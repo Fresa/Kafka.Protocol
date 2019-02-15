@@ -1,19 +1,20 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using System.IO;
 using System.Text;
 
 namespace Kafka.Protocol
 {
-    public class KafkaWriter : IKafkaWriter
+    internal class KafkaWriter : IKafkaWriter
     {
         private readonly Stream _buffer;
 
-        public KafkaWriter(Stream buffer)
+        internal KafkaWriter(Stream buffer)
         {
             _buffer = buffer;
         }
-        
+
         public void WriteBoolean(bool value)
         {
             WriteAsLittleEndian(BitConverter.GetBytes(value));
@@ -38,7 +39,7 @@ namespace Kafka.Protocol
         {
             WriteAsBigEndian(BitConverter.GetBytes(value));
         }
-        
+
         public void WriteUInt32(uint value)
         {
             WriteAsBigEndian(BitConverter.GetBytes(value));
@@ -46,7 +47,10 @@ namespace Kafka.Protocol
 
         public void WriteVarInt(int value)
         {
-            throw new NotImplementedException();
+            WriteAsLittleEndian(
+                value
+                    .EncodeAsZigZag()
+                    .EncodeAsVarInt());
         }
 
         public void WriteVarLong(long value)
@@ -67,8 +71,8 @@ namespace Kafka.Protocol
             {
                 throw new SyntaxErrorException($"{value} is to long");
             }
-            
-            WriteInt16((short) bytes.Length);
+
+            WriteInt16((short)bytes.Length);
             WriteAsLittleEndian(bytes);
         }
 
