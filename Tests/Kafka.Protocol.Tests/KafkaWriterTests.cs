@@ -355,5 +355,28 @@ namespace Kafka.Protocol.Tests
                 _buffer.Should().Equal(216, 4);
             }
         }
+
+        public class When_writing_var_long : XUnit2Specification
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[2];
+
+            protected override void Given()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+            }
+
+            protected override void When()
+            {
+                _writer.WriteVarLong(value: 300);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should().Equal(216, 4);
+            }
+        }
     }
 }

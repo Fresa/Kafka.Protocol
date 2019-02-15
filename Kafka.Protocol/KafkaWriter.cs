@@ -55,7 +55,10 @@ namespace Kafka.Protocol
 
         public void WriteVarLong(long value)
         {
-            throw new NotImplementedException();
+            WriteAsLittleEndian(
+                value
+                    .EncodeAsZigZag()
+                    .EncodeAsVarInt());
         }
 
         public void WriteString(string value)
