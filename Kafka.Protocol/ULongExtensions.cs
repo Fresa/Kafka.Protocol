@@ -30,5 +30,10 @@ namespace Kafka.Protocol
 
             return result;
         }
+
+        internal static long DecodeFromZigZag(this ulong value)
+        {
+            return (long) ((value >> 1) - (value & 1) * value);
+        }
     }
 }

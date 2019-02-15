@@ -22,5 +22,4 @@ namespace Kafka.Protocol
 
         void WriteArrayInt32(int[] values);
     }
-
 }
