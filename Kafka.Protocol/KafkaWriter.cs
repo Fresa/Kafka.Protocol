@@ -112,7 +112,17 @@ namespace Kafka.Protocol
 
         public void WriteArrayInt32(int[] values)
         {
-            throw new NotImplementedException();
+            if (values == null)
+            {
+                WriteInt32(-1);
+                return;
+            }
+
+            WriteInt32(values.Length);
+            foreach (var value in values)
+            {
+                WriteInt32(value);
+            }
         }
 
         private void WriteByte(byte value)

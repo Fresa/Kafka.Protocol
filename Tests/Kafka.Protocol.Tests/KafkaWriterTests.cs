@@ -378,5 +378,51 @@ namespace Kafka.Protocol.Tests
                 _buffer.Should().Equal(216, 4);
             }
         }
+
+        public class When_writing_array_of_int32 : XUnit2Specification
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[12];
+
+            protected override void Given()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+            }
+
+            protected override void When()
+            {
+                _writer.WriteArrayInt32(new[] { 257, 1 });
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should().Equal(0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0, 1);
+            }
+        }
+
+        public class When_writing_null_to_array_of_int32 : XUnit2Specification
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[4];
+
+            protected override void Given()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+            }
+
+            protected override void When()
+            {
+                _writer.WriteArrayInt32(null);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should().Equal(255, 255, 255, 255);
+            }
+        }
     }
 }
