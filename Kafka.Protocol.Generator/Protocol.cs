@@ -9,17 +9,84 @@ namespace Kafka.Protocol.Generator
 {
     internal class Protocol
     {
-        private Protocol(HtmlDocument definition)
-        {
-            ErrorCodes = ParseErrorCodes(definition.DocumentNode);
-        }
-
         internal static Protocol Load(HtmlDocument definition)
         {
             return new Protocol(definition);
         }
 
-        public IDictionary<int, ErrorCode> ErrorCodes { get; private set; }
+        private Protocol(HtmlDocument definition)
+        {
+            ErrorCodes = ParseErrorCodes(definition.DocumentNode);
+            Requests = ParseRequests(definition.DocumentNode);
+        }
+
+        internal IDictionary<int, ErrorCode> ErrorCodes { get; }
+
+        internal IDictionary<int, Request> Requests { get; }
+
+        private readonly string[] _apiKeyPropertyNames =
+        {
+            "Name",
+            "Key"
+        };
+
+        private const string ProtocolApiKeysXPath = "//*[contains(@id,'protocol_api_keys')]/..";
+
+        private IDictionary<int, Request> ParseRequests(HtmlNode node)
+        {
+            var rows = node
+                .SelectFirst(ProtocolApiKeysXPath)
+                .GetFirstSiblingNamed("table")
+                .SelectAtLeast(1, "tbody/tr");
+
+            var headerValues = rows
+                .First()
+                .SelectExactly(_apiKeyPropertyNames.Length, "th");
+
+            for (var i = 0; i < _apiKeyPropertyNames.Length; i++)
+            {
+                var apiKeyPropertyName = headerValues[i].InnerText;
+                if (apiKeyPropertyName != _apiKeyPropertyNames[i])
+                {
+                    throw new ArgumentException($"Expected property name at position {i} to be '{_apiKeyPropertyNames[i]}' but found {apiKeyPropertyName}");
+                }
+            }
+
+            return rows
+                .Skip(1)
+                .Select(row => row
+                    .SelectExactly(_apiKeyPropertyNames.Length, "td"))
+                .Select(ParseRequest)
+                .ToDictionary(
+                    errorCode => errorCode.Key,
+                    errorCode => errorCode);
+        }
+
+        private Request ParseRequest(HtmlNodeCollection errorPropertyValues)
+        {
+            var request = new Request();
+            for (var i = 0; i < errorPropertyValues.Count; i++)
+            {
+                var apiKeyPropertyValue = errorPropertyValues[i].FirstChild;
+                var apiKeyPropertyName = _apiKeyPropertyNames[i];
+
+                var errorCodeProperty = request
+                    .GetType()
+                    .GetProperty(apiKeyPropertyName,
+                        BindingFlags.Public | BindingFlags.Instance);
+
+                if (errorCodeProperty == null)
+                {
+                    throw new InvalidOperationException(
+                        $"Missing property '{apiKeyPropertyName}' on type {request.GetType()}");
+                }
+
+                var value = Convert.ChangeType(apiKeyPropertyValue.InnerText, errorCodeProperty.PropertyType);
+                errorCodeProperty.SetValue(request, value);
+            }
+
+            return request;
+        }
 
         private readonly string[] _errorPropertyNames =
         {
@@ -47,7 +114,7 @@ namespace Kafka.Protocol.Generator
                 var errorPropertyName = headerValues[i].InnerText;
                 if (errorPropertyName != _errorPropertyNames[i])
                 {
-                    throw new ArgumentException($"Expected header property at position {i} to be '{_errorPropertyNames[i]}' but found {errorPropertyName}");
+                    throw new ArgumentException($"Expected property name at position {i} to be '{_errorPropertyNames[i]}' but found {errorPropertyName}");
                 }
             }
 
@@ -87,5 +154,11 @@ namespace Kafka.Protocol.Generator
             return errorCode;
         }
 
+    }
+
+    internal class Request
+    {
+        public string Name { get; internal set; }
+        public int Key { get; internal set; }
     }
 }

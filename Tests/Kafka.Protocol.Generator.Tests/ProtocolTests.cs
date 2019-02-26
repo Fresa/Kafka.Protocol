@@ -39,6 +39,19 @@ namespace Kafka.Protocol.Generator.Tests
                         Retriable = false
                     });
             }
+
+            [Fact]
+            public void It_should_have_parsed_requests()
+            {
+                _protocol.Requests
+                    .Should().HaveCount(43)
+                    .And.ContainKey(1)
+                    .And.Subject[1].Should().BeEquivalentTo(new Request
+                    {
+                        Key = 1,
+                        Name = "Fetch"
+                    });
+            }
         }
     }
 }
