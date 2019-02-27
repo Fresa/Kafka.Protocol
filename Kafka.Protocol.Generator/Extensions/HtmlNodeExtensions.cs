@@ -74,7 +74,15 @@ namespace Kafka.Protocol.Generator.Extensions
 
         internal delegate string ResolveCellValue(HtmlNode cellNode);
 
-        internal static IEnumerable<T> ConvertTableNodeTo<T>(
+        /// <summary>
+        /// Parses table cell values to property values on <see cref="T"/>
+        /// by mapping table header cell values as property names
+        /// </summary>
+        /// <typeparam name="T">Object type to convert to</typeparam>
+        /// <param name="node">Table node</param>
+        /// <param name="resolveCellValue">Resolves cell value. Defaults to InnerText.</param>
+        /// <returns></returns>
+        internal static IEnumerable<T> ParseTableNodeTo<T>(
             this HtmlNode node,
             ResolveCellValue resolveCellValue = null) 
             where T : class, new()

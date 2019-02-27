@@ -29,7 +29,7 @@ namespace Kafka.Protocol.Generator
             return node
                 .SelectFirst(ProtocolApiKeysXPath)
                 .GetFirstSiblingNamed("table")
-                .ConvertTableNodeTo<Request>(cell => 
+                .ParseTableNodeTo<Request>(cell => 
                     cell.FirstChild.InnerText)
                 .ToDictionary(
                     request => request.Key);
@@ -42,7 +42,7 @@ namespace Kafka.Protocol.Generator
             return node
                 .SelectFirst(ProtocolErrorCodesXPath)
                 .GetFirstSiblingNamed("table")
-                .ConvertTableNodeTo<ErrorCode>()
+                .ParseTableNodeTo<ErrorCode>()
                 .ToDictionary(
                     errorCode => errorCode.Code);
         }
