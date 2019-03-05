@@ -46,7 +46,7 @@ namespace Kafka.Protocol.Generator.Tests
                 _protocol.Requests
                     .Should().HaveCount(43)
                     .And.ContainKey(1)
-                    .And.Subject[1].Should().BeEquivalentTo(new Request
+                    .And.Subject[1].Should().BeEquivalentTo(new ApiKeyMessageMap
                     {
                         Key = 1,
                         Name = "Fetch"
