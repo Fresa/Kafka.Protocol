@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
@@ -53,7 +55,7 @@ namespace Kafka.Protocol.Generator
         private string GetProtocolRequestMethodXPathFor(string methodName) =>
             $"//*/pre[starts-with(text(),'{methodName} Request')]";
 
-        private IDictionary<int, Request> ParseRequestsForMessage(string name)
+        private IDictionary<int, Method> ParseRequestsForMessage(string name)
         {
             var messageDefinitionNode = _definition
                 .DocumentNode
@@ -79,126 +81,297 @@ namespace Kafka.Protocol.Generator
 
     }
 
-    internal class BNFParser
+    internal class MethodParser
+    {
+        internal static Method Parse(Queue<char> buffer)
+        {
+            var methodSymbol = MethodSymbolParser.Parse(buffer);
+            
+            var symbolCollection = new SymbolCollection();
+            var methodExpression = ExpressionParser.Parse(buffer, symbolCollection);
+            
+            while (buffer.Any())
+            {
+                RuleParser.Parse(buffer, ref symbolCollection);
+            }
+
+            return new Method
+            {
+                Name = methodSymbol.Name,
+                Version = methodSymbol.Version,
+                Type = methodSymbol.Type,
+                Expression = methodExpression,
+                Fields = symbolCollection.Values.ToList()
+            };
+        }
+    }
+
+    internal class MethodSymbolParser
+    {
+        private readonly Queue<char> _buffer;
+        private readonly Queue<Func<char, bool>> _handlers;
+
+        private MethodSymbolParser(Queue<char> buffer)
+        {
+            _buffer = buffer;
+            _handlers = new Queue<Func<char, bool>>(new List<Func<char, bool>>
+            {
+                ParseName,
+                ParseMethodType,
+                ParseVersion
+            });
+            _handle = _handlers.Dequeue();
+        }
+
+        private string _name = "";
+        private int _version;
+        private MethodType _type;
+
+        private string _tempBuffer = "";
+        private Func<char, bool> _handle;
+
+        internal static MethodSymbol Parse(Queue<char> buffer)
+        {
+            var methodSymbolParser = new MethodSymbolParser(buffer);
+            while (methodSymbolParser.Next()) { }
+
+            return new MethodSymbol
+            {
+                Name = methodSymbolParser._name,
+                Version = methodSymbolParser._version,
+                Type = methodSymbolParser._type
+            };
+        }
+
+        private bool ParseName(char chr)
+        {
+            if (chr == ' ')
+            {
+                return false;
+            }
+
+            _name += chr;
+            return true;
+        }
+
+        private bool ParseMethodType(char chr)
+        {
+            if (chr == ' ')
+            {
+                _type = (MethodType)Enum.Parse(typeof(MethodType), _tempBuffer);
+                _tempBuffer = "";
+                return false;
+            }
+
+            _tempBuffer += chr;
+            return true;
+        }
+
+        private bool ParseVersion(char chr)
+        {
+            if (chr == ')')
+            {
+                _version = int.Parse(_tempBuffer.Split(' ')[1]);
+                _tempBuffer = "";
+                return false;
+            }
+
+            _tempBuffer += chr;
+            return true;
+        }
+        
+        private bool Next()
+        {
+            var chr = _buffer.Dequeue();
+
+            var canHandleMore = _handle(chr);
+
+            if (canHandleMore)
+            {
+                return true;
+            }
+
+            if (_handlers.Any())
+            {
+                _handle = _handlers.Dequeue();
+                return true;
+            }
+
+            while (HasReachedDefinedAs(chr) == false)
+            {
+                chr = _buffer.Dequeue();
+            }
+
+            return false;
+        }
+
+        private bool HasReachedDefinedAs(char chr)
+        {
+            if (string.Concat(chr, _buffer.Peek()) == "=>")
+            {
+                _buffer.Dequeue();
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    internal class SymbolNameParser
     {
         private const string DefinedAs = "=>";
+        private readonly Queue<char> _buffer;
 
-        internal Request Parse(string bnf)
+        private SymbolNameParser(Queue<char> buffer)
         {
-            var expressions = new Queue<string>();
-            var fields = new Dictionary<string, Field>();
+            _buffer = buffer;
+        }
 
-            var buffer = "";
-            Field currentField = null;
-            Request message = null;
+        private string _name = "";
 
-            var handler = (Action<char>)HandleName;
+        internal static string Parse(Queue<char> buffer)
+        {
+            var parser = new SymbolNameParser(buffer);
 
+            while (parser.Next()) { }
+
+            return parser._name;
+        }
+
+        private bool Next()
+        {
+            var chr = _buffer.Dequeue();
+            if (HasReachedDefinedAs(chr))
+            {
+                _name = _name.Trim();
+                return false;
+            }
+
+            _name += chr;
+            return true;
+        }
+
+        private bool HasReachedDefinedAs(char chr)
+        {
+            if (string.Concat(chr, _buffer.Peek()) == DefinedAs)
+            {
+                _buffer.Dequeue();
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    internal class ExpressionParser
+    {
+        private readonly Queue<char> _buffer;
+        private readonly SymbolCollection _symbolCollection;
+        private const char End = '\n';
+
+        private ExpressionParser(Queue<char> buffer, SymbolCollection symbolCollection)
+        {
+            _buffer = buffer;
+            _symbolCollection = symbolCollection;
+        }
+
+        private Queue<SymbolSequence> Expression { get; } = new Queue<SymbolSequence>();
+        private string _fieldExpressionBuffer = "";
+
+        internal static Queue<SymbolSequence> Parse(Queue<char> buffer, SymbolCollection symbolCollection)
+        {
+            var parser = new ExpressionParser(buffer, symbolCollection);
+
+            while (parser.Next()) { }
+
+            return parser.Expression;
+        }
+
+        private bool Next()
+        {
+            if (_buffer.Any() == false)
+            {
+                AddCurrentExpression();
+                return false;
+            }
+
+            var chr = _buffer.Dequeue();
+            if (chr == End)
+            {
+                AddCurrentExpression();
+                return false;
+            }
+
+            if (chr == ' ')
+            {
+                AddCurrentExpression();
+                return true;
+            }
+
+            _fieldExpressionBuffer += chr;
+            return true;
+        }
+
+        private void AddCurrentExpression()
+        {
+            var currentFieldExpression = _fieldExpressionBuffer.Trim();
+            _fieldExpressionBuffer = "";
+
+            if (string.IsNullOrEmpty(currentFieldExpression))
+            {
+                return;
+            }
+
+            var name = ParseName(currentFieldExpression, out var isOptional);
+            var rule = _symbolCollection.GetOrAdd(name, _ => new Symbol {Name = name});
+
+            Expression.Enqueue(new SymbolSequence
+            {
+                Reference = rule,
+                IsOptional = isOptional
+            });
+        }
+
+        private string ParseName(string expression, out bool isOptional)
+        {
+            isOptional = false;
+            if (expression.StartsWith("[") &&
+                expression.EndsWith("]"))
+            {
+                expression = expression.Substring(1, expression.Length - 2);
+                isOptional = true;
+            }
+
+            return expression;
+        }
+    }
+
+    internal class RuleParser
+    {
+        internal static Symbol Parse(Queue<char> buffer, ref SymbolCollection symbolCollection)
+        {
+            var symbolName = SymbolNameParser.Parse(buffer);
+
+            var symbol = symbolCollection.GetOrAdd(symbolName, _ => new Symbol
+            {
+                Name = symbolName
+            });
+
+            var expression = ExpressionParser.Parse(buffer, symbolCollection);
+
+            symbol.Expression = expression;
+
+            return symbol;
+        }
+    }
+
+    internal class BNFParser
+    {
+        internal Method Parse(string bnf)
+        {
             var chars = new Queue<char>(bnf);
-            while (chars.Any())
-            {
-                var c = chars.Dequeue();
-                if (c == '=' && chars.Peek() == '>')
-                {
-                    chars.Dequeue();
-                    HandleEndOfFieldName();
-                    continue;
-                }
 
-                if (c == '\n')
-                {
-                    HandleEndOfField();
-                    continue;
-                }
-
-                handler(c);
-            }
-
-            HandleEndOfField();
-
-            message.Fields = fields.Values.ToList();
-            return message;
-
-            void HandleName(char c) => buffer += c;
-
-            void HandleFields(char c)
-            {
-                if (c == ' ')
-                {
-                    expressions.Enqueue(buffer);
-                    buffer = "";
-                    return;
-                }
-
-                buffer += c;
-            }
-
-            void HandleEndOfField()
-            {
-                expressions.Enqueue(buffer);
-                buffer = "";
-
-
-                while (expressions.Any())
-                {
-                    var expression = expressions.Dequeue().Trim();
-                    if (string.IsNullOrEmpty(expression))
-                    {
-                        continue;
-                    }
-
-                    var isOptional = false;
-                    if (expression.StartsWith("[") &&
-                        expression.EndsWith("]"))
-                    {
-                        expression = expression.Substring(1, expression.Length - 2);
-                        isOptional = true;
-                    }
-
-                    if (fields.TryGetValue(expression, out var referencedField) == false)
-                    {
-                        referencedField = new Field
-                        {
-                            Name = expression,
-                        };
-                        fields.Add(referencedField.Name, referencedField);
-                    }
-
-                    var expressionQueue = message.Expressions;
-                    if (currentField != null)
-                    {
-                        expressionQueue = currentField.Expressions;
-                    }
-
-                    expressionQueue.Enqueue(new Expression
-                    {
-                        FieldReference = referencedField,
-                        IsOptional = isOptional
-                    });
-                }
-
-                currentField = currentField ?? new Field();
-
-                handler = HandleName;
-            }
-
-            void HandleEndOfFieldName()
-            {
-                var fieldName = buffer.Trim();
-                buffer = "";
-                handler = HandleFields;
-
-                if (message == null)
-                {
-                    message = new Request();
-                    var parts = fieldName.Split(' ');
-                    message.Name = parts[0];
-                    message.Version = int.Parse(parts.Last().Replace(")", ""));
-                    return;
-                }
-
-                fields.TryGetValue(fieldName, out currentField);
-            }
+            return MethodParser.Parse(chars);
         }
     }
 
@@ -219,39 +392,52 @@ namespace Kafka.Protocol.Generator
         public int Key { get; }
         public string Name { get; }
 
-        private readonly Dictionary<int, Request> _requests = new Dictionary<int, Request>();
-        public IReadOnlyDictionary<int, Request> Requests => _requests;
+        private readonly Dictionary<int, Method> _requests = new Dictionary<int, Method>();
+        public IReadOnlyDictionary<int, Method> Requests => _requests;
 
-        internal void Add(int version, Request request)
+        internal void Add(int version, Method method)
         {
-            _requests.Add(version, request);
+            _requests.Add(version, method);
         }
 
     }
 
-    internal class Request : Field
+    internal enum MethodType
     {
-        public int Version { get; set; }
-        public List<Field> Fields { get; set; } = new List<Field>();
+        Request,
+        Response
     }
 
-    internal class Field
+
+    internal class Method : Symbol
+    {
+        public int Version { get; set; }
+        internal MethodType Type { get; set; }
+        public List<Symbol> Fields { get; set; } = new List<Symbol>();
+    }
+
+    internal class Symbol
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public Queue<Expression> Expressions { get; set; } = new Queue<Expression>();
+        public Queue<SymbolSequence> Expression { get; set; } = new Queue<SymbolSequence>();
     }
 
-    internal class Expression
+    internal class SymbolSequence
     {
-        public Field FieldReference { get; set; }
+        public Symbol Reference { get; set; }
         public bool IsOptional { get; set; }
     }
 
-    internal class Response
+    internal class SymbolCollection : ConcurrentDictionary<string, Symbol>
     {
-
     }
 
+    internal class MethodSymbol
+    {
+        public string Name { get; set; }
+        public int Version { get; set; }
+        internal MethodType Type { get; set; }
 
+    }
 }

@@ -15,8 +15,8 @@ namespace Kafka.Protocol.Generator.Tests
         {
             private BNFParser _parser;
             private string _syntax;
-            private List<Field> _fields => _message.Fields;
-            private Request _message;
+            private List<Symbol> _fields => _message.Fields;
+            private Method _message;
 
             protected override void Given()
             {
@@ -59,19 +59,19 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_message_expressions()
             {
-                _message.Expressions.Should().HaveCount(4);
+                _message.Expression.Should().HaveCount(4);
             }
 
             [Fact]
             public void It_should_have_parsed_message_expression_of_transactional_id()
             {
                 _message
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "transactional_id"),
+                            Reference = _fields.First(field => field.Name == "transactional_id"),
                             IsOptional = false
                         }
                     );
@@ -81,12 +81,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_message_expression_of_acks()
             {
                 _message
-                    .Expressions
+                    .Expression
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "acks"),
+                            Reference = _fields.First(field => field.Name == "acks"),
                             IsOptional = false
                         }
                     );
@@ -96,12 +96,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_message_expression_of_timeout()
             {
                 _message
-                    .Expressions
+                    .Expression
                     .ToArray()[2]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "timeout"),
+                            Reference = _fields.First(field => field.Name == "timeout"),
                             IsOptional = false
                         }
                     );
@@ -111,12 +111,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_message_expression_of_topic_data()
             {
                 _message
-                    .Expressions
+                    .Expression
                     .ToArray()[3]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "topic_data"),
+                            Reference = _fields.First(field => field.Name == "topic_data"),
                             IsOptional = true
                         }
                     );
@@ -132,7 +132,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_transactional_id_field_expressions()
             {
                 _fields.Single(field => field.Name == "transactional_id")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(1);
             }
@@ -141,12 +141,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_transactional_id_field_expression_of_nullable_string()
             {
                 _fields.Single(field => field.Name == "transactional_id")
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "NULLABLE_STRING"),
+                            Reference = _fields.First(field => field.Name == "NULLABLE_STRING"),
                             IsOptional = false
                         }
                     );
@@ -162,7 +162,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_acks_field_expressions()
             {
                 _fields.Single(field => field.Name == "acks")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(1);
             }
@@ -171,12 +171,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_acks_field_expression_of_INT16()
             {
                 _fields.Single(field => field.Name == "acks")
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "INT16"),
+                            Reference = _fields.First(field => field.Name == "INT16"),
                             IsOptional = false
                         }
                     );
@@ -192,7 +192,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_timeout_field_expressions()
             {
                 _fields.Single(field => field.Name == "timeout")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(1);
             }
@@ -201,12 +201,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_timeout_field_expression_of_INT32()
             {
                 _fields.Single(field => field.Name == "timeout")
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "INT32"),
+                            Reference = _fields.First(field => field.Name == "INT32"),
                             IsOptional = false
                         }
                     );
@@ -222,7 +222,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_topic_data_field_expressions()
             {
                 _fields.Single(field => field.Name == "topic_data")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(2);
             }
@@ -231,12 +231,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_topic_data_field_expression_of_topic()
             {
                 _fields.Single(field => field.Name == "topic_data")
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "topic"),
+                            Reference = _fields.First(field => field.Name == "topic"),
                             IsOptional = false
                         }
                     );
@@ -246,12 +246,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_topic_data_field_expression_of_data()
             {
                 _fields.Single(field => field.Name == "topic_data")
-                    .Expressions
+                    .Expression
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "data"),
+                            Reference = _fields.First(field => field.Name == "data"),
                             IsOptional = true
                         }
                     );
@@ -268,7 +268,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_topic_field_expressions()
             {
                 _fields.Single(field => field.Name == "topic")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(1);
             }
@@ -277,12 +277,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_topic_field_expression_of_STRING()
             {
                 _fields.Single(field => field.Name == "topic")
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "STRING"),
+                            Reference = _fields.First(field => field.Name == "STRING"),
                             IsOptional = false
                         }
                     );
@@ -299,7 +299,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_data_field_expressions()
             {
                 _fields.Single(field => field.Name == "data")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(2);
             }
@@ -308,12 +308,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_data_field_expression_of_partition()
             {
                 _fields.Single(field => field.Name == "data")
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "partition"),
+                            Reference = _fields.First(field => field.Name == "partition"),
                             IsOptional = false
                         }
                     );
@@ -323,12 +323,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_data_field_expression_of_record_set()
             {
                 _fields.Single(field => field.Name == "data")
-                    .Expressions
+                    .Expression
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "record_set"),
+                            Reference = _fields.First(field => field.Name == "record_set"),
                             IsOptional = false
                         }
                     );
@@ -345,7 +345,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_partition_field_expressions()
             {
                 _fields.Single(field => field.Name == "partition")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(1);
             }
@@ -354,12 +354,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_partition_field_expression_of_INT32()
             {
                 _fields.Single(field => field.Name == "partition")
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "INT32"),
+                            Reference = _fields.First(field => field.Name == "INT32"),
                             IsOptional = false
                         }
                     );
@@ -376,7 +376,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_record_set_field_expressions()
             {
                 _fields.Single(field => field.Name == "record_set")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(1);
             }
@@ -385,12 +385,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_record_set_field_expression_of_RECORDS()
             {
                 _fields.Single(field => field.Name == "record_set")
-                    .Expressions
+                    .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new Expression
+                        new SymbolSequence
                         {
-                            FieldReference = _fields.First(field => field.Name == "RECORDS"),
+                            Reference = _fields.First(field => field.Name == "RECORDS"),
                             IsOptional = false
                         }
                     );
@@ -407,7 +407,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_NULLABLE_STRING_field_expressions()
             {
                 _fields.Single(field => field.Name == "NULLABLE_STRING")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(0);
             }
@@ -423,7 +423,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_INT16_field_expressions()
             {
                 _fields.Single(field => field.Name == "INT16")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(0);
             }
@@ -439,7 +439,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_INT32_field_expressions()
             {
                 _fields.Single(field => field.Name == "INT32")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(0);
             }
@@ -455,7 +455,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_STRING_field_expressions()
             {
                 _fields.Single(field => field.Name == "STRING")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(0);
             }
@@ -471,7 +471,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_RECORDS_field_expressions()
             {
                 _fields.Single(field => field.Name == "RECORDS")
-                    .Expressions
+                    .Expression
                     .Should()
                     .HaveCount(0);
             }
