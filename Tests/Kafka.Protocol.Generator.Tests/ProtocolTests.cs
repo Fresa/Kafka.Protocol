@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using FluentAssertions;
 using HtmlAgilityPack;
+using Kafka.Protocol.Generator.BackusNaurForm;
 using Test.It.With.XUnit;
 using Xunit;
 

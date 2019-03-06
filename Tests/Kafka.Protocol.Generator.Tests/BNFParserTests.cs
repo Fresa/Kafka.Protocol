@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using FluentAssertions;
 using HtmlAgilityPack;
+using Kafka.Protocol.Generator.BackusNaurForm;
 using Test.It.With.XUnit;
 using Xunit;
 
@@ -13,14 +14,14 @@ namespace Kafka.Protocol.Generator.Tests
     {       
         public class When_parsing_valid_BNF_syntax : XUnit2Specification
         {
-            private BNFParser _parser;
+            private BackusNaurFormParser _parser;
             private string _syntax;
             private List<Symbol> _fields => _message.Fields;
             private Method _message;
 
             protected override void Given()
             {
-                _parser = new BNFParser();
+                _parser = new BackusNaurFormParser();
                 _syntax =
                     @"Produce Request (Version: 7) => transactional_id acks timeout [topic_data] 
                       transactional_id => NULLABLE_STRING
