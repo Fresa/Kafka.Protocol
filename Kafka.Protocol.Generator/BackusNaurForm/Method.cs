@@ -21,6 +21,5 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
         public int Version { get; }
         internal MethodType Type { get; }
         public List<Symbol> Symbols { get; }
-
     }
 }

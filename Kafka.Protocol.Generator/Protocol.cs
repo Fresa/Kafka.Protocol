@@ -44,11 +44,14 @@ namespace Kafka.Protocol.Generator
             var messages = new Dictionary<int, Message>();
             foreach (var apiKeyMessageMap in apiKeyMessageMaps.Values)
             {
-                var requests = ParseRequestsForMessage(apiKeyMessageMap.Name);
+                var methods = ParseRequestsForMessage(apiKeyMessageMap.Name);
+                methods.AddRange(ParseResponsesForMessage(apiKeyMessageMap.Name));
+
                 var message = new Message(
                     apiKeyMessageMap.Key, 
                     apiKeyMessageMap.Name,
-                    requests);
+                    methods);
+
                 messages.Add(apiKeyMessageMap.Key, message);
             }
 
@@ -58,22 +61,43 @@ namespace Kafka.Protocol.Generator
         private string GetProtocolRequestMethodXPathFor(string methodName) =>
             $"//*/pre[starts-with(text(),'{methodName} Request')]";
 
-        private IDictionary<int, Method> ParseRequestsForMessage(string name)
+        private List<Method> ParseRequestsForMessage(string name)
         {
             return _definition
                 .DocumentNode
                 .SelectNodes(GetProtocolRequestMethodXPathFor(name))
-                .Select(requestDefinitionNode => 
+                .Select(definitionNode =>
                     System.Net.WebUtility.HtmlDecode(
-                        requestDefinitionNode
+                        definitionNode
                             .InnerText))
-                .Select(requestDefinition
+                .Select(definition
                     => MethodParser.Parse(
-                    new Buffer<char>(
-                        requestDefinition
-                            .ToCharArray())))
-                .ToDictionary(method => method.Version);
+                        new Buffer<char>(
+                            definition
+                                .ToCharArray())))
+                .ToList();
         }
+
+        private string GetProtocolResponseMethodXPathFor(string methodName) =>
+            $"//*/pre[starts-with(text(),'{methodName} Response')]";
+
+        private List<Method> ParseResponsesForMessage(string name)
+        {
+            return _definition
+                .DocumentNode
+                .SelectNodes(GetProtocolResponseMethodXPathFor(name))
+                .Select(definitionNode =>
+                    System.Net.WebUtility.HtmlDecode(
+                        definitionNode
+                            .InnerText))
+                .Select(definition
+                    => MethodParser.Parse(
+                        new Buffer<char>(
+                            definition
+                                .ToCharArray())))
+                .ToList();
+        }
+
 
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
 

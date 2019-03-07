@@ -6,15 +6,16 @@ namespace Kafka.Protocol.Generator
 {
     internal class Message
     {
-        internal Message(int key, string name, IDictionary<int, Method> requests)
+        internal Message(int key, string name, List<Method> methods)
         {
             Key = key;
             Name = name;
-            Requests = requests.ToDictionary(pair => pair.Key, pair => pair.Value);
+
+            Methods = methods;
         }
 
         public int Key { get; }
         public string Name { get; }
-        public IReadOnlyDictionary<int, Method> Requests { get; }
+        public List<Method> Methods { get; }
     }
 }
