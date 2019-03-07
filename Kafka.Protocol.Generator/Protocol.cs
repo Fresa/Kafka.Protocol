@@ -48,7 +48,7 @@ namespace Kafka.Protocol.Generator
                 methods.AddRange(ParseResponsesForMessage(apiKeyMessageMap.Name));
 
                 var message = new Message(
-                    apiKeyMessageMap.Key, 
+                    apiKeyMessageMap.Key,
                     apiKeyMessageMap.Name,
                     methods);
 
@@ -63,19 +63,39 @@ namespace Kafka.Protocol.Generator
 
         private List<Method> ParseRequestsForMessage(string name)
         {
-            return _definition
+            var nodes = _definition
                 .DocumentNode
-                .SelectNodes(GetProtocolRequestMethodXPathFor(name))
-                .Select(definitionNode =>
-                    System.Net.WebUtility.HtmlDecode(
-                        definitionNode
-                            .InnerText))
-                .Select(definition
-                    => MethodParser.Parse(
-                        new Buffer<char>(
-                            definition
-                                .ToCharArray())))
-                .ToList();
+                .SelectNodes(GetProtocolRequestMethodXPathFor(name));
+
+            var methods = new List<Method>();
+            foreach (var definitionNode in nodes)
+            {
+                var definition = System.Net.WebUtility.HtmlDecode(
+                       definitionNode
+                           .InnerText);
+
+                var descriptionTable = definitionNode
+                    .GetFirstSiblingNamed("table")
+                    .ParseTableNodeTo<FieldDescription>()
+                    .ToList();
+
+                var method = MethodParser.Parse(
+                    new Buffer<char>(
+                        definition
+                            .ToCharArray()));
+
+                foreach (var symbol in method.Symbols)
+                {
+                    symbol.Description = descriptionTable
+                        .FirstOrDefault(
+                            description => 
+                                description.Field == symbol.Name)?.Description;
+                }
+
+                methods.Add(method);
+            }
+
+            return methods;
         }
 
         private string GetProtocolResponseMethodXPathFor(string methodName) =>
@@ -83,21 +103,40 @@ namespace Kafka.Protocol.Generator
 
         private List<Method> ParseResponsesForMessage(string name)
         {
-            return _definition
+            var nodes = _definition
                 .DocumentNode
-                .SelectNodes(GetProtocolResponseMethodXPathFor(name))
-                .Select(definitionNode =>
-                    System.Net.WebUtility.HtmlDecode(
-                        definitionNode
-                            .InnerText))
-                .Select(definition
-                    => MethodParser.Parse(
-                        new Buffer<char>(
-                            definition
-                                .ToCharArray())))
-                .ToList();
-        }
+                .SelectNodes(GetProtocolResponseMethodXPathFor(name));
 
+            var methods = new List<Method>();
+            foreach (var definitionNode in nodes)
+            {
+                var definition = System.Net.WebUtility.HtmlDecode(
+                    definitionNode
+                        .InnerText);
+
+                var descriptionTable = definitionNode
+                    .GetFirstSiblingNamed("table")
+                    .ParseTableNodeTo<FieldDescription>()
+                    .ToList();
+
+                var method = MethodParser.Parse(
+                    new Buffer<char>(
+                        definition
+                            .ToCharArray()));
+
+                foreach (var symbol in method.Symbols)
+                {
+                    symbol.Description = descriptionTable
+                        .FirstOrDefault(
+                            description =>
+                                description.Field == symbol.Name)?.Description;
+                }
+
+                methods.Add(method);
+            }
+
+            return methods;           
+        }
 
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
 

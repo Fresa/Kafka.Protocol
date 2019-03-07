@@ -11,7 +11,6 @@
 
             return new Symbol(
                 symbolName,
-                "", 
                 expression);
         }
     }

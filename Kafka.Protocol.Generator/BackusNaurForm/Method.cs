@@ -6,12 +6,11 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
     {
         internal Method(
             string name, 
-            string description, 
             int version,
             MethodType type,
             Queue<SymbolSequence> expression, 
             List<Symbol> symbols) 
-            : base(name, description, expression)
+            : base(name, expression)
         {
             Version = version;
             Type = type;

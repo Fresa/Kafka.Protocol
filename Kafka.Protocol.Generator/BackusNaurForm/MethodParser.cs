@@ -20,7 +20,6 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
 
             return new Method(
                 methodSymbol.Name, 
-                "",
                 methodSymbol.Version,
                 methodSymbol.Type,
                 methodExpression,
