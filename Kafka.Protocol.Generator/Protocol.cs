@@ -44,9 +44,12 @@ namespace Kafka.Protocol.Generator
             var messages = new Dictionary<int, Message>();
             foreach (var apiKeyMessageMap in apiKeyMessageMaps.Values)
             {
-                var message = new Message(apiKeyMessageMap.Key, apiKeyMessageMap.Name);
+                var requests = ParseRequestsForMessage(apiKeyMessageMap.Name);
+                var message = new Message(
+                    apiKeyMessageMap.Key, 
+                    apiKeyMessageMap.Name,
+                    requests);
                 messages.Add(apiKeyMessageMap.Key, message);
-                ParseRequestsForMessage(message.Name);
             }
 
             return messages;
@@ -57,14 +60,19 @@ namespace Kafka.Protocol.Generator
 
         private IDictionary<int, Method> ParseRequestsForMessage(string name)
         {
-            var messageDefinitionNode = _definition
+            return _definition
                 .DocumentNode
-                .SelectFirst(GetProtocolRequestMethodXPathFor(name));
-
-            var definitionRows = messageDefinitionNode.InnerText.Split('\n');
-
-
-            return null;
+                .SelectNodes(GetProtocolRequestMethodXPathFor(name))
+                .Select(requestDefinitionNode => 
+                    System.Net.WebUtility.HtmlDecode(
+                        requestDefinitionNode
+                            .InnerText))
+                .Select(requestDefinition
+                    => MethodParser.Parse(
+                    new Buffer<char>(
+                        requestDefinition
+                            .ToCharArray())))
+                .ToDictionary(method => method.Version);
         }
 
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
