@@ -4,8 +4,24 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
 {
     internal class Method : Symbol
     {
-        public int Version { get; set; }
-        internal MethodType Type { get; set; }
-        public List<Symbol> Fields { get; set; } = new List<Symbol>();
+        internal Method(
+            string name, 
+            string description, 
+            int version,
+            MethodType type,
+            Queue<SymbolSequence> expression, 
+            List<Symbol> symbols) 
+            : base(name, description)
+        {
+            Version = version;
+            Type = type;
+            Symbols = symbols;
+            Expression = expression;
+        }
+
+        public int Version { get; }
+        internal MethodType Type { get; }
+        public List<Symbol> Symbols { get; }
+
     }
 }

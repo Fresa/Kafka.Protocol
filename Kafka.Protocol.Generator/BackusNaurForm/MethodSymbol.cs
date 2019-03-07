@@ -2,9 +2,16 @@
 {
     internal class MethodSymbol
     {
-        public string Name { get; set; }
-        public int Version { get; set; }
-        internal MethodType Type { get; set; }
+        internal MethodSymbol(string name, int version, MethodType type)
+        {
+            Name = name;
+            Version = version;
+            Type = type;
+        }
+
+        public string Name { get; }
+        public int Version { get; }
+        internal MethodType Type { get; }
 
     }
 }

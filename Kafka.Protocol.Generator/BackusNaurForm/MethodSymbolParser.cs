@@ -34,14 +34,13 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
         internal static MethodSymbol Parse(IBuffer<char> buffer)
         {
             var methodSymbolParser = new MethodSymbolParser(buffer);
+
             while (methodSymbolParser.Next()) { }
 
-            return new MethodSymbol
-            {
-                Name = methodSymbolParser._name,
-                Version = methodSymbolParser._version,
-                Type = methodSymbolParser._type
-            };
+            return new MethodSymbol(
+                methodSymbolParser._name,
+                methodSymbolParser._version,
+                methodSymbolParser._type);
         }
 
         private bool ParseName()

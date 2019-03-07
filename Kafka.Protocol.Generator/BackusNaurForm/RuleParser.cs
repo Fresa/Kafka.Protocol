@@ -8,12 +8,13 @@
         {
             var symbolName = SymbolNameParser.Parse(buffer);
 
-            var symbol = symbolCollection.GetOrAdd(symbolName, _ => new Symbol
-            {
-                Name = symbolName
-            });
+            var symbol = symbolCollection.GetOrAdd(
+                symbolName, 
+                _ => new Symbol(
+                    symbolName,
+                    ""));
 
-            var expression = ExpressionParser.Parse(buffer, symbolCollection);
+            var expression = ExpressionParser.Parse(buffer, ref symbolCollection);
 
             symbol.Expression = expression;
 

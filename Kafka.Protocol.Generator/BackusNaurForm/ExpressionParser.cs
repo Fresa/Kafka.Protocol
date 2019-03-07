@@ -5,21 +5,21 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
     internal class ExpressionParser
     {
         private readonly IBuffer<char> _buffer;
-        private readonly SymbolCollection _symbolCollection;
+        private readonly SymbolCollection _symbols;
         private const char End = '\n';
 
-        private ExpressionParser(IBuffer<char> buffer, SymbolCollection symbolCollection)
+        private ExpressionParser(IBuffer<char> buffer, SymbolCollection symbols)
         {
             _buffer = buffer;
-            _symbolCollection = symbolCollection;
+            _symbols = symbols;
         }
 
         private Queue<SymbolSequence> Expression { get; } = new Queue<SymbolSequence>();
-        private string _fieldExpressionBuffer = "";
+        private string _symbolSequence = "";
 
         internal static Queue<SymbolSequence> Parse(
-            IBuffer<char> buffer, 
-            SymbolCollection symbolCollection)
+            IBuffer<char> buffer,
+            ref SymbolCollection symbolCollection)
         {
             var parser = new ExpressionParser(buffer, symbolCollection);
 
@@ -49,41 +49,53 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
                 return true;
             }
 
-            _fieldExpressionBuffer += chr;
+            _symbolSequence += chr;
             return true;
         }
 
         private void AddCurrentExpression()
         {
-            var currentFieldExpression = _fieldExpressionBuffer.Trim();
-            _fieldExpressionBuffer = "";
+            var symbolSequence = _symbolSequence.Trim();
+            _symbolSequence = "";
 
-            if (string.IsNullOrEmpty(currentFieldExpression))
+            if (string.IsNullOrEmpty(symbolSequence))
             {
                 return;
             }
 
-            var name = ParseName(currentFieldExpression, out var isOptional);
-            var rule = _symbolCollection.GetOrAdd(name, _ => new Symbol { Name = name });
+            var symbol = ParseSymbolSequence(
+                symbolSequence);
 
-            Expression.Enqueue(new SymbolSequence
-            {
-                Reference = rule,
-                IsOptional = isOptional
-            });
+            Expression.Enqueue(symbol);
         }
 
-        private string ParseName(string expression, out bool isOptional)
+        private SymbolSequence ParseSymbolSequence(
+            string symbolSequence)
         {
-            isOptional = false;
-            if (expression.StartsWith("[") &&
-                expression.EndsWith("]"))
+            var isOptional = false;
+            var symbolName = symbolSequence;
+
+            if (symbolSequence.StartsWith("[") &&
+                symbolSequence.EndsWith("]"))
             {
-                expression = expression.Substring(1, expression.Length - 2);
+                symbolName = symbolSequence.Substring(
+                    1,
+                    symbolSequence.Length - 2);
+
                 isOptional = true;
             }
 
-            return expression;
+            var symbol = _symbols
+                .GetOrAdd(
+                    symbolName,
+                    _ =>
+                        new Symbol(
+                            symbolName, 
+                            ""));
+
+            return new SymbolSequence(
+                symbol, 
+                isOptional);
         }
     }
 }

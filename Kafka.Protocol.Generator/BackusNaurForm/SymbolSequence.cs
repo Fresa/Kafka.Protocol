@@ -2,7 +2,13 @@
 {
     internal class SymbolSequence
     {
-        public Symbol Reference { get; set; }
-        public bool IsOptional { get; set; }
+        internal SymbolSequence(Symbol symbol, bool isOptional)
+        {
+            Symbol = symbol;
+            IsOptional = isOptional;
+        }
+
+        public Symbol Symbol { get;  }
+        public bool IsOptional { get; }
     }
 }

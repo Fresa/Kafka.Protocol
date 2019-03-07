@@ -11,12 +11,12 @@ using Xunit;
 namespace Kafka.Protocol.Generator.Tests
 {
     public partial class Given_a_BNF_parser
-    {       
+    {
         public class When_parsing_valid_BNF_syntax : XUnit2Specification
         {
             private BackusNaurFormParser _parser;
             private string _syntax;
-            private List<Symbol> _fields => _message.Fields;
+            private List<Symbol> _fields => _message.Symbols;
             private Method _message;
 
             protected override void Given()
@@ -70,12 +70,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "transactional_id"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "transactional_id"),
+                            false));
             }
 
             [Fact]
@@ -85,12 +83,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "acks"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "acks"),
+                            false));
             }
 
             [Fact]
@@ -100,12 +96,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[2]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "timeout"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "timeout"),
+                            false));
             }
 
             [Fact]
@@ -115,12 +109,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[3]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "topic_data"),
-                            IsOptional = true
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "topic_data"),
+                            true));
             }
 
             [Fact]
@@ -145,12 +137,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "NULLABLE_STRING"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "NULLABLE_STRING"),
+                            false));
             }
 
             [Fact]
@@ -175,12 +165,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "INT16"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "INT16"),
+                            false));
             }
 
             [Fact]
@@ -205,12 +193,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "INT32"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "INT32"),
+                            false));
             }
 
             [Fact]
@@ -235,12 +221,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "topic"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "topic"),
+                            false));
             }
 
             [Fact]
@@ -250,12 +234,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "data"),
-                            IsOptional = true
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "data"),
+                            true));
             }
 
             [Fact]
@@ -281,12 +263,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "STRING"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "STRING"),
+                            false));
             }
 
             [Fact]
@@ -312,12 +292,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "partition"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "partition"),
+                            false));
             }
 
             [Fact]
@@ -327,12 +305,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "record_set"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "record_set"),
+                            false));
             }
 
             [Fact]
@@ -358,12 +334,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "INT32"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "INT32"),
+                            false));
             }
 
             [Fact]
@@ -389,12 +363,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .Expression
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
-                        new SymbolSequence
-                        {
-                            Reference = _fields.First(field => field.Name == "RECORDS"),
-                            IsOptional = false
-                        }
-                    );
+                        new SymbolSequence(
+                            _fields.First(
+                                field => field.Name == "RECORDS"),
+                            false));
             }
 
             [Fact]

@@ -1,4 +1,4 @@
-﻿namespace Kafka.Protocol.Generator.BackusNaurForm
+﻿namespace Kafka.Protocol.Generator
 {
     public class ErrorCode
     {
