@@ -5,23 +5,20 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
     internal class ExpressionParser
     {
         private readonly IBuffer<char> _buffer;
-        private readonly SymbolCollection _symbols;
         private const char End = '\n';
 
-        private ExpressionParser(IBuffer<char> buffer, SymbolCollection symbols)
+        private ExpressionParser(IBuffer<char> buffer)
         {
             _buffer = buffer;
-            _symbols = symbols;
         }
 
         private Queue<SymbolSequence> Expression { get; } = new Queue<SymbolSequence>();
         private string _symbolSequence = "";
 
         internal static Queue<SymbolSequence> Parse(
-            IBuffer<char> buffer,
-            ref SymbolCollection symbolCollection)
+            IBuffer<char> buffer)
         {
-            var parser = new ExpressionParser(buffer, symbolCollection);
+            var parser = new ExpressionParser(buffer);
 
             while (parser.Next()) { }
 
@@ -85,16 +82,8 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
                 isOptional = true;
             }
 
-            var symbol = _symbols
-                .GetOrAdd(
-                    symbolName,
-                    _ =>
-                        new Symbol(
-                            symbolName, 
-                            ""));
-
             return new SymbolSequence(
-                symbol, 
+                new SymbolReference(symbolName), 
                 isOptional);
         }
     }

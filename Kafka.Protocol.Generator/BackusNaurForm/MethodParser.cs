@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using Kafka.Protocol.Generator.Extensions;
 
 namespace Kafka.Protocol.Generator.BackusNaurForm
@@ -9,12 +9,13 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
         {
             var methodSymbol = MethodSymbolParser.Parse(buffer);
 
-            var symbolCollection = new SymbolCollection();
-            var methodExpression = ExpressionParser.Parse(buffer, ref symbolCollection);
+            var methodExpression = ExpressionParser.Parse(buffer);
 
+            var symbols = new List<Symbol>();
             while (buffer.HasNext())
             {
-                RuleParser.Parse(buffer, ref symbolCollection);
+                var symbol = RuleParser.Parse(buffer);
+                symbols.Add(symbol);
             }
 
             return new Method(
@@ -23,7 +24,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
                 methodSymbol.Version,
                 methodSymbol.Type,
                 methodExpression,
-                symbolCollection.Values.ToList());
+                symbols);
         }
     }
 }

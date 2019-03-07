@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using FluentAssertions;
-using HtmlAgilityPack;
 using Kafka.Protocol.Generator.BackusNaurForm;
 using Test.It.With.XUnit;
 using Xunit;
@@ -42,7 +39,7 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_all_fields()
             {
-                _fields.Should().HaveCount(13);
+                _fields.Should().HaveCount(8);
             }
 
             [Fact]
@@ -71,8 +68,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "transactional_id"),
+                            new SymbolReference("transactional_id"),
                             false));
             }
 
@@ -84,8 +80,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "acks"),
+                            new SymbolReference("acks"),
                             false));
             }
 
@@ -97,8 +92,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[2]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "timeout"),
+                            new SymbolReference("timeout"),
                             false));
             }
 
@@ -110,8 +104,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[3]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "topic_data"),
+                            new SymbolReference("topic_data"),
                             true));
             }
 
@@ -138,8 +131,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "NULLABLE_STRING"),
+                            new SymbolReference("NULLABLE_STRING"),
                             false));
             }
 
@@ -166,8 +158,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "INT16"),
+                            new SymbolReference("INT16"),
                             false));
             }
 
@@ -194,8 +185,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "INT32"),
+                            new SymbolReference("INT32"),
                             false));
             }
 
@@ -222,8 +212,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "topic"),
+                            new SymbolReference("topic"),
                             false));
             }
 
@@ -235,8 +224,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "data"),
+                            new SymbolReference("data"),
                             true));
             }
 
@@ -264,8 +252,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "STRING"),
+                            new SymbolReference("STRING"),
                             false));
             }
 
@@ -293,8 +280,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "partition"),
+                            new SymbolReference("partition"),
                             false));
             }
 
@@ -306,8 +292,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[1]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "record_set"),
+                            new SymbolReference("record_set"),
                             false));
             }
 
@@ -335,8 +320,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "INT32"),
+                            new SymbolReference("INT32"),
                             false));
             }
 
@@ -364,89 +348,8 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            _fields.First(
-                                field => field.Name == "RECORDS"),
+                            new SymbolReference("RECORDS"),
                             false));
-            }
-
-            [Fact]
-            public void It_should_have_parsed_NULLABLE_STRING_field_name()
-            {
-                _fields.Should().ContainSingle(field => field.Name == "NULLABLE_STRING");
-
-            }
-
-            [Fact]
-            public void It_should_have_parsed_NULLABLE_STRING_field_expressions()
-            {
-                _fields.Single(field => field.Name == "NULLABLE_STRING")
-                    .Expression
-                    .Should()
-                    .HaveCount(0);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_INT16_field_name()
-            {
-                _fields.Should().ContainSingle(field => field.Name == "INT16");
-
-            }
-
-            [Fact]
-            public void It_should_have_parsed_INT16_field_expressions()
-            {
-                _fields.Single(field => field.Name == "INT16")
-                    .Expression
-                    .Should()
-                    .HaveCount(0);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_INT32_field_name()
-            {
-                _fields.Should().ContainSingle(field => field.Name == "INT32");
-
-            }
-
-            [Fact]
-            public void It_should_have_parsed_INT32_field_expressions()
-            {
-                _fields.Single(field => field.Name == "INT32")
-                    .Expression
-                    .Should()
-                    .HaveCount(0);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_STRING_field_name()
-            {
-                _fields.Should().ContainSingle(field => field.Name == "STRING");
-
-            }
-
-            [Fact]
-            public void It_should_have_parsed_STRING_field_expressions()
-            {
-                _fields.Single(field => field.Name == "STRING")
-                    .Expression
-                    .Should()
-                    .HaveCount(0);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_RECORDS_field_name()
-            {
-                _fields.Should().ContainSingle(field => field.Name == "RECORDS");
-
-            }
-
-            [Fact]
-            public void It_should_have_parsed_RECORDS_field_expressions()
-            {
-                _fields.Single(field => field.Name == "RECORDS")
-                    .Expression
-                    .Should()
-                    .HaveCount(0);
             }
         }
     }

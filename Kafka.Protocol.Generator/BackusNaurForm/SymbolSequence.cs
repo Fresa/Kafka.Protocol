@@ -2,13 +2,13 @@
 {
     internal class SymbolSequence
     {
-        internal SymbolSequence(Symbol symbol, bool isOptional)
+        internal SymbolSequence(SymbolReference symbol, bool isOptional)
         {
             Symbol = symbol;
             IsOptional = isOptional;
         }
 
-        public Symbol Symbol { get;  }
+        public SymbolReference Symbol { get;  }
         public bool IsOptional { get; }
     }
 }

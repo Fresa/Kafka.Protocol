@@ -11,12 +11,11 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
             MethodType type,
             Queue<SymbolSequence> expression, 
             List<Symbol> symbols) 
-            : base(name, description)
+            : base(name, description, expression)
         {
             Version = version;
             Type = type;
             Symbols = symbols;
-            Expression = expression;
         }
 
         public int Version { get; }
