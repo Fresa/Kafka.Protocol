@@ -82,9 +82,35 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
                 isOptional = true;
             }
 
+            var symbolReference = ParseSymbolReference(new Buffer<char>(symbolName.ToCharArray()));
+
             return new SymbolSequence(
-                new SymbolReference(symbolName), 
+                symbolReference,
                 isOptional);
+        }
+
+        private static SymbolReference ParseSymbolReference(IBuffer<char> symbolSequence)
+        {
+            var name = "";
+            SymbolReference genericSymbolReference = null;
+            while (symbolSequence.MoveToNext())
+            {
+                var chr = symbolSequence.Current;
+                if (chr == '(')
+                {
+                    genericSymbolReference = ParseSymbolReference(symbolSequence);
+                    continue;
+                }
+
+                if (chr == ')')
+                {
+                    continue;
+                }
+
+                name += chr;
+            }
+
+            return new SymbolReference(name, genericSymbolReference);
         }
     }
 }

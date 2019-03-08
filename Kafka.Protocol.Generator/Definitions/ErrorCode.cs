@@ -1,4 +1,4 @@
-﻿namespace Kafka.Protocol.Generator
+﻿namespace Kafka.Protocol.Generator.Definitions
 {
     public class ErrorCode
     {

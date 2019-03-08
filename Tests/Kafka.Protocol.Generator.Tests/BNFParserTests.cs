@@ -28,7 +28,7 @@ namespace Kafka.Protocol.Generator.Tests
                         topic => STRING
                         data => partition record_set 
                           partition => INT32
-                          record_set => RECORDS";
+                          record_set => RECORDS(INT32)";
             }
 
             protected override void When()
@@ -348,7 +348,8 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()[0]
                     .Should().BeEquivalentTo(
                         new SymbolSequence(
-                            new SymbolReference("RECORDS"),
+                            new SymbolReference("RECORDS", 
+                                new SymbolReference("INT32")),
                             false));
             }
         }

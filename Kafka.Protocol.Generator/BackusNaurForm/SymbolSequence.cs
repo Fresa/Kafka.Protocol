@@ -2,13 +2,18 @@
 {
     internal class SymbolSequence
     {
-        internal SymbolSequence(SymbolReference symbol, bool isOptional)
+        internal SymbolSequence(SymbolReference symbolReference, bool isOptional)
         {
-            Symbol = symbol;
+            SymbolReference = symbolReference;
             IsOptional = isOptional;
         }
 
-        public SymbolReference Symbol { get;  }
+        public SymbolReference SymbolReference { get;  }
         public bool IsOptional { get; }
+
+        public override string ToString()
+        {
+            return SymbolReference.Name;
+        }
     }
 }

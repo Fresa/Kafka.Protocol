@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using Kafka.Protocol.Generator.BackusNaurForm;
+using Kafka.Protocol.Generator.Definitions;
 using Kafka.Protocol.Generator.Extensions;
 
 namespace Kafka.Protocol.Generator
@@ -19,8 +21,11 @@ namespace Kafka.Protocol.Generator
         {
             _definition = definition;
             ErrorCodes = ParseErrorCodes(definition.DocumentNode);
+            PrimitiveTypes = ParsePrimitiveTypes();
             Requests = ParseMessages(definition.DocumentNode);
         }
+
+        internal IDictionary<string, PrimitiveType> PrimitiveTypes { get; set; }
 
         internal IDictionary<int, ErrorCode> ErrorCodes { get; }
 
@@ -77,7 +82,7 @@ namespace Kafka.Protocol.Generator
                 .Select(ParseDefinitionNode);
         }
 
-        private static Method ParseDefinitionNode(HtmlNode definitionNode)
+        private Method ParseDefinitionNode(HtmlNode definitionNode)
         {
             var definition = System.Net.WebUtility.HtmlDecode(
                 definitionNode
@@ -93,6 +98,8 @@ namespace Kafka.Protocol.Generator
                     definition
                         .ToCharArray()));
 
+            ValidateMethod(method);
+
             foreach (var symbol in method.Symbols)
             {
                 symbol.Description = descriptionTable
@@ -102,6 +109,37 @@ namespace Kafka.Protocol.Generator
             }
 
             return method;
+        }
+
+        private void ValidateMethod(Method method)
+        {
+            var symbolSequences =
+                method
+                    .Symbols
+                    .SelectMany(
+                        symbol => symbol
+                            .Expression)
+                    .ToList();
+            symbolSequences.AddRange(method.Expression);
+
+
+            foreach (var symbolSequence in symbolSequences)
+            {
+                if (PrimitiveTypes.ContainsKey(symbolSequence.SymbolReference.Name))
+                {
+                    continue;
+                }
+
+                if (method.Symbols.Any(
+                    symbol => 
+                        symbol.Name == symbolSequence.SymbolReference.Name))
+                {
+                    continue;
+                }
+
+                throw new InvalidOperationException(
+                    $"Method '{method}' has a reference to type '{symbolSequence}' which does not appear within the parsed symbols nor the primitive types");
+            }
         }
 
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
@@ -116,5 +154,17 @@ namespace Kafka.Protocol.Generator
                     errorCode => errorCode.Code);
         }
 
+        private const string PrimitiveTypesXPath = "//*[contains(@id,'protocol_types')]/..";
+
+        private IDictionary<string, PrimitiveType> ParsePrimitiveTypes()
+        {
+            return _definition
+                .DocumentNode
+                .SelectFirst(PrimitiveTypesXPath)
+                .GetFirstSiblingNamed("table")
+                .ParseTableNodeTo<PrimitiveType>()
+                .ToDictionary(
+                    type => type.Type);
+        }
     }
 }

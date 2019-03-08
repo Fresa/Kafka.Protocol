@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Kafka.Protocol.Generator.BackusNaurForm;
 
-namespace Kafka.Protocol.Generator
+namespace Kafka.Protocol.Generator.Definitions
 {
     internal class Message
     {
