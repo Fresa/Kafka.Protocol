@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using Kafka.Protocol.Generator.BackusNaurForm;
@@ -32,8 +30,6 @@ namespace Kafka.Protocol.Generator
 
         private IDictionary<int, Message> ParseMessages(HtmlNode node)
         {
-            var links = new Dictionary<string, HtmlNode>();
-
             var apiKeyMessageMaps = node
                 .SelectFirst(ProtocolApiKeysXPath)
                 .GetFirstSiblingNamed("table")
@@ -58,84 +54,54 @@ namespace Kafka.Protocol.Generator
             return messages;
         }
 
-        private string GetProtocolRequestMethodXPathFor(string methodName) =>
+        private static string GetProtocolRequestMethodXPathFor(string methodName) =>
             $"//*/pre[starts-with(text(),'{methodName} Request')]";
 
         private List<Method> ParseRequestsForMessage(string name)
         {
-            var nodes = _definition
+            return _definition
                 .DocumentNode
-                .SelectNodes(GetProtocolRequestMethodXPathFor(name));
-
-            var methods = new List<Method>();
-            foreach (var definitionNode in nodes)
-            {
-                var definition = System.Net.WebUtility.HtmlDecode(
-                       definitionNode
-                           .InnerText);
-
-                var descriptionTable = definitionNode
-                    .GetFirstSiblingNamed("table")
-                    .ParseTableNodeTo<FieldDescription>()
-                    .ToList();
-
-                var method = MethodParser.Parse(
-                    new Buffer<char>(
-                        definition
-                            .ToCharArray()));
-
-                foreach (var symbol in method.Symbols)
-                {
-                    symbol.Description = descriptionTable
-                        .FirstOrDefault(
-                            description => 
-                                description.Field == symbol.Name)?.Description;
-                }
-
-                methods.Add(method);
-            }
-
-            return methods;
+                .SelectNodes(GetProtocolRequestMethodXPathFor(name))
+                .Select(ParseDefinitionNode)
+                .ToList();
         }
 
-        private string GetProtocolResponseMethodXPathFor(string methodName) =>
+        private static string GetProtocolResponseMethodXPathFor(string methodName) =>
             $"//*/pre[starts-with(text(),'{methodName} Response')]";
 
-        private List<Method> ParseResponsesForMessage(string name)
+        private IEnumerable<Method> ParseResponsesForMessage(string name)
         {
-            var nodes = _definition
+            return _definition
                 .DocumentNode
-                .SelectNodes(GetProtocolResponseMethodXPathFor(name));
+                .SelectNodes(GetProtocolResponseMethodXPathFor(name))
+                .Select(ParseDefinitionNode);
+        }
 
-            var methods = new List<Method>();
-            foreach (var definitionNode in nodes)
+        private static Method ParseDefinitionNode(HtmlNode definitionNode)
+        {
+            var definition = System.Net.WebUtility.HtmlDecode(
+                definitionNode
+                    .InnerText);
+
+            var descriptionTable = definitionNode
+                .GetFirstSiblingNamed("table")
+                .ParseTableNodeTo<FieldDescription>()
+                .ToList();
+
+            var method = MethodParser.Parse(
+                new Buffer<char>(
+                    definition
+                        .ToCharArray()));
+
+            foreach (var symbol in method.Symbols)
             {
-                var definition = System.Net.WebUtility.HtmlDecode(
-                    definitionNode
-                        .InnerText);
-
-                var descriptionTable = definitionNode
-                    .GetFirstSiblingNamed("table")
-                    .ParseTableNodeTo<FieldDescription>()
-                    .ToList();
-
-                var method = MethodParser.Parse(
-                    new Buffer<char>(
-                        definition
-                            .ToCharArray()));
-
-                foreach (var symbol in method.Symbols)
-                {
-                    symbol.Description = descriptionTable
-                        .FirstOrDefault(
-                            description =>
-                                description.Field == symbol.Name)?.Description;
-                }
-
-                methods.Add(method);
+                symbol.Description = descriptionTable
+                    .FirstOrDefault(
+                        description =>
+                            description.Field == symbol.Name)?.Description;
             }
 
-            return methods;           
+            return method;
         }
 
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
