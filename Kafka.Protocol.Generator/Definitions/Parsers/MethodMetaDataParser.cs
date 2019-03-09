@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Kafka.Protocol.Generator.Extensions;
+using Kafka.Protocol.Generator.BackusNaurForm;
 
-namespace Kafka.Protocol.Generator.BackusNaurForm
+namespace Kafka.Protocol.Generator.Definitions.Parsers
 {
-    internal class MethodSymbolParser
+    internal class MethodMetaDataParser
     {
         private readonly IBuffer<char> _buffer;
         private readonly Queue<Func<bool>> _handlers;
 
-        private MethodSymbolParser(IBuffer<char> buffer)
+        private MethodMetaDataParser(IBuffer<char> buffer)
         {
             _buffer = buffer;
             _handlers = new Queue<Func<bool>>(new List<Func<bool>>
             {
                 ParseName,
                 ParseMethodType,
-                ParseVersion,
-                ParseDefinedAs
+                ParseVersion
             });
             _handle = _handlers.Dequeue();
         }
@@ -31,13 +30,14 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
         private string _tempBuffer = "";
         private Func<bool> _handle;
 
-        internal static MethodSymbol Parse(IBuffer<char> buffer)
+        internal static MethodMetaData Parse(Symbol symbol)
         {
-            var methodSymbolParser = new MethodSymbolParser(buffer);
+            var buffer = new Buffer<char>(symbol.Name.ToCharArray());
+            var methodSymbolParser = new MethodMetaDataParser(buffer);
 
             while (methodSymbolParser.Next()) { }
 
-            return new MethodSymbol(
+            return new MethodMetaData(
                 methodSymbolParser._name,
                 methodSymbolParser._version,
                 methodSymbolParser._type);
@@ -77,17 +77,6 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
             }
 
             _tempBuffer += _buffer.Current;
-            return true;
-        }
-
-        private bool ParseDefinedAs()
-        {
-            if (_buffer.CurrentSequenceIs("=>"))
-            {
-                _buffer.MoveForward(2);
-                return false;
-            }
-
             return true;
         }
 

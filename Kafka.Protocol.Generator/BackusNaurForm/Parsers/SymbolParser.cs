@@ -1,26 +1,26 @@
 ﻿using Kafka.Protocol.Generator.Extensions;
 
-namespace Kafka.Protocol.Generator.BackusNaurForm
+namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
 {
-    internal class SymbolNameParser
+    internal class SymbolParser
     {
         private const string DefinedAs = "=>";
         private readonly IBuffer<char> _buffer;
 
-        private SymbolNameParser(IBuffer<char> buffer)
+        private SymbolParser(IBuffer<char> buffer)
         {
             _buffer = buffer;
         }
 
         private string _name = "";
 
-        internal static string Parse(IBuffer<char> buffer)
+        internal static Symbol Parse(IBuffer<char> buffer)
         {
-            var parser = new SymbolNameParser(buffer);
+            var parser = new SymbolParser(buffer);
 
             while (parser.Next()) { }
 
-            return parser._name;
+            return new Symbol(parser._name);
         }
 
         private bool Next()

@@ -1,8 +1,10 @@
-﻿namespace Kafka.Protocol.Generator.BackusNaurForm
+﻿using Kafka.Protocol.Generator.BackusNaurForm;
+
+namespace Kafka.Protocol.Generator.Definitions
 {
-    internal class MethodSymbol
+    internal class MethodMetaData
     {
-        internal MethodSymbol(string name, int version, MethodType type)
+        internal MethodMetaData(string name, int version, MethodType type)
         {
             Name = name;
             Version = version;

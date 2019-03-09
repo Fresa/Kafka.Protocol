@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Kafka.Protocol.Generator.BackusNaurForm
+namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
 {
     internal class ExpressionParser
     {
@@ -66,7 +66,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
             Expression.Enqueue(symbol);
         }
 
-        private SymbolSequence ParseSymbolSequence(
+        private static SymbolSequence ParseSymbolSequence(
             string symbolSequence)
         {
             var isOptional = false;
@@ -82,35 +82,11 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
                 isOptional = true;
             }
 
-            var symbolReference = ParseSymbolReference(new Buffer<char>(symbolName.ToCharArray()));
+            var symbolReference = new SymbolReference(symbolName);
 
             return new SymbolSequence(
                 symbolReference,
                 isOptional);
-        }
-
-        private static SymbolReference ParseSymbolReference(IBuffer<char> symbolSequence)
-        {
-            var name = "";
-            SymbolReference genericSymbolReference = null;
-            while (symbolSequence.MoveToNext())
-            {
-                var chr = symbolSequence.Current;
-                if (chr == '(')
-                {
-                    genericSymbolReference = ParseSymbolReference(symbolSequence);
-                    continue;
-                }
-
-                if (chr == ')')
-                {
-                    continue;
-                }
-
-                name += chr;
-            }
-
-            return new SymbolReference(name, genericSymbolReference);
         }
     }
 }

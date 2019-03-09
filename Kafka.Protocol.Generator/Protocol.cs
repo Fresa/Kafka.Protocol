@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
 using Kafka.Protocol.Generator.BackusNaurForm;
+using Kafka.Protocol.Generator.BackusNaurForm.Parsers;
 using Kafka.Protocol.Generator.Definitions;
+using Kafka.Protocol.Generator.Definitions.Parsers;
 using Kafka.Protocol.Generator.Extensions;
 
 namespace Kafka.Protocol.Generator
@@ -93,19 +95,20 @@ namespace Kafka.Protocol.Generator
                 .ParseTableNodeTo<FieldDescription>()
                 .ToList();
 
-            var method = MethodParser.Parse(
+            var specification = BackusNaurParser.Parse(
                 new Buffer<char>(
                     definition
                         .ToCharArray()));
 
+            var method = MethodParser.Parse(specification);
             ValidateMethod(method);
 
-            foreach (var symbol in method.Symbols)
+            foreach (var field in method.Fields)
             {
-                symbol.Description = descriptionTable
+                field.Description = descriptionTable
                     .FirstOrDefault(
                         description =>
-                            description.Field == symbol.Name)?.Description;
+                            description.Field == field.Name)?.Description;
             }
 
             return method;
@@ -113,32 +116,33 @@ namespace Kafka.Protocol.Generator
 
         private void ValidateMethod(Method method)
         {
-            var symbolSequences =
+            var fieldReferences =
                 method
-                    .Symbols
+                    .Fields
                     .SelectMany(
-                        symbol => symbol
-                            .Expression)
+                        field => field
+                            .FieldReferences)
                     .ToList();
-            symbolSequences.AddRange(method.Expression);
+            fieldReferences.AddRange(method.FieldReferences);
 
-
-            foreach (var symbolSequence in symbolSequences)
+            // todo: validate generic type arguments
+            foreach (var fieldReference in fieldReferences)
             {
-                if (PrimitiveTypes.ContainsKey(symbolSequence.SymbolReference.Name))
+                if (PrimitiveTypes.ContainsKey(
+                    fieldReference.Type.Name))
                 {
                     continue;
                 }
 
-                if (method.Symbols.Any(
-                    symbol => 
-                        symbol.Name == symbolSequence.SymbolReference.Name))
+                if (method.Fields.Any(
+                    field => 
+                        field.Name == fieldReference.Type.Name))
                 {
                     continue;
                 }
 
                 throw new InvalidOperationException(
-                    $"Method '{method}' has a reference to type '{symbolSequence}' which does not appear within the parsed symbols nor the primitive types");
+                    $"Method '{method}' has a reference to type '{fieldReference}' which does not appear within the parsed symbols nor the primitive types");
             }
         }
 

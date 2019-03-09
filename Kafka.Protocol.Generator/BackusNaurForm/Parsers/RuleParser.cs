@@ -1,15 +1,15 @@
-﻿namespace Kafka.Protocol.Generator.BackusNaurForm
+﻿namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
 {
     internal class RuleParser
     {
-        internal static Symbol Parse(
+        internal static Rule Parse(
             IBuffer<char> buffer)
         {
-            var symbolName = SymbolNameParser.Parse(buffer);
+            var symbolName = SymbolParser.Parse(buffer);
             
             var expression = ExpressionParser.Parse(buffer);
 
-            return new Symbol(
+            return new Rule(
                 symbolName,
                 expression);
         }
