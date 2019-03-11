@@ -21,9 +21,12 @@ namespace Kafka.Protocol.Generator
         private Protocol(HtmlDocument definition)
         {
             _definition = definition;
-            ErrorCodes = ParseErrorCodes(definition.DocumentNode);
+
+            ErrorCodes = ParseErrorCodes();
             PrimitiveTypes = ParsePrimitiveTypes();
-            Messages = ParseMessages(definition.DocumentNode);
+            Messages = ParseMessages();
+            RequestHeader = ParseRequestHeader();
+            ResponseHeader = ParseResponseHeader();
         }
 
         internal IDictionary<string, PrimitiveType> PrimitiveTypes { get; set; }
@@ -32,11 +35,103 @@ namespace Kafka.Protocol.Generator
 
         internal IDictionary<int, Message> Messages { get; }
 
+        internal Header RequestHeader { get; }
+
+        internal Header ResponseHeader { get; }
+
+        private const string ProtocolRequestHeaderXPath = "//*/pre[starts-with(text(),'Request Header')]";
+
+        private Header ParseRequestHeader()
+        {
+            var headerNode = _definition
+                .DocumentNode
+                .SelectFirst(ProtocolRequestHeaderXPath);
+
+            return ParseHeader(headerNode);
+        }
+
+        private const string ProtocolResponseHeaderXPath = "//*/pre[starts-with(text(),'Response Header')]";
+
+        private Header ParseResponseHeader()
+        {
+            var headerNode = _definition
+                .DocumentNode
+                .SelectFirst(ProtocolResponseHeaderXPath);
+
+            return ParseHeader(headerNode);
+        }
+
+        private Header ParseHeader(HtmlNode headerNode)
+        {
+            var headerDefinition = System.Net.WebUtility.HtmlDecode(
+                headerNode
+                    .InnerText);
+
+            var descriptionTable = headerNode
+                .GetFirstSiblingNamed("table")
+                .ParseTableNodeTo<FieldDescription>()
+                .ToList();
+
+            var specification = BackusNaurParser.Parse(
+                new Buffer<char>(
+                    headerDefinition
+                        .ToCharArray()));
+
+            var header = HeaderParser.Parse(specification);
+            ValidateHeader(header);
+
+            SetDescriptions(header.Fields, descriptionTable);
+
+            return header;
+        }
+
+        private void ValidateHeader(Header header)
+        {
+            var fieldReferences =
+                header
+                    .Fields
+                    .SelectMany(
+                        field => field
+                            .FieldReferences)
+                    .ToList();
+            fieldReferences.AddRange(header.FieldReferences);
+
+            foreach (var fieldReference in fieldReferences)
+            {
+                ValidateTypeReference(fieldReference.Type, header);
+            }
+        }
+
+        private void ValidateTypeReference(TypeReference typeReference, Header header)
+        {
+            if (typeReference.IsGeneric)
+            {
+                ValidateTypeReference(typeReference.GenericArgument, header);
+            }
+
+            if (PrimitiveTypes.ContainsKey(
+                typeReference.Name))
+            {
+                return;
+            }
+
+            if (header.Fields.Any(
+                field =>
+                    field.Name == typeReference.Name))
+            {
+                return;
+            }
+
+            throw new InvalidOperationException(
+                $"'{header}' has a reference to type '{typeReference}' which does not appear within the parsed symbols nor the primitive types");
+        }
+
         private const string ProtocolApiKeysXPath = "//*[contains(@id,'protocol_api_keys')]/..";
 
-        private IDictionary<int, Message> ParseMessages(HtmlNode node)
+        private IDictionary<int, Message> ParseMessages()
         {
-            var apiKeyMessageMaps = node
+            var apiKeyMessageMaps = _definition
+                .DocumentNode
                 .SelectFirst(ProtocolApiKeysXPath)
                 .GetFirstSiblingNamed("table")
                 .ParseTableNodeTo<ApiKeyMessageMap>()
@@ -68,7 +163,7 @@ namespace Kafka.Protocol.Generator
             return _definition
                 .DocumentNode
                 .SelectNodes(GetProtocolRequestMethodXPathFor(name))
-                .Select(ParseDefinitionNode)
+                .Select(ParseMethodDefinitionNode)
                 .ToList();
         }
 
@@ -80,10 +175,10 @@ namespace Kafka.Protocol.Generator
             return _definition
                 .DocumentNode
                 .SelectNodes(GetProtocolResponseMethodXPathFor(name))
-                .Select(ParseDefinitionNode);
+                .Select(ParseMethodDefinitionNode);
         }
 
-        private Method ParseDefinitionNode(HtmlNode definitionNode)
+        private Method ParseMethodDefinitionNode(HtmlNode definitionNode)
         {
             var definition = System.Net.WebUtility.HtmlDecode(
                 definitionNode
@@ -102,15 +197,20 @@ namespace Kafka.Protocol.Generator
             var method = MethodParser.Parse(specification);
             ValidateMethod(method);
 
-            foreach (var field in method.Fields)
+            SetDescriptions(method.Fields, descriptionTable);
+
+            return method;
+        }
+
+        private void SetDescriptions(List<Field> fields, List<FieldDescription> fieldDescriptions)
+        {
+            foreach (var field in fields)
             {
-                field.Description = descriptionTable
+                field.Description = fieldDescriptions
                     .FirstOrDefault(
                         description =>
                             description.Field == field.Name)?.Description;
             }
-
-            return method;
         }
 
         private void ValidateMethod(Method method)
@@ -156,9 +256,10 @@ namespace Kafka.Protocol.Generator
 
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
 
-        private static IDictionary<int, ErrorCode> ParseErrorCodes(HtmlNode node)
+        private IDictionary<int, ErrorCode> ParseErrorCodes()
         {
-            return node
+            return _definition
+                .DocumentNode
                 .SelectFirst(ProtocolErrorCodesXPath)
                 .GetFirstSiblingNamed("table")
                 .ParseTableNodeTo<ErrorCode>()
