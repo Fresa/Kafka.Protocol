@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
-using Kafka.Protocol.Generator.BackusNaurForm;
 using Kafka.Protocol.Generator.BackusNaurForm.Parsers;
 using Kafka.Protocol.Generator.Definitions;
 using Kafka.Protocol.Generator.Definitions.Parsers;
@@ -24,14 +23,14 @@ namespace Kafka.Protocol.Generator
             _definition = definition;
             ErrorCodes = ParseErrorCodes(definition.DocumentNode);
             PrimitiveTypes = ParsePrimitiveTypes();
-            Requests = ParseMessages(definition.DocumentNode);
+            Messages = ParseMessages(definition.DocumentNode);
         }
 
         internal IDictionary<string, PrimitiveType> PrimitiveTypes { get; set; }
 
         internal IDictionary<int, ErrorCode> ErrorCodes { get; }
 
-        internal IDictionary<int, Message> Requests { get; }
+        internal IDictionary<int, Message> Messages { get; }
 
         private const string ProtocolApiKeysXPath = "//*[contains(@id,'protocol_api_keys')]/..";
 

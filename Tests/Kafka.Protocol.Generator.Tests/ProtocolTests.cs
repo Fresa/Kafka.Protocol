@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FluentAssertions;
 using HtmlAgilityPack;
 using Kafka.Protocol.Generator.BackusNaurForm;
@@ -13,7 +15,7 @@ namespace Kafka.Protocol.Generator.Tests
     {       
         public class When_parsing : XUnit2Specification
         {
-            private HtmlDocument _apacheKafkaDefinitionPage = new HtmlDocument();
+            private readonly HtmlDocument _apacheKafkaDefinitionPage = new HtmlDocument();
             private Protocol _protocol;
 
             protected override void Given()
@@ -43,16 +45,59 @@ namespace Kafka.Protocol.Generator.Tests
             }
 
             [Fact]
-            public void It_should_have_parsed_requests()
+            public void It_should_have_fetch_message()
             {
-                _protocol.Requests
+                _protocol.Messages
                     .Should().HaveCount(43)
                     .And.ContainKey(1)
-                    .And.Subject[1].Should().BeEquivalentTo(new ApiKeyMessageMap
-                    {
-                        Key = 1,
-                        Name = "Fetch"
-                    });
+                    .And.Subject[1]
+                    .Should()
+                    .BeEquivalentTo(
+                        new Message(
+                            1, 
+                            "Fetch",
+                            new List<Method>()), 
+                        options => 
+                            options
+                                .Excluding(message => 
+                                    message
+                                        .Methods));
+            }
+
+            [Fact]
+            public void It_should_have_parsed_fetch_message_requests()
+            {
+                _protocol.Messages[1]
+                    .Methods
+                    .Where(method =>
+                        method.Type == MethodType.Request)
+                    .Should()
+                    .HaveCount(11);
+            }
+
+            [Fact]
+            public void It_should_have_parsed_fetch_message_responses()
+            {
+                _protocol.Messages[1]
+                    .Methods
+                    .Where(method =>
+                        method.Type == MethodType.Response)
+                    .Should()
+                    .HaveCount(11);
+            }
+
+            [Fact]
+            public void It_should_have_parsed_primitives()
+            {
+                _protocol.PrimitiveTypes
+                    .Should()
+                    .HaveCount(14)
+                    .And.Subject
+                    .Values
+                    .Select(type => 
+                        type.Description)
+                    .Should()
+                    .NotContainNulls();
             }
         }
     }
