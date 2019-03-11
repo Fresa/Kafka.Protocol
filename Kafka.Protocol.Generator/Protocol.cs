@@ -125,25 +125,34 @@ namespace Kafka.Protocol.Generator
                     .ToList();
             fieldReferences.AddRange(method.FieldReferences);
 
-            // todo: validate generic type arguments
             foreach (var fieldReference in fieldReferences)
             {
-                if (PrimitiveTypes.ContainsKey(
-                    fieldReference.Type.Name))
-                {
-                    continue;
-                }
-
-                if (method.Fields.Any(
-                    field => 
-                        field.Name == fieldReference.Type.Name))
-                {
-                    continue;
-                }
-
-                throw new InvalidOperationException(
-                    $"Method '{method}' has a reference to type '{fieldReference}' which does not appear within the parsed symbols nor the primitive types");
+                ValidateTypeReference(fieldReference.Type, method);
             }
+        }
+
+        private void ValidateTypeReference(TypeReference typeReference, Method method)
+        {
+            if (typeReference.IsGeneric)
+            {
+                ValidateTypeReference(typeReference.GenericArgument, method);
+            }
+
+            if (PrimitiveTypes.ContainsKey(
+                typeReference.Name))
+            {
+                return;
+            }
+
+            if (method.Fields.Any(
+                field =>
+                    field.Name == typeReference.Name))
+            {
+                return;
+            }
+
+            throw new InvalidOperationException(
+                $"Method '{method}' has a reference to type '{typeReference}' which does not appear within the parsed symbols nor the primitive types");
         }
 
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
