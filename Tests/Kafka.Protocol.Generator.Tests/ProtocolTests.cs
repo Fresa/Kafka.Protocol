@@ -45,7 +45,7 @@ namespace Kafka.Protocol.Generator.Tests
             }
 
             [Fact]
-            public void It_should_have_fetch_message()
+            public void It_should_have_parsed_fetch_message()
             {
                 _protocol.Messages
                     .Should().HaveCount(43)
@@ -98,6 +98,46 @@ namespace Kafka.Protocol.Generator.Tests
                         type.Description)
                     .Should()
                     .NotContainNulls();
+            }
+
+            [Fact]
+            public void It_should_have_parsed_request_header()
+            {
+                _protocol.RequestHeader
+                    .Should()
+                    .BeEquivalentTo(
+                        new Header(
+                            new HeaderMetaData("Header", MethodType.Request), 
+                            new List<FieldReference>(), 
+                            new List<Field>()),
+                        options =>
+                            options
+                                .Excluding(header =>
+                                    header
+                                        .Fields)
+                                .Excluding(header => 
+                                    header
+                                        .FieldReferences));
+            }
+
+            [Fact]
+            public void It_should_have_parsed_response_header()
+            {
+                _protocol.ResponseHeader
+                    .Should()
+                    .BeEquivalentTo(
+                        new Header(
+                            new HeaderMetaData("Header", MethodType.Response),
+                            new List<FieldReference>(),
+                            new List<Field>()),
+                        options =>
+                            options
+                                .Excluding(header =>
+                                    header
+                                        .Fields)
+                                .Excluding(header =>
+                                    header
+                                        .FieldReferences));
             }
         }
     }
