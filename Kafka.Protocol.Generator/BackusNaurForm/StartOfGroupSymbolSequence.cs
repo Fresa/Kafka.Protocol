@@ -1,8 +1,8 @@
 ﻿namespace Kafka.Protocol.Generator.BackusNaurForm
 {
-    internal class StartParenthesisSymbolSequence : OperatorSymbolSequence
+    internal class StartOfGroupSymbolSequence : OperatorSymbolSequence
     {
-        internal StartParenthesisSymbolSequence()
+        internal StartOfGroupSymbolSequence()
             : base(new SymbolReference("("))
         {
         }

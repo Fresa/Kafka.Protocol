@@ -61,10 +61,10 @@
                 new OrSymbolSequence();
             internal static AndSymbolSequence And =>
                 new AndSymbolSequence();
-            internal static StartParenthesisSymbolSequence StartParenthesis =>
-                new StartParenthesisSymbolSequence();
-            internal static EndParenthesisSymbolSequence EndParenthesis =>
-                new EndParenthesisSymbolSequence();
+            internal static StartOfGroupSymbolSequence StartOfGroup =>
+                new StartOfGroupSymbolSequence();
+            internal static EndOfGroupSymbolSequence EndOfGroup =>
+                new EndOfGroupSymbolSequence();
         }
 
         internal static class Operands

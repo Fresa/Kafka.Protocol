@@ -35,31 +35,36 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
         {
             while (MoveToNext())
             {
-                if (CurrentIsStartOfGroup())
+                if (ExcessiveWhiteSpaceDetected())
                 {
-                    _operatorStack.Push(
-                        SymbolSequence.Operators.StartParenthesis);
                     continue;
                 }
 
-                if (CurrentIsEndOfGroup())
+                if (AtStartOfGroup())
+                {
+                    _operatorStack.Push(
+                        SymbolSequence.Operators.StartOfGroup);
+                    continue;
+                }
+
+                if (AtEndOfGroup())
                 {
                     if (TryAddCurrentOperand() == false)
                     {
                         throw _buffer
-                            .CreateSyntaxError("Expected an operand before end of grouping operator");
+                            .CreateSyntaxError("Expected an operand before end of group");
                     }
 
                     while (_operatorStack.Any() &&
                            _operatorStack.Peek() !=
-                           SymbolSequence.Operators.StartParenthesis)
+                           SymbolSequence.Operators.StartOfGroup)
                     {
                         PostFixExpression.Enqueue(_operatorStack.Pop());
                     }
 
                     if (_operatorStack.Any() == false ||
                         _operatorStack.Pop() !=
-                        SymbolSequence.Operators.StartParenthesis)
+                        SymbolSequence.Operators.StartOfGroup)
                     {
                         throw _buffer
                             .CreateSyntaxError("Missing '('");
@@ -68,41 +73,26 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                     continue;
                 }
 
-                if (CurrentIsStartOfGenericParameter())
+                if (AtStartOfGenericSymbol())
                 {
                     _operandBuffer += _buffer.Current;
                     _genericParameterLevel++;
                     continue;
                 }
 
-                if (CurrentIsEndOfGenericParameter())
+                if (AtEndOfGenericSymbol())
                 {
                     _operandBuffer += _buffer.Current;
                     _genericParameterLevel--;
                     continue;
                 }
 
-                if (IsOperator(out var @operator))
+                if (AtOperator(out var @operator))
                 {
                     if (TryAddCurrentOperand() == false)
                     {
                         throw _buffer
-                            .CreateSyntaxError("Expected an operand before an OR operator");
-                    }
-
-                    if (_buffer.HasNext() == false)
-                    {
-                        continue;
-                    }
-
-                    if (_buffer.CurrentSequenceIs("  "))
-                    {
-                        continue;
-                    }
-
-                    if (_buffer.CurrentSequenceIs($" {End}"))
-                    {
-                        continue;
+                            .CreateSyntaxError($"Expected an operand before an '{@operator}' operator");
                     }
 
                     PushOperator(@operator);
@@ -121,29 +111,54 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
 
         private bool MoveToNext()
         {
-            return _buffer.MoveToNext() &&
-                   _buffer.CurrentSequenceIs(End) == false;
+            var moved = _buffer.MoveToNext();
+            if (moved == false)
+            {
+                return false;
+            }
+
+            if (_buffer.CurrentSequenceIs(End))
+            {
+                return false;
+            }
+
+            if (_buffer.CurrentSequenceIs($" {End}"))
+            {
+                return false;
+            }
+
+            if (_buffer.Current == ' ' && _buffer.HasNext() == false)
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        private bool CurrentIsStartOfGroup()
+        private bool ExcessiveWhiteSpaceDetected()
+        {
+            return _buffer.CurrentSequenceIs("  ");
+        }
+
+        private bool AtStartOfGroup()
         {
             return _buffer.Current == '(' &&
                    _buffer.PeekBehind() == ' ';
         }
 
-        private bool CurrentIsEndOfGroup()
+        private bool AtEndOfGroup()
         {
             return _buffer.Current == ')' &&
                    _genericParameterLevel == 0;
         }
 
-        private bool CurrentIsStartOfGenericParameter()
+        private bool AtStartOfGenericSymbol()
         {
             return _buffer.Current == '(' &&
                    _buffer.PeekBehind() != ' ';
         }
 
-        private bool CurrentIsEndOfGenericParameter()
+        private bool AtEndOfGenericSymbol()
         {
             return _buffer.Current == ')' &&
                    _genericParameterLevel > 0;
@@ -160,7 +175,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                 }
             };
 
-        private bool IsOperator(out OperatorSymbolSequence operatorSymbolSequence)
+        private bool AtOperator(out OperatorSymbolSequence operatorSymbolSequence)
         {
             foreach (var @operator in _operators)
             {
