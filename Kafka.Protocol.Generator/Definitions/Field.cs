@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Kafka.Protocol.Generator.Definitions.FieldExpression;
 
 namespace Kafka.Protocol.Generator.Definitions
 {
     internal class Field
     {
-        public Field(string name, List<FieldReference> fieldReferences)
+        public Field(string name, PostFixFieldExpression postFixFieldExpression)
         {
             Name = name;
-            FieldReferences = fieldReferences;
+            PostFixFieldExpression = postFixFieldExpression;
         }
 
         public string Name { get; }
         public string Description { get; set; }
-        public List<FieldReference> FieldReferences { get; }
+        public PostFixFieldExpression PostFixFieldExpression { get; }
     }
 }

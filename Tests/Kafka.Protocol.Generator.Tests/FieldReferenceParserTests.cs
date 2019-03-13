@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Kafka.Protocol.Generator.BackusNaurForm;
 using Kafka.Protocol.Generator.Definitions;
+using Kafka.Protocol.Generator.Definitions.FieldExpression;
 using Kafka.Protocol.Generator.Definitions.Parsers;
 using Test.It.With.XUnit;
 using Xunit;
@@ -13,14 +14,12 @@ namespace Kafka.Protocol.Generator.Tests
         {
             private FieldReferenceParser _parser;
             private SymbolSequence _symbolSequence;
-            private FieldReference _fieldReference;
+            private FieldExpressionToken _fieldReference;
 
             protected override void Given()
             {
-                _symbolSequence = new SymbolSequence(
-                    new SymbolReference(
-                        "ARRAY(INT32)"), 
-                    false);
+                _symbolSequence = SymbolSequence.Operands.Required(
+                    "ARRAY(INT32)");
             }
 
             protected override void When()
@@ -29,9 +28,16 @@ namespace Kafka.Protocol.Generator.Tests
             }
 
             [Fact]
+            public void It_should_have_parsed_a_operand()
+            {
+                _fieldReference.ExpressionType
+                    .Should().Be(FieldExpressionType.Operand);
+            }
+
+            [Fact]
             public void It_should_have_parsed_the_type_name()
             {
-                _fieldReference.Type.Name
+                _fieldReference.As<FieldReference>().Type.Name
                     .Should().Be("ARRAY");
             }
 
@@ -39,10 +45,12 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_the_generic_type_argument()
             {
                 _fieldReference
+                    .As<FieldReference>()
                     .Type
                     .IsGeneric
                     .Should().BeTrue();
                 _fieldReference
+                    .As<FieldReference>()
                     .Type
                     .GenericArgument
                     .Name
@@ -53,6 +61,7 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_mapped_is_optional()
             {
                 _fieldReference
+                    .As<FieldReference>()
                     .IsOptional
                     .Should().BeFalse();
             }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Kafka.Protocol.Generator.BackusNaurForm;
+using Kafka.Protocol.Generator.Definitions.FieldExpression;
 
 namespace Kafka.Protocol.Generator.Definitions.Parsers
 {
@@ -8,17 +9,17 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
     {
         internal static Field Parse(Rule rule)
         {
-            var fieldReferences = new List<FieldReference>();
-            while (rule.Expression.Any())
+            var fieldExpressionTokens = new Queue<FieldExpressionToken>();
+            while (rule.PostFixExpression.Any())
             {
-                var symbolSequence = rule.Expression.Dequeue();
-                var fieldReference = FieldReferenceParser.Parse(symbolSequence);
-                fieldReferences.Add(fieldReference);
+                var symbolSequence = rule.PostFixExpression.Dequeue();
+                var fieldExpressionToken = FieldReferenceParser.Parse(symbolSequence);
+                fieldExpressionTokens.Enqueue(fieldExpressionToken);
             }
 
             return new Field(
                 rule.Symbol.Name,
-                fieldReferences);
+                new PostFixFieldExpression(fieldExpressionTokens));
         }
     }
 

@@ -11,7 +11,7 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
             var methodRule = specification.Rules.Dequeue();
             var metaData = MethodMetaDataParser.Parse(methodRule.Symbol);
 
-            var fieldReferences = FieldParser.Parse(methodRule).FieldReferences;
+            var postFixFieldExpression = FieldParser.Parse(methodRule).PostFixFieldExpression;
 
             var fields = new List<Field>();
             while (specification.Rules.Any())
@@ -23,7 +23,7 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
 
             return new Method(
                 metaData,
-                fieldReferences,
+                postFixFieldExpression,
                 fields);
         }
     }

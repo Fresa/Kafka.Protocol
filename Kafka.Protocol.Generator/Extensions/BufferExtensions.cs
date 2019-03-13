@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Data;
+using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 
 namespace Kafka.Protocol.Generator.Extensions
 {
@@ -39,7 +41,7 @@ namespace Kafka.Protocol.Generator.Extensions
             return buffer.Position < buffer.Items.Length - 1;
         }
 
-        internal static string CreateSyntaxErrorMessage(
+        internal static SyntaxErrorException CreateSyntaxError(
             this IBuffer<char> buffer,
             string message)
         {
@@ -65,7 +67,17 @@ namespace Kafka.Protocol.Generator.Extensions
                 position -= row.Length - 1;
             }
 
-            return exceptionMessage.ToString();
+            return new SyntaxErrorException(exceptionMessage.ToString());
+        }
+
+        internal static T PeekBehind<T>(this IBuffer<T> buffer)
+        {
+            return buffer.Items[buffer.Position - 1];
+        }
+
+        internal static T Peek<T>(this IBuffer<T> buffer)
+        {
+            return buffer.Items[buffer.Position + 1];
         }
     }
 }

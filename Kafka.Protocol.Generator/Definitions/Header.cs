@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Kafka.Protocol.Generator.Definitions.FieldExpression;
 
 namespace Kafka.Protocol.Generator.Definitions
 {
@@ -6,19 +7,19 @@ namespace Kafka.Protocol.Generator.Definitions
     {
         internal Header(
             HeaderMetaData metaData,
-            List<FieldReference> fieldReferences,
+            PostFixFieldExpression postFixFieldExpression,
             List<Field> fields)
         {
             Name = metaData.Name;
             Type = metaData.Type;
             Fields = fields;
-            FieldReferences = fieldReferences;
+            PostFixFieldExpression = postFixFieldExpression;
         }
 
         internal MethodType Type { get; }
         public List<Field> Fields { get; }
         public string Name { get; }
-        public List<FieldReference> FieldReferences { get; }
+        public PostFixFieldExpression PostFixFieldExpression { get; }
 
         public override string ToString()
         {

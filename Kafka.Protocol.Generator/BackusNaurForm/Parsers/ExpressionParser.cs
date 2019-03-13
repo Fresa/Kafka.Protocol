@@ -1,19 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using Kafka.Protocol.Generator.Extensions;
 
 namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
 {
     internal class ExpressionParser
     {
         private readonly IBuffer<char> _buffer;
-        private const char End = '\n';
+        private const string End = "\n";
 
         private ExpressionParser(IBuffer<char> buffer)
         {
             _buffer = buffer;
         }
 
-        private Queue<SymbolSequence> Expression { get; } = new Queue<SymbolSequence>();
-        private string _symbolSequence = "";
+        private Queue<SymbolSequence> PostFixExpression { get; } = new Queue<SymbolSequence>();
+
+        private readonly Stack<OperatorSymbolSequence> _operatorStack = new Stack<OperatorSymbolSequence>();
+
+        private string _operand = "";
+        private int _genericParameterLevel;
 
         internal static Queue<SymbolSequence> Parse(
             IBuffer<char> buffer)
@@ -22,48 +29,130 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
 
             while (parser.Next()) { }
 
-            return parser.Expression;
+            return parser.PostFixExpression;
         }
 
         private bool Next()
         {
-            if (_buffer.MoveToNext() == false)
+            if (_buffer.MoveToNext() == false ||
+                _buffer.CurrentSequenceIs(End))
             {
-                AddCurrentExpression();
+                _buffer.MoveForward(1);
+                TryAddCurrentOperand();
+                while (_operatorStack.Any())
+                {
+                    PostFixExpression.Enqueue(_operatorStack.Pop());
+                }
                 return false;
             }
 
             var chr = _buffer.Current;
-            if (chr == End)
+
+            if (chr == '(')
             {
-                AddCurrentExpression();
-                return false;
+                if (_buffer.PeekBehind() == ' ')
+                {
+                    _operatorStack.Push(
+                        SymbolSequence.Operators.StartParenthesis);
+                    return true;
+                }
+
+                _genericParameterLevel++;
             }
 
-            if (chr == ' ')
+            if (chr == ')')
             {
-                AddCurrentExpression();
+                if (_genericParameterLevel == 0)
+                {
+                    if (TryAddCurrentOperand() == false)
+                    {
+                        throw _buffer
+                            .CreateSyntaxError("Expected an operand before end of grouping operator");
+                    }
+                    while (_operatorStack.Any() &&
+                           _operatorStack.Peek() !=
+                           SymbolSequence.Operators.StartParenthesis)
+                    {
+                        PostFixExpression.Enqueue(_operatorStack.Pop());
+                    }
+
+                    if (_operatorStack.Any() == false ||
+                        _operatorStack.Pop() !=
+                        SymbolSequence.Operators.StartParenthesis)
+                    {
+                        throw new SyntaxErrorException("Missing '('");
+                    }
+
+                    return true;
+                }
+
+                _genericParameterLevel--;
+            }
+
+            if (_buffer.CurrentSequenceIs(" | "))
+            {
+                _buffer.MoveForward(2);
+                if (TryAddCurrentOperand() == false)
+                {
+                    throw _buffer
+                        .CreateSyntaxError("Expected an operand before an OR operator");
+                }
+                PushOperator(SymbolSequence.Operators.Or);
                 return true;
             }
 
-            _symbolSequence += chr;
+            if (chr == ' ' &&
+                TryAddCurrentOperand())
+            {
+                if (_buffer.HasNext() == false)
+                {
+                    return true;
+                }
+
+                if (_buffer.CurrentSequenceIs("  "))
+                {
+                    return true;
+                }
+
+                if (_buffer.CurrentSequenceIs($" {End}"))
+                {
+                    return true;
+                }
+
+                PushOperator(SymbolSequence.Operators.And);
+
+                return true;
+            }
+
+            _operand += chr;
             return true;
         }
 
-        private void AddCurrentExpression()
+        private void PushOperator(OperatorSymbolSequence @operator)
         {
-            var symbolSequence = _symbolSequence.Trim();
-            _symbolSequence = "";
+            while (_operatorStack.Any() &&
+                   @operator.Precedence <= _operatorStack.Peek().Precedence)
+            {
+                PostFixExpression.Enqueue(_operatorStack.Pop());
+            }
+            _operatorStack.Push(@operator);
+        }
+
+        private bool TryAddCurrentOperand()
+        {
+            var symbolSequence = _operand.Trim();
+            _operand = "";
 
             if (string.IsNullOrEmpty(symbolSequence))
             {
-                return;
+                return false;
             }
 
             var symbol = ParseSymbolSequence(
                 symbolSequence);
 
-            Expression.Enqueue(symbol);
+            PostFixExpression.Enqueue(symbol);
+            return true;
         }
 
         private static SymbolSequence ParseSymbolSequence(
@@ -82,11 +171,12 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                 isOptional = true;
             }
 
-            var symbolReference = new SymbolReference(symbolName);
+            if (isOptional)
+            {
+                return SymbolSequence.Operands.Optional(symbolName);
+            }
 
-            return new SymbolSequence(
-                symbolReference,
-                isOptional);
+            return SymbolSequence.Operands.Required(symbolName);
         }
     }
 }

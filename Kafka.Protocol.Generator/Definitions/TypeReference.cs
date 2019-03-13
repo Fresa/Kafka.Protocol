@@ -12,5 +12,10 @@
         public bool IsGeneric => 
             GenericArgument != null;
         public TypeReference GenericArgument { get; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

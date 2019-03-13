@@ -1,6 +1,8 @@
-﻿namespace Kafka.Protocol.Generator.Definitions
+﻿using Kafka.Protocol.Generator.Definitions.FieldExpression;
+
+namespace Kafka.Protocol.Generator.Definitions
 {
-    internal class FieldReference
+    internal class FieldReference : FieldExpressionToken
     {
         public FieldReference(TypeReference type, bool isOptional)
         {
@@ -10,5 +12,7 @@
 
         public TypeReference Type { get; }
         public bool IsOptional { get; }
+        internal override FieldExpressionType ExpressionType => 
+            FieldExpressionType.Operand;
     }
 }

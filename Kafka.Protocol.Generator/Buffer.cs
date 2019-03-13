@@ -19,7 +19,7 @@
         public bool MoveToPrevious()
         {
             Position--;
-            return Position < 0;
+            return Position >= 0;
         }
 
         public T[] Items { get; }

@@ -92,9 +92,14 @@ namespace Kafka.Protocol.Generator
                     .Fields
                     .SelectMany(
                         field => field
-                            .FieldReferences)
+                            .PostFixFieldExpression.ExpressionTokens)
+                    .OfType<FieldReference>()
                     .ToList();
-            fieldReferences.AddRange(header.FieldReferences);
+            fieldReferences.AddRange(
+                header
+                    .PostFixFieldExpression
+                    .ExpressionTokens
+                    .OfType<FieldReference>());
 
             foreach (var fieldReference in fieldReferences)
             {
@@ -220,9 +225,13 @@ namespace Kafka.Protocol.Generator
                     .Fields
                     .SelectMany(
                         field => field
-                            .FieldReferences)
+                            .PostFixFieldExpression.ExpressionTokens)
+                    .OfType<FieldReference>()
                     .ToList();
-            fieldReferences.AddRange(method.FieldReferences);
+            fieldReferences.AddRange(method
+                .PostFixFieldExpression
+                .ExpressionTokens
+                .OfType<FieldReference>());
 
             foreach (var fieldReference in fieldReferences)
             {

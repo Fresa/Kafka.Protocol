@@ -6,6 +6,7 @@ using FluentAssertions;
 using HtmlAgilityPack;
 using Kafka.Protocol.Generator.BackusNaurForm;
 using Kafka.Protocol.Generator.Definitions;
+using Kafka.Protocol.Generator.Definitions.FieldExpression;
 using Test.It.With.XUnit;
 using Xunit;
 
@@ -108,7 +109,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .BeEquivalentTo(
                         new Header(
                             new HeaderMetaData("Header", MethodType.Request), 
-                            new List<FieldReference>(), 
+                            new PostFixFieldExpression(new Queue<FieldExpressionToken>()), 
                             new List<Field>()),
                         options =>
                             options
@@ -117,7 +118,7 @@ namespace Kafka.Protocol.Generator.Tests
                                         .Fields)
                                 .Excluding(header => 
                                     header
-                                        .FieldReferences));
+                                        .PostFixFieldExpression));
             }
 
             [Fact]
@@ -128,7 +129,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .BeEquivalentTo(
                         new Header(
                             new HeaderMetaData("Header", MethodType.Response),
-                            new List<FieldReference>(),
+                            new PostFixFieldExpression(new Queue<FieldExpressionToken>()), 
                             new List<Field>()),
                         options =>
                             options
@@ -137,7 +138,7 @@ namespace Kafka.Protocol.Generator.Tests
                                         .Fields)
                                 .Excluding(header =>
                                     header
-                                        .FieldReferences));
+                                        .PostFixFieldExpression));
             }
         }
     }

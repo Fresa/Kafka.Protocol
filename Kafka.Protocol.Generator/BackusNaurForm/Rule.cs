@@ -4,13 +4,13 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
 {
     internal class Rule
     {
-        internal Rule(Symbol symbol, Queue<SymbolSequence> expression)
+        internal Rule(Symbol symbol, Queue<SymbolSequence> postFixExpression)
         {
             Symbol = symbol;
-            Expression = expression;
+            PostFixExpression = postFixExpression;
         }
 
         public Symbol Symbol { get; }
-        public Queue<SymbolSequence> Expression { get; }
+        public Queue<SymbolSequence> PostFixExpression { get; }
     }
 }

@@ -11,7 +11,7 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
             var headerRule = specification.Rules.Dequeue();
             var metaData = HeaderMetaDataParser.Parse(headerRule.Symbol);
 
-            var fieldReferences = FieldParser.Parse(headerRule).FieldReferences;
+            var postFixFieldExpression = FieldParser.Parse(headerRule).PostFixFieldExpression;
 
             var fields = new List<Field>();
             while (specification.Rules.Any())
@@ -23,7 +23,7 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
 
             return new Header(
                 metaData,
-                fieldReferences,
+                postFixFieldExpression,
                 fields);
         }
     }

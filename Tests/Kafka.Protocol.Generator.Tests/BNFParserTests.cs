@@ -27,7 +27,8 @@ namespace Kafka.Protocol.Generator.Tests
                         topic => STRING
                         data => partition record_set 
                           partition => INT32
-                          record_set => RECORDS(INT32)";
+                          record_set => RECORDS(INT32)"
+                        .Replace("\r\n", "\n");
             }
 
             protected override void When()
@@ -53,57 +54,27 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_message_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "Produce Request (Version: 7)")
-                    .Expression.Should().HaveCount(4);
+                    .PostFixExpression
+                    .Should()
+                    .HaveCount(7)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "transactional_id"),
+                        SymbolSequence.Operands.Required(
+                            "acks"),
+                        SymbolSequence.Operators.And,
+                        SymbolSequence.Operands.Required(
+                            "timeout"),
+                        SymbolSequence.Operators.And,
+                        SymbolSequence.Operands.Optional(
+                            "topic_data"),
+                        SymbolSequence.Operators.And);
             }
-
-            [Fact]
-            public void It_should_have_parsed_message_expression_of_transactional_id()
-            {
-                _fields.Single(field => field.Symbol.Name == "Produce Request (Version: 7)")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("transactional_id"),
-                            false));
-            }
-
-            [Fact]
-            public void It_should_have_parsed_message_expression_of_acks()
-            {
-                _fields.Single(field => field.Symbol.Name == "Produce Request (Version: 7)")
-                    .Expression
-                    .ToArray()[1]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("acks"),
-                            false));
-            }
-
-            [Fact]
-            public void It_should_have_parsed_message_expression_of_timeout()
-            {
-                _fields.Single(field => field.Symbol.Name == "Produce Request (Version: 7)")
-                    .Expression
-                    .ToArray()[2]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("timeout"),
-                            false));
-            }
-
-            [Fact]
-            public void It_should_have_parsed_message_expression_of_topic_data()
-            {
-                _fields.Single(field => field.Symbol.Name == "Produce Request (Version: 7)")
-                    .Expression
-                    .ToArray()[3]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("topic_data"),
-                            true));
-            }
-
+            
             [Fact]
             public void It_should_have_parsed_transactional_id_field_name()
             {
@@ -114,21 +85,16 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_transactional_id_field_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "transactional_id")
-                    .Expression
+                    .PostFixExpression
                     .Should()
-                    .HaveCount(1);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_transactional_id_field_expression_of_nullable_string()
-            {
-                _fields.Single(field => field.Symbol.Name == "transactional_id")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("NULLABLE_STRING"),
-                            false));
+                    .HaveCount(1)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "NULLABLE_STRING"));
             }
 
             [Fact]
@@ -141,23 +107,18 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_acks_field_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "acks")
-                    .Expression
+                    .PostFixExpression
                     .Should()
-                    .HaveCount(1);
+                    .HaveCount(1)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "INT16"));
             }
-
-            [Fact]
-            public void It_should_have_parsed_acks_field_expression_of_INT16()
-            {
-                _fields.Single(field => field.Symbol.Name == "acks")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("INT16"),
-                            false));
-            }
-
+            
             [Fact]
             public void It_should_have_parsed_timeout_field_name()
             {
@@ -168,21 +129,16 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_timeout_field_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "timeout")
-                    .Expression
+                    .PostFixExpression
                     .Should()
-                    .HaveCount(1);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_timeout_field_expression_of_INT32()
-            {
-                _fields.Single(field => field.Symbol.Name == "timeout")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("INT32"),
-                            false));
+                    .HaveCount(1)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "INT32"));
             }
 
             [Fact]
@@ -195,33 +151,19 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_topic_data_field_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "topic_data")
-                    .Expression
+                    .PostFixExpression
                     .Should()
-                    .HaveCount(2);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_topic_data_field_expression_of_topic()
-            {
-                _fields.Single(field => field.Symbol.Name == "topic_data")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("topic"),
-                            false));
-            }
-
-            [Fact]
-            public void It_should_have_parsed_topic_data_field_expression_of_data()
-            {
-                _fields.Single(field => field.Symbol.Name == "topic_data")
-                    .Expression
-                    .ToArray()[1]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("data"),
-                            true));
+                    .HaveCount(3)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "topic"),
+                        SymbolSequence.Operands.Optional(
+                            "data"),
+                        SymbolSequence.Operators.And);
             }
 
             [Fact]
@@ -235,23 +177,18 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_topic_field_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "topic")
-                    .Expression
+                    .PostFixExpression
                     .Should()
-                    .HaveCount(1);
+                    .HaveCount(1)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "STRING"));
             }
-
-            [Fact]
-            public void It_should_have_parsed_topic_field_expression_of_STRING()
-            {
-                _fields.Single(field => field.Symbol.Name == "topic")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("STRING"),
-                            false));
-            }
-
+            
             [Fact]
             public void It_should_have_parsed_data_field_name()
             {
@@ -263,61 +200,41 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_data_field_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "data")
-                    .Expression
+                    .PostFixExpression
                     .Should()
-                    .HaveCount(2);
+                    .HaveCount(3)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "partition"), 
+                        SymbolSequence.Operands.Required(
+                            "record_set"), 
+                        SymbolSequence.Operators.And);
             }
-
-            [Fact]
-            public void It_should_have_parsed_data_field_expression_of_partition()
-            {
-                _fields.Single(field => field.Symbol.Name == "data")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("partition"),
-                            false));
-            }
-
-            [Fact]
-            public void It_should_have_parsed_data_field_expression_of_record_set()
-            {
-                _fields.Single(field => field.Symbol.Name == "data")
-                    .Expression
-                    .ToArray()[1]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("record_set"),
-                            false));
-            }
-
+            
             [Fact]
             public void It_should_have_parsed_partition_field_name()
             {
                 _fields.Should().ContainSingle(field => field.Symbol.Name == "partition");
-
             }
 
             [Fact]
             public void It_should_have_parsed_partition_field_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "partition")
-                    .Expression
+                    .PostFixExpression
                     .Should()
-                    .HaveCount(1);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_partition_field_expression_of_INT32()
-            {
-                _fields.Single(field => field.Symbol.Name == "partition")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("INT32"),
-                            false));
+                    .HaveCount(1)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "INT32"));
             }
 
             [Fact]
@@ -332,21 +249,16 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_record_set_field_expressions()
             {
                 _fields.Single(field => field.Symbol.Name == "record_set")
-                    .Expression
+                    .PostFixExpression
                     .Should()
-                    .HaveCount(1);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_record_set_field_expression_of_RECORDS()
-            {
-                _fields.Single(field => field.Symbol.Name == "record_set")
-                    .Expression
-                    .ToArray()[0]
-                    .Should().BeEquivalentTo(
-                        new SymbolSequence(
-                            new SymbolReference("RECORDS(INT32)"),
-                            false));
+                    .HaveCount(1)
+                    .And
+                    .Subject
+                    .ToArray()
+                    .Should()
+                    .BeEquivalentTo(
+                        SymbolSequence.Operands.Required(
+                            "RECORDS(INT32)"));
             }
         }
     }
