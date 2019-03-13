@@ -3,7 +3,7 @@
     internal class AndSymbolSequence : OperatorSymbolSequence
     {
         internal AndSymbolSequence()
-            : base(new SymbolReference("AND"))
+            : base(new SymbolReference(" "))
         {
         }
 

@@ -2,14 +2,12 @@
 {
     internal abstract class SymbolSequence
     {
-        internal SymbolSequence(SymbolReference symbolReference, bool isOptional, SymbolSequenceType type)
+        internal SymbolSequence(SymbolReference symbolReference, bool isOptional)
         {
             SymbolReference = symbolReference;
             IsOptional = isOptional;
-            Type = type;
         }
 
-        internal SymbolSequenceType Type { get; }
         public SymbolReference SymbolReference { get; }
         public bool IsOptional { get; }
 
@@ -27,8 +25,8 @@
         {
             unchecked
             {
-                var hashCode = (int)Type;
-                hashCode = (hashCode * 397) ^ (SymbolReference != null ? SymbolReference.GetHashCode() : 0);
+                var hashCode = GetType().GetHashCode();
+                hashCode = (hashCode * 397) ^ SymbolReference.GetHashCode();
                 hashCode = (hashCode * 397) ^ IsOptional.GetHashCode();
                 return hashCode;
             }

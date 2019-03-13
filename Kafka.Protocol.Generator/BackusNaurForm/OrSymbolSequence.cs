@@ -3,7 +3,7 @@
     internal class OrSymbolSequence : OperatorSymbolSequence
     {
         internal OrSymbolSequence()
-            : base(new SymbolReference("OR"))
+            : base(new SymbolReference(" | "))
         {
         }
 

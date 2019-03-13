@@ -8,6 +8,10 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
     {
         private readonly IBuffer<char> _buffer;
         private const string End = "\n";
+        private static readonly string Or = SymbolSequence.Operators.Or.SymbolReference.Name;
+        private static readonly string And = SymbolSequence.Operators.And.SymbolReference.Name;
+        private static readonly string StartOfGroup = SymbolSequence.Operators.StartOfGroup.SymbolReference.Name;
+        private static readonly string EndOfGroup = SymbolSequence.Operators.EndOfGroup.SymbolReference.Name;
 
         private ExpressionParser(IBuffer<char> buffer)
         {
@@ -67,7 +71,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                         SymbolSequence.Operators.StartOfGroup)
                     {
                         throw _buffer
-                            .CreateSyntaxError("Missing '('");
+                            .CreateSyntaxError($"Missing '{StartOfGroup}'");
                     }
 
                     continue;
@@ -92,7 +96,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                     if (TryAddCurrentOperand() == false)
                     {
                         throw _buffer
-                            .CreateSyntaxError($"Expected an operand before an '{@operator}' operator");
+                            .CreateSyntaxError($"Expected an operand before an operator of '{@operator}' operator");
                     }
 
                     PushOperator(@operator);
@@ -142,25 +146,25 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
 
         private bool AtStartOfGroup()
         {
-            return _buffer.Current == '(' &&
+            return _buffer.CurrentSequenceIs(StartOfGroup) &&
                    _buffer.PeekBehind() == ' ';
         }
 
         private bool AtEndOfGroup()
         {
-            return _buffer.Current == ')' &&
+            return _buffer.CurrentSequenceIs(EndOfGroup) &&
                    _genericParameterLevel == 0;
         }
 
         private bool AtStartOfGenericSymbol()
         {
-            return _buffer.Current == '(' &&
+            return _buffer.CurrentSequenceIs(StartOfGroup) &&
                    _buffer.PeekBehind() != ' ';
         }
 
         private bool AtEndOfGenericSymbol()
         {
-            return _buffer.Current == ')' &&
+            return _buffer.CurrentSequenceIs(EndOfGroup) &&
                    _genericParameterLevel > 0;
         }
 
@@ -168,10 +172,10 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
             new Dictionary<string, OperatorSymbolSequence>
             {
                 {
-                    " | ", SymbolSequence.Operators.Or
+                    Or, SymbolSequence.Operators.Or
                 },
                 {
-                    " ", SymbolSequence.Operators.And
+                    And, SymbolSequence.Operators.And
                 }
             };
 
