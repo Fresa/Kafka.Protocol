@@ -22,5 +22,4 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
                 new PostFixFieldExpression(fieldExpressionTokens));
         }
     }
-
 }

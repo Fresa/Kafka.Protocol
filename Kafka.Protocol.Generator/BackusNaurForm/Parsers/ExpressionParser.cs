@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Kafka.Protocol.Generator.Extensions;
 
@@ -15,60 +14,42 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
             _buffer = buffer;
         }
 
-        private Queue<SymbolSequence> PostFixExpression { get; } = new Queue<SymbolSequence>();
+        private PostFixExpression PostFixExpression { get; } = new PostFixExpression();
 
         private readonly Stack<OperatorSymbolSequence> _operatorStack = new Stack<OperatorSymbolSequence>();
 
-        private string _operand = "";
+        private string _operandBuffer = "";
         private int _genericParameterLevel;
 
-        internal static Queue<SymbolSequence> Parse(
+        internal static PostFixExpression Parse(
             IBuffer<char> buffer)
         {
             var parser = new ExpressionParser(buffer);
 
-            while (parser.Next()) { }
+            parser.Parse();
 
             return parser.PostFixExpression;
         }
 
-        private bool Next()
+        private void Parse()
         {
-            if (_buffer.MoveToNext() == false ||
-                _buffer.CurrentSequenceIs(End))
+            while (MoveToNext())
             {
-                _buffer.MoveForward(1);
-                TryAddCurrentOperand();
-                while (_operatorStack.Any())
-                {
-                    PostFixExpression.Enqueue(_operatorStack.Pop());
-                }
-                return false;
-            }
-
-            var chr = _buffer.Current;
-
-            if (chr == '(')
-            {
-                if (_buffer.PeekBehind() == ' ')
+                if (CurrentIsStartOfGroup())
                 {
                     _operatorStack.Push(
                         SymbolSequence.Operators.StartParenthesis);
-                    return true;
+                    continue;
                 }
 
-                _genericParameterLevel++;
-            }
-
-            if (chr == ')')
-            {
-                if (_genericParameterLevel == 0)
+                if (CurrentIsEndOfGroup())
                 {
                     if (TryAddCurrentOperand() == false)
                     {
                         throw _buffer
                             .CreateSyntaxError("Expected an operand before end of grouping operator");
                     }
+
                     while (_operatorStack.Any() &&
                            _operatorStack.Peek() !=
                            SymbolSequence.Operators.StartParenthesis)
@@ -80,68 +61,141 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                         _operatorStack.Pop() !=
                         SymbolSequence.Operators.StartParenthesis)
                     {
-                        throw new SyntaxErrorException("Missing '('");
+                        throw _buffer
+                            .CreateSyntaxError("Missing '('");
                     }
 
-                    return true;
+                    continue;
                 }
 
-                _genericParameterLevel--;
+                if (CurrentIsStartOfGenericParameter())
+                {
+                    _operandBuffer += _buffer.Current;
+                    _genericParameterLevel++;
+                    continue;
+                }
+
+                if (CurrentIsEndOfGenericParameter())
+                {
+                    _operandBuffer += _buffer.Current;
+                    _genericParameterLevel--;
+                    continue;
+                }
+
+                if (IsOperator(out var @operator))
+                {
+                    if (TryAddCurrentOperand() == false)
+                    {
+                        throw _buffer
+                            .CreateSyntaxError("Expected an operand before an OR operator");
+                    }
+
+                    if (_buffer.HasNext() == false)
+                    {
+                        continue;
+                    }
+
+                    if (_buffer.CurrentSequenceIs("  "))
+                    {
+                        continue;
+                    }
+
+                    if (_buffer.CurrentSequenceIs($" {End}"))
+                    {
+                        continue;
+                    }
+
+                    PushOperator(@operator);
+                    continue;                   
+                }
+
+                _operandBuffer += _buffer.Current;
             }
 
-            if (_buffer.CurrentSequenceIs(" | "))
+            TryAddCurrentOperand();
+            while (_operatorStack.Any())
             {
-                _buffer.MoveForward(2);
-                if (TryAddCurrentOperand() == false)
-                {
-                    throw _buffer
-                        .CreateSyntaxError("Expected an operand before an OR operator");
-                }
-                PushOperator(SymbolSequence.Operators.Or);
-                return true;
+                PostFixExpression.Enqueue(_operatorStack.Pop());
             }
+        }
 
-            if (chr == ' ' &&
-                TryAddCurrentOperand())
+        private bool MoveToNext()
+        {
+            return _buffer.MoveToNext() &&
+                   _buffer.CurrentSequenceIs(End) == false;
+        }
+
+        private bool CurrentIsStartOfGroup()
+        {
+            return _buffer.Current == '(' &&
+                   _buffer.PeekBehind() == ' ';
+        }
+
+        private bool CurrentIsEndOfGroup()
+        {
+            return _buffer.Current == ')' &&
+                   _genericParameterLevel == 0;
+        }
+
+        private bool CurrentIsStartOfGenericParameter()
+        {
+            return _buffer.Current == '(' &&
+                   _buffer.PeekBehind() != ' ';
+        }
+
+        private bool CurrentIsEndOfGenericParameter()
+        {
+            return _buffer.Current == ')' &&
+                   _genericParameterLevel > 0;
+        }
+
+        private readonly Dictionary<string, OperatorSymbolSequence> _operators =
+            new Dictionary<string, OperatorSymbolSequence>
             {
-                if (_buffer.HasNext() == false)
                 {
+                    " | ", SymbolSequence.Operators.Or
+                },
+                {
+                    " ", SymbolSequence.Operators.And
+                }
+            };
+
+        private bool IsOperator(out OperatorSymbolSequence operatorSymbolSequence)
+        {
+            foreach (var @operator in _operators)
+            {
+                if (_buffer.CurrentSequenceIs(@operator.Key))
+                {
+                    _buffer.MoveForward(@operator.Key.Length - 1);
+                    operatorSymbolSequence = @operator.Value;
                     return true;
                 }
-
-                if (_buffer.CurrentSequenceIs("  "))
-                {
-                    return true;
-                }
-
-                if (_buffer.CurrentSequenceIs($" {End}"))
-                {
-                    return true;
-                }
-
-                PushOperator(SymbolSequence.Operators.And);
-
-                return true;
             }
 
-            _operand += chr;
-            return true;
+            operatorSymbolSequence = default;
+            return false;
         }
 
         private void PushOperator(OperatorSymbolSequence @operator)
         {
             while (_operatorStack.Any() &&
-                   @operator.Precedence <= _operatorStack.Peek().Precedence)
+                   @operator
+                       .Precedence <=
+                   _operatorStack
+                       .Peek()
+                       .Precedence)
             {
-                PostFixExpression.Enqueue(_operatorStack.Pop());
+                PostFixExpression.Enqueue(
+                    _operatorStack.Pop());
             }
+
             _operatorStack.Push(@operator);
         }
 
         private bool TryAddCurrentOperand()
         {
-            var symbolSequence = _operand.Trim();
-            _operand = "";
+            var symbolSequence = _operandBuffer.Trim();
+            _operandBuffer = "";
 
             if (string.IsNullOrEmpty(symbolSequence))
             {
@@ -158,25 +212,29 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
         private static SymbolSequence ParseSymbolSequence(
             string symbolSequence)
         {
-            var isOptional = false;
             var symbolName = symbolSequence;
 
-            if (symbolSequence.StartsWith("[") &&
-                symbolSequence.EndsWith("]"))
-            {
-                symbolName = symbolSequence.Substring(
-                    1,
-                    symbolSequence.Length - 2);
-
-                isOptional = true;
-            }
-
-            if (isOptional)
+            if (IsOptional(ref symbolName))
             {
                 return SymbolSequence.Operands.Optional(symbolName);
             }
 
             return SymbolSequence.Operands.Required(symbolName);
+        }
+
+        private static bool IsOptional(ref string symbolName)
+        {
+            if (symbolName.StartsWith("[") &&
+                symbolName.EndsWith("]"))
+            {
+                symbolName = symbolName.Substring(
+                    1,
+                    symbolName.Length - 2);
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

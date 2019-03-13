@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace Kafka.Protocol.Generator.BackusNaurForm
+﻿namespace Kafka.Protocol.Generator.BackusNaurForm
 {
     internal class Rule
     {
-        internal Rule(Symbol symbol, Queue<SymbolSequence> postFixExpression)
+        internal Rule(Symbol symbol, PostFixExpression postFixExpression)
         {
             Symbol = symbol;
             PostFixExpression = postFixExpression;
         }
 
         public Symbol Symbol { get; }
-        public Queue<SymbolSequence> PostFixExpression { get; }
+        public PostFixExpression PostFixExpression { get; }
     }
 }
