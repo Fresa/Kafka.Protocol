@@ -12,7 +12,5 @@ namespace Kafka.Protocol.Generator.Definitions
 
         public TypeReference Type { get; }
         public bool IsOptional { get; }
-        internal override FieldExpressionType ExpressionType => 
-            FieldExpressionType.Operand;
     }
 }

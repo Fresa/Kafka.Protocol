@@ -28,10 +28,10 @@ namespace Kafka.Protocol.Generator.Tests
             }
 
             [Fact]
-            public void It_should_have_parsed_a_operand()
+            public void It_should_have_parsed_an_operand()
             {
-                _fieldReference.ExpressionType
-                    .Should().Be(FieldExpressionType.Operand);
+                _fieldReference
+                    .Should().BeOfType<FieldReference>();
             }
 
             [Fact]

@@ -2,8 +2,5 @@
 {
     internal class Or : FieldExpressionOperator
     {
-        public Or() : base(FieldExpressionOperatorName.Or)
-        {
-        }
     }
 }

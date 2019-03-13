@@ -2,6 +2,5 @@
 {
     internal abstract class FieldExpressionToken
     {
-        internal abstract FieldExpressionType ExpressionType { get; }
     }
 }
