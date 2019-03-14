@@ -16,19 +16,16 @@ namespace Kafka.Protocol.Generator.Tests
     {       
         public class When_parsing : XUnit2Specification
         {
-            private readonly HtmlDocument _apacheKafkaDefinitionPage = new HtmlDocument();
-            private Protocol _protocol;
-
-            protected override void Given()
+            static When_parsing()
             {
                 var path = Path.Combine(Environment.CurrentDirectory, @"Apache Kafka.html");
-                _apacheKafkaDefinitionPage.LoadHtml(File.ReadAllText(path));
+                ApacheKafkaDefinitionPage.LoadHtml(File.ReadAllText(path));
             }
 
-            protected override void When()
-            {
-                _protocol = Protocol.Load(_apacheKafkaDefinitionPage);
-            }
+            private static readonly HtmlDocument ApacheKafkaDefinitionPage = new HtmlDocument();
+            private static readonly Lazy<Protocol> ProtocolLoader = new Lazy<Protocol>(() => Protocol.Load(ApacheKafkaDefinitionPage));
+
+            private Protocol _protocol => ProtocolLoader.Value;
 
             [Fact]
             public void It_should_have_parsed_errors()
@@ -92,7 +89,7 @@ namespace Kafka.Protocol.Generator.Tests
             {
                 _protocol.PrimitiveTypes
                     .Should()
-                    .HaveCount(14)
+                    .HaveCount(16)
                     .And.Subject
                     .Values
                     .Select(type => 
@@ -139,6 +136,13 @@ namespace Kafka.Protocol.Generator.Tests
                                 .Excluding(header =>
                                     header
                                         .PostFixFieldExpression));
+            }
+
+            [Fact]
+            public void It_should_have_parsed_message_envelope()
+            {
+                _protocol.MessageEnvelope.Name
+                    .Should().Be("RequestOrResponse");
             }
         }
     }

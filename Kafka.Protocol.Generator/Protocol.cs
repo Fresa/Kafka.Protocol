@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using HtmlAgilityPack;
 using Kafka.Protocol.Generator.BackusNaurForm.Parsers;
 using Kafka.Protocol.Generator.Definitions;
+using Kafka.Protocol.Generator.Definitions.FieldExpression;
 using Kafka.Protocol.Generator.Definitions.Parsers;
 using Kafka.Protocol.Generator.Extensions;
 
@@ -24,9 +26,12 @@ namespace Kafka.Protocol.Generator
 
             ErrorCodes = ParseErrorCodes();
             PrimitiveTypes = ParsePrimitiveTypes();
+
             Messages = ParseMessages();
             RequestHeader = ParseRequestHeader();
             ResponseHeader = ParseResponseHeader();
+
+            MessageEnvelope = ParseRequestAndResponseStructure();
         }
 
         internal IDictionary<string, PrimitiveType> PrimitiveTypes { get; set; }
@@ -38,6 +43,104 @@ namespace Kafka.Protocol.Generator
         internal Header RequestHeader { get; }
 
         internal Header ResponseHeader { get; }
+
+        internal MessageEnvelope MessageEnvelope { get; }
+
+        private const string RequestOrResponseXPath = "//*/pre[starts-with(text(),'RequestOrResponse')]";
+
+        private MessageEnvelope ParseRequestAndResponseStructure()
+        {
+            var requestOrResponseNode = _definition
+                .DocumentNode
+                .SelectFirst(RequestOrResponseXPath);
+
+            var requestOrResponseDefinition = System.Net.WebUtility.HtmlDecode(
+                requestOrResponseNode
+                    .InnerText);
+
+            var descriptionTable = requestOrResponseNode
+                .GetFirstSiblingNamed("table")
+                .ParseTableNodeTo<FieldDescription>()
+                .ToList();
+
+            // Known inconsistency in the documentation
+            var messageSize = descriptionTable.FirstOrDefault(description => description.Field == "message_size");
+            if (messageSize != null)
+            {
+                messageSize.Field = "Size";
+            }
+
+            var specification = BackusNaurParser.Parse(
+                new Buffer<char>(
+                    requestOrResponseDefinition
+                        .ToCharArray()));
+
+            var messageEnvelope = MessageEnvelopeParser.Parse(specification);
+
+            // Known missing fields in the specification
+            PrimitiveTypes.Add("RequestMessage", new PrimitiveType
+            {
+                Type = "RequestMessage",
+                Description = "Request message"
+            });
+            PrimitiveTypes.Add("ResponseMessage", new PrimitiveType
+            {
+                Type = "ResponseMessage",
+                Description = "Response message"
+            });
+
+            ValidateMessageEnvelope(messageEnvelope);
+
+            SetDescriptions(messageEnvelope.Fields, descriptionTable);
+
+            return messageEnvelope;
+        }
+
+        private void ValidateMessageEnvelope(MessageEnvelope messageEnvelope)
+        {
+            var fieldReferences =
+                messageEnvelope
+                    .Fields
+                    .SelectMany(
+                        field => field
+                            .PostFixFieldExpression.ExpressionTokens)
+                    .OfType<FieldReference>()
+                    .ToList();
+            fieldReferences.AddRange(
+                messageEnvelope
+                    .PostFixFieldExpression
+                    .ExpressionTokens
+                    .OfType<FieldReference>());
+
+            foreach (var fieldReference in fieldReferences)
+            {
+                ValidateTypeReference(fieldReference.Type, messageEnvelope);
+            }
+        }
+
+        private void ValidateTypeReference(TypeReference typeReference, MessageEnvelope messageEnvelope)
+        {
+            if (typeReference.IsGeneric)
+            {
+                ValidateTypeReference(typeReference.GenericArgument, messageEnvelope);
+            }
+
+            if (PrimitiveTypes.Keys.Contains(
+                typeReference.Name, StringComparer.CurrentCultureIgnoreCase))
+            {
+                return;
+            }
+
+            if (messageEnvelope.Fields.Any(
+                field =>
+                    field.Name.Equals(typeReference.Name, StringComparison.CurrentCultureIgnoreCase)))
+            {
+                return;
+            }
+
+            throw new InvalidOperationException(
+                $"'{messageEnvelope}' has a reference to type '{typeReference}' which does not appear within the parsed symbols nor the primitive types");
+        }
 
         private const string ProtocolRequestHeaderXPath = "//*/pre[starts-with(text(),'Request Header')]";
 
