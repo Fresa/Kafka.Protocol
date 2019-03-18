@@ -156,12 +156,20 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                    _genericParameterLevel == 0;
         }
 
+        /// <summary>
+        /// Not to be mixed up with grouping symbols. It's incorrect BNF syntax, but needs to be handled
+        /// </summary>
+        /// <returns></returns>
         private bool AtStartOfGenericSymbol()
         {
             return _buffer.CurrentSequenceIs(StartOfGroup) &&
                    _buffer.PeekBehind() != ' ';
         }
 
+        /// <summary>
+        /// Not to be mixed up with grouping symbols. It's incorrect BNF syntax, but needs to be handled
+        /// </summary>
+        /// <returns></returns>
         private bool AtEndOfGenericSymbol()
         {
             return _buffer.CurrentSequenceIs(EndOfGroup) &&
@@ -233,27 +241,24 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
         {
             var symbolName = symbolSequence;
 
-            if (IsOptional(ref symbolName))
-            {
-                return SymbolSequence.Operands.Optional(symbolName);
-            }
-
-            return SymbolSequence.Operands.Required(symbolName);
+            HandleInconsistentArraySpecification(ref symbolName);
+            
+            return SymbolSequence.Operand(symbolName);
         }
 
-        private static bool IsOptional(ref string symbolName)
+        /// <summary>
+        /// The specification is inconsistent when it comes to arrays. Sometimes [] is used, sometimes it is ARRAY(). Harmonizing for consistency.
+        /// Also note that [] does not mean optional as by the BNF specification but 'array'
+        /// </summary>
+        /// <param name="symbolName"></param>
+        private static void HandleInconsistentArraySpecification(ref string symbolName)
         {
             if (symbolName.StartsWith("[") &&
                 symbolName.EndsWith("]"))
             {
-                symbolName = symbolName.Substring(
-                    1,
-                    symbolName.Length - 2);
-
-                return true;
+                symbolName = symbolName.Substring(1, symbolName.Length - 2);
+                symbolName = $"ARRAY({symbolName})";
             }
-
-            return false;
         }
     }
 }

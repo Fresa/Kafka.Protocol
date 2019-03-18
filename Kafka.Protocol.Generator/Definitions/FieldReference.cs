@@ -4,13 +4,11 @@ namespace Kafka.Protocol.Generator.Definitions
 {
     internal class FieldReference : FieldExpressionToken
     {
-        public FieldReference(TypeReference type, bool isOptional)
+        public FieldReference(TypeReference type)
         {
             Type = type;
-            IsOptional = isOptional;
         }
 
         public TypeReference Type { get; }
-        public bool IsOptional { get; }
     }
 }

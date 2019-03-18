@@ -28,9 +28,7 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
                     new Buffer<char>(
                         symbolSequence.SymbolReference.Name.ToCharArray()));
 
-            return new FieldReference(
-                type,
-                symbolSequence.IsOptional);
+            return new FieldReference(type);
         }
 
         private static TypeReference ParseTypeReference(

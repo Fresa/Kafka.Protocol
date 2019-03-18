@@ -2,8 +2,8 @@
 {
     internal class OperandSymbolSequence : SymbolSequence
     {
-        public OperandSymbolSequence(SymbolReference symbolReference, bool isOptional)
-            : base(symbolReference, isOptional)
+        public OperandSymbolSequence(SymbolReference symbolReference)
+            : base(symbolReference)
         {
         }
     }

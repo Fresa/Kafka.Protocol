@@ -14,10 +14,6 @@ namespace Kafka.Protocol.Generator.Tests
             private Queue<SymbolSequence> _symbolSequences;
             private string _expression;
 
-            public When_parsing_a_expression_with_or()
-            {
-            }
-
             protected override void Given()
             {
                 _expression = "Size (RequestMessage | ResponseMessage)";
@@ -39,11 +35,11 @@ namespace Kafka.Protocol.Generator.Tests
                     .Subject
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "Size"),
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "RequestMessage"),
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "ResponseMessage"),
                         SymbolSequence.Operators.Or,
                         SymbolSequence.Operators.And);

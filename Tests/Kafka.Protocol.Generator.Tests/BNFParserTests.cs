@@ -62,16 +62,16 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "transactional_id"),
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "acks"),
                         SymbolSequence.Operators.And,
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "timeout"),
                         SymbolSequence.Operators.And,
-                        SymbolSequence.Operands.Optional(
-                            "topic_data"),
+                        SymbolSequence.Operand(
+                            "ARRAY(topic_data)"),
                         SymbolSequence.Operators.And);
             }
             
@@ -93,7 +93,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "NULLABLE_STRING"));
             }
 
@@ -115,7 +115,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "INT16"));
             }
             
@@ -137,7 +137,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "INT32"));
             }
 
@@ -159,10 +159,10 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "topic"),
-                        SymbolSequence.Operands.Optional(
-                            "data"),
+                        SymbolSequence.Operand(
+                            "ARRAY(data)"),
                         SymbolSequence.Operators.And);
             }
 
@@ -185,7 +185,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "STRING"));
             }
             
@@ -208,9 +208,9 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "partition"), 
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "record_set"), 
                         SymbolSequence.Operators.And);
             }
@@ -233,7 +233,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "INT32"));
             }
 
@@ -257,7 +257,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .ToArray()
                     .Should()
                     .BeEquivalentTo(
-                        SymbolSequence.Operands.Required(
+                        SymbolSequence.Operand(
                             "RECORDS(INT32)"));
             }
         }

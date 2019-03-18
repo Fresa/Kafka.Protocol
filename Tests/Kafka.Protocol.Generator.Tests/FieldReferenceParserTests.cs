@@ -18,7 +18,7 @@ namespace Kafka.Protocol.Generator.Tests
 
             protected override void Given()
             {
-                _symbolSequence = SymbolSequence.Operands.Required(
+                _symbolSequence = SymbolSequence.Operand(
                     "ARRAY(INT32)");
             }
 
@@ -55,15 +55,6 @@ namespace Kafka.Protocol.Generator.Tests
                     .GenericArgument
                     .Name
                     .Should().Be("INT32");
-            }
-
-            [Fact]
-            public void It_should_have_mapped_is_optional()
-            {
-                _fieldReference
-                    .As<FieldReference>()
-                    .IsOptional
-                    .Should().BeFalse();
             }
         }
     }
