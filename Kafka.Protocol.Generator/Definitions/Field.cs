@@ -2,7 +2,7 @@
 
 namespace Kafka.Protocol.Generator.Definitions
 {
-    internal class Field
+    public class Field
     {
         public Field(string name, PostFixFieldExpression postFixFieldExpression)
         {

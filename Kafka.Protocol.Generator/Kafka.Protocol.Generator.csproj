@@ -8,5 +8,26 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.9.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.15.0">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.TextTemplating.15.0.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Amqp091Protocol.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Amqp091Protocol.cs</LastGenOutput>
+    </None>
+    <None Update="Protocol.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Protocol.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
   
 </Project>

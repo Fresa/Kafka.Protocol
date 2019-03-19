@@ -4,7 +4,7 @@ using Kafka.Protocol.Generator.Definitions.FieldExpression;
 
 namespace Kafka.Protocol.Generator.Definitions
 {
-    internal class Method
+    public class Method
     {
         internal Method(
             MethodMetaData metaData,

@@ -23,14 +23,14 @@ namespace Kafka.Protocol.Generator.Tests
             }
 
             private static readonly HtmlDocument ApacheKafkaDefinitionPage = new HtmlDocument();
-            private static readonly Lazy<Protocol> ProtocolLoader = new Lazy<Protocol>(() => Protocol.Load(ApacheKafkaDefinitionPage));
+            private static readonly Lazy<ProtocolSpecification> ProtocolLoader = new Lazy<ProtocolSpecification>(() => ProtocolSpecification.Load(ApacheKafkaDefinitionPage));
 
-            private Protocol _protocol => ProtocolLoader.Value;
+            private ProtocolSpecification ProtocolSpecification => ProtocolLoader.Value;
 
             [Fact]
             public void It_should_have_parsed_errors()
             {
-                _protocol.ErrorCodes
+                ProtocolSpecification.ErrorCodes
                     .Should().HaveCount(78)
                     .And.ContainKey(1)
                     .And.Subject[1].Should().BeEquivalentTo(new ErrorCode
@@ -45,7 +45,7 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_fetch_message()
             {
-                _protocol.Messages
+                ProtocolSpecification.Messages
                     .Should().HaveCount(43)
                     .And.ContainKey(1)
                     .And.Subject[1]
@@ -65,7 +65,7 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_fetch_message_requests()
             {
-                _protocol.Messages[1]
+                ProtocolSpecification.Messages[1]
                     .Methods
                     .Where(method =>
                         method.Type == MethodType.Request)
@@ -76,7 +76,7 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_fetch_message_responses()
             {
-                _protocol.Messages[1]
+                ProtocolSpecification.Messages[1]
                     .Methods
                     .Where(method =>
                         method.Type == MethodType.Response)
@@ -87,7 +87,7 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_primitives()
             {
-                _protocol.PrimitiveTypes
+                ProtocolSpecification.PrimitiveTypes
                     .Should()
                     .HaveCount(16)
                     .And.Subject
@@ -101,7 +101,7 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_request_header()
             {
-                _protocol.RequestHeader
+                ProtocolSpecification.RequestHeader
                     .Should()
                     .BeEquivalentTo(
                         new Header(
@@ -121,7 +121,7 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_response_header()
             {
-                _protocol.ResponseHeader
+                ProtocolSpecification.ResponseHeader
                     .Should()
                     .BeEquivalentTo(
                         new Header(
@@ -141,7 +141,7 @@ namespace Kafka.Protocol.Generator.Tests
             [Fact]
             public void It_should_have_parsed_message_envelope()
             {
-                _protocol.MessageEnvelope.Name
+                ProtocolSpecification.MessageEnvelope.Name
                     .Should().Be("RequestOrResponse");
             }
         }

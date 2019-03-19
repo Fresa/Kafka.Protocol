@@ -3,7 +3,7 @@ using Kafka.Protocol.Generator.Definitions.FieldExpression;
 
 namespace Kafka.Protocol.Generator.Definitions
 {
-    internal class MessageEnvelope
+    public class MessageEnvelope
     {
         internal MessageEnvelope(
             string name, 

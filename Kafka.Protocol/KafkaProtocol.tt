@@ -1,0 +1,73 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" #>
+<#@ assembly name="netstandard" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Text.RegularExpressions" #>
+<#@ assembly name="$(NuGetPackageRoot)\htmlagilitypack\1.9.0\lib\netstandard2.0\HtmlAgilityPack.dll" #>
+<#@ assembly name="$(SolutionDir)\Kafka.Protocol.Generator\bin\Debug\netstandard2.0\Kafka.Protocol.Generator.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="HtmlAgilityPack" #>
+<#@ import namespace="Kafka.Protocol.Generator" #>
+<#@ import namespace="Kafka.Protocol.Generator.Extensions" #>
+<#
+    var path = Path.Combine(Host.ResolvePath(@"ProtocolSpecifications\Apache Kafka.html"));
+    var apacheKafkaDefinitionPage = new HtmlDocument();
+    apacheKafkaDefinitionPage.LoadHtml(File.ReadAllText(path));
+
+    var protocol = ProtocolSpecification.Load(apacheKafkaDefinitionPage);
+
+	void Tab(Action action) { this.Tab(action); }
+    void Block(Action action) { this.Block(action); }
+	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
+	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
+	void _(int count = 1) { this.WriteNewLine(count); }
+    
+	void GenerateDocumentation(string documentation)
+    {
+        if (string.IsNullOrEmpty(documentation))
+        {
+            return;
+        }
+
+        #>/// <summary><# _();
+        foreach (var documentationRow in documentation.Trim().Split('\n'))
+        {
+            #>/// <#= documentationRow.Trim() #><# _();
+        }
+		#>/// </summary><# _();
+    }
+#>
+// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
+
+using System;
+using System.Linq;
+using System.Net;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+
+namespace Kafka.Protocol<# Block(() =>
+{
+	// Exceptions
+    PrintOnNewRowForEachWithIndex(protocol.ErrorCodes.Values, (errorCode, index, count) =>
+    {
+        var exceptionName = errorCode.Error.ToPascalCase('_');
+        GenerateDocumentation(errorCode.Description);
+        #>public class <#= exceptionName #>Exception : Exception<# Block(() =>
+        {
+			#>public <#= exceptionName #>Exception()<# Block(() =>
+			{
+			}); _(2);
+
+            #>public <#= exceptionName #>Exception(string message) : base(message)<# Block(() =>
+			{
+			}); _(2);
+
+			#>public int Code { get; } = <#= errorCode.Code #>;<# 
+        });
+
+		if (index + 1 != count) _();
+    }); 
+});
+#>

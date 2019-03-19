@@ -11,16 +11,16 @@ using Kafka.Protocol.Generator.Extensions;
 
 namespace Kafka.Protocol.Generator
 {
-    internal class Protocol
+    public class ProtocolSpecification
     {
         private readonly HtmlDocument _definition;
 
-        internal static Protocol Load(HtmlDocument definition)
+        public static ProtocolSpecification Load(HtmlDocument definition)
         {
-            return new Protocol(definition);
+            return new ProtocolSpecification(definition);
         }
 
-        private Protocol(HtmlDocument definition)
+        private ProtocolSpecification(HtmlDocument definition)
         {
             _definition = definition;
 
@@ -34,17 +34,17 @@ namespace Kafka.Protocol.Generator
             MessageEnvelope = ParseRequestAndResponseStructure();
         }
 
-        internal IDictionary<string, PrimitiveType> PrimitiveTypes { get; set; }
+        public IDictionary<string, PrimitiveType> PrimitiveTypes { get; set; }
 
-        internal IDictionary<int, ErrorCode> ErrorCodes { get; }
+        public IDictionary<int, ErrorCode> ErrorCodes { get; }
 
-        internal IDictionary<int, Message> Messages { get; }
+        public IDictionary<int, Message> Messages { get; }
 
-        internal Header RequestHeader { get; }
+        public Header RequestHeader { get; }
 
-        internal Header ResponseHeader { get; }
+        public Header ResponseHeader { get; }
 
-        internal MessageEnvelope MessageEnvelope { get; }
+        public MessageEnvelope MessageEnvelope { get; }
 
         private const string RequestOrResponseXPath = "//*/pre[starts-with(text(),'RequestOrResponse')]";
 

@@ -2,7 +2,7 @@
 
 namespace Kafka.Protocol.Generator.Definitions.FieldExpression
 {
-    internal class PostFixFieldExpression
+    public class PostFixFieldExpression
     {
         internal PostFixFieldExpression(Queue<FieldExpressionToken> expressionTokens)
         {

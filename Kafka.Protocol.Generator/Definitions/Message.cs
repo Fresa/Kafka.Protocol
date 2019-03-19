@@ -3,7 +3,7 @@ using Kafka.Protocol.Generator.BackusNaurForm;
 
 namespace Kafka.Protocol.Generator.Definitions
 {
-    internal class Message
+    public class Message
     {
         internal Message(int key, string name, List<Method> methods)
         {

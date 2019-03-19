@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Tests", "Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator", "Kafka.Protocol.Generator\Kafka.Protocol.Generator.csproj", "{748F35A5-87E7-411B-98E7-56D35472EC50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.Protocol.Generator.Tests", "Tests\Kafka.Protocol.Generator.Tests\Kafka.Protocol.Generator.Tests.csproj", "{B6F3A296-464C-4B91-8412-066B78D6E3C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator.Tests", "Tests\Kafka.Protocol.Generator.Tests\Kafka.Protocol.Generator.Tests.csproj", "{B6F3A296-464C-4B91-8412-066B78D6E3C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
