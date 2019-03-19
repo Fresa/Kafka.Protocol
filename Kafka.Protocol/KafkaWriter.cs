@@ -93,7 +93,7 @@ namespace Kafka.Protocol
 
         public void WriteBytes(byte[] value)
         {
-            value = value ?? Array.Empty<byte>();
+            value = value ?? System.Array.Empty<byte>();
             WriteInt32(value.Length);
             WriteAsLittleEndian(value);
         }
@@ -134,7 +134,7 @@ namespace Kafka.Protocol
         {
             if (BitConverter.IsLittleEndian == false)
             {
-                Array.Reverse(value);
+                System.Array.Reverse(value);
             }
             Write(value);
         }
@@ -143,7 +143,7 @@ namespace Kafka.Protocol
         {
             if (BitConverter.IsLittleEndian)
             {
-                Array.Reverse(value);
+                System.Array.Reverse(value);
             }
             Write(value);
         }

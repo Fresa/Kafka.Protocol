@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol", "Kafka.Protocol\Kafka.Protocol.csproj", "{653865A8-71A6-4E0F-8625-DDF8A3E51B39}"
+	ProjectSection(ProjectDependencies) = postProject
+		{748F35A5-87E7-411B-98E7-56D35472EC50} = {748F35A5-87E7-411B-98E7-56D35472EC50}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D896A914-149B-4AB4-8C8B-405753509786}"
 EndProject

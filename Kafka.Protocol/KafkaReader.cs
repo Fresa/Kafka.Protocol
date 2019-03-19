@@ -142,7 +142,7 @@ namespace Kafka.Protocol
             var bytes = Read(length);
             if (BitConverter.IsLittleEndian == false)
             {
-                Array.Reverse(bytes);
+                System.Array.Reverse(bytes);
             }
             return bytes;
         }
@@ -152,7 +152,7 @@ namespace Kafka.Protocol
             var bytes = Read(length);
             if (BitConverter.IsLittleEndian)
             {
-                Array.Reverse(bytes);
+                System.Array.Reverse(bytes);
             }
             return bytes;
         }
@@ -165,7 +165,7 @@ namespace Kafka.Protocol
             }
 
             var bytes = new byte[length];
-            Array.Copy(
+            System.Array.Copy(
                 _buffer,
                 _position,
                 bytes,

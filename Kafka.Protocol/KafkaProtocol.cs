@@ -10,6 +10,607 @@ using System.Text.RegularExpressions;
 namespace Kafka.Protocol
 {
 	/// <summary>
+	/// Represents a boolean value in a byte. Values 0 and 1 are used to represent false and true respectively. When reading a boolean value, any non-zero value is considered true.
+	/// </summary>
+	public struct Boolean 
+	{
+		public System.Boolean Value { get; }
+
+		public Boolean(System.Boolean value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Boolean comparingBoolean && this == comparingBoolean;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Boolean x, Boolean y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Boolean x, Boolean y)
+		{
+			return !(x == y);
+		}
+
+		public static Boolean From(System.Boolean value)
+		{
+			return new Boolean(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents an integer between -27 and 27-1 inclusive.
+	/// </summary>
+	public struct Int8 
+	{
+		public System.SByte Value { get; }
+
+		public Int8(System.SByte value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Int8 comparingInt8 && this == comparingInt8;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Int8 x, Int8 y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Int8 x, Int8 y)
+		{
+			return !(x == y);
+		}
+
+		public static Int8 From(System.SByte value)
+		{
+			return new Int8(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents an integer between -215 and 215-1 inclusive. The values are encoded using two bytes in network byte order (big-endian).
+	/// </summary>
+	public struct Int16 
+	{
+		public System.Int16 Value { get; }
+
+		public Int16(System.Int16 value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Int16 comparingInt16 && this == comparingInt16;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Int16 x, Int16 y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Int16 x, Int16 y)
+		{
+			return !(x == y);
+		}
+
+		public static Int16 From(System.Int16 value)
+		{
+			return new Int16(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents an integer between -231 and 231-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).
+	/// </summary>
+	public struct Int32 
+	{
+		public System.Int32 Value { get; }
+
+		public Int32(System.Int32 value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Int32 comparingInt32 && this == comparingInt32;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Int32 x, Int32 y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Int32 x, Int32 y)
+		{
+			return !(x == y);
+		}
+
+		public static Int32 From(System.Int32 value)
+		{
+			return new Int32(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents an integer between -263 and 263-1 inclusive. The values are encoded using eight bytes in network byte order (big-endian).
+	/// </summary>
+	public struct Int64 
+	{
+		public System.Int64 Value { get; }
+
+		public Int64(System.Int64 value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Int64 comparingInt64 && this == comparingInt64;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Int64 x, Int64 y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Int64 x, Int64 y)
+		{
+			return !(x == y);
+		}
+
+		public static Int64 From(System.Int64 value)
+		{
+			return new Int64(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents an integer between 0 and 232-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).
+	/// </summary>
+	public struct Uint32 
+	{
+		public System.UInt32 Value { get; }
+
+		public Uint32(System.UInt32 value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Uint32 comparingUint32 && this == comparingUint32;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Uint32 x, Uint32 y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Uint32 x, Uint32 y)
+		{
+			return !(x == y);
+		}
+
+		public static Uint32 From(System.UInt32 value)
+		{
+			return new Uint32(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents an integer between -231 and 231-1 inclusive. Encoding follows the variable-length zig-zag encoding from   Google Protocol Buffers.
+	/// </summary>
+	public struct Varint 
+	{
+		public System.Int32 Value { get; }
+
+		public Varint(System.Int32 value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Varint comparingVarint && this == comparingVarint;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Varint x, Varint y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Varint x, Varint y)
+		{
+			return !(x == y);
+		}
+
+		public static Varint From(System.Int32 value)
+		{
+			return new Varint(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents an integer between -263 and 263-1 inclusive. Encoding follows the variable-length zig-zag encoding from   Google Protocol Buffers.
+	/// </summary>
+	public struct Varlong 
+	{
+		public System.Int64 Value { get; }
+
+		public Varlong(System.Int64 value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Varlong comparingVarlong && this == comparingVarlong;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Varlong x, Varlong y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Varlong x, Varlong y)
+		{
+			return !(x == y);
+		}
+
+		public static Varlong From(System.Int64 value)
+		{
+			return new Varlong(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents a sequence of characters. First the length N is given as an INT16. Then N bytes follow which are the UTF-8 encoding of the character sequence. Length must not be negative.
+	/// </summary>
+	public struct String 
+	{
+		public System.String Value { get; }
+
+		public String(System.String value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is String comparingString && this == comparingString;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (String x, String y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (String x, String y)
+		{
+			return !(x == y);
+		}
+
+		public static String From(System.String value)
+		{
+			return new String(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents a sequence of characters or null. For non-null strings, first the length N is given as an INT16. Then N bytes follow which are the UTF-8 encoding of the character sequence. A null value is encoded with length of -1 and there are no following bytes.
+	/// </summary>
+	public struct NullableString 
+	{
+		public System.String Value { get; }
+
+		public NullableString(System.String value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is NullableString comparingNullableString && this == comparingNullableString;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (NullableString x, NullableString y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (NullableString x, NullableString y)
+		{
+			return !(x == y);
+		}
+
+		public static NullableString From(System.String value)
+		{
+			return new NullableString(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents a raw sequence of bytes. First the length N is given as an INT32. Then N bytes follow.
+	/// </summary>
+	public struct Bytes 
+	{
+		public System.Byte[] Value { get; }
+
+		public Bytes(System.Byte[] value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Bytes comparingBytes && this == comparingBytes;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Bytes x, Bytes y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Bytes x, Bytes y)
+		{
+			return !(x == y);
+		}
+
+		public static Bytes From(System.Byte[] value)
+		{
+			return new Bytes(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents a raw sequence of bytes or null. For non-null values, first the length N is given as an INT32. Then N bytes follow. A null value is encoded with length of -1 and there are no following bytes.
+	/// </summary>
+	public struct NullableBytes 
+	{
+		public System.Byte[] Value { get; }
+
+		public NullableBytes(System.Byte[] value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is NullableBytes comparingNullableBytes && this == comparingNullableBytes;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (NullableBytes x, NullableBytes y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (NullableBytes x, NullableBytes y)
+		{
+			return !(x == y);
+		}
+
+		public static NullableBytes From(System.Byte[] value)
+		{
+			return new NullableBytes(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents a sequence of Kafka records as NULLABLE_BYTES. For a detailed description of records see Message Sets.
+	/// </summary>
+	public struct Records 
+	{
+		public System.Byte[] Value { get; }
+
+		public Records(System.Byte[] value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Records comparingRecords && this == comparingRecords;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Records x, Records y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Records x, Records y)
+		{
+			return !(x == y);
+		}
+
+		public static Records From(System.Byte[] value)
+		{
+			return new Records(value);
+		}
+	}
+
+	/// <summary>
+	/// Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N is given as an INT32. Then N instances of type T follow. A null array is represented with a length of -1. In protocol documentation an array of T instances is referred to as [T].
+	/// </summary>
+	public struct Array 
+	{
+		public System.Array Value { get; }
+
+		public Array(System.Array value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Array comparingArray && this == comparingArray;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Array x, Array y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Array x, Array y)
+		{
+			return !(x == y);
+		}
+
+		public static Array From(System.Array value)
+		{
+			return new Array(value);
+		}
+	}
+	/// <summary>
 	/// The server experienced an unexpected error when processing the request.
 	/// </summary>
 	public class UnknownServerErrorException : Exception
