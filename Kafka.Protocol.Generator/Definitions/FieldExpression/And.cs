@@ -1,6 +1,10 @@
 ﻿namespace Kafka.Protocol.Generator.Definitions.FieldExpression
 {
-    internal class And : FieldExpressionOperator
+    public class And : FieldExpressionOperator
     {
+        internal And()
+        {
+            
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Kafka.Protocol.Generator.Definitions.FieldExpression
 {
-    internal abstract class FieldExpressionToken
+    public abstract class FieldExpressionToken
     {
     }
 }

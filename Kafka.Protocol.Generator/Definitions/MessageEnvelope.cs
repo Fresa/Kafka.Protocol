@@ -15,9 +15,8 @@ namespace Kafka.Protocol.Generator.Definitions
             Fields = fields;
         }
 
-        internal string Name { get; }
-        internal PostFixFieldExpression PostFixFieldExpression { get; }
-        internal List<Field> Fields { get; }
-
+        public string Name { get; }
+        public PostFixFieldExpression PostFixFieldExpression { get; }
+        public List<Field> Fields { get; }
     }
 }

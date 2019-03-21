@@ -106,7 +106,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .BeEquivalentTo(
                         new Header(
                             new HeaderMetaData("Header", MethodType.Request), 
-                            new PostFixFieldExpression(new Queue<FieldExpressionToken>()), 
+                            new PostFixFieldExpression(new List<FieldExpressionToken>()), 
                             new List<Field>()),
                         options =>
                             options
@@ -126,7 +126,7 @@ namespace Kafka.Protocol.Generator.Tests
                     .BeEquivalentTo(
                         new Header(
                             new HeaderMetaData("Header", MethodType.Response),
-                            new PostFixFieldExpression(new Queue<FieldExpressionToken>()), 
+                            new PostFixFieldExpression(new List<FieldExpressionToken>()), 
                             new List<Field>()),
                         options =>
                             options

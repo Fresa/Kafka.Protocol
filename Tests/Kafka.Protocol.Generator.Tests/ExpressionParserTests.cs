@@ -11,7 +11,7 @@ namespace Kafka.Protocol.Generator.Tests
     {
         public class When_parsing_a_expression_with_or : XUnit2Specification
         {
-            private Queue<SymbolSequence> _symbolSequences;
+            private List<SymbolSequence> _symbolSequences;
             private string _expression;
 
             protected override void Given()

@@ -10,6 +10,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="HtmlAgilityPack" #>
 <#@ import namespace="Kafka.Protocol.Generator" #>
+<#@ import namespace="Kafka.Protocol.Generator.Definitions" #>
 <#@ import namespace="Kafka.Protocol.Generator.Extensions" #>
 <#
     var path = Path.Combine(Host.ResolvePath(@"ProtocolSpecifications\Apache Kafka.html"));
@@ -123,5 +124,20 @@ namespace Kafka.Protocol<# Block(() =>
 
 		if (index + 1 != count) _();
     }); 
+
+    #>public class <#= protocol.MessageEnvelope.Name #><# Block(() =>
+    {
+        PrintOnNewRowForEachWithIndex(protocol.MessageEnvelope.Fields, (field, index, length) =>
+        {
+            if (field.PostFixFieldExpression.ExpressionTokens.Count == 1)
+            {
+                var fieldReference = field.PostFixFieldExpression.ExpressionTokens.OfType<FieldReference>().First();
+				#>public struct <#= field.Name #><# Block(() =>
+                {
+
+                });
+            }
+        });
+    });
 });
 #>

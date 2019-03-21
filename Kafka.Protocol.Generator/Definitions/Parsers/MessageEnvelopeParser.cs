@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Kafka.Protocol.Generator.BackusNaurForm;
 
 namespace Kafka.Protocol.Generator.Definitions.Parsers
@@ -8,17 +7,16 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
     {
         internal static MessageEnvelope Parse(Specification specification)
         {
-            var headerRule = specification.Rules.Dequeue();
+            var headerRule = specification.Rules.First();
             
-            var postFixFieldExpression = FieldParser.Parse(headerRule).PostFixFieldExpression;
+            var postFixFieldExpression = FieldParser
+                .Parse(headerRule)
+                .PostFixFieldExpression;
 
-            var fields = new List<Field>();
-            while (specification.Rules.Any())
-            {
-                var rule = specification.Rules.Dequeue();
-                var field = FieldParser.Parse(rule);
-                fields.Add(field);
-            }
+            var fields = specification.Rules
+                .Skip(1)
+                .Select(FieldParser.Parse)
+                .ToList();
 
             return new MessageEnvelope(
                 headerRule.Symbol.Name,

@@ -2,7 +2,7 @@
 
 namespace Kafka.Protocol.Generator.BackusNaurForm
 {
-    internal class PostFixExpression : Queue<SymbolSequence>
+    internal class PostFixExpression : List<SymbolSequence>
     {
     }
 }

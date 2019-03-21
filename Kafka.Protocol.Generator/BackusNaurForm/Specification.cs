@@ -4,6 +4,6 @@ namespace Kafka.Protocol.Generator.BackusNaurForm
 {
     internal class Specification
     {
-        public Queue<Rule> Rules { get; } = new Queue<Rule>();
+        public List<Rule> Rules { get; } = new List<Rule>();
     }
 }

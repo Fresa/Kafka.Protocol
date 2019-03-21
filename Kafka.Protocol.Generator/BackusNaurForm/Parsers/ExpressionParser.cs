@@ -63,7 +63,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                            _operatorStack.Peek() !=
                            SymbolSequence.Operators.StartOfGroup)
                     {
-                        PostFixExpression.Enqueue(_operatorStack.Pop());
+                        PostFixExpression.Add(_operatorStack.Pop());
                     }
 
                     if (_operatorStack.Any() == false ||
@@ -109,7 +109,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
             TryAddCurrentOperand();
             while (_operatorStack.Any())
             {
-                PostFixExpression.Enqueue(_operatorStack.Pop());
+                PostFixExpression.Add(_operatorStack.Pop());
             }
         }
 
@@ -212,7 +212,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                        .Peek()
                        .Precedence)
             {
-                PostFixExpression.Enqueue(
+                PostFixExpression.Add(
                     _operatorStack.Pop());
             }
 
@@ -232,7 +232,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
             var symbol = ParseSymbolSequence(
                 symbolSequence);
 
-            PostFixExpression.Enqueue(symbol);
+            PostFixExpression.Add(symbol);
             return true;
         }
 

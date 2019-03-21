@@ -1,6 +1,6 @@
 ﻿namespace Kafka.Protocol.Generator.Definitions.FieldExpression
 {
-    internal abstract class FieldExpressionOperator : FieldExpressionToken
+    public abstract class FieldExpressionOperator : FieldExpressionToken
     {
         internal static And And 
             => new And();

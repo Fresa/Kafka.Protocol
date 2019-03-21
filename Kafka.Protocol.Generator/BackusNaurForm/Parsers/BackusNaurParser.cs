@@ -10,7 +10,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
             while (buffer.HasNext())
             {
                 var symbol = RuleParser.Parse(buffer);
-                specification.Rules.Enqueue(symbol);
+                specification.Rules.Add(symbol);
             }
 
             return specification;

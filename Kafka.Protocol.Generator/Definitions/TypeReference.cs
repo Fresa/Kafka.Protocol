@@ -1,8 +1,8 @@
 ﻿namespace Kafka.Protocol.Generator.Definitions
 {
-    internal class TypeReference
+    public class TypeReference
     {
-        public TypeReference(string name, TypeReference genericArgument)
+        internal TypeReference(string name, TypeReference genericArgument)
         {
             Name = name;
             GenericArgument = genericArgument;

@@ -2,9 +2,9 @@
 
 namespace Kafka.Protocol.Generator.Definitions
 {
-    internal class FieldReference : FieldExpressionToken
+    public class FieldReference : FieldExpressionToken
     {
-        public FieldReference(TypeReference type)
+        internal FieldReference(TypeReference type)
         {
             Type = type;
         }
