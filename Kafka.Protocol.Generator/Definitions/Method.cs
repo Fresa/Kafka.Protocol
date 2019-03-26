@@ -39,6 +39,7 @@ namespace Kafka.Protocol.Generator.Definitions
         public string Description { get; set; }
 
         public List<FieldNew> Fields { get; set; } = new List<FieldNew>();
+        public bool IsArray { get; set; }
     }
 
     internal class MethodNew

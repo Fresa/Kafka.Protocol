@@ -23,7 +23,7 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
         private readonly Stack<OperatorSymbolSequence> _operatorStack = new Stack<OperatorSymbolSequence>();
 
         private string _operandBuffer = "";
-        private int _genericParameterLevel;
+        private int _inconsistentArrayDefinitionLevel;
 
         internal static PostFixExpression Parse(
             IBuffer<char> buffer)
@@ -77,17 +77,17 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                     continue;
                 }
 
-                if (AtStartOfGenericSymbol())
+                if (AtStartOfInconsistentArrayDefinition())
                 {
                     _operandBuffer += _buffer.Current;
-                    _genericParameterLevel++;
+                    _inconsistentArrayDefinitionLevel++;
                     continue;
                 }
 
-                if (AtEndOfGenericSymbol())
+                if (AtEndOfInconsistentArrayDefinition())
                 {
                     _operandBuffer += _buffer.Current;
-                    _genericParameterLevel--;
+                    _inconsistentArrayDefinitionLevel--;
                     continue;
                 }
 
@@ -153,14 +153,14 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
         private bool AtEndOfGroup()
         {
             return _buffer.CurrentSequenceIs(EndOfGroup) &&
-                   _genericParameterLevel == 0;
+                   _inconsistentArrayDefinitionLevel == 0;
         }
 
         /// <summary>
         /// Not to be mixed up with grouping symbols. It's incorrect BNF syntax, but needs to be handled
         /// </summary>
         /// <returns></returns>
-        private bool AtStartOfGenericSymbol()
+        private bool AtStartOfInconsistentArrayDefinition()
         {
             return _buffer.CurrentSequenceIs(StartOfGroup) &&
                    _buffer.PeekBehind() != ' ';
@@ -170,10 +170,10 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
         /// Not to be mixed up with grouping symbols. It's incorrect BNF syntax, but needs to be handled
         /// </summary>
         /// <returns></returns>
-        private bool AtEndOfGenericSymbol()
+        private bool AtEndOfInconsistentArrayDefinition()
         {
             return _buffer.CurrentSequenceIs(EndOfGroup) &&
-                   _genericParameterLevel > 0;
+                   _inconsistentArrayDefinitionLevel > 0;
         }
 
         private readonly Dictionary<string, OperatorSymbolSequence> _operators =
@@ -253,11 +253,11 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
         /// <param name="symbolName"></param>
         private static void HandleInconsistentArraySpecification(ref string symbolName)
         {
-            if (symbolName.StartsWith("[") &&
-                symbolName.EndsWith("]"))
+            if (symbolName.StartsWith("ARRAY(") &&
+                symbolName.EndsWith(")"))
             {
-                symbolName = symbolName.Substring(1, symbolName.Length - 2);
-                symbolName = $"ARRAY({symbolName})";
+                symbolName = symbolName.Substring(6, symbolName.Length - 7);
+                symbolName = $"[{symbolName}]";
             }
         }
     }

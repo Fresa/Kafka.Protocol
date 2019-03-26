@@ -121,11 +121,6 @@ namespace Kafka.Protocol.Generator
 
         private void ValidateTypeReference(TypeReference typeReference, MessageEnvelope messageEnvelope)
         {
-            if (typeReference.IsGeneric)
-            {
-                ValidateTypeReference(typeReference.GenericArgument, messageEnvelope);
-            }
-
             if (PrimitiveTypes.Keys.Contains(
                 typeReference.Name, StringComparer.CurrentCultureIgnoreCase))
             {
@@ -213,11 +208,6 @@ namespace Kafka.Protocol.Generator
 
         private void ValidateTypeReference(TypeReference typeReference, Header header)
         {
-            if (typeReference.IsGeneric)
-            {
-                ValidateTypeReference(typeReference.GenericArgument, header);
-            }
-
             if (PrimitiveTypes.ContainsKey(
                 typeReference.Name))
             {
@@ -345,7 +335,7 @@ namespace Kafka.Protocol.Generator
             var field = new FieldNew()
             {
                 Name = rule.Symbol.Name,
-                Type = new TypeReference(rule.Symbol.Name, null)
+                Type = new TypeReference(rule.Symbol.Name)
             };
 
             if (!rule.PostFixExpression.Any())
@@ -406,19 +396,11 @@ namespace Kafka.Protocol.Generator
                     {
                         Name = fieldReference.Type.Name,
                         Type = fieldReference.Type,
+                        IsArray = fieldReference.IsRepeatable,
                         IsType = true,
                         Description = foundPrimitive.Description
                     };
                 }
-
-                if (fieldReference.Type.IsGeneric)
-                {
-                    var f = Handle(
-                        new FieldReference(fieldReference.Type.GenericArgument));
-                    foundfield.Fields.AddRange(f.Fields);
-                    foundfield.Description = f.Description;
-                }
-
 
                 return foundfield;
             }
@@ -485,6 +467,7 @@ namespace Kafka.Protocol.Generator
                 {
                     Name = fieldReference.Type.Name,
                     Type = fieldReference.Type,
+                    IsArray = fieldReference.IsRepeatable,
                     Fields = new List<FieldNew>()
                 };
                 if (foundfield != null)
@@ -514,16 +497,7 @@ namespace Kafka.Protocol.Generator
                     firstOperandFIeld.IsType = true;
                     firstOperandFIeld.Description = foundPrimitive.Description;
                 }
-
-                if (fieldReference.Type.IsGeneric)
-                {
-                    var f = Handle(
-                        new FieldReference(fieldReference.Type.GenericArgument));
-                    firstOperandFIeld.Fields.AddRange(f.Fields);
-                    firstOperandFIeld.Description = f.Description;
-                }
-
-
+                
                 return firstOperandFIeld;
             }
         }
@@ -562,11 +536,6 @@ namespace Kafka.Protocol.Generator
 
         private void ValidateTypeReference(TypeReference typeReference, Method method)
         {
-            if (typeReference.IsGeneric)
-            {
-                ValidateTypeReference(typeReference.GenericArgument, method);
-            }
-
             if (PrimitiveTypes.ContainsKey(
                 typeReference.Name))
             {

@@ -71,7 +71,7 @@ namespace Kafka.Protocol.Generator.Tests
                             "timeout"),
                         SymbolSequence.Operators.And,
                         SymbolSequence.Operand(
-                            "ARRAY(topic_data)"),
+                            "[topic_data]"),
                         SymbolSequence.Operators.And);
             }
             
@@ -162,7 +162,7 @@ namespace Kafka.Protocol.Generator.Tests
                         SymbolSequence.Operand(
                             "topic"),
                         SymbolSequence.Operand(
-                            "ARRAY(data)"),
+                            "[data]"),
                         SymbolSequence.Operators.And);
             }
 

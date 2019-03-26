@@ -23,37 +23,36 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
 
         internal static FieldReference ParseOperand(OperandSymbolSequence symbolSequence)
         {
-            var type =
+            return
                 ParseTypeReference(
                     new Buffer<char>(
                         symbolSequence.SymbolReference.Name.ToCharArray()));
-
-            return new FieldReference(type);
         }
 
-        private static TypeReference ParseTypeReference(
+        private static FieldReference ParseTypeReference(
             IBuffer<char> symbolReferenceName)
         {
             var name = "";
-            TypeReference genericTypeReference = null;
+            var isArray = false;
             while (symbolReferenceName.MoveToNext())
             {
                 var chr = symbolReferenceName.Current;
-                if (chr == '(')
+                if (chr == '[')
                 {
-                    genericTypeReference = ParseTypeReference(symbolReferenceName);
+                    isArray = true;
                     continue;
                 }
 
-                if (chr == ')')
+                if (chr == ']')
                 {
+                    // todo: verify that there is an end bracket
                     continue;
                 }
 
                 name += chr;
             }
 
-            return new TypeReference(name, genericTypeReference);
+            return new FieldReference(new TypeReference(name), isArray);
         }
     }
 }

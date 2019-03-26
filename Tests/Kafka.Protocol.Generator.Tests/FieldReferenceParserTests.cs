@@ -10,16 +10,15 @@ namespace Kafka.Protocol.Generator.Tests
 {
     public partial class Given_a_field_reference_parser
     {
-        public class When_parsing_a_valid_symbol_sequence_with_a_generic_symbol_reference : XUnit2Specification
+        public class When_parsing_a_valid_repeatable_symbol_sequence : XUnit2Specification
         {
-            private FieldReferenceParser _parser;
             private SymbolSequence _symbolSequence;
             private FieldExpressionToken _fieldReference;
 
             protected override void Given()
             {
                 _symbolSequence = SymbolSequence.Operand(
-                    "ARRAY(INT32)");
+                    "[INT32]");
             }
 
             protected override void When()
@@ -38,23 +37,16 @@ namespace Kafka.Protocol.Generator.Tests
             public void It_should_have_parsed_the_type_name()
             {
                 _fieldReference.As<FieldReference>().Type.Name
-                    .Should().Be("ARRAY");
+                    .Should().Be("INT32");
             }
 
             [Fact]
-            public void It_should_have_parsed_the_generic_type_argument()
+            public void It_should_have_detected_that_the_field_is_repeatable()
             {
                 _fieldReference
                     .As<FieldReference>()
-                    .Type
-                    .IsGeneric
-                    .Should().BeTrue();
-                _fieldReference
-                    .As<FieldReference>()
-                    .Type
-                    .GenericArgument
-                    .Name
-                    .Should().Be("INT32");
+                    .IsRepeatable
+                    .Should().BeTrue();                
             }
         }
     }
