@@ -247,8 +247,9 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
         }
 
         /// <summary>
-        /// The specification is inconsistent when it comes to arrays. Sometimes [] is used, sometimes it is ARRAY(). Harmonizing for consistency.
+        /// The specification is inconsistent when it comes to arrays. Sometimes [] is used, sometimes it is ARRAY().
         /// Also note that [] does not mean optional as by the BNF specification but 'array'
+        /// Using EBNF curly braces syntax for 0 or more repetition.
         /// </summary>
         /// <param name="symbolName"></param>
         private static void HandleInconsistentArraySpecification(ref string symbolName)
@@ -257,7 +258,14 @@ namespace Kafka.Protocol.Generator.BackusNaurForm.Parsers
                 symbolName.EndsWith(")"))
             {
                 symbolName = symbolName.Substring(6, symbolName.Length - 7);
-                symbolName = $"[{symbolName}]";
+                symbolName = $"{{{symbolName}}}";
+            }
+
+            if (symbolName.StartsWith("[") &&
+                symbolName.EndsWith("]"))
+            {
+                symbolName = symbolName.Substring(1, symbolName.Length - 2);
+                symbolName = $"{{{symbolName}}}";
             }
         }
     }

@@ -37,13 +37,13 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
             while (symbolReferenceName.MoveToNext())
             {
                 var chr = symbolReferenceName.Current;
-                if (chr == '[')
+                if (chr == '{')
                 {
                     isArray = true;
                     continue;
                 }
 
-                if (chr == ']')
+                if (chr == '}')
                 {
                     // todo: verify that there is an end bracket
                     continue;

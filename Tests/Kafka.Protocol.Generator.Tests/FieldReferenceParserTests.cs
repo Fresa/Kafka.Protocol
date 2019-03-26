@@ -18,7 +18,7 @@ namespace Kafka.Protocol.Generator.Tests
             protected override void Given()
             {
                 _symbolSequence = SymbolSequence.Operand(
-                    "[INT32]");
+                    "{INT32}");
             }
 
             protected override void When()
