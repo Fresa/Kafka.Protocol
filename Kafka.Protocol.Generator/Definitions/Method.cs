@@ -29,4 +29,25 @@ namespace Kafka.Protocol.Generator.Definitions
             return Name;
         }
     }
+
+
+    internal class FieldNew
+    {
+        public bool IsType { get; set; }
+        public string Name { get; set; }
+        public TypeReference Type { get; set; }
+        public string Description { get; set; }
+
+        public List<FieldNew> Fields { get; set; } = new List<FieldNew>();
+    }
+
+    internal class MethodNew
+    {
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public int Version { get; set; }
+
+        public List<FieldNew> Fields { get; set; }
+
+    }
 }

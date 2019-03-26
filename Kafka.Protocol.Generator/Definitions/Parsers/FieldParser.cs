@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Kafka.Protocol.Generator.BackusNaurForm;
 using Kafka.Protocol.Generator.Definitions.FieldExpression;
 
@@ -12,10 +14,15 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
                 rule.PostFixExpression
                     .Select(FieldReferenceParser.Parse)
                     .ToList();
-            
+
             return new Field(
                 rule.Symbol.Name,
                 new PostFixFieldExpression(fieldExpressionTokens));
         }
+
+        
+
+        
     }
+
 }

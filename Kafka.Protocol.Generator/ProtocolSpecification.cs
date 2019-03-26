@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using HtmlAgilityPack;
+using Kafka.Protocol.Generator.BackusNaurForm;
 using Kafka.Protocol.Generator.BackusNaurForm.Parsers;
 using Kafka.Protocol.Generator.Definitions;
 using Kafka.Protocol.Generator.Definitions.FieldExpression;
@@ -307,7 +308,224 @@ namespace Kafka.Protocol.Generator
 
             SetDescriptions(method.Fields, descriptionTable);
 
+            var f = WithMethod(method);
+
+            var e = ParseMethod(specification);
+
             return method;
+        }
+
+        private MethodNew ParseMethod(Specification specification)
+        {
+            var methodRule = specification.Rules.First();
+            var metaData = MethodMetaDataParser.Parse(methodRule.Symbol);
+
+            var reversedRules = specification.Rules.Skip(1).ToList();
+            reversedRules.Reverse();
+
+            var fields = new List<FieldNew>();
+            foreach (var reversedRule in reversedRules)
+            {
+                fields.Add(ParseFieldReferences(reversedRule, fields));
+            }
+
+            var methodFields = ParseFieldReferences(methodRule, fields);
+
+
+            return new MethodNew
+            {
+                Name = metaData.Name,
+                Version = metaData.Version,
+                Fields = methodFields.Fields
+            };
+        }
+
+        private FieldNew ParseFieldReferences(Rule rule, List<FieldNew> fields)
+        {
+            var field = new FieldNew()
+            {
+                Name = rule.Symbol.Name,
+                Type = new TypeReference(rule.Symbol.Name, null)
+            };
+
+            if (!rule.PostFixExpression.Any())
+            {
+                return field;
+            }
+
+            var operands = new Stack<List<FieldReference>>();
+
+            foreach (var expressionToken in rule.PostFixExpression)
+            {
+                if (expressionToken is OperandSymbolSequence operand)
+                {
+                    operands.Push(new List<FieldReference> { FieldReferenceParser.ParseOperand(operand) });
+                    continue;
+                }
+
+                if (expressionToken is AndSymbolSequence)
+                {
+                    var references = operands.Pop();
+                    references.AddRange(operands.Pop());
+
+                    operands.Push(references);
+                    continue;
+                }
+
+                if (expressionToken is OrSymbolSequence)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            var fieldReferences = operands.Pop();
+
+            foreach (var fieldReference in fieldReferences)
+            {
+                field.Fields.Add(Handle(fieldReference));
+            }
+
+            field.Fields.Reverse();
+            return field;
+
+            FieldNew Handle(FieldReference fieldReference)
+            {
+                var foundfield = fields.FirstOrDefault(field1 => field1.Name == fieldReference.Type.Name);
+                
+                if (foundfield == null)
+                {
+                    var foundPrimitive =
+                        PrimitiveTypes.Values.FirstOrDefault(type => type.Type == fieldReference.Type.Name);
+
+                    if (foundPrimitive == null)
+                    {
+                        throw new InvalidOperationException($"Could not find type '{fieldReference.Type}'");
+                    }
+
+                    foundfield = new FieldNew
+                    {
+                        Name = fieldReference.Type.Name,
+                        Type = fieldReference.Type,
+                        IsType = true,
+                        Description = foundPrimitive.Description
+                    };
+                }
+
+                if (fieldReference.Type.IsGeneric)
+                {
+                    var f = Handle(
+                        new FieldReference(fieldReference.Type.GenericArgument));
+                    foundfield.Fields.AddRange(f.Fields);
+                    foundfield.Description = f.Description;
+                }
+
+
+                return foundfield;
+            }
+        }
+
+
+
+        private MethodNew WithMethod(Method method)
+        {
+            var ret = To(method.PostFixFieldExpression, method.Fields);
+            return new MethodNew
+            {
+                Name = method.Name,
+                Version = method.Version,
+                Fields = ret
+            };
+        }
+
+
+        private List<FieldNew> To(PostFixFieldExpression expression, List<Field> fields)
+        {
+            if (!expression.ExpressionTokens.Any())
+            {
+                return new List<FieldNew>();
+            }
+
+            var operands = new Stack<List<FieldReference>>();
+
+            foreach (var expressionToken in expression.ExpressionTokens)
+            {
+                if (expressionToken is FieldReference fieldReference)
+                {
+                    operands.Push(new List<FieldReference> { fieldReference });
+                    continue;
+                }
+
+                if (expressionToken is And)
+                {
+                    var references = operands.Pop();
+                    references.AddRange(operands.Pop());
+
+                    operands.Push(references);
+                    continue;
+                }
+
+                if (expressionToken is Or)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            var fieldReferences = operands.Pop();
+            fieldReferences.Reverse();
+
+            return fieldReferences.Select(Handle).ToList();
+
+            FieldNew Handle(FieldReference fieldReference)
+            {
+                var foundfield = fields.FirstOrDefault(field1 => field1.Name == fieldReference.Type.Name);
+                var foundPrimitive =
+                    PrimitiveTypes.Values.FirstOrDefault(type => type.Type == fieldReference.Type.Name);
+
+                var firstOperandFIeld = new FieldNew
+                {
+                    Name = fieldReference.Type.Name,
+                    Type = fieldReference.Type,
+                    Fields = new List<FieldNew>()
+                };
+                if (foundfield != null)
+                {
+                    firstOperandFIeld.Description = foundfield.Description;
+                    var foundTypes = To(foundfield.PostFixFieldExpression, fields);
+                    if (foundTypes.Count() == 1)
+                    {
+                        if (foundTypes.First().IsType)
+                        {
+                            firstOperandFIeld.Type = foundTypes.First().Type;
+                        }
+                        else
+                        {
+                            firstOperandFIeld.Fields.AddRange(foundTypes);
+                        }
+                    }
+                    else
+                    {
+                        firstOperandFIeld.Fields.AddRange(foundTypes);
+                    }
+                    firstOperandFIeld.Description = foundfield.Description;
+                }
+
+                if (foundPrimitive != null)
+                {
+                    firstOperandFIeld.IsType = true;
+                    firstOperandFIeld.Description = foundPrimitive.Description;
+                }
+
+                if (fieldReference.Type.IsGeneric)
+                {
+                    var f = Handle(
+                        new FieldReference(fieldReference.Type.GenericArgument));
+                    firstOperandFIeld.Fields.AddRange(f.Fields);
+                    firstOperandFIeld.Description = f.Description;
+                }
+
+
+                return firstOperandFIeld;
+            }
         }
 
         private void SetDescriptions(List<Field> fields, List<FieldDescription> fieldDescriptions)

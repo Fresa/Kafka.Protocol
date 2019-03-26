@@ -21,7 +21,7 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
             throw new InvalidOperationException($"{symbolSequence} is not supported");
         }
 
-        private static FieldExpressionToken ParseOperand(OperandSymbolSequence symbolSequence)
+        internal static FieldReference ParseOperand(OperandSymbolSequence symbolSequence)
         {
             var type =
                 ParseTypeReference(
