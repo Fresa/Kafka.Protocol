@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using HtmlAgilityPack;
-using Kafka.Protocol.Generator.BackusNaurForm;
 using Kafka.Protocol.Generator.BackusNaurForm.Parsers;
 using Kafka.Protocol.Generator.Definitions;
-using Kafka.Protocol.Generator.Definitions.FieldExpression;
 using Kafka.Protocol.Generator.Definitions.Parsers;
 using Kafka.Protocol.Generator.Extensions;
 
@@ -76,7 +72,7 @@ namespace Kafka.Protocol.Generator
                     requestOrResponseDefinition
                         .ToCharArray()));
 
-            var messageEnvelope = MessageEnvelopeParser.Parse(specification);
+            var messageEnvelope = MessageEnvelopeParser.Parse(specification, PrimitiveTypes.Values);
 
             // Known missing fields in the specification
             PrimitiveTypes.Add("RequestMessage", new PrimitiveType
@@ -90,52 +86,9 @@ namespace Kafka.Protocol.Generator
                 Description = "Response message"
             });
 
-            ValidateMessageEnvelope(messageEnvelope);
-
             SetDescriptions(messageEnvelope.Fields, descriptionTable);
 
             return messageEnvelope;
-        }
-
-        private void ValidateMessageEnvelope(MessageEnvelope messageEnvelope)
-        {
-            var fieldReferences =
-                messageEnvelope
-                    .Fields
-                    .SelectMany(
-                        field => field
-                            .PostFixFieldExpression.ExpressionTokens)
-                    .OfType<FieldReference>()
-                    .ToList();
-            fieldReferences.AddRange(
-                messageEnvelope
-                    .PostFixFieldExpression
-                    .ExpressionTokens
-                    .OfType<FieldReference>());
-
-            foreach (var fieldReference in fieldReferences)
-            {
-                ValidateTypeReference(fieldReference.Type, messageEnvelope);
-            }
-        }
-
-        private void ValidateTypeReference(TypeReference typeReference, MessageEnvelope messageEnvelope)
-        {
-            if (PrimitiveTypes.Keys.Contains(
-                typeReference.Name, StringComparer.CurrentCultureIgnoreCase))
-            {
-                return;
-            }
-
-            if (messageEnvelope.Fields.Any(
-                field =>
-                    field.Name.Equals(typeReference.Name, StringComparison.CurrentCultureIgnoreCase)))
-            {
-                return;
-            }
-
-            throw new InvalidOperationException(
-                $"'{messageEnvelope}' has a reference to type '{typeReference}' which does not appear within the parsed symbols nor the primitive types");
         }
 
         private const string ProtocolRequestHeaderXPath = "//*/pre[starts-with(text(),'Request Header')]";
@@ -176,55 +129,13 @@ namespace Kafka.Protocol.Generator
                     headerDefinition
                         .ToCharArray()));
 
-            var header = HeaderParser.Parse(specification);
-            ValidateHeader(header);
-
+            var header = HeaderParser.Parse(specification, PrimitiveTypes.Values);
+        
             SetDescriptions(header.Fields, descriptionTable);
 
             return header;
         }
-
-        private void ValidateHeader(Header header)
-        {
-            var fieldReferences =
-                header
-                    .Fields
-                    .SelectMany(
-                        field => field
-                            .PostFixFieldExpression.ExpressionTokens)
-                    .OfType<FieldReference>()
-                    .ToList();
-            fieldReferences.AddRange(
-                header
-                    .PostFixFieldExpression
-                    .ExpressionTokens
-                    .OfType<FieldReference>());
-
-            foreach (var fieldReference in fieldReferences)
-            {
-                ValidateTypeReference(fieldReference.Type, header);
-            }
-        }
-
-        private void ValidateTypeReference(TypeReference typeReference, Header header)
-        {
-            if (PrimitiveTypes.ContainsKey(
-                typeReference.Name))
-            {
-                return;
-            }
-
-            if (header.Fields.Any(
-                field =>
-                    field.Name == typeReference.Name))
-            {
-                return;
-            }
-
-            throw new InvalidOperationException(
-                $"'{header}' has a reference to type '{typeReference}' which does not appear within the parsed symbols nor the primitive types");
-        }
-
+        
         private const string ProtocolApiKeysXPath = "//*[contains(@id,'protocol_api_keys')]/..";
 
         private IDictionary<int, Message> ParseMessages()
@@ -293,213 +204,11 @@ namespace Kafka.Protocol.Generator
                     definition
                         .ToCharArray()));
 
-            var method = MethodParser.Parse(specification);
-            ValidateMethod(method);
-
+            var method = MethodParser.Parse(specification, PrimitiveTypes.Values);
+         
             SetDescriptions(method.Fields, descriptionTable);
 
-            var f = WithMethod(method);
-
-            var e = ParseMethod(specification);
-
             return method;
-        }
-
-        private MethodNew ParseMethod(Specification specification)
-        {
-            var methodRule = specification.Rules.First();
-            var metaData = MethodMetaDataParser.Parse(methodRule.Symbol);
-
-            var reversedRules = specification.Rules.Skip(1).ToList();
-            reversedRules.Reverse();
-
-            var fields = new List<FieldNew>();
-            foreach (var reversedRule in reversedRules)
-            {
-                fields.Add(ParseFieldReferences(reversedRule, fields));
-            }
-
-            var methodFields = ParseFieldReferences(methodRule, fields);
-
-
-            return new MethodNew
-            {
-                Name = metaData.Name,
-                Version = metaData.Version,
-                Fields = methodFields.Fields
-            };
-        }
-
-        private FieldNew ParseFieldReferences(Rule rule, List<FieldNew> fields)
-        {
-            var field = new FieldNew()
-            {
-                Name = rule.Symbol.Name,
-                Type = new TypeReference(rule.Symbol.Name)
-            };
-
-            if (!rule.PostFixExpression.Any())
-            {
-                return field;
-            }
-
-            var operands = new Stack<List<FieldReference>>();
-
-            foreach (var expressionToken in rule.PostFixExpression)
-            {
-                if (expressionToken is OperandSymbolSequence operand)
-                {
-                    operands.Push(new List<FieldReference> { FieldReferenceParser.ParseOperand(operand) });
-                    continue;
-                }
-
-                if (expressionToken is AndSymbolSequence)
-                {
-                    var references = operands.Pop();
-                    references.AddRange(operands.Pop());
-
-                    operands.Push(references);
-                    continue;
-                }
-
-                if (expressionToken is OrSymbolSequence)
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            var fieldReferences = operands.Pop();
-
-            foreach (var fieldReference in fieldReferences)
-            {
-                field.Fields.Add(Handle(fieldReference));
-            }
-
-            field.Fields.Reverse();
-            return field;
-
-            FieldNew Handle(FieldReference fieldReference)
-            {
-                var foundfield = fields.FirstOrDefault(field1 => field1.Name == fieldReference.Type.Name);
-                
-                if (foundfield == null)
-                {
-                    var foundPrimitive =
-                        PrimitiveTypes.Values.FirstOrDefault(type => type.Type == fieldReference.Type.Name);
-
-                    if (foundPrimitive == null)
-                    {
-                        throw new InvalidOperationException($"Could not find type '{fieldReference.Type}'");
-                    }
-
-                    foundfield = new FieldNew
-                    {
-                        Name = fieldReference.Type.Name,
-                        Type = fieldReference.Type,
-                        IsArray = fieldReference.IsRepeatable,
-                        IsType = true,
-                        Description = foundPrimitive.Description
-                    };
-                }
-
-                return foundfield;
-            }
-        }
-
-
-
-        private MethodNew WithMethod(Method method)
-        {
-            var ret = To(method.PostFixFieldExpression, method.Fields);
-            return new MethodNew
-            {
-                Name = method.Name,
-                Version = method.Version,
-                Fields = ret
-            };
-        }
-
-
-        private List<FieldNew> To(PostFixFieldExpression expression, List<Field> fields)
-        {
-            if (!expression.ExpressionTokens.Any())
-            {
-                return new List<FieldNew>();
-            }
-
-            var operands = new Stack<List<FieldReference>>();
-
-            foreach (var expressionToken in expression.ExpressionTokens)
-            {
-                if (expressionToken is FieldReference fieldReference)
-                {
-                    operands.Push(new List<FieldReference> { fieldReference });
-                    continue;
-                }
-
-                if (expressionToken is And)
-                {
-                    var references = operands.Pop();
-                    references.AddRange(operands.Pop());
-
-                    operands.Push(references);
-                    continue;
-                }
-
-                if (expressionToken is Or)
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            var fieldReferences = operands.Pop();
-            fieldReferences.Reverse();
-
-            return fieldReferences.Select(Handle).ToList();
-
-            FieldNew Handle(FieldReference fieldReference)
-            {
-                var foundfield = fields.FirstOrDefault(field1 => field1.Name == fieldReference.Type.Name);
-                var foundPrimitive =
-                    PrimitiveTypes.Values.FirstOrDefault(type => type.Type == fieldReference.Type.Name);
-
-                var firstOperandFIeld = new FieldNew
-                {
-                    Name = fieldReference.Type.Name,
-                    Type = fieldReference.Type,
-                    IsArray = fieldReference.IsRepeatable,
-                    Fields = new List<FieldNew>()
-                };
-                if (foundfield != null)
-                {
-                    firstOperandFIeld.Description = foundfield.Description;
-                    var foundTypes = To(foundfield.PostFixFieldExpression, fields);
-                    if (foundTypes.Count() == 1)
-                    {
-                        if (foundTypes.First().IsType)
-                        {
-                            firstOperandFIeld.Type = foundTypes.First().Type;
-                        }
-                        else
-                        {
-                            firstOperandFIeld.Fields.AddRange(foundTypes);
-                        }
-                    }
-                    else
-                    {
-                        firstOperandFIeld.Fields.AddRange(foundTypes);
-                    }
-                    firstOperandFIeld.Description = foundfield.Description;
-                }
-
-                if (foundPrimitive != null)
-                {
-                    firstOperandFIeld.IsType = true;
-                    firstOperandFIeld.Description = foundPrimitive.Description;
-                }
-                
-                return firstOperandFIeld;
-            }
         }
 
         private void SetDescriptions(List<Field> fields, List<FieldDescription> fieldDescriptions)
@@ -511,46 +220,6 @@ namespace Kafka.Protocol.Generator
                         description =>
                             description.Field == field.Name)?.Description;
             }
-        }
-
-        private void ValidateMethod(Method method)
-        {
-            var fieldReferences =
-                method
-                    .Fields
-                    .SelectMany(
-                        field => field
-                            .PostFixFieldExpression.ExpressionTokens)
-                    .OfType<FieldReference>()
-                    .ToList();
-            fieldReferences.AddRange(method
-                .PostFixFieldExpression
-                .ExpressionTokens
-                .OfType<FieldReference>());
-
-            foreach (var fieldReference in fieldReferences)
-            {
-                ValidateTypeReference(fieldReference.Type, method);
-            }
-        }
-
-        private void ValidateTypeReference(TypeReference typeReference, Method method)
-        {
-            if (PrimitiveTypes.ContainsKey(
-                typeReference.Name))
-            {
-                return;
-            }
-
-            if (method.Fields.Any(
-                field =>
-                    field.Name == typeReference.Name))
-            {
-                return;
-            }
-
-            throw new InvalidOperationException(
-                $"Method '{method}' has a reference to type '{typeReference}' which does not appear within the parsed symbols nor the primitive types");
         }
 
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";

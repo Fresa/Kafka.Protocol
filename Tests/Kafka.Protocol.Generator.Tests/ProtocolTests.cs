@@ -106,16 +106,12 @@ namespace Kafka.Protocol.Generator.Tests
                     .BeEquivalentTo(
                         new Header(
                             new HeaderMetaData("Header", MethodType.Request), 
-                            new PostFixFieldExpression(new List<FieldExpressionToken>()), 
                             new List<Field>()),
                         options =>
                             options
                                 .Excluding(header =>
                                     header
-                                        .Fields)
-                                .Excluding(header => 
-                                    header
-                                        .PostFixFieldExpression));
+                                        .Fields));
             }
 
             [Fact]
@@ -126,16 +122,12 @@ namespace Kafka.Protocol.Generator.Tests
                     .BeEquivalentTo(
                         new Header(
                             new HeaderMetaData("Header", MethodType.Response),
-                            new PostFixFieldExpression(new List<FieldExpressionToken>()), 
                             new List<Field>()),
                         options =>
                             options
                                 .Excluding(header =>
                                     header
-                                        .Fields)
-                                .Excluding(header =>
-                                    header
-                                        .PostFixFieldExpression));
+                                        .Fields));
             }
 
             [Fact]

@@ -1,28 +1,23 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Kafka.Protocol.Generator.BackusNaurForm;
 
 namespace Kafka.Protocol.Generator.Definitions.Parsers
 {
     internal class HeaderParser
     {
-        internal static Header Parse(Specification specification)
+        internal static Header Parse(Specification specification, IEnumerable<PrimitiveType> primitiveTypes)
         {
             var headerRule = specification.Rules.First();
             var metaData = HeaderMetaDataParser.Parse(headerRule.Symbol);
 
-            var postFixFieldExpression = FieldParser
-                .Parse(headerRule)
-                .PostFixFieldExpression;
+            var types = TypesParser.Parse(specification, primitiveTypes);
 
-            var fields = 
-                specification.Rules.Skip(1)
-                    .Select(FieldParser.Parse)
-                    .ToList();
+            var headerType = types.First(@new => @new.Name == headerRule.Symbol.Name);
 
             return new Header(
                 metaData,
-                postFixFieldExpression,
-                fields);
+                headerType.Fields);
         }
     }
 }

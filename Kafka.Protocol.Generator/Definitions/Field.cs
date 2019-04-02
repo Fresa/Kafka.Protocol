@@ -1,17 +1,17 @@
-﻿using Kafka.Protocol.Generator.Definitions.FieldExpression;
-
-namespace Kafka.Protocol.Generator.Definitions
+﻿namespace Kafka.Protocol.Generator.Definitions
 {
     public class Field
     {
-        public Field(string name, PostFixFieldExpression postFixFieldExpression)
+        public Field(FieldReference fieldReference, Type type)
         {
-            Name = name;
-            PostFixFieldExpression = postFixFieldExpression;
+            Name = fieldReference.Type.Name;
+            IsRepeatable = fieldReference.IsRepeatable;
+            Type = type;
         }
 
         public string Name { get; }
+        public Type Type { get; }
+        public bool IsRepeatable { get; }
         public string Description { get; set; }
-        public PostFixFieldExpression PostFixFieldExpression { get; }
     }
 }
