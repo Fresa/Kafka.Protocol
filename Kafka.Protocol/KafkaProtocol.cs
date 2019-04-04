@@ -2009,11 +2009,5 @@ namespace Kafka.Protocol
 		}
 
 		public int Code { get; } = 76;
-	}public class RequestOrResponse
-	{
-		public struct Size
-		{
-
-		}
 	}
 }

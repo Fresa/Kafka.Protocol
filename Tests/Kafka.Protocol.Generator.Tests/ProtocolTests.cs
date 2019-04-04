@@ -4,9 +4,7 @@ using System.IO;
 using System.Linq;
 using FluentAssertions;
 using HtmlAgilityPack;
-using Kafka.Protocol.Generator.BackusNaurForm;
 using Kafka.Protocol.Generator.Definitions;
-using Kafka.Protocol.Generator.Definitions.FieldExpression;
 using Test.It.With.XUnit;
 using Xunit;
 
@@ -41,49 +39,7 @@ namespace Kafka.Protocol.Generator.Tests
                         Retriable = false
                     });
             }
-
-            [Fact]
-            public void It_should_have_parsed_fetch_message()
-            {
-                ProtocolSpecification.Messages
-                    .Should().HaveCount(43)
-                    .And.ContainKey(1)
-                    .And.Subject[1]
-                    .Should()
-                    .BeEquivalentTo(
-                        new Message(
-                            1, 
-                            "Fetch",
-                            new List<Method>()), 
-                        options => 
-                            options
-                                .Excluding(message => 
-                                    message
-                                        .Methods));
-            }
-
-            [Fact]
-            public void It_should_have_parsed_fetch_message_requests()
-            {
-                ProtocolSpecification.Messages[1]
-                    .Methods
-                    .Where(method =>
-                        method.Type == MethodType.Request)
-                    .Should()
-                    .HaveCount(11);
-            }
-
-            [Fact]
-            public void It_should_have_parsed_fetch_message_responses()
-            {
-                ProtocolSpecification.Messages[1]
-                    .Methods
-                    .Where(method =>
-                        method.Type == MethodType.Response)
-                    .Should()
-                    .HaveCount(11);
-            }
-
+            
             [Fact]
             public void It_should_have_parsed_primitives()
             {
@@ -128,13 +84,6 @@ namespace Kafka.Protocol.Generator.Tests
                                 .Excluding(header =>
                                     header
                                         .Fields));
-            }
-
-            [Fact(Skip = "Disabled")]
-            public void It_should_have_parsed_message_envelope()
-            {
-                ProtocolSpecification.MessageEnvelope.Name
-                    .Should().Be("RequestOrResponse");
             }
         }
     }

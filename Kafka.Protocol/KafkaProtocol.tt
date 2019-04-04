@@ -20,7 +20,6 @@
     var protocol = ProtocolSpecification.Load(apacheKafkaDefinitionPage);
 	var protocolPrimitiveTypeConverter = new ProtocolPrimitiveTypeConverter();
 
-	void Tab(Action action) { this.Tab(action); }
     void Block(Action action) { this.Block(action); }
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
@@ -124,20 +123,5 @@ namespace Kafka.Protocol<# Block(() =>
 
 		if (index + 1 != count) _();
     }); 
-
-    #>public class <#= protocol.MessageEnvelope.Name #><# Block(() =>
-    {
-        PrintOnNewRowForEachWithIndex(protocol.MessageEnvelope.Fields, (field, index, length) =>
-        {
-            if (field.PostFixFieldExpression.ExpressionTokens.Count == 1)
-            {
-                var fieldReference = field.PostFixFieldExpression.ExpressionTokens.OfType<FieldReference>().First();
-				#>public struct <#= field.Name #><# Block(() =>
-                {
-
-                });
-            }
-        });
-    });
 });
 #>

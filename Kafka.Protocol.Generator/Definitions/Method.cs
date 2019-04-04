@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Kafka.Protocol.Generator.BackusNaurForm;
 using Kafka.Protocol.Generator.Definitions.FieldExpression;
+using Kafka.Protocol.Generator.Definitions.Messages;
 
 namespace Kafka.Protocol.Generator.Definitions
 {

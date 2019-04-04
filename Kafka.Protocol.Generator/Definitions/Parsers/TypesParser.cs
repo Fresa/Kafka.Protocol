@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kafka.Protocol.Generator.BackusNaurForm;
+using Kafka.Protocol.Generator.Definitions.Messages;
 
 namespace Kafka.Protocol.Generator.Definitions.Parsers
 {
