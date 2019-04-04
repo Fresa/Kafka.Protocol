@@ -8,7 +8,7 @@ namespace Kafka.Protocol.Generator.Definitions
     {
         public string Name { get; set; }
         public int Version { get; set; }
-        internal MethodType Type { get; }
+        internal MethodType Type { get; set; }
 
         public List<Field> Fields { get; set; }
 

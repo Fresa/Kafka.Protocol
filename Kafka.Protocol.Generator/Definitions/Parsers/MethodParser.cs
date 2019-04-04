@@ -19,7 +19,8 @@ namespace Kafka.Protocol.Generator.Definitions.Parsers
             {
                 Name = metaData.Name,
                 Version = metaData.Version,
-                Fields = methodType.Fields
+                Fields = methodType.Fields,
+                Type = metaData.Type
             };
         }
     }

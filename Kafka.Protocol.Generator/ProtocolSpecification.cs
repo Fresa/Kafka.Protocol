@@ -28,7 +28,7 @@ namespace Kafka.Protocol.Generator
             RequestHeader = ParseRequestHeader();
             ResponseHeader = ParseResponseHeader();
 
-            MessageEnvelope = ParseRequestAndResponseStructure();
+            //MessageEnvelope = ParseRequestAndResponseStructure();
         }
 
         public IDictionary<string, PrimitiveType> PrimitiveTypes { get; set; }
