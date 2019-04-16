@@ -2326,7 +2326,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		public System.Int64 BrokerEpoch { get; }
+		public System.Int64 BrokerEpoch { get; } = -1;
 	}
 
 	public class ControlledShutdownResponse
@@ -2377,7 +2377,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The pattern type for the ACL.
 			/// </summary>
-			public System.SByte ResourcePatternType { get; }
+			public System.SByte ResourcePatternType { get; } = 3;
 
 			/// <summary>
 			/// The principal for the ACL.
@@ -2640,12 +2640,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// How long to wait in milliseconds before timing out the request.
 		/// </summary>
-		public System.Int32 timeoutMs { get; }
+		public System.Int32 timeoutMs { get; } = 60000;
 
 		/// <summary>
 		/// If true, check that the topics can be created as specified, but don't create anything.
 		/// </summary>
-		public bool validateOnly { get; }
+		public bool validateOnly { get; } = false;
 	}
 
 	public class CreateTopicsResponse
@@ -2701,7 +2701,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The pattern type.
 			/// </summary>
-			public System.SByte PatternTypeFilter { get; }
+			public System.SByte PatternTypeFilter { get; } = 3;
 
 			/// <summary>
 			/// The principal filter, or null to accept all principals.
@@ -2779,7 +2779,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The ACL resource pattern type.
 				/// </summary>
-				public System.SByte PatternType { get; }
+				public System.SByte PatternType { get; } = 3;
 
 				/// <summary>
 				/// The ACL principal.
@@ -2975,7 +2975,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The resource pattern to match.
 		/// </summary>
-		public System.SByte ResourcePatternType { get; }
+		public System.SByte ResourcePatternType { get; } = 3;
 
 		/// <summary>
 		/// The principal to match, or null to match any principal.
@@ -3035,7 +3035,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource pattern type.
 			/// </summary>
-			public System.SByte PatternType { get; }
+			public System.SByte PatternType { get; } = 3;
 
 			/// <summary>
 			/// The ACLs.
@@ -3095,7 +3095,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// True if we should include all synonyms.
 		/// </summary>
-		public bool IncludeSynoyms { get; }
+		public bool IncludeSynoyms { get; } = false;
 	}
 
 	public class DescribeConfigsResponse
@@ -3162,7 +3162,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration source.
 				/// </summary>
-				public System.SByte ConfigSource { get; }
+				public System.SByte ConfigSource { get; } = -1;
 
 				/// <summary>
 				/// True if this configuration is sensitive.
@@ -3490,7 +3490,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The time in ms to wait for the election to complete.
 		/// </summary>
-		public System.Int32 TimeoutMs { get; }
+		public System.Int32 TimeoutMs { get; } = 60000;
 	}
 
 	public class ElectPreferredLeadersResponse
@@ -3624,22 +3624,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.
 		/// </summary>
-		public System.Int32 MaxBytes { get; }
+		public System.Int32 MaxBytes { get; } = 0x7fffffff;
 
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
 		/// </summary>
-		public System.SByte IsolationLevel { get; }
+		public System.SByte IsolationLevel { get; } = 0;
 
 		/// <summary>
 		/// The fetch session ID.
 		/// </summary>
-		public System.Int32 SessionId { get; }
+		public System.Int32 SessionId { get; } = 0;
 
 		/// <summary>
 		/// The fetch session ID.
 		/// </summary>
-		public System.Int32 Epoch { get; }
+		public System.Int32 Epoch { get; } = -1;
 
 		/// <summary>
 		/// The topics to fetch.
@@ -3668,7 +3668,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The current leader epoch of the partition.
 				/// </summary>
-				public System.Int32 CurrentLeaderEpoch { get; }
+				public System.Int32 CurrentLeaderEpoch { get; } = -1;
 
 				/// <summary>
 				/// The message offset.
@@ -3678,7 +3678,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The earliest available offset of the follower replica.  The field is only used when the request is sent by the follower.
 				/// </summary>
-				public System.Int64 LogStartOffset { get; }
+				public System.Int64 LogStartOffset { get; } = -1;
 
 				/// <summary>
 				/// The maximum bytes to fetch from this partition.  See KIP-74 for cases where this limit may not be honored.
@@ -3721,7 +3721,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The fetch session ID, or 0 if this is not part of a fetch session.
 		/// </summary>
-		public System.Int32 SessionId { get; }
+		public System.Int32 SessionId { get; } = 0;
 
 		/// <summary>
 		/// The response topics.
@@ -3760,12 +3760,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)
 				/// </summary>
-				public System.Int64 LastStableOffset { get; }
+				public System.Int64 LastStableOffset { get; } = -1;
 
 				/// <summary>
 				/// The current log start offset.
 				/// </summary>
-				public System.Int64 LogStartOffset { get; }
+				public System.Int64 LogStartOffset { get; } = -1;
 
 				/// <summary>
 				/// The aborted transactions.
@@ -3803,7 +3803,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The coordinator key type.  (Group, transaction, etc.)
 		/// </summary>
-		public System.SByte KeyType { get; }
+		public System.SByte KeyType { get; } = 0;
 	}
 
 	public class FindCoordinatorResponse
@@ -3921,7 +3921,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The maximum time in milliseconds that the coordinator will wait for each member to rejoin when rebalancing the group.
 		/// </summary>
-		public System.Int32 RebalanceTimeoutMs { get; }
+		public System.Int32 RebalanceTimeoutMs { get; } = -1;
 
 		/// <summary>
 		/// The member id assigned by the group coordinator.
@@ -3967,7 +3967,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The generation ID of the group.
 		/// </summary>
-		public System.Int32 GenerationId { get; }
+		public System.Int32 GenerationId { get; } = -1;
 
 		/// <summary>
 		/// The group protocol selected by the coordinator.
@@ -4015,7 +4015,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The current broker epoch.
 		/// </summary>
-		public System.Int64 BrokerEpoch { get; }
+		public System.Int64 BrokerEpoch { get; } = -1;
 
 		/// <summary>
 		/// Each topic.
@@ -4074,7 +4074,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// Whether the replica should have existed on the broker or not.
 				/// </summary>
-				public bool IsNew { get; }
+				public bool IsNew { get; } = false;
 			}
 		}
 
@@ -4128,7 +4128,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Whether the replica should have existed on the broker or not.
 			/// </summary>
-			public bool IsNew { get; }
+			public bool IsNew { get; } = false;
 		}
 
 		/// <summary>
@@ -4346,12 +4346,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The timestamp associated with the returned offset.
 				/// </summary>
-				public System.Int64 Timestamp { get; }
+				public System.Int64 Timestamp { get; } = -1;
 
 				/// <summary>
 				/// The returned offset.
 				/// </summary>
-				public System.Int64 Offset { get; }
+				public System.Int64 Offset { get; } = -1;
 
 				public System.Int32 LeaderEpoch { get; }
 			}
@@ -4376,7 +4376,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// If this is true, the broker may auto-create topics that we requested which do not already exist, if it is configured to do so.
 		/// </summary>
-		public bool AllowAutoTopicCreation { get; }
+		public bool AllowAutoTopicCreation { get; } = true;
 
 		/// <summary>
 		/// Whether to include cluster authorized operations.
@@ -4421,18 +4421,18 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The rack of the broker, or null if it has not been assigned to a rack.
 			/// </summary>
-			public System.String Rack { get; }
+			public System.String Rack { get; } = null;
 		}
 
 		/// <summary>
 		/// The cluster ID that responding broker belongs to.
 		/// </summary>
-		public System.String ClusterId { get; }
+		public System.String ClusterId { get; } = null;
 
 		/// <summary>
 		/// The ID of the controller broker.
 		/// </summary>
-		public System.Int32 ControllerId { get; }
+		public System.Int32 ControllerId { get; } = -1;
 
 		/// <summary>
 		/// Each topic in the response.
@@ -4454,7 +4454,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// True if the topic is internal.
 			/// </summary>
-			public bool IsInternal { get; }
+			public bool IsInternal { get; } = false;
 
 			/// <summary>
 			/// Each partition in the topic.
@@ -4481,7 +4481,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				public System.Int32 LeaderEpoch { get; }
+				public System.Int32 LeaderEpoch { get; } = -1;
 
 				/// <summary>
 				/// The set of all nodes that host this partition.
@@ -4521,7 +4521,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		public System.Int32 GenerationId { get; }
+		public System.Int32 GenerationId { get; } = -1;
 
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
@@ -4531,7 +4531,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The time period in ms to retain the offset.
 		/// </summary>
-		public System.Int64 RetentionTimeMs { get; }
+		public System.Int64 RetentionTimeMs { get; } = -1;
 
 		/// <summary>
 		/// The topics to commit offsets for.
@@ -4565,12 +4565,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				public System.Int32 CommittedLeaderEpoch { get; }
+				public System.Int32 CommittedLeaderEpoch { get; } = -1;
 
 				/// <summary>
 				/// The timestamp of the commit.
 				/// </summary>
-				public System.Int64 CommitTimestamp { get; }
+				public System.Int64 CommitTimestamp { get; } = -1;
 
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
@@ -4698,7 +4698,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code, or 0 if there was no error.
 		/// </summary>
-		public System.Int16 ErrorCode { get; }
+		public System.Int16 ErrorCode { get; } = 0;
 	}
 
 	public class OffsetForLeaderEpochRequest
@@ -4730,7 +4730,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// An epoch used to fence consumers/replicas with old metadata.  If the epoch provided by the client is larger than the current epoch known to the broker, then the UNKNOWN_LEADER_EPOCH error code will be returned. If the provided epoch is smaller, then the FENCED_LEADER_EPOCH error code will be returned.
 				/// </summary>
-				public System.Int32 CurrentLeaderEpoch { get; }
+				public System.Int32 CurrentLeaderEpoch { get; } = -1;
 
 				/// <summary>
 				/// The epoch to look up an offset for.
@@ -4779,7 +4779,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The leader epoch of the partition.
 				/// </summary>
-				public System.Int32 LeaderEpoch { get; }
+				public System.Int32 LeaderEpoch { get; } = -1;
 
 				/// <summary>
 				/// The end offset of the epoch.
@@ -4877,12 +4877,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The timestamp returned by broker after appending the messages. If CreateTime is used for the topic, the timestamp will be -1.  If LogAppendTime is used for the topic, the timestamp will be the broker local time when the messages are appended.
 				/// </summary>
-				public System.Int64 LogAppendTimeMs { get; }
+				public System.Int64 LogAppendTimeMs { get; } = -1;
 
 				/// <summary>
 				/// The log start offset.
 				/// </summary>
-				public System.Int64 LogStartOffset { get; }
+				public System.Int64 LogStartOffset { get; } = -1;
 			}
 		}
 
@@ -4982,7 +4982,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
 		/// </summary>
-		public System.Int64 SessionLifetimeMs { get; }
+		public System.Int64 SessionLifetimeMs { get; } = 0;
 	}
 
 	public class SaslHandshakeRequest
@@ -5021,7 +5021,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		public System.Int64 BrokerEpoch { get; }
+		public System.Int64 BrokerEpoch { get; } = -1;
 
 		/// <summary>
 		/// Whether these partitions should be deleted.
@@ -5204,7 +5204,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The leader epoch of the last consumed record.
 				/// </summary>
-				public System.Int32 CommittedLeaderEpoch { get; }
+				public System.Int32 CommittedLeaderEpoch { get; } = -1;
 
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
@@ -5268,7 +5268,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		public System.Int64 BrokerEpoch { get; }
+		public System.Int64 BrokerEpoch { get; } = -1;
 
 		/// <summary>
 		/// Each topic that we would like to update.

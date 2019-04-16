@@ -142,7 +142,7 @@ namespace Kafka.Protocol<# Block(() =>
 			{
 				GenerateDocumentation(field.About);
 				var fieldTypeName = protocolPrimitiveTypeConverter.Convert(field.Type);
-				#>public <#= fieldTypeName #> <#= field.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #> { get; }<# 
+				#>public <#= fieldTypeName #> <#= field.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #> { get; }<# if(field.Default != null) { #> = <#= field.Default #>;<# } #><# 
 
 				if (field.Fields == null) 
 				{
