@@ -17,12 +17,13 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                 if (!Directory.Exists(path))
                 {
                     Console.Error.WriteLine($"'{path}' is not a valid directory");
+                    return;
                 }
             }
 
             var client = new KafkaGithubRepositoryClient();
             Console.WriteLine($"Writing files to '{path}'");
-            await client.GetMessagesAndWriteToPath(path);
+            await client.GetMessagesAndWriteToPathAsync(path);
             Console.WriteLine("Done");
         }
     }

@@ -24,7 +24,7 @@ namespace Kafka.Protocol.Generator.Tests
 
             protected override async Task WhenAsync()
             {
-                _messages = await _client.GetMessages();
+                _messages = await _client.GetMessagesAsync();
             }
 
             [Fact(Skip = "fetches messages from the Kafka Github repository, which will be spammed with requests when using a live test runner like NCrunch")]

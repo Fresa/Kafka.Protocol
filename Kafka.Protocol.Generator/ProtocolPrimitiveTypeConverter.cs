@@ -1,46 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using Kafka.Protocol.Generator.Extensions;
 
 namespace Kafka.Protocol.Generator
 {
     public class ProtocolPrimitiveTypeConverter
     {
-        public Type Convert(string type)
+        public string Convert(string typeName)
         {
-            type = type.ToPascalCase('_');
+            var isArray = false;
+            if (typeName.StartsWith("[]"))
+            {
+                isArray = true;
+                typeName = typeName.Substring(2);
+            }
 
-            switch (type.ToLower())
+            switch (typeName.ToLower())
             {
                 case "int8":
-                    return Type<sbyte>();
+                    return Type<sbyte>()
+                        .ToArrayType(isArray)
+                        .GetPrettyFullName();
                 case "varint":
-                    return Type<int>();
+                    return Type<int>()
+                        .ToArrayType(isArray)
+                        .GetPrettyFullName();
                 case "varlong":
-                    return Type<long>();
+                    return Type<long>()
+                        .ToArrayType(isArray)
+                        .GetPrettyFullName();
                 case "nullablestring":
-                    return Type<string>();
+                    return Type<string>()
+                        .ToArrayType(isArray)
+                        .GetPrettyFullName();
                 case "nullablebytes":
-                    return Type<byte[]>();
+                    return Type<byte[]>()
+                        .GetPrettyFullName();
                 case "bytes":
-                    return Type<byte[]>();
+                    return Type<byte[]>()
+                        .GetPrettyFullName();
                 case "records":
-                    return Type<byte[]>();
+                    return Type<byte[]>()
+                        .GetPrettyFullName();
             }
 
             var resolvedType = typeof(int)
                 .Assembly
                 .GetType(
-                    $"System.{type}",
+                    $"System.{typeName}",
                     false,
                     true);
 
             if (resolvedType != null)
             {
-                return resolvedType;
+                return resolvedType
+                    .ToArrayType(isArray)
+                    .GetPrettyFullName();
             }
 
-            throw new NotSupportedException($"Unknown type '{type}'.");
+            return typeName + (isArray ? "[]" : "");
         }
 
         private static Type Type<T>()

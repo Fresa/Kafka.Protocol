@@ -12,6 +12,7 @@
 <#@ import namespace="Kafka.Protocol.Generator" #>
 <#@ import namespace="Kafka.Protocol.Generator.Definitions" #>
 <#@ import namespace="Kafka.Protocol.Generator.Extensions" #>
+<#@ import namespace="Kafka.Protocol.Generator.Definitions.Messages" #>
 <#
     var path = Path.Combine(Host.ResolvePath(@"ProtocolSpecifications\Apache Kafka.html"));
     var apacheKafkaDefinitionPage = new HtmlDocument();
@@ -19,6 +20,9 @@
 
     var protocol = ProtocolSpecification.Load(apacheKafkaDefinitionPage);
 	var protocolPrimitiveTypeConverter = new ProtocolPrimitiveTypeConverter();
+
+	var messageDefinitionPath = Path.Combine(Host.ResolvePath(@"..\Kafka.Protocol.MessageDefinitionsDownloader\MessageDefinitions\"));
+	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath);
 
     void Block(Action action) { this.Block(action); }
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
@@ -59,7 +63,7 @@ namespace Kafka.Protocol<# Block(() =>
             type.Type!="ResponseMessage"), primitiveType =>
     {
         var className = primitiveType.Type.ToPascalCase('_');
-        var type = protocolPrimitiveTypeConverter.Convert(primitiveType.Type).GetPrettyFullName();
+        var type = protocolPrimitiveTypeConverter.Convert(className);
 
         GenerateDocumentation(primitiveType.Description);
         #>public struct <#= className #> <# Block(() =>
@@ -122,6 +126,40 @@ namespace Kafka.Protocol<# Block(() =>
         });
 
 		if (index + 1 != count) _();
-    }); 
+    }); _(2);
+
+	PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
+	{
+		#>public class <#= messageDefinition.Name #><# Block(() => 
+		{
+			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
+			{
+				PrintField(messageField);
+				if (messageFieldIndex + 1 != messageFieldCount) _();
+			});
+
+			void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
+			{
+				GenerateDocumentation(field.About);
+				var fieldTypeName = protocolPrimitiveTypeConverter.Convert(field.Type);
+				#>public <#= fieldTypeName #> <#= field.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #> { get; }<# 
+
+				if (field.Fields == null) 
+				{
+					return;
+				} 
+				
+				_(2); 
+				#>public class <#= fieldTypeName.Replace("[]", "") #><# Block(() => 
+				{
+					PrintOnNewRowForEachWithIndex(field.Fields, (nestedField, index, count) =>
+					{
+						PrintField(nestedField); 
+						if (index + 1 != count) _();
+					});					
+				});
+			}
+		}); _();
+	}); 
 });
 #>

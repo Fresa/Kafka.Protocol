@@ -7,6 +7,11 @@ namespace Kafka.Protocol.Generator.Extensions
     {
         public static string GetPrettyFullName(this Type type)
         {
+            if (type == null)
+            {
+                return "";
+            }
+
             var prettyName = type.FullName;
             if (type.IsGenericType == false)
             {
@@ -22,6 +27,16 @@ namespace Kafka.Protocol.Generator.Extensions
                 .Select(GetPrettyFullName);
 
             return $"{prettyName}<{string.Join(", ", genericArguments)}>";
+        }
+
+        internal static Type ToArrayType(this Type type, bool isArray)
+        {
+            if (isArray || type.IsArray)
+            {
+                return type.MakeArrayType();
+            }
+
+            return type;
         }
     }
 }

@@ -10,14 +10,14 @@ using ProductHeaderValue = Octokit.ProductHeaderValue;
 
 namespace Kafka.Protocol.Generator
 {
-    public class KafkaGithubRepositoryClient
+    public class KafkaGithubRepositoryClient : IMessageDefinitionClient
     {
         private readonly GitHubClient _client = new GitHubClient(
                     new ProductHeaderValue("Kafka.Protocol"));
 
-        internal async Task<IEnumerable<Message>> GetMessages()
+        public async Task<IEnumerable<Message>> GetMessagesAsync()
         {
-            var files = await GetMessageFiles();
+            var files = await GetMessageFilesAsync();
 
             var fileClient = new HttpClient();
 
@@ -34,9 +34,9 @@ namespace Kafka.Protocol.Generator
                     JsonConvert.DeserializeObject<Message>);
         }
 
-        public async Task GetMessagesAndWriteToPath(string path)
+        public async Task GetMessagesAndWriteToPathAsync(string path)
         {
-            var files = await GetMessageFiles();
+            var files = await GetMessageFilesAsync();
 
             await Task.WhenAll(files
                 .Select(async repositoryContent =>
@@ -46,7 +46,7 @@ namespace Kafka.Protocol.Generator
                                 $"{path}\\{repositoryContent.Name}")));
         }
         
-        private async Task<IEnumerable<RepositoryContent>> GetMessageFiles()
+        private async Task<IEnumerable<RepositoryContent>> GetMessageFilesAsync()
         {
             var content = await _client
                 .Repository
