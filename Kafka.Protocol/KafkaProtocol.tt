@@ -62,13 +62,13 @@ namespace Kafka.Protocol<# Block(() =>
             type.Type!="RequestMessage" && 
             type.Type!="ResponseMessage"), primitiveType =>
     {
-        var className = primitiveType.Type.ToPascalCase('_');
+        var className = protocolPrimitiveTypeConverter.Correct(primitiveType.Type.ToPascalCase('_'));
         var type = protocolPrimitiveTypeConverter.Convert(className);
 
         GenerateDocumentation(primitiveType.Description);
-        #>public struct <#= className #> <# Block(() =>
+        #>public struct <#= className #> : ISerialize <# Block(() =>
         {
-            #>public <#= type #> Value { get; }<# _(2);
+            #>public <#= type #> Value { get; private set; }<# _(2);
 
             #>public <#= className #>(<#= type #> value)<# Block(() =>
             {
@@ -99,6 +99,16 @@ namespace Kafka.Protocol<# Block(() =>
             {
                 #>return !(x == y);<#
             }); _(2);
+
+			#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
+			{
+				#>Value = reader.Read<#= className #>();<#
+			}); _(2);
+
+			#>public void WriteTo(IKafkaWriter writer)<# Block(() => 
+			{
+				#>writer.Write<#= className #>(Value);<#
+			}); _(2);
 
 			#>public static <#= className #> From(<#= type #> value)<# Block(() =>
             {
@@ -132,6 +142,42 @@ namespace Kafka.Protocol<# Block(() =>
 	{
 		#>public class <#= messageDefinition.Name #><# Block(() => 
 		{
+			#>public <#= messageDefinition.Name #>(int version)<# Block(() => 
+			{
+				 #>Version = version;<#
+			}); _(2);
+
+			#>public int Version { get; }<# _(2);
+
+			#>public int ApiKey => <#= messageDefinition.ApiKey #>;<# _(2);
+
+			#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
+			{
+				PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
+				{
+					var fieldTypeName = protocolPrimitiveTypeConverter.ConvertToPrimitive(messageField.Type);
+					if (messageField.Fields == null)
+					{
+						if (fieldTypeName.EndsWith("[]"))
+						{
+						#><#= messageField.Name + "Collection" #> = reader.Read(() => new <#= fieldTypeName.TrimEnd('[', ']') #>(reader.Read<#= fieldTypeName.TrimEnd('[', ']') #>()));<# 	
+						} 
+						else 
+						{
+						#><#= messageField.Name #> = new <#= fieldTypeName #>(reader.Read<#= fieldTypeName #>());<# 
+						}
+					}
+					else 
+					{
+						#><#= messageField.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #> = reader.Read(() => new <#= fieldTypeName.TrimEnd('[', ']') #>(Version));<# 
+					}
+				});
+			}); _(2);
+
+			#>public void WriteTo(IKafkaWriter writer)<# Block(() => 
+			{
+			}); _(2);
+
 			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
 			{
 				PrintField(messageField);
@@ -141,8 +187,8 @@ namespace Kafka.Protocol<# Block(() =>
 			void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 			{
 				GenerateDocumentation(field.About);
-				var fieldTypeName = protocolPrimitiveTypeConverter.Convert(field.Type);
-				#>public <#= fieldTypeName #> <#= field.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #> { get; }<# if(field.Default != null) { #> = <#= field.Default #>;<# } #><# 
+				var fieldTypeName = protocolPrimitiveTypeConverter.ConvertToPrimitive(field.Type);
+				#>public <#= fieldTypeName #> <#= field.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #> { get; set; }<# if(field.Default != null) { #> = new <#= fieldTypeName #>(<#= field.Default #>);<# } #><# 
 
 				if (field.Fields == null) 
 				{
@@ -150,8 +196,23 @@ namespace Kafka.Protocol<# Block(() =>
 				} 
 				
 				_(2); 
-				#>public class <#= fieldTypeName.Replace("[]", "") #><# Block(() => 
+				#>public class <#= fieldTypeName.TrimEnd('[', ']') #> : ISerialize<# Block(() => 
 				{
+					#>public <#= fieldTypeName.TrimEnd('[', ']') #>(int version)<# Block(() => 
+					{
+						 #>Version = version;<#
+					}); _(2);
+
+					#>public int Version { get; }<# _(2);
+
+					#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
+					{
+					}); _(2);
+
+					#>public void WriteTo(IKafkaWriter writer)<# Block(() => 
+					{
+					}); _(2);
+
 					PrintOnNewRowForEachWithIndex(field.Fields, (nestedField, index, count) =>
 					{
 						PrintField(nestedField); 

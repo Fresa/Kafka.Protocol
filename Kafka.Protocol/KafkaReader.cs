@@ -131,6 +131,26 @@ namespace Kafka.Protocol
             return result;
         }
 
+        public T[] Read<T>(Func<T> createItem) 
+            where T : ISerialize
+        {
+            var length = ReadInt32();
+            if (length == -1)
+            {
+                return null;
+            }
+
+            var result = new T[length];
+            for (var i = 0; i < length; i++)
+            {
+                var item = createItem();
+                item.ReadFrom(this);
+                result[i] = item;
+            }
+
+            return result;
+        }
+
         private byte ReadByte()
         {
             return ReadAsLittleEndian(1)

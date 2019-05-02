@@ -18,6 +18,8 @@ namespace Kafka.Protocol.Generator.Definitions.Messages
 
         public string About { get; set; }
 
+        public bool MapKey { get; set; }
+
         public List<Field> Fields { get; set; }
     }
 }

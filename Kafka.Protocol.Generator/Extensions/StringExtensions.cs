@@ -30,5 +30,15 @@ namespace Kafka.Protocol.Generator.Extensions
             var result = str.ToPascalCase(delimiter);
             return result.First().ToString().ToLower() + string.Join(string.Empty, result.Skip(1));
         }
+
+        public static string FirstCharacterToUpperCase(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+
+            return str.First().ToString().ToUpper() + string.Join(string.Empty, str.Skip(1));
+        }
     }
 }

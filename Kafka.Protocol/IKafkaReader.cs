@@ -21,5 +21,7 @@ namespace Kafka.Protocol
         byte[] ReadNullableBytes();
 
         int[] ReadArrayInt32();
+        T[] Read<T>(Func<T> factory) 
+            where T : ISerialize;
     }
 }

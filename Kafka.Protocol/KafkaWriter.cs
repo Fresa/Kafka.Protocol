@@ -125,6 +125,22 @@ namespace Kafka.Protocol
             }
         }
 
+        public void Write<T>(T[] items) 
+            where T : ISerialize
+        {
+            if (items == null)
+            {
+                WriteInt32(-1);
+                return;
+            }
+
+            WriteInt32(items.Length);
+            foreach (var item in items)
+            {
+                item.WriteTo(this);
+            }
+        }
+
         private void WriteByte(byte value)
         {
             WriteAsLittleEndian(new[] { value });
