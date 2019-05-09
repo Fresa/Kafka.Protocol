@@ -20,9 +20,7 @@ namespace Kafka.Protocol
         void WriteBytes(byte[] value);
         void WriteNullableBytes(byte[] value);
 
-        void WriteArrayInt32(int[] values);
-
-        void Write<T>(T[] items) 
+        void Write<T>(params T[] items) 
             where T : ISerialize;
     }
 }

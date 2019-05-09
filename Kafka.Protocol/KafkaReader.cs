@@ -113,24 +113,7 @@ namespace Kafka.Protocol
             }
             return ReadAsLittleEndian(length);
         }
-
-        public int[] ReadArrayInt32()
-        {
-            var length = ReadInt32();
-            if (length == -1)
-            {
-                return null;
-            }
-
-            var result = new int[length];
-            for (var i = 0; i < length; i++)
-            {
-                result[i] = ReadInt32();
-            }
-
-            return result;
-        }
-
+        
         public T[] Read<T>(Func<T> createItem) 
             where T : ISerialize
         {

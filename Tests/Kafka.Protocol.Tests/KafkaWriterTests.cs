@@ -392,7 +392,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteArrayInt32(new[] { 257, 1 });
+                _writer.Write(new Int32(257), new Int32(1));
             }
 
             [Fact]
@@ -415,7 +415,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteArrayInt32(null);
+                _writer.Write<Int32>(null);
             }
 
             [Fact]

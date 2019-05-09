@@ -339,7 +339,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_array_of_int32 : XUnit2Specification
         {
             private KafkaReader _reader;
-            private int[] _value;
+            private Int32[] _value;
 
             protected override void Given()
             {
@@ -348,20 +348,20 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _value = _reader.ReadArrayInt32();
+                _value = _reader.Read(() => new Int32());
             }
 
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().BeEquivalentTo(257, 1);
+                _value.Should().BeEquivalentTo(new Int32(257), new Int32(1));
             }
         }
 
         public class When_reading_a_null_array_of_int32 : XUnit2Specification
         {
             private KafkaReader _reader;
-            private int[] _value;
+            private Int32[] _value;
 
             protected override void Given()
             {
@@ -370,7 +370,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _value = _reader.ReadArrayInt32();
+                _value = _reader.Read(() => new Int32());
             }
 
             [Fact]

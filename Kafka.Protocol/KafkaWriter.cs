@@ -110,22 +110,7 @@ namespace Kafka.Protocol
             }
         }
 
-        public void WriteArrayInt32(int[] values)
-        {
-            if (values == null)
-            {
-                WriteInt32(-1);
-                return;
-            }
-
-            WriteInt32(values.Length);
-            foreach (var value in values)
-            {
-                WriteInt32(value);
-            }
-        }
-
-        public void Write<T>(T[] items) 
+        public void Write<T>(params T[] items) 
             where T : ISerialize
         {
             if (items == null)
