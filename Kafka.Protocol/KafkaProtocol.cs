@@ -2066,7 +2066,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(TransactionalId.Value);
+			writer.WriteInt64(ProducerId.Value);
+			writer.WriteInt16(ProducerEpoch.Value);
+			writer.WriteString(GroupId.Value);
 		}
 
 		/// <summary>
@@ -2109,7 +2112,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
 		}
 
 		/// <summary>
@@ -2144,7 +2148,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(TransactionalId.Value);
+			writer.WriteInt64(ProducerId.Value);
+			writer.WriteInt16(ProducerEpoch.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -2178,12 +2185,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -2217,7 +2226,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResultsCollection);
 		}
 
 		/// <summary>
@@ -2241,12 +2251,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				ResultsCollection = reader.Read(() => new AddPartitionsToTxnPartitionResult(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(ResultsCollection);
 			}
 
 			/// <summary>
@@ -2270,12 +2282,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ErrorCode = new Int16(reader.ReadInt16());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt16(ErrorCode.Value);
 				}
 
 				/// <summary>
@@ -2310,7 +2324,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(ResourcesCollection);
+			writer.WriteBoolean(ValidateOnly.Value);
 		}
 
 		/// <summary>
@@ -2329,12 +2344,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ResourceType = new Int8(reader.ReadInt8());
+				ResourceName = new String(reader.ReadString());
+				ConfigsCollection = reader.Read(() => new AlterableConfig(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt8(ResourceType.Value);
+				writer.WriteString(ResourceName.Value);
+				writer.Write(ConfigsCollection);
 			}
 
 			/// <summary>
@@ -2363,12 +2382,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Name = new String(reader.ReadString());
+					Value = new String(reader.ReadString());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(Name.Value);
+					writer.WriteString(Value.Value);
 				}
 
 				/// <summary>
@@ -2408,7 +2429,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResourcesCollection);
 		}
 
 		/// <summary>
@@ -2432,12 +2454,18 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ErrorCode = new Int16(reader.ReadInt16());
+				ErrorMessage = new String(reader.ReadString());
+				ResourceType = new Int8(reader.ReadInt8());
+				ResourceName = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(ErrorMessage.Value);
+				writer.WriteInt8(ResourceType.Value);
+				writer.WriteString(ResourceName.Value);
 			}
 
 			/// <summary>
@@ -2480,7 +2508,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(DirsCollection);
 		}
 
 		/// <summary>
@@ -2499,12 +2527,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Path = new String(reader.ReadString());
+				TopicsCollection = reader.Read(() => new AlterReplicaLogDirTopic(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Path.Value);
+				writer.Write(TopicsCollection);
 			}
 
 			/// <summary>
@@ -2528,12 +2558,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Name = new String(reader.ReadString());
+					PartitionsCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(Name.Value);
+					writer.Write(PartitionsCollection);
 				}
 
 				/// <summary>
@@ -2568,7 +2600,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResultsCollection);
 		}
 
 		/// <summary>
@@ -2592,12 +2625,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				TopicName = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new AlterReplicaLogDirPartitionResult(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(TopicName.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -2621,12 +2656,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ErrorCode = new Int16(reader.ReadInt16());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt16(ErrorCode.Value);
 				}
 
 				/// <summary>
@@ -2686,7 +2723,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.Write(ApiKeysCollection);
+			writer.WriteInt32(ThrottleTimeMs.Value);
 		}
 
 		/// <summary>
@@ -2710,12 +2749,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Index = new Int16(reader.ReadInt16());
+				MinVersion = new Int16(reader.ReadInt16());
+				MaxVersion = new Int16(reader.ReadInt16());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt16(Index.Value);
+				writer.WriteInt16(MinVersion.Value);
+				writer.WriteInt16(MaxVersion.Value);
 			}
 
 			/// <summary>
@@ -2759,7 +2802,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(BrokerId.Value);
+			writer.WriteInt64(BrokerEpoch.Value);
 		}
 
 		/// <summary>
@@ -2792,7 +2836,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.Write(RemainingPartitionsCollection);
 		}
 
 		/// <summary>
@@ -2816,12 +2861,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				TopicName = new String(reader.ReadString());
+				PartitionIndex = new Int32(reader.ReadInt32());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(TopicName.Value);
+				writer.WriteInt32(PartitionIndex.Value);
 			}
 
 			/// <summary>
@@ -2854,7 +2901,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(CreationsCollection);
 		}
 
 		/// <summary>
@@ -2873,12 +2920,24 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ResourceType = new Int8(reader.ReadInt8());
+				ResourceName = new String(reader.ReadString());
+				ResourcePatternType = new Int8(reader.ReadInt8());
+				Principal = new String(reader.ReadString());
+				Host = new String(reader.ReadString());
+				Operation = new Int8(reader.ReadInt8());
+				PermissionType = new Int8(reader.ReadInt8());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt8(ResourceType.Value);
+				writer.WriteString(ResourceName.Value);
+				writer.WriteInt8(ResourcePatternType.Value);
+				writer.WriteString(Principal.Value);
+				writer.WriteString(Host.Value);
+				writer.WriteInt8(Operation.Value);
+				writer.WriteInt8(PermissionType.Value);
 			}
 
 			/// <summary>
@@ -2937,7 +2996,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResultsCollection);
 		}
 
 		/// <summary>
@@ -2961,12 +3021,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ErrorCode = new Int16(reader.ReadInt16());
+				ErrorMessage = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(ErrorMessage.Value);
 			}
 
 			/// <summary>
@@ -3000,7 +3062,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(RenewersCollection);
+			writer.WriteInt64(MaxLifetimeMs.Value);
 		}
 
 		/// <summary>
@@ -3019,12 +3082,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				PrincipalType = new String(reader.ReadString());
+				PrincipalName = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(PrincipalType.Value);
+				writer.WriteString(PrincipalName.Value);
 			}
 
 			/// <summary>
@@ -3070,7 +3135,15 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteString(PrincipalType.Value);
+			writer.WriteString(PrincipalName.Value);
+			writer.WriteInt64(IssueTimestampMs.Value);
+			writer.WriteInt64(ExpiryTimestampMs.Value);
+			writer.WriteInt64(MaxTimestampMs.Value);
+			writer.WriteString(TokenId.Value);
+			writer.WriteBytes(Hmac.Value);
+			writer.WriteInt32(ThrottleTimeMs.Value);
 		}
 
 		/// <summary>
@@ -3139,7 +3212,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(TopicsCollection);
+			writer.WriteInt32(TimeoutMs.Value);
+			writer.WriteBoolean(ValidateOnly.Value);
 		}
 
 		/// <summary>
@@ -3158,12 +3233,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				Count = new Int32(reader.ReadInt32());
+				AssignmentsCollection = reader.Read(() => new CreatePartitionsAssignment(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.WriteInt32(Count.Value);
+				writer.Write(AssignmentsCollection);
 			}
 
 			/// <summary>
@@ -3192,12 +3271,12 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					BrokerIdsCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.Write(BrokerIdsCollection);
 				}
 
 				/// <summary>
@@ -3237,7 +3316,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResultsCollection);
 		}
 
 		/// <summary>
@@ -3261,12 +3341,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				ErrorCode = new Int16(reader.ReadInt16());
+				ErrorMessage = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(ErrorMessage.Value);
 			}
 
 			/// <summary>
@@ -3306,7 +3390,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(TopicsCollection);
+			writer.WriteInt32(timeoutMs.Value);
+			writer.WriteBoolean(validateOnly.Value);
 		}
 
 		/// <summary>
@@ -3325,12 +3411,20 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				NumPartitions = new Int32(reader.ReadInt32());
+				ReplicationFactor = new Int16(reader.ReadInt16());
+				AssignmentsCollection = reader.Read(() => new CreatableReplicaAssignment(Version));
+				ConfigsCollection = reader.Read(() => new CreateableTopicConfig(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.WriteInt32(NumPartitions.Value);
+				writer.WriteInt16(ReplicationFactor.Value);
+				writer.Write(AssignmentsCollection);
+				writer.Write(ConfigsCollection);
 			}
 
 			/// <summary>
@@ -3364,12 +3458,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					BrokerIdsCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.Write(BrokerIdsCollection);
 				}
 
 				/// <summary>
@@ -3399,12 +3495,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Name = new String(reader.ReadString());
+					Value = new String(reader.ReadString());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(Name.Value);
+					writer.WriteString(Value.Value);
 				}
 
 				/// <summary>
@@ -3449,7 +3547,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -3473,12 +3572,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				ErrorCode = new Int16(reader.ReadInt16());
+				ErrorMessage = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(ErrorMessage.Value);
 			}
 
 			/// <summary>
@@ -3516,7 +3619,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(FiltersCollection);
 		}
 
 		/// <summary>
@@ -3535,12 +3638,24 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ResourceTypeFilter = new Int8(reader.ReadInt8());
+				ResourceNameFilter = new String(reader.ReadString());
+				PatternTypeFilter = new Int8(reader.ReadInt8());
+				PrincipalFilter = new String(reader.ReadString());
+				HostFilter = new String(reader.ReadString());
+				Operation = new Int8(reader.ReadInt8());
+				PermissionType = new Int8(reader.ReadInt8());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt8(ResourceTypeFilter.Value);
+				writer.WriteString(ResourceNameFilter.Value);
+				writer.WriteInt8(PatternTypeFilter.Value);
+				writer.WriteString(PrincipalFilter.Value);
+				writer.WriteString(HostFilter.Value);
+				writer.WriteInt8(Operation.Value);
+				writer.WriteInt8(PermissionType.Value);
 			}
 
 			/// <summary>
@@ -3599,7 +3714,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(FilterResultsCollection);
 		}
 
 		/// <summary>
@@ -3623,12 +3739,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ErrorCode = new Int16(reader.ReadInt16());
+				ErrorMessage = new String(reader.ReadString());
+				MatchingAclsCollection = reader.Read(() => new DeleteAclsMatchingAcl(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(ErrorMessage.Value);
+				writer.Write(MatchingAclsCollection);
 			}
 
 			/// <summary>
@@ -3657,12 +3777,28 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					ErrorCode = new Int16(reader.ReadInt16());
+					ErrorMessage = new String(reader.ReadString());
+					ResourceType = new Int8(reader.ReadInt8());
+					ResourceName = new String(reader.ReadString());
+					PatternType = new Int8(reader.ReadInt8());
+					Principal = new String(reader.ReadString());
+					Host = new String(reader.ReadString());
+					Operation = new Int8(reader.ReadInt8());
+					PermissionType = new Int8(reader.ReadInt8());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt16(ErrorCode.Value);
+					writer.WriteString(ErrorMessage.Value);
+					writer.WriteInt8(ResourceType.Value);
+					writer.WriteString(ResourceName.Value);
+					writer.WriteInt8(PatternType.Value);
+					writer.WriteString(Principal.Value);
+					writer.WriteString(Host.Value);
+					writer.WriteInt8(Operation.Value);
+					writer.WriteInt8(PermissionType.Value);
 				}
 
 				/// <summary>
@@ -3731,7 +3867,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(GroupsNamesCollection);
 		}
 
 		/// <summary>
@@ -3759,7 +3895,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResultsCollection);
 		}
 
 		/// <summary>
@@ -3783,12 +3920,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				GroupId = new String(reader.ReadString());
+				ErrorCode = new Int16(reader.ReadInt16());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(GroupId.Value);
+				writer.WriteInt16(ErrorCode.Value);
 			}
 
 			/// <summary>
@@ -3822,7 +3961,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(TopicsCollection);
+			writer.WriteInt32(TimeoutMs.Value);
 		}
 
 		/// <summary>
@@ -3841,12 +3981,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new DeleteRecordsPartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -3870,12 +4012,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					Offset = new Int64(reader.ReadInt64());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt64(Offset.Value);
 				}
 
 				/// <summary>
@@ -3915,7 +4059,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -3939,12 +4084,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new DeleteRecordsPartitionResult(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -3968,12 +4115,16 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					LowWatermark = new Int64(reader.ReadInt64());
+					ErrorCode = new Int16(reader.ReadInt16());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt64(LowWatermark.Value);
+					writer.WriteInt16(ErrorCode.Value);
 				}
 
 				/// <summary>
@@ -4013,7 +4164,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(TopicNamesCollection);
+			writer.WriteInt32(TimeoutMs.Value);
 		}
 
 		/// <summary>
@@ -4046,7 +4198,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResponsesCollection);
 		}
 
 		/// <summary>
@@ -4070,12 +4223,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				ErrorCode = new Int16(reader.ReadInt16());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.WriteInt16(ErrorCode.Value);
 			}
 
 			/// <summary>
@@ -4114,7 +4269,13 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt8(ResourceType.Value);
+			writer.WriteString(ResourceNameFilter.Value);
+			writer.WriteInt8(ResourcePatternType.Value);
+			writer.WriteString(PrincipalFilter.Value);
+			writer.WriteString(HostFilter.Value);
+			writer.WriteInt8(Operation.Value);
+			writer.WriteInt8(PermissionType.Value);
 		}
 
 		/// <summary>
@@ -4174,7 +4335,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteString(ErrorMessage.Value);
+			writer.Write(ResourcesCollection);
 		}
 
 		/// <summary>
@@ -4208,12 +4372,18 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Type = new Int8(reader.ReadInt8());
+				Name = new String(reader.ReadString());
+				PatternType = new Int8(reader.ReadInt8());
+				AclsCollection = reader.Read(() => new AclDescription(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt8(Type.Value);
+				writer.WriteString(Name.Value);
+				writer.WriteInt8(PatternType.Value);
+				writer.Write(AclsCollection);
 			}
 
 			/// <summary>
@@ -4247,12 +4417,18 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Principal = new String(reader.ReadString());
+					Host = new String(reader.ReadString());
+					Operation = new Int8(reader.ReadInt8());
+					PermissionType = new Int8(reader.ReadInt8());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(Principal.Value);
+					writer.WriteString(Host.Value);
+					writer.WriteInt8(Operation.Value);
+					writer.WriteInt8(PermissionType.Value);
 				}
 
 				/// <summary>
@@ -4297,7 +4473,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(ResourcesCollection);
+			writer.WriteBoolean(IncludeSynoyms.Value);
 		}
 
 		/// <summary>
@@ -4316,12 +4493,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ResourceType = new Int8(reader.ReadInt8());
+				ResourceName = new String(reader.ReadString());
+				ConfigurationKeysCollection = reader.Read(() => new String(reader.ReadString()));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt8(ResourceType.Value);
+				writer.WriteString(ResourceName.Value);
+				writer.Write(ConfigurationKeysCollection);
 			}
 
 			/// <summary>
@@ -4365,7 +4546,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResultsCollection);
 		}
 
 		/// <summary>
@@ -4389,12 +4571,20 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ErrorCode = new Int16(reader.ReadInt16());
+				ErrorMessage = new String(reader.ReadString());
+				ResourceType = new Int8(reader.ReadInt8());
+				ResourceName = new String(reader.ReadString());
+				ConfigsCollection = reader.Read(() => new DescribeConfigsResourceResult(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(ErrorMessage.Value);
+				writer.WriteInt8(ResourceType.Value);
+				writer.WriteString(ResourceName.Value);
+				writer.Write(ConfigsCollection);
 			}
 
 			/// <summary>
@@ -4433,12 +4623,24 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Name = new String(reader.ReadString());
+					Value = new String(reader.ReadString());
+					ReadOnly = new Boolean(reader.ReadBoolean());
+					IsDefault = new Boolean(reader.ReadBoolean());
+					ConfigSource = new Int8(reader.ReadInt8());
+					IsSensitive = new Boolean(reader.ReadBoolean());
+					SynonymsCollection = reader.Read(() => new DescribeConfigsSynonym(Version));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(Name.Value);
+					writer.WriteString(Value.Value);
+					writer.WriteBoolean(ReadOnly.Value);
+					writer.WriteBoolean(IsDefault.Value);
+					writer.WriteInt8(ConfigSource.Value);
+					writer.WriteBoolean(IsSensitive.Value);
+					writer.Write(SynonymsCollection);
 				}
 
 				/// <summary>
@@ -4487,12 +4689,16 @@ namespace Kafka.Protocol
 
 					public void ReadFrom(IKafkaReader reader)
 					{
-
+						Name = new String(reader.ReadString());
+						Value = new String(reader.ReadString());
+						Source = new Int8(reader.ReadInt8());
 					}
 
 					public void WriteTo(IKafkaWriter writer)
 					{
-
+						writer.WriteString(Name.Value);
+						writer.WriteString(Value.Value);
+						writer.WriteInt8(Source.Value);
 					}
 
 					/// <summary>
@@ -4532,7 +4738,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(OwnersCollection);
 		}
 
 		/// <summary>
@@ -4551,12 +4757,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				PrincipalType = new String(reader.ReadString());
+				PrincipalName = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(PrincipalType.Value);
+				writer.WriteString(PrincipalName.Value);
 			}
 
 			/// <summary>
@@ -4591,7 +4799,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.Write(TokensCollection);
+			writer.WriteInt32(ThrottleTimeMs.Value);
 		}
 
 		/// <summary>
@@ -4615,12 +4825,26 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				PrincipalType = new String(reader.ReadString());
+				PrincipalName = new String(reader.ReadString());
+				IssueTimestamp = new Int64(reader.ReadInt64());
+				ExpiryTimestamp = new Int64(reader.ReadInt64());
+				MaxTimestamp = new Int64(reader.ReadInt64());
+				TokenId = new String(reader.ReadString());
+				Hmac = new Bytes(reader.ReadBytes());
+				RenewersCollection = reader.Read(() => new DescribedDelegationTokenRenewer(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(PrincipalType.Value);
+				writer.WriteString(PrincipalName.Value);
+				writer.WriteInt64(IssueTimestamp.Value);
+				writer.WriteInt64(ExpiryTimestamp.Value);
+				writer.WriteInt64(MaxTimestamp.Value);
+				writer.WriteString(TokenId.Value);
+				writer.WriteBytes(Hmac.Value);
+				writer.Write(RenewersCollection);
 			}
 
 			/// <summary>
@@ -4674,12 +4898,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PrincipalType = new String(reader.ReadString());
+					PrincipalName = new String(reader.ReadString());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(PrincipalType.Value);
+					writer.WriteString(PrincipalName.Value);
 				}
 
 				/// <summary>
@@ -4719,7 +4945,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(GroupsCollection);
+			writer.WriteBoolean(IncludeAuthorizedOperations.Value);
 		}
 
 		/// <summary>
@@ -4752,7 +4979,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(GroupsCollection);
 		}
 
 		/// <summary>
@@ -4776,12 +5004,24 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ErrorCode = new Int16(reader.ReadInt16());
+				GroupId = new String(reader.ReadString());
+				GroupState = new String(reader.ReadString());
+				ProtocolType = new String(reader.ReadString());
+				ProtocolData = new String(reader.ReadString());
+				MembersCollection = reader.Read(() => new DescribedGroupMember(Version));
+				AuthorizedOperations = new Int32(reader.ReadInt32());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(GroupId.Value);
+				writer.WriteString(GroupState.Value);
+				writer.WriteString(ProtocolType.Value);
+				writer.WriteString(ProtocolData.Value);
+				writer.Write(MembersCollection);
+				writer.WriteInt32(AuthorizedOperations.Value);
 			}
 
 			/// <summary>
@@ -4825,12 +5065,20 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					MemberId = new String(reader.ReadString());
+					ClientId = new String(reader.ReadString());
+					ClientHost = new String(reader.ReadString());
+					MemberMetadata = new Bytes(reader.ReadBytes());
+					MemberAssignment = new Bytes(reader.ReadBytes());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(MemberId.Value);
+					writer.WriteString(ClientId.Value);
+					writer.WriteString(ClientHost.Value);
+					writer.WriteBytes(MemberMetadata.Value);
+					writer.WriteBytes(MemberAssignment.Value);
 				}
 
 				/// <summary>
@@ -4884,7 +5132,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -4903,12 +5151,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Topic = new String(reader.ReadString());
+				PartitionIndexCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Topic.Value);
+				writer.Write(PartitionIndexCollection);
 			}
 
 			/// <summary>
@@ -4942,7 +5192,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ResultsCollection);
 		}
 
 		/// <summary>
@@ -4966,12 +5217,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ErrorCode = new Int16(reader.ReadInt16());
+				LogDir = new String(reader.ReadString());
+				TopicsCollection = reader.Read(() => new DescribeLogDirsTopic(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(LogDir.Value);
+				writer.Write(TopicsCollection);
 			}
 
 			/// <summary>
@@ -5000,12 +5255,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Name = new String(reader.ReadString());
+					PartitionsCollection = reader.Read(() => new DescribeLogDirsPartition(Version));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(Name.Value);
+					writer.Write(PartitionsCollection);
 				}
 
 				/// <summary>
@@ -5026,12 +5283,18 @@ namespace Kafka.Protocol
 
 					public void ReadFrom(IKafkaReader reader)
 					{
-
+						PartitionIndex = new Int32(reader.ReadInt32());
+						PartitionSize = new Int64(reader.ReadInt64());
+						OffsetLag = new Int64(reader.ReadInt64());
+						IsFutureKey = new Boolean(reader.ReadBoolean());
 					}
 
 					public void WriteTo(IKafkaWriter writer)
 					{
-
+						writer.WriteInt32(PartitionIndex.Value);
+						writer.WriteInt64(PartitionSize.Value);
+						writer.WriteInt64(OffsetLag.Value);
+						writer.WriteBoolean(IsFutureKey.Value);
 					}
 
 					/// <summary>
@@ -5077,7 +5340,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(TopicPartitionsCollection);
+			writer.WriteInt32(TimeoutMs.Value);
 		}
 
 		/// <summary>
@@ -5096,12 +5360,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Topic = new String(reader.ReadString());
+				PartitionIdCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Topic.Value);
+				writer.Write(PartitionIdCollection);
 			}
 
 			/// <summary>
@@ -5140,7 +5406,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(ReplicaElectionResultsCollection);
 		}
 
 		/// <summary>
@@ -5164,12 +5431,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Topic = new String(reader.ReadString());
+				PartitionResultCollection = reader.Read(() => new PartitionResult(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Topic.Value);
+				writer.Write(PartitionResultCollection);
 			}
 
 			/// <summary>
@@ -5193,12 +5462,16 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionId = new Int32(reader.ReadInt32());
+					ErrorCode = new Int16(reader.ReadInt16());
+					ErrorMessage = new String(reader.ReadString());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionId.Value);
+					writer.WriteInt16(ErrorCode.Value);
+					writer.WriteString(ErrorMessage.Value);
 				}
 
 				/// <summary>
@@ -5240,7 +5513,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(TransactionalId.Value);
+			writer.WriteInt64(ProducerId.Value);
+			writer.WriteInt16(ProducerEpoch.Value);
+			writer.WriteBoolean(Committed.Value);
 		}
 
 		/// <summary>
@@ -5283,7 +5559,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
 		}
 
 		/// <summary>
@@ -5316,7 +5593,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteBytes(Hmac.Value);
+			writer.WriteInt64(ExpiryTimePeriodMs.Value);
 		}
 
 		/// <summary>
@@ -5350,7 +5628,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteInt64(ExpiryTimestampMs.Value);
+			writer.WriteInt32(ThrottleTimeMs.Value);
 		}
 
 		/// <summary>
@@ -5395,7 +5675,15 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ReplicaId.Value);
+			writer.WriteInt32(MaxWait.Value);
+			writer.WriteInt32(MinBytes.Value);
+			writer.WriteInt32(MaxBytes.Value);
+			writer.WriteInt8(IsolationLevel.Value);
+			writer.WriteInt32(SessionId.Value);
+			writer.WriteInt32(Epoch.Value);
+			writer.Write(TopicsCollection);
+			writer.Write(ForgottenCollection);
 		}
 
 		/// <summary>
@@ -5449,12 +5737,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				FetchPartitionsCollection = reader.Read(() => new FetchPartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(FetchPartitionsCollection);
 			}
 
 			/// <summary>
@@ -5478,12 +5768,20 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					CurrentLeaderEpoch = new Int32(reader.ReadInt32());
+					FetchOffset = new Int64(reader.ReadInt64());
+					LogStartOffset = new Int64(reader.ReadInt64());
+					MaxBytes = new Int32(reader.ReadInt32());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt32(CurrentLeaderEpoch.Value);
+					writer.WriteInt64(FetchOffset.Value);
+					writer.WriteInt64(LogStartOffset.Value);
+					writer.WriteInt32(MaxBytes.Value);
 				}
 
 				/// <summary>
@@ -5529,12 +5827,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				ForgottenPartitionIndexesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(ForgottenPartitionIndexesCollection);
 			}
 
 			/// <summary>
@@ -5570,7 +5870,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteInt32(SessionId.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -5604,12 +5907,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new FetchablePartitionResponse(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -5633,12 +5938,24 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ErrorCode = new Int16(reader.ReadInt16());
+					HighWatermark = new Int64(reader.ReadInt64());
+					LastStableOffset = new Int64(reader.ReadInt64());
+					LogStartOffset = new Int64(reader.ReadInt64());
+					AbortedCollection = reader.Read(() => new AbortedTransaction(Version));
+					Records = new Bytes(reader.ReadBytes());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt16(ErrorCode.Value);
+					writer.WriteInt64(HighWatermark.Value);
+					writer.WriteInt64(LastStableOffset.Value);
+					writer.WriteInt64(LogStartOffset.Value);
+					writer.Write(AbortedCollection);
+					writer.WriteBytes(Records.Value);
 				}
 
 				/// <summary>
@@ -5682,12 +5999,14 @@ namespace Kafka.Protocol
 
 					public void ReadFrom(IKafkaReader reader)
 					{
-
+						ProducerId = new Int64(reader.ReadInt64());
+						FirstOffset = new Int64(reader.ReadInt64());
 					}
 
 					public void WriteTo(IKafkaWriter writer)
 					{
-
+						writer.WriteInt64(ProducerId.Value);
+						writer.WriteInt64(FirstOffset.Value);
 					}
 
 					/// <summary>
@@ -5728,7 +6047,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(Key.Value);
+			writer.WriteInt8(KeyType.Value);
 		}
 
 		/// <summary>
@@ -5765,7 +6085,12 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteString(ErrorMessage.Value);
+			writer.WriteInt32(NodeId.Value);
+			writer.WriteString(Host.Value);
+			writer.WriteInt32(Port.Value);
 		}
 
 		/// <summary>
@@ -5819,7 +6144,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(GroupId.Value);
+			writer.WriteInt32(Generationid.Value);
+			writer.WriteString(MemberId.Value);
 		}
 
 		/// <summary>
@@ -5857,7 +6184,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
 		}
 
 		/// <summary>
@@ -5890,7 +6218,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(TransactionalId.Value);
+			writer.WriteInt32(TransactionTimeoutMs.Value);
 		}
 
 		/// <summary>
@@ -5925,7 +6254,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteInt64(ProducerId.Value);
+			writer.WriteInt16(ProducerEpoch.Value);
 		}
 
 		/// <summary>
@@ -5972,7 +6304,12 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(GroupId.Value);
+			writer.WriteInt32(SessionTimeoutMs.Value);
+			writer.WriteInt32(RebalanceTimeoutMs.Value);
+			writer.WriteString(MemberId.Value);
+			writer.WriteString(ProtocolType.Value);
+			writer.Write(ProtocolsCollection);
 		}
 
 		/// <summary>
@@ -6016,12 +6353,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				Metadata = new Bytes(reader.ReadBytes());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.WriteBytes(Metadata.Value);
 			}
 
 			/// <summary>
@@ -6060,7 +6399,13 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteInt32(GenerationId.Value);
+			writer.WriteString(ProtocolName.Value);
+			writer.WriteString(Leader.Value);
+			writer.WriteString(MemberId.Value);
+			writer.Write(MembersCollection);
 		}
 
 		/// <summary>
@@ -6106,12 +6451,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				MemberId = new String(reader.ReadString());
+				Metadata = new Bytes(reader.ReadBytes());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(MemberId.Value);
+				writer.WriteBytes(Metadata.Value);
 			}
 
 			/// <summary>
@@ -6149,7 +6496,12 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ControllerId.Value);
+			writer.WriteInt32(ControllerEpoch.Value);
+			writer.WriteInt64(BrokerEpoch.Value);
+			writer.Write(TopicStatesCollection);
+			writer.Write(PartitionStatesV0Collection);
+			writer.Write(LiveLeadersCollection);
 		}
 
 		/// <summary>
@@ -6183,12 +6535,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionStatesCollection = reader.Read(() => new LeaderAndIsrRequestPartitionState(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionStatesCollection);
 			}
 
 			/// <summary>
@@ -6212,12 +6566,26 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ControllerEpoch = new Int32(reader.ReadInt32());
+					LeaderKey = new Int32(reader.ReadInt32());
+					LeaderEpoch = new Int32(reader.ReadInt32());
+					IsrReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					ZkVersion = new Int32(reader.ReadInt32());
+					ReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					IsNew = new Boolean(reader.ReadBoolean());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt32(ControllerEpoch.Value);
+					writer.WriteInt32(LeaderKey.Value);
+					writer.WriteInt32(LeaderEpoch.Value);
+					writer.Write(IsrReplicasCollection);
+					writer.WriteInt32(ZkVersion.Value);
+					writer.Write(ReplicasCollection);
+					writer.WriteBoolean(IsNew.Value);
 				}
 
 				/// <summary>
@@ -6278,12 +6646,28 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				TopicName = new String(reader.ReadString());
+				PartitionIndex = new Int32(reader.ReadInt32());
+				ControllerEpoch = new Int32(reader.ReadInt32());
+				LeaderKey = new Int32(reader.ReadInt32());
+				LeaderEpoch = new Int32(reader.ReadInt32());
+				IsrReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+				ZkVersion = new Int32(reader.ReadInt32());
+				ReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+				IsNew = new Boolean(reader.ReadBoolean());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(TopicName.Value);
+				writer.WriteInt32(PartitionIndex.Value);
+				writer.WriteInt32(ControllerEpoch.Value);
+				writer.WriteInt32(LeaderKey.Value);
+				writer.WriteInt32(LeaderEpoch.Value);
+				writer.Write(IsrReplicasCollection);
+				writer.WriteInt32(ZkVersion.Value);
+				writer.Write(ReplicasCollection);
+				writer.WriteBoolean(IsNew.Value);
 			}
 
 			/// <summary>
@@ -6348,12 +6732,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				BrokerId = new Int32(reader.ReadInt32());
+				HostName = new String(reader.ReadString());
+				Port = new Int32(reader.ReadInt32());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt32(BrokerId.Value);
+				writer.WriteString(HostName.Value);
+				writer.WriteInt32(Port.Value);
 			}
 
 			/// <summary>
@@ -6392,7 +6780,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.Write(PartitionsCollection);
 		}
 
 		/// <summary>
@@ -6416,12 +6805,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				TopicName = new String(reader.ReadString());
+				PartitionIndex = new Int32(reader.ReadInt32());
+				ErrorCode = new Int16(reader.ReadInt16());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(TopicName.Value);
+				writer.WriteInt32(PartitionIndex.Value);
+				writer.WriteInt16(ErrorCode.Value);
 			}
 
 			/// <summary>
@@ -6460,7 +6853,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(GroupId.Value);
+			writer.WriteString(MemberId.Value);
 		}
 
 		/// <summary>
@@ -6493,7 +6887,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
 		}
 
 		/// <summary>
@@ -6551,7 +6946,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
+			writer.Write(GroupsCollection);
 		}
 
 		/// <summary>
@@ -6580,12 +6977,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				GroupId = new String(reader.ReadString());
+				ProtocolType = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(GroupId.Value);
+				writer.WriteString(ProtocolType.Value);
 			}
 
 			/// <summary>
@@ -6620,7 +7019,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ReplicaId.Value);
+			writer.WriteInt8(IsolationLevel.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -6649,12 +7050,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new ListOffsetPartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -6678,12 +7081,18 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					CurrentLeaderEpoch = new Int32(reader.ReadInt32());
+					Timestamp = new Int64(reader.ReadInt64());
+					MaxNumOffsets = new Int32(reader.ReadInt32());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt32(CurrentLeaderEpoch.Value);
+					writer.WriteInt64(Timestamp.Value);
+					writer.WriteInt32(MaxNumOffsets.Value);
 				}
 
 				/// <summary>
@@ -6728,7 +7137,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -6752,12 +7162,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new ListOffsetPartitionResponse(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -6781,12 +7193,22 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ErrorCode = new Int16(reader.ReadInt16());
+					OldStyleOffsetsCollection = reader.Read(() => new Int64(reader.ReadInt64()));
+					Timestamp = new Int64(reader.ReadInt64());
+					Offset = new Int64(reader.ReadInt64());
+					LeaderEpoch = new Int32(reader.ReadInt32());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt16(ErrorCode.Value);
+					writer.Write(OldStyleOffsetsCollection);
+					writer.WriteInt64(Timestamp.Value);
+					writer.WriteInt64(Offset.Value);
+					writer.WriteInt32(LeaderEpoch.Value);
 				}
 
 				/// <summary>
@@ -6840,7 +7262,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(TopicsCollection);
+			writer.WriteBoolean(AllowAutoTopicCreation.Value);
+			writer.WriteBoolean(IncludeClusterAuthorizedOperations.Value);
+			writer.WriteBoolean(IncludeTopicAuthorizedOperations.Value);
 		}
 
 		/// <summary>
@@ -6859,12 +7284,12 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
 			}
 
 			/// <summary>
@@ -6912,7 +7337,12 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(BrokersCollection);
+			writer.WriteString(ClusterId.Value);
+			writer.WriteInt32(ControllerId.Value);
+			writer.Write(TopicsCollection);
+			writer.WriteInt32(ClusterAuthorizedOperations.Value);
 		}
 
 		/// <summary>
@@ -6936,12 +7366,18 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				NodeId = new Int32(reader.ReadInt32());
+				Host = new String(reader.ReadString());
+				Port = new Int32(reader.ReadInt32());
+				Rack = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt32(NodeId.Value);
+				writer.WriteString(Host.Value);
+				writer.WriteInt32(Port.Value);
+				writer.WriteString(Rack.Value);
 			}
 
 			/// <summary>
@@ -6991,12 +7427,20 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ErrorCode = new Int16(reader.ReadInt16());
+				Name = new String(reader.ReadString());
+				IsInternal = new Boolean(reader.ReadBoolean());
+				PartitionsCollection = reader.Read(() => new MetadataResponsePartition(Version));
+				TopicAuthorizedOperations = new Int32(reader.ReadInt32());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt16(ErrorCode.Value);
+				writer.WriteString(Name.Value);
+				writer.WriteBoolean(IsInternal.Value);
+				writer.Write(PartitionsCollection);
+				writer.WriteInt32(TopicAuthorizedOperations.Value);
 			}
 
 			/// <summary>
@@ -7030,12 +7474,24 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					ErrorCode = new Int16(reader.ReadInt16());
+					PartitionIndex = new Int32(reader.ReadInt32());
+					LeaderId = new Int32(reader.ReadInt32());
+					LeaderEpoch = new Int32(reader.ReadInt32());
+					ReplicaNodesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					IsrNodesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					OfflineReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt16(ErrorCode.Value);
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt32(LeaderId.Value);
+					writer.WriteInt32(LeaderEpoch.Value);
+					writer.Write(ReplicaNodesCollection);
+					writer.Write(IsrNodesCollection);
+					writer.Write(OfflineReplicasCollection);
 				}
 
 				/// <summary>
@@ -7108,7 +7564,11 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(GroupId.Value);
+			writer.WriteInt32(GenerationId.Value);
+			writer.WriteString(MemberId.Value);
+			writer.WriteInt64(RetentionTimeMs.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -7147,12 +7607,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new OffsetCommitRequestPartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -7176,12 +7638,20 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					CommittedOffset = new Int64(reader.ReadInt64());
+					CommittedLeaderEpoch = new Int32(reader.ReadInt32());
+					CommitTimestamp = new Int64(reader.ReadInt64());
+					CommittedMetadata = new String(reader.ReadString());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt64(CommittedOffset.Value);
+					writer.WriteInt32(CommittedLeaderEpoch.Value);
+					writer.WriteInt64(CommitTimestamp.Value);
+					writer.WriteString(CommittedMetadata.Value);
 				}
 
 				/// <summary>
@@ -7231,7 +7701,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -7255,12 +7726,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new OffsetCommitResponsePartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -7284,12 +7757,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ErrorCode = new Int16(reader.ReadInt16());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt16(ErrorCode.Value);
 				}
 
 				/// <summary>
@@ -7324,7 +7799,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(GroupId.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -7348,12 +7824,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionIndexesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionIndexesCollection);
 			}
 
 			public String Name { get; set; }
@@ -7385,7 +7863,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(TopicsCollection);
+			writer.WriteInt16(ErrorCode.Value);
 		}
 
 		/// <summary>
@@ -7409,12 +7889,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new OffsetFetchResponsePartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -7438,12 +7920,20 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					CommittedOffset = new Int64(reader.ReadInt64());
+					CommittedLeaderEpoch = new Int32(reader.ReadInt32());
+					Metadata = new String(reader.ReadString());
+					ErrorCode = new Int16(reader.ReadInt16());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt64(CommittedOffset.Value);
+					writer.WriteInt32(CommittedLeaderEpoch.Value);
+					writer.WriteString(Metadata.Value);
+					writer.WriteInt16(ErrorCode.Value);
 				}
 
 				/// <summary>
@@ -7497,7 +7987,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -7516,12 +8006,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new OffsetForLeaderPartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -7545,12 +8037,16 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					CurrentLeaderEpoch = new Int32(reader.ReadInt32());
+					LeaderEpoch = new Int32(reader.ReadInt32());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt32(CurrentLeaderEpoch.Value);
+					writer.WriteInt32(LeaderEpoch.Value);
 				}
 
 				/// <summary>
@@ -7590,7 +8086,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -7614,12 +8111,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new OffsetForLeaderPartitionResult(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -7643,12 +8142,18 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					ErrorCode = new Int16(reader.ReadInt16());
+					PartitionIndex = new Int32(reader.ReadInt32());
+					LeaderEpoch = new Int32(reader.ReadInt32());
+					EndOffset = new Int64(reader.ReadInt64());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt16(ErrorCode.Value);
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt32(LeaderEpoch.Value);
+					writer.WriteInt64(EndOffset.Value);
 				}
 
 				/// <summary>
@@ -7695,7 +8200,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(TransactionalId.Value);
+			writer.WriteInt16(Acks.Value);
+			writer.WriteInt32(TimeoutMs.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -7729,12 +8237,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new PartitionProduceData(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -7758,12 +8268,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					Records = new Bytes(reader.ReadBytes());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteBytes(Records.Value);
 				}
 
 				/// <summary>
@@ -7798,7 +8310,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(ResponsesCollection);
+			writer.WriteInt32(ThrottleTimeMs.Value);
 		}
 
 		/// <summary>
@@ -7817,12 +8330,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new PartitionProduceResponse(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -7846,12 +8361,20 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ErrorCode = new Int16(reader.ReadInt16());
+					BaseOffset = new Int64(reader.ReadInt64());
+					LogAppendTimeMs = new Int64(reader.ReadInt64());
+					LogStartOffset = new Int64(reader.ReadInt64());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt16(ErrorCode.Value);
+					writer.WriteInt64(BaseOffset.Value);
+					writer.WriteInt64(LogAppendTimeMs.Value);
+					writer.WriteInt64(LogStartOffset.Value);
 				}
 
 				/// <summary>
@@ -7906,7 +8429,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteBytes(Hmac.Value);
+			writer.WriteInt64(RenewPeriodMs.Value);
 		}
 
 		/// <summary>
@@ -7940,7 +8464,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteInt64(ExpiryTimestampMs.Value);
+			writer.WriteInt32(ThrottleTimeMs.Value);
 		}
 
 		/// <summary>
@@ -7980,7 +8506,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(RequestApiKey.Value);
+			writer.WriteInt16(RequestApiVersion.Value);
+			writer.WriteInt32(CorrelationId.Value);
+			writer.WriteString(ClientId.Value);
 		}
 
 		/// <summary>
@@ -8022,7 +8551,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(CorrelationId.Value);
 		}
 
 		/// <summary>
@@ -8049,7 +8578,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteBytes(AuthBytes.Value);
 		}
 
 		/// <summary>
@@ -8079,7 +8608,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteString(ErrorMessage.Value);
+			writer.WriteBytes(AuthBytes.Value);
+			writer.WriteInt64(SessionLifetimeMs.Value);
 		}
 
 		/// <summary>
@@ -8121,7 +8653,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(Mechanism.Value);
 		}
 
 		/// <summary>
@@ -8149,7 +8681,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.Write(MechanismsCollection);
 		}
 
 		/// <summary>
@@ -8186,7 +8719,12 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ControllerId.Value);
+			writer.WriteInt32(ControllerEpoch.Value);
+			writer.WriteInt64(BrokerEpoch.Value);
+			writer.WriteBoolean(DeletePartitions.Value);
+			writer.Write(PartitionsV0Collection);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -8225,12 +8763,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				TopicName = new String(reader.ReadString());
+				PartitionIndex = new Int32(reader.ReadInt32());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(TopicName.Value);
+				writer.WriteInt32(PartitionIndex.Value);
 			}
 
 			/// <summary>
@@ -8260,12 +8800,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionIndexesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionIndexesCollection);
 			}
 
 			/// <summary>
@@ -8299,7 +8841,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
+			writer.Write(PartitionsCollection);
 		}
 
 		/// <summary>
@@ -8323,12 +8866,16 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				TopicName = new String(reader.ReadString());
+				PartitionIndex = new Int32(reader.ReadInt32());
+				ErrorCode = new Int16(reader.ReadInt16());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(TopicName.Value);
+				writer.WriteInt32(PartitionIndex.Value);
+				writer.WriteInt16(ErrorCode.Value);
 			}
 
 			/// <summary>
@@ -8369,7 +8916,10 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(GroupId.Value);
+			writer.WriteInt32(GenerationId.Value);
+			writer.WriteString(MemberId.Value);
+			writer.Write(AssignmentsCollection);
 		}
 
 		/// <summary>
@@ -8403,12 +8953,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				MemberId = new String(reader.ReadString());
+				Assignment = new Bytes(reader.ReadBytes());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(MemberId.Value);
+				writer.WriteBytes(Assignment.Value);
 			}
 
 			/// <summary>
@@ -8443,7 +8995,9 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.WriteInt16(ErrorCode.Value);
+			writer.WriteBytes(Assignment.Value);
 		}
 
 		/// <summary>
@@ -8484,7 +9038,11 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteString(TransactionalId.Value);
+			writer.WriteString(GroupId.Value);
+			writer.WriteInt64(ProducerId.Value);
+			writer.WriteInt16(ProducerEpoch.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -8523,12 +9081,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new TxnOffsetCommitRequestPartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -8552,12 +9112,18 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					CommittedOffset = new Int64(reader.ReadInt64());
+					CommittedLeaderEpoch = new Int32(reader.ReadInt32());
+					CommittedMetadata = new String(reader.ReadString());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt64(CommittedOffset.Value);
+					writer.WriteInt32(CommittedLeaderEpoch.Value);
+					writer.WriteString(CommittedMetadata.Value);
 				}
 
 				/// <summary>
@@ -8602,7 +9168,8 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ThrottleTimeMs.Value);
+			writer.Write(TopicsCollection);
 		}
 
 		/// <summary>
@@ -8626,12 +9193,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Name = new String(reader.ReadString());
+				PartitionsCollection = reader.Read(() => new TxnOffsetCommitResponsePartition(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(Name.Value);
+				writer.Write(PartitionsCollection);
 			}
 
 			/// <summary>
@@ -8655,12 +9224,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ErrorCode = new Int16(reader.ReadInt16());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt16(ErrorCode.Value);
 				}
 
 				/// <summary>
@@ -8699,7 +9270,12 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt32(ControllerId.Value);
+			writer.WriteInt32(ControllerEpoch.Value);
+			writer.WriteInt64(BrokerEpoch.Value);
+			writer.Write(TopicStatesCollection);
+			writer.Write(PartitionStatesV0Collection);
+			writer.Write(BrokersCollection);
 		}
 
 		/// <summary>
@@ -8733,12 +9309,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				TopicName = new String(reader.ReadString());
+				PartitionStatesCollection = reader.Read(() => new UpdateMetadataPartitionState(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(TopicName.Value);
+				writer.Write(PartitionStatesCollection);
 			}
 
 			/// <summary>
@@ -8762,12 +9340,26 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					PartitionIndex = new Int32(reader.ReadInt32());
+					ControllerEpoch = new Int32(reader.ReadInt32());
+					Leader = new Int32(reader.ReadInt32());
+					LeaderEpoch = new Int32(reader.ReadInt32());
+					IsrCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					ZkVersion = new Int32(reader.ReadInt32());
+					ReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					OfflineReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(PartitionIndex.Value);
+					writer.WriteInt32(ControllerEpoch.Value);
+					writer.WriteInt32(Leader.Value);
+					writer.WriteInt32(LeaderEpoch.Value);
+					writer.Write(IsrCollection);
+					writer.WriteInt32(ZkVersion.Value);
+					writer.Write(ReplicasCollection);
+					writer.Write(OfflineReplicasCollection);
 				}
 
 				/// <summary>
@@ -8828,12 +9420,28 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				TopicName = new String(reader.ReadString());
+				PartitionIndex = new Int32(reader.ReadInt32());
+				ControllerEpoch = new Int32(reader.ReadInt32());
+				Leader = new Int32(reader.ReadInt32());
+				LeaderEpoch = new Int32(reader.ReadInt32());
+				IsrCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+				ZkVersion = new Int32(reader.ReadInt32());
+				ReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+				OfflineReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteString(TopicName.Value);
+				writer.WriteInt32(PartitionIndex.Value);
+				writer.WriteInt32(ControllerEpoch.Value);
+				writer.WriteInt32(Leader.Value);
+				writer.WriteInt32(LeaderEpoch.Value);
+				writer.Write(IsrCollection);
+				writer.WriteInt32(ZkVersion.Value);
+				writer.Write(ReplicasCollection);
+				writer.Write(OfflineReplicasCollection);
 			}
 
 			/// <summary>
@@ -8895,12 +9503,20 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				Id = new Int32(reader.ReadInt32());
+				V0Host = new String(reader.ReadString());
+				V0Port = new Int32(reader.ReadInt32());
+				EndpointsCollection = reader.Read(() => new UpdateMetadataRequestEndpoint(Version));
+				Rack = new String(reader.ReadString());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt32(Id.Value);
+				writer.WriteString(V0Host.Value);
+				writer.WriteInt32(V0Port.Value);
+				writer.Write(EndpointsCollection);
+				writer.WriteString(Rack.Value);
 			}
 
 			public Int32 Id { get; set; }
@@ -8931,12 +9547,18 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Port = new Int32(reader.ReadInt32());
+					Host = new String(reader.ReadString());
+					Listener = new String(reader.ReadString());
+					SecurityProtocol = new Int16(reader.ReadInt16());
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteInt32(Port.Value);
+					writer.WriteString(Host.Value);
+					writer.WriteString(Listener.Value);
+					writer.WriteInt16(SecurityProtocol.Value);
 				}
 
 				/// <summary>
@@ -8985,7 +9607,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.WriteInt16(ErrorCode.Value);
 		}
 
 		/// <summary>
@@ -9012,7 +9634,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(MarkersCollection);
 		}
 
 		/// <summary>
@@ -9031,12 +9653,20 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ProducerId = new Int64(reader.ReadInt64());
+				ProducerEpoch = new Int16(reader.ReadInt16());
+				TransactionResult = new Boolean(reader.ReadBoolean());
+				TopicsCollection = reader.Read(() => new WritableTxnMarkerTopic(Version));
+				CoordinatorEpoch = new Int32(reader.ReadInt32());
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt64(ProducerId.Value);
+				writer.WriteInt16(ProducerEpoch.Value);
+				writer.WriteBoolean(TransactionResult.Value);
+				writer.Write(TopicsCollection);
+				writer.WriteInt32(CoordinatorEpoch.Value);
 			}
 
 			/// <summary>
@@ -9070,12 +9700,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Name = new String(reader.ReadString());
+					PartitionIndexesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(Name.Value);
+					writer.Write(PartitionIndexesCollection);
 				}
 
 				/// <summary>
@@ -9114,7 +9746,7 @@ namespace Kafka.Protocol
 
 		public void WriteTo(IKafkaWriter writer)
 		{
-
+			writer.Write(MarkersCollection);
 		}
 
 		/// <summary>
@@ -9133,12 +9765,14 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-
+				ProducerId = new Int64(reader.ReadInt64());
+				TopicsCollection = reader.Read(() => new WritableTxnMarkerTopicResult(Version));
 			}
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-
+				writer.WriteInt64(ProducerId.Value);
+				writer.Write(TopicsCollection);
 			}
 
 			/// <summary>
@@ -9162,12 +9796,14 @@ namespace Kafka.Protocol
 
 				public void ReadFrom(IKafkaReader reader)
 				{
-
+					Name = new String(reader.ReadString());
+					PartitionsCollection = reader.Read(() => new WritableTxnMarkerPartitionResult(Version));
 				}
 
 				public void WriteTo(IKafkaWriter writer)
 				{
-
+					writer.WriteString(Name.Value);
+					writer.Write(PartitionsCollection);
 				}
 
 				/// <summary>
@@ -9191,12 +9827,14 @@ namespace Kafka.Protocol
 
 					public void ReadFrom(IKafkaReader reader)
 					{
-
+						PartitionIndex = new Int32(reader.ReadInt32());
+						ErrorCode = new Int16(reader.ReadInt16());
 					}
 
 					public void WriteTo(IKafkaWriter writer)
 					{
-
+						writer.WriteInt32(PartitionIndex.Value);
+						writer.WriteInt16(ErrorCode.Value);
 					}
 
 					/// <summary>
