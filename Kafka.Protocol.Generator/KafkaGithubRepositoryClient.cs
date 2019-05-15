@@ -10,7 +10,7 @@ using ProductHeaderValue = Octokit.ProductHeaderValue;
 
 namespace Kafka.Protocol.Generator
 {
-    public class KafkaGithubRepositoryClient : IMessageDefinitionClient
+    public class KafkaGithubRepositoryClient
     {
         private readonly GitHubClient _client = new GitHubClient(
                     new ProductHeaderValue("Kafka.Protocol"));
