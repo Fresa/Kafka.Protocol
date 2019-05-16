@@ -1,33 +1,13 @@
-﻿using System;
-using System.Linq;
-using Kafka.Protocol.Generator.Extensions;
+﻿using Kafka.Protocol.Generator.Extensions;
 
-namespace Kafka.Protocol.Generator
+namespace Kafka.Protocol.Generator.Definitions
 {
-    public class ProtocolPrimitiveTypeConverter
+    public static class PrimitiveTypeExtensions
     {
-        public string ConvertToPrimitive(string typeName)
+        public static string GetClassName(this PrimitiveType primitiveType)
         {
-            var isArray = false;
-            if (typeName.StartsWith("[]"))
-            {
-                isArray = true;
-                typeName = typeName.Substring(2);
-            }
+            var typeName = primitiveType.Type.ToPascalCase('_');
 
-            switch (typeName.ToLower())
-            {
-                case "bool":
-                    typeName = "Boolean";
-                    break;
-            }
-
-            typeName = typeName.FirstCharacterToUpperCase();
-            return typeName + (isArray ? "[]" : "");
-        }
-
-        public string Correct(string typeName)
-        {
             var isArray = false;
             if (typeName.StartsWith("[]"))
             {
@@ -63,8 +43,10 @@ namespace Kafka.Protocol.Generator
             return typeName + (isArray ? "[]" : "");
         }
 
-        public string Convert(string typeName)
+        public static string GetTypeName(this PrimitiveType primitiveType)
         {
+            var typeName = primitiveType.GetClassName();
+
             var isArray = false;
             if (typeName.StartsWith("[]"))
             {
@@ -115,7 +97,7 @@ namespace Kafka.Protocol.Generator
             return typeName + (isArray ? "[]" : "");
         }
 
-        private static Type Type<T>()
+        private static System.Type Type<T>()
         {
             return typeof(T);
         }

@@ -19,7 +19,6 @@
     apacheKafkaDefinitionPage.LoadHtml(File.ReadAllText(path));
 
     var protocol = ProtocolSpecification.Load(apacheKafkaDefinitionPage);
-	var protocolPrimitiveTypeConverter = new ProtocolPrimitiveTypeConverter();
 
 	var messageDefinitionPath = Path.Combine(Host.ResolvePath(@"..\Kafka.Protocol.MessageDefinitionsDownloader\MessageDefinitions\"));
 	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath);
@@ -62,8 +61,8 @@ namespace Kafka.Protocol<# Block(() =>
             type.Type!="RequestMessage" && 
             type.Type!="ResponseMessage"), primitiveType =>
     {
-        var className = protocolPrimitiveTypeConverter.Correct(primitiveType.Type.ToPascalCase('_'));
-        var type = protocolPrimitiveTypeConverter.Convert(className);
+        var className = primitiveType.GetClassName();
+        var type = primitiveType.GetTypeName();
 
         GenerateDocumentation(primitiveType.Description);
         #>public struct <#= className #> : ISerialize <# Block(() =>
@@ -178,57 +177,57 @@ namespace Kafka.Protocol<# Block(() =>
 
 void PrintReadFrom(Kafka.Protocol.Generator.Definitions.Messages.Field messageField)
 {
-	var fieldTypeName = protocolPrimitiveTypeConverter.ConvertToPrimitive(messageField.Type);
-	if (messageField.Fields == null)
+	var versionRange = VersionRange.Parse(messageField.Versions);
+	#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
 	{
-		var versionRange = VersionRange.Parse(messageField.Versions);
-		#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
+		var fieldTypeName = messageField.GetTypeName();
+		if (messageField.Fields == null)
 		{
-			if (fieldTypeName.EndsWith("[]"))
+			if (messageField.IsArray())
 			{
-			#><#= messageField.Name + "Collection" #> = reader.Read(() => new <#= fieldTypeName.TrimEnd('[', ']') #>(reader.Read<#= fieldTypeName.TrimEnd('[', ']') #>()));<# 	
+			#><#= messageField.GetName() #> = reader.Read(() => new <#= fieldTypeName.TrimEnd('[', ']') #>(reader.Read<#= fieldTypeName.TrimEnd('[', ']') #>()));<# 	
 			} 
 			else 
 			{
-			#><#= messageField.Name #> = new <#= fieldTypeName #>(reader.Read<#= fieldTypeName #>());<# 
+			#><#= messageField.GetName() #> = new <#= fieldTypeName #>(reader.Read<#= fieldTypeName #>());<# 
 			}
-		});		
-	}
-	else 
-	{
-		#><#= messageField.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #> = reader.Read(() => new <#= fieldTypeName.TrimEnd('[', ']') #>(Version));<# 
-	}
+		}
+		else 
+		{
+			#><#= messageField.GetName() #> = reader.Read(() => new <#= fieldTypeName.TrimEnd('[', ']') #>(Version));<# 
+		}
+	});		
 }
 
 void PrintWriteTo(Kafka.Protocol.Generator.Definitions.Messages.Field messageField)
 {
-	var fieldTypeName = protocolPrimitiveTypeConverter.ConvertToPrimitive(messageField.Type);
-	if (messageField.Fields == null)
+	var versionRange = VersionRange.Parse(messageField.Versions);
+	#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
 	{
-		var versionRange = VersionRange.Parse(messageField.Versions);
-		#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
+		if (messageField.Fields == null)
 		{
-			if (fieldTypeName.EndsWith("[]"))
+			var fieldTypeName = messageField.GetTypeName();
+			if (messageField.IsArray())
 			{
-			#>writer.Write(<#= messageField.Name + "Collection" #>);<# 	
+			#>writer.Write(<#= messageField.GetName() #>);<# 	
 			} 
 			else 
 			{
-			#>writer.Write<#= fieldTypeName #>(<#= messageField.Name #>.Value);<# 
+			#>writer.Write<#= fieldTypeName #>(<#= messageField.GetName() #>.Value);<# 
 			}
-		});		
-	}
-	else 
-	{
-		#>writer.Write(<#= messageField.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #>);<# 
-	}
+		}
+		else 
+		{
+			#>writer.Write(<#= messageField.GetName() #>);<# 
+		}
+	});		
 }
 
 void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 {
 	GenerateDocumentation(field.About);
-	var fieldTypeName = protocolPrimitiveTypeConverter.ConvertToPrimitive(field.Type);
-	#>public <#= fieldTypeName #> <#= field.Name + (fieldTypeName.EndsWith("[]") ? "Collection" : "") #> { get; set; }<# if(field.Default != null) { #> = new <#= fieldTypeName #>(<#= field.Default #>);<# } #><# 
+	var fieldTypeName = field.GetTypeName();
+	#>public <#= fieldTypeName #> <#= field.GetName() #> { get; set; }<# if(field.Default != null) { #> = new <#= fieldTypeName #>(<#= field.Default #>);<# } #><# 
 
 	if (field.Fields == null) 
 	{
@@ -240,7 +239,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 	{
 		#>public <#= fieldTypeName.TrimEnd('[', ']') #>(int version)<# Block(() => 
 		{
-				#>Version = version;<#
+			#>Version = version;<#
 		}); _(2);
 
 		#>public int Version { get; }<# _(2);
