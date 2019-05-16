@@ -181,20 +181,22 @@ void PrintReadFrom(Kafka.Protocol.Generator.Definitions.Messages.Field messageFi
 	#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
+		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
+		var fieldName = messageField.GetName();
 		if (messageField.Fields == null)
 		{
 			if (messageField.IsArray())
 			{
-			#><#= messageField.GetName() #> = reader.Read(() => new <#= fieldTypeName.TrimEnd('[', ']') #>(reader.Read<#= fieldTypeName.TrimEnd('[', ']') #>()));<# 	
+			#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(reader.Read<#= fieldTypeNameWithoutArrayCharacters #>()));<# 	
 			} 
 			else 
 			{
-			#><#= messageField.GetName() #> = new <#= fieldTypeName #>(reader.Read<#= fieldTypeName #>());<# 
+			#><#= fieldName #> = new <#= fieldTypeName #>(reader.Read<#= fieldTypeName #>());<# 
 			}
 		}
 		else 
 		{
-			#><#= messageField.GetName() #> = reader.Read(() => new <#= fieldTypeName.TrimEnd('[', ']') #>(Version));<# 
+			#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version));<# 
 		}
 	});		
 }
@@ -204,21 +206,22 @@ void PrintWriteTo(Kafka.Protocol.Generator.Definitions.Messages.Field messageFie
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
 	{
+		var fieldName = messageField.GetName();
 		if (messageField.Fields == null)
 		{
 			var fieldTypeName = messageField.GetTypeName();
 			if (messageField.IsArray())
 			{
-			#>writer.Write(<#= messageField.GetName() #>);<# 	
+			#>writer.Write(<#= fieldName #>);<# 	
 			} 
 			else 
 			{
-			#>writer.Write<#= fieldTypeName #>(<#= messageField.GetName() #>.Value);<# 
+			#>writer.Write<#= fieldTypeName #>(<#= fieldName #>.Value);<# 
 			}
 		}
 		else 
 		{
-			#>writer.Write(<#= messageField.GetName() #>);<# 
+			#>writer.Write(<#= fieldName #>);<# 
 		}
 	});		
 }
@@ -226,7 +229,10 @@ void PrintWriteTo(Kafka.Protocol.Generator.Definitions.Messages.Field messageFie
 void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 {
 	GenerateDocumentation(field.About);
+
 	var fieldTypeName = field.GetTypeName();
+	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
+	
 	#>public <#= fieldTypeName #> <#= field.GetName() #> { get; set; }<# if(field.Default != null) { #> = new <#= fieldTypeName #>(<#= field.Default #>);<# } #><# 
 
 	if (field.Fields == null) 
@@ -235,9 +241,9 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 	} 
 				
 	_(2); 
-	#>public class <#= fieldTypeName.TrimEnd('[', ']') #> : ISerialize<# Block(() => 
+	#>public class <#= fieldTypeNameWithoutArrayCharacters #> : ISerialize<# Block(() => 
 	{
-		#>public <#= fieldTypeName.TrimEnd('[', ']') #>(int version)<# Block(() => 
+		#>public <#= fieldTypeNameWithoutArrayCharacters #>(int version)<# Block(() => 
 		{
 			#>Version = version;<#
 		}); _(2);

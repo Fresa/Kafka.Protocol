@@ -5,9 +5,11 @@ namespace Kafka.Protocol.Generator
 {
     public static class FieldExtensions
     {
+        private const string ArrayTypeCharacter = "[]";
+
         public static bool IsArray(this Field field)
         {
-            return field.Type.StartsWith("[]");
+            return field.Type.StartsWith(ArrayTypeCharacter);
         }
 
         public static string GetName(this Field field)
@@ -17,10 +19,16 @@ namespace Kafka.Protocol.Generator
 
         public static string GetTypeName(this Field field)
         {
+            return field.GetTypeNameWithoutArrayCharacters() +
+                   (field.IsArray() ? ArrayTypeCharacter : "");
+        }
+
+        public static string GetTypeNameWithoutArrayCharacters(this Field field)
+        {
             var typeName = field.Type;
             if (field.IsArray())
             {
-                typeName = typeName.Substring(2);
+                typeName = typeName.TrimStart(ArrayTypeCharacter.ToCharArray());
             }
 
             switch (typeName.ToLower())
@@ -30,8 +38,7 @@ namespace Kafka.Protocol.Generator
                     break;
             }
 
-            typeName = typeName.FirstCharacterToUpperCase();
-            return typeName + (field.IsArray() ? "[]" : "");
+            return typeName.FirstCharacterToUpperCase();
         }
     }
 }
