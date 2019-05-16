@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Kafka.Protocol.Generator.Definitions;
 using Test.It.With.XUnit;
 using Xunit;
 
@@ -15,13 +16,16 @@ namespace Kafka.Protocol.Generator.Tests
                 _range = VersionRange.Parse("0+");
             }
 
-            [Theory]
-            [InlineData(-1, false)]
-            [InlineData(0, true)]
-            [InlineData(int.MaxValue, true)]
-            public void It_should_create_a_valid_range(int version, bool valid)
+            [Fact]
+            public void It_should_create_a_range_with_from()
             {
-                _range.IsInRange(version).Should().Be(valid);
+                _range.From.Should().Be(0);
+            }
+
+            [Fact]
+            public void It_should_create_a_range_with_to()
+            {
+                _range.To.Should().Be(int.MaxValue);
             }
         }
     }
@@ -37,14 +41,16 @@ namespace Kafka.Protocol.Generator.Tests
                 _range = VersionRange.Parse("1-2");
             }
 
-            [Theory]
-            [InlineData(0, false)]
-            [InlineData(1, true)]
-            [InlineData(2, true)]
-            [InlineData(int.MaxValue, false)]
-            public void It_should_create_a_valid_range(int version, bool valid)
+            [Fact]
+            public void It_should_create_a_range_with_from()
             {
-                _range.IsInRange(version).Should().Be(valid);
+                _range.From.Should().Be(1);
+            }
+
+            [Fact]
+            public void It_should_create_a_range_with_to()
+            {
+                _range.To.Should().Be(2);
             }
         }
     }

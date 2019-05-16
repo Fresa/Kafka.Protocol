@@ -6,5 +6,10 @@
         {
             return (uint)((value << 1) ^ (value >> 31));
         }
+
+        internal static bool InRange(this int value, IRange<int> range)
+        {
+            return range.InRange(value);
+        }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 
-namespace Kafka.Protocol.Generator
+namespace Kafka.Protocol.Generator.Definitions
 {
     public class VersionRange
     {
-        private int From { get; }
-        private int To { get; }
+        public int From { get; }
+        public int To { get; }
 
         internal VersionRange(int from, int to)
         {
@@ -20,18 +20,27 @@ namespace Kafka.Protocol.Generator
 
             if (string.IsNullOrEmpty(versionRangeExpression))
             {
-                throw new ArgumentNullException(nameof(versionRangeExpression), expectedFormatMessage);
+                throw new ArgumentNullException(
+                    nameof(versionRangeExpression),
+                    expectedFormatMessage);
             }
 
-            var versions = versionRangeExpression.Split(new[] { '-', '+' }, StringSplitOptions.RemoveEmptyEntries);
+            var versions = versionRangeExpression.Split(
+                new[] {'-', '+'},
+                StringSplitOptions.RemoveEmptyEntries);
+
             if (versions.Length > 2)
             {
-                throw new ArgumentException(expectedFormatMessage, nameof(versionRangeExpression));
+                throw new ArgumentException(
+                    expectedFormatMessage,
+                    nameof(versionRangeExpression));
             }
 
             if (int.TryParse(versions.First(), out var from) == false)
             {
-                throw new ArgumentException($"{versions.First()} is not a number. {expectedFormatMessage}", nameof(versionRangeExpression));
+                throw new ArgumentException(
+                    $"{versions.First()} is not a number. {expectedFormatMessage}",
+                    nameof(versionRangeExpression));
             }
 
             var to = int.MaxValue;
@@ -42,16 +51,12 @@ namespace Kafka.Protocol.Generator
 
             if (int.TryParse(versions.Last(), out to) == false)
             {
-                throw new ArgumentException($"{versions.Last()} is not a number. {expectedFormatMessage}", nameof(versionRangeExpression));
+                throw new ArgumentException(
+                    $"{versions.Last()} is not a number. {expectedFormatMessage}",
+                    nameof(versionRangeExpression));
             }
 
             return new VersionRange(from, to);
-        }
-
-        public bool IsInRange(int version)
-        {
-            return version >= From &&
-                   version <= To;
         }
     }
 }
