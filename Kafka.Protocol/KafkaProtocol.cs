@@ -1,5 +1,7 @@
 ﻿// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Kafka.Protocol
 {
@@ -2184,7 +2186,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				TopicsCollection = reader.Read(() => new AddPartitionsToTxnTopic(Version));
+				TopicsCollection = reader.Read(() => new AddPartitionsToTxnTopic(Version)).ToDictionary(field => field.Name);
 			}
 		}
 
@@ -2204,7 +2206,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				writer.Write(TopicsCollection.Values.ToArray());
 			}
 		}
 
@@ -2226,7 +2228,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The partitions to add to the transation.
 		/// </summary>
-		public AddPartitionsToTxnTopic[] TopicsCollection { get; set; }
+		public Dictionary<String, AddPartitionsToTxnTopic> TopicsCollection { get; set; }
 
 		public class AddPartitionsToTxnTopic : ISerialize
 		{
@@ -2292,7 +2294,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				ResultsCollection = reader.Read(() => new AddPartitionsToTxnTopicResult(Version));
+				ResultsCollection = reader.Read(() => new AddPartitionsToTxnTopicResult(Version)).ToDictionary(field => field.Name);
 			}
 		}
 
@@ -2304,7 +2306,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection);
+				writer.Write(ResultsCollection.Values.ToArray());
 			}
 		}
 
@@ -2316,7 +2318,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
-		public AddPartitionsToTxnTopicResult[] ResultsCollection { get; set; }
+		public Dictionary<String, AddPartitionsToTxnTopicResult> ResultsCollection { get; set; }
 
 		public class AddPartitionsToTxnTopicResult : ISerialize
 		{
@@ -2335,7 +2337,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					ResultsCollection = reader.Read(() => new AddPartitionsToTxnPartitionResult(Version));
+					ResultsCollection = reader.Read(() => new AddPartitionsToTxnPartitionResult(Version)).ToDictionary(field => field.PartitionIndex);
 				}
 			}
 
@@ -2347,7 +2349,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ResultsCollection);
+					writer.Write(ResultsCollection.Values.ToArray());
 				}
 			}
 
@@ -2359,7 +2361,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The results for each partition
 			/// </summary>
-			public AddPartitionsToTxnPartitionResult[] ResultsCollection { get; set; }
+			public Dictionary<Int32, AddPartitionsToTxnPartitionResult> ResultsCollection { get; set; }
 
 			public class AddPartitionsToTxnPartitionResult : ISerialize
 			{
@@ -2422,7 +2424,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				ResourcesCollection = reader.Read(() => new AlterConfigsResource(Version));
+				ResourcesCollection = reader.Read(() => new AlterConfigsResource(Version)).ToDictionary(field => field.ResourceType);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2434,7 +2436,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResourcesCollection);
+				writer.Write(ResourcesCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2445,7 +2447,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The updates for each resource.
 		/// </summary>
-		public AlterConfigsResource[] ResourcesCollection { get; set; }
+		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection { get; set; }
 
 		public class AlterConfigsResource : ISerialize
 		{
@@ -2468,7 +2470,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					ConfigsCollection = reader.Read(() => new AlterableConfig(Version));
+					ConfigsCollection = reader.Read(() => new AlterableConfig(Version)).ToDictionary(field => field.Name);
 				}
 			}
 
@@ -2484,7 +2486,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ConfigsCollection);
+					writer.Write(ConfigsCollection.Values.ToArray());
 				}
 			}
 
@@ -2501,7 +2503,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The configurations.
 			/// </summary>
-			public AlterableConfig[] ConfigsCollection { get; set; }
+			public Dictionary<String, AlterableConfig> ConfigsCollection { get; set; }
 
 			public class AlterableConfig : ISerialize
 			{
@@ -2685,7 +2687,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				DirsCollection = reader.Read(() => new AlterReplicaLogDir(Version));
+				DirsCollection = reader.Read(() => new AlterReplicaLogDir(Version)).ToDictionary(field => field.Path);
 			}
 		}
 
@@ -2693,14 +2695,14 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(DirsCollection);
+				writer.Write(DirsCollection.Values.ToArray());
 			}
 		}
 
 		/// <summary>
 		/// The alterations to make for each directory.
 		/// </summary>
-		public AlterReplicaLogDir[] DirsCollection { get; set; }
+		public Dictionary<String, AlterReplicaLogDir> DirsCollection { get; set; }
 
 		public class AlterReplicaLogDir : ISerialize
 		{
@@ -2719,7 +2721,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					TopicsCollection = reader.Read(() => new AlterReplicaLogDirTopic(Version));
+					TopicsCollection = reader.Read(() => new AlterReplicaLogDirTopic(Version)).ToDictionary(field => field.Name);
 				}
 			}
 
@@ -2731,7 +2733,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(TopicsCollection);
+					writer.Write(TopicsCollection.Values.ToArray());
 				}
 			}
 
@@ -2743,7 +2745,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topics to add to the directory.
 			/// </summary>
-			public AlterReplicaLogDirTopic[] TopicsCollection { get; set; }
+			public Dictionary<String, AlterReplicaLogDirTopic> TopicsCollection { get; set; }
 
 			public class AlterReplicaLogDirTopic : ISerialize
 			{
@@ -2968,7 +2970,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				ApiKeysCollection = reader.Read(() => new ApiVersionsResponseKey(Version));
+				ApiKeysCollection = reader.Read(() => new ApiVersionsResponseKey(Version)).ToDictionary(field => field.Index);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -2984,7 +2986,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ApiKeysCollection);
+				writer.Write(ApiKeysCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -3000,7 +3002,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The APIs supported by the broker.
 		/// </summary>
-		public ApiVersionsResponseKey[] ApiKeysCollection { get; set; }
+		public Dictionary<Int16, ApiVersionsResponseKey> ApiKeysCollection { get; set; }
 
 		public class ApiVersionsResponseKey : ISerialize
 		{
@@ -3130,7 +3132,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				RemainingPartitionsCollection = reader.Read(() => new RemainingPartition(Version));
+				RemainingPartitionsCollection = reader.Read(() => new RemainingPartition(Version)).ToDictionary(field => field.TopicName);
 			}
 		}
 
@@ -3142,7 +3144,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(RemainingPartitionsCollection);
+				writer.Write(RemainingPartitionsCollection.Values.ToArray());
 			}
 		}
 
@@ -3154,7 +3156,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The partitions that the broker still leads.
 		/// </summary>
-		public RemainingPartition[] RemainingPartitionsCollection { get; set; }
+		public Dictionary<String, RemainingPartition> RemainingPartitionsCollection { get; set; }
 
 		public class RemainingPartition : ISerialize
 		{
@@ -3925,7 +3927,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				TopicsCollection = reader.Read(() => new CreatableTopic(Version));
+				TopicsCollection = reader.Read(() => new CreatableTopic(Version)).ToDictionary(field => field.Name);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -3941,7 +3943,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				writer.Write(TopicsCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -3956,7 +3958,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to create.
 		/// </summary>
-		public CreatableTopic[] TopicsCollection { get; set; }
+		public Dictionary<String, CreatableTopic> TopicsCollection { get; set; }
 
 		public class CreatableTopic : ISerialize
 		{
@@ -3983,11 +3985,11 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					AssignmentsCollection = reader.Read(() => new CreatableReplicaAssignment(Version));
+					AssignmentsCollection = reader.Read(() => new CreatableReplicaAssignment(Version)).ToDictionary(field => field.PartitionIndex);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					ConfigsCollection = reader.Read(() => new CreateableTopicConfig(Version));
+					ConfigsCollection = reader.Read(() => new CreateableTopicConfig(Version)).ToDictionary(field => field.Name);
 				}
 			}
 
@@ -4007,11 +4009,11 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(AssignmentsCollection);
+					writer.Write(AssignmentsCollection.Values.ToArray());
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ConfigsCollection);
+					writer.Write(ConfigsCollection.Values.ToArray());
 				}
 			}
 
@@ -4033,7 +4035,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The manual partition assignment, or the empty array if we are using automatic assignment.
 			/// </summary>
-			public CreatableReplicaAssignment[] AssignmentsCollection { get; set; }
+			public Dictionary<Int32, CreatableReplicaAssignment> AssignmentsCollection { get; set; }
 
 			public class CreatableReplicaAssignment : ISerialize
 			{
@@ -4082,7 +4084,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The custom topic configurations to set.
 			/// </summary>
-			public CreateableTopicConfig[] ConfigsCollection { get; set; }
+			public Dictionary<String, CreateableTopicConfig> ConfigsCollection { get; set; }
 
 			public class CreateableTopicConfig : ISerialize
 			{
@@ -4159,7 +4161,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				TopicsCollection = reader.Read(() => new CreatableTopicResult(Version));
+				TopicsCollection = reader.Read(() => new CreatableTopicResult(Version)).ToDictionary(field => field.Name);
 			}
 		}
 
@@ -4171,7 +4173,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				writer.Write(TopicsCollection.Values.ToArray());
 			}
 		}
 
@@ -4183,7 +4185,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Results for each topic we tried to create.
 		/// </summary>
-		public CreatableTopicResult[] TopicsCollection { get; set; }
+		public Dictionary<String, CreatableTopicResult> TopicsCollection { get; set; }
 
 		public class CreatableTopicResult : ISerialize
 		{
@@ -4675,7 +4677,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				ResultsCollection = reader.Read(() => new DeletableGroupResult(Version));
+				ResultsCollection = reader.Read(() => new DeletableGroupResult(Version)).ToDictionary(field => field.GroupId);
 			}
 		}
 
@@ -4687,7 +4689,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection);
+				writer.Write(ResultsCollection.Values.ToArray());
 			}
 		}
 
@@ -4699,7 +4701,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The deletion results
 		/// </summary>
-		public DeletableGroupResult[] ResultsCollection { get; set; }
+		public Dictionary<String, DeletableGroupResult> ResultsCollection { get; set; }
 
 		public class DeletableGroupResult : ISerialize
 		{
@@ -5092,7 +5094,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				ResponsesCollection = reader.Read(() => new DeletableTopicResult(Version));
+				ResponsesCollection = reader.Read(() => new DeletableTopicResult(Version)).ToDictionary(field => field.Name);
 			}
 		}
 
@@ -5104,7 +5106,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResponsesCollection);
+				writer.Write(ResponsesCollection.Values.ToArray());
 			}
 		}
 
@@ -5116,7 +5118,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for each topic we tried to delete.
 		/// </summary>
-		public DeletableTopicResult[] ResponsesCollection { get; set; }
+		public Dictionary<String, DeletableTopicResult> ResponsesCollection { get; set; }
 
 		public class DeletableTopicResult : ISerialize
 		{
@@ -8200,7 +8202,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				ProtocolsCollection = reader.Read(() => new JoinGroupRequestProtocol(Version));
+				ProtocolsCollection = reader.Read(() => new JoinGroupRequestProtocol(Version)).ToDictionary(field => field.Name);
 			}
 		}
 
@@ -8228,7 +8230,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ProtocolsCollection);
+				writer.Write(ProtocolsCollection.Values.ToArray());
 			}
 		}
 
@@ -8260,7 +8262,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The list of protocols that the member supports.
 		/// </summary>
-		public JoinGroupRequestProtocol[] ProtocolsCollection { get; set; }
+		public Dictionary<String, JoinGroupRequestProtocol> ProtocolsCollection { get; set; }
 
 		public class JoinGroupRequestProtocol : ISerialize
 		{
@@ -9715,7 +9717,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				BrokersCollection = reader.Read(() => new MetadataResponseBroker(Version));
+				BrokersCollection = reader.Read(() => new MetadataResponseBroker(Version)).ToDictionary(field => field.NodeId);
 			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -9727,7 +9729,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				TopicsCollection = reader.Read(() => new MetadataResponseTopic(Version));
+				TopicsCollection = reader.Read(() => new MetadataResponseTopic(Version)).ToDictionary(field => field.Name);
 			}
 			if (Version.InRange(new VersionRange(8, 2147483647))) 
 			{
@@ -9743,7 +9745,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(BrokersCollection);
+				writer.Write(BrokersCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -9755,7 +9757,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				writer.Write(TopicsCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(8, 2147483647))) 
 			{
@@ -9771,7 +9773,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each broker in the response.
 		/// </summary>
-		public MetadataResponseBroker[] BrokersCollection { get; set; }
+		public Dictionary<Int32, MetadataResponseBroker> BrokersCollection { get; set; }
 
 		public class MetadataResponseBroker : ISerialize
 		{
@@ -9856,7 +9858,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
-		public MetadataResponseTopic[] TopicsCollection { get; set; }
+		public Dictionary<String, MetadataResponseTopic> TopicsCollection { get; set; }
 
 		public class MetadataResponseTopic : ISerialize
 		{

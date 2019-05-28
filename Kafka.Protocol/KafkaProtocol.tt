@@ -45,6 +45,8 @@
 #>
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Kafka.Protocol<# Block(() =>
 {
@@ -190,7 +192,15 @@ void PrintReadFrom(Kafka.Protocol.Generator.Definitions.Messages.Field messageFi
 		}
 		else 
 		{
-			#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version));<# 
+			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
+			if (mapKeyField == null)
+			{
+				#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version));<# 
+			}
+			else 
+			{
+				#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+			}
 		}
 	});		
 }
@@ -215,7 +225,15 @@ void PrintWriteTo(Kafka.Protocol.Generator.Definitions.Messages.Field messageFie
 		}
 		else 
 		{
-			#>writer.Write(<#= fieldName #>);<# 
+			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
+			if (mapKeyField == null)
+			{
+				#>writer.Write(<#= fieldName #>);<# 
+			} 
+			else 
+			{
+				#>writer.Write(<#= fieldName #>.Values.ToArray());<#
+			}
 		}
 	});		
 }
