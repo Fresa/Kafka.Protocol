@@ -1,11 +1,5 @@
 ﻿// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
-
 using System;
-using System.Linq;
-using System.Net;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Kafka.Protocol
 {
