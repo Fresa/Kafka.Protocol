@@ -56,6 +56,8 @@ namespace Kafka.Protocol
 		{
 			return new Boolean(value);
 		}
+
+		public static Boolean Default => Boolean.From(default);
 	}
 
 	/// <summary>
@@ -109,6 +111,8 @@ namespace Kafka.Protocol
 		{
 			return new Int8(value);
 		}
+
+		public static Int8 Default => Int8.From(default);
 	}
 
 	/// <summary>
@@ -162,6 +166,8 @@ namespace Kafka.Protocol
 		{
 			return new Int16(value);
 		}
+
+		public static Int16 Default => Int16.From(default);
 	}
 
 	/// <summary>
@@ -215,6 +221,8 @@ namespace Kafka.Protocol
 		{
 			return new Int32(value);
 		}
+
+		public static Int32 Default => Int32.From(default);
 	}
 
 	/// <summary>
@@ -268,6 +276,8 @@ namespace Kafka.Protocol
 		{
 			return new Int64(value);
 		}
+
+		public static Int64 Default => Int64.From(default);
 	}
 
 	/// <summary>
@@ -321,6 +331,8 @@ namespace Kafka.Protocol
 		{
 			return new UInt32(value);
 		}
+
+		public static UInt32 Default => UInt32.From(default);
 	}
 
 	/// <summary>
@@ -374,6 +386,8 @@ namespace Kafka.Protocol
 		{
 			return new VarInt(value);
 		}
+
+		public static VarInt Default => VarInt.From(default);
 	}
 
 	/// <summary>
@@ -427,6 +441,8 @@ namespace Kafka.Protocol
 		{
 			return new VarLong(value);
 		}
+
+		public static VarLong Default => VarLong.From(default);
 	}
 
 	/// <summary>
@@ -480,6 +496,8 @@ namespace Kafka.Protocol
 		{
 			return new String(value);
 		}
+
+		public static String Default => String.From(System.String.Empty);
 	}
 
 	/// <summary>
@@ -533,6 +551,8 @@ namespace Kafka.Protocol
 		{
 			return new NullableString(value);
 		}
+
+		public static NullableString Default => NullableString.From(System.String.Empty);
 	}
 
 	/// <summary>
@@ -586,6 +606,8 @@ namespace Kafka.Protocol
 		{
 			return new Bytes(value);
 		}
+
+		public static Bytes Default => Bytes.From(new System.Byte[0]);
 	}
 
 	/// <summary>
@@ -639,6 +661,8 @@ namespace Kafka.Protocol
 		{
 			return new NullableBytes(value);
 		}
+
+		public static NullableBytes Default => NullableBytes.From(new System.Byte[0]);
 	}
 	/// <summary>
 	/// The server experienced an unexpected error when processing the request.
@@ -2095,22 +2119,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
 		/// </summary>
-		public String TransactionalId { get; set; }
+		public String TransactionalId { get; set; } = String.Default;
 
 		/// <summary>
 		/// Current producer id in use by the transactional id.
 		/// </summary>
-		public Int64 ProducerId { get; set; }
+		public Int64 ProducerId { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// Current epoch associated with the producer id.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; }
+		public Int16 ProducerEpoch { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		public String GroupId { get; set; }
+		public String GroupId { get; set; } = String.Default;
 	}
 
 	public class AddOffsetsToTxnResponse
@@ -2151,12 +2175,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The response error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 	}
 
 	public class AddPartitionsToTxnRequest
@@ -2213,22 +2237,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
 		/// </summary>
-		public String TransactionalId { get; set; }
+		public String TransactionalId { get; set; } = String.Default;
 
 		/// <summary>
 		/// Current producer id in use by the transactional id.
 		/// </summary>
-		public Int64 ProducerId { get; set; }
+		public Int64 ProducerId { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// Current epoch associated with the producer id.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; }
+		public Int16 ProducerEpoch { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The partitions to add to the transation.
 		/// </summary>
-		public Dictionary<String, AddPartitionsToTxnTopic> TopicsCollection { get; set; }
+		public Dictionary<String, AddPartitionsToTxnTopic> TopicsCollection { get; set; } = new Dictionary<String, AddPartitionsToTxnTopic>();
 
 		public class AddPartitionsToTxnTopic : ISerialize
 		{
@@ -2266,12 +2290,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition indexes to add to the transaction
 			/// </summary>
-			public Int32[] PartitionsCollection { get; set; }
+			public Int32[] PartitionsCollection { get; set; } = System.Array.Empty<Int32>();
 		}
 	}
 
@@ -2313,12 +2337,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
-		public Dictionary<String, AddPartitionsToTxnTopicResult> ResultsCollection { get; set; }
+		public Dictionary<String, AddPartitionsToTxnTopicResult> ResultsCollection { get; set; } = new Dictionary<String, AddPartitionsToTxnTopicResult>();
 
 		public class AddPartitionsToTxnTopicResult : ISerialize
 		{
@@ -2356,12 +2380,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The results for each partition
 			/// </summary>
-			public Dictionary<Int32, AddPartitionsToTxnPartitionResult> ResultsCollection { get; set; }
+			public Dictionary<Int32, AddPartitionsToTxnPartitionResult> ResultsCollection { get; set; } = new Dictionary<Int32, AddPartitionsToTxnPartitionResult>();
 
 			public class AddPartitionsToTxnPartitionResult : ISerialize
 			{
@@ -2399,12 +2423,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The response error code.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 			}
 		}
 	}
@@ -2447,7 +2471,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The updates for each resource.
 		/// </summary>
-		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection { get; set; }
+		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection { get; set; } = new Dictionary<Int8, AlterConfigsResource>();
 
 		public class AlterConfigsResource : ISerialize
 		{
@@ -2493,17 +2517,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceType { get; set; }
+			public Int8 ResourceType { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceName { get; set; }
+			public String ResourceName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The configurations.
 			/// </summary>
-			public Dictionary<String, AlterableConfig> ConfigsCollection { get; set; }
+			public Dictionary<String, AlterableConfig> ConfigsCollection { get; set; } = new Dictionary<String, AlterableConfig>();
 
 			public class AlterableConfig : ISerialize
 			{
@@ -2541,19 +2565,19 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration key name.
 				/// </summary>
-				public String Name { get; set; }
+				public String Name { get; set; } = String.Default;
 
 				/// <summary>
 				/// The value to set for the configuration key.
 				/// </summary>
-				public String Value { get; set; }
+				public String Value { get; set; } = String.Default;
 			}
 		}
 
 		/// <summary>
 		/// True if we should validate the request, but not change the configurations.
 		/// </summary>
-		public Boolean ValidateOnly { get; set; }
+		public Boolean ValidateOnly { get; set; } = Boolean.Default;
 	}
 
 	public class AlterConfigsResponse
@@ -2594,12 +2618,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The responses for each resource.
 		/// </summary>
-		public AlterConfigsResourceResponse[] ResourcesCollection { get; set; }
+		public AlterConfigsResourceResponse[] ResourcesCollection { get; set; } = System.Array.Empty<AlterConfigsResourceResponse>();
 
 		public class AlterConfigsResourceResponse : ISerialize
 		{
@@ -2653,22 +2677,22 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource error code.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The resource error message, or null if there was no error.
 			/// </summary>
-			public String ErrorMessage { get; set; }
+			public String ErrorMessage { get; set; } = String.Default;
 
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceType { get; set; }
+			public Int8 ResourceType { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceName { get; set; }
+			public String ResourceName { get; set; } = String.Default;
 		}
 	}
 
@@ -2702,7 +2726,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The alterations to make for each directory.
 		/// </summary>
-		public Dictionary<String, AlterReplicaLogDir> DirsCollection { get; set; }
+		public Dictionary<String, AlterReplicaLogDir> DirsCollection { get; set; } = new Dictionary<String, AlterReplicaLogDir>();
 
 		public class AlterReplicaLogDir : ISerialize
 		{
@@ -2740,12 +2764,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The absolute directory path.
 			/// </summary>
-			public String Path { get; set; }
+			public String Path { get; set; } = String.Default;
 
 			/// <summary>
 			/// The topics to add to the directory.
 			/// </summary>
-			public Dictionary<String, AlterReplicaLogDirTopic> TopicsCollection { get; set; }
+			public Dictionary<String, AlterReplicaLogDirTopic> TopicsCollection { get; set; } = new Dictionary<String, AlterReplicaLogDirTopic>();
 
 			public class AlterReplicaLogDirTopic : ISerialize
 			{
@@ -2783,12 +2807,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				public String Name { get; set; }
+				public String Name { get; set; } = String.Default;
 
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
-				public Int32[] PartitionsCollection { get; set; }
+				public Int32[] PartitionsCollection { get; set; } = System.Array.Empty<Int32>();
 			}
 		}
 	}
@@ -2831,12 +2855,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
-		public AlterReplicaLogDirTopicResult[] ResultsCollection { get; set; }
+		public AlterReplicaLogDirTopicResult[] ResultsCollection { get; set; } = System.Array.Empty<AlterReplicaLogDirTopicResult>();
 
 		public class AlterReplicaLogDirTopicResult : ISerialize
 		{
@@ -2874,12 +2898,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			public String TopicName { get; set; }
+			public String TopicName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The results for each partition.
 			/// </summary>
-			public AlterReplicaLogDirPartitionResult[] PartitionsCollection { get; set; }
+			public AlterReplicaLogDirPartitionResult[] PartitionsCollection { get; set; } = System.Array.Empty<AlterReplicaLogDirPartitionResult>();
 
 			public class AlterReplicaLogDirPartitionResult : ISerialize
 			{
@@ -2917,12 +2941,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 			}
 		}
 	}
@@ -2997,12 +3021,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The APIs supported by the broker.
 		/// </summary>
-		public Dictionary<Int16, ApiVersionsResponseKey> ApiKeysCollection { get; set; }
+		public Dictionary<Int16, ApiVersionsResponseKey> ApiKeysCollection { get; set; } = new Dictionary<Int16, ApiVersionsResponseKey>();
 
 		public class ApiVersionsResponseKey : ISerialize
 		{
@@ -3048,23 +3072,23 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The API index.
 			/// </summary>
-			public Int16 Index { get; set; }
+			public Int16 Index { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The minimum supported version, inclusive.
 			/// </summary>
-			public Int16 MinVersion { get; set; }
+			public Int16 MinVersion { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The maximum supported version, inclusive.
 			/// </summary>
-			public Int16 MaxVersion { get; set; }
+			public Int16 MaxVersion { get; set; } = Int16.Default;
 		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 	}
 
 	public class ControlledShutdownRequest
@@ -3105,7 +3129,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The id of the broker for which controlled shutdown has been requested.
 		/// </summary>
-		public Int32 BrokerId { get; set; }
+		public Int32 BrokerId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The broker epoch.
@@ -3151,12 +3175,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The partitions that the broker still leads.
 		/// </summary>
-		public Dictionary<String, RemainingPartition> RemainingPartitionsCollection { get; set; }
+		public Dictionary<String, RemainingPartition> RemainingPartitionsCollection { get; set; } = new Dictionary<String, RemainingPartition>();
 
 		public class RemainingPartition : ISerialize
 		{
@@ -3194,12 +3218,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			public String TopicName { get; set; }
+			public String TopicName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The index of the partition.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; }
+			public Int32 PartitionIndex { get; set; } = Int32.Default;
 		}
 	}
 
@@ -3233,7 +3257,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ACLs that we want to create.
 		/// </summary>
-		public CreatableAcl[] CreationsCollection { get; set; }
+		public CreatableAcl[] CreationsCollection { get; set; } = System.Array.Empty<CreatableAcl>();
 
 		public class CreatableAcl : ISerialize
 		{
@@ -3311,12 +3335,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The type of the resource.
 			/// </summary>
-			public Int8 ResourceType { get; set; }
+			public Int8 ResourceType { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The resource name for the ACL.
 			/// </summary>
-			public String ResourceName { get; set; }
+			public String ResourceName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The pattern type for the ACL.
@@ -3326,22 +3350,22 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The principal for the ACL.
 			/// </summary>
-			public String Principal { get; set; }
+			public String Principal { get; set; } = String.Default;
 
 			/// <summary>
 			/// The host for the ACL.
 			/// </summary>
-			public String Host { get; set; }
+			public String Host { get; set; } = String.Default;
 
 			/// <summary>
 			/// The operation type for the ACL (read, write, etc.).
 			/// </summary>
-			public Int8 Operation { get; set; }
+			public Int8 Operation { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The permission type for the ACL (allow, deny, etc.).
 			/// </summary>
-			public Int8 PermissionType { get; set; }
+			public Int8 PermissionType { get; set; } = Int8.Default;
 		}
 	}
 
@@ -3383,12 +3407,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The results for each ACL creation.
 		/// </summary>
-		public CreatableAclResult[] ResultsCollection { get; set; }
+		public CreatableAclResult[] ResultsCollection { get; set; } = System.Array.Empty<CreatableAclResult>();
 
 		public class CreatableAclResult : ISerialize
 		{
@@ -3426,12 +3450,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The result message, or null if there was no error.
 			/// </summary>
-			public String ErrorMessage { get; set; }
+			public String ErrorMessage { get; set; } = String.Default;
 		}
 	}
 
@@ -3473,7 +3497,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// A list of those who are allowed to renew this token before it expires.
 		/// </summary>
-		public CreatableRenewers[] RenewersCollection { get; set; }
+		public CreatableRenewers[] RenewersCollection { get; set; } = System.Array.Empty<CreatableRenewers>();
 
 		public class CreatableRenewers : ISerialize
 		{
@@ -3511,18 +3535,18 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The type of the Kafka principal.
 			/// </summary>
-			public String PrincipalType { get; set; }
+			public String PrincipalType { get; set; } = String.Default;
 
 			/// <summary>
 			/// The name of the Kafka principal.
 			/// </summary>
-			public String PrincipalName { get; set; }
+			public String PrincipalName { get; set; } = String.Default;
 		}
 
 		/// <summary>
 		/// The maximum lifetime of the token in milliseconds, or -1 to use the server side default.
 		/// </summary>
-		public Int64 MaxLifetimeMs { get; set; }
+		public Int64 MaxLifetimeMs { get; set; } = Int64.Default;
 	}
 
 	public class CreateDelegationTokenResponse
@@ -3619,47 +3643,47 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error, or zero if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The principal type of the token owner.
 		/// </summary>
-		public String PrincipalType { get; set; }
+		public String PrincipalType { get; set; } = String.Default;
 
 		/// <summary>
 		/// The name of the token owner.
 		/// </summary>
-		public String PrincipalName { get; set; }
+		public String PrincipalName { get; set; } = String.Default;
 
 		/// <summary>
 		/// When this token was generated.
 		/// </summary>
-		public Int64 IssueTimestampMs { get; set; }
+		public Int64 IssueTimestampMs { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// When this token expires.
 		/// </summary>
-		public Int64 ExpiryTimestampMs { get; set; }
+		public Int64 ExpiryTimestampMs { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// The maximum lifetime of this token.
 		/// </summary>
-		public Int64 MaxTimestampMs { get; set; }
+		public Int64 MaxTimestampMs { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// The token UUID.
 		/// </summary>
-		public String TokenId { get; set; }
+		public String TokenId { get; set; } = String.Default;
 
 		/// <summary>
 		/// HMAC of the delegation token.
 		/// </summary>
-		public Bytes Hmac { get; set; }
+		public Bytes Hmac { get; set; } = Bytes.Default;
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 	}
 
 	public class CreatePartitionsRequest
@@ -3708,7 +3732,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to create new partitions inside.
 		/// </summary>
-		public CreatePartitionsTopic[] TopicsCollection { get; set; }
+		public CreatePartitionsTopic[] TopicsCollection { get; set; } = System.Array.Empty<CreatePartitionsTopic>();
 
 		public class CreatePartitionsTopic : ISerialize
 		{
@@ -3754,17 +3778,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The new partition count.
 			/// </summary>
-			public Int32 Count { get; set; }
+			public Int32 Count { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The new partition assignments.
 			/// </summary>
-			public CreatePartitionsAssignment[] AssignmentsCollection { get; set; }
+			public CreatePartitionsAssignment[] AssignmentsCollection { get; set; } = System.Array.Empty<CreatePartitionsAssignment>();
 
 			public class CreatePartitionsAssignment : ISerialize
 			{
@@ -3794,19 +3818,19 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The assigned broker IDs.
 				/// </summary>
-				public Int32[] BrokerIdsCollection { get; set; }
+				public Int32[] BrokerIdsCollection { get; set; } = System.Array.Empty<Int32>();
 			}
 		}
 
 		/// <summary>
 		/// The time in ms to wait for the partitions to be created.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; }
+		public Int32 TimeoutMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// If true, then validate the request, but don't actually increase the number of partitions.
 		/// </summary>
-		public Boolean ValidateOnly { get; set; }
+		public Boolean ValidateOnly { get; set; } = Boolean.Default;
 	}
 
 	public class CreatePartitionsResponse
@@ -3847,12 +3871,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The partition creation results for each topic.
 		/// </summary>
-		public CreatePartitionsTopicResult[] ResultsCollection { get; set; }
+		public CreatePartitionsTopicResult[] ResultsCollection { get; set; } = System.Array.Empty<CreatePartitionsTopicResult>();
 
 		public class CreatePartitionsTopicResult : ISerialize
 		{
@@ -3898,17 +3922,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The result message, or null if there was no error.
 			/// </summary>
-			public String ErrorMessage { get; set; }
+			public String ErrorMessage { get; set; } = String.Default;
 		}
 	}
 
@@ -3958,7 +3982,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to create.
 		/// </summary>
-		public Dictionary<String, CreatableTopic> TopicsCollection { get; set; }
+		public Dictionary<String, CreatableTopic> TopicsCollection { get; set; } = new Dictionary<String, CreatableTopic>();
 
 		public class CreatableTopic : ISerialize
 		{
@@ -4020,22 +4044,22 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The number of partitions to create in the topic, or -1 if we are specifying a manual partition assignment.
 			/// </summary>
-			public Int32 NumPartitions { get; set; }
+			public Int32 NumPartitions { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The number of replicas to create for each partition in the topic, or -1 if we are specifying a manual partition assignment.
 			/// </summary>
-			public Int16 ReplicationFactor { get; set; }
+			public Int16 ReplicationFactor { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The manual partition assignment, or the empty array if we are using automatic assignment.
 			/// </summary>
-			public Dictionary<Int32, CreatableReplicaAssignment> AssignmentsCollection { get; set; }
+			public Dictionary<Int32, CreatableReplicaAssignment> AssignmentsCollection { get; set; } = new Dictionary<Int32, CreatableReplicaAssignment>();
 
 			public class CreatableReplicaAssignment : ISerialize
 			{
@@ -4073,18 +4097,18 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The brokers to place the partition on.
 				/// </summary>
-				public Int32[] BrokerIdsCollection { get; set; }
+				public Int32[] BrokerIdsCollection { get; set; } = System.Array.Empty<Int32>();
 			}
 
 			/// <summary>
 			/// The custom topic configurations to set.
 			/// </summary>
-			public Dictionary<String, CreateableTopicConfig> ConfigsCollection { get; set; }
+			public Dictionary<String, CreateableTopicConfig> ConfigsCollection { get; set; } = new Dictionary<String, CreateableTopicConfig>();
 
 			public class CreateableTopicConfig : ISerialize
 			{
@@ -4122,12 +4146,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
-				public String Name { get; set; }
+				public String Name { get; set; } = String.Default;
 
 				/// <summary>
 				/// The configuration value.
 				/// </summary>
-				public String Value { get; set; }
+				public String Value { get; set; } = String.Default;
 			}
 		}
 
@@ -4180,12 +4204,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// Results for each topic we tried to create.
 		/// </summary>
-		public Dictionary<String, CreatableTopicResult> TopicsCollection { get; set; }
+		public Dictionary<String, CreatableTopicResult> TopicsCollection { get; set; } = new Dictionary<String, CreatableTopicResult>();
 
 		public class CreatableTopicResult : ISerialize
 		{
@@ -4231,17 +4255,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The error message, or null if there was no error.
 			/// </summary>
-			public String ErrorMessage { get; set; }
+			public String ErrorMessage { get; set; } = String.Default;
 		}
 	}
 
@@ -4275,7 +4299,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The filters to use when deleting ACLs.
 		/// </summary>
-		public DeleteAclsFilter[] FiltersCollection { get; set; }
+		public DeleteAclsFilter[] FiltersCollection { get; set; } = System.Array.Empty<DeleteAclsFilter>();
 
 		public class DeleteAclsFilter : ISerialize
 		{
@@ -4353,12 +4377,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceTypeFilter { get; set; }
+			public Int8 ResourceTypeFilter { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceNameFilter { get; set; }
+			public String ResourceNameFilter { get; set; } = String.Default;
 
 			/// <summary>
 			/// The pattern type.
@@ -4368,22 +4392,22 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The principal filter, or null to accept all principals.
 			/// </summary>
-			public String PrincipalFilter { get; set; }
+			public String PrincipalFilter { get; set; } = String.Default;
 
 			/// <summary>
 			/// The host filter, or null to accept all hosts.
 			/// </summary>
-			public String HostFilter { get; set; }
+			public String HostFilter { get; set; } = String.Default;
 
 			/// <summary>
 			/// The ACL operation.
 			/// </summary>
-			public Int8 Operation { get; set; }
+			public Int8 Operation { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The permission type.
 			/// </summary>
-			public Int8 PermissionType { get; set; }
+			public Int8 PermissionType { get; set; } = Int8.Default;
 		}
 	}
 
@@ -4425,12 +4449,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The results for each filter.
 		/// </summary>
-		public DeleteAclsFilterResult[] FilterResultsCollection { get; set; }
+		public DeleteAclsFilterResult[] FilterResultsCollection { get; set; } = System.Array.Empty<DeleteAclsFilterResult>();
 
 		public class DeleteAclsFilterResult : ISerialize
 		{
@@ -4476,17 +4500,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if the filter succeeded.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The error message, or null if the filter succeeded.
 			/// </summary>
-			public String ErrorMessage { get; set; }
+			public String ErrorMessage { get; set; } = String.Default;
 
 			/// <summary>
 			/// The ACLs which matched this filter.
 			/// </summary>
-			public DeleteAclsMatchingAcl[] MatchingAclsCollection { get; set; }
+			public DeleteAclsMatchingAcl[] MatchingAclsCollection { get; set; } = System.Array.Empty<DeleteAclsMatchingAcl>();
 
 			public class DeleteAclsMatchingAcl : ISerialize
 			{
@@ -4580,22 +4604,22 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 
 				/// <summary>
 				/// The deletion error message, or null if the deletion succeeded.
 				/// </summary>
-				public String ErrorMessage { get; set; }
+				public String ErrorMessage { get; set; } = String.Default;
 
 				/// <summary>
 				/// The ACL resource type.
 				/// </summary>
-				public Int8 ResourceType { get; set; }
+				public Int8 ResourceType { get; set; } = Int8.Default;
 
 				/// <summary>
 				/// The ACL resource name.
 				/// </summary>
-				public String ResourceName { get; set; }
+				public String ResourceName { get; set; } = String.Default;
 
 				/// <summary>
 				/// The ACL resource pattern type.
@@ -4605,22 +4629,22 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The ACL principal.
 				/// </summary>
-				public String Principal { get; set; }
+				public String Principal { get; set; } = String.Default;
 
 				/// <summary>
 				/// The ACL host.
 				/// </summary>
-				public String Host { get; set; }
+				public String Host { get; set; } = String.Default;
 
 				/// <summary>
 				/// The ACL operation.
 				/// </summary>
-				public Int8 Operation { get; set; }
+				public Int8 Operation { get; set; } = Int8.Default;
 
 				/// <summary>
 				/// The ACL permission type.
 				/// </summary>
-				public Int8 PermissionType { get; set; }
+				public Int8 PermissionType { get; set; } = Int8.Default;
 			}
 		}
 	}
@@ -4655,7 +4679,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group names to delete.
 		/// </summary>
-		public String[] GroupsNamesCollection { get; set; }
+		public String[] GroupsNamesCollection { get; set; } = System.Array.Empty<String>();
 	}
 
 	public class DeleteGroupsResponse
@@ -4696,12 +4720,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The deletion results
 		/// </summary>
-		public Dictionary<String, DeletableGroupResult> ResultsCollection { get; set; }
+		public Dictionary<String, DeletableGroupResult> ResultsCollection { get; set; } = new Dictionary<String, DeletableGroupResult>();
 
 		public class DeletableGroupResult : ISerialize
 		{
@@ -4739,12 +4763,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group id
 			/// </summary>
-			public String GroupId { get; set; }
+			public String GroupId { get; set; } = String.Default;
 
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 		}
 	}
 
@@ -4786,7 +4810,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to delete records from.
 		/// </summary>
-		public DeleteRecordsTopic[] TopicsCollection { get; set; }
+		public DeleteRecordsTopic[] TopicsCollection { get; set; } = System.Array.Empty<DeleteRecordsTopic>();
 
 		public class DeleteRecordsTopic : ISerialize
 		{
@@ -4824,12 +4848,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition that we want to delete records from.
 			/// </summary>
-			public DeleteRecordsPartition[] PartitionsCollection { get; set; }
+			public DeleteRecordsPartition[] PartitionsCollection { get; set; } = System.Array.Empty<DeleteRecordsPartition>();
 
 			public class DeleteRecordsPartition : ISerialize
 			{
@@ -4867,19 +4891,19 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The deletion offset.
 				/// </summary>
-				public Int64 Offset { get; set; }
+				public Int64 Offset { get; set; } = Int64.Default;
 			}
 		}
 
 		/// <summary>
 		/// How long to wait for the deletion to complete, in milliseconds.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; }
+		public Int32 TimeoutMs { get; set; } = Int32.Default;
 	}
 
 	public class DeleteRecordsResponse
@@ -4920,12 +4944,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// Each topic that we wanted to delete records from.
 		/// </summary>
-		public DeleteRecordsTopicResult[] TopicsCollection { get; set; }
+		public DeleteRecordsTopicResult[] TopicsCollection { get; set; } = System.Array.Empty<DeleteRecordsTopicResult>();
 
 		public class DeleteRecordsTopicResult : ISerialize
 		{
@@ -4963,12 +4987,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition that we wanted to delete records from.
 			/// </summary>
-			public DeleteRecordsPartitionResult[] PartitionsCollection { get; set; }
+			public DeleteRecordsPartitionResult[] PartitionsCollection { get; set; } = System.Array.Empty<DeleteRecordsPartitionResult>();
 
 			public class DeleteRecordsPartitionResult : ISerialize
 			{
@@ -5014,17 +5038,17 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The partition low water mark.
 				/// </summary>
-				public Int64 LowWatermark { get; set; }
+				public Int64 LowWatermark { get; set; } = Int64.Default;
 
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 			}
 		}
 	}
@@ -5067,12 +5091,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The names of the topics to delete
 		/// </summary>
-		public String[] TopicNamesCollection { get; set; }
+		public String[] TopicNamesCollection { get; set; } = System.Array.Empty<String>();
 
 		/// <summary>
 		/// The length of time in milliseconds to wait for the deletions to complete.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; }
+		public Int32 TimeoutMs { get; set; } = Int32.Default;
 	}
 
 	public class DeleteTopicsResponse
@@ -5113,12 +5137,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The results for each topic we tried to delete.
 		/// </summary>
-		public Dictionary<String, DeletableTopicResult> ResponsesCollection { get; set; }
+		public Dictionary<String, DeletableTopicResult> ResponsesCollection { get; set; } = new Dictionary<String, DeletableTopicResult>();
 
 		public class DeletableTopicResult : ISerialize
 		{
@@ -5156,12 +5180,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 		}
 	}
 
@@ -5243,12 +5267,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The resource type.
 		/// </summary>
-		public Int8 ResourceType { get; set; }
+		public Int8 ResourceType { get; set; } = Int8.Default;
 
 		/// <summary>
 		/// The resource name, or null to match any resource name.
 		/// </summary>
-		public String ResourceNameFilter { get; set; }
+		public String ResourceNameFilter { get; set; } = String.Default;
 
 		/// <summary>
 		/// The resource pattern to match.
@@ -5258,22 +5282,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The principal to match, or null to match any principal.
 		/// </summary>
-		public String PrincipalFilter { get; set; }
+		public String PrincipalFilter { get; set; } = String.Default;
 
 		/// <summary>
 		/// The host to match, or null to match any host.
 		/// </summary>
-		public String HostFilter { get; set; }
+		public String HostFilter { get; set; } = String.Default;
 
 		/// <summary>
 		/// The operation to match.
 		/// </summary>
-		public Int8 Operation { get; set; }
+		public Int8 Operation { get; set; } = Int8.Default;
 
 		/// <summary>
 		/// The permission type to match.
 		/// </summary>
-		public Int8 PermissionType { get; set; }
+		public Int8 PermissionType { get; set; } = Int8.Default;
 	}
 
 	public class DescribeAclsResponse
@@ -5330,22 +5354,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		public String ErrorMessage { get; set; }
+		public String ErrorMessage { get; set; } = String.Default;
 
 		/// <summary>
 		/// Each Resource that is referenced in an ACL.
 		/// </summary>
-		public DescribeAclsResource[] ResourcesCollection { get; set; }
+		public DescribeAclsResource[] ResourcesCollection { get; set; } = System.Array.Empty<DescribeAclsResource>();
 
 		public class DescribeAclsResource : ISerialize
 		{
@@ -5399,12 +5423,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 Type { get; set; }
+			public Int8 Type { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The resource pattern type.
@@ -5414,7 +5438,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The ACLs.
 			/// </summary>
-			public AclDescription[] AclsCollection { get; set; }
+			public AclDescription[] AclsCollection { get; set; } = System.Array.Empty<AclDescription>();
 
 			public class AclDescription : ISerialize
 			{
@@ -5468,22 +5492,22 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The ACL principal.
 				/// </summary>
-				public String Principal { get; set; }
+				public String Principal { get; set; } = String.Default;
 
 				/// <summary>
 				/// The ACL host.
 				/// </summary>
-				public String Host { get; set; }
+				public String Host { get; set; } = String.Default;
 
 				/// <summary>
 				/// The ACL operation.
 				/// </summary>
-				public Int8 Operation { get; set; }
+				public Int8 Operation { get; set; } = Int8.Default;
 
 				/// <summary>
 				/// The ACL permission type.
 				/// </summary>
-				public Int8 PermissionType { get; set; }
+				public Int8 PermissionType { get; set; } = Int8.Default;
 			}
 		}
 	}
@@ -5526,7 +5550,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The resources whose configurations we want to describe.
 		/// </summary>
-		public DescribeConfigsResource[] ResourcesCollection { get; set; }
+		public DescribeConfigsResource[] ResourcesCollection { get; set; } = System.Array.Empty<DescribeConfigsResource>();
 
 		public class DescribeConfigsResource : ISerialize
 		{
@@ -5572,17 +5596,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceType { get; set; }
+			public Int8 ResourceType { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceName { get; set; }
+			public String ResourceName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The configuration keys to list, or null to list all configuration keys.
 			/// </summary>
-			public String[] ConfigurationKeysCollection { get; set; }
+			public String[] ConfigurationKeysCollection { get; set; } = System.Array.Empty<String>();
 		}
 
 		/// <summary>
@@ -5629,12 +5653,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The results for each resource.
 		/// </summary>
-		public DescribeConfigsResult[] ResultsCollection { get; set; }
+		public DescribeConfigsResult[] ResultsCollection { get; set; } = System.Array.Empty<DescribeConfigsResult>();
 
 		public class DescribeConfigsResult : ISerialize
 		{
@@ -5696,27 +5720,27 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if we were able to successfully describe the configurations.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The error message, or null if we were able to successfully describe the configurations.
 			/// </summary>
-			public String ErrorMessage { get; set; }
+			public String ErrorMessage { get; set; } = String.Default;
 
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceType { get; set; }
+			public Int8 ResourceType { get; set; } = Int8.Default;
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceName { get; set; }
+			public String ResourceName { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each listed configuration.
 			/// </summary>
-			public DescribeConfigsResourceResult[] ConfigsCollection { get; set; }
+			public DescribeConfigsResourceResult[] ConfigsCollection { get; set; } = System.Array.Empty<DescribeConfigsResourceResult>();
 
 			public class DescribeConfigsResourceResult : ISerialize
 			{
@@ -5794,22 +5818,22 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
-				public String Name { get; set; }
+				public String Name { get; set; } = String.Default;
 
 				/// <summary>
 				/// The configuration value.
 				/// </summary>
-				public String Value { get; set; }
+				public String Value { get; set; } = String.Default;
 
 				/// <summary>
 				/// True if the configuration is read-only.
 				/// </summary>
-				public Boolean ReadOnly { get; set; }
+				public Boolean ReadOnly { get; set; } = Boolean.Default;
 
 				/// <summary>
 				/// True if the configuration is not set.
 				/// </summary>
-				public Boolean IsDefault { get; set; }
+				public Boolean IsDefault { get; set; } = Boolean.Default;
 
 				/// <summary>
 				/// The configuration source.
@@ -5819,12 +5843,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// True if this configuration is sensitive.
 				/// </summary>
-				public Boolean IsSensitive { get; set; }
+				public Boolean IsSensitive { get; set; } = Boolean.Default;
 
 				/// <summary>
 				/// The synonyms for this configuration key.
 				/// </summary>
-				public DescribeConfigsSynonym[] SynonymsCollection { get; set; }
+				public DescribeConfigsSynonym[] SynonymsCollection { get; set; } = System.Array.Empty<DescribeConfigsSynonym>();
 
 				public class DescribeConfigsSynonym : ISerialize
 				{
@@ -5870,17 +5894,17 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The synonym name.
 					/// </summary>
-					public String Name { get; set; }
+					public String Name { get; set; } = String.Default;
 
 					/// <summary>
 					/// The synonym value.
 					/// </summary>
-					public String Value { get; set; }
+					public String Value { get; set; } = String.Default;
 
 					/// <summary>
 					/// The synonym source.
 					/// </summary>
-					public Int8 Source { get; set; }
+					public Int8 Source { get; set; } = Int8.Default;
 				}
 			}
 		}
@@ -5916,7 +5940,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each owner that we want to describe delegation tokens for, or null to describe all tokens.
 		/// </summary>
-		public DescribeDelegationTokenOwner[] OwnersCollection { get; set; }
+		public DescribeDelegationTokenOwner[] OwnersCollection { get; set; } = System.Array.Empty<DescribeDelegationTokenOwner>();
 
 		public class DescribeDelegationTokenOwner : ISerialize
 		{
@@ -5954,12 +5978,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The owner principal type.
 			/// </summary>
-			public String PrincipalType { get; set; }
+			public String PrincipalType { get; set; } = String.Default;
 
 			/// <summary>
 			/// The owner principal name.
 			/// </summary>
-			public String PrincipalName { get; set; }
+			public String PrincipalName { get; set; } = String.Default;
 		}
 	}
 
@@ -6009,12 +6033,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The tokens.
 		/// </summary>
-		public DescribedDelegationToken[] TokensCollection { get; set; }
+		public DescribedDelegationToken[] TokensCollection { get; set; } = System.Array.Empty<DescribedDelegationToken>();
 
 		public class DescribedDelegationToken : ISerialize
 		{
@@ -6100,42 +6124,42 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The token principal type.
 			/// </summary>
-			public String PrincipalType { get; set; }
+			public String PrincipalType { get; set; } = String.Default;
 
 			/// <summary>
 			/// The token principal name.
 			/// </summary>
-			public String PrincipalName { get; set; }
+			public String PrincipalName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The token issue timestamp in milliseconds.
 			/// </summary>
-			public Int64 IssueTimestamp { get; set; }
+			public Int64 IssueTimestamp { get; set; } = Int64.Default;
 
 			/// <summary>
 			/// The token expiry timestamp in milliseconds.
 			/// </summary>
-			public Int64 ExpiryTimestamp { get; set; }
+			public Int64 ExpiryTimestamp { get; set; } = Int64.Default;
 
 			/// <summary>
 			/// The token maximum timestamp length in milliseconds.
 			/// </summary>
-			public Int64 MaxTimestamp { get; set; }
+			public Int64 MaxTimestamp { get; set; } = Int64.Default;
 
 			/// <summary>
 			/// The token ID.
 			/// </summary>
-			public String TokenId { get; set; }
+			public String TokenId { get; set; } = String.Default;
 
 			/// <summary>
 			/// The token HMAC.
 			/// </summary>
-			public Bytes Hmac { get; set; }
+			public Bytes Hmac { get; set; } = Bytes.Default;
 
 			/// <summary>
 			/// Those who are able to renew this token before it expires.
 			/// </summary>
-			public DescribedDelegationTokenRenewer[] RenewersCollection { get; set; }
+			public DescribedDelegationTokenRenewer[] RenewersCollection { get; set; } = System.Array.Empty<DescribedDelegationTokenRenewer>();
 
 			public class DescribedDelegationTokenRenewer : ISerialize
 			{
@@ -6173,19 +6197,19 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The renewer principal type
 				/// </summary>
-				public String PrincipalType { get; set; }
+				public String PrincipalType { get; set; } = String.Default;
 
 				/// <summary>
 				/// The renewer principal name
 				/// </summary>
-				public String PrincipalName { get; set; }
+				public String PrincipalName { get; set; } = String.Default;
 			}
 		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 	}
 
 	public class DescribeGroupsRequest
@@ -6226,12 +6250,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The names of the groups to describe
 		/// </summary>
-		public String[] GroupsCollection { get; set; }
+		public String[] GroupsCollection { get; set; } = System.Array.Empty<String>();
 
 		/// <summary>
 		/// Whether to include authorized operations.
 		/// </summary>
-		public Boolean IncludeAuthorizedOperations { get; set; }
+		public Boolean IncludeAuthorizedOperations { get; set; } = Boolean.Default;
 	}
 
 	public class DescribeGroupsResponse
@@ -6272,12 +6296,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// Each described group.
 		/// </summary>
-		public DescribedGroup[] GroupsCollection { get; set; }
+		public DescribedGroup[] GroupsCollection { get; set; } = System.Array.Empty<DescribedGroup>();
 
 		public class DescribedGroup : ISerialize
 		{
@@ -6355,32 +6379,32 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The describe error, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The group ID string.
 			/// </summary>
-			public String GroupId { get; set; }
+			public String GroupId { get; set; } = String.Default;
 
 			/// <summary>
 			/// The group state string, or the empty string.
 			/// </summary>
-			public String GroupState { get; set; }
+			public String GroupState { get; set; } = String.Default;
 
 			/// <summary>
 			/// The group protocol type, or the empty string.
 			/// </summary>
-			public String ProtocolType { get; set; }
+			public String ProtocolType { get; set; } = String.Default;
 
 			/// <summary>
 			/// The group protocol data, or the empty string.
 			/// </summary>
-			public String ProtocolData { get; set; }
+			public String ProtocolData { get; set; } = String.Default;
 
 			/// <summary>
 			/// The group members.
 			/// </summary>
-			public DescribedGroupMember[] MembersCollection { get; set; }
+			public DescribedGroupMember[] MembersCollection { get; set; } = System.Array.Empty<DescribedGroupMember>();
 
 			public class DescribedGroupMember : ISerialize
 			{
@@ -6442,33 +6466,33 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The member ID assigned by the group coordinator.
 				/// </summary>
-				public String MemberId { get; set; }
+				public String MemberId { get; set; } = String.Default;
 
 				/// <summary>
 				/// The client ID used in the member's latest join group request.
 				/// </summary>
-				public String ClientId { get; set; }
+				public String ClientId { get; set; } = String.Default;
 
 				/// <summary>
 				/// The client host.
 				/// </summary>
-				public String ClientHost { get; set; }
+				public String ClientHost { get; set; } = String.Default;
 
 				/// <summary>
 				/// The metadata corresponding to the current group protocol in use.
 				/// </summary>
-				public Bytes MemberMetadata { get; set; }
+				public Bytes MemberMetadata { get; set; } = Bytes.Default;
 
 				/// <summary>
 				/// The current assignment provided by the group leader.
 				/// </summary>
-				public Bytes MemberAssignment { get; set; }
+				public Bytes MemberAssignment { get; set; } = Bytes.Default;
 			}
 
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this group.
 			/// </summary>
-			public Int32 AuthorizedOperations { get; set; }
+			public Int32 AuthorizedOperations { get; set; } = Int32.Default;
 		}
 	}
 
@@ -6502,7 +6526,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to describe log directories for, or null for all topics.
 		/// </summary>
-		public DescribableLogDirTopic[] TopicsCollection { get; set; }
+		public DescribableLogDirTopic[] TopicsCollection { get; set; } = System.Array.Empty<DescribableLogDirTopic>();
 
 		public class DescribableLogDirTopic : ISerialize
 		{
@@ -6540,12 +6564,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Topic { get; set; }
+			public String Topic { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition indxes.
 			/// </summary>
-			public Int32[] PartitionIndexCollection { get; set; }
+			public Int32[] PartitionIndexCollection { get; set; } = System.Array.Empty<Int32>();
 		}
 	}
 
@@ -6587,12 +6611,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The log directories.
 		/// </summary>
-		public DescribeLogDirsResult[] ResultsCollection { get; set; }
+		public DescribeLogDirsResult[] ResultsCollection { get; set; } = System.Array.Empty<DescribeLogDirsResult>();
 
 		public class DescribeLogDirsResult : ISerialize
 		{
@@ -6638,17 +6662,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The absolute log directory path.
 			/// </summary>
-			public String LogDir { get; set; }
+			public String LogDir { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each topic.
 			/// </summary>
-			public DescribeLogDirsTopic[] TopicsCollection { get; set; }
+			public DescribeLogDirsTopic[] TopicsCollection { get; set; } = System.Array.Empty<DescribeLogDirsTopic>();
 
 			public class DescribeLogDirsTopic : ISerialize
 			{
@@ -6686,9 +6710,9 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				public String Name { get; set; }
+				public String Name { get; set; } = String.Default;
 
-				public DescribeLogDirsPartition[] PartitionsCollection { get; set; }
+				public DescribeLogDirsPartition[] PartitionsCollection { get; set; } = System.Array.Empty<DescribeLogDirsPartition>();
 
 				public class DescribeLogDirsPartition : ISerialize
 				{
@@ -6742,22 +6766,22 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The partition index.
 					/// </summary>
-					public Int32 PartitionIndex { get; set; }
+					public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 					/// <summary>
 					/// The size of the log segments in this partition in bytes.
 					/// </summary>
-					public Int64 PartitionSize { get; set; }
+					public Int64 PartitionSize { get; set; } = Int64.Default;
 
 					/// <summary>
 					/// The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition)
 					/// </summary>
-					public Int64 OffsetLag { get; set; }
+					public Int64 OffsetLag { get; set; } = Int64.Default;
 
 					/// <summary>
 					/// True if this log is created by AlterReplicaLogDirsRequest and will replace the current log of the replica in the future.
 					/// </summary>
-					public Boolean IsFutureKey { get; set; }
+					public Boolean IsFutureKey { get; set; } = Boolean.Default;
 				}
 			}
 		}
@@ -6801,7 +6825,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topic partitions to elect the preferred leader of.
 		/// </summary>
-		public TopicPartitions[] TopicPartitionsCollection { get; set; }
+		public TopicPartitions[] TopicPartitionsCollection { get; set; } = System.Array.Empty<TopicPartitions>();
 
 		public class TopicPartitions : ISerialize
 		{
@@ -6839,12 +6863,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of a topic.
 			/// </summary>
-			public String Topic { get; set; }
+			public String Topic { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partitions of this topic whose preferred leader should be elected
 			/// </summary>
-			public Int32[] PartitionIdCollection { get; set; }
+			public Int32[] PartitionIdCollection { get; set; } = System.Array.Empty<Int32>();
 		}
 
 		/// <summary>
@@ -6891,12 +6915,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The election results, or an empty array if the requester did not have permission and the request asks for all partitions.
 		/// </summary>
-		public ReplicaElectionResult[] ReplicaElectionResultsCollection { get; set; }
+		public ReplicaElectionResult[] ReplicaElectionResultsCollection { get; set; } = System.Array.Empty<ReplicaElectionResult>();
 
 		public class ReplicaElectionResult : ISerialize
 		{
@@ -6934,12 +6958,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Topic { get; set; }
+			public String Topic { get; set; } = String.Default;
 
 			/// <summary>
 			/// The results for each partition
 			/// </summary>
-			public PartitionResult[] PartitionResultCollection { get; set; }
+			public PartitionResult[] PartitionResultCollection { get; set; } = System.Array.Empty<PartitionResult>();
 
 			public class PartitionResult : ISerialize
 			{
@@ -6985,17 +7009,17 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition id
 				/// </summary>
-				public Int32 PartitionId { get; set; }
+				public Int32 PartitionId { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The result error, or zero if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 
 				/// <summary>
 				/// The result message, or null if there was no error.
 				/// </summary>
-				public String ErrorMessage { get; set; }
+				public String ErrorMessage { get; set; } = String.Default;
 			}
 		}
 	}
@@ -7054,22 +7078,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the transaction to end.
 		/// </summary>
-		public String TransactionalId { get; set; }
+		public String TransactionalId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The producer ID.
 		/// </summary>
-		public Int64 ProducerId { get; set; }
+		public Int64 ProducerId { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// The current epoch associated with the producer.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; }
+		public Int16 ProducerEpoch { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// True if the transaction was committed, false if it was aborted.
 		/// </summary>
-		public Boolean Committed { get; set; }
+		public Boolean Committed { get; set; } = Boolean.Default;
 	}
 
 	public class EndTxnResponse
@@ -7110,12 +7134,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 	}
 
 	public class ExpireDelegationTokenRequest
@@ -7156,12 +7180,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The HMAC of the delegation token to be expired.
 		/// </summary>
-		public Bytes Hmac { get; set; }
+		public Bytes Hmac { get; set; } = Bytes.Default;
 
 		/// <summary>
 		/// The expiry time period in milliseconds.
 		/// </summary>
-		public Int64 ExpiryTimePeriodMs { get; set; }
+		public Int64 ExpiryTimePeriodMs { get; set; } = Int64.Default;
 	}
 
 	public class ExpireDelegationTokenResponse
@@ -7210,17 +7234,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
 		/// </summary>
-		public Int64 ExpiryTimestampMs { get; set; }
+		public Int64 ExpiryTimestampMs { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 	}
 
 	public class FetchRequest
@@ -7317,17 +7341,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker ID of the follower, of -1 if this request is from a consumer.
 		/// </summary>
-		public Int32 ReplicaId { get; set; }
+		public Int32 ReplicaId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The maximum time in milliseconds to wait for the response.
 		/// </summary>
-		public Int32 MaxWait { get; set; }
+		public Int32 MaxWait { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The minimum bytes to accumulate in the response.
 		/// </summary>
-		public Int32 MinBytes { get; set; }
+		public Int32 MinBytes { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.
@@ -7352,7 +7376,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to fetch.
 		/// </summary>
-		public FetchableTopic[] TopicsCollection { get; set; }
+		public FetchableTopic[] TopicsCollection { get; set; } = System.Array.Empty<FetchableTopic>();
 
 		public class FetchableTopic : ISerialize
 		{
@@ -7390,12 +7414,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic to fetch.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partitions to fetch.
 			/// </summary>
-			public FetchPartition[] FetchPartitionsCollection { get; set; }
+			public FetchPartition[] FetchPartitionsCollection { get; set; } = System.Array.Empty<FetchPartition>();
 
 			public class FetchPartition : ISerialize
 			{
@@ -7457,7 +7481,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The current leader epoch of the partition.
@@ -7467,7 +7491,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The message offset.
 				/// </summary>
-				public Int64 FetchOffset { get; set; }
+				public Int64 FetchOffset { get; set; } = Int64.Default;
 
 				/// <summary>
 				/// The earliest available offset of the follower replica.  The field is only used when the request is sent by the follower.
@@ -7477,14 +7501,14 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The maximum bytes to fetch from this partition.  See KIP-74 for cases where this limit may not be honored.
 				/// </summary>
-				public Int32 MaxBytes { get; set; }
+				public Int32 MaxBytes { get; set; } = Int32.Default;
 			}
 		}
 
 		/// <summary>
 		/// In an incremental fetch request, the partitions to remove.
 		/// </summary>
-		public ForgottenTopic[] ForgottenCollection { get; set; }
+		public ForgottenTopic[] ForgottenCollection { get; set; } = System.Array.Empty<ForgottenTopic>();
 
 		public class ForgottenTopic : ISerialize
 		{
@@ -7522,12 +7546,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partition name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partitions indexes to forget.
 			/// </summary>
-			public Int32[] ForgottenPartitionIndexesCollection { get; set; }
+			public Int32[] ForgottenPartitionIndexesCollection { get; set; } = System.Array.Empty<Int32>();
 		}
 	}
 
@@ -7585,12 +7609,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The top level response error code.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The fetch session ID, or 0 if this is not part of a fetch session.
@@ -7600,7 +7624,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The response topics.
 		/// </summary>
-		public FetchableTopicResponse[] TopicsCollection { get; set; }
+		public FetchableTopicResponse[] TopicsCollection { get; set; } = System.Array.Empty<FetchableTopicResponse>();
 
 		public class FetchableTopicResponse : ISerialize
 		{
@@ -7638,12 +7662,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The topic partitions.
 			/// </summary>
-			public FetchablePartitionResponse[] PartitionsCollection { get; set; }
+			public FetchablePartitionResponse[] PartitionsCollection { get; set; } = System.Array.Empty<FetchablePartitionResponse>();
 
 			public class FetchablePartitionResponse : ISerialize
 			{
@@ -7721,17 +7745,17 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partiiton index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The error code, or 0 if there was no fetch error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 
 				/// <summary>
 				/// The current high water mark.
 				/// </summary>
-				public Int64 HighWatermark { get; set; }
+				public Int64 HighWatermark { get; set; } = Int64.Default;
 
 				/// <summary>
 				/// The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)
@@ -7746,7 +7770,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The aborted transactions.
 				/// </summary>
-				public AbortedTransaction[] AbortedCollection { get; set; }
+				public AbortedTransaction[] AbortedCollection { get; set; } = System.Array.Empty<AbortedTransaction>();
 
 				public class AbortedTransaction : ISerialize
 				{
@@ -7784,18 +7808,18 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The producer id associated with the aborted transaction.
 					/// </summary>
-					public Int64 ProducerId { get; set; }
+					public Int64 ProducerId { get; set; } = Int64.Default;
 
 					/// <summary>
 					/// The first offset in the aborted transaction.
 					/// </summary>
-					public Int64 FirstOffset { get; set; }
+					public Int64 FirstOffset { get; set; } = Int64.Default;
 				}
 
 				/// <summary>
 				/// The record data.
 				/// </summary>
-				public Bytes Records { get; set; }
+				public Bytes Records { get; set; } = Bytes.Default;
 			}
 		}
 	}
@@ -7838,7 +7862,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The coordinator key.
 		/// </summary>
-		public String Key { get; set; }
+		public String Key { get; set; } = String.Default;
 
 		/// <summary>
 		/// The coordinator key type.  (Group, transaction, etc.)
@@ -7916,32 +7940,32 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		public String ErrorMessage { get; set; }
+		public String ErrorMessage { get; set; } = String.Default;
 
 		/// <summary>
 		/// The node id.
 		/// </summary>
-		public Int32 NodeId { get; set; }
+		public Int32 NodeId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The host name.
 		/// </summary>
-		public String Host { get; set; }
+		public String Host { get; set; } = String.Default;
 
 		/// <summary>
 		/// The port.
 		/// </summary>
-		public Int32 Port { get; set; }
+		public Int32 Port { get; set; } = Int32.Default;
 	}
 
 	public class HeartbeatRequest
@@ -7990,17 +8014,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group id.
 		/// </summary>
-		public String GroupId { get; set; }
+		public String GroupId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		public Int32 Generationid { get; set; }
+		public Int32 Generationid { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The member ID.
 		/// </summary>
-		public String MemberId { get; set; }
+		public String MemberId { get; set; } = String.Default;
 	}
 
 	public class HeartbeatResponse
@@ -8041,12 +8065,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 	}
 
 	public class InitProducerIdRequest
@@ -8087,12 +8111,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id, or null if the producer is not transactional.
 		/// </summary>
-		public String TransactionalId { get; set; }
+		public String TransactionalId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The time in ms to wait for before aborting idle transactions sent by this producer.
 		/// </summary>
-		public Int32 TransactionTimeoutMs { get; set; }
+		public Int32 TransactionTimeoutMs { get; set; } = Int32.Default;
 	}
 
 	public class InitProducerIdResponse
@@ -8149,22 +8173,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The current producer id.
 		/// </summary>
-		public Int64 ProducerId { get; set; }
+		public Int64 ProducerId { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// The current epoch associated with the producer id.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; }
+		public Int16 ProducerEpoch { get; set; } = Int16.Default;
 	}
 
 	public class JoinGroupRequest
@@ -8237,12 +8261,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group identifier.
 		/// </summary>
-		public String GroupId { get; set; }
+		public String GroupId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The coordinator considers the consumer dead if it receives no heartbeat after this timeout in milliseconds.
 		/// </summary>
-		public Int32 SessionTimeoutMs { get; set; }
+		public Int32 SessionTimeoutMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The maximum time in milliseconds that the coordinator will wait for each member to rejoin when rebalancing the group.
@@ -8252,17 +8276,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The member id assigned by the group coordinator.
 		/// </summary>
-		public String MemberId { get; set; }
+		public String MemberId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The unique name the for class of protocols implemented by the group we want to join.
 		/// </summary>
-		public String ProtocolType { get; set; }
+		public String ProtocolType { get; set; } = String.Default;
 
 		/// <summary>
 		/// The list of protocols that the member supports.
 		/// </summary>
-		public Dictionary<String, JoinGroupRequestProtocol> ProtocolsCollection { get; set; }
+		public Dictionary<String, JoinGroupRequestProtocol> ProtocolsCollection { get; set; } = new Dictionary<String, JoinGroupRequestProtocol>();
 
 		public class JoinGroupRequestProtocol : ISerialize
 		{
@@ -8300,12 +8324,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The protocol name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The protocol metadata.
 			/// </summary>
-			public Bytes Metadata { get; set; }
+			public Bytes Metadata { get; set; } = Bytes.Default;
 		}
 	}
 
@@ -8387,12 +8411,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The generation ID of the group.
@@ -8402,19 +8426,19 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group protocol selected by the coordinator.
 		/// </summary>
-		public String ProtocolName { get; set; }
+		public String ProtocolName { get; set; } = String.Default;
 
 		/// <summary>
 		/// The leader of the group.
 		/// </summary>
-		public String Leader { get; set; }
+		public String Leader { get; set; } = String.Default;
 
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
 		/// </summary>
-		public String MemberId { get; set; }
+		public String MemberId { get; set; } = String.Default;
 
-		public JoinGroupResponseMember[] MembersCollection { get; set; }
+		public JoinGroupResponseMember[] MembersCollection { get; set; } = System.Array.Empty<JoinGroupResponseMember>();
 
 		public class JoinGroupResponseMember : ISerialize
 		{
@@ -8452,12 +8476,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group member ID.
 			/// </summary>
-			public String MemberId { get; set; }
+			public String MemberId { get; set; } = String.Default;
 
 			/// <summary>
 			/// The group member metadata.
 			/// </summary>
-			public Bytes Metadata { get; set; }
+			public Bytes Metadata { get; set; } = Bytes.Default;
 		}
 	}
 
@@ -8531,12 +8555,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The current controller ID.
 		/// </summary>
-		public Int32 ControllerId { get; set; }
+		public Int32 ControllerId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The current controller epoch.
 		/// </summary>
-		public Int32 ControllerEpoch { get; set; }
+		public Int32 ControllerEpoch { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The current broker epoch.
@@ -8546,7 +8570,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic.
 		/// </summary>
-		public LeaderAndIsrRequestTopicState[] TopicStatesCollection { get; set; }
+		public LeaderAndIsrRequestTopicState[] TopicStatesCollection { get; set; } = System.Array.Empty<LeaderAndIsrRequestTopicState>();
 
 		public class LeaderAndIsrRequestTopicState : ISerialize
 		{
@@ -8584,12 +8608,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The state of each partition
 			/// </summary>
-			public LeaderAndIsrRequestPartitionState[] PartitionStatesCollection { get; set; }
+			public LeaderAndIsrRequestPartitionState[] PartitionStatesCollection { get; set; } = System.Array.Empty<LeaderAndIsrRequestPartitionState>();
 
 			public class LeaderAndIsrRequestPartitionState : ISerialize
 			{
@@ -8675,37 +8699,37 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The controller epoch.
 				/// </summary>
-				public Int32 ControllerEpoch { get; set; }
+				public Int32 ControllerEpoch { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The broker ID of the leader.
 				/// </summary>
-				public Int32 LeaderKey { get; set; }
+				public Int32 LeaderKey { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The leader epoch.
 				/// </summary>
-				public Int32 LeaderEpoch { get; set; }
+				public Int32 LeaderEpoch { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The in-sync replica IDs.
 				/// </summary>
-				public Int32[] IsrReplicasCollection { get; set; }
+				public Int32[] IsrReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 
 				/// <summary>
 				/// The ZooKeeper version.
 				/// </summary>
-				public Int32 ZkVersion { get; set; }
+				public Int32 ZkVersion { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The replica IDs.
 				/// </summary>
-				public Int32[] ReplicasCollection { get; set; }
+				public Int32[] ReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 
 				/// <summary>
 				/// Whether the replica should have existed on the broker or not.
@@ -8717,7 +8741,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The state of each partition
 		/// </summary>
-		public LeaderAndIsrRequestPartitionStateV0[] PartitionStatesV0Collection { get; set; }
+		public LeaderAndIsrRequestPartitionStateV0[] PartitionStatesV0Collection { get; set; } = System.Array.Empty<LeaderAndIsrRequestPartitionStateV0>();
 
 		public class LeaderAndIsrRequestPartitionStateV0 : ISerialize
 		{
@@ -8811,42 +8835,42 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; }
+			public String TopicName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; }
+			public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The controller epoch.
 			/// </summary>
-			public Int32 ControllerEpoch { get; set; }
+			public Int32 ControllerEpoch { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The broker ID of the leader.
 			/// </summary>
-			public Int32 LeaderKey { get; set; }
+			public Int32 LeaderKey { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The leader epoch.
 			/// </summary>
-			public Int32 LeaderEpoch { get; set; }
+			public Int32 LeaderEpoch { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The in-sync replica IDs.
 			/// </summary>
-			public Int32[] IsrReplicasCollection { get; set; }
+			public Int32[] IsrReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 
 			/// <summary>
 			/// The ZooKeeper version.
 			/// </summary>
-			public Int32 ZkVersion { get; set; }
+			public Int32 ZkVersion { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The replica IDs.
 			/// </summary>
-			public Int32[] ReplicasCollection { get; set; }
+			public Int32[] ReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 
 			/// <summary>
 			/// Whether the replica should have existed on the broker or not.
@@ -8857,7 +8881,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The current live leaders.
 		/// </summary>
-		public LeaderAndIsrLiveLeader[] LiveLeadersCollection { get; set; }
+		public LeaderAndIsrLiveLeader[] LiveLeadersCollection { get; set; } = System.Array.Empty<LeaderAndIsrLiveLeader>();
 
 		public class LeaderAndIsrLiveLeader : ISerialize
 		{
@@ -8903,17 +8927,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The leader's broker ID.
 			/// </summary>
-			public Int32 BrokerId { get; set; }
+			public Int32 BrokerId { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The leader's hostname.
 			/// </summary>
-			public String HostName { get; set; }
+			public String HostName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The leader's port.
 			/// </summary>
-			public Int32 Port { get; set; }
+			public Int32 Port { get; set; } = Int32.Default;
 		}
 	}
 
@@ -8955,12 +8979,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// Each partition.
 		/// </summary>
-		public LeaderAndIsrResponsePartition[] PartitionsCollection { get; set; }
+		public LeaderAndIsrResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<LeaderAndIsrResponsePartition>();
 
 		public class LeaderAndIsrResponsePartition : ISerialize
 		{
@@ -9006,17 +9030,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; }
+			public String TopicName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; }
+			public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The partition error code, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 		}
 	}
 
@@ -9058,12 +9082,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the group to leave.
 		/// </summary>
-		public String GroupId { get; set; }
+		public String GroupId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The member ID to remove from the group.
 		/// </summary>
-		public String MemberId { get; set; }
+		public String MemberId { get; set; } = String.Default;
 	}
 
 	public class LeaveGroupResponse
@@ -9104,12 +9128,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 	}
 
 	public class ListGroupsRequest
@@ -9182,17 +9206,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// Each group in the response.
 		/// </summary>
-		public ListedGroup[] GroupsCollection { get; set; }
+		public ListedGroup[] GroupsCollection { get; set; } = System.Array.Empty<ListedGroup>();
 
 		public class ListedGroup : ISerialize
 		{
@@ -9230,12 +9254,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group ID.
 			/// </summary>
-			public String GroupId { get; set; }
+			public String GroupId { get; set; } = String.Default;
 
 			/// <summary>
 			/// The group protocol type.
 			/// </summary>
-			public String ProtocolType { get; set; }
+			public String ProtocolType { get; set; } = String.Default;
 		}
 	}
 
@@ -9285,17 +9309,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker ID of the requestor, or -1 if this request is being made by a normal consumer.
 		/// </summary>
-		public Int32 ReplicaId { get; set; }
+		public Int32 ReplicaId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
 		/// </summary>
-		public Int8 IsolationLevel { get; set; }
+		public Int8 IsolationLevel { get; set; } = Int8.Default;
 
 		/// <summary>
 		/// Each topic in the request.
 		/// </summary>
-		public ListOffsetTopic[] TopicsCollection { get; set; }
+		public ListOffsetTopic[] TopicsCollection { get; set; } = System.Array.Empty<ListOffsetTopic>();
 
 		public class ListOffsetTopic : ISerialize
 		{
@@ -9333,12 +9357,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition in the request.
 			/// </summary>
-			public ListOffsetPartition[] PartitionsCollection { get; set; }
+			public ListOffsetPartition[] PartitionsCollection { get; set; } = System.Array.Empty<ListOffsetPartition>();
 
 			public class ListOffsetPartition : ISerialize
 			{
@@ -9392,22 +9416,22 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The current leader epoch.
 				/// </summary>
-				public Int32 CurrentLeaderEpoch { get; set; }
+				public Int32 CurrentLeaderEpoch { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The current timestamp.
 				/// </summary>
-				public Int64 Timestamp { get; set; }
+				public Int64 Timestamp { get; set; } = Int64.Default;
 
 				/// <summary>
 				/// The maximum number of offsets to report.
 				/// </summary>
-				public Int32 MaxNumOffsets { get; set; }
+				public Int32 MaxNumOffsets { get; set; } = Int32.Default;
 			}
 		}
 	}
@@ -9450,12 +9474,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
-		public ListOffsetTopicResponse[] TopicsCollection { get; set; }
+		public ListOffsetTopicResponse[] TopicsCollection { get; set; } = System.Array.Empty<ListOffsetTopicResponse>();
 
 		public class ListOffsetTopicResponse : ISerialize
 		{
@@ -9493,12 +9517,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition in the response.
 			/// </summary>
-			public ListOffsetPartitionResponse[] PartitionsCollection { get; set; }
+			public ListOffsetPartitionResponse[] PartitionsCollection { get; set; } = System.Array.Empty<ListOffsetPartitionResponse>();
 
 			public class ListOffsetPartitionResponse : ISerialize
 			{
@@ -9568,17 +9592,17 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The partition error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 
 				/// <summary>
 				/// The result offsets.
 				/// </summary>
-				public Int64[] OldStyleOffsetsCollection { get; set; }
+				public Int64[] OldStyleOffsetsCollection { get; set; } = System.Array.Empty<Int64>();
 
 				/// <summary>
 				/// The timestamp associated with the returned offset.
@@ -9590,7 +9614,7 @@ namespace Kafka.Protocol
 				/// </summary>
 				public Int64 Offset { get; set; } = new Int64(-1);
 
-				public Int32 LeaderEpoch { get; set; }
+				public Int32 LeaderEpoch { get; set; } = Int32.Default;
 			}
 		}
 	}
@@ -9649,7 +9673,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to fetch metadata for.
 		/// </summary>
-		public MetadataRequestTopic[] TopicsCollection { get; set; }
+		public MetadataRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<MetadataRequestTopic>();
 
 		public class MetadataRequestTopic : ISerialize
 		{
@@ -9679,7 +9703,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 		}
 
 		/// <summary>
@@ -9690,12 +9714,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Whether to include cluster authorized operations.
 		/// </summary>
-		public Boolean IncludeClusterAuthorizedOperations { get; set; }
+		public Boolean IncludeClusterAuthorizedOperations { get; set; } = Boolean.Default;
 
 		/// <summary>
 		/// Whether to include topic authorized operations.
 		/// </summary>
-		public Boolean IncludeTopicAuthorizedOperations { get; set; }
+		public Boolean IncludeTopicAuthorizedOperations { get; set; } = Boolean.Default;
 	}
 
 	public class MetadataResponse
@@ -9768,12 +9792,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// Each broker in the response.
 		/// </summary>
-		public Dictionary<Int32, MetadataResponseBroker> BrokersCollection { get; set; }
+		public Dictionary<Int32, MetadataResponseBroker> BrokersCollection { get; set; } = new Dictionary<Int32, MetadataResponseBroker>();
 
 		public class MetadataResponseBroker : ISerialize
 		{
@@ -9827,17 +9851,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The broker ID.
 			/// </summary>
-			public Int32 NodeId { get; set; }
+			public Int32 NodeId { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The broker hostname.
 			/// </summary>
-			public String Host { get; set; }
+			public String Host { get; set; } = String.Default;
 
 			/// <summary>
 			/// The broker port.
 			/// </summary>
-			public Int32 Port { get; set; }
+			public Int32 Port { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The rack of the broker, or null if it has not been assigned to a rack.
@@ -9858,7 +9882,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
-		public Dictionary<String, MetadataResponseTopic> TopicsCollection { get; set; }
+		public Dictionary<String, MetadataResponseTopic> TopicsCollection { get; set; } = new Dictionary<String, MetadataResponseTopic>();
 
 		public class MetadataResponseTopic : ISerialize
 		{
@@ -9920,12 +9944,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic error, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// True if the topic is internal.
@@ -9935,7 +9959,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition in the topic.
 			/// </summary>
-			public MetadataResponsePartition[] PartitionsCollection { get; set; }
+			public MetadataResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<MetadataResponsePartition>();
 
 			public class MetadataResponsePartition : ISerialize
 			{
@@ -10013,17 +10037,17 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition error, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The ID of the leader broker.
 				/// </summary>
-				public Int32 LeaderId { get; set; }
+				public Int32 LeaderId { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The leader epoch of this partition.
@@ -10033,29 +10057,29 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The set of all nodes that host this partition.
 				/// </summary>
-				public Int32[] ReplicaNodesCollection { get; set; }
+				public Int32[] ReplicaNodesCollection { get; set; } = System.Array.Empty<Int32>();
 
 				/// <summary>
 				/// The set of nodes that are in sync with the leader for this partition.
 				/// </summary>
-				public Int32[] IsrNodesCollection { get; set; }
+				public Int32[] IsrNodesCollection { get; set; } = System.Array.Empty<Int32>();
 
 				/// <summary>
 				/// The set of offline replicas of this partition.
 				/// </summary>
-				public Int32[] OfflineReplicasCollection { get; set; }
+				public Int32[] OfflineReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 			}
 
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this topic.
 			/// </summary>
-			public Int32 TopicAuthorizedOperations { get; set; }
+			public Int32 TopicAuthorizedOperations { get; set; } = Int32.Default;
 		}
 
 		/// <summary>
 		/// 32-bit bitfield to represent authorized operations for this cluster.
 		/// </summary>
-		public Int32 ClusterAuthorizedOperations { get; set; }
+		public Int32 ClusterAuthorizedOperations { get; set; } = Int32.Default;
 	}
 
 	public class OffsetCommitRequest
@@ -10120,7 +10144,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		public String GroupId { get; set; }
+		public String GroupId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The generation of the group.
@@ -10130,7 +10154,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
 		/// </summary>
-		public String MemberId { get; set; }
+		public String MemberId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The time period in ms to retain the offset.
@@ -10140,7 +10164,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to commit offsets for.
 		/// </summary>
-		public OffsetCommitRequestTopic[] TopicsCollection { get; set; }
+		public OffsetCommitRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetCommitRequestTopic>();
 
 		public class OffsetCommitRequestTopic : ISerialize
 		{
@@ -10178,12 +10202,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition to commit offsets for.
 			/// </summary>
-			public OffsetCommitRequestPartition[] PartitionsCollection { get; set; }
+			public OffsetCommitRequestPartition[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetCommitRequestPartition>();
 
 			public class OffsetCommitRequestPartition : ISerialize
 			{
@@ -10245,12 +10269,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The message offset to be committed.
 				/// </summary>
-				public Int64 CommittedOffset { get; set; }
+				public Int64 CommittedOffset { get; set; } = Int64.Default;
 
 				/// <summary>
 				/// The leader epoch of this partition.
@@ -10265,7 +10289,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
 				/// </summary>
-				public String CommittedMetadata { get; set; }
+				public String CommittedMetadata { get; set; } = String.Default;
 			}
 		}
 	}
@@ -10308,12 +10332,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
-		public OffsetCommitResponseTopic[] TopicsCollection { get; set; }
+		public OffsetCommitResponseTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetCommitResponseTopic>();
 
 		public class OffsetCommitResponseTopic : ISerialize
 		{
@@ -10351,12 +10375,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The responses for each partition in the topic.
 			/// </summary>
-			public OffsetCommitResponsePartition[] PartitionsCollection { get; set; }
+			public OffsetCommitResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetCommitResponsePartition>();
 
 			public class OffsetCommitResponsePartition : ISerialize
 			{
@@ -10394,12 +10418,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 			}
 		}
 	}
@@ -10442,12 +10466,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group to fetch offsets for.
 		/// </summary>
-		public String GroupId { get; set; }
+		public String GroupId { get; set; } = String.Default;
 
 		/// <summary>
 		/// Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.
 		/// </summary>
-		public OffsetFetchRequestTopic[] TopicsCollection { get; set; }
+		public OffsetFetchRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetFetchRequestTopic>();
 
 		public class OffsetFetchRequestTopic : ISerialize
 		{
@@ -10482,12 +10506,12 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition indexes we would like to fetch offsets for.
 			/// </summary>
-			public Int32[] PartitionIndexesCollection { get; set; }
+			public Int32[] PartitionIndexesCollection { get; set; } = System.Array.Empty<Int32>();
 		}
 	}
 
@@ -10537,12 +10561,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The responses per topic.
 		/// </summary>
-		public OffsetFetchResponseTopic[] TopicsCollection { get; set; }
+		public OffsetFetchResponseTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetFetchResponseTopic>();
 
 		public class OffsetFetchResponseTopic : ISerialize
 		{
@@ -10580,12 +10604,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The responses per partition
 			/// </summary>
-			public OffsetFetchResponsePartition[] PartitionsCollection { get; set; }
+			public OffsetFetchResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetFetchResponsePartition>();
 
 			public class OffsetFetchResponsePartition : ISerialize
 			{
@@ -10647,27 +10671,27 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The committed message offset.
 				/// </summary>
-				public Int64 CommittedOffset { get; set; }
+				public Int64 CommittedOffset { get; set; } = Int64.Default;
 
 				/// <summary>
 				/// The leader epoch.
 				/// </summary>
-				public Int32 CommittedLeaderEpoch { get; set; }
+				public Int32 CommittedLeaderEpoch { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The partition metadata.
 				/// </summary>
-				public String Metadata { get; set; }
+				public String Metadata { get; set; } = String.Default;
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 			}
 		}
 
@@ -10707,7 +10731,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic to get offsets for.
 		/// </summary>
-		public OffsetForLeaderTopic[] TopicsCollection { get; set; }
+		public OffsetForLeaderTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetForLeaderTopic>();
 
 		public class OffsetForLeaderTopic : ISerialize
 		{
@@ -10745,12 +10769,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition to get offsets for.
 			/// </summary>
-			public OffsetForLeaderPartition[] PartitionsCollection { get; set; }
+			public OffsetForLeaderPartition[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetForLeaderPartition>();
 
 			public class OffsetForLeaderPartition : ISerialize
 			{
@@ -10796,7 +10820,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// An epoch used to fence consumers/replicas with old metadata.  If the epoch provided by the client is larger than the current epoch known to the broker, then the UNKNOWN_LEADER_EPOCH error code will be returned. If the provided epoch is smaller, then the FENCED_LEADER_EPOCH error code will be returned.
@@ -10806,7 +10830,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The epoch to look up an offset for.
 				/// </summary>
-				public Int32 LeaderEpoch { get; set; }
+				public Int32 LeaderEpoch { get; set; } = Int32.Default;
 			}
 		}
 	}
@@ -10849,12 +10873,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// Each topic we fetched offsets for.
 		/// </summary>
-		public OffsetForLeaderTopicResult[] TopicsCollection { get; set; }
+		public OffsetForLeaderTopicResult[] TopicsCollection { get; set; } = System.Array.Empty<OffsetForLeaderTopicResult>();
 
 		public class OffsetForLeaderTopicResult : ISerialize
 		{
@@ -10892,12 +10916,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition in the topic we fetched offsets for.
 			/// </summary>
-			public OffsetForLeaderPartitionResult[] PartitionsCollection { get; set; }
+			public OffsetForLeaderPartitionResult[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetForLeaderPartitionResult>();
 
 			public class OffsetForLeaderPartitionResult : ISerialize
 			{
@@ -10951,12 +10975,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The error code 0, or if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The leader epoch of the partition.
@@ -10966,7 +10990,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The end offset of the epoch.
 				/// </summary>
-				public Int64 EndOffset { get; set; }
+				public Int64 EndOffset { get; set; } = Int64.Default;
 			}
 		}
 	}
@@ -11025,22 +11049,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional ID, or null if the producer is not transactional.
 		/// </summary>
-		public String TransactionalId { get; set; }
+		public String TransactionalId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The number of acknowledgments the producer requires the leader to have received before considering a request complete. Allowed values: 0 for no acknowledgments, 1 for only the leader and -1 for the full ISR.
 		/// </summary>
-		public Int16 Acks { get; set; }
+		public Int16 Acks { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The timeout to await a response in miliseconds.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; }
+		public Int32 TimeoutMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// Each topic to produce to.
 		/// </summary>
-		public TopicProduceData[] TopicsCollection { get; set; }
+		public TopicProduceData[] TopicsCollection { get; set; } = System.Array.Empty<TopicProduceData>();
 
 		public class TopicProduceData : ISerialize
 		{
@@ -11078,12 +11102,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition to produce to.
 			/// </summary>
-			public PartitionProduceData[] PartitionsCollection { get; set; }
+			public PartitionProduceData[] PartitionsCollection { get; set; } = System.Array.Empty<PartitionProduceData>();
 
 			public class PartitionProduceData : ISerialize
 			{
@@ -11121,12 +11145,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The record data to be produced.
 				/// </summary>
-				public Bytes Records { get; set; }
+				public Bytes Records { get; set; } = Bytes.Default;
 			}
 		}
 	}
@@ -11169,7 +11193,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each produce response
 		/// </summary>
-		public TopicProduceResponse[] ResponsesCollection { get; set; }
+		public TopicProduceResponse[] ResponsesCollection { get; set; } = System.Array.Empty<TopicProduceResponse>();
 
 		public class TopicProduceResponse : ISerialize
 		{
@@ -11207,12 +11231,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// Each partition that we produced to within the topic.
 			/// </summary>
-			public PartitionProduceResponse[] PartitionsCollection { get; set; }
+			public PartitionProduceResponse[] PartitionsCollection { get; set; } = System.Array.Empty<PartitionProduceResponse>();
 
 			public class PartitionProduceResponse : ISerialize
 			{
@@ -11274,17 +11298,17 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 
 				/// <summary>
 				/// The base offset.
 				/// </summary>
-				public Int64 BaseOffset { get; set; }
+				public Int64 BaseOffset { get; set; } = Int64.Default;
 
 				/// <summary>
 				/// The timestamp returned by broker after appending the messages. If CreateTime is used for the topic, the timestamp will be -1.  If LogAppendTime is used for the topic, the timestamp will be the broker local time when the messages are appended.
@@ -11301,7 +11325,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 	}
 
 	public class RenewDelegationTokenRequest
@@ -11342,12 +11366,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The HMAC of the delegation token to be renewed.
 		/// </summary>
-		public Bytes Hmac { get; set; }
+		public Bytes Hmac { get; set; } = Bytes.Default;
 
 		/// <summary>
 		/// The renewal time period in milliseconds.
 		/// </summary>
-		public Int64 RenewPeriodMs { get; set; }
+		public Int64 RenewPeriodMs { get; set; } = Int64.Default;
 	}
 
 	public class RenewDelegationTokenResponse
@@ -11396,17 +11420,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
 		/// </summary>
-		public Int64 ExpiryTimestampMs { get; set; }
+		public Int64 ExpiryTimestampMs { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 	}
 
 	public class RequestHeader
@@ -11463,22 +11487,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The API key of this request.
 		/// </summary>
-		public Int16 RequestApiKey { get; set; }
+		public Int16 RequestApiKey { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The API version of this request.
 		/// </summary>
-		public Int16 RequestApiVersion { get; set; }
+		public Int16 RequestApiVersion { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The correlation ID of this request.
 		/// </summary>
-		public Int32 CorrelationId { get; set; }
+		public Int32 CorrelationId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The client ID string.
 		/// </summary>
-		public String ClientId { get; set; }
+		public String ClientId { get; set; } = String.Default;
 	}
 
 	public class ResponseHeader
@@ -11511,7 +11535,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The correlation ID of this response.
 		/// </summary>
-		public Int32 CorrelationId { get; set; }
+		public Int32 CorrelationId { get; set; } = Int32.Default;
 	}
 
 	public class SaslAuthenticateRequest
@@ -11544,7 +11568,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The SASL authentication bytes from the client, as defined by the SASL mechanism.
 		/// </summary>
-		public Bytes AuthBytes { get; set; }
+		public Bytes AuthBytes { get; set; } = Bytes.Default;
 	}
 
 	public class SaslAuthenticateResponse
@@ -11601,17 +11625,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		public String ErrorMessage { get; set; }
+		public String ErrorMessage { get; set; } = String.Default;
 
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
 		/// </summary>
-		public Bytes AuthBytes { get; set; }
+		public Bytes AuthBytes { get; set; } = Bytes.Default;
 
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
@@ -11649,7 +11673,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The SASL mechanism chosen by the client.
 		/// </summary>
-		public String Mechanism { get; set; }
+		public String Mechanism { get; set; } = String.Default;
 	}
 
 	public class SaslHandshakeResponse
@@ -11690,12 +11714,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The mechanisms enabled in the server.
 		/// </summary>
-		public String[] MechanismsCollection { get; set; }
+		public String[] MechanismsCollection { get; set; } = System.Array.Empty<String>();
 	}
 
 	public class StopReplicaRequest
@@ -11768,12 +11792,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The controller id.
 		/// </summary>
-		public Int32 ControllerId { get; set; }
+		public Int32 ControllerId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The controller epoch.
 		/// </summary>
-		public Int32 ControllerEpoch { get; set; }
+		public Int32 ControllerEpoch { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The broker epoch.
@@ -11783,12 +11807,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Whether these partitions should be deleted.
 		/// </summary>
-		public Boolean DeletePartitions { get; set; }
+		public Boolean DeletePartitions { get; set; } = Boolean.Default;
 
 		/// <summary>
 		/// The partitions to stop.
 		/// </summary>
-		public StopReplicaRequestPartitionV0[] PartitionsV0Collection { get; set; }
+		public StopReplicaRequestPartitionV0[] PartitionsV0Collection { get; set; } = System.Array.Empty<StopReplicaRequestPartitionV0>();
 
 		public class StopReplicaRequestPartitionV0 : ISerialize
 		{
@@ -11826,18 +11850,18 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; }
+			public String TopicName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; }
+			public Int32 PartitionIndex { get; set; } = Int32.Default;
 		}
 
 		/// <summary>
 		/// The topics to stop.
 		/// </summary>
-		public StopReplicaRequestTopic[] TopicsCollection { get; set; }
+		public StopReplicaRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<StopReplicaRequestTopic>();
 
 		public class StopReplicaRequestTopic : ISerialize
 		{
@@ -11875,12 +11899,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition indexes.
 			/// </summary>
-			public Int32[] PartitionIndexesCollection { get; set; }
+			public Int32[] PartitionIndexesCollection { get; set; } = System.Array.Empty<Int32>();
 		}
 	}
 
@@ -11922,12 +11946,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code, or 0 if there was no top-level error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The responses for each partition.
 		/// </summary>
-		public StopReplicaResponsePartition[] PartitionsCollection { get; set; }
+		public StopReplicaResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<StopReplicaResponsePartition>();
 
 		public class StopReplicaResponsePartition : ISerialize
 		{
@@ -11973,17 +11997,17 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; }
+			public String TopicName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; }
+			public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The partition error code, or 0 if there was no partition error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; }
+			public Int16 ErrorCode { get; set; } = Int16.Default;
 		}
 	}
 
@@ -12041,22 +12065,22 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		public String GroupId { get; set; }
+		public String GroupId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		public Int32 GenerationId { get; set; }
+		public Int32 GenerationId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The member ID assigned by the group.
 		/// </summary>
-		public String MemberId { get; set; }
+		public String MemberId { get; set; } = String.Default;
 
 		/// <summary>
 		/// Each assignment.
 		/// </summary>
-		public SyncGroupRequestAssignment[] AssignmentsCollection { get; set; }
+		public SyncGroupRequestAssignment[] AssignmentsCollection { get; set; } = System.Array.Empty<SyncGroupRequestAssignment>();
 
 		public class SyncGroupRequestAssignment : ISerialize
 		{
@@ -12094,12 +12118,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The ID of the member to assign.
 			/// </summary>
-			public String MemberId { get; set; }
+			public String MemberId { get; set; } = String.Default;
 
 			/// <summary>
 			/// The member assignment.
 			/// </summary>
-			public Bytes Assignment { get; set; }
+			public Bytes Assignment { get; set; } = Bytes.Default;
 		}
 	}
 
@@ -12149,17 +12173,17 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// The member assignment.
 		/// </summary>
-		public Bytes Assignment { get; set; }
+		public Bytes Assignment { get; set; } = Bytes.Default;
 	}
 
 	public class TxnOffsetCommitRequest
@@ -12224,27 +12248,27 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the transaction.
 		/// </summary>
-		public String TransactionalId { get; set; }
+		public String TransactionalId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The ID of the group.
 		/// </summary>
-		public String GroupId { get; set; }
+		public String GroupId { get; set; } = String.Default;
 
 		/// <summary>
 		/// The current producer ID in use by the transactional ID.
 		/// </summary>
-		public Int64 ProducerId { get; set; }
+		public Int64 ProducerId { get; set; } = Int64.Default;
 
 		/// <summary>
 		/// The current epoch associated with the producer ID.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; }
+		public Int16 ProducerEpoch { get; set; } = Int16.Default;
 
 		/// <summary>
 		/// Each topic that we want to committ offsets for.
 		/// </summary>
-		public TxnOffsetCommitRequestTopic[] TopicsCollection { get; set; }
+		public TxnOffsetCommitRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<TxnOffsetCommitRequestTopic>();
 
 		public class TxnOffsetCommitRequestTopic : ISerialize
 		{
@@ -12282,12 +12306,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partitions inside the topic that we want to committ offsets for.
 			/// </summary>
-			public TxnOffsetCommitRequestPartition[] PartitionsCollection { get; set; }
+			public TxnOffsetCommitRequestPartition[] PartitionsCollection { get; set; } = System.Array.Empty<TxnOffsetCommitRequestPartition>();
 
 			public class TxnOffsetCommitRequestPartition : ISerialize
 			{
@@ -12341,12 +12365,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The index of the partition within the topic.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The message offset to be committed.
 				/// </summary>
-				public Int64 CommittedOffset { get; set; }
+				public Int64 CommittedOffset { get; set; } = Int64.Default;
 
 				/// <summary>
 				/// The leader epoch of the last consumed record.
@@ -12356,7 +12380,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
 				/// </summary>
-				public String CommittedMetadata { get; set; }
+				public String CommittedMetadata { get; set; } = String.Default;
 			}
 		}
 	}
@@ -12399,12 +12423,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; }
+		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
-		public TxnOffsetCommitResponseTopic[] TopicsCollection { get; set; }
+		public TxnOffsetCommitResponseTopic[] TopicsCollection { get; set; } = System.Array.Empty<TxnOffsetCommitResponseTopic>();
 
 		public class TxnOffsetCommitResponseTopic : ISerialize
 		{
@@ -12442,12 +12466,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; }
+			public String Name { get; set; } = String.Default;
 
 			/// <summary>
 			/// The responses for each partition in the topic.
 			/// </summary>
-			public TxnOffsetCommitResponsePartition[] PartitionsCollection { get; set; }
+			public TxnOffsetCommitResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<TxnOffsetCommitResponsePartition>();
 
 			public class TxnOffsetCommitResponsePartition : ISerialize
 			{
@@ -12485,12 +12509,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partitition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; }
+				public Int16 ErrorCode { get; set; } = Int16.Default;
 			}
 		}
 	}
@@ -12565,12 +12589,12 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The controller id.
 		/// </summary>
-		public Int32 ControllerId { get; set; }
+		public Int32 ControllerId { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The controller epoch.
 		/// </summary>
-		public Int32 ControllerEpoch { get; set; }
+		public Int32 ControllerEpoch { get; set; } = Int32.Default;
 
 		/// <summary>
 		/// The broker epoch.
@@ -12580,7 +12604,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we would like to update.
 		/// </summary>
-		public UpdateMetadataRequestTopicState[] TopicStatesCollection { get; set; }
+		public UpdateMetadataRequestTopicState[] TopicStatesCollection { get; set; } = System.Array.Empty<UpdateMetadataRequestTopicState>();
 
 		public class UpdateMetadataRequestTopicState : ISerialize
 		{
@@ -12618,12 +12642,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; }
+			public String TopicName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition that we would like to update.
 			/// </summary>
-			public UpdateMetadataPartitionState[] PartitionStatesCollection { get; set; }
+			public UpdateMetadataPartitionState[] PartitionStatesCollection { get; set; } = System.Array.Empty<UpdateMetadataPartitionState>();
 
 			public class UpdateMetadataPartitionState : ISerialize
 			{
@@ -12709,49 +12733,49 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; }
+				public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The controller epoch.
 				/// </summary>
-				public Int32 ControllerEpoch { get; set; }
+				public Int32 ControllerEpoch { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The ID of the broker which is the current partition leader.
 				/// </summary>
-				public Int32 Leader { get; set; }
+				public Int32 Leader { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				public Int32 LeaderEpoch { get; set; }
+				public Int32 LeaderEpoch { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The brokers which are in the ISR for this partition.
 				/// </summary>
-				public Int32[] IsrCollection { get; set; }
+				public Int32[] IsrCollection { get; set; } = System.Array.Empty<Int32>();
 
 				/// <summary>
 				/// The Zookeeper version.
 				/// </summary>
-				public Int32 ZkVersion { get; set; }
+				public Int32 ZkVersion { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// All the replicas of this partition.
 				/// </summary>
-				public Int32[] ReplicasCollection { get; set; }
+				public Int32[] ReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 
 				/// <summary>
 				/// The replicas of this partition which are offline.
 				/// </summary>
-				public Int32[] OfflineReplicasCollection { get; set; }
+				public Int32[] OfflineReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 			}
 		}
 
 		/// <summary>
 		/// Each partition that we would like to update.
 		/// </summary>
-		public UpdateMetadataRequestPartitionStateV0[] PartitionStatesV0Collection { get; set; }
+		public UpdateMetadataRequestPartitionStateV0[] PartitionStatesV0Collection { get; set; } = System.Array.Empty<UpdateMetadataRequestPartitionStateV0>();
 
 		public class UpdateMetadataRequestPartitionStateV0 : ISerialize
 		{
@@ -12845,50 +12869,50 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; }
+			public String TopicName { get; set; } = String.Default;
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; }
+			public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The controller epoch.
 			/// </summary>
-			public Int32 ControllerEpoch { get; set; }
+			public Int32 ControllerEpoch { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The ID of the broker which is the current partition leader.
 			/// </summary>
-			public Int32 Leader { get; set; }
+			public Int32 Leader { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The leader epoch of this partition.
 			/// </summary>
-			public Int32 LeaderEpoch { get; set; }
+			public Int32 LeaderEpoch { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The brokers which are in the ISR for this partition.
 			/// </summary>
-			public Int32[] IsrCollection { get; set; }
+			public Int32[] IsrCollection { get; set; } = System.Array.Empty<Int32>();
 
 			/// <summary>
 			/// The Zookeeper version.
 			/// </summary>
-			public Int32 ZkVersion { get; set; }
+			public Int32 ZkVersion { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// All the replicas of this partition.
 			/// </summary>
-			public Int32[] ReplicasCollection { get; set; }
+			public Int32[] ReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 
 			/// <summary>
 			/// The replicas of this partition which are offline.
 			/// </summary>
-			public Int32[] OfflineReplicasCollection { get; set; }
+			public Int32[] OfflineReplicasCollection { get; set; } = System.Array.Empty<Int32>();
 		}
 
-		public UpdateMetadataRequestBroker[] BrokersCollection { get; set; }
+		public UpdateMetadataRequestBroker[] BrokersCollection { get; set; } = System.Array.Empty<UpdateMetadataRequestBroker>();
 
 		public class UpdateMetadataRequestBroker : ISerialize
 		{
@@ -12947,22 +12971,22 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public Int32 Id { get; set; }
+			public Int32 Id { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The broker hostname.
 			/// </summary>
-			public String V0Host { get; set; }
+			public String V0Host { get; set; } = String.Default;
 
 			/// <summary>
 			/// The broker port.
 			/// </summary>
-			public Int32 V0Port { get; set; }
+			public Int32 V0Port { get; set; } = Int32.Default;
 
 			/// <summary>
 			/// The broker endpoints.
 			/// </summary>
-			public UpdateMetadataRequestEndpoint[] EndpointsCollection { get; set; }
+			public UpdateMetadataRequestEndpoint[] EndpointsCollection { get; set; } = System.Array.Empty<UpdateMetadataRequestEndpoint>();
 
 			public class UpdateMetadataRequestEndpoint : ISerialize
 			{
@@ -13016,28 +13040,28 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The port of this endpoint
 				/// </summary>
-				public Int32 Port { get; set; }
+				public Int32 Port { get; set; } = Int32.Default;
 
 				/// <summary>
 				/// The hostname of this endpoint
 				/// </summary>
-				public String Host { get; set; }
+				public String Host { get; set; } = String.Default;
 
 				/// <summary>
 				/// The listener name.
 				/// </summary>
-				public String Listener { get; set; }
+				public String Listener { get; set; } = String.Default;
 
 				/// <summary>
 				/// The security protocol type.
 				/// </summary>
-				public Int16 SecurityProtocol { get; set; }
+				public Int16 SecurityProtocol { get; set; } = Int16.Default;
 			}
 
 			/// <summary>
 			/// The rack which this broker belongs to.
 			/// </summary>
-			public String Rack { get; set; }
+			public String Rack { get; set; } = String.Default;
 		}
 	}
 
@@ -13071,7 +13095,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; }
+		public Int16 ErrorCode { get; set; } = Int16.Default;
 	}
 
 	public class WriteTxnMarkersRequest
@@ -13104,7 +13128,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transaction markers to be written.
 		/// </summary>
-		public WritableTxnMarker[] MarkersCollection { get; set; }
+		public WritableTxnMarker[] MarkersCollection { get; set; } = System.Array.Empty<WritableTxnMarker>();
 
 		public class WritableTxnMarker : ISerialize
 		{
@@ -13166,22 +13190,22 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The current producer ID.
 			/// </summary>
-			public Int64 ProducerId { get; set; }
+			public Int64 ProducerId { get; set; } = Int64.Default;
 
 			/// <summary>
 			/// The current epoch associated with the producer ID.
 			/// </summary>
-			public Int16 ProducerEpoch { get; set; }
+			public Int16 ProducerEpoch { get; set; } = Int16.Default;
 
 			/// <summary>
 			/// The result of the transaction to write to the partitions (false = ABORT, true = COMMIT).
 			/// </summary>
-			public Boolean TransactionResult { get; set; }
+			public Boolean TransactionResult { get; set; } = Boolean.Default;
 
 			/// <summary>
 			/// Each topic that we want to write transaction marker(s) for.
 			/// </summary>
-			public WritableTxnMarkerTopic[] TopicsCollection { get; set; }
+			public WritableTxnMarkerTopic[] TopicsCollection { get; set; } = System.Array.Empty<WritableTxnMarkerTopic>();
 
 			public class WritableTxnMarkerTopic : ISerialize
 			{
@@ -13219,18 +13243,18 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				public String Name { get; set; }
+				public String Name { get; set; } = String.Default;
 
 				/// <summary>
 				/// The indexes of the partitions to write transaction markers for.
 				/// </summary>
-				public Int32[] PartitionIndexesCollection { get; set; }
+				public Int32[] PartitionIndexesCollection { get; set; } = System.Array.Empty<Int32>();
 			}
 
 			/// <summary>
 			/// Epoch associated with the transaction state partition hosted by this transaction coordinator
 			/// </summary>
-			public Int32 CoordinatorEpoch { get; set; }
+			public Int32 CoordinatorEpoch { get; set; } = Int32.Default;
 		}
 	}
 
@@ -13264,7 +13288,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for writing makers.
 		/// </summary>
-		public WritableTxnMarkerResult[] MarkersCollection { get; set; }
+		public WritableTxnMarkerResult[] MarkersCollection { get; set; } = System.Array.Empty<WritableTxnMarkerResult>();
 
 		public class WritableTxnMarkerResult : ISerialize
 		{
@@ -13302,12 +13326,12 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The current producer ID in use by the transactional ID.
 			/// </summary>
-			public Int64 ProducerId { get; set; }
+			public Int64 ProducerId { get; set; } = Int64.Default;
 
 			/// <summary>
 			/// The results by topic.
 			/// </summary>
-			public WritableTxnMarkerTopicResult[] TopicsCollection { get; set; }
+			public WritableTxnMarkerTopicResult[] TopicsCollection { get; set; } = System.Array.Empty<WritableTxnMarkerTopicResult>();
 
 			public class WritableTxnMarkerTopicResult : ISerialize
 			{
@@ -13345,12 +13369,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				public String Name { get; set; }
+				public String Name { get; set; } = String.Default;
 
 				/// <summary>
 				/// The results by partition.
 				/// </summary>
-				public WritableTxnMarkerPartitionResult[] PartitionsCollection { get; set; }
+				public WritableTxnMarkerPartitionResult[] PartitionsCollection { get; set; } = System.Array.Empty<WritableTxnMarkerPartitionResult>();
 
 				public class WritableTxnMarkerPartitionResult : ISerialize
 				{
@@ -13388,12 +13412,12 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The partition index.
 					/// </summary>
-					public Int32 PartitionIndex { get; set; }
+					public Int32 PartitionIndex { get; set; } = Int32.Default;
 
 					/// <summary>
 					/// The error code, or 0 if there was no error.
 					/// </summary>
-					public Int16 ErrorCode { get; set; }
+					public Int16 ErrorCode { get; set; } = Int16.Default;
 				}
 			}
 		}

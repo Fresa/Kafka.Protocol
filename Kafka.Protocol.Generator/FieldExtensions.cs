@@ -14,6 +14,11 @@ namespace Kafka.Protocol.Generator
             return field.Type.StartsWith(ArrayTypeCharacter);
         }
 
+        public static bool IsDictionary(this Field field)
+        {
+            return field.Fields?.Any(subField => subField.MapKey) ?? false;
+        }
+
         public static string GetName(this Field field)
         {
             return field.Name + (field.IsArray() ? "Collection" : "");

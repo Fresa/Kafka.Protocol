@@ -59,6 +59,7 @@ namespace Kafka.Protocol<# Block(() =>
     {
         var className = primitiveType.GetClassName();
         var type = primitiveType.GetTypeName();
+		var defaultValue = primitiveType.GetDefaultValue();
 
         GenerateDocumentation(primitiveType.Description);
         #>public struct <#= className #> : ISerialize <# Block(() =>
@@ -108,7 +109,9 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public static <#= className #> From(<#= type #> value)<# Block(() =>
             {
                 #>return new <#= className #>(value);<#
-            });
+            }); _(2);
+
+			#>public static <#= className #> Default => <#= className #>.From(<#= defaultValue #>);<#
         }); _();
     });
 
@@ -245,7 +248,24 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 	var fieldTypeName = field.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
 	
-	#>public <#= fieldTypeName #> <#= field.GetName() #> { get; set; }<# if(field.Default != null) { #> = new <#= fieldTypeName #>(<#= field.Default #>);<# } #><# 
+	#>public <#= fieldTypeName #> <#= field.GetName() #> { get; set; }<# 
+	
+	if(field.Default != null) 
+	{ 
+		#> = new <#= fieldTypeName #>(<#= field.Default #>);<# 
+	} 
+	else if (field.IsDictionary())
+	{
+		#> = new <#= fieldTypeName #>();<# 
+	}
+	else if (field.IsArray())
+	{
+		#> = System.Array.Empty<<#= fieldTypeNameWithoutArrayCharacters #>>();<# 
+	}
+	else 
+	{
+		#> = <#= fieldTypeName #>.Default;<# 
+	}
 
 	if (field.Fields == null) 
 	{

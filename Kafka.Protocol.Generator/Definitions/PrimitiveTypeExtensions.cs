@@ -1,4 +1,6 @@
-﻿using Kafka.Protocol.Generator.Extensions;
+﻿using System;
+using System.Reflection;
+using Kafka.Protocol.Generator.Extensions;
 
 namespace Kafka.Protocol.Generator.Definitions
 {
@@ -45,6 +47,13 @@ namespace Kafka.Protocol.Generator.Definitions
 
         public static string GetTypeName(this PrimitiveType primitiveType)
         {
+            return primitiveType
+                .ResolveType()
+                .GetPrettyFullName();
+        }
+
+        private static System.Type ResolveType(this PrimitiveType primitiveType)
+        {
             var typeName = primitiveType.GetClassName();
 
             var isArray = false;
@@ -58,26 +67,20 @@ namespace Kafka.Protocol.Generator.Definitions
             {
                 case "int8":
                     return Type<sbyte>()
-                        .ToArrayType(isArray)
-                        .GetPrettyFullName();
+                        .ToArrayType(isArray);
                 case "varint":
                     return Type<int>()
-                        .ToArrayType(isArray)
-                        .GetPrettyFullName();
+                        .ToArrayType(isArray);
                 case "varlong":
                     return Type<long>()
-                        .ToArrayType(isArray)
-                        .GetPrettyFullName();
+                        .ToArrayType(isArray);
                 case "nullablestring":
                     return Type<string>()
-                        .ToArrayType(isArray)
-                        .GetPrettyFullName();
+                        .ToArrayType(isArray);
                 case "nullablebytes":
-                    return Type<byte[]>()
-                        .GetPrettyFullName();
+                    return Type<byte[]>();
                 case "bytes":
-                    return Type<byte[]>()
-                        .GetPrettyFullName();
+                    return Type<byte[]>();
             }
 
             var resolvedType = typeof(int)
@@ -87,14 +90,30 @@ namespace Kafka.Protocol.Generator.Definitions
                     false,
                     true);
 
-            if (resolvedType != null)
+            if (resolvedType == null)
             {
-                return resolvedType
-                    .ToArrayType(isArray)
-                    .GetPrettyFullName();
+                throw new InvalidOperationException($"Could not resolve '{primitiveType.Type}' to a primitive type");
             }
 
-            return typeName + (isArray ? "[]" : "");
+            return resolvedType
+                .ToArrayType(isArray);
+        }
+
+        public static string GetDefaultValue(this PrimitiveType primitiveType)
+        {
+            var type = primitiveType.ResolveType();
+            if (type.IsArray)
+            {
+                return $"new {type.GetPrettyFullName().Replace("[]", "[0]")}";
+            }
+
+            switch (type)
+            {
+                case System.Type t when t == typeof(string):
+                    return "System.String.Empty";
+                default:
+                    return "default";
+            }
         }
 
         private static System.Type Type<T>()
