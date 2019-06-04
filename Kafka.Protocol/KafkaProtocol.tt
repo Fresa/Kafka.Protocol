@@ -248,7 +248,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 	var fieldTypeName = field.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
 	
-	#>public <#= fieldTypeName #> <#= field.GetName() #> { get; set; }<# 
+	#>private <#= fieldTypeName #> _<#= field.GetName() #><#
 	
 	if(field.Default != null) 
 	{ 
@@ -265,8 +265,26 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 	else 
 	{
 		#> = <#= fieldTypeName #>.Default;<# 
-	}
+	} _();
 
+	#>public <#= fieldTypeName #> <#= field.GetName() #> <# Block(() => 
+	{
+		#>get => _<#= field.GetName() #>;<# _();
+		#>set <# Block(() => 
+		{
+			if (field.Ignorable == false)
+			{
+				var versionRange = VersionRange.Parse(field.Versions);
+				#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>)) == false) <# Block(() => 
+				{
+					#>throw new UnsupportedVersionException($"<#= field.GetName() #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<#
+				}); _(2);
+			}
+
+			#>_<#= field.GetName() #> = value;<#
+		});
+	});
+	
 	if (field.Fields == null) 
 	{
 		return;

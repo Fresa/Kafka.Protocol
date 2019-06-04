@@ -2119,22 +2119,74 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
 		/// </summary>
-		public String TransactionalId { get; set; } = String.Default;
+		private String _TransactionalId = String.Default;
+		public String TransactionalId 
+		{
+			get => _TransactionalId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TransactionalId = value;
+			}
+		}
 
 		/// <summary>
 		/// Current producer id in use by the transactional id.
 		/// </summary>
-		public Int64 ProducerId { get; set; } = Int64.Default;
+		private Int64 _ProducerId = Int64.Default;
+		public Int64 ProducerId 
+		{
+			get => _ProducerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerId = value;
+			}
+		}
 
 		/// <summary>
 		/// Current epoch associated with the producer id.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; } = Int16.Default;
+		private Int16 _ProducerEpoch = Int16.Default;
+		public Int16 ProducerEpoch 
+		{
+			get => _ProducerEpoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		public String GroupId { get; set; } = String.Default;
+		private String _GroupId = String.Default;
+		public String GroupId 
+		{
+			get => _GroupId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupId = value;
+			}
+		}
 	}
 
 	public class AddOffsetsToTxnResponse
@@ -2175,12 +2227,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The response error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 	}
 
 	public class AddPartitionsToTxnRequest
@@ -2237,22 +2315,74 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
 		/// </summary>
-		public String TransactionalId { get; set; } = String.Default;
+		private String _TransactionalId = String.Default;
+		public String TransactionalId 
+		{
+			get => _TransactionalId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TransactionalId = value;
+			}
+		}
 
 		/// <summary>
 		/// Current producer id in use by the transactional id.
 		/// </summary>
-		public Int64 ProducerId { get; set; } = Int64.Default;
+		private Int64 _ProducerId = Int64.Default;
+		public Int64 ProducerId 
+		{
+			get => _ProducerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerId = value;
+			}
+		}
 
 		/// <summary>
 		/// Current epoch associated with the producer id.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; } = Int16.Default;
+		private Int16 _ProducerEpoch = Int16.Default;
+		public Int16 ProducerEpoch 
+		{
+			get => _ProducerEpoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// The partitions to add to the transation.
 		/// </summary>
-		public Dictionary<String, AddPartitionsToTxnTopic> TopicsCollection { get; set; } = new Dictionary<String, AddPartitionsToTxnTopic>();
+		private Dictionary<String, AddPartitionsToTxnTopic> _TopicsCollection = new Dictionary<String, AddPartitionsToTxnTopic>();
+		public Dictionary<String, AddPartitionsToTxnTopic> TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class AddPartitionsToTxnTopic : ISerialize
 		{
@@ -2290,12 +2420,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition indexes to add to the transaction
 			/// </summary>
-			public Int32[] PartitionsCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _PartitionsCollection = System.Array.Empty<Int32>();
+			public Int32[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 		}
 	}
 
@@ -2337,12 +2493,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
-		public Dictionary<String, AddPartitionsToTxnTopicResult> ResultsCollection { get; set; } = new Dictionary<String, AddPartitionsToTxnTopicResult>();
+		private Dictionary<String, AddPartitionsToTxnTopicResult> _ResultsCollection = new Dictionary<String, AddPartitionsToTxnTopicResult>();
+		public Dictionary<String, AddPartitionsToTxnTopicResult> ResultsCollection 
+		{
+			get => _ResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResultsCollection = value;
+			}
+		}
 
 		public class AddPartitionsToTxnTopicResult : ISerialize
 		{
@@ -2380,12 +2562,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The results for each partition
 			/// </summary>
-			public Dictionary<Int32, AddPartitionsToTxnPartitionResult> ResultsCollection { get; set; } = new Dictionary<Int32, AddPartitionsToTxnPartitionResult>();
+			private Dictionary<Int32, AddPartitionsToTxnPartitionResult> _ResultsCollection = new Dictionary<Int32, AddPartitionsToTxnPartitionResult>();
+			public Dictionary<Int32, AddPartitionsToTxnPartitionResult> ResultsCollection 
+			{
+				get => _ResultsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResultsCollection = value;
+				}
+			}
 
 			public class AddPartitionsToTxnPartitionResult : ISerialize
 			{
@@ -2423,12 +2631,38 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The response error code.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 			}
 		}
 	}
@@ -2471,7 +2705,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The updates for each resource.
 		/// </summary>
-		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection { get; set; } = new Dictionary<Int8, AlterConfigsResource>();
+		private Dictionary<Int8, AlterConfigsResource> _ResourcesCollection = new Dictionary<Int8, AlterConfigsResource>();
+		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection 
+		{
+			get => _ResourcesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResourcesCollection = value;
+			}
+		}
 
 		public class AlterConfigsResource : ISerialize
 		{
@@ -2517,17 +2764,56 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceType { get; set; } = Int8.Default;
+			private Int8 _ResourceType = Int8.Default;
+			public Int8 ResourceType 
+			{
+				get => _ResourceType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceType = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceName { get; set; } = String.Default;
+			private String _ResourceName = String.Default;
+			public String ResourceName 
+			{
+				get => _ResourceName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceName = value;
+				}
+			}
 
 			/// <summary>
 			/// The configurations.
 			/// </summary>
-			public Dictionary<String, AlterableConfig> ConfigsCollection { get; set; } = new Dictionary<String, AlterableConfig>();
+			private Dictionary<String, AlterableConfig> _ConfigsCollection = new Dictionary<String, AlterableConfig>();
+			public Dictionary<String, AlterableConfig> ConfigsCollection 
+			{
+				get => _ConfigsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ConfigsCollection = value;
+				}
+			}
 
 			public class AlterableConfig : ISerialize
 			{
@@ -2565,19 +2851,58 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration key name.
 				/// </summary>
-				public String Name { get; set; } = String.Default;
+				private String _Name = String.Default;
+				public String Name 
+				{
+					get => _Name;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Name = value;
+					}
+				}
 
 				/// <summary>
 				/// The value to set for the configuration key.
 				/// </summary>
-				public String Value { get; set; } = String.Default;
+				private String _Value = String.Default;
+				public String Value 
+				{
+					get => _Value;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Value = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// True if we should validate the request, but not change the configurations.
 		/// </summary>
-		public Boolean ValidateOnly { get; set; } = Boolean.Default;
+		private Boolean _ValidateOnly = Boolean.Default;
+		public Boolean ValidateOnly 
+		{
+			get => _ValidateOnly;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ValidateOnly = value;
+			}
+		}
 	}
 
 	public class AlterConfigsResponse
@@ -2618,12 +2943,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The responses for each resource.
 		/// </summary>
-		public AlterConfigsResourceResponse[] ResourcesCollection { get; set; } = System.Array.Empty<AlterConfigsResourceResponse>();
+		private AlterConfigsResourceResponse[] _ResourcesCollection = System.Array.Empty<AlterConfigsResourceResponse>();
+		public AlterConfigsResourceResponse[] ResourcesCollection 
+		{
+			get => _ResourcesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResourcesCollection = value;
+			}
+		}
 
 		public class AlterConfigsResourceResponse : ISerialize
 		{
@@ -2677,22 +3028,74 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource error code.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource error message, or null if there was no error.
 			/// </summary>
-			public String ErrorMessage { get; set; } = String.Default;
+			private String _ErrorMessage = String.Default;
+			public String ErrorMessage 
+			{
+				get => _ErrorMessage;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorMessage = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceType { get; set; } = Int8.Default;
+			private Int8 _ResourceType = Int8.Default;
+			public Int8 ResourceType 
+			{
+				get => _ResourceType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceType = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceName { get; set; } = String.Default;
+			private String _ResourceName = String.Default;
+			public String ResourceName 
+			{
+				get => _ResourceName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceName = value;
+				}
+			}
 		}
 	}
 
@@ -2726,7 +3129,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The alterations to make for each directory.
 		/// </summary>
-		public Dictionary<String, AlterReplicaLogDir> DirsCollection { get; set; } = new Dictionary<String, AlterReplicaLogDir>();
+		private Dictionary<String, AlterReplicaLogDir> _DirsCollection = new Dictionary<String, AlterReplicaLogDir>();
+		public Dictionary<String, AlterReplicaLogDir> DirsCollection 
+		{
+			get => _DirsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"DirsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_DirsCollection = value;
+			}
+		}
 
 		public class AlterReplicaLogDir : ISerialize
 		{
@@ -2764,12 +3180,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The absolute directory path.
 			/// </summary>
-			public String Path { get; set; } = String.Default;
+			private String _Path = String.Default;
+			public String Path 
+			{
+				get => _Path;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Path does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Path = value;
+				}
+			}
 
 			/// <summary>
 			/// The topics to add to the directory.
 			/// </summary>
-			public Dictionary<String, AlterReplicaLogDirTopic> TopicsCollection { get; set; } = new Dictionary<String, AlterReplicaLogDirTopic>();
+			private Dictionary<String, AlterReplicaLogDirTopic> _TopicsCollection = new Dictionary<String, AlterReplicaLogDirTopic>();
+			public Dictionary<String, AlterReplicaLogDirTopic> TopicsCollection 
+			{
+				get => _TopicsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicsCollection = value;
+				}
+			}
 
 			public class AlterReplicaLogDirTopic : ISerialize
 			{
@@ -2807,12 +3249,38 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				public String Name { get; set; } = String.Default;
+				private String _Name = String.Default;
+				public String Name 
+				{
+					get => _Name;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Name = value;
+					}
+				}
 
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
-				public Int32[] PartitionsCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _PartitionsCollection = System.Array.Empty<Int32>();
+				public Int32[] PartitionsCollection 
+				{
+					get => _PartitionsCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionsCollection = value;
+					}
+				}
 			}
 		}
 	}
@@ -2855,12 +3323,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
-		public AlterReplicaLogDirTopicResult[] ResultsCollection { get; set; } = System.Array.Empty<AlterReplicaLogDirTopicResult>();
+		private AlterReplicaLogDirTopicResult[] _ResultsCollection = System.Array.Empty<AlterReplicaLogDirTopicResult>();
+		public AlterReplicaLogDirTopicResult[] ResultsCollection 
+		{
+			get => _ResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResultsCollection = value;
+			}
+		}
 
 		public class AlterReplicaLogDirTopicResult : ISerialize
 		{
@@ -2898,12 +3392,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			public String TopicName { get; set; } = String.Default;
+			private String _TopicName = String.Default;
+			public String TopicName 
+			{
+				get => _TopicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicName = value;
+				}
+			}
 
 			/// <summary>
 			/// The results for each partition.
 			/// </summary>
-			public AlterReplicaLogDirPartitionResult[] PartitionsCollection { get; set; } = System.Array.Empty<AlterReplicaLogDirPartitionResult>();
+			private AlterReplicaLogDirPartitionResult[] _PartitionsCollection = System.Array.Empty<AlterReplicaLogDirPartitionResult>();
+			public AlterReplicaLogDirPartitionResult[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class AlterReplicaLogDirPartitionResult : ISerialize
 			{
@@ -2941,12 +3461,38 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 			}
 		}
 	}
@@ -3021,12 +3567,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The APIs supported by the broker.
 		/// </summary>
-		public Dictionary<Int16, ApiVersionsResponseKey> ApiKeysCollection { get; set; } = new Dictionary<Int16, ApiVersionsResponseKey>();
+		private Dictionary<Int16, ApiVersionsResponseKey> _ApiKeysCollection = new Dictionary<Int16, ApiVersionsResponseKey>();
+		public Dictionary<Int16, ApiVersionsResponseKey> ApiKeysCollection 
+		{
+			get => _ApiKeysCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ApiKeysCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ApiKeysCollection = value;
+			}
+		}
 
 		public class ApiVersionsResponseKey : ISerialize
 		{
@@ -3072,23 +3644,70 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The API index.
 			/// </summary>
-			public Int16 Index { get; set; } = Int16.Default;
+			private Int16 _Index = Int16.Default;
+			public Int16 Index 
+			{
+				get => _Index;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Index does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Index = value;
+				}
+			}
 
 			/// <summary>
 			/// The minimum supported version, inclusive.
 			/// </summary>
-			public Int16 MinVersion { get; set; } = Int16.Default;
+			private Int16 _MinVersion = Int16.Default;
+			public Int16 MinVersion 
+			{
+				get => _MinVersion;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"MinVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_MinVersion = value;
+				}
+			}
 
 			/// <summary>
 			/// The maximum supported version, inclusive.
 			/// </summary>
-			public Int16 MaxVersion { get; set; } = Int16.Default;
+			private Int16 _MaxVersion = Int16.Default;
+			public Int16 MaxVersion 
+			{
+				get => _MaxVersion;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"MaxVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_MaxVersion = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 	}
 
 	public class ControlledShutdownRequest
@@ -3129,12 +3748,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The id of the broker for which controlled shutdown has been requested.
 		/// </summary>
-		public Int32 BrokerId { get; set; } = Int32.Default;
+		private Int32 _BrokerId = Int32.Default;
+		public Int32 BrokerId 
+		{
+			get => _BrokerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_BrokerId = value;
+			}
+		}
 
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		public Int64 BrokerEpoch { get; set; } = new Int64(-1);
+		private Int64 _BrokerEpoch = new Int64(-1);
+		public Int64 BrokerEpoch 
+		{
+			get => _BrokerEpoch;
+			set 
+			{
+				_BrokerEpoch = value;
+			}
+		}
 	}
 
 	public class ControlledShutdownResponse
@@ -3175,12 +3815,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The partitions that the broker still leads.
 		/// </summary>
-		public Dictionary<String, RemainingPartition> RemainingPartitionsCollection { get; set; } = new Dictionary<String, RemainingPartition>();
+		private Dictionary<String, RemainingPartition> _RemainingPartitionsCollection = new Dictionary<String, RemainingPartition>();
+		public Dictionary<String, RemainingPartition> RemainingPartitionsCollection 
+		{
+			get => _RemainingPartitionsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"RemainingPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_RemainingPartitionsCollection = value;
+			}
+		}
 
 		public class RemainingPartition : ISerialize
 		{
@@ -3218,12 +3884,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			public String TopicName { get; set; } = String.Default;
+			private String _TopicName = String.Default;
+			public String TopicName 
+			{
+				get => _TopicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicName = value;
+				}
+			}
 
 			/// <summary>
 			/// The index of the partition.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; } = Int32.Default;
+			private Int32 _PartitionIndex = Int32.Default;
+			public Int32 PartitionIndex 
+			{
+				get => _PartitionIndex;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionIndex = value;
+				}
+			}
 		}
 	}
 
@@ -3257,7 +3949,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ACLs that we want to create.
 		/// </summary>
-		public CreatableAcl[] CreationsCollection { get; set; } = System.Array.Empty<CreatableAcl>();
+		private CreatableAcl[] _CreationsCollection = System.Array.Empty<CreatableAcl>();
+		public CreatableAcl[] CreationsCollection 
+		{
+			get => _CreationsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"CreationsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_CreationsCollection = value;
+			}
+		}
 
 		public class CreatableAcl : ISerialize
 		{
@@ -3335,37 +4040,128 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The type of the resource.
 			/// </summary>
-			public Int8 ResourceType { get; set; } = Int8.Default;
+			private Int8 _ResourceType = Int8.Default;
+			public Int8 ResourceType 
+			{
+				get => _ResourceType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceType = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource name for the ACL.
 			/// </summary>
-			public String ResourceName { get; set; } = String.Default;
+			private String _ResourceName = String.Default;
+			public String ResourceName 
+			{
+				get => _ResourceName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceName = value;
+				}
+			}
 
 			/// <summary>
 			/// The pattern type for the ACL.
 			/// </summary>
-			public Int8 ResourcePatternType { get; set; } = new Int8(3);
+			private Int8 _ResourcePatternType = new Int8(3);
+			public Int8 ResourcePatternType 
+			{
+				get => _ResourcePatternType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourcePatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+					}
+
+					_ResourcePatternType = value;
+				}
+			}
 
 			/// <summary>
 			/// The principal for the ACL.
 			/// </summary>
-			public String Principal { get; set; } = String.Default;
+			private String _Principal = String.Default;
+			public String Principal 
+			{
+				get => _Principal;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Principal = value;
+				}
+			}
 
 			/// <summary>
 			/// The host for the ACL.
 			/// </summary>
-			public String Host { get; set; } = String.Default;
+			private String _Host = String.Default;
+			public String Host 
+			{
+				get => _Host;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Host = value;
+				}
+			}
 
 			/// <summary>
 			/// The operation type for the ACL (read, write, etc.).
 			/// </summary>
-			public Int8 Operation { get; set; } = Int8.Default;
+			private Int8 _Operation = Int8.Default;
+			public Int8 Operation 
+			{
+				get => _Operation;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Operation = value;
+				}
+			}
 
 			/// <summary>
 			/// The permission type for the ACL (allow, deny, etc.).
 			/// </summary>
-			public Int8 PermissionType { get; set; } = Int8.Default;
+			private Int8 _PermissionType = Int8.Default;
+			public Int8 PermissionType 
+			{
+				get => _PermissionType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PermissionType = value;
+				}
+			}
 		}
 	}
 
@@ -3407,12 +4203,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The results for each ACL creation.
 		/// </summary>
-		public CreatableAclResult[] ResultsCollection { get; set; } = System.Array.Empty<CreatableAclResult>();
+		private CreatableAclResult[] _ResultsCollection = System.Array.Empty<CreatableAclResult>();
+		public CreatableAclResult[] ResultsCollection 
+		{
+			get => _ResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResultsCollection = value;
+			}
+		}
 
 		public class CreatableAclResult : ISerialize
 		{
@@ -3450,12 +4272,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The result message, or null if there was no error.
 			/// </summary>
-			public String ErrorMessage { get; set; } = String.Default;
+			private String _ErrorMessage = String.Default;
+			public String ErrorMessage 
+			{
+				get => _ErrorMessage;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorMessage = value;
+				}
+			}
 		}
 	}
 
@@ -3497,7 +4345,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// A list of those who are allowed to renew this token before it expires.
 		/// </summary>
-		public CreatableRenewers[] RenewersCollection { get; set; } = System.Array.Empty<CreatableRenewers>();
+		private CreatableRenewers[] _RenewersCollection = System.Array.Empty<CreatableRenewers>();
+		public CreatableRenewers[] RenewersCollection 
+		{
+			get => _RenewersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"RenewersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_RenewersCollection = value;
+			}
+		}
 
 		public class CreatableRenewers : ISerialize
 		{
@@ -3535,18 +4396,57 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The type of the Kafka principal.
 			/// </summary>
-			public String PrincipalType { get; set; } = String.Default;
+			private String _PrincipalType = String.Default;
+			public String PrincipalType 
+			{
+				get => _PrincipalType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PrincipalType = value;
+				}
+			}
 
 			/// <summary>
 			/// The name of the Kafka principal.
 			/// </summary>
-			public String PrincipalName { get; set; } = String.Default;
+			private String _PrincipalName = String.Default;
+			public String PrincipalName 
+			{
+				get => _PrincipalName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PrincipalName = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// The maximum lifetime of the token in milliseconds, or -1 to use the server side default.
 		/// </summary>
-		public Int64 MaxLifetimeMs { get; set; } = Int64.Default;
+		private Int64 _MaxLifetimeMs = Int64.Default;
+		public Int64 MaxLifetimeMs 
+		{
+			get => _MaxLifetimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MaxLifetimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MaxLifetimeMs = value;
+			}
+		}
 	}
 
 	public class CreateDelegationTokenResponse
@@ -3643,47 +4543,164 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error, or zero if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The principal type of the token owner.
 		/// </summary>
-		public String PrincipalType { get; set; } = String.Default;
+		private String _PrincipalType = String.Default;
+		public String PrincipalType 
+		{
+			get => _PrincipalType;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_PrincipalType = value;
+			}
+		}
 
 		/// <summary>
 		/// The name of the token owner.
 		/// </summary>
-		public String PrincipalName { get; set; } = String.Default;
+		private String _PrincipalName = String.Default;
+		public String PrincipalName 
+		{
+			get => _PrincipalName;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_PrincipalName = value;
+			}
+		}
 
 		/// <summary>
 		/// When this token was generated.
 		/// </summary>
-		public Int64 IssueTimestampMs { get; set; } = Int64.Default;
+		private Int64 _IssueTimestampMs = Int64.Default;
+		public Int64 IssueTimestampMs 
+		{
+			get => _IssueTimestampMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"IssueTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_IssueTimestampMs = value;
+			}
+		}
 
 		/// <summary>
 		/// When this token expires.
 		/// </summary>
-		public Int64 ExpiryTimestampMs { get; set; } = Int64.Default;
+		private Int64 _ExpiryTimestampMs = Int64.Default;
+		public Int64 ExpiryTimestampMs 
+		{
+			get => _ExpiryTimestampMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ExpiryTimestampMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The maximum lifetime of this token.
 		/// </summary>
-		public Int64 MaxTimestampMs { get; set; } = Int64.Default;
+		private Int64 _MaxTimestampMs = Int64.Default;
+		public Int64 MaxTimestampMs 
+		{
+			get => _MaxTimestampMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MaxTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MaxTimestampMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The token UUID.
 		/// </summary>
-		public String TokenId { get; set; } = String.Default;
+		private String _TokenId = String.Default;
+		public String TokenId 
+		{
+			get => _TokenId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TokenId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TokenId = value;
+			}
+		}
 
 		/// <summary>
 		/// HMAC of the delegation token.
 		/// </summary>
-		public Bytes Hmac { get; set; } = Bytes.Default;
+		private Bytes _Hmac = Bytes.Default;
+		public Bytes Hmac 
+		{
+			get => _Hmac;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Hmac = value;
+			}
+		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 	}
 
 	public class CreatePartitionsRequest
@@ -3732,7 +4749,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to create new partitions inside.
 		/// </summary>
-		public CreatePartitionsTopic[] TopicsCollection { get; set; } = System.Array.Empty<CreatePartitionsTopic>();
+		private CreatePartitionsTopic[] _TopicsCollection = System.Array.Empty<CreatePartitionsTopic>();
+		public CreatePartitionsTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class CreatePartitionsTopic : ISerialize
 		{
@@ -3778,17 +4808,56 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The new partition count.
 			/// </summary>
-			public Int32 Count { get; set; } = Int32.Default;
+			private Int32 _Count = Int32.Default;
+			public Int32 Count 
+			{
+				get => _Count;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Count does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Count = value;
+				}
+			}
 
 			/// <summary>
 			/// The new partition assignments.
 			/// </summary>
-			public CreatePartitionsAssignment[] AssignmentsCollection { get; set; } = System.Array.Empty<CreatePartitionsAssignment>();
+			private CreatePartitionsAssignment[] _AssignmentsCollection = System.Array.Empty<CreatePartitionsAssignment>();
+			public CreatePartitionsAssignment[] AssignmentsCollection 
+			{
+				get => _AssignmentsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"AssignmentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_AssignmentsCollection = value;
+				}
+			}
 
 			public class CreatePartitionsAssignment : ISerialize
 			{
@@ -3818,19 +4887,58 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The assigned broker IDs.
 				/// </summary>
-				public Int32[] BrokerIdsCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _BrokerIdsCollection = System.Array.Empty<Int32>();
+				public Int32[] BrokerIdsCollection 
+				{
+					get => _BrokerIdsCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"BrokerIdsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_BrokerIdsCollection = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// The time in ms to wait for the partitions to be created.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; } = Int32.Default;
+		private Int32 _TimeoutMs = Int32.Default;
+		public Int32 TimeoutMs 
+		{
+			get => _TimeoutMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TimeoutMs = value;
+			}
+		}
 
 		/// <summary>
 		/// If true, then validate the request, but don't actually increase the number of partitions.
 		/// </summary>
-		public Boolean ValidateOnly { get; set; } = Boolean.Default;
+		private Boolean _ValidateOnly = Boolean.Default;
+		public Boolean ValidateOnly 
+		{
+			get => _ValidateOnly;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ValidateOnly = value;
+			}
+		}
 	}
 
 	public class CreatePartitionsResponse
@@ -3871,12 +4979,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The partition creation results for each topic.
 		/// </summary>
-		public CreatePartitionsTopicResult[] ResultsCollection { get; set; } = System.Array.Empty<CreatePartitionsTopicResult>();
+		private CreatePartitionsTopicResult[] _ResultsCollection = System.Array.Empty<CreatePartitionsTopicResult>();
+		public CreatePartitionsTopicResult[] ResultsCollection 
+		{
+			get => _ResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResultsCollection = value;
+			}
+		}
 
 		public class CreatePartitionsTopicResult : ISerialize
 		{
@@ -3922,17 +5056,56 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The result message, or null if there was no error.
 			/// </summary>
-			public String ErrorMessage { get; set; } = String.Default;
+			private String _ErrorMessage = String.Default;
+			public String ErrorMessage 
+			{
+				get => _ErrorMessage;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorMessage = value;
+				}
+			}
 		}
 	}
 
@@ -3982,7 +5155,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to create.
 		/// </summary>
-		public Dictionary<String, CreatableTopic> TopicsCollection { get; set; } = new Dictionary<String, CreatableTopic>();
+		private Dictionary<String, CreatableTopic> _TopicsCollection = new Dictionary<String, CreatableTopic>();
+		public Dictionary<String, CreatableTopic> TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class CreatableTopic : ISerialize
 		{
@@ -4044,22 +5230,74 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The number of partitions to create in the topic, or -1 if we are specifying a manual partition assignment.
 			/// </summary>
-			public Int32 NumPartitions { get; set; } = Int32.Default;
+			private Int32 _NumPartitions = Int32.Default;
+			public Int32 NumPartitions 
+			{
+				get => _NumPartitions;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"NumPartitions does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_NumPartitions = value;
+				}
+			}
 
 			/// <summary>
 			/// The number of replicas to create for each partition in the topic, or -1 if we are specifying a manual partition assignment.
 			/// </summary>
-			public Int16 ReplicationFactor { get; set; } = Int16.Default;
+			private Int16 _ReplicationFactor = Int16.Default;
+			public Int16 ReplicationFactor 
+			{
+				get => _ReplicationFactor;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ReplicationFactor does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ReplicationFactor = value;
+				}
+			}
 
 			/// <summary>
 			/// The manual partition assignment, or the empty array if we are using automatic assignment.
 			/// </summary>
-			public Dictionary<Int32, CreatableReplicaAssignment> AssignmentsCollection { get; set; } = new Dictionary<Int32, CreatableReplicaAssignment>();
+			private Dictionary<Int32, CreatableReplicaAssignment> _AssignmentsCollection = new Dictionary<Int32, CreatableReplicaAssignment>();
+			public Dictionary<Int32, CreatableReplicaAssignment> AssignmentsCollection 
+			{
+				get => _AssignmentsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"AssignmentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_AssignmentsCollection = value;
+				}
+			}
 
 			public class CreatableReplicaAssignment : ISerialize
 			{
@@ -4097,18 +5335,57 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The brokers to place the partition on.
 				/// </summary>
-				public Int32[] BrokerIdsCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _BrokerIdsCollection = System.Array.Empty<Int32>();
+				public Int32[] BrokerIdsCollection 
+				{
+					get => _BrokerIdsCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"BrokerIdsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_BrokerIdsCollection = value;
+					}
+				}
 			}
 
 			/// <summary>
 			/// The custom topic configurations to set.
 			/// </summary>
-			public Dictionary<String, CreateableTopicConfig> ConfigsCollection { get; set; } = new Dictionary<String, CreateableTopicConfig>();
+			private Dictionary<String, CreateableTopicConfig> _ConfigsCollection = new Dictionary<String, CreateableTopicConfig>();
+			public Dictionary<String, CreateableTopicConfig> ConfigsCollection 
+			{
+				get => _ConfigsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ConfigsCollection = value;
+				}
+			}
 
 			public class CreateableTopicConfig : ISerialize
 			{
@@ -4146,24 +5423,76 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
-				public String Name { get; set; } = String.Default;
+				private String _Name = String.Default;
+				public String Name 
+				{
+					get => _Name;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Name = value;
+					}
+				}
 
 				/// <summary>
 				/// The configuration value.
 				/// </summary>
-				public String Value { get; set; } = String.Default;
+				private String _Value = String.Default;
+				public String Value 
+				{
+					get => _Value;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Value = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// How long to wait in milliseconds before timing out the request.
 		/// </summary>
-		public Int32 timeoutMs { get; set; } = new Int32(60000);
+		private Int32 _timeoutMs = new Int32(60000);
+		public Int32 timeoutMs 
+		{
+			get => _timeoutMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"timeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_timeoutMs = value;
+			}
+		}
 
 		/// <summary>
 		/// If true, check that the topics can be created as specified, but don't create anything.
 		/// </summary>
-		public Boolean validateOnly { get; set; } = new Boolean(false);
+		private Boolean _validateOnly = new Boolean(false);
+		public Boolean validateOnly 
+		{
+			get => _validateOnly;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"validateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				_validateOnly = value;
+			}
+		}
 	}
 
 	public class CreateTopicsResponse
@@ -4204,12 +5533,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// Results for each topic we tried to create.
 		/// </summary>
-		public Dictionary<String, CreatableTopicResult> TopicsCollection { get; set; } = new Dictionary<String, CreatableTopicResult>();
+		private Dictionary<String, CreatableTopicResult> _TopicsCollection = new Dictionary<String, CreatableTopicResult>();
+		public Dictionary<String, CreatableTopicResult> TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class CreatableTopicResult : ISerialize
 		{
@@ -4255,17 +5605,51 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The error message, or null if there was no error.
 			/// </summary>
-			public String ErrorMessage { get; set; } = String.Default;
+			private String _ErrorMessage = String.Default;
+			public String ErrorMessage 
+			{
+				get => _ErrorMessage;
+				set 
+				{
+					_ErrorMessage = value;
+				}
+			}
 		}
 	}
 
@@ -4299,7 +5683,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The filters to use when deleting ACLs.
 		/// </summary>
-		public DeleteAclsFilter[] FiltersCollection { get; set; } = System.Array.Empty<DeleteAclsFilter>();
+		private DeleteAclsFilter[] _FiltersCollection = System.Array.Empty<DeleteAclsFilter>();
+		public DeleteAclsFilter[] FiltersCollection 
+		{
+			get => _FiltersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"FiltersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_FiltersCollection = value;
+			}
+		}
 
 		public class DeleteAclsFilter : ISerialize
 		{
@@ -4377,37 +5774,128 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceTypeFilter { get; set; } = Int8.Default;
+			private Int8 _ResourceTypeFilter = Int8.Default;
+			public Int8 ResourceTypeFilter 
+			{
+				get => _ResourceTypeFilter;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceTypeFilter = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceNameFilter { get; set; } = String.Default;
+			private String _ResourceNameFilter = String.Default;
+			public String ResourceNameFilter 
+			{
+				get => _ResourceNameFilter;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceNameFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceNameFilter = value;
+				}
+			}
 
 			/// <summary>
 			/// The pattern type.
 			/// </summary>
-			public Int8 PatternTypeFilter { get; set; } = new Int8(3);
+			private Int8 _PatternTypeFilter = new Int8(3);
+			public Int8 PatternTypeFilter 
+			{
+				get => _PatternTypeFilter;
+				set 
+				{
+					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PatternTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+					}
+
+					_PatternTypeFilter = value;
+				}
+			}
 
 			/// <summary>
 			/// The principal filter, or null to accept all principals.
 			/// </summary>
-			public String PrincipalFilter { get; set; } = String.Default;
+			private String _PrincipalFilter = String.Default;
+			public String PrincipalFilter 
+			{
+				get => _PrincipalFilter;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PrincipalFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PrincipalFilter = value;
+				}
+			}
 
 			/// <summary>
 			/// The host filter, or null to accept all hosts.
 			/// </summary>
-			public String HostFilter { get; set; } = String.Default;
+			private String _HostFilter = String.Default;
+			public String HostFilter 
+			{
+				get => _HostFilter;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"HostFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_HostFilter = value;
+				}
+			}
 
 			/// <summary>
 			/// The ACL operation.
 			/// </summary>
-			public Int8 Operation { get; set; } = Int8.Default;
+			private Int8 _Operation = Int8.Default;
+			public Int8 Operation 
+			{
+				get => _Operation;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Operation = value;
+				}
+			}
 
 			/// <summary>
 			/// The permission type.
 			/// </summary>
-			public Int8 PermissionType { get; set; } = Int8.Default;
+			private Int8 _PermissionType = Int8.Default;
+			public Int8 PermissionType 
+			{
+				get => _PermissionType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PermissionType = value;
+				}
+			}
 		}
 	}
 
@@ -4449,12 +5937,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The results for each filter.
 		/// </summary>
-		public DeleteAclsFilterResult[] FilterResultsCollection { get; set; } = System.Array.Empty<DeleteAclsFilterResult>();
+		private DeleteAclsFilterResult[] _FilterResultsCollection = System.Array.Empty<DeleteAclsFilterResult>();
+		public DeleteAclsFilterResult[] FilterResultsCollection 
+		{
+			get => _FilterResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"FilterResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_FilterResultsCollection = value;
+			}
+		}
 
 		public class DeleteAclsFilterResult : ISerialize
 		{
@@ -4500,17 +6014,56 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if the filter succeeded.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The error message, or null if the filter succeeded.
 			/// </summary>
-			public String ErrorMessage { get; set; } = String.Default;
+			private String _ErrorMessage = String.Default;
+			public String ErrorMessage 
+			{
+				get => _ErrorMessage;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorMessage = value;
+				}
+			}
 
 			/// <summary>
 			/// The ACLs which matched this filter.
 			/// </summary>
-			public DeleteAclsMatchingAcl[] MatchingAclsCollection { get; set; } = System.Array.Empty<DeleteAclsMatchingAcl>();
+			private DeleteAclsMatchingAcl[] _MatchingAclsCollection = System.Array.Empty<DeleteAclsMatchingAcl>();
+			public DeleteAclsMatchingAcl[] MatchingAclsCollection 
+			{
+				get => _MatchingAclsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"MatchingAclsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_MatchingAclsCollection = value;
+				}
+			}
 
 			public class DeleteAclsMatchingAcl : ISerialize
 			{
@@ -4604,47 +6157,164 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 
 				/// <summary>
 				/// The deletion error message, or null if the deletion succeeded.
 				/// </summary>
-				public String ErrorMessage { get; set; } = String.Default;
+				private String _ErrorMessage = String.Default;
+				public String ErrorMessage 
+				{
+					get => _ErrorMessage;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorMessage = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL resource type.
 				/// </summary>
-				public Int8 ResourceType { get; set; } = Int8.Default;
+				private Int8 _ResourceType = Int8.Default;
+				public Int8 ResourceType 
+				{
+					get => _ResourceType;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ResourceType = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL resource name.
 				/// </summary>
-				public String ResourceName { get; set; } = String.Default;
+				private String _ResourceName = String.Default;
+				public String ResourceName 
+				{
+					get => _ResourceName;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ResourceName = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL resource pattern type.
 				/// </summary>
-				public Int8 PatternType { get; set; } = new Int8(3);
+				private Int8 _PatternType = new Int8(3);
+				public Int8 PatternType 
+				{
+					get => _PatternType;
+					set 
+					{
+						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+						}
+
+						_PatternType = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL principal.
 				/// </summary>
-				public String Principal { get; set; } = String.Default;
+				private String _Principal = String.Default;
+				public String Principal 
+				{
+					get => _Principal;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Principal = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL host.
 				/// </summary>
-				public String Host { get; set; } = String.Default;
+				private String _Host = String.Default;
+				public String Host 
+				{
+					get => _Host;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Host = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL operation.
 				/// </summary>
-				public Int8 Operation { get; set; } = Int8.Default;
+				private Int8 _Operation = Int8.Default;
+				public Int8 Operation 
+				{
+					get => _Operation;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Operation = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL permission type.
 				/// </summary>
-				public Int8 PermissionType { get; set; } = Int8.Default;
+				private Int8 _PermissionType = Int8.Default;
+				public Int8 PermissionType 
+				{
+					get => _PermissionType;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PermissionType = value;
+					}
+				}
 			}
 		}
 	}
@@ -4679,7 +6349,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group names to delete.
 		/// </summary>
-		public String[] GroupsNamesCollection { get; set; } = System.Array.Empty<String>();
+		private String[] _GroupsNamesCollection = System.Array.Empty<String>();
+		public String[] GroupsNamesCollection 
+		{
+			get => _GroupsNamesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupsNamesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupsNamesCollection = value;
+			}
+		}
 	}
 
 	public class DeleteGroupsResponse
@@ -4720,12 +6403,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The deletion results
 		/// </summary>
-		public Dictionary<String, DeletableGroupResult> ResultsCollection { get; set; } = new Dictionary<String, DeletableGroupResult>();
+		private Dictionary<String, DeletableGroupResult> _ResultsCollection = new Dictionary<String, DeletableGroupResult>();
+		public Dictionary<String, DeletableGroupResult> ResultsCollection 
+		{
+			get => _ResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResultsCollection = value;
+			}
+		}
 
 		public class DeletableGroupResult : ISerialize
 		{
@@ -4763,12 +6472,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group id
 			/// </summary>
-			public String GroupId { get; set; } = String.Default;
+			private String _GroupId = String.Default;
+			public String GroupId 
+			{
+				get => _GroupId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_GroupId = value;
+				}
+			}
 
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 		}
 	}
 
@@ -4810,7 +6545,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to delete records from.
 		/// </summary>
-		public DeleteRecordsTopic[] TopicsCollection { get; set; } = System.Array.Empty<DeleteRecordsTopic>();
+		private DeleteRecordsTopic[] _TopicsCollection = System.Array.Empty<DeleteRecordsTopic>();
+		public DeleteRecordsTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class DeleteRecordsTopic : ISerialize
 		{
@@ -4848,12 +6596,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition that we want to delete records from.
 			/// </summary>
-			public DeleteRecordsPartition[] PartitionsCollection { get; set; } = System.Array.Empty<DeleteRecordsPartition>();
+			private DeleteRecordsPartition[] _PartitionsCollection = System.Array.Empty<DeleteRecordsPartition>();
+			public DeleteRecordsPartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class DeleteRecordsPartition : ISerialize
 			{
@@ -4891,19 +6665,58 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The deletion offset.
 				/// </summary>
-				public Int64 Offset { get; set; } = Int64.Default;
+				private Int64 _Offset = Int64.Default;
+				public Int64 Offset 
+				{
+					get => _Offset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Offset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Offset = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// How long to wait for the deletion to complete, in milliseconds.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; } = Int32.Default;
+		private Int32 _TimeoutMs = Int32.Default;
+		public Int32 TimeoutMs 
+		{
+			get => _TimeoutMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TimeoutMs = value;
+			}
+		}
 	}
 
 	public class DeleteRecordsResponse
@@ -4944,12 +6757,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic that we wanted to delete records from.
 		/// </summary>
-		public DeleteRecordsTopicResult[] TopicsCollection { get; set; } = System.Array.Empty<DeleteRecordsTopicResult>();
+		private DeleteRecordsTopicResult[] _TopicsCollection = System.Array.Empty<DeleteRecordsTopicResult>();
+		public DeleteRecordsTopicResult[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class DeleteRecordsTopicResult : ISerialize
 		{
@@ -4987,12 +6826,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition that we wanted to delete records from.
 			/// </summary>
-			public DeleteRecordsPartitionResult[] PartitionsCollection { get; set; } = System.Array.Empty<DeleteRecordsPartitionResult>();
+			private DeleteRecordsPartitionResult[] _PartitionsCollection = System.Array.Empty<DeleteRecordsPartitionResult>();
+			public DeleteRecordsPartitionResult[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class DeleteRecordsPartitionResult : ISerialize
 			{
@@ -5038,17 +6903,56 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The partition low water mark.
 				/// </summary>
-				public Int64 LowWatermark { get; set; } = Int64.Default;
+				private Int64 _LowWatermark = Int64.Default;
+				public Int64 LowWatermark 
+				{
+					get => _LowWatermark;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"LowWatermark does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_LowWatermark = value;
+					}
+				}
 
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 			}
 		}
 	}
@@ -5091,12 +6995,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The names of the topics to delete
 		/// </summary>
-		public String[] TopicNamesCollection { get; set; } = System.Array.Empty<String>();
+		private String[] _TopicNamesCollection = System.Array.Empty<String>();
+		public String[] TopicNamesCollection 
+		{
+			get => _TopicNamesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicNamesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicNamesCollection = value;
+			}
+		}
 
 		/// <summary>
 		/// The length of time in milliseconds to wait for the deletions to complete.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; } = Int32.Default;
+		private Int32 _TimeoutMs = Int32.Default;
+		public Int32 TimeoutMs 
+		{
+			get => _TimeoutMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TimeoutMs = value;
+			}
+		}
 	}
 
 	public class DeleteTopicsResponse
@@ -5137,12 +7067,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The results for each topic we tried to delete.
 		/// </summary>
-		public Dictionary<String, DeletableTopicResult> ResponsesCollection { get; set; } = new Dictionary<String, DeletableTopicResult>();
+		private Dictionary<String, DeletableTopicResult> _ResponsesCollection = new Dictionary<String, DeletableTopicResult>();
+		public Dictionary<String, DeletableTopicResult> ResponsesCollection 
+		{
+			get => _ResponsesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResponsesCollection = value;
+			}
+		}
 
 		public class DeletableTopicResult : ISerialize
 		{
@@ -5180,12 +7136,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 		}
 	}
 
@@ -5267,37 +7249,128 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The resource type.
 		/// </summary>
-		public Int8 ResourceType { get; set; } = Int8.Default;
+		private Int8 _ResourceType = Int8.Default;
+		public Int8 ResourceType 
+		{
+			get => _ResourceType;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResourceType = value;
+			}
+		}
 
 		/// <summary>
 		/// The resource name, or null to match any resource name.
 		/// </summary>
-		public String ResourceNameFilter { get; set; } = String.Default;
+		private String _ResourceNameFilter = String.Default;
+		public String ResourceNameFilter 
+		{
+			get => _ResourceNameFilter;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResourceNameFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResourceNameFilter = value;
+			}
+		}
 
 		/// <summary>
 		/// The resource pattern to match.
 		/// </summary>
-		public Int8 ResourcePatternType { get; set; } = new Int8(3);
+		private Int8 _ResourcePatternType = new Int8(3);
+		public Int8 ResourcePatternType 
+		{
+			get => _ResourcePatternType;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResourcePatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				_ResourcePatternType = value;
+			}
+		}
 
 		/// <summary>
 		/// The principal to match, or null to match any principal.
 		/// </summary>
-		public String PrincipalFilter { get; set; } = String.Default;
+		private String _PrincipalFilter = String.Default;
+		public String PrincipalFilter 
+		{
+			get => _PrincipalFilter;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"PrincipalFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_PrincipalFilter = value;
+			}
+		}
 
 		/// <summary>
 		/// The host to match, or null to match any host.
 		/// </summary>
-		public String HostFilter { get; set; } = String.Default;
+		private String _HostFilter = String.Default;
+		public String HostFilter 
+		{
+			get => _HostFilter;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"HostFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_HostFilter = value;
+			}
+		}
 
 		/// <summary>
 		/// The operation to match.
 		/// </summary>
-		public Int8 Operation { get; set; } = Int8.Default;
+		private Int8 _Operation = Int8.Default;
+		public Int8 Operation 
+		{
+			get => _Operation;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Operation = value;
+			}
+		}
 
 		/// <summary>
 		/// The permission type to match.
 		/// </summary>
-		public Int8 PermissionType { get; set; } = Int8.Default;
+		private Int8 _PermissionType = Int8.Default;
+		public Int8 PermissionType 
+		{
+			get => _PermissionType;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_PermissionType = value;
+			}
+		}
 	}
 
 	public class DescribeAclsResponse
@@ -5354,22 +7427,74 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		public String ErrorMessage { get; set; } = String.Default;
+		private String _ErrorMessage = String.Default;
+		public String ErrorMessage 
+		{
+			get => _ErrorMessage;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorMessage = value;
+			}
+		}
 
 		/// <summary>
 		/// Each Resource that is referenced in an ACL.
 		/// </summary>
-		public DescribeAclsResource[] ResourcesCollection { get; set; } = System.Array.Empty<DescribeAclsResource>();
+		private DescribeAclsResource[] _ResourcesCollection = System.Array.Empty<DescribeAclsResource>();
+		public DescribeAclsResource[] ResourcesCollection 
+		{
+			get => _ResourcesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResourcesCollection = value;
+			}
+		}
 
 		public class DescribeAclsResource : ISerialize
 		{
@@ -5423,22 +7548,74 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 Type { get; set; } = Int8.Default;
+			private Int8 _Type = Int8.Default;
+			public Int8 Type 
+			{
+				get => _Type;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Type does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Type = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource pattern type.
 			/// </summary>
-			public Int8 PatternType { get; set; } = new Int8(3);
+			private Int8 _PatternType = new Int8(3);
+			public Int8 PatternType 
+			{
+				get => _PatternType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+					}
+
+					_PatternType = value;
+				}
+			}
 
 			/// <summary>
 			/// The ACLs.
 			/// </summary>
-			public AclDescription[] AclsCollection { get; set; } = System.Array.Empty<AclDescription>();
+			private AclDescription[] _AclsCollection = System.Array.Empty<AclDescription>();
+			public AclDescription[] AclsCollection 
+			{
+				get => _AclsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"AclsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_AclsCollection = value;
+				}
+			}
 
 			public class AclDescription : ISerialize
 			{
@@ -5492,22 +7669,74 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The ACL principal.
 				/// </summary>
-				public String Principal { get; set; } = String.Default;
+				private String _Principal = String.Default;
+				public String Principal 
+				{
+					get => _Principal;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Principal = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL host.
 				/// </summary>
-				public String Host { get; set; } = String.Default;
+				private String _Host = String.Default;
+				public String Host 
+				{
+					get => _Host;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Host = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL operation.
 				/// </summary>
-				public Int8 Operation { get; set; } = Int8.Default;
+				private Int8 _Operation = Int8.Default;
+				public Int8 Operation 
+				{
+					get => _Operation;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Operation = value;
+					}
+				}
 
 				/// <summary>
 				/// The ACL permission type.
 				/// </summary>
-				public Int8 PermissionType { get; set; } = Int8.Default;
+				private Int8 _PermissionType = Int8.Default;
+				public Int8 PermissionType 
+				{
+					get => _PermissionType;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PermissionType = value;
+					}
+				}
 			}
 		}
 	}
@@ -5550,7 +7779,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The resources whose configurations we want to describe.
 		/// </summary>
-		public DescribeConfigsResource[] ResourcesCollection { get; set; } = System.Array.Empty<DescribeConfigsResource>();
+		private DescribeConfigsResource[] _ResourcesCollection = System.Array.Empty<DescribeConfigsResource>();
+		public DescribeConfigsResource[] ResourcesCollection 
+		{
+			get => _ResourcesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResourcesCollection = value;
+			}
+		}
 
 		public class DescribeConfigsResource : ISerialize
 		{
@@ -5596,23 +7838,75 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceType { get; set; } = Int8.Default;
+			private Int8 _ResourceType = Int8.Default;
+			public Int8 ResourceType 
+			{
+				get => _ResourceType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceType = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceName { get; set; } = String.Default;
+			private String _ResourceName = String.Default;
+			public String ResourceName 
+			{
+				get => _ResourceName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceName = value;
+				}
+			}
 
 			/// <summary>
 			/// The configuration keys to list, or null to list all configuration keys.
 			/// </summary>
-			public String[] ConfigurationKeysCollection { get; set; } = System.Array.Empty<String>();
+			private String[] _ConfigurationKeysCollection = System.Array.Empty<String>();
+			public String[] ConfigurationKeysCollection 
+			{
+				get => _ConfigurationKeysCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ConfigurationKeysCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ConfigurationKeysCollection = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// True if we should include all synonyms.
 		/// </summary>
-		public Boolean IncludeSynoyms { get; set; } = new Boolean(false);
+		private Boolean _IncludeSynoyms = new Boolean(false);
+		public Boolean IncludeSynoyms 
+		{
+			get => _IncludeSynoyms;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"IncludeSynoyms does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				_IncludeSynoyms = value;
+			}
+		}
 	}
 
 	public class DescribeConfigsResponse
@@ -5653,12 +7947,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The results for each resource.
 		/// </summary>
-		public DescribeConfigsResult[] ResultsCollection { get; set; } = System.Array.Empty<DescribeConfigsResult>();
+		private DescribeConfigsResult[] _ResultsCollection = System.Array.Empty<DescribeConfigsResult>();
+		public DescribeConfigsResult[] ResultsCollection 
+		{
+			get => _ResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResultsCollection = value;
+			}
+		}
 
 		public class DescribeConfigsResult : ISerialize
 		{
@@ -5720,27 +8040,92 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if we were able to successfully describe the configurations.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The error message, or null if we were able to successfully describe the configurations.
 			/// </summary>
-			public String ErrorMessage { get; set; } = String.Default;
+			private String _ErrorMessage = String.Default;
+			public String ErrorMessage 
+			{
+				get => _ErrorMessage;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorMessage = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			public Int8 ResourceType { get; set; } = Int8.Default;
+			private Int8 _ResourceType = Int8.Default;
+			public Int8 ResourceType 
+			{
+				get => _ResourceType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceType = value;
+				}
+			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			public String ResourceName { get; set; } = String.Default;
+			private String _ResourceName = String.Default;
+			public String ResourceName 
+			{
+				get => _ResourceName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ResourceName = value;
+				}
+			}
 
 			/// <summary>
 			/// Each listed configuration.
 			/// </summary>
-			public DescribeConfigsResourceResult[] ConfigsCollection { get; set; } = System.Array.Empty<DescribeConfigsResourceResult>();
+			private DescribeConfigsResourceResult[] _ConfigsCollection = System.Array.Empty<DescribeConfigsResourceResult>();
+			public DescribeConfigsResourceResult[] ConfigsCollection 
+			{
+				get => _ConfigsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ConfigsCollection = value;
+				}
+			}
 
 			public class DescribeConfigsResourceResult : ISerialize
 			{
@@ -5818,37 +8203,118 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
-				public String Name { get; set; } = String.Default;
+				private String _Name = String.Default;
+				public String Name 
+				{
+					get => _Name;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Name = value;
+					}
+				}
 
 				/// <summary>
 				/// The configuration value.
 				/// </summary>
-				public String Value { get; set; } = String.Default;
+				private String _Value = String.Default;
+				public String Value 
+				{
+					get => _Value;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Value = value;
+					}
+				}
 
 				/// <summary>
 				/// True if the configuration is read-only.
 				/// </summary>
-				public Boolean ReadOnly { get; set; } = Boolean.Default;
+				private Boolean _ReadOnly = Boolean.Default;
+				public Boolean ReadOnly 
+				{
+					get => _ReadOnly;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ReadOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ReadOnly = value;
+					}
+				}
 
 				/// <summary>
 				/// True if the configuration is not set.
 				/// </summary>
-				public Boolean IsDefault { get; set; } = Boolean.Default;
+				private Boolean _IsDefault = Boolean.Default;
+				public Boolean IsDefault 
+				{
+					get => _IsDefault;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"IsDefault does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
+						}
+
+						_IsDefault = value;
+					}
+				}
 
 				/// <summary>
 				/// The configuration source.
 				/// </summary>
-				public Int8 ConfigSource { get; set; } = new Int8(-1);
+				private Int8 _ConfigSource = new Int8(-1);
+				public Int8 ConfigSource 
+				{
+					get => _ConfigSource;
+					set 
+					{
+						_ConfigSource = value;
+					}
+				}
 
 				/// <summary>
 				/// True if this configuration is sensitive.
 				/// </summary>
-				public Boolean IsSensitive { get; set; } = Boolean.Default;
+				private Boolean _IsSensitive = Boolean.Default;
+				public Boolean IsSensitive 
+				{
+					get => _IsSensitive;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"IsSensitive does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_IsSensitive = value;
+					}
+				}
 
 				/// <summary>
 				/// The synonyms for this configuration key.
 				/// </summary>
-				public DescribeConfigsSynonym[] SynonymsCollection { get; set; } = System.Array.Empty<DescribeConfigsSynonym>();
+				private DescribeConfigsSynonym[] _SynonymsCollection = System.Array.Empty<DescribeConfigsSynonym>();
+				public DescribeConfigsSynonym[] SynonymsCollection 
+				{
+					get => _SynonymsCollection;
+					set 
+					{
+						_SynonymsCollection = value;
+					}
+				}
 
 				public class DescribeConfigsSynonym : ISerialize
 				{
@@ -5894,17 +8360,56 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The synonym name.
 					/// </summary>
-					public String Name { get; set; } = String.Default;
+					private String _Name = String.Default;
+					public String Name 
+					{
+						get => _Name;
+						set 
+						{
+							if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+							}
+
+							_Name = value;
+						}
+					}
 
 					/// <summary>
 					/// The synonym value.
 					/// </summary>
-					public String Value { get; set; } = String.Default;
+					private String _Value = String.Default;
+					public String Value 
+					{
+						get => _Value;
+						set 
+						{
+							if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+							}
+
+							_Value = value;
+						}
+					}
 
 					/// <summary>
 					/// The synonym source.
 					/// </summary>
-					public Int8 Source { get; set; } = Int8.Default;
+					private Int8 _Source = Int8.Default;
+					public Int8 Source 
+					{
+						get => _Source;
+						set 
+						{
+							if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"Source does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+							}
+
+							_Source = value;
+						}
+					}
 				}
 			}
 		}
@@ -5940,7 +8445,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each owner that we want to describe delegation tokens for, or null to describe all tokens.
 		/// </summary>
-		public DescribeDelegationTokenOwner[] OwnersCollection { get; set; } = System.Array.Empty<DescribeDelegationTokenOwner>();
+		private DescribeDelegationTokenOwner[] _OwnersCollection = System.Array.Empty<DescribeDelegationTokenOwner>();
+		public DescribeDelegationTokenOwner[] OwnersCollection 
+		{
+			get => _OwnersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"OwnersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_OwnersCollection = value;
+			}
+		}
 
 		public class DescribeDelegationTokenOwner : ISerialize
 		{
@@ -5978,12 +8496,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The owner principal type.
 			/// </summary>
-			public String PrincipalType { get; set; } = String.Default;
+			private String _PrincipalType = String.Default;
+			public String PrincipalType 
+			{
+				get => _PrincipalType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PrincipalType = value;
+				}
+			}
 
 			/// <summary>
 			/// The owner principal name.
 			/// </summary>
-			public String PrincipalName { get; set; } = String.Default;
+			private String _PrincipalName = String.Default;
+			public String PrincipalName 
+			{
+				get => _PrincipalName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PrincipalName = value;
+				}
+			}
 		}
 	}
 
@@ -6033,12 +8577,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The tokens.
 		/// </summary>
-		public DescribedDelegationToken[] TokensCollection { get; set; } = System.Array.Empty<DescribedDelegationToken>();
+		private DescribedDelegationToken[] _TokensCollection = System.Array.Empty<DescribedDelegationToken>();
+		public DescribedDelegationToken[] TokensCollection 
+		{
+			get => _TokensCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TokensCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TokensCollection = value;
+			}
+		}
 
 		public class DescribedDelegationToken : ISerialize
 		{
@@ -6124,42 +8694,146 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The token principal type.
 			/// </summary>
-			public String PrincipalType { get; set; } = String.Default;
+			private String _PrincipalType = String.Default;
+			public String PrincipalType 
+			{
+				get => _PrincipalType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PrincipalType = value;
+				}
+			}
 
 			/// <summary>
 			/// The token principal name.
 			/// </summary>
-			public String PrincipalName { get; set; } = String.Default;
+			private String _PrincipalName = String.Default;
+			public String PrincipalName 
+			{
+				get => _PrincipalName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PrincipalName = value;
+				}
+			}
 
 			/// <summary>
 			/// The token issue timestamp in milliseconds.
 			/// </summary>
-			public Int64 IssueTimestamp { get; set; } = Int64.Default;
+			private Int64 _IssueTimestamp = Int64.Default;
+			public Int64 IssueTimestamp 
+			{
+				get => _IssueTimestamp;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"IssueTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_IssueTimestamp = value;
+				}
+			}
 
 			/// <summary>
 			/// The token expiry timestamp in milliseconds.
 			/// </summary>
-			public Int64 ExpiryTimestamp { get; set; } = Int64.Default;
+			private Int64 _ExpiryTimestamp = Int64.Default;
+			public Int64 ExpiryTimestamp 
+			{
+				get => _ExpiryTimestamp;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ExpiryTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ExpiryTimestamp = value;
+				}
+			}
 
 			/// <summary>
 			/// The token maximum timestamp length in milliseconds.
 			/// </summary>
-			public Int64 MaxTimestamp { get; set; } = Int64.Default;
+			private Int64 _MaxTimestamp = Int64.Default;
+			public Int64 MaxTimestamp 
+			{
+				get => _MaxTimestamp;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"MaxTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_MaxTimestamp = value;
+				}
+			}
 
 			/// <summary>
 			/// The token ID.
 			/// </summary>
-			public String TokenId { get; set; } = String.Default;
+			private String _TokenId = String.Default;
+			public String TokenId 
+			{
+				get => _TokenId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TokenId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TokenId = value;
+				}
+			}
 
 			/// <summary>
 			/// The token HMAC.
 			/// </summary>
-			public Bytes Hmac { get; set; } = Bytes.Default;
+			private Bytes _Hmac = Bytes.Default;
+			public Bytes Hmac 
+			{
+				get => _Hmac;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Hmac = value;
+				}
+			}
 
 			/// <summary>
 			/// Those who are able to renew this token before it expires.
 			/// </summary>
-			public DescribedDelegationTokenRenewer[] RenewersCollection { get; set; } = System.Array.Empty<DescribedDelegationTokenRenewer>();
+			private DescribedDelegationTokenRenewer[] _RenewersCollection = System.Array.Empty<DescribedDelegationTokenRenewer>();
+			public DescribedDelegationTokenRenewer[] RenewersCollection 
+			{
+				get => _RenewersCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"RenewersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_RenewersCollection = value;
+				}
+			}
 
 			public class DescribedDelegationTokenRenewer : ISerialize
 			{
@@ -6197,19 +8871,58 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The renewer principal type
 				/// </summary>
-				public String PrincipalType { get; set; } = String.Default;
+				private String _PrincipalType = String.Default;
+				public String PrincipalType 
+				{
+					get => _PrincipalType;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PrincipalType = value;
+					}
+				}
 
 				/// <summary>
 				/// The renewer principal name
 				/// </summary>
-				public String PrincipalName { get; set; } = String.Default;
+				private String _PrincipalName = String.Default;
+				public String PrincipalName 
+				{
+					get => _PrincipalName;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PrincipalName = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 	}
 
 	public class DescribeGroupsRequest
@@ -6250,12 +8963,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The names of the groups to describe
 		/// </summary>
-		public String[] GroupsCollection { get; set; } = System.Array.Empty<String>();
+		private String[] _GroupsCollection = System.Array.Empty<String>();
+		public String[] GroupsCollection 
+		{
+			get => _GroupsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupsCollection = value;
+			}
+		}
 
 		/// <summary>
 		/// Whether to include authorized operations.
 		/// </summary>
-		public Boolean IncludeAuthorizedOperations { get; set; } = Boolean.Default;
+		private Boolean _IncludeAuthorizedOperations = Boolean.Default;
+		public Boolean IncludeAuthorizedOperations 
+		{
+			get => _IncludeAuthorizedOperations;
+			set 
+			{
+				if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"IncludeAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
+				}
+
+				_IncludeAuthorizedOperations = value;
+			}
+		}
 	}
 
 	public class DescribeGroupsResponse
@@ -6296,12 +9035,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// Each described group.
 		/// </summary>
-		public DescribedGroup[] GroupsCollection { get; set; } = System.Array.Empty<DescribedGroup>();
+		private DescribedGroup[] _GroupsCollection = System.Array.Empty<DescribedGroup>();
+		public DescribedGroup[] GroupsCollection 
+		{
+			get => _GroupsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupsCollection = value;
+			}
+		}
 
 		public class DescribedGroup : ISerialize
 		{
@@ -6379,32 +9139,110 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The describe error, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The group ID string.
 			/// </summary>
-			public String GroupId { get; set; } = String.Default;
+			private String _GroupId = String.Default;
+			public String GroupId 
+			{
+				get => _GroupId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_GroupId = value;
+				}
+			}
 
 			/// <summary>
 			/// The group state string, or the empty string.
 			/// </summary>
-			public String GroupState { get; set; } = String.Default;
+			private String _GroupState = String.Default;
+			public String GroupState 
+			{
+				get => _GroupState;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"GroupState does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_GroupState = value;
+				}
+			}
 
 			/// <summary>
 			/// The group protocol type, or the empty string.
 			/// </summary>
-			public String ProtocolType { get; set; } = String.Default;
+			private String _ProtocolType = String.Default;
+			public String ProtocolType 
+			{
+				get => _ProtocolType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ProtocolType = value;
+				}
+			}
 
 			/// <summary>
 			/// The group protocol data, or the empty string.
 			/// </summary>
-			public String ProtocolData { get; set; } = String.Default;
+			private String _ProtocolData = String.Default;
+			public String ProtocolData 
+			{
+				get => _ProtocolData;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ProtocolData does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ProtocolData = value;
+				}
+			}
 
 			/// <summary>
 			/// The group members.
 			/// </summary>
-			public DescribedGroupMember[] MembersCollection { get; set; } = System.Array.Empty<DescribedGroupMember>();
+			private DescribedGroupMember[] _MembersCollection = System.Array.Empty<DescribedGroupMember>();
+			public DescribedGroupMember[] MembersCollection 
+			{
+				get => _MembersCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_MembersCollection = value;
+				}
+			}
 
 			public class DescribedGroupMember : ISerialize
 			{
@@ -6466,33 +9304,111 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The member ID assigned by the group coordinator.
 				/// </summary>
-				public String MemberId { get; set; } = String.Default;
+				private String _MemberId = String.Default;
+				public String MemberId 
+				{
+					get => _MemberId;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_MemberId = value;
+					}
+				}
 
 				/// <summary>
 				/// The client ID used in the member's latest join group request.
 				/// </summary>
-				public String ClientId { get; set; } = String.Default;
+				private String _ClientId = String.Default;
+				public String ClientId 
+				{
+					get => _ClientId;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ClientId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ClientId = value;
+					}
+				}
 
 				/// <summary>
 				/// The client host.
 				/// </summary>
-				public String ClientHost { get; set; } = String.Default;
+				private String _ClientHost = String.Default;
+				public String ClientHost 
+				{
+					get => _ClientHost;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ClientHost does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ClientHost = value;
+					}
+				}
 
 				/// <summary>
 				/// The metadata corresponding to the current group protocol in use.
 				/// </summary>
-				public Bytes MemberMetadata { get; set; } = Bytes.Default;
+				private Bytes _MemberMetadata = Bytes.Default;
+				public Bytes MemberMetadata 
+				{
+					get => _MemberMetadata;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"MemberMetadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_MemberMetadata = value;
+					}
+				}
 
 				/// <summary>
 				/// The current assignment provided by the group leader.
 				/// </summary>
-				public Bytes MemberAssignment { get; set; } = Bytes.Default;
+				private Bytes _MemberAssignment = Bytes.Default;
+				public Bytes MemberAssignment 
+				{
+					get => _MemberAssignment;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"MemberAssignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_MemberAssignment = value;
+					}
+				}
 			}
 
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this group.
 			/// </summary>
-			public Int32 AuthorizedOperations { get; set; } = Int32.Default;
+			private Int32 _AuthorizedOperations = Int32.Default;
+			public Int32 AuthorizedOperations 
+			{
+				get => _AuthorizedOperations;
+				set 
+				{
+					if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"AuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
+					}
+
+					_AuthorizedOperations = value;
+				}
+			}
 		}
 	}
 
@@ -6526,7 +9442,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to describe log directories for, or null for all topics.
 		/// </summary>
-		public DescribableLogDirTopic[] TopicsCollection { get; set; } = System.Array.Empty<DescribableLogDirTopic>();
+		private DescribableLogDirTopic[] _TopicsCollection = System.Array.Empty<DescribableLogDirTopic>();
+		public DescribableLogDirTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class DescribableLogDirTopic : ISerialize
 		{
@@ -6564,12 +9493,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Topic { get; set; } = String.Default;
+			private String _Topic = String.Default;
+			public String Topic 
+			{
+				get => _Topic;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Topic = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition indxes.
 			/// </summary>
-			public Int32[] PartitionIndexCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _PartitionIndexCollection = System.Array.Empty<Int32>();
+			public Int32[] PartitionIndexCollection 
+			{
+				get => _PartitionIndexCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndexCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionIndexCollection = value;
+				}
+			}
 		}
 	}
 
@@ -6611,12 +9566,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The log directories.
 		/// </summary>
-		public DescribeLogDirsResult[] ResultsCollection { get; set; } = System.Array.Empty<DescribeLogDirsResult>();
+		private DescribeLogDirsResult[] _ResultsCollection = System.Array.Empty<DescribeLogDirsResult>();
+		public DescribeLogDirsResult[] ResultsCollection 
+		{
+			get => _ResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResultsCollection = value;
+			}
+		}
 
 		public class DescribeLogDirsResult : ISerialize
 		{
@@ -6662,17 +9643,56 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The absolute log directory path.
 			/// </summary>
-			public String LogDir { get; set; } = String.Default;
+			private String _LogDir = String.Default;
+			public String LogDir 
+			{
+				get => _LogDir;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"LogDir does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_LogDir = value;
+				}
+			}
 
 			/// <summary>
 			/// Each topic.
 			/// </summary>
-			public DescribeLogDirsTopic[] TopicsCollection { get; set; } = System.Array.Empty<DescribeLogDirsTopic>();
+			private DescribeLogDirsTopic[] _TopicsCollection = System.Array.Empty<DescribeLogDirsTopic>();
+			public DescribeLogDirsTopic[] TopicsCollection 
+			{
+				get => _TopicsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicsCollection = value;
+				}
+			}
 
 			public class DescribeLogDirsTopic : ISerialize
 			{
@@ -6710,9 +9730,35 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				public String Name { get; set; } = String.Default;
+				private String _Name = String.Default;
+				public String Name 
+				{
+					get => _Name;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
 
-				public DescribeLogDirsPartition[] PartitionsCollection { get; set; } = System.Array.Empty<DescribeLogDirsPartition>();
+						_Name = value;
+					}
+				}
+
+				private DescribeLogDirsPartition[] _PartitionsCollection = System.Array.Empty<DescribeLogDirsPartition>();
+				public DescribeLogDirsPartition[] PartitionsCollection 
+				{
+					get => _PartitionsCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionsCollection = value;
+					}
+				}
 
 				public class DescribeLogDirsPartition : ISerialize
 				{
@@ -6766,22 +9812,74 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The partition index.
 					/// </summary>
-					public Int32 PartitionIndex { get; set; } = Int32.Default;
+					private Int32 _PartitionIndex = Int32.Default;
+					public Int32 PartitionIndex 
+					{
+						get => _PartitionIndex;
+						set 
+						{
+							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+							}
+
+							_PartitionIndex = value;
+						}
+					}
 
 					/// <summary>
 					/// The size of the log segments in this partition in bytes.
 					/// </summary>
-					public Int64 PartitionSize { get; set; } = Int64.Default;
+					private Int64 _PartitionSize = Int64.Default;
+					public Int64 PartitionSize 
+					{
+						get => _PartitionSize;
+						set 
+						{
+							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"PartitionSize does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+							}
+
+							_PartitionSize = value;
+						}
+					}
 
 					/// <summary>
 					/// The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition)
 					/// </summary>
-					public Int64 OffsetLag { get; set; } = Int64.Default;
+					private Int64 _OffsetLag = Int64.Default;
+					public Int64 OffsetLag 
+					{
+						get => _OffsetLag;
+						set 
+						{
+							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"OffsetLag does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+							}
+
+							_OffsetLag = value;
+						}
+					}
 
 					/// <summary>
 					/// True if this log is created by AlterReplicaLogDirsRequest and will replace the current log of the replica in the future.
 					/// </summary>
-					public Boolean IsFutureKey { get; set; } = Boolean.Default;
+					private Boolean _IsFutureKey = Boolean.Default;
+					public Boolean IsFutureKey 
+					{
+						get => _IsFutureKey;
+						set 
+						{
+							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"IsFutureKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+							}
+
+							_IsFutureKey = value;
+						}
+					}
 				}
 			}
 		}
@@ -6825,7 +9923,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topic partitions to elect the preferred leader of.
 		/// </summary>
-		public TopicPartitions[] TopicPartitionsCollection { get; set; } = System.Array.Empty<TopicPartitions>();
+		private TopicPartitions[] _TopicPartitionsCollection = System.Array.Empty<TopicPartitions>();
+		public TopicPartitions[] TopicPartitionsCollection 
+		{
+			get => _TopicPartitionsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicPartitionsCollection = value;
+			}
+		}
 
 		public class TopicPartitions : ISerialize
 		{
@@ -6863,18 +9974,57 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of a topic.
 			/// </summary>
-			public String Topic { get; set; } = String.Default;
+			private String _Topic = String.Default;
+			public String Topic 
+			{
+				get => _Topic;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Topic = value;
+				}
+			}
 
 			/// <summary>
 			/// The partitions of this topic whose preferred leader should be elected
 			/// </summary>
-			public Int32[] PartitionIdCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _PartitionIdCollection = System.Array.Empty<Int32>();
+			public Int32[] PartitionIdCollection 
+			{
+				get => _PartitionIdCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIdCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionIdCollection = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// The time in ms to wait for the election to complete.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; } = new Int32(60000);
+		private Int32 _TimeoutMs = new Int32(60000);
+		public Int32 TimeoutMs 
+		{
+			get => _TimeoutMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TimeoutMs = value;
+			}
+		}
 	}
 
 	public class ElectPreferredLeadersResponse
@@ -6915,12 +10065,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The election results, or an empty array if the requester did not have permission and the request asks for all partitions.
 		/// </summary>
-		public ReplicaElectionResult[] ReplicaElectionResultsCollection { get; set; } = System.Array.Empty<ReplicaElectionResult>();
+		private ReplicaElectionResult[] _ReplicaElectionResultsCollection = System.Array.Empty<ReplicaElectionResult>();
+		public ReplicaElectionResult[] ReplicaElectionResultsCollection 
+		{
+			get => _ReplicaElectionResultsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ReplicaElectionResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ReplicaElectionResultsCollection = value;
+			}
+		}
 
 		public class ReplicaElectionResult : ISerialize
 		{
@@ -6958,12 +10134,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Topic { get; set; } = String.Default;
+			private String _Topic = String.Default;
+			public String Topic 
+			{
+				get => _Topic;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Topic = value;
+				}
+			}
 
 			/// <summary>
 			/// The results for each partition
 			/// </summary>
-			public PartitionResult[] PartitionResultCollection { get; set; } = System.Array.Empty<PartitionResult>();
+			private PartitionResult[] _PartitionResultCollection = System.Array.Empty<PartitionResult>();
+			public PartitionResult[] PartitionResultCollection 
+			{
+				get => _PartitionResultCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionResultCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionResultCollection = value;
+				}
+			}
 
 			public class PartitionResult : ISerialize
 			{
@@ -7009,17 +10211,56 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition id
 				/// </summary>
-				public Int32 PartitionId { get; set; } = Int32.Default;
+				private Int32 _PartitionId = Int32.Default;
+				public Int32 PartitionId 
+				{
+					get => _PartitionId;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionId = value;
+					}
+				}
 
 				/// <summary>
 				/// The result error, or zero if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 
 				/// <summary>
 				/// The result message, or null if there was no error.
 				/// </summary>
-				public String ErrorMessage { get; set; } = String.Default;
+				private String _ErrorMessage = String.Default;
+				public String ErrorMessage 
+				{
+					get => _ErrorMessage;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorMessage = value;
+					}
+				}
 			}
 		}
 	}
@@ -7078,22 +10319,74 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the transaction to end.
 		/// </summary>
-		public String TransactionalId { get; set; } = String.Default;
+		private String _TransactionalId = String.Default;
+		public String TransactionalId 
+		{
+			get => _TransactionalId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TransactionalId = value;
+			}
+		}
 
 		/// <summary>
 		/// The producer ID.
 		/// </summary>
-		public Int64 ProducerId { get; set; } = Int64.Default;
+		private Int64 _ProducerId = Int64.Default;
+		public Int64 ProducerId 
+		{
+			get => _ProducerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerId = value;
+			}
+		}
 
 		/// <summary>
 		/// The current epoch associated with the producer.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; } = Int16.Default;
+		private Int16 _ProducerEpoch = Int16.Default;
+		public Int16 ProducerEpoch 
+		{
+			get => _ProducerEpoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// True if the transaction was committed, false if it was aborted.
 		/// </summary>
-		public Boolean Committed { get; set; } = Boolean.Default;
+		private Boolean _Committed = Boolean.Default;
+		public Boolean Committed 
+		{
+			get => _Committed;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Committed does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Committed = value;
+			}
+		}
 	}
 
 	public class EndTxnResponse
@@ -7134,12 +10427,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 	}
 
 	public class ExpireDelegationTokenRequest
@@ -7180,12 +10499,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The HMAC of the delegation token to be expired.
 		/// </summary>
-		public Bytes Hmac { get; set; } = Bytes.Default;
+		private Bytes _Hmac = Bytes.Default;
+		public Bytes Hmac 
+		{
+			get => _Hmac;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Hmac = value;
+			}
+		}
 
 		/// <summary>
 		/// The expiry time period in milliseconds.
 		/// </summary>
-		public Int64 ExpiryTimePeriodMs { get; set; } = Int64.Default;
+		private Int64 _ExpiryTimePeriodMs = Int64.Default;
+		public Int64 ExpiryTimePeriodMs 
+		{
+			get => _ExpiryTimePeriodMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ExpiryTimePeriodMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ExpiryTimePeriodMs = value;
+			}
+		}
 	}
 
 	public class ExpireDelegationTokenResponse
@@ -7234,17 +10579,56 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
 		/// </summary>
-		public Int64 ExpiryTimestampMs { get; set; } = Int64.Default;
+		private Int64 _ExpiryTimestampMs = Int64.Default;
+		public Int64 ExpiryTimestampMs 
+		{
+			get => _ExpiryTimestampMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ExpiryTimestampMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 	}
 
 	public class FetchRequest
@@ -7341,42 +10725,141 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker ID of the follower, of -1 if this request is from a consumer.
 		/// </summary>
-		public Int32 ReplicaId { get; set; } = Int32.Default;
+		private Int32 _ReplicaId = Int32.Default;
+		public Int32 ReplicaId 
+		{
+			get => _ReplicaId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ReplicaId = value;
+			}
+		}
 
 		/// <summary>
 		/// The maximum time in milliseconds to wait for the response.
 		/// </summary>
-		public Int32 MaxWait { get; set; } = Int32.Default;
+		private Int32 _MaxWait = Int32.Default;
+		public Int32 MaxWait 
+		{
+			get => _MaxWait;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MaxWait does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MaxWait = value;
+			}
+		}
 
 		/// <summary>
 		/// The minimum bytes to accumulate in the response.
 		/// </summary>
-		public Int32 MinBytes { get; set; } = Int32.Default;
+		private Int32 _MinBytes = Int32.Default;
+		public Int32 MinBytes 
+		{
+			get => _MinBytes;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MinBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MinBytes = value;
+			}
+		}
 
 		/// <summary>
 		/// The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.
 		/// </summary>
-		public Int32 MaxBytes { get; set; } = new Int32(0x7fffffff);
+		private Int32 _MaxBytes = new Int32(0x7fffffff);
+		public Int32 MaxBytes 
+		{
+			get => _MaxBytes;
+			set 
+			{
+				_MaxBytes = value;
+			}
+		}
 
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
 		/// </summary>
-		public Int8 IsolationLevel { get; set; } = new Int8(0);
+		private Int8 _IsolationLevel = new Int8(0);
+		public Int8 IsolationLevel 
+		{
+			get => _IsolationLevel;
+			set 
+			{
+				if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"IsolationLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+				}
+
+				_IsolationLevel = value;
+			}
+		}
 
 		/// <summary>
 		/// The fetch session ID.
 		/// </summary>
-		public Int32 SessionId { get; set; } = new Int32(0);
+		private Int32 _SessionId = new Int32(0);
+		public Int32 SessionId 
+		{
+			get => _SessionId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"SessionId does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
+				}
+
+				_SessionId = value;
+			}
+		}
 
 		/// <summary>
 		/// The fetch session ID.
 		/// </summary>
-		public Int32 Epoch { get; set; } = new Int32(-1);
+		private Int32 _Epoch = new Int32(-1);
+		public Int32 Epoch 
+		{
+			get => _Epoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Epoch does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
+				}
+
+				_Epoch = value;
+			}
+		}
 
 		/// <summary>
 		/// The topics to fetch.
 		/// </summary>
-		public FetchableTopic[] TopicsCollection { get; set; } = System.Array.Empty<FetchableTopic>();
+		private FetchableTopic[] _TopicsCollection = System.Array.Empty<FetchableTopic>();
+		public FetchableTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class FetchableTopic : ISerialize
 		{
@@ -7414,12 +10897,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic to fetch.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The partitions to fetch.
 			/// </summary>
-			public FetchPartition[] FetchPartitionsCollection { get; set; } = System.Array.Empty<FetchPartition>();
+			private FetchPartition[] _FetchPartitionsCollection = System.Array.Empty<FetchPartition>();
+			public FetchPartition[] FetchPartitionsCollection 
+			{
+				get => _FetchPartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"FetchPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_FetchPartitionsCollection = value;
+				}
+			}
 
 			public class FetchPartition : ISerialize
 			{
@@ -7481,34 +10990,107 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The current leader epoch of the partition.
 				/// </summary>
-				public Int32 CurrentLeaderEpoch { get; set; } = new Int32(-1);
+				private Int32 _CurrentLeaderEpoch = new Int32(-1);
+				public Int32 CurrentLeaderEpoch 
+				{
+					get => _CurrentLeaderEpoch;
+					set 
+					{
+						_CurrentLeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The message offset.
 				/// </summary>
-				public Int64 FetchOffset { get; set; } = Int64.Default;
+				private Int64 _FetchOffset = Int64.Default;
+				public Int64 FetchOffset 
+				{
+					get => _FetchOffset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"FetchOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_FetchOffset = value;
+					}
+				}
 
 				/// <summary>
 				/// The earliest available offset of the follower replica.  The field is only used when the request is sent by the follower.
 				/// </summary>
-				public Int64 LogStartOffset { get; set; } = new Int64(-1);
+				private Int64 _LogStartOffset = new Int64(-1);
+				public Int64 LogStartOffset 
+				{
+					get => _LogStartOffset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"LogStartOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_LogStartOffset = value;
+					}
+				}
 
 				/// <summary>
 				/// The maximum bytes to fetch from this partition.  See KIP-74 for cases where this limit may not be honored.
 				/// </summary>
-				public Int32 MaxBytes { get; set; } = Int32.Default;
+				private Int32 _MaxBytes = Int32.Default;
+				public Int32 MaxBytes 
+				{
+					get => _MaxBytes;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"MaxBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_MaxBytes = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// In an incremental fetch request, the partitions to remove.
 		/// </summary>
-		public ForgottenTopic[] ForgottenCollection { get; set; } = System.Array.Empty<ForgottenTopic>();
+		private ForgottenTopic[] _ForgottenCollection = System.Array.Empty<ForgottenTopic>();
+		public ForgottenTopic[] ForgottenCollection 
+		{
+			get => _ForgottenCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ForgottenCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
+				}
+
+				_ForgottenCollection = value;
+			}
+		}
 
 		public class ForgottenTopic : ISerialize
 		{
@@ -7546,12 +11128,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partition name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The partitions indexes to forget.
 			/// </summary>
-			public Int32[] ForgottenPartitionIndexesCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _ForgottenPartitionIndexesCollection = System.Array.Empty<Int32>();
+			public Int32[] ForgottenPartitionIndexesCollection 
+			{
+				get => _ForgottenPartitionIndexesCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ForgottenPartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
+					}
+
+					_ForgottenPartitionIndexesCollection = value;
+				}
+			}
 		}
 	}
 
@@ -7609,22 +11217,69 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The top level response error code.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The fetch session ID, or 0 if this is not part of a fetch session.
 		/// </summary>
-		public Int32 SessionId { get; set; } = new Int32(0);
+		private Int32 _SessionId = new Int32(0);
+		public Int32 SessionId 
+		{
+			get => _SessionId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"SessionId does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
+				}
+
+				_SessionId = value;
+			}
+		}
 
 		/// <summary>
 		/// The response topics.
 		/// </summary>
-		public FetchableTopicResponse[] TopicsCollection { get; set; } = System.Array.Empty<FetchableTopicResponse>();
+		private FetchableTopicResponse[] _TopicsCollection = System.Array.Empty<FetchableTopicResponse>();
+		public FetchableTopicResponse[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class FetchableTopicResponse : ISerialize
 		{
@@ -7662,12 +11317,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The topic partitions.
 			/// </summary>
-			public FetchablePartitionResponse[] PartitionsCollection { get; set; } = System.Array.Empty<FetchablePartitionResponse>();
+			private FetchablePartitionResponse[] _PartitionsCollection = System.Array.Empty<FetchablePartitionResponse>();
+			public FetchablePartitionResponse[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class FetchablePartitionResponse : ISerialize
 			{
@@ -7745,32 +11426,100 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partiiton index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no fetch error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 
 				/// <summary>
 				/// The current high water mark.
 				/// </summary>
-				public Int64 HighWatermark { get; set; } = Int64.Default;
+				private Int64 _HighWatermark = Int64.Default;
+				public Int64 HighWatermark 
+				{
+					get => _HighWatermark;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"HighWatermark does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_HighWatermark = value;
+					}
+				}
 
 				/// <summary>
 				/// The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)
 				/// </summary>
-				public Int64 LastStableOffset { get; set; } = new Int64(-1);
+				private Int64 _LastStableOffset = new Int64(-1);
+				public Int64 LastStableOffset 
+				{
+					get => _LastStableOffset;
+					set 
+					{
+						_LastStableOffset = value;
+					}
+				}
 
 				/// <summary>
 				/// The current log start offset.
 				/// </summary>
-				public Int64 LogStartOffset { get; set; } = new Int64(-1);
+				private Int64 _LogStartOffset = new Int64(-1);
+				public Int64 LogStartOffset 
+				{
+					get => _LogStartOffset;
+					set 
+					{
+						_LogStartOffset = value;
+					}
+				}
 
 				/// <summary>
 				/// The aborted transactions.
 				/// </summary>
-				public AbortedTransaction[] AbortedCollection { get; set; } = System.Array.Empty<AbortedTransaction>();
+				private AbortedTransaction[] _AbortedCollection = System.Array.Empty<AbortedTransaction>();
+				public AbortedTransaction[] AbortedCollection 
+				{
+					get => _AbortedCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"AbortedCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+						}
+
+						_AbortedCollection = value;
+					}
+				}
 
 				public class AbortedTransaction : ISerialize
 				{
@@ -7808,18 +11557,57 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The producer id associated with the aborted transaction.
 					/// </summary>
-					public Int64 ProducerId { get; set; } = Int64.Default;
+					private Int64 _ProducerId = Int64.Default;
+					public Int64 ProducerId 
+					{
+						get => _ProducerId;
+						set 
+						{
+							if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+							}
+
+							_ProducerId = value;
+						}
+					}
 
 					/// <summary>
 					/// The first offset in the aborted transaction.
 					/// </summary>
-					public Int64 FirstOffset { get; set; } = Int64.Default;
+					private Int64 _FirstOffset = Int64.Default;
+					public Int64 FirstOffset 
+					{
+						get => _FirstOffset;
+						set 
+						{
+							if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"FirstOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+							}
+
+							_FirstOffset = value;
+						}
+					}
 				}
 
 				/// <summary>
 				/// The record data.
 				/// </summary>
-				public Bytes Records { get; set; } = Bytes.Default;
+				private Bytes _Records = Bytes.Default;
+				public Bytes Records 
+				{
+					get => _Records;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Records does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Records = value;
+					}
+				}
 			}
 		}
 	}
@@ -7862,12 +11650,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The coordinator key.
 		/// </summary>
-		public String Key { get; set; } = String.Default;
+		private String _Key = String.Default;
+		public String Key 
+		{
+			get => _Key;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Key = value;
+			}
+		}
 
 		/// <summary>
 		/// The coordinator key type.  (Group, transaction, etc.)
 		/// </summary>
-		public Int8 KeyType { get; set; } = new Int8(0);
+		private Int8 _KeyType = new Int8(0);
+		public Int8 KeyType 
+		{
+			get => _KeyType;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"KeyType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				_KeyType = value;
+			}
+		}
 	}
 
 	public class FindCoordinatorResponse
@@ -7940,32 +11754,100 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		public String ErrorMessage { get; set; } = String.Default;
+		private String _ErrorMessage = String.Default;
+		public String ErrorMessage 
+		{
+			get => _ErrorMessage;
+			set 
+			{
+				_ErrorMessage = value;
+			}
+		}
 
 		/// <summary>
 		/// The node id.
 		/// </summary>
-		public Int32 NodeId { get; set; } = Int32.Default;
+		private Int32 _NodeId = Int32.Default;
+		public Int32 NodeId 
+		{
+			get => _NodeId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_NodeId = value;
+			}
+		}
 
 		/// <summary>
 		/// The host name.
 		/// </summary>
-		public String Host { get; set; } = String.Default;
+		private String _Host = String.Default;
+		public String Host 
+		{
+			get => _Host;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Host = value;
+			}
+		}
 
 		/// <summary>
 		/// The port.
 		/// </summary>
-		public Int32 Port { get; set; } = Int32.Default;
+		private Int32 _Port = Int32.Default;
+		public Int32 Port 
+		{
+			get => _Port;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Port = value;
+			}
+		}
 	}
 
 	public class HeartbeatRequest
@@ -8014,17 +11896,56 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group id.
 		/// </summary>
-		public String GroupId { get; set; } = String.Default;
+		private String _GroupId = String.Default;
+		public String GroupId 
+		{
+			get => _GroupId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupId = value;
+			}
+		}
 
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		public Int32 Generationid { get; set; } = Int32.Default;
+		private Int32 _Generationid = Int32.Default;
+		public Int32 Generationid 
+		{
+			get => _Generationid;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Generationid does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Generationid = value;
+			}
+		}
 
 		/// <summary>
 		/// The member ID.
 		/// </summary>
-		public String MemberId { get; set; } = String.Default;
+		private String _MemberId = String.Default;
+		public String MemberId 
+		{
+			get => _MemberId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MemberId = value;
+			}
+		}
 	}
 
 	public class HeartbeatResponse
@@ -8065,12 +11986,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 	}
 
 	public class InitProducerIdRequest
@@ -8111,12 +12053,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id, or null if the producer is not transactional.
 		/// </summary>
-		public String TransactionalId { get; set; } = String.Default;
+		private String _TransactionalId = String.Default;
+		public String TransactionalId 
+		{
+			get => _TransactionalId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TransactionalId = value;
+			}
+		}
 
 		/// <summary>
 		/// The time in ms to wait for before aborting idle transactions sent by this producer.
 		/// </summary>
-		public Int32 TransactionTimeoutMs { get; set; } = Int32.Default;
+		private Int32 _TransactionTimeoutMs = Int32.Default;
+		public Int32 TransactionTimeoutMs 
+		{
+			get => _TransactionTimeoutMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TransactionTimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TransactionTimeoutMs = value;
+			}
+		}
 	}
 
 	public class InitProducerIdResponse
@@ -8173,22 +12141,69 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The current producer id.
 		/// </summary>
-		public Int64 ProducerId { get; set; } = Int64.Default;
+		private Int64 _ProducerId = Int64.Default;
+		public Int64 ProducerId 
+		{
+			get => _ProducerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerId = value;
+			}
+		}
 
 		/// <summary>
 		/// The current epoch associated with the producer id.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; } = Int16.Default;
+		private Int16 _ProducerEpoch = Int16.Default;
+		public Int16 ProducerEpoch 
+		{
+			get => _ProducerEpoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerEpoch = value;
+			}
+		}
 	}
 
 	public class JoinGroupRequest
@@ -8261,32 +12276,105 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group identifier.
 		/// </summary>
-		public String GroupId { get; set; } = String.Default;
+		private String _GroupId = String.Default;
+		public String GroupId 
+		{
+			get => _GroupId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupId = value;
+			}
+		}
 
 		/// <summary>
 		/// The coordinator considers the consumer dead if it receives no heartbeat after this timeout in milliseconds.
 		/// </summary>
-		public Int32 SessionTimeoutMs { get; set; } = Int32.Default;
+		private Int32 _SessionTimeoutMs = Int32.Default;
+		public Int32 SessionTimeoutMs 
+		{
+			get => _SessionTimeoutMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"SessionTimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_SessionTimeoutMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The maximum time in milliseconds that the coordinator will wait for each member to rejoin when rebalancing the group.
 		/// </summary>
-		public Int32 RebalanceTimeoutMs { get; set; } = new Int32(-1);
+		private Int32 _RebalanceTimeoutMs = new Int32(-1);
+		public Int32 RebalanceTimeoutMs 
+		{
+			get => _RebalanceTimeoutMs;
+			set 
+			{
+				_RebalanceTimeoutMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The member id assigned by the group coordinator.
 		/// </summary>
-		public String MemberId { get; set; } = String.Default;
+		private String _MemberId = String.Default;
+		public String MemberId 
+		{
+			get => _MemberId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MemberId = value;
+			}
+		}
 
 		/// <summary>
 		/// The unique name the for class of protocols implemented by the group we want to join.
 		/// </summary>
-		public String ProtocolType { get; set; } = String.Default;
+		private String _ProtocolType = String.Default;
+		public String ProtocolType 
+		{
+			get => _ProtocolType;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProtocolType = value;
+			}
+		}
 
 		/// <summary>
 		/// The list of protocols that the member supports.
 		/// </summary>
-		public Dictionary<String, JoinGroupRequestProtocol> ProtocolsCollection { get; set; } = new Dictionary<String, JoinGroupRequestProtocol>();
+		private Dictionary<String, JoinGroupRequestProtocol> _ProtocolsCollection = new Dictionary<String, JoinGroupRequestProtocol>();
+		public Dictionary<String, JoinGroupRequestProtocol> ProtocolsCollection 
+		{
+			get => _ProtocolsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProtocolsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProtocolsCollection = value;
+			}
+		}
 
 		public class JoinGroupRequestProtocol : ISerialize
 		{
@@ -8324,12 +12412,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The protocol name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The protocol metadata.
 			/// </summary>
-			public Bytes Metadata { get; set; } = Bytes.Default;
+			private Bytes _Metadata = Bytes.Default;
+			public Bytes Metadata 
+			{
+				get => _Metadata;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Metadata = value;
+				}
+			}
 		}
 	}
 
@@ -8411,34 +12525,120 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The generation ID of the group.
 		/// </summary>
-		public Int32 GenerationId { get; set; } = new Int32(-1);
+		private Int32 _GenerationId = new Int32(-1);
+		public Int32 GenerationId 
+		{
+			get => _GenerationId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GenerationId = value;
+			}
+		}
 
 		/// <summary>
 		/// The group protocol selected by the coordinator.
 		/// </summary>
-		public String ProtocolName { get; set; } = String.Default;
+		private String _ProtocolName = String.Default;
+		public String ProtocolName 
+		{
+			get => _ProtocolName;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProtocolName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProtocolName = value;
+			}
+		}
 
 		/// <summary>
 		/// The leader of the group.
 		/// </summary>
-		public String Leader { get; set; } = String.Default;
+		private String _Leader = String.Default;
+		public String Leader 
+		{
+			get => _Leader;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Leader = value;
+			}
+		}
 
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
 		/// </summary>
-		public String MemberId { get; set; } = String.Default;
+		private String _MemberId = String.Default;
+		public String MemberId 
+		{
+			get => _MemberId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
 
-		public JoinGroupResponseMember[] MembersCollection { get; set; } = System.Array.Empty<JoinGroupResponseMember>();
+				_MemberId = value;
+			}
+		}
+
+		private JoinGroupResponseMember[] _MembersCollection = System.Array.Empty<JoinGroupResponseMember>();
+		public JoinGroupResponseMember[] MembersCollection 
+		{
+			get => _MembersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MembersCollection = value;
+			}
+		}
 
 		public class JoinGroupResponseMember : ISerialize
 		{
@@ -8476,12 +12676,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group member ID.
 			/// </summary>
-			public String MemberId { get; set; } = String.Default;
+			private String _MemberId = String.Default;
+			public String MemberId 
+			{
+				get => _MemberId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_MemberId = value;
+				}
+			}
 
 			/// <summary>
 			/// The group member metadata.
 			/// </summary>
-			public Bytes Metadata { get; set; } = Bytes.Default;
+			private Bytes _Metadata = Bytes.Default;
+			public Bytes Metadata 
+			{
+				get => _Metadata;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Metadata = value;
+				}
+			}
 		}
 	}
 
@@ -8555,22 +12781,69 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The current controller ID.
 		/// </summary>
-		public Int32 ControllerId { get; set; } = Int32.Default;
+		private Int32 _ControllerId = Int32.Default;
+		public Int32 ControllerId 
+		{
+			get => _ControllerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ControllerId = value;
+			}
+		}
 
 		/// <summary>
 		/// The current controller epoch.
 		/// </summary>
-		public Int32 ControllerEpoch { get; set; } = Int32.Default;
+		private Int32 _ControllerEpoch = Int32.Default;
+		public Int32 ControllerEpoch 
+		{
+			get => _ControllerEpoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ControllerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// The current broker epoch.
 		/// </summary>
-		public Int64 BrokerEpoch { get; set; } = new Int64(-1);
+		private Int64 _BrokerEpoch = new Int64(-1);
+		public Int64 BrokerEpoch 
+		{
+			get => _BrokerEpoch;
+			set 
+			{
+				_BrokerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic.
 		/// </summary>
-		public LeaderAndIsrRequestTopicState[] TopicStatesCollection { get; set; } = System.Array.Empty<LeaderAndIsrRequestTopicState>();
+		private LeaderAndIsrRequestTopicState[] _TopicStatesCollection = System.Array.Empty<LeaderAndIsrRequestTopicState>();
+		public LeaderAndIsrRequestTopicState[] TopicStatesCollection 
+		{
+			get => _TopicStatesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+				}
+
+				_TopicStatesCollection = value;
+			}
+		}
 
 		public class LeaderAndIsrRequestTopicState : ISerialize
 		{
@@ -8608,12 +12881,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The state of each partition
 			/// </summary>
-			public LeaderAndIsrRequestPartitionState[] PartitionStatesCollection { get; set; } = System.Array.Empty<LeaderAndIsrRequestPartitionState>();
+			private LeaderAndIsrRequestPartitionState[] _PartitionStatesCollection = System.Array.Empty<LeaderAndIsrRequestPartitionState>();
+			public LeaderAndIsrRequestPartitionState[] PartitionStatesCollection 
+			{
+				get => _PartitionStatesCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionStatesCollection = value;
+				}
+			}
 
 			public class LeaderAndIsrRequestPartitionState : ISerialize
 			{
@@ -8699,49 +12998,161 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The controller epoch.
 				/// </summary>
-				public Int32 ControllerEpoch { get; set; } = Int32.Default;
+				private Int32 _ControllerEpoch = Int32.Default;
+				public Int32 ControllerEpoch 
+				{
+					get => _ControllerEpoch;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ControllerEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The broker ID of the leader.
 				/// </summary>
-				public Int32 LeaderKey { get; set; } = Int32.Default;
+				private Int32 _LeaderKey = Int32.Default;
+				public Int32 LeaderKey 
+				{
+					get => _LeaderKey;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"LeaderKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_LeaderKey = value;
+					}
+				}
 
 				/// <summary>
 				/// The leader epoch.
 				/// </summary>
-				public Int32 LeaderEpoch { get; set; } = Int32.Default;
+				private Int32 _LeaderEpoch = Int32.Default;
+				public Int32 LeaderEpoch 
+				{
+					get => _LeaderEpoch;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_LeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The in-sync replica IDs.
 				/// </summary>
-				public Int32[] IsrReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _IsrReplicasCollection = System.Array.Empty<Int32>();
+				public Int32[] IsrReplicasCollection 
+				{
+					get => _IsrReplicasCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"IsrReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_IsrReplicasCollection = value;
+					}
+				}
 
 				/// <summary>
 				/// The ZooKeeper version.
 				/// </summary>
-				public Int32 ZkVersion { get; set; } = Int32.Default;
+				private Int32 _ZkVersion = Int32.Default;
+				public Int32 ZkVersion 
+				{
+					get => _ZkVersion;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ZkVersion = value;
+					}
+				}
 
 				/// <summary>
 				/// The replica IDs.
 				/// </summary>
-				public Int32[] ReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _ReplicasCollection = System.Array.Empty<Int32>();
+				public Int32[] ReplicasCollection 
+				{
+					get => _ReplicasCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ReplicasCollection = value;
+					}
+				}
 
 				/// <summary>
 				/// Whether the replica should have existed on the broker or not.
 				/// </summary>
-				public Boolean IsNew { get; set; } = new Boolean(false);
+				private Boolean _IsNew = new Boolean(false);
+				public Boolean IsNew 
+				{
+					get => _IsNew;
+					set 
+					{
+						_IsNew = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// The state of each partition
 		/// </summary>
-		public LeaderAndIsrRequestPartitionStateV0[] PartitionStatesV0Collection { get; set; } = System.Array.Empty<LeaderAndIsrRequestPartitionStateV0>();
+		private LeaderAndIsrRequestPartitionStateV0[] _PartitionStatesV0Collection = System.Array.Empty<LeaderAndIsrRequestPartitionStateV0>();
+		public LeaderAndIsrRequestPartitionStateV0[] PartitionStatesV0Collection 
+		{
+			get => _PartitionStatesV0Collection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 1)) == false) 
+				{
+					throw new UnsupportedVersionException($"PartitionStatesV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+				}
+
+				_PartitionStatesV0Collection = value;
+			}
+		}
 
 		public class LeaderAndIsrRequestPartitionStateV0 : ISerialize
 		{
@@ -8835,53 +13246,178 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; } = String.Default;
+			private String _TopicName = String.Default;
+			public String TopicName 
+			{
+				get => _TopicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					_TopicName = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; } = Int32.Default;
+			private Int32 _PartitionIndex = Int32.Default;
+			public Int32 PartitionIndex 
+			{
+				get => _PartitionIndex;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					_PartitionIndex = value;
+				}
+			}
 
 			/// <summary>
 			/// The controller epoch.
 			/// </summary>
-			public Int32 ControllerEpoch { get; set; } = Int32.Default;
+			private Int32 _ControllerEpoch = Int32.Default;
+			public Int32 ControllerEpoch 
+			{
+				get => _ControllerEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					_ControllerEpoch = value;
+				}
+			}
 
 			/// <summary>
 			/// The broker ID of the leader.
 			/// </summary>
-			public Int32 LeaderKey { get; set; } = Int32.Default;
+			private Int32 _LeaderKey = Int32.Default;
+			public Int32 LeaderKey 
+			{
+				get => _LeaderKey;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"LeaderKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					_LeaderKey = value;
+				}
+			}
 
 			/// <summary>
 			/// The leader epoch.
 			/// </summary>
-			public Int32 LeaderEpoch { get; set; } = Int32.Default;
+			private Int32 _LeaderEpoch = Int32.Default;
+			public Int32 LeaderEpoch 
+			{
+				get => _LeaderEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					_LeaderEpoch = value;
+				}
+			}
 
 			/// <summary>
 			/// The in-sync replica IDs.
 			/// </summary>
-			public Int32[] IsrReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _IsrReplicasCollection = System.Array.Empty<Int32>();
+			public Int32[] IsrReplicasCollection 
+			{
+				get => _IsrReplicasCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"IsrReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					_IsrReplicasCollection = value;
+				}
+			}
 
 			/// <summary>
 			/// The ZooKeeper version.
 			/// </summary>
-			public Int32 ZkVersion { get; set; } = Int32.Default;
+			private Int32 _ZkVersion = Int32.Default;
+			public Int32 ZkVersion 
+			{
+				get => _ZkVersion;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					_ZkVersion = value;
+				}
+			}
 
 			/// <summary>
 			/// The replica IDs.
 			/// </summary>
-			public Int32[] ReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _ReplicasCollection = System.Array.Empty<Int32>();
+			public Int32[] ReplicasCollection 
+			{
+				get => _ReplicasCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					_ReplicasCollection = value;
+				}
+			}
 
 			/// <summary>
 			/// Whether the replica should have existed on the broker or not.
 			/// </summary>
-			public Boolean IsNew { get; set; } = new Boolean(false);
+			private Boolean _IsNew = new Boolean(false);
+			public Boolean IsNew 
+			{
+				get => _IsNew;
+				set 
+				{
+					_IsNew = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// The current live leaders.
 		/// </summary>
-		public LeaderAndIsrLiveLeader[] LiveLeadersCollection { get; set; } = System.Array.Empty<LeaderAndIsrLiveLeader>();
+		private LeaderAndIsrLiveLeader[] _LiveLeadersCollection = System.Array.Empty<LeaderAndIsrLiveLeader>();
+		public LeaderAndIsrLiveLeader[] LiveLeadersCollection 
+		{
+			get => _LiveLeadersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"LiveLeadersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_LiveLeadersCollection = value;
+			}
+		}
 
 		public class LeaderAndIsrLiveLeader : ISerialize
 		{
@@ -8927,17 +13463,56 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The leader's broker ID.
 			/// </summary>
-			public Int32 BrokerId { get; set; } = Int32.Default;
+			private Int32 _BrokerId = Int32.Default;
+			public Int32 BrokerId 
+			{
+				get => _BrokerId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_BrokerId = value;
+				}
+			}
 
 			/// <summary>
 			/// The leader's hostname.
 			/// </summary>
-			public String HostName { get; set; } = String.Default;
+			private String _HostName = String.Default;
+			public String HostName 
+			{
+				get => _HostName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"HostName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_HostName = value;
+				}
+			}
 
 			/// <summary>
 			/// The leader's port.
 			/// </summary>
-			public Int32 Port { get; set; } = Int32.Default;
+			private Int32 _Port = Int32.Default;
+			public Int32 Port 
+			{
+				get => _Port;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Port = value;
+				}
+			}
 		}
 	}
 
@@ -8979,12 +13554,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// Each partition.
 		/// </summary>
-		public LeaderAndIsrResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<LeaderAndIsrResponsePartition>();
+		private LeaderAndIsrResponsePartition[] _PartitionsCollection = System.Array.Empty<LeaderAndIsrResponsePartition>();
+		public LeaderAndIsrResponsePartition[] PartitionsCollection 
+		{
+			get => _PartitionsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_PartitionsCollection = value;
+			}
+		}
 
 		public class LeaderAndIsrResponsePartition : ISerialize
 		{
@@ -9030,17 +13631,56 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; } = String.Default;
+			private String _TopicName = String.Default;
+			public String TopicName 
+			{
+				get => _TopicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicName = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; } = Int32.Default;
+			private Int32 _PartitionIndex = Int32.Default;
+			public Int32 PartitionIndex 
+			{
+				get => _PartitionIndex;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionIndex = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition error code, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 		}
 	}
 
@@ -9082,12 +13722,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the group to leave.
 		/// </summary>
-		public String GroupId { get; set; } = String.Default;
+		private String _GroupId = String.Default;
+		public String GroupId 
+		{
+			get => _GroupId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupId = value;
+			}
+		}
 
 		/// <summary>
 		/// The member ID to remove from the group.
 		/// </summary>
-		public String MemberId { get; set; } = String.Default;
+		private String _MemberId = String.Default;
+		public String MemberId 
+		{
+			get => _MemberId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MemberId = value;
+			}
+		}
 	}
 
 	public class LeaveGroupResponse
@@ -9128,12 +13794,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 	}
 
 	public class ListGroupsRequest
@@ -9206,17 +13893,51 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// Each group in the response.
 		/// </summary>
-		public ListedGroup[] GroupsCollection { get; set; } = System.Array.Empty<ListedGroup>();
+		private ListedGroup[] _GroupsCollection = System.Array.Empty<ListedGroup>();
+		public ListedGroup[] GroupsCollection 
+		{
+			get => _GroupsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupsCollection = value;
+			}
+		}
 
 		public class ListedGroup : ISerialize
 		{
@@ -9254,12 +13975,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group ID.
 			/// </summary>
-			public String GroupId { get; set; } = String.Default;
+			private String _GroupId = String.Default;
+			public String GroupId 
+			{
+				get => _GroupId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_GroupId = value;
+				}
+			}
 
 			/// <summary>
 			/// The group protocol type.
 			/// </summary>
-			public String ProtocolType { get; set; } = String.Default;
+			private String _ProtocolType = String.Default;
+			public String ProtocolType 
+			{
+				get => _ProtocolType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ProtocolType = value;
+				}
+			}
 		}
 	}
 
@@ -9309,17 +14056,56 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker ID of the requestor, or -1 if this request is being made by a normal consumer.
 		/// </summary>
-		public Int32 ReplicaId { get; set; } = Int32.Default;
+		private Int32 _ReplicaId = Int32.Default;
+		public Int32 ReplicaId 
+		{
+			get => _ReplicaId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ReplicaId = value;
+			}
+		}
 
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
 		/// </summary>
-		public Int8 IsolationLevel { get; set; } = Int8.Default;
+		private Int8 _IsolationLevel = Int8.Default;
+		public Int8 IsolationLevel 
+		{
+			get => _IsolationLevel;
+			set 
+			{
+				if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"IsolationLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+				}
+
+				_IsolationLevel = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic in the request.
 		/// </summary>
-		public ListOffsetTopic[] TopicsCollection { get; set; } = System.Array.Empty<ListOffsetTopic>();
+		private ListOffsetTopic[] _TopicsCollection = System.Array.Empty<ListOffsetTopic>();
+		public ListOffsetTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class ListOffsetTopic : ISerialize
 		{
@@ -9357,12 +14143,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition in the request.
 			/// </summary>
-			public ListOffsetPartition[] PartitionsCollection { get; set; } = System.Array.Empty<ListOffsetPartition>();
+			private ListOffsetPartition[] _PartitionsCollection = System.Array.Empty<ListOffsetPartition>();
+			public ListOffsetPartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class ListOffsetPartition : ISerialize
 			{
@@ -9416,22 +14228,74 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The current leader epoch.
 				/// </summary>
-				public Int32 CurrentLeaderEpoch { get; set; } = Int32.Default;
+				private Int32 _CurrentLeaderEpoch = Int32.Default;
+				public Int32 CurrentLeaderEpoch 
+				{
+					get => _CurrentLeaderEpoch;
+					set 
+					{
+						if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"CurrentLeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+						}
+
+						_CurrentLeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The current timestamp.
 				/// </summary>
-				public Int64 Timestamp { get; set; } = Int64.Default;
+				private Int64 _Timestamp = Int64.Default;
+				public Int64 Timestamp 
+				{
+					get => _Timestamp;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Timestamp = value;
+					}
+				}
 
 				/// <summary>
 				/// The maximum number of offsets to report.
 				/// </summary>
-				public Int32 MaxNumOffsets { get; set; } = Int32.Default;
+				private Int32 _MaxNumOffsets = Int32.Default;
+				public Int32 MaxNumOffsets 
+				{
+					get => _MaxNumOffsets;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"MaxNumOffsets does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
+						}
+
+						_MaxNumOffsets = value;
+					}
+				}
 			}
 		}
 	}
@@ -9474,12 +14338,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
-		public ListOffsetTopicResponse[] TopicsCollection { get; set; } = System.Array.Empty<ListOffsetTopicResponse>();
+		private ListOffsetTopicResponse[] _TopicsCollection = System.Array.Empty<ListOffsetTopicResponse>();
+		public ListOffsetTopicResponse[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class ListOffsetTopicResponse : ISerialize
 		{
@@ -9517,12 +14402,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition in the response.
 			/// </summary>
-			public ListOffsetPartitionResponse[] PartitionsCollection { get; set; } = System.Array.Empty<ListOffsetPartitionResponse>();
+			private ListOffsetPartitionResponse[] _PartitionsCollection = System.Array.Empty<ListOffsetPartitionResponse>();
+			public ListOffsetPartitionResponse[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class ListOffsetPartitionResponse : ISerialize
 			{
@@ -9592,29 +14503,107 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The partition error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 
 				/// <summary>
 				/// The result offsets.
 				/// </summary>
-				public Int64[] OldStyleOffsetsCollection { get; set; } = System.Array.Empty<Int64>();
+				private Int64[] _OldStyleOffsetsCollection = System.Array.Empty<Int64>();
+				public Int64[] OldStyleOffsetsCollection 
+				{
+					get => _OldStyleOffsetsCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"OldStyleOffsetsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
+						}
+
+						_OldStyleOffsetsCollection = value;
+					}
+				}
 
 				/// <summary>
 				/// The timestamp associated with the returned offset.
 				/// </summary>
-				public Int64 Timestamp { get; set; } = new Int64(-1);
+				private Int64 _Timestamp = new Int64(-1);
+				public Int64 Timestamp 
+				{
+					get => _Timestamp;
+					set 
+					{
+						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+						}
+
+						_Timestamp = value;
+					}
+				}
 
 				/// <summary>
 				/// The returned offset.
 				/// </summary>
-				public Int64 Offset { get; set; } = new Int64(-1);
+				private Int64 _Offset = new Int64(-1);
+				public Int64 Offset 
+				{
+					get => _Offset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Offset does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+						}
 
-				public Int32 LeaderEpoch { get; set; } = Int32.Default;
+						_Offset = value;
+					}
+				}
+
+				private Int32 _LeaderEpoch = Int32.Default;
+				public Int32 LeaderEpoch 
+				{
+					get => _LeaderEpoch;
+					set 
+					{
+						if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+						}
+
+						_LeaderEpoch = value;
+					}
+				}
 			}
 		}
 	}
@@ -9673,7 +14662,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to fetch metadata for.
 		/// </summary>
-		public MetadataRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<MetadataRequestTopic>();
+		private MetadataRequestTopic[] _TopicsCollection = System.Array.Empty<MetadataRequestTopic>();
+		public MetadataRequestTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class MetadataRequestTopic : ISerialize
 		{
@@ -9703,23 +14705,75 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// If this is true, the broker may auto-create topics that we requested which do not already exist, if it is configured to do so.
 		/// </summary>
-		public Boolean AllowAutoTopicCreation { get; set; } = new Boolean(true);
+		private Boolean _AllowAutoTopicCreation = new Boolean(true);
+		public Boolean AllowAutoTopicCreation 
+		{
+			get => _AllowAutoTopicCreation;
+			set 
+			{
+				if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"AllowAutoTopicCreation does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+				}
+
+				_AllowAutoTopicCreation = value;
+			}
+		}
 
 		/// <summary>
 		/// Whether to include cluster authorized operations.
 		/// </summary>
-		public Boolean IncludeClusterAuthorizedOperations { get; set; } = Boolean.Default;
+		private Boolean _IncludeClusterAuthorizedOperations = Boolean.Default;
+		public Boolean IncludeClusterAuthorizedOperations 
+		{
+			get => _IncludeClusterAuthorizedOperations;
+			set 
+			{
+				if (Version.InRange(new VersionRange(8, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"IncludeClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
+				}
+
+				_IncludeClusterAuthorizedOperations = value;
+			}
+		}
 
 		/// <summary>
 		/// Whether to include topic authorized operations.
 		/// </summary>
-		public Boolean IncludeTopicAuthorizedOperations { get; set; } = Boolean.Default;
+		private Boolean _IncludeTopicAuthorizedOperations = Boolean.Default;
+		public Boolean IncludeTopicAuthorizedOperations 
+		{
+			get => _IncludeTopicAuthorizedOperations;
+			set 
+			{
+				if (Version.InRange(new VersionRange(8, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"IncludeTopicAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
+				}
+
+				_IncludeTopicAuthorizedOperations = value;
+			}
+		}
 	}
 
 	public class MetadataResponse
@@ -9792,12 +14846,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// Each broker in the response.
 		/// </summary>
-		public Dictionary<Int32, MetadataResponseBroker> BrokersCollection { get; set; } = new Dictionary<Int32, MetadataResponseBroker>();
+		private Dictionary<Int32, MetadataResponseBroker> _BrokersCollection = new Dictionary<Int32, MetadataResponseBroker>();
+		public Dictionary<Int32, MetadataResponseBroker> BrokersCollection 
+		{
+			get => _BrokersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"BrokersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_BrokersCollection = value;
+			}
+		}
 
 		public class MetadataResponseBroker : ISerialize
 		{
@@ -9851,38 +14931,114 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The broker ID.
 			/// </summary>
-			public Int32 NodeId { get; set; } = Int32.Default;
+			private Int32 _NodeId = Int32.Default;
+			public Int32 NodeId 
+			{
+				get => _NodeId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_NodeId = value;
+				}
+			}
 
 			/// <summary>
 			/// The broker hostname.
 			/// </summary>
-			public String Host { get; set; } = String.Default;
+			private String _Host = String.Default;
+			public String Host 
+			{
+				get => _Host;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Host = value;
+				}
+			}
 
 			/// <summary>
 			/// The broker port.
 			/// </summary>
-			public Int32 Port { get; set; } = Int32.Default;
+			private Int32 _Port = Int32.Default;
+			public Int32 Port 
+			{
+				get => _Port;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Port = value;
+				}
+			}
 
 			/// <summary>
 			/// The rack of the broker, or null if it has not been assigned to a rack.
 			/// </summary>
-			public String Rack { get; set; } = new String(null);
+			private String _Rack = new String(null);
+			public String Rack 
+			{
+				get => _Rack;
+				set 
+				{
+					_Rack = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// The cluster ID that responding broker belongs to.
 		/// </summary>
-		public String ClusterId { get; set; } = new String(null);
+		private String _ClusterId = new String(null);
+		public String ClusterId 
+		{
+			get => _ClusterId;
+			set 
+			{
+				_ClusterId = value;
+			}
+		}
 
 		/// <summary>
 		/// The ID of the controller broker.
 		/// </summary>
-		public Int32 ControllerId { get; set; } = new Int32(-1);
+		private Int32 _ControllerId = new Int32(-1);
+		public Int32 ControllerId 
+		{
+			get => _ControllerId;
+			set 
+			{
+				_ControllerId = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
-		public Dictionary<String, MetadataResponseTopic> TopicsCollection { get; set; } = new Dictionary<String, MetadataResponseTopic>();
+		private Dictionary<String, MetadataResponseTopic> _TopicsCollection = new Dictionary<String, MetadataResponseTopic>();
+		public Dictionary<String, MetadataResponseTopic> TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class MetadataResponseTopic : ISerialize
 		{
@@ -9944,22 +15100,69 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic error, or 0 if there was no error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// True if the topic is internal.
 			/// </summary>
-			public Boolean IsInternal { get; set; } = new Boolean(false);
+			private Boolean _IsInternal = new Boolean(false);
+			public Boolean IsInternal 
+			{
+				get => _IsInternal;
+				set 
+				{
+					_IsInternal = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition in the topic.
 			/// </summary>
-			public MetadataResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<MetadataResponsePartition>();
+			private MetadataResponsePartition[] _PartitionsCollection = System.Array.Empty<MetadataResponsePartition>();
+			public MetadataResponsePartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class MetadataResponsePartition : ISerialize
 			{
@@ -10037,49 +15240,156 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition error, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The ID of the leader broker.
 				/// </summary>
-				public Int32 LeaderId { get; set; } = Int32.Default;
+				private Int32 _LeaderId = Int32.Default;
+				public Int32 LeaderId 
+				{
+					get => _LeaderId;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_LeaderId = value;
+					}
+				}
 
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				public Int32 LeaderEpoch { get; set; } = new Int32(-1);
+				private Int32 _LeaderEpoch = new Int32(-1);
+				public Int32 LeaderEpoch 
+				{
+					get => _LeaderEpoch;
+					set 
+					{
+						_LeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The set of all nodes that host this partition.
 				/// </summary>
-				public Int32[] ReplicaNodesCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _ReplicaNodesCollection = System.Array.Empty<Int32>();
+				public Int32[] ReplicaNodesCollection 
+				{
+					get => _ReplicaNodesCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ReplicaNodesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ReplicaNodesCollection = value;
+					}
+				}
 
 				/// <summary>
 				/// The set of nodes that are in sync with the leader for this partition.
 				/// </summary>
-				public Int32[] IsrNodesCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _IsrNodesCollection = System.Array.Empty<Int32>();
+				public Int32[] IsrNodesCollection 
+				{
+					get => _IsrNodesCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"IsrNodesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_IsrNodesCollection = value;
+					}
+				}
 
 				/// <summary>
 				/// The set of offline replicas of this partition.
 				/// </summary>
-				public Int32[] OfflineReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _OfflineReplicasCollection = System.Array.Empty<Int32>();
+				public Int32[] OfflineReplicasCollection 
+				{
+					get => _OfflineReplicasCollection;
+					set 
+					{
+						_OfflineReplicasCollection = value;
+					}
+				}
 			}
 
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this topic.
 			/// </summary>
-			public Int32 TopicAuthorizedOperations { get; set; } = Int32.Default;
+			private Int32 _TopicAuthorizedOperations = Int32.Default;
+			public Int32 TopicAuthorizedOperations 
+			{
+				get => _TopicAuthorizedOperations;
+				set 
+				{
+					if (Version.InRange(new VersionRange(8, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
+					}
+
+					_TopicAuthorizedOperations = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// 32-bit bitfield to represent authorized operations for this cluster.
 		/// </summary>
-		public Int32 ClusterAuthorizedOperations { get; set; } = Int32.Default;
+		private Int32 _ClusterAuthorizedOperations = Int32.Default;
+		public Int32 ClusterAuthorizedOperations 
+		{
+			get => _ClusterAuthorizedOperations;
+			set 
+			{
+				if (Version.InRange(new VersionRange(8, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
+				}
+
+				_ClusterAuthorizedOperations = value;
+			}
+		}
 	}
 
 	public class OffsetCommitRequest
@@ -10144,27 +15454,77 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		public String GroupId { get; set; } = String.Default;
+		private String _GroupId = String.Default;
+		public String GroupId 
+		{
+			get => _GroupId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupId = value;
+			}
+		}
 
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		public Int32 GenerationId { get; set; } = new Int32(-1);
+		private Int32 _GenerationId = new Int32(-1);
+		public Int32 GenerationId 
+		{
+			get => _GenerationId;
+			set 
+			{
+				_GenerationId = value;
+			}
+		}
 
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
 		/// </summary>
-		public String MemberId { get; set; } = String.Default;
+		private String _MemberId = String.Default;
+		public String MemberId 
+		{
+			get => _MemberId;
+			set 
+			{
+				_MemberId = value;
+			}
+		}
 
 		/// <summary>
 		/// The time period in ms to retain the offset.
 		/// </summary>
-		public Int64 RetentionTimeMs { get; set; } = new Int64(-1);
+		private Int64 _RetentionTimeMs = new Int64(-1);
+		public Int64 RetentionTimeMs 
+		{
+			get => _RetentionTimeMs;
+			set 
+			{
+				_RetentionTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The topics to commit offsets for.
 		/// </summary>
-		public OffsetCommitRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetCommitRequestTopic>();
+		private OffsetCommitRequestTopic[] _TopicsCollection = System.Array.Empty<OffsetCommitRequestTopic>();
+		public OffsetCommitRequestTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class OffsetCommitRequestTopic : ISerialize
 		{
@@ -10202,12 +15562,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition to commit offsets for.
 			/// </summary>
-			public OffsetCommitRequestPartition[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetCommitRequestPartition>();
+			private OffsetCommitRequestPartition[] _PartitionsCollection = System.Array.Empty<OffsetCommitRequestPartition>();
+			public OffsetCommitRequestPartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class OffsetCommitRequestPartition : ISerialize
 			{
@@ -10269,27 +15655,87 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The message offset to be committed.
 				/// </summary>
-				public Int64 CommittedOffset { get; set; } = Int64.Default;
+				private Int64 _CommittedOffset = Int64.Default;
+				public Int64 CommittedOffset 
+				{
+					get => _CommittedOffset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_CommittedOffset = value;
+					}
+				}
 
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				public Int32 CommittedLeaderEpoch { get; set; } = new Int32(-1);
+				private Int32 _CommittedLeaderEpoch = new Int32(-1);
+				public Int32 CommittedLeaderEpoch 
+				{
+					get => _CommittedLeaderEpoch;
+					set 
+					{
+						_CommittedLeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The timestamp of the commit.
 				/// </summary>
-				public Int64 CommitTimestamp { get; set; } = new Int64(-1);
+				private Int64 _CommitTimestamp = new Int64(-1);
+				public Int64 CommitTimestamp 
+				{
+					get => _CommitTimestamp;
+					set 
+					{
+						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"CommitTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1");
+						}
+
+						_CommitTimestamp = value;
+					}
+				}
 
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
 				/// </summary>
-				public String CommittedMetadata { get; set; } = String.Default;
+				private String _CommittedMetadata = String.Default;
+				public String CommittedMetadata 
+				{
+					get => _CommittedMetadata;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"CommittedMetadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_CommittedMetadata = value;
+					}
+				}
 			}
 		}
 	}
@@ -10332,12 +15778,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
-		public OffsetCommitResponseTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetCommitResponseTopic>();
+		private OffsetCommitResponseTopic[] _TopicsCollection = System.Array.Empty<OffsetCommitResponseTopic>();
+		public OffsetCommitResponseTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class OffsetCommitResponseTopic : ISerialize
 		{
@@ -10375,12 +15842,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The responses for each partition in the topic.
 			/// </summary>
-			public OffsetCommitResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetCommitResponsePartition>();
+			private OffsetCommitResponsePartition[] _PartitionsCollection = System.Array.Empty<OffsetCommitResponsePartition>();
+			public OffsetCommitResponsePartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class OffsetCommitResponsePartition : ISerialize
 			{
@@ -10418,12 +15911,38 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 			}
 		}
 	}
@@ -10466,12 +15985,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group to fetch offsets for.
 		/// </summary>
-		public String GroupId { get; set; } = String.Default;
+		private String _GroupId = String.Default;
+		public String GroupId 
+		{
+			get => _GroupId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupId = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.
 		/// </summary>
-		public OffsetFetchRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetFetchRequestTopic>();
+		private OffsetFetchRequestTopic[] _TopicsCollection = System.Array.Empty<OffsetFetchRequestTopic>();
+		public OffsetFetchRequestTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class OffsetFetchRequestTopic : ISerialize
 		{
@@ -10506,12 +16051,38 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition indexes we would like to fetch offsets for.
 			/// </summary>
-			public Int32[] PartitionIndexesCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _PartitionIndexesCollection = System.Array.Empty<Int32>();
+			public Int32[] PartitionIndexesCollection 
+			{
+				get => _PartitionIndexesCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionIndexesCollection = value;
+				}
+			}
 		}
 	}
 
@@ -10561,12 +16132,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The responses per topic.
 		/// </summary>
-		public OffsetFetchResponseTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetFetchResponseTopic>();
+		private OffsetFetchResponseTopic[] _TopicsCollection = System.Array.Empty<OffsetFetchResponseTopic>();
+		public OffsetFetchResponseTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class OffsetFetchResponseTopic : ISerialize
 		{
@@ -10604,12 +16196,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The responses per partition
 			/// </summary>
-			public OffsetFetchResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetFetchResponsePartition>();
+			private OffsetFetchResponsePartition[] _PartitionsCollection = System.Array.Empty<OffsetFetchResponsePartition>();
+			public OffsetFetchResponsePartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class OffsetFetchResponsePartition : ISerialize
 			{
@@ -10671,34 +16289,112 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The committed message offset.
 				/// </summary>
-				public Int64 CommittedOffset { get; set; } = Int64.Default;
+				private Int64 _CommittedOffset = Int64.Default;
+				public Int64 CommittedOffset 
+				{
+					get => _CommittedOffset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_CommittedOffset = value;
+					}
+				}
 
 				/// <summary>
 				/// The leader epoch.
 				/// </summary>
-				public Int32 CommittedLeaderEpoch { get; set; } = Int32.Default;
+				private Int32 _CommittedLeaderEpoch = Int32.Default;
+				public Int32 CommittedLeaderEpoch 
+				{
+					get => _CommittedLeaderEpoch;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"CommittedLeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_CommittedLeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The partition metadata.
 				/// </summary>
-				public String Metadata { get; set; } = String.Default;
+				private String _Metadata = String.Default;
+				public String Metadata 
+				{
+					get => _Metadata;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Metadata = value;
+					}
+				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// The top-level error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = new Int16(0);
+		private Int16 _ErrorCode = new Int16(0);
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 	}
 
 	public class OffsetForLeaderEpochRequest
@@ -10731,7 +16427,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic to get offsets for.
 		/// </summary>
-		public OffsetForLeaderTopic[] TopicsCollection { get; set; } = System.Array.Empty<OffsetForLeaderTopic>();
+		private OffsetForLeaderTopic[] _TopicsCollection = System.Array.Empty<OffsetForLeaderTopic>();
+		public OffsetForLeaderTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class OffsetForLeaderTopic : ISerialize
 		{
@@ -10769,12 +16478,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition to get offsets for.
 			/// </summary>
-			public OffsetForLeaderPartition[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetForLeaderPartition>();
+			private OffsetForLeaderPartition[] _PartitionsCollection = System.Array.Empty<OffsetForLeaderPartition>();
+			public OffsetForLeaderPartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class OffsetForLeaderPartition : ISerialize
 			{
@@ -10820,17 +16555,51 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// An epoch used to fence consumers/replicas with old metadata.  If the epoch provided by the client is larger than the current epoch known to the broker, then the UNKNOWN_LEADER_EPOCH error code will be returned. If the provided epoch is smaller, then the FENCED_LEADER_EPOCH error code will be returned.
 				/// </summary>
-				public Int32 CurrentLeaderEpoch { get; set; } = new Int32(-1);
+				private Int32 _CurrentLeaderEpoch = new Int32(-1);
+				public Int32 CurrentLeaderEpoch 
+				{
+					get => _CurrentLeaderEpoch;
+					set 
+					{
+						_CurrentLeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The epoch to look up an offset for.
 				/// </summary>
-				public Int32 LeaderEpoch { get; set; } = Int32.Default;
+				private Int32 _LeaderEpoch = Int32.Default;
+				public Int32 LeaderEpoch 
+				{
+					get => _LeaderEpoch;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_LeaderEpoch = value;
+					}
+				}
 			}
 		}
 	}
@@ -10873,12 +16642,33 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic we fetched offsets for.
 		/// </summary>
-		public OffsetForLeaderTopicResult[] TopicsCollection { get; set; } = System.Array.Empty<OffsetForLeaderTopicResult>();
+		private OffsetForLeaderTopicResult[] _TopicsCollection = System.Array.Empty<OffsetForLeaderTopicResult>();
+		public OffsetForLeaderTopicResult[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class OffsetForLeaderTopicResult : ISerialize
 		{
@@ -10916,12 +16706,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition in the topic we fetched offsets for.
 			/// </summary>
-			public OffsetForLeaderPartitionResult[] PartitionsCollection { get; set; } = System.Array.Empty<OffsetForLeaderPartitionResult>();
+			private OffsetForLeaderPartitionResult[] _PartitionsCollection = System.Array.Empty<OffsetForLeaderPartitionResult>();
+			public OffsetForLeaderPartitionResult[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class OffsetForLeaderPartitionResult : ISerialize
 			{
@@ -10975,22 +16791,69 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The error code 0, or if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The leader epoch of the partition.
 				/// </summary>
-				public Int32 LeaderEpoch { get; set; } = new Int32(-1);
+				private Int32 _LeaderEpoch = new Int32(-1);
+				public Int32 LeaderEpoch 
+				{
+					get => _LeaderEpoch;
+					set 
+					{
+						_LeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The end offset of the epoch.
 				/// </summary>
-				public Int64 EndOffset { get; set; } = Int64.Default;
+				private Int64 _EndOffset = Int64.Default;
+				public Int64 EndOffset 
+				{
+					get => _EndOffset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"EndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_EndOffset = value;
+					}
+				}
 			}
 		}
 	}
@@ -11049,22 +16912,74 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional ID, or null if the producer is not transactional.
 		/// </summary>
-		public String TransactionalId { get; set; } = String.Default;
+		private String _TransactionalId = String.Default;
+		public String TransactionalId 
+		{
+			get => _TransactionalId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
+				}
+
+				_TransactionalId = value;
+			}
+		}
 
 		/// <summary>
 		/// The number of acknowledgments the producer requires the leader to have received before considering a request complete. Allowed values: 0 for no acknowledgments, 1 for only the leader and -1 for the full ISR.
 		/// </summary>
-		public Int16 Acks { get; set; } = Int16.Default;
+		private Int16 _Acks = Int16.Default;
+		public Int16 Acks 
+		{
+			get => _Acks;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Acks does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Acks = value;
+			}
+		}
 
 		/// <summary>
 		/// The timeout to await a response in miliseconds.
 		/// </summary>
-		public Int32 TimeoutMs { get; set; } = Int32.Default;
+		private Int32 _TimeoutMs = Int32.Default;
+		public Int32 TimeoutMs 
+		{
+			get => _TimeoutMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TimeoutMs = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic to produce to.
 		/// </summary>
-		public TopicProduceData[] TopicsCollection { get; set; } = System.Array.Empty<TopicProduceData>();
+		private TopicProduceData[] _TopicsCollection = System.Array.Empty<TopicProduceData>();
+		public TopicProduceData[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class TopicProduceData : ISerialize
 		{
@@ -11102,12 +17017,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition to produce to.
 			/// </summary>
-			public PartitionProduceData[] PartitionsCollection { get; set; } = System.Array.Empty<PartitionProduceData>();
+			private PartitionProduceData[] _PartitionsCollection = System.Array.Empty<PartitionProduceData>();
+			public PartitionProduceData[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class PartitionProduceData : ISerialize
 			{
@@ -11145,12 +17086,38 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The record data to be produced.
 				/// </summary>
-				public Bytes Records { get; set; } = Bytes.Default;
+				private Bytes _Records = Bytes.Default;
+				public Bytes Records 
+				{
+					get => _Records;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Records does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Records = value;
+					}
+				}
 			}
 		}
 	}
@@ -11193,7 +17160,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each produce response
 		/// </summary>
-		public TopicProduceResponse[] ResponsesCollection { get; set; } = System.Array.Empty<TopicProduceResponse>();
+		private TopicProduceResponse[] _ResponsesCollection = System.Array.Empty<TopicProduceResponse>();
+		public TopicProduceResponse[] ResponsesCollection 
+		{
+			get => _ResponsesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ResponsesCollection = value;
+			}
+		}
 
 		public class TopicProduceResponse : ISerialize
 		{
@@ -11231,12 +17211,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// Each partition that we produced to within the topic.
 			/// </summary>
-			public PartitionProduceResponse[] PartitionsCollection { get; set; } = System.Array.Empty<PartitionProduceResponse>();
+			private PartitionProduceResponse[] _PartitionsCollection = System.Array.Empty<PartitionProduceResponse>();
+			public PartitionProduceResponse[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class PartitionProduceResponse : ISerialize
 			{
@@ -11298,34 +17304,97 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 
 				/// <summary>
 				/// The base offset.
 				/// </summary>
-				public Int64 BaseOffset { get; set; } = Int64.Default;
+				private Int64 _BaseOffset = Int64.Default;
+				public Int64 BaseOffset 
+				{
+					get => _BaseOffset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"BaseOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_BaseOffset = value;
+					}
+				}
 
 				/// <summary>
 				/// The timestamp returned by broker after appending the messages. If CreateTime is used for the topic, the timestamp will be -1.  If LogAppendTime is used for the topic, the timestamp will be the broker local time when the messages are appended.
 				/// </summary>
-				public Int64 LogAppendTimeMs { get; set; } = new Int64(-1);
+				private Int64 _LogAppendTimeMs = new Int64(-1);
+				public Int64 LogAppendTimeMs 
+				{
+					get => _LogAppendTimeMs;
+					set 
+					{
+						_LogAppendTimeMs = value;
+					}
+				}
 
 				/// <summary>
 				/// The log start offset.
 				/// </summary>
-				public Int64 LogStartOffset { get; set; } = new Int64(-1);
+				private Int64 _LogStartOffset = new Int64(-1);
+				public Int64 LogStartOffset 
+				{
+					get => _LogStartOffset;
+					set 
+					{
+						_LogStartOffset = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 	}
 
 	public class RenewDelegationTokenRequest
@@ -11366,12 +17435,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The HMAC of the delegation token to be renewed.
 		/// </summary>
-		public Bytes Hmac { get; set; } = Bytes.Default;
+		private Bytes _Hmac = Bytes.Default;
+		public Bytes Hmac 
+		{
+			get => _Hmac;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Hmac = value;
+			}
+		}
 
 		/// <summary>
 		/// The renewal time period in milliseconds.
 		/// </summary>
-		public Int64 RenewPeriodMs { get; set; } = Int64.Default;
+		private Int64 _RenewPeriodMs = Int64.Default;
+		public Int64 RenewPeriodMs 
+		{
+			get => _RenewPeriodMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"RenewPeriodMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_RenewPeriodMs = value;
+			}
+		}
 	}
 
 	public class RenewDelegationTokenResponse
@@ -11420,17 +17515,56 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
 		/// </summary>
-		public Int64 ExpiryTimestampMs { get; set; } = Int64.Default;
+		private Int64 _ExpiryTimestampMs = Int64.Default;
+		public Int64 ExpiryTimestampMs 
+		{
+			get => _ExpiryTimestampMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ExpiryTimestampMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 	}
 
 	public class RequestHeader
@@ -11487,22 +17621,74 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The API key of this request.
 		/// </summary>
-		public Int16 RequestApiKey { get; set; } = Int16.Default;
+		private Int16 _RequestApiKey = Int16.Default;
+		public Int16 RequestApiKey 
+		{
+			get => _RequestApiKey;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"RequestApiKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_RequestApiKey = value;
+			}
+		}
 
 		/// <summary>
 		/// The API version of this request.
 		/// </summary>
-		public Int16 RequestApiVersion { get; set; } = Int16.Default;
+		private Int16 _RequestApiVersion = Int16.Default;
+		public Int16 RequestApiVersion 
+		{
+			get => _RequestApiVersion;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"RequestApiVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_RequestApiVersion = value;
+			}
+		}
 
 		/// <summary>
 		/// The correlation ID of this request.
 		/// </summary>
-		public Int32 CorrelationId { get; set; } = Int32.Default;
+		private Int32 _CorrelationId = Int32.Default;
+		public Int32 CorrelationId 
+		{
+			get => _CorrelationId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"CorrelationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_CorrelationId = value;
+			}
+		}
 
 		/// <summary>
 		/// The client ID string.
 		/// </summary>
-		public String ClientId { get; set; } = String.Default;
+		private String _ClientId = String.Default;
+		public String ClientId 
+		{
+			get => _ClientId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ClientId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ClientId = value;
+			}
+		}
 	}
 
 	public class ResponseHeader
@@ -11535,7 +17721,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The correlation ID of this response.
 		/// </summary>
-		public Int32 CorrelationId { get; set; } = Int32.Default;
+		private Int32 _CorrelationId = Int32.Default;
+		public Int32 CorrelationId 
+		{
+			get => _CorrelationId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"CorrelationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_CorrelationId = value;
+			}
+		}
 	}
 
 	public class SaslAuthenticateRequest
@@ -11568,7 +17767,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The SASL authentication bytes from the client, as defined by the SASL mechanism.
 		/// </summary>
-		public Bytes AuthBytes { get; set; } = Bytes.Default;
+		private Bytes _AuthBytes = Bytes.Default;
+		public Bytes AuthBytes 
+		{
+			get => _AuthBytes;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"AuthBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_AuthBytes = value;
+			}
+		}
 	}
 
 	public class SaslAuthenticateResponse
@@ -11625,22 +17837,74 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		public String ErrorMessage { get; set; } = String.Default;
+		private String _ErrorMessage = String.Default;
+		public String ErrorMessage 
+		{
+			get => _ErrorMessage;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorMessage = value;
+			}
+		}
 
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
 		/// </summary>
-		public Bytes AuthBytes { get; set; } = Bytes.Default;
+		private Bytes _AuthBytes = Bytes.Default;
+		public Bytes AuthBytes 
+		{
+			get => _AuthBytes;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"AuthBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_AuthBytes = value;
+			}
+		}
 
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
 		/// </summary>
-		public Int64 SessionLifetimeMs { get; set; } = new Int64(0);
+		private Int64 _SessionLifetimeMs = new Int64(0);
+		public Int64 SessionLifetimeMs 
+		{
+			get => _SessionLifetimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"SessionLifetimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				_SessionLifetimeMs = value;
+			}
+		}
 	}
 
 	public class SaslHandshakeRequest
@@ -11673,7 +17937,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The SASL mechanism chosen by the client.
 		/// </summary>
-		public String Mechanism { get; set; } = String.Default;
+		private String _Mechanism = String.Default;
+		public String Mechanism 
+		{
+			get => _Mechanism;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Mechanism does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Mechanism = value;
+			}
+		}
 	}
 
 	public class SaslHandshakeResponse
@@ -11714,12 +17991,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The mechanisms enabled in the server.
 		/// </summary>
-		public String[] MechanismsCollection { get; set; } = System.Array.Empty<String>();
+		private String[] _MechanismsCollection = System.Array.Empty<String>();
+		public String[] MechanismsCollection 
+		{
+			get => _MechanismsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MechanismsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MechanismsCollection = value;
+			}
+		}
 	}
 
 	public class StopReplicaRequest
@@ -11792,27 +18095,87 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The controller id.
 		/// </summary>
-		public Int32 ControllerId { get; set; } = Int32.Default;
+		private Int32 _ControllerId = Int32.Default;
+		public Int32 ControllerId 
+		{
+			get => _ControllerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ControllerId = value;
+			}
+		}
 
 		/// <summary>
 		/// The controller epoch.
 		/// </summary>
-		public Int32 ControllerEpoch { get; set; } = Int32.Default;
+		private Int32 _ControllerEpoch = Int32.Default;
+		public Int32 ControllerEpoch 
+		{
+			get => _ControllerEpoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ControllerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		public Int64 BrokerEpoch { get; set; } = new Int64(-1);
+		private Int64 _BrokerEpoch = new Int64(-1);
+		public Int64 BrokerEpoch 
+		{
+			get => _BrokerEpoch;
+			set 
+			{
+				_BrokerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// Whether these partitions should be deleted.
 		/// </summary>
-		public Boolean DeletePartitions { get; set; } = Boolean.Default;
+		private Boolean _DeletePartitions = Boolean.Default;
+		public Boolean DeletePartitions 
+		{
+			get => _DeletePartitions;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"DeletePartitions does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_DeletePartitions = value;
+			}
+		}
 
 		/// <summary>
 		/// The partitions to stop.
 		/// </summary>
-		public StopReplicaRequestPartitionV0[] PartitionsV0Collection { get; set; } = System.Array.Empty<StopReplicaRequestPartitionV0>();
+		private StopReplicaRequestPartitionV0[] _PartitionsV0Collection = System.Array.Empty<StopReplicaRequestPartitionV0>();
+		public StopReplicaRequestPartitionV0[] PartitionsV0Collection 
+		{
+			get => _PartitionsV0Collection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"PartitionsV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
+				}
+
+				_PartitionsV0Collection = value;
+			}
+		}
 
 		public class StopReplicaRequestPartitionV0 : ISerialize
 		{
@@ -11850,18 +18213,57 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; } = String.Default;
+			private String _TopicName = String.Default;
+			public String TopicName 
+			{
+				get => _TopicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
+					}
+
+					_TopicName = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; } = Int32.Default;
+			private Int32 _PartitionIndex = Int32.Default;
+			public Int32 PartitionIndex 
+			{
+				get => _PartitionIndex;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
+					}
+
+					_PartitionIndex = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// The topics to stop.
 		/// </summary>
-		public StopReplicaRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<StopReplicaRequestTopic>();
+		private StopReplicaRequestTopic[] _TopicsCollection = System.Array.Empty<StopReplicaRequestTopic>();
+		public StopReplicaRequestTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class StopReplicaRequestTopic : ISerialize
 		{
@@ -11899,12 +18301,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition indexes.
 			/// </summary>
-			public Int32[] PartitionIndexesCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _PartitionIndexesCollection = System.Array.Empty<Int32>();
+			public Int32[] PartitionIndexesCollection 
+			{
+				get => _PartitionIndexesCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+					}
+
+					_PartitionIndexesCollection = value;
+				}
+			}
 		}
 	}
 
@@ -11946,12 +18374,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code, or 0 if there was no top-level error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The responses for each partition.
 		/// </summary>
-		public StopReplicaResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<StopReplicaResponsePartition>();
+		private StopReplicaResponsePartition[] _PartitionsCollection = System.Array.Empty<StopReplicaResponsePartition>();
+		public StopReplicaResponsePartition[] PartitionsCollection 
+		{
+			get => _PartitionsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_PartitionsCollection = value;
+			}
+		}
 
 		public class StopReplicaResponsePartition : ISerialize
 		{
@@ -11997,17 +18451,56 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; } = String.Default;
+			private String _TopicName = String.Default;
+			public String TopicName 
+			{
+				get => _TopicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicName = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; } = Int32.Default;
+			private Int32 _PartitionIndex = Int32.Default;
+			public Int32 PartitionIndex 
+			{
+				get => _PartitionIndex;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionIndex = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition error code, or 0 if there was no partition error.
 			/// </summary>
-			public Int16 ErrorCode { get; set; } = Int16.Default;
+			private Int16 _ErrorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _ErrorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ErrorCode = value;
+				}
+			}
 		}
 	}
 
@@ -12065,22 +18558,74 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		public String GroupId { get; set; } = String.Default;
+		private String _GroupId = String.Default;
+		public String GroupId 
+		{
+			get => _GroupId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupId = value;
+			}
+		}
 
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		public Int32 GenerationId { get; set; } = Int32.Default;
+		private Int32 _GenerationId = Int32.Default;
+		public Int32 GenerationId 
+		{
+			get => _GenerationId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GenerationId = value;
+			}
+		}
 
 		/// <summary>
 		/// The member ID assigned by the group.
 		/// </summary>
-		public String MemberId { get; set; } = String.Default;
+		private String _MemberId = String.Default;
+		public String MemberId 
+		{
+			get => _MemberId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MemberId = value;
+			}
+		}
 
 		/// <summary>
 		/// Each assignment.
 		/// </summary>
-		public SyncGroupRequestAssignment[] AssignmentsCollection { get; set; } = System.Array.Empty<SyncGroupRequestAssignment>();
+		private SyncGroupRequestAssignment[] _AssignmentsCollection = System.Array.Empty<SyncGroupRequestAssignment>();
+		public SyncGroupRequestAssignment[] AssignmentsCollection 
+		{
+			get => _AssignmentsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"AssignmentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_AssignmentsCollection = value;
+			}
+		}
 
 		public class SyncGroupRequestAssignment : ISerialize
 		{
@@ -12118,12 +18663,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The ID of the member to assign.
 			/// </summary>
-			public String MemberId { get; set; } = String.Default;
+			private String _MemberId = String.Default;
+			public String MemberId 
+			{
+				get => _MemberId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_MemberId = value;
+				}
+			}
 
 			/// <summary>
 			/// The member assignment.
 			/// </summary>
-			public Bytes Assignment { get; set; } = Bytes.Default;
+			private Bytes _Assignment = Bytes.Default;
+			public Bytes Assignment 
+			{
+				get => _Assignment;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Assignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Assignment = value;
+				}
+			}
 		}
 	}
 
@@ -12173,17 +18744,51 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 
 		/// <summary>
 		/// The member assignment.
 		/// </summary>
-		public Bytes Assignment { get; set; } = Bytes.Default;
+		private Bytes _Assignment = Bytes.Default;
+		public Bytes Assignment 
+		{
+			get => _Assignment;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"Assignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_Assignment = value;
+			}
+		}
 	}
 
 	public class TxnOffsetCommitRequest
@@ -12248,27 +18853,92 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the transaction.
 		/// </summary>
-		public String TransactionalId { get; set; } = String.Default;
+		private String _TransactionalId = String.Default;
+		public String TransactionalId 
+		{
+			get => _TransactionalId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TransactionalId = value;
+			}
+		}
 
 		/// <summary>
 		/// The ID of the group.
 		/// </summary>
-		public String GroupId { get; set; } = String.Default;
+		private String _GroupId = String.Default;
+		public String GroupId 
+		{
+			get => _GroupId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_GroupId = value;
+			}
+		}
 
 		/// <summary>
 		/// The current producer ID in use by the transactional ID.
 		/// </summary>
-		public Int64 ProducerId { get; set; } = Int64.Default;
+		private Int64 _ProducerId = Int64.Default;
+		public Int64 ProducerId 
+		{
+			get => _ProducerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerId = value;
+			}
+		}
 
 		/// <summary>
 		/// The current epoch associated with the producer ID.
 		/// </summary>
-		public Int16 ProducerEpoch { get; set; } = Int16.Default;
+		private Int16 _ProducerEpoch = Int16.Default;
+		public Int16 ProducerEpoch 
+		{
+			get => _ProducerEpoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ProducerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic that we want to committ offsets for.
 		/// </summary>
-		public TxnOffsetCommitRequestTopic[] TopicsCollection { get; set; } = System.Array.Empty<TxnOffsetCommitRequestTopic>();
+		private TxnOffsetCommitRequestTopic[] _TopicsCollection = System.Array.Empty<TxnOffsetCommitRequestTopic>();
+		public TxnOffsetCommitRequestTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class TxnOffsetCommitRequestTopic : ISerialize
 		{
@@ -12306,12 +18976,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The partitions inside the topic that we want to committ offsets for.
 			/// </summary>
-			public TxnOffsetCommitRequestPartition[] PartitionsCollection { get; set; } = System.Array.Empty<TxnOffsetCommitRequestPartition>();
+			private TxnOffsetCommitRequestPartition[] _PartitionsCollection = System.Array.Empty<TxnOffsetCommitRequestPartition>();
+			public TxnOffsetCommitRequestPartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class TxnOffsetCommitRequestPartition : ISerialize
 			{
@@ -12365,22 +19061,69 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The index of the partition within the topic.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The message offset to be committed.
 				/// </summary>
-				public Int64 CommittedOffset { get; set; } = Int64.Default;
+				private Int64 _CommittedOffset = Int64.Default;
+				public Int64 CommittedOffset 
+				{
+					get => _CommittedOffset;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_CommittedOffset = value;
+					}
+				}
 
 				/// <summary>
 				/// The leader epoch of the last consumed record.
 				/// </summary>
-				public Int32 CommittedLeaderEpoch { get; set; } = new Int32(-1);
+				private Int32 _CommittedLeaderEpoch = new Int32(-1);
+				public Int32 CommittedLeaderEpoch 
+				{
+					get => _CommittedLeaderEpoch;
+					set 
+					{
+						_CommittedLeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
 				/// </summary>
-				public String CommittedMetadata { get; set; } = String.Default;
+				private String _CommittedMetadata = String.Default;
+				public String CommittedMetadata 
+				{
+					get => _CommittedMetadata;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"CommittedMetadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_CommittedMetadata = value;
+					}
+				}
 			}
 		}
 	}
@@ -12423,12 +19166,38 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		public Int32 ThrottleTimeMs { get; set; } = Int32.Default;
+		private Int32 _ThrottleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _ThrottleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ThrottleTimeMs = value;
+			}
+		}
 
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
-		public TxnOffsetCommitResponseTopic[] TopicsCollection { get; set; } = System.Array.Empty<TxnOffsetCommitResponseTopic>();
+		private TxnOffsetCommitResponseTopic[] _TopicsCollection = System.Array.Empty<TxnOffsetCommitResponseTopic>();
+		public TxnOffsetCommitResponseTopic[] TopicsCollection 
+		{
+			get => _TopicsCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_TopicsCollection = value;
+			}
+		}
 
 		public class TxnOffsetCommitResponseTopic : ISerialize
 		{
@@ -12466,12 +19235,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String Name { get; set; } = String.Default;
+			private String _Name = String.Default;
+			public String Name 
+			{
+				get => _Name;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Name = value;
+				}
+			}
 
 			/// <summary>
 			/// The responses for each partition in the topic.
 			/// </summary>
-			public TxnOffsetCommitResponsePartition[] PartitionsCollection { get; set; } = System.Array.Empty<TxnOffsetCommitResponsePartition>();
+			private TxnOffsetCommitResponsePartition[] _PartitionsCollection = System.Array.Empty<TxnOffsetCommitResponsePartition>();
+			public TxnOffsetCommitResponsePartition[] PartitionsCollection 
+			{
+				get => _PartitionsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_PartitionsCollection = value;
+				}
+			}
 
 			public class TxnOffsetCommitResponsePartition : ISerialize
 			{
@@ -12509,12 +19304,38 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partitition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				public Int16 ErrorCode { get; set; } = Int16.Default;
+				private Int16 _ErrorCode = Int16.Default;
+				public Int16 ErrorCode 
+				{
+					get => _ErrorCode;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_ErrorCode = value;
+					}
+				}
 			}
 		}
 	}
@@ -12589,22 +19410,69 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The controller id.
 		/// </summary>
-		public Int32 ControllerId { get; set; } = Int32.Default;
+		private Int32 _ControllerId = Int32.Default;
+		public Int32 ControllerId 
+		{
+			get => _ControllerId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ControllerId = value;
+			}
+		}
 
 		/// <summary>
 		/// The controller epoch.
 		/// </summary>
-		public Int32 ControllerEpoch { get; set; } = Int32.Default;
+		private Int32 _ControllerEpoch = Int32.Default;
+		public Int32 ControllerEpoch 
+		{
+			get => _ControllerEpoch;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ControllerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		public Int64 BrokerEpoch { get; set; } = new Int64(-1);
+		private Int64 _BrokerEpoch = new Int64(-1);
+		public Int64 BrokerEpoch 
+		{
+			get => _BrokerEpoch;
+			set 
+			{
+				_BrokerEpoch = value;
+			}
+		}
 
 		/// <summary>
 		/// Each topic that we would like to update.
 		/// </summary>
-		public UpdateMetadataRequestTopicState[] TopicStatesCollection { get; set; } = System.Array.Empty<UpdateMetadataRequestTopicState>();
+		private UpdateMetadataRequestTopicState[] _TopicStatesCollection = System.Array.Empty<UpdateMetadataRequestTopicState>();
+		public UpdateMetadataRequestTopicState[] TopicStatesCollection 
+		{
+			get => _TopicStatesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+				}
+
+				_TopicStatesCollection = value;
+			}
+		}
 
 		public class UpdateMetadataRequestTopicState : ISerialize
 		{
@@ -12642,12 +19510,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; } = String.Default;
+			private String _TopicName = String.Default;
+			public String TopicName 
+			{
+				get => _TopicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicName = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition that we would like to update.
 			/// </summary>
-			public UpdateMetadataPartitionState[] PartitionStatesCollection { get; set; } = System.Array.Empty<UpdateMetadataPartitionState>();
+			private UpdateMetadataPartitionState[] _PartitionStatesCollection = System.Array.Empty<UpdateMetadataPartitionState>();
+			public UpdateMetadataPartitionState[] PartitionStatesCollection 
+			{
+				get => _PartitionStatesCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+					}
+
+					_PartitionStatesCollection = value;
+				}
+			}
 
 			public class UpdateMetadataPartitionState : ISerialize
 			{
@@ -12733,49 +19627,166 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				public Int32 PartitionIndex { get; set; } = Int32.Default;
+				private Int32 _PartitionIndex = Int32.Default;
+				public Int32 PartitionIndex 
+				{
+					get => _PartitionIndex;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_PartitionIndex = value;
+					}
+				}
 
 				/// <summary>
 				/// The controller epoch.
 				/// </summary>
-				public Int32 ControllerEpoch { get; set; } = Int32.Default;
+				private Int32 _ControllerEpoch = Int32.Default;
+				public Int32 ControllerEpoch 
+				{
+					get => _ControllerEpoch;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_ControllerEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The ID of the broker which is the current partition leader.
 				/// </summary>
-				public Int32 Leader { get; set; } = Int32.Default;
+				private Int32 _Leader = Int32.Default;
+				public Int32 Leader 
+				{
+					get => _Leader;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_Leader = value;
+					}
+				}
 
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				public Int32 LeaderEpoch { get; set; } = Int32.Default;
+				private Int32 _LeaderEpoch = Int32.Default;
+				public Int32 LeaderEpoch 
+				{
+					get => _LeaderEpoch;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_LeaderEpoch = value;
+					}
+				}
 
 				/// <summary>
 				/// The brokers which are in the ISR for this partition.
 				/// </summary>
-				public Int32[] IsrCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _IsrCollection = System.Array.Empty<Int32>();
+				public Int32[] IsrCollection 
+				{
+					get => _IsrCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_IsrCollection = value;
+					}
+				}
 
 				/// <summary>
 				/// The Zookeeper version.
 				/// </summary>
-				public Int32 ZkVersion { get; set; } = Int32.Default;
+				private Int32 _ZkVersion = Int32.Default;
+				public Int32 ZkVersion 
+				{
+					get => _ZkVersion;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_ZkVersion = value;
+					}
+				}
 
 				/// <summary>
 				/// All the replicas of this partition.
 				/// </summary>
-				public Int32[] ReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _ReplicasCollection = System.Array.Empty<Int32>();
+				public Int32[] ReplicasCollection 
+				{
+					get => _ReplicasCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_ReplicasCollection = value;
+					}
+				}
 
 				/// <summary>
 				/// The replicas of this partition which are offline.
 				/// </summary>
-				public Int32[] OfflineReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _OfflineReplicasCollection = System.Array.Empty<Int32>();
+				public Int32[] OfflineReplicasCollection 
+				{
+					get => _OfflineReplicasCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"OfflineReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+						}
+
+						_OfflineReplicasCollection = value;
+					}
+				}
 			}
 		}
 
 		/// <summary>
 		/// Each partition that we would like to update.
 		/// </summary>
-		public UpdateMetadataRequestPartitionStateV0[] PartitionStatesV0Collection { get; set; } = System.Array.Empty<UpdateMetadataRequestPartitionStateV0>();
+		private UpdateMetadataRequestPartitionStateV0[] _PartitionStatesV0Collection = System.Array.Empty<UpdateMetadataRequestPartitionStateV0>();
+		public UpdateMetadataRequestPartitionStateV0[] PartitionStatesV0Collection 
+		{
+			get => _PartitionStatesV0Collection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 4)) == false) 
+				{
+					throw new UnsupportedVersionException($"PartitionStatesV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+				}
+
+				_PartitionStatesV0Collection = value;
+			}
+		}
 
 		public class UpdateMetadataRequestPartitionStateV0 : ISerialize
 		{
@@ -12869,50 +19880,180 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			public String TopicName { get; set; } = String.Default;
+			private String _TopicName = String.Default;
+			public String TopicName 
+			{
+				get => _TopicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					_TopicName = value;
+				}
+			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			public Int32 PartitionIndex { get; set; } = Int32.Default;
+			private Int32 _PartitionIndex = Int32.Default;
+			public Int32 PartitionIndex 
+			{
+				get => _PartitionIndex;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					_PartitionIndex = value;
+				}
+			}
 
 			/// <summary>
 			/// The controller epoch.
 			/// </summary>
-			public Int32 ControllerEpoch { get; set; } = Int32.Default;
+			private Int32 _ControllerEpoch = Int32.Default;
+			public Int32 ControllerEpoch 
+			{
+				get => _ControllerEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					_ControllerEpoch = value;
+				}
+			}
 
 			/// <summary>
 			/// The ID of the broker which is the current partition leader.
 			/// </summary>
-			public Int32 Leader { get; set; } = Int32.Default;
+			private Int32 _Leader = Int32.Default;
+			public Int32 Leader 
+			{
+				get => _Leader;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					_Leader = value;
+				}
+			}
 
 			/// <summary>
 			/// The leader epoch of this partition.
 			/// </summary>
-			public Int32 LeaderEpoch { get; set; } = Int32.Default;
+			private Int32 _LeaderEpoch = Int32.Default;
+			public Int32 LeaderEpoch 
+			{
+				get => _LeaderEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					_LeaderEpoch = value;
+				}
+			}
 
 			/// <summary>
 			/// The brokers which are in the ISR for this partition.
 			/// </summary>
-			public Int32[] IsrCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _IsrCollection = System.Array.Empty<Int32>();
+			public Int32[] IsrCollection 
+			{
+				get => _IsrCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					_IsrCollection = value;
+				}
+			}
 
 			/// <summary>
 			/// The Zookeeper version.
 			/// </summary>
-			public Int32 ZkVersion { get; set; } = Int32.Default;
+			private Int32 _ZkVersion = Int32.Default;
+			public Int32 ZkVersion 
+			{
+				get => _ZkVersion;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					_ZkVersion = value;
+				}
+			}
 
 			/// <summary>
 			/// All the replicas of this partition.
 			/// </summary>
-			public Int32[] ReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _ReplicasCollection = System.Array.Empty<Int32>();
+			public Int32[] ReplicasCollection 
+			{
+				get => _ReplicasCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					_ReplicasCollection = value;
+				}
+			}
 
 			/// <summary>
 			/// The replicas of this partition which are offline.
 			/// </summary>
-			public Int32[] OfflineReplicasCollection { get; set; } = System.Array.Empty<Int32>();
+			private Int32[] _OfflineReplicasCollection = System.Array.Empty<Int32>();
+			public Int32[] OfflineReplicasCollection 
+			{
+				get => _OfflineReplicasCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"OfflineReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4");
+					}
+
+					_OfflineReplicasCollection = value;
+				}
+			}
 		}
 
-		public UpdateMetadataRequestBroker[] BrokersCollection { get; set; } = System.Array.Empty<UpdateMetadataRequestBroker>();
+		private UpdateMetadataRequestBroker[] _BrokersCollection = System.Array.Empty<UpdateMetadataRequestBroker>();
+		public UpdateMetadataRequestBroker[] BrokersCollection 
+		{
+			get => _BrokersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"BrokersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_BrokersCollection = value;
+			}
+		}
 
 		public class UpdateMetadataRequestBroker : ISerialize
 		{
@@ -12971,22 +20112,64 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public Int32 Id { get; set; } = Int32.Default;
+			private Int32 _Id = Int32.Default;
+			public Int32 Id 
+			{
+				get => _Id;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Id does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_Id = value;
+				}
+			}
 
 			/// <summary>
 			/// The broker hostname.
 			/// </summary>
-			public String V0Host { get; set; } = String.Default;
+			private String _V0Host = String.Default;
+			public String V0Host 
+			{
+				get => _V0Host;
+				set 
+				{
+					_V0Host = value;
+				}
+			}
 
 			/// <summary>
 			/// The broker port.
 			/// </summary>
-			public Int32 V0Port { get; set; } = Int32.Default;
+			private Int32 _V0Port = Int32.Default;
+			public Int32 V0Port 
+			{
+				get => _V0Port;
+				set 
+				{
+					_V0Port = value;
+				}
+			}
 
 			/// <summary>
 			/// The broker endpoints.
 			/// </summary>
-			public UpdateMetadataRequestEndpoint[] EndpointsCollection { get; set; } = System.Array.Empty<UpdateMetadataRequestEndpoint>();
+			private UpdateMetadataRequestEndpoint[] _EndpointsCollection = System.Array.Empty<UpdateMetadataRequestEndpoint>();
+			public UpdateMetadataRequestEndpoint[] EndpointsCollection 
+			{
+				get => _EndpointsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"EndpointsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+					}
+
+					_EndpointsCollection = value;
+				}
+			}
 
 			public class UpdateMetadataRequestEndpoint : ISerialize
 			{
@@ -13040,28 +20223,88 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The port of this endpoint
 				/// </summary>
-				public Int32 Port { get; set; } = Int32.Default;
+				private Int32 _Port = Int32.Default;
+				public Int32 Port 
+				{
+					get => _Port;
+					set 
+					{
+						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+						}
+
+						_Port = value;
+					}
+				}
 
 				/// <summary>
 				/// The hostname of this endpoint
 				/// </summary>
-				public String Host { get; set; } = String.Default;
+				private String _Host = String.Default;
+				public String Host 
+				{
+					get => _Host;
+					set 
+					{
+						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+						}
+
+						_Host = value;
+					}
+				}
 
 				/// <summary>
 				/// The listener name.
 				/// </summary>
-				public String Listener { get; set; } = String.Default;
+				private String _Listener = String.Default;
+				public String Listener 
+				{
+					get => _Listener;
+					set 
+					{
+						if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Listener does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
+						}
+
+						_Listener = value;
+					}
+				}
 
 				/// <summary>
 				/// The security protocol type.
 				/// </summary>
-				public Int16 SecurityProtocol { get; set; } = Int16.Default;
+				private Int16 _SecurityProtocol = Int16.Default;
+				public Int16 SecurityProtocol 
+				{
+					get => _SecurityProtocol;
+					set 
+					{
+						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"SecurityProtocol does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+						}
+
+						_SecurityProtocol = value;
+					}
+				}
 			}
 
 			/// <summary>
 			/// The rack which this broker belongs to.
 			/// </summary>
-			public String Rack { get; set; } = String.Default;
+			private String _Rack = String.Default;
+			public String Rack 
+			{
+				get => _Rack;
+				set 
+				{
+					_Rack = value;
+				}
+			}
 		}
 	}
 
@@ -13095,7 +20338,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		public Int16 ErrorCode { get; set; } = Int16.Default;
+		private Int16 _ErrorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _ErrorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_ErrorCode = value;
+			}
+		}
 	}
 
 	public class WriteTxnMarkersRequest
@@ -13128,7 +20384,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transaction markers to be written.
 		/// </summary>
-		public WritableTxnMarker[] MarkersCollection { get; set; } = System.Array.Empty<WritableTxnMarker>();
+		private WritableTxnMarker[] _MarkersCollection = System.Array.Empty<WritableTxnMarker>();
+		public WritableTxnMarker[] MarkersCollection 
+		{
+			get => _MarkersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MarkersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MarkersCollection = value;
+			}
+		}
 
 		public class WritableTxnMarker : ISerialize
 		{
@@ -13190,22 +20459,74 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The current producer ID.
 			/// </summary>
-			public Int64 ProducerId { get; set; } = Int64.Default;
+			private Int64 _ProducerId = Int64.Default;
+			public Int64 ProducerId 
+			{
+				get => _ProducerId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ProducerId = value;
+				}
+			}
 
 			/// <summary>
 			/// The current epoch associated with the producer ID.
 			/// </summary>
-			public Int16 ProducerEpoch { get; set; } = Int16.Default;
+			private Int16 _ProducerEpoch = Int16.Default;
+			public Int16 ProducerEpoch 
+			{
+				get => _ProducerEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ProducerEpoch = value;
+				}
+			}
 
 			/// <summary>
 			/// The result of the transaction to write to the partitions (false = ABORT, true = COMMIT).
 			/// </summary>
-			public Boolean TransactionResult { get; set; } = Boolean.Default;
+			private Boolean _TransactionResult = Boolean.Default;
+			public Boolean TransactionResult 
+			{
+				get => _TransactionResult;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TransactionResult does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TransactionResult = value;
+				}
+			}
 
 			/// <summary>
 			/// Each topic that we want to write transaction marker(s) for.
 			/// </summary>
-			public WritableTxnMarkerTopic[] TopicsCollection { get; set; } = System.Array.Empty<WritableTxnMarkerTopic>();
+			private WritableTxnMarkerTopic[] _TopicsCollection = System.Array.Empty<WritableTxnMarkerTopic>();
+			public WritableTxnMarkerTopic[] TopicsCollection 
+			{
+				get => _TopicsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicsCollection = value;
+				}
+			}
 
 			public class WritableTxnMarkerTopic : ISerialize
 			{
@@ -13243,18 +20564,57 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				public String Name { get; set; } = String.Default;
+				private String _Name = String.Default;
+				public String Name 
+				{
+					get => _Name;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Name = value;
+					}
+				}
 
 				/// <summary>
 				/// The indexes of the partitions to write transaction markers for.
 				/// </summary>
-				public Int32[] PartitionIndexesCollection { get; set; } = System.Array.Empty<Int32>();
+				private Int32[] _PartitionIndexesCollection = System.Array.Empty<Int32>();
+				public Int32[] PartitionIndexesCollection 
+				{
+					get => _PartitionIndexesCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionIndexesCollection = value;
+					}
+				}
 			}
 
 			/// <summary>
 			/// Epoch associated with the transaction state partition hosted by this transaction coordinator
 			/// </summary>
-			public Int32 CoordinatorEpoch { get; set; } = Int32.Default;
+			private Int32 _CoordinatorEpoch = Int32.Default;
+			public Int32 CoordinatorEpoch 
+			{
+				get => _CoordinatorEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"CoordinatorEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_CoordinatorEpoch = value;
+				}
+			}
 		}
 	}
 
@@ -13288,7 +20648,20 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for writing makers.
 		/// </summary>
-		public WritableTxnMarkerResult[] MarkersCollection { get; set; } = System.Array.Empty<WritableTxnMarkerResult>();
+		private WritableTxnMarkerResult[] _MarkersCollection = System.Array.Empty<WritableTxnMarkerResult>();
+		public WritableTxnMarkerResult[] MarkersCollection 
+		{
+			get => _MarkersCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"MarkersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				_MarkersCollection = value;
+			}
+		}
 
 		public class WritableTxnMarkerResult : ISerialize
 		{
@@ -13326,12 +20699,38 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The current producer ID in use by the transactional ID.
 			/// </summary>
-			public Int64 ProducerId { get; set; } = Int64.Default;
+			private Int64 _ProducerId = Int64.Default;
+			public Int64 ProducerId 
+			{
+				get => _ProducerId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_ProducerId = value;
+				}
+			}
 
 			/// <summary>
 			/// The results by topic.
 			/// </summary>
-			public WritableTxnMarkerTopicResult[] TopicsCollection { get; set; } = System.Array.Empty<WritableTxnMarkerTopicResult>();
+			private WritableTxnMarkerTopicResult[] _TopicsCollection = System.Array.Empty<WritableTxnMarkerTopicResult>();
+			public WritableTxnMarkerTopicResult[] TopicsCollection 
+			{
+				get => _TopicsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					_TopicsCollection = value;
+				}
+			}
 
 			public class WritableTxnMarkerTopicResult : ISerialize
 			{
@@ -13369,12 +20768,38 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				public String Name { get; set; } = String.Default;
+				private String _Name = String.Default;
+				public String Name 
+				{
+					get => _Name;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_Name = value;
+					}
+				}
 
 				/// <summary>
 				/// The results by partition.
 				/// </summary>
-				public WritableTxnMarkerPartitionResult[] PartitionsCollection { get; set; } = System.Array.Empty<WritableTxnMarkerPartitionResult>();
+				private WritableTxnMarkerPartitionResult[] _PartitionsCollection = System.Array.Empty<WritableTxnMarkerPartitionResult>();
+				public WritableTxnMarkerPartitionResult[] PartitionsCollection 
+				{
+					get => _PartitionsCollection;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						_PartitionsCollection = value;
+					}
+				}
 
 				public class WritableTxnMarkerPartitionResult : ISerialize
 				{
@@ -13412,12 +20837,38 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The partition index.
 					/// </summary>
-					public Int32 PartitionIndex { get; set; } = Int32.Default;
+					private Int32 _PartitionIndex = Int32.Default;
+					public Int32 PartitionIndex 
+					{
+						get => _PartitionIndex;
+						set 
+						{
+							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+							}
+
+							_PartitionIndex = value;
+						}
+					}
 
 					/// <summary>
 					/// The error code, or 0 if there was no error.
 					/// </summary>
-					public Int16 ErrorCode { get; set; } = Int16.Default;
+					private Int16 _ErrorCode = Int16.Default;
+					public Int16 ErrorCode 
+					{
+						get => _ErrorCode;
+						set 
+						{
+							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+							{
+								throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+							}
+
+							_ErrorCode = value;
+						}
+					}
 				}
 			}
 		}
