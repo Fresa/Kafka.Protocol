@@ -2449,14 +2449,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AddPartitionsToTxnTopic CreateAddPartitionsToTxnTopic()
+		{
+			return new AddPartitionsToTxnTopic(Version);
+		}
+
 		public class AddPartitionsToTxnTopic : ISerialize
 		{
-			public AddPartitionsToTxnTopic(int version)
+			internal AddPartitionsToTxnTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -2616,14 +2621,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AddPartitionsToTxnTopicResult CreateAddPartitionsToTxnTopicResult()
+		{
+			return new AddPartitionsToTxnTopicResult(Version);
+		}
+
 		public class AddPartitionsToTxnTopicResult : ISerialize
 		{
-			public AddPartitionsToTxnTopicResult(int version)
+			internal AddPartitionsToTxnTopicResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -2695,14 +2705,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AddPartitionsToTxnPartitionResult CreateAddPartitionsToTxnPartitionResult()
+			{
+				return new AddPartitionsToTxnPartitionResult(Version);
+			}
+
 			public class AddPartitionsToTxnPartitionResult : ISerialize
 			{
-				public AddPartitionsToTxnPartitionResult(int version)
+				internal AddPartitionsToTxnPartitionResult(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -2840,14 +2855,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AlterConfigsResource CreateAlterConfigsResource()
+		{
+			return new AlterConfigsResource(Version);
+		}
+
 		public class AlterConfigsResource : ISerialize
 		{
-			public AlterConfigsResource(int version)
+			internal AlterConfigsResource(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -2950,14 +2970,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterableConfig CreateAlterableConfig()
+			{
+				return new AlterableConfig(Version);
+			}
+
 			public class AlterableConfig : ISerialize
 			{
-				public AlterableConfig(int version)
+				internal AlterableConfig(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -3142,14 +3167,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AlterConfigsResourceResponse CreateAlterConfigsResourceResponse()
+		{
+			return new AlterConfigsResourceResponse(Version);
+		}
+
 		public class AlterConfigsResourceResponse : ISerialize
 		{
-			public AlterConfigsResourceResponse(int version)
+			internal AlterConfigsResourceResponse(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -3341,14 +3371,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AlterReplicaLogDir CreateAlterReplicaLogDir()
+		{
+			return new AlterReplicaLogDir(Version);
+		}
+
 		public class AlterReplicaLogDir : ISerialize
 		{
-			public AlterReplicaLogDir(int version)
+			internal AlterReplicaLogDir(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -3420,14 +3455,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterReplicaLogDirTopic CreateAlterReplicaLogDirTopic()
+			{
+				return new AlterReplicaLogDirTopic(Version);
+			}
+
 			public class AlterReplicaLogDirTopic : ISerialize
 			{
-				public AlterReplicaLogDirTopic(int version)
+				internal AlterReplicaLogDirTopic(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -3588,14 +3628,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AlterReplicaLogDirTopicResult CreateAlterReplicaLogDirTopicResult()
+		{
+			return new AlterReplicaLogDirTopicResult(Version);
+		}
+
 		public class AlterReplicaLogDirTopicResult : ISerialize
 		{
-			public AlterReplicaLogDirTopicResult(int version)
+			internal AlterReplicaLogDirTopicResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -3667,14 +3712,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterReplicaLogDirPartitionResult CreateAlterReplicaLogDirPartitionResult()
+			{
+				return new AlterReplicaLogDirPartitionResult(Version);
+			}
+
 			public class AlterReplicaLogDirPartitionResult : ISerialize
 			{
-				public AlterReplicaLogDirPartitionResult(int version)
+				internal AlterReplicaLogDirPartitionResult(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -3872,14 +3922,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ApiVersionsResponseKey CreateApiVersionsResponseKey()
+		{
+			return new ApiVersionsResponseKey(Version);
+		}
+
 		public class ApiVersionsResponseKey : ISerialize
 		{
-			public ApiVersionsResponseKey(int version)
+			internal ApiVersionsResponseKey(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -4170,14 +4225,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public RemainingPartition CreateRemainingPartition()
+		{
+			return new RemainingPartition(Version);
+		}
+
 		public class RemainingPartition : ISerialize
 		{
-			public RemainingPartition(int version)
+			internal RemainingPartition(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -4306,14 +4366,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatableAcl CreateCreatableAcl()
+		{
+			return new CreatableAcl(Version);
+		}
+
 		public class CreatableAcl : ISerialize
 		{
-			public CreatableAcl(int version)
+			internal CreatableAcl(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -4628,14 +4693,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatableAclResult CreateCreatableAclResult()
+		{
+			return new CreatableAclResult(Version);
+		}
+
 		public class CreatableAclResult : ISerialize
 		{
-			public CreatableAclResult(int version)
+			internal CreatableAclResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -4773,14 +4843,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatableRenewers CreateCreatableRenewers()
+		{
+			return new CreatableRenewers(Version);
+		}
+
 		public class CreatableRenewers : ISerialize
 		{
-			public CreatableRenewers(int version)
+			internal CreatableRenewers(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -5252,14 +5327,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatePartitionsTopic CreateCreatePartitionsTopic()
+		{
+			return new CreatePartitionsTopic(Version);
+		}
+
 		public class CreatePartitionsTopic : ISerialize
 		{
-			public CreatePartitionsTopic(int version)
+			internal CreatePartitionsTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -5363,14 +5443,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatePartitionsAssignment CreateCreatePartitionsAssignment()
+			{
+				return new CreatePartitionsAssignment(Version);
+			}
+
 			public class CreatePartitionsAssignment : ISerialize
 			{
-				public CreatePartitionsAssignment(int version)
+				internal CreatePartitionsAssignment(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -5546,14 +5631,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatePartitionsTopicResult CreateCreatePartitionsTopicResult()
+		{
+			return new CreatePartitionsTopicResult(Version);
+		}
+
 		public class CreatePartitionsTopicResult : ISerialize
 		{
-			public CreatePartitionsTopicResult(int version)
+			internal CreatePartitionsTopicResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -5730,14 +5820,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatableTopic CreateCreatableTopic()
+		{
+			return new CreatableTopic(Version);
+		}
+
 		public class CreatableTopic : ISerialize
 		{
-			public CreatableTopic(int version)
+			internal CreatableTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -5879,14 +5974,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableReplicaAssignment CreateCreatableReplicaAssignment()
+			{
+				return new CreatableReplicaAssignment(Version);
+			}
+
 			public class CreatableReplicaAssignment : ISerialize
 			{
-				public CreatableReplicaAssignment(int version)
+				internal CreatableReplicaAssignment(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -5982,14 +6082,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreateableTopicConfig CreateCreateableTopicConfig()
+			{
+				return new CreateableTopicConfig(Version);
+			}
+
 			public class CreateableTopicConfig : ISerialize
 			{
-				public CreateableTopicConfig(int version)
+				internal CreateableTopicConfig(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -6192,14 +6297,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatableTopicResult CreateCreatableTopicResult()
+		{
+			return new CreatableTopicResult(Version);
+		}
+
 		public class CreatableTopicResult : ISerialize
 		{
-			public CreatableTopicResult(int version)
+			internal CreatableTopicResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -6355,14 +6465,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteAclsFilter CreateDeleteAclsFilter()
+		{
+			return new DeleteAclsFilter(Version);
+		}
+
 		public class DeleteAclsFilter : ISerialize
 		{
-			public DeleteAclsFilter(int version)
+			internal DeleteAclsFilter(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -6680,14 +6795,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteAclsFilterResult CreateDeleteAclsFilterResult()
+		{
+			return new DeleteAclsFilterResult(Version);
+		}
+
 		public class DeleteAclsFilterResult : ISerialize
 		{
-			public DeleteAclsFilterResult(int version)
+			internal DeleteAclsFilterResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -6791,14 +6911,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteAclsMatchingAcl CreateDeleteAclsMatchingAcl()
+			{
+				return new DeleteAclsMatchingAcl(Version);
+			}
+
 			public class DeleteAclsMatchingAcl : ISerialize
 			{
-				public DeleteAclsMatchingAcl(int version)
+				internal DeleteAclsMatchingAcl(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -7233,14 +7358,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeletableGroupResult CreateDeletableGroupResult()
+		{
+			return new DeletableGroupResult(Version);
+		}
+
 		public class DeletableGroupResult : ISerialize
 		{
-			public DeletableGroupResult(int version)
+			internal DeletableGroupResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -7377,14 +7507,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteRecordsTopic CreateDeleteRecordsTopic()
+		{
+			return new DeleteRecordsTopic(Version);
+		}
+
 		public class DeleteRecordsTopic : ISerialize
 		{
-			public DeleteRecordsTopic(int version)
+			internal DeleteRecordsTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -7456,14 +7591,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteRecordsPartition CreateDeleteRecordsPartition()
+			{
+				return new DeleteRecordsPartition(Version);
+			}
+
 			public class DeleteRecordsPartition : ISerialize
 			{
-				public DeleteRecordsPartition(int version)
+				internal DeleteRecordsPartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -7647,14 +7787,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteRecordsTopicResult CreateDeleteRecordsTopicResult()
+		{
+			return new DeleteRecordsTopicResult(Version);
+		}
+
 		public class DeleteRecordsTopicResult : ISerialize
 		{
-			public DeleteRecordsTopicResult(int version)
+			internal DeleteRecordsTopicResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -7726,14 +7871,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteRecordsPartitionResult CreateDeleteRecordsPartitionResult()
+			{
+				return new DeleteRecordsPartitionResult(Version);
+			}
+
 			public class DeleteRecordsPartitionResult : ISerialize
 			{
-				public DeleteRecordsPartitionResult(int version)
+				internal DeleteRecordsPartitionResult(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -8012,14 +8162,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeletableTopicResult CreateDeletableTopicResult()
+		{
+			return new DeletableTopicResult(Version);
+		}
+
 		public class DeletableTopicResult : ISerialize
 		{
-			public DeletableTopicResult(int version)
+			internal DeletableTopicResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -8487,14 +8642,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeAclsResource CreateDescribeAclsResource()
+		{
+			return new DescribeAclsResource(Version);
+		}
+
 		public class DescribeAclsResource : ISerialize
 		{
-			public DescribeAclsResource(int version)
+			internal DescribeAclsResource(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -8628,14 +8788,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AclDescription CreateAclDescription()
+			{
+				return new AclDescription(Version);
+			}
+
 			public class AclDescription : ISerialize
 			{
-				public AclDescription(int version)
+				internal AclDescription(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -8835,14 +9000,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeConfigsResource CreateDescribeConfigsResource()
+		{
+			return new DescribeConfigsResource(Version);
+		}
+
 		public class DescribeConfigsResource : ISerialize
 		{
-			public DescribeConfigsResource(int version)
+			internal DescribeConfigsResource(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -9057,14 +9227,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeConfigsResult CreateDescribeConfigsResult()
+		{
+			return new DescribeConfigsResult(Version);
+		}
+
 		public class DescribeConfigsResult : ISerialize
 		{
-			public DescribeConfigsResult(int version)
+			internal DescribeConfigsResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -9230,14 +9405,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeConfigsResourceResult CreateDescribeConfigsResourceResult()
+			{
+				return new DescribeConfigsResourceResult(Version);
+			}
+
 			public class DescribeConfigsResourceResult : ISerialize
 			{
-				public DescribeConfigsResourceResult(int version)
+				internal DescribeConfigsResourceResult(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -9455,14 +9635,19 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribeConfigsSynonym CreateDescribeConfigsSynonym()
+				{
+					return new DescribeConfigsSynonym(Version);
+				}
+
 				public class DescribeConfigsSynonym : ISerialize
 				{
-					public DescribeConfigsSynonym(int version)
+					internal DescribeConfigsSynonym(int version)
 					{
 						Version = version;
 					}
 
-					public int Version { get; }
+					internal int Version { get; }
 
 					public void ReadFrom(IKafkaReader reader)
 					{
@@ -9626,14 +9811,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeDelegationTokenOwner CreateDescribeDelegationTokenOwner()
+		{
+			return new DescribeDelegationTokenOwner(Version);
+		}
+
 		public class DescribeDelegationTokenOwner : ISerialize
 		{
-			public DescribeDelegationTokenOwner(int version)
+			internal DescribeDelegationTokenOwner(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -9801,14 +9991,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribedDelegationToken CreateDescribedDelegationToken()
+		{
+			return new DescribedDelegationToken(Version);
+		}
+
 		public class DescribedDelegationToken : ISerialize
 		{
-			public DescribedDelegationToken(int version)
+			internal DescribedDelegationToken(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -10066,14 +10261,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedDelegationTokenRenewer CreateDescribedDelegationTokenRenewer()
+			{
+				return new DescribedDelegationTokenRenewer(Version);
+			}
+
 			public class DescribedDelegationTokenRenewer : ISerialize
 			{
-				public DescribedDelegationTokenRenewer(int version)
+				internal DescribedDelegationTokenRenewer(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -10339,14 +10539,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribedGroup CreateDescribedGroup()
+		{
+			return new DescribedGroup(Version);
+		}
+
 		public class DescribedGroup : ISerialize
 		{
-			public DescribedGroup(int version)
+			internal DescribedGroup(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -10550,14 +10755,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedGroupMember CreateDescribedGroupMember()
+			{
+				return new DescribedGroupMember(Version);
+			}
+
 			public class DescribedGroupMember : ISerialize
 			{
-				public DescribedGroupMember(int version)
+				internal DescribedGroupMember(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -10804,14 +11014,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribableLogDirTopic CreateDescribableLogDirTopic()
+		{
+			return new DescribableLogDirTopic(Version);
+		}
+
 		public class DescribableLogDirTopic : ISerialize
 		{
-			public DescribableLogDirTopic(int version)
+			internal DescribableLogDirTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -10971,14 +11186,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeLogDirsResult CreateDescribeLogDirsResult()
+		{
+			return new DescribeLogDirsResult(Version);
+		}
+
 		public class DescribeLogDirsResult : ISerialize
 		{
-			public DescribeLogDirsResult(int version)
+			internal DescribeLogDirsResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -11081,14 +11301,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeLogDirsTopic CreateDescribeLogDirsTopic()
+			{
+				return new DescribeLogDirsTopic(Version);
+			}
+
 			public class DescribeLogDirsTopic : ISerialize
 			{
-				public DescribeLogDirsTopic(int version)
+				internal DescribeLogDirsTopic(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -11157,14 +11382,19 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribeLogDirsPartition CreateDescribeLogDirsPartition()
+				{
+					return new DescribeLogDirsPartition(Version);
+				}
+
 				public class DescribeLogDirsPartition : ISerialize
 				{
-					public DescribeLogDirsPartition(int version)
+					internal DescribeLogDirsPartition(int version)
 					{
 						Version = version;
 					}
 
-					public int Version { get; }
+					internal int Version { get; }
 
 					public void ReadFrom(IKafkaReader reader)
 					{
@@ -11366,14 +11596,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TopicPartitions CreateTopicPartitions()
+		{
+			return new TopicPartitions(Version);
+		}
+
 		public class TopicPartitions : ISerialize
 		{
-			public TopicPartitions(int version)
+			internal TopicPartitions(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -11556,14 +11791,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ReplicaElectionResult CreateReplicaElectionResult()
+		{
+			return new ReplicaElectionResult(Version);
+		}
+
 		public class ReplicaElectionResult : ISerialize
 		{
-			public ReplicaElectionResult(int version)
+			internal ReplicaElectionResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -11635,14 +11875,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public PartitionResult CreatePartitionResult()
+			{
+				return new PartitionResult(Version);
+			}
+
 			public class PartitionResult : ISerialize
 			{
-				public PartitionResult(int version)
+				internal PartitionResult(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -12465,14 +12710,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FetchableTopic CreateFetchableTopic()
+		{
+			return new FetchableTopic(Version);
+		}
+
 		public class FetchableTopic : ISerialize
 		{
-			public FetchableTopic(int version)
+			internal FetchableTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -12544,14 +12794,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public FetchPartition CreateFetchPartition()
+			{
+				return new FetchPartition(Version);
+			}
+
 			public class FetchPartition : ISerialize
 			{
-				public FetchPartition(int version)
+				internal FetchPartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -12736,14 +12991,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ForgottenTopic CreateForgottenTopic()
+		{
+			return new ForgottenTopic(Version);
+		}
+
 		public class ForgottenTopic : ISerialize
 		{
-			public ForgottenTopic(int version)
+			internal ForgottenTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -12960,14 +13220,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FetchableTopicResponse CreateFetchableTopicResponse()
+		{
+			return new FetchableTopicResponse(Version);
+		}
+
 		public class FetchableTopicResponse : ISerialize
 		{
-			public FetchableTopicResponse(int version)
+			internal FetchableTopicResponse(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -13039,14 +13304,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public FetchablePartitionResponse CreateFetchablePartitionResponse()
+			{
+				return new FetchablePartitionResponse(Version);
+			}
+
 			public class FetchablePartitionResponse : ISerialize
 			{
-				public FetchablePartitionResponse(int version)
+				internal FetchablePartitionResponse(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -13241,14 +13511,19 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public AbortedTransaction CreateAbortedTransaction()
+				{
+					return new AbortedTransaction(Version);
+				}
+
 				public class AbortedTransaction : ISerialize
 				{
-					public AbortedTransaction(int version)
+					internal AbortedTransaction(int version)
 					{
 						Version = version;
 					}
 
-					public int Version { get; }
+					internal int Version { get; }
 
 					public void ReadFrom(IKafkaReader reader)
 					{
@@ -14274,14 +14549,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupRequestProtocol CreateJoinGroupRequestProtocol()
+		{
+			return new JoinGroupRequestProtocol(Version);
+		}
+
 		public class JoinGroupRequestProtocol : ISerialize
 		{
-			public JoinGroupRequestProtocol(int version)
+			internal JoinGroupRequestProtocol(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -14588,14 +14868,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupResponseMember CreateJoinGroupResponseMember()
+		{
+			return new JoinGroupResponseMember(Version);
+		}
+
 		public class JoinGroupResponseMember : ISerialize
 		{
-			public JoinGroupResponseMember(int version)
+			internal JoinGroupResponseMember(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -14828,14 +15113,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaderAndIsrRequestTopicState CreateLeaderAndIsrRequestTopicState()
+		{
+			return new LeaderAndIsrRequestTopicState(Version);
+		}
+
 		public class LeaderAndIsrRequestTopicState : ISerialize
 		{
-			public LeaderAndIsrRequestTopicState(int version)
+			internal LeaderAndIsrRequestTopicState(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -14907,14 +15197,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrRequestPartitionState CreateLeaderAndIsrRequestPartitionState()
+			{
+				return new LeaderAndIsrRequestPartitionState(Version);
+			}
+
 			public class LeaderAndIsrRequestPartitionState : ISerialize
 			{
-				public LeaderAndIsrRequestPartitionState(int version)
+				internal LeaderAndIsrRequestPartitionState(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -15192,14 +15487,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaderAndIsrRequestPartitionStateV0 CreateLeaderAndIsrRequestPartitionStateV0()
+		{
+			return new LeaderAndIsrRequestPartitionStateV0(Version);
+		}
+
 		public class LeaderAndIsrRequestPartitionStateV0 : ISerialize
 		{
-			public LeaderAndIsrRequestPartitionStateV0(int version)
+			internal LeaderAndIsrRequestPartitionStateV0(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -15507,14 +15807,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaderAndIsrLiveLeader CreateLeaderAndIsrLiveLeader()
+		{
+			return new LeaderAndIsrLiveLeader(Version);
+		}
+
 		public class LeaderAndIsrLiveLeader : ISerialize
 		{
-			public LeaderAndIsrLiveLeader(int version)
+			internal LeaderAndIsrLiveLeader(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -15705,14 +16010,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaderAndIsrResponsePartition CreateLeaderAndIsrResponsePartition()
+		{
+			return new LeaderAndIsrResponsePartition(Version);
+		}
+
 		public class LeaderAndIsrResponsePartition : ISerialize
 		{
-			public LeaderAndIsrResponsePartition(int version)
+			internal LeaderAndIsrResponsePartition(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -16127,14 +16437,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ListedGroup CreateListedGroup()
+		{
+			return new ListedGroup(Version);
+		}
+
 		public class ListedGroup : ISerialize
 		{
-			public ListedGroup(int version)
+			internal ListedGroup(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -16325,14 +16640,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ListOffsetTopic CreateListOffsetTopic()
+		{
+			return new ListOffsetTopic(Version);
+		}
+
 		public class ListOffsetTopic : ISerialize
 		{
-			public ListOffsetTopic(int version)
+			internal ListOffsetTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -16404,14 +16724,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ListOffsetPartition CreateListOffsetPartition()
+			{
+				return new ListOffsetPartition(Version);
+			}
+
 			public class ListOffsetPartition : ISerialize
 			{
-				public ListOffsetPartition(int version)
+				internal ListOffsetPartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -16629,14 +16954,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ListOffsetTopicResponse CreateListOffsetTopicResponse()
+		{
+			return new ListOffsetTopicResponse(Version);
+		}
+
 		public class ListOffsetTopicResponse : ISerialize
 		{
-			public ListOffsetTopicResponse(int version)
+			internal ListOffsetTopicResponse(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -16708,14 +17038,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ListOffsetPartitionResponse CreateListOffsetPartitionResponse()
+			{
+				return new ListOffsetPartitionResponse(Version);
+			}
+
 			public class ListOffsetPartitionResponse : ISerialize
 			{
-				public ListOffsetPartitionResponse(int version)
+				internal ListOffsetPartitionResponse(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -16991,14 +17326,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public MetadataRequestTopic CreateMetadataRequestTopic()
+		{
+			return new MetadataRequestTopic(Version);
+		}
+
 		public class MetadataRequestTopic : ISerialize
 		{
-			public MetadataRequestTopic(int version)
+			internal MetadataRequestTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -17228,14 +17568,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public MetadataResponseBroker CreateMetadataResponseBroker()
+		{
+			return new MetadataResponseBroker(Version);
+		}
+
 		public class MetadataResponseBroker : ISerialize
 		{
-			public MetadataResponseBroker(int version)
+			internal MetadataResponseBroker(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -17426,14 +17771,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public MetadataResponseTopic CreateMetadataResponseTopic()
+		{
+			return new MetadataResponseTopic(Version);
+		}
+
 		public class MetadataResponseTopic : ISerialize
 		{
-			public MetadataResponseTopic(int version)
+			internal MetadataResponseTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -17570,14 +17920,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public MetadataResponsePartition CreateMetadataResponsePartition()
+			{
+				return new MetadataResponsePartition(Version);
+			}
+
 			public class MetadataResponsePartition : ISerialize
 			{
-				public MetadataResponsePartition(int version)
+				internal MetadataResponsePartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -18007,14 +18362,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetCommitRequestTopic CreateOffsetCommitRequestTopic()
+		{
+			return new OffsetCommitRequestTopic(Version);
+		}
+
 		public class OffsetCommitRequestTopic : ISerialize
 		{
-			public OffsetCommitRequestTopic(int version)
+			internal OffsetCommitRequestTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -18086,14 +18446,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetCommitRequestPartition CreateOffsetCommitRequestPartition()
+			{
+				return new OffsetCommitRequestPartition(Version);
+			}
+
 			public class OffsetCommitRequestPartition : ISerialize
 			{
-				public OffsetCommitRequestPartition(int version)
+				internal OffsetCommitRequestPartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -18338,14 +18703,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetCommitResponseTopic CreateOffsetCommitResponseTopic()
+		{
+			return new OffsetCommitResponseTopic(Version);
+		}
+
 		public class OffsetCommitResponseTopic : ISerialize
 		{
-			public OffsetCommitResponseTopic(int version)
+			internal OffsetCommitResponseTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -18417,14 +18787,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetCommitResponsePartition CreateOffsetCommitResponsePartition()
+			{
+				return new OffsetCommitResponsePartition(Version);
+			}
+
 			public class OffsetCommitResponsePartition : ISerialize
 			{
-				public OffsetCommitResponsePartition(int version)
+				internal OffsetCommitResponsePartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -18586,14 +18961,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetFetchRequestTopic CreateOffsetFetchRequestTopic()
+		{
+			return new OffsetFetchRequestTopic(Version);
+		}
+
 		public class OffsetFetchRequestTopic : ISerialize
 		{
-			public OffsetFetchRequestTopic(int version)
+			internal OffsetFetchRequestTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -18753,14 +19133,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetFetchResponseTopic CreateOffsetFetchResponseTopic()
+		{
+			return new OffsetFetchResponseTopic(Version);
+		}
+
 		public class OffsetFetchResponseTopic : ISerialize
 		{
-			public OffsetFetchResponseTopic(int version)
+			internal OffsetFetchResponseTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -18832,14 +19217,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetFetchResponsePartition CreateOffsetFetchResponsePartition()
+			{
+				return new OffsetFetchResponsePartition(Version);
+			}
+
 			public class OffsetFetchResponsePartition : ISerialize
 			{
-				public OffsetFetchResponsePartition(int version)
+				internal OffsetFetchResponsePartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -19086,14 +19476,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetForLeaderTopic CreateOffsetForLeaderTopic()
+		{
+			return new OffsetForLeaderTopic(Version);
+		}
+
 		public class OffsetForLeaderTopic : ISerialize
 		{
-			public OffsetForLeaderTopic(int version)
+			internal OffsetForLeaderTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -19165,14 +19560,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetForLeaderPartition CreateOffsetForLeaderPartition()
+			{
+				return new OffsetForLeaderPartition(Version);
+			}
+
 			public class OffsetForLeaderPartition : ISerialize
 			{
-				public OffsetForLeaderPartition(int version)
+				internal OffsetForLeaderPartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -19354,14 +19754,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetForLeaderTopicResult CreateOffsetForLeaderTopicResult()
+		{
+			return new OffsetForLeaderTopicResult(Version);
+		}
+
 		public class OffsetForLeaderTopicResult : ISerialize
 		{
-			public OffsetForLeaderTopicResult(int version)
+			internal OffsetForLeaderTopicResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -19433,14 +19838,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetForLeaderPartitionResult CreateOffsetForLeaderPartitionResult()
+			{
+				return new OffsetForLeaderPartitionResult(Version);
+			}
+
 			public class OffsetForLeaderPartitionResult : ISerialize
 			{
-				public OffsetForLeaderPartitionResult(int version)
+				internal OffsetForLeaderPartitionResult(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -19721,14 +20131,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TopicProduceData CreateTopicProduceData()
+		{
+			return new TopicProduceData(Version);
+		}
+
 		public class TopicProduceData : ISerialize
 		{
-			public TopicProduceData(int version)
+			internal TopicProduceData(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -19800,14 +20215,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public PartitionProduceData CreatePartitionProduceData()
+			{
+				return new PartitionProduceData(Version);
+			}
+
 			public class PartitionProduceData : ISerialize
 			{
-				public PartitionProduceData(int version)
+				internal PartitionProduceData(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -19946,14 +20366,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TopicProduceResponse CreateTopicProduceResponse()
+		{
+			return new TopicProduceResponse(Version);
+		}
+
 		public class TopicProduceResponse : ISerialize
 		{
-			public TopicProduceResponse(int version)
+			internal TopicProduceResponse(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -20025,14 +20450,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public PartitionProduceResponse CreatePartitionProduceResponse()
+			{
+				return new PartitionProduceResponse(Version);
+			}
+
 			public class PartitionProduceResponse : ISerialize
 			{
-				public PartitionProduceResponse(int version)
+				internal PartitionProduceResponse(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -21149,14 +21579,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public StopReplicaRequestPartitionV0 CreateStopReplicaRequestPartitionV0()
+		{
+			return new StopReplicaRequestPartitionV0(Version);
+		}
+
 		public class StopReplicaRequestPartitionV0 : ISerialize
 		{
-			public StopReplicaRequestPartitionV0(int version)
+			internal StopReplicaRequestPartitionV0(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -21252,14 +21687,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public StopReplicaRequestTopic CreateStopReplicaRequestTopic()
+		{
+			return new StopReplicaRequestTopic(Version);
+		}
+
 		public class StopReplicaRequestTopic : ISerialize
 		{
-			public StopReplicaRequestTopic(int version)
+			internal StopReplicaRequestTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -21419,14 +21859,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public StopReplicaResponsePartition CreateStopReplicaResponsePartition()
+		{
+			return new StopReplicaResponsePartition(Version);
+		}
+
 		public class StopReplicaResponsePartition : ISerialize
 		{
-			public StopReplicaResponsePartition(int version)
+			internal StopReplicaResponsePartition(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -21679,14 +22124,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public SyncGroupRequestAssignment CreateSyncGroupRequestAssignment()
+		{
+			return new SyncGroupRequestAssignment(Version);
+		}
+
 		public class SyncGroupRequestAssignment : ISerialize
 		{
-			public SyncGroupRequestAssignment(int version)
+			internal SyncGroupRequestAssignment(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -22052,14 +22502,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TxnOffsetCommitRequestTopic CreateTxnOffsetCommitRequestTopic()
+		{
+			return new TxnOffsetCommitRequestTopic(Version);
+		}
+
 		public class TxnOffsetCommitRequestTopic : ISerialize
 		{
-			public TxnOffsetCommitRequestTopic(int version)
+			internal TxnOffsetCommitRequestTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -22131,14 +22586,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public TxnOffsetCommitRequestPartition CreateTxnOffsetCommitRequestPartition()
+			{
+				return new TxnOffsetCommitRequestPartition(Version);
+			}
+
 			public class TxnOffsetCommitRequestPartition : ISerialize
 			{
-				public TxnOffsetCommitRequestPartition(int version)
+				internal TxnOffsetCommitRequestPartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -22357,14 +22817,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TxnOffsetCommitResponseTopic CreateTxnOffsetCommitResponseTopic()
+		{
+			return new TxnOffsetCommitResponseTopic(Version);
+		}
+
 		public class TxnOffsetCommitResponseTopic : ISerialize
 		{
-			public TxnOffsetCommitResponseTopic(int version)
+			internal TxnOffsetCommitResponseTopic(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -22436,14 +22901,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public TxnOffsetCommitResponsePartition CreateTxnOffsetCommitResponsePartition()
+			{
+				return new TxnOffsetCommitResponsePartition(Version);
+			}
+
 			public class TxnOffsetCommitResponsePartition : ISerialize
 			{
-				public TxnOffsetCommitResponsePartition(int version)
+				internal TxnOffsetCommitResponsePartition(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -22677,14 +23147,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public UpdateMetadataRequestTopicState CreateUpdateMetadataRequestTopicState()
+		{
+			return new UpdateMetadataRequestTopicState(Version);
+		}
+
 		public class UpdateMetadataRequestTopicState : ISerialize
 		{
-			public UpdateMetadataRequestTopicState(int version)
+			internal UpdateMetadataRequestTopicState(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -22756,14 +23231,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataPartitionState CreateUpdateMetadataPartitionState()
+			{
+				return new UpdateMetadataPartitionState(Version);
+			}
+
 			public class UpdateMetadataPartitionState : ISerialize
 			{
-				public UpdateMetadataPartitionState(int version)
+				internal UpdateMetadataPartitionState(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -23046,14 +23526,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public UpdateMetadataRequestPartitionStateV0 CreateUpdateMetadataRequestPartitionStateV0()
+		{
+			return new UpdateMetadataRequestPartitionStateV0(Version);
+		}
+
 		public class UpdateMetadataRequestPartitionStateV0 : ISerialize
 		{
-			public UpdateMetadataRequestPartitionStateV0(int version)
+			internal UpdateMetadataRequestPartitionStateV0(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -23363,14 +23848,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public UpdateMetadataRequestBroker CreateUpdateMetadataRequestBroker()
+		{
+			return new UpdateMetadataRequestBroker(Version);
+		}
+
 		public class UpdateMetadataRequestBroker : ISerialize
 		{
-			public UpdateMetadataRequestBroker(int version)
+			internal UpdateMetadataRequestBroker(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -23499,14 +23989,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestEndpoint CreateUpdateMetadataRequestEndpoint()
+			{
+				return new UpdateMetadataRequestEndpoint(Version);
+			}
+
 			public class UpdateMetadataRequestEndpoint : ISerialize
 			{
-				public UpdateMetadataRequestEndpoint(int version)
+				internal UpdateMetadataRequestEndpoint(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -23773,14 +24268,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public WritableTxnMarker CreateWritableTxnMarker()
+		{
+			return new WritableTxnMarker(Version);
+		}
+
 		public class WritableTxnMarker : ISerialize
 		{
-			public WritableTxnMarker(int version)
+			internal WritableTxnMarker(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -23922,14 +24422,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public WritableTxnMarkerTopic CreateWritableTxnMarkerTopic()
+			{
+				return new WritableTxnMarkerTopic(Version);
+			}
+
 			public class WritableTxnMarkerTopic : ISerialize
 			{
-				public WritableTxnMarkerTopic(int version)
+				internal WritableTxnMarkerTopic(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -24082,14 +24587,19 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public WritableTxnMarkerResult CreateWritableTxnMarkerResult()
+		{
+			return new WritableTxnMarkerResult(Version);
+		}
+
 		public class WritableTxnMarkerResult : ISerialize
 		{
-			public WritableTxnMarkerResult(int version)
+			internal WritableTxnMarkerResult(int version)
 			{
 				Version = version;
 			}
 
-			public int Version { get; }
+			internal int Version { get; }
 
 			public void ReadFrom(IKafkaReader reader)
 			{
@@ -24161,14 +24671,19 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public WritableTxnMarkerTopicResult CreateWritableTxnMarkerTopicResult()
+			{
+				return new WritableTxnMarkerTopicResult(Version);
+			}
+
 			public class WritableTxnMarkerTopicResult : ISerialize
 			{
-				public WritableTxnMarkerTopicResult(int version)
+				internal WritableTxnMarkerTopicResult(int version)
 				{
 					Version = version;
 				}
 
-				public int Version { get; }
+				internal int Version { get; }
 
 				public void ReadFrom(IKafkaReader reader)
 				{
@@ -24240,14 +24755,19 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public WritableTxnMarkerPartitionResult CreateWritableTxnMarkerPartitionResult()
+				{
+					return new WritableTxnMarkerPartitionResult(Version);
+				}
+
 				public class WritableTxnMarkerPartitionResult : ISerialize
 				{
-					public WritableTxnMarkerPartitionResult(int version)
+					internal WritableTxnMarkerPartitionResult(int version)
 					{
 						Version = version;
 					}
 
-					public int Version { get; }
+					internal int Version { get; }
 
 					public void ReadFrom(IKafkaReader reader)
 					{

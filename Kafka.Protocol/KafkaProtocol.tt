@@ -312,17 +312,21 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 	if (field.Fields == null) 
 	{
 		return;
-	} 
-				
-	_(2); 
+	} _(2); 
+
+	#>public <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>()<# Block(() => 
+	{
+		#>return new <#= fieldTypeNameWithoutArrayCharacters #>(Version);<#
+	}); _(2);
+
 	#>public class <#= fieldTypeNameWithoutArrayCharacters #> : ISerialize<# Block(() => 
 	{
-		#>public <#= fieldTypeNameWithoutArrayCharacters #>(int version)<# Block(() => 
+		#>internal <#= fieldTypeNameWithoutArrayCharacters #>(int version)<# Block(() => 
 		{
 			#>Version = version;<#
 		}); _(2);
 
-		#>public int Version { get; }<# _(2);
+		#>internal int Version { get; }<# _(2);
 
 		#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
 		{
