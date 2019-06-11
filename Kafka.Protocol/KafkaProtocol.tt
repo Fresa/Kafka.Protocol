@@ -281,6 +281,23 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 				}); _(2);
 			}
 
+			if (field.NullableVersions == null)
+			{
+				#>if (value == null) <# Block(() => 
+				{					
+					#>throw new UnsupportedVersionException($"<#= field.GetName() #> is non-nullable.");<#
+				}); _(2);
+			}
+			else
+			{
+				var nullableVersionRange = VersionRange.Parse(field.NullableVersions);
+				#>if (Version.InRange(new VersionRange(<#= nullableVersionRange.From #>, <#= nullableVersionRange.To #>)) == false &&<# _();
+				#>	value == null) <# Block(() => 
+				{					
+					#>throw new UnsupportedVersionException($"<#= field.GetName() #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<#
+				}); _(2);
+			}
+
 			#>_<#= field.GetName() #> = value;<#
 		});
 	});
