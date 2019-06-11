@@ -2124,10 +2124,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
 		/// </summary>
-		private String _TransactionalId = String.Default;
+		private String _transactionalId = String.Default;
 		public String TransactionalId 
 		{
-			get => _TransactionalId;
+			get => _transactionalId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2140,17 +2140,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TransactionalId is non-nullable.");
 				}
 
-				_TransactionalId = value;
+				_transactionalId = value;
 			}
 		}
 
 		/// <summary>
 		/// Current producer id in use by the transactional id.
 		/// </summary>
-		private Int64 _ProducerId = Int64.Default;
+		private Int64 _producerId = Int64.Default;
 		public Int64 ProducerId 
 		{
-			get => _ProducerId;
+			get => _producerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2163,17 +2163,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 				}
 
-				_ProducerId = value;
+				_producerId = value;
 			}
 		}
 
 		/// <summary>
 		/// Current epoch associated with the producer id.
 		/// </summary>
-		private Int16 _ProducerEpoch = Int16.Default;
+		private Int16 _producerEpoch = Int16.Default;
 		public Int16 ProducerEpoch 
 		{
-			get => _ProducerEpoch;
+			get => _producerEpoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2186,17 +2186,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
 				}
 
-				_ProducerEpoch = value;
+				_producerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		private String _GroupId = String.Default;
+		private String _groupId = String.Default;
 		public String GroupId 
 		{
-			get => _GroupId;
+			get => _groupId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2209,7 +2209,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
-				_GroupId = value;
+				_groupId = value;
 			}
 		}
 	}
@@ -2257,10 +2257,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2273,17 +2273,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The response error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2296,7 +2296,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 	}
@@ -2360,10 +2360,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
 		/// </summary>
-		private String _TransactionalId = String.Default;
+		private String _transactionalId = String.Default;
 		public String TransactionalId 
 		{
-			get => _TransactionalId;
+			get => _transactionalId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2376,17 +2376,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TransactionalId is non-nullable.");
 				}
 
-				_TransactionalId = value;
+				_transactionalId = value;
 			}
 		}
 
 		/// <summary>
 		/// Current producer id in use by the transactional id.
 		/// </summary>
-		private Int64 _ProducerId = Int64.Default;
+		private Int64 _producerId = Int64.Default;
 		public Int64 ProducerId 
 		{
-			get => _ProducerId;
+			get => _producerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2399,17 +2399,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 				}
 
-				_ProducerId = value;
+				_producerId = value;
 			}
 		}
 
 		/// <summary>
 		/// Current epoch associated with the producer id.
 		/// </summary>
-		private Int16 _ProducerEpoch = Int16.Default;
+		private Int16 _producerEpoch = Int16.Default;
 		public Int16 ProducerEpoch 
 		{
-			get => _ProducerEpoch;
+			get => _producerEpoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2422,17 +2422,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
 				}
 
-				_ProducerEpoch = value;
+				_producerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// The partitions to add to the transation.
 		/// </summary>
-		private Dictionary<String, AddPartitionsToTxnTopic> _TopicsCollection = new Dictionary<String, AddPartitionsToTxnTopic>();
+		private Dictionary<String, AddPartitionsToTxnTopic> _topicsCollection = new Dictionary<String, AddPartitionsToTxnTopic>();
 		public Dictionary<String, AddPartitionsToTxnTopic> TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2445,7 +2445,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -2490,10 +2490,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2506,17 +2506,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition indexes to add to the transaction
 			/// </summary>
-			private Int32[] _PartitionsCollection = System.Array.Empty<Int32>();
+			private Int32[] _partitionsCollection = System.Array.Empty<Int32>();
 			public Int32[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2529,7 +2529,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 		}
@@ -2578,10 +2578,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2594,17 +2594,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
-		private Dictionary<String, AddPartitionsToTxnTopicResult> _ResultsCollection = new Dictionary<String, AddPartitionsToTxnTopicResult>();
+		private Dictionary<String, AddPartitionsToTxnTopicResult> _resultsCollection = new Dictionary<String, AddPartitionsToTxnTopicResult>();
 		public Dictionary<String, AddPartitionsToTxnTopicResult> ResultsCollection 
 		{
-			get => _ResultsCollection;
+			get => _resultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2617,7 +2617,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
-				_ResultsCollection = value;
+				_resultsCollection = value;
 			}
 		}
 
@@ -2662,10 +2662,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2678,17 +2678,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The results for each partition
 			/// </summary>
-			private Dictionary<Int32, AddPartitionsToTxnPartitionResult> _ResultsCollection = new Dictionary<Int32, AddPartitionsToTxnPartitionResult>();
+			private Dictionary<Int32, AddPartitionsToTxnPartitionResult> _resultsCollection = new Dictionary<Int32, AddPartitionsToTxnPartitionResult>();
 			public Dictionary<Int32, AddPartitionsToTxnPartitionResult> ResultsCollection 
 			{
-				get => _ResultsCollection;
+				get => _resultsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2701,7 +2701,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 					}
 
-					_ResultsCollection = value;
+					_resultsCollection = value;
 				}
 			}
 
@@ -2746,10 +2746,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2762,17 +2762,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The response error code.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2785,7 +2785,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 			}
@@ -2835,10 +2835,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The updates for each resource.
 		/// </summary>
-		private Dictionary<Int8, AlterConfigsResource> _ResourcesCollection = new Dictionary<Int8, AlterConfigsResource>();
+		private Dictionary<Int8, AlterConfigsResource> _resourcesCollection = new Dictionary<Int8, AlterConfigsResource>();
 		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection 
 		{
-			get => _ResourcesCollection;
+			get => _resourcesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2851,7 +2851,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
 				}
 
-				_ResourcesCollection = value;
+				_resourcesCollection = value;
 			}
 		}
 
@@ -2904,10 +2904,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			private Int8 _ResourceType = Int8.Default;
+			private Int8 _resourceType = Int8.Default;
 			public Int8 ResourceType 
 			{
-				get => _ResourceType;
+				get => _resourceType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2920,17 +2920,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
-					_ResourceType = value;
+					_resourceType = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			private String _ResourceName = String.Default;
+			private String _resourceName = String.Default;
 			public String ResourceName 
 			{
-				get => _ResourceName;
+				get => _resourceName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2943,17 +2943,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
 					}
 
-					_ResourceName = value;
+					_resourceName = value;
 				}
 			}
 
 			/// <summary>
 			/// The configurations.
 			/// </summary>
-			private Dictionary<String, AlterableConfig> _ConfigsCollection = new Dictionary<String, AlterableConfig>();
+			private Dictionary<String, AlterableConfig> _configsCollection = new Dictionary<String, AlterableConfig>();
 			public Dictionary<String, AlterableConfig> ConfigsCollection 
 			{
-				get => _ConfigsCollection;
+				get => _configsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -2966,7 +2966,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ConfigsCollection is non-nullable.");
 					}
 
-					_ConfigsCollection = value;
+					_configsCollection = value;
 				}
 			}
 
@@ -3011,10 +3011,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration key name.
 				/// </summary>
-				private String _Name = String.Default;
+				private String _name = String.Default;
 				public String Name 
 				{
-					get => _Name;
+					get => _name;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3027,17 +3027,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name is non-nullable.");
 						}
 
-						_Name = value;
+						_name = value;
 					}
 				}
 
 				/// <summary>
 				/// The value to set for the configuration key.
 				/// </summary>
-				private String _Value = String.Default;
+				private String _value = String.Default;
 				public String Value 
 				{
-					get => _Value;
+					get => _value;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3051,7 +3051,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_Value = value;
+						_value = value;
 					}
 				}
 			}
@@ -3060,10 +3060,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// True if we should validate the request, but not change the configurations.
 		/// </summary>
-		private Boolean _ValidateOnly = Boolean.Default;
+		private Boolean _validateOnly = Boolean.Default;
 		public Boolean ValidateOnly 
 		{
-			get => _ValidateOnly;
+			get => _validateOnly;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3076,7 +3076,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ValidateOnly is non-nullable.");
 				}
 
-				_ValidateOnly = value;
+				_validateOnly = value;
 			}
 		}
 	}
@@ -3124,10 +3124,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3140,17 +3140,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The responses for each resource.
 		/// </summary>
-		private AlterConfigsResourceResponse[] _ResourcesCollection = System.Array.Empty<AlterConfigsResourceResponse>();
+		private AlterConfigsResourceResponse[] _resourcesCollection = System.Array.Empty<AlterConfigsResourceResponse>();
 		public AlterConfigsResourceResponse[] ResourcesCollection 
 		{
-			get => _ResourcesCollection;
+			get => _resourcesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3163,7 +3163,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
 				}
 
-				_ResourcesCollection = value;
+				_resourcesCollection = value;
 			}
 		}
 
@@ -3224,10 +3224,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource error code.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3240,17 +3240,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource error message, or null if there was no error.
 			/// </summary>
-			private String _ErrorMessage = String.Default;
+			private String _errorMessage = String.Default;
 			public String ErrorMessage 
 			{
-				get => _ErrorMessage;
+				get => _errorMessage;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3264,17 +3264,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_ErrorMessage = value;
+					_errorMessage = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			private Int8 _ResourceType = Int8.Default;
+			private Int8 _resourceType = Int8.Default;
 			public Int8 ResourceType 
 			{
-				get => _ResourceType;
+				get => _resourceType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3287,17 +3287,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
-					_ResourceType = value;
+					_resourceType = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			private String _ResourceName = String.Default;
+			private String _resourceName = String.Default;
 			public String ResourceName 
 			{
-				get => _ResourceName;
+				get => _resourceName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3310,7 +3310,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
 					}
 
-					_ResourceName = value;
+					_resourceName = value;
 				}
 			}
 		}
@@ -3351,10 +3351,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The alterations to make for each directory.
 		/// </summary>
-		private Dictionary<String, AlterReplicaLogDir> _DirsCollection = new Dictionary<String, AlterReplicaLogDir>();
+		private Dictionary<String, AlterReplicaLogDir> _dirsCollection = new Dictionary<String, AlterReplicaLogDir>();
 		public Dictionary<String, AlterReplicaLogDir> DirsCollection 
 		{
-			get => _DirsCollection;
+			get => _dirsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3367,7 +3367,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"DirsCollection is non-nullable.");
 				}
 
-				_DirsCollection = value;
+				_dirsCollection = value;
 			}
 		}
 
@@ -3412,10 +3412,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The absolute directory path.
 			/// </summary>
-			private String _Path = String.Default;
+			private String _path = String.Default;
 			public String Path 
 			{
-				get => _Path;
+				get => _path;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3428,17 +3428,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Path is non-nullable.");
 					}
 
-					_Path = value;
+					_path = value;
 				}
 			}
 
 			/// <summary>
 			/// The topics to add to the directory.
 			/// </summary>
-			private Dictionary<String, AlterReplicaLogDirTopic> _TopicsCollection = new Dictionary<String, AlterReplicaLogDirTopic>();
+			private Dictionary<String, AlterReplicaLogDirTopic> _topicsCollection = new Dictionary<String, AlterReplicaLogDirTopic>();
 			public Dictionary<String, AlterReplicaLogDirTopic> TopicsCollection 
 			{
-				get => _TopicsCollection;
+				get => _topicsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3451,7 +3451,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 					}
 
-					_TopicsCollection = value;
+					_topicsCollection = value;
 				}
 			}
 
@@ -3496,10 +3496,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				private String _Name = String.Default;
+				private String _name = String.Default;
 				public String Name 
 				{
-					get => _Name;
+					get => _name;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3512,17 +3512,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name is non-nullable.");
 						}
 
-						_Name = value;
+						_name = value;
 					}
 				}
 
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
-				private Int32[] _PartitionsCollection = System.Array.Empty<Int32>();
+				private Int32[] _partitionsCollection = System.Array.Empty<Int32>();
 				public Int32[] PartitionsCollection 
 				{
-					get => _PartitionsCollection;
+					get => _partitionsCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3535,7 +3535,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 						}
 
-						_PartitionsCollection = value;
+						_partitionsCollection = value;
 					}
 				}
 			}
@@ -3585,10 +3585,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3601,17 +3601,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
-		private AlterReplicaLogDirTopicResult[] _ResultsCollection = System.Array.Empty<AlterReplicaLogDirTopicResult>();
+		private AlterReplicaLogDirTopicResult[] _resultsCollection = System.Array.Empty<AlterReplicaLogDirTopicResult>();
 		public AlterReplicaLogDirTopicResult[] ResultsCollection 
 		{
-			get => _ResultsCollection;
+			get => _resultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3624,7 +3624,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
-				_ResultsCollection = value;
+				_resultsCollection = value;
 			}
 		}
 
@@ -3669,10 +3669,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			private String _TopicName = String.Default;
+			private String _topicName = String.Default;
 			public String TopicName 
 			{
-				get => _TopicName;
+				get => _topicName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3685,17 +3685,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
-					_TopicName = value;
+					_topicName = value;
 				}
 			}
 
 			/// <summary>
 			/// The results for each partition.
 			/// </summary>
-			private AlterReplicaLogDirPartitionResult[] _PartitionsCollection = System.Array.Empty<AlterReplicaLogDirPartitionResult>();
+			private AlterReplicaLogDirPartitionResult[] _partitionsCollection = System.Array.Empty<AlterReplicaLogDirPartitionResult>();
 			public AlterReplicaLogDirPartitionResult[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3708,7 +3708,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -3753,10 +3753,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3769,17 +3769,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3792,7 +3792,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 			}
@@ -3879,10 +3879,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3895,17 +3895,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The APIs supported by the broker.
 		/// </summary>
-		private Dictionary<Int16, ApiVersionsResponseKey> _ApiKeysCollection = new Dictionary<Int16, ApiVersionsResponseKey>();
+		private Dictionary<Int16, ApiVersionsResponseKey> _apiKeysCollection = new Dictionary<Int16, ApiVersionsResponseKey>();
 		public Dictionary<Int16, ApiVersionsResponseKey> ApiKeysCollection 
 		{
-			get => _ApiKeysCollection;
+			get => _apiKeysCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3918,7 +3918,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ApiKeysCollection is non-nullable.");
 				}
 
-				_ApiKeysCollection = value;
+				_apiKeysCollection = value;
 			}
 		}
 
@@ -3971,10 +3971,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The API index.
 			/// </summary>
-			private Int16 _Index = Int16.Default;
+			private Int16 _index = Int16.Default;
 			public Int16 Index 
 			{
-				get => _Index;
+				get => _index;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -3987,17 +3987,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Index is non-nullable.");
 					}
 
-					_Index = value;
+					_index = value;
 				}
 			}
 
 			/// <summary>
 			/// The minimum supported version, inclusive.
 			/// </summary>
-			private Int16 _MinVersion = Int16.Default;
+			private Int16 _minVersion = Int16.Default;
 			public Int16 MinVersion 
 			{
-				get => _MinVersion;
+				get => _minVersion;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4010,17 +4010,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MinVersion is non-nullable.");
 					}
 
-					_MinVersion = value;
+					_minVersion = value;
 				}
 			}
 
 			/// <summary>
 			/// The maximum supported version, inclusive.
 			/// </summary>
-			private Int16 _MaxVersion = Int16.Default;
+			private Int16 _maxVersion = Int16.Default;
 			public Int16 MaxVersion 
 			{
-				get => _MaxVersion;
+				get => _maxVersion;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4033,7 +4033,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MaxVersion is non-nullable.");
 					}
 
-					_MaxVersion = value;
+					_maxVersion = value;
 				}
 			}
 		}
@@ -4041,10 +4041,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -4052,7 +4052,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 	}
@@ -4100,10 +4100,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The id of the broker for which controlled shutdown has been requested.
 		/// </summary>
-		private Int32 _BrokerId = Int32.Default;
+		private Int32 _brokerId = Int32.Default;
 		public Int32 BrokerId 
 		{
-			get => _BrokerId;
+			get => _brokerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4116,17 +4116,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"BrokerId is non-nullable.");
 				}
 
-				_BrokerId = value;
+				_brokerId = value;
 			}
 		}
 
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		private Int64 _BrokerEpoch = new Int64(-1);
+		private Int64 _brokerEpoch = new Int64(-1);
 		public Int64 BrokerEpoch 
 		{
-			get => _BrokerEpoch;
+			get => _brokerEpoch;
 			set 
 			{
 				if (value == null) 
@@ -4134,7 +4134,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"BrokerEpoch is non-nullable.");
 				}
 
-				_BrokerEpoch = value;
+				_brokerEpoch = value;
 			}
 		}
 	}
@@ -4182,10 +4182,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4198,17 +4198,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The partitions that the broker still leads.
 		/// </summary>
-		private Dictionary<String, RemainingPartition> _RemainingPartitionsCollection = new Dictionary<String, RemainingPartition>();
+		private Dictionary<String, RemainingPartition> _remainingPartitionsCollection = new Dictionary<String, RemainingPartition>();
 		public Dictionary<String, RemainingPartition> RemainingPartitionsCollection 
 		{
-			get => _RemainingPartitionsCollection;
+			get => _remainingPartitionsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4221,7 +4221,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RemainingPartitionsCollection is non-nullable.");
 				}
 
-				_RemainingPartitionsCollection = value;
+				_remainingPartitionsCollection = value;
 			}
 		}
 
@@ -4266,10 +4266,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
-			private String _TopicName = String.Default;
+			private String _topicName = String.Default;
 			public String TopicName 
 			{
-				get => _TopicName;
+				get => _topicName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4282,17 +4282,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
-					_TopicName = value;
+					_topicName = value;
 				}
 			}
 
 			/// <summary>
 			/// The index of the partition.
 			/// </summary>
-			private Int32 _PartitionIndex = Int32.Default;
+			private Int32 _partitionIndex = Int32.Default;
 			public Int32 PartitionIndex 
 			{
-				get => _PartitionIndex;
+				get => _partitionIndex;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4305,7 +4305,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 					}
 
-					_PartitionIndex = value;
+					_partitionIndex = value;
 				}
 			}
 		}
@@ -4346,10 +4346,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ACLs that we want to create.
 		/// </summary>
-		private CreatableAcl[] _CreationsCollection = System.Array.Empty<CreatableAcl>();
+		private CreatableAcl[] _creationsCollection = System.Array.Empty<CreatableAcl>();
 		public CreatableAcl[] CreationsCollection 
 		{
-			get => _CreationsCollection;
+			get => _creationsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4362,7 +4362,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"CreationsCollection is non-nullable.");
 				}
 
-				_CreationsCollection = value;
+				_creationsCollection = value;
 			}
 		}
 
@@ -4447,10 +4447,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The type of the resource.
 			/// </summary>
-			private Int8 _ResourceType = Int8.Default;
+			private Int8 _resourceType = Int8.Default;
 			public Int8 ResourceType 
 			{
-				get => _ResourceType;
+				get => _resourceType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4463,17 +4463,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
-					_ResourceType = value;
+					_resourceType = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource name for the ACL.
 			/// </summary>
-			private String _ResourceName = String.Default;
+			private String _resourceName = String.Default;
 			public String ResourceName 
 			{
-				get => _ResourceName;
+				get => _resourceName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4486,17 +4486,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
 					}
 
-					_ResourceName = value;
+					_resourceName = value;
 				}
 			}
 
 			/// <summary>
 			/// The pattern type for the ACL.
 			/// </summary>
-			private Int8 _ResourcePatternType = new Int8(3);
+			private Int8 _resourcePatternType = new Int8(3);
 			public Int8 ResourcePatternType 
 			{
-				get => _ResourcePatternType;
+				get => _resourcePatternType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -4509,17 +4509,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourcePatternType is non-nullable.");
 					}
 
-					_ResourcePatternType = value;
+					_resourcePatternType = value;
 				}
 			}
 
 			/// <summary>
 			/// The principal for the ACL.
 			/// </summary>
-			private String _Principal = String.Default;
+			private String _principal = String.Default;
 			public String Principal 
 			{
-				get => _Principal;
+				get => _principal;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4532,17 +4532,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Principal is non-nullable.");
 					}
 
-					_Principal = value;
+					_principal = value;
 				}
 			}
 
 			/// <summary>
 			/// The host for the ACL.
 			/// </summary>
-			private String _Host = String.Default;
+			private String _host = String.Default;
 			public String Host 
 			{
-				get => _Host;
+				get => _host;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4555,17 +4555,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Host is non-nullable.");
 					}
 
-					_Host = value;
+					_host = value;
 				}
 			}
 
 			/// <summary>
 			/// The operation type for the ACL (read, write, etc.).
 			/// </summary>
-			private Int8 _Operation = Int8.Default;
+			private Int8 _operation = Int8.Default;
 			public Int8 Operation 
 			{
-				get => _Operation;
+				get => _operation;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4578,17 +4578,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Operation is non-nullable.");
 					}
 
-					_Operation = value;
+					_operation = value;
 				}
 			}
 
 			/// <summary>
 			/// The permission type for the ACL (allow, deny, etc.).
 			/// </summary>
-			private Int8 _PermissionType = Int8.Default;
+			private Int8 _permissionType = Int8.Default;
 			public Int8 PermissionType 
 			{
-				get => _PermissionType;
+				get => _permissionType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4601,7 +4601,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 					}
 
-					_PermissionType = value;
+					_permissionType = value;
 				}
 			}
 		}
@@ -4650,10 +4650,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4666,17 +4666,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The results for each ACL creation.
 		/// </summary>
-		private CreatableAclResult[] _ResultsCollection = System.Array.Empty<CreatableAclResult>();
+		private CreatableAclResult[] _resultsCollection = System.Array.Empty<CreatableAclResult>();
 		public CreatableAclResult[] ResultsCollection 
 		{
-			get => _ResultsCollection;
+			get => _resultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4689,7 +4689,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
-				_ResultsCollection = value;
+				_resultsCollection = value;
 			}
 		}
 
@@ -4734,10 +4734,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4750,17 +4750,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The result message, or null if there was no error.
 			/// </summary>
-			private String _ErrorMessage = String.Default;
+			private String _errorMessage = String.Default;
 			public String ErrorMessage 
 			{
-				get => _ErrorMessage;
+				get => _errorMessage;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4774,7 +4774,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_ErrorMessage = value;
+					_errorMessage = value;
 				}
 			}
 		}
@@ -4823,10 +4823,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// A list of those who are allowed to renew this token before it expires.
 		/// </summary>
-		private CreatableRenewers[] _RenewersCollection = System.Array.Empty<CreatableRenewers>();
+		private CreatableRenewers[] _renewersCollection = System.Array.Empty<CreatableRenewers>();
 		public CreatableRenewers[] RenewersCollection 
 		{
-			get => _RenewersCollection;
+			get => _renewersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4839,7 +4839,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RenewersCollection is non-nullable.");
 				}
 
-				_RenewersCollection = value;
+				_renewersCollection = value;
 			}
 		}
 
@@ -4884,10 +4884,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The type of the Kafka principal.
 			/// </summary>
-			private String _PrincipalType = String.Default;
+			private String _principalType = String.Default;
 			public String PrincipalType 
 			{
-				get => _PrincipalType;
+				get => _principalType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4900,17 +4900,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 					}
 
-					_PrincipalType = value;
+					_principalType = value;
 				}
 			}
 
 			/// <summary>
 			/// The name of the Kafka principal.
 			/// </summary>
-			private String _PrincipalName = String.Default;
+			private String _principalName = String.Default;
 			public String PrincipalName 
 			{
-				get => _PrincipalName;
+				get => _principalName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4923,7 +4923,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
 					}
 
-					_PrincipalName = value;
+					_principalName = value;
 				}
 			}
 		}
@@ -4931,10 +4931,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The maximum lifetime of the token in milliseconds, or -1 to use the server side default.
 		/// </summary>
-		private Int64 _MaxLifetimeMs = Int64.Default;
+		private Int64 _maxLifetimeMs = Int64.Default;
 		public Int64 MaxLifetimeMs 
 		{
-			get => _MaxLifetimeMs;
+			get => _maxLifetimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -4947,7 +4947,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MaxLifetimeMs is non-nullable.");
 				}
 
-				_MaxLifetimeMs = value;
+				_maxLifetimeMs = value;
 			}
 		}
 	}
@@ -5051,10 +5051,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error, or zero if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5067,17 +5067,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The principal type of the token owner.
 		/// </summary>
-		private String _PrincipalType = String.Default;
+		private String _principalType = String.Default;
 		public String PrincipalType 
 		{
-			get => _PrincipalType;
+			get => _principalType;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5090,17 +5090,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 				}
 
-				_PrincipalType = value;
+				_principalType = value;
 			}
 		}
 
 		/// <summary>
 		/// The name of the token owner.
 		/// </summary>
-		private String _PrincipalName = String.Default;
+		private String _principalName = String.Default;
 		public String PrincipalName 
 		{
-			get => _PrincipalName;
+			get => _principalName;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5113,17 +5113,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
 				}
 
-				_PrincipalName = value;
+				_principalName = value;
 			}
 		}
 
 		/// <summary>
 		/// When this token was generated.
 		/// </summary>
-		private Int64 _IssueTimestampMs = Int64.Default;
+		private Int64 _issueTimestampMs = Int64.Default;
 		public Int64 IssueTimestampMs 
 		{
-			get => _IssueTimestampMs;
+			get => _issueTimestampMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5136,17 +5136,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IssueTimestampMs is non-nullable.");
 				}
 
-				_IssueTimestampMs = value;
+				_issueTimestampMs = value;
 			}
 		}
 
 		/// <summary>
 		/// When this token expires.
 		/// </summary>
-		private Int64 _ExpiryTimestampMs = Int64.Default;
+		private Int64 _expiryTimestampMs = Int64.Default;
 		public Int64 ExpiryTimestampMs 
 		{
-			get => _ExpiryTimestampMs;
+			get => _expiryTimestampMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5159,17 +5159,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ExpiryTimestampMs is non-nullable.");
 				}
 
-				_ExpiryTimestampMs = value;
+				_expiryTimestampMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The maximum lifetime of this token.
 		/// </summary>
-		private Int64 _MaxTimestampMs = Int64.Default;
+		private Int64 _maxTimestampMs = Int64.Default;
 		public Int64 MaxTimestampMs 
 		{
-			get => _MaxTimestampMs;
+			get => _maxTimestampMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5182,17 +5182,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MaxTimestampMs is non-nullable.");
 				}
 
-				_MaxTimestampMs = value;
+				_maxTimestampMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The token UUID.
 		/// </summary>
-		private String _TokenId = String.Default;
+		private String _tokenId = String.Default;
 		public String TokenId 
 		{
-			get => _TokenId;
+			get => _tokenId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5205,17 +5205,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TokenId is non-nullable.");
 				}
 
-				_TokenId = value;
+				_tokenId = value;
 			}
 		}
 
 		/// <summary>
 		/// HMAC of the delegation token.
 		/// </summary>
-		private Bytes _Hmac = Bytes.Default;
+		private Bytes _hmac = Bytes.Default;
 		public Bytes Hmac 
 		{
-			get => _Hmac;
+			get => _hmac;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5228,17 +5228,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Hmac is non-nullable.");
 				}
 
-				_Hmac = value;
+				_hmac = value;
 			}
 		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5251,7 +5251,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 	}
@@ -5307,10 +5307,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to create new partitions inside.
 		/// </summary>
-		private CreatePartitionsTopic[] _TopicsCollection = System.Array.Empty<CreatePartitionsTopic>();
+		private CreatePartitionsTopic[] _topicsCollection = System.Array.Empty<CreatePartitionsTopic>();
 		public CreatePartitionsTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5323,7 +5323,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -5376,10 +5376,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5392,17 +5392,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The new partition count.
 			/// </summary>
-			private Int32 _Count = Int32.Default;
+			private Int32 _count = Int32.Default;
 			public Int32 Count 
 			{
-				get => _Count;
+				get => _count;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5415,17 +5415,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Count is non-nullable.");
 					}
 
-					_Count = value;
+					_count = value;
 				}
 			}
 
 			/// <summary>
 			/// The new partition assignments.
 			/// </summary>
-			private CreatePartitionsAssignment[] _AssignmentsCollection = System.Array.Empty<CreatePartitionsAssignment>();
+			private CreatePartitionsAssignment[] _assignmentsCollection = System.Array.Empty<CreatePartitionsAssignment>();
 			public CreatePartitionsAssignment[] AssignmentsCollection 
 			{
-				get => _AssignmentsCollection;
+				get => _assignmentsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5439,7 +5439,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"AssignmentsCollection does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_AssignmentsCollection = value;
+					_assignmentsCollection = value;
 				}
 			}
 
@@ -5476,10 +5476,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The assigned broker IDs.
 				/// </summary>
-				private Int32[] _BrokerIdsCollection = System.Array.Empty<Int32>();
+				private Int32[] _brokerIdsCollection = System.Array.Empty<Int32>();
 				public Int32[] BrokerIdsCollection 
 				{
-					get => _BrokerIdsCollection;
+					get => _brokerIdsCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5492,7 +5492,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"BrokerIdsCollection is non-nullable.");
 						}
 
-						_BrokerIdsCollection = value;
+						_brokerIdsCollection = value;
 					}
 				}
 			}
@@ -5501,10 +5501,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The time in ms to wait for the partitions to be created.
 		/// </summary>
-		private Int32 _TimeoutMs = Int32.Default;
+		private Int32 _timeoutMs = Int32.Default;
 		public Int32 TimeoutMs 
 		{
-			get => _TimeoutMs;
+			get => _timeoutMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5517,17 +5517,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
-				_TimeoutMs = value;
+				_timeoutMs = value;
 			}
 		}
 
 		/// <summary>
 		/// If true, then validate the request, but don't actually increase the number of partitions.
 		/// </summary>
-		private Boolean _ValidateOnly = Boolean.Default;
+		private Boolean _validateOnly = Boolean.Default;
 		public Boolean ValidateOnly 
 		{
-			get => _ValidateOnly;
+			get => _validateOnly;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5540,7 +5540,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ValidateOnly is non-nullable.");
 				}
 
-				_ValidateOnly = value;
+				_validateOnly = value;
 			}
 		}
 	}
@@ -5588,10 +5588,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5604,17 +5604,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The partition creation results for each topic.
 		/// </summary>
-		private CreatePartitionsTopicResult[] _ResultsCollection = System.Array.Empty<CreatePartitionsTopicResult>();
+		private CreatePartitionsTopicResult[] _resultsCollection = System.Array.Empty<CreatePartitionsTopicResult>();
 		public CreatePartitionsTopicResult[] ResultsCollection 
 		{
-			get => _ResultsCollection;
+			get => _resultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5627,7 +5627,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
-				_ResultsCollection = value;
+				_resultsCollection = value;
 			}
 		}
 
@@ -5680,10 +5680,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5696,17 +5696,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5719,17 +5719,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The result message, or null if there was no error.
 			/// </summary>
-			private String _ErrorMessage = String.Default;
+			private String _errorMessage = String.Default;
 			public String ErrorMessage 
 			{
-				get => _ErrorMessage;
+				get => _errorMessage;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5743,7 +5743,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_ErrorMessage = value;
+					_errorMessage = value;
 				}
 			}
 		}
@@ -5800,10 +5800,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to create.
 		/// </summary>
-		private Dictionary<String, CreatableTopic> _TopicsCollection = new Dictionary<String, CreatableTopic>();
+		private Dictionary<String, CreatableTopic> _topicsCollection = new Dictionary<String, CreatableTopic>();
 		public Dictionary<String, CreatableTopic> TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5816,7 +5816,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -5885,10 +5885,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5901,17 +5901,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The number of partitions to create in the topic, or -1 if we are specifying a manual partition assignment.
 			/// </summary>
-			private Int32 _NumPartitions = Int32.Default;
+			private Int32 _numPartitions = Int32.Default;
 			public Int32 NumPartitions 
 			{
-				get => _NumPartitions;
+				get => _numPartitions;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5924,17 +5924,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"NumPartitions is non-nullable.");
 					}
 
-					_NumPartitions = value;
+					_numPartitions = value;
 				}
 			}
 
 			/// <summary>
 			/// The number of replicas to create for each partition in the topic, or -1 if we are specifying a manual partition assignment.
 			/// </summary>
-			private Int16 _ReplicationFactor = Int16.Default;
+			private Int16 _replicationFactor = Int16.Default;
 			public Int16 ReplicationFactor 
 			{
-				get => _ReplicationFactor;
+				get => _replicationFactor;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5947,17 +5947,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ReplicationFactor is non-nullable.");
 					}
 
-					_ReplicationFactor = value;
+					_replicationFactor = value;
 				}
 			}
 
 			/// <summary>
 			/// The manual partition assignment, or the empty array if we are using automatic assignment.
 			/// </summary>
-			private Dictionary<Int32, CreatableReplicaAssignment> _AssignmentsCollection = new Dictionary<Int32, CreatableReplicaAssignment>();
+			private Dictionary<Int32, CreatableReplicaAssignment> _assignmentsCollection = new Dictionary<Int32, CreatableReplicaAssignment>();
 			public Dictionary<Int32, CreatableReplicaAssignment> AssignmentsCollection 
 			{
-				get => _AssignmentsCollection;
+				get => _assignmentsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -5970,7 +5970,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"AssignmentsCollection is non-nullable.");
 					}
 
-					_AssignmentsCollection = value;
+					_assignmentsCollection = value;
 				}
 			}
 
@@ -6015,10 +6015,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6031,17 +6031,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The brokers to place the partition on.
 				/// </summary>
-				private Int32[] _BrokerIdsCollection = System.Array.Empty<Int32>();
+				private Int32[] _brokerIdsCollection = System.Array.Empty<Int32>();
 				public Int32[] BrokerIdsCollection 
 				{
-					get => _BrokerIdsCollection;
+					get => _brokerIdsCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6054,7 +6054,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"BrokerIdsCollection is non-nullable.");
 						}
 
-						_BrokerIdsCollection = value;
+						_brokerIdsCollection = value;
 					}
 				}
 			}
@@ -6062,10 +6062,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The custom topic configurations to set.
 			/// </summary>
-			private Dictionary<String, CreateableTopicConfig> _ConfigsCollection = new Dictionary<String, CreateableTopicConfig>();
+			private Dictionary<String, CreateableTopicConfig> _configsCollection = new Dictionary<String, CreateableTopicConfig>();
 			public Dictionary<String, CreateableTopicConfig> ConfigsCollection 
 			{
-				get => _ConfigsCollection;
+				get => _configsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6078,7 +6078,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ConfigsCollection is non-nullable.");
 					}
 
-					_ConfigsCollection = value;
+					_configsCollection = value;
 				}
 			}
 
@@ -6123,10 +6123,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
-				private String _Name = String.Default;
+				private String _name = String.Default;
 				public String Name 
 				{
-					get => _Name;
+					get => _name;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6139,17 +6139,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name is non-nullable.");
 						}
 
-						_Name = value;
+						_name = value;
 					}
 				}
 
 				/// <summary>
 				/// The configuration value.
 				/// </summary>
-				private String _Value = String.Default;
+				private String _value = String.Default;
 				public String Value 
 				{
-					get => _Value;
+					get => _value;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6163,7 +6163,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_Value = value;
+						_value = value;
 					}
 				}
 			}
@@ -6259,10 +6259,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -6270,17 +6270,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// Results for each topic we tried to create.
 		/// </summary>
-		private Dictionary<String, CreatableTopicResult> _TopicsCollection = new Dictionary<String, CreatableTopicResult>();
+		private Dictionary<String, CreatableTopicResult> _topicsCollection = new Dictionary<String, CreatableTopicResult>();
 		public Dictionary<String, CreatableTopicResult> TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6293,7 +6293,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -6346,10 +6346,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6362,17 +6362,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6385,17 +6385,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The error message, or null if there was no error.
 			/// </summary>
-			private String _ErrorMessage = String.Default;
+			private String _errorMessage = String.Default;
 			public String ErrorMessage 
 			{
-				get => _ErrorMessage;
+				get => _errorMessage;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false &&
@@ -6404,7 +6404,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_ErrorMessage = value;
+					_errorMessage = value;
 				}
 			}
 		}
@@ -6445,10 +6445,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The filters to use when deleting ACLs.
 		/// </summary>
-		private DeleteAclsFilter[] _FiltersCollection = System.Array.Empty<DeleteAclsFilter>();
+		private DeleteAclsFilter[] _filtersCollection = System.Array.Empty<DeleteAclsFilter>();
 		public DeleteAclsFilter[] FiltersCollection 
 		{
-			get => _FiltersCollection;
+			get => _filtersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6461,7 +6461,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"FiltersCollection is non-nullable.");
 				}
 
-				_FiltersCollection = value;
+				_filtersCollection = value;
 			}
 		}
 
@@ -6546,10 +6546,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			private Int8 _ResourceTypeFilter = Int8.Default;
+			private Int8 _resourceTypeFilter = Int8.Default;
 			public Int8 ResourceTypeFilter 
 			{
-				get => _ResourceTypeFilter;
+				get => _resourceTypeFilter;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6562,17 +6562,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceTypeFilter is non-nullable.");
 					}
 
-					_ResourceTypeFilter = value;
+					_resourceTypeFilter = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			private String _ResourceNameFilter = String.Default;
+			private String _resourceNameFilter = String.Default;
 			public String ResourceNameFilter 
 			{
-				get => _ResourceNameFilter;
+				get => _resourceNameFilter;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6586,17 +6586,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceNameFilter does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_ResourceNameFilter = value;
+					_resourceNameFilter = value;
 				}
 			}
 
 			/// <summary>
 			/// The pattern type.
 			/// </summary>
-			private Int8 _PatternTypeFilter = new Int8(3);
+			private Int8 _patternTypeFilter = new Int8(3);
 			public Int8 PatternTypeFilter 
 			{
-				get => _PatternTypeFilter;
+				get => _patternTypeFilter;
 				set 
 				{
 					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -6609,17 +6609,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PatternTypeFilter is non-nullable.");
 					}
 
-					_PatternTypeFilter = value;
+					_patternTypeFilter = value;
 				}
 			}
 
 			/// <summary>
 			/// The principal filter, or null to accept all principals.
 			/// </summary>
-			private String _PrincipalFilter = String.Default;
+			private String _principalFilter = String.Default;
 			public String PrincipalFilter 
 			{
-				get => _PrincipalFilter;
+				get => _principalFilter;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6633,17 +6633,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalFilter does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_PrincipalFilter = value;
+					_principalFilter = value;
 				}
 			}
 
 			/// <summary>
 			/// The host filter, or null to accept all hosts.
 			/// </summary>
-			private String _HostFilter = String.Default;
+			private String _hostFilter = String.Default;
 			public String HostFilter 
 			{
-				get => _HostFilter;
+				get => _hostFilter;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6657,17 +6657,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"HostFilter does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_HostFilter = value;
+					_hostFilter = value;
 				}
 			}
 
 			/// <summary>
 			/// The ACL operation.
 			/// </summary>
-			private Int8 _Operation = Int8.Default;
+			private Int8 _operation = Int8.Default;
 			public Int8 Operation 
 			{
-				get => _Operation;
+				get => _operation;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6680,17 +6680,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Operation is non-nullable.");
 					}
 
-					_Operation = value;
+					_operation = value;
 				}
 			}
 
 			/// <summary>
 			/// The permission type.
 			/// </summary>
-			private Int8 _PermissionType = Int8.Default;
+			private Int8 _permissionType = Int8.Default;
 			public Int8 PermissionType 
 			{
-				get => _PermissionType;
+				get => _permissionType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6703,7 +6703,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 					}
 
-					_PermissionType = value;
+					_permissionType = value;
 				}
 			}
 		}
@@ -6752,10 +6752,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6768,17 +6768,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The results for each filter.
 		/// </summary>
-		private DeleteAclsFilterResult[] _FilterResultsCollection = System.Array.Empty<DeleteAclsFilterResult>();
+		private DeleteAclsFilterResult[] _filterResultsCollection = System.Array.Empty<DeleteAclsFilterResult>();
 		public DeleteAclsFilterResult[] FilterResultsCollection 
 		{
-			get => _FilterResultsCollection;
+			get => _filterResultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6791,7 +6791,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"FilterResultsCollection is non-nullable.");
 				}
 
-				_FilterResultsCollection = value;
+				_filterResultsCollection = value;
 			}
 		}
 
@@ -6844,10 +6844,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if the filter succeeded.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6860,17 +6860,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The error message, or null if the filter succeeded.
 			/// </summary>
-			private String _ErrorMessage = String.Default;
+			private String _errorMessage = String.Default;
 			public String ErrorMessage 
 			{
-				get => _ErrorMessage;
+				get => _errorMessage;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6884,17 +6884,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_ErrorMessage = value;
+					_errorMessage = value;
 				}
 			}
 
 			/// <summary>
 			/// The ACLs which matched this filter.
 			/// </summary>
-			private DeleteAclsMatchingAcl[] _MatchingAclsCollection = System.Array.Empty<DeleteAclsMatchingAcl>();
+			private DeleteAclsMatchingAcl[] _matchingAclsCollection = System.Array.Empty<DeleteAclsMatchingAcl>();
 			public DeleteAclsMatchingAcl[] MatchingAclsCollection 
 			{
-				get => _MatchingAclsCollection;
+				get => _matchingAclsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -6907,7 +6907,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MatchingAclsCollection is non-nullable.");
 					}
 
-					_MatchingAclsCollection = value;
+					_matchingAclsCollection = value;
 				}
 			}
 
@@ -7008,10 +7008,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7024,17 +7024,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 
 				/// <summary>
 				/// The deletion error message, or null if the deletion succeeded.
 				/// </summary>
-				private String _ErrorMessage = String.Default;
+				private String _errorMessage = String.Default;
 				public String ErrorMessage 
 				{
-					get => _ErrorMessage;
+					get => _errorMessage;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7048,17 +7048,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_ErrorMessage = value;
+						_errorMessage = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL resource type.
 				/// </summary>
-				private Int8 _ResourceType = Int8.Default;
+				private Int8 _resourceType = Int8.Default;
 				public Int8 ResourceType 
 				{
-					get => _ResourceType;
+					get => _resourceType;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7071,17 +7071,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 						}
 
-						_ResourceType = value;
+						_resourceType = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL resource name.
 				/// </summary>
-				private String _ResourceName = String.Default;
+				private String _resourceName = String.Default;
 				public String ResourceName 
 				{
-					get => _ResourceName;
+					get => _resourceName;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7094,17 +7094,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ResourceName is non-nullable.");
 						}
 
-						_ResourceName = value;
+						_resourceName = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL resource pattern type.
 				/// </summary>
-				private Int8 _PatternType = new Int8(3);
+				private Int8 _patternType = new Int8(3);
 				public Int8 PatternType 
 				{
-					get => _PatternType;
+					get => _patternType;
 					set 
 					{
 						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -7117,17 +7117,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PatternType is non-nullable.");
 						}
 
-						_PatternType = value;
+						_patternType = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL principal.
 				/// </summary>
-				private String _Principal = String.Default;
+				private String _principal = String.Default;
 				public String Principal 
 				{
-					get => _Principal;
+					get => _principal;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7140,17 +7140,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Principal is non-nullable.");
 						}
 
-						_Principal = value;
+						_principal = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL host.
 				/// </summary>
-				private String _Host = String.Default;
+				private String _host = String.Default;
 				public String Host 
 				{
-					get => _Host;
+					get => _host;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7163,17 +7163,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Host is non-nullable.");
 						}
 
-						_Host = value;
+						_host = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL operation.
 				/// </summary>
-				private Int8 _Operation = Int8.Default;
+				private Int8 _operation = Int8.Default;
 				public Int8 Operation 
 				{
-					get => _Operation;
+					get => _operation;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7186,17 +7186,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Operation is non-nullable.");
 						}
 
-						_Operation = value;
+						_operation = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL permission type.
 				/// </summary>
-				private Int8 _PermissionType = Int8.Default;
+				private Int8 _permissionType = Int8.Default;
 				public Int8 PermissionType 
 				{
-					get => _PermissionType;
+					get => _permissionType;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7209,7 +7209,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 						}
 
-						_PermissionType = value;
+						_permissionType = value;
 					}
 				}
 			}
@@ -7251,10 +7251,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group names to delete.
 		/// </summary>
-		private String[] _GroupsNamesCollection = System.Array.Empty<String>();
+		private String[] _groupsNamesCollection = System.Array.Empty<String>();
 		public String[] GroupsNamesCollection 
 		{
-			get => _GroupsNamesCollection;
+			get => _groupsNamesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7267,7 +7267,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupsNamesCollection is non-nullable.");
 				}
 
-				_GroupsNamesCollection = value;
+				_groupsNamesCollection = value;
 			}
 		}
 	}
@@ -7315,10 +7315,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7331,17 +7331,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The deletion results
 		/// </summary>
-		private Dictionary<String, DeletableGroupResult> _ResultsCollection = new Dictionary<String, DeletableGroupResult>();
+		private Dictionary<String, DeletableGroupResult> _resultsCollection = new Dictionary<String, DeletableGroupResult>();
 		public Dictionary<String, DeletableGroupResult> ResultsCollection 
 		{
-			get => _ResultsCollection;
+			get => _resultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7354,7 +7354,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
-				_ResultsCollection = value;
+				_resultsCollection = value;
 			}
 		}
 
@@ -7399,10 +7399,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group id
 			/// </summary>
-			private String _GroupId = String.Default;
+			private String _groupId = String.Default;
 			public String GroupId 
 			{
-				get => _GroupId;
+				get => _groupId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7415,17 +7415,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupId is non-nullable.");
 					}
 
-					_GroupId = value;
+					_groupId = value;
 				}
 			}
 
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7438,7 +7438,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 		}
@@ -7487,10 +7487,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to delete records from.
 		/// </summary>
-		private DeleteRecordsTopic[] _TopicsCollection = System.Array.Empty<DeleteRecordsTopic>();
+		private DeleteRecordsTopic[] _topicsCollection = System.Array.Empty<DeleteRecordsTopic>();
 		public DeleteRecordsTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7503,7 +7503,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -7548,10 +7548,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7564,17 +7564,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition that we want to delete records from.
 			/// </summary>
-			private DeleteRecordsPartition[] _PartitionsCollection = System.Array.Empty<DeleteRecordsPartition>();
+			private DeleteRecordsPartition[] _partitionsCollection = System.Array.Empty<DeleteRecordsPartition>();
 			public DeleteRecordsPartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7587,7 +7587,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -7632,10 +7632,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7648,17 +7648,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The deletion offset.
 				/// </summary>
-				private Int64 _Offset = Int64.Default;
+				private Int64 _offset = Int64.Default;
 				public Int64 Offset 
 				{
-					get => _Offset;
+					get => _offset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7671,7 +7671,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Offset is non-nullable.");
 						}
 
-						_Offset = value;
+						_offset = value;
 					}
 				}
 			}
@@ -7680,10 +7680,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// How long to wait for the deletion to complete, in milliseconds.
 		/// </summary>
-		private Int32 _TimeoutMs = Int32.Default;
+		private Int32 _timeoutMs = Int32.Default;
 		public Int32 TimeoutMs 
 		{
-			get => _TimeoutMs;
+			get => _timeoutMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7696,7 +7696,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
-				_TimeoutMs = value;
+				_timeoutMs = value;
 			}
 		}
 	}
@@ -7744,10 +7744,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7760,17 +7760,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic that we wanted to delete records from.
 		/// </summary>
-		private DeleteRecordsTopicResult[] _TopicsCollection = System.Array.Empty<DeleteRecordsTopicResult>();
+		private DeleteRecordsTopicResult[] _topicsCollection = System.Array.Empty<DeleteRecordsTopicResult>();
 		public DeleteRecordsTopicResult[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7783,7 +7783,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -7828,10 +7828,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7844,17 +7844,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition that we wanted to delete records from.
 			/// </summary>
-			private DeleteRecordsPartitionResult[] _PartitionsCollection = System.Array.Empty<DeleteRecordsPartitionResult>();
+			private DeleteRecordsPartitionResult[] _partitionsCollection = System.Array.Empty<DeleteRecordsPartitionResult>();
 			public DeleteRecordsPartitionResult[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7867,7 +7867,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -7920,10 +7920,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7936,17 +7936,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The partition low water mark.
 				/// </summary>
-				private Int64 _LowWatermark = Int64.Default;
+				private Int64 _lowWatermark = Int64.Default;
 				public Int64 LowWatermark 
 				{
-					get => _LowWatermark;
+					get => _lowWatermark;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7959,17 +7959,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LowWatermark is non-nullable.");
 						}
 
-						_LowWatermark = value;
+						_lowWatermark = value;
 					}
 				}
 
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -7982,7 +7982,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 			}
@@ -8032,10 +8032,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The names of the topics to delete
 		/// </summary>
-		private String[] _TopicNamesCollection = System.Array.Empty<String>();
+		private String[] _topicNamesCollection = System.Array.Empty<String>();
 		public String[] TopicNamesCollection 
 		{
-			get => _TopicNamesCollection;
+			get => _topicNamesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8048,17 +8048,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicNamesCollection is non-nullable.");
 				}
 
-				_TopicNamesCollection = value;
+				_topicNamesCollection = value;
 			}
 		}
 
 		/// <summary>
 		/// The length of time in milliseconds to wait for the deletions to complete.
 		/// </summary>
-		private Int32 _TimeoutMs = Int32.Default;
+		private Int32 _timeoutMs = Int32.Default;
 		public Int32 TimeoutMs 
 		{
-			get => _TimeoutMs;
+			get => _timeoutMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8071,7 +8071,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
-				_TimeoutMs = value;
+				_timeoutMs = value;
 			}
 		}
 	}
@@ -8119,10 +8119,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -8135,17 +8135,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The results for each topic we tried to delete.
 		/// </summary>
-		private Dictionary<String, DeletableTopicResult> _ResponsesCollection = new Dictionary<String, DeletableTopicResult>();
+		private Dictionary<String, DeletableTopicResult> _responsesCollection = new Dictionary<String, DeletableTopicResult>();
 		public Dictionary<String, DeletableTopicResult> ResponsesCollection 
 		{
-			get => _ResponsesCollection;
+			get => _responsesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8158,7 +8158,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResponsesCollection is non-nullable.");
 				}
 
-				_ResponsesCollection = value;
+				_responsesCollection = value;
 			}
 		}
 
@@ -8203,10 +8203,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8219,17 +8219,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8242,7 +8242,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 		}
@@ -8331,10 +8331,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The resource type.
 		/// </summary>
-		private Int8 _ResourceType = Int8.Default;
+		private Int8 _resourceType = Int8.Default;
 		public Int8 ResourceType 
 		{
-			get => _ResourceType;
+			get => _resourceType;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8347,17 +8347,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 				}
 
-				_ResourceType = value;
+				_resourceType = value;
 			}
 		}
 
 		/// <summary>
 		/// The resource name, or null to match any resource name.
 		/// </summary>
-		private String _ResourceNameFilter = String.Default;
+		private String _resourceNameFilter = String.Default;
 		public String ResourceNameFilter 
 		{
-			get => _ResourceNameFilter;
+			get => _resourceNameFilter;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8371,17 +8371,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourceNameFilter does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_ResourceNameFilter = value;
+				_resourceNameFilter = value;
 			}
 		}
 
 		/// <summary>
 		/// The resource pattern to match.
 		/// </summary>
-		private Int8 _ResourcePatternType = new Int8(3);
+		private Int8 _resourcePatternType = new Int8(3);
 		public Int8 ResourcePatternType 
 		{
-			get => _ResourcePatternType;
+			get => _resourcePatternType;
 			set 
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -8394,17 +8394,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourcePatternType is non-nullable.");
 				}
 
-				_ResourcePatternType = value;
+				_resourcePatternType = value;
 			}
 		}
 
 		/// <summary>
 		/// The principal to match, or null to match any principal.
 		/// </summary>
-		private String _PrincipalFilter = String.Default;
+		private String _principalFilter = String.Default;
 		public String PrincipalFilter 
 		{
-			get => _PrincipalFilter;
+			get => _principalFilter;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8418,17 +8418,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PrincipalFilter does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_PrincipalFilter = value;
+				_principalFilter = value;
 			}
 		}
 
 		/// <summary>
 		/// The host to match, or null to match any host.
 		/// </summary>
-		private String _HostFilter = String.Default;
+		private String _hostFilter = String.Default;
 		public String HostFilter 
 		{
-			get => _HostFilter;
+			get => _hostFilter;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8442,17 +8442,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"HostFilter does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_HostFilter = value;
+				_hostFilter = value;
 			}
 		}
 
 		/// <summary>
 		/// The operation to match.
 		/// </summary>
-		private Int8 _Operation = Int8.Default;
+		private Int8 _operation = Int8.Default;
 		public Int8 Operation 
 		{
-			get => _Operation;
+			get => _operation;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8465,17 +8465,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Operation is non-nullable.");
 				}
 
-				_Operation = value;
+				_operation = value;
 			}
 		}
 
 		/// <summary>
 		/// The permission type to match.
 		/// </summary>
-		private Int8 _PermissionType = Int8.Default;
+		private Int8 _permissionType = Int8.Default;
 		public Int8 PermissionType 
 		{
-			get => _PermissionType;
+			get => _permissionType;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8488,7 +8488,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 				}
 
-				_PermissionType = value;
+				_permissionType = value;
 			}
 		}
 	}
@@ -8552,10 +8552,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8568,17 +8568,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8591,17 +8591,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		private String _ErrorMessage = String.Default;
+		private String _errorMessage = String.Default;
 		public String ErrorMessage 
 		{
-			get => _ErrorMessage;
+			get => _errorMessage;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8615,17 +8615,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_ErrorMessage = value;
+				_errorMessage = value;
 			}
 		}
 
 		/// <summary>
 		/// Each Resource that is referenced in an ACL.
 		/// </summary>
-		private DescribeAclsResource[] _ResourcesCollection = System.Array.Empty<DescribeAclsResource>();
+		private DescribeAclsResource[] _resourcesCollection = System.Array.Empty<DescribeAclsResource>();
 		public DescribeAclsResource[] ResourcesCollection 
 		{
-			get => _ResourcesCollection;
+			get => _resourcesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8638,7 +8638,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
 				}
 
-				_ResourcesCollection = value;
+				_resourcesCollection = value;
 			}
 		}
 
@@ -8699,10 +8699,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			private Int8 _Type = Int8.Default;
+			private Int8 _type = Int8.Default;
 			public Int8 Type 
 			{
-				get => _Type;
+				get => _type;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8715,17 +8715,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Type is non-nullable.");
 					}
 
-					_Type = value;
+					_type = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8738,17 +8738,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource pattern type.
 			/// </summary>
-			private Int8 _PatternType = new Int8(3);
+			private Int8 _patternType = new Int8(3);
 			public Int8 PatternType 
 			{
-				get => _PatternType;
+				get => _patternType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -8761,17 +8761,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PatternType is non-nullable.");
 					}
 
-					_PatternType = value;
+					_patternType = value;
 				}
 			}
 
 			/// <summary>
 			/// The ACLs.
 			/// </summary>
-			private AclDescription[] _AclsCollection = System.Array.Empty<AclDescription>();
+			private AclDescription[] _aclsCollection = System.Array.Empty<AclDescription>();
 			public AclDescription[] AclsCollection 
 			{
-				get => _AclsCollection;
+				get => _aclsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8784,7 +8784,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"AclsCollection is non-nullable.");
 					}
 
-					_AclsCollection = value;
+					_aclsCollection = value;
 				}
 			}
 
@@ -8845,10 +8845,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The ACL principal.
 				/// </summary>
-				private String _Principal = String.Default;
+				private String _principal = String.Default;
 				public String Principal 
 				{
-					get => _Principal;
+					get => _principal;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8861,17 +8861,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Principal is non-nullable.");
 						}
 
-						_Principal = value;
+						_principal = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL host.
 				/// </summary>
-				private String _Host = String.Default;
+				private String _host = String.Default;
 				public String Host 
 				{
-					get => _Host;
+					get => _host;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8884,17 +8884,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Host is non-nullable.");
 						}
 
-						_Host = value;
+						_host = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL operation.
 				/// </summary>
-				private Int8 _Operation = Int8.Default;
+				private Int8 _operation = Int8.Default;
 				public Int8 Operation 
 				{
-					get => _Operation;
+					get => _operation;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8907,17 +8907,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Operation is non-nullable.");
 						}
 
-						_Operation = value;
+						_operation = value;
 					}
 				}
 
 				/// <summary>
 				/// The ACL permission type.
 				/// </summary>
-				private Int8 _PermissionType = Int8.Default;
+				private Int8 _permissionType = Int8.Default;
 				public Int8 PermissionType 
 				{
-					get => _PermissionType;
+					get => _permissionType;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8930,7 +8930,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 						}
 
-						_PermissionType = value;
+						_permissionType = value;
 					}
 				}
 			}
@@ -8980,10 +8980,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The resources whose configurations we want to describe.
 		/// </summary>
-		private DescribeConfigsResource[] _ResourcesCollection = System.Array.Empty<DescribeConfigsResource>();
+		private DescribeConfigsResource[] _resourcesCollection = System.Array.Empty<DescribeConfigsResource>();
 		public DescribeConfigsResource[] ResourcesCollection 
 		{
-			get => _ResourcesCollection;
+			get => _resourcesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -8996,7 +8996,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
 				}
 
-				_ResourcesCollection = value;
+				_resourcesCollection = value;
 			}
 		}
 
@@ -9049,10 +9049,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			private Int8 _ResourceType = Int8.Default;
+			private Int8 _resourceType = Int8.Default;
 			public Int8 ResourceType 
 			{
-				get => _ResourceType;
+				get => _resourceType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9065,17 +9065,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
-					_ResourceType = value;
+					_resourceType = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			private String _ResourceName = String.Default;
+			private String _resourceName = String.Default;
 			public String ResourceName 
 			{
-				get => _ResourceName;
+				get => _resourceName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9088,17 +9088,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
 					}
 
-					_ResourceName = value;
+					_resourceName = value;
 				}
 			}
 
 			/// <summary>
 			/// The configuration keys to list, or null to list all configuration keys.
 			/// </summary>
-			private String[] _ConfigurationKeysCollection = System.Array.Empty<String>();
+			private String[] _configurationKeysCollection = System.Array.Empty<String>();
 			public String[] ConfigurationKeysCollection 
 			{
-				get => _ConfigurationKeysCollection;
+				get => _configurationKeysCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9112,7 +9112,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ConfigurationKeysCollection does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_ConfigurationKeysCollection = value;
+					_configurationKeysCollection = value;
 				}
 			}
 		}
@@ -9120,10 +9120,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// True if we should include all synonyms.
 		/// </summary>
-		private Boolean _IncludeSynoyms = new Boolean(false);
+		private Boolean _includeSynoyms = new Boolean(false);
 		public Boolean IncludeSynoyms 
 		{
-			get => _IncludeSynoyms;
+			get => _includeSynoyms;
 			set 
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -9136,7 +9136,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeSynoyms is non-nullable.");
 				}
 
-				_IncludeSynoyms = value;
+				_includeSynoyms = value;
 			}
 		}
 	}
@@ -9184,10 +9184,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9200,17 +9200,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The results for each resource.
 		/// </summary>
-		private DescribeConfigsResult[] _ResultsCollection = System.Array.Empty<DescribeConfigsResult>();
+		private DescribeConfigsResult[] _resultsCollection = System.Array.Empty<DescribeConfigsResult>();
 		public DescribeConfigsResult[] ResultsCollection 
 		{
-			get => _ResultsCollection;
+			get => _resultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9223,7 +9223,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
-				_ResultsCollection = value;
+				_resultsCollection = value;
 			}
 		}
 
@@ -9292,10 +9292,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if we were able to successfully describe the configurations.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9308,17 +9308,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The error message, or null if we were able to successfully describe the configurations.
 			/// </summary>
-			private String _ErrorMessage = String.Default;
+			private String _errorMessage = String.Default;
 			public String ErrorMessage 
 			{
-				get => _ErrorMessage;
+				get => _errorMessage;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9332,17 +9332,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_ErrorMessage = value;
+					_errorMessage = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource type.
 			/// </summary>
-			private Int8 _ResourceType = Int8.Default;
+			private Int8 _resourceType = Int8.Default;
 			public Int8 ResourceType 
 			{
-				get => _ResourceType;
+				get => _resourceType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9355,17 +9355,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
-					_ResourceType = value;
+					_resourceType = value;
 				}
 			}
 
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			private String _ResourceName = String.Default;
+			private String _resourceName = String.Default;
 			public String ResourceName 
 			{
-				get => _ResourceName;
+				get => _resourceName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9378,17 +9378,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
 					}
 
-					_ResourceName = value;
+					_resourceName = value;
 				}
 			}
 
 			/// <summary>
 			/// Each listed configuration.
 			/// </summary>
-			private DescribeConfigsResourceResult[] _ConfigsCollection = System.Array.Empty<DescribeConfigsResourceResult>();
+			private DescribeConfigsResourceResult[] _configsCollection = System.Array.Empty<DescribeConfigsResourceResult>();
 			public DescribeConfigsResourceResult[] ConfigsCollection 
 			{
-				get => _ConfigsCollection;
+				get => _configsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9401,7 +9401,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ConfigsCollection is non-nullable.");
 					}
 
-					_ConfigsCollection = value;
+					_configsCollection = value;
 				}
 			}
 
@@ -9486,10 +9486,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
-				private String _Name = String.Default;
+				private String _name = String.Default;
 				public String Name 
 				{
-					get => _Name;
+					get => _name;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9502,17 +9502,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name is non-nullable.");
 						}
 
-						_Name = value;
+						_name = value;
 					}
 				}
 
 				/// <summary>
 				/// The configuration value.
 				/// </summary>
-				private String _Value = String.Default;
+				private String _value = String.Default;
 				public String Value 
 				{
-					get => _Value;
+					get => _value;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9526,17 +9526,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_Value = value;
+						_value = value;
 					}
 				}
 
 				/// <summary>
 				/// True if the configuration is read-only.
 				/// </summary>
-				private Boolean _ReadOnly = Boolean.Default;
+				private Boolean _readOnly = Boolean.Default;
 				public Boolean ReadOnly 
 				{
-					get => _ReadOnly;
+					get => _readOnly;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9549,17 +9549,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ReadOnly is non-nullable.");
 						}
 
-						_ReadOnly = value;
+						_readOnly = value;
 					}
 				}
 
 				/// <summary>
 				/// True if the configuration is not set.
 				/// </summary>
-				private Boolean _IsDefault = Boolean.Default;
+				private Boolean _isDefault = Boolean.Default;
 				public Boolean IsDefault 
 				{
-					get => _IsDefault;
+					get => _isDefault;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9572,17 +9572,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsDefault is non-nullable.");
 						}
 
-						_IsDefault = value;
+						_isDefault = value;
 					}
 				}
 
 				/// <summary>
 				/// The configuration source.
 				/// </summary>
-				private Int8 _ConfigSource = new Int8(-1);
+				private Int8 _configSource = new Int8(-1);
 				public Int8 ConfigSource 
 				{
-					get => _ConfigSource;
+					get => _configSource;
 					set 
 					{
 						if (value == null) 
@@ -9590,17 +9590,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ConfigSource is non-nullable.");
 						}
 
-						_ConfigSource = value;
+						_configSource = value;
 					}
 				}
 
 				/// <summary>
 				/// True if this configuration is sensitive.
 				/// </summary>
-				private Boolean _IsSensitive = Boolean.Default;
+				private Boolean _isSensitive = Boolean.Default;
 				public Boolean IsSensitive 
 				{
-					get => _IsSensitive;
+					get => _isSensitive;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9613,17 +9613,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsSensitive is non-nullable.");
 						}
 
-						_IsSensitive = value;
+						_isSensitive = value;
 					}
 				}
 
 				/// <summary>
 				/// The synonyms for this configuration key.
 				/// </summary>
-				private DescribeConfigsSynonym[] _SynonymsCollection = System.Array.Empty<DescribeConfigsSynonym>();
+				private DescribeConfigsSynonym[] _synonymsCollection = System.Array.Empty<DescribeConfigsSynonym>();
 				public DescribeConfigsSynonym[] SynonymsCollection 
 				{
-					get => _SynonymsCollection;
+					get => _synonymsCollection;
 					set 
 					{
 						if (value == null) 
@@ -9631,7 +9631,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"SynonymsCollection is non-nullable.");
 						}
 
-						_SynonymsCollection = value;
+						_synonymsCollection = value;
 					}
 				}
 
@@ -9684,10 +9684,10 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The synonym name.
 					/// </summary>
-					private String _Name = String.Default;
+					private String _name = String.Default;
 					public String Name 
 					{
-						get => _Name;
+						get => _name;
 						set 
 						{
 							if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -9700,17 +9700,17 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Name is non-nullable.");
 							}
 
-							_Name = value;
+							_name = value;
 						}
 					}
 
 					/// <summary>
 					/// The synonym value.
 					/// </summary>
-					private String _Value = String.Default;
+					private String _value = String.Default;
 					public String Value 
 					{
-						get => _Value;
+						get => _value;
 						set 
 						{
 							if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -9724,17 +9724,17 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
 							}
 
-							_Value = value;
+							_value = value;
 						}
 					}
 
 					/// <summary>
 					/// The synonym source.
 					/// </summary>
-					private Int8 _Source = Int8.Default;
+					private Int8 _source = Int8.Default;
 					public Int8 Source 
 					{
-						get => _Source;
+						get => _source;
 						set 
 						{
 							if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -9747,7 +9747,7 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Source is non-nullable.");
 							}
 
-							_Source = value;
+							_source = value;
 						}
 					}
 				}
@@ -9790,10 +9790,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each owner that we want to describe delegation tokens for, or null to describe all tokens.
 		/// </summary>
-		private DescribeDelegationTokenOwner[] _OwnersCollection = System.Array.Empty<DescribeDelegationTokenOwner>();
+		private DescribeDelegationTokenOwner[] _ownersCollection = System.Array.Empty<DescribeDelegationTokenOwner>();
 		public DescribeDelegationTokenOwner[] OwnersCollection 
 		{
-			get => _OwnersCollection;
+			get => _ownersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9807,7 +9807,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"OwnersCollection does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_OwnersCollection = value;
+				_ownersCollection = value;
 			}
 		}
 
@@ -9852,10 +9852,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The owner principal type.
 			/// </summary>
-			private String _PrincipalType = String.Default;
+			private String _principalType = String.Default;
 			public String PrincipalType 
 			{
-				get => _PrincipalType;
+				get => _principalType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9868,17 +9868,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 					}
 
-					_PrincipalType = value;
+					_principalType = value;
 				}
 			}
 
 			/// <summary>
 			/// The owner principal name.
 			/// </summary>
-			private String _PrincipalName = String.Default;
+			private String _principalName = String.Default;
 			public String PrincipalName 
 			{
-				get => _PrincipalName;
+				get => _principalName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9891,7 +9891,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
 					}
 
-					_PrincipalName = value;
+					_principalName = value;
 				}
 			}
 		}
@@ -9948,10 +9948,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9964,17 +9964,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The tokens.
 		/// </summary>
-		private DescribedDelegationToken[] _TokensCollection = System.Array.Empty<DescribedDelegationToken>();
+		private DescribedDelegationToken[] _tokensCollection = System.Array.Empty<DescribedDelegationToken>();
 		public DescribedDelegationToken[] TokensCollection 
 		{
-			get => _TokensCollection;
+			get => _tokensCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -9987,7 +9987,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TokensCollection is non-nullable.");
 				}
 
-				_TokensCollection = value;
+				_tokensCollection = value;
 			}
 		}
 
@@ -10080,10 +10080,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The token principal type.
 			/// </summary>
-			private String _PrincipalType = String.Default;
+			private String _principalType = String.Default;
 			public String PrincipalType 
 			{
-				get => _PrincipalType;
+				get => _principalType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10096,17 +10096,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 					}
 
-					_PrincipalType = value;
+					_principalType = value;
 				}
 			}
 
 			/// <summary>
 			/// The token principal name.
 			/// </summary>
-			private String _PrincipalName = String.Default;
+			private String _principalName = String.Default;
 			public String PrincipalName 
 			{
-				get => _PrincipalName;
+				get => _principalName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10119,17 +10119,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
 					}
 
-					_PrincipalName = value;
+					_principalName = value;
 				}
 			}
 
 			/// <summary>
 			/// The token issue timestamp in milliseconds.
 			/// </summary>
-			private Int64 _IssueTimestamp = Int64.Default;
+			private Int64 _issueTimestamp = Int64.Default;
 			public Int64 IssueTimestamp 
 			{
-				get => _IssueTimestamp;
+				get => _issueTimestamp;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10142,17 +10142,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"IssueTimestamp is non-nullable.");
 					}
 
-					_IssueTimestamp = value;
+					_issueTimestamp = value;
 				}
 			}
 
 			/// <summary>
 			/// The token expiry timestamp in milliseconds.
 			/// </summary>
-			private Int64 _ExpiryTimestamp = Int64.Default;
+			private Int64 _expiryTimestamp = Int64.Default;
 			public Int64 ExpiryTimestamp 
 			{
-				get => _ExpiryTimestamp;
+				get => _expiryTimestamp;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10165,17 +10165,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ExpiryTimestamp is non-nullable.");
 					}
 
-					_ExpiryTimestamp = value;
+					_expiryTimestamp = value;
 				}
 			}
 
 			/// <summary>
 			/// The token maximum timestamp length in milliseconds.
 			/// </summary>
-			private Int64 _MaxTimestamp = Int64.Default;
+			private Int64 _maxTimestamp = Int64.Default;
 			public Int64 MaxTimestamp 
 			{
-				get => _MaxTimestamp;
+				get => _maxTimestamp;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10188,17 +10188,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MaxTimestamp is non-nullable.");
 					}
 
-					_MaxTimestamp = value;
+					_maxTimestamp = value;
 				}
 			}
 
 			/// <summary>
 			/// The token ID.
 			/// </summary>
-			private String _TokenId = String.Default;
+			private String _tokenId = String.Default;
 			public String TokenId 
 			{
-				get => _TokenId;
+				get => _tokenId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10211,17 +10211,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TokenId is non-nullable.");
 					}
 
-					_TokenId = value;
+					_tokenId = value;
 				}
 			}
 
 			/// <summary>
 			/// The token HMAC.
 			/// </summary>
-			private Bytes _Hmac = Bytes.Default;
+			private Bytes _hmac = Bytes.Default;
 			public Bytes Hmac 
 			{
-				get => _Hmac;
+				get => _hmac;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10234,17 +10234,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Hmac is non-nullable.");
 					}
 
-					_Hmac = value;
+					_hmac = value;
 				}
 			}
 
 			/// <summary>
 			/// Those who are able to renew this token before it expires.
 			/// </summary>
-			private DescribedDelegationTokenRenewer[] _RenewersCollection = System.Array.Empty<DescribedDelegationTokenRenewer>();
+			private DescribedDelegationTokenRenewer[] _renewersCollection = System.Array.Empty<DescribedDelegationTokenRenewer>();
 			public DescribedDelegationTokenRenewer[] RenewersCollection 
 			{
-				get => _RenewersCollection;
+				get => _renewersCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10257,7 +10257,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"RenewersCollection is non-nullable.");
 					}
 
-					_RenewersCollection = value;
+					_renewersCollection = value;
 				}
 			}
 
@@ -10302,10 +10302,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The renewer principal type
 				/// </summary>
-				private String _PrincipalType = String.Default;
+				private String _principalType = String.Default;
 				public String PrincipalType 
 				{
-					get => _PrincipalType;
+					get => _principalType;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10318,17 +10318,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 						}
 
-						_PrincipalType = value;
+						_principalType = value;
 					}
 				}
 
 				/// <summary>
 				/// The renewer principal name
 				/// </summary>
-				private String _PrincipalName = String.Default;
+				private String _principalName = String.Default;
 				public String PrincipalName 
 				{
-					get => _PrincipalName;
+					get => _principalName;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10341,7 +10341,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
 						}
 
-						_PrincipalName = value;
+						_principalName = value;
 					}
 				}
 			}
@@ -10350,10 +10350,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10366,7 +10366,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 	}
@@ -10414,10 +10414,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The names of the groups to describe
 		/// </summary>
-		private String[] _GroupsCollection = System.Array.Empty<String>();
+		private String[] _groupsCollection = System.Array.Empty<String>();
 		public String[] GroupsCollection 
 		{
-			get => _GroupsCollection;
+			get => _groupsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10430,17 +10430,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupsCollection is non-nullable.");
 				}
 
-				_GroupsCollection = value;
+				_groupsCollection = value;
 			}
 		}
 
 		/// <summary>
 		/// Whether to include authorized operations.
 		/// </summary>
-		private Boolean _IncludeAuthorizedOperations = Boolean.Default;
+		private Boolean _includeAuthorizedOperations = Boolean.Default;
 		public Boolean IncludeAuthorizedOperations 
 		{
-			get => _IncludeAuthorizedOperations;
+			get => _includeAuthorizedOperations;
 			set 
 			{
 				if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
@@ -10453,7 +10453,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeAuthorizedOperations is non-nullable.");
 				}
 
-				_IncludeAuthorizedOperations = value;
+				_includeAuthorizedOperations = value;
 			}
 		}
 	}
@@ -10501,10 +10501,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -10512,17 +10512,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// Each described group.
 		/// </summary>
-		private DescribedGroup[] _GroupsCollection = System.Array.Empty<DescribedGroup>();
+		private DescribedGroup[] _groupsCollection = System.Array.Empty<DescribedGroup>();
 		public DescribedGroup[] GroupsCollection 
 		{
-			get => _GroupsCollection;
+			get => _groupsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10535,7 +10535,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupsCollection is non-nullable.");
 				}
 
-				_GroupsCollection = value;
+				_groupsCollection = value;
 			}
 		}
 
@@ -10620,10 +10620,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The describe error, or 0 if there was no error.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10636,17 +10636,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The group ID string.
 			/// </summary>
-			private String _GroupId = String.Default;
+			private String _groupId = String.Default;
 			public String GroupId 
 			{
-				get => _GroupId;
+				get => _groupId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10659,17 +10659,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupId is non-nullable.");
 					}
 
-					_GroupId = value;
+					_groupId = value;
 				}
 			}
 
 			/// <summary>
 			/// The group state string, or the empty string.
 			/// </summary>
-			private String _GroupState = String.Default;
+			private String _groupState = String.Default;
 			public String GroupState 
 			{
-				get => _GroupState;
+				get => _groupState;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10682,17 +10682,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupState is non-nullable.");
 					}
 
-					_GroupState = value;
+					_groupState = value;
 				}
 			}
 
 			/// <summary>
 			/// The group protocol type, or the empty string.
 			/// </summary>
-			private String _ProtocolType = String.Default;
+			private String _protocolType = String.Default;
 			public String ProtocolType 
 			{
-				get => _ProtocolType;
+				get => _protocolType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10705,17 +10705,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProtocolType is non-nullable.");
 					}
 
-					_ProtocolType = value;
+					_protocolType = value;
 				}
 			}
 
 			/// <summary>
 			/// The group protocol data, or the empty string.
 			/// </summary>
-			private String _ProtocolData = String.Default;
+			private String _protocolData = String.Default;
 			public String ProtocolData 
 			{
-				get => _ProtocolData;
+				get => _protocolData;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10728,17 +10728,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProtocolData is non-nullable.");
 					}
 
-					_ProtocolData = value;
+					_protocolData = value;
 				}
 			}
 
 			/// <summary>
 			/// The group members.
 			/// </summary>
-			private DescribedGroupMember[] _MembersCollection = System.Array.Empty<DescribedGroupMember>();
+			private DescribedGroupMember[] _membersCollection = System.Array.Empty<DescribedGroupMember>();
 			public DescribedGroupMember[] MembersCollection 
 			{
-				get => _MembersCollection;
+				get => _membersCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10751,7 +10751,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MembersCollection is non-nullable.");
 					}
 
-					_MembersCollection = value;
+					_membersCollection = value;
 				}
 			}
 
@@ -10820,10 +10820,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The member ID assigned by the group coordinator.
 				/// </summary>
-				private String _MemberId = String.Default;
+				private String _memberId = String.Default;
 				public String MemberId 
 				{
-					get => _MemberId;
+					get => _memberId;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10836,17 +10836,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"MemberId is non-nullable.");
 						}
 
-						_MemberId = value;
+						_memberId = value;
 					}
 				}
 
 				/// <summary>
 				/// The client ID used in the member's latest join group request.
 				/// </summary>
-				private String _ClientId = String.Default;
+				private String _clientId = String.Default;
 				public String ClientId 
 				{
-					get => _ClientId;
+					get => _clientId;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10859,17 +10859,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ClientId is non-nullable.");
 						}
 
-						_ClientId = value;
+						_clientId = value;
 					}
 				}
 
 				/// <summary>
 				/// The client host.
 				/// </summary>
-				private String _ClientHost = String.Default;
+				private String _clientHost = String.Default;
 				public String ClientHost 
 				{
-					get => _ClientHost;
+					get => _clientHost;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10882,17 +10882,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ClientHost is non-nullable.");
 						}
 
-						_ClientHost = value;
+						_clientHost = value;
 					}
 				}
 
 				/// <summary>
 				/// The metadata corresponding to the current group protocol in use.
 				/// </summary>
-				private Bytes _MemberMetadata = Bytes.Default;
+				private Bytes _memberMetadata = Bytes.Default;
 				public Bytes MemberMetadata 
 				{
-					get => _MemberMetadata;
+					get => _memberMetadata;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10905,17 +10905,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"MemberMetadata is non-nullable.");
 						}
 
-						_MemberMetadata = value;
+						_memberMetadata = value;
 					}
 				}
 
 				/// <summary>
 				/// The current assignment provided by the group leader.
 				/// </summary>
-				private Bytes _MemberAssignment = Bytes.Default;
+				private Bytes _memberAssignment = Bytes.Default;
 				public Bytes MemberAssignment 
 				{
-					get => _MemberAssignment;
+					get => _memberAssignment;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -10928,7 +10928,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"MemberAssignment is non-nullable.");
 						}
 
-						_MemberAssignment = value;
+						_memberAssignment = value;
 					}
 				}
 			}
@@ -10936,10 +10936,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this group.
 			/// </summary>
-			private Int32 _AuthorizedOperations = Int32.Default;
+			private Int32 _authorizedOperations = Int32.Default;
 			public Int32 AuthorizedOperations 
 			{
-				get => _AuthorizedOperations;
+				get => _authorizedOperations;
 				set 
 				{
 					if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
@@ -10952,7 +10952,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"AuthorizedOperations is non-nullable.");
 					}
 
-					_AuthorizedOperations = value;
+					_authorizedOperations = value;
 				}
 			}
 		}
@@ -10993,10 +10993,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to describe log directories for, or null for all topics.
 		/// </summary>
-		private DescribableLogDirTopic[] _TopicsCollection = System.Array.Empty<DescribableLogDirTopic>();
+		private DescribableLogDirTopic[] _topicsCollection = System.Array.Empty<DescribableLogDirTopic>();
 		public DescribableLogDirTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11010,7 +11010,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -11055,10 +11055,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			private String _Topic = String.Default;
+			private String _topic = String.Default;
 			public String Topic 
 			{
-				get => _Topic;
+				get => _topic;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11071,17 +11071,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Topic is non-nullable.");
 					}
 
-					_Topic = value;
+					_topic = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition indxes.
 			/// </summary>
-			private Int32[] _PartitionIndexCollection = System.Array.Empty<Int32>();
+			private Int32[] _partitionIndexCollection = System.Array.Empty<Int32>();
 			public Int32[] PartitionIndexCollection 
 			{
-				get => _PartitionIndexCollection;
+				get => _partitionIndexCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11094,7 +11094,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndexCollection is non-nullable.");
 					}
 
-					_PartitionIndexCollection = value;
+					_partitionIndexCollection = value;
 				}
 			}
 		}
@@ -11143,10 +11143,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11159,17 +11159,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The log directories.
 		/// </summary>
-		private DescribeLogDirsResult[] _ResultsCollection = System.Array.Empty<DescribeLogDirsResult>();
+		private DescribeLogDirsResult[] _resultsCollection = System.Array.Empty<DescribeLogDirsResult>();
 		public DescribeLogDirsResult[] ResultsCollection 
 		{
-			get => _ResultsCollection;
+			get => _resultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11182,7 +11182,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
-				_ResultsCollection = value;
+				_resultsCollection = value;
 			}
 		}
 
@@ -11235,10 +11235,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11251,17 +11251,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The absolute log directory path.
 			/// </summary>
-			private String _LogDir = String.Default;
+			private String _logDir = String.Default;
 			public String LogDir 
 			{
-				get => _LogDir;
+				get => _logDir;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11274,17 +11274,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"LogDir is non-nullable.");
 					}
 
-					_LogDir = value;
+					_logDir = value;
 				}
 			}
 
 			/// <summary>
 			/// Each topic.
 			/// </summary>
-			private DescribeLogDirsTopic[] _TopicsCollection = System.Array.Empty<DescribeLogDirsTopic>();
+			private DescribeLogDirsTopic[] _topicsCollection = System.Array.Empty<DescribeLogDirsTopic>();
 			public DescribeLogDirsTopic[] TopicsCollection 
 			{
-				get => _TopicsCollection;
+				get => _topicsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11297,7 +11297,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 					}
 
-					_TopicsCollection = value;
+					_topicsCollection = value;
 				}
 			}
 
@@ -11342,10 +11342,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				private String _Name = String.Default;
+				private String _name = String.Default;
 				public String Name 
 				{
-					get => _Name;
+					get => _name;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11358,14 +11358,14 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name is non-nullable.");
 						}
 
-						_Name = value;
+						_name = value;
 					}
 				}
 
-				private DescribeLogDirsPartition[] _PartitionsCollection = System.Array.Empty<DescribeLogDirsPartition>();
+				private DescribeLogDirsPartition[] _partitionsCollection = System.Array.Empty<DescribeLogDirsPartition>();
 				public DescribeLogDirsPartition[] PartitionsCollection 
 				{
-					get => _PartitionsCollection;
+					get => _partitionsCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11378,7 +11378,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 						}
 
-						_PartitionsCollection = value;
+						_partitionsCollection = value;
 					}
 				}
 
@@ -11439,10 +11439,10 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The partition index.
 					/// </summary>
-					private Int32 _PartitionIndex = Int32.Default;
+					private Int32 _partitionIndex = Int32.Default;
 					public Int32 PartitionIndex 
 					{
-						get => _PartitionIndex;
+						get => _partitionIndex;
 						set 
 						{
 							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11455,17 +11455,17 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 							}
 
-							_PartitionIndex = value;
+							_partitionIndex = value;
 						}
 					}
 
 					/// <summary>
 					/// The size of the log segments in this partition in bytes.
 					/// </summary>
-					private Int64 _PartitionSize = Int64.Default;
+					private Int64 _partitionSize = Int64.Default;
 					public Int64 PartitionSize 
 					{
-						get => _PartitionSize;
+						get => _partitionSize;
 						set 
 						{
 							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11478,17 +11478,17 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"PartitionSize is non-nullable.");
 							}
 
-							_PartitionSize = value;
+							_partitionSize = value;
 						}
 					}
 
 					/// <summary>
 					/// The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition)
 					/// </summary>
-					private Int64 _OffsetLag = Int64.Default;
+					private Int64 _offsetLag = Int64.Default;
 					public Int64 OffsetLag 
 					{
-						get => _OffsetLag;
+						get => _offsetLag;
 						set 
 						{
 							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11501,17 +11501,17 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"OffsetLag is non-nullable.");
 							}
 
-							_OffsetLag = value;
+							_offsetLag = value;
 						}
 					}
 
 					/// <summary>
 					/// True if this log is created by AlterReplicaLogDirsRequest and will replace the current log of the replica in the future.
 					/// </summary>
-					private Boolean _IsFutureKey = Boolean.Default;
+					private Boolean _isFutureKey = Boolean.Default;
 					public Boolean IsFutureKey 
 					{
-						get => _IsFutureKey;
+						get => _isFutureKey;
 						set 
 						{
 							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11524,7 +11524,7 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"IsFutureKey is non-nullable.");
 							}
 
-							_IsFutureKey = value;
+							_isFutureKey = value;
 						}
 					}
 				}
@@ -11575,10 +11575,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topic partitions to elect the preferred leader of.
 		/// </summary>
-		private TopicPartitions[] _TopicPartitionsCollection = System.Array.Empty<TopicPartitions>();
+		private TopicPartitions[] _topicPartitionsCollection = System.Array.Empty<TopicPartitions>();
 		public TopicPartitions[] TopicPartitionsCollection 
 		{
-			get => _TopicPartitionsCollection;
+			get => _topicPartitionsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11592,7 +11592,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicPartitionsCollection does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_TopicPartitionsCollection = value;
+				_topicPartitionsCollection = value;
 			}
 		}
 
@@ -11637,10 +11637,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of a topic.
 			/// </summary>
-			private String _Topic = String.Default;
+			private String _topic = String.Default;
 			public String Topic 
 			{
-				get => _Topic;
+				get => _topic;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11653,17 +11653,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Topic is non-nullable.");
 					}
 
-					_Topic = value;
+					_topic = value;
 				}
 			}
 
 			/// <summary>
 			/// The partitions of this topic whose preferred leader should be elected
 			/// </summary>
-			private Int32[] _PartitionIdCollection = System.Array.Empty<Int32>();
+			private Int32[] _partitionIdCollection = System.Array.Empty<Int32>();
 			public Int32[] PartitionIdCollection 
 			{
-				get => _PartitionIdCollection;
+				get => _partitionIdCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11676,7 +11676,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIdCollection is non-nullable.");
 					}
 
-					_PartitionIdCollection = value;
+					_partitionIdCollection = value;
 				}
 			}
 		}
@@ -11684,10 +11684,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The time in ms to wait for the election to complete.
 		/// </summary>
-		private Int32 _TimeoutMs = new Int32(60000);
+		private Int32 _timeoutMs = new Int32(60000);
 		public Int32 TimeoutMs 
 		{
-			get => _TimeoutMs;
+			get => _timeoutMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11700,7 +11700,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
-				_TimeoutMs = value;
+				_timeoutMs = value;
 			}
 		}
 	}
@@ -11748,10 +11748,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11764,17 +11764,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The election results, or an empty array if the requester did not have permission and the request asks for all partitions.
 		/// </summary>
-		private ReplicaElectionResult[] _ReplicaElectionResultsCollection = System.Array.Empty<ReplicaElectionResult>();
+		private ReplicaElectionResult[] _replicaElectionResultsCollection = System.Array.Empty<ReplicaElectionResult>();
 		public ReplicaElectionResult[] ReplicaElectionResultsCollection 
 		{
-			get => _ReplicaElectionResultsCollection;
+			get => _replicaElectionResultsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11787,7 +11787,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ReplicaElectionResultsCollection is non-nullable.");
 				}
 
-				_ReplicaElectionResultsCollection = value;
+				_replicaElectionResultsCollection = value;
 			}
 		}
 
@@ -11832,10 +11832,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			private String _Topic = String.Default;
+			private String _topic = String.Default;
 			public String Topic 
 			{
-				get => _Topic;
+				get => _topic;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11848,17 +11848,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Topic is non-nullable.");
 					}
 
-					_Topic = value;
+					_topic = value;
 				}
 			}
 
 			/// <summary>
 			/// The results for each partition
 			/// </summary>
-			private PartitionResult[] _PartitionResultCollection = System.Array.Empty<PartitionResult>();
+			private PartitionResult[] _partitionResultCollection = System.Array.Empty<PartitionResult>();
 			public PartitionResult[] PartitionResultCollection 
 			{
-				get => _PartitionResultCollection;
+				get => _partitionResultCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11871,7 +11871,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionResultCollection is non-nullable.");
 					}
 
-					_PartitionResultCollection = value;
+					_partitionResultCollection = value;
 				}
 			}
 
@@ -11924,10 +11924,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition id
 				/// </summary>
-				private Int32 _PartitionId = Int32.Default;
+				private Int32 _partitionId = Int32.Default;
 				public Int32 PartitionId 
 				{
-					get => _PartitionId;
+					get => _partitionId;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11940,17 +11940,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionId is non-nullable.");
 						}
 
-						_PartitionId = value;
+						_partitionId = value;
 					}
 				}
 
 				/// <summary>
 				/// The result error, or zero if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11963,17 +11963,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 
 				/// <summary>
 				/// The result message, or null if there was no error.
 				/// </summary>
-				private String _ErrorMessage = String.Default;
+				private String _errorMessage = String.Default;
 				public String ErrorMessage 
 				{
-					get => _ErrorMessage;
+					get => _errorMessage;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -11987,7 +11987,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_ErrorMessage = value;
+						_errorMessage = value;
 					}
 				}
 			}
@@ -12053,10 +12053,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the transaction to end.
 		/// </summary>
-		private String _TransactionalId = String.Default;
+		private String _transactionalId = String.Default;
 		public String TransactionalId 
 		{
-			get => _TransactionalId;
+			get => _transactionalId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12069,17 +12069,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TransactionalId is non-nullable.");
 				}
 
-				_TransactionalId = value;
+				_transactionalId = value;
 			}
 		}
 
 		/// <summary>
 		/// The producer ID.
 		/// </summary>
-		private Int64 _ProducerId = Int64.Default;
+		private Int64 _producerId = Int64.Default;
 		public Int64 ProducerId 
 		{
-			get => _ProducerId;
+			get => _producerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12092,17 +12092,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 				}
 
-				_ProducerId = value;
+				_producerId = value;
 			}
 		}
 
 		/// <summary>
 		/// The current epoch associated with the producer.
 		/// </summary>
-		private Int16 _ProducerEpoch = Int16.Default;
+		private Int16 _producerEpoch = Int16.Default;
 		public Int16 ProducerEpoch 
 		{
-			get => _ProducerEpoch;
+			get => _producerEpoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12115,17 +12115,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
 				}
 
-				_ProducerEpoch = value;
+				_producerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// True if the transaction was committed, false if it was aborted.
 		/// </summary>
-		private Boolean _Committed = Boolean.Default;
+		private Boolean _committed = Boolean.Default;
 		public Boolean Committed 
 		{
-			get => _Committed;
+			get => _committed;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12138,7 +12138,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Committed is non-nullable.");
 				}
 
-				_Committed = value;
+				_committed = value;
 			}
 		}
 	}
@@ -12186,10 +12186,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12202,17 +12202,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12225,7 +12225,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 	}
@@ -12273,10 +12273,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The HMAC of the delegation token to be expired.
 		/// </summary>
-		private Bytes _Hmac = Bytes.Default;
+		private Bytes _hmac = Bytes.Default;
 		public Bytes Hmac 
 		{
-			get => _Hmac;
+			get => _hmac;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12289,17 +12289,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Hmac is non-nullable.");
 				}
 
-				_Hmac = value;
+				_hmac = value;
 			}
 		}
 
 		/// <summary>
 		/// The expiry time period in milliseconds.
 		/// </summary>
-		private Int64 _ExpiryTimePeriodMs = Int64.Default;
+		private Int64 _expiryTimePeriodMs = Int64.Default;
 		public Int64 ExpiryTimePeriodMs 
 		{
-			get => _ExpiryTimePeriodMs;
+			get => _expiryTimePeriodMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12312,7 +12312,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ExpiryTimePeriodMs is non-nullable.");
 				}
 
-				_ExpiryTimePeriodMs = value;
+				_expiryTimePeriodMs = value;
 			}
 		}
 	}
@@ -12368,10 +12368,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12384,17 +12384,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
 		/// </summary>
-		private Int64 _ExpiryTimestampMs = Int64.Default;
+		private Int64 _expiryTimestampMs = Int64.Default;
 		public Int64 ExpiryTimestampMs 
 		{
-			get => _ExpiryTimestampMs;
+			get => _expiryTimestampMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12407,17 +12407,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ExpiryTimestampMs is non-nullable.");
 				}
 
-				_ExpiryTimestampMs = value;
+				_expiryTimestampMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12430,7 +12430,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 	}
@@ -12534,10 +12534,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker ID of the follower, of -1 if this request is from a consumer.
 		/// </summary>
-		private Int32 _ReplicaId = Int32.Default;
+		private Int32 _replicaId = Int32.Default;
 		public Int32 ReplicaId 
 		{
-			get => _ReplicaId;
+			get => _replicaId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12550,17 +12550,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ReplicaId is non-nullable.");
 				}
 
-				_ReplicaId = value;
+				_replicaId = value;
 			}
 		}
 
 		/// <summary>
 		/// The maximum time in milliseconds to wait for the response.
 		/// </summary>
-		private Int32 _MaxWait = Int32.Default;
+		private Int32 _maxWait = Int32.Default;
 		public Int32 MaxWait 
 		{
-			get => _MaxWait;
+			get => _maxWait;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12573,17 +12573,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MaxWait is non-nullable.");
 				}
 
-				_MaxWait = value;
+				_maxWait = value;
 			}
 		}
 
 		/// <summary>
 		/// The minimum bytes to accumulate in the response.
 		/// </summary>
-		private Int32 _MinBytes = Int32.Default;
+		private Int32 _minBytes = Int32.Default;
 		public Int32 MinBytes 
 		{
-			get => _MinBytes;
+			get => _minBytes;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12596,17 +12596,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MinBytes is non-nullable.");
 				}
 
-				_MinBytes = value;
+				_minBytes = value;
 			}
 		}
 
 		/// <summary>
 		/// The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.
 		/// </summary>
-		private Int32 _MaxBytes = new Int32(0x7fffffff);
+		private Int32 _maxBytes = new Int32(0x7fffffff);
 		public Int32 MaxBytes 
 		{
-			get => _MaxBytes;
+			get => _maxBytes;
 			set 
 			{
 				if (value == null) 
@@ -12614,17 +12614,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MaxBytes is non-nullable.");
 				}
 
-				_MaxBytes = value;
+				_maxBytes = value;
 			}
 		}
 
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
 		/// </summary>
-		private Int8 _IsolationLevel = new Int8(0);
+		private Int8 _isolationLevel = new Int8(0);
 		public Int8 IsolationLevel 
 		{
-			get => _IsolationLevel;
+			get => _isolationLevel;
 			set 
 			{
 				if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
@@ -12637,17 +12637,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IsolationLevel is non-nullable.");
 				}
 
-				_IsolationLevel = value;
+				_isolationLevel = value;
 			}
 		}
 
 		/// <summary>
 		/// The fetch session ID.
 		/// </summary>
-		private Int32 _SessionId = new Int32(0);
+		private Int32 _sessionId = new Int32(0);
 		public Int32 SessionId 
 		{
-			get => _SessionId;
+			get => _sessionId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
@@ -12660,17 +12660,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"SessionId is non-nullable.");
 				}
 
-				_SessionId = value;
+				_sessionId = value;
 			}
 		}
 
 		/// <summary>
 		/// The fetch session ID.
 		/// </summary>
-		private Int32 _Epoch = new Int32(-1);
+		private Int32 _epoch = new Int32(-1);
 		public Int32 Epoch 
 		{
-			get => _Epoch;
+			get => _epoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
@@ -12683,17 +12683,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Epoch is non-nullable.");
 				}
 
-				_Epoch = value;
+				_epoch = value;
 			}
 		}
 
 		/// <summary>
 		/// The topics to fetch.
 		/// </summary>
-		private FetchableTopic[] _TopicsCollection = System.Array.Empty<FetchableTopic>();
+		private FetchableTopic[] _topicsCollection = System.Array.Empty<FetchableTopic>();
 		public FetchableTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12706,7 +12706,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -12751,10 +12751,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The name of the topic to fetch.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12767,17 +12767,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The partitions to fetch.
 			/// </summary>
-			private FetchPartition[] _FetchPartitionsCollection = System.Array.Empty<FetchPartition>();
+			private FetchPartition[] _fetchPartitionsCollection = System.Array.Empty<FetchPartition>();
 			public FetchPartition[] FetchPartitionsCollection 
 			{
-				get => _FetchPartitionsCollection;
+				get => _fetchPartitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12790,7 +12790,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"FetchPartitionsCollection is non-nullable.");
 					}
 
-					_FetchPartitionsCollection = value;
+					_fetchPartitionsCollection = value;
 				}
 			}
 
@@ -12859,10 +12859,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12875,17 +12875,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The current leader epoch of the partition.
 				/// </summary>
-				private Int32 _CurrentLeaderEpoch = new Int32(-1);
+				private Int32 _currentLeaderEpoch = new Int32(-1);
 				public Int32 CurrentLeaderEpoch 
 				{
-					get => _CurrentLeaderEpoch;
+					get => _currentLeaderEpoch;
 					set 
 					{
 						if (value == null) 
@@ -12893,17 +12893,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CurrentLeaderEpoch is non-nullable.");
 						}
 
-						_CurrentLeaderEpoch = value;
+						_currentLeaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The message offset.
 				/// </summary>
-				private Int64 _FetchOffset = Int64.Default;
+				private Int64 _fetchOffset = Int64.Default;
 				public Int64 FetchOffset 
 				{
-					get => _FetchOffset;
+					get => _fetchOffset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12916,17 +12916,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"FetchOffset is non-nullable.");
 						}
 
-						_FetchOffset = value;
+						_fetchOffset = value;
 					}
 				}
 
 				/// <summary>
 				/// The earliest available offset of the follower replica.  The field is only used when the request is sent by the follower.
 				/// </summary>
-				private Int64 _LogStartOffset = new Int64(-1);
+				private Int64 _logStartOffset = new Int64(-1);
 				public Int64 LogStartOffset 
 				{
-					get => _LogStartOffset;
+					get => _logStartOffset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -12939,17 +12939,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LogStartOffset is non-nullable.");
 						}
 
-						_LogStartOffset = value;
+						_logStartOffset = value;
 					}
 				}
 
 				/// <summary>
 				/// The maximum bytes to fetch from this partition.  See KIP-74 for cases where this limit may not be honored.
 				/// </summary>
-				private Int32 _MaxBytes = Int32.Default;
+				private Int32 _maxBytes = Int32.Default;
 				public Int32 MaxBytes 
 				{
-					get => _MaxBytes;
+					get => _maxBytes;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -12962,7 +12962,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"MaxBytes is non-nullable.");
 						}
 
-						_MaxBytes = value;
+						_maxBytes = value;
 					}
 				}
 			}
@@ -12971,10 +12971,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// In an incremental fetch request, the partitions to remove.
 		/// </summary>
-		private ForgottenTopic[] _ForgottenCollection = System.Array.Empty<ForgottenTopic>();
+		private ForgottenTopic[] _forgottenCollection = System.Array.Empty<ForgottenTopic>();
 		public ForgottenTopic[] ForgottenCollection 
 		{
-			get => _ForgottenCollection;
+			get => _forgottenCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
@@ -12987,7 +12987,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ForgottenCollection is non-nullable.");
 				}
 
-				_ForgottenCollection = value;
+				_forgottenCollection = value;
 			}
 		}
 
@@ -13032,10 +13032,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partition name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
@@ -13048,17 +13048,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The partitions indexes to forget.
 			/// </summary>
-			private Int32[] _ForgottenPartitionIndexesCollection = System.Array.Empty<Int32>();
+			private Int32[] _forgottenPartitionIndexesCollection = System.Array.Empty<Int32>();
 			public Int32[] ForgottenPartitionIndexesCollection 
 			{
-				get => _ForgottenPartitionIndexesCollection;
+				get => _forgottenPartitionIndexesCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
@@ -13071,7 +13071,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ForgottenPartitionIndexesCollection is non-nullable.");
 					}
 
-					_ForgottenPartitionIndexesCollection = value;
+					_forgottenPartitionIndexesCollection = value;
 				}
 			}
 		}
@@ -13136,10 +13136,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -13147,17 +13147,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The top level response error code.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
@@ -13170,17 +13170,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The fetch session ID, or 0 if this is not part of a fetch session.
 		/// </summary>
-		private Int32 _SessionId = new Int32(0);
+		private Int32 _sessionId = new Int32(0);
 		public Int32 SessionId 
 		{
-			get => _SessionId;
+			get => _sessionId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
@@ -13193,17 +13193,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"SessionId is non-nullable.");
 				}
 
-				_SessionId = value;
+				_sessionId = value;
 			}
 		}
 
 		/// <summary>
 		/// The response topics.
 		/// </summary>
-		private FetchableTopicResponse[] _TopicsCollection = System.Array.Empty<FetchableTopicResponse>();
+		private FetchableTopicResponse[] _topicsCollection = System.Array.Empty<FetchableTopicResponse>();
 		public FetchableTopicResponse[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13216,7 +13216,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -13261,10 +13261,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13277,17 +13277,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The topic partitions.
 			/// </summary>
-			private FetchablePartitionResponse[] _PartitionsCollection = System.Array.Empty<FetchablePartitionResponse>();
+			private FetchablePartitionResponse[] _partitionsCollection = System.Array.Empty<FetchablePartitionResponse>();
 			public FetchablePartitionResponse[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13300,7 +13300,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -13385,10 +13385,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partiiton index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13401,17 +13401,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no fetch error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13424,17 +13424,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 
 				/// <summary>
 				/// The current high water mark.
 				/// </summary>
-				private Int64 _HighWatermark = Int64.Default;
+				private Int64 _highWatermark = Int64.Default;
 				public Int64 HighWatermark 
 				{
-					get => _HighWatermark;
+					get => _highWatermark;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13447,17 +13447,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"HighWatermark is non-nullable.");
 						}
 
-						_HighWatermark = value;
+						_highWatermark = value;
 					}
 				}
 
 				/// <summary>
 				/// The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)
 				/// </summary>
-				private Int64 _LastStableOffset = new Int64(-1);
+				private Int64 _lastStableOffset = new Int64(-1);
 				public Int64 LastStableOffset 
 				{
-					get => _LastStableOffset;
+					get => _lastStableOffset;
 					set 
 					{
 						if (value == null) 
@@ -13465,17 +13465,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LastStableOffset is non-nullable.");
 						}
 
-						_LastStableOffset = value;
+						_lastStableOffset = value;
 					}
 				}
 
 				/// <summary>
 				/// The current log start offset.
 				/// </summary>
-				private Int64 _LogStartOffset = new Int64(-1);
+				private Int64 _logStartOffset = new Int64(-1);
 				public Int64 LogStartOffset 
 				{
-					get => _LogStartOffset;
+					get => _logStartOffset;
 					set 
 					{
 						if (value == null) 
@@ -13483,17 +13483,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LogStartOffset is non-nullable.");
 						}
 
-						_LogStartOffset = value;
+						_logStartOffset = value;
 					}
 				}
 
 				/// <summary>
 				/// The aborted transactions.
 				/// </summary>
-				private AbortedTransaction[] _AbortedCollection = System.Array.Empty<AbortedTransaction>();
+				private AbortedTransaction[] _abortedCollection = System.Array.Empty<AbortedTransaction>();
 				public AbortedTransaction[] AbortedCollection 
 				{
-					get => _AbortedCollection;
+					get => _abortedCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
@@ -13507,7 +13507,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"AbortedCollection does not support null for version {Version}. Supported versions for null value: 4+");
 						}
 
-						_AbortedCollection = value;
+						_abortedCollection = value;
 					}
 				}
 
@@ -13552,10 +13552,10 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The producer id associated with the aborted transaction.
 					/// </summary>
-					private Int64 _ProducerId = Int64.Default;
+					private Int64 _producerId = Int64.Default;
 					public Int64 ProducerId 
 					{
-						get => _ProducerId;
+						get => _producerId;
 						set 
 						{
 							if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
@@ -13568,17 +13568,17 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 							}
 
-							_ProducerId = value;
+							_producerId = value;
 						}
 					}
 
 					/// <summary>
 					/// The first offset in the aborted transaction.
 					/// </summary>
-					private Int64 _FirstOffset = Int64.Default;
+					private Int64 _firstOffset = Int64.Default;
 					public Int64 FirstOffset 
 					{
-						get => _FirstOffset;
+						get => _firstOffset;
 						set 
 						{
 							if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
@@ -13591,7 +13591,7 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"FirstOffset is non-nullable.");
 							}
 
-							_FirstOffset = value;
+							_firstOffset = value;
 						}
 					}
 				}
@@ -13599,10 +13599,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The record data.
 				/// </summary>
-				private Bytes _Records = Bytes.Default;
+				private Bytes _records = Bytes.Default;
 				public Bytes Records 
 				{
-					get => _Records;
+					get => _records;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13616,7 +13616,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Records does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_Records = value;
+						_records = value;
 					}
 				}
 			}
@@ -13666,10 +13666,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The coordinator key.
 		/// </summary>
-		private String _Key = String.Default;
+		private String _key = String.Default;
 		public String Key 
 		{
-			get => _Key;
+			get => _key;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13682,17 +13682,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Key is non-nullable.");
 				}
 
-				_Key = value;
+				_key = value;
 			}
 		}
 
 		/// <summary>
 		/// The coordinator key type.  (Group, transaction, etc.)
 		/// </summary>
-		private Int8 _KeyType = new Int8(0);
+		private Int8 _keyType = new Int8(0);
 		public Int8 KeyType 
 		{
-			get => _KeyType;
+			get => _keyType;
 			set 
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -13705,7 +13705,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"KeyType is non-nullable.");
 				}
 
-				_KeyType = value;
+				_keyType = value;
 			}
 		}
 	}
@@ -13785,10 +13785,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -13796,17 +13796,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13819,17 +13819,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		private String _ErrorMessage = String.Default;
+		private String _errorMessage = String.Default;
 		public String ErrorMessage 
 		{
-			get => _ErrorMessage;
+			get => _errorMessage;
 			set 
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647)) == false &&
@@ -13838,17 +13838,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 1+");
 				}
 
-				_ErrorMessage = value;
+				_errorMessage = value;
 			}
 		}
 
 		/// <summary>
 		/// The node id.
 		/// </summary>
-		private Int32 _NodeId = Int32.Default;
+		private Int32 _nodeId = Int32.Default;
 		public Int32 NodeId 
 		{
-			get => _NodeId;
+			get => _nodeId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13861,17 +13861,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"NodeId is non-nullable.");
 				}
 
-				_NodeId = value;
+				_nodeId = value;
 			}
 		}
 
 		/// <summary>
 		/// The host name.
 		/// </summary>
-		private String _Host = String.Default;
+		private String _host = String.Default;
 		public String Host 
 		{
-			get => _Host;
+			get => _host;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13884,17 +13884,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Host is non-nullable.");
 				}
 
-				_Host = value;
+				_host = value;
 			}
 		}
 
 		/// <summary>
 		/// The port.
 		/// </summary>
-		private Int32 _Port = Int32.Default;
+		private Int32 _port = Int32.Default;
 		public Int32 Port 
 		{
-			get => _Port;
+			get => _port;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13907,7 +13907,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Port is non-nullable.");
 				}
 
-				_Port = value;
+				_port = value;
 			}
 		}
 	}
@@ -13963,10 +13963,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group id.
 		/// </summary>
-		private String _GroupId = String.Default;
+		private String _groupId = String.Default;
 		public String GroupId 
 		{
-			get => _GroupId;
+			get => _groupId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -13979,17 +13979,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
-				_GroupId = value;
+				_groupId = value;
 			}
 		}
 
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		private Int32 _Generationid = Int32.Default;
+		private Int32 _generationid = Int32.Default;
 		public Int32 Generationid 
 		{
-			get => _Generationid;
+			get => _generationid;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14002,17 +14002,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Generationid is non-nullable.");
 				}
 
-				_Generationid = value;
+				_generationid = value;
 			}
 		}
 
 		/// <summary>
 		/// The member ID.
 		/// </summary>
-		private String _MemberId = String.Default;
+		private String _memberId = String.Default;
 		public String MemberId 
 		{
-			get => _MemberId;
+			get => _memberId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14025,7 +14025,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId is non-nullable.");
 				}
 
-				_MemberId = value;
+				_memberId = value;
 			}
 		}
 	}
@@ -14073,10 +14073,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -14084,17 +14084,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14107,7 +14107,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 	}
@@ -14155,10 +14155,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional id, or null if the producer is not transactional.
 		/// </summary>
-		private String _TransactionalId = String.Default;
+		private String _transactionalId = String.Default;
 		public String TransactionalId 
 		{
-			get => _TransactionalId;
+			get => _transactionalId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14172,17 +14172,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TransactionalId does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_TransactionalId = value;
+				_transactionalId = value;
 			}
 		}
 
 		/// <summary>
 		/// The time in ms to wait for before aborting idle transactions sent by this producer.
 		/// </summary>
-		private Int32 _TransactionTimeoutMs = Int32.Default;
+		private Int32 _transactionTimeoutMs = Int32.Default;
 		public Int32 TransactionTimeoutMs 
 		{
-			get => _TransactionTimeoutMs;
+			get => _transactionTimeoutMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14195,7 +14195,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TransactionTimeoutMs is non-nullable.");
 				}
 
-				_TransactionTimeoutMs = value;
+				_transactionTimeoutMs = value;
 			}
 		}
 	}
@@ -14259,10 +14259,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -14270,17 +14270,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14293,17 +14293,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The current producer id.
 		/// </summary>
-		private Int64 _ProducerId = Int64.Default;
+		private Int64 _producerId = Int64.Default;
 		public Int64 ProducerId 
 		{
-			get => _ProducerId;
+			get => _producerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14316,17 +14316,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 				}
 
-				_ProducerId = value;
+				_producerId = value;
 			}
 		}
 
 		/// <summary>
 		/// The current epoch associated with the producer id.
 		/// </summary>
-		private Int16 _ProducerEpoch = Int16.Default;
+		private Int16 _producerEpoch = Int16.Default;
 		public Int16 ProducerEpoch 
 		{
-			get => _ProducerEpoch;
+			get => _producerEpoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14339,7 +14339,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
 				}
 
-				_ProducerEpoch = value;
+				_producerEpoch = value;
 			}
 		}
 	}
@@ -14419,10 +14419,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group identifier.
 		/// </summary>
-		private String _GroupId = String.Default;
+		private String _groupId = String.Default;
 		public String GroupId 
 		{
-			get => _GroupId;
+			get => _groupId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14435,17 +14435,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
-				_GroupId = value;
+				_groupId = value;
 			}
 		}
 
 		/// <summary>
 		/// The coordinator considers the consumer dead if it receives no heartbeat after this timeout in milliseconds.
 		/// </summary>
-		private Int32 _SessionTimeoutMs = Int32.Default;
+		private Int32 _sessionTimeoutMs = Int32.Default;
 		public Int32 SessionTimeoutMs 
 		{
-			get => _SessionTimeoutMs;
+			get => _sessionTimeoutMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14458,17 +14458,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"SessionTimeoutMs is non-nullable.");
 				}
 
-				_SessionTimeoutMs = value;
+				_sessionTimeoutMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The maximum time in milliseconds that the coordinator will wait for each member to rejoin when rebalancing the group.
 		/// </summary>
-		private Int32 _RebalanceTimeoutMs = new Int32(-1);
+		private Int32 _rebalanceTimeoutMs = new Int32(-1);
 		public Int32 RebalanceTimeoutMs 
 		{
-			get => _RebalanceTimeoutMs;
+			get => _rebalanceTimeoutMs;
 			set 
 			{
 				if (value == null) 
@@ -14476,17 +14476,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RebalanceTimeoutMs is non-nullable.");
 				}
 
-				_RebalanceTimeoutMs = value;
+				_rebalanceTimeoutMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The member id assigned by the group coordinator.
 		/// </summary>
-		private String _MemberId = String.Default;
+		private String _memberId = String.Default;
 		public String MemberId 
 		{
-			get => _MemberId;
+			get => _memberId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14499,17 +14499,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId is non-nullable.");
 				}
 
-				_MemberId = value;
+				_memberId = value;
 			}
 		}
 
 		/// <summary>
 		/// The unique name the for class of protocols implemented by the group we want to join.
 		/// </summary>
-		private String _ProtocolType = String.Default;
+		private String _protocolType = String.Default;
 		public String ProtocolType 
 		{
-			get => _ProtocolType;
+			get => _protocolType;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14522,17 +14522,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolType is non-nullable.");
 				}
 
-				_ProtocolType = value;
+				_protocolType = value;
 			}
 		}
 
 		/// <summary>
 		/// The list of protocols that the member supports.
 		/// </summary>
-		private Dictionary<String, JoinGroupRequestProtocol> _ProtocolsCollection = new Dictionary<String, JoinGroupRequestProtocol>();
+		private Dictionary<String, JoinGroupRequestProtocol> _protocolsCollection = new Dictionary<String, JoinGroupRequestProtocol>();
 		public Dictionary<String, JoinGroupRequestProtocol> ProtocolsCollection 
 		{
-			get => _ProtocolsCollection;
+			get => _protocolsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14545,7 +14545,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolsCollection is non-nullable.");
 				}
 
-				_ProtocolsCollection = value;
+				_protocolsCollection = value;
 			}
 		}
 
@@ -14590,10 +14590,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The protocol name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14606,17 +14606,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The protocol metadata.
 			/// </summary>
-			private Bytes _Metadata = Bytes.Default;
+			private Bytes _metadata = Bytes.Default;
 			public Bytes Metadata 
 			{
-				get => _Metadata;
+				get => _metadata;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14629,7 +14629,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Metadata is non-nullable.");
 					}
 
-					_Metadata = value;
+					_metadata = value;
 				}
 			}
 		}
@@ -14718,10 +14718,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -14729,17 +14729,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14752,17 +14752,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The generation ID of the group.
 		/// </summary>
-		private Int32 _GenerationId = new Int32(-1);
+		private Int32 _generationId = new Int32(-1);
 		public Int32 GenerationId 
 		{
-			get => _GenerationId;
+			get => _generationId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14775,17 +14775,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GenerationId is non-nullable.");
 				}
 
-				_GenerationId = value;
+				_generationId = value;
 			}
 		}
 
 		/// <summary>
 		/// The group protocol selected by the coordinator.
 		/// </summary>
-		private String _ProtocolName = String.Default;
+		private String _protocolName = String.Default;
 		public String ProtocolName 
 		{
-			get => _ProtocolName;
+			get => _protocolName;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14798,17 +14798,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolName is non-nullable.");
 				}
 
-				_ProtocolName = value;
+				_protocolName = value;
 			}
 		}
 
 		/// <summary>
 		/// The leader of the group.
 		/// </summary>
-		private String _Leader = String.Default;
+		private String _leader = String.Default;
 		public String Leader 
 		{
-			get => _Leader;
+			get => _leader;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14821,17 +14821,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Leader is non-nullable.");
 				}
 
-				_Leader = value;
+				_leader = value;
 			}
 		}
 
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
 		/// </summary>
-		private String _MemberId = String.Default;
+		private String _memberId = String.Default;
 		public String MemberId 
 		{
-			get => _MemberId;
+			get => _memberId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14844,14 +14844,14 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId is non-nullable.");
 				}
 
-				_MemberId = value;
+				_memberId = value;
 			}
 		}
 
-		private JoinGroupResponseMember[] _MembersCollection = System.Array.Empty<JoinGroupResponseMember>();
+		private JoinGroupResponseMember[] _membersCollection = System.Array.Empty<JoinGroupResponseMember>();
 		public JoinGroupResponseMember[] MembersCollection 
 		{
-			get => _MembersCollection;
+			get => _membersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14864,7 +14864,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MembersCollection is non-nullable.");
 				}
 
-				_MembersCollection = value;
+				_membersCollection = value;
 			}
 		}
 
@@ -14909,10 +14909,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group member ID.
 			/// </summary>
-			private String _MemberId = String.Default;
+			private String _memberId = String.Default;
 			public String MemberId 
 			{
-				get => _MemberId;
+				get => _memberId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14925,17 +14925,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MemberId is non-nullable.");
 					}
 
-					_MemberId = value;
+					_memberId = value;
 				}
 			}
 
 			/// <summary>
 			/// The group member metadata.
 			/// </summary>
-			private Bytes _Metadata = Bytes.Default;
+			private Bytes _metadata = Bytes.Default;
 			public Bytes Metadata 
 			{
-				get => _Metadata;
+				get => _metadata;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -14948,7 +14948,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Metadata is non-nullable.");
 					}
 
-					_Metadata = value;
+					_metadata = value;
 				}
 			}
 		}
@@ -15029,10 +15029,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The current controller ID.
 		/// </summary>
-		private Int32 _ControllerId = Int32.Default;
+		private Int32 _controllerId = Int32.Default;
 		public Int32 ControllerId 
 		{
-			get => _ControllerId;
+			get => _controllerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15045,17 +15045,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerId is non-nullable.");
 				}
 
-				_ControllerId = value;
+				_controllerId = value;
 			}
 		}
 
 		/// <summary>
 		/// The current controller epoch.
 		/// </summary>
-		private Int32 _ControllerEpoch = Int32.Default;
+		private Int32 _controllerEpoch = Int32.Default;
 		public Int32 ControllerEpoch 
 		{
-			get => _ControllerEpoch;
+			get => _controllerEpoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15068,17 +15068,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 				}
 
-				_ControllerEpoch = value;
+				_controllerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// The current broker epoch.
 		/// </summary>
-		private Int64 _BrokerEpoch = new Int64(-1);
+		private Int64 _brokerEpoch = new Int64(-1);
 		public Int64 BrokerEpoch 
 		{
-			get => _BrokerEpoch;
+			get => _brokerEpoch;
 			set 
 			{
 				if (value == null) 
@@ -15086,17 +15086,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"BrokerEpoch is non-nullable.");
 				}
 
-				_BrokerEpoch = value;
+				_brokerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic.
 		/// </summary>
-		private LeaderAndIsrRequestTopicState[] _TopicStatesCollection = System.Array.Empty<LeaderAndIsrRequestTopicState>();
+		private LeaderAndIsrRequestTopicState[] _topicStatesCollection = System.Array.Empty<LeaderAndIsrRequestTopicState>();
 		public LeaderAndIsrRequestTopicState[] TopicStatesCollection 
 		{
-			get => _TopicStatesCollection;
+			get => _topicStatesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
@@ -15109,7 +15109,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicStatesCollection is non-nullable.");
 				}
 
-				_TopicStatesCollection = value;
+				_topicStatesCollection = value;
 			}
 		}
 
@@ -15154,10 +15154,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
@@ -15170,17 +15170,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The state of each partition
 			/// </summary>
-			private LeaderAndIsrRequestPartitionState[] _PartitionStatesCollection = System.Array.Empty<LeaderAndIsrRequestPartitionState>();
+			private LeaderAndIsrRequestPartitionState[] _partitionStatesCollection = System.Array.Empty<LeaderAndIsrRequestPartitionState>();
 			public LeaderAndIsrRequestPartitionState[] PartitionStatesCollection 
 			{
-				get => _PartitionStatesCollection;
+				get => _partitionStatesCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15193,7 +15193,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionStatesCollection is non-nullable.");
 					}
 
-					_PartitionStatesCollection = value;
+					_partitionStatesCollection = value;
 				}
 			}
 
@@ -15286,10 +15286,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15302,17 +15302,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The controller epoch.
 				/// </summary>
-				private Int32 _ControllerEpoch = Int32.Default;
+				private Int32 _controllerEpoch = Int32.Default;
 				public Int32 ControllerEpoch 
 				{
-					get => _ControllerEpoch;
+					get => _controllerEpoch;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15325,17 +15325,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 						}
 
-						_ControllerEpoch = value;
+						_controllerEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The broker ID of the leader.
 				/// </summary>
-				private Int32 _LeaderKey = Int32.Default;
+				private Int32 _leaderKey = Int32.Default;
 				public Int32 LeaderKey 
 				{
-					get => _LeaderKey;
+					get => _leaderKey;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15348,17 +15348,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderKey is non-nullable.");
 						}
 
-						_LeaderKey = value;
+						_leaderKey = value;
 					}
 				}
 
 				/// <summary>
 				/// The leader epoch.
 				/// </summary>
-				private Int32 _LeaderEpoch = Int32.Default;
+				private Int32 _leaderEpoch = Int32.Default;
 				public Int32 LeaderEpoch 
 				{
-					get => _LeaderEpoch;
+					get => _leaderEpoch;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15371,17 +15371,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 						}
 
-						_LeaderEpoch = value;
+						_leaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The in-sync replica IDs.
 				/// </summary>
-				private Int32[] _IsrReplicasCollection = System.Array.Empty<Int32>();
+				private Int32[] _isrReplicasCollection = System.Array.Empty<Int32>();
 				public Int32[] IsrReplicasCollection 
 				{
-					get => _IsrReplicasCollection;
+					get => _isrReplicasCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15394,17 +15394,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsrReplicasCollection is non-nullable.");
 						}
 
-						_IsrReplicasCollection = value;
+						_isrReplicasCollection = value;
 					}
 				}
 
 				/// <summary>
 				/// The ZooKeeper version.
 				/// </summary>
-				private Int32 _ZkVersion = Int32.Default;
+				private Int32 _zkVersion = Int32.Default;
 				public Int32 ZkVersion 
 				{
-					get => _ZkVersion;
+					get => _zkVersion;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15417,17 +15417,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
 						}
 
-						_ZkVersion = value;
+						_zkVersion = value;
 					}
 				}
 
 				/// <summary>
 				/// The replica IDs.
 				/// </summary>
-				private Int32[] _ReplicasCollection = System.Array.Empty<Int32>();
+				private Int32[] _replicasCollection = System.Array.Empty<Int32>();
 				public Int32[] ReplicasCollection 
 				{
-					get => _ReplicasCollection;
+					get => _replicasCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15440,17 +15440,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
 						}
 
-						_ReplicasCollection = value;
+						_replicasCollection = value;
 					}
 				}
 
 				/// <summary>
 				/// Whether the replica should have existed on the broker or not.
 				/// </summary>
-				private Boolean _IsNew = new Boolean(false);
+				private Boolean _isNew = new Boolean(false);
 				public Boolean IsNew 
 				{
-					get => _IsNew;
+					get => _isNew;
 					set 
 					{
 						if (value == null) 
@@ -15458,7 +15458,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsNew is non-nullable.");
 						}
 
-						_IsNew = value;
+						_isNew = value;
 					}
 				}
 			}
@@ -15467,10 +15467,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The state of each partition
 		/// </summary>
-		private LeaderAndIsrRequestPartitionStateV0[] _PartitionStatesV0Collection = System.Array.Empty<LeaderAndIsrRequestPartitionStateV0>();
+		private LeaderAndIsrRequestPartitionStateV0[] _partitionStatesV0Collection = System.Array.Empty<LeaderAndIsrRequestPartitionStateV0>();
 		public LeaderAndIsrRequestPartitionStateV0[] PartitionStatesV0Collection 
 		{
-			get => _PartitionStatesV0Collection;
+			get => _partitionStatesV0Collection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15483,7 +15483,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PartitionStatesV0Collection is non-nullable.");
 				}
 
-				_PartitionStatesV0Collection = value;
+				_partitionStatesV0Collection = value;
 			}
 		}
 
@@ -15584,10 +15584,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _TopicName = String.Default;
+			private String _topicName = String.Default;
 			public String TopicName 
 			{
-				get => _TopicName;
+				get => _topicName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15600,17 +15600,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
-					_TopicName = value;
+					_topicName = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			private Int32 _PartitionIndex = Int32.Default;
+			private Int32 _partitionIndex = Int32.Default;
 			public Int32 PartitionIndex 
 			{
-				get => _PartitionIndex;
+				get => _partitionIndex;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15623,17 +15623,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 					}
 
-					_PartitionIndex = value;
+					_partitionIndex = value;
 				}
 			}
 
 			/// <summary>
 			/// The controller epoch.
 			/// </summary>
-			private Int32 _ControllerEpoch = Int32.Default;
+			private Int32 _controllerEpoch = Int32.Default;
 			public Int32 ControllerEpoch 
 			{
-				get => _ControllerEpoch;
+				get => _controllerEpoch;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15646,17 +15646,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 					}
 
-					_ControllerEpoch = value;
+					_controllerEpoch = value;
 				}
 			}
 
 			/// <summary>
 			/// The broker ID of the leader.
 			/// </summary>
-			private Int32 _LeaderKey = Int32.Default;
+			private Int32 _leaderKey = Int32.Default;
 			public Int32 LeaderKey 
 			{
-				get => _LeaderKey;
+				get => _leaderKey;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15669,17 +15669,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"LeaderKey is non-nullable.");
 					}
 
-					_LeaderKey = value;
+					_leaderKey = value;
 				}
 			}
 
 			/// <summary>
 			/// The leader epoch.
 			/// </summary>
-			private Int32 _LeaderEpoch = Int32.Default;
+			private Int32 _leaderEpoch = Int32.Default;
 			public Int32 LeaderEpoch 
 			{
-				get => _LeaderEpoch;
+				get => _leaderEpoch;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15692,17 +15692,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 					}
 
-					_LeaderEpoch = value;
+					_leaderEpoch = value;
 				}
 			}
 
 			/// <summary>
 			/// The in-sync replica IDs.
 			/// </summary>
-			private Int32[] _IsrReplicasCollection = System.Array.Empty<Int32>();
+			private Int32[] _isrReplicasCollection = System.Array.Empty<Int32>();
 			public Int32[] IsrReplicasCollection 
 			{
-				get => _IsrReplicasCollection;
+				get => _isrReplicasCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15715,17 +15715,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"IsrReplicasCollection is non-nullable.");
 					}
 
-					_IsrReplicasCollection = value;
+					_isrReplicasCollection = value;
 				}
 			}
 
 			/// <summary>
 			/// The ZooKeeper version.
 			/// </summary>
-			private Int32 _ZkVersion = Int32.Default;
+			private Int32 _zkVersion = Int32.Default;
 			public Int32 ZkVersion 
 			{
-				get => _ZkVersion;
+				get => _zkVersion;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15738,17 +15738,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
 					}
 
-					_ZkVersion = value;
+					_zkVersion = value;
 				}
 			}
 
 			/// <summary>
 			/// The replica IDs.
 			/// </summary>
-			private Int32[] _ReplicasCollection = System.Array.Empty<Int32>();
+			private Int32[] _replicasCollection = System.Array.Empty<Int32>();
 			public Int32[] ReplicasCollection 
 			{
-				get => _ReplicasCollection;
+				get => _replicasCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 1)) == false) 
@@ -15761,17 +15761,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
 					}
 
-					_ReplicasCollection = value;
+					_replicasCollection = value;
 				}
 			}
 
 			/// <summary>
 			/// Whether the replica should have existed on the broker or not.
 			/// </summary>
-			private Boolean _IsNew = new Boolean(false);
+			private Boolean _isNew = new Boolean(false);
 			public Boolean IsNew 
 			{
-				get => _IsNew;
+				get => _isNew;
 				set 
 				{
 					if (value == null) 
@@ -15779,7 +15779,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"IsNew is non-nullable.");
 					}
 
-					_IsNew = value;
+					_isNew = value;
 				}
 			}
 		}
@@ -15787,10 +15787,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The current live leaders.
 		/// </summary>
-		private LeaderAndIsrLiveLeader[] _LiveLeadersCollection = System.Array.Empty<LeaderAndIsrLiveLeader>();
+		private LeaderAndIsrLiveLeader[] _liveLeadersCollection = System.Array.Empty<LeaderAndIsrLiveLeader>();
 		public LeaderAndIsrLiveLeader[] LiveLeadersCollection 
 		{
-			get => _LiveLeadersCollection;
+			get => _liveLeadersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15803,7 +15803,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"LiveLeadersCollection is non-nullable.");
 				}
 
-				_LiveLeadersCollection = value;
+				_liveLeadersCollection = value;
 			}
 		}
 
@@ -15856,10 +15856,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The leader's broker ID.
 			/// </summary>
-			private Int32 _BrokerId = Int32.Default;
+			private Int32 _brokerId = Int32.Default;
 			public Int32 BrokerId 
 			{
-				get => _BrokerId;
+				get => _brokerId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15872,17 +15872,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"BrokerId is non-nullable.");
 					}
 
-					_BrokerId = value;
+					_brokerId = value;
 				}
 			}
 
 			/// <summary>
 			/// The leader's hostname.
 			/// </summary>
-			private String _HostName = String.Default;
+			private String _hostName = String.Default;
 			public String HostName 
 			{
-				get => _HostName;
+				get => _hostName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15895,17 +15895,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"HostName is non-nullable.");
 					}
 
-					_HostName = value;
+					_hostName = value;
 				}
 			}
 
 			/// <summary>
 			/// The leader's port.
 			/// </summary>
-			private Int32 _Port = Int32.Default;
+			private Int32 _port = Int32.Default;
 			public Int32 Port 
 			{
-				get => _Port;
+				get => _port;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15918,7 +15918,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Port is non-nullable.");
 					}
 
-					_Port = value;
+					_port = value;
 				}
 			}
 		}
@@ -15967,10 +15967,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -15983,17 +15983,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// Each partition.
 		/// </summary>
-		private LeaderAndIsrResponsePartition[] _PartitionsCollection = System.Array.Empty<LeaderAndIsrResponsePartition>();
+		private LeaderAndIsrResponsePartition[] _partitionsCollection = System.Array.Empty<LeaderAndIsrResponsePartition>();
 		public LeaderAndIsrResponsePartition[] PartitionsCollection 
 		{
-			get => _PartitionsCollection;
+			get => _partitionsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16006,7 +16006,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 				}
 
-				_PartitionsCollection = value;
+				_partitionsCollection = value;
 			}
 		}
 
@@ -16059,10 +16059,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _TopicName = String.Default;
+			private String _topicName = String.Default;
 			public String TopicName 
 			{
-				get => _TopicName;
+				get => _topicName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16075,17 +16075,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
-					_TopicName = value;
+					_topicName = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			private Int32 _PartitionIndex = Int32.Default;
+			private Int32 _partitionIndex = Int32.Default;
 			public Int32 PartitionIndex 
 			{
-				get => _PartitionIndex;
+				get => _partitionIndex;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16098,17 +16098,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 					}
 
-					_PartitionIndex = value;
+					_partitionIndex = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition error code, or 0 if there was no error.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16121,7 +16121,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 		}
@@ -16170,10 +16170,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the group to leave.
 		/// </summary>
-		private String _GroupId = String.Default;
+		private String _groupId = String.Default;
 		public String GroupId 
 		{
-			get => _GroupId;
+			get => _groupId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16186,17 +16186,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
-				_GroupId = value;
+				_groupId = value;
 			}
 		}
 
 		/// <summary>
 		/// The member ID to remove from the group.
 		/// </summary>
-		private String _MemberId = String.Default;
+		private String _memberId = String.Default;
 		public String MemberId 
 		{
-			get => _MemberId;
+			get => _memberId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16209,7 +16209,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId is non-nullable.");
 				}
 
-				_MemberId = value;
+				_memberId = value;
 			}
 		}
 	}
@@ -16257,10 +16257,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -16268,17 +16268,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16291,7 +16291,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 	}
@@ -16376,10 +16376,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -16387,17 +16387,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16410,17 +16410,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// Each group in the response.
 		/// </summary>
-		private ListedGroup[] _GroupsCollection = System.Array.Empty<ListedGroup>();
+		private ListedGroup[] _groupsCollection = System.Array.Empty<ListedGroup>();
 		public ListedGroup[] GroupsCollection 
 		{
-			get => _GroupsCollection;
+			get => _groupsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16433,7 +16433,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupsCollection is non-nullable.");
 				}
 
-				_GroupsCollection = value;
+				_groupsCollection = value;
 			}
 		}
 
@@ -16478,10 +16478,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group ID.
 			/// </summary>
-			private String _GroupId = String.Default;
+			private String _groupId = String.Default;
 			public String GroupId 
 			{
-				get => _GroupId;
+				get => _groupId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16494,17 +16494,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupId is non-nullable.");
 					}
 
-					_GroupId = value;
+					_groupId = value;
 				}
 			}
 
 			/// <summary>
 			/// The group protocol type.
 			/// </summary>
-			private String _ProtocolType = String.Default;
+			private String _protocolType = String.Default;
 			public String ProtocolType 
 			{
-				get => _ProtocolType;
+				get => _protocolType;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16517,7 +16517,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProtocolType is non-nullable.");
 					}
 
-					_ProtocolType = value;
+					_protocolType = value;
 				}
 			}
 		}
@@ -16574,10 +16574,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The broker ID of the requestor, or -1 if this request is being made by a normal consumer.
 		/// </summary>
-		private Int32 _ReplicaId = Int32.Default;
+		private Int32 _replicaId = Int32.Default;
 		public Int32 ReplicaId 
 		{
-			get => _ReplicaId;
+			get => _replicaId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16590,17 +16590,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ReplicaId is non-nullable.");
 				}
 
-				_ReplicaId = value;
+				_replicaId = value;
 			}
 		}
 
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
 		/// </summary>
-		private Int8 _IsolationLevel = Int8.Default;
+		private Int8 _isolationLevel = Int8.Default;
 		public Int8 IsolationLevel 
 		{
-			get => _IsolationLevel;
+			get => _isolationLevel;
 			set 
 			{
 				if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
@@ -16613,17 +16613,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IsolationLevel is non-nullable.");
 				}
 
-				_IsolationLevel = value;
+				_isolationLevel = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic in the request.
 		/// </summary>
-		private ListOffsetTopic[] _TopicsCollection = System.Array.Empty<ListOffsetTopic>();
+		private ListOffsetTopic[] _topicsCollection = System.Array.Empty<ListOffsetTopic>();
 		public ListOffsetTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16636,7 +16636,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -16681,10 +16681,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16697,17 +16697,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition in the request.
 			/// </summary>
-			private ListOffsetPartition[] _PartitionsCollection = System.Array.Empty<ListOffsetPartition>();
+			private ListOffsetPartition[] _partitionsCollection = System.Array.Empty<ListOffsetPartition>();
 			public ListOffsetPartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16720,7 +16720,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -16781,10 +16781,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16797,17 +16797,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The current leader epoch.
 				/// </summary>
-				private Int32 _CurrentLeaderEpoch = Int32.Default;
+				private Int32 _currentLeaderEpoch = Int32.Default;
 				public Int32 CurrentLeaderEpoch 
 				{
-					get => _CurrentLeaderEpoch;
+					get => _currentLeaderEpoch;
 					set 
 					{
 						if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
@@ -16820,17 +16820,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CurrentLeaderEpoch is non-nullable.");
 						}
 
-						_CurrentLeaderEpoch = value;
+						_currentLeaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The current timestamp.
 				/// </summary>
-				private Int64 _Timestamp = Int64.Default;
+				private Int64 _timestamp = Int64.Default;
 				public Int64 Timestamp 
 				{
-					get => _Timestamp;
+					get => _timestamp;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16843,17 +16843,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Timestamp is non-nullable.");
 						}
 
-						_Timestamp = value;
+						_timestamp = value;
 					}
 				}
 
 				/// <summary>
 				/// The maximum number of offsets to report.
 				/// </summary>
-				private Int32 _MaxNumOffsets = Int32.Default;
+				private Int32 _maxNumOffsets = Int32.Default;
 				public Int32 MaxNumOffsets 
 				{
-					get => _MaxNumOffsets;
+					get => _maxNumOffsets;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16866,7 +16866,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"MaxNumOffsets is non-nullable.");
 						}
 
-						_MaxNumOffsets = value;
+						_maxNumOffsets = value;
 					}
 				}
 			}
@@ -16916,10 +16916,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -16927,17 +16927,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
-		private ListOffsetTopicResponse[] _TopicsCollection = System.Array.Empty<ListOffsetTopicResponse>();
+		private ListOffsetTopicResponse[] _topicsCollection = System.Array.Empty<ListOffsetTopicResponse>();
 		public ListOffsetTopicResponse[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -16950,7 +16950,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -16995,10 +16995,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17011,17 +17011,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition in the response.
 			/// </summary>
-			private ListOffsetPartitionResponse[] _PartitionsCollection = System.Array.Empty<ListOffsetPartitionResponse>();
+			private ListOffsetPartitionResponse[] _partitionsCollection = System.Array.Empty<ListOffsetPartitionResponse>();
 			public ListOffsetPartitionResponse[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17034,7 +17034,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -17111,10 +17111,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17127,17 +17127,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The partition error code, or 0 if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17150,17 +17150,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 
 				/// <summary>
 				/// The result offsets.
 				/// </summary>
-				private Int64[] _OldStyleOffsetsCollection = System.Array.Empty<Int64>();
+				private Int64[] _oldStyleOffsetsCollection = System.Array.Empty<Int64>();
 				public Int64[] OldStyleOffsetsCollection 
 				{
-					get => _OldStyleOffsetsCollection;
+					get => _oldStyleOffsetsCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17173,17 +17173,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"OldStyleOffsetsCollection is non-nullable.");
 						}
 
-						_OldStyleOffsetsCollection = value;
+						_oldStyleOffsetsCollection = value;
 					}
 				}
 
 				/// <summary>
 				/// The timestamp associated with the returned offset.
 				/// </summary>
-				private Int64 _Timestamp = new Int64(-1);
+				private Int64 _timestamp = new Int64(-1);
 				public Int64 Timestamp 
 				{
-					get => _Timestamp;
+					get => _timestamp;
 					set 
 					{
 						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -17196,17 +17196,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Timestamp is non-nullable.");
 						}
 
-						_Timestamp = value;
+						_timestamp = value;
 					}
 				}
 
 				/// <summary>
 				/// The returned offset.
 				/// </summary>
-				private Int64 _Offset = new Int64(-1);
+				private Int64 _offset = new Int64(-1);
 				public Int64 Offset 
 				{
-					get => _Offset;
+					get => _offset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -17219,14 +17219,14 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Offset is non-nullable.");
 						}
 
-						_Offset = value;
+						_offset = value;
 					}
 				}
 
-				private Int32 _LeaderEpoch = Int32.Default;
+				private Int32 _leaderEpoch = Int32.Default;
 				public Int32 LeaderEpoch 
 				{
-					get => _LeaderEpoch;
+					get => _leaderEpoch;
 					set 
 					{
 						if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
@@ -17239,7 +17239,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 						}
 
-						_LeaderEpoch = value;
+						_leaderEpoch = value;
 					}
 				}
 			}
@@ -17305,10 +17305,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to fetch metadata for.
 		/// </summary>
-		private MetadataRequestTopic[] _TopicsCollection = System.Array.Empty<MetadataRequestTopic>();
+		private MetadataRequestTopic[] _topicsCollection = System.Array.Empty<MetadataRequestTopic>();
 		public MetadataRequestTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17322,7 +17322,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 1+");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -17359,10 +17359,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17375,7 +17375,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 		}
@@ -17383,10 +17383,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// If this is true, the broker may auto-create topics that we requested which do not already exist, if it is configured to do so.
 		/// </summary>
-		private Boolean _AllowAutoTopicCreation = new Boolean(true);
+		private Boolean _allowAutoTopicCreation = new Boolean(true);
 		public Boolean AllowAutoTopicCreation 
 		{
-			get => _AllowAutoTopicCreation;
+			get => _allowAutoTopicCreation;
 			set 
 			{
 				if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
@@ -17399,17 +17399,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"AllowAutoTopicCreation is non-nullable.");
 				}
 
-				_AllowAutoTopicCreation = value;
+				_allowAutoTopicCreation = value;
 			}
 		}
 
 		/// <summary>
 		/// Whether to include cluster authorized operations.
 		/// </summary>
-		private Boolean _IncludeClusterAuthorizedOperations = Boolean.Default;
+		private Boolean _includeClusterAuthorizedOperations = Boolean.Default;
 		public Boolean IncludeClusterAuthorizedOperations 
 		{
-			get => _IncludeClusterAuthorizedOperations;
+			get => _includeClusterAuthorizedOperations;
 			set 
 			{
 				if (Version.InRange(new VersionRange(8, 2147483647)) == false) 
@@ -17422,17 +17422,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeClusterAuthorizedOperations is non-nullable.");
 				}
 
-				_IncludeClusterAuthorizedOperations = value;
+				_includeClusterAuthorizedOperations = value;
 			}
 		}
 
 		/// <summary>
 		/// Whether to include topic authorized operations.
 		/// </summary>
-		private Boolean _IncludeTopicAuthorizedOperations = Boolean.Default;
+		private Boolean _includeTopicAuthorizedOperations = Boolean.Default;
 		public Boolean IncludeTopicAuthorizedOperations 
 		{
-			get => _IncludeTopicAuthorizedOperations;
+			get => _includeTopicAuthorizedOperations;
 			set 
 			{
 				if (Version.InRange(new VersionRange(8, 2147483647)) == false) 
@@ -17445,7 +17445,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeTopicAuthorizedOperations is non-nullable.");
 				}
 
-				_IncludeTopicAuthorizedOperations = value;
+				_includeTopicAuthorizedOperations = value;
 			}
 		}
 	}
@@ -17525,10 +17525,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
@@ -17541,17 +17541,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// Each broker in the response.
 		/// </summary>
-		private Dictionary<Int32, MetadataResponseBroker> _BrokersCollection = new Dictionary<Int32, MetadataResponseBroker>();
+		private Dictionary<Int32, MetadataResponseBroker> _brokersCollection = new Dictionary<Int32, MetadataResponseBroker>();
 		public Dictionary<Int32, MetadataResponseBroker> BrokersCollection 
 		{
-			get => _BrokersCollection;
+			get => _brokersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17564,7 +17564,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"BrokersCollection is non-nullable.");
 				}
 
-				_BrokersCollection = value;
+				_brokersCollection = value;
 			}
 		}
 
@@ -17625,10 +17625,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The broker ID.
 			/// </summary>
-			private Int32 _NodeId = Int32.Default;
+			private Int32 _nodeId = Int32.Default;
 			public Int32 NodeId 
 			{
-				get => _NodeId;
+				get => _nodeId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17641,17 +17641,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"NodeId is non-nullable.");
 					}
 
-					_NodeId = value;
+					_nodeId = value;
 				}
 			}
 
 			/// <summary>
 			/// The broker hostname.
 			/// </summary>
-			private String _Host = String.Default;
+			private String _host = String.Default;
 			public String Host 
 			{
-				get => _Host;
+				get => _host;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17664,17 +17664,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Host is non-nullable.");
 					}
 
-					_Host = value;
+					_host = value;
 				}
 			}
 
 			/// <summary>
 			/// The broker port.
 			/// </summary>
-			private Int32 _Port = Int32.Default;
+			private Int32 _port = Int32.Default;
 			public Int32 Port 
 			{
-				get => _Port;
+				get => _port;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17687,17 +17687,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Port is non-nullable.");
 					}
 
-					_Port = value;
+					_port = value;
 				}
 			}
 
 			/// <summary>
 			/// The rack of the broker, or null if it has not been assigned to a rack.
 			/// </summary>
-			private String _Rack = new String(null);
+			private String _rack = new String(null);
 			public String Rack 
 			{
-				get => _Rack;
+				get => _rack;
 				set 
 				{
 					if (Version.InRange(new VersionRange(1, 2147483647)) == false &&
@@ -17706,7 +17706,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 1+");
 					}
 
-					_Rack = value;
+					_rack = value;
 				}
 			}
 		}
@@ -17714,10 +17714,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The cluster ID that responding broker belongs to.
 		/// </summary>
-		private String _ClusterId = new String(null);
+		private String _clusterId = new String(null);
 		public String ClusterId 
 		{
-			get => _ClusterId;
+			get => _clusterId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(2, 2147483647)) == false &&
@@ -17726,17 +17726,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 2+");
 				}
 
-				_ClusterId = value;
+				_clusterId = value;
 			}
 		}
 
 		/// <summary>
 		/// The ID of the controller broker.
 		/// </summary>
-		private Int32 _ControllerId = new Int32(-1);
+		private Int32 _controllerId = new Int32(-1);
 		public Int32 ControllerId 
 		{
-			get => _ControllerId;
+			get => _controllerId;
 			set 
 			{
 				if (value == null) 
@@ -17744,17 +17744,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerId is non-nullable.");
 				}
 
-				_ControllerId = value;
+				_controllerId = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
-		private Dictionary<String, MetadataResponseTopic> _TopicsCollection = new Dictionary<String, MetadataResponseTopic>();
+		private Dictionary<String, MetadataResponseTopic> _topicsCollection = new Dictionary<String, MetadataResponseTopic>();
 		public Dictionary<String, MetadataResponseTopic> TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17767,7 +17767,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -17836,10 +17836,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic error, or 0 if there was no error.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17852,17 +17852,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17875,17 +17875,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// True if the topic is internal.
 			/// </summary>
-			private Boolean _IsInternal = new Boolean(false);
+			private Boolean _isInternal = new Boolean(false);
 			public Boolean IsInternal 
 			{
-				get => _IsInternal;
+				get => _isInternal;
 				set 
 				{
 					if (value == null) 
@@ -17893,17 +17893,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"IsInternal is non-nullable.");
 					}
 
-					_IsInternal = value;
+					_isInternal = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition in the topic.
 			/// </summary>
-			private MetadataResponsePartition[] _PartitionsCollection = System.Array.Empty<MetadataResponsePartition>();
+			private MetadataResponsePartition[] _partitionsCollection = System.Array.Empty<MetadataResponsePartition>();
 			public MetadataResponsePartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -17916,7 +17916,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -18001,10 +18001,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition error, or 0 if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18017,17 +18017,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18040,17 +18040,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The ID of the leader broker.
 				/// </summary>
-				private Int32 _LeaderId = Int32.Default;
+				private Int32 _leaderId = Int32.Default;
 				public Int32 LeaderId 
 				{
-					get => _LeaderId;
+					get => _leaderId;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18063,17 +18063,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderId is non-nullable.");
 						}
 
-						_LeaderId = value;
+						_leaderId = value;
 					}
 				}
 
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				private Int32 _LeaderEpoch = new Int32(-1);
+				private Int32 _leaderEpoch = new Int32(-1);
 				public Int32 LeaderEpoch 
 				{
-					get => _LeaderEpoch;
+					get => _leaderEpoch;
 					set 
 					{
 						if (value == null) 
@@ -18081,17 +18081,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 						}
 
-						_LeaderEpoch = value;
+						_leaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The set of all nodes that host this partition.
 				/// </summary>
-				private Int32[] _ReplicaNodesCollection = System.Array.Empty<Int32>();
+				private Int32[] _replicaNodesCollection = System.Array.Empty<Int32>();
 				public Int32[] ReplicaNodesCollection 
 				{
-					get => _ReplicaNodesCollection;
+					get => _replicaNodesCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18104,17 +18104,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ReplicaNodesCollection is non-nullable.");
 						}
 
-						_ReplicaNodesCollection = value;
+						_replicaNodesCollection = value;
 					}
 				}
 
 				/// <summary>
 				/// The set of nodes that are in sync with the leader for this partition.
 				/// </summary>
-				private Int32[] _IsrNodesCollection = System.Array.Empty<Int32>();
+				private Int32[] _isrNodesCollection = System.Array.Empty<Int32>();
 				public Int32[] IsrNodesCollection 
 				{
-					get => _IsrNodesCollection;
+					get => _isrNodesCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18127,17 +18127,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsrNodesCollection is non-nullable.");
 						}
 
-						_IsrNodesCollection = value;
+						_isrNodesCollection = value;
 					}
 				}
 
 				/// <summary>
 				/// The set of offline replicas of this partition.
 				/// </summary>
-				private Int32[] _OfflineReplicasCollection = System.Array.Empty<Int32>();
+				private Int32[] _offlineReplicasCollection = System.Array.Empty<Int32>();
 				public Int32[] OfflineReplicasCollection 
 				{
-					get => _OfflineReplicasCollection;
+					get => _offlineReplicasCollection;
 					set 
 					{
 						if (value == null) 
@@ -18145,7 +18145,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"OfflineReplicasCollection is non-nullable.");
 						}
 
-						_OfflineReplicasCollection = value;
+						_offlineReplicasCollection = value;
 					}
 				}
 			}
@@ -18153,10 +18153,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this topic.
 			/// </summary>
-			private Int32 _TopicAuthorizedOperations = Int32.Default;
+			private Int32 _topicAuthorizedOperations = Int32.Default;
 			public Int32 TopicAuthorizedOperations 
 			{
-				get => _TopicAuthorizedOperations;
+				get => _topicAuthorizedOperations;
 				set 
 				{
 					if (Version.InRange(new VersionRange(8, 2147483647)) == false) 
@@ -18169,7 +18169,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicAuthorizedOperations is non-nullable.");
 					}
 
-					_TopicAuthorizedOperations = value;
+					_topicAuthorizedOperations = value;
 				}
 			}
 		}
@@ -18177,10 +18177,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// 32-bit bitfield to represent authorized operations for this cluster.
 		/// </summary>
-		private Int32 _ClusterAuthorizedOperations = Int32.Default;
+		private Int32 _clusterAuthorizedOperations = Int32.Default;
 		public Int32 ClusterAuthorizedOperations 
 		{
-			get => _ClusterAuthorizedOperations;
+			get => _clusterAuthorizedOperations;
 			set 
 			{
 				if (Version.InRange(new VersionRange(8, 2147483647)) == false) 
@@ -18193,7 +18193,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ClusterAuthorizedOperations is non-nullable.");
 				}
 
-				_ClusterAuthorizedOperations = value;
+				_clusterAuthorizedOperations = value;
 			}
 		}
 	}
@@ -18265,10 +18265,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		private String _GroupId = String.Default;
+		private String _groupId = String.Default;
 		public String GroupId 
 		{
-			get => _GroupId;
+			get => _groupId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18281,17 +18281,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
-				_GroupId = value;
+				_groupId = value;
 			}
 		}
 
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		private Int32 _GenerationId = new Int32(-1);
+		private Int32 _generationId = new Int32(-1);
 		public Int32 GenerationId 
 		{
-			get => _GenerationId;
+			get => _generationId;
 			set 
 			{
 				if (value == null) 
@@ -18299,17 +18299,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GenerationId is non-nullable.");
 				}
 
-				_GenerationId = value;
+				_generationId = value;
 			}
 		}
 
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
 		/// </summary>
-		private String _MemberId = String.Default;
+		private String _memberId = String.Default;
 		public String MemberId 
 		{
-			get => _MemberId;
+			get => _memberId;
 			set 
 			{
 				if (value == null) 
@@ -18317,17 +18317,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId is non-nullable.");
 				}
 
-				_MemberId = value;
+				_memberId = value;
 			}
 		}
 
 		/// <summary>
 		/// The time period in ms to retain the offset.
 		/// </summary>
-		private Int64 _RetentionTimeMs = new Int64(-1);
+		private Int64 _retentionTimeMs = new Int64(-1);
 		public Int64 RetentionTimeMs 
 		{
-			get => _RetentionTimeMs;
+			get => _retentionTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -18335,17 +18335,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RetentionTimeMs is non-nullable.");
 				}
 
-				_RetentionTimeMs = value;
+				_retentionTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The topics to commit offsets for.
 		/// </summary>
-		private OffsetCommitRequestTopic[] _TopicsCollection = System.Array.Empty<OffsetCommitRequestTopic>();
+		private OffsetCommitRequestTopic[] _topicsCollection = System.Array.Empty<OffsetCommitRequestTopic>();
 		public OffsetCommitRequestTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18358,7 +18358,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -18403,10 +18403,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18419,17 +18419,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition to commit offsets for.
 			/// </summary>
-			private OffsetCommitRequestPartition[] _PartitionsCollection = System.Array.Empty<OffsetCommitRequestPartition>();
+			private OffsetCommitRequestPartition[] _partitionsCollection = System.Array.Empty<OffsetCommitRequestPartition>();
 			public OffsetCommitRequestPartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18442,7 +18442,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -18511,10 +18511,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18527,17 +18527,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The message offset to be committed.
 				/// </summary>
-				private Int64 _CommittedOffset = Int64.Default;
+				private Int64 _committedOffset = Int64.Default;
 				public Int64 CommittedOffset 
 				{
-					get => _CommittedOffset;
+					get => _committedOffset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18550,17 +18550,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedOffset is non-nullable.");
 						}
 
-						_CommittedOffset = value;
+						_committedOffset = value;
 					}
 				}
 
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				private Int32 _CommittedLeaderEpoch = new Int32(-1);
+				private Int32 _committedLeaderEpoch = new Int32(-1);
 				public Int32 CommittedLeaderEpoch 
 				{
-					get => _CommittedLeaderEpoch;
+					get => _committedLeaderEpoch;
 					set 
 					{
 						if (value == null) 
@@ -18568,17 +18568,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedLeaderEpoch is non-nullable.");
 						}
 
-						_CommittedLeaderEpoch = value;
+						_committedLeaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The timestamp of the commit.
 				/// </summary>
-				private Int64 _CommitTimestamp = new Int64(-1);
+				private Int64 _commitTimestamp = new Int64(-1);
 				public Int64 CommitTimestamp 
 				{
-					get => _CommitTimestamp;
+					get => _commitTimestamp;
 					set 
 					{
 						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -18591,17 +18591,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommitTimestamp is non-nullable.");
 						}
 
-						_CommitTimestamp = value;
+						_commitTimestamp = value;
 					}
 				}
 
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
 				/// </summary>
-				private String _CommittedMetadata = String.Default;
+				private String _committedMetadata = String.Default;
 				public String CommittedMetadata 
 				{
-					get => _CommittedMetadata;
+					get => _committedMetadata;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18615,7 +18615,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedMetadata does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_CommittedMetadata = value;
+						_committedMetadata = value;
 					}
 				}
 			}
@@ -18665,10 +18665,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -18676,17 +18676,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
-		private OffsetCommitResponseTopic[] _TopicsCollection = System.Array.Empty<OffsetCommitResponseTopic>();
+		private OffsetCommitResponseTopic[] _topicsCollection = System.Array.Empty<OffsetCommitResponseTopic>();
 		public OffsetCommitResponseTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18699,7 +18699,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -18744,10 +18744,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18760,17 +18760,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The responses for each partition in the topic.
 			/// </summary>
-			private OffsetCommitResponsePartition[] _PartitionsCollection = System.Array.Empty<OffsetCommitResponsePartition>();
+			private OffsetCommitResponsePartition[] _partitionsCollection = System.Array.Empty<OffsetCommitResponsePartition>();
 			public OffsetCommitResponsePartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18783,7 +18783,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -18828,10 +18828,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18844,17 +18844,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18867,7 +18867,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 			}
@@ -18917,10 +18917,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The group to fetch offsets for.
 		/// </summary>
-		private String _GroupId = String.Default;
+		private String _groupId = String.Default;
 		public String GroupId 
 		{
-			get => _GroupId;
+			get => _groupId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18933,17 +18933,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
-				_GroupId = value;
+				_groupId = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.
 		/// </summary>
-		private OffsetFetchRequestTopic[] _TopicsCollection = System.Array.Empty<OffsetFetchRequestTopic>();
+		private OffsetFetchRequestTopic[] _topicsCollection = System.Array.Empty<OffsetFetchRequestTopic>();
 		public OffsetFetchRequestTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -18957,7 +18957,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 2+");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -18999,10 +18999,10 @@ namespace Kafka.Protocol
 				}
 			}
 
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19015,17 +19015,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition indexes we would like to fetch offsets for.
 			/// </summary>
-			private Int32[] _PartitionIndexesCollection = System.Array.Empty<Int32>();
+			private Int32[] _partitionIndexesCollection = System.Array.Empty<Int32>();
 			public Int32[] PartitionIndexesCollection 
 			{
-				get => _PartitionIndexesCollection;
+				get => _partitionIndexesCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19038,7 +19038,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndexesCollection is non-nullable.");
 					}
 
-					_PartitionIndexesCollection = value;
+					_partitionIndexesCollection = value;
 				}
 			}
 		}
@@ -19095,10 +19095,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -19106,17 +19106,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The responses per topic.
 		/// </summary>
-		private OffsetFetchResponseTopic[] _TopicsCollection = System.Array.Empty<OffsetFetchResponseTopic>();
+		private OffsetFetchResponseTopic[] _topicsCollection = System.Array.Empty<OffsetFetchResponseTopic>();
 		public OffsetFetchResponseTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19129,7 +19129,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -19174,10 +19174,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19190,17 +19190,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The responses per partition
 			/// </summary>
-			private OffsetFetchResponsePartition[] _PartitionsCollection = System.Array.Empty<OffsetFetchResponsePartition>();
+			private OffsetFetchResponsePartition[] _partitionsCollection = System.Array.Empty<OffsetFetchResponsePartition>();
 			public OffsetFetchResponsePartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19213,7 +19213,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -19282,10 +19282,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19298,17 +19298,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The committed message offset.
 				/// </summary>
-				private Int64 _CommittedOffset = Int64.Default;
+				private Int64 _committedOffset = Int64.Default;
 				public Int64 CommittedOffset 
 				{
-					get => _CommittedOffset;
+					get => _committedOffset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19321,17 +19321,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedOffset is non-nullable.");
 						}
 
-						_CommittedOffset = value;
+						_committedOffset = value;
 					}
 				}
 
 				/// <summary>
 				/// The leader epoch.
 				/// </summary>
-				private Int32 _CommittedLeaderEpoch = Int32.Default;
+				private Int32 _committedLeaderEpoch = Int32.Default;
 				public Int32 CommittedLeaderEpoch 
 				{
-					get => _CommittedLeaderEpoch;
+					get => _committedLeaderEpoch;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -19344,17 +19344,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedLeaderEpoch is non-nullable.");
 						}
 
-						_CommittedLeaderEpoch = value;
+						_committedLeaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The partition metadata.
 				/// </summary>
-				private String _Metadata = String.Default;
+				private String _metadata = String.Default;
 				public String Metadata 
 				{
-					get => _Metadata;
+					get => _metadata;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19368,17 +19368,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Metadata does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_Metadata = value;
+						_metadata = value;
 					}
 				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19391,7 +19391,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 			}
@@ -19400,10 +19400,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = new Int16(0);
+		private Int16 _errorCode = new Int16(0);
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
@@ -19416,7 +19416,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 	}
@@ -19456,10 +19456,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic to get offsets for.
 		/// </summary>
-		private OffsetForLeaderTopic[] _TopicsCollection = System.Array.Empty<OffsetForLeaderTopic>();
+		private OffsetForLeaderTopic[] _topicsCollection = System.Array.Empty<OffsetForLeaderTopic>();
 		public OffsetForLeaderTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19472,7 +19472,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -19517,10 +19517,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19533,17 +19533,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition to get offsets for.
 			/// </summary>
-			private OffsetForLeaderPartition[] _PartitionsCollection = System.Array.Empty<OffsetForLeaderPartition>();
+			private OffsetForLeaderPartition[] _partitionsCollection = System.Array.Empty<OffsetForLeaderPartition>();
 			public OffsetForLeaderPartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19556,7 +19556,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -19609,10 +19609,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19625,17 +19625,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// An epoch used to fence consumers/replicas with old metadata.  If the epoch provided by the client is larger than the current epoch known to the broker, then the UNKNOWN_LEADER_EPOCH error code will be returned. If the provided epoch is smaller, then the FENCED_LEADER_EPOCH error code will be returned.
 				/// </summary>
-				private Int32 _CurrentLeaderEpoch = new Int32(-1);
+				private Int32 _currentLeaderEpoch = new Int32(-1);
 				public Int32 CurrentLeaderEpoch 
 				{
-					get => _CurrentLeaderEpoch;
+					get => _currentLeaderEpoch;
 					set 
 					{
 						if (value == null) 
@@ -19643,17 +19643,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CurrentLeaderEpoch is non-nullable.");
 						}
 
-						_CurrentLeaderEpoch = value;
+						_currentLeaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The epoch to look up an offset for.
 				/// </summary>
-				private Int32 _LeaderEpoch = Int32.Default;
+				private Int32 _leaderEpoch = Int32.Default;
 				public Int32 LeaderEpoch 
 				{
-					get => _LeaderEpoch;
+					get => _leaderEpoch;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19666,7 +19666,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 						}
 
-						_LeaderEpoch = value;
+						_leaderEpoch = value;
 					}
 				}
 			}
@@ -19716,10 +19716,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -19727,17 +19727,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic we fetched offsets for.
 		/// </summary>
-		private OffsetForLeaderTopicResult[] _TopicsCollection = System.Array.Empty<OffsetForLeaderTopicResult>();
+		private OffsetForLeaderTopicResult[] _topicsCollection = System.Array.Empty<OffsetForLeaderTopicResult>();
 		public OffsetForLeaderTopicResult[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19750,7 +19750,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -19795,10 +19795,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19811,17 +19811,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition in the topic we fetched offsets for.
 			/// </summary>
-			private OffsetForLeaderPartitionResult[] _PartitionsCollection = System.Array.Empty<OffsetForLeaderPartitionResult>();
+			private OffsetForLeaderPartitionResult[] _partitionsCollection = System.Array.Empty<OffsetForLeaderPartitionResult>();
 			public OffsetForLeaderPartitionResult[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19834,7 +19834,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -19895,10 +19895,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The error code 0, or if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19911,17 +19911,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19934,17 +19934,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The leader epoch of the partition.
 				/// </summary>
-				private Int32 _LeaderEpoch = new Int32(-1);
+				private Int32 _leaderEpoch = new Int32(-1);
 				public Int32 LeaderEpoch 
 				{
-					get => _LeaderEpoch;
+					get => _leaderEpoch;
 					set 
 					{
 						if (value == null) 
@@ -19952,17 +19952,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 						}
 
-						_LeaderEpoch = value;
+						_leaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The end offset of the epoch.
 				/// </summary>
-				private Int64 _EndOffset = Int64.Default;
+				private Int64 _endOffset = Int64.Default;
 				public Int64 EndOffset 
 				{
-					get => _EndOffset;
+					get => _endOffset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -19975,7 +19975,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"EndOffset is non-nullable.");
 						}
 
-						_EndOffset = value;
+						_endOffset = value;
 					}
 				}
 			}
@@ -20041,10 +20041,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transactional ID, or null if the producer is not transactional.
 		/// </summary>
-		private String _TransactionalId = String.Default;
+		private String _transactionalId = String.Default;
 		public String TransactionalId 
 		{
-			get => _TransactionalId;
+			get => _transactionalId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
@@ -20058,17 +20058,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TransactionalId does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_TransactionalId = value;
+				_transactionalId = value;
 			}
 		}
 
 		/// <summary>
 		/// The number of acknowledgments the producer requires the leader to have received before considering a request complete. Allowed values: 0 for no acknowledgments, 1 for only the leader and -1 for the full ISR.
 		/// </summary>
-		private Int16 _Acks = Int16.Default;
+		private Int16 _acks = Int16.Default;
 		public Int16 Acks 
 		{
-			get => _Acks;
+			get => _acks;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20081,17 +20081,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Acks is non-nullable.");
 				}
 
-				_Acks = value;
+				_acks = value;
 			}
 		}
 
 		/// <summary>
 		/// The timeout to await a response in miliseconds.
 		/// </summary>
-		private Int32 _TimeoutMs = Int32.Default;
+		private Int32 _timeoutMs = Int32.Default;
 		public Int32 TimeoutMs 
 		{
-			get => _TimeoutMs;
+			get => _timeoutMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20104,17 +20104,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
-				_TimeoutMs = value;
+				_timeoutMs = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic to produce to.
 		/// </summary>
-		private TopicProduceData[] _TopicsCollection = System.Array.Empty<TopicProduceData>();
+		private TopicProduceData[] _topicsCollection = System.Array.Empty<TopicProduceData>();
 		public TopicProduceData[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20127,7 +20127,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -20172,10 +20172,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20188,17 +20188,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition to produce to.
 			/// </summary>
-			private PartitionProduceData[] _PartitionsCollection = System.Array.Empty<PartitionProduceData>();
+			private PartitionProduceData[] _partitionsCollection = System.Array.Empty<PartitionProduceData>();
 			public PartitionProduceData[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20211,7 +20211,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -20256,10 +20256,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20272,17 +20272,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The record data to be produced.
 				/// </summary>
-				private Bytes _Records = Bytes.Default;
+				private Bytes _records = Bytes.Default;
 				public Bytes Records 
 				{
-					get => _Records;
+					get => _records;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20296,7 +20296,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Records does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_Records = value;
+						_records = value;
 					}
 				}
 			}
@@ -20346,10 +20346,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each produce response
 		/// </summary>
-		private TopicProduceResponse[] _ResponsesCollection = System.Array.Empty<TopicProduceResponse>();
+		private TopicProduceResponse[] _responsesCollection = System.Array.Empty<TopicProduceResponse>();
 		public TopicProduceResponse[] ResponsesCollection 
 		{
-			get => _ResponsesCollection;
+			get => _responsesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20362,7 +20362,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResponsesCollection is non-nullable.");
 				}
 
-				_ResponsesCollection = value;
+				_responsesCollection = value;
 			}
 		}
 
@@ -20407,10 +20407,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20423,17 +20423,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// Each partition that we produced to within the topic.
 			/// </summary>
-			private PartitionProduceResponse[] _PartitionsCollection = System.Array.Empty<PartitionProduceResponse>();
+			private PartitionProduceResponse[] _partitionsCollection = System.Array.Empty<PartitionProduceResponse>();
 			public PartitionProduceResponse[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20446,7 +20446,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -20515,10 +20515,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20531,17 +20531,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20554,17 +20554,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 
 				/// <summary>
 				/// The base offset.
 				/// </summary>
-				private Int64 _BaseOffset = Int64.Default;
+				private Int64 _baseOffset = Int64.Default;
 				public Int64 BaseOffset 
 				{
-					get => _BaseOffset;
+					get => _baseOffset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20577,17 +20577,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"BaseOffset is non-nullable.");
 						}
 
-						_BaseOffset = value;
+						_baseOffset = value;
 					}
 				}
 
 				/// <summary>
 				/// The timestamp returned by broker after appending the messages. If CreateTime is used for the topic, the timestamp will be -1.  If LogAppendTime is used for the topic, the timestamp will be the broker local time when the messages are appended.
 				/// </summary>
-				private Int64 _LogAppendTimeMs = new Int64(-1);
+				private Int64 _logAppendTimeMs = new Int64(-1);
 				public Int64 LogAppendTimeMs 
 				{
-					get => _LogAppendTimeMs;
+					get => _logAppendTimeMs;
 					set 
 					{
 						if (value == null) 
@@ -20595,17 +20595,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LogAppendTimeMs is non-nullable.");
 						}
 
-						_LogAppendTimeMs = value;
+						_logAppendTimeMs = value;
 					}
 				}
 
 				/// <summary>
 				/// The log start offset.
 				/// </summary>
-				private Int64 _LogStartOffset = new Int64(-1);
+				private Int64 _logStartOffset = new Int64(-1);
 				public Int64 LogStartOffset 
 				{
-					get => _LogStartOffset;
+					get => _logStartOffset;
 					set 
 					{
 						if (value == null) 
@@ -20613,7 +20613,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LogStartOffset is non-nullable.");
 						}
 
-						_LogStartOffset = value;
+						_logStartOffset = value;
 					}
 				}
 			}
@@ -20622,10 +20622,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -20633,7 +20633,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 	}
@@ -20681,10 +20681,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The HMAC of the delegation token to be renewed.
 		/// </summary>
-		private Bytes _Hmac = Bytes.Default;
+		private Bytes _hmac = Bytes.Default;
 		public Bytes Hmac 
 		{
-			get => _Hmac;
+			get => _hmac;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20697,17 +20697,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Hmac is non-nullable.");
 				}
 
-				_Hmac = value;
+				_hmac = value;
 			}
 		}
 
 		/// <summary>
 		/// The renewal time period in milliseconds.
 		/// </summary>
-		private Int64 _RenewPeriodMs = Int64.Default;
+		private Int64 _renewPeriodMs = Int64.Default;
 		public Int64 RenewPeriodMs 
 		{
-			get => _RenewPeriodMs;
+			get => _renewPeriodMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20720,7 +20720,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RenewPeriodMs is non-nullable.");
 				}
 
-				_RenewPeriodMs = value;
+				_renewPeriodMs = value;
 			}
 		}
 	}
@@ -20776,10 +20776,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20792,17 +20792,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
 		/// </summary>
-		private Int64 _ExpiryTimestampMs = Int64.Default;
+		private Int64 _expiryTimestampMs = Int64.Default;
 		public Int64 ExpiryTimestampMs 
 		{
-			get => _ExpiryTimestampMs;
+			get => _expiryTimestampMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20815,17 +20815,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ExpiryTimestampMs is non-nullable.");
 				}
 
-				_ExpiryTimestampMs = value;
+				_expiryTimestampMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20838,7 +20838,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 	}
@@ -20902,10 +20902,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The API key of this request.
 		/// </summary>
-		private Int16 _RequestApiKey = Int16.Default;
+		private Int16 _requestApiKey = Int16.Default;
 		public Int16 RequestApiKey 
 		{
-			get => _RequestApiKey;
+			get => _requestApiKey;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20918,17 +20918,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RequestApiKey is non-nullable.");
 				}
 
-				_RequestApiKey = value;
+				_requestApiKey = value;
 			}
 		}
 
 		/// <summary>
 		/// The API version of this request.
 		/// </summary>
-		private Int16 _RequestApiVersion = Int16.Default;
+		private Int16 _requestApiVersion = Int16.Default;
 		public Int16 RequestApiVersion 
 		{
-			get => _RequestApiVersion;
+			get => _requestApiVersion;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20941,17 +20941,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RequestApiVersion is non-nullable.");
 				}
 
-				_RequestApiVersion = value;
+				_requestApiVersion = value;
 			}
 		}
 
 		/// <summary>
 		/// The correlation ID of this request.
 		/// </summary>
-		private Int32 _CorrelationId = Int32.Default;
+		private Int32 _correlationId = Int32.Default;
 		public Int32 CorrelationId 
 		{
-			get => _CorrelationId;
+			get => _correlationId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20964,17 +20964,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"CorrelationId is non-nullable.");
 				}
 
-				_CorrelationId = value;
+				_correlationId = value;
 			}
 		}
 
 		/// <summary>
 		/// The client ID string.
 		/// </summary>
-		private String _ClientId = String.Default;
+		private String _clientId = String.Default;
 		public String ClientId 
 		{
-			get => _ClientId;
+			get => _clientId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -20987,7 +20987,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ClientId is non-nullable.");
 				}
 
-				_ClientId = value;
+				_clientId = value;
 			}
 		}
 	}
@@ -21027,10 +21027,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The correlation ID of this response.
 		/// </summary>
-		private Int32 _CorrelationId = Int32.Default;
+		private Int32 _correlationId = Int32.Default;
 		public Int32 CorrelationId 
 		{
-			get => _CorrelationId;
+			get => _correlationId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21043,7 +21043,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"CorrelationId is non-nullable.");
 				}
 
-				_CorrelationId = value;
+				_correlationId = value;
 			}
 		}
 	}
@@ -21083,10 +21083,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The SASL authentication bytes from the client, as defined by the SASL mechanism.
 		/// </summary>
-		private Bytes _AuthBytes = Bytes.Default;
+		private Bytes _authBytes = Bytes.Default;
 		public Bytes AuthBytes 
 		{
-			get => _AuthBytes;
+			get => _authBytes;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21099,7 +21099,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"AuthBytes is non-nullable.");
 				}
 
-				_AuthBytes = value;
+				_authBytes = value;
 			}
 		}
 	}
@@ -21163,10 +21163,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21179,17 +21179,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		private String _ErrorMessage = String.Default;
+		private String _errorMessage = String.Default;
 		public String ErrorMessage 
 		{
-			get => _ErrorMessage;
+			get => _errorMessage;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21203,17 +21203,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
 				}
 
-				_ErrorMessage = value;
+				_errorMessage = value;
 			}
 		}
 
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
 		/// </summary>
-		private Bytes _AuthBytes = Bytes.Default;
+		private Bytes _authBytes = Bytes.Default;
 		public Bytes AuthBytes 
 		{
-			get => _AuthBytes;
+			get => _authBytes;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21226,17 +21226,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"AuthBytes is non-nullable.");
 				}
 
-				_AuthBytes = value;
+				_authBytes = value;
 			}
 		}
 
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
 		/// </summary>
-		private Int64 _SessionLifetimeMs = new Int64(0);
+		private Int64 _sessionLifetimeMs = new Int64(0);
 		public Int64 SessionLifetimeMs 
 		{
-			get => _SessionLifetimeMs;
+			get => _sessionLifetimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -21249,7 +21249,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"SessionLifetimeMs is non-nullable.");
 				}
 
-				_SessionLifetimeMs = value;
+				_sessionLifetimeMs = value;
 			}
 		}
 	}
@@ -21289,10 +21289,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The SASL mechanism chosen by the client.
 		/// </summary>
-		private String _Mechanism = String.Default;
+		private String _mechanism = String.Default;
 		public String Mechanism 
 		{
-			get => _Mechanism;
+			get => _mechanism;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21305,7 +21305,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Mechanism is non-nullable.");
 				}
 
-				_Mechanism = value;
+				_mechanism = value;
 			}
 		}
 	}
@@ -21353,10 +21353,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21369,17 +21369,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The mechanisms enabled in the server.
 		/// </summary>
-		private String[] _MechanismsCollection = System.Array.Empty<String>();
+		private String[] _mechanismsCollection = System.Array.Empty<String>();
 		public String[] MechanismsCollection 
 		{
-			get => _MechanismsCollection;
+			get => _mechanismsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21392,7 +21392,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MechanismsCollection is non-nullable.");
 				}
 
-				_MechanismsCollection = value;
+				_mechanismsCollection = value;
 			}
 		}
 	}
@@ -21472,10 +21472,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The controller id.
 		/// </summary>
-		private Int32 _ControllerId = Int32.Default;
+		private Int32 _controllerId = Int32.Default;
 		public Int32 ControllerId 
 		{
-			get => _ControllerId;
+			get => _controllerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21488,17 +21488,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerId is non-nullable.");
 				}
 
-				_ControllerId = value;
+				_controllerId = value;
 			}
 		}
 
 		/// <summary>
 		/// The controller epoch.
 		/// </summary>
-		private Int32 _ControllerEpoch = Int32.Default;
+		private Int32 _controllerEpoch = Int32.Default;
 		public Int32 ControllerEpoch 
 		{
-			get => _ControllerEpoch;
+			get => _controllerEpoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21511,17 +21511,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 				}
 
-				_ControllerEpoch = value;
+				_controllerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		private Int64 _BrokerEpoch = new Int64(-1);
+		private Int64 _brokerEpoch = new Int64(-1);
 		public Int64 BrokerEpoch 
 		{
-			get => _BrokerEpoch;
+			get => _brokerEpoch;
 			set 
 			{
 				if (value == null) 
@@ -21529,17 +21529,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"BrokerEpoch is non-nullable.");
 				}
 
-				_BrokerEpoch = value;
+				_brokerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// Whether these partitions should be deleted.
 		/// </summary>
-		private Boolean _DeletePartitions = Boolean.Default;
+		private Boolean _deletePartitions = Boolean.Default;
 		public Boolean DeletePartitions 
 		{
-			get => _DeletePartitions;
+			get => _deletePartitions;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21552,17 +21552,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"DeletePartitions is non-nullable.");
 				}
 
-				_DeletePartitions = value;
+				_deletePartitions = value;
 			}
 		}
 
 		/// <summary>
 		/// The partitions to stop.
 		/// </summary>
-		private StopReplicaRequestPartitionV0[] _PartitionsV0Collection = System.Array.Empty<StopReplicaRequestPartitionV0>();
+		private StopReplicaRequestPartitionV0[] _partitionsV0Collection = System.Array.Empty<StopReplicaRequestPartitionV0>();
 		public StopReplicaRequestPartitionV0[] PartitionsV0Collection 
 		{
-			get => _PartitionsV0Collection;
+			get => _partitionsV0Collection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21575,7 +21575,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PartitionsV0Collection is non-nullable.");
 				}
 
-				_PartitionsV0Collection = value;
+				_partitionsV0Collection = value;
 			}
 		}
 
@@ -21620,10 +21620,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _TopicName = String.Default;
+			private String _topicName = String.Default;
 			public String TopicName 
 			{
-				get => _TopicName;
+				get => _topicName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21636,17 +21636,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
-					_TopicName = value;
+					_topicName = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			private Int32 _PartitionIndex = Int32.Default;
+			private Int32 _partitionIndex = Int32.Default;
 			public Int32 PartitionIndex 
 			{
-				get => _PartitionIndex;
+				get => _partitionIndex;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21659,7 +21659,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 					}
 
-					_PartitionIndex = value;
+					_partitionIndex = value;
 				}
 			}
 		}
@@ -21667,10 +21667,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to stop.
 		/// </summary>
-		private StopReplicaRequestTopic[] _TopicsCollection = System.Array.Empty<StopReplicaRequestTopic>();
+		private StopReplicaRequestTopic[] _topicsCollection = System.Array.Empty<StopReplicaRequestTopic>();
 		public StopReplicaRequestTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -21683,7 +21683,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -21728,10 +21728,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -21744,17 +21744,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition indexes.
 			/// </summary>
-			private Int32[] _PartitionIndexesCollection = System.Array.Empty<Int32>();
+			private Int32[] _partitionIndexesCollection = System.Array.Empty<Int32>();
 			public Int32[] PartitionIndexesCollection 
 			{
-				get => _PartitionIndexesCollection;
+				get => _partitionIndexesCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -21767,7 +21767,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndexesCollection is non-nullable.");
 					}
 
-					_PartitionIndexesCollection = value;
+					_partitionIndexesCollection = value;
 				}
 			}
 		}
@@ -21816,10 +21816,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The top-level error code, or 0 if there was no top-level error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21832,17 +21832,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The responses for each partition.
 		/// </summary>
-		private StopReplicaResponsePartition[] _PartitionsCollection = System.Array.Empty<StopReplicaResponsePartition>();
+		private StopReplicaResponsePartition[] _partitionsCollection = System.Array.Empty<StopReplicaResponsePartition>();
 		public StopReplicaResponsePartition[] PartitionsCollection 
 		{
-			get => _PartitionsCollection;
+			get => _partitionsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21855,7 +21855,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 				}
 
-				_PartitionsCollection = value;
+				_partitionsCollection = value;
 			}
 		}
 
@@ -21908,10 +21908,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _TopicName = String.Default;
+			private String _topicName = String.Default;
 			public String TopicName 
 			{
-				get => _TopicName;
+				get => _topicName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21924,17 +21924,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
-					_TopicName = value;
+					_topicName = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			private Int32 _PartitionIndex = Int32.Default;
+			private Int32 _partitionIndex = Int32.Default;
 			public Int32 PartitionIndex 
 			{
-				get => _PartitionIndex;
+				get => _partitionIndex;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21947,17 +21947,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 					}
 
-					_PartitionIndex = value;
+					_partitionIndex = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition error code, or 0 if there was no partition error.
 			/// </summary>
-			private Int16 _ErrorCode = Int16.Default;
+			private Int16 _errorCode = Int16.Default;
 			public Int16 ErrorCode 
 			{
-				get => _ErrorCode;
+				get => _errorCode;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -21970,7 +21970,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
-					_ErrorCode = value;
+					_errorCode = value;
 				}
 			}
 		}
@@ -22035,10 +22035,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
-		private String _GroupId = String.Default;
+		private String _groupId = String.Default;
 		public String GroupId 
 		{
-			get => _GroupId;
+			get => _groupId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22051,17 +22051,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
-				_GroupId = value;
+				_groupId = value;
 			}
 		}
 
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		private Int32 _GenerationId = Int32.Default;
+		private Int32 _generationId = Int32.Default;
 		public Int32 GenerationId 
 		{
-			get => _GenerationId;
+			get => _generationId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22074,17 +22074,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GenerationId is non-nullable.");
 				}
 
-				_GenerationId = value;
+				_generationId = value;
 			}
 		}
 
 		/// <summary>
 		/// The member ID assigned by the group.
 		/// </summary>
-		private String _MemberId = String.Default;
+		private String _memberId = String.Default;
 		public String MemberId 
 		{
-			get => _MemberId;
+			get => _memberId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22097,17 +22097,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId is non-nullable.");
 				}
 
-				_MemberId = value;
+				_memberId = value;
 			}
 		}
 
 		/// <summary>
 		/// Each assignment.
 		/// </summary>
-		private SyncGroupRequestAssignment[] _AssignmentsCollection = System.Array.Empty<SyncGroupRequestAssignment>();
+		private SyncGroupRequestAssignment[] _assignmentsCollection = System.Array.Empty<SyncGroupRequestAssignment>();
 		public SyncGroupRequestAssignment[] AssignmentsCollection 
 		{
-			get => _AssignmentsCollection;
+			get => _assignmentsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22120,7 +22120,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"AssignmentsCollection is non-nullable.");
 				}
 
-				_AssignmentsCollection = value;
+				_assignmentsCollection = value;
 			}
 		}
 
@@ -22165,10 +22165,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The ID of the member to assign.
 			/// </summary>
-			private String _MemberId = String.Default;
+			private String _memberId = String.Default;
 			public String MemberId 
 			{
-				get => _MemberId;
+				get => _memberId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22181,17 +22181,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MemberId is non-nullable.");
 					}
 
-					_MemberId = value;
+					_memberId = value;
 				}
 			}
 
 			/// <summary>
 			/// The member assignment.
 			/// </summary>
-			private Bytes _Assignment = Bytes.Default;
+			private Bytes _assignment = Bytes.Default;
 			public Bytes Assignment 
 			{
-				get => _Assignment;
+				get => _assignment;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22204,7 +22204,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Assignment is non-nullable.");
 					}
 
-					_Assignment = value;
+					_assignment = value;
 				}
 			}
 		}
@@ -22261,10 +22261,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (value == null) 
@@ -22272,17 +22272,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22295,17 +22295,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 
 		/// <summary>
 		/// The member assignment.
 		/// </summary>
-		private Bytes _Assignment = Bytes.Default;
+		private Bytes _assignment = Bytes.Default;
 		public Bytes Assignment 
 		{
-			get => _Assignment;
+			get => _assignment;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22318,7 +22318,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Assignment is non-nullable.");
 				}
 
-				_Assignment = value;
+				_assignment = value;
 			}
 		}
 	}
@@ -22390,10 +22390,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The ID of the transaction.
 		/// </summary>
-		private String _TransactionalId = String.Default;
+		private String _transactionalId = String.Default;
 		public String TransactionalId 
 		{
-			get => _TransactionalId;
+			get => _transactionalId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22406,17 +22406,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TransactionalId is non-nullable.");
 				}
 
-				_TransactionalId = value;
+				_transactionalId = value;
 			}
 		}
 
 		/// <summary>
 		/// The ID of the group.
 		/// </summary>
-		private String _GroupId = String.Default;
+		private String _groupId = String.Default;
 		public String GroupId 
 		{
-			get => _GroupId;
+			get => _groupId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22429,17 +22429,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
-				_GroupId = value;
+				_groupId = value;
 			}
 		}
 
 		/// <summary>
 		/// The current producer ID in use by the transactional ID.
 		/// </summary>
-		private Int64 _ProducerId = Int64.Default;
+		private Int64 _producerId = Int64.Default;
 		public Int64 ProducerId 
 		{
-			get => _ProducerId;
+			get => _producerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22452,17 +22452,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 				}
 
-				_ProducerId = value;
+				_producerId = value;
 			}
 		}
 
 		/// <summary>
 		/// The current epoch associated with the producer ID.
 		/// </summary>
-		private Int16 _ProducerEpoch = Int16.Default;
+		private Int16 _producerEpoch = Int16.Default;
 		public Int16 ProducerEpoch 
 		{
-			get => _ProducerEpoch;
+			get => _producerEpoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22475,17 +22475,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
 				}
 
-				_ProducerEpoch = value;
+				_producerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic that we want to committ offsets for.
 		/// </summary>
-		private TxnOffsetCommitRequestTopic[] _TopicsCollection = System.Array.Empty<TxnOffsetCommitRequestTopic>();
+		private TxnOffsetCommitRequestTopic[] _topicsCollection = System.Array.Empty<TxnOffsetCommitRequestTopic>();
 		public TxnOffsetCommitRequestTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22498,7 +22498,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -22543,10 +22543,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22559,17 +22559,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The partitions inside the topic that we want to committ offsets for.
 			/// </summary>
-			private TxnOffsetCommitRequestPartition[] _PartitionsCollection = System.Array.Empty<TxnOffsetCommitRequestPartition>();
+			private TxnOffsetCommitRequestPartition[] _partitionsCollection = System.Array.Empty<TxnOffsetCommitRequestPartition>();
 			public TxnOffsetCommitRequestPartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22582,7 +22582,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -22643,10 +22643,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The index of the partition within the topic.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22659,17 +22659,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The message offset to be committed.
 				/// </summary>
-				private Int64 _CommittedOffset = Int64.Default;
+				private Int64 _committedOffset = Int64.Default;
 				public Int64 CommittedOffset 
 				{
-					get => _CommittedOffset;
+					get => _committedOffset;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22682,17 +22682,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedOffset is non-nullable.");
 						}
 
-						_CommittedOffset = value;
+						_committedOffset = value;
 					}
 				}
 
 				/// <summary>
 				/// The leader epoch of the last consumed record.
 				/// </summary>
-				private Int32 _CommittedLeaderEpoch = new Int32(-1);
+				private Int32 _committedLeaderEpoch = new Int32(-1);
 				public Int32 CommittedLeaderEpoch 
 				{
-					get => _CommittedLeaderEpoch;
+					get => _committedLeaderEpoch;
 					set 
 					{
 						if (value == null) 
@@ -22700,17 +22700,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedLeaderEpoch is non-nullable.");
 						}
 
-						_CommittedLeaderEpoch = value;
+						_committedLeaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
 				/// </summary>
-				private String _CommittedMetadata = String.Default;
+				private String _committedMetadata = String.Default;
 				public String CommittedMetadata 
 				{
-					get => _CommittedMetadata;
+					get => _committedMetadata;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22724,7 +22724,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedMetadata does not support null for version {Version}. Supported versions for null value: 0+");
 						}
 
-						_CommittedMetadata = value;
+						_committedMetadata = value;
 					}
 				}
 			}
@@ -22774,10 +22774,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
-		private Int32 _ThrottleTimeMs = Int32.Default;
+		private Int32 _throttleTimeMs = Int32.Default;
 		public Int32 ThrottleTimeMs 
 		{
-			get => _ThrottleTimeMs;
+			get => _throttleTimeMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22790,17 +22790,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
-				_ThrottleTimeMs = value;
+				_throttleTimeMs = value;
 			}
 		}
 
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
-		private TxnOffsetCommitResponseTopic[] _TopicsCollection = System.Array.Empty<TxnOffsetCommitResponseTopic>();
+		private TxnOffsetCommitResponseTopic[] _topicsCollection = System.Array.Empty<TxnOffsetCommitResponseTopic>();
 		public TxnOffsetCommitResponseTopic[] TopicsCollection 
 		{
-			get => _TopicsCollection;
+			get => _topicsCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22813,7 +22813,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
-				_TopicsCollection = value;
+				_topicsCollection = value;
 			}
 		}
 
@@ -22858,10 +22858,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _Name = String.Default;
+			private String _name = String.Default;
 			public String Name 
 			{
-				get => _Name;
+				get => _name;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22874,17 +22874,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
-					_Name = value;
+					_name = value;
 				}
 			}
 
 			/// <summary>
 			/// The responses for each partition in the topic.
 			/// </summary>
-			private TxnOffsetCommitResponsePartition[] _PartitionsCollection = System.Array.Empty<TxnOffsetCommitResponsePartition>();
+			private TxnOffsetCommitResponsePartition[] _partitionsCollection = System.Array.Empty<TxnOffsetCommitResponsePartition>();
 			public TxnOffsetCommitResponsePartition[] PartitionsCollection 
 			{
-				get => _PartitionsCollection;
+				get => _partitionsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22897,7 +22897,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
-					_PartitionsCollection = value;
+					_partitionsCollection = value;
 				}
 			}
 
@@ -22942,10 +22942,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partitition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22958,17 +22958,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
 				/// </summary>
-				private Int16 _ErrorCode = Int16.Default;
+				private Int16 _errorCode = Int16.Default;
 				public Int16 ErrorCode 
 				{
-					get => _ErrorCode;
+					get => _errorCode;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -22981,7 +22981,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
-						_ErrorCode = value;
+						_errorCode = value;
 					}
 				}
 			}
@@ -23063,10 +23063,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The controller id.
 		/// </summary>
-		private Int32 _ControllerId = Int32.Default;
+		private Int32 _controllerId = Int32.Default;
 		public Int32 ControllerId 
 		{
-			get => _ControllerId;
+			get => _controllerId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -23079,17 +23079,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerId is non-nullable.");
 				}
 
-				_ControllerId = value;
+				_controllerId = value;
 			}
 		}
 
 		/// <summary>
 		/// The controller epoch.
 		/// </summary>
-		private Int32 _ControllerEpoch = Int32.Default;
+		private Int32 _controllerEpoch = Int32.Default;
 		public Int32 ControllerEpoch 
 		{
-			get => _ControllerEpoch;
+			get => _controllerEpoch;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -23102,17 +23102,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 				}
 
-				_ControllerEpoch = value;
+				_controllerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
-		private Int64 _BrokerEpoch = new Int64(-1);
+		private Int64 _brokerEpoch = new Int64(-1);
 		public Int64 BrokerEpoch 
 		{
-			get => _BrokerEpoch;
+			get => _brokerEpoch;
 			set 
 			{
 				if (value == null) 
@@ -23120,17 +23120,17 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"BrokerEpoch is non-nullable.");
 				}
 
-				_BrokerEpoch = value;
+				_brokerEpoch = value;
 			}
 		}
 
 		/// <summary>
 		/// Each topic that we would like to update.
 		/// </summary>
-		private UpdateMetadataRequestTopicState[] _TopicStatesCollection = System.Array.Empty<UpdateMetadataRequestTopicState>();
+		private UpdateMetadataRequestTopicState[] _topicStatesCollection = System.Array.Empty<UpdateMetadataRequestTopicState>();
 		public UpdateMetadataRequestTopicState[] TopicStatesCollection 
 		{
-			get => _TopicStatesCollection;
+			get => _topicStatesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23143,7 +23143,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicStatesCollection is non-nullable.");
 				}
 
-				_TopicStatesCollection = value;
+				_topicStatesCollection = value;
 			}
 		}
 
@@ -23188,10 +23188,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _TopicName = String.Default;
+			private String _topicName = String.Default;
 			public String TopicName 
 			{
-				get => _TopicName;
+				get => _topicName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -23204,17 +23204,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
-					_TopicName = value;
+					_topicName = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition that we would like to update.
 			/// </summary>
-			private UpdateMetadataPartitionState[] _PartitionStatesCollection = System.Array.Empty<UpdateMetadataPartitionState>();
+			private UpdateMetadataPartitionState[] _partitionStatesCollection = System.Array.Empty<UpdateMetadataPartitionState>();
 			public UpdateMetadataPartitionState[] PartitionStatesCollection 
 			{
-				get => _PartitionStatesCollection;
+				get => _partitionStatesCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23227,7 +23227,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionStatesCollection is non-nullable.");
 					}
 
-					_PartitionStatesCollection = value;
+					_partitionStatesCollection = value;
 				}
 			}
 
@@ -23320,10 +23320,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition index.
 				/// </summary>
-				private Int32 _PartitionIndex = Int32.Default;
+				private Int32 _partitionIndex = Int32.Default;
 				public Int32 PartitionIndex 
 				{
-					get => _PartitionIndex;
+					get => _partitionIndex;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23336,17 +23336,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
-						_PartitionIndex = value;
+						_partitionIndex = value;
 					}
 				}
 
 				/// <summary>
 				/// The controller epoch.
 				/// </summary>
-				private Int32 _ControllerEpoch = Int32.Default;
+				private Int32 _controllerEpoch = Int32.Default;
 				public Int32 ControllerEpoch 
 				{
-					get => _ControllerEpoch;
+					get => _controllerEpoch;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23359,17 +23359,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 						}
 
-						_ControllerEpoch = value;
+						_controllerEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The ID of the broker which is the current partition leader.
 				/// </summary>
-				private Int32 _Leader = Int32.Default;
+				private Int32 _leader = Int32.Default;
 				public Int32 Leader 
 				{
-					get => _Leader;
+					get => _leader;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23382,17 +23382,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Leader is non-nullable.");
 						}
 
-						_Leader = value;
+						_leader = value;
 					}
 				}
 
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
-				private Int32 _LeaderEpoch = Int32.Default;
+				private Int32 _leaderEpoch = Int32.Default;
 				public Int32 LeaderEpoch 
 				{
-					get => _LeaderEpoch;
+					get => _leaderEpoch;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23405,17 +23405,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 						}
 
-						_LeaderEpoch = value;
+						_leaderEpoch = value;
 					}
 				}
 
 				/// <summary>
 				/// The brokers which are in the ISR for this partition.
 				/// </summary>
-				private Int32[] _IsrCollection = System.Array.Empty<Int32>();
+				private Int32[] _isrCollection = System.Array.Empty<Int32>();
 				public Int32[] IsrCollection 
 				{
-					get => _IsrCollection;
+					get => _isrCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23428,17 +23428,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsrCollection is non-nullable.");
 						}
 
-						_IsrCollection = value;
+						_isrCollection = value;
 					}
 				}
 
 				/// <summary>
 				/// The Zookeeper version.
 				/// </summary>
-				private Int32 _ZkVersion = Int32.Default;
+				private Int32 _zkVersion = Int32.Default;
 				public Int32 ZkVersion 
 				{
-					get => _ZkVersion;
+					get => _zkVersion;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23451,17 +23451,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
 						}
 
-						_ZkVersion = value;
+						_zkVersion = value;
 					}
 				}
 
 				/// <summary>
 				/// All the replicas of this partition.
 				/// </summary>
-				private Int32[] _ReplicasCollection = System.Array.Empty<Int32>();
+				private Int32[] _replicasCollection = System.Array.Empty<Int32>();
 				public Int32[] ReplicasCollection 
 				{
-					get => _ReplicasCollection;
+					get => _replicasCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23474,17 +23474,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
 						}
 
-						_ReplicasCollection = value;
+						_replicasCollection = value;
 					}
 				}
 
 				/// <summary>
 				/// The replicas of this partition which are offline.
 				/// </summary>
-				private Int32[] _OfflineReplicasCollection = System.Array.Empty<Int32>();
+				private Int32[] _offlineReplicasCollection = System.Array.Empty<Int32>();
 				public Int32[] OfflineReplicasCollection 
 				{
-					get => _OfflineReplicasCollection;
+					get => _offlineReplicasCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
@@ -23497,7 +23497,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"OfflineReplicasCollection is non-nullable.");
 						}
 
-						_OfflineReplicasCollection = value;
+						_offlineReplicasCollection = value;
 					}
 				}
 			}
@@ -23506,10 +23506,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each partition that we would like to update.
 		/// </summary>
-		private UpdateMetadataRequestPartitionStateV0[] _PartitionStatesV0Collection = System.Array.Empty<UpdateMetadataRequestPartitionStateV0>();
+		private UpdateMetadataRequestPartitionStateV0[] _partitionStatesV0Collection = System.Array.Empty<UpdateMetadataRequestPartitionStateV0>();
 		public UpdateMetadataRequestPartitionStateV0[] PartitionStatesV0Collection 
 		{
-			get => _PartitionStatesV0Collection;
+			get => _partitionStatesV0Collection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23522,7 +23522,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PartitionStatesV0Collection is non-nullable.");
 				}
 
-				_PartitionStatesV0Collection = value;
+				_partitionStatesV0Collection = value;
 			}
 		}
 
@@ -23623,10 +23623,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic name.
 			/// </summary>
-			private String _TopicName = String.Default;
+			private String _topicName = String.Default;
 			public String TopicName 
 			{
-				get => _TopicName;
+				get => _topicName;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23639,17 +23639,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
-					_TopicName = value;
+					_topicName = value;
 				}
 			}
 
 			/// <summary>
 			/// The partition index.
 			/// </summary>
-			private Int32 _PartitionIndex = Int32.Default;
+			private Int32 _partitionIndex = Int32.Default;
 			public Int32 PartitionIndex 
 			{
-				get => _PartitionIndex;
+				get => _partitionIndex;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23662,17 +23662,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 					}
 
-					_PartitionIndex = value;
+					_partitionIndex = value;
 				}
 			}
 
 			/// <summary>
 			/// The controller epoch.
 			/// </summary>
-			private Int32 _ControllerEpoch = Int32.Default;
+			private Int32 _controllerEpoch = Int32.Default;
 			public Int32 ControllerEpoch 
 			{
-				get => _ControllerEpoch;
+				get => _controllerEpoch;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23685,17 +23685,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 					}
 
-					_ControllerEpoch = value;
+					_controllerEpoch = value;
 				}
 			}
 
 			/// <summary>
 			/// The ID of the broker which is the current partition leader.
 			/// </summary>
-			private Int32 _Leader = Int32.Default;
+			private Int32 _leader = Int32.Default;
 			public Int32 Leader 
 			{
-				get => _Leader;
+				get => _leader;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23708,17 +23708,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Leader is non-nullable.");
 					}
 
-					_Leader = value;
+					_leader = value;
 				}
 			}
 
 			/// <summary>
 			/// The leader epoch of this partition.
 			/// </summary>
-			private Int32 _LeaderEpoch = Int32.Default;
+			private Int32 _leaderEpoch = Int32.Default;
 			public Int32 LeaderEpoch 
 			{
-				get => _LeaderEpoch;
+				get => _leaderEpoch;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23731,17 +23731,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 					}
 
-					_LeaderEpoch = value;
+					_leaderEpoch = value;
 				}
 			}
 
 			/// <summary>
 			/// The brokers which are in the ISR for this partition.
 			/// </summary>
-			private Int32[] _IsrCollection = System.Array.Empty<Int32>();
+			private Int32[] _isrCollection = System.Array.Empty<Int32>();
 			public Int32[] IsrCollection 
 			{
-				get => _IsrCollection;
+				get => _isrCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23754,17 +23754,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"IsrCollection is non-nullable.");
 					}
 
-					_IsrCollection = value;
+					_isrCollection = value;
 				}
 			}
 
 			/// <summary>
 			/// The Zookeeper version.
 			/// </summary>
-			private Int32 _ZkVersion = Int32.Default;
+			private Int32 _zkVersion = Int32.Default;
 			public Int32 ZkVersion 
 			{
-				get => _ZkVersion;
+				get => _zkVersion;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23777,17 +23777,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
 					}
 
-					_ZkVersion = value;
+					_zkVersion = value;
 				}
 			}
 
 			/// <summary>
 			/// All the replicas of this partition.
 			/// </summary>
-			private Int32[] _ReplicasCollection = System.Array.Empty<Int32>();
+			private Int32[] _replicasCollection = System.Array.Empty<Int32>();
 			public Int32[] ReplicasCollection 
 			{
-				get => _ReplicasCollection;
+				get => _replicasCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 4)) == false) 
@@ -23800,17 +23800,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
 					}
 
-					_ReplicasCollection = value;
+					_replicasCollection = value;
 				}
 			}
 
 			/// <summary>
 			/// The replicas of this partition which are offline.
 			/// </summary>
-			private Int32[] _OfflineReplicasCollection = System.Array.Empty<Int32>();
+			private Int32[] _offlineReplicasCollection = System.Array.Empty<Int32>();
 			public Int32[] OfflineReplicasCollection 
 			{
-				get => _OfflineReplicasCollection;
+				get => _offlineReplicasCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
@@ -23823,15 +23823,15 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"OfflineReplicasCollection is non-nullable.");
 					}
 
-					_OfflineReplicasCollection = value;
+					_offlineReplicasCollection = value;
 				}
 			}
 		}
 
-		private UpdateMetadataRequestBroker[] _BrokersCollection = System.Array.Empty<UpdateMetadataRequestBroker>();
+		private UpdateMetadataRequestBroker[] _brokersCollection = System.Array.Empty<UpdateMetadataRequestBroker>();
 		public UpdateMetadataRequestBroker[] BrokersCollection 
 		{
-			get => _BrokersCollection;
+			get => _brokersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -23844,7 +23844,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"BrokersCollection is non-nullable.");
 				}
 
-				_BrokersCollection = value;
+				_brokersCollection = value;
 			}
 		}
 
@@ -23910,10 +23910,10 @@ namespace Kafka.Protocol
 				}
 			}
 
-			private Int32 _Id = Int32.Default;
+			private Int32 _id = Int32.Default;
 			public Int32 Id 
 			{
-				get => _Id;
+				get => _id;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -23926,17 +23926,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Id is non-nullable.");
 					}
 
-					_Id = value;
+					_id = value;
 				}
 			}
 
 			/// <summary>
 			/// The broker hostname.
 			/// </summary>
-			private String _V0Host = String.Default;
+			private String _v0Host = String.Default;
 			public String V0Host 
 			{
-				get => _V0Host;
+				get => _v0Host;
 				set 
 				{
 					if (value == null) 
@@ -23944,17 +23944,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"V0Host is non-nullable.");
 					}
 
-					_V0Host = value;
+					_v0Host = value;
 				}
 			}
 
 			/// <summary>
 			/// The broker port.
 			/// </summary>
-			private Int32 _V0Port = Int32.Default;
+			private Int32 _v0Port = Int32.Default;
 			public Int32 V0Port 
 			{
-				get => _V0Port;
+				get => _v0Port;
 				set 
 				{
 					if (value == null) 
@@ -23962,17 +23962,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"V0Port is non-nullable.");
 					}
 
-					_V0Port = value;
+					_v0Port = value;
 				}
 			}
 
 			/// <summary>
 			/// The broker endpoints.
 			/// </summary>
-			private UpdateMetadataRequestEndpoint[] _EndpointsCollection = System.Array.Empty<UpdateMetadataRequestEndpoint>();
+			private UpdateMetadataRequestEndpoint[] _endpointsCollection = System.Array.Empty<UpdateMetadataRequestEndpoint>();
 			public UpdateMetadataRequestEndpoint[] EndpointsCollection 
 			{
-				get => _EndpointsCollection;
+				get => _endpointsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -23985,7 +23985,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"EndpointsCollection is non-nullable.");
 					}
 
-					_EndpointsCollection = value;
+					_endpointsCollection = value;
 				}
 			}
 
@@ -24046,10 +24046,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The port of this endpoint
 				/// </summary>
-				private Int32 _Port = Int32.Default;
+				private Int32 _port = Int32.Default;
 				public Int32 Port 
 				{
-					get => _Port;
+					get => _port;
 					set 
 					{
 						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -24062,17 +24062,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Port is non-nullable.");
 						}
 
-						_Port = value;
+						_port = value;
 					}
 				}
 
 				/// <summary>
 				/// The hostname of this endpoint
 				/// </summary>
-				private String _Host = String.Default;
+				private String _host = String.Default;
 				public String Host 
 				{
-					get => _Host;
+					get => _host;
 					set 
 					{
 						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -24085,17 +24085,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Host is non-nullable.");
 						}
 
-						_Host = value;
+						_host = value;
 					}
 				}
 
 				/// <summary>
 				/// The listener name.
 				/// </summary>
-				private String _Listener = String.Default;
+				private String _listener = String.Default;
 				public String Listener 
 				{
-					get => _Listener;
+					get => _listener;
 					set 
 					{
 						if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
@@ -24108,17 +24108,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Listener is non-nullable.");
 						}
 
-						_Listener = value;
+						_listener = value;
 					}
 				}
 
 				/// <summary>
 				/// The security protocol type.
 				/// </summary>
-				private Int16 _SecurityProtocol = Int16.Default;
+				private Int16 _securityProtocol = Int16.Default;
 				public Int16 SecurityProtocol 
 				{
-					get => _SecurityProtocol;
+					get => _securityProtocol;
 					set 
 					{
 						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
@@ -24131,7 +24131,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"SecurityProtocol is non-nullable.");
 						}
 
-						_SecurityProtocol = value;
+						_securityProtocol = value;
 					}
 				}
 			}
@@ -24139,10 +24139,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The rack which this broker belongs to.
 			/// </summary>
-			private String _Rack = String.Default;
+			private String _rack = String.Default;
 			public String Rack 
 			{
-				get => _Rack;
+				get => _rack;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false &&
@@ -24151,7 +24151,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 0+");
 					}
 
-					_Rack = value;
+					_rack = value;
 				}
 			}
 		}
@@ -24192,10 +24192,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
-		private Int16 _ErrorCode = Int16.Default;
+		private Int16 _errorCode = Int16.Default;
 		public Int16 ErrorCode 
 		{
-			get => _ErrorCode;
+			get => _errorCode;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24208,7 +24208,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
-				_ErrorCode = value;
+				_errorCode = value;
 			}
 		}
 	}
@@ -24248,10 +24248,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The transaction markers to be written.
 		/// </summary>
-		private WritableTxnMarker[] _MarkersCollection = System.Array.Empty<WritableTxnMarker>();
+		private WritableTxnMarker[] _markersCollection = System.Array.Empty<WritableTxnMarker>();
 		public WritableTxnMarker[] MarkersCollection 
 		{
-			get => _MarkersCollection;
+			get => _markersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24264,7 +24264,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MarkersCollection is non-nullable.");
 				}
 
-				_MarkersCollection = value;
+				_markersCollection = value;
 			}
 		}
 
@@ -24333,10 +24333,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The current producer ID.
 			/// </summary>
-			private Int64 _ProducerId = Int64.Default;
+			private Int64 _producerId = Int64.Default;
 			public Int64 ProducerId 
 			{
-				get => _ProducerId;
+				get => _producerId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24349,17 +24349,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 					}
 
-					_ProducerId = value;
+					_producerId = value;
 				}
 			}
 
 			/// <summary>
 			/// The current epoch associated with the producer ID.
 			/// </summary>
-			private Int16 _ProducerEpoch = Int16.Default;
+			private Int16 _producerEpoch = Int16.Default;
 			public Int16 ProducerEpoch 
 			{
-				get => _ProducerEpoch;
+				get => _producerEpoch;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24372,17 +24372,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
 					}
 
-					_ProducerEpoch = value;
+					_producerEpoch = value;
 				}
 			}
 
 			/// <summary>
 			/// The result of the transaction to write to the partitions (false = ABORT, true = COMMIT).
 			/// </summary>
-			private Boolean _TransactionResult = Boolean.Default;
+			private Boolean _transactionResult = Boolean.Default;
 			public Boolean TransactionResult 
 			{
-				get => _TransactionResult;
+				get => _transactionResult;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24395,17 +24395,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TransactionResult is non-nullable.");
 					}
 
-					_TransactionResult = value;
+					_transactionResult = value;
 				}
 			}
 
 			/// <summary>
 			/// Each topic that we want to write transaction marker(s) for.
 			/// </summary>
-			private WritableTxnMarkerTopic[] _TopicsCollection = System.Array.Empty<WritableTxnMarkerTopic>();
+			private WritableTxnMarkerTopic[] _topicsCollection = System.Array.Empty<WritableTxnMarkerTopic>();
 			public WritableTxnMarkerTopic[] TopicsCollection 
 			{
-				get => _TopicsCollection;
+				get => _topicsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24418,7 +24418,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 					}
 
-					_TopicsCollection = value;
+					_topicsCollection = value;
 				}
 			}
 
@@ -24463,10 +24463,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				private String _Name = String.Default;
+				private String _name = String.Default;
 				public String Name 
 				{
-					get => _Name;
+					get => _name;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24479,17 +24479,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name is non-nullable.");
 						}
 
-						_Name = value;
+						_name = value;
 					}
 				}
 
 				/// <summary>
 				/// The indexes of the partitions to write transaction markers for.
 				/// </summary>
-				private Int32[] _PartitionIndexesCollection = System.Array.Empty<Int32>();
+				private Int32[] _partitionIndexesCollection = System.Array.Empty<Int32>();
 				public Int32[] PartitionIndexesCollection 
 				{
-					get => _PartitionIndexesCollection;
+					get => _partitionIndexesCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24502,7 +24502,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndexesCollection is non-nullable.");
 						}
 
-						_PartitionIndexesCollection = value;
+						_partitionIndexesCollection = value;
 					}
 				}
 			}
@@ -24510,10 +24510,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Epoch associated with the transaction state partition hosted by this transaction coordinator
 			/// </summary>
-			private Int32 _CoordinatorEpoch = Int32.Default;
+			private Int32 _coordinatorEpoch = Int32.Default;
 			public Int32 CoordinatorEpoch 
 			{
-				get => _CoordinatorEpoch;
+				get => _coordinatorEpoch;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24526,7 +24526,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"CoordinatorEpoch is non-nullable.");
 					}
 
-					_CoordinatorEpoch = value;
+					_coordinatorEpoch = value;
 				}
 			}
 		}
@@ -24567,10 +24567,10 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for writing makers.
 		/// </summary>
-		private WritableTxnMarkerResult[] _MarkersCollection = System.Array.Empty<WritableTxnMarkerResult>();
+		private WritableTxnMarkerResult[] _markersCollection = System.Array.Empty<WritableTxnMarkerResult>();
 		public WritableTxnMarkerResult[] MarkersCollection 
 		{
-			get => _MarkersCollection;
+			get => _markersCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24583,7 +24583,7 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MarkersCollection is non-nullable.");
 				}
 
-				_MarkersCollection = value;
+				_markersCollection = value;
 			}
 		}
 
@@ -24628,10 +24628,10 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The current producer ID in use by the transactional ID.
 			/// </summary>
-			private Int64 _ProducerId = Int64.Default;
+			private Int64 _producerId = Int64.Default;
 			public Int64 ProducerId 
 			{
-				get => _ProducerId;
+				get => _producerId;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24644,17 +24644,17 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 					}
 
-					_ProducerId = value;
+					_producerId = value;
 				}
 			}
 
 			/// <summary>
 			/// The results by topic.
 			/// </summary>
-			private WritableTxnMarkerTopicResult[] _TopicsCollection = System.Array.Empty<WritableTxnMarkerTopicResult>();
+			private WritableTxnMarkerTopicResult[] _topicsCollection = System.Array.Empty<WritableTxnMarkerTopicResult>();
 			public WritableTxnMarkerTopicResult[] TopicsCollection 
 			{
-				get => _TopicsCollection;
+				get => _topicsCollection;
 				set 
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24667,7 +24667,7 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 					}
 
-					_TopicsCollection = value;
+					_topicsCollection = value;
 				}
 			}
 
@@ -24712,10 +24712,10 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The topic name.
 				/// </summary>
-				private String _Name = String.Default;
+				private String _name = String.Default;
 				public String Name 
 				{
-					get => _Name;
+					get => _name;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24728,17 +24728,17 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name is non-nullable.");
 						}
 
-						_Name = value;
+						_name = value;
 					}
 				}
 
 				/// <summary>
 				/// The results by partition.
 				/// </summary>
-				private WritableTxnMarkerPartitionResult[] _PartitionsCollection = System.Array.Empty<WritableTxnMarkerPartitionResult>();
+				private WritableTxnMarkerPartitionResult[] _partitionsCollection = System.Array.Empty<WritableTxnMarkerPartitionResult>();
 				public WritableTxnMarkerPartitionResult[] PartitionsCollection 
 				{
-					get => _PartitionsCollection;
+					get => _partitionsCollection;
 					set 
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24751,7 +24751,7 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 						}
 
-						_PartitionsCollection = value;
+						_partitionsCollection = value;
 					}
 				}
 
@@ -24796,10 +24796,10 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The partition index.
 					/// </summary>
-					private Int32 _PartitionIndex = Int32.Default;
+					private Int32 _partitionIndex = Int32.Default;
 					public Int32 PartitionIndex 
 					{
-						get => _PartitionIndex;
+						get => _partitionIndex;
 						set 
 						{
 							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24812,17 +24812,17 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 							}
 
-							_PartitionIndex = value;
+							_partitionIndex = value;
 						}
 					}
 
 					/// <summary>
 					/// The error code, or 0 if there was no error.
 					/// </summary>
-					private Int16 _ErrorCode = Int16.Default;
+					private Int16 _errorCode = Int16.Default;
 					public Int16 ErrorCode 
 					{
-						get => _ErrorCode;
+						get => _errorCode;
 						set 
 						{
 							if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
@@ -24835,7 +24835,7 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 							}
 
-							_ErrorCode = value;
+							_errorCode = value;
 						}
 					}
 				}

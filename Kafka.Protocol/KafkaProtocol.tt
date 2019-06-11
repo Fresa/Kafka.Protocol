@@ -254,8 +254,9 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 
 	var fieldTypeName = field.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
+	var privateFieldName = field.GetName().FirstCharacterToLowerCase();
 	
-	#>private <#= fieldTypeName #> _<#= field.GetName() #><#
+	#>private <#= fieldTypeName #> _<#= privateFieldName #><#
 	
 	if(field.Default != null) 
 	{ 
@@ -276,7 +277,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 
 	#>public <#= fieldTypeName #> <#= field.GetName() #> <# Block(() => 
 	{
-		#>get => _<#= field.GetName() #>;<# _();
+		#>get => _<#= privateFieldName #>;<# _();
 		#>set <# Block(() => 
 		{
 			if (field.Ignorable == false)
@@ -305,7 +306,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 				}); _(2);
 			}
 
-			#>_<#= field.GetName() #> = value;<#
+			#>_<#= privateFieldName #> = value;<#
 		});
 	});
 	

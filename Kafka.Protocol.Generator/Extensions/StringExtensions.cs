@@ -40,5 +40,15 @@ namespace Kafka.Protocol.Generator.Extensions
 
             return str.First().ToString().ToUpper() + string.Join(string.Empty, str.Skip(1));
         }
+
+        public static string FirstCharacterToLowerCase(this string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return str;
+            }
+
+            return str.First().ToString().ToLower() + string.Join(string.Empty, str.Skip(1));
+        }
     }
 }
