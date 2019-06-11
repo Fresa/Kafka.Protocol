@@ -2069,6 +2069,11 @@ namespace Kafka.Protocol
 	{
 		public AddOffsetsToTxnRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"AddOffsetsToTxnRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -2213,6 +2218,11 @@ namespace Kafka.Protocol
 	{
 		public AddOffsetsToTxnResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"AddOffsetsToTxnResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -2295,6 +2305,11 @@ namespace Kafka.Protocol
 	{
 		public AddPartitionsToTxnRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"AddPartitionsToTxnRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -2519,6 +2534,11 @@ namespace Kafka.Protocol
 	{
 		public AddPartitionsToTxnResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"AddPartitionsToTxnResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -2761,6 +2781,11 @@ namespace Kafka.Protocol
 	{
 		public AlterConfigsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"AlterConfigsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -3035,6 +3060,11 @@ namespace Kafka.Protocol
 	{
 		public AlterConfigsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"AlterConfigsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -3260,6 +3290,11 @@ namespace Kafka.Protocol
 	{
 		public AlterReplicaLogDirsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"AlterReplicaLogDirsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -3471,6 +3506,11 @@ namespace Kafka.Protocol
 	{
 		public AlterReplicaLogDirsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"AlterReplicaLogDirsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -3713,6 +3753,11 @@ namespace Kafka.Protocol
 	{
 		public ApiVersionsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"ApiVersionsRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -3737,6 +3782,11 @@ namespace Kafka.Protocol
 	{
 		public ApiVersionsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"ApiVersionsResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -3956,6 +4006,11 @@ namespace Kafka.Protocol
 	{
 		public ControlledShutdownRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"ControlledShutdownRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -4033,6 +4088,11 @@ namespace Kafka.Protocol
 	{
 		public ControlledShutdownResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"ControlledShutdownResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -4195,6 +4255,11 @@ namespace Kafka.Protocol
 	{
 		public CreateAclsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"CreateAclsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -4481,6 +4546,11 @@ namespace Kafka.Protocol
 	{
 		public CreateAclsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"CreateAclsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -4644,6 +4714,11 @@ namespace Kafka.Protocol
 	{
 		public CreateDelegationTokenRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"CreateDelegationTokenRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -4806,6 +4881,11 @@ namespace Kafka.Protocol
 	{
 		public CreateDelegationTokenResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"CreateDelegationTokenResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -5105,6 +5185,11 @@ namespace Kafka.Protocol
 	{
 		public CreatePartitionsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"CreatePartitionsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -5379,6 +5464,11 @@ namespace Kafka.Protocol
 	{
 		public CreatePartitionsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"CreatePartitionsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -5573,6 +5663,11 @@ namespace Kafka.Protocol
 	{
 		public CreateTopicsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 3)) == false) 
+			{
+				throw new UnsupportedVersionException($"CreateTopicsRequest does not support version {version}. Valid versions are: 0-3");
+			}
+
 			Version = version;
 		}
 
@@ -6020,6 +6115,11 @@ namespace Kafka.Protocol
 	{
 		public CreateTopicsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 3)) == false) 
+			{
+				throw new UnsupportedVersionException($"CreateTopicsResponse does not support version {version}. Valid versions are: 0-3");
+			}
+
 			Version = version;
 		}
 
@@ -6204,6 +6304,11 @@ namespace Kafka.Protocol
 	{
 		public DeleteAclsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DeleteAclsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -6493,6 +6598,11 @@ namespace Kafka.Protocol
 	{
 		public DeleteAclsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DeleteAclsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -6985,6 +7095,11 @@ namespace Kafka.Protocol
 	{
 		public DeleteGroupsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DeleteGroupsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -7036,6 +7151,11 @@ namespace Kafka.Protocol
 	{
 		public DeleteGroupsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DeleteGroupsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -7198,6 +7318,11 @@ namespace Kafka.Protocol
 	{
 		public DeleteRecordsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DeleteRecordsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -7440,6 +7565,11 @@ namespace Kafka.Protocol
 	{
 		public DeleteRecordsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DeleteRecordsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -7713,6 +7843,11 @@ namespace Kafka.Protocol
 	{
 		public DeleteTopicsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 3)) == false) 
+			{
+				throw new UnsupportedVersionException($"DeleteTopicsRequest does not support version {version}. Valid versions are: 0-3");
+			}
+
 			Version = version;
 		}
 
@@ -7795,6 +7930,11 @@ namespace Kafka.Protocol
 	{
 		public DeleteTopicsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 3)) == false) 
+			{
+				throw new UnsupportedVersionException($"DeleteTopicsResponse does not support version {version}. Valid versions are: 0-3");
+			}
+
 			Version = version;
 		}
 
@@ -7957,6 +8097,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeAclsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeAclsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -8197,6 +8342,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeAclsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeAclsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -8626,6 +8776,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeConfigsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeConfigsRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -8820,6 +8975,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeConfigsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeConfigsResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -9414,6 +9574,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeDelegationTokenRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeDelegationTokenRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -9546,6 +9711,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeDelegationTokenResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeDelegationTokenResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -10005,6 +10175,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeGroupsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 3)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeGroupsRequest does not support version {version}. Valid versions are: 0-3");
+			}
+
 			Version = version;
 		}
 
@@ -10087,6 +10262,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeGroupsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 3)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeGroupsResponse does not support version {version}. Valid versions are: 0-3");
+			}
+
 			Version = version;
 		}
 
@@ -10572,6 +10752,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeLogDirsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeLogDirsRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -10704,6 +10889,11 @@ namespace Kafka.Protocol
 	{
 		public DescribeLogDirsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"DescribeLogDirsResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -11116,6 +11306,11 @@ namespace Kafka.Protocol
 	{
 		public ElectPreferredLeadersRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			{
+				throw new UnsupportedVersionException($"ElectPreferredLeadersRequest does not support version {version}. Valid versions are: 0");
+			}
+
 			Version = version;
 		}
 
@@ -11279,6 +11474,11 @@ namespace Kafka.Protocol
 	{
 		public ElectPreferredLeadersResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			{
+				throw new UnsupportedVersionException($"ElectPreferredLeadersResponse does not support version {version}. Valid versions are: 0");
+			}
+
 			Version = version;
 		}
 
@@ -11553,6 +11753,11 @@ namespace Kafka.Protocol
 	{
 		public EndTxnRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"EndTxnRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -11697,6 +11902,11 @@ namespace Kafka.Protocol
 	{
 		public EndTxnResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"EndTxnResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -11779,6 +11989,11 @@ namespace Kafka.Protocol
 	{
 		public ExpireDelegationTokenRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"ExpireDelegationTokenRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -11861,6 +12076,11 @@ namespace Kafka.Protocol
 	{
 		public ExpireDelegationTokenResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"ExpireDelegationTokenResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -11974,6 +12194,11 @@ namespace Kafka.Protocol
 	{
 		public FetchRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 10)) == false) 
+			{
+				throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 0-10");
+			}
+
 			Version = version;
 		}
 
@@ -12596,6 +12821,11 @@ namespace Kafka.Protocol
 	{
 		public FetchResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 10)) == false) 
+			{
+				throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 0-10");
+			}
+
 			Version = version;
 		}
 
@@ -13122,6 +13352,11 @@ namespace Kafka.Protocol
 	{
 		public FindCoordinatorRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"FindCoordinatorRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -13204,6 +13439,11 @@ namespace Kafka.Protocol
 	{
 		public FindCoordinatorResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"FindCoordinatorResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -13401,6 +13641,11 @@ namespace Kafka.Protocol
 	{
 		public HeartbeatRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"HeartbeatRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -13514,6 +13759,11 @@ namespace Kafka.Protocol
 	{
 		public HeartbeatResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"HeartbeatResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -13591,6 +13841,11 @@ namespace Kafka.Protocol
 	{
 		public InitProducerIdRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"InitProducerIdRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -13674,6 +13929,11 @@ namespace Kafka.Protocol
 	{
 		public InitProducerIdResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"InitProducerIdResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -13813,6 +14073,11 @@ namespace Kafka.Protocol
 	{
 		public JoinGroupRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 4)) == false) 
+			{
+				throw new UnsupportedVersionException($"JoinGroupRequest does not support version {version}. Valid versions are: 0-4");
+			}
+
 			Version = version;
 		}
 
@@ -14094,6 +14359,11 @@ namespace Kafka.Protocol
 	{
 		public JoinGroupResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 4)) == false) 
+			{
+				throw new UnsupportedVersionException($"JoinGroupResponse does not support version {version}. Valid versions are: 0-4");
+			}
+
 			Version = version;
 		}
 
@@ -14403,6 +14673,11 @@ namespace Kafka.Protocol
 	{
 		public LeaderAndIsrRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"LeaderAndIsrRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -15348,6 +15623,11 @@ namespace Kafka.Protocol
 	{
 		public LeaderAndIsrResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"LeaderAndIsrResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -15541,6 +15821,11 @@ namespace Kafka.Protocol
 	{
 		public LeaveGroupRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"LeaveGroupRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -15623,6 +15908,11 @@ namespace Kafka.Protocol
 	{
 		public LeaveGroupResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"LeaveGroupResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -15700,6 +15990,11 @@ namespace Kafka.Protocol
 	{
 		public ListGroupsRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"ListGroupsRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -15724,6 +16019,11 @@ namespace Kafka.Protocol
 	{
 		public ListGroupsResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"ListGroupsResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -15912,6 +16212,11 @@ namespace Kafka.Protocol
 	{
 		public ListOffsetRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 5)) == false) 
+			{
+				throw new UnsupportedVersionException($"ListOffsetRequest does not support version {version}. Valid versions are: 0-5");
+			}
+
 			Version = version;
 		}
 
@@ -16247,6 +16552,11 @@ namespace Kafka.Protocol
 	{
 		public ListOffsetResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 5)) == false) 
+			{
+				throw new UnsupportedVersionException($"ListOffsetResponse does not support version {version}. Valid versions are: 0-5");
+			}
+
 			Version = version;
 		}
 
@@ -16605,6 +16915,11 @@ namespace Kafka.Protocol
 	{
 		public MetadataRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 8)) == false) 
+			{
+				throw new UnsupportedVersionException($"MetadataRequest does not support version {version}. Valid versions are: 0-8");
+			}
+
 			Version = version;
 		}
 
@@ -16799,6 +17114,11 @@ namespace Kafka.Protocol
 	{
 		public MetadataResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 8)) == false) 
+			{
+				throw new UnsupportedVersionException($"MetadataResponse does not support version {version}. Valid versions are: 0-8");
+			}
+
 			Version = version;
 		}
 
@@ -17527,6 +17847,11 @@ namespace Kafka.Protocol
 	{
 		public OffsetCommitRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 6)) == false) 
+			{
+				throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 0-6");
+			}
+
 			Version = version;
 		}
 
@@ -17936,6 +18261,11 @@ namespace Kafka.Protocol
 	{
 		public OffsetCommitResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 6)) == false) 
+			{
+				throw new UnsupportedVersionException($"OffsetCommitResponse does not support version {version}. Valid versions are: 0-6");
+			}
+
 			Version = version;
 		}
 
@@ -18173,6 +18503,11 @@ namespace Kafka.Protocol
 	{
 		public OffsetFetchRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 5)) == false) 
+			{
+				throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 0-5");
+			}
+
 			Version = version;
 		}
 
@@ -18333,6 +18668,11 @@ namespace Kafka.Protocol
 	{
 		public OffsetFetchResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 5)) == false) 
+			{
+				throw new UnsupportedVersionException($"OffsetFetchResponse does not support version {version}. Valid versions are: 0-5");
+			}
+
 			Version = version;
 		}
 
@@ -18695,6 +19035,11 @@ namespace Kafka.Protocol
 	{
 		public OffsetForLeaderEpochRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"OffsetForLeaderEpochRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -18932,6 +19277,11 @@ namespace Kafka.Protocol
 	{
 		public OffsetForLeaderEpochResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"OffsetForLeaderEpochResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -19226,6 +19576,11 @@ namespace Kafka.Protocol
 	{
 		public ProduceRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 7)) == false) 
+			{
+				throw new UnsupportedVersionException($"ProduceRequest does not support version {version}. Valid versions are: 0-7");
+			}
+
 			Version = version;
 		}
 
@@ -19532,6 +19887,11 @@ namespace Kafka.Protocol
 	{
 		public ProduceResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 7)) == false) 
+			{
+				throw new UnsupportedVersionException($"ProduceResponse does not support version {version}. Valid versions are: 0-7");
+			}
+
 			Version = version;
 		}
 
@@ -19852,6 +20212,11 @@ namespace Kafka.Protocol
 	{
 		public RenewDelegationTokenRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"RenewDelegationTokenRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -19934,6 +20299,11 @@ namespace Kafka.Protocol
 	{
 		public RenewDelegationTokenResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"RenewDelegationTokenResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -20047,6 +20417,11 @@ namespace Kafka.Protocol
 	{
 		public RequestHeader(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			{
+				throw new UnsupportedVersionException($"RequestHeader does not support version {version}. Valid versions are: 0");
+			}
+
 			Version = version;
 		}
 
@@ -20191,6 +20566,11 @@ namespace Kafka.Protocol
 	{
 		public ResponseHeader(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			{
+				throw new UnsupportedVersionException($"ResponseHeader does not support version {version}. Valid versions are: 0");
+			}
+
 			Version = version;
 		}
 
@@ -20242,6 +20622,11 @@ namespace Kafka.Protocol
 	{
 		public SaslAuthenticateRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"SaslAuthenticateRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -20293,6 +20678,11 @@ namespace Kafka.Protocol
 	{
 		public SaslAuthenticateResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"SaslAuthenticateResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -20438,6 +20828,11 @@ namespace Kafka.Protocol
 	{
 		public SaslHandshakeRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"SaslHandshakeRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -20489,6 +20884,11 @@ namespace Kafka.Protocol
 	{
 		public SaslHandshakeResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"SaslHandshakeResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -20571,6 +20971,11 @@ namespace Kafka.Protocol
 	{
 		public StopReplicaRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"StopReplicaRequest does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -20932,6 +21337,11 @@ namespace Kafka.Protocol
 	{
 		public StopReplicaResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 1)) == false) 
+			{
+				throw new UnsupportedVersionException($"StopReplicaResponse does not support version {version}. Valid versions are: 0-1");
+			}
+
 			Version = version;
 		}
 
@@ -21125,6 +21535,11 @@ namespace Kafka.Protocol
 	{
 		public SyncGroupRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"SyncGroupRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -21349,6 +21764,11 @@ namespace Kafka.Protocol
 	{
 		public SyncGroupResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"SyncGroupResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -21457,6 +21877,11 @@ namespace Kafka.Protocol
 	{
 		public TxnOffsetCommitRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"TxnOffsetCommitRequest does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -21850,6 +22275,11 @@ namespace Kafka.Protocol
 	{
 		public TxnOffsetCommitResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2)) == false) 
+			{
+				throw new UnsupportedVersionException($"TxnOffsetCommitResponse does not support version {version}. Valid versions are: 0-2");
+			}
+
 			Version = version;
 		}
 
@@ -22092,6 +22522,11 @@ namespace Kafka.Protocol
 	{
 		public UpdateMetadataRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 5)) == false) 
+			{
+				throw new UnsupportedVersionException($"UpdateMetadataRequest does not support version {version}. Valid versions are: 0-5");
+			}
+
 			Version = version;
 		}
 
@@ -23231,6 +23666,11 @@ namespace Kafka.Protocol
 	{
 		public UpdateMetadataResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 5)) == false) 
+			{
+				throw new UnsupportedVersionException($"UpdateMetadataResponse does not support version {version}. Valid versions are: 0-5");
+			}
+
 			Version = version;
 		}
 
@@ -23282,6 +23722,11 @@ namespace Kafka.Protocol
 	{
 		public WriteTxnMarkersRequest(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			{
+				throw new UnsupportedVersionException($"WriteTxnMarkersRequest does not support version {version}. Valid versions are: 0");
+			}
+
 			Version = version;
 		}
 
@@ -23586,6 +24031,11 @@ namespace Kafka.Protocol
 	{
 		public WriteTxnMarkersResponse(int version)
 		{
+			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			{
+				throw new UnsupportedVersionException($"WriteTxnMarkersResponse does not support version {version}. Valid versions are: 0");
+			}
+
 			Version = version;
 		}
 

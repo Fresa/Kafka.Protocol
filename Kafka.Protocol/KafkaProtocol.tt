@@ -136,12 +136,19 @@ namespace Kafka.Protocol<# Block(() =>
 		if (index + 1 != count) _();
     }); _(2);
 
+	// Messages
 	PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
 	{
 		#>public class <#= messageDefinition.Name #><# Block(() => 
 		{
 			#>public <#= messageDefinition.Name #>(int version)<# Block(() => 
 			{
+				var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
+				#>if (version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>)) == false) <# Block(() => 
+				{
+					#>throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<#
+				}); _(2);
+
 				 #>Version = version;<#
 			}); _(2);
 
