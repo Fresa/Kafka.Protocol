@@ -2487,6 +2487,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AddPartitionsToTxnTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
@@ -2508,6 +2514,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public AddPartitionsToTxnTopic WithPartitionsCollection(Int32[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -2659,6 +2671,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AddPartitionsToTxnTopicResult WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -2680,6 +2698,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public AddPartitionsToTxnTopicResult WithResultsCollection(Dictionary<Int32, AddPartitionsToTxnPartitionResult> resultsCollection)
+			{
+				ResultsCollection = resultsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -2743,6 +2767,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public AddPartitionsToTxnPartitionResult WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
@@ -2764,6 +2794,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public AddPartitionsToTxnPartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -2901,6 +2937,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterConfigsResource WithResourceType(Int8 resourceType)
+			{
+				ResourceType = resourceType;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -2924,6 +2966,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterConfigsResource WithResourceName(String resourceName)
+			{
+				ResourceName = resourceName;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource name.
 			/// </summary>
@@ -2945,6 +2993,12 @@ namespace Kafka.Protocol
 
 					_resourceName = value;
 				}
+			}
+
+			public AlterConfigsResource WithConfigsCollection(Dictionary<String, AlterableConfig> configsCollection)
+			{
+				ConfigsCollection = configsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -3008,6 +3062,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public AlterableConfig WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
 				/// <summary>
 				/// The configuration key name.
 				/// </summary>
@@ -3029,6 +3089,12 @@ namespace Kafka.Protocol
 
 						_name = value;
 					}
+				}
+
+				public AlterableConfig WithValue(String value)
+				{
+					Value = value;
+					return this;
 				}
 
 				/// <summary>
@@ -3221,6 +3287,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterConfigsResourceResponse WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource error code.
 			/// </summary>
@@ -3242,6 +3314,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public AlterConfigsResourceResponse WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 
 			/// <summary>
@@ -3268,6 +3346,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterConfigsResourceResponse WithResourceType(Int8 resourceType)
+			{
+				ResourceType = resourceType;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -3289,6 +3373,12 @@ namespace Kafka.Protocol
 
 					_resourceType = value;
 				}
+			}
+
+			public AlterConfigsResourceResponse WithResourceName(String resourceName)
+			{
+				ResourceName = resourceName;
+				return this;
 			}
 
 			/// <summary>
@@ -3409,6 +3499,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterReplicaLogDir WithPath(String path)
+			{
+				Path = path;
+				return this;
+			}
+
 			/// <summary>
 			/// The absolute directory path.
 			/// </summary>
@@ -3430,6 +3526,12 @@ namespace Kafka.Protocol
 
 					_path = value;
 				}
+			}
+
+			public AlterReplicaLogDir WithTopicsCollection(Dictionary<String, AlterReplicaLogDirTopic> topicsCollection)
+			{
+				TopicsCollection = topicsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -3493,6 +3595,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public AlterReplicaLogDirTopic WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
 				/// <summary>
 				/// The topic name.
 				/// </summary>
@@ -3514,6 +3622,12 @@ namespace Kafka.Protocol
 
 						_name = value;
 					}
+				}
+
+				public AlterReplicaLogDirTopic WithPartitionsCollection(Int32[] partitionsCollection)
+				{
+					PartitionsCollection = partitionsCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -3666,6 +3780,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public AlterReplicaLogDirTopicResult WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
@@ -3687,6 +3807,12 @@ namespace Kafka.Protocol
 
 					_topicName = value;
 				}
+			}
+
+			public AlterReplicaLogDirTopicResult WithPartitionsCollection(AlterReplicaLogDirPartitionResult[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -3750,6 +3876,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public AlterReplicaLogDirPartitionResult WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -3771,6 +3903,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public AlterReplicaLogDirPartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -3968,6 +4106,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ApiVersionsResponseKey WithIndex(Int16 index)
+			{
+				Index = index;
+				return this;
+			}
+
 			/// <summary>
 			/// The API index.
 			/// </summary>
@@ -3991,6 +4135,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ApiVersionsResponseKey WithMinVersion(Int16 minVersion)
+			{
+				MinVersion = minVersion;
+				return this;
+			}
+
 			/// <summary>
 			/// The minimum supported version, inclusive.
 			/// </summary>
@@ -4012,6 +4162,12 @@ namespace Kafka.Protocol
 
 					_minVersion = value;
 				}
+			}
+
+			public ApiVersionsResponseKey WithMaxVersion(Int16 maxVersion)
+			{
+				MaxVersion = maxVersion;
+				return this;
 			}
 
 			/// <summary>
@@ -4263,6 +4419,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public RemainingPartition WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
@@ -4284,6 +4446,12 @@ namespace Kafka.Protocol
 
 					_topicName = value;
 				}
+			}
+
+			public RemainingPartition WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
 			}
 
 			/// <summary>
@@ -4444,6 +4612,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableAcl WithResourceType(Int8 resourceType)
+			{
+				ResourceType = resourceType;
+				return this;
+			}
+
 			/// <summary>
 			/// The type of the resource.
 			/// </summary>
@@ -4465,6 +4639,12 @@ namespace Kafka.Protocol
 
 					_resourceType = value;
 				}
+			}
+
+			public CreatableAcl WithResourceName(String resourceName)
+			{
+				ResourceName = resourceName;
+				return this;
 			}
 
 			/// <summary>
@@ -4490,6 +4670,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableAcl WithResourcePatternType(Int8 resourcePatternType)
+			{
+				ResourcePatternType = resourcePatternType;
+				return this;
+			}
+
 			/// <summary>
 			/// The pattern type for the ACL.
 			/// </summary>
@@ -4511,6 +4697,12 @@ namespace Kafka.Protocol
 
 					_resourcePatternType = value;
 				}
+			}
+
+			public CreatableAcl WithPrincipal(String principal)
+			{
+				Principal = principal;
+				return this;
 			}
 
 			/// <summary>
@@ -4536,6 +4728,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableAcl WithHost(String host)
+			{
+				Host = host;
+				return this;
+			}
+
 			/// <summary>
 			/// The host for the ACL.
 			/// </summary>
@@ -4559,6 +4757,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableAcl WithOperation(Int8 operation)
+			{
+				Operation = operation;
+				return this;
+			}
+
 			/// <summary>
 			/// The operation type for the ACL (read, write, etc.).
 			/// </summary>
@@ -4580,6 +4784,12 @@ namespace Kafka.Protocol
 
 					_operation = value;
 				}
+			}
+
+			public CreatableAcl WithPermissionType(Int8 permissionType)
+			{
+				PermissionType = permissionType;
+				return this;
 			}
 
 			/// <summary>
@@ -4731,6 +4941,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableAclResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
@@ -4752,6 +4968,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public CreatableAclResult WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 
 			/// <summary>
@@ -4881,6 +5103,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableRenewers WithPrincipalType(String principalType)
+			{
+				PrincipalType = principalType;
+				return this;
+			}
+
 			/// <summary>
 			/// The type of the Kafka principal.
 			/// </summary>
@@ -4902,6 +5130,12 @@ namespace Kafka.Protocol
 
 					_principalType = value;
 				}
+			}
+
+			public CreatableRenewers WithPrincipalName(String principalName)
+			{
+				PrincipalName = principalName;
+				return this;
 			}
 
 			/// <summary>
@@ -5373,6 +5607,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatePartitionsTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -5396,6 +5636,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatePartitionsTopic WithCount(Int32 count)
+			{
+				Count = count;
+				return this;
+			}
+
 			/// <summary>
 			/// The new partition count.
 			/// </summary>
@@ -5417,6 +5663,12 @@ namespace Kafka.Protocol
 
 					_count = value;
 				}
+			}
+
+			public CreatePartitionsTopic WithAssignmentsCollection(CreatePartitionsAssignment[] assignmentsCollection)
+			{
+				AssignmentsCollection = assignmentsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -5471,6 +5723,12 @@ namespace Kafka.Protocol
 					{
 						writer.Write(BrokerIdsCollection);
 					}
+				}
+
+				public CreatePartitionsAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
+				{
+					BrokerIdsCollection = brokerIdsCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -5677,6 +5935,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatePartitionsTopicResult WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -5700,6 +5964,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatePartitionsTopicResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
@@ -5721,6 +5991,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public CreatePartitionsTopicResult WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 
 			/// <summary>
@@ -5882,6 +6158,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -5903,6 +6185,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public CreatableTopic WithNumPartitions(Int32 numPartitions)
+			{
+				NumPartitions = numPartitions;
+				return this;
 			}
 
 			/// <summary>
@@ -5928,6 +6216,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableTopic WithReplicationFactor(Int16 replicationFactor)
+			{
+				ReplicationFactor = replicationFactor;
+				return this;
+			}
+
 			/// <summary>
 			/// The number of replicas to create for each partition in the topic, or -1 if we are specifying a manual partition assignment.
 			/// </summary>
@@ -5949,6 +6243,12 @@ namespace Kafka.Protocol
 
 					_replicationFactor = value;
 				}
+			}
+
+			public CreatableTopic WithAssignmentsCollection(Dictionary<Int32, CreatableReplicaAssignment> assignmentsCollection)
+			{
+				AssignmentsCollection = assignmentsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -6012,6 +6312,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public CreatableReplicaAssignment WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -6033,6 +6339,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public CreatableReplicaAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
+				{
+					BrokerIdsCollection = brokerIdsCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -6057,6 +6369,12 @@ namespace Kafka.Protocol
 						_brokerIdsCollection = value;
 					}
 				}
+			}
+
+			public CreatableTopic WithConfigsCollection(Dictionary<String, CreateableTopicConfig> configsCollection)
+			{
+				ConfigsCollection = configsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -6120,6 +6438,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public CreateableTopicConfig WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
@@ -6141,6 +6465,12 @@ namespace Kafka.Protocol
 
 						_name = value;
 					}
+				}
+
+				public CreateableTopicConfig WithValue(String value)
+				{
+					Value = value;
+					return this;
 				}
 
 				/// <summary>
@@ -6343,6 +6673,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableTopicResult WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -6366,6 +6702,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public CreatableTopicResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
@@ -6387,6 +6729,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public CreatableTopicResult WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 
 			/// <summary>
@@ -6543,6 +6891,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteAclsFilter WithResourceTypeFilter(Int8 resourceTypeFilter)
+			{
+				ResourceTypeFilter = resourceTypeFilter;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -6564,6 +6918,12 @@ namespace Kafka.Protocol
 
 					_resourceTypeFilter = value;
 				}
+			}
+
+			public DeleteAclsFilter WithResourceNameFilter(String resourceNameFilter)
+			{
+				ResourceNameFilter = resourceNameFilter;
+				return this;
 			}
 
 			/// <summary>
@@ -6590,6 +6950,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteAclsFilter WithPatternTypeFilter(Int8 patternTypeFilter)
+			{
+				PatternTypeFilter = patternTypeFilter;
+				return this;
+			}
+
 			/// <summary>
 			/// The pattern type.
 			/// </summary>
@@ -6611,6 +6977,12 @@ namespace Kafka.Protocol
 
 					_patternTypeFilter = value;
 				}
+			}
+
+			public DeleteAclsFilter WithPrincipalFilter(String principalFilter)
+			{
+				PrincipalFilter = principalFilter;
+				return this;
 			}
 
 			/// <summary>
@@ -6637,6 +7009,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteAclsFilter WithHostFilter(String hostFilter)
+			{
+				HostFilter = hostFilter;
+				return this;
+			}
+
 			/// <summary>
 			/// The host filter, or null to accept all hosts.
 			/// </summary>
@@ -6661,6 +7039,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteAclsFilter WithOperation(Int8 operation)
+			{
+				Operation = operation;
+				return this;
+			}
+
 			/// <summary>
 			/// The ACL operation.
 			/// </summary>
@@ -6682,6 +7066,12 @@ namespace Kafka.Protocol
 
 					_operation = value;
 				}
+			}
+
+			public DeleteAclsFilter WithPermissionType(Int8 permissionType)
+			{
+				PermissionType = permissionType;
+				return this;
 			}
 
 			/// <summary>
@@ -6841,6 +7231,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteAclsFilterResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The error code, or 0 if the filter succeeded.
 			/// </summary>
@@ -6862,6 +7258,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public DeleteAclsFilterResult WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 
 			/// <summary>
@@ -6886,6 +7288,12 @@ namespace Kafka.Protocol
 
 					_errorMessage = value;
 				}
+			}
+
+			public DeleteAclsFilterResult WithMatchingAclsCollection(DeleteAclsMatchingAcl[] matchingAclsCollection)
+			{
+				MatchingAclsCollection = matchingAclsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -7005,6 +7413,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DeleteAclsMatchingAcl WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
 				/// </summary>
@@ -7026,6 +7440,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public DeleteAclsMatchingAcl WithErrorMessage(String errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
 				}
 
 				/// <summary>
@@ -7052,6 +7472,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DeleteAclsMatchingAcl WithResourceType(Int8 resourceType)
+				{
+					ResourceType = resourceType;
+					return this;
+				}
+
 				/// <summary>
 				/// The ACL resource type.
 				/// </summary>
@@ -7073,6 +7499,12 @@ namespace Kafka.Protocol
 
 						_resourceType = value;
 					}
+				}
+
+				public DeleteAclsMatchingAcl WithResourceName(String resourceName)
+				{
+					ResourceName = resourceName;
+					return this;
 				}
 
 				/// <summary>
@@ -7098,6 +7530,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DeleteAclsMatchingAcl WithPatternType(Int8 patternType)
+				{
+					PatternType = patternType;
+					return this;
+				}
+
 				/// <summary>
 				/// The ACL resource pattern type.
 				/// </summary>
@@ -7119,6 +7557,12 @@ namespace Kafka.Protocol
 
 						_patternType = value;
 					}
+				}
+
+				public DeleteAclsMatchingAcl WithPrincipal(String principal)
+				{
+					Principal = principal;
+					return this;
 				}
 
 				/// <summary>
@@ -7144,6 +7588,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DeleteAclsMatchingAcl WithHost(String host)
+				{
+					Host = host;
+					return this;
+				}
+
 				/// <summary>
 				/// The ACL host.
 				/// </summary>
@@ -7167,6 +7617,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DeleteAclsMatchingAcl WithOperation(Int8 operation)
+				{
+					Operation = operation;
+					return this;
+				}
+
 				/// <summary>
 				/// The ACL operation.
 				/// </summary>
@@ -7188,6 +7644,12 @@ namespace Kafka.Protocol
 
 						_operation = value;
 					}
+				}
+
+				public DeleteAclsMatchingAcl WithPermissionType(Int8 permissionType)
+				{
+					PermissionType = permissionType;
+					return this;
 				}
 
 				/// <summary>
@@ -7396,6 +7858,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeletableGroupResult WithGroupId(String groupId)
+			{
+				GroupId = groupId;
+				return this;
+			}
+
 			/// <summary>
 			/// The group id
 			/// </summary>
@@ -7417,6 +7885,12 @@ namespace Kafka.Protocol
 
 					_groupId = value;
 				}
+			}
+
+			public DeletableGroupResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
 			}
 
 			/// <summary>
@@ -7545,6 +8019,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteRecordsTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -7566,6 +8046,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public DeleteRecordsTopic WithPartitionsCollection(DeleteRecordsPartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -7629,6 +8115,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DeleteRecordsPartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -7650,6 +8142,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public DeleteRecordsPartition WithOffset(Int64 offset)
+				{
+					Offset = offset;
+					return this;
 				}
 
 				/// <summary>
@@ -7825,6 +8323,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeleteRecordsTopicResult WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -7846,6 +8350,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public DeleteRecordsTopicResult WithPartitionsCollection(DeleteRecordsPartitionResult[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -7917,6 +8427,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DeleteRecordsPartitionResult WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -7940,6 +8456,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DeleteRecordsPartitionResult WithLowWatermark(Int64 lowWatermark)
+				{
+					LowWatermark = lowWatermark;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition low water mark.
 				/// </summary>
@@ -7961,6 +8483,12 @@ namespace Kafka.Protocol
 
 						_lowWatermark = value;
 					}
+				}
+
+				public DeleteRecordsPartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -8200,6 +8728,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DeletableTopicResult WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -8221,6 +8755,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public DeletableTopicResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
 			}
 
 			/// <summary>
@@ -8696,6 +9236,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeAclsResource WithType(Int8 type)
+			{
+				Type = type;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -8717,6 +9263,12 @@ namespace Kafka.Protocol
 
 					_type = value;
 				}
+			}
+
+			public DescribeAclsResource WithName(String name)
+			{
+				Name = name;
+				return this;
 			}
 
 			/// <summary>
@@ -8742,6 +9294,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeAclsResource WithPatternType(Int8 patternType)
+			{
+				PatternType = patternType;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource pattern type.
 			/// </summary>
@@ -8763,6 +9321,12 @@ namespace Kafka.Protocol
 
 					_patternType = value;
 				}
+			}
+
+			public DescribeAclsResource WithAclsCollection(AclDescription[] aclsCollection)
+			{
+				AclsCollection = aclsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -8842,6 +9406,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public AclDescription WithPrincipal(String principal)
+				{
+					Principal = principal;
+					return this;
+				}
+
 				/// <summary>
 				/// The ACL principal.
 				/// </summary>
@@ -8863,6 +9433,12 @@ namespace Kafka.Protocol
 
 						_principal = value;
 					}
+				}
+
+				public AclDescription WithHost(String host)
+				{
+					Host = host;
+					return this;
 				}
 
 				/// <summary>
@@ -8888,6 +9464,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public AclDescription WithOperation(Int8 operation)
+				{
+					Operation = operation;
+					return this;
+				}
+
 				/// <summary>
 				/// The ACL operation.
 				/// </summary>
@@ -8909,6 +9491,12 @@ namespace Kafka.Protocol
 
 						_operation = value;
 					}
+				}
+
+				public AclDescription WithPermissionType(Int8 permissionType)
+				{
+					PermissionType = permissionType;
+					return this;
 				}
 
 				/// <summary>
@@ -9046,6 +9634,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeConfigsResource WithResourceType(Int8 resourceType)
+			{
+				ResourceType = resourceType;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -9069,6 +9663,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeConfigsResource WithResourceName(String resourceName)
+			{
+				ResourceName = resourceName;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource name.
 			/// </summary>
@@ -9090,6 +9690,12 @@ namespace Kafka.Protocol
 
 					_resourceName = value;
 				}
+			}
+
+			public DescribeConfigsResource WithConfigurationKeysCollection(String[] configurationKeysCollection)
+			{
+				ConfigurationKeysCollection = configurationKeysCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -9289,6 +9895,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeConfigsResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The error code, or 0 if we were able to successfully describe the configurations.
 			/// </summary>
@@ -9310,6 +9922,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public DescribeConfigsResult WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 
 			/// <summary>
@@ -9336,6 +9954,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeConfigsResult WithResourceType(Int8 resourceType)
+			{
+				ResourceType = resourceType;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -9359,6 +9983,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeConfigsResult WithResourceName(String resourceName)
+			{
+				ResourceName = resourceName;
+				return this;
+			}
+
 			/// <summary>
 			/// The resource name.
 			/// </summary>
@@ -9380,6 +10010,12 @@ namespace Kafka.Protocol
 
 					_resourceName = value;
 				}
+			}
+
+			public DescribeConfigsResult WithConfigsCollection(DescribeConfigsResourceResult[] configsCollection)
+			{
+				ConfigsCollection = configsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -9483,6 +10119,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribeConfigsResourceResult WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
@@ -9504,6 +10146,12 @@ namespace Kafka.Protocol
 
 						_name = value;
 					}
+				}
+
+				public DescribeConfigsResourceResult WithValue(String value)
+				{
+					Value = value;
+					return this;
 				}
 
 				/// <summary>
@@ -9530,6 +10178,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribeConfigsResourceResult WithReadOnly(Boolean readOnly)
+				{
+					ReadOnly = readOnly;
+					return this;
+				}
+
 				/// <summary>
 				/// True if the configuration is read-only.
 				/// </summary>
@@ -9551,6 +10205,12 @@ namespace Kafka.Protocol
 
 						_readOnly = value;
 					}
+				}
+
+				public DescribeConfigsResourceResult WithIsDefault(Boolean isDefault)
+				{
+					IsDefault = isDefault;
+					return this;
 				}
 
 				/// <summary>
@@ -9576,6 +10236,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribeConfigsResourceResult WithConfigSource(Int8 configSource)
+				{
+					ConfigSource = configSource;
+					return this;
+				}
+
 				/// <summary>
 				/// The configuration source.
 				/// </summary>
@@ -9592,6 +10258,12 @@ namespace Kafka.Protocol
 
 						_configSource = value;
 					}
+				}
+
+				public DescribeConfigsResourceResult WithIsSensitive(Boolean isSensitive)
+				{
+					IsSensitive = isSensitive;
+					return this;
 				}
 
 				/// <summary>
@@ -9615,6 +10287,12 @@ namespace Kafka.Protocol
 
 						_isSensitive = value;
 					}
+				}
+
+				public DescribeConfigsResourceResult WithSynonymsCollection(DescribeConfigsSynonym[] synonymsCollection)
+				{
+					SynonymsCollection = synonymsCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -9681,6 +10359,12 @@ namespace Kafka.Protocol
 						}
 					}
 
+					public DescribeConfigsSynonym WithName(String name)
+					{
+						Name = name;
+						return this;
+					}
+
 					/// <summary>
 					/// The synonym name.
 					/// </summary>
@@ -9702,6 +10386,12 @@ namespace Kafka.Protocol
 
 							_name = value;
 						}
+					}
+
+					public DescribeConfigsSynonym WithValue(String value)
+					{
+						Value = value;
+						return this;
 					}
 
 					/// <summary>
@@ -9726,6 +10416,12 @@ namespace Kafka.Protocol
 
 							_value = value;
 						}
+					}
+
+					public DescribeConfigsSynonym WithSource(Int8 source)
+					{
+						Source = source;
+						return this;
 					}
 
 					/// <summary>
@@ -9849,6 +10545,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeDelegationTokenOwner WithPrincipalType(String principalType)
+			{
+				PrincipalType = principalType;
+				return this;
+			}
+
 			/// <summary>
 			/// The owner principal type.
 			/// </summary>
@@ -9870,6 +10572,12 @@ namespace Kafka.Protocol
 
 					_principalType = value;
 				}
+			}
+
+			public DescribeDelegationTokenOwner WithPrincipalName(String principalName)
+			{
+				PrincipalName = principalName;
+				return this;
 			}
 
 			/// <summary>
@@ -10077,6 +10785,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedDelegationToken WithPrincipalType(String principalType)
+			{
+				PrincipalType = principalType;
+				return this;
+			}
+
 			/// <summary>
 			/// The token principal type.
 			/// </summary>
@@ -10098,6 +10812,12 @@ namespace Kafka.Protocol
 
 					_principalType = value;
 				}
+			}
+
+			public DescribedDelegationToken WithPrincipalName(String principalName)
+			{
+				PrincipalName = principalName;
+				return this;
 			}
 
 			/// <summary>
@@ -10123,6 +10843,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedDelegationToken WithIssueTimestamp(Int64 issueTimestamp)
+			{
+				IssueTimestamp = issueTimestamp;
+				return this;
+			}
+
 			/// <summary>
 			/// The token issue timestamp in milliseconds.
 			/// </summary>
@@ -10144,6 +10870,12 @@ namespace Kafka.Protocol
 
 					_issueTimestamp = value;
 				}
+			}
+
+			public DescribedDelegationToken WithExpiryTimestamp(Int64 expiryTimestamp)
+			{
+				ExpiryTimestamp = expiryTimestamp;
+				return this;
 			}
 
 			/// <summary>
@@ -10169,6 +10901,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedDelegationToken WithMaxTimestamp(Int64 maxTimestamp)
+			{
+				MaxTimestamp = maxTimestamp;
+				return this;
+			}
+
 			/// <summary>
 			/// The token maximum timestamp length in milliseconds.
 			/// </summary>
@@ -10190,6 +10928,12 @@ namespace Kafka.Protocol
 
 					_maxTimestamp = value;
 				}
+			}
+
+			public DescribedDelegationToken WithTokenId(String tokenId)
+			{
+				TokenId = tokenId;
+				return this;
 			}
 
 			/// <summary>
@@ -10215,6 +10959,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedDelegationToken WithHmac(Bytes hmac)
+			{
+				Hmac = hmac;
+				return this;
+			}
+
 			/// <summary>
 			/// The token HMAC.
 			/// </summary>
@@ -10236,6 +10986,12 @@ namespace Kafka.Protocol
 
 					_hmac = value;
 				}
+			}
+
+			public DescribedDelegationToken WithRenewersCollection(DescribedDelegationTokenRenewer[] renewersCollection)
+			{
+				RenewersCollection = renewersCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -10299,6 +11055,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribedDelegationTokenRenewer WithPrincipalType(String principalType)
+				{
+					PrincipalType = principalType;
+					return this;
+				}
+
 				/// <summary>
 				/// The renewer principal type
 				/// </summary>
@@ -10320,6 +11082,12 @@ namespace Kafka.Protocol
 
 						_principalType = value;
 					}
+				}
+
+				public DescribedDelegationTokenRenewer WithPrincipalName(String principalName)
+				{
+					PrincipalName = principalName;
+					return this;
 				}
 
 				/// <summary>
@@ -10617,6 +11385,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedGroup WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The describe error, or 0 if there was no error.
 			/// </summary>
@@ -10638,6 +11412,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public DescribedGroup WithGroupId(String groupId)
+			{
+				GroupId = groupId;
+				return this;
 			}
 
 			/// <summary>
@@ -10663,6 +11443,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedGroup WithGroupState(String groupState)
+			{
+				GroupState = groupState;
+				return this;
+			}
+
 			/// <summary>
 			/// The group state string, or the empty string.
 			/// </summary>
@@ -10684,6 +11470,12 @@ namespace Kafka.Protocol
 
 					_groupState = value;
 				}
+			}
+
+			public DescribedGroup WithProtocolType(String protocolType)
+			{
+				ProtocolType = protocolType;
+				return this;
 			}
 
 			/// <summary>
@@ -10709,6 +11501,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribedGroup WithProtocolData(String protocolData)
+			{
+				ProtocolData = protocolData;
+				return this;
+			}
+
 			/// <summary>
 			/// The group protocol data, or the empty string.
 			/// </summary>
@@ -10730,6 +11528,12 @@ namespace Kafka.Protocol
 
 					_protocolData = value;
 				}
+			}
+
+			public DescribedGroup WithMembersCollection(DescribedGroupMember[] membersCollection)
+			{
+				MembersCollection = membersCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -10817,6 +11621,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribedGroupMember WithMemberId(String memberId)
+				{
+					MemberId = memberId;
+					return this;
+				}
+
 				/// <summary>
 				/// The member ID assigned by the group coordinator.
 				/// </summary>
@@ -10838,6 +11648,12 @@ namespace Kafka.Protocol
 
 						_memberId = value;
 					}
+				}
+
+				public DescribedGroupMember WithClientId(String clientId)
+				{
+					ClientId = clientId;
+					return this;
 				}
 
 				/// <summary>
@@ -10863,6 +11679,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribedGroupMember WithClientHost(String clientHost)
+				{
+					ClientHost = clientHost;
+					return this;
+				}
+
 				/// <summary>
 				/// The client host.
 				/// </summary>
@@ -10884,6 +11706,12 @@ namespace Kafka.Protocol
 
 						_clientHost = value;
 					}
+				}
+
+				public DescribedGroupMember WithMemberMetadata(Bytes memberMetadata)
+				{
+					MemberMetadata = memberMetadata;
+					return this;
 				}
 
 				/// <summary>
@@ -10909,6 +11737,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribedGroupMember WithMemberAssignment(Bytes memberAssignment)
+				{
+					MemberAssignment = memberAssignment;
+					return this;
+				}
+
 				/// <summary>
 				/// The current assignment provided by the group leader.
 				/// </summary>
@@ -10931,6 +11765,12 @@ namespace Kafka.Protocol
 						_memberAssignment = value;
 					}
 				}
+			}
+
+			public DescribedGroup WithAuthorizedOperations(Int32 authorizedOperations)
+			{
+				AuthorizedOperations = authorizedOperations;
+				return this;
 			}
 
 			/// <summary>
@@ -11052,6 +11892,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribableLogDirTopic WithTopic(String topic)
+			{
+				Topic = topic;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -11073,6 +11919,12 @@ namespace Kafka.Protocol
 
 					_topic = value;
 				}
+			}
+
+			public DescribableLogDirTopic WithPartitionIndexCollection(Int32[] partitionIndexCollection)
+			{
+				PartitionIndexCollection = partitionIndexCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -11232,6 +12084,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeLogDirsResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
@@ -11255,6 +12113,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public DescribeLogDirsResult WithLogDir(String logDir)
+			{
+				LogDir = logDir;
+				return this;
+			}
+
 			/// <summary>
 			/// The absolute log directory path.
 			/// </summary>
@@ -11276,6 +12140,12 @@ namespace Kafka.Protocol
 
 					_logDir = value;
 				}
+			}
+
+			public DescribeLogDirsResult WithTopicsCollection(DescribeLogDirsTopic[] topicsCollection)
+			{
+				TopicsCollection = topicsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -11339,6 +12209,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public DescribeLogDirsTopic WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
 				/// <summary>
 				/// The topic name.
 				/// </summary>
@@ -11360,6 +12236,12 @@ namespace Kafka.Protocol
 
 						_name = value;
 					}
+				}
+
+				public DescribeLogDirsTopic WithPartitionsCollection(DescribeLogDirsPartition[] partitionsCollection)
+				{
+					PartitionsCollection = partitionsCollection;
+					return this;
 				}
 
 				private DescribeLogDirsPartition[] _partitionsCollection = System.Array.Empty<DescribeLogDirsPartition>();
@@ -11436,6 +12318,12 @@ namespace Kafka.Protocol
 						}
 					}
 
+					public DescribeLogDirsPartition WithPartitionIndex(Int32 partitionIndex)
+					{
+						PartitionIndex = partitionIndex;
+						return this;
+					}
+
 					/// <summary>
 					/// The partition index.
 					/// </summary>
@@ -11457,6 +12345,12 @@ namespace Kafka.Protocol
 
 							_partitionIndex = value;
 						}
+					}
+
+					public DescribeLogDirsPartition WithPartitionSize(Int64 partitionSize)
+					{
+						PartitionSize = partitionSize;
+						return this;
 					}
 
 					/// <summary>
@@ -11482,6 +12376,12 @@ namespace Kafka.Protocol
 						}
 					}
 
+					public DescribeLogDirsPartition WithOffsetLag(Int64 offsetLag)
+					{
+						OffsetLag = offsetLag;
+						return this;
+					}
+
 					/// <summary>
 					/// The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition)
 					/// </summary>
@@ -11503,6 +12403,12 @@ namespace Kafka.Protocol
 
 							_offsetLag = value;
 						}
+					}
+
+					public DescribeLogDirsPartition WithIsFutureKey(Boolean isFutureKey)
+					{
+						IsFutureKey = isFutureKey;
+						return this;
 					}
 
 					/// <summary>
@@ -11634,6 +12540,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public TopicPartitions WithTopic(String topic)
+			{
+				Topic = topic;
+				return this;
+			}
+
 			/// <summary>
 			/// The name of a topic.
 			/// </summary>
@@ -11655,6 +12567,12 @@ namespace Kafka.Protocol
 
 					_topic = value;
 				}
+			}
+
+			public TopicPartitions WithPartitionIdCollection(Int32[] partitionIdCollection)
+			{
+				PartitionIdCollection = partitionIdCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -11829,6 +12747,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ReplicaElectionResult WithTopic(String topic)
+			{
+				Topic = topic;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -11850,6 +12774,12 @@ namespace Kafka.Protocol
 
 					_topic = value;
 				}
+			}
+
+			public ReplicaElectionResult WithPartitionResultCollection(PartitionResult[] partitionResultCollection)
+			{
+				PartitionResultCollection = partitionResultCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -11921,6 +12851,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public PartitionResult WithPartitionId(Int32 partitionId)
+				{
+					PartitionId = partitionId;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition id
 				/// </summary>
@@ -11944,6 +12880,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public PartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
 				/// <summary>
 				/// The result error, or zero if there was no error.
 				/// </summary>
@@ -11965,6 +12907,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public PartitionResult WithErrorMessage(String errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
 				}
 
 				/// <summary>
@@ -12748,6 +13696,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public FetchableTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The name of the topic to fetch.
 			/// </summary>
@@ -12769,6 +13723,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public FetchableTopic WithFetchPartitionsCollection(FetchPartition[] fetchPartitionsCollection)
+			{
+				FetchPartitionsCollection = fetchPartitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -12856,6 +13816,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public FetchPartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -12879,6 +13845,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public FetchPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
+				{
+					CurrentLeaderEpoch = currentLeaderEpoch;
+					return this;
+				}
+
 				/// <summary>
 				/// The current leader epoch of the partition.
 				/// </summary>
@@ -12895,6 +13867,12 @@ namespace Kafka.Protocol
 
 						_currentLeaderEpoch = value;
 					}
+				}
+
+				public FetchPartition WithFetchOffset(Int64 fetchOffset)
+				{
+					FetchOffset = fetchOffset;
+					return this;
 				}
 
 				/// <summary>
@@ -12920,6 +13898,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public FetchPartition WithLogStartOffset(Int64 logStartOffset)
+				{
+					LogStartOffset = logStartOffset;
+					return this;
+				}
+
 				/// <summary>
 				/// The earliest available offset of the follower replica.  The field is only used when the request is sent by the follower.
 				/// </summary>
@@ -12941,6 +13925,12 @@ namespace Kafka.Protocol
 
 						_logStartOffset = value;
 					}
+				}
+
+				public FetchPartition WithMaxBytes(Int32 maxBytes)
+				{
+					MaxBytes = maxBytes;
+					return this;
 				}
 
 				/// <summary>
@@ -13029,6 +14019,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ForgottenTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The partition name.
 			/// </summary>
@@ -13050,6 +14046,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public ForgottenTopic WithForgottenPartitionIndexesCollection(Int32[] forgottenPartitionIndexesCollection)
+			{
+				ForgottenPartitionIndexesCollection = forgottenPartitionIndexesCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -13258,6 +14260,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public FetchableTopicResponse WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -13279,6 +14287,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public FetchableTopicResponse WithPartitionsCollection(FetchablePartitionResponse[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -13382,6 +14396,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public FetchablePartitionResponse WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partiiton index.
 				/// </summary>
@@ -13403,6 +14423,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public FetchablePartitionResponse WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -13428,6 +14454,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public FetchablePartitionResponse WithHighWatermark(Int64 highWatermark)
+				{
+					HighWatermark = highWatermark;
+					return this;
+				}
+
 				/// <summary>
 				/// The current high water mark.
 				/// </summary>
@@ -13451,6 +14483,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public FetchablePartitionResponse WithLastStableOffset(Int64 lastStableOffset)
+				{
+					LastStableOffset = lastStableOffset;
+					return this;
+				}
+
 				/// <summary>
 				/// The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)
 				/// </summary>
@@ -13469,6 +14507,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public FetchablePartitionResponse WithLogStartOffset(Int64 logStartOffset)
+				{
+					LogStartOffset = logStartOffset;
+					return this;
+				}
+
 				/// <summary>
 				/// The current log start offset.
 				/// </summary>
@@ -13485,6 +14529,12 @@ namespace Kafka.Protocol
 
 						_logStartOffset = value;
 					}
+				}
+
+				public FetchablePartitionResponse WithAbortedCollection(AbortedTransaction[] abortedCollection)
+				{
+					AbortedCollection = abortedCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -13549,6 +14599,12 @@ namespace Kafka.Protocol
 						}
 					}
 
+					public AbortedTransaction WithProducerId(Int64 producerId)
+					{
+						ProducerId = producerId;
+						return this;
+					}
+
 					/// <summary>
 					/// The producer id associated with the aborted transaction.
 					/// </summary>
@@ -13570,6 +14626,12 @@ namespace Kafka.Protocol
 
 							_producerId = value;
 						}
+					}
+
+					public AbortedTransaction WithFirstOffset(Int64 firstOffset)
+					{
+						FirstOffset = firstOffset;
+						return this;
 					}
 
 					/// <summary>
@@ -13594,6 +14656,12 @@ namespace Kafka.Protocol
 							_firstOffset = value;
 						}
 					}
+				}
+
+				public FetchablePartitionResponse WithRecords(Bytes records)
+				{
+					Records = records;
+					return this;
 				}
 
 				/// <summary>
@@ -14587,6 +15655,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public JoinGroupRequestProtocol WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The protocol name.
 			/// </summary>
@@ -14608,6 +15682,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public JoinGroupRequestProtocol WithMetadata(Bytes metadata)
+			{
+				Metadata = metadata;
+				return this;
 			}
 
 			/// <summary>
@@ -14906,6 +15986,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public JoinGroupResponseMember WithMemberId(String memberId)
+			{
+				MemberId = memberId;
+				return this;
+			}
+
 			/// <summary>
 			/// The group member ID.
 			/// </summary>
@@ -14927,6 +16013,12 @@ namespace Kafka.Protocol
 
 					_memberId = value;
 				}
+			}
+
+			public JoinGroupResponseMember WithMetadata(Bytes metadata)
+			{
+				Metadata = metadata;
+				return this;
 			}
 
 			/// <summary>
@@ -15151,6 +16243,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrRequestTopicState WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -15172,6 +16270,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public LeaderAndIsrRequestTopicState WithPartitionStatesCollection(LeaderAndIsrRequestPartitionState[] partitionStatesCollection)
+			{
+				PartitionStatesCollection = partitionStatesCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -15283,6 +16387,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public LeaderAndIsrRequestPartitionState WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -15304,6 +16414,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public LeaderAndIsrRequestPartitionState WithControllerEpoch(Int32 controllerEpoch)
+				{
+					ControllerEpoch = controllerEpoch;
+					return this;
 				}
 
 				/// <summary>
@@ -15329,6 +16445,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public LeaderAndIsrRequestPartitionState WithLeaderKey(Int32 leaderKey)
+				{
+					LeaderKey = leaderKey;
+					return this;
+				}
+
 				/// <summary>
 				/// The broker ID of the leader.
 				/// </summary>
@@ -15350,6 +16472,12 @@ namespace Kafka.Protocol
 
 						_leaderKey = value;
 					}
+				}
+
+				public LeaderAndIsrRequestPartitionState WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
 				}
 
 				/// <summary>
@@ -15375,6 +16503,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public LeaderAndIsrRequestPartitionState WithIsrReplicasCollection(Int32[] isrReplicasCollection)
+				{
+					IsrReplicasCollection = isrReplicasCollection;
+					return this;
+				}
+
 				/// <summary>
 				/// The in-sync replica IDs.
 				/// </summary>
@@ -15396,6 +16530,12 @@ namespace Kafka.Protocol
 
 						_isrReplicasCollection = value;
 					}
+				}
+
+				public LeaderAndIsrRequestPartitionState WithZkVersion(Int32 zkVersion)
+				{
+					ZkVersion = zkVersion;
+					return this;
 				}
 
 				/// <summary>
@@ -15421,6 +16561,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public LeaderAndIsrRequestPartitionState WithReplicasCollection(Int32[] replicasCollection)
+				{
+					ReplicasCollection = replicasCollection;
+					return this;
+				}
+
 				/// <summary>
 				/// The replica IDs.
 				/// </summary>
@@ -15442,6 +16588,12 @@ namespace Kafka.Protocol
 
 						_replicasCollection = value;
 					}
+				}
+
+				public LeaderAndIsrRequestPartitionState WithIsNew(Boolean isNew)
+				{
+					IsNew = isNew;
+					return this;
 				}
 
 				/// <summary>
@@ -15581,6 +16733,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrRequestPartitionStateV0 WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -15602,6 +16760,12 @@ namespace Kafka.Protocol
 
 					_topicName = value;
 				}
+			}
+
+			public LeaderAndIsrRequestPartitionStateV0 WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
 			}
 
 			/// <summary>
@@ -15627,6 +16791,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrRequestPartitionStateV0 WithControllerEpoch(Int32 controllerEpoch)
+			{
+				ControllerEpoch = controllerEpoch;
+				return this;
+			}
+
 			/// <summary>
 			/// The controller epoch.
 			/// </summary>
@@ -15648,6 +16818,12 @@ namespace Kafka.Protocol
 
 					_controllerEpoch = value;
 				}
+			}
+
+			public LeaderAndIsrRequestPartitionStateV0 WithLeaderKey(Int32 leaderKey)
+			{
+				LeaderKey = leaderKey;
+				return this;
 			}
 
 			/// <summary>
@@ -15673,6 +16849,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrRequestPartitionStateV0 WithLeaderEpoch(Int32 leaderEpoch)
+			{
+				LeaderEpoch = leaderEpoch;
+				return this;
+			}
+
 			/// <summary>
 			/// The leader epoch.
 			/// </summary>
@@ -15694,6 +16876,12 @@ namespace Kafka.Protocol
 
 					_leaderEpoch = value;
 				}
+			}
+
+			public LeaderAndIsrRequestPartitionStateV0 WithIsrReplicasCollection(Int32[] isrReplicasCollection)
+			{
+				IsrReplicasCollection = isrReplicasCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -15719,6 +16907,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrRequestPartitionStateV0 WithZkVersion(Int32 zkVersion)
+			{
+				ZkVersion = zkVersion;
+				return this;
+			}
+
 			/// <summary>
 			/// The ZooKeeper version.
 			/// </summary>
@@ -15742,6 +16936,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrRequestPartitionStateV0 WithReplicasCollection(Int32[] replicasCollection)
+			{
+				ReplicasCollection = replicasCollection;
+				return this;
+			}
+
 			/// <summary>
 			/// The replica IDs.
 			/// </summary>
@@ -15763,6 +16963,12 @@ namespace Kafka.Protocol
 
 					_replicasCollection = value;
 				}
+			}
+
+			public LeaderAndIsrRequestPartitionStateV0 WithIsNew(Boolean isNew)
+			{
+				IsNew = isNew;
+				return this;
 			}
 
 			/// <summary>
@@ -15853,6 +17059,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrLiveLeader WithBrokerId(Int32 brokerId)
+			{
+				BrokerId = brokerId;
+				return this;
+			}
+
 			/// <summary>
 			/// The leader's broker ID.
 			/// </summary>
@@ -15876,6 +17088,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrLiveLeader WithHostName(String hostName)
+			{
+				HostName = hostName;
+				return this;
+			}
+
 			/// <summary>
 			/// The leader's hostname.
 			/// </summary>
@@ -15897,6 +17115,12 @@ namespace Kafka.Protocol
 
 					_hostName = value;
 				}
+			}
+
+			public LeaderAndIsrLiveLeader WithPort(Int32 port)
+			{
+				Port = port;
+				return this;
 			}
 
 			/// <summary>
@@ -16056,6 +17280,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrResponsePartition WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -16079,6 +17309,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public LeaderAndIsrResponsePartition WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
+			}
+
 			/// <summary>
 			/// The partition index.
 			/// </summary>
@@ -16100,6 +17336,12 @@ namespace Kafka.Protocol
 
 					_partitionIndex = value;
 				}
+			}
+
+			public LeaderAndIsrResponsePartition WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
 			}
 
 			/// <summary>
@@ -16475,6 +17717,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ListedGroup WithGroupId(String groupId)
+			{
+				GroupId = groupId;
+				return this;
+			}
+
 			/// <summary>
 			/// The group ID.
 			/// </summary>
@@ -16496,6 +17744,12 @@ namespace Kafka.Protocol
 
 					_groupId = value;
 				}
+			}
+
+			public ListedGroup WithProtocolType(String protocolType)
+			{
+				ProtocolType = protocolType;
+				return this;
 			}
 
 			/// <summary>
@@ -16678,6 +17932,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ListOffsetTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -16699,6 +17959,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public ListOffsetTopic WithPartitionsCollection(ListOffsetPartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -16778,6 +18044,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public ListOffsetPartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -16799,6 +18071,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public ListOffsetPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
+				{
+					CurrentLeaderEpoch = currentLeaderEpoch;
+					return this;
 				}
 
 				/// <summary>
@@ -16824,6 +18102,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public ListOffsetPartition WithTimestamp(Int64 timestamp)
+				{
+					Timestamp = timestamp;
+					return this;
+				}
+
 				/// <summary>
 				/// The current timestamp.
 				/// </summary>
@@ -16845,6 +18129,12 @@ namespace Kafka.Protocol
 
 						_timestamp = value;
 					}
+				}
+
+				public ListOffsetPartition WithMaxNumOffsets(Int32 maxNumOffsets)
+				{
+					MaxNumOffsets = maxNumOffsets;
+					return this;
 				}
 
 				/// <summary>
@@ -16992,6 +18282,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public ListOffsetTopicResponse WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -17013,6 +18309,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public ListOffsetTopicResponse WithPartitionsCollection(ListOffsetPartitionResponse[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -17108,6 +18410,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public ListOffsetPartitionResponse WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -17129,6 +18437,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public ListOffsetPartitionResponse WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -17154,6 +18468,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public ListOffsetPartitionResponse WithOldStyleOffsetsCollection(Int64[] oldStyleOffsetsCollection)
+				{
+					OldStyleOffsetsCollection = oldStyleOffsetsCollection;
+					return this;
+				}
+
 				/// <summary>
 				/// The result offsets.
 				/// </summary>
@@ -17175,6 +18495,12 @@ namespace Kafka.Protocol
 
 						_oldStyleOffsetsCollection = value;
 					}
+				}
+
+				public ListOffsetPartitionResponse WithTimestamp(Int64 timestamp)
+				{
+					Timestamp = timestamp;
+					return this;
 				}
 
 				/// <summary>
@@ -17200,6 +18526,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public ListOffsetPartitionResponse WithOffset(Int64 offset)
+				{
+					Offset = offset;
+					return this;
+				}
+
 				/// <summary>
 				/// The returned offset.
 				/// </summary>
@@ -17221,6 +18553,12 @@ namespace Kafka.Protocol
 
 						_offset = value;
 					}
+				}
+
+				public ListOffsetPartitionResponse WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
 				}
 
 				private Int32 _leaderEpoch = Int32.Default;
@@ -17354,6 +18692,12 @@ namespace Kafka.Protocol
 				{
 					writer.WriteString(Name.Value);
 				}
+			}
+
+			public MetadataRequestTopic WithName(String name)
+			{
+				Name = name;
+				return this;
 			}
 
 			/// <summary>
@@ -17622,6 +18966,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public MetadataResponseBroker WithNodeId(Int32 nodeId)
+			{
+				NodeId = nodeId;
+				return this;
+			}
+
 			/// <summary>
 			/// The broker ID.
 			/// </summary>
@@ -17643,6 +18993,12 @@ namespace Kafka.Protocol
 
 					_nodeId = value;
 				}
+			}
+
+			public MetadataResponseBroker WithHost(String host)
+			{
+				Host = host;
+				return this;
 			}
 
 			/// <summary>
@@ -17668,6 +19024,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public MetadataResponseBroker WithPort(Int32 port)
+			{
+				Port = port;
+				return this;
+			}
+
 			/// <summary>
 			/// The broker port.
 			/// </summary>
@@ -17689,6 +19051,12 @@ namespace Kafka.Protocol
 
 					_port = value;
 				}
+			}
+
+			public MetadataResponseBroker WithRack(String rack)
+			{
+				Rack = rack;
+				return this;
 			}
 
 			/// <summary>
@@ -17833,6 +19201,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public MetadataResponseTopic WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic error, or 0 if there was no error.
 			/// </summary>
@@ -17854,6 +19228,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public MetadataResponseTopic WithName(String name)
+			{
+				Name = name;
+				return this;
 			}
 
 			/// <summary>
@@ -17879,6 +19259,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public MetadataResponseTopic WithIsInternal(Boolean isInternal)
+			{
+				IsInternal = isInternal;
+				return this;
+			}
+
 			/// <summary>
 			/// True if the topic is internal.
 			/// </summary>
@@ -17895,6 +19281,12 @@ namespace Kafka.Protocol
 
 					_isInternal = value;
 				}
+			}
+
+			public MetadataResponseTopic WithPartitionsCollection(MetadataResponsePartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -17998,6 +19390,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public MetadataResponsePartition WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition error, or 0 if there was no error.
 				/// </summary>
@@ -18019,6 +19417,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public MetadataResponsePartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
 				}
 
 				/// <summary>
@@ -18044,6 +19448,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public MetadataResponsePartition WithLeaderId(Int32 leaderId)
+				{
+					LeaderId = leaderId;
+					return this;
+				}
+
 				/// <summary>
 				/// The ID of the leader broker.
 				/// </summary>
@@ -18067,6 +19477,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public MetadataResponsePartition WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
+				}
+
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
@@ -18083,6 +19499,12 @@ namespace Kafka.Protocol
 
 						_leaderEpoch = value;
 					}
+				}
+
+				public MetadataResponsePartition WithReplicaNodesCollection(Int32[] replicaNodesCollection)
+				{
+					ReplicaNodesCollection = replicaNodesCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -18108,6 +19530,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public MetadataResponsePartition WithIsrNodesCollection(Int32[] isrNodesCollection)
+				{
+					IsrNodesCollection = isrNodesCollection;
+					return this;
+				}
+
 				/// <summary>
 				/// The set of nodes that are in sync with the leader for this partition.
 				/// </summary>
@@ -18131,6 +19559,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public MetadataResponsePartition WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+				{
+					OfflineReplicasCollection = offlineReplicasCollection;
+					return this;
+				}
+
 				/// <summary>
 				/// The set of offline replicas of this partition.
 				/// </summary>
@@ -18148,6 +19582,12 @@ namespace Kafka.Protocol
 						_offlineReplicasCollection = value;
 					}
 				}
+			}
+
+			public MetadataResponseTopic WithTopicAuthorizedOperations(Int32 topicAuthorizedOperations)
+			{
+				TopicAuthorizedOperations = topicAuthorizedOperations;
+				return this;
 			}
 
 			/// <summary>
@@ -18400,6 +19840,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetCommitRequestTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -18421,6 +19867,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public OffsetCommitRequestTopic WithPartitionsCollection(OffsetCommitRequestPartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -18508,6 +19960,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetCommitRequestPartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -18529,6 +19987,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public OffsetCommitRequestPartition WithCommittedOffset(Int64 committedOffset)
+				{
+					CommittedOffset = committedOffset;
+					return this;
 				}
 
 				/// <summary>
@@ -18554,6 +20018,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
+				{
+					CommittedLeaderEpoch = committedLeaderEpoch;
+					return this;
+				}
+
 				/// <summary>
 				/// The leader epoch of this partition.
 				/// </summary>
@@ -18570,6 +20040,12 @@ namespace Kafka.Protocol
 
 						_committedLeaderEpoch = value;
 					}
+				}
+
+				public OffsetCommitRequestPartition WithCommitTimestamp(Int64 commitTimestamp)
+				{
+					CommitTimestamp = commitTimestamp;
+					return this;
 				}
 
 				/// <summary>
@@ -18593,6 +20069,12 @@ namespace Kafka.Protocol
 
 						_commitTimestamp = value;
 					}
+				}
+
+				public OffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
+				{
+					CommittedMetadata = committedMetadata;
+					return this;
 				}
 
 				/// <summary>
@@ -18741,6 +20223,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetCommitResponseTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -18762,6 +20250,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public OffsetCommitResponseTopic WithPartitionsCollection(OffsetCommitResponsePartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -18825,6 +20319,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetCommitResponsePartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -18846,6 +20346,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public OffsetCommitResponsePartition WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -18999,6 +20505,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetFetchRequestTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			private String _name = String.Default;
 			public String Name 
 			{
@@ -19017,6 +20529,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public OffsetFetchRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+			{
+				PartitionIndexesCollection = partitionIndexesCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -19171,6 +20689,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetFetchResponseTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -19192,6 +20716,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public OffsetFetchResponseTopic WithPartitionsCollection(OffsetFetchResponsePartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -19279,6 +20809,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetFetchResponsePartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -19300,6 +20836,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public OffsetFetchResponsePartition WithCommittedOffset(Int64 committedOffset)
+				{
+					CommittedOffset = committedOffset;
+					return this;
 				}
 
 				/// <summary>
@@ -19325,6 +20867,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetFetchResponsePartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
+				{
+					CommittedLeaderEpoch = committedLeaderEpoch;
+					return this;
+				}
+
 				/// <summary>
 				/// The leader epoch.
 				/// </summary>
@@ -19346,6 +20894,12 @@ namespace Kafka.Protocol
 
 						_committedLeaderEpoch = value;
 					}
+				}
+
+				public OffsetFetchResponsePartition WithMetadata(String metadata)
+				{
+					Metadata = metadata;
+					return this;
 				}
 
 				/// <summary>
@@ -19370,6 +20924,12 @@ namespace Kafka.Protocol
 
 						_metadata = value;
 					}
+				}
+
+				public OffsetFetchResponsePartition WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -19514,6 +21074,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetForLeaderTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -19535,6 +21101,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public OffsetForLeaderTopic WithPartitionsCollection(OffsetForLeaderPartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -19606,6 +21178,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetForLeaderPartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -19629,6 +21207,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetForLeaderPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
+				{
+					CurrentLeaderEpoch = currentLeaderEpoch;
+					return this;
+				}
+
 				/// <summary>
 				/// An epoch used to fence consumers/replicas with old metadata.  If the epoch provided by the client is larger than the current epoch known to the broker, then the UNKNOWN_LEADER_EPOCH error code will be returned. If the provided epoch is smaller, then the FENCED_LEADER_EPOCH error code will be returned.
 				/// </summary>
@@ -19645,6 +21229,12 @@ namespace Kafka.Protocol
 
 						_currentLeaderEpoch = value;
 					}
+				}
+
+				public OffsetForLeaderPartition WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
 				}
 
 				/// <summary>
@@ -19792,6 +21382,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public OffsetForLeaderTopicResult WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -19813,6 +21409,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public OffsetForLeaderTopicResult WithPartitionsCollection(OffsetForLeaderPartitionResult[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -19892,6 +21494,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetForLeaderPartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
 				/// <summary>
 				/// The error code 0, or if there was no error.
 				/// </summary>
@@ -19913,6 +21521,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public OffsetForLeaderPartitionResult WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
 				}
 
 				/// <summary>
@@ -19938,6 +21552,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public OffsetForLeaderPartitionResult WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
+				}
+
 				/// <summary>
 				/// The leader epoch of the partition.
 				/// </summary>
@@ -19954,6 +21574,12 @@ namespace Kafka.Protocol
 
 						_leaderEpoch = value;
 					}
+				}
+
+				public OffsetForLeaderPartitionResult WithEndOffset(Int64 endOffset)
+				{
+					EndOffset = endOffset;
+					return this;
 				}
 
 				/// <summary>
@@ -20169,6 +21795,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public TopicProduceData WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -20190,6 +21822,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public TopicProduceData WithPartitionsCollection(PartitionProduceData[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -20253,6 +21891,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public PartitionProduceData WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -20274,6 +21918,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public PartitionProduceData WithRecords(Bytes records)
+				{
+					Records = records;
+					return this;
 				}
 
 				/// <summary>
@@ -20404,6 +22054,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public TopicProduceResponse WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -20425,6 +22081,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public TopicProduceResponse WithPartitionsCollection(PartitionProduceResponse[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -20512,6 +22174,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public PartitionProduceResponse WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -20533,6 +22201,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public PartitionProduceResponse WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -20558,6 +22232,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public PartitionProduceResponse WithBaseOffset(Int64 baseOffset)
+				{
+					BaseOffset = baseOffset;
+					return this;
+				}
+
 				/// <summary>
 				/// The base offset.
 				/// </summary>
@@ -20581,6 +22261,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public PartitionProduceResponse WithLogAppendTimeMs(Int64 logAppendTimeMs)
+				{
+					LogAppendTimeMs = logAppendTimeMs;
+					return this;
+				}
+
 				/// <summary>
 				/// The timestamp returned by broker after appending the messages. If CreateTime is used for the topic, the timestamp will be -1.  If LogAppendTime is used for the topic, the timestamp will be the broker local time when the messages are appended.
 				/// </summary>
@@ -20597,6 +22283,12 @@ namespace Kafka.Protocol
 
 						_logAppendTimeMs = value;
 					}
+				}
+
+				public PartitionProduceResponse WithLogStartOffset(Int64 logStartOffset)
+				{
+					LogStartOffset = logStartOffset;
+					return this;
 				}
 
 				/// <summary>
@@ -21617,6 +23309,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public StopReplicaRequestPartitionV0 WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -21638,6 +23336,12 @@ namespace Kafka.Protocol
 
 					_topicName = value;
 				}
+			}
+
+			public StopReplicaRequestPartitionV0 WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
 			}
 
 			/// <summary>
@@ -21725,6 +23429,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public StopReplicaRequestTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -21746,6 +23456,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public StopReplicaRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+			{
+				PartitionIndexesCollection = partitionIndexesCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -21905,6 +23621,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public StopReplicaResponsePartition WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -21928,6 +23650,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public StopReplicaResponsePartition WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
+			}
+
 			/// <summary>
 			/// The partition index.
 			/// </summary>
@@ -21949,6 +23677,12 @@ namespace Kafka.Protocol
 
 					_partitionIndex = value;
 				}
+			}
+
+			public StopReplicaResponsePartition WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
 			}
 
 			/// <summary>
@@ -22162,6 +23896,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public SyncGroupRequestAssignment WithMemberId(String memberId)
+			{
+				MemberId = memberId;
+				return this;
+			}
+
 			/// <summary>
 			/// The ID of the member to assign.
 			/// </summary>
@@ -22183,6 +23923,12 @@ namespace Kafka.Protocol
 
 					_memberId = value;
 				}
+			}
+
+			public SyncGroupRequestAssignment WithAssignment(Bytes assignment)
+			{
+				Assignment = assignment;
+				return this;
 			}
 
 			/// <summary>
@@ -22540,6 +24286,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public TxnOffsetCommitRequestTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -22561,6 +24313,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public TxnOffsetCommitRequestTopic WithPartitionsCollection(TxnOffsetCommitRequestPartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -22640,6 +24398,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public TxnOffsetCommitRequestPartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The index of the partition within the topic.
 				/// </summary>
@@ -22661,6 +24425,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public TxnOffsetCommitRequestPartition WithCommittedOffset(Int64 committedOffset)
+				{
+					CommittedOffset = committedOffset;
+					return this;
 				}
 
 				/// <summary>
@@ -22686,6 +24456,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public TxnOffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
+				{
+					CommittedLeaderEpoch = committedLeaderEpoch;
+					return this;
+				}
+
 				/// <summary>
 				/// The leader epoch of the last consumed record.
 				/// </summary>
@@ -22702,6 +24478,12 @@ namespace Kafka.Protocol
 
 						_committedLeaderEpoch = value;
 					}
+				}
+
+				public TxnOffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
+				{
+					CommittedMetadata = committedMetadata;
+					return this;
 				}
 
 				/// <summary>
@@ -22855,6 +24637,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public TxnOffsetCommitResponseTopic WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -22876,6 +24664,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public TxnOffsetCommitResponseTopic WithPartitionsCollection(TxnOffsetCommitResponsePartition[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -22939,6 +24733,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public TxnOffsetCommitResponsePartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partitition index.
 				/// </summary>
@@ -22960,6 +24760,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public TxnOffsetCommitResponsePartition WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 
 				/// <summary>
@@ -23185,6 +24991,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestTopicState WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -23206,6 +25018,12 @@ namespace Kafka.Protocol
 
 					_topicName = value;
 				}
+			}
+
+			public UpdateMetadataRequestTopicState WithPartitionStatesCollection(UpdateMetadataPartitionState[] partitionStatesCollection)
+			{
+				PartitionStatesCollection = partitionStatesCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -23317,6 +25135,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public UpdateMetadataPartitionState WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -23338,6 +25162,12 @@ namespace Kafka.Protocol
 
 						_partitionIndex = value;
 					}
+				}
+
+				public UpdateMetadataPartitionState WithControllerEpoch(Int32 controllerEpoch)
+				{
+					ControllerEpoch = controllerEpoch;
+					return this;
 				}
 
 				/// <summary>
@@ -23363,6 +25193,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public UpdateMetadataPartitionState WithLeader(Int32 leader)
+				{
+					Leader = leader;
+					return this;
+				}
+
 				/// <summary>
 				/// The ID of the broker which is the current partition leader.
 				/// </summary>
@@ -23384,6 +25220,12 @@ namespace Kafka.Protocol
 
 						_leader = value;
 					}
+				}
+
+				public UpdateMetadataPartitionState WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
 				}
 
 				/// <summary>
@@ -23409,6 +25251,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public UpdateMetadataPartitionState WithIsrCollection(Int32[] isrCollection)
+				{
+					IsrCollection = isrCollection;
+					return this;
+				}
+
 				/// <summary>
 				/// The brokers which are in the ISR for this partition.
 				/// </summary>
@@ -23430,6 +25278,12 @@ namespace Kafka.Protocol
 
 						_isrCollection = value;
 					}
+				}
+
+				public UpdateMetadataPartitionState WithZkVersion(Int32 zkVersion)
+				{
+					ZkVersion = zkVersion;
+					return this;
 				}
 
 				/// <summary>
@@ -23455,6 +25309,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public UpdateMetadataPartitionState WithReplicasCollection(Int32[] replicasCollection)
+				{
+					ReplicasCollection = replicasCollection;
+					return this;
+				}
+
 				/// <summary>
 				/// All the replicas of this partition.
 				/// </summary>
@@ -23476,6 +25336,12 @@ namespace Kafka.Protocol
 
 						_replicasCollection = value;
 					}
+				}
+
+				public UpdateMetadataPartitionState WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+				{
+					OfflineReplicasCollection = offlineReplicasCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -23620,6 +25486,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestPartitionStateV0 WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -23641,6 +25513,12 @@ namespace Kafka.Protocol
 
 					_topicName = value;
 				}
+			}
+
+			public UpdateMetadataRequestPartitionStateV0 WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
 			}
 
 			/// <summary>
@@ -23666,6 +25544,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestPartitionStateV0 WithControllerEpoch(Int32 controllerEpoch)
+			{
+				ControllerEpoch = controllerEpoch;
+				return this;
+			}
+
 			/// <summary>
 			/// The controller epoch.
 			/// </summary>
@@ -23687,6 +25571,12 @@ namespace Kafka.Protocol
 
 					_controllerEpoch = value;
 				}
+			}
+
+			public UpdateMetadataRequestPartitionStateV0 WithLeader(Int32 leader)
+			{
+				Leader = leader;
+				return this;
 			}
 
 			/// <summary>
@@ -23712,6 +25602,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestPartitionStateV0 WithLeaderEpoch(Int32 leaderEpoch)
+			{
+				LeaderEpoch = leaderEpoch;
+				return this;
+			}
+
 			/// <summary>
 			/// The leader epoch of this partition.
 			/// </summary>
@@ -23733,6 +25629,12 @@ namespace Kafka.Protocol
 
 					_leaderEpoch = value;
 				}
+			}
+
+			public UpdateMetadataRequestPartitionStateV0 WithIsrCollection(Int32[] isrCollection)
+			{
+				IsrCollection = isrCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -23758,6 +25660,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestPartitionStateV0 WithZkVersion(Int32 zkVersion)
+			{
+				ZkVersion = zkVersion;
+				return this;
+			}
+
 			/// <summary>
 			/// The Zookeeper version.
 			/// </summary>
@@ -23781,6 +25689,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestPartitionStateV0 WithReplicasCollection(Int32[] replicasCollection)
+			{
+				ReplicasCollection = replicasCollection;
+				return this;
+			}
+
 			/// <summary>
 			/// All the replicas of this partition.
 			/// </summary>
@@ -23802,6 +25716,12 @@ namespace Kafka.Protocol
 
 					_replicasCollection = value;
 				}
+			}
+
+			public UpdateMetadataRequestPartitionStateV0 WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+			{
+				OfflineReplicasCollection = offlineReplicasCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -23910,6 +25830,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestBroker WithId(Int32 id)
+			{
+				Id = id;
+				return this;
+			}
+
 			private Int32 _id = Int32.Default;
 			public Int32 Id 
 			{
@@ -23930,6 +25856,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestBroker WithV0Host(String v0Host)
+			{
+				V0Host = v0Host;
+				return this;
+			}
+
 			/// <summary>
 			/// The broker hostname.
 			/// </summary>
@@ -23948,6 +25880,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public UpdateMetadataRequestBroker WithV0Port(Int32 v0Port)
+			{
+				V0Port = v0Port;
+				return this;
+			}
+
 			/// <summary>
 			/// The broker port.
 			/// </summary>
@@ -23964,6 +25902,12 @@ namespace Kafka.Protocol
 
 					_v0Port = value;
 				}
+			}
+
+			public UpdateMetadataRequestBroker WithEndpointsCollection(UpdateMetadataRequestEndpoint[] endpointsCollection)
+			{
+				EndpointsCollection = endpointsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -24043,6 +25987,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public UpdateMetadataRequestEndpoint WithPort(Int32 port)
+				{
+					Port = port;
+					return this;
+				}
+
 				/// <summary>
 				/// The port of this endpoint
 				/// </summary>
@@ -24064,6 +26014,12 @@ namespace Kafka.Protocol
 
 						_port = value;
 					}
+				}
+
+				public UpdateMetadataRequestEndpoint WithHost(String host)
+				{
+					Host = host;
+					return this;
 				}
 
 				/// <summary>
@@ -24089,6 +26045,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public UpdateMetadataRequestEndpoint WithListener(String listener)
+				{
+					Listener = listener;
+					return this;
+				}
+
 				/// <summary>
 				/// The listener name.
 				/// </summary>
@@ -24110,6 +26072,12 @@ namespace Kafka.Protocol
 
 						_listener = value;
 					}
+				}
+
+				public UpdateMetadataRequestEndpoint WithSecurityProtocol(Int16 securityProtocol)
+				{
+					SecurityProtocol = securityProtocol;
+					return this;
 				}
 
 				/// <summary>
@@ -24134,6 +26102,12 @@ namespace Kafka.Protocol
 						_securityProtocol = value;
 					}
 				}
+			}
+
+			public UpdateMetadataRequestBroker WithRack(String rack)
+			{
+				Rack = rack;
+				return this;
 			}
 
 			/// <summary>
@@ -24330,6 +26304,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public WritableTxnMarker WithProducerId(Int64 producerId)
+			{
+				ProducerId = producerId;
+				return this;
+			}
+
 			/// <summary>
 			/// The current producer ID.
 			/// </summary>
@@ -24351,6 +26331,12 @@ namespace Kafka.Protocol
 
 					_producerId = value;
 				}
+			}
+
+			public WritableTxnMarker WithProducerEpoch(Int16 producerEpoch)
+			{
+				ProducerEpoch = producerEpoch;
+				return this;
 			}
 
 			/// <summary>
@@ -24376,6 +26362,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public WritableTxnMarker WithTransactionResult(Boolean transactionResult)
+			{
+				TransactionResult = transactionResult;
+				return this;
+			}
+
 			/// <summary>
 			/// The result of the transaction to write to the partitions (false = ABORT, true = COMMIT).
 			/// </summary>
@@ -24397,6 +26389,12 @@ namespace Kafka.Protocol
 
 					_transactionResult = value;
 				}
+			}
+
+			public WritableTxnMarker WithTopicsCollection(WritableTxnMarkerTopic[] topicsCollection)
+			{
+				TopicsCollection = topicsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -24460,6 +26458,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public WritableTxnMarkerTopic WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
 				/// <summary>
 				/// The topic name.
 				/// </summary>
@@ -24481,6 +26485,12 @@ namespace Kafka.Protocol
 
 						_name = value;
 					}
+				}
+
+				public WritableTxnMarkerTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+				{
+					PartitionIndexesCollection = partitionIndexesCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -24505,6 +26515,12 @@ namespace Kafka.Protocol
 						_partitionIndexesCollection = value;
 					}
 				}
+			}
+
+			public WritableTxnMarker WithCoordinatorEpoch(Int32 coordinatorEpoch)
+			{
+				CoordinatorEpoch = coordinatorEpoch;
+				return this;
 			}
 
 			/// <summary>
@@ -24625,6 +26641,12 @@ namespace Kafka.Protocol
 				}
 			}
 
+			public WritableTxnMarkerResult WithProducerId(Int64 producerId)
+			{
+				ProducerId = producerId;
+				return this;
+			}
+
 			/// <summary>
 			/// The current producer ID in use by the transactional ID.
 			/// </summary>
@@ -24646,6 +26668,12 @@ namespace Kafka.Protocol
 
 					_producerId = value;
 				}
+			}
+
+			public WritableTxnMarkerResult WithTopicsCollection(WritableTxnMarkerTopicResult[] topicsCollection)
+			{
+				TopicsCollection = topicsCollection;
+				return this;
 			}
 
 			/// <summary>
@@ -24709,6 +26737,12 @@ namespace Kafka.Protocol
 					}
 				}
 
+				public WritableTxnMarkerTopicResult WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
 				/// <summary>
 				/// The topic name.
 				/// </summary>
@@ -24730,6 +26764,12 @@ namespace Kafka.Protocol
 
 						_name = value;
 					}
+				}
+
+				public WritableTxnMarkerTopicResult WithPartitionsCollection(WritableTxnMarkerPartitionResult[] partitionsCollection)
+				{
+					PartitionsCollection = partitionsCollection;
+					return this;
 				}
 
 				/// <summary>
@@ -24793,6 +26833,12 @@ namespace Kafka.Protocol
 						}
 					}
 
+					public WritableTxnMarkerPartitionResult WithPartitionIndex(Int32 partitionIndex)
+					{
+						PartitionIndex = partitionIndex;
+						return this;
+					}
+
 					/// <summary>
 					/// The partition index.
 					/// </summary>
@@ -24814,6 +26860,12 @@ namespace Kafka.Protocol
 
 							_partitionIndex = value;
 						}
+					}
+
+					public WritableTxnMarkerPartitionResult WithErrorCode(Int16 errorCode)
+					{
+						ErrorCode = errorCode;
+						return this;
 					}
 
 					/// <summary>

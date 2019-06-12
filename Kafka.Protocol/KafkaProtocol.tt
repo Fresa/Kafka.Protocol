@@ -347,6 +347,13 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 
 		PrintOnNewRowForEachWithIndex(field.Fields, (nestedField, index, count) =>
 		{
+			var argumentName = nestedField.GetName().FirstCharacterToLowerCase();
+			#>public <#= fieldTypeNameWithoutArrayCharacters #> With<#= nestedField.GetName() #>(<#= nestedField.GetTypeName() #> <#= argumentName #>)<# Block(() => 
+			{
+				#><#= nestedField.GetName() #> = <#= argumentName #>;<# _();
+				#>return this;<#
+			}); _(2);
+
 			PrintField(nestedField); 
 			if (index + 1 != count) _();
 		});					
