@@ -174,7 +174,7 @@ namespace Kafka.Protocol<# Block(() =>
 
 			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
 			{
-				PrintField(messageField);
+				PrintField(messageField, messageDefinition.Name);
 				if (messageFieldIndex + 1 != messageFieldCount) _();
 			});
 		}); _();
@@ -188,7 +188,7 @@ void PrintReadFrom(Kafka.Protocol.Generator.Definitions.Messages.Field messageFi
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
-		var fieldName = messageField.GetName();
+		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
 		if (messageField.Fields == null)
 		{
 			if (messageField.IsArray())
@@ -220,7 +220,7 @@ void PrintWriteTo(Kafka.Protocol.Generator.Definitions.Messages.Field messageFie
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
 	{
-		var fieldName = messageField.GetName();
+		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
 		if (messageField.Fields == null)
 		{
 			var fieldTypeName = messageField.GetTypeName();
@@ -248,14 +248,15 @@ void PrintWriteTo(Kafka.Protocol.Generator.Definitions.Messages.Field messageFie
 	});		
 }
 
-void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
+void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field, string className)
 {
 	GenerateDocumentation(field.About);
 
 	var fieldTypeName = field.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
 	var privateFieldName = field.GetName().FirstCharacterToLowerCase();
-	
+	var fieldName = field.GetName().FirstCharacterToUpperCase();
+
 	#>private <#= fieldTypeName #> _<#= privateFieldName #><#
 	
 	if(field.Default != null) 
@@ -275,7 +276,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 		#> = <#= fieldTypeName #>.Default;<# 
 	} _();
 
-	#>public <#= fieldTypeName #> <#= field.GetName() #> <# Block(() => 
+	#>public <#= fieldTypeName #> <#= fieldName #> <# Block(() => 
 	{
 		#>get => _<#= privateFieldName #>;<# _();
 		#>set <# Block(() => 
@@ -285,7 +286,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 				var versionRange = VersionRange.Parse(field.Versions);
 				#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>)) == false) <# Block(() => 
 				{
-					#>throw new UnsupportedVersionException($"<#= field.GetName() #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<#
+					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<#
 				}); _(2);
 			}
 
@@ -293,7 +294,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 			{
 				#>if (value == null) <# Block(() => 
 				{					
-					#>throw new UnsupportedVersionException($"<#= field.GetName() #> is non-nullable.");<#
+					#>throw new UnsupportedVersionException($"<#= fieldName #> is non-nullable.");<#
 				}); _(2);
 			}
 			else
@@ -302,18 +303,31 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 				#>if (Version.InRange(new VersionRange(<#= nullableVersionRange.From #>, <#= nullableVersionRange.To #>)) == false &&<# _();
 				#>	value == null) <# Block(() => 
 				{					
-					#>throw new UnsupportedVersionException($"<#= field.GetName() #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<#
+					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<#
 				}); _(2);
 			}
 
 			#>_<#= privateFieldName #> = value;<#
 		});
-	});
+	}); _(2); 
 	
 	if (field.Fields == null) 
 	{
+		var argumentName = field.GetName().FirstCharacterToLowerCase();
+		#>public <#= className #> With<#= fieldName #>(<#= field.GetTypeName() #> <#= argumentName #>)<# Block(() => 
+		{
+			#><#= fieldName #> = <#= argumentName #>;<# _();
+			#>return this;<#
+		}); 
+
 		return;
-	} _(2); 
+	} 
+
+	#>public <#= className #> With<#= fieldName #>s(Func<<#= className #>, <#= field.GetTypeName() #>> createField)<# Block(() => 
+	{
+		#><#= fieldName #> = createField(this);<# _();
+		#>return this;<#
+	}); _(2);
 
 	#>public <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>()<# Block(() => 
 	{
@@ -347,14 +361,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field)
 
 		PrintOnNewRowForEachWithIndex(field.Fields, (nestedField, index, count) =>
 		{
-			var argumentName = nestedField.GetName().FirstCharacterToLowerCase();
-			#>public <#= fieldTypeNameWithoutArrayCharacters #> With<#= nestedField.GetName() #>(<#= nestedField.GetTypeName() #> <#= argumentName #>)<# Block(() => 
-			{
-				#><#= nestedField.GetName() #> = <#= argumentName #>;<# _();
-				#>return this;<#
-			}); _(2);
-
-			PrintField(nestedField); 
+			PrintField(nestedField, fieldTypeNameWithoutArrayCharacters); 
 			if (index + 1 != count) _();
 		});					
 	});

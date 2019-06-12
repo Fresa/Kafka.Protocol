@@ -2144,6 +2144,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AddOffsetsToTxnRequest WithTransactionalId(String transactionalId)
+		{
+			TransactionalId = transactionalId;
+			return this;
+		}
+
 		/// <summary>
 		/// Current producer id in use by the transactional id.
 		/// </summary>
@@ -2165,6 +2171,12 @@ namespace Kafka.Protocol
 
 				_producerId = value;
 			}
+		}
+
+		public AddOffsetsToTxnRequest WithProducerId(Int64 producerId)
+		{
+			ProducerId = producerId;
+			return this;
 		}
 
 		/// <summary>
@@ -2190,6 +2202,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AddOffsetsToTxnRequest WithProducerEpoch(Int16 producerEpoch)
+		{
+			ProducerEpoch = producerEpoch;
+			return this;
+		}
+
 		/// <summary>
 		/// The unique group identifier.
 		/// </summary>
@@ -2211,6 +2229,12 @@ namespace Kafka.Protocol
 
 				_groupId = value;
 			}
+		}
+
+		public AddOffsetsToTxnRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
 		}
 	}
 
@@ -2277,6 +2301,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AddOffsetsToTxnResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The response error code, or 0 if there was no error.
 		/// </summary>
@@ -2298,6 +2328,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public AddOffsetsToTxnResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 	}
 
@@ -2380,6 +2416,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AddPartitionsToTxnRequest WithTransactionalId(String transactionalId)
+		{
+			TransactionalId = transactionalId;
+			return this;
+		}
+
 		/// <summary>
 		/// Current producer id in use by the transactional id.
 		/// </summary>
@@ -2401,6 +2443,12 @@ namespace Kafka.Protocol
 
 				_producerId = value;
 			}
+		}
+
+		public AddPartitionsToTxnRequest WithProducerId(Int64 producerId)
+		{
+			ProducerId = producerId;
+			return this;
 		}
 
 		/// <summary>
@@ -2426,6 +2474,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AddPartitionsToTxnRequest WithProducerEpoch(Int16 producerEpoch)
+		{
+			ProducerEpoch = producerEpoch;
+			return this;
+		}
+
 		/// <summary>
 		/// The partitions to add to the transation.
 		/// </summary>
@@ -2447,6 +2501,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public AddPartitionsToTxnRequest WithTopicsCollections(Func<AddPartitionsToTxnRequest, Dictionary<String, AddPartitionsToTxnTopic>> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public AddPartitionsToTxnTopic CreateAddPartitionsToTxnTopic()
@@ -2487,12 +2547,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AddPartitionsToTxnTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
@@ -2516,9 +2570,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AddPartitionsToTxnTopic WithPartitionsCollection(Int32[] partitionsCollection)
+			public AddPartitionsToTxnTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -2543,6 +2597,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public AddPartitionsToTxnTopic WithPartitionsCollection(Int32[] partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
 			}
 		}
 	}
@@ -2610,6 +2670,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AddPartitionsToTxnResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
@@ -2631,6 +2697,12 @@ namespace Kafka.Protocol
 
 				_resultsCollection = value;
 			}
+		}
+
+		public AddPartitionsToTxnResponse WithResultsCollections(Func<AddPartitionsToTxnResponse, Dictionary<String, AddPartitionsToTxnTopicResult>> createField)
+		{
+			ResultsCollection = createField(this);
+			return this;
 		}
 
 		public AddPartitionsToTxnTopicResult CreateAddPartitionsToTxnTopicResult()
@@ -2671,12 +2743,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AddPartitionsToTxnTopicResult WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -2700,9 +2766,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AddPartitionsToTxnTopicResult WithResultsCollection(Dictionary<Int32, AddPartitionsToTxnPartitionResult> resultsCollection)
+			public AddPartitionsToTxnTopicResult WithName(String name)
 			{
-				ResultsCollection = resultsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -2727,6 +2793,12 @@ namespace Kafka.Protocol
 
 					_resultsCollection = value;
 				}
+			}
+
+			public AddPartitionsToTxnTopicResult WithResultsCollections(Func<AddPartitionsToTxnTopicResult, Dictionary<Int32, AddPartitionsToTxnPartitionResult>> createField)
+			{
+				ResultsCollection = createField(this);
+				return this;
 			}
 
 			public AddPartitionsToTxnPartitionResult CreateAddPartitionsToTxnPartitionResult()
@@ -2767,12 +2839,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AddPartitionsToTxnPartitionResult WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
@@ -2796,9 +2862,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AddPartitionsToTxnPartitionResult WithErrorCode(Int16 errorCode)
+				public AddPartitionsToTxnPartitionResult WithPartitionIndex(Int32 partitionIndex)
 				{
-					ErrorCode = errorCode;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -2823,6 +2889,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public AddPartitionsToTxnPartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 			}
 		}
@@ -2891,6 +2963,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AlterConfigsRequest WithResourcesCollections(Func<AlterConfigsRequest, Dictionary<Int8, AlterConfigsResource>> createField)
+		{
+			ResourcesCollection = createField(this);
+			return this;
+		}
+
 		public AlterConfigsResource CreateAlterConfigsResource()
 		{
 			return new AlterConfigsResource(Version);
@@ -2937,12 +3015,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResource WithResourceType(Int8 resourceType)
-			{
-				ResourceType = resourceType;
-				return this;
-			}
-
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -2966,9 +3038,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResource WithResourceName(String resourceName)
+			public AlterConfigsResource WithResourceType(Int8 resourceType)
 			{
-				ResourceName = resourceName;
+				ResourceType = resourceType;
 				return this;
 			}
 
@@ -2995,9 +3067,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResource WithConfigsCollection(Dictionary<String, AlterableConfig> configsCollection)
+			public AlterConfigsResource WithResourceName(String resourceName)
 			{
-				ConfigsCollection = configsCollection;
+				ResourceName = resourceName;
 				return this;
 			}
 
@@ -3022,6 +3094,12 @@ namespace Kafka.Protocol
 
 					_configsCollection = value;
 				}
+			}
+
+			public AlterConfigsResource WithConfigsCollections(Func<AlterConfigsResource, Dictionary<String, AlterableConfig>> createField)
+			{
+				ConfigsCollection = createField(this);
+				return this;
 			}
 
 			public AlterableConfig CreateAlterableConfig()
@@ -3062,12 +3140,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AlterableConfig WithName(String name)
-				{
-					Name = name;
-					return this;
-				}
-
 				/// <summary>
 				/// The configuration key name.
 				/// </summary>
@@ -3091,9 +3163,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AlterableConfig WithValue(String value)
+				public AlterableConfig WithName(String name)
 				{
-					Value = value;
+					Name = name;
 					return this;
 				}
 
@@ -3120,6 +3192,12 @@ namespace Kafka.Protocol
 						_value = value;
 					}
 				}
+
+				public AlterableConfig WithValue(String value)
+				{
+					Value = value;
+					return this;
+				}
 			}
 		}
 
@@ -3144,6 +3222,12 @@ namespace Kafka.Protocol
 
 				_validateOnly = value;
 			}
+		}
+
+		public AlterConfigsRequest WithValidateOnly(Boolean validateOnly)
+		{
+			ValidateOnly = validateOnly;
+			return this;
 		}
 	}
 
@@ -3210,6 +3294,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AlterConfigsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The responses for each resource.
 		/// </summary>
@@ -3231,6 +3321,12 @@ namespace Kafka.Protocol
 
 				_resourcesCollection = value;
 			}
+		}
+
+		public AlterConfigsResponse WithResourcesCollections(Func<AlterConfigsResponse, AlterConfigsResourceResponse[]> createField)
+		{
+			ResourcesCollection = createField(this);
+			return this;
 		}
 
 		public AlterConfigsResourceResponse CreateAlterConfigsResourceResponse()
@@ -3287,12 +3383,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResourceResponse WithErrorCode(Int16 errorCode)
-			{
-				ErrorCode = errorCode;
-				return this;
-			}
-
 			/// <summary>
 			/// The resource error code.
 			/// </summary>
@@ -3316,9 +3406,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResourceResponse WithErrorMessage(String errorMessage)
+			public AlterConfigsResourceResponse WithErrorCode(Int16 errorCode)
 			{
-				ErrorMessage = errorMessage;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -3346,9 +3436,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResourceResponse WithResourceType(Int8 resourceType)
+			public AlterConfigsResourceResponse WithErrorMessage(String errorMessage)
 			{
-				ResourceType = resourceType;
+				ErrorMessage = errorMessage;
 				return this;
 			}
 
@@ -3375,9 +3465,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResourceResponse WithResourceName(String resourceName)
+			public AlterConfigsResourceResponse WithResourceType(Int8 resourceType)
 			{
-				ResourceName = resourceName;
+				ResourceType = resourceType;
 				return this;
 			}
 
@@ -3402,6 +3492,12 @@ namespace Kafka.Protocol
 
 					_resourceName = value;
 				}
+			}
+
+			public AlterConfigsResourceResponse WithResourceName(String resourceName)
+			{
+				ResourceName = resourceName;
+				return this;
 			}
 		}
 	}
@@ -3461,6 +3557,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AlterReplicaLogDirsRequest WithDirsCollections(Func<AlterReplicaLogDirsRequest, Dictionary<String, AlterReplicaLogDir>> createField)
+		{
+			DirsCollection = createField(this);
+			return this;
+		}
+
 		public AlterReplicaLogDir CreateAlterReplicaLogDir()
 		{
 			return new AlterReplicaLogDir(Version);
@@ -3499,12 +3601,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterReplicaLogDir WithPath(String path)
-			{
-				Path = path;
-				return this;
-			}
-
 			/// <summary>
 			/// The absolute directory path.
 			/// </summary>
@@ -3528,9 +3624,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterReplicaLogDir WithTopicsCollection(Dictionary<String, AlterReplicaLogDirTopic> topicsCollection)
+			public AlterReplicaLogDir WithPath(String path)
 			{
-				TopicsCollection = topicsCollection;
+				Path = path;
 				return this;
 			}
 
@@ -3555,6 +3651,12 @@ namespace Kafka.Protocol
 
 					_topicsCollection = value;
 				}
+			}
+
+			public AlterReplicaLogDir WithTopicsCollections(Func<AlterReplicaLogDir, Dictionary<String, AlterReplicaLogDirTopic>> createField)
+			{
+				TopicsCollection = createField(this);
+				return this;
 			}
 
 			public AlterReplicaLogDirTopic CreateAlterReplicaLogDirTopic()
@@ -3595,12 +3697,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AlterReplicaLogDirTopic WithName(String name)
-				{
-					Name = name;
-					return this;
-				}
-
 				/// <summary>
 				/// The topic name.
 				/// </summary>
@@ -3624,9 +3720,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AlterReplicaLogDirTopic WithPartitionsCollection(Int32[] partitionsCollection)
+				public AlterReplicaLogDirTopic WithName(String name)
 				{
-					PartitionsCollection = partitionsCollection;
+					Name = name;
 					return this;
 				}
 
@@ -3651,6 +3747,12 @@ namespace Kafka.Protocol
 
 						_partitionsCollection = value;
 					}
+				}
+
+				public AlterReplicaLogDirTopic WithPartitionsCollection(Int32[] partitionsCollection)
+				{
+					PartitionsCollection = partitionsCollection;
+					return this;
 				}
 			}
 		}
@@ -3719,6 +3821,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public AlterReplicaLogDirsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
@@ -3740,6 +3848,12 @@ namespace Kafka.Protocol
 
 				_resultsCollection = value;
 			}
+		}
+
+		public AlterReplicaLogDirsResponse WithResultsCollections(Func<AlterReplicaLogDirsResponse, AlterReplicaLogDirTopicResult[]> createField)
+		{
+			ResultsCollection = createField(this);
+			return this;
 		}
 
 		public AlterReplicaLogDirTopicResult CreateAlterReplicaLogDirTopicResult()
@@ -3780,12 +3894,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterReplicaLogDirTopicResult WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
@@ -3809,9 +3917,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterReplicaLogDirTopicResult WithPartitionsCollection(AlterReplicaLogDirPartitionResult[] partitionsCollection)
+			public AlterReplicaLogDirTopicResult WithTopicName(String topicName)
 			{
-				PartitionsCollection = partitionsCollection;
+				TopicName = topicName;
 				return this;
 			}
 
@@ -3836,6 +3944,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public AlterReplicaLogDirTopicResult WithPartitionsCollections(Func<AlterReplicaLogDirTopicResult, AlterReplicaLogDirPartitionResult[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public AlterReplicaLogDirPartitionResult CreateAlterReplicaLogDirPartitionResult()
@@ -3876,12 +3990,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AlterReplicaLogDirPartitionResult WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -3905,9 +4013,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AlterReplicaLogDirPartitionResult WithErrorCode(Int16 errorCode)
+				public AlterReplicaLogDirPartitionResult WithPartitionIndex(Int32 partitionIndex)
 				{
-					ErrorCode = errorCode;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -3932,6 +4040,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public AlterReplicaLogDirPartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 			}
 		}
@@ -4037,6 +4151,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ApiVersionsResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The APIs supported by the broker.
 		/// </summary>
@@ -4058,6 +4178,12 @@ namespace Kafka.Protocol
 
 				_apiKeysCollection = value;
 			}
+		}
+
+		public ApiVersionsResponse WithApiKeysCollections(Func<ApiVersionsResponse, Dictionary<Int16, ApiVersionsResponseKey>> createField)
+		{
+			ApiKeysCollection = createField(this);
+			return this;
 		}
 
 		public ApiVersionsResponseKey CreateApiVersionsResponseKey()
@@ -4106,12 +4232,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ApiVersionsResponseKey WithIndex(Int16 index)
-			{
-				Index = index;
-				return this;
-			}
-
 			/// <summary>
 			/// The API index.
 			/// </summary>
@@ -4135,9 +4255,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ApiVersionsResponseKey WithMinVersion(Int16 minVersion)
+			public ApiVersionsResponseKey WithIndex(Int16 index)
 			{
-				MinVersion = minVersion;
+				Index = index;
 				return this;
 			}
 
@@ -4164,9 +4284,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ApiVersionsResponseKey WithMaxVersion(Int16 maxVersion)
+			public ApiVersionsResponseKey WithMinVersion(Int16 minVersion)
 			{
-				MaxVersion = maxVersion;
+				MinVersion = minVersion;
 				return this;
 			}
 
@@ -4192,6 +4312,12 @@ namespace Kafka.Protocol
 					_maxVersion = value;
 				}
 			}
+
+			public ApiVersionsResponseKey WithMaxVersion(Int16 maxVersion)
+			{
+				MaxVersion = maxVersion;
+				return this;
+			}
 		}
 
 		/// <summary>
@@ -4210,6 +4336,12 @@ namespace Kafka.Protocol
 
 				_throttleTimeMs = value;
 			}
+		}
+
+		public ApiVersionsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
 		}
 	}
 
@@ -4276,6 +4408,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ControlledShutdownRequest WithBrokerId(Int32 brokerId)
+		{
+			BrokerId = brokerId;
+			return this;
+		}
+
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
@@ -4292,6 +4430,12 @@ namespace Kafka.Protocol
 
 				_brokerEpoch = value;
 			}
+		}
+
+		public ControlledShutdownRequest WithBrokerEpoch(Int64 brokerEpoch)
+		{
+			BrokerEpoch = brokerEpoch;
+			return this;
 		}
 	}
 
@@ -4358,6 +4502,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ControlledShutdownResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The partitions that the broker still leads.
 		/// </summary>
@@ -4379,6 +4529,12 @@ namespace Kafka.Protocol
 
 				_remainingPartitionsCollection = value;
 			}
+		}
+
+		public ControlledShutdownResponse WithRemainingPartitionsCollections(Func<ControlledShutdownResponse, Dictionary<String, RemainingPartition>> createField)
+		{
+			RemainingPartitionsCollection = createField(this);
+			return this;
 		}
 
 		public RemainingPartition CreateRemainingPartition()
@@ -4419,12 +4575,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public RemainingPartition WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
 			/// <summary>
 			/// The name of the topic.
 			/// </summary>
@@ -4448,9 +4598,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public RemainingPartition WithPartitionIndex(Int32 partitionIndex)
+			public RemainingPartition WithTopicName(String topicName)
 			{
-				PartitionIndex = partitionIndex;
+				TopicName = topicName;
 				return this;
 			}
 
@@ -4475,6 +4625,12 @@ namespace Kafka.Protocol
 
 					_partitionIndex = value;
 				}
+			}
+
+			public RemainingPartition WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
 			}
 		}
 	}
@@ -4532,6 +4688,12 @@ namespace Kafka.Protocol
 
 				_creationsCollection = value;
 			}
+		}
+
+		public CreateAclsRequest WithCreationsCollections(Func<CreateAclsRequest, CreatableAcl[]> createField)
+		{
+			CreationsCollection = createField(this);
+			return this;
 		}
 
 		public CreatableAcl CreateCreatableAcl()
@@ -4612,12 +4774,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAcl WithResourceType(Int8 resourceType)
-			{
-				ResourceType = resourceType;
-				return this;
-			}
-
 			/// <summary>
 			/// The type of the resource.
 			/// </summary>
@@ -4641,9 +4797,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAcl WithResourceName(String resourceName)
+			public CreatableAcl WithResourceType(Int8 resourceType)
 			{
-				ResourceName = resourceName;
+				ResourceType = resourceType;
 				return this;
 			}
 
@@ -4670,9 +4826,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAcl WithResourcePatternType(Int8 resourcePatternType)
+			public CreatableAcl WithResourceName(String resourceName)
 			{
-				ResourcePatternType = resourcePatternType;
+				ResourceName = resourceName;
 				return this;
 			}
 
@@ -4699,9 +4855,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAcl WithPrincipal(String principal)
+			public CreatableAcl WithResourcePatternType(Int8 resourcePatternType)
 			{
-				Principal = principal;
+				ResourcePatternType = resourcePatternType;
 				return this;
 			}
 
@@ -4728,9 +4884,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAcl WithHost(String host)
+			public CreatableAcl WithPrincipal(String principal)
 			{
-				Host = host;
+				Principal = principal;
 				return this;
 			}
 
@@ -4757,9 +4913,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAcl WithOperation(Int8 operation)
+			public CreatableAcl WithHost(String host)
 			{
-				Operation = operation;
+				Host = host;
 				return this;
 			}
 
@@ -4786,9 +4942,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAcl WithPermissionType(Int8 permissionType)
+			public CreatableAcl WithOperation(Int8 operation)
 			{
-				PermissionType = permissionType;
+				Operation = operation;
 				return this;
 			}
 
@@ -4813,6 +4969,12 @@ namespace Kafka.Protocol
 
 					_permissionType = value;
 				}
+			}
+
+			public CreatableAcl WithPermissionType(Int8 permissionType)
+			{
+				PermissionType = permissionType;
+				return this;
 			}
 		}
 	}
@@ -4880,6 +5042,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreateAclsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The results for each ACL creation.
 		/// </summary>
@@ -4901,6 +5069,12 @@ namespace Kafka.Protocol
 
 				_resultsCollection = value;
 			}
+		}
+
+		public CreateAclsResponse WithResultsCollections(Func<CreateAclsResponse, CreatableAclResult[]> createField)
+		{
+			ResultsCollection = createField(this);
+			return this;
 		}
 
 		public CreatableAclResult CreateCreatableAclResult()
@@ -4941,12 +5115,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAclResult WithErrorCode(Int16 errorCode)
-			{
-				ErrorCode = errorCode;
-				return this;
-			}
-
 			/// <summary>
 			/// The result error, or zero if there was no error.
 			/// </summary>
@@ -4970,9 +5138,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAclResult WithErrorMessage(String errorMessage)
+			public CreatableAclResult WithErrorCode(Int16 errorCode)
 			{
-				ErrorMessage = errorMessage;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -4998,6 +5166,12 @@ namespace Kafka.Protocol
 
 					_errorMessage = value;
 				}
+			}
+
+			public CreatableAclResult WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 		}
 	}
@@ -5065,6 +5239,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreateDelegationTokenRequest WithRenewersCollections(Func<CreateDelegationTokenRequest, CreatableRenewers[]> createField)
+		{
+			RenewersCollection = createField(this);
+			return this;
+		}
+
 		public CreatableRenewers CreateCreatableRenewers()
 		{
 			return new CreatableRenewers(Version);
@@ -5103,12 +5283,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableRenewers WithPrincipalType(String principalType)
-			{
-				PrincipalType = principalType;
-				return this;
-			}
-
 			/// <summary>
 			/// The type of the Kafka principal.
 			/// </summary>
@@ -5132,9 +5306,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableRenewers WithPrincipalName(String principalName)
+			public CreatableRenewers WithPrincipalType(String principalType)
 			{
-				PrincipalName = principalName;
+				PrincipalType = principalType;
 				return this;
 			}
 
@@ -5160,6 +5334,12 @@ namespace Kafka.Protocol
 					_principalName = value;
 				}
 			}
+
+			public CreatableRenewers WithPrincipalName(String principalName)
+			{
+				PrincipalName = principalName;
+				return this;
+			}
 		}
 
 		/// <summary>
@@ -5183,6 +5363,12 @@ namespace Kafka.Protocol
 
 				_maxLifetimeMs = value;
 			}
+		}
+
+		public CreateDelegationTokenRequest WithMaxLifetimeMs(Int64 maxLifetimeMs)
+		{
+			MaxLifetimeMs = maxLifetimeMs;
+			return this;
 		}
 	}
 
@@ -5305,6 +5491,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreateDelegationTokenResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The principal type of the token owner.
 		/// </summary>
@@ -5326,6 +5518,12 @@ namespace Kafka.Protocol
 
 				_principalType = value;
 			}
+		}
+
+		public CreateDelegationTokenResponse WithPrincipalType(String principalType)
+		{
+			PrincipalType = principalType;
+			return this;
 		}
 
 		/// <summary>
@@ -5351,6 +5549,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreateDelegationTokenResponse WithPrincipalName(String principalName)
+		{
+			PrincipalName = principalName;
+			return this;
+		}
+
 		/// <summary>
 		/// When this token was generated.
 		/// </summary>
@@ -5372,6 +5576,12 @@ namespace Kafka.Protocol
 
 				_issueTimestampMs = value;
 			}
+		}
+
+		public CreateDelegationTokenResponse WithIssueTimestampMs(Int64 issueTimestampMs)
+		{
+			IssueTimestampMs = issueTimestampMs;
+			return this;
 		}
 
 		/// <summary>
@@ -5397,6 +5607,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreateDelegationTokenResponse WithExpiryTimestampMs(Int64 expiryTimestampMs)
+		{
+			ExpiryTimestampMs = expiryTimestampMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The maximum lifetime of this token.
 		/// </summary>
@@ -5418,6 +5634,12 @@ namespace Kafka.Protocol
 
 				_maxTimestampMs = value;
 			}
+		}
+
+		public CreateDelegationTokenResponse WithMaxTimestampMs(Int64 maxTimestampMs)
+		{
+			MaxTimestampMs = maxTimestampMs;
+			return this;
 		}
 
 		/// <summary>
@@ -5443,6 +5665,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreateDelegationTokenResponse WithTokenId(String tokenId)
+		{
+			TokenId = tokenId;
+			return this;
+		}
+
 		/// <summary>
 		/// HMAC of the delegation token.
 		/// </summary>
@@ -5466,6 +5694,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreateDelegationTokenResponse WithHmac(Bytes hmac)
+		{
+			Hmac = hmac;
+			return this;
+		}
+
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
@@ -5487,6 +5721,12 @@ namespace Kafka.Protocol
 
 				_throttleTimeMs = value;
 			}
+		}
+
+		public CreateDelegationTokenResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
 		}
 	}
 
@@ -5561,6 +5801,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatePartitionsRequest WithTopicsCollections(Func<CreatePartitionsRequest, CreatePartitionsTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
+		}
+
 		public CreatePartitionsTopic CreateCreatePartitionsTopic()
 		{
 			return new CreatePartitionsTopic(Version);
@@ -5607,12 +5853,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatePartitionsTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -5636,9 +5876,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatePartitionsTopic WithCount(Int32 count)
+			public CreatePartitionsTopic WithName(String name)
 			{
-				Count = count;
+				Name = name;
 				return this;
 			}
 
@@ -5665,9 +5905,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatePartitionsTopic WithAssignmentsCollection(CreatePartitionsAssignment[] assignmentsCollection)
+			public CreatePartitionsTopic WithCount(Int32 count)
 			{
-				AssignmentsCollection = assignmentsCollection;
+				Count = count;
 				return this;
 			}
 
@@ -5693,6 +5933,12 @@ namespace Kafka.Protocol
 
 					_assignmentsCollection = value;
 				}
+			}
+
+			public CreatePartitionsTopic WithAssignmentsCollections(Func<CreatePartitionsTopic, CreatePartitionsAssignment[]> createField)
+			{
+				AssignmentsCollection = createField(this);
+				return this;
 			}
 
 			public CreatePartitionsAssignment CreateCreatePartitionsAssignment()
@@ -5725,12 +5971,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public CreatePartitionsAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
-				{
-					BrokerIdsCollection = brokerIdsCollection;
-					return this;
-				}
-
 				/// <summary>
 				/// The assigned broker IDs.
 				/// </summary>
@@ -5752,6 +5992,12 @@ namespace Kafka.Protocol
 
 						_brokerIdsCollection = value;
 					}
+				}
+
+				public CreatePartitionsAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
+				{
+					BrokerIdsCollection = brokerIdsCollection;
+					return this;
 				}
 			}
 		}
@@ -5779,6 +6025,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatePartitionsRequest WithTimeoutMs(Int32 timeoutMs)
+		{
+			TimeoutMs = timeoutMs;
+			return this;
+		}
+
 		/// <summary>
 		/// If true, then validate the request, but don't actually increase the number of partitions.
 		/// </summary>
@@ -5800,6 +6052,12 @@ namespace Kafka.Protocol
 
 				_validateOnly = value;
 			}
+		}
+
+		public CreatePartitionsRequest WithValidateOnly(Boolean validateOnly)
+		{
+			ValidateOnly = validateOnly;
+			return this;
 		}
 	}
 
@@ -5866,6 +6124,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreatePartitionsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The partition creation results for each topic.
 		/// </summary>
@@ -5887,6 +6151,12 @@ namespace Kafka.Protocol
 
 				_resultsCollection = value;
 			}
+		}
+
+		public CreatePartitionsResponse WithResultsCollections(Func<CreatePartitionsResponse, CreatePartitionsTopicResult[]> createField)
+		{
+			ResultsCollection = createField(this);
+			return this;
 		}
 
 		public CreatePartitionsTopicResult CreateCreatePartitionsTopicResult()
@@ -5935,12 +6205,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatePartitionsTopicResult WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -5964,9 +6228,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatePartitionsTopicResult WithErrorCode(Int16 errorCode)
+			public CreatePartitionsTopicResult WithName(String name)
 			{
-				ErrorCode = errorCode;
+				Name = name;
 				return this;
 			}
 
@@ -5993,9 +6257,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatePartitionsTopicResult WithErrorMessage(String errorMessage)
+			public CreatePartitionsTopicResult WithErrorCode(Int16 errorCode)
 			{
-				ErrorMessage = errorMessage;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -6021,6 +6285,12 @@ namespace Kafka.Protocol
 
 					_errorMessage = value;
 				}
+			}
+
+			public CreatePartitionsTopicResult WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 		}
 	}
@@ -6049,11 +6319,11 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				timeoutMs = new Int32(reader.ReadInt32());
+				TimeoutMs = new Int32(reader.ReadInt32());
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				validateOnly = new Boolean(reader.ReadBoolean());
+				ValidateOnly = new Boolean(reader.ReadBoolean());
 			}
 		}
 
@@ -6065,11 +6335,11 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(timeoutMs.Value);
+				writer.WriteInt32(TimeoutMs.Value);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteBoolean(validateOnly.Value);
+				writer.WriteBoolean(ValidateOnly.Value);
 			}
 		}
 
@@ -6094,6 +6364,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public CreateTopicsRequest WithTopicsCollections(Func<CreateTopicsRequest, Dictionary<String, CreatableTopic>> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public CreatableTopic CreateCreatableTopic()
@@ -6158,12 +6434,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -6187,9 +6457,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopic WithNumPartitions(Int32 numPartitions)
+			public CreatableTopic WithName(String name)
 			{
-				NumPartitions = numPartitions;
+				Name = name;
 				return this;
 			}
 
@@ -6216,9 +6486,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopic WithReplicationFactor(Int16 replicationFactor)
+			public CreatableTopic WithNumPartitions(Int32 numPartitions)
 			{
-				ReplicationFactor = replicationFactor;
+				NumPartitions = numPartitions;
 				return this;
 			}
 
@@ -6245,9 +6515,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopic WithAssignmentsCollection(Dictionary<Int32, CreatableReplicaAssignment> assignmentsCollection)
+			public CreatableTopic WithReplicationFactor(Int16 replicationFactor)
 			{
-				AssignmentsCollection = assignmentsCollection;
+				ReplicationFactor = replicationFactor;
 				return this;
 			}
 
@@ -6272,6 +6542,12 @@ namespace Kafka.Protocol
 
 					_assignmentsCollection = value;
 				}
+			}
+
+			public CreatableTopic WithAssignmentsCollections(Func<CreatableTopic, Dictionary<Int32, CreatableReplicaAssignment>> createField)
+			{
+				AssignmentsCollection = createField(this);
+				return this;
 			}
 
 			public CreatableReplicaAssignment CreateCreatableReplicaAssignment()
@@ -6312,12 +6588,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public CreatableReplicaAssignment WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -6341,9 +6611,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public CreatableReplicaAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
+				public CreatableReplicaAssignment WithPartitionIndex(Int32 partitionIndex)
 				{
-					BrokerIdsCollection = brokerIdsCollection;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -6369,12 +6639,12 @@ namespace Kafka.Protocol
 						_brokerIdsCollection = value;
 					}
 				}
-			}
 
-			public CreatableTopic WithConfigsCollection(Dictionary<String, CreateableTopicConfig> configsCollection)
-			{
-				ConfigsCollection = configsCollection;
-				return this;
+				public CreatableReplicaAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
+				{
+					BrokerIdsCollection = brokerIdsCollection;
+					return this;
+				}
 			}
 
 			/// <summary>
@@ -6398,6 +6668,12 @@ namespace Kafka.Protocol
 
 					_configsCollection = value;
 				}
+			}
+
+			public CreatableTopic WithConfigsCollections(Func<CreatableTopic, Dictionary<String, CreateableTopicConfig>> createField)
+			{
+				ConfigsCollection = createField(this);
+				return this;
 			}
 
 			public CreateableTopicConfig CreateCreateableTopicConfig()
@@ -6438,12 +6714,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public CreateableTopicConfig WithName(String name)
-				{
-					Name = name;
-					return this;
-				}
-
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
@@ -6467,9 +6737,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public CreateableTopicConfig WithValue(String value)
+				public CreateableTopicConfig WithName(String name)
 				{
-					Value = value;
+					Name = name;
 					return this;
 				}
 
@@ -6496,6 +6766,12 @@ namespace Kafka.Protocol
 						_value = value;
 					}
 				}
+
+				public CreateableTopicConfig WithValue(String value)
+				{
+					Value = value;
+					return this;
+				}
 			}
 		}
 
@@ -6503,46 +6779,58 @@ namespace Kafka.Protocol
 		/// How long to wait in milliseconds before timing out the request.
 		/// </summary>
 		private Int32 _timeoutMs = new Int32(60000);
-		public Int32 timeoutMs 
+		public Int32 TimeoutMs 
 		{
 			get => _timeoutMs;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
 				{
-					throw new UnsupportedVersionException($"timeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
 				if (value == null) 
 				{
-					throw new UnsupportedVersionException($"timeoutMs is non-nullable.");
+					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
 				_timeoutMs = value;
 			}
 		}
 
+		public CreateTopicsRequest WithTimeoutMs(Int32 timeoutMs)
+		{
+			TimeoutMs = timeoutMs;
+			return this;
+		}
+
 		/// <summary>
 		/// If true, check that the topics can be created as specified, but don't create anything.
 		/// </summary>
 		private Boolean _validateOnly = new Boolean(false);
-		public Boolean validateOnly 
+		public Boolean ValidateOnly 
 		{
 			get => _validateOnly;
 			set 
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
 				{
-					throw new UnsupportedVersionException($"validateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 				}
 
 				if (value == null) 
 				{
-					throw new UnsupportedVersionException($"validateOnly is non-nullable.");
+					throw new UnsupportedVersionException($"ValidateOnly is non-nullable.");
 				}
 
 				_validateOnly = value;
 			}
+		}
+
+		public CreateTopicsRequest WithValidateOnly(Boolean validateOnly)
+		{
+			ValidateOnly = validateOnly;
+			return this;
 		}
 	}
 
@@ -6604,6 +6892,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public CreateTopicsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// Results for each topic we tried to create.
 		/// </summary>
@@ -6625,6 +6919,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public CreateTopicsResponse WithTopicsCollections(Func<CreateTopicsResponse, Dictionary<String, CreatableTopicResult>> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public CreatableTopicResult CreateCreatableTopicResult()
@@ -6673,12 +6973,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopicResult WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -6702,9 +6996,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopicResult WithErrorCode(Int16 errorCode)
+			public CreatableTopicResult WithName(String name)
 			{
-				ErrorCode = errorCode;
+				Name = name;
 				return this;
 			}
 
@@ -6731,9 +7025,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopicResult WithErrorMessage(String errorMessage)
+			public CreatableTopicResult WithErrorCode(Int16 errorCode)
 			{
-				ErrorMessage = errorMessage;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -6754,6 +7048,12 @@ namespace Kafka.Protocol
 
 					_errorMessage = value;
 				}
+			}
+
+			public CreatableTopicResult WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
 			}
 		}
 	}
@@ -6811,6 +7111,12 @@ namespace Kafka.Protocol
 
 				_filtersCollection = value;
 			}
+		}
+
+		public DeleteAclsRequest WithFiltersCollections(Func<DeleteAclsRequest, DeleteAclsFilter[]> createField)
+		{
+			FiltersCollection = createField(this);
+			return this;
 		}
 
 		public DeleteAclsFilter CreateDeleteAclsFilter()
@@ -6891,12 +7197,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithResourceTypeFilter(Int8 resourceTypeFilter)
-			{
-				ResourceTypeFilter = resourceTypeFilter;
-				return this;
-			}
-
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -6920,9 +7220,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithResourceNameFilter(String resourceNameFilter)
+			public DeleteAclsFilter WithResourceTypeFilter(Int8 resourceTypeFilter)
 			{
-				ResourceNameFilter = resourceNameFilter;
+				ResourceTypeFilter = resourceTypeFilter;
 				return this;
 			}
 
@@ -6950,9 +7250,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithPatternTypeFilter(Int8 patternTypeFilter)
+			public DeleteAclsFilter WithResourceNameFilter(String resourceNameFilter)
 			{
-				PatternTypeFilter = patternTypeFilter;
+				ResourceNameFilter = resourceNameFilter;
 				return this;
 			}
 
@@ -6979,9 +7279,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithPrincipalFilter(String principalFilter)
+			public DeleteAclsFilter WithPatternTypeFilter(Int8 patternTypeFilter)
 			{
-				PrincipalFilter = principalFilter;
+				PatternTypeFilter = patternTypeFilter;
 				return this;
 			}
 
@@ -7009,9 +7309,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithHostFilter(String hostFilter)
+			public DeleteAclsFilter WithPrincipalFilter(String principalFilter)
 			{
-				HostFilter = hostFilter;
+				PrincipalFilter = principalFilter;
 				return this;
 			}
 
@@ -7039,9 +7339,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithOperation(Int8 operation)
+			public DeleteAclsFilter WithHostFilter(String hostFilter)
 			{
-				Operation = operation;
+				HostFilter = hostFilter;
 				return this;
 			}
 
@@ -7068,9 +7368,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithPermissionType(Int8 permissionType)
+			public DeleteAclsFilter WithOperation(Int8 operation)
 			{
-				PermissionType = permissionType;
+				Operation = operation;
 				return this;
 			}
 
@@ -7095,6 +7395,12 @@ namespace Kafka.Protocol
 
 					_permissionType = value;
 				}
+			}
+
+			public DeleteAclsFilter WithPermissionType(Int8 permissionType)
+			{
+				PermissionType = permissionType;
+				return this;
 			}
 		}
 	}
@@ -7162,6 +7468,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteAclsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The results for each filter.
 		/// </summary>
@@ -7183,6 +7495,12 @@ namespace Kafka.Protocol
 
 				_filterResultsCollection = value;
 			}
+		}
+
+		public DeleteAclsResponse WithFilterResultsCollections(Func<DeleteAclsResponse, DeleteAclsFilterResult[]> createField)
+		{
+			FilterResultsCollection = createField(this);
+			return this;
 		}
 
 		public DeleteAclsFilterResult CreateDeleteAclsFilterResult()
@@ -7231,12 +7549,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilterResult WithErrorCode(Int16 errorCode)
-			{
-				ErrorCode = errorCode;
-				return this;
-			}
-
 			/// <summary>
 			/// The error code, or 0 if the filter succeeded.
 			/// </summary>
@@ -7260,9 +7572,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilterResult WithErrorMessage(String errorMessage)
+			public DeleteAclsFilterResult WithErrorCode(Int16 errorCode)
 			{
-				ErrorMessage = errorMessage;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -7290,9 +7602,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilterResult WithMatchingAclsCollection(DeleteAclsMatchingAcl[] matchingAclsCollection)
+			public DeleteAclsFilterResult WithErrorMessage(String errorMessage)
 			{
-				MatchingAclsCollection = matchingAclsCollection;
+				ErrorMessage = errorMessage;
 				return this;
 			}
 
@@ -7317,6 +7629,12 @@ namespace Kafka.Protocol
 
 					_matchingAclsCollection = value;
 				}
+			}
+
+			public DeleteAclsFilterResult WithMatchingAclsCollections(Func<DeleteAclsFilterResult, DeleteAclsMatchingAcl[]> createField)
+			{
+				MatchingAclsCollection = createField(this);
+				return this;
 			}
 
 			public DeleteAclsMatchingAcl CreateDeleteAclsMatchingAcl()
@@ -7413,12 +7731,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithErrorCode(Int16 errorCode)
-				{
-					ErrorCode = errorCode;
-					return this;
-				}
-
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
 				/// </summary>
@@ -7442,9 +7754,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithErrorMessage(String errorMessage)
+				public DeleteAclsMatchingAcl WithErrorCode(Int16 errorCode)
 				{
-					ErrorMessage = errorMessage;
+					ErrorCode = errorCode;
 					return this;
 				}
 
@@ -7472,9 +7784,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithResourceType(Int8 resourceType)
+				public DeleteAclsMatchingAcl WithErrorMessage(String errorMessage)
 				{
-					ResourceType = resourceType;
+					ErrorMessage = errorMessage;
 					return this;
 				}
 
@@ -7501,9 +7813,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithResourceName(String resourceName)
+				public DeleteAclsMatchingAcl WithResourceType(Int8 resourceType)
 				{
-					ResourceName = resourceName;
+					ResourceType = resourceType;
 					return this;
 				}
 
@@ -7530,9 +7842,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithPatternType(Int8 patternType)
+				public DeleteAclsMatchingAcl WithResourceName(String resourceName)
 				{
-					PatternType = patternType;
+					ResourceName = resourceName;
 					return this;
 				}
 
@@ -7559,9 +7871,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithPrincipal(String principal)
+				public DeleteAclsMatchingAcl WithPatternType(Int8 patternType)
 				{
-					Principal = principal;
+					PatternType = patternType;
 					return this;
 				}
 
@@ -7588,9 +7900,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithHost(String host)
+				public DeleteAclsMatchingAcl WithPrincipal(String principal)
 				{
-					Host = host;
+					Principal = principal;
 					return this;
 				}
 
@@ -7617,9 +7929,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithOperation(Int8 operation)
+				public DeleteAclsMatchingAcl WithHost(String host)
 				{
-					Operation = operation;
+					Host = host;
 					return this;
 				}
 
@@ -7646,9 +7958,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithPermissionType(Int8 permissionType)
+				public DeleteAclsMatchingAcl WithOperation(Int8 operation)
 				{
-					PermissionType = permissionType;
+					Operation = operation;
 					return this;
 				}
 
@@ -7673,6 +7985,12 @@ namespace Kafka.Protocol
 
 						_permissionType = value;
 					}
+				}
+
+				public DeleteAclsMatchingAcl WithPermissionType(Int8 permissionType)
+				{
+					PermissionType = permissionType;
+					return this;
 				}
 			}
 		}
@@ -7731,6 +8049,12 @@ namespace Kafka.Protocol
 
 				_groupsNamesCollection = value;
 			}
+		}
+
+		public DeleteGroupsRequest WithGroupsNamesCollection(String[] groupsNamesCollection)
+		{
+			GroupsNamesCollection = groupsNamesCollection;
+			return this;
 		}
 	}
 
@@ -7797,6 +8121,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteGroupsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The deletion results
 		/// </summary>
@@ -7818,6 +8148,12 @@ namespace Kafka.Protocol
 
 				_resultsCollection = value;
 			}
+		}
+
+		public DeleteGroupsResponse WithResultsCollections(Func<DeleteGroupsResponse, Dictionary<String, DeletableGroupResult>> createField)
+		{
+			ResultsCollection = createField(this);
+			return this;
 		}
 
 		public DeletableGroupResult CreateDeletableGroupResult()
@@ -7858,12 +8194,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeletableGroupResult WithGroupId(String groupId)
-			{
-				GroupId = groupId;
-				return this;
-			}
-
 			/// <summary>
 			/// The group id
 			/// </summary>
@@ -7887,9 +8217,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeletableGroupResult WithErrorCode(Int16 errorCode)
+			public DeletableGroupResult WithGroupId(String groupId)
 			{
-				ErrorCode = errorCode;
+				GroupId = groupId;
 				return this;
 			}
 
@@ -7914,6 +8244,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public DeletableGroupResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
 			}
 		}
 	}
@@ -7981,6 +8317,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteRecordsRequest WithTopicsCollections(Func<DeleteRecordsRequest, DeleteRecordsTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
+		}
+
 		public DeleteRecordsTopic CreateDeleteRecordsTopic()
 		{
 			return new DeleteRecordsTopic(Version);
@@ -8019,12 +8361,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteRecordsTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -8048,9 +8384,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteRecordsTopic WithPartitionsCollection(DeleteRecordsPartition[] partitionsCollection)
+			public DeleteRecordsTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -8075,6 +8411,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public DeleteRecordsTopic WithPartitionsCollections(Func<DeleteRecordsTopic, DeleteRecordsPartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public DeleteRecordsPartition CreateDeleteRecordsPartition()
@@ -8115,12 +8457,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteRecordsPartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -8144,9 +8480,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteRecordsPartition WithOffset(Int64 offset)
+				public DeleteRecordsPartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					Offset = offset;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -8172,6 +8508,12 @@ namespace Kafka.Protocol
 						_offset = value;
 					}
 				}
+
+				public DeleteRecordsPartition WithOffset(Int64 offset)
+				{
+					Offset = offset;
+					return this;
+				}
 			}
 		}
 
@@ -8196,6 +8538,12 @@ namespace Kafka.Protocol
 
 				_timeoutMs = value;
 			}
+		}
+
+		public DeleteRecordsRequest WithTimeoutMs(Int32 timeoutMs)
+		{
+			TimeoutMs = timeoutMs;
+			return this;
 		}
 	}
 
@@ -8262,6 +8610,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteRecordsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// Each topic that we wanted to delete records from.
 		/// </summary>
@@ -8283,6 +8637,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public DeleteRecordsResponse WithTopicsCollections(Func<DeleteRecordsResponse, DeleteRecordsTopicResult[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public DeleteRecordsTopicResult CreateDeleteRecordsTopicResult()
@@ -8323,12 +8683,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteRecordsTopicResult WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -8352,9 +8706,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteRecordsTopicResult WithPartitionsCollection(DeleteRecordsPartitionResult[] partitionsCollection)
+			public DeleteRecordsTopicResult WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -8379,6 +8733,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public DeleteRecordsTopicResult WithPartitionsCollections(Func<DeleteRecordsTopicResult, DeleteRecordsPartitionResult[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public DeleteRecordsPartitionResult CreateDeleteRecordsPartitionResult()
@@ -8427,12 +8787,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteRecordsPartitionResult WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -8456,9 +8810,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteRecordsPartitionResult WithLowWatermark(Int64 lowWatermark)
+				public DeleteRecordsPartitionResult WithPartitionIndex(Int32 partitionIndex)
 				{
-					LowWatermark = lowWatermark;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -8485,9 +8839,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteRecordsPartitionResult WithErrorCode(Int16 errorCode)
+				public DeleteRecordsPartitionResult WithLowWatermark(Int64 lowWatermark)
 				{
-					ErrorCode = errorCode;
+					LowWatermark = lowWatermark;
 					return this;
 				}
 
@@ -8512,6 +8866,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public DeleteRecordsPartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 			}
 		}
@@ -8580,6 +8940,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteTopicsRequest WithTopicNamesCollection(String[] topicNamesCollection)
+		{
+			TopicNamesCollection = topicNamesCollection;
+			return this;
+		}
+
 		/// <summary>
 		/// The length of time in milliseconds to wait for the deletions to complete.
 		/// </summary>
@@ -8601,6 +8967,12 @@ namespace Kafka.Protocol
 
 				_timeoutMs = value;
 			}
+		}
+
+		public DeleteTopicsRequest WithTimeoutMs(Int32 timeoutMs)
+		{
+			TimeoutMs = timeoutMs;
+			return this;
 		}
 	}
 
@@ -8667,6 +9039,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DeleteTopicsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The results for each topic we tried to delete.
 		/// </summary>
@@ -8688,6 +9066,12 @@ namespace Kafka.Protocol
 
 				_responsesCollection = value;
 			}
+		}
+
+		public DeleteTopicsResponse WithResponsesCollections(Func<DeleteTopicsResponse, Dictionary<String, DeletableTopicResult>> createField)
+		{
+			ResponsesCollection = createField(this);
+			return this;
 		}
 
 		public DeletableTopicResult CreateDeletableTopicResult()
@@ -8728,12 +9112,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeletableTopicResult WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -8757,9 +9135,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeletableTopicResult WithErrorCode(Int16 errorCode)
+			public DeletableTopicResult WithName(String name)
 			{
-				ErrorCode = errorCode;
+				Name = name;
 				return this;
 			}
 
@@ -8784,6 +9162,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public DeletableTopicResult WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
 			}
 		}
 	}
@@ -8891,6 +9275,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeAclsRequest WithResourceType(Int8 resourceType)
+		{
+			ResourceType = resourceType;
+			return this;
+		}
+
 		/// <summary>
 		/// The resource name, or null to match any resource name.
 		/// </summary>
@@ -8915,6 +9305,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeAclsRequest WithResourceNameFilter(String resourceNameFilter)
+		{
+			ResourceNameFilter = resourceNameFilter;
+			return this;
+		}
+
 		/// <summary>
 		/// The resource pattern to match.
 		/// </summary>
@@ -8936,6 +9332,12 @@ namespace Kafka.Protocol
 
 				_resourcePatternType = value;
 			}
+		}
+
+		public DescribeAclsRequest WithResourcePatternType(Int8 resourcePatternType)
+		{
+			ResourcePatternType = resourcePatternType;
+			return this;
 		}
 
 		/// <summary>
@@ -8962,6 +9364,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeAclsRequest WithPrincipalFilter(String principalFilter)
+		{
+			PrincipalFilter = principalFilter;
+			return this;
+		}
+
 		/// <summary>
 		/// The host to match, or null to match any host.
 		/// </summary>
@@ -8984,6 +9392,12 @@ namespace Kafka.Protocol
 
 				_hostFilter = value;
 			}
+		}
+
+		public DescribeAclsRequest WithHostFilter(String hostFilter)
+		{
+			HostFilter = hostFilter;
+			return this;
 		}
 
 		/// <summary>
@@ -9009,6 +9423,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeAclsRequest WithOperation(Int8 operation)
+		{
+			Operation = operation;
+			return this;
+		}
+
 		/// <summary>
 		/// The permission type to match.
 		/// </summary>
@@ -9030,6 +9450,12 @@ namespace Kafka.Protocol
 
 				_permissionType = value;
 			}
+		}
+
+		public DescribeAclsRequest WithPermissionType(Int8 permissionType)
+		{
+			PermissionType = permissionType;
+			return this;
 		}
 	}
 
@@ -9112,6 +9538,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeAclsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -9133,6 +9565,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public DescribeAclsResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 
 		/// <summary>
@@ -9159,6 +9597,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeAclsResponse WithErrorMessage(String errorMessage)
+		{
+			ErrorMessage = errorMessage;
+			return this;
+		}
+
 		/// <summary>
 		/// Each Resource that is referenced in an ACL.
 		/// </summary>
@@ -9180,6 +9624,12 @@ namespace Kafka.Protocol
 
 				_resourcesCollection = value;
 			}
+		}
+
+		public DescribeAclsResponse WithResourcesCollections(Func<DescribeAclsResponse, DescribeAclsResource[]> createField)
+		{
+			ResourcesCollection = createField(this);
+			return this;
 		}
 
 		public DescribeAclsResource CreateDescribeAclsResource()
@@ -9236,12 +9686,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeAclsResource WithType(Int8 type)
-			{
-				Type = type;
-				return this;
-			}
-
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -9265,9 +9709,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeAclsResource WithName(String name)
+			public DescribeAclsResource WithType(Int8 type)
 			{
-				Name = name;
+				Type = type;
 				return this;
 			}
 
@@ -9294,9 +9738,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeAclsResource WithPatternType(Int8 patternType)
+			public DescribeAclsResource WithName(String name)
 			{
-				PatternType = patternType;
+				Name = name;
 				return this;
 			}
 
@@ -9323,9 +9767,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeAclsResource WithAclsCollection(AclDescription[] aclsCollection)
+			public DescribeAclsResource WithPatternType(Int8 patternType)
 			{
-				AclsCollection = aclsCollection;
+				PatternType = patternType;
 				return this;
 			}
 
@@ -9350,6 +9794,12 @@ namespace Kafka.Protocol
 
 					_aclsCollection = value;
 				}
+			}
+
+			public DescribeAclsResource WithAclsCollections(Func<DescribeAclsResource, AclDescription[]> createField)
+			{
+				AclsCollection = createField(this);
+				return this;
 			}
 
 			public AclDescription CreateAclDescription()
@@ -9406,12 +9856,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AclDescription WithPrincipal(String principal)
-				{
-					Principal = principal;
-					return this;
-				}
-
 				/// <summary>
 				/// The ACL principal.
 				/// </summary>
@@ -9435,9 +9879,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AclDescription WithHost(String host)
+				public AclDescription WithPrincipal(String principal)
 				{
-					Host = host;
+					Principal = principal;
 					return this;
 				}
 
@@ -9464,9 +9908,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AclDescription WithOperation(Int8 operation)
+				public AclDescription WithHost(String host)
 				{
-					Operation = operation;
+					Host = host;
 					return this;
 				}
 
@@ -9493,9 +9937,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AclDescription WithPermissionType(Int8 permissionType)
+				public AclDescription WithOperation(Int8 operation)
 				{
-					PermissionType = permissionType;
+					Operation = operation;
 					return this;
 				}
 
@@ -9520,6 +9964,12 @@ namespace Kafka.Protocol
 
 						_permissionType = value;
 					}
+				}
+
+				public AclDescription WithPermissionType(Int8 permissionType)
+				{
+					PermissionType = permissionType;
+					return this;
 				}
 			}
 		}
@@ -9588,6 +10038,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeConfigsRequest WithResourcesCollections(Func<DescribeConfigsRequest, DescribeConfigsResource[]> createField)
+		{
+			ResourcesCollection = createField(this);
+			return this;
+		}
+
 		public DescribeConfigsResource CreateDescribeConfigsResource()
 		{
 			return new DescribeConfigsResource(Version);
@@ -9634,12 +10090,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResource WithResourceType(Int8 resourceType)
-			{
-				ResourceType = resourceType;
-				return this;
-			}
-
 			/// <summary>
 			/// The resource type.
 			/// </summary>
@@ -9663,9 +10113,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResource WithResourceName(String resourceName)
+			public DescribeConfigsResource WithResourceType(Int8 resourceType)
 			{
-				ResourceName = resourceName;
+				ResourceType = resourceType;
 				return this;
 			}
 
@@ -9692,9 +10142,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResource WithConfigurationKeysCollection(String[] configurationKeysCollection)
+			public DescribeConfigsResource WithResourceName(String resourceName)
 			{
-				ConfigurationKeysCollection = configurationKeysCollection;
+				ResourceName = resourceName;
 				return this;
 			}
 
@@ -9721,6 +10171,12 @@ namespace Kafka.Protocol
 					_configurationKeysCollection = value;
 				}
 			}
+
+			public DescribeConfigsResource WithConfigurationKeysCollection(String[] configurationKeysCollection)
+			{
+				ConfigurationKeysCollection = configurationKeysCollection;
+				return this;
+			}
 		}
 
 		/// <summary>
@@ -9744,6 +10200,12 @@ namespace Kafka.Protocol
 
 				_includeSynoyms = value;
 			}
+		}
+
+		public DescribeConfigsRequest WithIncludeSynoyms(Boolean includeSynoyms)
+		{
+			IncludeSynoyms = includeSynoyms;
+			return this;
 		}
 	}
 
@@ -9810,6 +10272,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeConfigsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The results for each resource.
 		/// </summary>
@@ -9831,6 +10299,12 @@ namespace Kafka.Protocol
 
 				_resultsCollection = value;
 			}
+		}
+
+		public DescribeConfigsResponse WithResultsCollections(Func<DescribeConfigsResponse, DescribeConfigsResult[]> createField)
+		{
+			ResultsCollection = createField(this);
+			return this;
 		}
 
 		public DescribeConfigsResult CreateDescribeConfigsResult()
@@ -9895,12 +10369,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResult WithErrorCode(Int16 errorCode)
-			{
-				ErrorCode = errorCode;
-				return this;
-			}
-
 			/// <summary>
 			/// The error code, or 0 if we were able to successfully describe the configurations.
 			/// </summary>
@@ -9924,9 +10392,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResult WithErrorMessage(String errorMessage)
+			public DescribeConfigsResult WithErrorCode(Int16 errorCode)
 			{
-				ErrorMessage = errorMessage;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -9954,9 +10422,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResult WithResourceType(Int8 resourceType)
+			public DescribeConfigsResult WithErrorMessage(String errorMessage)
 			{
-				ResourceType = resourceType;
+				ErrorMessage = errorMessage;
 				return this;
 			}
 
@@ -9983,9 +10451,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResult WithResourceName(String resourceName)
+			public DescribeConfigsResult WithResourceType(Int8 resourceType)
 			{
-				ResourceName = resourceName;
+				ResourceType = resourceType;
 				return this;
 			}
 
@@ -10012,9 +10480,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResult WithConfigsCollection(DescribeConfigsResourceResult[] configsCollection)
+			public DescribeConfigsResult WithResourceName(String resourceName)
 			{
-				ConfigsCollection = configsCollection;
+				ResourceName = resourceName;
 				return this;
 			}
 
@@ -10039,6 +10507,12 @@ namespace Kafka.Protocol
 
 					_configsCollection = value;
 				}
+			}
+
+			public DescribeConfigsResult WithConfigsCollections(Func<DescribeConfigsResult, DescribeConfigsResourceResult[]> createField)
+			{
+				ConfigsCollection = createField(this);
+				return this;
 			}
 
 			public DescribeConfigsResourceResult CreateDescribeConfigsResourceResult()
@@ -10119,12 +10593,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithName(String name)
-				{
-					Name = name;
-					return this;
-				}
-
 				/// <summary>
 				/// The configuration name.
 				/// </summary>
@@ -10148,9 +10616,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithValue(String value)
+				public DescribeConfigsResourceResult WithName(String name)
 				{
-					Value = value;
+					Name = name;
 					return this;
 				}
 
@@ -10178,9 +10646,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithReadOnly(Boolean readOnly)
+				public DescribeConfigsResourceResult WithValue(String value)
 				{
-					ReadOnly = readOnly;
+					Value = value;
 					return this;
 				}
 
@@ -10207,9 +10675,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithIsDefault(Boolean isDefault)
+				public DescribeConfigsResourceResult WithReadOnly(Boolean readOnly)
 				{
-					IsDefault = isDefault;
+					ReadOnly = readOnly;
 					return this;
 				}
 
@@ -10236,9 +10704,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithConfigSource(Int8 configSource)
+				public DescribeConfigsResourceResult WithIsDefault(Boolean isDefault)
 				{
-					ConfigSource = configSource;
+					IsDefault = isDefault;
 					return this;
 				}
 
@@ -10260,9 +10728,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithIsSensitive(Boolean isSensitive)
+				public DescribeConfigsResourceResult WithConfigSource(Int8 configSource)
 				{
-					IsSensitive = isSensitive;
+					ConfigSource = configSource;
 					return this;
 				}
 
@@ -10289,9 +10757,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithSynonymsCollection(DescribeConfigsSynonym[] synonymsCollection)
+				public DescribeConfigsResourceResult WithIsSensitive(Boolean isSensitive)
 				{
-					SynonymsCollection = synonymsCollection;
+					IsSensitive = isSensitive;
 					return this;
 				}
 
@@ -10311,6 +10779,12 @@ namespace Kafka.Protocol
 
 						_synonymsCollection = value;
 					}
+				}
+
+				public DescribeConfigsResourceResult WithSynonymsCollections(Func<DescribeConfigsResourceResult, DescribeConfigsSynonym[]> createField)
+				{
+					SynonymsCollection = createField(this);
+					return this;
 				}
 
 				public DescribeConfigsSynonym CreateDescribeConfigsSynonym()
@@ -10359,12 +10833,6 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public DescribeConfigsSynonym WithName(String name)
-					{
-						Name = name;
-						return this;
-					}
-
 					/// <summary>
 					/// The synonym name.
 					/// </summary>
@@ -10388,9 +10856,9 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public DescribeConfigsSynonym WithValue(String value)
+					public DescribeConfigsSynonym WithName(String name)
 					{
-						Value = value;
+						Name = name;
 						return this;
 					}
 
@@ -10418,9 +10886,9 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public DescribeConfigsSynonym WithSource(Int8 source)
+					public DescribeConfigsSynonym WithValue(String value)
 					{
-						Source = source;
+						Value = value;
 						return this;
 					}
 
@@ -10445,6 +10913,12 @@ namespace Kafka.Protocol
 
 							_source = value;
 						}
+					}
+
+					public DescribeConfigsSynonym WithSource(Int8 source)
+					{
+						Source = source;
+						return this;
 					}
 				}
 			}
@@ -10507,6 +10981,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeDelegationTokenRequest WithOwnersCollections(Func<DescribeDelegationTokenRequest, DescribeDelegationTokenOwner[]> createField)
+		{
+			OwnersCollection = createField(this);
+			return this;
+		}
+
 		public DescribeDelegationTokenOwner CreateDescribeDelegationTokenOwner()
 		{
 			return new DescribeDelegationTokenOwner(Version);
@@ -10545,12 +11025,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeDelegationTokenOwner WithPrincipalType(String principalType)
-			{
-				PrincipalType = principalType;
-				return this;
-			}
-
 			/// <summary>
 			/// The owner principal type.
 			/// </summary>
@@ -10574,9 +11048,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeDelegationTokenOwner WithPrincipalName(String principalName)
+			public DescribeDelegationTokenOwner WithPrincipalType(String principalType)
 			{
-				PrincipalName = principalName;
+				PrincipalType = principalType;
 				return this;
 			}
 
@@ -10601,6 +11075,12 @@ namespace Kafka.Protocol
 
 					_principalName = value;
 				}
+			}
+
+			public DescribeDelegationTokenOwner WithPrincipalName(String principalName)
+			{
+				PrincipalName = principalName;
+				return this;
 			}
 		}
 	}
@@ -10676,6 +11156,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeDelegationTokenResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The tokens.
 		/// </summary>
@@ -10697,6 +11183,12 @@ namespace Kafka.Protocol
 
 				_tokensCollection = value;
 			}
+		}
+
+		public DescribeDelegationTokenResponse WithTokensCollections(Func<DescribeDelegationTokenResponse, DescribedDelegationToken[]> createField)
+		{
+			TokensCollection = createField(this);
+			return this;
 		}
 
 		public DescribedDelegationToken CreateDescribedDelegationToken()
@@ -10785,12 +11277,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithPrincipalType(String principalType)
-			{
-				PrincipalType = principalType;
-				return this;
-			}
-
 			/// <summary>
 			/// The token principal type.
 			/// </summary>
@@ -10814,9 +11300,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithPrincipalName(String principalName)
+			public DescribedDelegationToken WithPrincipalType(String principalType)
 			{
-				PrincipalName = principalName;
+				PrincipalType = principalType;
 				return this;
 			}
 
@@ -10843,9 +11329,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithIssueTimestamp(Int64 issueTimestamp)
+			public DescribedDelegationToken WithPrincipalName(String principalName)
 			{
-				IssueTimestamp = issueTimestamp;
+				PrincipalName = principalName;
 				return this;
 			}
 
@@ -10872,9 +11358,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithExpiryTimestamp(Int64 expiryTimestamp)
+			public DescribedDelegationToken WithIssueTimestamp(Int64 issueTimestamp)
 			{
-				ExpiryTimestamp = expiryTimestamp;
+				IssueTimestamp = issueTimestamp;
 				return this;
 			}
 
@@ -10901,9 +11387,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithMaxTimestamp(Int64 maxTimestamp)
+			public DescribedDelegationToken WithExpiryTimestamp(Int64 expiryTimestamp)
 			{
-				MaxTimestamp = maxTimestamp;
+				ExpiryTimestamp = expiryTimestamp;
 				return this;
 			}
 
@@ -10930,9 +11416,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithTokenId(String tokenId)
+			public DescribedDelegationToken WithMaxTimestamp(Int64 maxTimestamp)
 			{
-				TokenId = tokenId;
+				MaxTimestamp = maxTimestamp;
 				return this;
 			}
 
@@ -10959,9 +11445,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithHmac(Bytes hmac)
+			public DescribedDelegationToken WithTokenId(String tokenId)
 			{
-				Hmac = hmac;
+				TokenId = tokenId;
 				return this;
 			}
 
@@ -10988,9 +11474,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithRenewersCollection(DescribedDelegationTokenRenewer[] renewersCollection)
+			public DescribedDelegationToken WithHmac(Bytes hmac)
 			{
-				RenewersCollection = renewersCollection;
+				Hmac = hmac;
 				return this;
 			}
 
@@ -11015,6 +11501,12 @@ namespace Kafka.Protocol
 
 					_renewersCollection = value;
 				}
+			}
+
+			public DescribedDelegationToken WithRenewersCollections(Func<DescribedDelegationToken, DescribedDelegationTokenRenewer[]> createField)
+			{
+				RenewersCollection = createField(this);
+				return this;
 			}
 
 			public DescribedDelegationTokenRenewer CreateDescribedDelegationTokenRenewer()
@@ -11055,12 +11547,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribedDelegationTokenRenewer WithPrincipalType(String principalType)
-				{
-					PrincipalType = principalType;
-					return this;
-				}
-
 				/// <summary>
 				/// The renewer principal type
 				/// </summary>
@@ -11084,9 +11570,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribedDelegationTokenRenewer WithPrincipalName(String principalName)
+				public DescribedDelegationTokenRenewer WithPrincipalType(String principalType)
 				{
-					PrincipalName = principalName;
+					PrincipalType = principalType;
 					return this;
 				}
 
@@ -11112,6 +11598,12 @@ namespace Kafka.Protocol
 						_principalName = value;
 					}
 				}
+
+				public DescribedDelegationTokenRenewer WithPrincipalName(String principalName)
+				{
+					PrincipalName = principalName;
+					return this;
+				}
 			}
 		}
 
@@ -11136,6 +11628,12 @@ namespace Kafka.Protocol
 
 				_throttleTimeMs = value;
 			}
+		}
+
+		public DescribeDelegationTokenResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
 		}
 	}
 
@@ -11202,6 +11700,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeGroupsRequest WithGroupsCollection(String[] groupsCollection)
+		{
+			GroupsCollection = groupsCollection;
+			return this;
+		}
+
 		/// <summary>
 		/// Whether to include authorized operations.
 		/// </summary>
@@ -11223,6 +11727,12 @@ namespace Kafka.Protocol
 
 				_includeAuthorizedOperations = value;
 			}
+		}
+
+		public DescribeGroupsRequest WithIncludeAuthorizedOperations(Boolean includeAuthorizedOperations)
+		{
+			IncludeAuthorizedOperations = includeAuthorizedOperations;
+			return this;
 		}
 	}
 
@@ -11284,6 +11794,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeGroupsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// Each described group.
 		/// </summary>
@@ -11305,6 +11821,12 @@ namespace Kafka.Protocol
 
 				_groupsCollection = value;
 			}
+		}
+
+		public DescribeGroupsResponse WithGroupsCollections(Func<DescribeGroupsResponse, DescribedGroup[]> createField)
+		{
+			GroupsCollection = createField(this);
+			return this;
 		}
 
 		public DescribedGroup CreateDescribedGroup()
@@ -11385,12 +11907,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedGroup WithErrorCode(Int16 errorCode)
-			{
-				ErrorCode = errorCode;
-				return this;
-			}
-
 			/// <summary>
 			/// The describe error, or 0 if there was no error.
 			/// </summary>
@@ -11414,9 +11930,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedGroup WithGroupId(String groupId)
+			public DescribedGroup WithErrorCode(Int16 errorCode)
 			{
-				GroupId = groupId;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -11443,9 +11959,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedGroup WithGroupState(String groupState)
+			public DescribedGroup WithGroupId(String groupId)
 			{
-				GroupState = groupState;
+				GroupId = groupId;
 				return this;
 			}
 
@@ -11472,9 +11988,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedGroup WithProtocolType(String protocolType)
+			public DescribedGroup WithGroupState(String groupState)
 			{
-				ProtocolType = protocolType;
+				GroupState = groupState;
 				return this;
 			}
 
@@ -11501,9 +12017,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedGroup WithProtocolData(String protocolData)
+			public DescribedGroup WithProtocolType(String protocolType)
 			{
-				ProtocolData = protocolData;
+				ProtocolType = protocolType;
 				return this;
 			}
 
@@ -11530,9 +12046,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedGroup WithMembersCollection(DescribedGroupMember[] membersCollection)
+			public DescribedGroup WithProtocolData(String protocolData)
 			{
-				MembersCollection = membersCollection;
+				ProtocolData = protocolData;
 				return this;
 			}
 
@@ -11557,6 +12073,12 @@ namespace Kafka.Protocol
 
 					_membersCollection = value;
 				}
+			}
+
+			public DescribedGroup WithMembersCollections(Func<DescribedGroup, DescribedGroupMember[]> createField)
+			{
+				MembersCollection = createField(this);
+				return this;
 			}
 
 			public DescribedGroupMember CreateDescribedGroupMember()
@@ -11621,12 +12143,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribedGroupMember WithMemberId(String memberId)
-				{
-					MemberId = memberId;
-					return this;
-				}
-
 				/// <summary>
 				/// The member ID assigned by the group coordinator.
 				/// </summary>
@@ -11650,9 +12166,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribedGroupMember WithClientId(String clientId)
+				public DescribedGroupMember WithMemberId(String memberId)
 				{
-					ClientId = clientId;
+					MemberId = memberId;
 					return this;
 				}
 
@@ -11679,9 +12195,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribedGroupMember WithClientHost(String clientHost)
+				public DescribedGroupMember WithClientId(String clientId)
 				{
-					ClientHost = clientHost;
+					ClientId = clientId;
 					return this;
 				}
 
@@ -11708,9 +12224,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribedGroupMember WithMemberMetadata(Bytes memberMetadata)
+				public DescribedGroupMember WithClientHost(String clientHost)
 				{
-					MemberMetadata = memberMetadata;
+					ClientHost = clientHost;
 					return this;
 				}
 
@@ -11737,9 +12253,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribedGroupMember WithMemberAssignment(Bytes memberAssignment)
+				public DescribedGroupMember WithMemberMetadata(Bytes memberMetadata)
 				{
-					MemberAssignment = memberAssignment;
+					MemberMetadata = memberMetadata;
 					return this;
 				}
 
@@ -11765,12 +12281,12 @@ namespace Kafka.Protocol
 						_memberAssignment = value;
 					}
 				}
-			}
 
-			public DescribedGroup WithAuthorizedOperations(Int32 authorizedOperations)
-			{
-				AuthorizedOperations = authorizedOperations;
-				return this;
+				public DescribedGroupMember WithMemberAssignment(Bytes memberAssignment)
+				{
+					MemberAssignment = memberAssignment;
+					return this;
+				}
 			}
 
 			/// <summary>
@@ -11794,6 +12310,12 @@ namespace Kafka.Protocol
 
 					_authorizedOperations = value;
 				}
+			}
+
+			public DescribedGroup WithAuthorizedOperations(Int32 authorizedOperations)
+			{
+				AuthorizedOperations = authorizedOperations;
+				return this;
 			}
 		}
 	}
@@ -11854,6 +12376,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeLogDirsRequest WithTopicsCollections(Func<DescribeLogDirsRequest, DescribableLogDirTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
+		}
+
 		public DescribableLogDirTopic CreateDescribableLogDirTopic()
 		{
 			return new DescribableLogDirTopic(Version);
@@ -11892,12 +12420,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribableLogDirTopic WithTopic(String topic)
-			{
-				Topic = topic;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -11921,9 +12443,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribableLogDirTopic WithPartitionIndexCollection(Int32[] partitionIndexCollection)
+			public DescribableLogDirTopic WithTopic(String topic)
 			{
-				PartitionIndexCollection = partitionIndexCollection;
+				Topic = topic;
 				return this;
 			}
 
@@ -11948,6 +12470,12 @@ namespace Kafka.Protocol
 
 					_partitionIndexCollection = value;
 				}
+			}
+
+			public DescribableLogDirTopic WithPartitionIndexCollection(Int32[] partitionIndexCollection)
+			{
+				PartitionIndexCollection = partitionIndexCollection;
+				return this;
 			}
 		}
 	}
@@ -12015,6 +12543,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public DescribeLogDirsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The log directories.
 		/// </summary>
@@ -12036,6 +12570,12 @@ namespace Kafka.Protocol
 
 				_resultsCollection = value;
 			}
+		}
+
+		public DescribeLogDirsResponse WithResultsCollections(Func<DescribeLogDirsResponse, DescribeLogDirsResult[]> createField)
+		{
+			ResultsCollection = createField(this);
+			return this;
 		}
 
 		public DescribeLogDirsResult CreateDescribeLogDirsResult()
@@ -12084,12 +12624,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeLogDirsResult WithErrorCode(Int16 errorCode)
-			{
-				ErrorCode = errorCode;
-				return this;
-			}
-
 			/// <summary>
 			/// The error code, or 0 if there was no error.
 			/// </summary>
@@ -12113,9 +12647,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeLogDirsResult WithLogDir(String logDir)
+			public DescribeLogDirsResult WithErrorCode(Int16 errorCode)
 			{
-				LogDir = logDir;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -12142,9 +12676,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeLogDirsResult WithTopicsCollection(DescribeLogDirsTopic[] topicsCollection)
+			public DescribeLogDirsResult WithLogDir(String logDir)
 			{
-				TopicsCollection = topicsCollection;
+				LogDir = logDir;
 				return this;
 			}
 
@@ -12169,6 +12703,12 @@ namespace Kafka.Protocol
 
 					_topicsCollection = value;
 				}
+			}
+
+			public DescribeLogDirsResult WithTopicsCollections(Func<DescribeLogDirsResult, DescribeLogDirsTopic[]> createField)
+			{
+				TopicsCollection = createField(this);
+				return this;
 			}
 
 			public DescribeLogDirsTopic CreateDescribeLogDirsTopic()
@@ -12209,12 +12749,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeLogDirsTopic WithName(String name)
-				{
-					Name = name;
-					return this;
-				}
-
 				/// <summary>
 				/// The topic name.
 				/// </summary>
@@ -12238,9 +12772,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeLogDirsTopic WithPartitionsCollection(DescribeLogDirsPartition[] partitionsCollection)
+				public DescribeLogDirsTopic WithName(String name)
 				{
-					PartitionsCollection = partitionsCollection;
+					Name = name;
 					return this;
 				}
 
@@ -12262,6 +12796,12 @@ namespace Kafka.Protocol
 
 						_partitionsCollection = value;
 					}
+				}
+
+				public DescribeLogDirsTopic WithPartitionsCollections(Func<DescribeLogDirsTopic, DescribeLogDirsPartition[]> createField)
+				{
+					PartitionsCollection = createField(this);
+					return this;
 				}
 
 				public DescribeLogDirsPartition CreateDescribeLogDirsPartition()
@@ -12318,12 +12858,6 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public DescribeLogDirsPartition WithPartitionIndex(Int32 partitionIndex)
-					{
-						PartitionIndex = partitionIndex;
-						return this;
-					}
-
 					/// <summary>
 					/// The partition index.
 					/// </summary>
@@ -12347,9 +12881,9 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public DescribeLogDirsPartition WithPartitionSize(Int64 partitionSize)
+					public DescribeLogDirsPartition WithPartitionIndex(Int32 partitionIndex)
 					{
-						PartitionSize = partitionSize;
+						PartitionIndex = partitionIndex;
 						return this;
 					}
 
@@ -12376,9 +12910,9 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public DescribeLogDirsPartition WithOffsetLag(Int64 offsetLag)
+					public DescribeLogDirsPartition WithPartitionSize(Int64 partitionSize)
 					{
-						OffsetLag = offsetLag;
+						PartitionSize = partitionSize;
 						return this;
 					}
 
@@ -12405,9 +12939,9 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public DescribeLogDirsPartition WithIsFutureKey(Boolean isFutureKey)
+					public DescribeLogDirsPartition WithOffsetLag(Int64 offsetLag)
 					{
-						IsFutureKey = isFutureKey;
+						OffsetLag = offsetLag;
 						return this;
 					}
 
@@ -12432,6 +12966,12 @@ namespace Kafka.Protocol
 
 							_isFutureKey = value;
 						}
+					}
+
+					public DescribeLogDirsPartition WithIsFutureKey(Boolean isFutureKey)
+					{
+						IsFutureKey = isFutureKey;
+						return this;
 					}
 				}
 			}
@@ -12502,6 +13042,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ElectPreferredLeadersRequest WithTopicPartitionsCollections(Func<ElectPreferredLeadersRequest, TopicPartitions[]> createField)
+		{
+			TopicPartitionsCollection = createField(this);
+			return this;
+		}
+
 		public TopicPartitions CreateTopicPartitions()
 		{
 			return new TopicPartitions(Version);
@@ -12540,12 +13086,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TopicPartitions WithTopic(String topic)
-			{
-				Topic = topic;
-				return this;
-			}
-
 			/// <summary>
 			/// The name of a topic.
 			/// </summary>
@@ -12569,9 +13109,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TopicPartitions WithPartitionIdCollection(Int32[] partitionIdCollection)
+			public TopicPartitions WithTopic(String topic)
 			{
-				PartitionIdCollection = partitionIdCollection;
+				Topic = topic;
 				return this;
 			}
 
@@ -12597,6 +13137,12 @@ namespace Kafka.Protocol
 					_partitionIdCollection = value;
 				}
 			}
+
+			public TopicPartitions WithPartitionIdCollection(Int32[] partitionIdCollection)
+			{
+				PartitionIdCollection = partitionIdCollection;
+				return this;
+			}
 		}
 
 		/// <summary>
@@ -12620,6 +13166,12 @@ namespace Kafka.Protocol
 
 				_timeoutMs = value;
 			}
+		}
+
+		public ElectPreferredLeadersRequest WithTimeoutMs(Int32 timeoutMs)
+		{
+			TimeoutMs = timeoutMs;
+			return this;
 		}
 	}
 
@@ -12686,6 +13238,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ElectPreferredLeadersResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The election results, or an empty array if the requester did not have permission and the request asks for all partitions.
 		/// </summary>
@@ -12707,6 +13265,12 @@ namespace Kafka.Protocol
 
 				_replicaElectionResultsCollection = value;
 			}
+		}
+
+		public ElectPreferredLeadersResponse WithReplicaElectionResultsCollections(Func<ElectPreferredLeadersResponse, ReplicaElectionResult[]> createField)
+		{
+			ReplicaElectionResultsCollection = createField(this);
+			return this;
 		}
 
 		public ReplicaElectionResult CreateReplicaElectionResult()
@@ -12747,12 +13311,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ReplicaElectionResult WithTopic(String topic)
-			{
-				Topic = topic;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -12776,9 +13334,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ReplicaElectionResult WithPartitionResultCollection(PartitionResult[] partitionResultCollection)
+			public ReplicaElectionResult WithTopic(String topic)
 			{
-				PartitionResultCollection = partitionResultCollection;
+				Topic = topic;
 				return this;
 			}
 
@@ -12803,6 +13361,12 @@ namespace Kafka.Protocol
 
 					_partitionResultCollection = value;
 				}
+			}
+
+			public ReplicaElectionResult WithPartitionResultCollections(Func<ReplicaElectionResult, PartitionResult[]> createField)
+			{
+				PartitionResultCollection = createField(this);
+				return this;
 			}
 
 			public PartitionResult CreatePartitionResult()
@@ -12851,12 +13415,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionResult WithPartitionId(Int32 partitionId)
-				{
-					PartitionId = partitionId;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition id
 				/// </summary>
@@ -12880,9 +13438,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionResult WithErrorCode(Int16 errorCode)
+				public PartitionResult WithPartitionId(Int32 partitionId)
 				{
-					ErrorCode = errorCode;
+					PartitionId = partitionId;
 					return this;
 				}
 
@@ -12909,9 +13467,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionResult WithErrorMessage(String errorMessage)
+				public PartitionResult WithErrorCode(Int16 errorCode)
 				{
-					ErrorMessage = errorMessage;
+					ErrorCode = errorCode;
 					return this;
 				}
 
@@ -12937,6 +13495,12 @@ namespace Kafka.Protocol
 
 						_errorMessage = value;
 					}
+				}
+
+				public PartitionResult WithErrorMessage(String errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
 				}
 			}
 		}
@@ -13021,6 +13585,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public EndTxnRequest WithTransactionalId(String transactionalId)
+		{
+			TransactionalId = transactionalId;
+			return this;
+		}
+
 		/// <summary>
 		/// The producer ID.
 		/// </summary>
@@ -13042,6 +13612,12 @@ namespace Kafka.Protocol
 
 				_producerId = value;
 			}
+		}
+
+		public EndTxnRequest WithProducerId(Int64 producerId)
+		{
+			ProducerId = producerId;
+			return this;
 		}
 
 		/// <summary>
@@ -13067,6 +13643,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public EndTxnRequest WithProducerEpoch(Int16 producerEpoch)
+		{
+			ProducerEpoch = producerEpoch;
+			return this;
+		}
+
 		/// <summary>
 		/// True if the transaction was committed, false if it was aborted.
 		/// </summary>
@@ -13088,6 +13670,12 @@ namespace Kafka.Protocol
 
 				_committed = value;
 			}
+		}
+
+		public EndTxnRequest WithCommitted(Boolean committed)
+		{
+			Committed = committed;
+			return this;
 		}
 	}
 
@@ -13154,6 +13742,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public EndTxnResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -13175,6 +13769,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public EndTxnResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 	}
 
@@ -13241,6 +13841,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ExpireDelegationTokenRequest WithHmac(Bytes hmac)
+		{
+			Hmac = hmac;
+			return this;
+		}
+
 		/// <summary>
 		/// The expiry time period in milliseconds.
 		/// </summary>
@@ -13262,6 +13868,12 @@ namespace Kafka.Protocol
 
 				_expiryTimePeriodMs = value;
 			}
+		}
+
+		public ExpireDelegationTokenRequest WithExpiryTimePeriodMs(Int64 expiryTimePeriodMs)
+		{
+			ExpiryTimePeriodMs = expiryTimePeriodMs;
+			return this;
 		}
 	}
 
@@ -13336,6 +13948,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ExpireDelegationTokenResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
 		/// </summary>
@@ -13359,6 +13977,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ExpireDelegationTokenResponse WithExpiryTimestampMs(Int64 expiryTimestampMs)
+		{
+			ExpiryTimestampMs = expiryTimestampMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
@@ -13380,6 +14004,12 @@ namespace Kafka.Protocol
 
 				_throttleTimeMs = value;
 			}
+		}
+
+		public ExpireDelegationTokenResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
 		}
 	}
 
@@ -13502,6 +14132,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FetchRequest WithReplicaId(Int32 replicaId)
+		{
+			ReplicaId = replicaId;
+			return this;
+		}
+
 		/// <summary>
 		/// The maximum time in milliseconds to wait for the response.
 		/// </summary>
@@ -13523,6 +14159,12 @@ namespace Kafka.Protocol
 
 				_maxWait = value;
 			}
+		}
+
+		public FetchRequest WithMaxWait(Int32 maxWait)
+		{
+			MaxWait = maxWait;
+			return this;
 		}
 
 		/// <summary>
@@ -13548,6 +14190,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FetchRequest WithMinBytes(Int32 minBytes)
+		{
+			MinBytes = minBytes;
+			return this;
+		}
+
 		/// <summary>
 		/// The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.
 		/// </summary>
@@ -13564,6 +14212,12 @@ namespace Kafka.Protocol
 
 				_maxBytes = value;
 			}
+		}
+
+		public FetchRequest WithMaxBytes(Int32 maxBytes)
+		{
+			MaxBytes = maxBytes;
+			return this;
 		}
 
 		/// <summary>
@@ -13589,6 +14243,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FetchRequest WithIsolationLevel(Int8 isolationLevel)
+		{
+			IsolationLevel = isolationLevel;
+			return this;
+		}
+
 		/// <summary>
 		/// The fetch session ID.
 		/// </summary>
@@ -13610,6 +14270,12 @@ namespace Kafka.Protocol
 
 				_sessionId = value;
 			}
+		}
+
+		public FetchRequest WithSessionId(Int32 sessionId)
+		{
+			SessionId = sessionId;
+			return this;
 		}
 
 		/// <summary>
@@ -13635,6 +14301,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FetchRequest WithEpoch(Int32 epoch)
+		{
+			Epoch = epoch;
+			return this;
+		}
+
 		/// <summary>
 		/// The topics to fetch.
 		/// </summary>
@@ -13656,6 +14328,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public FetchRequest WithTopicsCollections(Func<FetchRequest, FetchableTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public FetchableTopic CreateFetchableTopic()
@@ -13696,12 +14374,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public FetchableTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The name of the topic to fetch.
 			/// </summary>
@@ -13725,9 +14397,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public FetchableTopic WithFetchPartitionsCollection(FetchPartition[] fetchPartitionsCollection)
+			public FetchableTopic WithName(String name)
 			{
-				FetchPartitionsCollection = fetchPartitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -13752,6 +14424,12 @@ namespace Kafka.Protocol
 
 					_fetchPartitionsCollection = value;
 				}
+			}
+
+			public FetchableTopic WithFetchPartitionsCollections(Func<FetchableTopic, FetchPartition[]> createField)
+			{
+				FetchPartitionsCollection = createField(this);
+				return this;
 			}
 
 			public FetchPartition CreateFetchPartition()
@@ -13816,12 +14494,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchPartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -13845,9 +14517,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
+				public FetchPartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					CurrentLeaderEpoch = currentLeaderEpoch;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -13869,9 +14541,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchPartition WithFetchOffset(Int64 fetchOffset)
+				public FetchPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
 				{
-					FetchOffset = fetchOffset;
+					CurrentLeaderEpoch = currentLeaderEpoch;
 					return this;
 				}
 
@@ -13898,9 +14570,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchPartition WithLogStartOffset(Int64 logStartOffset)
+				public FetchPartition WithFetchOffset(Int64 fetchOffset)
 				{
-					LogStartOffset = logStartOffset;
+					FetchOffset = fetchOffset;
 					return this;
 				}
 
@@ -13927,9 +14599,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchPartition WithMaxBytes(Int32 maxBytes)
+				public FetchPartition WithLogStartOffset(Int64 logStartOffset)
 				{
-					MaxBytes = maxBytes;
+					LogStartOffset = logStartOffset;
 					return this;
 				}
 
@@ -13955,6 +14627,12 @@ namespace Kafka.Protocol
 						_maxBytes = value;
 					}
 				}
+
+				public FetchPartition WithMaxBytes(Int32 maxBytes)
+				{
+					MaxBytes = maxBytes;
+					return this;
+				}
 			}
 		}
 
@@ -13979,6 +14657,12 @@ namespace Kafka.Protocol
 
 				_forgottenCollection = value;
 			}
+		}
+
+		public FetchRequest WithForgottenCollections(Func<FetchRequest, ForgottenTopic[]> createField)
+		{
+			ForgottenCollection = createField(this);
+			return this;
 		}
 
 		public ForgottenTopic CreateForgottenTopic()
@@ -14019,12 +14703,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ForgottenTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The partition name.
 			/// </summary>
@@ -14048,9 +14726,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ForgottenTopic WithForgottenPartitionIndexesCollection(Int32[] forgottenPartitionIndexesCollection)
+			public ForgottenTopic WithName(String name)
 			{
-				ForgottenPartitionIndexesCollection = forgottenPartitionIndexesCollection;
+				Name = name;
 				return this;
 			}
 
@@ -14075,6 +14753,12 @@ namespace Kafka.Protocol
 
 					_forgottenPartitionIndexesCollection = value;
 				}
+			}
+
+			public ForgottenTopic WithForgottenPartitionIndexesCollection(Int32[] forgottenPartitionIndexesCollection)
+			{
+				ForgottenPartitionIndexesCollection = forgottenPartitionIndexesCollection;
+				return this;
 			}
 		}
 	}
@@ -14153,6 +14837,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FetchResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The top level response error code.
 		/// </summary>
@@ -14174,6 +14864,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public FetchResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 
 		/// <summary>
@@ -14199,6 +14895,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FetchResponse WithSessionId(Int32 sessionId)
+		{
+			SessionId = sessionId;
+			return this;
+		}
+
 		/// <summary>
 		/// The response topics.
 		/// </summary>
@@ -14220,6 +14922,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public FetchResponse WithTopicsCollections(Func<FetchResponse, FetchableTopicResponse[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public FetchableTopicResponse CreateFetchableTopicResponse()
@@ -14260,12 +14968,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public FetchableTopicResponse WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -14289,9 +14991,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public FetchableTopicResponse WithPartitionsCollection(FetchablePartitionResponse[] partitionsCollection)
+			public FetchableTopicResponse WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -14316,6 +15018,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public FetchableTopicResponse WithPartitionsCollections(Func<FetchableTopicResponse, FetchablePartitionResponse[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public FetchablePartitionResponse CreateFetchablePartitionResponse()
@@ -14396,12 +15104,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchablePartitionResponse WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partiiton index.
 				/// </summary>
@@ -14425,9 +15127,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchablePartitionResponse WithErrorCode(Int16 errorCode)
+				public FetchablePartitionResponse WithPartitionIndex(Int32 partitionIndex)
 				{
-					ErrorCode = errorCode;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -14454,9 +15156,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchablePartitionResponse WithHighWatermark(Int64 highWatermark)
+				public FetchablePartitionResponse WithErrorCode(Int16 errorCode)
 				{
-					HighWatermark = highWatermark;
+					ErrorCode = errorCode;
 					return this;
 				}
 
@@ -14483,9 +15185,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchablePartitionResponse WithLastStableOffset(Int64 lastStableOffset)
+				public FetchablePartitionResponse WithHighWatermark(Int64 highWatermark)
 				{
-					LastStableOffset = lastStableOffset;
+					HighWatermark = highWatermark;
 					return this;
 				}
 
@@ -14507,9 +15209,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchablePartitionResponse WithLogStartOffset(Int64 logStartOffset)
+				public FetchablePartitionResponse WithLastStableOffset(Int64 lastStableOffset)
 				{
-					LogStartOffset = logStartOffset;
+					LastStableOffset = lastStableOffset;
 					return this;
 				}
 
@@ -14531,9 +15233,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchablePartitionResponse WithAbortedCollection(AbortedTransaction[] abortedCollection)
+				public FetchablePartitionResponse WithLogStartOffset(Int64 logStartOffset)
 				{
-					AbortedCollection = abortedCollection;
+					LogStartOffset = logStartOffset;
 					return this;
 				}
 
@@ -14559,6 +15261,12 @@ namespace Kafka.Protocol
 
 						_abortedCollection = value;
 					}
+				}
+
+				public FetchablePartitionResponse WithAbortedCollections(Func<FetchablePartitionResponse, AbortedTransaction[]> createField)
+				{
+					AbortedCollection = createField(this);
+					return this;
 				}
 
 				public AbortedTransaction CreateAbortedTransaction()
@@ -14599,12 +15307,6 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public AbortedTransaction WithProducerId(Int64 producerId)
-					{
-						ProducerId = producerId;
-						return this;
-					}
-
 					/// <summary>
 					/// The producer id associated with the aborted transaction.
 					/// </summary>
@@ -14628,9 +15330,9 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public AbortedTransaction WithFirstOffset(Int64 firstOffset)
+					public AbortedTransaction WithProducerId(Int64 producerId)
 					{
-						FirstOffset = firstOffset;
+						ProducerId = producerId;
 						return this;
 					}
 
@@ -14656,12 +15358,12 @@ namespace Kafka.Protocol
 							_firstOffset = value;
 						}
 					}
-				}
 
-				public FetchablePartitionResponse WithRecords(Bytes records)
-				{
-					Records = records;
-					return this;
+					public AbortedTransaction WithFirstOffset(Int64 firstOffset)
+					{
+						FirstOffset = firstOffset;
+						return this;
+					}
 				}
 
 				/// <summary>
@@ -14686,6 +15388,12 @@ namespace Kafka.Protocol
 
 						_records = value;
 					}
+				}
+
+				public FetchablePartitionResponse WithRecords(Bytes records)
+				{
+					Records = records;
+					return this;
 				}
 			}
 		}
@@ -14754,6 +15462,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FindCoordinatorRequest WithKey(String key)
+		{
+			Key = key;
+			return this;
+		}
+
 		/// <summary>
 		/// The coordinator key type.  (Group, transaction, etc.)
 		/// </summary>
@@ -14775,6 +15489,12 @@ namespace Kafka.Protocol
 
 				_keyType = value;
 			}
+		}
+
+		public FindCoordinatorRequest WithKeyType(Int8 keyType)
+		{
+			KeyType = keyType;
+			return this;
 		}
 	}
 
@@ -14868,6 +15588,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FindCoordinatorResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -14891,6 +15617,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FindCoordinatorResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
@@ -14908,6 +15640,12 @@ namespace Kafka.Protocol
 
 				_errorMessage = value;
 			}
+		}
+
+		public FindCoordinatorResponse WithErrorMessage(String errorMessage)
+		{
+			ErrorMessage = errorMessage;
+			return this;
 		}
 
 		/// <summary>
@@ -14933,6 +15671,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FindCoordinatorResponse WithNodeId(Int32 nodeId)
+		{
+			NodeId = nodeId;
+			return this;
+		}
+
 		/// <summary>
 		/// The host name.
 		/// </summary>
@@ -14956,6 +15700,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public FindCoordinatorResponse WithHost(String host)
+		{
+			Host = host;
+			return this;
+		}
+
 		/// <summary>
 		/// The port.
 		/// </summary>
@@ -14977,6 +15727,12 @@ namespace Kafka.Protocol
 
 				_port = value;
 			}
+		}
+
+		public FindCoordinatorResponse WithPort(Int32 port)
+		{
+			Port = port;
+			return this;
 		}
 	}
 
@@ -15051,6 +15807,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public HeartbeatRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
@@ -15074,6 +15836,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public HeartbeatRequest WithGenerationid(Int32 generationid)
+		{
+			Generationid = generationid;
+			return this;
+		}
+
 		/// <summary>
 		/// The member ID.
 		/// </summary>
@@ -15095,6 +15863,12 @@ namespace Kafka.Protocol
 
 				_memberId = value;
 			}
+		}
+
+		public HeartbeatRequest WithMemberId(String memberId)
+		{
+			MemberId = memberId;
+			return this;
 		}
 	}
 
@@ -15156,6 +15930,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public HeartbeatResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -15177,6 +15957,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public HeartbeatResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 	}
 
@@ -15244,6 +16030,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public InitProducerIdRequest WithTransactionalId(String transactionalId)
+		{
+			TransactionalId = transactionalId;
+			return this;
+		}
+
 		/// <summary>
 		/// The time in ms to wait for before aborting idle transactions sent by this producer.
 		/// </summary>
@@ -15265,6 +16057,12 @@ namespace Kafka.Protocol
 
 				_transactionTimeoutMs = value;
 			}
+		}
+
+		public InitProducerIdRequest WithTransactionTimeoutMs(Int32 transactionTimeoutMs)
+		{
+			TransactionTimeoutMs = transactionTimeoutMs;
+			return this;
 		}
 	}
 
@@ -15342,6 +16140,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public InitProducerIdResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -15363,6 +16167,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public InitProducerIdResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 
 		/// <summary>
@@ -15388,6 +16198,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public InitProducerIdResponse WithProducerId(Int64 producerId)
+		{
+			ProducerId = producerId;
+			return this;
+		}
+
 		/// <summary>
 		/// The current epoch associated with the producer id.
 		/// </summary>
@@ -15409,6 +16225,12 @@ namespace Kafka.Protocol
 
 				_producerEpoch = value;
 			}
+		}
+
+		public InitProducerIdResponse WithProducerEpoch(Int16 producerEpoch)
+		{
+			ProducerEpoch = producerEpoch;
+			return this;
 		}
 	}
 
@@ -15507,6 +16329,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
 		/// <summary>
 		/// The coordinator considers the consumer dead if it receives no heartbeat after this timeout in milliseconds.
 		/// </summary>
@@ -15530,6 +16358,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupRequest WithSessionTimeoutMs(Int32 sessionTimeoutMs)
+		{
+			SessionTimeoutMs = sessionTimeoutMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The maximum time in milliseconds that the coordinator will wait for each member to rejoin when rebalancing the group.
 		/// </summary>
@@ -15546,6 +16380,12 @@ namespace Kafka.Protocol
 
 				_rebalanceTimeoutMs = value;
 			}
+		}
+
+		public JoinGroupRequest WithRebalanceTimeoutMs(Int32 rebalanceTimeoutMs)
+		{
+			RebalanceTimeoutMs = rebalanceTimeoutMs;
+			return this;
 		}
 
 		/// <summary>
@@ -15571,6 +16411,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupRequest WithMemberId(String memberId)
+		{
+			MemberId = memberId;
+			return this;
+		}
+
 		/// <summary>
 		/// The unique name the for class of protocols implemented by the group we want to join.
 		/// </summary>
@@ -15594,6 +16440,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupRequest WithProtocolType(String protocolType)
+		{
+			ProtocolType = protocolType;
+			return this;
+		}
+
 		/// <summary>
 		/// The list of protocols that the member supports.
 		/// </summary>
@@ -15615,6 +16467,12 @@ namespace Kafka.Protocol
 
 				_protocolsCollection = value;
 			}
+		}
+
+		public JoinGroupRequest WithProtocolsCollections(Func<JoinGroupRequest, Dictionary<String, JoinGroupRequestProtocol>> createField)
+		{
+			ProtocolsCollection = createField(this);
+			return this;
 		}
 
 		public JoinGroupRequestProtocol CreateJoinGroupRequestProtocol()
@@ -15655,12 +16513,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public JoinGroupRequestProtocol WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The protocol name.
 			/// </summary>
@@ -15684,9 +16536,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public JoinGroupRequestProtocol WithMetadata(Bytes metadata)
+			public JoinGroupRequestProtocol WithName(String name)
 			{
-				Metadata = metadata;
+				Name = name;
 				return this;
 			}
 
@@ -15711,6 +16563,12 @@ namespace Kafka.Protocol
 
 					_metadata = value;
 				}
+			}
+
+			public JoinGroupRequestProtocol WithMetadata(Bytes metadata)
+			{
+				Metadata = metadata;
+				return this;
 			}
 		}
 	}
@@ -15813,6 +16671,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -15834,6 +16698,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public JoinGroupResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 
 		/// <summary>
@@ -15859,6 +16729,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupResponse WithGenerationId(Int32 generationId)
+		{
+			GenerationId = generationId;
+			return this;
+		}
+
 		/// <summary>
 		/// The group protocol selected by the coordinator.
 		/// </summary>
@@ -15880,6 +16756,12 @@ namespace Kafka.Protocol
 
 				_protocolName = value;
 			}
+		}
+
+		public JoinGroupResponse WithProtocolName(String protocolName)
+		{
+			ProtocolName = protocolName;
+			return this;
 		}
 
 		/// <summary>
@@ -15905,6 +16787,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupResponse WithLeader(String leader)
+		{
+			Leader = leader;
+			return this;
+		}
+
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
 		/// </summary>
@@ -15928,6 +16816,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public JoinGroupResponse WithMemberId(String memberId)
+		{
+			MemberId = memberId;
+			return this;
+		}
+
 		private JoinGroupResponseMember[] _membersCollection = System.Array.Empty<JoinGroupResponseMember>();
 		public JoinGroupResponseMember[] MembersCollection 
 		{
@@ -15946,6 +16840,12 @@ namespace Kafka.Protocol
 
 				_membersCollection = value;
 			}
+		}
+
+		public JoinGroupResponse WithMembersCollections(Func<JoinGroupResponse, JoinGroupResponseMember[]> createField)
+		{
+			MembersCollection = createField(this);
+			return this;
 		}
 
 		public JoinGroupResponseMember CreateJoinGroupResponseMember()
@@ -15986,12 +16886,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public JoinGroupResponseMember WithMemberId(String memberId)
-			{
-				MemberId = memberId;
-				return this;
-			}
-
 			/// <summary>
 			/// The group member ID.
 			/// </summary>
@@ -16015,9 +16909,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public JoinGroupResponseMember WithMetadata(Bytes metadata)
+			public JoinGroupResponseMember WithMemberId(String memberId)
 			{
-				Metadata = metadata;
+				MemberId = memberId;
 				return this;
 			}
 
@@ -16042,6 +16936,12 @@ namespace Kafka.Protocol
 
 					_metadata = value;
 				}
+			}
+
+			public JoinGroupResponseMember WithMetadata(Bytes metadata)
+			{
+				Metadata = metadata;
+				return this;
 			}
 		}
 	}
@@ -16141,6 +17041,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaderAndIsrRequest WithControllerId(Int32 controllerId)
+		{
+			ControllerId = controllerId;
+			return this;
+		}
+
 		/// <summary>
 		/// The current controller epoch.
 		/// </summary>
@@ -16164,6 +17070,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaderAndIsrRequest WithControllerEpoch(Int32 controllerEpoch)
+		{
+			ControllerEpoch = controllerEpoch;
+			return this;
+		}
+
 		/// <summary>
 		/// The current broker epoch.
 		/// </summary>
@@ -16180,6 +17092,12 @@ namespace Kafka.Protocol
 
 				_brokerEpoch = value;
 			}
+		}
+
+		public LeaderAndIsrRequest WithBrokerEpoch(Int64 brokerEpoch)
+		{
+			BrokerEpoch = brokerEpoch;
+			return this;
 		}
 
 		/// <summary>
@@ -16203,6 +17121,12 @@ namespace Kafka.Protocol
 
 				_topicStatesCollection = value;
 			}
+		}
+
+		public LeaderAndIsrRequest WithTopicStatesCollections(Func<LeaderAndIsrRequest, LeaderAndIsrRequestTopicState[]> createField)
+		{
+			TopicStatesCollection = createField(this);
+			return this;
 		}
 
 		public LeaderAndIsrRequestTopicState CreateLeaderAndIsrRequestTopicState()
@@ -16243,12 +17167,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestTopicState WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -16272,9 +17190,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestTopicState WithPartitionStatesCollection(LeaderAndIsrRequestPartitionState[] partitionStatesCollection)
+			public LeaderAndIsrRequestTopicState WithName(String name)
 			{
-				PartitionStatesCollection = partitionStatesCollection;
+				Name = name;
 				return this;
 			}
 
@@ -16299,6 +17217,12 @@ namespace Kafka.Protocol
 
 					_partitionStatesCollection = value;
 				}
+			}
+
+			public LeaderAndIsrRequestTopicState WithPartitionStatesCollections(Func<LeaderAndIsrRequestTopicState, LeaderAndIsrRequestPartitionState[]> createField)
+			{
+				PartitionStatesCollection = createField(this);
+				return this;
 			}
 
 			public LeaderAndIsrRequestPartitionState CreateLeaderAndIsrRequestPartitionState()
@@ -16387,12 +17311,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public LeaderAndIsrRequestPartitionState WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -16416,9 +17334,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public LeaderAndIsrRequestPartitionState WithControllerEpoch(Int32 controllerEpoch)
+				public LeaderAndIsrRequestPartitionState WithPartitionIndex(Int32 partitionIndex)
 				{
-					ControllerEpoch = controllerEpoch;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -16445,9 +17363,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public LeaderAndIsrRequestPartitionState WithLeaderKey(Int32 leaderKey)
+				public LeaderAndIsrRequestPartitionState WithControllerEpoch(Int32 controllerEpoch)
 				{
-					LeaderKey = leaderKey;
+					ControllerEpoch = controllerEpoch;
 					return this;
 				}
 
@@ -16474,9 +17392,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public LeaderAndIsrRequestPartitionState WithLeaderEpoch(Int32 leaderEpoch)
+				public LeaderAndIsrRequestPartitionState WithLeaderKey(Int32 leaderKey)
 				{
-					LeaderEpoch = leaderEpoch;
+					LeaderKey = leaderKey;
 					return this;
 				}
 
@@ -16503,9 +17421,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public LeaderAndIsrRequestPartitionState WithIsrReplicasCollection(Int32[] isrReplicasCollection)
+				public LeaderAndIsrRequestPartitionState WithLeaderEpoch(Int32 leaderEpoch)
 				{
-					IsrReplicasCollection = isrReplicasCollection;
+					LeaderEpoch = leaderEpoch;
 					return this;
 				}
 
@@ -16532,9 +17450,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public LeaderAndIsrRequestPartitionState WithZkVersion(Int32 zkVersion)
+				public LeaderAndIsrRequestPartitionState WithIsrReplicasCollection(Int32[] isrReplicasCollection)
 				{
-					ZkVersion = zkVersion;
+					IsrReplicasCollection = isrReplicasCollection;
 					return this;
 				}
 
@@ -16561,9 +17479,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public LeaderAndIsrRequestPartitionState WithReplicasCollection(Int32[] replicasCollection)
+				public LeaderAndIsrRequestPartitionState WithZkVersion(Int32 zkVersion)
 				{
-					ReplicasCollection = replicasCollection;
+					ZkVersion = zkVersion;
 					return this;
 				}
 
@@ -16590,9 +17508,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public LeaderAndIsrRequestPartitionState WithIsNew(Boolean isNew)
+				public LeaderAndIsrRequestPartitionState WithReplicasCollection(Int32[] replicasCollection)
 				{
-					IsNew = isNew;
+					ReplicasCollection = replicasCollection;
 					return this;
 				}
 
@@ -16612,6 +17530,12 @@ namespace Kafka.Protocol
 
 						_isNew = value;
 					}
+				}
+
+				public LeaderAndIsrRequestPartitionState WithIsNew(Boolean isNew)
+				{
+					IsNew = isNew;
+					return this;
 				}
 			}
 		}
@@ -16637,6 +17561,12 @@ namespace Kafka.Protocol
 
 				_partitionStatesV0Collection = value;
 			}
+		}
+
+		public LeaderAndIsrRequest WithPartitionStatesV0Collections(Func<LeaderAndIsrRequest, LeaderAndIsrRequestPartitionStateV0[]> createField)
+		{
+			PartitionStatesV0Collection = createField(this);
+			return this;
 		}
 
 		public LeaderAndIsrRequestPartitionStateV0 CreateLeaderAndIsrRequestPartitionStateV0()
@@ -16733,12 +17663,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -16762,9 +17686,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithPartitionIndex(Int32 partitionIndex)
+			public LeaderAndIsrRequestPartitionStateV0 WithTopicName(String topicName)
 			{
-				PartitionIndex = partitionIndex;
+				TopicName = topicName;
 				return this;
 			}
 
@@ -16791,9 +17715,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithControllerEpoch(Int32 controllerEpoch)
+			public LeaderAndIsrRequestPartitionStateV0 WithPartitionIndex(Int32 partitionIndex)
 			{
-				ControllerEpoch = controllerEpoch;
+				PartitionIndex = partitionIndex;
 				return this;
 			}
 
@@ -16820,9 +17744,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithLeaderKey(Int32 leaderKey)
+			public LeaderAndIsrRequestPartitionStateV0 WithControllerEpoch(Int32 controllerEpoch)
 			{
-				LeaderKey = leaderKey;
+				ControllerEpoch = controllerEpoch;
 				return this;
 			}
 
@@ -16849,9 +17773,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithLeaderEpoch(Int32 leaderEpoch)
+			public LeaderAndIsrRequestPartitionStateV0 WithLeaderKey(Int32 leaderKey)
 			{
-				LeaderEpoch = leaderEpoch;
+				LeaderKey = leaderKey;
 				return this;
 			}
 
@@ -16878,9 +17802,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithIsrReplicasCollection(Int32[] isrReplicasCollection)
+			public LeaderAndIsrRequestPartitionStateV0 WithLeaderEpoch(Int32 leaderEpoch)
 			{
-				IsrReplicasCollection = isrReplicasCollection;
+				LeaderEpoch = leaderEpoch;
 				return this;
 			}
 
@@ -16907,9 +17831,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithZkVersion(Int32 zkVersion)
+			public LeaderAndIsrRequestPartitionStateV0 WithIsrReplicasCollection(Int32[] isrReplicasCollection)
 			{
-				ZkVersion = zkVersion;
+				IsrReplicasCollection = isrReplicasCollection;
 				return this;
 			}
 
@@ -16936,9 +17860,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithReplicasCollection(Int32[] replicasCollection)
+			public LeaderAndIsrRequestPartitionStateV0 WithZkVersion(Int32 zkVersion)
 			{
-				ReplicasCollection = replicasCollection;
+				ZkVersion = zkVersion;
 				return this;
 			}
 
@@ -16965,9 +17889,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestPartitionStateV0 WithIsNew(Boolean isNew)
+			public LeaderAndIsrRequestPartitionStateV0 WithReplicasCollection(Int32[] replicasCollection)
 			{
-				IsNew = isNew;
+				ReplicasCollection = replicasCollection;
 				return this;
 			}
 
@@ -16987,6 +17911,12 @@ namespace Kafka.Protocol
 
 					_isNew = value;
 				}
+			}
+
+			public LeaderAndIsrRequestPartitionStateV0 WithIsNew(Boolean isNew)
+			{
+				IsNew = isNew;
+				return this;
 			}
 		}
 
@@ -17011,6 +17941,12 @@ namespace Kafka.Protocol
 
 				_liveLeadersCollection = value;
 			}
+		}
+
+		public LeaderAndIsrRequest WithLiveLeadersCollections(Func<LeaderAndIsrRequest, LeaderAndIsrLiveLeader[]> createField)
+		{
+			LiveLeadersCollection = createField(this);
+			return this;
 		}
 
 		public LeaderAndIsrLiveLeader CreateLeaderAndIsrLiveLeader()
@@ -17059,12 +17995,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrLiveLeader WithBrokerId(Int32 brokerId)
-			{
-				BrokerId = brokerId;
-				return this;
-			}
-
 			/// <summary>
 			/// The leader's broker ID.
 			/// </summary>
@@ -17088,9 +18018,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrLiveLeader WithHostName(String hostName)
+			public LeaderAndIsrLiveLeader WithBrokerId(Int32 brokerId)
 			{
-				HostName = hostName;
+				BrokerId = brokerId;
 				return this;
 			}
 
@@ -17117,9 +18047,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrLiveLeader WithPort(Int32 port)
+			public LeaderAndIsrLiveLeader WithHostName(String hostName)
 			{
-				Port = port;
+				HostName = hostName;
 				return this;
 			}
 
@@ -17144,6 +18074,12 @@ namespace Kafka.Protocol
 
 					_port = value;
 				}
+			}
+
+			public LeaderAndIsrLiveLeader WithPort(Int32 port)
+			{
+				Port = port;
+				return this;
 			}
 		}
 	}
@@ -17211,6 +18147,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaderAndIsrResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// Each partition.
 		/// </summary>
@@ -17232,6 +18174,12 @@ namespace Kafka.Protocol
 
 				_partitionsCollection = value;
 			}
+		}
+
+		public LeaderAndIsrResponse WithPartitionsCollections(Func<LeaderAndIsrResponse, LeaderAndIsrResponsePartition[]> createField)
+		{
+			PartitionsCollection = createField(this);
+			return this;
 		}
 
 		public LeaderAndIsrResponsePartition CreateLeaderAndIsrResponsePartition()
@@ -17280,12 +18228,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrResponsePartition WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -17309,9 +18251,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrResponsePartition WithPartitionIndex(Int32 partitionIndex)
+			public LeaderAndIsrResponsePartition WithTopicName(String topicName)
 			{
-				PartitionIndex = partitionIndex;
+				TopicName = topicName;
 				return this;
 			}
 
@@ -17338,9 +18280,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrResponsePartition WithErrorCode(Int16 errorCode)
+			public LeaderAndIsrResponsePartition WithPartitionIndex(Int32 partitionIndex)
 			{
-				ErrorCode = errorCode;
+				PartitionIndex = partitionIndex;
 				return this;
 			}
 
@@ -17365,6 +18307,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public LeaderAndIsrResponsePartition WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
 			}
 		}
 	}
@@ -17432,6 +18380,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaveGroupRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
 		/// <summary>
 		/// The member ID to remove from the group.
 		/// </summary>
@@ -17453,6 +18407,12 @@ namespace Kafka.Protocol
 
 				_memberId = value;
 			}
+		}
+
+		public LeaveGroupRequest WithMemberId(String memberId)
+		{
+			MemberId = memberId;
+			return this;
 		}
 	}
 
@@ -17514,6 +18474,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public LeaveGroupResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -17535,6 +18501,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public LeaveGroupResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 	}
 
@@ -17633,6 +18605,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ListGroupsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -17656,6 +18634,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ListGroupsResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// Each group in the response.
 		/// </summary>
@@ -17677,6 +18661,12 @@ namespace Kafka.Protocol
 
 				_groupsCollection = value;
 			}
+		}
+
+		public ListGroupsResponse WithGroupsCollections(Func<ListGroupsResponse, ListedGroup[]> createField)
+		{
+			GroupsCollection = createField(this);
+			return this;
 		}
 
 		public ListedGroup CreateListedGroup()
@@ -17717,12 +18707,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ListedGroup WithGroupId(String groupId)
-			{
-				GroupId = groupId;
-				return this;
-			}
-
 			/// <summary>
 			/// The group ID.
 			/// </summary>
@@ -17746,9 +18730,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ListedGroup WithProtocolType(String protocolType)
+			public ListedGroup WithGroupId(String groupId)
 			{
-				ProtocolType = protocolType;
+				GroupId = groupId;
 				return this;
 			}
 
@@ -17773,6 +18757,12 @@ namespace Kafka.Protocol
 
 					_protocolType = value;
 				}
+			}
+
+			public ListedGroup WithProtocolType(String protocolType)
+			{
+				ProtocolType = protocolType;
+				return this;
 			}
 		}
 	}
@@ -17848,6 +18838,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ListOffsetRequest WithReplicaId(Int32 replicaId)
+		{
+			ReplicaId = replicaId;
+			return this;
+		}
+
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
 		/// </summary>
@@ -17871,6 +18867,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ListOffsetRequest WithIsolationLevel(Int8 isolationLevel)
+		{
+			IsolationLevel = isolationLevel;
+			return this;
+		}
+
 		/// <summary>
 		/// Each topic in the request.
 		/// </summary>
@@ -17892,6 +18894,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public ListOffsetRequest WithTopicsCollections(Func<ListOffsetRequest, ListOffsetTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public ListOffsetTopic CreateListOffsetTopic()
@@ -17932,12 +18940,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ListOffsetTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -17961,9 +18963,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ListOffsetTopic WithPartitionsCollection(ListOffsetPartition[] partitionsCollection)
+			public ListOffsetTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -17988,6 +18990,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public ListOffsetTopic WithPartitionsCollections(Func<ListOffsetTopic, ListOffsetPartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public ListOffsetPartition CreateListOffsetPartition()
@@ -18044,12 +19052,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -18073,9 +19075,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
+				public ListOffsetPartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					CurrentLeaderEpoch = currentLeaderEpoch;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -18102,9 +19104,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartition WithTimestamp(Int64 timestamp)
+				public ListOffsetPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
 				{
-					Timestamp = timestamp;
+					CurrentLeaderEpoch = currentLeaderEpoch;
 					return this;
 				}
 
@@ -18131,9 +19133,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartition WithMaxNumOffsets(Int32 maxNumOffsets)
+				public ListOffsetPartition WithTimestamp(Int64 timestamp)
 				{
-					MaxNumOffsets = maxNumOffsets;
+					Timestamp = timestamp;
 					return this;
 				}
 
@@ -18158,6 +19160,12 @@ namespace Kafka.Protocol
 
 						_maxNumOffsets = value;
 					}
+				}
+
+				public ListOffsetPartition WithMaxNumOffsets(Int32 maxNumOffsets)
+				{
+					MaxNumOffsets = maxNumOffsets;
+					return this;
 				}
 			}
 		}
@@ -18221,6 +19229,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ListOffsetResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
@@ -18242,6 +19256,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public ListOffsetResponse WithTopicsCollections(Func<ListOffsetResponse, ListOffsetTopicResponse[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public ListOffsetTopicResponse CreateListOffsetTopicResponse()
@@ -18282,12 +19302,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ListOffsetTopicResponse WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -18311,9 +19325,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ListOffsetTopicResponse WithPartitionsCollection(ListOffsetPartitionResponse[] partitionsCollection)
+			public ListOffsetTopicResponse WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -18338,6 +19352,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public ListOffsetTopicResponse WithPartitionsCollections(Func<ListOffsetTopicResponse, ListOffsetPartitionResponse[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public ListOffsetPartitionResponse CreateListOffsetPartitionResponse()
@@ -18410,12 +19430,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartitionResponse WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -18439,9 +19453,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartitionResponse WithErrorCode(Int16 errorCode)
+				public ListOffsetPartitionResponse WithPartitionIndex(Int32 partitionIndex)
 				{
-					ErrorCode = errorCode;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -18468,9 +19482,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartitionResponse WithOldStyleOffsetsCollection(Int64[] oldStyleOffsetsCollection)
+				public ListOffsetPartitionResponse WithErrorCode(Int16 errorCode)
 				{
-					OldStyleOffsetsCollection = oldStyleOffsetsCollection;
+					ErrorCode = errorCode;
 					return this;
 				}
 
@@ -18497,9 +19511,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartitionResponse WithTimestamp(Int64 timestamp)
+				public ListOffsetPartitionResponse WithOldStyleOffsetsCollection(Int64[] oldStyleOffsetsCollection)
 				{
-					Timestamp = timestamp;
+					OldStyleOffsetsCollection = oldStyleOffsetsCollection;
 					return this;
 				}
 
@@ -18526,9 +19540,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartitionResponse WithOffset(Int64 offset)
+				public ListOffsetPartitionResponse WithTimestamp(Int64 timestamp)
 				{
-					Offset = offset;
+					Timestamp = timestamp;
 					return this;
 				}
 
@@ -18555,9 +19569,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public ListOffsetPartitionResponse WithLeaderEpoch(Int32 leaderEpoch)
+				public ListOffsetPartitionResponse WithOffset(Int64 offset)
 				{
-					LeaderEpoch = leaderEpoch;
+					Offset = offset;
 					return this;
 				}
 
@@ -18579,6 +19593,12 @@ namespace Kafka.Protocol
 
 						_leaderEpoch = value;
 					}
+				}
+
+				public ListOffsetPartitionResponse WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
 				}
 			}
 		}
@@ -18664,6 +19684,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public MetadataRequest WithTopicsCollections(Func<MetadataRequest, MetadataRequestTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
+		}
+
 		public MetadataRequestTopic CreateMetadataRequestTopic()
 		{
 			return new MetadataRequestTopic(Version);
@@ -18694,12 +19720,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataRequestTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -18721,6 +19741,12 @@ namespace Kafka.Protocol
 
 					_name = value;
 				}
+			}
+
+			public MetadataRequestTopic WithName(String name)
+			{
+				Name = name;
+				return this;
 			}
 		}
 
@@ -18747,6 +19773,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public MetadataRequest WithAllowAutoTopicCreation(Boolean allowAutoTopicCreation)
+		{
+			AllowAutoTopicCreation = allowAutoTopicCreation;
+			return this;
+		}
+
 		/// <summary>
 		/// Whether to include cluster authorized operations.
 		/// </summary>
@@ -18770,6 +19802,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public MetadataRequest WithIncludeClusterAuthorizedOperations(Boolean includeClusterAuthorizedOperations)
+		{
+			IncludeClusterAuthorizedOperations = includeClusterAuthorizedOperations;
+			return this;
+		}
+
 		/// <summary>
 		/// Whether to include topic authorized operations.
 		/// </summary>
@@ -18791,6 +19829,12 @@ namespace Kafka.Protocol
 
 				_includeTopicAuthorizedOperations = value;
 			}
+		}
+
+		public MetadataRequest WithIncludeTopicAuthorizedOperations(Boolean includeTopicAuthorizedOperations)
+		{
+			IncludeTopicAuthorizedOperations = includeTopicAuthorizedOperations;
+			return this;
 		}
 	}
 
@@ -18889,6 +19933,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public MetadataResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// Each broker in the response.
 		/// </summary>
@@ -18910,6 +19960,12 @@ namespace Kafka.Protocol
 
 				_brokersCollection = value;
 			}
+		}
+
+		public MetadataResponse WithBrokersCollections(Func<MetadataResponse, Dictionary<Int32, MetadataResponseBroker>> createField)
+		{
+			BrokersCollection = createField(this);
+			return this;
 		}
 
 		public MetadataResponseBroker CreateMetadataResponseBroker()
@@ -18966,12 +20022,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseBroker WithNodeId(Int32 nodeId)
-			{
-				NodeId = nodeId;
-				return this;
-			}
-
 			/// <summary>
 			/// The broker ID.
 			/// </summary>
@@ -18995,9 +20045,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseBroker WithHost(String host)
+			public MetadataResponseBroker WithNodeId(Int32 nodeId)
 			{
-				Host = host;
+				NodeId = nodeId;
 				return this;
 			}
 
@@ -19024,9 +20074,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseBroker WithPort(Int32 port)
+			public MetadataResponseBroker WithHost(String host)
 			{
-				Port = port;
+				Host = host;
 				return this;
 			}
 
@@ -19053,9 +20103,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseBroker WithRack(String rack)
+			public MetadataResponseBroker WithPort(Int32 port)
 			{
-				Rack = rack;
+				Port = port;
 				return this;
 			}
 
@@ -19076,6 +20126,12 @@ namespace Kafka.Protocol
 
 					_rack = value;
 				}
+			}
+
+			public MetadataResponseBroker WithRack(String rack)
+			{
+				Rack = rack;
+				return this;
 			}
 		}
 
@@ -19098,6 +20154,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public MetadataResponse WithClusterId(String clusterId)
+		{
+			ClusterId = clusterId;
+			return this;
+		}
+
 		/// <summary>
 		/// The ID of the controller broker.
 		/// </summary>
@@ -19114,6 +20176,12 @@ namespace Kafka.Protocol
 
 				_controllerId = value;
 			}
+		}
+
+		public MetadataResponse WithControllerId(Int32 controllerId)
+		{
+			ControllerId = controllerId;
+			return this;
 		}
 
 		/// <summary>
@@ -19137,6 +20205,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public MetadataResponse WithTopicsCollections(Func<MetadataResponse, Dictionary<String, MetadataResponseTopic>> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public MetadataResponseTopic CreateMetadataResponseTopic()
@@ -19201,12 +20275,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseTopic WithErrorCode(Int16 errorCode)
-			{
-				ErrorCode = errorCode;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic error, or 0 if there was no error.
 			/// </summary>
@@ -19230,9 +20298,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseTopic WithName(String name)
+			public MetadataResponseTopic WithErrorCode(Int16 errorCode)
 			{
-				Name = name;
+				ErrorCode = errorCode;
 				return this;
 			}
 
@@ -19259,9 +20327,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseTopic WithIsInternal(Boolean isInternal)
+			public MetadataResponseTopic WithName(String name)
 			{
-				IsInternal = isInternal;
+				Name = name;
 				return this;
 			}
 
@@ -19283,9 +20351,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseTopic WithPartitionsCollection(MetadataResponsePartition[] partitionsCollection)
+			public MetadataResponseTopic WithIsInternal(Boolean isInternal)
 			{
-				PartitionsCollection = partitionsCollection;
+				IsInternal = isInternal;
 				return this;
 			}
 
@@ -19310,6 +20378,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public MetadataResponseTopic WithPartitionsCollections(Func<MetadataResponseTopic, MetadataResponsePartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public MetadataResponsePartition CreateMetadataResponsePartition()
@@ -19390,12 +20464,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public MetadataResponsePartition WithErrorCode(Int16 errorCode)
-				{
-					ErrorCode = errorCode;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition error, or 0 if there was no error.
 				/// </summary>
@@ -19419,9 +20487,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public MetadataResponsePartition WithPartitionIndex(Int32 partitionIndex)
+				public MetadataResponsePartition WithErrorCode(Int16 errorCode)
 				{
-					PartitionIndex = partitionIndex;
+					ErrorCode = errorCode;
 					return this;
 				}
 
@@ -19448,9 +20516,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public MetadataResponsePartition WithLeaderId(Int32 leaderId)
+				public MetadataResponsePartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					LeaderId = leaderId;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -19477,9 +20545,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public MetadataResponsePartition WithLeaderEpoch(Int32 leaderEpoch)
+				public MetadataResponsePartition WithLeaderId(Int32 leaderId)
 				{
-					LeaderEpoch = leaderEpoch;
+					LeaderId = leaderId;
 					return this;
 				}
 
@@ -19501,9 +20569,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public MetadataResponsePartition WithReplicaNodesCollection(Int32[] replicaNodesCollection)
+				public MetadataResponsePartition WithLeaderEpoch(Int32 leaderEpoch)
 				{
-					ReplicaNodesCollection = replicaNodesCollection;
+					LeaderEpoch = leaderEpoch;
 					return this;
 				}
 
@@ -19530,9 +20598,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public MetadataResponsePartition WithIsrNodesCollection(Int32[] isrNodesCollection)
+				public MetadataResponsePartition WithReplicaNodesCollection(Int32[] replicaNodesCollection)
 				{
-					IsrNodesCollection = isrNodesCollection;
+					ReplicaNodesCollection = replicaNodesCollection;
 					return this;
 				}
 
@@ -19559,9 +20627,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public MetadataResponsePartition WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+				public MetadataResponsePartition WithIsrNodesCollection(Int32[] isrNodesCollection)
 				{
-					OfflineReplicasCollection = offlineReplicasCollection;
+					IsrNodesCollection = isrNodesCollection;
 					return this;
 				}
 
@@ -19582,12 +20650,12 @@ namespace Kafka.Protocol
 						_offlineReplicasCollection = value;
 					}
 				}
-			}
 
-			public MetadataResponseTopic WithTopicAuthorizedOperations(Int32 topicAuthorizedOperations)
-			{
-				TopicAuthorizedOperations = topicAuthorizedOperations;
-				return this;
+				public MetadataResponsePartition WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+				{
+					OfflineReplicasCollection = offlineReplicasCollection;
+					return this;
+				}
 			}
 
 			/// <summary>
@@ -19612,6 +20680,12 @@ namespace Kafka.Protocol
 					_topicAuthorizedOperations = value;
 				}
 			}
+
+			public MetadataResponseTopic WithTopicAuthorizedOperations(Int32 topicAuthorizedOperations)
+			{
+				TopicAuthorizedOperations = topicAuthorizedOperations;
+				return this;
+			}
 		}
 
 		/// <summary>
@@ -19635,6 +20709,12 @@ namespace Kafka.Protocol
 
 				_clusterAuthorizedOperations = value;
 			}
+		}
+
+		public MetadataResponse WithClusterAuthorizedOperations(Int32 clusterAuthorizedOperations)
+		{
+			ClusterAuthorizedOperations = clusterAuthorizedOperations;
+			return this;
 		}
 	}
 
@@ -19725,6 +20805,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetCommitRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
@@ -19741,6 +20827,12 @@ namespace Kafka.Protocol
 
 				_generationId = value;
 			}
+		}
+
+		public OffsetCommitRequest WithGenerationId(Int32 generationId)
+		{
+			GenerationId = generationId;
+			return this;
 		}
 
 		/// <summary>
@@ -19761,6 +20853,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetCommitRequest WithMemberId(String memberId)
+		{
+			MemberId = memberId;
+			return this;
+		}
+
 		/// <summary>
 		/// The time period in ms to retain the offset.
 		/// </summary>
@@ -19777,6 +20875,12 @@ namespace Kafka.Protocol
 
 				_retentionTimeMs = value;
 			}
+		}
+
+		public OffsetCommitRequest WithRetentionTimeMs(Int64 retentionTimeMs)
+		{
+			RetentionTimeMs = retentionTimeMs;
+			return this;
 		}
 
 		/// <summary>
@@ -19800,6 +20904,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public OffsetCommitRequest WithTopicsCollections(Func<OffsetCommitRequest, OffsetCommitRequestTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public OffsetCommitRequestTopic CreateOffsetCommitRequestTopic()
@@ -19840,12 +20950,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetCommitRequestTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -19869,9 +20973,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetCommitRequestTopic WithPartitionsCollection(OffsetCommitRequestPartition[] partitionsCollection)
+			public OffsetCommitRequestTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -19896,6 +21000,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public OffsetCommitRequestTopic WithPartitionsCollections(Func<OffsetCommitRequestTopic, OffsetCommitRequestPartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public OffsetCommitRequestPartition CreateOffsetCommitRequestPartition()
@@ -19960,12 +21070,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetCommitRequestPartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -19989,9 +21093,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetCommitRequestPartition WithCommittedOffset(Int64 committedOffset)
+				public OffsetCommitRequestPartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					CommittedOffset = committedOffset;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -20018,9 +21122,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
+				public OffsetCommitRequestPartition WithCommittedOffset(Int64 committedOffset)
 				{
-					CommittedLeaderEpoch = committedLeaderEpoch;
+					CommittedOffset = committedOffset;
 					return this;
 				}
 
@@ -20042,9 +21146,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetCommitRequestPartition WithCommitTimestamp(Int64 commitTimestamp)
+				public OffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
 				{
-					CommitTimestamp = commitTimestamp;
+					CommittedLeaderEpoch = committedLeaderEpoch;
 					return this;
 				}
 
@@ -20071,9 +21175,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
+				public OffsetCommitRequestPartition WithCommitTimestamp(Int64 commitTimestamp)
 				{
-					CommittedMetadata = committedMetadata;
+					CommitTimestamp = commitTimestamp;
 					return this;
 				}
 
@@ -20099,6 +21203,12 @@ namespace Kafka.Protocol
 
 						_committedMetadata = value;
 					}
+				}
+
+				public OffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
+				{
+					CommittedMetadata = committedMetadata;
+					return this;
 				}
 			}
 		}
@@ -20162,6 +21272,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetCommitResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
@@ -20183,6 +21299,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public OffsetCommitResponse WithTopicsCollections(Func<OffsetCommitResponse, OffsetCommitResponseTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public OffsetCommitResponseTopic CreateOffsetCommitResponseTopic()
@@ -20223,12 +21345,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetCommitResponseTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -20252,9 +21368,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetCommitResponseTopic WithPartitionsCollection(OffsetCommitResponsePartition[] partitionsCollection)
+			public OffsetCommitResponseTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -20279,6 +21395,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public OffsetCommitResponseTopic WithPartitionsCollections(Func<OffsetCommitResponseTopic, OffsetCommitResponsePartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public OffsetCommitResponsePartition CreateOffsetCommitResponsePartition()
@@ -20319,12 +21441,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetCommitResponsePartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -20348,9 +21464,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetCommitResponsePartition WithErrorCode(Int16 errorCode)
+				public OffsetCommitResponsePartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					ErrorCode = errorCode;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -20375,6 +21491,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public OffsetCommitResponsePartition WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 			}
 		}
@@ -20443,6 +21565,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetFetchRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
 		/// <summary>
 		/// Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.
 		/// </summary>
@@ -20465,6 +21593,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public OffsetFetchRequest WithTopicsCollections(Func<OffsetFetchRequest, OffsetFetchRequestTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public OffsetFetchRequestTopic CreateOffsetFetchRequestTopic()
@@ -20505,12 +21639,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetFetchRequestTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			private String _name = String.Default;
 			public String Name 
 			{
@@ -20531,9 +21659,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetFetchRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+			public OffsetFetchRequestTopic WithName(String name)
 			{
-				PartitionIndexesCollection = partitionIndexesCollection;
+				Name = name;
 				return this;
 			}
 
@@ -20558,6 +21686,12 @@ namespace Kafka.Protocol
 
 					_partitionIndexesCollection = value;
 				}
+			}
+
+			public OffsetFetchRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+			{
+				PartitionIndexesCollection = partitionIndexesCollection;
+				return this;
 			}
 		}
 	}
@@ -20628,6 +21762,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetFetchResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The responses per topic.
 		/// </summary>
@@ -20649,6 +21789,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public OffsetFetchResponse WithTopicsCollections(Func<OffsetFetchResponse, OffsetFetchResponseTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public OffsetFetchResponseTopic CreateOffsetFetchResponseTopic()
@@ -20689,12 +21835,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetFetchResponseTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -20718,9 +21858,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetFetchResponseTopic WithPartitionsCollection(OffsetFetchResponsePartition[] partitionsCollection)
+			public OffsetFetchResponseTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -20745,6 +21885,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public OffsetFetchResponseTopic WithPartitionsCollections(Func<OffsetFetchResponseTopic, OffsetFetchResponsePartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public OffsetFetchResponsePartition CreateOffsetFetchResponsePartition()
@@ -20809,12 +21955,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetFetchResponsePartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -20838,9 +21978,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetFetchResponsePartition WithCommittedOffset(Int64 committedOffset)
+				public OffsetFetchResponsePartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					CommittedOffset = committedOffset;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -20867,9 +22007,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetFetchResponsePartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
+				public OffsetFetchResponsePartition WithCommittedOffset(Int64 committedOffset)
 				{
-					CommittedLeaderEpoch = committedLeaderEpoch;
+					CommittedOffset = committedOffset;
 					return this;
 				}
 
@@ -20896,9 +22036,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetFetchResponsePartition WithMetadata(String metadata)
+				public OffsetFetchResponsePartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
 				{
-					Metadata = metadata;
+					CommittedLeaderEpoch = committedLeaderEpoch;
 					return this;
 				}
 
@@ -20926,9 +22066,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetFetchResponsePartition WithErrorCode(Int16 errorCode)
+				public OffsetFetchResponsePartition WithMetadata(String metadata)
 				{
-					ErrorCode = errorCode;
+					Metadata = metadata;
 					return this;
 				}
 
@@ -20954,6 +22094,12 @@ namespace Kafka.Protocol
 						_errorCode = value;
 					}
 				}
+
+				public OffsetFetchResponsePartition WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
 			}
 		}
 
@@ -20978,6 +22124,12 @@ namespace Kafka.Protocol
 
 				_errorCode = value;
 			}
+		}
+
+		public OffsetFetchResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
 		}
 	}
 
@@ -21036,6 +22188,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetForLeaderEpochRequest WithTopicsCollections(Func<OffsetForLeaderEpochRequest, OffsetForLeaderTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
+		}
+
 		public OffsetForLeaderTopic CreateOffsetForLeaderTopic()
 		{
 			return new OffsetForLeaderTopic(Version);
@@ -21074,12 +22232,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetForLeaderTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -21103,9 +22255,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetForLeaderTopic WithPartitionsCollection(OffsetForLeaderPartition[] partitionsCollection)
+			public OffsetForLeaderTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -21130,6 +22282,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public OffsetForLeaderTopic WithPartitionsCollections(Func<OffsetForLeaderTopic, OffsetForLeaderPartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public OffsetForLeaderPartition CreateOffsetForLeaderPartition()
@@ -21178,12 +22336,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetForLeaderPartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -21207,9 +22359,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetForLeaderPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
+				public OffsetForLeaderPartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					CurrentLeaderEpoch = currentLeaderEpoch;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -21231,9 +22383,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetForLeaderPartition WithLeaderEpoch(Int32 leaderEpoch)
+				public OffsetForLeaderPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
 				{
-					LeaderEpoch = leaderEpoch;
+					CurrentLeaderEpoch = currentLeaderEpoch;
 					return this;
 				}
 
@@ -21258,6 +22410,12 @@ namespace Kafka.Protocol
 
 						_leaderEpoch = value;
 					}
+				}
+
+				public OffsetForLeaderPartition WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
 				}
 			}
 		}
@@ -21321,6 +22479,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public OffsetForLeaderEpochResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// Each topic we fetched offsets for.
 		/// </summary>
@@ -21342,6 +22506,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public OffsetForLeaderEpochResponse WithTopicsCollections(Func<OffsetForLeaderEpochResponse, OffsetForLeaderTopicResult[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public OffsetForLeaderTopicResult CreateOffsetForLeaderTopicResult()
@@ -21382,12 +22552,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetForLeaderTopicResult WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -21411,9 +22575,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetForLeaderTopicResult WithPartitionsCollection(OffsetForLeaderPartitionResult[] partitionsCollection)
+			public OffsetForLeaderTopicResult WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -21438,6 +22602,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public OffsetForLeaderTopicResult WithPartitionsCollections(Func<OffsetForLeaderTopicResult, OffsetForLeaderPartitionResult[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public OffsetForLeaderPartitionResult CreateOffsetForLeaderPartitionResult()
@@ -21494,12 +22664,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetForLeaderPartitionResult WithErrorCode(Int16 errorCode)
-				{
-					ErrorCode = errorCode;
-					return this;
-				}
-
 				/// <summary>
 				/// The error code 0, or if there was no error.
 				/// </summary>
@@ -21523,9 +22687,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetForLeaderPartitionResult WithPartitionIndex(Int32 partitionIndex)
+				public OffsetForLeaderPartitionResult WithErrorCode(Int16 errorCode)
 				{
-					PartitionIndex = partitionIndex;
+					ErrorCode = errorCode;
 					return this;
 				}
 
@@ -21552,9 +22716,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetForLeaderPartitionResult WithLeaderEpoch(Int32 leaderEpoch)
+				public OffsetForLeaderPartitionResult WithPartitionIndex(Int32 partitionIndex)
 				{
-					LeaderEpoch = leaderEpoch;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -21576,9 +22740,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetForLeaderPartitionResult WithEndOffset(Int64 endOffset)
+				public OffsetForLeaderPartitionResult WithLeaderEpoch(Int32 leaderEpoch)
 				{
-					EndOffset = endOffset;
+					LeaderEpoch = leaderEpoch;
 					return this;
 				}
 
@@ -21603,6 +22767,12 @@ namespace Kafka.Protocol
 
 						_endOffset = value;
 					}
+				}
+
+				public OffsetForLeaderPartitionResult WithEndOffset(Int64 endOffset)
+				{
+					EndOffset = endOffset;
+					return this;
 				}
 			}
 		}
@@ -21688,6 +22858,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ProduceRequest WithTransactionalId(String transactionalId)
+		{
+			TransactionalId = transactionalId;
+			return this;
+		}
+
 		/// <summary>
 		/// The number of acknowledgments the producer requires the leader to have received before considering a request complete. Allowed values: 0 for no acknowledgments, 1 for only the leader and -1 for the full ISR.
 		/// </summary>
@@ -21709,6 +22885,12 @@ namespace Kafka.Protocol
 
 				_acks = value;
 			}
+		}
+
+		public ProduceRequest WithAcks(Int16 acks)
+		{
+			Acks = acks;
+			return this;
 		}
 
 		/// <summary>
@@ -21734,6 +22916,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ProduceRequest WithTimeoutMs(Int32 timeoutMs)
+		{
+			TimeoutMs = timeoutMs;
+			return this;
+		}
+
 		/// <summary>
 		/// Each topic to produce to.
 		/// </summary>
@@ -21755,6 +22943,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public ProduceRequest WithTopicsCollections(Func<ProduceRequest, TopicProduceData[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public TopicProduceData CreateTopicProduceData()
@@ -21795,12 +22989,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TopicProduceData WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -21824,9 +23012,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TopicProduceData WithPartitionsCollection(PartitionProduceData[] partitionsCollection)
+			public TopicProduceData WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -21851,6 +23039,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public TopicProduceData WithPartitionsCollections(Func<TopicProduceData, PartitionProduceData[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public PartitionProduceData CreatePartitionProduceData()
@@ -21891,12 +23085,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionProduceData WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -21920,9 +23108,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionProduceData WithRecords(Bytes records)
+				public PartitionProduceData WithPartitionIndex(Int32 partitionIndex)
 				{
-					Records = records;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -21948,6 +23136,12 @@ namespace Kafka.Protocol
 
 						_records = value;
 					}
+				}
+
+				public PartitionProduceData WithRecords(Bytes records)
+				{
+					Records = records;
+					return this;
 				}
 			}
 		}
@@ -22016,6 +23210,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public ProduceResponse WithResponsesCollections(Func<ProduceResponse, TopicProduceResponse[]> createField)
+		{
+			ResponsesCollection = createField(this);
+			return this;
+		}
+
 		public TopicProduceResponse CreateTopicProduceResponse()
 		{
 			return new TopicProduceResponse(Version);
@@ -22054,12 +23254,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TopicProduceResponse WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name
 			/// </summary>
@@ -22083,9 +23277,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TopicProduceResponse WithPartitionsCollection(PartitionProduceResponse[] partitionsCollection)
+			public TopicProduceResponse WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -22110,6 +23304,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public TopicProduceResponse WithPartitionsCollections(Func<TopicProduceResponse, PartitionProduceResponse[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public PartitionProduceResponse CreatePartitionProduceResponse()
@@ -22174,12 +23374,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionProduceResponse WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -22203,9 +23397,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionProduceResponse WithErrorCode(Int16 errorCode)
+				public PartitionProduceResponse WithPartitionIndex(Int32 partitionIndex)
 				{
-					ErrorCode = errorCode;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -22232,9 +23426,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionProduceResponse WithBaseOffset(Int64 baseOffset)
+				public PartitionProduceResponse WithErrorCode(Int16 errorCode)
 				{
-					BaseOffset = baseOffset;
+					ErrorCode = errorCode;
 					return this;
 				}
 
@@ -22261,9 +23455,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionProduceResponse WithLogAppendTimeMs(Int64 logAppendTimeMs)
+				public PartitionProduceResponse WithBaseOffset(Int64 baseOffset)
 				{
-					LogAppendTimeMs = logAppendTimeMs;
+					BaseOffset = baseOffset;
 					return this;
 				}
 
@@ -22285,9 +23479,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionProduceResponse WithLogStartOffset(Int64 logStartOffset)
+				public PartitionProduceResponse WithLogAppendTimeMs(Int64 logAppendTimeMs)
 				{
-					LogStartOffset = logStartOffset;
+					LogAppendTimeMs = logAppendTimeMs;
 					return this;
 				}
 
@@ -22308,6 +23502,12 @@ namespace Kafka.Protocol
 						_logStartOffset = value;
 					}
 				}
+
+				public PartitionProduceResponse WithLogStartOffset(Int64 logStartOffset)
+				{
+					LogStartOffset = logStartOffset;
+					return this;
+				}
 			}
 		}
 
@@ -22327,6 +23527,12 @@ namespace Kafka.Protocol
 
 				_throttleTimeMs = value;
 			}
+		}
+
+		public ProduceResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
 		}
 	}
 
@@ -22393,6 +23599,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public RenewDelegationTokenRequest WithHmac(Bytes hmac)
+		{
+			Hmac = hmac;
+			return this;
+		}
+
 		/// <summary>
 		/// The renewal time period in milliseconds.
 		/// </summary>
@@ -22414,6 +23626,12 @@ namespace Kafka.Protocol
 
 				_renewPeriodMs = value;
 			}
+		}
+
+		public RenewDelegationTokenRequest WithRenewPeriodMs(Int64 renewPeriodMs)
+		{
+			RenewPeriodMs = renewPeriodMs;
+			return this;
 		}
 	}
 
@@ -22488,6 +23706,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public RenewDelegationTokenResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
 		/// </summary>
@@ -22511,6 +23735,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public RenewDelegationTokenResponse WithExpiryTimestampMs(Int64 expiryTimestampMs)
+		{
+			ExpiryTimestampMs = expiryTimestampMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
 		/// </summary>
@@ -22532,6 +23762,12 @@ namespace Kafka.Protocol
 
 				_throttleTimeMs = value;
 			}
+		}
+
+		public RenewDelegationTokenResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
 		}
 	}
 
@@ -22614,6 +23850,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public RequestHeader WithRequestApiKey(Int16 requestApiKey)
+		{
+			RequestApiKey = requestApiKey;
+			return this;
+		}
+
 		/// <summary>
 		/// The API version of this request.
 		/// </summary>
@@ -22635,6 +23877,12 @@ namespace Kafka.Protocol
 
 				_requestApiVersion = value;
 			}
+		}
+
+		public RequestHeader WithRequestApiVersion(Int16 requestApiVersion)
+		{
+			RequestApiVersion = requestApiVersion;
+			return this;
 		}
 
 		/// <summary>
@@ -22660,6 +23908,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public RequestHeader WithCorrelationId(Int32 correlationId)
+		{
+			CorrelationId = correlationId;
+			return this;
+		}
+
 		/// <summary>
 		/// The client ID string.
 		/// </summary>
@@ -22681,6 +23935,12 @@ namespace Kafka.Protocol
 
 				_clientId = value;
 			}
+		}
+
+		public RequestHeader WithClientId(String clientId)
+		{
+			ClientId = clientId;
+			return this;
 		}
 	}
 
@@ -22738,6 +23998,12 @@ namespace Kafka.Protocol
 				_correlationId = value;
 			}
 		}
+
+		public ResponseHeader WithCorrelationId(Int32 correlationId)
+		{
+			CorrelationId = correlationId;
+			return this;
+		}
 	}
 
 	public class SaslAuthenticateRequest
@@ -22793,6 +24059,12 @@ namespace Kafka.Protocol
 
 				_authBytes = value;
 			}
+		}
+
+		public SaslAuthenticateRequest WithAuthBytes(Bytes authBytes)
+		{
+			AuthBytes = authBytes;
+			return this;
 		}
 	}
 
@@ -22875,6 +24147,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public SaslAuthenticateResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
@@ -22897,6 +24175,12 @@ namespace Kafka.Protocol
 
 				_errorMessage = value;
 			}
+		}
+
+		public SaslAuthenticateResponse WithErrorMessage(String errorMessage)
+		{
+			ErrorMessage = errorMessage;
+			return this;
 		}
 
 		/// <summary>
@@ -22922,6 +24206,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public SaslAuthenticateResponse WithAuthBytes(Bytes authBytes)
+		{
+			AuthBytes = authBytes;
+			return this;
+		}
+
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
 		/// </summary>
@@ -22943,6 +24233,12 @@ namespace Kafka.Protocol
 
 				_sessionLifetimeMs = value;
 			}
+		}
+
+		public SaslAuthenticateResponse WithSessionLifetimeMs(Int64 sessionLifetimeMs)
+		{
+			SessionLifetimeMs = sessionLifetimeMs;
+			return this;
 		}
 	}
 
@@ -22999,6 +24295,12 @@ namespace Kafka.Protocol
 
 				_mechanism = value;
 			}
+		}
+
+		public SaslHandshakeRequest WithMechanism(String mechanism)
+		{
+			Mechanism = mechanism;
+			return this;
 		}
 	}
 
@@ -23065,6 +24367,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public SaslHandshakeResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The mechanisms enabled in the server.
 		/// </summary>
@@ -23086,6 +24394,12 @@ namespace Kafka.Protocol
 
 				_mechanismsCollection = value;
 			}
+		}
+
+		public SaslHandshakeResponse WithMechanismsCollection(String[] mechanismsCollection)
+		{
+			MechanismsCollection = mechanismsCollection;
+			return this;
 		}
 	}
 
@@ -23184,6 +24498,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public StopReplicaRequest WithControllerId(Int32 controllerId)
+		{
+			ControllerId = controllerId;
+			return this;
+		}
+
 		/// <summary>
 		/// The controller epoch.
 		/// </summary>
@@ -23207,6 +24527,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public StopReplicaRequest WithControllerEpoch(Int32 controllerEpoch)
+		{
+			ControllerEpoch = controllerEpoch;
+			return this;
+		}
+
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
@@ -23223,6 +24549,12 @@ namespace Kafka.Protocol
 
 				_brokerEpoch = value;
 			}
+		}
+
+		public StopReplicaRequest WithBrokerEpoch(Int64 brokerEpoch)
+		{
+			BrokerEpoch = brokerEpoch;
+			return this;
 		}
 
 		/// <summary>
@@ -23248,6 +24580,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public StopReplicaRequest WithDeletePartitions(Boolean deletePartitions)
+		{
+			DeletePartitions = deletePartitions;
+			return this;
+		}
+
 		/// <summary>
 		/// The partitions to stop.
 		/// </summary>
@@ -23269,6 +24607,12 @@ namespace Kafka.Protocol
 
 				_partitionsV0Collection = value;
 			}
+		}
+
+		public StopReplicaRequest WithPartitionsV0Collections(Func<StopReplicaRequest, StopReplicaRequestPartitionV0[]> createField)
+		{
+			PartitionsV0Collection = createField(this);
+			return this;
 		}
 
 		public StopReplicaRequestPartitionV0 CreateStopReplicaRequestPartitionV0()
@@ -23309,12 +24653,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public StopReplicaRequestPartitionV0 WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -23338,9 +24676,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public StopReplicaRequestPartitionV0 WithPartitionIndex(Int32 partitionIndex)
+			public StopReplicaRequestPartitionV0 WithTopicName(String topicName)
 			{
-				PartitionIndex = partitionIndex;
+				TopicName = topicName;
 				return this;
 			}
 
@@ -23366,6 +24704,12 @@ namespace Kafka.Protocol
 					_partitionIndex = value;
 				}
 			}
+
+			public StopReplicaRequestPartitionV0 WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
+			}
 		}
 
 		/// <summary>
@@ -23389,6 +24733,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public StopReplicaRequest WithTopicsCollections(Func<StopReplicaRequest, StopReplicaRequestTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public StopReplicaRequestTopic CreateStopReplicaRequestTopic()
@@ -23429,12 +24779,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public StopReplicaRequestTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -23458,9 +24802,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public StopReplicaRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+			public StopReplicaRequestTopic WithName(String name)
 			{
-				PartitionIndexesCollection = partitionIndexesCollection;
+				Name = name;
 				return this;
 			}
 
@@ -23485,6 +24829,12 @@ namespace Kafka.Protocol
 
 					_partitionIndexesCollection = value;
 				}
+			}
+
+			public StopReplicaRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+			{
+				PartitionIndexesCollection = partitionIndexesCollection;
+				return this;
 			}
 		}
 	}
@@ -23552,6 +24902,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public StopReplicaResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The responses for each partition.
 		/// </summary>
@@ -23573,6 +24929,12 @@ namespace Kafka.Protocol
 
 				_partitionsCollection = value;
 			}
+		}
+
+		public StopReplicaResponse WithPartitionsCollections(Func<StopReplicaResponse, StopReplicaResponsePartition[]> createField)
+		{
+			PartitionsCollection = createField(this);
+			return this;
 		}
 
 		public StopReplicaResponsePartition CreateStopReplicaResponsePartition()
@@ -23621,12 +24983,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public StopReplicaResponsePartition WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -23650,9 +25006,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public StopReplicaResponsePartition WithPartitionIndex(Int32 partitionIndex)
+			public StopReplicaResponsePartition WithTopicName(String topicName)
 			{
-				PartitionIndex = partitionIndex;
+				TopicName = topicName;
 				return this;
 			}
 
@@ -23679,9 +25035,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public StopReplicaResponsePartition WithErrorCode(Int16 errorCode)
+			public StopReplicaResponsePartition WithPartitionIndex(Int32 partitionIndex)
 			{
-				ErrorCode = errorCode;
+				PartitionIndex = partitionIndex;
 				return this;
 			}
 
@@ -23706,6 +25062,12 @@ namespace Kafka.Protocol
 
 					_errorCode = value;
 				}
+			}
+
+			public StopReplicaResponsePartition WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
 			}
 		}
 	}
@@ -23789,6 +25151,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public SyncGroupRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
@@ -23810,6 +25178,12 @@ namespace Kafka.Protocol
 
 				_generationId = value;
 			}
+		}
+
+		public SyncGroupRequest WithGenerationId(Int32 generationId)
+		{
+			GenerationId = generationId;
+			return this;
 		}
 
 		/// <summary>
@@ -23835,6 +25209,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public SyncGroupRequest WithMemberId(String memberId)
+		{
+			MemberId = memberId;
+			return this;
+		}
+
 		/// <summary>
 		/// Each assignment.
 		/// </summary>
@@ -23856,6 +25236,12 @@ namespace Kafka.Protocol
 
 				_assignmentsCollection = value;
 			}
+		}
+
+		public SyncGroupRequest WithAssignmentsCollections(Func<SyncGroupRequest, SyncGroupRequestAssignment[]> createField)
+		{
+			AssignmentsCollection = createField(this);
+			return this;
 		}
 
 		public SyncGroupRequestAssignment CreateSyncGroupRequestAssignment()
@@ -23896,12 +25282,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public SyncGroupRequestAssignment WithMemberId(String memberId)
-			{
-				MemberId = memberId;
-				return this;
-			}
-
 			/// <summary>
 			/// The ID of the member to assign.
 			/// </summary>
@@ -23925,9 +25305,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public SyncGroupRequestAssignment WithAssignment(Bytes assignment)
+			public SyncGroupRequestAssignment WithMemberId(String memberId)
 			{
-				Assignment = assignment;
+				MemberId = memberId;
 				return this;
 			}
 
@@ -23952,6 +25332,12 @@ namespace Kafka.Protocol
 
 					_assignment = value;
 				}
+			}
+
+			public SyncGroupRequestAssignment WithAssignment(Bytes assignment)
+			{
+				Assignment = assignment;
+				return this;
 			}
 		}
 	}
@@ -24022,6 +25408,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public SyncGroupResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The error code, or 0 if there was no error.
 		/// </summary>
@@ -24045,6 +25437,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public SyncGroupResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
 		/// <summary>
 		/// The member assignment.
 		/// </summary>
@@ -24066,6 +25464,12 @@ namespace Kafka.Protocol
 
 				_assignment = value;
 			}
+		}
+
+		public SyncGroupResponse WithAssignment(Bytes assignment)
+		{
+			Assignment = assignment;
+			return this;
 		}
 	}
 
@@ -24156,6 +25560,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TxnOffsetCommitRequest WithTransactionalId(String transactionalId)
+		{
+			TransactionalId = transactionalId;
+			return this;
+		}
+
 		/// <summary>
 		/// The ID of the group.
 		/// </summary>
@@ -24177,6 +25587,12 @@ namespace Kafka.Protocol
 
 				_groupId = value;
 			}
+		}
+
+		public TxnOffsetCommitRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
 		}
 
 		/// <summary>
@@ -24202,6 +25618,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TxnOffsetCommitRequest WithProducerId(Int64 producerId)
+		{
+			ProducerId = producerId;
+			return this;
+		}
+
 		/// <summary>
 		/// The current epoch associated with the producer ID.
 		/// </summary>
@@ -24225,6 +25647,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TxnOffsetCommitRequest WithProducerEpoch(Int16 producerEpoch)
+		{
+			ProducerEpoch = producerEpoch;
+			return this;
+		}
+
 		/// <summary>
 		/// Each topic that we want to committ offsets for.
 		/// </summary>
@@ -24246,6 +25674,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public TxnOffsetCommitRequest WithTopicsCollections(Func<TxnOffsetCommitRequest, TxnOffsetCommitRequestTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public TxnOffsetCommitRequestTopic CreateTxnOffsetCommitRequestTopic()
@@ -24286,12 +25720,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TxnOffsetCommitRequestTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -24315,9 +25743,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TxnOffsetCommitRequestTopic WithPartitionsCollection(TxnOffsetCommitRequestPartition[] partitionsCollection)
+			public TxnOffsetCommitRequestTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -24342,6 +25770,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public TxnOffsetCommitRequestTopic WithPartitionsCollections(Func<TxnOffsetCommitRequestTopic, TxnOffsetCommitRequestPartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public TxnOffsetCommitRequestPartition CreateTxnOffsetCommitRequestPartition()
@@ -24398,12 +25832,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public TxnOffsetCommitRequestPartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The index of the partition within the topic.
 				/// </summary>
@@ -24427,9 +25855,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public TxnOffsetCommitRequestPartition WithCommittedOffset(Int64 committedOffset)
+				public TxnOffsetCommitRequestPartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					CommittedOffset = committedOffset;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -24456,9 +25884,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public TxnOffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
+				public TxnOffsetCommitRequestPartition WithCommittedOffset(Int64 committedOffset)
 				{
-					CommittedLeaderEpoch = committedLeaderEpoch;
+					CommittedOffset = committedOffset;
 					return this;
 				}
 
@@ -24480,9 +25908,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public TxnOffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
+				public TxnOffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
 				{
-					CommittedMetadata = committedMetadata;
+					CommittedLeaderEpoch = committedLeaderEpoch;
 					return this;
 				}
 
@@ -24508,6 +25936,12 @@ namespace Kafka.Protocol
 
 						_committedMetadata = value;
 					}
+				}
+
+				public TxnOffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
+				{
+					CommittedMetadata = committedMetadata;
+					return this;
 				}
 			}
 		}
@@ -24576,6 +26010,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public TxnOffsetCommitResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
@@ -24597,6 +26037,12 @@ namespace Kafka.Protocol
 
 				_topicsCollection = value;
 			}
+		}
+
+		public TxnOffsetCommitResponse WithTopicsCollections(Func<TxnOffsetCommitResponse, TxnOffsetCommitResponseTopic[]> createField)
+		{
+			TopicsCollection = createField(this);
+			return this;
 		}
 
 		public TxnOffsetCommitResponseTopic CreateTxnOffsetCommitResponseTopic()
@@ -24637,12 +26083,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TxnOffsetCommitResponseTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -24666,9 +26106,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TxnOffsetCommitResponseTopic WithPartitionsCollection(TxnOffsetCommitResponsePartition[] partitionsCollection)
+			public TxnOffsetCommitResponseTopic WithName(String name)
 			{
-				PartitionsCollection = partitionsCollection;
+				Name = name;
 				return this;
 			}
 
@@ -24693,6 +26133,12 @@ namespace Kafka.Protocol
 
 					_partitionsCollection = value;
 				}
+			}
+
+			public TxnOffsetCommitResponseTopic WithPartitionsCollections(Func<TxnOffsetCommitResponseTopic, TxnOffsetCommitResponsePartition[]> createField)
+			{
+				PartitionsCollection = createField(this);
+				return this;
 			}
 
 			public TxnOffsetCommitResponsePartition CreateTxnOffsetCommitResponsePartition()
@@ -24733,12 +26179,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public TxnOffsetCommitResponsePartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partitition index.
 				/// </summary>
@@ -24762,9 +26202,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public TxnOffsetCommitResponsePartition WithErrorCode(Int16 errorCode)
+				public TxnOffsetCommitResponsePartition WithPartitionIndex(Int32 partitionIndex)
 				{
-					ErrorCode = errorCode;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -24789,6 +26229,12 @@ namespace Kafka.Protocol
 
 						_errorCode = value;
 					}
+				}
+
+				public TxnOffsetCommitResponsePartition WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
 				}
 			}
 		}
@@ -24889,6 +26335,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public UpdateMetadataRequest WithControllerId(Int32 controllerId)
+		{
+			ControllerId = controllerId;
+			return this;
+		}
+
 		/// <summary>
 		/// The controller epoch.
 		/// </summary>
@@ -24912,6 +26364,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public UpdateMetadataRequest WithControllerEpoch(Int32 controllerEpoch)
+		{
+			ControllerEpoch = controllerEpoch;
+			return this;
+		}
+
 		/// <summary>
 		/// The broker epoch.
 		/// </summary>
@@ -24928,6 +26386,12 @@ namespace Kafka.Protocol
 
 				_brokerEpoch = value;
 			}
+		}
+
+		public UpdateMetadataRequest WithBrokerEpoch(Int64 brokerEpoch)
+		{
+			BrokerEpoch = brokerEpoch;
+			return this;
 		}
 
 		/// <summary>
@@ -24951,6 +26415,12 @@ namespace Kafka.Protocol
 
 				_topicStatesCollection = value;
 			}
+		}
+
+		public UpdateMetadataRequest WithTopicStatesCollections(Func<UpdateMetadataRequest, UpdateMetadataRequestTopicState[]> createField)
+		{
+			TopicStatesCollection = createField(this);
+			return this;
 		}
 
 		public UpdateMetadataRequestTopicState CreateUpdateMetadataRequestTopicState()
@@ -24991,12 +26461,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestTopicState WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -25020,9 +26484,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestTopicState WithPartitionStatesCollection(UpdateMetadataPartitionState[] partitionStatesCollection)
+			public UpdateMetadataRequestTopicState WithTopicName(String topicName)
 			{
-				PartitionStatesCollection = partitionStatesCollection;
+				TopicName = topicName;
 				return this;
 			}
 
@@ -25047,6 +26511,12 @@ namespace Kafka.Protocol
 
 					_partitionStatesCollection = value;
 				}
+			}
+
+			public UpdateMetadataRequestTopicState WithPartitionStatesCollections(Func<UpdateMetadataRequestTopicState, UpdateMetadataPartitionState[]> createField)
+			{
+				PartitionStatesCollection = createField(this);
+				return this;
 			}
 
 			public UpdateMetadataPartitionState CreateUpdateMetadataPartitionState()
@@ -25135,12 +26605,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataPartitionState WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
 				/// <summary>
 				/// The partition index.
 				/// </summary>
@@ -25164,9 +26628,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataPartitionState WithControllerEpoch(Int32 controllerEpoch)
+				public UpdateMetadataPartitionState WithPartitionIndex(Int32 partitionIndex)
 				{
-					ControllerEpoch = controllerEpoch;
+					PartitionIndex = partitionIndex;
 					return this;
 				}
 
@@ -25193,9 +26657,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataPartitionState WithLeader(Int32 leader)
+				public UpdateMetadataPartitionState WithControllerEpoch(Int32 controllerEpoch)
 				{
-					Leader = leader;
+					ControllerEpoch = controllerEpoch;
 					return this;
 				}
 
@@ -25222,9 +26686,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataPartitionState WithLeaderEpoch(Int32 leaderEpoch)
+				public UpdateMetadataPartitionState WithLeader(Int32 leader)
 				{
-					LeaderEpoch = leaderEpoch;
+					Leader = leader;
 					return this;
 				}
 
@@ -25251,9 +26715,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataPartitionState WithIsrCollection(Int32[] isrCollection)
+				public UpdateMetadataPartitionState WithLeaderEpoch(Int32 leaderEpoch)
 				{
-					IsrCollection = isrCollection;
+					LeaderEpoch = leaderEpoch;
 					return this;
 				}
 
@@ -25280,9 +26744,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataPartitionState WithZkVersion(Int32 zkVersion)
+				public UpdateMetadataPartitionState WithIsrCollection(Int32[] isrCollection)
 				{
-					ZkVersion = zkVersion;
+					IsrCollection = isrCollection;
 					return this;
 				}
 
@@ -25309,9 +26773,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataPartitionState WithReplicasCollection(Int32[] replicasCollection)
+				public UpdateMetadataPartitionState WithZkVersion(Int32 zkVersion)
 				{
-					ReplicasCollection = replicasCollection;
+					ZkVersion = zkVersion;
 					return this;
 				}
 
@@ -25338,9 +26802,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataPartitionState WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+				public UpdateMetadataPartitionState WithReplicasCollection(Int32[] replicasCollection)
 				{
-					OfflineReplicasCollection = offlineReplicasCollection;
+					ReplicasCollection = replicasCollection;
 					return this;
 				}
 
@@ -25366,6 +26830,12 @@ namespace Kafka.Protocol
 						_offlineReplicasCollection = value;
 					}
 				}
+
+				public UpdateMetadataPartitionState WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+				{
+					OfflineReplicasCollection = offlineReplicasCollection;
+					return this;
+				}
 			}
 		}
 
@@ -25390,6 +26860,12 @@ namespace Kafka.Protocol
 
 				_partitionStatesV0Collection = value;
 			}
+		}
+
+		public UpdateMetadataRequest WithPartitionStatesV0Collections(Func<UpdateMetadataRequest, UpdateMetadataRequestPartitionStateV0[]> createField)
+		{
+			PartitionStatesV0Collection = createField(this);
+			return this;
 		}
 
 		public UpdateMetadataRequestPartitionStateV0 CreateUpdateMetadataRequestPartitionStateV0()
@@ -25486,12 +26962,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
 			/// <summary>
 			/// The topic name.
 			/// </summary>
@@ -25515,9 +26985,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithPartitionIndex(Int32 partitionIndex)
+			public UpdateMetadataRequestPartitionStateV0 WithTopicName(String topicName)
 			{
-				PartitionIndex = partitionIndex;
+				TopicName = topicName;
 				return this;
 			}
 
@@ -25544,9 +27014,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithControllerEpoch(Int32 controllerEpoch)
+			public UpdateMetadataRequestPartitionStateV0 WithPartitionIndex(Int32 partitionIndex)
 			{
-				ControllerEpoch = controllerEpoch;
+				PartitionIndex = partitionIndex;
 				return this;
 			}
 
@@ -25573,9 +27043,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithLeader(Int32 leader)
+			public UpdateMetadataRequestPartitionStateV0 WithControllerEpoch(Int32 controllerEpoch)
 			{
-				Leader = leader;
+				ControllerEpoch = controllerEpoch;
 				return this;
 			}
 
@@ -25602,9 +27072,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithLeaderEpoch(Int32 leaderEpoch)
+			public UpdateMetadataRequestPartitionStateV0 WithLeader(Int32 leader)
 			{
-				LeaderEpoch = leaderEpoch;
+				Leader = leader;
 				return this;
 			}
 
@@ -25631,9 +27101,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithIsrCollection(Int32[] isrCollection)
+			public UpdateMetadataRequestPartitionStateV0 WithLeaderEpoch(Int32 leaderEpoch)
 			{
-				IsrCollection = isrCollection;
+				LeaderEpoch = leaderEpoch;
 				return this;
 			}
 
@@ -25660,9 +27130,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithZkVersion(Int32 zkVersion)
+			public UpdateMetadataRequestPartitionStateV0 WithIsrCollection(Int32[] isrCollection)
 			{
-				ZkVersion = zkVersion;
+				IsrCollection = isrCollection;
 				return this;
 			}
 
@@ -25689,9 +27159,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithReplicasCollection(Int32[] replicasCollection)
+			public UpdateMetadataRequestPartitionStateV0 WithZkVersion(Int32 zkVersion)
 			{
-				ReplicasCollection = replicasCollection;
+				ZkVersion = zkVersion;
 				return this;
 			}
 
@@ -25718,9 +27188,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestPartitionStateV0 WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+			public UpdateMetadataRequestPartitionStateV0 WithReplicasCollection(Int32[] replicasCollection)
 			{
-				OfflineReplicasCollection = offlineReplicasCollection;
+				ReplicasCollection = replicasCollection;
 				return this;
 			}
 
@@ -25746,6 +27216,12 @@ namespace Kafka.Protocol
 					_offlineReplicasCollection = value;
 				}
 			}
+
+			public UpdateMetadataRequestPartitionStateV0 WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+			{
+				OfflineReplicasCollection = offlineReplicasCollection;
+				return this;
+			}
 		}
 
 		private UpdateMetadataRequestBroker[] _brokersCollection = System.Array.Empty<UpdateMetadataRequestBroker>();
@@ -25766,6 +27242,12 @@ namespace Kafka.Protocol
 
 				_brokersCollection = value;
 			}
+		}
+
+		public UpdateMetadataRequest WithBrokersCollections(Func<UpdateMetadataRequest, UpdateMetadataRequestBroker[]> createField)
+		{
+			BrokersCollection = createField(this);
+			return this;
 		}
 
 		public UpdateMetadataRequestBroker CreateUpdateMetadataRequestBroker()
@@ -25830,12 +27312,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestBroker WithId(Int32 id)
-			{
-				Id = id;
-				return this;
-			}
-
 			private Int32 _id = Int32.Default;
 			public Int32 Id 
 			{
@@ -25856,9 +27332,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestBroker WithV0Host(String v0Host)
+			public UpdateMetadataRequestBroker WithId(Int32 id)
 			{
-				V0Host = v0Host;
+				Id = id;
 				return this;
 			}
 
@@ -25880,9 +27356,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestBroker WithV0Port(Int32 v0Port)
+			public UpdateMetadataRequestBroker WithV0Host(String v0Host)
 			{
-				V0Port = v0Port;
+				V0Host = v0Host;
 				return this;
 			}
 
@@ -25904,9 +27380,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestBroker WithEndpointsCollection(UpdateMetadataRequestEndpoint[] endpointsCollection)
+			public UpdateMetadataRequestBroker WithV0Port(Int32 v0Port)
 			{
-				EndpointsCollection = endpointsCollection;
+				V0Port = v0Port;
 				return this;
 			}
 
@@ -25931,6 +27407,12 @@ namespace Kafka.Protocol
 
 					_endpointsCollection = value;
 				}
+			}
+
+			public UpdateMetadataRequestBroker WithEndpointsCollections(Func<UpdateMetadataRequestBroker, UpdateMetadataRequestEndpoint[]> createField)
+			{
+				EndpointsCollection = createField(this);
+				return this;
 			}
 
 			public UpdateMetadataRequestEndpoint CreateUpdateMetadataRequestEndpoint()
@@ -25987,12 +27469,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataRequestEndpoint WithPort(Int32 port)
-				{
-					Port = port;
-					return this;
-				}
-
 				/// <summary>
 				/// The port of this endpoint
 				/// </summary>
@@ -26016,9 +27492,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataRequestEndpoint WithHost(String host)
+				public UpdateMetadataRequestEndpoint WithPort(Int32 port)
 				{
-					Host = host;
+					Port = port;
 					return this;
 				}
 
@@ -26045,9 +27521,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataRequestEndpoint WithListener(String listener)
+				public UpdateMetadataRequestEndpoint WithHost(String host)
 				{
-					Listener = listener;
+					Host = host;
 					return this;
 				}
 
@@ -26074,9 +27550,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public UpdateMetadataRequestEndpoint WithSecurityProtocol(Int16 securityProtocol)
+				public UpdateMetadataRequestEndpoint WithListener(String listener)
 				{
-					SecurityProtocol = securityProtocol;
+					Listener = listener;
 					return this;
 				}
 
@@ -26102,12 +27578,12 @@ namespace Kafka.Protocol
 						_securityProtocol = value;
 					}
 				}
-			}
 
-			public UpdateMetadataRequestBroker WithRack(String rack)
-			{
-				Rack = rack;
-				return this;
+				public UpdateMetadataRequestEndpoint WithSecurityProtocol(Int16 securityProtocol)
+				{
+					SecurityProtocol = securityProtocol;
+					return this;
+				}
 			}
 
 			/// <summary>
@@ -26127,6 +27603,12 @@ namespace Kafka.Protocol
 
 					_rack = value;
 				}
+			}
+
+			public UpdateMetadataRequestBroker WithRack(String rack)
+			{
+				Rack = rack;
+				return this;
 			}
 		}
 	}
@@ -26185,6 +27667,12 @@ namespace Kafka.Protocol
 				_errorCode = value;
 			}
 		}
+
+		public UpdateMetadataResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
 	}
 
 	public class WriteTxnMarkersRequest
@@ -26240,6 +27728,12 @@ namespace Kafka.Protocol
 
 				_markersCollection = value;
 			}
+		}
+
+		public WriteTxnMarkersRequest WithMarkersCollections(Func<WriteTxnMarkersRequest, WritableTxnMarker[]> createField)
+		{
+			MarkersCollection = createField(this);
+			return this;
 		}
 
 		public WritableTxnMarker CreateWritableTxnMarker()
@@ -26304,12 +27798,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public WritableTxnMarker WithProducerId(Int64 producerId)
-			{
-				ProducerId = producerId;
-				return this;
-			}
-
 			/// <summary>
 			/// The current producer ID.
 			/// </summary>
@@ -26333,9 +27821,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public WritableTxnMarker WithProducerEpoch(Int16 producerEpoch)
+			public WritableTxnMarker WithProducerId(Int64 producerId)
 			{
-				ProducerEpoch = producerEpoch;
+				ProducerId = producerId;
 				return this;
 			}
 
@@ -26362,9 +27850,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public WritableTxnMarker WithTransactionResult(Boolean transactionResult)
+			public WritableTxnMarker WithProducerEpoch(Int16 producerEpoch)
 			{
-				TransactionResult = transactionResult;
+				ProducerEpoch = producerEpoch;
 				return this;
 			}
 
@@ -26391,9 +27879,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public WritableTxnMarker WithTopicsCollection(WritableTxnMarkerTopic[] topicsCollection)
+			public WritableTxnMarker WithTransactionResult(Boolean transactionResult)
 			{
-				TopicsCollection = topicsCollection;
+				TransactionResult = transactionResult;
 				return this;
 			}
 
@@ -26418,6 +27906,12 @@ namespace Kafka.Protocol
 
 					_topicsCollection = value;
 				}
+			}
+
+			public WritableTxnMarker WithTopicsCollections(Func<WritableTxnMarker, WritableTxnMarkerTopic[]> createField)
+			{
+				TopicsCollection = createField(this);
+				return this;
 			}
 
 			public WritableTxnMarkerTopic CreateWritableTxnMarkerTopic()
@@ -26458,12 +27952,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public WritableTxnMarkerTopic WithName(String name)
-				{
-					Name = name;
-					return this;
-				}
-
 				/// <summary>
 				/// The topic name.
 				/// </summary>
@@ -26487,9 +27975,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public WritableTxnMarkerTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+				public WritableTxnMarkerTopic WithName(String name)
 				{
-					PartitionIndexesCollection = partitionIndexesCollection;
+					Name = name;
 					return this;
 				}
 
@@ -26515,12 +28003,12 @@ namespace Kafka.Protocol
 						_partitionIndexesCollection = value;
 					}
 				}
-			}
 
-			public WritableTxnMarker WithCoordinatorEpoch(Int32 coordinatorEpoch)
-			{
-				CoordinatorEpoch = coordinatorEpoch;
-				return this;
+				public WritableTxnMarkerTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
+				{
+					PartitionIndexesCollection = partitionIndexesCollection;
+					return this;
+				}
 			}
 
 			/// <summary>
@@ -26544,6 +28032,12 @@ namespace Kafka.Protocol
 
 					_coordinatorEpoch = value;
 				}
+			}
+
+			public WritableTxnMarker WithCoordinatorEpoch(Int32 coordinatorEpoch)
+			{
+				CoordinatorEpoch = coordinatorEpoch;
+				return this;
 			}
 		}
 	}
@@ -26603,6 +28097,12 @@ namespace Kafka.Protocol
 			}
 		}
 
+		public WriteTxnMarkersResponse WithMarkersCollections(Func<WriteTxnMarkersResponse, WritableTxnMarkerResult[]> createField)
+		{
+			MarkersCollection = createField(this);
+			return this;
+		}
+
 		public WritableTxnMarkerResult CreateWritableTxnMarkerResult()
 		{
 			return new WritableTxnMarkerResult(Version);
@@ -26641,12 +28141,6 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public WritableTxnMarkerResult WithProducerId(Int64 producerId)
-			{
-				ProducerId = producerId;
-				return this;
-			}
-
 			/// <summary>
 			/// The current producer ID in use by the transactional ID.
 			/// </summary>
@@ -26670,9 +28164,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public WritableTxnMarkerResult WithTopicsCollection(WritableTxnMarkerTopicResult[] topicsCollection)
+			public WritableTxnMarkerResult WithProducerId(Int64 producerId)
 			{
-				TopicsCollection = topicsCollection;
+				ProducerId = producerId;
 				return this;
 			}
 
@@ -26697,6 +28191,12 @@ namespace Kafka.Protocol
 
 					_topicsCollection = value;
 				}
+			}
+
+			public WritableTxnMarkerResult WithTopicsCollections(Func<WritableTxnMarkerResult, WritableTxnMarkerTopicResult[]> createField)
+			{
+				TopicsCollection = createField(this);
+				return this;
 			}
 
 			public WritableTxnMarkerTopicResult CreateWritableTxnMarkerTopicResult()
@@ -26737,12 +28237,6 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public WritableTxnMarkerTopicResult WithName(String name)
-				{
-					Name = name;
-					return this;
-				}
-
 				/// <summary>
 				/// The topic name.
 				/// </summary>
@@ -26766,9 +28260,9 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public WritableTxnMarkerTopicResult WithPartitionsCollection(WritableTxnMarkerPartitionResult[] partitionsCollection)
+				public WritableTxnMarkerTopicResult WithName(String name)
 				{
-					PartitionsCollection = partitionsCollection;
+					Name = name;
 					return this;
 				}
 
@@ -26793,6 +28287,12 @@ namespace Kafka.Protocol
 
 						_partitionsCollection = value;
 					}
+				}
+
+				public WritableTxnMarkerTopicResult WithPartitionsCollections(Func<WritableTxnMarkerTopicResult, WritableTxnMarkerPartitionResult[]> createField)
+				{
+					PartitionsCollection = createField(this);
+					return this;
 				}
 
 				public WritableTxnMarkerPartitionResult CreateWritableTxnMarkerPartitionResult()
@@ -26833,12 +28333,6 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public WritableTxnMarkerPartitionResult WithPartitionIndex(Int32 partitionIndex)
-					{
-						PartitionIndex = partitionIndex;
-						return this;
-					}
-
 					/// <summary>
 					/// The partition index.
 					/// </summary>
@@ -26862,9 +28356,9 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public WritableTxnMarkerPartitionResult WithErrorCode(Int16 errorCode)
+					public WritableTxnMarkerPartitionResult WithPartitionIndex(Int32 partitionIndex)
 					{
-						ErrorCode = errorCode;
+						PartitionIndex = partitionIndex;
 						return this;
 					}
 
@@ -26889,6 +28383,12 @@ namespace Kafka.Protocol
 
 							_errorCode = value;
 						}
+					}
+
+					public WritableTxnMarkerPartitionResult WithErrorCode(Int16 errorCode)
+					{
+						ErrorCode = errorCode;
+						return this;
 					}
 				}
 			}
