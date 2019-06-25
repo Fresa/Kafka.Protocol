@@ -333,16 +333,26 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field, strin
 			#>return this;<#
 		}); _(2);
 	}
+	else if (field.IsArray())
+	{
+		#>public <#= className #> With<#= fieldName #>(params Func<<#= fieldTypeNameWithoutArrayCharacters #>, <#= fieldTypeNameWithoutArrayCharacters #>>[] createFields)<# Block(() => 
+		{
+			#><#= fieldName #> = createFields<# _();
+			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# _();
+			#>	.ToArray();<# _();
+			#>return this;<#
+		}); _(2);
+	}
 	else 
 	{
-		#>public <#= className #> With<#= fieldName #>s(Func<<#= className #>, <#= fieldTypeNameWithoutArrayCharacters #>[]> createField)<# Block(() => 
+		#>public <#= className #> With<#= fieldName #>s(Func<<#= fieldTypeName #>, <#= fieldTypeName #>> createField)<# Block(() => 
 		{
-			#><#= fieldName #> = createField(this);<# _();
+			#><#= fieldName #> = createField(Create<#= fieldTypeName #>());<# _();
 			#>return this;<#
 		}); _(2);
 	}
 	
-	#>public <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>()<# Block(() => 
+	#>internal <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>()<# Block(() => 
 	{
 		#>return new <#= fieldTypeNameWithoutArrayCharacters #>(Version);<#
 	}); _(2);

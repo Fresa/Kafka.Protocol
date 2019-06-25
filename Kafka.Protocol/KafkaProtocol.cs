@@ -2511,7 +2511,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public AddPartitionsToTxnTopic CreateAddPartitionsToTxnTopic()
+		internal AddPartitionsToTxnTopic CreateAddPartitionsToTxnTopic()
 		{
 			return new AddPartitionsToTxnTopic(Version);
 		}
@@ -2709,7 +2709,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public AddPartitionsToTxnTopicResult CreateAddPartitionsToTxnTopicResult()
+		internal AddPartitionsToTxnTopicResult CreateAddPartitionsToTxnTopicResult()
 		{
 			return new AddPartitionsToTxnTopicResult(Version);
 		}
@@ -2807,7 +2807,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			public AddPartitionsToTxnPartitionResult CreateAddPartitionsToTxnPartitionResult()
+			internal AddPartitionsToTxnPartitionResult CreateAddPartitionsToTxnPartitionResult()
 			{
 				return new AddPartitionsToTxnPartitionResult(Version);
 			}
@@ -2977,7 +2977,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public AlterConfigsResource CreateAlterConfigsResource()
+		internal AlterConfigsResource CreateAlterConfigsResource()
 		{
 			return new AlterConfigsResource(Version);
 		}
@@ -3112,7 +3112,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			public AlterableConfig CreateAlterableConfig()
+			internal AlterableConfig CreateAlterableConfig()
 			{
 				return new AlterableConfig(Version);
 			}
@@ -3333,13 +3333,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public AlterConfigsResponse WithResourcesCollections(Func<AlterConfigsResponse, AlterConfigsResourceResponse[]> createField)
+		public AlterConfigsResponse WithResourcesCollection(params Func<AlterConfigsResourceResponse, AlterConfigsResourceResponse>[] createFields)
 		{
-			ResourcesCollection = createField(this);
+			ResourcesCollection = createFields
+				.Select(createField => createField(CreateAlterConfigsResourceResponse()))
+				.ToArray();
 			return this;
 		}
 
-		public AlterConfigsResourceResponse CreateAlterConfigsResourceResponse()
+		internal AlterConfigsResourceResponse CreateAlterConfigsResourceResponse()
 		{
 			return new AlterConfigsResourceResponse(Version);
 		}
@@ -3575,7 +3577,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public AlterReplicaLogDir CreateAlterReplicaLogDir()
+		internal AlterReplicaLogDir CreateAlterReplicaLogDir()
 		{
 			return new AlterReplicaLogDir(Version);
 		}
@@ -3673,7 +3675,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			public AlterReplicaLogDirTopic CreateAlterReplicaLogDirTopic()
+			internal AlterReplicaLogDirTopic CreateAlterReplicaLogDirTopic()
 			{
 				return new AlterReplicaLogDirTopic(Version);
 			}
@@ -3864,13 +3866,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public AlterReplicaLogDirsResponse WithResultsCollections(Func<AlterReplicaLogDirsResponse, AlterReplicaLogDirTopicResult[]> createField)
+		public AlterReplicaLogDirsResponse WithResultsCollection(params Func<AlterReplicaLogDirTopicResult, AlterReplicaLogDirTopicResult>[] createFields)
 		{
-			ResultsCollection = createField(this);
+			ResultsCollection = createFields
+				.Select(createField => createField(CreateAlterReplicaLogDirTopicResult()))
+				.ToArray();
 			return this;
 		}
 
-		public AlterReplicaLogDirTopicResult CreateAlterReplicaLogDirTopicResult()
+		internal AlterReplicaLogDirTopicResult CreateAlterReplicaLogDirTopicResult()
 		{
 			return new AlterReplicaLogDirTopicResult(Version);
 		}
@@ -3960,13 +3964,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterReplicaLogDirTopicResult WithPartitionsCollections(Func<AlterReplicaLogDirTopicResult, AlterReplicaLogDirPartitionResult[]> createField)
+			public AlterReplicaLogDirTopicResult WithPartitionsCollection(params Func<AlterReplicaLogDirPartitionResult, AlterReplicaLogDirPartitionResult>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateAlterReplicaLogDirPartitionResult()))
+					.ToArray();
 				return this;
 			}
 
-			public AlterReplicaLogDirPartitionResult CreateAlterReplicaLogDirPartitionResult()
+			internal AlterReplicaLogDirPartitionResult CreateAlterReplicaLogDirPartitionResult()
 			{
 				return new AlterReplicaLogDirPartitionResult(Version);
 			}
@@ -4202,7 +4208,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public ApiVersionsResponseKey CreateApiVersionsResponseKey()
+		internal ApiVersionsResponseKey CreateApiVersionsResponseKey()
 		{
 			return new ApiVersionsResponseKey(Version);
 		}
@@ -4555,7 +4561,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public RemainingPartition CreateRemainingPartition()
+		internal RemainingPartition CreateRemainingPartition()
 		{
 			return new RemainingPartition(Version);
 		}
@@ -4708,13 +4714,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public CreateAclsRequest WithCreationsCollections(Func<CreateAclsRequest, CreatableAcl[]> createField)
+		public CreateAclsRequest WithCreationsCollection(params Func<CreatableAcl, CreatableAcl>[] createFields)
 		{
-			CreationsCollection = createField(this);
+			CreationsCollection = createFields
+				.Select(createField => createField(CreateCreatableAcl()))
+				.ToArray();
 			return this;
 		}
 
-		public CreatableAcl CreateCreatableAcl()
+		internal CreatableAcl CreateCreatableAcl()
 		{
 			return new CreatableAcl(Version);
 		}
@@ -5089,13 +5097,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public CreateAclsResponse WithResultsCollections(Func<CreateAclsResponse, CreatableAclResult[]> createField)
+		public CreateAclsResponse WithResultsCollection(params Func<CreatableAclResult, CreatableAclResult>[] createFields)
 		{
-			ResultsCollection = createField(this);
+			ResultsCollection = createFields
+				.Select(createField => createField(CreateCreatableAclResult()))
+				.ToArray();
 			return this;
 		}
 
-		public CreatableAclResult CreateCreatableAclResult()
+		internal CreatableAclResult CreateCreatableAclResult()
 		{
 			return new CreatableAclResult(Version);
 		}
@@ -5257,13 +5267,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public CreateDelegationTokenRequest WithRenewersCollections(Func<CreateDelegationTokenRequest, CreatableRenewers[]> createField)
+		public CreateDelegationTokenRequest WithRenewersCollection(params Func<CreatableRenewers, CreatableRenewers>[] createFields)
 		{
-			RenewersCollection = createField(this);
+			RenewersCollection = createFields
+				.Select(createField => createField(CreateCreatableRenewers()))
+				.ToArray();
 			return this;
 		}
 
-		public CreatableRenewers CreateCreatableRenewers()
+		internal CreatableRenewers CreateCreatableRenewers()
 		{
 			return new CreatableRenewers(Version);
 		}
@@ -5819,13 +5831,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public CreatePartitionsRequest WithTopicsCollections(Func<CreatePartitionsRequest, CreatePartitionsTopic[]> createField)
+		public CreatePartitionsRequest WithTopicsCollection(params Func<CreatePartitionsTopic, CreatePartitionsTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateCreatePartitionsTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public CreatePartitionsTopic CreateCreatePartitionsTopic()
+		internal CreatePartitionsTopic CreateCreatePartitionsTopic()
 		{
 			return new CreatePartitionsTopic(Version);
 		}
@@ -5953,13 +5967,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatePartitionsTopic WithAssignmentsCollections(Func<CreatePartitionsTopic, CreatePartitionsAssignment[]> createField)
+			public CreatePartitionsTopic WithAssignmentsCollection(params Func<CreatePartitionsAssignment, CreatePartitionsAssignment>[] createFields)
 			{
-				AssignmentsCollection = createField(this);
+				AssignmentsCollection = createFields
+					.Select(createField => createField(CreateCreatePartitionsAssignment()))
+					.ToArray();
 				return this;
 			}
 
-			public CreatePartitionsAssignment CreateCreatePartitionsAssignment()
+			internal CreatePartitionsAssignment CreateCreatePartitionsAssignment()
 			{
 				return new CreatePartitionsAssignment(Version);
 			}
@@ -6171,13 +6187,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public CreatePartitionsResponse WithResultsCollections(Func<CreatePartitionsResponse, CreatePartitionsTopicResult[]> createField)
+		public CreatePartitionsResponse WithResultsCollection(params Func<CreatePartitionsTopicResult, CreatePartitionsTopicResult>[] createFields)
 		{
-			ResultsCollection = createField(this);
+			ResultsCollection = createFields
+				.Select(createField => createField(CreateCreatePartitionsTopicResult()))
+				.ToArray();
 			return this;
 		}
 
-		public CreatePartitionsTopicResult CreateCreatePartitionsTopicResult()
+		internal CreatePartitionsTopicResult CreateCreatePartitionsTopicResult()
 		{
 			return new CreatePartitionsTopicResult(Version);
 		}
@@ -6392,7 +6410,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public CreatableTopic CreateCreatableTopic()
+		internal CreatableTopic CreateCreatableTopic()
 		{
 			return new CreatableTopic(Version);
 		}
@@ -6572,7 +6590,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			public CreatableReplicaAssignment CreateCreatableReplicaAssignment()
+			internal CreatableReplicaAssignment CreateCreatableReplicaAssignment()
 			{
 				return new CreatableReplicaAssignment(Version);
 			}
@@ -6700,7 +6718,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			public CreateableTopicConfig CreateCreateableTopicConfig()
+			internal CreateableTopicConfig CreateCreateableTopicConfig()
 			{
 				return new CreateableTopicConfig(Version);
 			}
@@ -6953,7 +6971,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public CreatableTopicResult CreateCreatableTopicResult()
+		internal CreatableTopicResult CreateCreatableTopicResult()
 		{
 			return new CreatableTopicResult(Version);
 		}
@@ -7139,13 +7157,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DeleteAclsRequest WithFiltersCollections(Func<DeleteAclsRequest, DeleteAclsFilter[]> createField)
+		public DeleteAclsRequest WithFiltersCollection(params Func<DeleteAclsFilter, DeleteAclsFilter>[] createFields)
 		{
-			FiltersCollection = createField(this);
+			FiltersCollection = createFields
+				.Select(createField => createField(CreateDeleteAclsFilter()))
+				.ToArray();
 			return this;
 		}
 
-		public DeleteAclsFilter CreateDeleteAclsFilter()
+		internal DeleteAclsFilter CreateDeleteAclsFilter()
 		{
 			return new DeleteAclsFilter(Version);
 		}
@@ -7523,13 +7543,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DeleteAclsResponse WithFilterResultsCollections(Func<DeleteAclsResponse, DeleteAclsFilterResult[]> createField)
+		public DeleteAclsResponse WithFilterResultsCollection(params Func<DeleteAclsFilterResult, DeleteAclsFilterResult>[] createFields)
 		{
-			FilterResultsCollection = createField(this);
+			FilterResultsCollection = createFields
+				.Select(createField => createField(CreateDeleteAclsFilterResult()))
+				.ToArray();
 			return this;
 		}
 
-		public DeleteAclsFilterResult CreateDeleteAclsFilterResult()
+		internal DeleteAclsFilterResult CreateDeleteAclsFilterResult()
 		{
 			return new DeleteAclsFilterResult(Version);
 		}
@@ -7657,13 +7679,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilterResult WithMatchingAclsCollections(Func<DeleteAclsFilterResult, DeleteAclsMatchingAcl[]> createField)
+			public DeleteAclsFilterResult WithMatchingAclsCollection(params Func<DeleteAclsMatchingAcl, DeleteAclsMatchingAcl>[] createFields)
 			{
-				MatchingAclsCollection = createField(this);
+				MatchingAclsCollection = createFields
+					.Select(createField => createField(CreateDeleteAclsMatchingAcl()))
+					.ToArray();
 				return this;
 			}
 
-			public DeleteAclsMatchingAcl CreateDeleteAclsMatchingAcl()
+			internal DeleteAclsMatchingAcl CreateDeleteAclsMatchingAcl()
 			{
 				return new DeleteAclsMatchingAcl(Version);
 			}
@@ -8184,7 +8208,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public DeletableGroupResult CreateDeletableGroupResult()
+		internal DeletableGroupResult CreateDeletableGroupResult()
 		{
 			return new DeletableGroupResult(Version);
 		}
@@ -8345,13 +8369,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DeleteRecordsRequest WithTopicsCollections(Func<DeleteRecordsRequest, DeleteRecordsTopic[]> createField)
+		public DeleteRecordsRequest WithTopicsCollection(params Func<DeleteRecordsTopic, DeleteRecordsTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateDeleteRecordsTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public DeleteRecordsTopic CreateDeleteRecordsTopic()
+		internal DeleteRecordsTopic CreateDeleteRecordsTopic()
 		{
 			return new DeleteRecordsTopic(Version);
 		}
@@ -8441,13 +8467,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteRecordsTopic WithPartitionsCollections(Func<DeleteRecordsTopic, DeleteRecordsPartition[]> createField)
+			public DeleteRecordsTopic WithPartitionsCollection(params Func<DeleteRecordsPartition, DeleteRecordsPartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateDeleteRecordsPartition()))
+					.ToArray();
 				return this;
 			}
 
-			public DeleteRecordsPartition CreateDeleteRecordsPartition()
+			internal DeleteRecordsPartition CreateDeleteRecordsPartition()
 			{
 				return new DeleteRecordsPartition(Version);
 			}
@@ -8667,13 +8695,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DeleteRecordsResponse WithTopicsCollections(Func<DeleteRecordsResponse, DeleteRecordsTopicResult[]> createField)
+		public DeleteRecordsResponse WithTopicsCollection(params Func<DeleteRecordsTopicResult, DeleteRecordsTopicResult>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateDeleteRecordsTopicResult()))
+				.ToArray();
 			return this;
 		}
 
-		public DeleteRecordsTopicResult CreateDeleteRecordsTopicResult()
+		internal DeleteRecordsTopicResult CreateDeleteRecordsTopicResult()
 		{
 			return new DeleteRecordsTopicResult(Version);
 		}
@@ -8763,13 +8793,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteRecordsTopicResult WithPartitionsCollections(Func<DeleteRecordsTopicResult, DeleteRecordsPartitionResult[]> createField)
+			public DeleteRecordsTopicResult WithPartitionsCollection(params Func<DeleteRecordsPartitionResult, DeleteRecordsPartitionResult>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateDeleteRecordsPartitionResult()))
+					.ToArray();
 				return this;
 			}
 
-			public DeleteRecordsPartitionResult CreateDeleteRecordsPartitionResult()
+			internal DeleteRecordsPartitionResult CreateDeleteRecordsPartitionResult()
 			{
 				return new DeleteRecordsPartitionResult(Version);
 			}
@@ -9104,7 +9136,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public DeletableTopicResult CreateDeletableTopicResult()
+		internal DeletableTopicResult CreateDeletableTopicResult()
 		{
 			return new DeletableTopicResult(Version);
 		}
@@ -9656,13 +9688,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeAclsResponse WithResourcesCollections(Func<DescribeAclsResponse, DescribeAclsResource[]> createField)
+		public DescribeAclsResponse WithResourcesCollection(params Func<DescribeAclsResource, DescribeAclsResource>[] createFields)
 		{
-			ResourcesCollection = createField(this);
+			ResourcesCollection = createFields
+				.Select(createField => createField(CreateDescribeAclsResource()))
+				.ToArray();
 			return this;
 		}
 
-		public DescribeAclsResource CreateDescribeAclsResource()
+		internal DescribeAclsResource CreateDescribeAclsResource()
 		{
 			return new DescribeAclsResource(Version);
 		}
@@ -9826,13 +9860,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeAclsResource WithAclsCollections(Func<DescribeAclsResource, AclDescription[]> createField)
+			public DescribeAclsResource WithAclsCollection(params Func<AclDescription, AclDescription>[] createFields)
 			{
-				AclsCollection = createField(this);
+				AclsCollection = createFields
+					.Select(createField => createField(CreateAclDescription()))
+					.ToArray();
 				return this;
 			}
 
-			public AclDescription CreateAclDescription()
+			internal AclDescription CreateAclDescription()
 			{
 				return new AclDescription(Version);
 			}
@@ -10068,13 +10104,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeConfigsRequest WithResourcesCollections(Func<DescribeConfigsRequest, DescribeConfigsResource[]> createField)
+		public DescribeConfigsRequest WithResourcesCollection(params Func<DescribeConfigsResource, DescribeConfigsResource>[] createFields)
 		{
-			ResourcesCollection = createField(this);
+			ResourcesCollection = createFields
+				.Select(createField => createField(CreateDescribeConfigsResource()))
+				.ToArray();
 			return this;
 		}
 
-		public DescribeConfigsResource CreateDescribeConfigsResource()
+		internal DescribeConfigsResource CreateDescribeConfigsResource()
 		{
 			return new DescribeConfigsResource(Version);
 		}
@@ -10331,13 +10369,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeConfigsResponse WithResultsCollections(Func<DescribeConfigsResponse, DescribeConfigsResult[]> createField)
+		public DescribeConfigsResponse WithResultsCollection(params Func<DescribeConfigsResult, DescribeConfigsResult>[] createFields)
 		{
-			ResultsCollection = createField(this);
+			ResultsCollection = createFields
+				.Select(createField => createField(CreateDescribeConfigsResult()))
+				.ToArray();
 			return this;
 		}
 
-		public DescribeConfigsResult CreateDescribeConfigsResult()
+		internal DescribeConfigsResult CreateDescribeConfigsResult()
 		{
 			return new DescribeConfigsResult(Version);
 		}
@@ -10539,13 +10579,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResult WithConfigsCollections(Func<DescribeConfigsResult, DescribeConfigsResourceResult[]> createField)
+			public DescribeConfigsResult WithConfigsCollection(params Func<DescribeConfigsResourceResult, DescribeConfigsResourceResult>[] createFields)
 			{
-				ConfigsCollection = createField(this);
+				ConfigsCollection = createFields
+					.Select(createField => createField(CreateDescribeConfigsResourceResult()))
+					.ToArray();
 				return this;
 			}
 
-			public DescribeConfigsResourceResult CreateDescribeConfigsResourceResult()
+			internal DescribeConfigsResourceResult CreateDescribeConfigsResourceResult()
 			{
 				return new DescribeConfigsResourceResult(Version);
 			}
@@ -10811,13 +10853,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithSynonymsCollections(Func<DescribeConfigsResourceResult, DescribeConfigsSynonym[]> createField)
+				public DescribeConfigsResourceResult WithSynonymsCollection(params Func<DescribeConfigsSynonym, DescribeConfigsSynonym>[] createFields)
 				{
-					SynonymsCollection = createField(this);
+					SynonymsCollection = createFields
+						.Select(createField => createField(CreateDescribeConfigsSynonym()))
+						.ToArray();
 					return this;
 				}
 
-				public DescribeConfigsSynonym CreateDescribeConfigsSynonym()
+				internal DescribeConfigsSynonym CreateDescribeConfigsSynonym()
 				{
 					return new DescribeConfigsSynonym(Version);
 				}
@@ -11011,13 +11055,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeDelegationTokenRequest WithOwnersCollections(Func<DescribeDelegationTokenRequest, DescribeDelegationTokenOwner[]> createField)
+		public DescribeDelegationTokenRequest WithOwnersCollection(params Func<DescribeDelegationTokenOwner, DescribeDelegationTokenOwner>[] createFields)
 		{
-			OwnersCollection = createField(this);
+			OwnersCollection = createFields
+				.Select(createField => createField(CreateDescribeDelegationTokenOwner()))
+				.ToArray();
 			return this;
 		}
 
-		public DescribeDelegationTokenOwner CreateDescribeDelegationTokenOwner()
+		internal DescribeDelegationTokenOwner CreateDescribeDelegationTokenOwner()
 		{
 			return new DescribeDelegationTokenOwner(Version);
 		}
@@ -11215,13 +11261,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeDelegationTokenResponse WithTokensCollections(Func<DescribeDelegationTokenResponse, DescribedDelegationToken[]> createField)
+		public DescribeDelegationTokenResponse WithTokensCollection(params Func<DescribedDelegationToken, DescribedDelegationToken>[] createFields)
 		{
-			TokensCollection = createField(this);
+			TokensCollection = createFields
+				.Select(createField => createField(CreateDescribedDelegationToken()))
+				.ToArray();
 			return this;
 		}
 
-		public DescribedDelegationToken CreateDescribedDelegationToken()
+		internal DescribedDelegationToken CreateDescribedDelegationToken()
 		{
 			return new DescribedDelegationToken(Version);
 		}
@@ -11533,13 +11581,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedDelegationToken WithRenewersCollections(Func<DescribedDelegationToken, DescribedDelegationTokenRenewer[]> createField)
+			public DescribedDelegationToken WithRenewersCollection(params Func<DescribedDelegationTokenRenewer, DescribedDelegationTokenRenewer>[] createFields)
 			{
-				RenewersCollection = createField(this);
+				RenewersCollection = createFields
+					.Select(createField => createField(CreateDescribedDelegationTokenRenewer()))
+					.ToArray();
 				return this;
 			}
 
-			public DescribedDelegationTokenRenewer CreateDescribedDelegationTokenRenewer()
+			internal DescribedDelegationTokenRenewer CreateDescribedDelegationTokenRenewer()
 			{
 				return new DescribedDelegationTokenRenewer(Version);
 			}
@@ -11853,13 +11903,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeGroupsResponse WithGroupsCollections(Func<DescribeGroupsResponse, DescribedGroup[]> createField)
+		public DescribeGroupsResponse WithGroupsCollection(params Func<DescribedGroup, DescribedGroup>[] createFields)
 		{
-			GroupsCollection = createField(this);
+			GroupsCollection = createFields
+				.Select(createField => createField(CreateDescribedGroup()))
+				.ToArray();
 			return this;
 		}
 
-		public DescribedGroup CreateDescribedGroup()
+		internal DescribedGroup CreateDescribedGroup()
 		{
 			return new DescribedGroup(Version);
 		}
@@ -12105,13 +12157,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribedGroup WithMembersCollections(Func<DescribedGroup, DescribedGroupMember[]> createField)
+			public DescribedGroup WithMembersCollection(params Func<DescribedGroupMember, DescribedGroupMember>[] createFields)
 			{
-				MembersCollection = createField(this);
+				MembersCollection = createFields
+					.Select(createField => createField(CreateDescribedGroupMember()))
+					.ToArray();
 				return this;
 			}
 
-			public DescribedGroupMember CreateDescribedGroupMember()
+			internal DescribedGroupMember CreateDescribedGroupMember()
 			{
 				return new DescribedGroupMember(Version);
 			}
@@ -12406,13 +12460,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeLogDirsRequest WithTopicsCollections(Func<DescribeLogDirsRequest, DescribableLogDirTopic[]> createField)
+		public DescribeLogDirsRequest WithTopicsCollection(params Func<DescribableLogDirTopic, DescribableLogDirTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateDescribableLogDirTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public DescribableLogDirTopic CreateDescribableLogDirTopic()
+		internal DescribableLogDirTopic CreateDescribableLogDirTopic()
 		{
 			return new DescribableLogDirTopic(Version);
 		}
@@ -12602,13 +12658,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeLogDirsResponse WithResultsCollections(Func<DescribeLogDirsResponse, DescribeLogDirsResult[]> createField)
+		public DescribeLogDirsResponse WithResultsCollection(params Func<DescribeLogDirsResult, DescribeLogDirsResult>[] createFields)
 		{
-			ResultsCollection = createField(this);
+			ResultsCollection = createFields
+				.Select(createField => createField(CreateDescribeLogDirsResult()))
+				.ToArray();
 			return this;
 		}
 
-		public DescribeLogDirsResult CreateDescribeLogDirsResult()
+		internal DescribeLogDirsResult CreateDescribeLogDirsResult()
 		{
 			return new DescribeLogDirsResult(Version);
 		}
@@ -12735,13 +12793,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeLogDirsResult WithTopicsCollections(Func<DescribeLogDirsResult, DescribeLogDirsTopic[]> createField)
+			public DescribeLogDirsResult WithTopicsCollection(params Func<DescribeLogDirsTopic, DescribeLogDirsTopic>[] createFields)
 			{
-				TopicsCollection = createField(this);
+				TopicsCollection = createFields
+					.Select(createField => createField(CreateDescribeLogDirsTopic()))
+					.ToArray();
 				return this;
 			}
 
-			public DescribeLogDirsTopic CreateDescribeLogDirsTopic()
+			internal DescribeLogDirsTopic CreateDescribeLogDirsTopic()
 			{
 				return new DescribeLogDirsTopic(Version);
 			}
@@ -12828,13 +12888,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeLogDirsTopic WithPartitionsCollections(Func<DescribeLogDirsTopic, DescribeLogDirsPartition[]> createField)
+				public DescribeLogDirsTopic WithPartitionsCollection(params Func<DescribeLogDirsPartition, DescribeLogDirsPartition>[] createFields)
 				{
-					PartitionsCollection = createField(this);
+					PartitionsCollection = createFields
+						.Select(createField => createField(CreateDescribeLogDirsPartition()))
+						.ToArray();
 					return this;
 				}
 
-				public DescribeLogDirsPartition CreateDescribeLogDirsPartition()
+				internal DescribeLogDirsPartition CreateDescribeLogDirsPartition()
 				{
 					return new DescribeLogDirsPartition(Version);
 				}
@@ -13072,13 +13134,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ElectPreferredLeadersRequest WithTopicPartitionsCollections(Func<ElectPreferredLeadersRequest, TopicPartitions[]> createField)
+		public ElectPreferredLeadersRequest WithTopicPartitionsCollection(params Func<TopicPartitions, TopicPartitions>[] createFields)
 		{
-			TopicPartitionsCollection = createField(this);
+			TopicPartitionsCollection = createFields
+				.Select(createField => createField(CreateTopicPartitions()))
+				.ToArray();
 			return this;
 		}
 
-		public TopicPartitions CreateTopicPartitions()
+		internal TopicPartitions CreateTopicPartitions()
 		{
 			return new TopicPartitions(Version);
 		}
@@ -13297,13 +13361,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ElectPreferredLeadersResponse WithReplicaElectionResultsCollections(Func<ElectPreferredLeadersResponse, ReplicaElectionResult[]> createField)
+		public ElectPreferredLeadersResponse WithReplicaElectionResultsCollection(params Func<ReplicaElectionResult, ReplicaElectionResult>[] createFields)
 		{
-			ReplicaElectionResultsCollection = createField(this);
+			ReplicaElectionResultsCollection = createFields
+				.Select(createField => createField(CreateReplicaElectionResult()))
+				.ToArray();
 			return this;
 		}
 
-		public ReplicaElectionResult CreateReplicaElectionResult()
+		internal ReplicaElectionResult CreateReplicaElectionResult()
 		{
 			return new ReplicaElectionResult(Version);
 		}
@@ -13393,13 +13459,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ReplicaElectionResult WithPartitionResultCollections(Func<ReplicaElectionResult, PartitionResult[]> createField)
+			public ReplicaElectionResult WithPartitionResultCollection(params Func<PartitionResult, PartitionResult>[] createFields)
 			{
-				PartitionResultCollection = createField(this);
+				PartitionResultCollection = createFields
+					.Select(createField => createField(CreatePartitionResult()))
+					.ToArray();
 				return this;
 			}
 
-			public PartitionResult CreatePartitionResult()
+			internal PartitionResult CreatePartitionResult()
 			{
 				return new PartitionResult(Version);
 			}
@@ -14360,13 +14428,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public FetchRequest WithTopicsCollections(Func<FetchRequest, FetchableTopic[]> createField)
+		public FetchRequest WithTopicsCollection(params Func<FetchableTopic, FetchableTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateFetchableTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public FetchableTopic CreateFetchableTopic()
+		internal FetchableTopic CreateFetchableTopic()
 		{
 			return new FetchableTopic(Version);
 		}
@@ -14456,13 +14526,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public FetchableTopic WithFetchPartitionsCollections(Func<FetchableTopic, FetchPartition[]> createField)
+			public FetchableTopic WithFetchPartitionsCollection(params Func<FetchPartition, FetchPartition>[] createFields)
 			{
-				FetchPartitionsCollection = createField(this);
+				FetchPartitionsCollection = createFields
+					.Select(createField => createField(CreateFetchPartition()))
+					.ToArray();
 				return this;
 			}
 
-			public FetchPartition CreateFetchPartition()
+			internal FetchPartition CreateFetchPartition()
 			{
 				return new FetchPartition(Version);
 			}
@@ -14689,13 +14761,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public FetchRequest WithForgottenCollections(Func<FetchRequest, ForgottenTopic[]> createField)
+		public FetchRequest WithForgottenCollection(params Func<ForgottenTopic, ForgottenTopic>[] createFields)
 		{
-			ForgottenCollection = createField(this);
+			ForgottenCollection = createFields
+				.Select(createField => createField(CreateForgottenTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public ForgottenTopic CreateForgottenTopic()
+		internal ForgottenTopic CreateForgottenTopic()
 		{
 			return new ForgottenTopic(Version);
 		}
@@ -14954,13 +15028,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public FetchResponse WithTopicsCollections(Func<FetchResponse, FetchableTopicResponse[]> createField)
+		public FetchResponse WithTopicsCollection(params Func<FetchableTopicResponse, FetchableTopicResponse>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateFetchableTopicResponse()))
+				.ToArray();
 			return this;
 		}
 
-		public FetchableTopicResponse CreateFetchableTopicResponse()
+		internal FetchableTopicResponse CreateFetchableTopicResponse()
 		{
 			return new FetchableTopicResponse(Version);
 		}
@@ -15050,13 +15126,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public FetchableTopicResponse WithPartitionsCollections(Func<FetchableTopicResponse, FetchablePartitionResponse[]> createField)
+			public FetchableTopicResponse WithPartitionsCollection(params Func<FetchablePartitionResponse, FetchablePartitionResponse>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateFetchablePartitionResponse()))
+					.ToArray();
 				return this;
 			}
 
-			public FetchablePartitionResponse CreateFetchablePartitionResponse()
+			internal FetchablePartitionResponse CreateFetchablePartitionResponse()
 			{
 				return new FetchablePartitionResponse(Version);
 			}
@@ -15293,13 +15371,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public FetchablePartitionResponse WithAbortedCollections(Func<FetchablePartitionResponse, AbortedTransaction[]> createField)
+				public FetchablePartitionResponse WithAbortedCollection(params Func<AbortedTransaction, AbortedTransaction>[] createFields)
 				{
-					AbortedCollection = createField(this);
+					AbortedCollection = createFields
+						.Select(createField => createField(CreateAbortedTransaction()))
+						.ToArray();
 					return this;
 				}
 
-				public AbortedTransaction CreateAbortedTransaction()
+				internal AbortedTransaction CreateAbortedTransaction()
 				{
 					return new AbortedTransaction(Version);
 				}
@@ -16507,7 +16587,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public JoinGroupRequestProtocol CreateJoinGroupRequestProtocol()
+		internal JoinGroupRequestProtocol CreateJoinGroupRequestProtocol()
 		{
 			return new JoinGroupRequestProtocol(Version);
 		}
@@ -16874,13 +16954,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public JoinGroupResponse WithMembersCollections(Func<JoinGroupResponse, JoinGroupResponseMember[]> createField)
+		public JoinGroupResponse WithMembersCollection(params Func<JoinGroupResponseMember, JoinGroupResponseMember>[] createFields)
 		{
-			MembersCollection = createField(this);
+			MembersCollection = createFields
+				.Select(createField => createField(CreateJoinGroupResponseMember()))
+				.ToArray();
 			return this;
 		}
 
-		public JoinGroupResponseMember CreateJoinGroupResponseMember()
+		internal JoinGroupResponseMember CreateJoinGroupResponseMember()
 		{
 			return new JoinGroupResponseMember(Version);
 		}
@@ -17155,13 +17237,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public LeaderAndIsrRequest WithTopicStatesCollections(Func<LeaderAndIsrRequest, LeaderAndIsrRequestTopicState[]> createField)
+		public LeaderAndIsrRequest WithTopicStatesCollection(params Func<LeaderAndIsrRequestTopicState, LeaderAndIsrRequestTopicState>[] createFields)
 		{
-			TopicStatesCollection = createField(this);
+			TopicStatesCollection = createFields
+				.Select(createField => createField(CreateLeaderAndIsrRequestTopicState()))
+				.ToArray();
 			return this;
 		}
 
-		public LeaderAndIsrRequestTopicState CreateLeaderAndIsrRequestTopicState()
+		internal LeaderAndIsrRequestTopicState CreateLeaderAndIsrRequestTopicState()
 		{
 			return new LeaderAndIsrRequestTopicState(Version);
 		}
@@ -17251,13 +17335,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public LeaderAndIsrRequestTopicState WithPartitionStatesCollections(Func<LeaderAndIsrRequestTopicState, LeaderAndIsrRequestPartitionState[]> createField)
+			public LeaderAndIsrRequestTopicState WithPartitionStatesCollection(params Func<LeaderAndIsrRequestPartitionState, LeaderAndIsrRequestPartitionState>[] createFields)
 			{
-				PartitionStatesCollection = createField(this);
+				PartitionStatesCollection = createFields
+					.Select(createField => createField(CreateLeaderAndIsrRequestPartitionState()))
+					.ToArray();
 				return this;
 			}
 
-			public LeaderAndIsrRequestPartitionState CreateLeaderAndIsrRequestPartitionState()
+			internal LeaderAndIsrRequestPartitionState CreateLeaderAndIsrRequestPartitionState()
 			{
 				return new LeaderAndIsrRequestPartitionState(Version);
 			}
@@ -17595,13 +17681,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public LeaderAndIsrRequest WithPartitionStatesV0Collections(Func<LeaderAndIsrRequest, LeaderAndIsrRequestPartitionStateV0[]> createField)
+		public LeaderAndIsrRequest WithPartitionStatesV0Collection(params Func<LeaderAndIsrRequestPartitionStateV0, LeaderAndIsrRequestPartitionStateV0>[] createFields)
 		{
-			PartitionStatesV0Collection = createField(this);
+			PartitionStatesV0Collection = createFields
+				.Select(createField => createField(CreateLeaderAndIsrRequestPartitionStateV0()))
+				.ToArray();
 			return this;
 		}
 
-		public LeaderAndIsrRequestPartitionStateV0 CreateLeaderAndIsrRequestPartitionStateV0()
+		internal LeaderAndIsrRequestPartitionStateV0 CreateLeaderAndIsrRequestPartitionStateV0()
 		{
 			return new LeaderAndIsrRequestPartitionStateV0(Version);
 		}
@@ -17975,13 +18063,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public LeaderAndIsrRequest WithLiveLeadersCollections(Func<LeaderAndIsrRequest, LeaderAndIsrLiveLeader[]> createField)
+		public LeaderAndIsrRequest WithLiveLeadersCollection(params Func<LeaderAndIsrLiveLeader, LeaderAndIsrLiveLeader>[] createFields)
 		{
-			LiveLeadersCollection = createField(this);
+			LiveLeadersCollection = createFields
+				.Select(createField => createField(CreateLeaderAndIsrLiveLeader()))
+				.ToArray();
 			return this;
 		}
 
-		public LeaderAndIsrLiveLeader CreateLeaderAndIsrLiveLeader()
+		internal LeaderAndIsrLiveLeader CreateLeaderAndIsrLiveLeader()
 		{
 			return new LeaderAndIsrLiveLeader(Version);
 		}
@@ -18208,13 +18298,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public LeaderAndIsrResponse WithPartitionsCollections(Func<LeaderAndIsrResponse, LeaderAndIsrResponsePartition[]> createField)
+		public LeaderAndIsrResponse WithPartitionsCollection(params Func<LeaderAndIsrResponsePartition, LeaderAndIsrResponsePartition>[] createFields)
 		{
-			PartitionsCollection = createField(this);
+			PartitionsCollection = createFields
+				.Select(createField => createField(CreateLeaderAndIsrResponsePartition()))
+				.ToArray();
 			return this;
 		}
 
-		public LeaderAndIsrResponsePartition CreateLeaderAndIsrResponsePartition()
+		internal LeaderAndIsrResponsePartition CreateLeaderAndIsrResponsePartition()
 		{
 			return new LeaderAndIsrResponsePartition(Version);
 		}
@@ -18695,13 +18787,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ListGroupsResponse WithGroupsCollections(Func<ListGroupsResponse, ListedGroup[]> createField)
+		public ListGroupsResponse WithGroupsCollection(params Func<ListedGroup, ListedGroup>[] createFields)
 		{
-			GroupsCollection = createField(this);
+			GroupsCollection = createFields
+				.Select(createField => createField(CreateListedGroup()))
+				.ToArray();
 			return this;
 		}
 
-		public ListedGroup CreateListedGroup()
+		internal ListedGroup CreateListedGroup()
 		{
 			return new ListedGroup(Version);
 		}
@@ -18928,13 +19022,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ListOffsetRequest WithTopicsCollections(Func<ListOffsetRequest, ListOffsetTopic[]> createField)
+		public ListOffsetRequest WithTopicsCollection(params Func<ListOffsetTopic, ListOffsetTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateListOffsetTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public ListOffsetTopic CreateListOffsetTopic()
+		internal ListOffsetTopic CreateListOffsetTopic()
 		{
 			return new ListOffsetTopic(Version);
 		}
@@ -19024,13 +19120,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ListOffsetTopic WithPartitionsCollections(Func<ListOffsetTopic, ListOffsetPartition[]> createField)
+			public ListOffsetTopic WithPartitionsCollection(params Func<ListOffsetPartition, ListOffsetPartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateListOffsetPartition()))
+					.ToArray();
 				return this;
 			}
 
-			public ListOffsetPartition CreateListOffsetPartition()
+			internal ListOffsetPartition CreateListOffsetPartition()
 			{
 				return new ListOffsetPartition(Version);
 			}
@@ -19290,13 +19388,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ListOffsetResponse WithTopicsCollections(Func<ListOffsetResponse, ListOffsetTopicResponse[]> createField)
+		public ListOffsetResponse WithTopicsCollection(params Func<ListOffsetTopicResponse, ListOffsetTopicResponse>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateListOffsetTopicResponse()))
+				.ToArray();
 			return this;
 		}
 
-		public ListOffsetTopicResponse CreateListOffsetTopicResponse()
+		internal ListOffsetTopicResponse CreateListOffsetTopicResponse()
 		{
 			return new ListOffsetTopicResponse(Version);
 		}
@@ -19386,13 +19486,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public ListOffsetTopicResponse WithPartitionsCollections(Func<ListOffsetTopicResponse, ListOffsetPartitionResponse[]> createField)
+			public ListOffsetTopicResponse WithPartitionsCollection(params Func<ListOffsetPartitionResponse, ListOffsetPartitionResponse>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateListOffsetPartitionResponse()))
+					.ToArray();
 				return this;
 			}
 
-			public ListOffsetPartitionResponse CreateListOffsetPartitionResponse()
+			internal ListOffsetPartitionResponse CreateListOffsetPartitionResponse()
 			{
 				return new ListOffsetPartitionResponse(Version);
 			}
@@ -19716,13 +19818,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public MetadataRequest WithTopicsCollections(Func<MetadataRequest, MetadataRequestTopic[]> createField)
+		public MetadataRequest WithTopicsCollection(params Func<MetadataRequestTopic, MetadataRequestTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateMetadataRequestTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public MetadataRequestTopic CreateMetadataRequestTopic()
+		internal MetadataRequestTopic CreateMetadataRequestTopic()
 		{
 			return new MetadataRequestTopic(Version);
 		}
@@ -20002,7 +20106,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public MetadataResponseBroker CreateMetadataResponseBroker()
+		internal MetadataResponseBroker CreateMetadataResponseBroker()
 		{
 			return new MetadataResponseBroker(Version);
 		}
@@ -20249,7 +20353,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		public MetadataResponseTopic CreateMetadataResponseTopic()
+		internal MetadataResponseTopic CreateMetadataResponseTopic()
 		{
 			return new MetadataResponseTopic(Version);
 		}
@@ -20416,13 +20520,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseTopic WithPartitionsCollections(Func<MetadataResponseTopic, MetadataResponsePartition[]> createField)
+			public MetadataResponseTopic WithPartitionsCollection(params Func<MetadataResponsePartition, MetadataResponsePartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateMetadataResponsePartition()))
+					.ToArray();
 				return this;
 			}
 
-			public MetadataResponsePartition CreateMetadataResponsePartition()
+			internal MetadataResponsePartition CreateMetadataResponsePartition()
 			{
 				return new MetadataResponsePartition(Version);
 			}
@@ -20942,13 +21048,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public OffsetCommitRequest WithTopicsCollections(Func<OffsetCommitRequest, OffsetCommitRequestTopic[]> createField)
+		public OffsetCommitRequest WithTopicsCollection(params Func<OffsetCommitRequestTopic, OffsetCommitRequestTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateOffsetCommitRequestTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public OffsetCommitRequestTopic CreateOffsetCommitRequestTopic()
+		internal OffsetCommitRequestTopic CreateOffsetCommitRequestTopic()
 		{
 			return new OffsetCommitRequestTopic(Version);
 		}
@@ -21038,13 +21146,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetCommitRequestTopic WithPartitionsCollections(Func<OffsetCommitRequestTopic, OffsetCommitRequestPartition[]> createField)
+			public OffsetCommitRequestTopic WithPartitionsCollection(params Func<OffsetCommitRequestPartition, OffsetCommitRequestPartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateOffsetCommitRequestPartition()))
+					.ToArray();
 				return this;
 			}
 
-			public OffsetCommitRequestPartition CreateOffsetCommitRequestPartition()
+			internal OffsetCommitRequestPartition CreateOffsetCommitRequestPartition()
 			{
 				return new OffsetCommitRequestPartition(Version);
 			}
@@ -21337,13 +21447,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public OffsetCommitResponse WithTopicsCollections(Func<OffsetCommitResponse, OffsetCommitResponseTopic[]> createField)
+		public OffsetCommitResponse WithTopicsCollection(params Func<OffsetCommitResponseTopic, OffsetCommitResponseTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateOffsetCommitResponseTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public OffsetCommitResponseTopic CreateOffsetCommitResponseTopic()
+		internal OffsetCommitResponseTopic CreateOffsetCommitResponseTopic()
 		{
 			return new OffsetCommitResponseTopic(Version);
 		}
@@ -21433,13 +21545,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetCommitResponseTopic WithPartitionsCollections(Func<OffsetCommitResponseTopic, OffsetCommitResponsePartition[]> createField)
+			public OffsetCommitResponseTopic WithPartitionsCollection(params Func<OffsetCommitResponsePartition, OffsetCommitResponsePartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateOffsetCommitResponsePartition()))
+					.ToArray();
 				return this;
 			}
 
-			public OffsetCommitResponsePartition CreateOffsetCommitResponsePartition()
+			internal OffsetCommitResponsePartition CreateOffsetCommitResponsePartition()
 			{
 				return new OffsetCommitResponsePartition(Version);
 			}
@@ -21631,13 +21745,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public OffsetFetchRequest WithTopicsCollections(Func<OffsetFetchRequest, OffsetFetchRequestTopic[]> createField)
+		public OffsetFetchRequest WithTopicsCollection(params Func<OffsetFetchRequestTopic, OffsetFetchRequestTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateOffsetFetchRequestTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public OffsetFetchRequestTopic CreateOffsetFetchRequestTopic()
+		internal OffsetFetchRequestTopic CreateOffsetFetchRequestTopic()
 		{
 			return new OffsetFetchRequestTopic(Version);
 		}
@@ -21827,13 +21943,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public OffsetFetchResponse WithTopicsCollections(Func<OffsetFetchResponse, OffsetFetchResponseTopic[]> createField)
+		public OffsetFetchResponse WithTopicsCollection(params Func<OffsetFetchResponseTopic, OffsetFetchResponseTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateOffsetFetchResponseTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public OffsetFetchResponseTopic CreateOffsetFetchResponseTopic()
+		internal OffsetFetchResponseTopic CreateOffsetFetchResponseTopic()
 		{
 			return new OffsetFetchResponseTopic(Version);
 		}
@@ -21923,13 +22041,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetFetchResponseTopic WithPartitionsCollections(Func<OffsetFetchResponseTopic, OffsetFetchResponsePartition[]> createField)
+			public OffsetFetchResponseTopic WithPartitionsCollection(params Func<OffsetFetchResponsePartition, OffsetFetchResponsePartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateOffsetFetchResponsePartition()))
+					.ToArray();
 				return this;
 			}
 
-			public OffsetFetchResponsePartition CreateOffsetFetchResponsePartition()
+			internal OffsetFetchResponsePartition CreateOffsetFetchResponsePartition()
 			{
 				return new OffsetFetchResponsePartition(Version);
 			}
@@ -22224,13 +22344,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public OffsetForLeaderEpochRequest WithTopicsCollections(Func<OffsetForLeaderEpochRequest, OffsetForLeaderTopic[]> createField)
+		public OffsetForLeaderEpochRequest WithTopicsCollection(params Func<OffsetForLeaderTopic, OffsetForLeaderTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateOffsetForLeaderTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public OffsetForLeaderTopic CreateOffsetForLeaderTopic()
+		internal OffsetForLeaderTopic CreateOffsetForLeaderTopic()
 		{
 			return new OffsetForLeaderTopic(Version);
 		}
@@ -22320,13 +22442,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetForLeaderTopic WithPartitionsCollections(Func<OffsetForLeaderTopic, OffsetForLeaderPartition[]> createField)
+			public OffsetForLeaderTopic WithPartitionsCollection(params Func<OffsetForLeaderPartition, OffsetForLeaderPartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateOffsetForLeaderPartition()))
+					.ToArray();
 				return this;
 			}
 
-			public OffsetForLeaderPartition CreateOffsetForLeaderPartition()
+			internal OffsetForLeaderPartition CreateOffsetForLeaderPartition()
 			{
 				return new OffsetForLeaderPartition(Version);
 			}
@@ -22544,13 +22668,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public OffsetForLeaderEpochResponse WithTopicsCollections(Func<OffsetForLeaderEpochResponse, OffsetForLeaderTopicResult[]> createField)
+		public OffsetForLeaderEpochResponse WithTopicsCollection(params Func<OffsetForLeaderTopicResult, OffsetForLeaderTopicResult>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateOffsetForLeaderTopicResult()))
+				.ToArray();
 			return this;
 		}
 
-		public OffsetForLeaderTopicResult CreateOffsetForLeaderTopicResult()
+		internal OffsetForLeaderTopicResult CreateOffsetForLeaderTopicResult()
 		{
 			return new OffsetForLeaderTopicResult(Version);
 		}
@@ -22640,13 +22766,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public OffsetForLeaderTopicResult WithPartitionsCollections(Func<OffsetForLeaderTopicResult, OffsetForLeaderPartitionResult[]> createField)
+			public OffsetForLeaderTopicResult WithPartitionsCollection(params Func<OffsetForLeaderPartitionResult, OffsetForLeaderPartitionResult>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateOffsetForLeaderPartitionResult()))
+					.ToArray();
 				return this;
 			}
 
-			public OffsetForLeaderPartitionResult CreateOffsetForLeaderPartitionResult()
+			internal OffsetForLeaderPartitionResult CreateOffsetForLeaderPartitionResult()
 			{
 				return new OffsetForLeaderPartitionResult(Version);
 			}
@@ -22981,13 +23109,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ProduceRequest WithTopicsCollections(Func<ProduceRequest, TopicProduceData[]> createField)
+		public ProduceRequest WithTopicsCollection(params Func<TopicProduceData, TopicProduceData>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateTopicProduceData()))
+				.ToArray();
 			return this;
 		}
 
-		public TopicProduceData CreateTopicProduceData()
+		internal TopicProduceData CreateTopicProduceData()
 		{
 			return new TopicProduceData(Version);
 		}
@@ -23077,13 +23207,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TopicProduceData WithPartitionsCollections(Func<TopicProduceData, PartitionProduceData[]> createField)
+			public TopicProduceData WithPartitionsCollection(params Func<PartitionProduceData, PartitionProduceData>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreatePartitionProduceData()))
+					.ToArray();
 				return this;
 			}
 
-			public PartitionProduceData CreatePartitionProduceData()
+			internal PartitionProduceData CreatePartitionProduceData()
 			{
 				return new PartitionProduceData(Version);
 			}
@@ -23246,13 +23378,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ProduceResponse WithResponsesCollections(Func<ProduceResponse, TopicProduceResponse[]> createField)
+		public ProduceResponse WithResponsesCollection(params Func<TopicProduceResponse, TopicProduceResponse>[] createFields)
 		{
-			ResponsesCollection = createField(this);
+			ResponsesCollection = createFields
+				.Select(createField => createField(CreateTopicProduceResponse()))
+				.ToArray();
 			return this;
 		}
 
-		public TopicProduceResponse CreateTopicProduceResponse()
+		internal TopicProduceResponse CreateTopicProduceResponse()
 		{
 			return new TopicProduceResponse(Version);
 		}
@@ -23342,13 +23476,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TopicProduceResponse WithPartitionsCollections(Func<TopicProduceResponse, PartitionProduceResponse[]> createField)
+			public TopicProduceResponse WithPartitionsCollection(params Func<PartitionProduceResponse, PartitionProduceResponse>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreatePartitionProduceResponse()))
+					.ToArray();
 				return this;
 			}
 
-			public PartitionProduceResponse CreatePartitionProduceResponse()
+			internal PartitionProduceResponse CreatePartitionProduceResponse()
 			{
 				return new PartitionProduceResponse(Version);
 			}
@@ -24645,13 +24781,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public StopReplicaRequest WithPartitionsV0Collections(Func<StopReplicaRequest, StopReplicaRequestPartitionV0[]> createField)
+		public StopReplicaRequest WithPartitionsV0Collection(params Func<StopReplicaRequestPartitionV0, StopReplicaRequestPartitionV0>[] createFields)
 		{
-			PartitionsV0Collection = createField(this);
+			PartitionsV0Collection = createFields
+				.Select(createField => createField(CreateStopReplicaRequestPartitionV0()))
+				.ToArray();
 			return this;
 		}
 
-		public StopReplicaRequestPartitionV0 CreateStopReplicaRequestPartitionV0()
+		internal StopReplicaRequestPartitionV0 CreateStopReplicaRequestPartitionV0()
 		{
 			return new StopReplicaRequestPartitionV0(Version);
 		}
@@ -24771,13 +24909,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public StopReplicaRequest WithTopicsCollections(Func<StopReplicaRequest, StopReplicaRequestTopic[]> createField)
+		public StopReplicaRequest WithTopicsCollection(params Func<StopReplicaRequestTopic, StopReplicaRequestTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateStopReplicaRequestTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public StopReplicaRequestTopic CreateStopReplicaRequestTopic()
+		internal StopReplicaRequestTopic CreateStopReplicaRequestTopic()
 		{
 			return new StopReplicaRequestTopic(Version);
 		}
@@ -24967,13 +25107,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public StopReplicaResponse WithPartitionsCollections(Func<StopReplicaResponse, StopReplicaResponsePartition[]> createField)
+		public StopReplicaResponse WithPartitionsCollection(params Func<StopReplicaResponsePartition, StopReplicaResponsePartition>[] createFields)
 		{
-			PartitionsCollection = createField(this);
+			PartitionsCollection = createFields
+				.Select(createField => createField(CreateStopReplicaResponsePartition()))
+				.ToArray();
 			return this;
 		}
 
-		public StopReplicaResponsePartition CreateStopReplicaResponsePartition()
+		internal StopReplicaResponsePartition CreateStopReplicaResponsePartition()
 		{
 			return new StopReplicaResponsePartition(Version);
 		}
@@ -25274,13 +25416,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public SyncGroupRequest WithAssignmentsCollections(Func<SyncGroupRequest, SyncGroupRequestAssignment[]> createField)
+		public SyncGroupRequest WithAssignmentsCollection(params Func<SyncGroupRequestAssignment, SyncGroupRequestAssignment>[] createFields)
 		{
-			AssignmentsCollection = createField(this);
+			AssignmentsCollection = createFields
+				.Select(createField => createField(CreateSyncGroupRequestAssignment()))
+				.ToArray();
 			return this;
 		}
 
-		public SyncGroupRequestAssignment CreateSyncGroupRequestAssignment()
+		internal SyncGroupRequestAssignment CreateSyncGroupRequestAssignment()
 		{
 			return new SyncGroupRequestAssignment(Version);
 		}
@@ -25712,13 +25856,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public TxnOffsetCommitRequest WithTopicsCollections(Func<TxnOffsetCommitRequest, TxnOffsetCommitRequestTopic[]> createField)
+		public TxnOffsetCommitRequest WithTopicsCollection(params Func<TxnOffsetCommitRequestTopic, TxnOffsetCommitRequestTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateTxnOffsetCommitRequestTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public TxnOffsetCommitRequestTopic CreateTxnOffsetCommitRequestTopic()
+		internal TxnOffsetCommitRequestTopic CreateTxnOffsetCommitRequestTopic()
 		{
 			return new TxnOffsetCommitRequestTopic(Version);
 		}
@@ -25808,13 +25954,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TxnOffsetCommitRequestTopic WithPartitionsCollections(Func<TxnOffsetCommitRequestTopic, TxnOffsetCommitRequestPartition[]> createField)
+			public TxnOffsetCommitRequestTopic WithPartitionsCollection(params Func<TxnOffsetCommitRequestPartition, TxnOffsetCommitRequestPartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateTxnOffsetCommitRequestPartition()))
+					.ToArray();
 				return this;
 			}
 
-			public TxnOffsetCommitRequestPartition CreateTxnOffsetCommitRequestPartition()
+			internal TxnOffsetCommitRequestPartition CreateTxnOffsetCommitRequestPartition()
 			{
 				return new TxnOffsetCommitRequestPartition(Version);
 			}
@@ -26075,13 +26223,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public TxnOffsetCommitResponse WithTopicsCollections(Func<TxnOffsetCommitResponse, TxnOffsetCommitResponseTopic[]> createField)
+		public TxnOffsetCommitResponse WithTopicsCollection(params Func<TxnOffsetCommitResponseTopic, TxnOffsetCommitResponseTopic>[] createFields)
 		{
-			TopicsCollection = createField(this);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateTxnOffsetCommitResponseTopic()))
+				.ToArray();
 			return this;
 		}
 
-		public TxnOffsetCommitResponseTopic CreateTxnOffsetCommitResponseTopic()
+		internal TxnOffsetCommitResponseTopic CreateTxnOffsetCommitResponseTopic()
 		{
 			return new TxnOffsetCommitResponseTopic(Version);
 		}
@@ -26171,13 +26321,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public TxnOffsetCommitResponseTopic WithPartitionsCollections(Func<TxnOffsetCommitResponseTopic, TxnOffsetCommitResponsePartition[]> createField)
+			public TxnOffsetCommitResponseTopic WithPartitionsCollection(params Func<TxnOffsetCommitResponsePartition, TxnOffsetCommitResponsePartition>[] createFields)
 			{
-				PartitionsCollection = createField(this);
+				PartitionsCollection = createFields
+					.Select(createField => createField(CreateTxnOffsetCommitResponsePartition()))
+					.ToArray();
 				return this;
 			}
 
-			public TxnOffsetCommitResponsePartition CreateTxnOffsetCommitResponsePartition()
+			internal TxnOffsetCommitResponsePartition CreateTxnOffsetCommitResponsePartition()
 			{
 				return new TxnOffsetCommitResponsePartition(Version);
 			}
@@ -26453,13 +26605,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public UpdateMetadataRequest WithTopicStatesCollections(Func<UpdateMetadataRequest, UpdateMetadataRequestTopicState[]> createField)
+		public UpdateMetadataRequest WithTopicStatesCollection(params Func<UpdateMetadataRequestTopicState, UpdateMetadataRequestTopicState>[] createFields)
 		{
-			TopicStatesCollection = createField(this);
+			TopicStatesCollection = createFields
+				.Select(createField => createField(CreateUpdateMetadataRequestTopicState()))
+				.ToArray();
 			return this;
 		}
 
-		public UpdateMetadataRequestTopicState CreateUpdateMetadataRequestTopicState()
+		internal UpdateMetadataRequestTopicState CreateUpdateMetadataRequestTopicState()
 		{
 			return new UpdateMetadataRequestTopicState(Version);
 		}
@@ -26549,13 +26703,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestTopicState WithPartitionStatesCollections(Func<UpdateMetadataRequestTopicState, UpdateMetadataPartitionState[]> createField)
+			public UpdateMetadataRequestTopicState WithPartitionStatesCollection(params Func<UpdateMetadataPartitionState, UpdateMetadataPartitionState>[] createFields)
 			{
-				PartitionStatesCollection = createField(this);
+				PartitionStatesCollection = createFields
+					.Select(createField => createField(CreateUpdateMetadataPartitionState()))
+					.ToArray();
 				return this;
 			}
 
-			public UpdateMetadataPartitionState CreateUpdateMetadataPartitionState()
+			internal UpdateMetadataPartitionState CreateUpdateMetadataPartitionState()
 			{
 				return new UpdateMetadataPartitionState(Version);
 			}
@@ -26898,13 +27054,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public UpdateMetadataRequest WithPartitionStatesV0Collections(Func<UpdateMetadataRequest, UpdateMetadataRequestPartitionStateV0[]> createField)
+		public UpdateMetadataRequest WithPartitionStatesV0Collection(params Func<UpdateMetadataRequestPartitionStateV0, UpdateMetadataRequestPartitionStateV0>[] createFields)
 		{
-			PartitionStatesV0Collection = createField(this);
+			PartitionStatesV0Collection = createFields
+				.Select(createField => createField(CreateUpdateMetadataRequestPartitionStateV0()))
+				.ToArray();
 			return this;
 		}
 
-		public UpdateMetadataRequestPartitionStateV0 CreateUpdateMetadataRequestPartitionStateV0()
+		internal UpdateMetadataRequestPartitionStateV0 CreateUpdateMetadataRequestPartitionStateV0()
 		{
 			return new UpdateMetadataRequestPartitionStateV0(Version);
 		}
@@ -27280,13 +27438,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public UpdateMetadataRequest WithBrokersCollections(Func<UpdateMetadataRequest, UpdateMetadataRequestBroker[]> createField)
+		public UpdateMetadataRequest WithBrokersCollection(params Func<UpdateMetadataRequestBroker, UpdateMetadataRequestBroker>[] createFields)
 		{
-			BrokersCollection = createField(this);
+			BrokersCollection = createFields
+				.Select(createField => createField(CreateUpdateMetadataRequestBroker()))
+				.ToArray();
 			return this;
 		}
 
-		public UpdateMetadataRequestBroker CreateUpdateMetadataRequestBroker()
+		internal UpdateMetadataRequestBroker CreateUpdateMetadataRequestBroker()
 		{
 			return new UpdateMetadataRequestBroker(Version);
 		}
@@ -27445,13 +27605,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestBroker WithEndpointsCollections(Func<UpdateMetadataRequestBroker, UpdateMetadataRequestEndpoint[]> createField)
+			public UpdateMetadataRequestBroker WithEndpointsCollection(params Func<UpdateMetadataRequestEndpoint, UpdateMetadataRequestEndpoint>[] createFields)
 			{
-				EndpointsCollection = createField(this);
+				EndpointsCollection = createFields
+					.Select(createField => createField(CreateUpdateMetadataRequestEndpoint()))
+					.ToArray();
 				return this;
 			}
 
-			public UpdateMetadataRequestEndpoint CreateUpdateMetadataRequestEndpoint()
+			internal UpdateMetadataRequestEndpoint CreateUpdateMetadataRequestEndpoint()
 			{
 				return new UpdateMetadataRequestEndpoint(Version);
 			}
@@ -27766,13 +27928,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public WriteTxnMarkersRequest WithMarkersCollections(Func<WriteTxnMarkersRequest, WritableTxnMarker[]> createField)
+		public WriteTxnMarkersRequest WithMarkersCollection(params Func<WritableTxnMarker, WritableTxnMarker>[] createFields)
 		{
-			MarkersCollection = createField(this);
+			MarkersCollection = createFields
+				.Select(createField => createField(CreateWritableTxnMarker()))
+				.ToArray();
 			return this;
 		}
 
-		public WritableTxnMarker CreateWritableTxnMarker()
+		internal WritableTxnMarker CreateWritableTxnMarker()
 		{
 			return new WritableTxnMarker(Version);
 		}
@@ -27944,13 +28108,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public WritableTxnMarker WithTopicsCollections(Func<WritableTxnMarker, WritableTxnMarkerTopic[]> createField)
+			public WritableTxnMarker WithTopicsCollection(params Func<WritableTxnMarkerTopic, WritableTxnMarkerTopic>[] createFields)
 			{
-				TopicsCollection = createField(this);
+				TopicsCollection = createFields
+					.Select(createField => createField(CreateWritableTxnMarkerTopic()))
+					.ToArray();
 				return this;
 			}
 
-			public WritableTxnMarkerTopic CreateWritableTxnMarkerTopic()
+			internal WritableTxnMarkerTopic CreateWritableTxnMarkerTopic()
 			{
 				return new WritableTxnMarkerTopic(Version);
 			}
@@ -28133,13 +28299,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public WriteTxnMarkersResponse WithMarkersCollections(Func<WriteTxnMarkersResponse, WritableTxnMarkerResult[]> createField)
+		public WriteTxnMarkersResponse WithMarkersCollection(params Func<WritableTxnMarkerResult, WritableTxnMarkerResult>[] createFields)
 		{
-			MarkersCollection = createField(this);
+			MarkersCollection = createFields
+				.Select(createField => createField(CreateWritableTxnMarkerResult()))
+				.ToArray();
 			return this;
 		}
 
-		public WritableTxnMarkerResult CreateWritableTxnMarkerResult()
+		internal WritableTxnMarkerResult CreateWritableTxnMarkerResult()
 		{
 			return new WritableTxnMarkerResult(Version);
 		}
@@ -28229,13 +28397,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public WritableTxnMarkerResult WithTopicsCollections(Func<WritableTxnMarkerResult, WritableTxnMarkerTopicResult[]> createField)
+			public WritableTxnMarkerResult WithTopicsCollection(params Func<WritableTxnMarkerTopicResult, WritableTxnMarkerTopicResult>[] createFields)
 			{
-				TopicsCollection = createField(this);
+				TopicsCollection = createFields
+					.Select(createField => createField(CreateWritableTxnMarkerTopicResult()))
+					.ToArray();
 				return this;
 			}
 
-			public WritableTxnMarkerTopicResult CreateWritableTxnMarkerTopicResult()
+			internal WritableTxnMarkerTopicResult CreateWritableTxnMarkerTopicResult()
 			{
 				return new WritableTxnMarkerTopicResult(Version);
 			}
@@ -28325,13 +28495,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public WritableTxnMarkerTopicResult WithPartitionsCollections(Func<WritableTxnMarkerTopicResult, WritableTxnMarkerPartitionResult[]> createField)
+				public WritableTxnMarkerTopicResult WithPartitionsCollection(params Func<WritableTxnMarkerPartitionResult, WritableTxnMarkerPartitionResult>[] createFields)
 				{
-					PartitionsCollection = createField(this);
+					PartitionsCollection = createFields
+						.Select(createField => createField(CreateWritableTxnMarkerPartitionResult()))
+						.ToArray();
 					return this;
 				}
 
-				public WritableTxnMarkerPartitionResult CreateWritableTxnMarkerPartitionResult()
+				internal WritableTxnMarkerPartitionResult CreateWritableTxnMarkerPartitionResult()
 				{
 					return new WritableTxnMarkerPartitionResult(Version);
 				}
