@@ -19,6 +19,14 @@ namespace Kafka.Protocol.Generator
             return field.Fields?.Any(subField => subField.MapKey) ?? false;
         }
 
+        public static bool TryGetMapKeyField(this Field field, out Field mapKeyField)
+        {
+            mapKeyField = field.Fields?
+                .FirstOrDefault(subField => subField.MapKey);
+
+            return mapKeyField != default;
+        }
+
         public static string GetName(this Field field)
         {
             return field.Name + (field.IsArray() ? "Collection" : "");
@@ -32,13 +40,12 @@ namespace Kafka.Protocol.Generator
                 return name;
             }
 
-            var mapKeyField = field.Fields?.FirstOrDefault(subField => subField.MapKey);
-            if (mapKeyField == null)
+            if (field.TryGetMapKeyField(out var mapKeyField))
             {
-                return name + ArrayTypeCharacter;
+                return $"Dictionary<{mapKeyField.GetTypeName()}, {name}>";
             }
 
-            return $"Dictionary<{mapKeyField.GetTypeName()}, {name}>";
+            return name + ArrayTypeCharacter;
         }
 
         public static string GetTypeNameWithoutArrayCharacters(this Field field)

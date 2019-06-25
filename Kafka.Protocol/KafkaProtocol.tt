@@ -314,7 +314,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field, strin
 	if (field.Fields == null) 
 	{
 		var argumentName = field.GetName().FirstCharacterToLowerCase();
-		#>public <#= className #> With<#= fieldName #>(<#= field.GetTypeName() #> <#= argumentName #>)<# Block(() => 
+		#>public <#= className #> With<#= fieldName #>(<#= fieldTypeName #> <#= argumentName #>)<# Block(() => 
 		{
 			#><#= fieldName #> = <#= argumentName #>;<# _();
 			#>return this;<#
@@ -323,9 +323,15 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field, strin
 		return;
 	} 
 
-	#>public <#= className #> With<#= fieldName #>s(Func<<#= className #>, <#= field.GetTypeName() #>> createField)<# Block(() => 
+	#>public <#= className #> With<#= fieldName #>s(Func<<#= className #>, <#= fieldTypeNameWithoutArrayCharacters #>[]> createField)<# Block(() => 
 	{
-		#><#= fieldName #> = createField(this);<# _();
+		#><#= fieldName #> = createField(this)<#
+		if (field.TryGetMapKeyField(out var mapKeyField))
+		{
+			#>.ToDictionary(field => field.<#= mapKeyField.GetName() #>)<# 
+		}
+		#>;<# _();
+
 		#>return this;<#
 	}); _(2);
 
