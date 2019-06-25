@@ -2503,9 +2503,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public AddPartitionsToTxnRequest WithTopicsCollections(Func<AddPartitionsToTxnRequest, AddPartitionsToTxnTopic[]> createField)
+		public AddPartitionsToTxnRequest WithTopicsCollection(params Func<AddPartitionsToTxnTopic, AddPartitionsToTxnTopic>[] createFields)
 		{
-			TopicsCollection = createField(this).ToDictionary(field => field.Name);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateAddPartitionsToTxnTopic()))
+				.ToDictionary(field => field.Name);
 			return this;
 		}
 
@@ -2699,9 +2701,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public AddPartitionsToTxnResponse WithResultsCollections(Func<AddPartitionsToTxnResponse, AddPartitionsToTxnTopicResult[]> createField)
+		public AddPartitionsToTxnResponse WithResultsCollection(params Func<AddPartitionsToTxnTopicResult, AddPartitionsToTxnTopicResult>[] createFields)
 		{
-			ResultsCollection = createField(this).ToDictionary(field => field.Name);
+			ResultsCollection = createFields
+				.Select(createField => createField(CreateAddPartitionsToTxnTopicResult()))
+				.ToDictionary(field => field.Name);
 			return this;
 		}
 
@@ -2795,9 +2799,11 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AddPartitionsToTxnTopicResult WithResultsCollections(Func<AddPartitionsToTxnTopicResult, AddPartitionsToTxnPartitionResult[]> createField)
+			public AddPartitionsToTxnTopicResult WithResultsCollection(params Func<AddPartitionsToTxnPartitionResult, AddPartitionsToTxnPartitionResult>[] createFields)
 			{
-				ResultsCollection = createField(this).ToDictionary(field => field.PartitionIndex);
+				ResultsCollection = createFields
+					.Select(createField => createField(CreateAddPartitionsToTxnPartitionResult()))
+					.ToDictionary(field => field.PartitionIndex);
 				return this;
 			}
 
@@ -2963,9 +2969,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public AlterConfigsRequest WithResourcesCollections(Func<AlterConfigsRequest, AlterConfigsResource[]> createField)
+		public AlterConfigsRequest WithResourcesCollection(params Func<AlterConfigsResource, AlterConfigsResource>[] createFields)
 		{
-			ResourcesCollection = createField(this).ToDictionary(field => field.ResourceType);
+			ResourcesCollection = createFields
+				.Select(createField => createField(CreateAlterConfigsResource()))
+				.ToDictionary(field => field.ResourceType);
 			return this;
 		}
 
@@ -3096,9 +3104,11 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResource WithConfigsCollections(Func<AlterConfigsResource, AlterableConfig[]> createField)
+			public AlterConfigsResource WithConfigsCollection(params Func<AlterableConfig, AlterableConfig>[] createFields)
 			{
-				ConfigsCollection = createField(this).ToDictionary(field => field.Name);
+				ConfigsCollection = createFields
+					.Select(createField => createField(CreateAlterableConfig()))
+					.ToDictionary(field => field.Name);
 				return this;
 			}
 
@@ -3557,9 +3567,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public AlterReplicaLogDirsRequest WithDirsCollections(Func<AlterReplicaLogDirsRequest, AlterReplicaLogDir[]> createField)
+		public AlterReplicaLogDirsRequest WithDirsCollection(params Func<AlterReplicaLogDir, AlterReplicaLogDir>[] createFields)
 		{
-			DirsCollection = createField(this).ToDictionary(field => field.Path);
+			DirsCollection = createFields
+				.Select(createField => createField(CreateAlterReplicaLogDir()))
+				.ToDictionary(field => field.Path);
 			return this;
 		}
 
@@ -3653,9 +3665,11 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterReplicaLogDir WithTopicsCollections(Func<AlterReplicaLogDir, AlterReplicaLogDirTopic[]> createField)
+			public AlterReplicaLogDir WithTopicsCollection(params Func<AlterReplicaLogDirTopic, AlterReplicaLogDirTopic>[] createFields)
 			{
-				TopicsCollection = createField(this).ToDictionary(field => field.Name);
+				TopicsCollection = createFields
+					.Select(createField => createField(CreateAlterReplicaLogDirTopic()))
+					.ToDictionary(field => field.Name);
 				return this;
 			}
 
@@ -4180,9 +4194,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ApiVersionsResponse WithApiKeysCollections(Func<ApiVersionsResponse, ApiVersionsResponseKey[]> createField)
+		public ApiVersionsResponse WithApiKeysCollection(params Func<ApiVersionsResponseKey, ApiVersionsResponseKey>[] createFields)
 		{
-			ApiKeysCollection = createField(this).ToDictionary(field => field.Index);
+			ApiKeysCollection = createFields
+				.Select(createField => createField(CreateApiVersionsResponseKey()))
+				.ToDictionary(field => field.Index);
 			return this;
 		}
 
@@ -4531,9 +4547,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ControlledShutdownResponse WithRemainingPartitionsCollections(Func<ControlledShutdownResponse, RemainingPartition[]> createField)
+		public ControlledShutdownResponse WithRemainingPartitionsCollection(params Func<RemainingPartition, RemainingPartition>[] createFields)
 		{
-			RemainingPartitionsCollection = createField(this).ToDictionary(field => field.TopicName);
+			RemainingPartitionsCollection = createFields
+				.Select(createField => createField(CreateRemainingPartition()))
+				.ToDictionary(field => field.TopicName);
 			return this;
 		}
 
@@ -6366,9 +6384,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public CreateTopicsRequest WithTopicsCollections(Func<CreateTopicsRequest, CreatableTopic[]> createField)
+		public CreateTopicsRequest WithTopicsCollection(params Func<CreatableTopic, CreatableTopic>[] createFields)
 		{
-			TopicsCollection = createField(this).ToDictionary(field => field.Name);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateCreatableTopic()))
+				.ToDictionary(field => field.Name);
 			return this;
 		}
 
@@ -6544,9 +6564,11 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopic WithAssignmentsCollections(Func<CreatableTopic, CreatableReplicaAssignment[]> createField)
+			public CreatableTopic WithAssignmentsCollection(params Func<CreatableReplicaAssignment, CreatableReplicaAssignment>[] createFields)
 			{
-				AssignmentsCollection = createField(this).ToDictionary(field => field.PartitionIndex);
+				AssignmentsCollection = createFields
+					.Select(createField => createField(CreateCreatableReplicaAssignment()))
+					.ToDictionary(field => field.PartitionIndex);
 				return this;
 			}
 
@@ -6670,9 +6692,11 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopic WithConfigsCollections(Func<CreatableTopic, CreateableTopicConfig[]> createField)
+			public CreatableTopic WithConfigsCollection(params Func<CreateableTopicConfig, CreateableTopicConfig>[] createFields)
 			{
-				ConfigsCollection = createField(this).ToDictionary(field => field.Name);
+				ConfigsCollection = createFields
+					.Select(createField => createField(CreateCreateableTopicConfig()))
+					.ToDictionary(field => field.Name);
 				return this;
 			}
 
@@ -6921,9 +6945,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public CreateTopicsResponse WithTopicsCollections(Func<CreateTopicsResponse, CreatableTopicResult[]> createField)
+		public CreateTopicsResponse WithTopicsCollection(params Func<CreatableTopicResult, CreatableTopicResult>[] createFields)
 		{
-			TopicsCollection = createField(this).ToDictionary(field => field.Name);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateCreatableTopicResult()))
+				.ToDictionary(field => field.Name);
 			return this;
 		}
 
@@ -8150,9 +8176,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DeleteGroupsResponse WithResultsCollections(Func<DeleteGroupsResponse, DeletableGroupResult[]> createField)
+		public DeleteGroupsResponse WithResultsCollection(params Func<DeletableGroupResult, DeletableGroupResult>[] createFields)
 		{
-			ResultsCollection = createField(this).ToDictionary(field => field.GroupId);
+			ResultsCollection = createFields
+				.Select(createField => createField(CreateDeletableGroupResult()))
+				.ToDictionary(field => field.GroupId);
 			return this;
 		}
 
@@ -9068,9 +9096,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DeleteTopicsResponse WithResponsesCollections(Func<DeleteTopicsResponse, DeletableTopicResult[]> createField)
+		public DeleteTopicsResponse WithResponsesCollection(params Func<DeletableTopicResult, DeletableTopicResult>[] createFields)
 		{
-			ResponsesCollection = createField(this).ToDictionary(field => field.Name);
+			ResponsesCollection = createFields
+				.Select(createField => createField(CreateDeletableTopicResult()))
+				.ToDictionary(field => field.Name);
 			return this;
 		}
 
@@ -16469,9 +16499,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public JoinGroupRequest WithProtocolsCollections(Func<JoinGroupRequest, JoinGroupRequestProtocol[]> createField)
+		public JoinGroupRequest WithProtocolsCollection(params Func<JoinGroupRequestProtocol, JoinGroupRequestProtocol>[] createFields)
 		{
-			ProtocolsCollection = createField(this).ToDictionary(field => field.Name);
+			ProtocolsCollection = createFields
+				.Select(createField => createField(CreateJoinGroupRequestProtocol()))
+				.ToDictionary(field => field.Name);
 			return this;
 		}
 
@@ -19962,9 +19994,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public MetadataResponse WithBrokersCollections(Func<MetadataResponse, MetadataResponseBroker[]> createField)
+		public MetadataResponse WithBrokersCollection(params Func<MetadataResponseBroker, MetadataResponseBroker>[] createFields)
 		{
-			BrokersCollection = createField(this).ToDictionary(field => field.NodeId);
+			BrokersCollection = createFields
+				.Select(createField => createField(CreateMetadataResponseBroker()))
+				.ToDictionary(field => field.NodeId);
 			return this;
 		}
 
@@ -20207,9 +20241,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public MetadataResponse WithTopicsCollections(Func<MetadataResponse, MetadataResponseTopic[]> createField)
+		public MetadataResponse WithTopicsCollection(params Func<MetadataResponseTopic, MetadataResponseTopic>[] createFields)
 		{
-			TopicsCollection = createField(this).ToDictionary(field => field.Name);
+			TopicsCollection = createFields
+				.Select(createField => createField(CreateMetadataResponseTopic()))
+				.ToDictionary(field => field.Name);
 			return this;
 		}
 

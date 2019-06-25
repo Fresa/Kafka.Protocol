@@ -27,7 +27,7 @@
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void _(int count = 1) { this.WriteNewLine(count); }
-    
+
 	void GenerateDocumentation(string documentation)
     {
         if (string.IsNullOrEmpty(documentation))
@@ -323,18 +323,25 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field, strin
 		return;
 	} 
 
-	#>public <#= className #> With<#= fieldName #>s(Func<<#= className #>, <#= fieldTypeNameWithoutArrayCharacters #>[]> createField)<# Block(() => 
+	if (field.TryGetMapKeyField(out var mapKeyField))
 	{
-		#><#= fieldName #> = createField(this)<#
-		if (field.TryGetMapKeyField(out var mapKeyField))
+		#>public <#= className #> With<#= fieldName #>(params Func<<#= fieldTypeNameWithoutArrayCharacters #>, <#= fieldTypeNameWithoutArrayCharacters #>>[] createFields)<# Block(() => 
 		{
-			#>.ToDictionary(field => field.<#= mapKeyField.GetName() #>)<# 
-		}
-		#>;<# _();
-
-		#>return this;<#
-	}); _(2);
-
+			#><#= fieldName #> = createFields<# _();
+			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# _();
+			#>	.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# _();
+			#>return this;<#
+		}); _(2);
+	}
+	else 
+	{
+		#>public <#= className #> With<#= fieldName #>s(Func<<#= className #>, <#= fieldTypeNameWithoutArrayCharacters #>[]> createField)<# Block(() => 
+		{
+			#><#= fieldName #> = createField(this);<# _();
+			#>return this;<#
+		}); _(2);
+	}
+	
 	#>public <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>()<# Block(() => 
 	{
 		#>return new <#= fieldTypeNameWithoutArrayCharacters #>(Version);<#
