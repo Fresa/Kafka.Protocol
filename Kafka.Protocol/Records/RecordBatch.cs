@@ -1,6 +1,6 @@
 ﻿namespace Kafka.Protocol.Records
 {
-    public class RecordBatch
+    public class RecordBatch : ISerialize
     {
         public Int64 BaseOffset { get; set; } = Int64.Default;
         public Int32 BatchLength { get; set; } = Int32.Default;
@@ -15,5 +15,39 @@
         public Int16 ProducerEpoch { get; set; } = Int16.Default;
         public Int32 BaseSequence { get; set; } = Int32.Default;
         public Record[] Records { get; set; } = new Record[0];
+
+        public void ReadFrom(IKafkaReader reader)
+        {
+            BaseOffset = Int64.From(reader.ReadInt64());
+            BatchLength = Int32.From(reader.ReadInt32());
+            PartitionLeaderEpoch = Int32.From(reader.ReadInt32());
+            Magic = Int8.From(reader.ReadInt8());
+            Crc = Int32.From(reader.ReadInt32());
+            Attributes = Int16.From(reader.ReadInt16());
+            LastOffsetDelta = Int32.From(reader.ReadInt32());
+            FirstTimestamp = Int64.From(reader.ReadInt64());
+            MaxTimestamp = Int64.From(reader.ReadInt64());
+            ProducerId = Int64.From(reader.ReadInt64());
+            ProducerEpoch = Int16.From(reader.ReadInt16());
+            BaseSequence = Int32.From(reader.ReadInt32());
+            Records = reader.Read(() => new Record());
+        }
+
+        public void WriteTo(IKafkaWriter writer)
+        {
+            writer.WriteInt64(BaseOffset.Value);
+            writer.WriteInt32(BatchLength.Value);
+            writer.WriteInt32(PartitionLeaderEpoch.Value);
+            writer.WriteInt8(Magic.Value);
+            writer.WriteInt32(Crc.Value);
+            writer.WriteInt16(Attributes.Value);
+            writer.WriteInt32(LastOffsetDelta.Value);
+            writer.WriteInt64(FirstTimestamp.Value);
+            writer.WriteInt64(MaxTimestamp.Value);
+            writer.WriteInt64(ProducerId.Value);
+            writer.WriteInt16(ProducerEpoch.Value);
+            writer.WriteInt32(BaseSequence.Value);
+            writer.Write(Records);
+        }
     }
 }
