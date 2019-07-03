@@ -28,20 +28,14 @@
                 _recordBatch = recordBatch;
             }
 
-            public bool None =>
-                _recordBatch.Attributes.GetValueOfBitRange(0, 2) == 0;
+            private int Value => 
+                _recordBatch.Attributes.GetValueOfBitRange(0, 2);
 
-            public bool Gzip =>
-                _recordBatch.Attributes.GetValueOfBitRange(0, 2) == 1;
-
-            public bool Snappy =>
-                _recordBatch.Attributes.GetValueOfBitRange(0, 2) == 2;
-
-            public bool Lz4 =>
-                _recordBatch.Attributes.GetValueOfBitRange(0, 2) == 3;
-
-            public bool Zstd =>
-                _recordBatch.Attributes.GetValueOfBitRange(0, 2) == 4;
+            public bool None => Value == 0;
+            public bool Gzip => Value == 1;
+            public bool Snappy => Value == 2;
+            public bool Lz4 => Value == 3;
+            public bool Zstd => Value == 4;
         }
 
         public TimestampTypes TimestampType => new TimestampTypes(this);
@@ -61,6 +55,12 @@
             public bool LogAppendTime =>
                 _recordBatch.Attributes.IsBitSet(3);
         }
+
+        public bool IsTransactional =>
+            Attributes.IsBitSet(4);
+
+        public bool IsControlBatch =>
+            Attributes.IsBitSet(5);
 
         public void ReadFrom(IKafkaReader reader)
         {
