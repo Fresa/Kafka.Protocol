@@ -1,4 +1,6 @@
-﻿namespace Kafka.Protocol.Records
+﻿using System;
+
+namespace Kafka.Protocol.Records
 {
     public class RecordBatch : ISerialize
     {
@@ -15,6 +17,48 @@
         public Int16 ProducerEpoch { get; set; } = Int16.Default;
         public Int32 BaseSequence { get; set; } = Int32.Default;
         public Record[] Records { get; set; } = new Record[0];
+        public ControlRecord ControlRecord { get; set; }
+
+        public Compressions Compression => new Compressions(this);
+
+        public class Compressions
+        {
+            private readonly RecordBatch _recordBatch;
+
+            internal Compressions(RecordBatch recordBatch)
+            {
+                _recordBatch = recordBatch;
+            }
+
+            private enum Attribute
+            {
+                NoCompression = 0,
+                Gzip = 1,
+                Snappy = 2,
+                Lz4 = 3,
+                Zstd = 4,
+            }
+
+            public bool NoCompression =>
+                _recordBatch.Attributes.GetValueOfBitRange(0, 2) ==
+                (int) Attribute.NoCompression;
+
+            public bool Gzip =>
+                _recordBatch.Attributes.GetValueOfBitRange(0, 2) ==
+                (int) Attribute.Gzip;
+
+            public bool Snappy =>
+                _recordBatch.Attributes.GetValueOfBitRange(0, 2) ==
+                (int) Attribute.Snappy;
+
+            public bool Lz4 =>
+                _recordBatch.Attributes.GetValueOfBitRange(0, 2) ==
+                (int) Attribute.Lz4;
+
+            public bool Zstd =>
+                _recordBatch.Attributes.GetValueOfBitRange(0, 2) ==
+                (int) Attribute.Zstd;
+        }
 
         public void ReadFrom(IKafkaReader reader)
         {
@@ -48,6 +92,33 @@
             writer.WriteInt16(ProducerEpoch.Value);
             writer.WriteInt32(BaseSequence.Value);
             writer.Write(Records);
+        }
+    }
+
+    internal static class Int16Extensions
+    {
+        internal static bool IsBitSet(this Int16 value, int bitNumber)
+        {
+            if (bitNumber < 0 ||
+                bitNumber > 15)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bitNumber), "Must be in range 0-15");
+            }
+
+            if (value.Value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Must be equal or greater than 0");
+            }
+
+            return ((int)value.Value)
+                .IsBitSet(bitNumber);
+        }
+
+        internal static int GetValueOfBitRange(this Int16 value, 
+            int fromBit, 
+            int toBit)
+        {
+            return ((int) value.Value).GetValueOfBitRange(fromBit, toBit);
         }
     }
 }
