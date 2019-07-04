@@ -30,19 +30,26 @@ namespace Kafka.Protocol
             } while (value > 0);
 
             var result = new byte[position];
-            Buffer.BlockCopy(buffer, 0, result, 0, position);
+            Buffer.BlockCopy(
+                buffer,
+                0,
+                result,
+                0,
+                position);
 
             return result;
         }
 
         internal static long DecodeFromZigZag(this ulong value)
         {
-            return (long) ((value >> 1) - (value & 1) * value);
+            return (long)((value >> 1) - (value & 1) * value);
         }
 
         internal static bool IsBitSet(this ulong value, int bitIndex)
         {
-            return value.GetValueOfBitRange(bitIndex, bitIndex) == 1;
+            return value.GetValueOfBitRange(
+                       bitIndex,
+                       bitIndex) == 1;
         }
 
         internal static ulong GetValueOfBitRange(this ulong value,
@@ -51,17 +58,20 @@ namespace Kafka.Protocol
         {
             if (fromBitIndex < MinIndex || fromBitIndex > MaxIndex)
             {
-                throw new ArgumentOutOfRangeException(nameof(fromBitIndex), $"From must be in range {MinIndex}-{MaxIndex}");
+                throw new ArgumentOutOfRangeException(nameof(fromBitIndex),
+                    $"From must be in range {MinIndex}-{MaxIndex}");
             }
 
             if (toBitIndex < MinIndex || toBitIndex > MaxIndex)
             {
-                throw new ArgumentOutOfRangeException(nameof(toBitIndex), $"To must be in range {MinIndex}-{MaxIndex}");
+                throw new ArgumentOutOfRangeException(nameof(toBitIndex),
+                    $"To must be in range {MinIndex}-{MaxIndex}");
             }
 
             if (toBitIndex < fromBitIndex)
             {
-                throw new ArgumentOutOfRangeException(nameof(toBitIndex), "To must be greater than or equal to from");
+                throw new ArgumentOutOfRangeException(nameof(toBitIndex),
+                    "To must be greater than or equal to from");
             }
 
             // Shift in ones covering the range
@@ -77,13 +87,16 @@ namespace Kafka.Protocol
         {
             if (bitIndex < MinIndex || bitIndex > MaxIndex)
             {
-                throw new ArgumentOutOfRangeException(nameof(bitIndex), $"Index must be in range {MinIndex}-{MaxIndex}");
+                throw new ArgumentOutOfRangeException(nameof(bitIndex),
+                    $"Index must be in range {MinIndex}-{MaxIndex}");
             }
 
-            var bitValueAsULong = bitValue ? 1UL : 0;
-            bitValueAsULong <<= bitIndex;
+            if (bitValue)
+            {
+                return value | (1UL << bitIndex);
+            }
 
-            return value | bitValueAsULong;
+            return value & ~(1UL << bitIndex);
         }
     }
 }
