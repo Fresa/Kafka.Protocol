@@ -4,6 +4,10 @@ namespace Kafka.Protocol
 {
     internal static class ULongExtensions
     {
+        private const int MinIndex = 0;
+        private const int MaxIndex = 63;
+        private const ulong Ones = 0b1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111;
+
         internal static byte[] EncodeAsVarInt(this ulong value)
         {
             var buffer = new byte[10];
@@ -45,18 +49,14 @@ namespace Kafka.Protocol
             int fromBitIndex,
             int toBitIndex)
         {
-            const int minIndex = 0;
-            const int maxIndex = 63;
-            const ulong ones = 0b1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111;
-
-            if (fromBitIndex < minIndex || fromBitIndex > maxIndex)
+            if (fromBitIndex < MinIndex || fromBitIndex > MaxIndex)
             {
-                throw new ArgumentOutOfRangeException(nameof(fromBitIndex), $"From must be in range {minIndex}-{maxIndex}");
+                throw new ArgumentOutOfRangeException(nameof(fromBitIndex), $"From must be in range {MinIndex}-{MaxIndex}");
             }
 
-            if (toBitIndex < minIndex || toBitIndex > maxIndex)
+            if (toBitIndex < MinIndex || toBitIndex > MaxIndex)
             {
-                throw new ArgumentOutOfRangeException(nameof(toBitIndex), $"To must be in range {minIndex}-{maxIndex}");
+                throw new ArgumentOutOfRangeException(nameof(toBitIndex), $"To must be in range {MinIndex}-{MaxIndex}");
             }
 
             if (toBitIndex < fromBitIndex)
@@ -65,12 +65,25 @@ namespace Kafka.Protocol
             }
 
             // Shift in ones covering the range
-            var mask = ones >>
-                       maxIndex - (toBitIndex - fromBitIndex) <<
+            var mask = Ones >>
+                       MaxIndex - (toBitIndex - fromBitIndex) <<
                        fromBitIndex;
 
             // Bit AND to get the range value and 0 index the result
             return (value & mask) >> fromBitIndex;
+        }
+
+        internal static ulong SetBit(this ulong value, int bitIndex, bool bitValue)
+        {
+            if (bitIndex < MinIndex || bitIndex > MaxIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bitIndex), $"Index must be in range {MinIndex}-{MaxIndex}");
+            }
+
+            var bitValueAsULong = bitValue ? 1UL : 0;
+            bitValueAsULong <<= bitIndex;
+
+            return value | bitValueAsULong;
         }
     }
 }
