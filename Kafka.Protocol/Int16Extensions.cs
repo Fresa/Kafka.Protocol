@@ -17,11 +17,11 @@ namespace Kafka.Protocol
                 throw new ArgumentOutOfRangeException(nameof(value), "Must be equal or greater than 0");
             }
 
-            return ((int)value.Value)
+            return ((ulong)value.Value)
                 .IsBitSet(bitNumber);
         }
 
-        internal static int GetValueOfBitRange(this Int16 value, 
+        internal static ulong GetValueOfBitRange(this Int16 value, 
             int fromBit, 
             int toBit)
         {
@@ -42,7 +42,7 @@ namespace Kafka.Protocol
                 throw new ArgumentOutOfRangeException(nameof(toBit), $"Must be equal or greater than {nameof(fromBit)}");
             }
 
-            return ((int) value.Value).GetValueOfBitRange(fromBit, toBit);
+            return ((ulong) value.Value).GetValueOfBitRange(fromBit, toBit);
         }
     }
 }

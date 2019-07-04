@@ -35,5 +35,42 @@ namespace Kafka.Protocol
         {
             return (long) ((value >> 1) - (value & 1) * value);
         }
+
+        internal static bool IsBitSet(this ulong value, int bitIndex)
+        {
+            return value.GetValueOfBitRange(bitIndex, bitIndex) == 1;
+        }
+
+        internal static ulong GetValueOfBitRange(this ulong value,
+            int fromBitIndex,
+            int toBitIndex)
+        {
+            const int minIndex = 0;
+            const int maxIndex = 63;
+            const ulong ones = 0b1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111;
+
+            if (fromBitIndex < minIndex || fromBitIndex > maxIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(fromBitIndex), $"From must be in range {minIndex}-{maxIndex}");
+            }
+
+            if (toBitIndex < minIndex || toBitIndex > maxIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(toBitIndex), $"To must be in range {minIndex}-{maxIndex}");
+            }
+
+            if (toBitIndex < fromBitIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(toBitIndex), "To must be greater than or equal to from");
+            }
+
+            // Shift in ones covering the range
+            var mask = ones >>
+                       maxIndex - (toBitIndex - fromBitIndex) <<
+                       fromBitIndex;
+
+            // Bit AND to get the range value and 0 index the result
+            return (value & mask) >> fromBitIndex;
+        }
     }
 }

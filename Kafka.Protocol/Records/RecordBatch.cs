@@ -28,7 +28,7 @@
                 _recordBatch = recordBatch;
             }
 
-            private int Value => 
+            private ulong Value => 
                 _recordBatch.Attributes.GetValueOfBitRange(0, 2);
 
             public bool None => Value == 0;
