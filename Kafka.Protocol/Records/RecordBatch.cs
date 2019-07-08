@@ -89,8 +89,7 @@
                 {
                     if (value)
                     {
-                        _recordBatch.Attributes =
-                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 4);
+                        Value = 4;
                     }
                 }
             }
