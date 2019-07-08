@@ -21,6 +21,23 @@ namespace Kafka.Protocol
                 .IsBitSet(bitNumber);
         }
 
+        internal static void SetBit(this Int16 value, int bitNumber, bool bitValue)
+        {
+            if (bitNumber < 0 ||
+                bitNumber > 15)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bitNumber), "Must be in range 0-15");
+            }
+
+            if (value.Value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Must be equal or greater than 0");
+            }
+
+            ((ulong)value.Value)
+                .SetBit(bitNumber, bitValue);
+        }
+
         internal static ulong GetValueOfBitRange(this Int16 value, 
             int fromBit, 
             int toBit)

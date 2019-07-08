@@ -49,18 +49,30 @@
                 _recordBatch = recordBatch;
             }
 
-            public bool CreateTime =>
-                !LogAppendTime;
+            public bool CreateTime
+            {
+                get => !LogAppendTime;
+                set => LogAppendTime = !value;
+            }
 
-            public bool LogAppendTime =>
-                _recordBatch.Attributes.IsBitSet(3);
+            public bool LogAppendTime
+            {
+                get => _recordBatch.Attributes.IsBitSet(3);
+                set => _recordBatch.Attributes.SetBit(3, value);
+            }
         }
 
-        public bool IsTransactional =>
-            Attributes.IsBitSet(4);
+        public bool IsTransactional
+        {
+            get => Attributes.IsBitSet(4);
+            set => Attributes.SetBit(4, value);
+        }
 
-        public bool IsControlBatch =>
-            Attributes.IsBitSet(5);
+        public bool IsControlBatch
+        {
+            get => Attributes.IsBitSet(5);
+            set => Attributes.SetBit(5, value);
+        }
 
         public void ReadFrom(IKafkaReader reader)
         {
