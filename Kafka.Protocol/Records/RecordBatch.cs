@@ -31,11 +31,70 @@
             private ulong Value => 
                 _recordBatch.Attributes.GetValueOfBitRange(0, 2);
 
-            public bool None => Value == 0;
-            public bool Gzip => Value == 1;
-            public bool Snappy => Value == 2;
-            public bool Lz4 => Value == 3;
-            public bool Zstd => Value == 4;
+            public bool None
+            {
+                get => Value == 0;
+                set
+                {
+                    if (value)
+                    {
+                        _recordBatch.Attributes =
+                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 0);
+                    }
+                }
+            }
+
+            public bool Gzip
+            {
+                get => Value == 1;
+                set
+                {
+                    if (value)
+                    {
+                        _recordBatch.Attributes =
+                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 1);
+                    }
+                }
+            }
+
+            public bool Snappy
+            {
+                get => Value == 2;
+                set
+                {
+                    if (value)
+                    {
+                        _recordBatch.Attributes =
+                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 2);
+                    }
+                }
+            }
+
+            public bool Lz4
+            {
+                get => Value == 3;
+                set
+                {
+                    if (value)
+                    {
+                        _recordBatch.Attributes =
+                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 3);
+                    }
+                }
+            }
+
+            public bool Zstd
+            {
+                get => Value == 4;
+                set
+                {
+                    if (value)
+                    {
+                        _recordBatch.Attributes =
+                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 4);
+                    }
+                }
+            }
         }
 
         public TimestampTypes TimestampType => new TimestampTypes(this);

@@ -60,7 +60,7 @@ namespace Kafka.Protocol
         internal static Int16 SetBitRangeValue(this Int16 value,
             int fromBit,
             int toBit,
-            Int16 rangeValue)
+            ushort rangeValue)
         {
             if (fromBit < 0 ||
                 fromBit > 15)
@@ -80,7 +80,7 @@ namespace Kafka.Protocol
             }
 
             return Int16.From((short) ((ulong) value.Value)
-                .SetBitRangeValue(fromBit, toBit, (ulong) rangeValue.Value));
+                .SetBitRangeValue(fromBit, toBit, rangeValue));
         }
     }
 }
