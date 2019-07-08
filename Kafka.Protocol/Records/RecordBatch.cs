@@ -28,8 +28,11 @@
                 _recordBatch = recordBatch;
             }
 
-            private ulong Value => 
-                _recordBatch.Attributes.GetValueOfBitRange(0, 2);
+            private ushort Value
+            {
+                get => _recordBatch.Attributes.GetValueOfBitRange(0, 2);
+                set => _recordBatch.Attributes = _recordBatch.Attributes.SetBitRangeValue(0, 2, value);
+            }
 
             public bool None
             {
@@ -38,8 +41,7 @@
                 {
                     if (value)
                     {
-                        _recordBatch.Attributes =
-                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 0);
+                        Value = 0;
                     }
                 }
             }
@@ -51,8 +53,7 @@
                 {
                     if (value)
                     {
-                        _recordBatch.Attributes =
-                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 1);
+                        Value = 1;
                     }
                 }
             }
@@ -64,8 +65,7 @@
                 {
                     if (value)
                     {
-                        _recordBatch.Attributes =
-                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 2);
+                        Value = 2;
                     }
                 }
             }
@@ -77,8 +77,7 @@
                 {
                     if (value)
                     {
-                        _recordBatch.Attributes =
-                            _recordBatch.Attributes.SetBitRangeValue(0, 2, 3);
+                        Value = 3;
                     }
                 }
             }

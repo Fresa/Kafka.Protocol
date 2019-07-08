@@ -38,7 +38,7 @@ namespace Kafka.Protocol
                 .SetBit(bitNumber, bitValue));
         }
 
-        internal static ulong GetValueOfBitRange(this Int16 value,
+        internal static ushort GetValueOfBitRange(this Int16 value,
             int fromBit,
             int toBit)
         {
@@ -54,7 +54,12 @@ namespace Kafka.Protocol
                 throw new ArgumentOutOfRangeException(nameof(toBit), "Must be in range 0-15");
             }
 
-            return ((ulong)value.Value).GetValueOfBitRange(fromBit, toBit);
+            if (value.Value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Must be equal or greater than 0");
+            }
+
+            return (ushort)((ulong)value.Value).GetValueOfBitRange(fromBit, toBit);
         }
 
         internal static Int16 SetBitRangeValue(this Int16 value,
@@ -79,7 +84,7 @@ namespace Kafka.Protocol
                 throw new ArgumentOutOfRangeException(nameof(value), "Must be equal or greater than 0");
             }
 
-            return Int16.From((short) ((ulong) value.Value)
+            return Int16.From((short)((ulong)value.Value)
                 .SetBitRangeValue(fromBit, toBit, rangeValue));
         }
     }
