@@ -58,20 +58,20 @@
             public bool LogAppendTime
             {
                 get => _recordBatch.Attributes.IsBitSet(3);
-                set => _recordBatch.Attributes.SetBit(3, value);
+                set => _recordBatch.Attributes = _recordBatch.Attributes.SetBit(3, value);
             }
         }
 
         public bool IsTransactional
         {
             get => Attributes.IsBitSet(4);
-            set => Attributes.SetBit(4, value);
+            set => Attributes = Attributes.SetBit(4, value);
         }
 
         public bool IsControlBatch
         {
             get => Attributes.IsBitSet(5);
-            set => Attributes.SetBit(5, value);
+            set => Attributes = Attributes.SetBit(5, value);
         }
 
         public void ReadFrom(IKafkaReader reader)

@@ -21,7 +21,7 @@ namespace Kafka.Protocol
                 .IsBitSet(bitNumber);
         }
 
-        internal static void SetBit(this Int16 value, int bitNumber, bool bitValue)
+        internal static Int16 SetBit(this Int16 value, int bitNumber, bool bitValue)
         {
             if (bitNumber < 0 ||
                 bitNumber > 15)
@@ -34,12 +34,12 @@ namespace Kafka.Protocol
                 throw new ArgumentOutOfRangeException(nameof(value), "Must be equal or greater than 0");
             }
 
-            ((ulong)value.Value)
-                .SetBit(bitNumber, bitValue);
+            return Int16.From((short)((ulong)value.Value)
+                .SetBit(bitNumber, bitValue));
         }
 
-        internal static ulong GetValueOfBitRange(this Int16 value, 
-            int fromBit, 
+        internal static ulong GetValueOfBitRange(this Int16 value,
+            int fromBit,
             int toBit)
         {
             if (fromBit < 0 ||
@@ -54,12 +54,33 @@ namespace Kafka.Protocol
                 throw new ArgumentOutOfRangeException(nameof(toBit), "Must be in range 0-15");
             }
 
-            if (toBit < fromBit)
+            return ((ulong)value.Value).GetValueOfBitRange(fromBit, toBit);
+        }
+
+        internal static Int16 SetBitRangeValue(this Int16 value,
+            int fromBit,
+            int toBit,
+            Int16 rangeValue)
+        {
+            if (fromBit < 0 ||
+                fromBit > 15)
             {
-                throw new ArgumentOutOfRangeException(nameof(toBit), $"Must be equal or greater than {nameof(fromBit)}");
+                throw new ArgumentOutOfRangeException(nameof(fromBit), "Must be in range 0-15");
             }
 
-            return ((ulong) value.Value).GetValueOfBitRange(fromBit, toBit);
+            if (toBit < 0 ||
+                toBit > 15)
+            {
+                throw new ArgumentOutOfRangeException(nameof(toBit), "Must be in range 0-15");
+            }
+
+            if (value.Value < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(value), "Must be equal or greater than 0");
+            }
+
+            return Int16.From((short) ((ulong) value.Value)
+                .SetBitRangeValue(fromBit, toBit, (ulong) rangeValue.Value));
         }
     }
 }

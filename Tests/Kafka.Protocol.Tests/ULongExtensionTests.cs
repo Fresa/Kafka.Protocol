@@ -37,5 +37,26 @@ namespace Kafka.Protocol.Tests
                 value.SetBit(bitIndex, bitValue).Should().Be(result);
             }
         }
+
+        public partial class When_setting_a_bit_range : XUnit2Specification
+        {
+            [Theory]
+            [InlineData(5, 0, 0, 0, 4)]
+            [InlineData(5, 0, 1, 0, 4)]
+            [InlineData(5, 0, 2, 0, 0)]
+            [InlineData(5, 0, 2, 7, 7)]
+            [InlineData(5, 0, 1, 3, 7)]
+            [InlineData(5, 1, 4, 14, 29)]
+            public void It_should_calculate_the_value_of_the_bit_range(
+                ulong value, 
+                int fromBit, 
+                int toBit, 
+                ulong rangeValue, 
+                ulong result)
+            {
+                value.SetBitRangeValue(fromBit, toBit, rangeValue)
+                    .Should().Be(result);
+            }
+        }
     }
 }

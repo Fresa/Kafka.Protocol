@@ -83,6 +83,44 @@ namespace Kafka.Protocol
             return (value & mask) >> fromBitIndex;
         }
 
+        internal static ulong SetBitRangeValue(this ulong value,
+            int fromBitIndex,
+            int toBitIndex,
+            ulong bitRangeValue)
+        {
+            if (fromBitIndex < MinIndex || fromBitIndex > MaxIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(fromBitIndex),
+                    $"From must be in range {MinIndex}-{MaxIndex}");
+            }
+
+            if (toBitIndex < MinIndex || toBitIndex > MaxIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(toBitIndex),
+                    $"To must be in range {MinIndex}-{MaxIndex}");
+            }
+
+            if (toBitIndex < fromBitIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(toBitIndex),
+                    "To must be greater than or equal to from");
+            }
+
+            if (bitRangeValue >= 1UL << (toBitIndex - fromBitIndex + 1))
+            {
+                throw new ArgumentOutOfRangeException(nameof(bitRangeValue),
+                    "Range value cannot be larger than the bit index span");
+            }
+
+            // Shift in ones covering the range and invert them
+            var mask = ~(Ones >>
+                       MaxIndex - (toBitIndex - fromBitIndex) <<
+                       fromBitIndex);
+
+            // Clear the range and set it with the new value
+            return (value & mask) | (bitRangeValue << fromBitIndex);
+        }
+
         internal static ulong SetBit(this ulong value, int bitIndex, bool bitValue)
         {
             if (bitIndex < MinIndex || bitIndex > MaxIndex)
