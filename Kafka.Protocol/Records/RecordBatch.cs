@@ -15,7 +15,6 @@
         public Int16 ProducerEpoch { get; set; } = Int16.Default;
         public Int32 BaseSequence { get; set; } = Int32.Default;
         public Record[] Records { get; set; } = new Record[0];
-        public ControlRecord ControlRecord { get; set; }
 
         public Compressions Compression => new Compressions(this);
 

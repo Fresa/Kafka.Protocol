@@ -1,12 +1,7 @@
 ﻿namespace Kafka.Protocol.Records
 {
-    public class ControlRecord : ISerialize
+    public class ControlRecordKey : ISerialize
     {
-        public ControlRecord(Int16 version)
-        {
-            Version = version;
-        }
-
         private Int16 _version = Int16.Default;
         public Int16 Version
         {
