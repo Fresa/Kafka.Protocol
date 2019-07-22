@@ -2518,6 +2518,8 @@ namespace Kafka.Protocol
 			{
 				return new WriteTxnMarkersResponse(version);
 			}
+
+			throw new ArgumentException($"{apiKey} is not supported");
 		}
 	}
 

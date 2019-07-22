@@ -140,14 +140,15 @@ namespace Kafka.Protocol<# Block(() =>
     {
 		#>public static Message Create(int apiKey, int version)<# Block(() =>
 		{
-			PrintOnNewRowForEachWithIndex(messageDefinitions, (messageDefinition, index, count) =>
+			PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
 			{
 				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# Block(() =>
 				{
 					#>return new <#= messageDefinition.Name #>(version);<#
-				}); 
-				if (index + 1 != count) _();
-			});
+				}); _();
+			}); _();
+
+			#>throw new ArgumentException($"{apiKey} is not supported");<#
 		});
 	}); _(2);
 	
