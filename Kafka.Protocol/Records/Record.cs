@@ -7,7 +7,7 @@
         public VarInt TimestampDelta { get; set; } = VarInt.Default;
         public VarInt OffsetDelta { get; set; } = VarInt.Default;
         public VarInt KeyLength { get; set; } = VarInt.Default;
-        public Bytes Bytes { get; set; } = Bytes.Default;
+        public Bytes Key { get; set; } = Bytes.Default;
         public VarInt ValueLen { get; set; } = VarInt.Default;
         public Bytes Value { get; set; } = Bytes.Default;
         public Header[] Headers { get; set; } = new Header[0];
@@ -19,7 +19,7 @@
             TimestampDelta = VarInt.From(reader.ReadVarInt());
             OffsetDelta = VarInt.From(reader.ReadVarInt());
             KeyLength = VarInt.From(reader.ReadVarInt());
-            Bytes = Bytes.From(reader.ReadBytes());
+            Key = Bytes.From(reader.ReadBytes());
             ValueLen = VarInt.From(reader.ReadVarInt());
             Value = Bytes.From(reader.ReadBytes());
             Headers = reader.Read(() => new Header());
@@ -32,7 +32,7 @@
             writer.WriteVarInt(TimestampDelta.Value);
             writer.WriteVarInt(OffsetDelta.Value);
             writer.WriteVarInt(KeyLength.Value);
-            writer.WriteBytes(Bytes.Value);
+            writer.WriteBytes(Key.Value);
             writer.WriteVarInt(ValueLen.Value);
             writer.WriteBytes(Value.Value);
             writer.Write(Headers);
