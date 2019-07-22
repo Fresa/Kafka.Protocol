@@ -136,10 +136,25 @@ namespace Kafka.Protocol<# Block(() =>
 		if (index + 1 != count) _();
     }); _(2);
 
+	#>public static class Messages <# Block(() =>
+    {
+		#>public static Message Create(int apiKey, int version)<# Block(() =>
+		{
+			PrintOnNewRowForEachWithIndex(messageDefinitions, (messageDefinition, index, count) =>
+			{
+				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# Block(() =>
+				{
+					#>return new <#= messageDefinition.Name #>(version);<#
+				}); 
+				if (index + 1 != count) _();
+			});
+		});
+	}); _(2);
+	
 	// Messages
 	PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
 	{
-		#>public class <#= messageDefinition.Name #><# Block(() => 
+		#>public class <#= messageDefinition.Name #> : Message<# Block(() => 
 		{
 			#>public <#= messageDefinition.Name #>(int version)<# Block(() => 
 			{
@@ -152,11 +167,11 @@ namespace Kafka.Protocol<# Block(() =>
 				 #>Version = version;<#
 			}); _(2);
 
-			#>public int Version { get; }<# _(2);
+			#>public const int ApiKey = <#= messageDefinition.ApiKey #>;<# _(2);
 
-			#>public int ApiKey => <#= messageDefinition.ApiKey #>;<# _(2);
+			#>public override int Version { get; }<# _(2);
 
-			#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
+			#>public override void ReadFrom(IKafkaReader reader)<# Block(() => 
 			{
 				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
 				{
@@ -164,7 +179,7 @@ namespace Kafka.Protocol<# Block(() =>
 				});
 			}); _(2);
 
-			#>public void WriteTo(IKafkaWriter writer)<# Block(() => 
+			#>public override void WriteTo(IKafkaWriter writer)<# Block(() => 
 			{
 				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
 				{
