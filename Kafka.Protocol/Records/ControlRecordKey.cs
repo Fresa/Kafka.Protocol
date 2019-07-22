@@ -17,30 +17,30 @@
             }
         }
 
-        public Int16 Type { get; private set;} = Int16.Default;
+        private Int16 _type = Int16.Default;
 
         public bool IsAbortMarker
         {
-            get => Type == Int16.From(0);
-            set => Type = Int16.From(value ? (short)0 : (short)1);
+            get => _type == Int16.From(0);
+            set => _type = Int16.From(value ? (short)0 : (short)1);
         }
 
         public bool IsCommit
         {
-            get => Type == Int16.From(1);
-            set => Type = Int16.From(value ? (short)1 : (short)0);
+            get => _type == Int16.From(1);
+            set => _type = Int16.From(value ? (short)1 : (short)0);
         }
 
         public void ReadFrom(IKafkaReader reader)
         {
             Version = Int16.From(reader.ReadInt16());
-            Type = Int16.From(reader.ReadInt16());
+            _type = Int16.From(reader.ReadInt16());
         }
 
         public void WriteTo(IKafkaWriter writer)
         {
             writer.WriteInt16(Version.Value);
-            writer.WriteInt16(Type.Value);
+            writer.WriteInt16(_type.Value);
         }
     }
 }
