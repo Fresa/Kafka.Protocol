@@ -2065,7 +2065,463 @@ namespace Kafka.Protocol
 		public int Code { get; } = 76;
 	}
 
-	public class AddOffsetsToTxnRequest
+	public static class Messages 
+	{
+		public static Message Create(int apiKey, int version)
+		{
+			if (AddOffsetsToTxnRequest.ApiKey == apiKey)
+			{
+				return new AddOffsetsToTxnRequest(version);
+			}
+
+			if (AddOffsetsToTxnResponse.ApiKey == apiKey)
+			{
+				return new AddOffsetsToTxnResponse(version);
+			}
+
+			if (AddPartitionsToTxnRequest.ApiKey == apiKey)
+			{
+				return new AddPartitionsToTxnRequest(version);
+			}
+
+			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
+			{
+				return new AddPartitionsToTxnResponse(version);
+			}
+
+			if (AlterConfigsRequest.ApiKey == apiKey)
+			{
+				return new AlterConfigsRequest(version);
+			}
+
+			if (AlterConfigsResponse.ApiKey == apiKey)
+			{
+				return new AlterConfigsResponse(version);
+			}
+
+			if (AlterReplicaLogDirsRequest.ApiKey == apiKey)
+			{
+				return new AlterReplicaLogDirsRequest(version);
+			}
+
+			if (AlterReplicaLogDirsResponse.ApiKey == apiKey)
+			{
+				return new AlterReplicaLogDirsResponse(version);
+			}
+
+			if (ApiVersionsRequest.ApiKey == apiKey)
+			{
+				return new ApiVersionsRequest(version);
+			}
+
+			if (ApiVersionsResponse.ApiKey == apiKey)
+			{
+				return new ApiVersionsResponse(version);
+			}
+
+			if (ControlledShutdownRequest.ApiKey == apiKey)
+			{
+				return new ControlledShutdownRequest(version);
+			}
+
+			if (ControlledShutdownResponse.ApiKey == apiKey)
+			{
+				return new ControlledShutdownResponse(version);
+			}
+
+			if (CreateAclsRequest.ApiKey == apiKey)
+			{
+				return new CreateAclsRequest(version);
+			}
+
+			if (CreateAclsResponse.ApiKey == apiKey)
+			{
+				return new CreateAclsResponse(version);
+			}
+
+			if (CreateDelegationTokenRequest.ApiKey == apiKey)
+			{
+				return new CreateDelegationTokenRequest(version);
+			}
+
+			if (CreateDelegationTokenResponse.ApiKey == apiKey)
+			{
+				return new CreateDelegationTokenResponse(version);
+			}
+
+			if (CreatePartitionsRequest.ApiKey == apiKey)
+			{
+				return new CreatePartitionsRequest(version);
+			}
+
+			if (CreatePartitionsResponse.ApiKey == apiKey)
+			{
+				return new CreatePartitionsResponse(version);
+			}
+
+			if (CreateTopicsRequest.ApiKey == apiKey)
+			{
+				return new CreateTopicsRequest(version);
+			}
+
+			if (CreateTopicsResponse.ApiKey == apiKey)
+			{
+				return new CreateTopicsResponse(version);
+			}
+
+			if (DeleteAclsRequest.ApiKey == apiKey)
+			{
+				return new DeleteAclsRequest(version);
+			}
+
+			if (DeleteAclsResponse.ApiKey == apiKey)
+			{
+				return new DeleteAclsResponse(version);
+			}
+
+			if (DeleteGroupsRequest.ApiKey == apiKey)
+			{
+				return new DeleteGroupsRequest(version);
+			}
+
+			if (DeleteGroupsResponse.ApiKey == apiKey)
+			{
+				return new DeleteGroupsResponse(version);
+			}
+
+			if (DeleteRecordsRequest.ApiKey == apiKey)
+			{
+				return new DeleteRecordsRequest(version);
+			}
+
+			if (DeleteRecordsResponse.ApiKey == apiKey)
+			{
+				return new DeleteRecordsResponse(version);
+			}
+
+			if (DeleteTopicsRequest.ApiKey == apiKey)
+			{
+				return new DeleteTopicsRequest(version);
+			}
+
+			if (DeleteTopicsResponse.ApiKey == apiKey)
+			{
+				return new DeleteTopicsResponse(version);
+			}
+
+			if (DescribeAclsRequest.ApiKey == apiKey)
+			{
+				return new DescribeAclsRequest(version);
+			}
+
+			if (DescribeAclsResponse.ApiKey == apiKey)
+			{
+				return new DescribeAclsResponse(version);
+			}
+
+			if (DescribeConfigsRequest.ApiKey == apiKey)
+			{
+				return new DescribeConfigsRequest(version);
+			}
+
+			if (DescribeConfigsResponse.ApiKey == apiKey)
+			{
+				return new DescribeConfigsResponse(version);
+			}
+
+			if (DescribeDelegationTokenRequest.ApiKey == apiKey)
+			{
+				return new DescribeDelegationTokenRequest(version);
+			}
+
+			if (DescribeDelegationTokenResponse.ApiKey == apiKey)
+			{
+				return new DescribeDelegationTokenResponse(version);
+			}
+
+			if (DescribeGroupsRequest.ApiKey == apiKey)
+			{
+				return new DescribeGroupsRequest(version);
+			}
+
+			if (DescribeGroupsResponse.ApiKey == apiKey)
+			{
+				return new DescribeGroupsResponse(version);
+			}
+
+			if (DescribeLogDirsRequest.ApiKey == apiKey)
+			{
+				return new DescribeLogDirsRequest(version);
+			}
+
+			if (DescribeLogDirsResponse.ApiKey == apiKey)
+			{
+				return new DescribeLogDirsResponse(version);
+			}
+
+			if (ElectPreferredLeadersRequest.ApiKey == apiKey)
+			{
+				return new ElectPreferredLeadersRequest(version);
+			}
+
+			if (ElectPreferredLeadersResponse.ApiKey == apiKey)
+			{
+				return new ElectPreferredLeadersResponse(version);
+			}
+
+			if (EndTxnRequest.ApiKey == apiKey)
+			{
+				return new EndTxnRequest(version);
+			}
+
+			if (EndTxnResponse.ApiKey == apiKey)
+			{
+				return new EndTxnResponse(version);
+			}
+
+			if (ExpireDelegationTokenRequest.ApiKey == apiKey)
+			{
+				return new ExpireDelegationTokenRequest(version);
+			}
+
+			if (ExpireDelegationTokenResponse.ApiKey == apiKey)
+			{
+				return new ExpireDelegationTokenResponse(version);
+			}
+
+			if (FetchRequest.ApiKey == apiKey)
+			{
+				return new FetchRequest(version);
+			}
+
+			if (FetchResponse.ApiKey == apiKey)
+			{
+				return new FetchResponse(version);
+			}
+
+			if (FindCoordinatorRequest.ApiKey == apiKey)
+			{
+				return new FindCoordinatorRequest(version);
+			}
+
+			if (FindCoordinatorResponse.ApiKey == apiKey)
+			{
+				return new FindCoordinatorResponse(version);
+			}
+
+			if (HeartbeatRequest.ApiKey == apiKey)
+			{
+				return new HeartbeatRequest(version);
+			}
+
+			if (HeartbeatResponse.ApiKey == apiKey)
+			{
+				return new HeartbeatResponse(version);
+			}
+
+			if (InitProducerIdRequest.ApiKey == apiKey)
+			{
+				return new InitProducerIdRequest(version);
+			}
+
+			if (InitProducerIdResponse.ApiKey == apiKey)
+			{
+				return new InitProducerIdResponse(version);
+			}
+
+			if (JoinGroupRequest.ApiKey == apiKey)
+			{
+				return new JoinGroupRequest(version);
+			}
+
+			if (JoinGroupResponse.ApiKey == apiKey)
+			{
+				return new JoinGroupResponse(version);
+			}
+
+			if (LeaderAndIsrRequest.ApiKey == apiKey)
+			{
+				return new LeaderAndIsrRequest(version);
+			}
+
+			if (LeaderAndIsrResponse.ApiKey == apiKey)
+			{
+				return new LeaderAndIsrResponse(version);
+			}
+
+			if (LeaveGroupRequest.ApiKey == apiKey)
+			{
+				return new LeaveGroupRequest(version);
+			}
+
+			if (LeaveGroupResponse.ApiKey == apiKey)
+			{
+				return new LeaveGroupResponse(version);
+			}
+
+			if (ListGroupsRequest.ApiKey == apiKey)
+			{
+				return new ListGroupsRequest(version);
+			}
+
+			if (ListGroupsResponse.ApiKey == apiKey)
+			{
+				return new ListGroupsResponse(version);
+			}
+
+			if (ListOffsetRequest.ApiKey == apiKey)
+			{
+				return new ListOffsetRequest(version);
+			}
+
+			if (ListOffsetResponse.ApiKey == apiKey)
+			{
+				return new ListOffsetResponse(version);
+			}
+
+			if (MetadataRequest.ApiKey == apiKey)
+			{
+				return new MetadataRequest(version);
+			}
+
+			if (MetadataResponse.ApiKey == apiKey)
+			{
+				return new MetadataResponse(version);
+			}
+
+			if (OffsetCommitRequest.ApiKey == apiKey)
+			{
+				return new OffsetCommitRequest(version);
+			}
+
+			if (OffsetCommitResponse.ApiKey == apiKey)
+			{
+				return new OffsetCommitResponse(version);
+			}
+
+			if (OffsetFetchRequest.ApiKey == apiKey)
+			{
+				return new OffsetFetchRequest(version);
+			}
+
+			if (OffsetFetchResponse.ApiKey == apiKey)
+			{
+				return new OffsetFetchResponse(version);
+			}
+
+			if (OffsetForLeaderEpochRequest.ApiKey == apiKey)
+			{
+				return new OffsetForLeaderEpochRequest(version);
+			}
+
+			if (OffsetForLeaderEpochResponse.ApiKey == apiKey)
+			{
+				return new OffsetForLeaderEpochResponse(version);
+			}
+
+			if (ProduceRequest.ApiKey == apiKey)
+			{
+				return new ProduceRequest(version);
+			}
+
+			if (ProduceResponse.ApiKey == apiKey)
+			{
+				return new ProduceResponse(version);
+			}
+
+			if (RenewDelegationTokenRequest.ApiKey == apiKey)
+			{
+				return new RenewDelegationTokenRequest(version);
+			}
+
+			if (RenewDelegationTokenResponse.ApiKey == apiKey)
+			{
+				return new RenewDelegationTokenResponse(version);
+			}
+
+			if (RequestHeader.ApiKey == apiKey)
+			{
+				return new RequestHeader(version);
+			}
+
+			if (ResponseHeader.ApiKey == apiKey)
+			{
+				return new ResponseHeader(version);
+			}
+
+			if (SaslAuthenticateRequest.ApiKey == apiKey)
+			{
+				return new SaslAuthenticateRequest(version);
+			}
+
+			if (SaslAuthenticateResponse.ApiKey == apiKey)
+			{
+				return new SaslAuthenticateResponse(version);
+			}
+
+			if (SaslHandshakeRequest.ApiKey == apiKey)
+			{
+				return new SaslHandshakeRequest(version);
+			}
+
+			if (SaslHandshakeResponse.ApiKey == apiKey)
+			{
+				return new SaslHandshakeResponse(version);
+			}
+
+			if (StopReplicaRequest.ApiKey == apiKey)
+			{
+				return new StopReplicaRequest(version);
+			}
+
+			if (StopReplicaResponse.ApiKey == apiKey)
+			{
+				return new StopReplicaResponse(version);
+			}
+
+			if (SyncGroupRequest.ApiKey == apiKey)
+			{
+				return new SyncGroupRequest(version);
+			}
+
+			if (SyncGroupResponse.ApiKey == apiKey)
+			{
+				return new SyncGroupResponse(version);
+			}
+
+			if (TxnOffsetCommitRequest.ApiKey == apiKey)
+			{
+				return new TxnOffsetCommitRequest(version);
+			}
+
+			if (TxnOffsetCommitResponse.ApiKey == apiKey)
+			{
+				return new TxnOffsetCommitResponse(version);
+			}
+
+			if (UpdateMetadataRequest.ApiKey == apiKey)
+			{
+				return new UpdateMetadataRequest(version);
+			}
+
+			if (UpdateMetadataResponse.ApiKey == apiKey)
+			{
+				return new UpdateMetadataResponse(version);
+			}
+
+			if (WriteTxnMarkersRequest.ApiKey == apiKey)
+			{
+				return new WriteTxnMarkersRequest(version);
+			}
+
+			if (WriteTxnMarkersResponse.ApiKey == apiKey)
+			{
+				return new WriteTxnMarkersResponse(version);
+			}
+		}
+	}
+
+	public class AddOffsetsToTxnRequest : Message
 	{
 		public AddOffsetsToTxnRequest(int version)
 		{
@@ -2077,11 +2533,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 25;
 
-		public int ApiKey => 25;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2101,7 +2557,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2238,7 +2694,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AddOffsetsToTxnResponse
+	public class AddOffsetsToTxnResponse : Message
 	{
 		public AddOffsetsToTxnResponse(int version)
 		{
@@ -2250,11 +2706,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 25;
 
-		public int ApiKey => 25;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2266,7 +2722,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2337,7 +2793,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AddPartitionsToTxnRequest
+	public class AddPartitionsToTxnRequest : Message
 	{
 		public AddPartitionsToTxnRequest(int version)
 		{
@@ -2349,11 +2805,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 24;
 
-		public int ApiKey => 24;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2373,7 +2829,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2609,7 +3065,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AddPartitionsToTxnResponse
+	public class AddPartitionsToTxnResponse : Message
 	{
 		public AddPartitionsToTxnResponse(int version)
 		{
@@ -2621,11 +3077,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 24;
 
-		public int ApiKey => 24;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2637,7 +3093,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2906,7 +3362,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AlterConfigsRequest
+	public class AlterConfigsRequest : Message
 	{
 		public AlterConfigsRequest(int version)
 		{
@@ -2918,11 +3374,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 33;
 
-		public int ApiKey => 33;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -2934,7 +3390,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -3241,7 +3697,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AlterConfigsResponse
+	public class AlterConfigsResponse : Message
 	{
 		public AlterConfigsResponse(int version)
 		{
@@ -3253,11 +3709,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 33;
 
-		public int ApiKey => 33;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -3269,7 +3725,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -3514,7 +3970,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AlterReplicaLogDirsRequest
+	public class AlterReplicaLogDirsRequest : Message
 	{
 		public AlterReplicaLogDirsRequest(int version)
 		{
@@ -3526,11 +3982,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 34;
 
-		public int ApiKey => 34;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -3538,7 +3994,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -3774,7 +4230,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AlterReplicaLogDirsResponse
+	public class AlterReplicaLogDirsResponse : Message
 	{
 		public AlterReplicaLogDirsResponse(int version)
 		{
@@ -3786,11 +4242,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 34;
 
-		public int ApiKey => 34;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -3802,7 +4258,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -4071,7 +4527,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ApiVersionsRequest
+	public class ApiVersionsRequest : Message
 	{
 		public ApiVersionsRequest(int version)
 		{
@@ -4083,16 +4539,16 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 18;
 
-		public int ApiKey => 18;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 
 		}
@@ -4100,7 +4556,7 @@ namespace Kafka.Protocol
 
 	}
 
-	public class ApiVersionsResponse
+	public class ApiVersionsResponse : Message
 	{
 		public ApiVersionsResponse(int version)
 		{
@@ -4112,11 +4568,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 18;
 
-		public int ApiKey => 18;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -4132,7 +4588,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -4367,7 +4823,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ControlledShutdownRequest
+	public class ControlledShutdownRequest : Message
 	{
 		public ControlledShutdownRequest(int version)
 		{
@@ -4379,11 +4835,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 7;
 
-		public int ApiKey => 7;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -4395,7 +4851,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -4461,7 +4917,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ControlledShutdownResponse
+	public class ControlledShutdownResponse : Message
 	{
 		public ControlledShutdownResponse(int version)
 		{
@@ -4473,11 +4929,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 7;
 
-		public int ApiKey => 7;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -4489,7 +4945,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -4659,7 +5115,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateAclsRequest
+	public class CreateAclsRequest : Message
 	{
 		public CreateAclsRequest(int version)
 		{
@@ -4671,11 +5127,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 30;
 
-		public int ApiKey => 30;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -4683,7 +5139,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -5005,7 +5461,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateAclsResponse
+	public class CreateAclsResponse : Message
 	{
 		public CreateAclsResponse(int version)
 		{
@@ -5017,11 +5473,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 30;
 
-		public int ApiKey => 30;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -5033,7 +5489,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -5204,7 +5660,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateDelegationTokenRequest
+	public class CreateDelegationTokenRequest : Message
 	{
 		public CreateDelegationTokenRequest(int version)
 		{
@@ -5216,11 +5672,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 38;
 
-		public int ApiKey => 38;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -5232,7 +5688,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -5402,7 +5858,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateDelegationTokenResponse
+	public class CreateDelegationTokenResponse : Message
 	{
 		public CreateDelegationTokenResponse(int version)
 		{
@@ -5414,11 +5870,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 38;
 
-		public int ApiKey => 38;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -5458,7 +5914,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -5760,7 +6216,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreatePartitionsRequest
+	public class CreatePartitionsRequest : Message
 	{
 		public CreatePartitionsRequest(int version)
 		{
@@ -5772,11 +6228,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 37;
 
-		public int ApiKey => 37;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -5792,7 +6248,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -6095,7 +6551,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreatePartitionsResponse
+	public class CreatePartitionsResponse : Message
 	{
 		public CreatePartitionsResponse(int version)
 		{
@@ -6107,11 +6563,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 37;
 
-		public int ApiKey => 37;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -6123,7 +6579,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -6331,7 +6787,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateTopicsRequest
+	public class CreateTopicsRequest : Message
 	{
 		public CreateTopicsRequest(int version)
 		{
@@ -6343,11 +6799,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 19;
 
-		public int ApiKey => 19;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -6363,7 +6819,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -6876,7 +7332,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateTopicsResponse
+	public class CreateTopicsResponse : Message
 	{
 		public CreateTopicsResponse(int version)
 		{
@@ -6888,11 +7344,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 19;
 
-		public int ApiKey => 19;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -6904,7 +7360,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -7102,7 +7558,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteAclsRequest
+	public class DeleteAclsRequest : Message
 	{
 		public DeleteAclsRequest(int version)
 		{
@@ -7114,11 +7570,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 31;
 
-		public int ApiKey => 31;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -7126,7 +7582,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -7451,7 +7907,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteAclsResponse
+	public class DeleteAclsResponse : Message
 	{
 		public DeleteAclsResponse(int version)
 		{
@@ -7463,11 +7919,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 31;
 
-		public int ApiKey => 31;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -7479,7 +7935,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8046,7 +8502,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteGroupsRequest
+	public class DeleteGroupsRequest : Message
 	{
 		public DeleteGroupsRequest(int version)
 		{
@@ -8058,11 +8514,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 42;
 
-		public int ApiKey => 42;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8070,7 +8526,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8108,7 +8564,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteGroupsResponse
+	public class DeleteGroupsResponse : Message
 	{
 		public DeleteGroupsResponse(int version)
 		{
@@ -8120,11 +8576,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 42;
 
-		public int ApiKey => 42;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8136,7 +8592,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8306,7 +8762,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteRecordsRequest
+	public class DeleteRecordsRequest : Message
 	{
 		public DeleteRecordsRequest(int version)
 		{
@@ -8318,11 +8774,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 21;
 
-		public int ApiKey => 21;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8334,7 +8790,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8603,7 +9059,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteRecordsResponse
+	public class DeleteRecordsResponse : Message
 	{
 		public DeleteRecordsResponse(int version)
 		{
@@ -8615,11 +9071,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 21;
 
-		public int ApiKey => 21;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8631,7 +9087,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8937,7 +9393,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteTopicsRequest
+	public class DeleteTopicsRequest : Message
 	{
 		public DeleteTopicsRequest(int version)
 		{
@@ -8949,11 +9405,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 20;
 
-		public int ApiKey => 20;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -8965,7 +9421,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -9036,7 +9492,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteTopicsResponse
+	public class DeleteTopicsResponse : Message
 	{
 		public DeleteTopicsResponse(int version)
 		{
@@ -9048,11 +9504,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 20;
 
-		public int ApiKey => 20;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -9064,7 +9520,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -9234,7 +9690,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeAclsRequest
+	public class DescribeAclsRequest : Message
 	{
 		public DescribeAclsRequest(int version)
 		{
@@ -9246,11 +9702,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 29;
 
-		public int ApiKey => 29;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -9282,7 +9738,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -9521,7 +9977,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeAclsResponse
+	public class DescribeAclsResponse : Message
 	{
 		public DescribeAclsResponse(int version)
 		{
@@ -9533,11 +9989,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 29;
 
-		public int ApiKey => 29;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -9557,7 +10013,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -10041,7 +10497,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeConfigsRequest
+	public class DescribeConfigsRequest : Message
 	{
 		public DescribeConfigsRequest(int version)
 		{
@@ -10053,11 +10509,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 32;
 
-		public int ApiKey => 32;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -10069,7 +10525,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -10277,7 +10733,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeConfigsResponse
+	public class DescribeConfigsResponse : Message
 	{
 		public DescribeConfigsResponse(int version)
 		{
@@ -10289,11 +10745,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 32;
 
-		public int ApiKey => 32;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -10305,7 +10761,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -10999,7 +11455,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeDelegationTokenRequest
+	public class DescribeDelegationTokenRequest : Message
 	{
 		public DescribeDelegationTokenRequest(int version)
 		{
@@ -11011,11 +11467,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 41;
 
-		public int ApiKey => 41;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -11023,7 +11479,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -11161,7 +11617,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeDelegationTokenResponse
+	public class DescribeDelegationTokenResponse : Message
 	{
 		public DescribeDelegationTokenResponse(int version)
 		{
@@ -11173,11 +11629,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 41;
 
-		public int ApiKey => 41;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -11193,7 +11649,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -11717,7 +12173,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeGroupsRequest
+	public class DescribeGroupsRequest : Message
 	{
 		public DescribeGroupsRequest(int version)
 		{
@@ -11729,11 +12185,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 15;
 
-		public int ApiKey => 15;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -11745,7 +12201,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -11816,7 +12272,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeGroupsResponse
+	public class DescribeGroupsResponse : Message
 	{
 		public DescribeGroupsResponse(int version)
 		{
@@ -11828,11 +12284,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 15;
 
-		public int ApiKey => 15;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -11844,7 +12300,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -12404,7 +12860,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeLogDirsRequest
+	public class DescribeLogDirsRequest : Message
 	{
 		public DescribeLogDirsRequest(int version)
 		{
@@ -12416,11 +12872,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 35;
 
-		public int ApiKey => 35;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -12428,7 +12884,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -12566,7 +13022,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeLogDirsResponse
+	public class DescribeLogDirsResponse : Message
 	{
 		public DescribeLogDirsResponse(int version)
 		{
@@ -12578,11 +13034,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 35;
 
-		public int ApiKey => 35;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -12594,7 +13050,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13070,7 +13526,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ElectPreferredLeadersRequest
+	public class ElectPreferredLeadersRequest : Message
 	{
 		public ElectPreferredLeadersRequest(int version)
 		{
@@ -13082,11 +13538,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 43;
 
-		public int ApiKey => 43;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13098,7 +13554,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13269,7 +13725,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ElectPreferredLeadersResponse
+	public class ElectPreferredLeadersResponse : Message
 	{
 		public ElectPreferredLeadersResponse(int version)
 		{
@@ -13281,11 +13737,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 43;
 
-		public int ApiKey => 43;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13297,7 +13753,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13604,7 +14060,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class EndTxnRequest
+	public class EndTxnRequest : Message
 	{
 		public EndTxnRequest(int version)
 		{
@@ -13616,11 +14072,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 26;
 
-		public int ApiKey => 26;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13640,7 +14096,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13777,7 +14233,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class EndTxnResponse
+	public class EndTxnResponse : Message
 	{
 		public EndTxnResponse(int version)
 		{
@@ -13789,11 +14245,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 26;
 
-		public int ApiKey => 26;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13805,7 +14261,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13876,7 +14332,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ExpireDelegationTokenRequest
+	public class ExpireDelegationTokenRequest : Message
 	{
 		public ExpireDelegationTokenRequest(int version)
 		{
@@ -13888,11 +14344,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 40;
 
-		public int ApiKey => 40;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13904,7 +14360,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13975,7 +14431,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ExpireDelegationTokenResponse
+	public class ExpireDelegationTokenResponse : Message
 	{
 		public ExpireDelegationTokenResponse(int version)
 		{
@@ -13987,11 +14443,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 40;
 
-		public int ApiKey => 40;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -14007,7 +14463,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -14111,7 +14567,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class FetchRequest
+	public class FetchRequest : Message
 	{
 		public FetchRequest(int version)
 		{
@@ -14123,11 +14579,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 1;
 
-		public int ApiKey => 1;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -14167,7 +14623,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -14867,7 +15323,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class FetchResponse
+	public class FetchResponse : Message
 	{
 		public FetchResponse(int version)
 		{
@@ -14879,11 +15335,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 1;
 
-		public int ApiKey => 1;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -14903,7 +15359,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -15509,7 +15965,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class FindCoordinatorRequest
+	public class FindCoordinatorRequest : Message
 	{
 		public FindCoordinatorRequest(int version)
 		{
@@ -15521,11 +15977,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 10;
 
-		public int ApiKey => 10;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -15537,7 +15993,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -15608,7 +16064,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class FindCoordinatorResponse
+	public class FindCoordinatorResponse : Message
 	{
 		public FindCoordinatorResponse(int version)
 		{
@@ -15620,11 +16076,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 10;
 
-		public int ApiKey => 10;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -15652,7 +16108,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -15846,7 +16302,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class HeartbeatRequest
+	public class HeartbeatRequest : Message
 	{
 		public HeartbeatRequest(int version)
 		{
@@ -15858,11 +16314,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 12;
 
-		public int ApiKey => 12;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -15878,7 +16334,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -15982,7 +16438,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class HeartbeatResponse
+	public class HeartbeatResponse : Message
 	{
 		public HeartbeatResponse(int version)
 		{
@@ -15994,11 +16450,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 12;
 
-		public int ApiKey => 12;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -16010,7 +16466,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -16076,7 +16532,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class InitProducerIdRequest
+	public class InitProducerIdRequest : Message
 	{
 		public InitProducerIdRequest(int version)
 		{
@@ -16088,11 +16544,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 22;
 
-		public int ApiKey => 22;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -16104,7 +16560,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -16176,7 +16632,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class InitProducerIdResponse
+	public class InitProducerIdResponse : Message
 	{
 		public InitProducerIdResponse(int version)
 		{
@@ -16188,11 +16644,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 22;
 
-		public int ApiKey => 22;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -16212,7 +16668,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -16344,7 +16800,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class JoinGroupRequest
+	public class JoinGroupRequest : Message
 	{
 		public JoinGroupRequest(int version)
 		{
@@ -16356,11 +16812,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 11;
 
-		public int ApiKey => 11;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -16388,7 +16844,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -16685,7 +17141,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class JoinGroupResponse
+	public class JoinGroupResponse : Message
 	{
 		public JoinGroupResponse(int version)
 		{
@@ -16697,11 +17153,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 11;
 
-		public int ApiKey => 11;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -16733,7 +17189,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -17060,7 +17516,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class LeaderAndIsrRequest
+	public class LeaderAndIsrRequest : Message
 	{
 		public LeaderAndIsrRequest(int version)
 		{
@@ -17072,11 +17528,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 4;
 
-		public int ApiKey => 4;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -17104,7 +17560,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -18206,7 +18662,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class LeaderAndIsrResponse
+	public class LeaderAndIsrResponse : Message
 	{
 		public LeaderAndIsrResponse(int version)
 		{
@@ -18218,11 +18674,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 4;
 
-		public int ApiKey => 4;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -18234,7 +18690,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -18441,7 +18897,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class LeaveGroupRequest
+	public class LeaveGroupRequest : Message
 	{
 		public LeaveGroupRequest(int version)
 		{
@@ -18453,11 +18909,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 13;
 
-		public int ApiKey => 13;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -18469,7 +18925,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -18540,7 +18996,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class LeaveGroupResponse
+	public class LeaveGroupResponse : Message
 	{
 		public LeaveGroupResponse(int version)
 		{
@@ -18552,11 +19008,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 13;
 
-		public int ApiKey => 13;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -18568,7 +19024,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -18634,7 +19090,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ListGroupsRequest
+	public class ListGroupsRequest : Message
 	{
 		public ListGroupsRequest(int version)
 		{
@@ -18646,16 +19102,16 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 16;
 
-		public int ApiKey => 16;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 
 		}
@@ -18663,7 +19119,7 @@ namespace Kafka.Protocol
 
 	}
 
-	public class ListGroupsResponse
+	public class ListGroupsResponse : Message
 	{
 		public ListGroupsResponse(int version)
 		{
@@ -18675,11 +19131,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 16;
 
-		public int ApiKey => 16;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -18695,7 +19151,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -18893,7 +19349,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ListOffsetRequest
+	public class ListOffsetRequest : Message
 	{
 		public ListOffsetRequest(int version)
 		{
@@ -18905,11 +19361,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 2;
 
-		public int ApiKey => 2;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -18925,7 +19381,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -19301,7 +19757,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ListOffsetResponse
+	public class ListOffsetResponse : Message
 	{
 		public ListOffsetResponse(int version)
 		{
@@ -19313,11 +19769,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 2;
 
-		public int ApiKey => 2;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -19329,7 +19785,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -19738,7 +20194,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class MetadataRequest
+	public class MetadataRequest : Message
 	{
 		public MetadataRequest(int version)
 		{
@@ -19750,11 +20206,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 3;
 
-		public int ApiKey => 3;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -19774,7 +20230,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -19974,7 +20430,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class MetadataResponse
+	public class MetadataResponse : Message
 	{
 		public MetadataResponse(int version)
 		{
@@ -19986,11 +20442,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 3;
 
-		public int ApiKey => 3;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -20018,7 +20474,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -20860,7 +21316,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetCommitRequest
+	public class OffsetCommitRequest : Message
 	{
 		public OffsetCommitRequest(int version)
 		{
@@ -20872,11 +21328,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 8;
 
-		public int ApiKey => 8;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -20900,7 +21356,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -21360,7 +21816,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetCommitResponse
+	public class OffsetCommitResponse : Message
 	{
 		public OffsetCommitResponse(int version)
 		{
@@ -21372,11 +21828,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 8;
 
-		public int ApiKey => 8;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -21388,7 +21844,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -21652,7 +22108,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetFetchRequest
+	public class OffsetFetchRequest : Message
 	{
 		public OffsetFetchRequest(int version)
 		{
@@ -21664,11 +22120,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 9;
 
-		public int ApiKey => 9;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -21680,7 +22136,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -21848,7 +22304,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetFetchResponse
+	public class OffsetFetchResponse : Message
 	{
 		public OffsetFetchResponse(int version)
 		{
@@ -21860,11 +22316,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 9;
 
-		public int ApiKey => 9;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -21880,7 +22336,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -22289,7 +22745,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetForLeaderEpochRequest
+	public class OffsetForLeaderEpochRequest : Message
 	{
 		public OffsetForLeaderEpochRequest(int version)
 		{
@@ -22301,11 +22757,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 23;
 
-		public int ApiKey => 23;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -22313,7 +22769,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -22581,7 +23037,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetForLeaderEpochResponse
+	public class OffsetForLeaderEpochResponse : Message
 	{
 		public OffsetForLeaderEpochResponse(int version)
 		{
@@ -22593,11 +23049,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 23;
 
-		public int ApiKey => 23;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -22609,7 +23065,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
@@ -22942,7 +23398,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ProduceRequest
+	public class ProduceRequest : Message
 	{
 		public ProduceRequest(int version)
 		{
@@ -22954,11 +23410,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 0;
 
-		public int ApiKey => 0;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -22978,7 +23434,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -23315,7 +23771,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ProduceResponse
+	public class ProduceResponse : Message
 	{
 		public ProduceResponse(int version)
 		{
@@ -23327,11 +23783,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 0;
 
-		public int ApiKey => 0;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -23343,7 +23799,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -23708,7 +24164,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class RenewDelegationTokenRequest
+	public class RenewDelegationTokenRequest : Message
 	{
 		public RenewDelegationTokenRequest(int version)
 		{
@@ -23720,11 +24176,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 39;
 
-		public int ApiKey => 39;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -23736,7 +24192,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -23807,7 +24263,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class RenewDelegationTokenResponse
+	public class RenewDelegationTokenResponse : Message
 	{
 		public RenewDelegationTokenResponse(int version)
 		{
@@ -23819,11 +24275,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 39;
 
-		public int ApiKey => 39;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -23839,7 +24295,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -23943,7 +24399,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class RequestHeader
+	public class RequestHeader : Message
 	{
 		public RequestHeader(int version)
 		{
@@ -23955,11 +24411,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 0;
 
-		public int ApiKey => 0;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -23979,7 +24435,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24116,7 +24572,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ResponseHeader
+	public class ResponseHeader : Message
 	{
 		public ResponseHeader(int version)
 		{
@@ -24128,11 +24584,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 0;
 
-		public int ApiKey => 0;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24140,7 +24596,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24178,7 +24634,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class SaslAuthenticateRequest
+	public class SaslAuthenticateRequest : Message
 	{
 		public SaslAuthenticateRequest(int version)
 		{
@@ -24190,11 +24646,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 36;
 
-		public int ApiKey => 36;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24202,7 +24658,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24240,7 +24696,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class SaslAuthenticateResponse
+	public class SaslAuthenticateResponse : Message
 	{
 		public SaslAuthenticateResponse(int version)
 		{
@@ -24252,11 +24708,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 36;
 
-		public int ApiKey => 36;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24276,7 +24732,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24414,7 +24870,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class SaslHandshakeRequest
+	public class SaslHandshakeRequest : Message
 	{
 		public SaslHandshakeRequest(int version)
 		{
@@ -24426,11 +24882,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 17;
 
-		public int ApiKey => 17;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24438,7 +24894,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24476,7 +24932,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class SaslHandshakeResponse
+	public class SaslHandshakeResponse : Message
 	{
 		public SaslHandshakeResponse(int version)
 		{
@@ -24488,11 +24944,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 17;
 
-		public int ApiKey => 17;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24504,7 +24960,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24575,7 +25031,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class StopReplicaRequest
+	public class StopReplicaRequest : Message
 	{
 		public StopReplicaRequest(int version)
 		{
@@ -24587,11 +25043,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 5;
 
-		public int ApiKey => 5;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -24619,7 +25075,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -25015,7 +25471,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class StopReplicaResponse
+	public class StopReplicaResponse : Message
 	{
 		public StopReplicaResponse(int version)
 		{
@@ -25027,11 +25483,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 5;
 
-		public int ApiKey => 5;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -25043,7 +25499,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -25250,7 +25706,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class SyncGroupRequest
+	public class SyncGroupRequest : Message
 	{
 		public SyncGroupRequest(int version)
 		{
@@ -25262,11 +25718,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 14;
 
-		public int ApiKey => 14;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -25286,7 +25742,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -25522,7 +25978,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class SyncGroupResponse
+	public class SyncGroupResponse : Message
 	{
 		public SyncGroupResponse(int version)
 		{
@@ -25534,11 +25990,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 14;
 
-		public int ApiKey => 14;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -25554,7 +26010,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
@@ -25653,7 +26109,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class TxnOffsetCommitRequest
+	public class TxnOffsetCommitRequest : Message
 	{
 		public TxnOffsetCommitRequest(int version)
 		{
@@ -25665,11 +26121,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 28;
 
-		public int ApiKey => 28;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -25693,7 +26149,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -26131,7 +26587,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class TxnOffsetCommitResponse
+	public class TxnOffsetCommitResponse : Message
 	{
 		public TxnOffsetCommitResponse(int version)
 		{
@@ -26143,11 +26599,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 28;
 
-		public int ApiKey => 28;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -26159,7 +26615,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -26428,7 +26884,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class UpdateMetadataRequest
+	public class UpdateMetadataRequest : Message
 	{
 		public UpdateMetadataRequest(int version)
 		{
@@ -26440,11 +26896,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 6;
 
-		public int ApiKey => 6;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -26472,7 +26928,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -27811,7 +28267,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class UpdateMetadataResponse
+	public class UpdateMetadataResponse : Message
 	{
 		public UpdateMetadataResponse(int version)
 		{
@@ -27823,11 +28279,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 6;
 
-		public int ApiKey => 6;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -27835,7 +28291,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -27873,7 +28329,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class WriteTxnMarkersRequest
+	public class WriteTxnMarkersRequest : Message
 	{
 		public WriteTxnMarkersRequest(int version)
 		{
@@ -27885,11 +28341,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 27;
 
-		public int ApiKey => 27;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -27897,7 +28353,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -28244,7 +28700,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class WriteTxnMarkersResponse
+	public class WriteTxnMarkersResponse : Message
 	{
 		public WriteTxnMarkersResponse(int version)
 		{
@@ -28256,11 +28712,11 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public int Version { get; }
+		public const int ApiKey = 27;
 
-		public int ApiKey => 27;
+		public override int Version { get; }
 
-		public void ReadFrom(IKafkaReader reader)
+		public override void ReadFrom(IKafkaReader reader)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -28268,7 +28724,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public override void WriteTo(IKafkaWriter writer)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
