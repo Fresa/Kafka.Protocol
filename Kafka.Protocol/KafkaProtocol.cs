@@ -61,7 +61,7 @@ namespace Kafka.Protocol
 	}
 
 	/// <summary>
-	/// Represents an integer between -27 and 27-1 inclusive.
+	/// Represents an integer between -2^7 and 2^7-1 inclusive.
 	/// </summary>
 	public struct Int8 : ISerialize 
 	{
@@ -116,7 +116,7 @@ namespace Kafka.Protocol
 	}
 
 	/// <summary>
-	/// Represents an integer between -215 and 215-1 inclusive. The values are encoded using two bytes in network byte order (big-endian).
+	/// Represents an integer between -2^15 and 2^15-1 inclusive. The values are encoded using two bytes in network byte order (big-endian).
 	/// </summary>
 	public struct Int16 : ISerialize 
 	{
@@ -171,7 +171,7 @@ namespace Kafka.Protocol
 	}
 
 	/// <summary>
-	/// Represents an integer between -231 and 231-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).
+	/// Represents an integer between -2^31 and 2^31-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).
 	/// </summary>
 	public struct Int32 : ISerialize 
 	{
@@ -226,7 +226,7 @@ namespace Kafka.Protocol
 	}
 
 	/// <summary>
-	/// Represents an integer between -263 and 263-1 inclusive. The values are encoded using eight bytes in network byte order (big-endian).
+	/// Represents an integer between -2^63 and 2^63-1 inclusive. The values are encoded using eight bytes in network byte order (big-endian).
 	/// </summary>
 	public struct Int64 : ISerialize 
 	{
@@ -281,7 +281,7 @@ namespace Kafka.Protocol
 	}
 
 	/// <summary>
-	/// Represents an integer between 0 and 232-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).
+	/// Represents an integer between 0 and 2^32-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).
 	/// </summary>
 	public struct UInt32 : ISerialize 
 	{
@@ -336,7 +336,7 @@ namespace Kafka.Protocol
 	}
 
 	/// <summary>
-	/// Represents an integer between -231 and 231-1 inclusive. Encoding follows the variable-length zig-zag encoding from   Google Protocol Buffers.
+	/// Represents an integer between -2^31 and 2^31-1 inclusive. Encoding follows the variable-length zig-zag encoding from  <a href="http://code.google.com/apis/protocolbuffers/docs/encoding.html"> Google Protocol Buffers</a>.
 	/// </summary>
 	public struct VarInt : ISerialize 
 	{
@@ -391,7 +391,7 @@ namespace Kafka.Protocol
 	}
 
 	/// <summary>
-	/// Represents an integer between -263 and 263-1 inclusive. Encoding follows the variable-length zig-zag encoding from   Google Protocol Buffers.
+	/// Represents an integer between -2^63 and 2^63-1 inclusive. Encoding follows the variable-length zig-zag encoding from  <a href="http://code.google.com/apis/protocolbuffers/docs/encoding.html"> Google Protocol Buffers</a>.
 	/// </summary>
 	public struct VarLong : ISerialize 
 	{

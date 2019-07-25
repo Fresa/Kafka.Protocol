@@ -80,20 +80,20 @@ namespace Kafka.Protocol.Generator.Extensions
         /// </summary>
         /// <typeparam name="T">Object type to convert to</typeparam>
         /// <param name="node">Table node</param>
-        /// <param name="resolveCellValue">Resolves cell value. Defaults to InnerText.</param>
+        /// <param name="resolveCellValue">Resolves cell value</param>
         /// <returns></returns>
         internal static IEnumerable<T> ParseTableNodeTo<T>(
             this HtmlNode node,
-            ResolveCellValue resolveCellValue = null) 
+            ResolveCellValue resolveCellValue = null)
             where T : class, new()
         {
-            resolveCellValue = resolveCellValue ?? (htmlNode => htmlNode.InnerText); 
+            resolveCellValue = resolveCellValue ?? (htmlNode => htmlNode.InnerHtmlAsFormattedString());
 
             if (node.Name.Equals("table",
                     StringComparison.CurrentCultureIgnoreCase) == false)
             {
                 throw new ArgumentException(
-                    "Node is not a table", 
+                    "Node is not a table",
                     nameof(node));
             }
 
@@ -134,10 +134,10 @@ namespace Kafka.Protocol.Generator.Extensions
                     var propertyName = properties[i].Name;
 
                     var property = properties
-                        .FirstOrDefault(info => 
+                        .FirstOrDefault(info =>
                             info.Name
                                 .Equals(propertyName));
-                    
+
                     if (property == null)
                     {
                         throw new InvalidOperationException(
@@ -152,6 +152,22 @@ namespace Kafka.Protocol.Generator.Extensions
             }
         }
 
-        
+        private static readonly Dictionary<string, string> HtmlTagTranslations = new Dictionary<string, string>
+        {
+            {"sup", "^" }
+        };
+
+        internal static string InnerHtmlAsFormattedString(this HtmlNode htmlNode)
+        {
+            var translated = htmlNode.InnerHtml;
+            foreach (var htmlTagTranslation in HtmlTagTranslations)
+            {
+                translated = translated
+                    .Replace($"<{htmlTagTranslation.Key}>", htmlTagTranslation.Value)
+                    .Replace($"</{htmlTagTranslation.Key}>", string.Empty);
+            }
+
+            return translated;
+        }
     }
 }
