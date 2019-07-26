@@ -2259,14 +2259,14 @@ namespace Kafka.Protocol
 				return new DescribeLogDirsResponse(version);
 			}
 
-			if (ElectPreferredLeadersRequest.ApiKey == apiKey)
+			if (ElectLeadersRequest.ApiKey == apiKey)
 			{
-				return new ElectPreferredLeadersRequest(version);
+				return new ElectLeadersRequest(version);
 			}
 
-			if (ElectPreferredLeadersResponse.ApiKey == apiKey)
+			if (ElectLeadersResponse.ApiKey == apiKey)
 			{
-				return new ElectPreferredLeadersResponse(version);
+				return new ElectLeadersResponse(version);
 			}
 
 			if (EndTxnRequest.ApiKey == apiKey)
@@ -2317,6 +2317,16 @@ namespace Kafka.Protocol
 			if (HeartbeatResponse.ApiKey == apiKey)
 			{
 				return new HeartbeatResponse(version);
+			}
+
+			if (IncrementalAlterConfigsRequest.ApiKey == apiKey)
+			{
+				return new IncrementalAlterConfigsRequest(version);
+			}
+
+			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
+			{
+				return new IncrementalAlterConfigsResponse(version);
 			}
 
 			if (InitProducerIdRequest.ApiKey == apiKey)
@@ -2991,7 +3001,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					PartitionsCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					PartitionsCollection = reader.Read(() => new Int32());
 				}
 			}
 
@@ -3723,7 +3733,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				ResourcesCollection = reader.Read(() => new AlterConfigsResourceResponse(Version));
+				ResponsesCollection = reader.Read(() => new AlterConfigsResourceResponse(Version));
 			}
 		}
 
@@ -3735,7 +3745,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResourcesCollection);
+				writer.Write(ResponsesCollection);
 			}
 		}
 
@@ -3771,29 +3781,29 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The responses for each resource.
 		/// </summary>
-		private AlterConfigsResourceResponse[] _resourcesCollection = System.Array.Empty<AlterConfigsResourceResponse>();
-		public AlterConfigsResourceResponse[] ResourcesCollection 
+		private AlterConfigsResourceResponse[] _responsesCollection = System.Array.Empty<AlterConfigsResourceResponse>();
+		public AlterConfigsResourceResponse[] ResponsesCollection 
 		{
-			get => _resourcesCollection;
+			get => _responsesCollection;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
 				{
-					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
 				if (value == null) 
 				{
-					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
+					throw new UnsupportedVersionException($"ResponsesCollection is non-nullable.");
 				}
 
-				_resourcesCollection = value;
+				_responsesCollection = value;
 			}
 		}
 
-		public AlterConfigsResponse WithResourcesCollection(params Func<AlterConfigsResourceResponse, AlterConfigsResourceResponse>[] createFields)
+		public AlterConfigsResponse WithResponsesCollection(params Func<AlterConfigsResourceResponse, AlterConfigsResourceResponse>[] createFields)
 		{
-			ResourcesCollection = createFields
+			ResponsesCollection = createFields
 				.Select(createField => createField(CreateAlterConfigsResourceResponse()))
 				.ToArray();
 			return this;
@@ -4155,7 +4165,7 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						PartitionsCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+						PartitionsCollection = reader.Read(() => new Int32());
 					}
 				}
 
@@ -6451,7 +6461,7 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						BrokerIdsCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+						BrokerIdsCollection = reader.Read(() => new Int32());
 					}
 				}
 
@@ -6793,9 +6803,9 @@ namespace Kafka.Protocol
 	{
 		public CreateTopicsRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 3)) == false) 
+			if (version.InRange(new VersionRange(0, 4)) == false) 
 			{
-				throw new UnsupportedVersionException($"CreateTopicsRequest does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"CreateTopicsRequest does not support version {version}. Valid versions are: 0-4");
 			}
 
 			Version = version;
@@ -6960,7 +6970,7 @@ namespace Kafka.Protocol
 			}
 
 			/// <summary>
-			/// The number of partitions to create in the topic, or -1 if we are specifying a manual partition assignment.
+			/// The number of partitions to create in the topic, or -1 if we are either specifying a manual partition assignment or using the default partitions.
 			/// </summary>
 			private Int32 _numPartitions = Int32.Default;
 			public Int32 NumPartitions 
@@ -6989,7 +6999,7 @@ namespace Kafka.Protocol
 			}
 
 			/// <summary>
-			/// The number of replicas to create for each partition in the topic, or -1 if we are specifying a manual partition assignment.
+			/// The number of replicas to create for each partition in the topic, or -1 if we are either specifying a manual partition assignment or using the default replication factor.
 			/// </summary>
 			private Int16 _replicationFactor = Int16.Default;
 			public Int16 ReplicationFactor 
@@ -7070,7 +7080,7 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						BrokerIdsCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+						BrokerIdsCollection = reader.Read(() => new Int32());
 					}
 				}
 
@@ -7338,9 +7348,9 @@ namespace Kafka.Protocol
 	{
 		public CreateTopicsResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 3)) == false) 
+			if (version.InRange(new VersionRange(0, 4)) == false) 
 			{
-				throw new UnsupportedVersionException($"CreateTopicsResponse does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"CreateTopicsResponse does not support version {version}. Valid versions are: 0-4");
 			}
 
 			Version = version;
@@ -8524,7 +8534,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				GroupsNamesCollection = reader.Read(() => new String(reader.ReadString()));
+				GroupsNamesCollection = reader.Read(() => new String());
 			}
 		}
 
@@ -9415,7 +9425,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				TopicNamesCollection = reader.Read(() => new String(reader.ReadString()));
+				TopicNamesCollection = reader.Read(() => new String());
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -10596,7 +10606,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					ConfigurationKeysCollection = reader.Read(() => new String(reader.ReadString()));
+					ConfigurationKeysCollection = reader.Read(() => new String());
 				}
 			}
 
@@ -12179,9 +12189,9 @@ namespace Kafka.Protocol
 	{
 		public DescribeGroupsRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 3)) == false) 
+			if (version.InRange(new VersionRange(0, 4)) == false) 
 			{
-				throw new UnsupportedVersionException($"DescribeGroupsRequest does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"DescribeGroupsRequest does not support version {version}. Valid versions are: 0-4");
 			}
 
 			Version = version;
@@ -12195,7 +12205,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				GroupsCollection = reader.Read(() => new String(reader.ReadString()));
+				GroupsCollection = reader.Read(() => new String());
 			}
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
@@ -12278,9 +12288,9 @@ namespace Kafka.Protocol
 	{
 		public DescribeGroupsResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 3)) == false) 
+			if (version.InRange(new VersionRange(0, 4)) == false) 
 			{
-				throw new UnsupportedVersionException($"DescribeGroupsResponse does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"DescribeGroupsResponse does not support version {version}. Valid versions are: 0-4");
 			}
 
 			Version = version;
@@ -12643,6 +12653,10 @@ namespace Kafka.Protocol
 					{
 						MemberId = new String(reader.ReadString());
 					}
+					if (Version.InRange(new VersionRange(4, 2147483647))) 
+					{
+						GroupInstanceId = new String(reader.ReadString());
+					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
 						ClientId = new String(reader.ReadString());
@@ -12666,6 +12680,10 @@ namespace Kafka.Protocol
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
 						writer.WriteString(MemberId.Value);
+					}
+					if (Version.InRange(new VersionRange(4, 2147483647))) 
+					{
+						writer.WriteString(GroupInstanceId.Value);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
@@ -12711,6 +12729,36 @@ namespace Kafka.Protocol
 				public DescribedGroupMember WithMemberId(String memberId)
 				{
 					MemberId = memberId;
+					return this;
+				}
+
+				/// <summary>
+				/// The unique identifier of the consumer instance provided by end user.
+				/// </summary>
+				private String _groupInstanceId = new String(null);
+				public String GroupInstanceId 
+				{
+					get => _groupInstanceId;
+					set 
+					{
+						if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+						}
+
+						if (Version.InRange(new VersionRange(4, 2147483647)) == false &&
+							value == null) 
+						{
+							throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 4+");
+						}
+
+						_groupInstanceId = value;
+					}
+				}
+
+				public DescribedGroupMember WithGroupInstanceId(String groupInstanceId)
+				{
+					GroupInstanceId = groupInstanceId;
 					return this;
 				}
 
@@ -12834,7 +12882,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this group.
 			/// </summary>
-			private Int32 _authorizedOperations = Int32.Default;
+			private Int32 _authorizedOperations = new Int32(-2147483648);
 			public Int32 AuthorizedOperations 
 			{
 				get => _authorizedOperations;
@@ -12948,7 +12996,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					PartitionIndexCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					PartitionIndexCollection = reader.Read(() => new Int32());
 				}
 			}
 
@@ -13528,13 +13576,13 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ElectPreferredLeadersRequest : Message
+	public class ElectLeadersRequest : Message
 	{
-		public ElectPreferredLeadersRequest(int version)
+		public ElectLeadersRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			if (version.InRange(new VersionRange(0, 1)) == false) 
 			{
-				throw new UnsupportedVersionException($"ElectPreferredLeadersRequest does not support version {version}. Valid versions are: 0");
+				throw new UnsupportedVersionException($"ElectLeadersRequest does not support version {version}. Valid versions are: 0-1");
 			}
 
 			Version = version;
@@ -13546,6 +13594,10 @@ namespace Kafka.Protocol
 
 		public override void ReadFrom(IKafkaReader reader)
 		{
+			if (Version.InRange(new VersionRange(1, 2147483647))) 
+			{
+				ElectionType = new Int8(reader.ReadInt8());
+			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				TopicPartitionsCollection = reader.Read(() => new TopicPartitions(Version));
@@ -13558,6 +13610,10 @@ namespace Kafka.Protocol
 
 		public override void WriteTo(IKafkaWriter writer)
 		{
+			if (Version.InRange(new VersionRange(1, 2147483647))) 
+			{
+				writer.WriteInt8(ElectionType.Value);
+			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				writer.Write(TopicPartitionsCollection);
@@ -13569,7 +13625,36 @@ namespace Kafka.Protocol
 		}
 
 		/// <summary>
-		/// The topic partitions to elect the preferred leader of.
+		/// Type of elections to conduct for the partition. A value of '0' elects the preferred replica. A value of '1' elects the first live replica if there are no in-sync replica.
+		/// </summary>
+		private Int8 _electionType = Int8.Default;
+		public Int8 ElectionType 
+		{
+			get => _electionType;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ElectionType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"ElectionType is non-nullable.");
+				}
+
+				_electionType = value;
+			}
+		}
+
+		public ElectLeadersRequest WithElectionType(Int8 electionType)
+		{
+			ElectionType = electionType;
+			return this;
+		}
+
+		/// <summary>
+		/// The topic partitions to elect leaders.
 		/// </summary>
 		private TopicPartitions[] _topicPartitionsCollection = System.Array.Empty<TopicPartitions>();
 		public TopicPartitions[] TopicPartitionsCollection 
@@ -13592,7 +13677,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ElectPreferredLeadersRequest WithTopicPartitionsCollection(params Func<TopicPartitions, TopicPartitions>[] createFields)
+		public ElectLeadersRequest WithTopicPartitionsCollection(params Func<TopicPartitions, TopicPartitions>[] createFields)
 		{
 			TopicPartitionsCollection = createFields
 				.Select(createField => createField(CreateTopicPartitions()))
@@ -13622,7 +13707,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					PartitionIdCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					PartitionIdCollection = reader.Read(() => new Int32());
 				}
 			}
 
@@ -13668,7 +13753,7 @@ namespace Kafka.Protocol
 			}
 
 			/// <summary>
-			/// The partitions of this topic whose preferred leader should be elected
+			/// The partitions of this topic whose leader should be elected.
 			/// </summary>
 			private Int32[] _partitionIdCollection = System.Array.Empty<Int32>();
 			public Int32[] PartitionIdCollection 
@@ -13720,20 +13805,20 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ElectPreferredLeadersRequest WithTimeoutMs(Int32 timeoutMs)
+		public ElectLeadersRequest WithTimeoutMs(Int32 timeoutMs)
 		{
 			TimeoutMs = timeoutMs;
 			return this;
 		}
 	}
 
-	public class ElectPreferredLeadersResponse : Message
+	public class ElectLeadersResponse : Message
 	{
-		public ElectPreferredLeadersResponse(int version)
+		public ElectLeadersResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			if (version.InRange(new VersionRange(0, 1)) == false) 
 			{
-				throw new UnsupportedVersionException($"ElectPreferredLeadersResponse does not support version {version}. Valid versions are: 0");
+				throw new UnsupportedVersionException($"ElectLeadersResponse does not support version {version}. Valid versions are: 0-1");
 			}
 
 			Version = version;
@@ -13749,6 +13834,10 @@ namespace Kafka.Protocol
 			{
 				ThrottleTimeMs = new Int32(reader.ReadInt32());
 			}
+			if (Version.InRange(new VersionRange(1, 2147483647))) 
+			{
+				ErrorCode = new Int16(reader.ReadInt16());
+			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				ReplicaElectionResultsCollection = reader.Read(() => new ReplicaElectionResult(Version));
@@ -13760,6 +13849,10 @@ namespace Kafka.Protocol
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				writer.WriteInt32(ThrottleTimeMs.Value);
+			}
+			if (Version.InRange(new VersionRange(1, 2147483647))) 
+			{
+				writer.WriteInt16(ErrorCode.Value);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -13790,9 +13883,38 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ElectPreferredLeadersResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		public ElectLeadersResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
 			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		/// <summary>
+		/// The top level response error code.
+		/// </summary>
+		private Int16 _errorCode = Int16.Default;
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			set 
+			{
+				if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+				}
+
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
+				}
+
+				_errorCode = value;
+			}
+		}
+
+		public ElectLeadersResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
 			return this;
 		}
 
@@ -13819,7 +13941,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ElectPreferredLeadersResponse WithReplicaElectionResultsCollection(params Func<ReplicaElectionResult, ReplicaElectionResult>[] createFields)
+		public ElectLeadersResponse WithReplicaElectionResultsCollection(params Func<ReplicaElectionResult, ReplicaElectionResult>[] createFields)
 		{
 			ReplicaElectionResultsCollection = createFields
 				.Select(createField => createField(CreateReplicaElectionResult()))
@@ -14573,9 +14695,9 @@ namespace Kafka.Protocol
 	{
 		public FetchRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 10)) == false) 
+			if (version.InRange(new VersionRange(0, 11)) == false) 
 			{
-				throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 0-10");
+				throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 0-11");
 			}
 
 			Version = version;
@@ -14623,6 +14745,10 @@ namespace Kafka.Protocol
 			{
 				ForgottenCollection = reader.Read(() => new ForgottenTopic(Version));
 			}
+			if (Version.InRange(new VersionRange(11, 2147483647))) 
+			{
+				RackId = new String(reader.ReadString());
+			}
 		}
 
 		public override void WriteTo(IKafkaWriter writer)
@@ -14662,6 +14788,10 @@ namespace Kafka.Protocol
 			if (Version.InRange(new VersionRange(7, 2147483647))) 
 			{
 				writer.Write(ForgottenCollection);
+			}
+			if (Version.InRange(new VersionRange(11, 2147483647))) 
+			{
+				writer.WriteString(RackId.Value);
 			}
 		}
 
@@ -15249,7 +15379,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(7, 2147483647))) 
 				{
-					ForgottenPartitionIndexesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					ForgottenPartitionIndexesCollection = reader.Read(() => new Int32());
 				}
 			}
 
@@ -15323,15 +15453,39 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		/// <summary>
+		/// Rack ID of the consumer making this request
+		/// </summary>
+		private String _rackId = new String();
+		public String RackId 
+		{
+			get => _rackId;
+			set 
+			{
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"RackId is non-nullable.");
+				}
+
+				_rackId = value;
+			}
+		}
+
+		public FetchRequest WithRackId(String rackId)
+		{
+			RackId = rackId;
+			return this;
+		}
 	}
 
 	public class FetchResponse : Message
 	{
 		public FetchResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 10)) == false) 
+			if (version.InRange(new VersionRange(0, 11)) == false) 
 			{
-				throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 0-10");
+				throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 0-11");
 			}
 
 			Version = version;
@@ -15632,6 +15786,10 @@ namespace Kafka.Protocol
 					{
 						AbortedCollection = reader.Read(() => new AbortedTransaction(Version));
 					}
+					if (Version.InRange(new VersionRange(11, 2147483647))) 
+					{
+						PreferredReadReplica = new Int32(reader.ReadInt32());
+					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
 						Records = new Bytes(reader.ReadBytes());
@@ -15663,6 +15821,10 @@ namespace Kafka.Protocol
 					if (Version.InRange(new VersionRange(4, 2147483647))) 
 					{
 						writer.Write(AbortedCollection);
+					}
+					if (Version.InRange(new VersionRange(11, 2147483647))) 
+					{
+						writer.WriteInt32(PreferredReadReplica.Value);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
@@ -15932,6 +16094,30 @@ namespace Kafka.Protocol
 						FirstOffset = firstOffset;
 						return this;
 					}
+				}
+
+				/// <summary>
+				/// The preferred read replica for the consumer to use on its next fetch request
+				/// </summary>
+				private Int32 _preferredReadReplica = Int32.Default;
+				public Int32 PreferredReadReplica 
+				{
+					get => _preferredReadReplica;
+					set 
+					{
+						if (value == null) 
+						{
+							throw new UnsupportedVersionException($"PreferredReadReplica is non-nullable.");
+						}
+
+						_preferredReadReplica = value;
+					}
+				}
+
+				public FetchablePartitionResponse WithPreferredReadReplica(Int32 preferredReadReplica)
+				{
+					PreferredReadReplica = preferredReadReplica;
+					return this;
 				}
 
 				/// <summary>
@@ -16308,9 +16494,9 @@ namespace Kafka.Protocol
 	{
 		public HeartbeatRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2)) == false) 
+			if (version.InRange(new VersionRange(0, 3)) == false) 
 			{
-				throw new UnsupportedVersionException($"HeartbeatRequest does not support version {version}. Valid versions are: 0-2");
+				throw new UnsupportedVersionException($"HeartbeatRequest does not support version {version}. Valid versions are: 0-3");
 			}
 
 			Version = version;
@@ -16328,11 +16514,15 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				Generationid = new Int32(reader.ReadInt32());
+				GenerationId = new Int32(reader.ReadInt32());
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				MemberId = new String(reader.ReadString());
+			}
+			if (Version.InRange(new VersionRange(3, 2147483647))) 
+			{
+				GroupInstanceId = new String(reader.ReadString());
 			}
 		}
 
@@ -16344,11 +16534,15 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(Generationid.Value);
+				writer.WriteInt32(GenerationId.Value);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				writer.WriteString(MemberId.Value);
+			}
+			if (Version.InRange(new VersionRange(3, 2147483647))) 
+			{
+				writer.WriteString(GroupInstanceId.Value);
 			}
 		}
 
@@ -16384,29 +16578,29 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The generation of the group.
 		/// </summary>
-		private Int32 _generationid = Int32.Default;
-		public Int32 Generationid 
+		private Int32 _generationId = Int32.Default;
+		public Int32 GenerationId 
 		{
-			get => _generationid;
+			get => _generationId;
 			set 
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
 				{
-					throw new UnsupportedVersionException($"Generationid does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
 				if (value == null) 
 				{
-					throw new UnsupportedVersionException($"Generationid is non-nullable.");
+					throw new UnsupportedVersionException($"GenerationId is non-nullable.");
 				}
 
-				_generationid = value;
+				_generationId = value;
 			}
 		}
 
-		public HeartbeatRequest WithGenerationid(Int32 generationid)
+		public HeartbeatRequest WithGenerationId(Int32 generationId)
 		{
-			Generationid = generationid;
+			GenerationId = generationId;
 			return this;
 		}
 
@@ -16438,15 +16632,45 @@ namespace Kafka.Protocol
 			MemberId = memberId;
 			return this;
 		}
+
+		/// <summary>
+		/// The unique identifier of the consumer instance provided by end user.
+		/// </summary>
+		private String _groupInstanceId = new String(null);
+		public String GroupInstanceId 
+		{
+			get => _groupInstanceId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
+				}
+
+				if (Version.InRange(new VersionRange(3, 2147483647)) == false &&
+					value == null) 
+				{
+					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
+				}
+
+				_groupInstanceId = value;
+			}
+		}
+
+		public HeartbeatRequest WithGroupInstanceId(String groupInstanceId)
+		{
+			GroupInstanceId = groupInstanceId;
+			return this;
+		}
 	}
 
 	public class HeartbeatResponse : Message
 	{
 		public HeartbeatResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2)) == false) 
+			if (version.InRange(new VersionRange(0, 3)) == false) 
 			{
-				throw new UnsupportedVersionException($"HeartbeatResponse does not support version {version}. Valid versions are: 0-2");
+				throw new UnsupportedVersionException($"HeartbeatResponse does not support version {version}. Valid versions are: 0-3");
 			}
 
 			Version = version;
@@ -16534,6 +16758,651 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class IncrementalAlterConfigsRequest : Message
+	{
+		public IncrementalAlterConfigsRequest(int version)
+		{
+			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			{
+				throw new UnsupportedVersionException($"IncrementalAlterConfigsRequest does not support version {version}. Valid versions are: 0");
+			}
+
+			Version = version;
+		}
+
+		public const int ApiKey = 44;
+
+		public override int Version { get; }
+
+		public override void ReadFrom(IKafkaReader reader)
+		{
+			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			{
+				ResourcesCollection = reader.Read(() => new AlterConfigsResource(Version)).ToDictionary(field => field.ResourceType);
+			}
+			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			{
+				ValidateOnly = new Boolean(reader.ReadBoolean());
+			}
+		}
+
+		public override void WriteTo(IKafkaWriter writer)
+		{
+			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			{
+				writer.Write(ResourcesCollection.Values.ToArray());
+			}
+			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			{
+				writer.WriteBoolean(ValidateOnly.Value);
+			}
+		}
+
+		/// <summary>
+		/// The incremental updates for each resource.
+		/// </summary>
+		private Dictionary<Int8, AlterConfigsResource> _resourcesCollection = new Dictionary<Int8, AlterConfigsResource>();
+		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection 
+		{
+			get => _resourcesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
+				}
+
+				_resourcesCollection = value;
+			}
+		}
+
+		public IncrementalAlterConfigsRequest WithResourcesCollection(params Func<AlterConfigsResource, AlterConfigsResource>[] createFields)
+		{
+			ResourcesCollection = createFields
+				.Select(createField => createField(CreateAlterConfigsResource()))
+				.ToDictionary(field => field.ResourceType);
+			return this;
+		}
+
+		internal AlterConfigsResource CreateAlterConfigsResource()
+		{
+			return new AlterConfigsResource(Version);
+		}
+
+		public class AlterConfigsResource : ISerialize
+		{
+			internal AlterConfigsResource(int version)
+			{
+				Version = version;
+			}
+
+			internal int Version { get; }
+
+			public void ReadFrom(IKafkaReader reader)
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ResourceType = new Int8(reader.ReadInt8());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ResourceName = new String(reader.ReadString());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ConfigsCollection = reader.Read(() => new AlterableConfig(Version)).ToDictionary(field => field.Name);
+				}
+			}
+
+			public void WriteTo(IKafkaWriter writer)
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt8(ResourceType.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteString(ResourceName.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.Write(ConfigsCollection.Values.ToArray());
+				}
+			}
+
+			/// <summary>
+			/// The resource type.
+			/// </summary>
+			private Int8 _resourceType = Int8.Default;
+			public Int8 ResourceType 
+			{
+				get => _resourceType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
+					}
+
+					_resourceType = value;
+				}
+			}
+
+			public AlterConfigsResource WithResourceType(Int8 resourceType)
+			{
+				ResourceType = resourceType;
+				return this;
+			}
+
+			/// <summary>
+			/// The resource name.
+			/// </summary>
+			private String _resourceName = String.Default;
+			public String ResourceName 
+			{
+				get => _resourceName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
+					}
+
+					_resourceName = value;
+				}
+			}
+
+			public AlterConfigsResource WithResourceName(String resourceName)
+			{
+				ResourceName = resourceName;
+				return this;
+			}
+
+			/// <summary>
+			/// The configurations.
+			/// </summary>
+			private Dictionary<String, AlterableConfig> _configsCollection = new Dictionary<String, AlterableConfig>();
+			public Dictionary<String, AlterableConfig> ConfigsCollection 
+			{
+				get => _configsCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ConfigsCollection is non-nullable.");
+					}
+
+					_configsCollection = value;
+				}
+			}
+
+			public AlterConfigsResource WithConfigsCollection(params Func<AlterableConfig, AlterableConfig>[] createFields)
+			{
+				ConfigsCollection = createFields
+					.Select(createField => createField(CreateAlterableConfig()))
+					.ToDictionary(field => field.Name);
+				return this;
+			}
+
+			internal AlterableConfig CreateAlterableConfig()
+			{
+				return new AlterableConfig(Version);
+			}
+
+			public class AlterableConfig : ISerialize
+			{
+				internal AlterableConfig(int version)
+				{
+					Version = version;
+				}
+
+				internal int Version { get; }
+
+				public void ReadFrom(IKafkaReader reader)
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					{
+						Name = new String(reader.ReadString());
+					}
+					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					{
+						ConfigOperation = new Int8(reader.ReadInt8());
+					}
+					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					{
+						Value = new String(reader.ReadString());
+					}
+				}
+
+				public void WriteTo(IKafkaWriter writer)
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					{
+						writer.WriteString(Name.Value);
+					}
+					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					{
+						writer.WriteInt8(ConfigOperation.Value);
+					}
+					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					{
+						writer.WriteString(Value.Value);
+					}
+				}
+
+				/// <summary>
+				/// The configuration key name.
+				/// </summary>
+				private String _name = String.Default;
+				public String Name 
+				{
+					get => _name;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						if (value == null) 
+						{
+							throw new UnsupportedVersionException($"Name is non-nullable.");
+						}
+
+						_name = value;
+					}
+				}
+
+				public AlterableConfig WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
+				/// <summary>
+				/// The type (Set, Delete, Append, Subtract) of operation.
+				/// </summary>
+				private Int8 _configOperation = Int8.Default;
+				public Int8 ConfigOperation 
+				{
+					get => _configOperation;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"ConfigOperation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						if (value == null) 
+						{
+							throw new UnsupportedVersionException($"ConfigOperation is non-nullable.");
+						}
+
+						_configOperation = value;
+					}
+				}
+
+				public AlterableConfig WithConfigOperation(Int8 configOperation)
+				{
+					ConfigOperation = configOperation;
+					return this;
+				}
+
+				/// <summary>
+				/// The value to set for the configuration key.
+				/// </summary>
+				private String _value = String.Default;
+				public String Value 
+				{
+					get => _value;
+					set 
+					{
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						{
+							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						}
+
+						if (Version.InRange(new VersionRange(0, 2147483647)) == false &&
+							value == null) 
+						{
+							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
+						}
+
+						_value = value;
+					}
+				}
+
+				public AlterableConfig WithValue(String value)
+				{
+					Value = value;
+					return this;
+				}
+			}
+		}
+
+		/// <summary>
+		/// True if we should validate the request, but not change the configurations.
+		/// </summary>
+		private Boolean _validateOnly = Boolean.Default;
+		public Boolean ValidateOnly 
+		{
+			get => _validateOnly;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"ValidateOnly is non-nullable.");
+				}
+
+				_validateOnly = value;
+			}
+		}
+
+		public IncrementalAlterConfigsRequest WithValidateOnly(Boolean validateOnly)
+		{
+			ValidateOnly = validateOnly;
+			return this;
+		}
+	}
+
+	public class IncrementalAlterConfigsResponse : Message
+	{
+		public IncrementalAlterConfigsResponse(int version)
+		{
+			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			{
+				throw new UnsupportedVersionException($"IncrementalAlterConfigsResponse does not support version {version}. Valid versions are: 0");
+			}
+
+			Version = version;
+		}
+
+		public const int ApiKey = 44;
+
+		public override int Version { get; }
+
+		public override void ReadFrom(IKafkaReader reader)
+		{
+			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			{
+				ThrottleTimeMs = new Int32(reader.ReadInt32());
+			}
+			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			{
+				ResponsesCollection = reader.Read(() => new AlterConfigsResourceResponse(Version));
+			}
+		}
+
+		public override void WriteTo(IKafkaWriter writer)
+		{
+			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			{
+				writer.WriteInt32(ThrottleTimeMs.Value);
+			}
+			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			{
+				writer.Write(ResponsesCollection);
+			}
+		}
+
+		/// <summary>
+		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// </summary>
+		private Int32 _throttleTimeMs = Int32.Default;
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
+				}
+
+				_throttleTimeMs = value;
+			}
+		}
+
+		public IncrementalAlterConfigsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		/// <summary>
+		/// The responses for each resource.
+		/// </summary>
+		private AlterConfigsResourceResponse[] _responsesCollection = System.Array.Empty<AlterConfigsResourceResponse>();
+		public AlterConfigsResourceResponse[] ResponsesCollection 
+		{
+			get => _responsesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+				}
+
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"ResponsesCollection is non-nullable.");
+				}
+
+				_responsesCollection = value;
+			}
+		}
+
+		public IncrementalAlterConfigsResponse WithResponsesCollection(params Func<AlterConfigsResourceResponse, AlterConfigsResourceResponse>[] createFields)
+		{
+			ResponsesCollection = createFields
+				.Select(createField => createField(CreateAlterConfigsResourceResponse()))
+				.ToArray();
+			return this;
+		}
+
+		internal AlterConfigsResourceResponse CreateAlterConfigsResourceResponse()
+		{
+			return new AlterConfigsResourceResponse(Version);
+		}
+
+		public class AlterConfigsResourceResponse : ISerialize
+		{
+			internal AlterConfigsResourceResponse(int version)
+			{
+				Version = version;
+			}
+
+			internal int Version { get; }
+
+			public void ReadFrom(IKafkaReader reader)
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ErrorCode = new Int16(reader.ReadInt16());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ErrorMessage = new String(reader.ReadString());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ResourceType = new Int8(reader.ReadInt8());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ResourceName = new String(reader.ReadString());
+				}
+			}
+
+			public void WriteTo(IKafkaWriter writer)
+			{
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt16(ErrorCode.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteString(ErrorMessage.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt8(ResourceType.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteString(ResourceName.Value);
+				}
+			}
+
+			/// <summary>
+			/// The resource error code.
+			/// </summary>
+			private Int16 _errorCode = Int16.Default;
+			public Int16 ErrorCode 
+			{
+				get => _errorCode;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
+					}
+
+					_errorCode = value;
+				}
+			}
+
+			public AlterConfigsResourceResponse WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
+			/// <summary>
+			/// The resource error message, or null if there was no error.
+			/// </summary>
+			private String _errorMessage = String.Default;
+			public String ErrorMessage 
+			{
+				get => _errorMessage;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false &&
+						value == null) 
+					{
+						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
+					}
+
+					_errorMessage = value;
+				}
+			}
+
+			public AlterConfigsResourceResponse WithErrorMessage(String errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
+			}
+
+			/// <summary>
+			/// The resource type.
+			/// </summary>
+			private Int8 _resourceType = Int8.Default;
+			public Int8 ResourceType 
+			{
+				get => _resourceType;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
+					}
+
+					_resourceType = value;
+				}
+			}
+
+			public AlterConfigsResourceResponse WithResourceType(Int8 resourceType)
+			{
+				ResourceType = resourceType;
+				return this;
+			}
+
+			/// <summary>
+			/// The resource name.
+			/// </summary>
+			private String _resourceName = String.Default;
+			public String ResourceName 
+			{
+				get => _resourceName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
+					}
+
+					_resourceName = value;
+				}
+			}
+
+			public AlterConfigsResourceResponse WithResourceName(String resourceName)
+			{
+				ResourceName = resourceName;
+				return this;
+			}
+		}
+	}
+
 	public class InitProducerIdRequest : Message
 	{
 		public InitProducerIdRequest(int version)
@@ -16605,7 +17474,7 @@ namespace Kafka.Protocol
 		}
 
 		/// <summary>
-		/// The time in ms to wait for before aborting idle transactions sent by this producer.
+		/// The time in ms to wait for before aborting idle transactions sent by this producer. This is only relevant if a TransactionalId has been defined.
 		/// </summary>
 		private Int32 _transactionTimeoutMs = Int32.Default;
 		public Int32 TransactionTimeoutMs 
@@ -16746,7 +17615,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The current producer id.
 		/// </summary>
-		private Int64 _producerId = Int64.Default;
+		private Int64 _producerId = new Int64(-1);
 		public Int64 ProducerId 
 		{
 			get => _producerId;
@@ -16806,9 +17675,9 @@ namespace Kafka.Protocol
 	{
 		public JoinGroupRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 4)) == false) 
+			if (version.InRange(new VersionRange(0, 5)) == false) 
 			{
-				throw new UnsupportedVersionException($"JoinGroupRequest does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"JoinGroupRequest does not support version {version}. Valid versions are: 0-5");
 			}
 
 			Version = version;
@@ -16835,6 +17704,10 @@ namespace Kafka.Protocol
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				MemberId = new String(reader.ReadString());
+			}
+			if (Version.InRange(new VersionRange(5, 2147483647))) 
+			{
+				GroupInstanceId = new String(reader.ReadString());
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -16863,6 +17736,10 @@ namespace Kafka.Protocol
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				writer.WriteString(MemberId.Value);
+			}
+			if (Version.InRange(new VersionRange(5, 2147483647))) 
+			{
+				writer.WriteString(GroupInstanceId.Value);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -16982,6 +17859,36 @@ namespace Kafka.Protocol
 		public JoinGroupRequest WithMemberId(String memberId)
 		{
 			MemberId = memberId;
+			return this;
+		}
+
+		/// <summary>
+		/// The unique identifier of the consumer instance provided by end user.
+		/// </summary>
+		private String _groupInstanceId = new String(null);
+		public String GroupInstanceId 
+		{
+			get => _groupInstanceId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+				}
+
+				if (Version.InRange(new VersionRange(5, 2147483647)) == false &&
+					value == null) 
+				{
+					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 5+");
+				}
+
+				_groupInstanceId = value;
+			}
+		}
+
+		public JoinGroupRequest WithGroupInstanceId(String groupInstanceId)
+		{
+			GroupInstanceId = groupInstanceId;
 			return this;
 		}
 
@@ -17147,9 +18054,9 @@ namespace Kafka.Protocol
 	{
 		public JoinGroupResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 4)) == false) 
+			if (version.InRange(new VersionRange(0, 5)) == false) 
 			{
-				throw new UnsupportedVersionException($"JoinGroupResponse does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"JoinGroupResponse does not support version {version}. Valid versions are: 0-5");
 			}
 
 			Version = version;
@@ -17440,6 +18347,10 @@ namespace Kafka.Protocol
 				{
 					MemberId = new String(reader.ReadString());
 				}
+				if (Version.InRange(new VersionRange(5, 2147483647))) 
+				{
+					GroupInstanceId = new String(reader.ReadString());
+				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
 					Metadata = new Bytes(reader.ReadBytes());
@@ -17451,6 +18362,10 @@ namespace Kafka.Protocol
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
 					writer.WriteString(MemberId.Value);
+				}
+				if (Version.InRange(new VersionRange(5, 2147483647))) 
+				{
+					writer.WriteString(GroupInstanceId.Value);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
@@ -17484,6 +18399,36 @@ namespace Kafka.Protocol
 			public JoinGroupResponseMember WithMemberId(String memberId)
 			{
 				MemberId = memberId;
+				return this;
+			}
+
+			/// <summary>
+			/// The unique identifier of the consumer instance provided by end user.
+			/// </summary>
+			private String _groupInstanceId = new String(null);
+			public String GroupInstanceId 
+			{
+				get => _groupInstanceId;
+				set 
+				{
+					if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+					}
+
+					if (Version.InRange(new VersionRange(5, 2147483647)) == false &&
+						value == null) 
+					{
+						throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 5+");
+					}
+
+					_groupInstanceId = value;
+				}
+			}
+
+			public JoinGroupResponseMember WithGroupInstanceId(String groupInstanceId)
+			{
+				GroupInstanceId = groupInstanceId;
 				return this;
 			}
 
@@ -17548,13 +18493,13 @@ namespace Kafka.Protocol
 			{
 				BrokerEpoch = new Int64(reader.ReadInt64());
 			}
+			if (Version.InRange(new VersionRange(0, 1))) 
+			{
+				PartitionStatesV0Collection = reader.Read(() => new LeaderAndIsrRequestPartition(Version));
+			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
 				TopicStatesCollection = reader.Read(() => new LeaderAndIsrRequestTopicState(Version));
-			}
-			if (Version.InRange(new VersionRange(0, 1))) 
-			{
-				PartitionStatesV0Collection = reader.Read(() => new LeaderAndIsrRequestPartitionStateV0(Version));
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -17576,13 +18521,13 @@ namespace Kafka.Protocol
 			{
 				writer.WriteInt64(BrokerEpoch.Value);
 			}
-			if (Version.InRange(new VersionRange(2, 2147483647))) 
-			{
-				writer.Write(TopicStatesCollection);
-			}
 			if (Version.InRange(new VersionRange(0, 1))) 
 			{
 				writer.Write(PartitionStatesV0Collection);
+			}
+			if (Version.InRange(new VersionRange(2, 2147483647))) 
+			{
+				writer.Write(TopicStatesCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -17673,6 +18618,35 @@ namespace Kafka.Protocol
 		}
 
 		/// <summary>
+		/// The state of each partition, in a v0 or v1 message.
+		/// </summary>
+		private LeaderAndIsrRequestPartition[] _partitionStatesV0Collection = System.Array.Empty<LeaderAndIsrRequestPartition>();
+		public LeaderAndIsrRequestPartition[] PartitionStatesV0Collection 
+		{
+			get => _partitionStatesV0Collection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 1)) == false) 
+				{
+					throw new UnsupportedVersionException($"PartitionStatesV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+				}
+
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"PartitionStatesV0Collection is non-nullable.");
+				}
+
+				_partitionStatesV0Collection = value;
+			}
+		}
+
+		public LeaderAndIsrRequest WithPartitionStatesV0Collection(LeaderAndIsrRequestPartition[] partitionStatesV0Collection)
+		{
+			PartitionStatesV0Collection = partitionStatesV0Collection;
+			return this;
+		}
+
+		/// <summary>
 		/// Each topic.
 		/// </summary>
 		private LeaderAndIsrRequestTopicState[] _topicStatesCollection = System.Array.Empty<LeaderAndIsrRequestTopicState>();
@@ -17723,9 +18697,9 @@ namespace Kafka.Protocol
 				{
 					Name = new String(reader.ReadString());
 				}
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(2, 2147483647))) 
 				{
-					PartitionStatesCollection = reader.Read(() => new LeaderAndIsrRequestPartitionState(Version));
+					PartitionStatesV0Collection = reader.Read(() => new LeaderAndIsrRequestPartition(Version));
 				}
 			}
 
@@ -17735,9 +18709,9 @@ namespace Kafka.Protocol
 				{
 					writer.WriteString(Name.Value);
 				}
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(2, 2147483647))) 
 				{
-					writer.Write(PartitionStatesCollection);
+					writer.Write(PartitionStatesV0Collection);
 				}
 			}
 
@@ -17773,727 +18747,29 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The state of each partition
 			/// </summary>
-			private LeaderAndIsrRequestPartitionState[] _partitionStatesCollection = System.Array.Empty<LeaderAndIsrRequestPartitionState>();
-			public LeaderAndIsrRequestPartitionState[] PartitionStatesCollection 
+			private LeaderAndIsrRequestPartition[] _partitionStatesV0Collection = System.Array.Empty<LeaderAndIsrRequestPartition>();
+			public LeaderAndIsrRequestPartition[] PartitionStatesV0Collection 
 			{
-				get => _partitionStatesCollection;
+				get => _partitionStatesV0Collection;
 				set 
 				{
-					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					if (Version.InRange(new VersionRange(2, 2147483647)) == false) 
 					{
-						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						throw new UnsupportedVersionException($"PartitionStatesV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
 					}
 
 					if (value == null) 
 					{
-						throw new UnsupportedVersionException($"PartitionStatesCollection is non-nullable.");
+						throw new UnsupportedVersionException($"PartitionStatesV0Collection is non-nullable.");
 					}
 
-					_partitionStatesCollection = value;
+					_partitionStatesV0Collection = value;
 				}
 			}
 
-			public LeaderAndIsrRequestTopicState WithPartitionStatesCollection(params Func<LeaderAndIsrRequestPartitionState, LeaderAndIsrRequestPartitionState>[] createFields)
+			public LeaderAndIsrRequestTopicState WithPartitionStatesV0Collection(LeaderAndIsrRequestPartition[] partitionStatesV0Collection)
 			{
-				PartitionStatesCollection = createFields
-					.Select(createField => createField(CreateLeaderAndIsrRequestPartitionState()))
-					.ToArray();
-				return this;
-			}
-
-			internal LeaderAndIsrRequestPartitionState CreateLeaderAndIsrRequestPartitionState()
-			{
-				return new LeaderAndIsrRequestPartitionState(Version);
-			}
-
-			public class LeaderAndIsrRequestPartitionState : ISerialize
-			{
-				internal LeaderAndIsrRequestPartitionState(int version)
-				{
-					Version = version;
-				}
-
-				internal int Version { get; }
-
-				public void ReadFrom(IKafkaReader reader)
-				{
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						PartitionIndex = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						ControllerEpoch = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						LeaderKey = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						LeaderEpoch = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						IsrReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						ZkVersion = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						ReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-					}
-					if (Version.InRange(new VersionRange(1, 2147483647))) 
-					{
-						IsNew = new Boolean(reader.ReadBoolean());
-					}
-				}
-
-				public void WriteTo(IKafkaWriter writer)
-				{
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						writer.WriteInt32(PartitionIndex.Value);
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						writer.WriteInt32(ControllerEpoch.Value);
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						writer.WriteInt32(LeaderKey.Value);
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						writer.WriteInt32(LeaderEpoch.Value);
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						writer.Write(IsrReplicasCollection);
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						writer.WriteInt32(ZkVersion.Value);
-					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
-					{
-						writer.Write(ReplicasCollection);
-					}
-					if (Version.InRange(new VersionRange(1, 2147483647))) 
-					{
-						writer.WriteBoolean(IsNew.Value);
-					}
-				}
-
-				/// <summary>
-				/// The partition index.
-				/// </summary>
-				private Int32 _partitionIndex = Int32.Default;
-				public Int32 PartitionIndex 
-				{
-					get => _partitionIndex;
-					set 
-					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-						}
-
-						_partitionIndex = value;
-					}
-				}
-
-				public LeaderAndIsrRequestPartitionState WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
-				/// <summary>
-				/// The controller epoch.
-				/// </summary>
-				private Int32 _controllerEpoch = Int32.Default;
-				public Int32 ControllerEpoch 
-				{
-					get => _controllerEpoch;
-					set 
-					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
-						}
-
-						_controllerEpoch = value;
-					}
-				}
-
-				public LeaderAndIsrRequestPartitionState WithControllerEpoch(Int32 controllerEpoch)
-				{
-					ControllerEpoch = controllerEpoch;
-					return this;
-				}
-
-				/// <summary>
-				/// The broker ID of the leader.
-				/// </summary>
-				private Int32 _leaderKey = Int32.Default;
-				public Int32 LeaderKey 
-				{
-					get => _leaderKey;
-					set 
-					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"LeaderKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LeaderKey is non-nullable.");
-						}
-
-						_leaderKey = value;
-					}
-				}
-
-				public LeaderAndIsrRequestPartitionState WithLeaderKey(Int32 leaderKey)
-				{
-					LeaderKey = leaderKey;
-					return this;
-				}
-
-				/// <summary>
-				/// The leader epoch.
-				/// </summary>
-				private Int32 _leaderEpoch = Int32.Default;
-				public Int32 LeaderEpoch 
-				{
-					get => _leaderEpoch;
-					set 
-					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
-						}
-
-						_leaderEpoch = value;
-					}
-				}
-
-				public LeaderAndIsrRequestPartitionState WithLeaderEpoch(Int32 leaderEpoch)
-				{
-					LeaderEpoch = leaderEpoch;
-					return this;
-				}
-
-				/// <summary>
-				/// The in-sync replica IDs.
-				/// </summary>
-				private Int32[] _isrReplicasCollection = System.Array.Empty<Int32>();
-				public Int32[] IsrReplicasCollection 
-				{
-					get => _isrReplicasCollection;
-					set 
-					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"IsrReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"IsrReplicasCollection is non-nullable.");
-						}
-
-						_isrReplicasCollection = value;
-					}
-				}
-
-				public LeaderAndIsrRequestPartitionState WithIsrReplicasCollection(Int32[] isrReplicasCollection)
-				{
-					IsrReplicasCollection = isrReplicasCollection;
-					return this;
-				}
-
-				/// <summary>
-				/// The ZooKeeper version.
-				/// </summary>
-				private Int32 _zkVersion = Int32.Default;
-				public Int32 ZkVersion 
-				{
-					get => _zkVersion;
-					set 
-					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
-						}
-
-						_zkVersion = value;
-					}
-				}
-
-				public LeaderAndIsrRequestPartitionState WithZkVersion(Int32 zkVersion)
-				{
-					ZkVersion = zkVersion;
-					return this;
-				}
-
-				/// <summary>
-				/// The replica IDs.
-				/// </summary>
-				private Int32[] _replicasCollection = System.Array.Empty<Int32>();
-				public Int32[] ReplicasCollection 
-				{
-					get => _replicasCollection;
-					set 
-					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
-						}
-
-						_replicasCollection = value;
-					}
-				}
-
-				public LeaderAndIsrRequestPartitionState WithReplicasCollection(Int32[] replicasCollection)
-				{
-					ReplicasCollection = replicasCollection;
-					return this;
-				}
-
-				/// <summary>
-				/// Whether the replica should have existed on the broker or not.
-				/// </summary>
-				private Boolean _isNew = new Boolean(false);
-				public Boolean IsNew 
-				{
-					get => _isNew;
-					set 
-					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"IsNew is non-nullable.");
-						}
-
-						_isNew = value;
-					}
-				}
-
-				public LeaderAndIsrRequestPartitionState WithIsNew(Boolean isNew)
-				{
-					IsNew = isNew;
-					return this;
-				}
-			}
-		}
-
-		/// <summary>
-		/// The state of each partition
-		/// </summary>
-		private LeaderAndIsrRequestPartitionStateV0[] _partitionStatesV0Collection = System.Array.Empty<LeaderAndIsrRequestPartitionStateV0>();
-		public LeaderAndIsrRequestPartitionStateV0[] PartitionStatesV0Collection 
-		{
-			get => _partitionStatesV0Collection;
-			set 
-			{
-				if (Version.InRange(new VersionRange(0, 1)) == false) 
-				{
-					throw new UnsupportedVersionException($"PartitionStatesV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PartitionStatesV0Collection is non-nullable.");
-				}
-
-				_partitionStatesV0Collection = value;
-			}
-		}
-
-		public LeaderAndIsrRequest WithPartitionStatesV0Collection(params Func<LeaderAndIsrRequestPartitionStateV0, LeaderAndIsrRequestPartitionStateV0>[] createFields)
-		{
-			PartitionStatesV0Collection = createFields
-				.Select(createField => createField(CreateLeaderAndIsrRequestPartitionStateV0()))
-				.ToArray();
-			return this;
-		}
-
-		internal LeaderAndIsrRequestPartitionStateV0 CreateLeaderAndIsrRequestPartitionStateV0()
-		{
-			return new LeaderAndIsrRequestPartitionStateV0(Version);
-		}
-
-		public class LeaderAndIsrRequestPartitionStateV0 : ISerialize
-		{
-			internal LeaderAndIsrRequestPartitionStateV0(int version)
-			{
-				Version = version;
-			}
-
-			internal int Version { get; }
-
-			public void ReadFrom(IKafkaReader reader)
-			{
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					TopicName = new String(reader.ReadString());
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					PartitionIndex = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					ControllerEpoch = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					LeaderKey = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					LeaderEpoch = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					IsrReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					ZkVersion = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					ReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-				}
-				if (Version.InRange(new VersionRange(1, 2147483647))) 
-				{
-					IsNew = new Boolean(reader.ReadBoolean());
-				}
-			}
-
-			public void WriteTo(IKafkaWriter writer)
-			{
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					writer.WriteString(TopicName.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					writer.WriteInt32(PartitionIndex.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					writer.WriteInt32(ControllerEpoch.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					writer.WriteInt32(LeaderKey.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					writer.WriteInt32(LeaderEpoch.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					writer.Write(IsrReplicasCollection);
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					writer.WriteInt32(ZkVersion.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 1))) 
-				{
-					writer.Write(ReplicasCollection);
-				}
-				if (Version.InRange(new VersionRange(1, 2147483647))) 
-				{
-					writer.WriteBoolean(IsNew.Value);
-				}
-			}
-
-			/// <summary>
-			/// The topic name.
-			/// </summary>
-			private String _topicName = String.Default;
-			public String TopicName 
-			{
-				get => _topicName;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 1)) == false) 
-					{
-						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
-					}
-
-					_topicName = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
-			/// <summary>
-			/// The partition index.
-			/// </summary>
-			private Int32 _partitionIndex = Int32.Default;
-			public Int32 PartitionIndex 
-			{
-				get => _partitionIndex;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 1)) == false) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-					}
-
-					_partitionIndex = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithPartitionIndex(Int32 partitionIndex)
-			{
-				PartitionIndex = partitionIndex;
-				return this;
-			}
-
-			/// <summary>
-			/// The controller epoch.
-			/// </summary>
-			private Int32 _controllerEpoch = Int32.Default;
-			public Int32 ControllerEpoch 
-			{
-				get => _controllerEpoch;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 1)) == false) 
-					{
-						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
-					}
-
-					_controllerEpoch = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithControllerEpoch(Int32 controllerEpoch)
-			{
-				ControllerEpoch = controllerEpoch;
-				return this;
-			}
-
-			/// <summary>
-			/// The broker ID of the leader.
-			/// </summary>
-			private Int32 _leaderKey = Int32.Default;
-			public Int32 LeaderKey 
-			{
-				get => _leaderKey;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 1)) == false) 
-					{
-						throw new UnsupportedVersionException($"LeaderKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"LeaderKey is non-nullable.");
-					}
-
-					_leaderKey = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithLeaderKey(Int32 leaderKey)
-			{
-				LeaderKey = leaderKey;
-				return this;
-			}
-
-			/// <summary>
-			/// The leader epoch.
-			/// </summary>
-			private Int32 _leaderEpoch = Int32.Default;
-			public Int32 LeaderEpoch 
-			{
-				get => _leaderEpoch;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 1)) == false) 
-					{
-						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
-					}
-
-					_leaderEpoch = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithLeaderEpoch(Int32 leaderEpoch)
-			{
-				LeaderEpoch = leaderEpoch;
-				return this;
-			}
-
-			/// <summary>
-			/// The in-sync replica IDs.
-			/// </summary>
-			private Int32[] _isrReplicasCollection = System.Array.Empty<Int32>();
-			public Int32[] IsrReplicasCollection 
-			{
-				get => _isrReplicasCollection;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 1)) == false) 
-					{
-						throw new UnsupportedVersionException($"IsrReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"IsrReplicasCollection is non-nullable.");
-					}
-
-					_isrReplicasCollection = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithIsrReplicasCollection(Int32[] isrReplicasCollection)
-			{
-				IsrReplicasCollection = isrReplicasCollection;
-				return this;
-			}
-
-			/// <summary>
-			/// The ZooKeeper version.
-			/// </summary>
-			private Int32 _zkVersion = Int32.Default;
-			public Int32 ZkVersion 
-			{
-				get => _zkVersion;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 1)) == false) 
-					{
-						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
-					}
-
-					_zkVersion = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithZkVersion(Int32 zkVersion)
-			{
-				ZkVersion = zkVersion;
-				return this;
-			}
-
-			/// <summary>
-			/// The replica IDs.
-			/// </summary>
-			private Int32[] _replicasCollection = System.Array.Empty<Int32>();
-			public Int32[] ReplicasCollection 
-			{
-				get => _replicasCollection;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 1)) == false) 
-					{
-						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
-					}
-
-					_replicasCollection = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithReplicasCollection(Int32[] replicasCollection)
-			{
-				ReplicasCollection = replicasCollection;
-				return this;
-			}
-
-			/// <summary>
-			/// Whether the replica should have existed on the broker or not.
-			/// </summary>
-			private Boolean _isNew = new Boolean(false);
-			public Boolean IsNew 
-			{
-				get => _isNew;
-				set 
-				{
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"IsNew is non-nullable.");
-					}
-
-					_isNew = value;
-				}
-			}
-
-			public LeaderAndIsrRequestPartitionStateV0 WithIsNew(Boolean isNew)
-			{
-				IsNew = isNew;
+				PartitionStatesV0Collection = partitionStatesV0Collection;
 				return this;
 			}
 		}
@@ -18659,6 +18935,357 @@ namespace Kafka.Protocol
 			public LeaderAndIsrLiveLeader WithPort(Int32 port)
 			{
 				Port = port;
+				return this;
+			}
+		}
+
+		public class LeaderAndIsrRequestPartition : ISerialize
+		{
+			internal LeaderAndIsrRequestPartition(int version)
+			{
+				if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"LeaderAndIsrRequestPartition does not support version {version}. Valid versions are: 0+");
+				}
+
+				Version = version;
+			}
+
+			internal int Version { get; }
+
+			public void ReadFrom(IKafkaReader reader)
+			{
+				if (Version.InRange(new VersionRange(0, 1))) 
+				{
+					TopicName = new String(reader.ReadString());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					PartitionIndex = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ControllerEpoch = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					LeaderKey = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					LeaderEpoch = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					IsrReplicasCollection = reader.Read(() => new Int32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ZkVersion = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ReplicasCollection = reader.Read(() => new Int32());
+				}
+				if (Version.InRange(new VersionRange(1, 2147483647))) 
+				{
+					IsNew = new Boolean(reader.ReadBoolean());
+				}
+			}
+
+			public void WriteTo(IKafkaWriter writer)
+			{
+				if (Version.InRange(new VersionRange(0, 1))) 
+				{
+					writer.WriteString(TopicName.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(PartitionIndex.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(ControllerEpoch.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(LeaderKey.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(LeaderEpoch.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.Write(IsrReplicasCollection);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(ZkVersion.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.Write(ReplicasCollection);
+				}
+				if (Version.InRange(new VersionRange(1, 2147483647))) 
+				{
+					writer.WriteBoolean(IsNew.Value);
+				}
+			}
+
+			/// <summary>
+			/// The topic name.  This is only present in v0 or v1.
+			/// </summary>
+			private String _topicName = String.Default;
+			public String TopicName 
+			{
+				get => _topicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 1)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"TopicName is non-nullable.");
+					}
+
+					_topicName = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
+			/// <summary>
+			/// The partition index.
+			/// </summary>
+			private Int32 _partitionIndex = Int32.Default;
+			public Int32 PartitionIndex 
+			{
+				get => _partitionIndex;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
+					}
+
+					_partitionIndex = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
+			}
+
+			/// <summary>
+			/// The controller epoch.
+			/// </summary>
+			private Int32 _controllerEpoch = Int32.Default;
+			public Int32 ControllerEpoch 
+			{
+				get => _controllerEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
+					}
+
+					_controllerEpoch = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithControllerEpoch(Int32 controllerEpoch)
+			{
+				ControllerEpoch = controllerEpoch;
+				return this;
+			}
+
+			/// <summary>
+			/// The broker ID of the leader.
+			/// </summary>
+			private Int32 _leaderKey = Int32.Default;
+			public Int32 LeaderKey 
+			{
+				get => _leaderKey;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"LeaderKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"LeaderKey is non-nullable.");
+					}
+
+					_leaderKey = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithLeaderKey(Int32 leaderKey)
+			{
+				LeaderKey = leaderKey;
+				return this;
+			}
+
+			/// <summary>
+			/// The leader epoch.
+			/// </summary>
+			private Int32 _leaderEpoch = Int32.Default;
+			public Int32 LeaderEpoch 
+			{
+				get => _leaderEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
+					}
+
+					_leaderEpoch = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithLeaderEpoch(Int32 leaderEpoch)
+			{
+				LeaderEpoch = leaderEpoch;
+				return this;
+			}
+
+			/// <summary>
+			/// The in-sync replica IDs.
+			/// </summary>
+			private Int32[] _isrReplicasCollection = System.Array.Empty<Int32>();
+			public Int32[] IsrReplicasCollection 
+			{
+				get => _isrReplicasCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"IsrReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"IsrReplicasCollection is non-nullable.");
+					}
+
+					_isrReplicasCollection = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithIsrReplicasCollection(Int32[] isrReplicasCollection)
+			{
+				IsrReplicasCollection = isrReplicasCollection;
+				return this;
+			}
+
+			/// <summary>
+			/// The ZooKeeper version.
+			/// </summary>
+			private Int32 _zkVersion = Int32.Default;
+			public Int32 ZkVersion 
+			{
+				get => _zkVersion;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
+					}
+
+					_zkVersion = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithZkVersion(Int32 zkVersion)
+			{
+				ZkVersion = zkVersion;
+				return this;
+			}
+
+			/// <summary>
+			/// The replica IDs.
+			/// </summary>
+			private Int32[] _replicasCollection = System.Array.Empty<Int32>();
+			public Int32[] ReplicasCollection 
+			{
+				get => _replicasCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
+					}
+
+					_replicasCollection = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithReplicasCollection(Int32[] replicasCollection)
+			{
+				ReplicasCollection = replicasCollection;
+				return this;
+			}
+
+			/// <summary>
+			/// Whether the replica should have existed on the broker or not.
+			/// </summary>
+			private Boolean _isNew = new Boolean(false);
+			public Boolean IsNew 
+			{
+				get => _isNew;
+				set 
+				{
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"IsNew is non-nullable.");
+					}
+
+					_isNew = value;
+				}
+			}
+
+			public LeaderAndIsrRequestPartition WithIsNew(Boolean isNew)
+			{
+				IsNew = isNew;
 				return this;
 			}
 		}
@@ -19978,7 +20605,7 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						OldStyleOffsetsCollection = reader.Read(() => new Int64(reader.ReadInt64()));
+						OldStyleOffsetsCollection = reader.Read(() => new Int64());
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
@@ -21020,15 +21647,15 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						ReplicaNodesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+						ReplicaNodesCollection = reader.Read(() => new Int32());
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						IsrNodesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+						IsrNodesCollection = reader.Read(() => new Int32());
 					}
 					if (Version.InRange(new VersionRange(5, 2147483647))) 
 					{
-						OfflineReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+						OfflineReplicasCollection = reader.Read(() => new Int32());
 					}
 				}
 
@@ -21261,7 +21888,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this topic.
 			/// </summary>
-			private Int32 _topicAuthorizedOperations = Int32.Default;
+			private Int32 _topicAuthorizedOperations = new Int32(-2147483648);
 			public Int32 TopicAuthorizedOperations 
 			{
 				get => _topicAuthorizedOperations;
@@ -21291,7 +21918,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// 32-bit bitfield to represent authorized operations for this cluster.
 		/// </summary>
-		private Int32 _clusterAuthorizedOperations = Int32.Default;
+		private Int32 _clusterAuthorizedOperations = new Int32(-2147483648);
 		public Int32 ClusterAuthorizedOperations 
 		{
 			get => _clusterAuthorizedOperations;
@@ -21322,9 +21949,9 @@ namespace Kafka.Protocol
 	{
 		public OffsetCommitRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 6)) == false) 
+			if (version.InRange(new VersionRange(0, 7)) == false) 
 			{
-				throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 0-6");
+				throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 0-7");
 			}
 
 			Version = version;
@@ -21347,6 +21974,10 @@ namespace Kafka.Protocol
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
 				MemberId = new String(reader.ReadString());
+			}
+			if (Version.InRange(new VersionRange(7, 2147483647))) 
+			{
+				GroupInstanceId = new String(reader.ReadString());
 			}
 			if (Version.InRange(new VersionRange(2, 4))) 
 			{
@@ -21371,6 +22002,10 @@ namespace Kafka.Protocol
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
 				writer.WriteString(MemberId.Value);
+			}
+			if (Version.InRange(new VersionRange(7, 2147483647))) 
+			{
+				writer.WriteString(GroupInstanceId.Value);
 			}
 			if (Version.InRange(new VersionRange(2, 4))) 
 			{
@@ -21456,6 +22091,36 @@ namespace Kafka.Protocol
 		public OffsetCommitRequest WithMemberId(String memberId)
 		{
 			MemberId = memberId;
+			return this;
+		}
+
+		/// <summary>
+		/// The unique identifier of the consumer instance provided by end user.
+		/// </summary>
+		private String _groupInstanceId = new String(null);
+		public String GroupInstanceId 
+		{
+			get => _groupInstanceId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(7, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
+				}
+
+				if (Version.InRange(new VersionRange(7, 2147483647)) == false &&
+					value == null) 
+				{
+					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 7+");
+				}
+
+				_groupInstanceId = value;
+			}
+		}
+
+		public OffsetCommitRequest WithGroupInstanceId(String groupInstanceId)
+		{
+			GroupInstanceId = groupInstanceId;
 			return this;
 		}
 
@@ -21822,9 +22487,9 @@ namespace Kafka.Protocol
 	{
 		public OffsetCommitResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 6)) == false) 
+			if (version.InRange(new VersionRange(0, 7)) == false) 
 			{
-				throw new UnsupportedVersionException($"OffsetCommitResponse does not support version {version}. Valid versions are: 0-6");
+				throw new UnsupportedVersionException($"OffsetCommitResponse does not support version {version}. Valid versions are: 0-7");
 			}
 
 			Version = version;
@@ -22233,7 +22898,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					PartitionIndexesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					PartitionIndexesCollection = reader.Read(() => new Int32());
 				}
 			}
 
@@ -22249,6 +22914,9 @@ namespace Kafka.Protocol
 				}
 			}
 
+			/// <summary>
+			/// The topic name.
+			/// </summary>
 			private String _name = String.Default;
 			public String Name 
 			{
@@ -22751,9 +23419,9 @@ namespace Kafka.Protocol
 	{
 		public OffsetForLeaderEpochRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2)) == false) 
+			if (version.InRange(new VersionRange(0, 3)) == false) 
 			{
-				throw new UnsupportedVersionException($"OffsetForLeaderEpochRequest does not support version {version}. Valid versions are: 0-2");
+				throw new UnsupportedVersionException($"OffsetForLeaderEpochRequest does not support version {version}. Valid versions are: 0-3");
 			}
 
 			Version = version;
@@ -22765,6 +23433,10 @@ namespace Kafka.Protocol
 
 		public override void ReadFrom(IKafkaReader reader)
 		{
+			if (Version.InRange(new VersionRange(3, 2147483647))) 
+			{
+				ReplicaId = new Int32(reader.ReadInt32());
+			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				TopicsCollection = reader.Read(() => new OffsetForLeaderTopic(Version));
@@ -22773,10 +23445,38 @@ namespace Kafka.Protocol
 
 		public override void WriteTo(IKafkaWriter writer)
 		{
+			if (Version.InRange(new VersionRange(3, 2147483647))) 
+			{
+				writer.WriteInt32(ReplicaId.Value);
+			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				writer.Write(TopicsCollection);
 			}
+		}
+
+		/// <summary>
+		/// The broker ID of the follower, of -1 if this request is from a consumer.
+		/// </summary>
+		private Int32 _replicaId = new Int32(-2);
+		public Int32 ReplicaId 
+		{
+			get => _replicaId;
+			set 
+			{
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"ReplicaId is non-nullable.");
+				}
+
+				_replicaId = value;
+			}
+		}
+
+		public OffsetForLeaderEpochRequest WithReplicaId(Int32 replicaId)
+		{
+			ReplicaId = replicaId;
+			return this;
 		}
 
 		/// <summary>
@@ -23043,9 +23743,9 @@ namespace Kafka.Protocol
 	{
 		public OffsetForLeaderEpochResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2)) == false) 
+			if (version.InRange(new VersionRange(0, 3)) == false) 
 			{
-				throw new UnsupportedVersionException($"OffsetForLeaderEpochResponse does not support version {version}. Valid versions are: 0-2");
+				throw new UnsupportedVersionException($"OffsetForLeaderEpochResponse does not support version {version}. Valid versions are: 0-3");
 			}
 
 			Version = version;
@@ -24958,7 +25658,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				MechanismsCollection = reader.Read(() => new String(reader.ReadString()));
+				MechanismsCollection = reader.Read(() => new String());
 			}
 		}
 
@@ -25397,7 +26097,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					PartitionIndexesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+					PartitionIndexesCollection = reader.Read(() => new Int32());
 				}
 			}
 
@@ -25712,9 +26412,9 @@ namespace Kafka.Protocol
 	{
 		public SyncGroupRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2)) == false) 
+			if (version.InRange(new VersionRange(0, 3)) == false) 
 			{
-				throw new UnsupportedVersionException($"SyncGroupRequest does not support version {version}. Valid versions are: 0-2");
+				throw new UnsupportedVersionException($"SyncGroupRequest does not support version {version}. Valid versions are: 0-3");
 			}
 
 			Version = version;
@@ -25738,6 +26438,10 @@ namespace Kafka.Protocol
 			{
 				MemberId = new String(reader.ReadString());
 			}
+			if (Version.InRange(new VersionRange(3, 2147483647))) 
+			{
+				GroupInstanceId = new String(reader.ReadString());
+			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				AssignmentsCollection = reader.Read(() => new SyncGroupRequestAssignment(Version));
@@ -25757,6 +26461,10 @@ namespace Kafka.Protocol
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
 				writer.WriteString(MemberId.Value);
+			}
+			if (Version.InRange(new VersionRange(3, 2147483647))) 
+			{
+				writer.WriteString(GroupInstanceId.Value);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -25848,6 +26556,36 @@ namespace Kafka.Protocol
 		public SyncGroupRequest WithMemberId(String memberId)
 		{
 			MemberId = memberId;
+			return this;
+		}
+
+		/// <summary>
+		/// The unique identifier of the consumer instance provided by end user.
+		/// </summary>
+		private String _groupInstanceId = new String(null);
+		public String GroupInstanceId 
+		{
+			get => _groupInstanceId;
+			set 
+			{
+				if (Version.InRange(new VersionRange(3, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
+				}
+
+				if (Version.InRange(new VersionRange(3, 2147483647)) == false &&
+					value == null) 
+				{
+					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
+				}
+
+				_groupInstanceId = value;
+			}
+		}
+
+		public SyncGroupRequest WithGroupInstanceId(String groupInstanceId)
+		{
+			GroupInstanceId = groupInstanceId;
 			return this;
 		}
 
@@ -25984,9 +26722,9 @@ namespace Kafka.Protocol
 	{
 		public SyncGroupResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2)) == false) 
+			if (version.InRange(new VersionRange(0, 3)) == false) 
 			{
-				throw new UnsupportedVersionException($"SyncGroupResponse does not support version {version}. Valid versions are: 0-2");
+				throw new UnsupportedVersionException($"SyncGroupResponse does not support version {version}. Valid versions are: 0-3");
 			}
 
 			Version = version;
@@ -26916,13 +27654,13 @@ namespace Kafka.Protocol
 			{
 				BrokerEpoch = new Int64(reader.ReadInt64());
 			}
+			if (Version.InRange(new VersionRange(0, 4))) 
+			{
+				LegacyPartitionStatesCollection = reader.Read(() => new UpdateMetadataPartitionState(Version));
+			}
 			if (Version.InRange(new VersionRange(5, 2147483647))) 
 			{
 				TopicStatesCollection = reader.Read(() => new UpdateMetadataRequestTopicState(Version));
-			}
-			if (Version.InRange(new VersionRange(0, 4))) 
-			{
-				PartitionStatesV0Collection = reader.Read(() => new UpdateMetadataRequestPartitionStateV0(Version));
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -26944,13 +27682,13 @@ namespace Kafka.Protocol
 			{
 				writer.WriteInt64(BrokerEpoch.Value);
 			}
+			if (Version.InRange(new VersionRange(0, 4))) 
+			{
+				writer.Write(LegacyPartitionStatesCollection);
+			}
 			if (Version.InRange(new VersionRange(5, 2147483647))) 
 			{
 				writer.Write(TopicStatesCollection);
-			}
-			if (Version.InRange(new VersionRange(0, 4))) 
-			{
-				writer.Write(PartitionStatesV0Collection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
@@ -27041,7 +27779,36 @@ namespace Kafka.Protocol
 		}
 
 		/// <summary>
-		/// Each topic that we would like to update.
+		/// In older versions of this RPC, each partition that we would like to update.
+		/// </summary>
+		private UpdateMetadataPartitionState[] _legacyPartitionStatesCollection = System.Array.Empty<UpdateMetadataPartitionState>();
+		public UpdateMetadataPartitionState[] LegacyPartitionStatesCollection 
+		{
+			get => _legacyPartitionStatesCollection;
+			set 
+			{
+				if (Version.InRange(new VersionRange(0, 4)) == false) 
+				{
+					throw new UnsupportedVersionException($"LegacyPartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+				}
+
+				if (value == null) 
+				{
+					throw new UnsupportedVersionException($"LegacyPartitionStatesCollection is non-nullable.");
+				}
+
+				_legacyPartitionStatesCollection = value;
+			}
+		}
+
+		public UpdateMetadataRequest WithLegacyPartitionStatesCollection(UpdateMetadataPartitionState[] legacyPartitionStatesCollection)
+		{
+			LegacyPartitionStatesCollection = legacyPartitionStatesCollection;
+			return this;
+		}
+
+		/// <summary>
+		/// In newer versions of this RPC, each topic that we would like to update.
 		/// </summary>
 		private UpdateMetadataRequestTopicState[] _topicStatesCollection = System.Array.Empty<UpdateMetadataRequestTopicState>();
 		public UpdateMetadataRequestTopicState[] TopicStatesCollection 
@@ -27087,7 +27854,7 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(5, 2147483647))) 
 				{
 					TopicName = new String(reader.ReadString());
 				}
@@ -27099,7 +27866,7 @@ namespace Kafka.Protocol
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(5, 2147483647))) 
 				{
 					writer.WriteString(TopicName.Value);
 				}
@@ -27118,9 +27885,9 @@ namespace Kafka.Protocol
 				get => _topicName;
 				set 
 				{
-					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
 					{
-						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 					}
 
 					if (value == null) 
@@ -27161,717 +27928,9 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestTopicState WithPartitionStatesCollection(params Func<UpdateMetadataPartitionState, UpdateMetadataPartitionState>[] createFields)
+			public UpdateMetadataRequestTopicState WithPartitionStatesCollection(UpdateMetadataPartitionState[] partitionStatesCollection)
 			{
-				PartitionStatesCollection = createFields
-					.Select(createField => createField(CreateUpdateMetadataPartitionState()))
-					.ToArray();
-				return this;
-			}
-
-			internal UpdateMetadataPartitionState CreateUpdateMetadataPartitionState()
-			{
-				return new UpdateMetadataPartitionState(Version);
-			}
-
-			public class UpdateMetadataPartitionState : ISerialize
-			{
-				internal UpdateMetadataPartitionState(int version)
-				{
-					Version = version;
-				}
-
-				internal int Version { get; }
-
-				public void ReadFrom(IKafkaReader reader)
-				{
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						PartitionIndex = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						ControllerEpoch = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						Leader = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						LeaderEpoch = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						IsrCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						ZkVersion = new Int32(reader.ReadInt32());
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						ReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						OfflineReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-					}
-				}
-
-				public void WriteTo(IKafkaWriter writer)
-				{
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						writer.WriteInt32(PartitionIndex.Value);
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						writer.WriteInt32(ControllerEpoch.Value);
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						writer.WriteInt32(Leader.Value);
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						writer.WriteInt32(LeaderEpoch.Value);
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						writer.Write(IsrCollection);
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						writer.WriteInt32(ZkVersion.Value);
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						writer.Write(ReplicasCollection);
-					}
-					if (Version.InRange(new VersionRange(5, 2147483647))) 
-					{
-						writer.Write(OfflineReplicasCollection);
-					}
-				}
-
-				/// <summary>
-				/// The partition index.
-				/// </summary>
-				private Int32 _partitionIndex = Int32.Default;
-				public Int32 PartitionIndex 
-				{
-					get => _partitionIndex;
-					set 
-					{
-						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-						}
-
-						_partitionIndex = value;
-					}
-				}
-
-				public UpdateMetadataPartitionState WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
-				/// <summary>
-				/// The controller epoch.
-				/// </summary>
-				private Int32 _controllerEpoch = Int32.Default;
-				public Int32 ControllerEpoch 
-				{
-					get => _controllerEpoch;
-					set 
-					{
-						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
-						}
-
-						_controllerEpoch = value;
-					}
-				}
-
-				public UpdateMetadataPartitionState WithControllerEpoch(Int32 controllerEpoch)
-				{
-					ControllerEpoch = controllerEpoch;
-					return this;
-				}
-
-				/// <summary>
-				/// The ID of the broker which is the current partition leader.
-				/// </summary>
-				private Int32 _leader = Int32.Default;
-				public Int32 Leader 
-				{
-					get => _leader;
-					set 
-					{
-						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Leader is non-nullable.");
-						}
-
-						_leader = value;
-					}
-				}
-
-				public UpdateMetadataPartitionState WithLeader(Int32 leader)
-				{
-					Leader = leader;
-					return this;
-				}
-
-				/// <summary>
-				/// The leader epoch of this partition.
-				/// </summary>
-				private Int32 _leaderEpoch = Int32.Default;
-				public Int32 LeaderEpoch 
-				{
-					get => _leaderEpoch;
-					set 
-					{
-						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
-						}
-
-						_leaderEpoch = value;
-					}
-				}
-
-				public UpdateMetadataPartitionState WithLeaderEpoch(Int32 leaderEpoch)
-				{
-					LeaderEpoch = leaderEpoch;
-					return this;
-				}
-
-				/// <summary>
-				/// The brokers which are in the ISR for this partition.
-				/// </summary>
-				private Int32[] _isrCollection = System.Array.Empty<Int32>();
-				public Int32[] IsrCollection 
-				{
-					get => _isrCollection;
-					set 
-					{
-						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"IsrCollection is non-nullable.");
-						}
-
-						_isrCollection = value;
-					}
-				}
-
-				public UpdateMetadataPartitionState WithIsrCollection(Int32[] isrCollection)
-				{
-					IsrCollection = isrCollection;
-					return this;
-				}
-
-				/// <summary>
-				/// The Zookeeper version.
-				/// </summary>
-				private Int32 _zkVersion = Int32.Default;
-				public Int32 ZkVersion 
-				{
-					get => _zkVersion;
-					set 
-					{
-						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
-						}
-
-						_zkVersion = value;
-					}
-				}
-
-				public UpdateMetadataPartitionState WithZkVersion(Int32 zkVersion)
-				{
-					ZkVersion = zkVersion;
-					return this;
-				}
-
-				/// <summary>
-				/// All the replicas of this partition.
-				/// </summary>
-				private Int32[] _replicasCollection = System.Array.Empty<Int32>();
-				public Int32[] ReplicasCollection 
-				{
-					get => _replicasCollection;
-					set 
-					{
-						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
-						}
-
-						_replicasCollection = value;
-					}
-				}
-
-				public UpdateMetadataPartitionState WithReplicasCollection(Int32[] replicasCollection)
-				{
-					ReplicasCollection = replicasCollection;
-					return this;
-				}
-
-				/// <summary>
-				/// The replicas of this partition which are offline.
-				/// </summary>
-				private Int32[] _offlineReplicasCollection = System.Array.Empty<Int32>();
-				public Int32[] OfflineReplicasCollection 
-				{
-					get => _offlineReplicasCollection;
-					set 
-					{
-						if (Version.InRange(new VersionRange(5, 2147483647)) == false) 
-						{
-							throw new UnsupportedVersionException($"OfflineReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"OfflineReplicasCollection is non-nullable.");
-						}
-
-						_offlineReplicasCollection = value;
-					}
-				}
-
-				public UpdateMetadataPartitionState WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
-				{
-					OfflineReplicasCollection = offlineReplicasCollection;
-					return this;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Each partition that we would like to update.
-		/// </summary>
-		private UpdateMetadataRequestPartitionStateV0[] _partitionStatesV0Collection = System.Array.Empty<UpdateMetadataRequestPartitionStateV0>();
-		public UpdateMetadataRequestPartitionStateV0[] PartitionStatesV0Collection 
-		{
-			get => _partitionStatesV0Collection;
-			set 
-			{
-				if (Version.InRange(new VersionRange(0, 4)) == false) 
-				{
-					throw new UnsupportedVersionException($"PartitionStatesV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PartitionStatesV0Collection is non-nullable.");
-				}
-
-				_partitionStatesV0Collection = value;
-			}
-		}
-
-		public UpdateMetadataRequest WithPartitionStatesV0Collection(params Func<UpdateMetadataRequestPartitionStateV0, UpdateMetadataRequestPartitionStateV0>[] createFields)
-		{
-			PartitionStatesV0Collection = createFields
-				.Select(createField => createField(CreateUpdateMetadataRequestPartitionStateV0()))
-				.ToArray();
-			return this;
-		}
-
-		internal UpdateMetadataRequestPartitionStateV0 CreateUpdateMetadataRequestPartitionStateV0()
-		{
-			return new UpdateMetadataRequestPartitionStateV0(Version);
-		}
-
-		public class UpdateMetadataRequestPartitionStateV0 : ISerialize
-		{
-			internal UpdateMetadataRequestPartitionStateV0(int version)
-			{
-				Version = version;
-			}
-
-			internal int Version { get; }
-
-			public void ReadFrom(IKafkaReader reader)
-			{
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					TopicName = new String(reader.ReadString());
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					PartitionIndex = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					ControllerEpoch = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					Leader = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					LeaderEpoch = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					IsrCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					ZkVersion = new Int32(reader.ReadInt32());
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					ReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-				}
-				if (Version.InRange(new VersionRange(4, 2147483647))) 
-				{
-					OfflineReplicasCollection = reader.Read(() => new Int32(reader.ReadInt32()));
-				}
-			}
-
-			public void WriteTo(IKafkaWriter writer)
-			{
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					writer.WriteString(TopicName.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					writer.WriteInt32(PartitionIndex.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					writer.WriteInt32(ControllerEpoch.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					writer.WriteInt32(Leader.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					writer.WriteInt32(LeaderEpoch.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					writer.Write(IsrCollection);
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					writer.WriteInt32(ZkVersion.Value);
-				}
-				if (Version.InRange(new VersionRange(0, 4))) 
-				{
-					writer.Write(ReplicasCollection);
-				}
-				if (Version.InRange(new VersionRange(4, 2147483647))) 
-				{
-					writer.Write(OfflineReplicasCollection);
-				}
-			}
-
-			/// <summary>
-			/// The topic name.
-			/// </summary>
-			private String _topicName = String.Default;
-			public String TopicName 
-			{
-				get => _topicName;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 4)) == false) 
-					{
-						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
-					}
-
-					_topicName = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithTopicName(String topicName)
-			{
-				TopicName = topicName;
-				return this;
-			}
-
-			/// <summary>
-			/// The partition index.
-			/// </summary>
-			private Int32 _partitionIndex = Int32.Default;
-			public Int32 PartitionIndex 
-			{
-				get => _partitionIndex;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 4)) == false) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-					}
-
-					_partitionIndex = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithPartitionIndex(Int32 partitionIndex)
-			{
-				PartitionIndex = partitionIndex;
-				return this;
-			}
-
-			/// <summary>
-			/// The controller epoch.
-			/// </summary>
-			private Int32 _controllerEpoch = Int32.Default;
-			public Int32 ControllerEpoch 
-			{
-				get => _controllerEpoch;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 4)) == false) 
-					{
-						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
-					}
-
-					_controllerEpoch = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithControllerEpoch(Int32 controllerEpoch)
-			{
-				ControllerEpoch = controllerEpoch;
-				return this;
-			}
-
-			/// <summary>
-			/// The ID of the broker which is the current partition leader.
-			/// </summary>
-			private Int32 _leader = Int32.Default;
-			public Int32 Leader 
-			{
-				get => _leader;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 4)) == false) 
-					{
-						throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Leader is non-nullable.");
-					}
-
-					_leader = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithLeader(Int32 leader)
-			{
-				Leader = leader;
-				return this;
-			}
-
-			/// <summary>
-			/// The leader epoch of this partition.
-			/// </summary>
-			private Int32 _leaderEpoch = Int32.Default;
-			public Int32 LeaderEpoch 
-			{
-				get => _leaderEpoch;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 4)) == false) 
-					{
-						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
-					}
-
-					_leaderEpoch = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithLeaderEpoch(Int32 leaderEpoch)
-			{
-				LeaderEpoch = leaderEpoch;
-				return this;
-			}
-
-			/// <summary>
-			/// The brokers which are in the ISR for this partition.
-			/// </summary>
-			private Int32[] _isrCollection = System.Array.Empty<Int32>();
-			public Int32[] IsrCollection 
-			{
-				get => _isrCollection;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 4)) == false) 
-					{
-						throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"IsrCollection is non-nullable.");
-					}
-
-					_isrCollection = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithIsrCollection(Int32[] isrCollection)
-			{
-				IsrCollection = isrCollection;
-				return this;
-			}
-
-			/// <summary>
-			/// The Zookeeper version.
-			/// </summary>
-			private Int32 _zkVersion = Int32.Default;
-			public Int32 ZkVersion 
-			{
-				get => _zkVersion;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 4)) == false) 
-					{
-						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
-					}
-
-					_zkVersion = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithZkVersion(Int32 zkVersion)
-			{
-				ZkVersion = zkVersion;
-				return this;
-			}
-
-			/// <summary>
-			/// All the replicas of this partition.
-			/// </summary>
-			private Int32[] _replicasCollection = System.Array.Empty<Int32>();
-			public Int32[] ReplicasCollection 
-			{
-				get => _replicasCollection;
-				set 
-				{
-					if (Version.InRange(new VersionRange(0, 4)) == false) 
-					{
-						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
-					}
-
-					_replicasCollection = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithReplicasCollection(Int32[] replicasCollection)
-			{
-				ReplicasCollection = replicasCollection;
-				return this;
-			}
-
-			/// <summary>
-			/// The replicas of this partition which are offline.
-			/// </summary>
-			private Int32[] _offlineReplicasCollection = System.Array.Empty<Int32>();
-			public Int32[] OfflineReplicasCollection 
-			{
-				get => _offlineReplicasCollection;
-				set 
-				{
-					if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
-					{
-						throw new UnsupportedVersionException($"OfflineReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"OfflineReplicasCollection is non-nullable.");
-					}
-
-					_offlineReplicasCollection = value;
-				}
-			}
-
-			public UpdateMetadataRequestPartitionStateV0 WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
-			{
-				OfflineReplicasCollection = offlineReplicasCollection;
+				PartitionStatesCollection = partitionStatesCollection;
 				return this;
 			}
 		}
@@ -27966,6 +28025,9 @@ namespace Kafka.Protocol
 				}
 			}
 
+			/// <summary>
+			/// The broker id.
+			/// </summary>
 			private Int32 _id = Int32.Default;
 			public Int32 Id 
 			{
@@ -28264,6 +28326,362 @@ namespace Kafka.Protocol
 			public UpdateMetadataRequestBroker WithRack(String rack)
 			{
 				Rack = rack;
+				return this;
+			}
+		}
+
+		public class UpdateMetadataPartitionState : ISerialize
+		{
+			internal UpdateMetadataPartitionState(int version)
+			{
+				if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+				{
+					throw new UnsupportedVersionException($"UpdateMetadataPartitionState does not support version {version}. Valid versions are: 0+");
+				}
+
+				Version = version;
+			}
+
+			internal int Version { get; }
+
+			public void ReadFrom(IKafkaReader reader)
+			{
+				if (Version.InRange(new VersionRange(0, 4))) 
+				{
+					TopicName = new String(reader.ReadString());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					PartitionIndex = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ControllerEpoch = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					Leader = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					LeaderEpoch = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					IsrCollection = reader.Read(() => new Int32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ZkVersion = new Int32(reader.ReadInt32());
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					ReplicasCollection = reader.Read(() => new Int32());
+				}
+				if (Version.InRange(new VersionRange(4, 2147483647))) 
+				{
+					OfflineReplicasCollection = reader.Read(() => new Int32());
+				}
+			}
+
+			public void WriteTo(IKafkaWriter writer)
+			{
+				if (Version.InRange(new VersionRange(0, 4))) 
+				{
+					writer.WriteString(TopicName.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(PartitionIndex.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(ControllerEpoch.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(Leader.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(LeaderEpoch.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.Write(IsrCollection);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.WriteInt32(ZkVersion.Value);
+				}
+				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				{
+					writer.Write(ReplicasCollection);
+				}
+				if (Version.InRange(new VersionRange(4, 2147483647))) 
+				{
+					writer.Write(OfflineReplicasCollection);
+				}
+			}
+
+			/// <summary>
+			/// In older versions of this RPC, the topic name.
+			/// </summary>
+			private String _topicName = String.Default;
+			public String TopicName 
+			{
+				get => _topicName;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 4)) == false) 
+					{
+						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"TopicName is non-nullable.");
+					}
+
+					_topicName = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
+			/// <summary>
+			/// The partition index.
+			/// </summary>
+			private Int32 _partitionIndex = Int32.Default;
+			public Int32 PartitionIndex 
+			{
+				get => _partitionIndex;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
+					}
+
+					_partitionIndex = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
+			}
+
+			/// <summary>
+			/// The controller epoch.
+			/// </summary>
+			private Int32 _controllerEpoch = Int32.Default;
+			public Int32 ControllerEpoch 
+			{
+				get => _controllerEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
+					}
+
+					_controllerEpoch = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithControllerEpoch(Int32 controllerEpoch)
+			{
+				ControllerEpoch = controllerEpoch;
+				return this;
+			}
+
+			/// <summary>
+			/// The ID of the broker which is the current partition leader.
+			/// </summary>
+			private Int32 _leader = Int32.Default;
+			public Int32 Leader 
+			{
+				get => _leader;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"Leader is non-nullable.");
+					}
+
+					_leader = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithLeader(Int32 leader)
+			{
+				Leader = leader;
+				return this;
+			}
+
+			/// <summary>
+			/// The leader epoch of this partition.
+			/// </summary>
+			private Int32 _leaderEpoch = Int32.Default;
+			public Int32 LeaderEpoch 
+			{
+				get => _leaderEpoch;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
+					}
+
+					_leaderEpoch = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithLeaderEpoch(Int32 leaderEpoch)
+			{
+				LeaderEpoch = leaderEpoch;
+				return this;
+			}
+
+			/// <summary>
+			/// The brokers which are in the ISR for this partition.
+			/// </summary>
+			private Int32[] _isrCollection = System.Array.Empty<Int32>();
+			public Int32[] IsrCollection 
+			{
+				get => _isrCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"IsrCollection is non-nullable.");
+					}
+
+					_isrCollection = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithIsrCollection(Int32[] isrCollection)
+			{
+				IsrCollection = isrCollection;
+				return this;
+			}
+
+			/// <summary>
+			/// The Zookeeper version.
+			/// </summary>
+			private Int32 _zkVersion = Int32.Default;
+			public Int32 ZkVersion 
+			{
+				get => _zkVersion;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
+					}
+
+					_zkVersion = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithZkVersion(Int32 zkVersion)
+			{
+				ZkVersion = zkVersion;
+				return this;
+			}
+
+			/// <summary>
+			/// All the replicas of this partition.
+			/// </summary>
+			private Int32[] _replicasCollection = System.Array.Empty<Int32>();
+			public Int32[] ReplicasCollection 
+			{
+				get => _replicasCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
+					}
+
+					_replicasCollection = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithReplicasCollection(Int32[] replicasCollection)
+			{
+				ReplicasCollection = replicasCollection;
+				return this;
+			}
+
+			/// <summary>
+			/// The replicas of this partition which are offline.
+			/// </summary>
+			private Int32[] _offlineReplicasCollection = System.Array.Empty<Int32>();
+			public Int32[] OfflineReplicasCollection 
+			{
+				get => _offlineReplicasCollection;
+				set 
+				{
+					if (Version.InRange(new VersionRange(4, 2147483647)) == false) 
+					{
+						throw new UnsupportedVersionException($"OfflineReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
+					}
+
+					if (value == null) 
+					{
+						throw new UnsupportedVersionException($"OfflineReplicasCollection is non-nullable.");
+					}
+
+					_offlineReplicasCollection = value;
+				}
+			}
+
+			public UpdateMetadataPartitionState WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
+			{
+				OfflineReplicasCollection = offlineReplicasCollection;
 				return this;
 			}
 		}
@@ -28596,7 +29014,7 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						PartitionIndexesCollection = reader.Read(() => new Int32(reader.ReadInt32()));
+						PartitionIndexesCollection = reader.Read(() => new Int32());
 					}
 				}
 

@@ -13,5 +13,7 @@ namespace Kafka.Protocol.Generator.Definitions.Messages
         public string ValidVersions { get; set; }
 
         public List<Field> Fields { get; set; }
+
+        public List<CommonStruct> CommonStructs { get; set; }
     }
 }

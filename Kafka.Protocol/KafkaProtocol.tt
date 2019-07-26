@@ -42,6 +42,19 @@
         }
 		#>/// </summary><# _();
     }
+
+	var primitiveTypeNames = protocol.PrimitiveTypes.Values
+        .Where(type => 
+            type.Type!="RequestMessage" && 
+            type.Type!="ResponseMessage")
+		.Select(type => type.GetClassName());
+
+	bool IsPrimitiveType(Kafka.Protocol.Generator.Definitions.Messages.Field field)
+	{
+		return primitiveTypeNames
+			.Any(primitiveTypeName => 
+			field.GetTypeNameWithoutArrayCharacters() == primitiveTypeName);
+	}
 #>
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
 using System;
@@ -193,6 +206,16 @@ namespace Kafka.Protocol<# Block(() =>
 				PrintField(messageField, messageDefinition.Name);
 				if (messageFieldIndex + 1 != messageFieldCount) _();
 			});
+
+			if (messageDefinition.CommonStructs != null)
+			{
+				_(2);
+				PrintOnNewRowForEachWithIndex(messageDefinition.CommonStructs, (commonStruct, commonStructIndex, commonStructCount) =>
+				{
+					PrintCommonStruct(commonStruct);
+					if (commonStructIndex + 1 != commonStructCount) _();
+				});
+			}
 		}); _();
 	}); 
 });
@@ -209,11 +232,18 @@ void PrintReadFrom(Kafka.Protocol.Generator.Definitions.Messages.Field messageFi
 		{
 			if (messageField.IsArray())
 			{
-			#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(reader.Read<#= fieldTypeNameWithoutArrayCharacters #>()));<# 	
+				if (IsPrimitiveType(messageField))
+				{
+					#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>());<# 	
+				} 
+				else 
+				{
+					#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version));<# 	
+				}
 			} 
 			else 
 			{
-			#><#= fieldName #> = new <#= fieldTypeName #>(reader.Read<#= fieldTypeName #>());<# 
+				#><#= fieldName #> = new <#= fieldTypeName #>(reader.Read<#= fieldTypeName #>());<# 
 			}
 		}
 		else 
@@ -404,5 +434,46 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field, strin
 			if (index + 1 != count) _();
 		});					
 	});
+}
+
+void PrintCommonStruct(Kafka.Protocol.Generator.Definitions.Messages.CommonStruct commonStruct)
+{
+	#>public class <#= commonStruct.Name #> : ISerialize<# Block(() => 
+	{
+		#>internal <#= commonStruct.Name #>(int version)<# Block(() => 
+		{
+			var versionRange = VersionRange.Parse(commonStruct.Versions);
+			#>if (version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>)) == false) <# Block(() => 
+			{
+				#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<#
+			}); _(2);
+
+			#>Version = version;<#
+		}); _(2);
+
+		#>internal int Version { get; }<# _(2);
+
+		#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
+		{
+			PrintOnNewRowForEach(commonStruct.Fields, field => 
+			{
+				PrintReadFrom(field);
+			});
+		}); _(2);
+
+		#>public void WriteTo(IKafkaWriter writer)<# Block(() => 
+		{
+			PrintOnNewRowForEach(commonStruct.Fields, field => 
+			{
+				PrintWriteTo(field);
+			});
+		}); _(2);
+
+		PrintOnNewRowForEachWithIndex(commonStruct.Fields, (field, index, count) =>
+		{
+			PrintField(field, commonStruct.Name); 
+			if (index + 1 != count) _();
+		});					
+	});	
 }
 #>
