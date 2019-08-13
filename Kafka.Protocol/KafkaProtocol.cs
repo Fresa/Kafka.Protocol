@@ -11083,7 +11083,7 @@ namespace Kafka.Protocol
 					{
 						ReadOnly = new Boolean(reader.ReadBoolean());
 					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					if (Version.InRange(new VersionRange(0, 0))) 
 					{
 						IsDefault = new Boolean(reader.ReadBoolean());
 					}
@@ -11115,7 +11115,7 @@ namespace Kafka.Protocol
 					{
 						writer.WriteBoolean(ReadOnly.Value);
 					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					if (Version.InRange(new VersionRange(0, 0))) 
 					{
 						writer.WriteBoolean(IsDefault.Value);
 					}
@@ -11230,7 +11230,7 @@ namespace Kafka.Protocol
 					get => _isDefault;
 					set 
 					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						if (Version.InRange(new VersionRange(0, 0)) == false) 
 						{
 							throw new UnsupportedVersionException($"IsDefault does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 						}
@@ -16762,7 +16762,7 @@ namespace Kafka.Protocol
 	{
 		public IncrementalAlterConfigsRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			if (version.InRange(new VersionRange(0, 0)) == false) 
 			{
 				throw new UnsupportedVersionException($"IncrementalAlterConfigsRequest does not support version {version}. Valid versions are: 0");
 			}
@@ -17134,7 +17134,7 @@ namespace Kafka.Protocol
 	{
 		public IncrementalAlterConfigsResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			if (version.InRange(new VersionRange(0, 0)) == false) 
 			{
 				throw new UnsupportedVersionException($"IncrementalAlterConfigsResponse does not support version {version}. Valid versions are: 0");
 			}
@@ -20241,7 +20241,7 @@ namespace Kafka.Protocol
 					{
 						Timestamp = new Int64(reader.ReadInt64());
 					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					if (Version.InRange(new VersionRange(0, 0))) 
 					{
 						MaxNumOffsets = new Int32(reader.ReadInt32());
 					}
@@ -20261,7 +20261,7 @@ namespace Kafka.Protocol
 					{
 						writer.WriteInt64(Timestamp.Value);
 					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					if (Version.InRange(new VersionRange(0, 0))) 
 					{
 						writer.WriteInt32(MaxNumOffsets.Value);
 					}
@@ -20363,7 +20363,7 @@ namespace Kafka.Protocol
 					get => _maxNumOffsets;
 					set 
 					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						if (Version.InRange(new VersionRange(0, 0)) == false) 
 						{
 							throw new UnsupportedVersionException($"MaxNumOffsets does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 						}
@@ -20603,7 +20603,7 @@ namespace Kafka.Protocol
 					{
 						ErrorCode = new Int16(reader.ReadInt16());
 					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					if (Version.InRange(new VersionRange(0, 0))) 
 					{
 						OldStyleOffsetsCollection = reader.Read(() => new Int64());
 					}
@@ -20631,7 +20631,7 @@ namespace Kafka.Protocol
 					{
 						writer.WriteInt16(ErrorCode.Value);
 					}
-					if (Version.InRange(new VersionRange(0, 2147483647))) 
+					if (Version.InRange(new VersionRange(0, 0))) 
 					{
 						writer.Write(OldStyleOffsetsCollection);
 					}
@@ -20716,7 +20716,7 @@ namespace Kafka.Protocol
 					get => _oldStyleOffsetsCollection;
 					set 
 					{
-						if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+						if (Version.InRange(new VersionRange(0, 0)) == false) 
 						{
 							throw new UnsupportedVersionException($"OldStyleOffsetsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 						}
@@ -22305,7 +22305,7 @@ namespace Kafka.Protocol
 					{
 						CommittedLeaderEpoch = new Int32(reader.ReadInt32());
 					}
-					if (Version.InRange(new VersionRange(1, 2147483647))) 
+					if (Version.InRange(new VersionRange(1, 1))) 
 					{
 						CommitTimestamp = new Int64(reader.ReadInt64());
 					}
@@ -22329,7 +22329,7 @@ namespace Kafka.Protocol
 					{
 						writer.WriteInt32(CommittedLeaderEpoch.Value);
 					}
-					if (Version.InRange(new VersionRange(1, 2147483647))) 
+					if (Version.InRange(new VersionRange(1, 1))) 
 					{
 						writer.WriteInt64(CommitTimestamp.Value);
 					}
@@ -22430,7 +22430,7 @@ namespace Kafka.Protocol
 					get => _commitTimestamp;
 					set 
 					{
-						if (Version.InRange(new VersionRange(1, 2147483647)) == false) 
+						if (Version.InRange(new VersionRange(1, 1)) == false) 
 						{
 							throw new UnsupportedVersionException($"CommitTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1");
 						}
@@ -25105,7 +25105,7 @@ namespace Kafka.Protocol
 	{
 		public RequestHeader(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			if (version.InRange(new VersionRange(0, 0)) == false) 
 			{
 				throw new UnsupportedVersionException($"RequestHeader does not support version {version}. Valid versions are: 0");
 			}
@@ -25278,7 +25278,7 @@ namespace Kafka.Protocol
 	{
 		public ResponseHeader(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			if (version.InRange(new VersionRange(0, 0)) == false) 
 			{
 				throw new UnsupportedVersionException($"ResponseHeader does not support version {version}. Valid versions are: 0");
 			}
@@ -25767,7 +25767,7 @@ namespace Kafka.Protocol
 			{
 				DeletePartitions = new Boolean(reader.ReadBoolean());
 			}
-			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			if (Version.InRange(new VersionRange(0, 0))) 
 			{
 				PartitionsV0Collection = reader.Read(() => new StopReplicaRequestPartitionV0(Version));
 			}
@@ -25795,7 +25795,7 @@ namespace Kafka.Protocol
 			{
 				writer.WriteBoolean(DeletePartitions.Value);
 			}
-			if (Version.InRange(new VersionRange(0, 2147483647))) 
+			if (Version.InRange(new VersionRange(0, 0))) 
 			{
 				writer.Write(PartitionsV0Collection);
 			}
@@ -25925,7 +25925,7 @@ namespace Kafka.Protocol
 			get => _partitionsV0Collection;
 			set 
 			{
-				if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+				if (Version.InRange(new VersionRange(0, 0)) == false) 
 				{
 					throw new UnsupportedVersionException($"PartitionsV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 				}
@@ -25963,11 +25963,11 @@ namespace Kafka.Protocol
 
 			public void ReadFrom(IKafkaReader reader)
 			{
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(0, 0))) 
 				{
 					TopicName = new String(reader.ReadString());
 				}
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(0, 0))) 
 				{
 					PartitionIndex = new Int32(reader.ReadInt32());
 				}
@@ -25975,11 +25975,11 @@ namespace Kafka.Protocol
 
 			public void WriteTo(IKafkaWriter writer)
 			{
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(0, 0))) 
 				{
 					writer.WriteString(TopicName.Value);
 				}
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(0, 0))) 
 				{
 					writer.WriteInt32(PartitionIndex.Value);
 				}
@@ -25994,7 +25994,7 @@ namespace Kafka.Protocol
 				get => _topicName;
 				set 
 				{
-					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					if (Version.InRange(new VersionRange(0, 0)) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 					}
@@ -26023,7 +26023,7 @@ namespace Kafka.Protocol
 				get => _partitionIndex;
 				set 
 				{
-					if (Version.InRange(new VersionRange(0, 2147483647)) == false) 
+					if (Version.InRange(new VersionRange(0, 0)) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 					}
@@ -27983,11 +27983,11 @@ namespace Kafka.Protocol
 				{
 					Id = new Int32(reader.ReadInt32());
 				}
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(0, 0))) 
 				{
 					V0Host = new String(reader.ReadString());
 				}
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(0, 0))) 
 				{
 					V0Port = new Int32(reader.ReadInt32());
 				}
@@ -28007,11 +28007,11 @@ namespace Kafka.Protocol
 				{
 					writer.WriteInt32(Id.Value);
 				}
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(0, 0))) 
 				{
 					writer.WriteString(V0Host.Value);
 				}
-				if (Version.InRange(new VersionRange(0, 2147483647))) 
+				if (Version.InRange(new VersionRange(0, 0))) 
 				{
 					writer.WriteInt32(V0Port.Value);
 				}
@@ -28753,7 +28753,7 @@ namespace Kafka.Protocol
 	{
 		public WriteTxnMarkersRequest(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			if (version.InRange(new VersionRange(0, 0)) == false) 
 			{
 				throw new UnsupportedVersionException($"WriteTxnMarkersRequest does not support version {version}. Valid versions are: 0");
 			}
@@ -29124,7 +29124,7 @@ namespace Kafka.Protocol
 	{
 		public WriteTxnMarkersResponse(int version)
 		{
-			if (version.InRange(new VersionRange(0, 2147483647)) == false) 
+			if (version.InRange(new VersionRange(0, 0)) == false) 
 			{
 				throw new UnsupportedVersionException($"WriteTxnMarkersResponse does not support version {version}. Valid versions are: 0");
 			}

@@ -29,6 +29,9 @@ namespace Kafka.Protocol.Generator.Definitions
                 new[] {'-', '+'},
                 StringSplitOptions.RemoveEmptyEntries);
 
+            var isRange = versionRangeExpression.Contains('-') || 
+                          versionRangeExpression.Contains('+');
+
             if (versions.Length > 2)
             {
                 throw new ArgumentException(
@@ -43,7 +46,7 @@ namespace Kafka.Protocol.Generator.Definitions
                     nameof(versionRangeExpression));
             }
 
-            var to = int.MaxValue;
+            var to = isRange ? int.MaxValue : from;
             if (versions.Length == 1)
             {
                 return new VersionRange(from, to);
