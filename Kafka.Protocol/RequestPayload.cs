@@ -32,7 +32,9 @@ namespace Kafka.Protocol
             var reader = new KafkaReader(payload);
             var header = new RequestHeader(version);
             header.ReadFrom(reader);
-            var message = Messages.Create(header.RequestApiKey.Value, version);
+            var message = Messages.Create(
+                header.RequestApiKey.Value,
+                header.RequestApiVersion.Value);
             message.ReadFrom(reader);
 
             return new RequestPayload(header, message);
