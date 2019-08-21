@@ -7,7 +7,7 @@ namespace Kafka.Protocol
         public RequestHeader Header { get; }
         public Message Message { get; }
 
-        public RequestPayload(RequestHeader header, Message message)
+        private RequestPayload(RequestHeader header, Message message)
         {
             Header = header;
             Message = message;
