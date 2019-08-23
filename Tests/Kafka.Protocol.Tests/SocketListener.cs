@@ -86,34 +86,6 @@ namespace Kafka.Protocol.Tests
         }
     }
 
-    internal class SocketListener
-    {
-        internal Socket Connect(string hostname, out int port)
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            var address = host.AddressList[0];
-            var endPoint = new IPEndPoint(address, GetPort());
-            port = endPoint.Port;
-
-            var listener = new Socket(
-                address.AddressFamily,
-                SocketType.Stream, ProtocolType.Tcp);
-
-            listener.Bind(endPoint);
-            listener.Listen(1);
-
-            return listener;
-        }
-
-        private static int GetPort()
-        {
-            const int min = 11000;
-            const int max = 12000;
-            var random = new Random();
-            return random.Next(min, max);
-        }
-    }
-
     internal class SocketServer : IDisposable
     {
         private readonly List<Socket> _clients = new List<Socket>();
@@ -133,25 +105,36 @@ namespace Kafka.Protocol.Tests
         {
             var server = new SocketServer();
             var socket = server.Connect(hostname);
-            server.StartAcceptingClients(socket, server._cancellationSource.Token)
-                .DoNotAwait();
+            server.StartAcceptingClients(socket, server._cancellationSource.Token);
             return server;
         }
 
-        private async Task StartAcceptingClients(Socket socket, CancellationToken cancellationToken)
+        private void StartAcceptingClients(Socket socket, CancellationToken cancellationToken)
         {
-            while (cancellationToken.IsCancellationRequested == false)
-            {
-                var clientSocket = await socket.AcceptAsync();
-                _clients.Add(clientSocket);
-                _clientAvailableSemaphore.Release();
-            }
+            Task.Factory.StartNew(
+                async () =>
+                {
+                    try
+                    {
+                        while (cancellationToken.IsCancellationRequested == false)
+                        {
+                            var clientSocket = await socket.AcceptAsync().ConfigureAwait(false);
+                            _clients.Add(clientSocket);
+                            _clientAvailableSemaphore.Release();
+                        }
+                    }
+                    finally
+                    {
+                        socket.Shutdown(SocketShutdown.Both);
+                        socket.Close();
+                        socket.Dispose();
 
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Close();
-            socket.Dispose();
-
-            _acceptBackgroundTaskCancelled.Release();
+                        _acceptBackgroundTaskCancelled.Release();
+                    }
+                },
+                cancellationToken,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default);
         }
 
         private Socket Connect(string hostname)
@@ -212,7 +195,11 @@ namespace Kafka.Protocol.Tests
                 do
                 {
                     var memory = writer.GetMemory(MinimumBufferSize);
-                    var bytesRead = await _socket.ReceiveAsync(memory, SocketFlags.None, cancellationToken);
+                    var bytesRead = await _socket.ReceiveAsync(
+                        memory,
+                        SocketFlags.None,
+                        cancellationToken);
+
                     if (bytesRead == 0)
                     {
                         return;
@@ -269,39 +256,61 @@ namespace Kafka.Protocol.Tests
         internal static Client Start(Socket clientSocket)
         {
             var client = new Client(clientSocket);
-            client.SendReceive()
-                .DoNotAwait();
-            client.ReadWrite()
-                .DoNotAwait();
+            client.StartSendingAndReceiving();
+            client.StartReadingAndWriting();
             return client;
         }
 
-        private async Task SendReceive()
+        private void StartSendingAndReceiving()
         {
             var cancellationToken = _cancellationSource.Token;
-            var dataReceiver = new DataReceiver(_socket);
-            while (cancellationToken.IsCancellationRequested == false)
-            {
-                // todo: alternate send
-                await dataReceiver.ReceiveAsync(_pipe.Writer, cancellationToken);
-            }
-
-            _sendReceiveCancelled.Release();
+            Task.Factory.StartNew(
+                async () =>
+                {
+                    try
+                    {
+                        var dataReceiver = new DataReceiver(_socket);
+                        while (cancellationToken.IsCancellationRequested == false)
+                        {
+                            // todo: alternate send
+                            await dataReceiver.ReceiveAsync(_pipe.Writer, cancellationToken).ConfigureAwait(false);
+                        }
+                    }
+                    finally
+                    {
+                        _sendReceiveCancelled.Release();
+                    }
+                },
+                cancellationToken,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default);
         }
 
-        private async Task ReadWrite()
+        private void StartReadingAndWriting()
         {
             var cancellationToken = _cancellationSource.Token;
-            var reader = new RequestReader(_pipe.Reader);
-            while (cancellationToken.IsCancellationRequested == false)
-            {
-                var requestPayload = await reader.ReadAsync(cancellationToken);
-                _requestPayloads.Add(requestPayload, cancellationToken);
-                _requestPayloadAvailableSemaphore.Release();
-                // todo: alternate write
-            }
-
-            _readWriteCancelled.Release();
+            Task.Factory.StartNew(
+                async () =>
+                {
+                    try
+                    {
+                        var reader = new RequestReader(_pipe.Reader);
+                        while (cancellationToken.IsCancellationRequested == false)
+                        {
+                            var requestPayload = await reader.ReadAsync(cancellationToken).ConfigureAwait(false);
+                            _requestPayloads.Add(requestPayload, cancellationToken);
+                            _requestPayloadAvailableSemaphore.Release();
+                            // todo: alternate write
+                        }
+                    }
+                    finally
+                    {
+                        _readWriteCancelled.Release();
+                    }
+                },
+                cancellationToken,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default);
         }
 
         public void Dispose()
