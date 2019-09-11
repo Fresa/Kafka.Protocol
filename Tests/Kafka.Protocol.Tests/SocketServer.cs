@@ -1,33 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace Kafka.Protocol.Tests
 {
     internal class SocketServer : IDisposable
     {
-        private readonly List<Socket> _clients = new List<Socket>();
-        private readonly SemaphoreSlim _clientAvailableSemaphore = new SemaphoreSlim(0);
+        private readonly ConcurrentQueue<Socket> _clients = new ConcurrentQueue<Socket>();
+        private readonly BufferBlock<Socket> _waitingClients = new BufferBlock<Socket>();
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
         private Task _acceptingClientsBackgroundTask;
-        private static Socket _socket;
+        private static Socket _clientAcceptingSocket;
 
         internal int Port { get; private set; }
 
         internal async Task<Socket> WaitForConnectedClientAsync(CancellationToken cancellationToken)
         {
-            await _clientAvailableSemaphore.WaitAsync(cancellationToken);
-            return _clients.Last();
+            var client = await _waitingClients.ReceiveAsync(cancellationToken);
+            _clients.Enqueue(client);
+            return client;
         }
 
         internal static SocketServer Start(string hostname)
         {
             var server = new SocketServer();
-            _socket = server.Connect(hostname);
+            _clientAcceptingSocket = server.Connect(hostname);
             server.StartAcceptingClients();
             return server;
         }
@@ -40,10 +41,10 @@ namespace Kafka.Protocol.Tests
                     {
                         try
                         {
-                            var clientSocket = await _socket.AcceptAsync()
+                            var clientSocket = await _clientAcceptingSocket.AcceptAsync()
                                 .ConfigureAwait(false);
-                            _clients.Add(clientSocket);
-                            _clientAvailableSemaphore.Release();
+                            await _waitingClients.SendAsync(clientSocket, _cancellationSource.Token)
+                                .ConfigureAwait(false);
                         }
                         catch (Exception) when (_cancellationSource.IsCancellationRequested)
                         {
@@ -76,16 +77,14 @@ namespace Kafka.Protocol.Tests
         public void Dispose()
         {
             _cancellationSource.Cancel();
-            _socket.Shutdown(SocketShutdown.Both);
+            _clientAcceptingSocket.Shutdown(SocketShutdown.Both);
             _acceptingClientsBackgroundTask.Wait(TimeSpan.FromSeconds(10));
-            foreach (var client in _clients)
+            while (_clients.TryDequeue(out var client))
             {
                 client.Shutdown(SocketShutdown.Both);
                 client.Close();
                 client.Dispose();
             }
-
-            _clientAvailableSemaphore.Dispose();
         }
     }
 }
