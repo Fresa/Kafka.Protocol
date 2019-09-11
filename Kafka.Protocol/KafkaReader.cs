@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Kafka.Protocol
 {
-    internal class KafkaReader : IKafkaReader
+    public class KafkaReader : IKafkaReader
     {
         private readonly byte[] _buffer;
         private int _position;
 
-        internal KafkaReader(params byte[] buffer)
+        public KafkaReader(params byte[] buffer)
         {
             _buffer = buffer;
         }

@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
-namespace Kafka.Protocol.Tests
+namespace Kafka.TestServer
 {
     internal class SocketServer : IDisposable
     {

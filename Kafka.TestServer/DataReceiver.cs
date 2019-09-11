@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Kafka.Protocol.Tests
+namespace Kafka.TestServer
 {
     internal class DataReceiver
     {

@@ -8,7 +8,7 @@ using Confluent.Kafka;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Kafka.Protocol.Tests
+namespace Kafka.TestServer.Tests
 {
     public partial class Given_a_client_and_a_server
     {

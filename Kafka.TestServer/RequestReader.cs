@@ -3,8 +3,9 @@ using System.Buffers;
 using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
+using Kafka.Protocol;
 
-namespace Kafka.Protocol.Tests
+namespace Kafka.TestServer
 {
     internal class RequestReader
     {
@@ -27,7 +28,7 @@ namespace Kafka.Protocol.Tests
                     continue;
                 }
 
-                var reader = new KafkaReader(result.Buffer.ToArray());
+                var reader = new KafkaReader(BuffersExtensions.ToArray<byte>(result.Buffer));
                 size = reader.ReadInt32();
                 _reader.AdvanceTo(result.Buffer.GetPosition(4));
                 break;
@@ -54,7 +55,7 @@ namespace Kafka.Protocol.Tests
 
             return RequestPayload.ReadFrom(
                 0, 
-                result.Buffer.ToArray());
+                BuffersExtensions.ToArray<byte>(result.Buffer));
         }
     }
 }

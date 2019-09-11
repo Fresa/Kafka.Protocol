@@ -4,8 +4,9 @@ using System.IO.Pipelines;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Kafka.Protocol;
 
-namespace Kafka.Protocol.Tests
+namespace Kafka.TestServer
 {
     internal class Client : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -8,18 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="1.1.0" />
-    <PackageReference Include="FluentAssertions" Version="5.6.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="System.IO.Pipelines" Version="4.5.3" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
-    <PackageReference Include="Test.It" version="2.2.0" />
-    <PackageReference Include="Test.It.With.XUnit" version="2.2.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Kafka.Protocol\Kafka.Protocol.csproj" />
-    <ProjectReference Include="..\..\Kafka.TestServer\Kafka.TestServer.csproj" />
+    <ProjectReference Include="..\Kafka.TestServer\Kafka.TestServer.csproj" />
   </ItemGroup>
 
 </Project>
