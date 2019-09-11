@@ -13,11 +13,12 @@ namespace Kafka.Protocol.Tests
         private readonly List<Socket> _clients = new List<Socket>();
         private readonly SemaphoreSlim _clientAvailableSemaphore = new SemaphoreSlim(0);
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
-        private readonly SemaphoreSlim _acceptBackgroundTaskCancelled = new SemaphoreSlim(0);
+        private Task _acceptingClientsBackgroundTask;
+        private static Socket _socket;
 
-        internal int Port { get; private set; } = AssignPort();
+        internal int Port { get; private set; }
 
-        internal async Task<Socket> WaitConnectedClientAsync(CancellationToken cancellationToken)
+        internal async Task<Socket> WaitForConnectedClientAsync(CancellationToken cancellationToken)
         {
             await _clientAvailableSemaphore.WaitAsync(cancellationToken);
             return _clients.Last();
@@ -26,71 +27,57 @@ namespace Kafka.Protocol.Tests
         internal static SocketServer Start(string hostname)
         {
             var server = new SocketServer();
-            var socket = server.Connect(hostname);
-            server.StartAcceptingClients(socket, server._cancellationSource.Token);
+            _socket = server.Connect(hostname);
+            server.StartAcceptingClients();
             return server;
         }
 
-        private void StartAcceptingClients(Socket socket, CancellationToken cancellationToken)
+        private void StartAcceptingClients()
         {
-            Task.Factory.StartNew(
-                async () =>
+            _acceptingClientsBackgroundTask = Task.Run(async () =>
                 {
-                    try
+                    while (_cancellationSource.IsCancellationRequested == false)
                     {
-                        while (cancellationToken.IsCancellationRequested == false)
+                        try
                         {
-                            var clientSocket = await socket.AcceptAsync().ConfigureAwait(false);
+                            var clientSocket = await _socket.AcceptAsync()
+                                .ConfigureAwait(false);
                             _clients.Add(clientSocket);
                             _clientAvailableSemaphore.Release();
                         }
+                        catch (Exception) when (_cancellationSource.IsCancellationRequested)
+                        {
+                            // Shutdown in progress
+                            return;
+                        }
                     }
-                    finally
-                    {
-                        socket.Shutdown(SocketShutdown.Both);
-                        socket.Close();
-                        socket.Dispose();
-
-                        _acceptBackgroundTaskCancelled.Release();
-                    }
-                },
-                cancellationToken,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Default);
+                });
         }
 
         private Socket Connect(string hostname)
         {
             var host = Dns.GetHostEntry(hostname);
             var address = host.AddressList[0];
-            var endPoint = new IPEndPoint(address, Port);
+            var endPoint = new IPEndPoint(address, 0);
             Port = endPoint.Port;
 
             var listener = new Socket(
                 address.AddressFamily,
-                SocketType.Stream, 
+                SocketType.Stream,
                 ProtocolType.Tcp);
 
             listener.Bind(endPoint);
-            Port = ((IPEndPoint) listener.LocalEndPoint).Port;
+            Port = ((IPEndPoint)listener.LocalEndPoint).Port;
             listener.Listen(100);
 
             return listener;
         }
 
-        private static int AssignPort()
-        {
-            return 0;
-            const int min = 11000;
-            const int max = 12000;
-            var random = new Random();
-            return random.Next(min, max);
-        }
-
         public void Dispose()
         {
             _cancellationSource.Cancel();
-            _acceptBackgroundTaskCancelled.Wait(TimeSpan.FromSeconds(10));
+            _socket.Shutdown(SocketShutdown.Both);
+            _acceptingClientsBackgroundTask.Wait(TimeSpan.FromSeconds(10));
             foreach (var client in _clients)
             {
                 client.Shutdown(SocketShutdown.Both);

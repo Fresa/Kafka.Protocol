@@ -28,7 +28,7 @@ namespace Kafka.Protocol.Tests
 
                 using (var server = SocketServer.Start(hostName))
                 {
-                    var clientAcceptedSocket = server.WaitConnectedClientAsync(CancellationToken.None);
+                    var clientAcceptedSocket = server.WaitForConnectedClientAsync(CancellationToken.None);
 
                     var clientTask = ProduceMessageFromClientAsync(hostName, server.Port);
                     var connectedClientSocket = await clientAcceptedSocket;
