@@ -29,13 +29,13 @@ namespace Kafka.Protocol
 
         public static RequestPayload ReadFrom(int version, byte[] payload)
         {
-            var reader = new KafkaReader(payload);
+            var kafkaReader = new KafkaReader(payload);
             var header = new RequestHeader(version);
-            header.ReadFrom(reader);
+            header.ReadFrom(kafkaReader);
             var message = Messages.Create(
                 header.RequestApiKey.Value,
                 header.RequestApiVersion.Value);
-            message.ReadFrom(reader);
+            message.ReadFrom(kafkaReader);
 
             return new RequestPayload(header, message);
         }
