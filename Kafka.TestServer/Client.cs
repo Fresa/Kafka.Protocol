@@ -15,19 +15,19 @@ namespace Kafka.TestServer
         private Client(Socket socket)
         {
             _socket = socket;
+            _reader = new RequestReader(_pipe.Reader);
         }
 
-        private readonly BufferBlock<RequestPayload> _requestPayloads = new BufferBlock<RequestPayload>();
         private readonly BufferBlock<ResponsePayload> _responsePayloads = new BufferBlock<ResponsePayload>();
 
         private readonly Pipe _pipe = new Pipe();
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
-        private Task _readAndWriteBackgroundTask;
         private Task _sendAndReceiveBackgroundTask;
+        private readonly RequestReader _reader;
 
         internal async Task<RequestPayload> ReadAsync(CancellationToken cancellationToken)
         {
-            return await _requestPayloads.ReceiveAsync(cancellationToken);
+            return await _reader.ReadAsync(cancellationToken);
         }
 
         internal async Task SendAsync(
@@ -41,7 +41,6 @@ namespace Kafka.TestServer
         {
             var client = new Client(clientSocket);
             client.StartSendingAndReceiving();
-            client.StartReadingAndWriting();
             return client;
         }
 
@@ -69,39 +68,10 @@ namespace Kafka.TestServer
                 });
         }
 
-        private void StartReadingAndWriting()
-        {
-            _readAndWriteBackgroundTask = Task.Run(
-                async () =>
-                {
-                    var cancellationToken = _cancellationSource.Token;
-                    try
-                    {
-                        var reader = new RequestReader(_pipe.Reader);
-                        while (cancellationToken.IsCancellationRequested == false)
-                        {
-                            var requestPayload = await reader
-                                .ReadAsync(cancellationToken)
-                                .ConfigureAwait(false);
-
-                            await _requestPayloads
-                                .SendAsync(requestPayload, cancellationToken)
-                                .ConfigureAwait(false);
-                            // todo: alternate write
-                        }
-                    }
-                    catch (Exception) when (_cancellationSource.IsCancellationRequested)
-                    {
-                        // Shutdown in progress
-                    }
-                });
-        }
-
         public void Dispose()
         {
             _cancellationSource.Cancel();
 
-            _readAndWriteBackgroundTask.Wait(TimeSpan.FromSeconds(3));
             _sendAndReceiveBackgroundTask.Wait(TimeSpan.FromSeconds(3));
         }
     }
