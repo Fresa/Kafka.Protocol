@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.IO.Pipelines;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using Kafka.Protocol;
 
 namespace Kafka.TestServer
@@ -17,11 +17,8 @@ namespace Kafka.TestServer
             _socket = socket;
         }
 
-        private readonly BlockingCollection<RequestPayload> _requestPayloads = new BlockingCollection<RequestPayload>();
-        private readonly SemaphoreSlim _requestPayloadAvailableSemaphore = new SemaphoreSlim(0);
-
-        private readonly BlockingCollection<ResponsePayload> _responsePayloads = new BlockingCollection<ResponsePayload>();
-        private readonly SemaphoreSlim _responsePayloadAvailableSemaphore = new SemaphoreSlim(0);
+        private readonly BufferBlock<RequestPayload> _requestPayloads = new BufferBlock<RequestPayload>();
+        private readonly BufferBlock<ResponsePayload> _responsePayloads = new BufferBlock<ResponsePayload>();
 
         private readonly Pipe _pipe = new Pipe();
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
@@ -30,13 +27,14 @@ namespace Kafka.TestServer
 
         internal async Task<RequestPayload> ReadAsync(CancellationToken cancellationToken)
         {
-            await _requestPayloadAvailableSemaphore.WaitAsync(cancellationToken);
-            return _requestPayloads.Take(cancellationToken);
+            return await _requestPayloads.ReceiveAsync(cancellationToken);
         }
 
-        internal void Send(ResponsePayload payload)
+        internal async Task SendAsync(
+            ResponsePayload payload, 
+            CancellationToken cancellationToken)
         {
-            _responsePayloads.Add(payload);
+            await _responsePayloads.SendAsync(payload, cancellationToken);
         }
 
         internal static Client Start(Socket clientSocket)
@@ -59,7 +57,9 @@ namespace Kafka.TestServer
                         while (cancellationToken.IsCancellationRequested == false)
                         {
                             // todo: alternate send
-                            await dataReceiver.ReceiveAsync(_pipe.Writer, cancellationToken).ConfigureAwait(false);
+                            await dataReceiver
+                                .ReceiveAsync(_pipe.Writer, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                     }
                     catch (Exception) when (_cancellationSource.IsCancellationRequested)
@@ -83,8 +83,10 @@ namespace Kafka.TestServer
                             var requestPayload = await reader
                                 .ReadAsync(cancellationToken)
                                 .ConfigureAwait(false);
-                            _requestPayloads.Add(requestPayload, cancellationToken);
-                            _requestPayloadAvailableSemaphore.Release();
+
+                            await _requestPayloads
+                                .SendAsync(requestPayload, cancellationToken)
+                                .ConfigureAwait(false);
                             // todo: alternate write
                         }
                     }
@@ -100,12 +102,7 @@ namespace Kafka.TestServer
             _cancellationSource.Cancel();
 
             _readAndWriteBackgroundTask.Wait(TimeSpan.FromSeconds(3));
-            _requestPayloads.Dispose();
-            _requestPayloadAvailableSemaphore.Dispose();
-
             _sendAndReceiveBackgroundTask.Wait(TimeSpan.FromSeconds(3));
-            _responsePayloads.Dispose();
-            _responsePayloadAvailableSemaphore.Dispose();
         }
     }
 }
