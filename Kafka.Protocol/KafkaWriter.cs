@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Kafka.Protocol
 {
-    internal class KafkaWriter : IKafkaWriter
+    public class KafkaWriter : IKafkaWriter
     {
         private readonly Stream _buffer;
 
-        internal KafkaWriter(Stream buffer)
+        public KafkaWriter(Stream buffer)
         {
             _buffer = buffer;
         }

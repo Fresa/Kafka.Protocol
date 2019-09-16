@@ -15,7 +15,7 @@ namespace Kafka.Protocol
             Message = message;
         }
 
-        internal byte[] WriteTo()
+        public byte[] Write()
         {
             using (var stream = new MemoryStream())
             {

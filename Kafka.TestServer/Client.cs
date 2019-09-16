@@ -1,9 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.IO.Pipelines;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
 using Kafka.Protocol;
 
 namespace Kafka.TestServer
@@ -17,8 +17,6 @@ namespace Kafka.TestServer
             _socket = socket;
             _reader = new RequestReader(_pipe.Reader);
         }
-
-        private readonly BufferBlock<ResponsePayload> _responsePayloads = new BufferBlock<ResponsePayload>();
 
         private readonly Pipe _pipe = new Pipe();
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
@@ -34,7 +32,28 @@ namespace Kafka.TestServer
             ResponsePayload payload, 
             CancellationToken cancellationToken)
         {
-            await _responsePayloads.SendAsync(payload, cancellationToken);
+            var pipe = new Pipe();
+            var payloadBytes = payload.Write();
+
+            using (var buffer = new MemoryStream())
+            {
+                using (var writer = new KafkaWriter(buffer))
+                {
+                    writer.WriteBytes(payloadBytes);
+                }
+
+                await pipe.Writer.WriteAsync(
+                    new ReadOnlyMemory<byte>(buffer.GetBuffer()),
+                    cancellationToken);
+
+                await pipe.Writer.FlushAsync(cancellationToken);
+            }
+
+            var memory = pipe.Writer.GetMemory(512);
+            await _socket.SendAsync(
+                memory,
+                SocketFlags.None,
+                cancellationToken);
         }
 
         internal static Client Start(Socket clientSocket)
