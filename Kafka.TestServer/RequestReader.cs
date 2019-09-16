@@ -28,7 +28,7 @@ namespace Kafka.TestServer
                     continue;
                 }
 
-                var reader = new KafkaReader(BuffersExtensions.ToArray<byte>(result.Buffer));
+                var reader = new KafkaReader(result.Buffer.ToArray());
                 size = reader.ReadInt32();
                 _reader.AdvanceTo(result.Buffer.GetPosition(4));
                 break;
@@ -55,7 +55,7 @@ namespace Kafka.TestServer
 
             return RequestPayload.ReadFrom(
                 0, 
-                BuffersExtensions.ToArray<byte>(result.Buffer));
+                result.Buffer.ToArray());
         }
     }
 }

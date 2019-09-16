@@ -25,8 +25,8 @@ namespace Kafka.TestServer
 
         private readonly Pipe _pipe = new Pipe();
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
-        private readonly SemaphoreSlim _readWriteCancelled = new SemaphoreSlim(0);
-        private readonly SemaphoreSlim _sendReceiveCancelled = new SemaphoreSlim(0);
+        private Task _readAndWriteBackgroundTask;
+        private Task _sendAndReceiveBackgroundTask;
 
         internal async Task<RequestPayload> ReadAsync(CancellationToken cancellationToken)
         {
@@ -49,10 +49,10 @@ namespace Kafka.TestServer
 
         private void StartSendingAndReceiving()
         {
-            var cancellationToken = _cancellationSource.Token;
-            Task.Factory.StartNew(
+            _sendAndReceiveBackgroundTask = Task.Run(
                 async () =>
                 {
+                    var cancellationToken = _cancellationSource.Token;
                     try
                     {
                         var dataReceiver = new DataReceiver(_socket);
@@ -62,22 +62,19 @@ namespace Kafka.TestServer
                             await dataReceiver.ReceiveAsync(_pipe.Writer, cancellationToken).ConfigureAwait(false);
                         }
                     }
-                    finally
+                    catch (Exception) when (_cancellationSource.IsCancellationRequested)
                     {
-                        _sendReceiveCancelled.Release();
+                        // Shutdown in progress
                     }
-                },
-                cancellationToken,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Default);
+                });
         }
 
         private void StartReadingAndWriting()
         {
-            var cancellationToken = _cancellationSource.Token;
-            Task.Factory.StartNew(
+            _readAndWriteBackgroundTask = Task.Run(
                 async () =>
                 {
+                    var cancellationToken = _cancellationSource.Token;
                     try
                     {
                         var reader = new RequestReader(_pipe.Reader);
@@ -91,25 +88,22 @@ namespace Kafka.TestServer
                             // todo: alternate write
                         }
                     }
-                    finally
+                    catch (Exception) when (_cancellationSource.IsCancellationRequested)
                     {
-                        _readWriteCancelled.Release();
+                        // Shutdown in progress
                     }
-                },
-                cancellationToken,
-                TaskCreationOptions.LongRunning,
-                TaskScheduler.Default);
+                });
         }
 
         public void Dispose()
         {
             _cancellationSource.Cancel();
 
-            _readWriteCancelled.Wait(TimeSpan.FromSeconds(3));
+            _readAndWriteBackgroundTask.Wait(TimeSpan.FromSeconds(3));
             _requestPayloads.Dispose();
             _requestPayloadAvailableSemaphore.Dispose();
 
-            _sendReceiveCancelled.Wait(TimeSpan.FromSeconds(3));
+            _sendAndReceiveBackgroundTask.Wait(TimeSpan.FromSeconds(3));
             _responsePayloads.Dispose();
             _responsePayloadAvailableSemaphore.Dispose();
         }
