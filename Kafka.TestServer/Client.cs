@@ -10,7 +10,12 @@ namespace Kafka.TestServer
 {
     internal class Client : IDisposable
     {
+        private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
+
+        private readonly Pipe _pipe = new Pipe();
+        private readonly RequestReader _reader;
         private readonly Socket _socket;
+        private Task _sendAndReceiveBackgroundTask;
 
         private Client(Socket socket)
         {
@@ -18,10 +23,12 @@ namespace Kafka.TestServer
             _reader = new RequestReader(_pipe.Reader);
         }
 
-        private readonly Pipe _pipe = new Pipe();
-        private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
-        private Task _sendAndReceiveBackgroundTask;
-        private readonly RequestReader _reader;
+        public void Dispose()
+        {
+            _cancellationSource.Cancel();
+
+            _sendAndReceiveBackgroundTask.Wait(TimeSpan.FromSeconds(3));
+        }
 
         internal async Task<RequestPayload> ReadAsync(CancellationToken cancellationToken)
         {
@@ -29,15 +36,15 @@ namespace Kafka.TestServer
         }
 
         internal async Task SendAsync(
-            ResponsePayload payload, 
+            ResponsePayload payload,
             CancellationToken cancellationToken)
         {
             var pipe = new Pipe();
-            var payloadBytes = payload.Write();
+            var payloadBytes = await payload.WriteAsync();
 
-            using (var buffer = new MemoryStream())
+            await using (var buffer = new MemoryStream())
             {
-                using (var writer = new KafkaWriter(buffer))
+                await using (var writer = new KafkaWriter(buffer))
                 {
                     writer.WriteBytes(payloadBytes);
                 }
@@ -80,18 +87,11 @@ namespace Kafka.TestServer
                                 .ConfigureAwait(false);
                         }
                     }
-                    catch (Exception) when (_cancellationSource.IsCancellationRequested)
+                    catch when (_cancellationSource.IsCancellationRequested)
                     {
                         // Shutdown in progress
                     }
                 });
-        }
-
-        public void Dispose()
-        {
-            _cancellationSource.Cancel();
-
-            _sendAndReceiveBackgroundTask.Wait(TimeSpan.FromSeconds(3));
         }
     }
 }

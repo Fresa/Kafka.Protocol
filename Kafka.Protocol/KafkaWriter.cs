@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
@@ -93,7 +93,7 @@ namespace Kafka.Protocol
 
         public void WriteBytes(byte[] value)
         {
-            value = value ?? System.Array.Empty<byte>();
+            value ??= Array.Empty<byte>();
             WriteInt32(value.Length);
             WriteAsLittleEndian(value);
         }
@@ -135,7 +135,7 @@ namespace Kafka.Protocol
         {
             if (BitConverter.IsLittleEndian == false)
             {
-                System.Array.Reverse(value);
+                Array.Reverse(value);
             }
             Write(value);
         }
@@ -144,7 +144,7 @@ namespace Kafka.Protocol
         {
             if (BitConverter.IsLittleEndian)
             {
-                System.Array.Reverse(value);
+                Array.Reverse(value);
             }
             Write(value);
         }
@@ -154,9 +154,9 @@ namespace Kafka.Protocol
             _buffer.Write(value, 0, value.Length);
         }
 
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
-            _buffer.Flush();
+            await _buffer.FlushAsync();
         }
     }
 }

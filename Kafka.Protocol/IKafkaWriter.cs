@@ -2,7 +2,7 @@
 
 namespace Kafka.Protocol
 {
-    public interface IKafkaWriter : IDisposable
+    public interface IKafkaWriter : IAsyncDisposable
     {
         void WriteBoolean(bool value);
         void WriteInt8(sbyte value);

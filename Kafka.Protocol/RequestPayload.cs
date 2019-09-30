@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
@@ -13,18 +14,16 @@ namespace Kafka.Protocol
             Message = message;
         }
 
-        internal byte[] WriteTo()
+        internal async Task<byte[]> WriteToAsync()
         {
-            using (var stream = new MemoryStream())
+            await using var stream = new MemoryStream();
+            await using (var writer = new KafkaWriter(stream))
             {
-                using (var writer = new KafkaWriter(stream))
-                {
-                    Header.WriteTo(writer);
-                    Message.WriteTo(writer);
-                }
-
-                return stream.GetBuffer();
+                Header.WriteTo(writer);
+                Message.WriteTo(writer);
             }
+
+            return stream.GetBuffer();
         }
 
         public static RequestPayload ReadFrom(int version, byte[] payload)
