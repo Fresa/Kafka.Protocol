@@ -68,7 +68,7 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Equals(65);
+                _value.Should().Be(65);
             }
         }
 
@@ -90,7 +90,7 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Equals(256);
+                _value.Should().Be(256);
             }
         }
 

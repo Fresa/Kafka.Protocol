@@ -26,19 +26,15 @@ namespace Kafka.TestServer.Tests
             {
                 var hostName = Dns.GetHostName();
 
-                using (var server = SocketServer.Start(hostName))
-                {
-                    var clientAcceptedSocket = server.WaitForConnectedClientAsync(CancellationToken.None);
+                using var server = SocketServer.Start(hostName);
+                var clientAcceptedSocket = server.WaitForConnectedClientAsync(CancellationToken.None);
 
-                    var clientTask = ProduceMessageFromClientAsync(hostName, server.Port);
-                    var connectedClientSocket = await clientAcceptedSocket;
+                var clientTask = ProduceMessageFromClientAsync(hostName, server.Port);
+                var connectedClientSocket = await clientAcceptedSocket;
 
-                    using (var client = Client.Start(connectedClientSocket))
-                    {
-                        var message = await client.ReadAsync(CancellationToken.None);
-                        await clientTask;
-                    }
-                }
+                using var client = Client.Start(connectedClientSocket);
+                var message = await client.ReadAsync(CancellationToken.None);
+                await clientTask;
             }
 
             private static async Task ProduceMessageFromClientAsync(string host, int port)
@@ -53,13 +49,11 @@ namespace Kafka.TestServer.Tests
                     SocketTimeoutMs = 30000
                 };
 
-                using (var producer = new ProducerBuilder<Null, string>(producerConfig)
+                using var producer = new ProducerBuilder<Null, string>(producerConfig)
                     .SetLogHandler((_, message) => Debug.WriteLine(message.Message))
-                    .Build())
-                {
-                    await producer.ProduceAsync("my-topic", new Message<Null, string> {Value = "test"});
-                    producer.Flush();
-                }
+                    .Build();
+                await producer.ProduceAsync("my-topic", new Message<Null, string> {Value = "test"});
+                producer.Flush();
             }
 
             private async Task RunClient2(string host, int port)

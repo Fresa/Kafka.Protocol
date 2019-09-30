@@ -46,7 +46,7 @@ namespace Kafka.TestServer
                             await _waitingClients.SendAsync(clientSocket, _cancellationSource.Token)
                                 .ConfigureAwait(false);
                         }
-                        catch (Exception) when (_cancellationSource.IsCancellationRequested)
+                        catch when (_cancellationSource.IsCancellationRequested)
                         {
                             // Shutdown in progress
                             return;
