@@ -23,7 +23,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteBoolean(true);
+                _writer.WriteBooleanAsync(true);
             }
 
             [Fact]
@@ -46,7 +46,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteBoolean(false);
+                _writer.WriteBooleanAsync(false);
             }
 
             [Fact]
@@ -69,7 +69,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteInt8(65);
+                _writer.WriteInt8Async(65);
             }
 
             [Fact]
@@ -92,7 +92,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteInt16(256);
+                _writer.WriteInt16Async(256);
             }
 
             [Fact]
@@ -115,7 +115,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteInt32(257);
+                _writer.WriteInt32Async(257);
             }
 
             [Fact]
@@ -138,7 +138,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteInt64(65);
+                _writer.WriteInt64Async(65);
             }
 
             [Fact]
@@ -161,7 +161,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteUInt32(2);
+                _writer.WriteUInt32Async(2);
             }
 
             [Fact]
@@ -184,7 +184,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteString("ABCDE");
+                _writer.WriteStringAsync("ABCDE");
             }
 
             [Fact]
@@ -208,7 +208,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _action = _writer.Invoking(writer => writer.WriteString(null));
+                _action = _writer.Invoking(writer => writer.WriteStringAsync(null));
             }
 
             [Fact]
@@ -231,7 +231,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteNullableString("ABCDE");
+                _writer.WriteNullableStringAsync("ABCDE");
             }
 
             [Fact]
@@ -254,7 +254,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteNullableString(null);
+                _writer.WriteNullableStringAsync(null);
             }
 
             [Fact]
@@ -277,7 +277,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteBytes(new byte[] { 1, 0, 6 });
+                _writer.WriteBytesAsync(new byte[] { 1, 0, 6 });
             }
 
             [Fact]
@@ -300,7 +300,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteNullableBytes(new byte[] { 1, 0, 6 });
+                _writer.WriteNullableBytesAsync(new byte[] { 1, 0, 6 });
             }
 
             [Fact]
@@ -323,7 +323,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteNullableBytes(null);
+                _writer.WriteNullableBytesAsync(null);
             }
 
             [Fact]
@@ -346,7 +346,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteVarInt(300);
+                _writer.WriteVarIntAsync(300);
             }
 
             [Fact]
@@ -369,7 +369,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.WriteVarLong(value: 300);
+                _writer.WriteVarLongAsync(value: 300);
             }
 
             [Fact]
@@ -392,7 +392,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.Write(new Int32(257), new Int32(1));
+                _writer.WriteAsync(new Int32(257), new Int32(1));
             }
 
             [Fact]
@@ -415,7 +415,7 @@ namespace Kafka.Protocol.Tests
 
             protected override void When()
             {
-                _writer.Write<Int32>(null);
+                _writer.WriteAsync<Int32>(null);
             }
 
             [Fact]

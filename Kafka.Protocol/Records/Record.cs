@@ -1,4 +1,7 @@
-﻿namespace Kafka.Protocol.Records
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Kafka.Protocol.Records
 {
     public class Record : ISerialize
     {
@@ -25,17 +28,18 @@
             Headers = reader.Read(() => new Header());
         }
 
-        public void WriteTo(IKafkaWriter writer)
+        public async Task WriteToAsync(IKafkaWriter writer,
+            CancellationToken cancellationToken = default)
         {
-            writer.WriteVarInt(Length.Value);
-            writer.WriteInt8(Attributes.Value);
-            writer.WriteVarInt(TimestampDelta.Value);
-            writer.WriteVarInt(OffsetDelta.Value);
-            writer.WriteVarInt(KeyLength.Value);
-            writer.WriteBytes(Key.Value);
-            writer.WriteVarInt(ValueLen.Value);
-            writer.WriteBytes(Value.Value);
-            writer.Write(Headers);
+            await writer.WriteVarIntAsync(Length.Value, cancellationToken);
+            await writer.WriteInt8Async(Attributes.Value, cancellationToken);
+            await writer.WriteVarIntAsync(TimestampDelta.Value, cancellationToken);
+            await writer.WriteVarIntAsync(OffsetDelta.Value, cancellationToken);
+            await writer.WriteVarIntAsync(KeyLength.Value, cancellationToken);
+            await writer.WriteBytesAsync(Key.Value, cancellationToken);
+            await writer.WriteVarIntAsync(ValueLen.Value, cancellationToken);
+            await writer.WriteBytesAsync(Value.Value, cancellationToken);
+            await writer.WriteAsync(cancellationToken, Headers);
         }
     }
 }

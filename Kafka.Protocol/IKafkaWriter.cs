@@ -1,26 +1,30 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
     public interface IKafkaWriter : IAsyncDisposable
     {
-        void WriteBoolean(bool value);
-        void WriteInt8(sbyte value);
-        void WriteInt16(short value);
-        void WriteInt32(int value);
-        void WriteInt64(long value);
-        void WriteUInt32(uint value);
+        Task WriteBooleanAsync(bool value, CancellationToken cancellationToken = default);
+        Task WriteInt8Async(sbyte value, CancellationToken cancellationToken = default);
+        Task WriteInt16Async(short value, CancellationToken cancellationToken = default);
+        Task WriteInt32Async(int value, CancellationToken cancellationToken = default);
+        Task WriteInt64Async(long value, CancellationToken cancellationToken = default);
+        Task WriteUInt32Async(uint value, CancellationToken cancellationToken = default);
 
-        void WriteVarInt(int value);
-        void WriteVarLong(long value);
+        Task WriteVarIntAsync(int value, CancellationToken cancellationToken = default);
+        Task WriteVarLongAsync(long value, CancellationToken cancellationToken = default);
 
-        void WriteString(string value);
-        void WriteNullableString(string value);
+        Task WriteStringAsync(string value, CancellationToken cancellationToken = default);
+        Task WriteNullableStringAsync(string value, CancellationToken cancellationToken = default);
 
-        void WriteBytes(byte[] value);
-        void WriteNullableBytes(byte[] value);
+        Task WriteBytesAsync(byte[] value, CancellationToken cancellationToken = default);
+        Task WriteNullableBytesAsync(byte[] value, CancellationToken cancellationToken = default);
 
-        void Write<T>(params T[] items) 
+        Task WriteAsync<T>(CancellationToken cancellationToken, params T[] items)
+            where T : ISerialize;
+        Task WriteAsync<T>(params T[] items) 
             where T : ISerialize;
     }
 }

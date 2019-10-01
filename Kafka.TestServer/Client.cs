@@ -46,7 +46,7 @@ namespace Kafka.TestServer
             {
                 await using (var writer = new KafkaWriter(buffer))
                 {
-                    writer.WriteBytes(payloadBytes);
+                    writer.WriteBytesAsync(payloadBytes);
                 }
 
                 await pipe.Writer.WriteAsync(

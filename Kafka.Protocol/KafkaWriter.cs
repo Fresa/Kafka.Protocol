@@ -2,6 +2,7 @@
 using System.Data;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Kafka.Protocol
@@ -15,53 +16,53 @@ namespace Kafka.Protocol
             _buffer = buffer;
         }
 
-        public void WriteBoolean(bool value)
+        public async Task WriteBooleanAsync(bool value, CancellationToken cancellationToken = default)
         {
-            WriteAsLittleEndian(BitConverter.GetBytes(value));
+            await WriteAsLittleEndianAsync(BitConverter.GetBytes(value), cancellationToken);
         }
 
-        public void WriteInt8(sbyte value)
+        public async Task WriteInt8Async(sbyte value, CancellationToken cancellationToken = default)
         {
-            WriteByte((byte)value);
+            await WriteByteAsync((byte)value, cancellationToken);
         }
 
-        public void WriteInt16(short value)
+        public async Task WriteInt16Async(short value, CancellationToken cancellationToken = default)
         {
-            WriteAsBigEndian(BitConverter.GetBytes(value));
+            await WriteAsBigEndianAsync(BitConverter.GetBytes(value), cancellationToken);
         }
 
-        public void WriteInt32(int value)
+        public async Task WriteInt32Async(int value, CancellationToken cancellationToken = default)
         {
-            WriteAsBigEndian(BitConverter.GetBytes(value));
+            await WriteAsBigEndianAsync(BitConverter.GetBytes(value), cancellationToken);
         }
 
-        public void WriteInt64(long value)
+        public async Task WriteInt64Async(long value, CancellationToken cancellationToken = default)
         {
-            WriteAsBigEndian(BitConverter.GetBytes(value));
+            await WriteAsBigEndianAsync(BitConverter.GetBytes(value), cancellationToken);
         }
 
-        public void WriteUInt32(uint value)
+        public async Task WriteUInt32Async(uint value, CancellationToken cancellationToken = default)
         {
-            WriteAsBigEndian(BitConverter.GetBytes(value));
+            await WriteAsBigEndianAsync(BitConverter.GetBytes(value), cancellationToken);
         }
 
-        public void WriteVarInt(int value)
+        public async Task WriteVarIntAsync(int value, CancellationToken cancellationToken = default)
         {
-            WriteAsLittleEndian(
+            await WriteAsLittleEndianAsync(
                 value
                     .EncodeAsZigZag()
-                    .EncodeAsVarInt());
+                    .EncodeAsVarInt(), cancellationToken);
         }
 
-        public void WriteVarLong(long value)
+        public async Task WriteVarLongAsync(long value, CancellationToken cancellationToken = default)
         {
-            WriteAsLittleEndian(
+            await WriteAsLittleEndianAsync(
                 value
                     .EncodeAsZigZag()
-                    .EncodeAsVarInt());
+                    .EncodeAsVarInt(), cancellationToken);
         }
 
-        public void WriteString(string value)
+        public async Task WriteStringAsync(string value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
@@ -75,83 +76,91 @@ namespace Kafka.Protocol
                 throw new SyntaxErrorException($"{value} is to long");
             }
 
-            WriteInt16((short)bytes.Length);
-            WriteAsLittleEndian(bytes);
+            await WriteInt16Async((short)bytes.Length, cancellationToken);
+            await WriteAsLittleEndianAsync(bytes, cancellationToken);
         }
 
-        public void WriteNullableString(string value)
+        public async Task WriteNullableStringAsync(string value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
-                WriteInt16(-1);
+                await WriteInt16Async(-1, cancellationToken);
             }
             else
             {
-                WriteString(value);
+                await WriteStringAsync(value, cancellationToken);
             }
         }
 
-        public void WriteBytes(byte[] value)
+        public async Task WriteBytesAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             value ??= Array.Empty<byte>();
-            WriteInt32(value.Length);
-            WriteAsLittleEndian(value);
+            await WriteInt32Async(value.Length, cancellationToken);
+            await WriteAsLittleEndianAsync(value, cancellationToken);
         }
 
-        public void WriteNullableBytes(byte[] value)
+        public async Task WriteNullableBytesAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
-                WriteInt32(-1);
+                await WriteInt32Async(-1, cancellationToken);
             }
             else
             {
-                WriteBytes(value);
+                await WriteBytesAsync(value, cancellationToken);
             }
         }
 
-        public void Write<T>(params T[] items) 
+        public async Task WriteAsync<T>(CancellationToken cancellationToken, params T[] items)
             where T : ISerialize
         {
             if (items == null)
             {
-                WriteInt32(-1);
+                await WriteInt32Async(-1, cancellationToken);
                 return;
             }
 
-            WriteInt32(items.Length);
+            await WriteInt32Async(items.Length, cancellationToken);
             foreach (var item in items)
             {
-                item.WriteTo(this);
+                await item.WriteToAsync(this, cancellationToken);
             }
         }
 
-        private void WriteByte(byte value)
+        public async Task WriteAsync<T>(params T[] items) 
+            where T : ISerialize
         {
-            WriteAsLittleEndian(new[] { value });
+            await WriteAsync(default, items);
         }
 
-        private void WriteAsLittleEndian(byte[] value)
+        private async Task WriteByteAsync(byte value, CancellationToken cancellationToken = default)
+        {
+            await WriteAsLittleEndianAsync(new[] { value }, cancellationToken);
+        }
+
+        private async Task WriteAsLittleEndianAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             if (BitConverter.IsLittleEndian == false)
             {
                 Array.Reverse(value);
             }
-            Write(value);
+
+            await WriteAsync(value, cancellationToken);
         }
 
-        private void WriteAsBigEndian(byte[] value)
+        private async Task WriteAsBigEndianAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(value);
             }
-            Write(value);
+
+            await WriteAsync(value, cancellationToken);
         }
 
-        private void Write(byte[] value)
+        private async Task WriteAsync(byte[] value, CancellationToken cancellationToken = default)
         {
-            _buffer.Write(value, 0, value.Length);
+            await _buffer.WriteAsync(value, 0, value.Length, cancellationToken);
         }
 
         public async ValueTask DisposeAsync()

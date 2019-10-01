@@ -1,4 +1,7 @@
-﻿namespace Kafka.Protocol.Records
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Kafka.Protocol.Records
 {
     public class RecordBatch : ISerialize
     {
@@ -147,21 +150,22 @@
             Records = reader.Read(() => new Record());
         }
 
-        public void WriteTo(IKafkaWriter writer)
+        public async Task WriteToAsync(IKafkaWriter writer,
+            CancellationToken cancellationToken = default)
         {
-            writer.WriteInt64(BaseOffset.Value);
-            writer.WriteInt32(BatchLength.Value);
-            writer.WriteInt32(PartitionLeaderEpoch.Value);
-            writer.WriteInt8(Magic.Value);
-            writer.WriteInt32(Crc.Value);
-            writer.WriteInt16(Attributes.Value);
-            writer.WriteInt32(LastOffsetDelta.Value);
-            writer.WriteInt64(FirstTimestamp.Value);
-            writer.WriteInt64(MaxTimestamp.Value);
-            writer.WriteInt64(ProducerId.Value);
-            writer.WriteInt16(ProducerEpoch.Value);
-            writer.WriteInt32(BaseSequence.Value);
-            writer.Write(Records);
+            await writer.WriteInt64Async(BaseOffset.Value, cancellationToken);
+            await writer.WriteInt32Async(BatchLength.Value, cancellationToken);
+            await writer.WriteInt32Async(PartitionLeaderEpoch.Value, cancellationToken);
+            await writer.WriteInt8Async(Magic.Value, cancellationToken);
+            await writer.WriteInt32Async(Crc.Value, cancellationToken);
+            await writer.WriteInt16Async(Attributes.Value, cancellationToken);
+            await writer.WriteInt32Async(LastOffsetDelta.Value, cancellationToken);
+            await writer.WriteInt64Async(FirstTimestamp.Value, cancellationToken);
+            await writer.WriteInt64Async(MaxTimestamp.Value, cancellationToken);
+            await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+            await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
+            await writer.WriteInt32Async(BaseSequence.Value, cancellationToken);
+            await writer.WriteAsync(cancellationToken, Records);
         }
     }
 }

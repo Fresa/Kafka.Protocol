@@ -1,4 +1,7 @@
-﻿namespace Kafka.Protocol.Records
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Kafka.Protocol.Records
 {
     public class Header : ISerialize
     {
@@ -15,12 +18,13 @@
             Value = Bytes.From(reader.ReadBytes());
         }
 
-        public void WriteTo(IKafkaWriter writer)
+        public async Task WriteToAsync(IKafkaWriter writer,
+            CancellationToken cancellationToken = default)
         {
-            writer.WriteVarInt(HeaderKeyLength.Value);
-            writer.WriteString(HeaderKey.Value);
-            writer.WriteVarInt(HeaderValueLength.Value);
-            writer.WriteBytes(Value.Value);
+            await writer.WriteVarIntAsync(HeaderKeyLength.Value, cancellationToken);
+            await writer.WriteStringAsync(HeaderKey.Value, cancellationToken);
+            await writer.WriteVarIntAsync(HeaderValueLength.Value, cancellationToken);
+            await writer.WriteBytesAsync(Value.Value, cancellationToken);
         }
     }
 }

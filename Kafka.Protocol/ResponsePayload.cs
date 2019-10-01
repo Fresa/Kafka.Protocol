@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Kafka.Protocol
@@ -16,13 +17,13 @@ namespace Kafka.Protocol
             Message = message;
         }
 
-        public async Task<byte[]> WriteAsync()
+        public async Task<byte[]> WriteAsync(CancellationToken cancellationToken = default)
         {
             await using var stream = new MemoryStream();
             await using (var writer = new KafkaWriter(stream))
             {
-                Header.WriteTo(writer);
-                Message.WriteTo(writer);
+                await Header.WriteToAsync(writer, cancellationToken);
+                await Message.WriteToAsync(writer, cancellationToken);
             }
 
             return stream.GetBuffer();

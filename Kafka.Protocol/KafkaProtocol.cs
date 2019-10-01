@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
@@ -47,9 +49,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadBoolean();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteBoolean(Value);
+			await writer.WriteBooleanAsync(Value, cancellationToken);
 		}
 
 		public static Boolean From(System.Boolean value)
@@ -102,9 +104,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadInt8();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteInt8(Value);
+			await writer.WriteInt8Async(Value, cancellationToken);
 		}
 
 		public static Int8 From(System.SByte value)
@@ -157,9 +159,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadInt16();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteInt16(Value);
+			await writer.WriteInt16Async(Value, cancellationToken);
 		}
 
 		public static Int16 From(System.Int16 value)
@@ -212,9 +214,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadInt32();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteInt32(Value);
+			await writer.WriteInt32Async(Value, cancellationToken);
 		}
 
 		public static Int32 From(System.Int32 value)
@@ -267,9 +269,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadInt64();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteInt64(Value);
+			await writer.WriteInt64Async(Value, cancellationToken);
 		}
 
 		public static Int64 From(System.Int64 value)
@@ -322,9 +324,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadUInt32();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteUInt32(Value);
+			await writer.WriteUInt32Async(Value, cancellationToken);
 		}
 
 		public static UInt32 From(System.UInt32 value)
@@ -377,9 +379,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadVarInt();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteVarInt(Value);
+			await writer.WriteVarIntAsync(Value, cancellationToken);
 		}
 
 		public static VarInt From(System.Int32 value)
@@ -432,9 +434,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadVarLong();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteVarLong(Value);
+			await writer.WriteVarLongAsync(Value, cancellationToken);
 		}
 
 		public static VarLong From(System.Int64 value)
@@ -487,9 +489,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadString();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteString(Value);
+			await writer.WriteStringAsync(Value, cancellationToken);
 		}
 
 		public static String From(System.String value)
@@ -542,9 +544,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadNullableString();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteNullableString(Value);
+			await writer.WriteNullableStringAsync(Value, cancellationToken);
 		}
 
 		public static NullableString From(System.String value)
@@ -597,9 +599,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadBytes();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteBytes(Value);
+			await writer.WriteBytesAsync(Value, cancellationToken);
 		}
 
 		public static Bytes From(System.Byte[] value)
@@ -652,9 +654,9 @@ namespace Kafka.Protocol
 			Value = reader.ReadNullableBytes();
 		}
 
-		public void WriteTo(IKafkaWriter writer)
+		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			writer.WriteNullableBytes(Value);
+			await writer.WriteNullableBytesAsync(Value, cancellationToken);
 		}
 
 		public static NullableBytes From(System.Byte[] value)
@@ -2569,23 +2571,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(TransactionalId.Value);
+				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ProducerId.Value);
+				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ProducerEpoch.Value);
+				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(GroupId.Value);
+				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 			}
 		}
 
@@ -2734,15 +2736,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 		}
 
@@ -2841,23 +2843,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(TransactionalId.Value);
+				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ProducerId.Value);
+				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ProducerEpoch.Value);
+				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
 			}
 		}
 
@@ -3005,15 +3007,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -3105,15 +3107,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, ResultsCollection.Values.ToArray());
 			}
 		}
 
@@ -3203,15 +3205,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ResultsCollection.Values.ToArray());
+					await writer.WriteAsync(cancellationToken, ResultsCollection.Values.ToArray());
 				}
 			}
 
@@ -3301,15 +3303,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 				}
 
@@ -3402,15 +3404,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResourcesCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, ResourcesCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBoolean(ValidateOnly.Value);
+				await writer.WriteBooleanAsync(ValidateOnly.Value, cancellationToken);
 			}
 		}
 
@@ -3475,19 +3477,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(ResourceType.Value);
+					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ResourceName.Value);
+					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ConfigsCollection.Values.ToArray());
+					await writer.WriteAsync(cancellationToken, ConfigsCollection.Values.ToArray());
 				}
 			}
 
@@ -3606,15 +3608,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Name.Value);
+						await writer.WriteStringAsync(Name.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Value.Value);
+						await writer.WriteStringAsync(Value.Value, cancellationToken);
 					}
 				}
 
@@ -3737,15 +3739,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResponsesCollection);
+				await writer.WriteAsync(cancellationToken, ResponsesCollection);
 			}
 		}
 
@@ -3843,23 +3845,23 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ErrorMessage.Value);
+					await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(ResourceType.Value);
+					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ResourceName.Value);
+					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
 				}
 			}
 
@@ -4006,11 +4008,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(DirsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, DirsCollection.Values.ToArray());
 			}
 		}
 
@@ -4071,15 +4073,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Path.Value);
+					await writer.WriteStringAsync(Path.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(TopicsCollection.Values.ToArray());
+					await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
 				}
 			}
 
@@ -4169,15 +4171,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Name.Value);
+						await writer.WriteStringAsync(Name.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.Write(PartitionsCollection);
+						await writer.WriteAsync(cancellationToken, PartitionsCollection);
 					}
 				}
 
@@ -4270,15 +4272,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection);
+				await writer.WriteAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -4368,15 +4370,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(TopicName.Value);
+					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -4466,15 +4468,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 				}
 
@@ -4560,7 +4562,7 @@ namespace Kafka.Protocol
 
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 
 		}
@@ -4600,19 +4602,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ApiKeysCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, ApiKeysCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 		}
 
@@ -4706,19 +4708,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(Index.Value);
+					await writer.WriteInt16Async(Index.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(MinVersion.Value);
+					await writer.WriteInt16Async(MinVersion.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(MaxVersion.Value);
+					await writer.WriteInt16Async(MaxVersion.Value, cancellationToken);
 				}
 			}
 
@@ -4863,15 +4865,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(BrokerId.Value);
+				await writer.WriteInt32Async(BrokerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteInt64(BrokerEpoch.Value);
+				await writer.WriteInt64Async(BrokerEpoch.Value, cancellationToken);
 			}
 		}
 
@@ -4957,15 +4959,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(RemainingPartitionsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, RemainingPartitionsCollection.Values.ToArray());
 			}
 		}
 
@@ -5055,15 +5057,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(TopicName.Value);
+					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(PartitionIndex.Value);
+					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 				}
 			}
 
@@ -5151,11 +5153,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(CreationsCollection);
+				await writer.WriteAsync(cancellationToken, CreationsCollection);
 			}
 		}
 
@@ -5236,35 +5238,35 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(ResourceType.Value);
+					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ResourceName.Value);
+					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.WriteInt8(ResourcePatternType.Value);
+					await writer.WriteInt8Async(ResourcePatternType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Principal.Value);
+					await writer.WriteStringAsync(Principal.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Host.Value);
+					await writer.WriteStringAsync(Host.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(Operation.Value);
+					await writer.WriteInt8Async(Operation.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(PermissionType.Value);
+					await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
 				}
 			}
 
@@ -5501,15 +5503,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection);
+				await writer.WriteAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -5599,15 +5601,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ErrorMessage.Value);
+					await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 				}
 			}
 
@@ -5700,15 +5702,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(RenewersCollection);
+				await writer.WriteAsync(cancellationToken, RenewersCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(MaxLifetimeMs.Value);
+				await writer.WriteInt64Async(MaxLifetimeMs.Value, cancellationToken);
 			}
 		}
 
@@ -5769,15 +5771,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(PrincipalType.Value);
+					await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(PrincipalName.Value);
+					await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
 				}
 			}
 
@@ -5926,43 +5928,43 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(PrincipalType.Value);
+				await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(PrincipalName.Value);
+				await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(IssueTimestampMs.Value);
+				await writer.WriteInt64Async(IssueTimestampMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ExpiryTimestampMs.Value);
+				await writer.WriteInt64Async(ExpiryTimestampMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(MaxTimestampMs.Value);
+				await writer.WriteInt64Async(MaxTimestampMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(TokenId.Value);
+				await writer.WriteStringAsync(TokenId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBytes(Hmac.Value);
+				await writer.WriteBytesAsync(Hmac.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 		}
 
@@ -6260,19 +6262,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(TimeoutMs.Value);
+				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBoolean(ValidateOnly.Value);
+				await writer.WriteBooleanAsync(ValidateOnly.Value, cancellationToken);
 			}
 		}
 
@@ -6337,19 +6339,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(Count.Value);
+					await writer.WriteInt32Async(Count.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(AssignmentsCollection);
+					await writer.WriteAsync(cancellationToken, AssignmentsCollection);
 				}
 			}
 
@@ -6465,11 +6467,11 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.Write(BrokerIdsCollection);
+						await writer.WriteAsync(cancellationToken, BrokerIdsCollection);
 					}
 				}
 
@@ -6591,15 +6593,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection);
+				await writer.WriteAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -6693,19 +6695,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ErrorMessage.Value);
+					await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 				}
 			}
 
@@ -6831,19 +6833,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(TimeoutMs.Value);
+				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteBoolean(ValidateOnly.Value);
+				await writer.WriteBooleanAsync(ValidateOnly.Value, cancellationToken);
 			}
 		}
 
@@ -6916,27 +6918,27 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(NumPartitions.Value);
+					await writer.WriteInt32Async(NumPartitions.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ReplicationFactor.Value);
+					await writer.WriteInt16Async(ReplicationFactor.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(AssignmentsCollection.Values.ToArray());
+					await writer.WriteAsync(cancellationToken, AssignmentsCollection.Values.ToArray());
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ConfigsCollection.Values.ToArray());
+					await writer.WriteAsync(cancellationToken, ConfigsCollection.Values.ToArray());
 				}
 			}
 
@@ -7084,15 +7086,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.Write(BrokerIdsCollection);
+						await writer.WriteAsync(cancellationToken, BrokerIdsCollection);
 					}
 				}
 
@@ -7212,15 +7214,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Name.Value);
+						await writer.WriteStringAsync(Name.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Value.Value);
+						await writer.WriteStringAsync(Value.Value, cancellationToken);
 					}
 				}
 
@@ -7372,15 +7374,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
 			}
 		}
 
@@ -7469,19 +7471,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.WriteString(ErrorMessage.Value);
+					await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 				}
 			}
 
@@ -7594,11 +7596,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(FiltersCollection);
+				await writer.WriteAsync(cancellationToken, FiltersCollection);
 			}
 		}
 
@@ -7679,35 +7681,35 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(ResourceTypeFilter.Value);
+					await writer.WriteInt8Async(ResourceTypeFilter.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ResourceNameFilter.Value);
+					await writer.WriteStringAsync(ResourceNameFilter.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.WriteInt8(PatternTypeFilter.Value);
+					await writer.WriteInt8Async(PatternTypeFilter.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(PrincipalFilter.Value);
+					await writer.WriteStringAsync(PrincipalFilter.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(HostFilter.Value);
+					await writer.WriteStringAsync(HostFilter.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(Operation.Value);
+					await writer.WriteInt8Async(Operation.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(PermissionType.Value);
+					await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
 				}
 			}
 
@@ -7947,15 +7949,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(FilterResultsCollection);
+				await writer.WriteAsync(cancellationToken, FilterResultsCollection);
 			}
 		}
 
@@ -8049,19 +8051,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ErrorMessage.Value);
+					await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(MatchingAclsCollection);
+					await writer.WriteAsync(cancellationToken, MatchingAclsCollection);
 				}
 			}
 
@@ -8209,43 +8211,43 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(ErrorMessage.Value);
+						await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt8(ResourceType.Value);
+						await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(ResourceName.Value);
+						await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.WriteInt8(PatternType.Value);
+						await writer.WriteInt8Async(PatternType.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Principal.Value);
+						await writer.WriteStringAsync(Principal.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Host.Value);
+						await writer.WriteStringAsync(Host.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt8(Operation.Value);
+						await writer.WriteInt8Async(Operation.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt8(PermissionType.Value);
+						await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
 					}
 				}
 
@@ -8538,11 +8540,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(GroupsNamesCollection);
+				await writer.WriteAsync(cancellationToken, GroupsNamesCollection);
 			}
 		}
 
@@ -8604,15 +8606,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, ResultsCollection.Values.ToArray());
 			}
 		}
 
@@ -8702,15 +8704,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(GroupId.Value);
+					await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 			}
 
@@ -8802,15 +8804,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(TimeoutMs.Value);
+				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
 			}
 		}
 
@@ -8871,15 +8873,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -8969,15 +8971,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(Offset.Value);
+						await writer.WriteInt64Async(Offset.Value, cancellationToken);
 					}
 				}
 
@@ -9099,15 +9101,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -9197,15 +9199,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -9299,19 +9301,19 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(LowWatermark.Value);
+						await writer.WriteInt64Async(LowWatermark.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 				}
 
@@ -9433,15 +9435,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicNamesCollection);
+				await writer.WriteAsync(cancellationToken, TopicNamesCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(TimeoutMs.Value);
+				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
 			}
 		}
 
@@ -9532,15 +9534,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResponsesCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, ResponsesCollection.Values.ToArray());
 			}
 		}
 
@@ -9630,15 +9632,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 			}
 
@@ -9750,35 +9752,35 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt8(ResourceType.Value);
+				await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(ResourceNameFilter.Value);
+				await writer.WriteStringAsync(ResourceNameFilter.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt8(ResourcePatternType.Value);
+				await writer.WriteInt8Async(ResourcePatternType.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(PrincipalFilter.Value);
+				await writer.WriteStringAsync(PrincipalFilter.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(HostFilter.Value);
+				await writer.WriteStringAsync(HostFilter.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt8(Operation.Value);
+				await writer.WriteInt8Async(Operation.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt8(PermissionType.Value);
+				await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
 			}
 		}
 
@@ -10025,23 +10027,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(ErrorMessage.Value);
+				await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResourcesCollection);
+				await writer.WriteAsync(cancellationToken, ResourcesCollection);
 			}
 		}
 
@@ -10198,23 +10200,23 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(Type.Value);
+					await writer.WriteInt8Async(Type.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.WriteInt8(PatternType.Value);
+					await writer.WriteInt8Async(PatternType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(AclsCollection);
+					await writer.WriteAsync(cancellationToken, AclsCollection);
 				}
 			}
 
@@ -10370,23 +10372,23 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Principal.Value);
+						await writer.WriteStringAsync(Principal.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Host.Value);
+						await writer.WriteStringAsync(Host.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt8(Operation.Value);
+						await writer.WriteInt8Async(Operation.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt8(PermissionType.Value);
+						await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
 					}
 				}
 
@@ -10537,15 +10539,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResourcesCollection);
+				await writer.WriteAsync(cancellationToken, ResourcesCollection);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteBoolean(IncludeSynoyms.Value);
+				await writer.WriteBooleanAsync(IncludeSynoyms.Value, cancellationToken);
 			}
 		}
 
@@ -10610,19 +10612,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(ResourceType.Value);
+					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ResourceName.Value);
+					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ConfigurationKeysCollection);
+					await writer.WriteAsync(cancellationToken, ConfigurationKeysCollection);
 				}
 			}
 
@@ -10773,15 +10775,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection);
+				await writer.WriteAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -10883,27 +10885,27 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ErrorMessage.Value);
+					await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(ResourceType.Value);
+					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ResourceName.Value);
+					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ConfigsCollection);
+					await writer.WriteAsync(cancellationToken, ConfigsCollection);
 				}
 			}
 
@@ -11101,35 +11103,35 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Name.Value);
+						await writer.WriteStringAsync(Name.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Value.Value);
+						await writer.WriteStringAsync(Value.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteBoolean(ReadOnly.Value);
+						await writer.WriteBooleanAsync(ReadOnly.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 0))) 
 					{
-						writer.WriteBoolean(IsDefault.Value);
+						await writer.WriteBooleanAsync(IsDefault.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.WriteInt8(ConfigSource.Value);
+						await writer.WriteInt8Async(ConfigSource.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteBoolean(IsSensitive.Value);
+						await writer.WriteBooleanAsync(IsSensitive.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.Write(SynonymsCollection);
+						await writer.WriteAsync(cancellationToken, SynonymsCollection);
 					}
 				}
 
@@ -11359,19 +11361,19 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public void WriteTo(IKafkaWriter writer)
+					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 					{
 						if (Version.InRange(new VersionRange(1, 2147483647))) 
 						{
-							writer.WriteString(Name.Value);
+							await writer.WriteStringAsync(Name.Value, cancellationToken);
 						}
 						if (Version.InRange(new VersionRange(1, 2147483647))) 
 						{
-							writer.WriteString(Value.Value);
+							await writer.WriteStringAsync(Value.Value, cancellationToken);
 						}
 						if (Version.InRange(new VersionRange(1, 2147483647))) 
 						{
-							writer.WriteInt8(Source.Value);
+							await writer.WriteInt8Async(Source.Value, cancellationToken);
 						}
 					}
 
@@ -11491,11 +11493,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(OwnersCollection);
+				await writer.WriteAsync(cancellationToken, OwnersCollection);
 			}
 		}
 
@@ -11557,15 +11559,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(PrincipalType.Value);
+					await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(PrincipalName.Value);
+					await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
 				}
 			}
 
@@ -11661,19 +11663,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TokensCollection);
+				await writer.WriteAsync(cancellationToken, TokensCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 		}
 
@@ -11787,39 +11789,39 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(PrincipalType.Value);
+					await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(PrincipalName.Value);
+					await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt64(IssueTimestamp.Value);
+					await writer.WriteInt64Async(IssueTimestamp.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt64(ExpiryTimestamp.Value);
+					await writer.WriteInt64Async(ExpiryTimestamp.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt64(MaxTimestamp.Value);
+					await writer.WriteInt64Async(MaxTimestamp.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(TokenId.Value);
+					await writer.WriteStringAsync(TokenId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteBytes(Hmac.Value);
+					await writer.WriteBytesAsync(Hmac.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(RenewersCollection);
+					await writer.WriteAsync(cancellationToken, RenewersCollection);
 				}
 			}
 
@@ -12083,15 +12085,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(PrincipalType.Value);
+						await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(PrincipalName.Value);
+						await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
 					}
 				}
 
@@ -12213,15 +12215,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(GroupsCollection);
+				await writer.WriteAsync(cancellationToken, GroupsCollection);
 			}
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteBoolean(IncludeAuthorizedOperations.Value);
+				await writer.WriteBooleanAsync(IncludeAuthorizedOperations.Value, cancellationToken);
 			}
 		}
 
@@ -12312,15 +12314,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(GroupsCollection);
+				await writer.WriteAsync(cancellationToken, GroupsCollection);
 			}
 		}
 
@@ -12425,35 +12427,35 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(GroupId.Value);
+					await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(GroupState.Value);
+					await writer.WriteStringAsync(GroupState.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ProtocolType.Value);
+					await writer.WriteStringAsync(ProtocolType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ProtocolData.Value);
+					await writer.WriteStringAsync(ProtocolData.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(MembersCollection);
+					await writer.WriteAsync(cancellationToken, MembersCollection);
 				}
 				if (Version.InRange(new VersionRange(3, 2147483647))) 
 				{
-					writer.WriteInt32(AuthorizedOperations.Value);
+					await writer.WriteInt32Async(AuthorizedOperations.Value, cancellationToken);
 				}
 			}
 
@@ -12675,31 +12677,31 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(MemberId.Value);
+						await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(4, 2147483647))) 
 					{
-						writer.WriteString(GroupInstanceId.Value);
+						await writer.WriteStringAsync(GroupInstanceId.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(ClientId.Value);
+						await writer.WriteStringAsync(ClientId.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(ClientHost.Value);
+						await writer.WriteStringAsync(ClientHost.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteBytes(MemberMetadata.Value);
+						await writer.WriteBytesAsync(MemberMetadata.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteBytes(MemberAssignment.Value);
+						await writer.WriteBytesAsync(MemberAssignment.Value, cancellationToken);
 					}
 				}
 
@@ -12934,11 +12936,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -13000,15 +13002,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Topic.Value);
+					await writer.WriteStringAsync(Topic.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionIndexCollection);
+					await writer.WriteAsync(cancellationToken, PartitionIndexCollection);
 				}
 			}
 
@@ -13100,15 +13102,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResultsCollection);
+				await writer.WriteAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -13202,19 +13204,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(LogDir.Value);
+					await writer.WriteStringAsync(LogDir.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(TopicsCollection);
+					await writer.WriteAsync(cancellationToken, TopicsCollection);
 				}
 			}
 
@@ -13333,15 +13335,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Name.Value);
+						await writer.WriteStringAsync(Name.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.Write(PartitionsCollection);
+						await writer.WriteAsync(cancellationToken, PartitionsCollection);
 					}
 				}
 
@@ -13436,23 +13438,23 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public void WriteTo(IKafkaWriter writer)
+					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647))) 
 						{
-							writer.WriteInt32(PartitionIndex.Value);
+							await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 						}
 						if (Version.InRange(new VersionRange(0, 2147483647))) 
 						{
-							writer.WriteInt64(PartitionSize.Value);
+							await writer.WriteInt64Async(PartitionSize.Value, cancellationToken);
 						}
 						if (Version.InRange(new VersionRange(0, 2147483647))) 
 						{
-							writer.WriteInt64(OffsetLag.Value);
+							await writer.WriteInt64Async(OffsetLag.Value, cancellationToken);
 						}
 						if (Version.InRange(new VersionRange(0, 2147483647))) 
 						{
-							writer.WriteBoolean(IsFutureKey.Value);
+							await writer.WriteBooleanAsync(IsFutureKey.Value, cancellationToken);
 						}
 					}
 
@@ -13608,19 +13610,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt8(ElectionType.Value);
+				await writer.WriteInt8Async(ElectionType.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicPartitionsCollection);
+				await writer.WriteAsync(cancellationToken, TopicPartitionsCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(TimeoutMs.Value);
+				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
 			}
 		}
 
@@ -13711,15 +13713,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Topic.Value);
+					await writer.WriteStringAsync(Topic.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionIdCollection);
+					await writer.WriteAsync(cancellationToken, PartitionIdCollection);
 				}
 			}
 
@@ -13844,19 +13846,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ReplicaElectionResultsCollection);
+				await writer.WriteAsync(cancellationToken, ReplicaElectionResultsCollection);
 			}
 		}
 
@@ -13975,15 +13977,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Topic.Value);
+					await writer.WriteStringAsync(Topic.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionResultCollection);
+					await writer.WriteAsync(cancellationToken, PartitionResultCollection);
 				}
 			}
 
@@ -14077,19 +14079,19 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionId.Value);
+						await writer.WriteInt32Async(PartitionId.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(ErrorMessage.Value);
+						await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 					}
 				}
 
@@ -14220,23 +14222,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(TransactionalId.Value);
+				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ProducerId.Value);
+				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ProducerEpoch.Value);
+				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBoolean(Committed.Value);
+				await writer.WriteBooleanAsync(Committed.Value, cancellationToken);
 			}
 		}
 
@@ -14385,15 +14387,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 		}
 
@@ -14484,15 +14486,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBytes(Hmac.Value);
+				await writer.WriteBytesAsync(Hmac.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ExpiryTimePeriodMs.Value);
+				await writer.WriteInt64Async(ExpiryTimePeriodMs.Value, cancellationToken);
 			}
 		}
 
@@ -14587,19 +14589,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ExpiryTimestampMs.Value);
+				await writer.WriteInt64Async(ExpiryTimestampMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 		}
 
@@ -14751,47 +14753,47 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ReplicaId.Value);
+				await writer.WriteInt32Async(ReplicaId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(MaxWait.Value);
+				await writer.WriteInt32Async(MaxWait.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(MinBytes.Value);
+				await writer.WriteInt32Async(MinBytes.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteInt32(MaxBytes.Value);
+				await writer.WriteInt32Async(MaxBytes.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(4, 2147483647))) 
 			{
-				writer.WriteInt8(IsolationLevel.Value);
+				await writer.WriteInt8Async(IsolationLevel.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(7, 2147483647))) 
 			{
-				writer.WriteInt32(SessionId.Value);
+				await writer.WriteInt32Async(SessionId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(7, 2147483647))) 
 			{
-				writer.WriteInt32(Epoch.Value);
+				await writer.WriteInt32Async(Epoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(new VersionRange(7, 2147483647))) 
 			{
-				writer.Write(ForgottenCollection);
+				await writer.WriteAsync(cancellationToken, ForgottenCollection);
 			}
 			if (Version.InRange(new VersionRange(11, 2147483647))) 
 			{
-				writer.WriteString(RackId.Value);
+				await writer.WriteStringAsync(RackId.Value, cancellationToken);
 			}
 		}
 
@@ -15050,15 +15052,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(FetchPartitionsCollection);
+					await writer.WriteAsync(cancellationToken, FetchPartitionsCollection);
 				}
 			}
 
@@ -15160,27 +15162,27 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(9, 2147483647))) 
 					{
-						writer.WriteInt32(CurrentLeaderEpoch.Value);
+						await writer.WriteInt32Async(CurrentLeaderEpoch.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(FetchOffset.Value);
+						await writer.WriteInt64Async(FetchOffset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(5, 2147483647))) 
 					{
-						writer.WriteInt64(LogStartOffset.Value);
+						await writer.WriteInt64Async(LogStartOffset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(MaxBytes.Value);
+						await writer.WriteInt32Async(MaxBytes.Value, cancellationToken);
 					}
 				}
 
@@ -15383,15 +15385,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(7, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(7, 2147483647))) 
 				{
-					writer.Write(ForgottenPartitionIndexesCollection);
+					await writer.WriteAsync(cancellationToken, ForgottenPartitionIndexesCollection);
 				}
 			}
 
@@ -15515,23 +15517,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(7, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(7, 2147483647))) 
 			{
-				writer.WriteInt32(SessionId.Value);
+				await writer.WriteInt32Async(SessionId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -15674,15 +15676,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -15796,39 +15798,39 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(HighWatermark.Value);
+						await writer.WriteInt64Async(HighWatermark.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(4, 2147483647))) 
 					{
-						writer.WriteInt64(LastStableOffset.Value);
+						await writer.WriteInt64Async(LastStableOffset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(5, 2147483647))) 
 					{
-						writer.WriteInt64(LogStartOffset.Value);
+						await writer.WriteInt64Async(LogStartOffset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(4, 2147483647))) 
 					{
-						writer.Write(AbortedCollection);
+						await writer.WriteAsync(cancellationToken, AbortedCollection);
 					}
 					if (Version.InRange(new VersionRange(11, 2147483647))) 
 					{
-						writer.WriteInt32(PreferredReadReplica.Value);
+						await writer.WriteInt32Async(PreferredReadReplica.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteBytes(Records.Value);
+						await writer.WriteBytesAsync(Records.Value, cancellationToken);
 					}
 				}
 
@@ -16025,15 +16027,15 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public void WriteTo(IKafkaWriter writer)
+					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 					{
 						if (Version.InRange(new VersionRange(4, 2147483647))) 
 						{
-							writer.WriteInt64(ProducerId.Value);
+							await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
 						}
 						if (Version.InRange(new VersionRange(4, 2147483647))) 
 						{
-							writer.WriteInt64(FirstOffset.Value);
+							await writer.WriteInt64Async(FirstOffset.Value, cancellationToken);
 						}
 					}
 
@@ -16181,15 +16183,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(Key.Value);
+				await writer.WriteStringAsync(Key.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt8(KeyType.Value);
+				await writer.WriteInt8Async(KeyType.Value, cancellationToken);
 			}
 		}
 
@@ -16296,31 +16298,31 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteString(ErrorMessage.Value);
+				await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(NodeId.Value);
+				await writer.WriteInt32Async(NodeId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(Host.Value);
+				await writer.WriteStringAsync(Host.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(Port.Value);
+				await writer.WriteInt32Async(Port.Value, cancellationToken);
 			}
 		}
 
@@ -16526,23 +16528,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(GroupId.Value);
+				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(GenerationId.Value);
+				await writer.WriteInt32Async(GenerationId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(MemberId.Value);
+				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteString(GroupInstanceId.Value);
+				await writer.WriteStringAsync(GroupInstanceId.Value, cancellationToken);
 			}
 		}
 
@@ -16692,15 +16694,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 		}
 
@@ -16786,15 +16788,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResourcesCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, ResourcesCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBoolean(ValidateOnly.Value);
+				await writer.WriteBooleanAsync(ValidateOnly.Value, cancellationToken);
 			}
 		}
 
@@ -16859,19 +16861,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(ResourceType.Value);
+					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ResourceName.Value);
+					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ConfigsCollection.Values.ToArray());
+					await writer.WriteAsync(cancellationToken, ConfigsCollection.Values.ToArray());
 				}
 			}
 
@@ -16994,19 +16996,19 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Name.Value);
+						await writer.WriteStringAsync(Name.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt8(ConfigOperation.Value);
+						await writer.WriteInt8Async(ConfigOperation.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Value.Value);
+						await writer.WriteStringAsync(Value.Value, cancellationToken);
 					}
 				}
 
@@ -17158,15 +17160,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResponsesCollection);
+				await writer.WriteAsync(cancellationToken, ResponsesCollection);
 			}
 		}
 
@@ -17264,23 +17266,23 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ErrorMessage.Value);
+					await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt8(ResourceType.Value);
+					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ResourceName.Value);
+					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
 				}
 			}
 
@@ -17431,15 +17433,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(TransactionalId.Value);
+				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(TransactionTimeoutMs.Value);
+				await writer.WriteInt32Async(TransactionTimeoutMs.Value, cancellationToken);
 			}
 		}
 
@@ -17539,23 +17541,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ProducerId.Value);
+				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ProducerEpoch.Value);
+				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
 			}
 		}
 
@@ -17719,35 +17721,35 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(GroupId.Value);
+				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(SessionTimeoutMs.Value);
+				await writer.WriteInt32Async(SessionTimeoutMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(RebalanceTimeoutMs.Value);
+				await writer.WriteInt32Async(RebalanceTimeoutMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(MemberId.Value);
+				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(5, 2147483647))) 
 			{
-				writer.WriteString(GroupInstanceId.Value);
+				await writer.WriteStringAsync(GroupInstanceId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(ProtocolType.Value);
+				await writer.WriteStringAsync(ProtocolType.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ProtocolsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, ProtocolsCollection.Values.ToArray());
 			}
 		}
 
@@ -17978,15 +17980,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteBytes(Metadata.Value);
+					await writer.WriteBytesAsync(Metadata.Value, cancellationToken);
 				}
 			}
 
@@ -18098,35 +18100,35 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(GenerationId.Value);
+				await writer.WriteInt32Async(GenerationId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(ProtocolName.Value);
+				await writer.WriteStringAsync(ProtocolName.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(Leader.Value);
+				await writer.WriteStringAsync(Leader.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(MemberId.Value);
+				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(MembersCollection);
+				await writer.WriteAsync(cancellationToken, MembersCollection);
 			}
 		}
 
@@ -18357,19 +18359,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(MemberId.Value);
+					await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(5, 2147483647))) 
 				{
-					writer.WriteString(GroupInstanceId.Value);
+					await writer.WriteStringAsync(GroupInstanceId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteBytes(Metadata.Value);
+					await writer.WriteBytesAsync(Metadata.Value, cancellationToken);
 				}
 			}
 
@@ -18507,31 +18509,31 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ControllerId.Value);
+				await writer.WriteInt32Async(ControllerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ControllerEpoch.Value);
+				await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteInt64(BrokerEpoch.Value);
+				await writer.WriteInt64Async(BrokerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 1))) 
 			{
-				writer.Write(PartitionStatesV0Collection);
+				await writer.WriteAsync(cancellationToken, PartitionStatesV0Collection);
 			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.Write(TopicStatesCollection);
+				await writer.WriteAsync(cancellationToken, TopicStatesCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(LiveLeadersCollection);
+				await writer.WriteAsync(cancellationToken, LiveLeadersCollection);
 			}
 		}
 
@@ -18703,15 +18705,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(2, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(2, 2147483647))) 
 				{
-					writer.Write(PartitionStatesV0Collection);
+					await writer.WriteAsync(cancellationToken, PartitionStatesV0Collection);
 				}
 			}
 
@@ -18835,19 +18837,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(BrokerId.Value);
+					await writer.WriteInt32Async(BrokerId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(HostName.Value);
+					await writer.WriteStringAsync(HostName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(Port.Value);
+					await writer.WriteInt32Async(Port.Value, cancellationToken);
 				}
 			}
 
@@ -18993,43 +18995,43 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 1))) 
 				{
-					writer.WriteString(TopicName.Value);
+					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(PartitionIndex.Value);
+					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(ControllerEpoch.Value);
+					await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(LeaderKey.Value);
+					await writer.WriteInt32Async(LeaderKey.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(LeaderEpoch.Value);
+					await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(IsrReplicasCollection);
+					await writer.WriteAsync(cancellationToken, IsrReplicasCollection);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(ZkVersion.Value);
+					await writer.WriteInt32Async(ZkVersion.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ReplicasCollection);
+					await writer.WriteAsync(cancellationToken, ReplicasCollection);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.WriteBoolean(IsNew.Value);
+					await writer.WriteBooleanAsync(IsNew.Value, cancellationToken);
 				}
 			}
 
@@ -19319,15 +19321,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(PartitionsCollection);
+				await writer.WriteAsync(cancellationToken, PartitionsCollection);
 			}
 		}
 
@@ -19421,19 +19423,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(TopicName.Value);
+					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(PartitionIndex.Value);
+					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 			}
 
@@ -19554,15 +19556,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(GroupId.Value);
+				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(MemberId.Value);
+				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 			}
 		}
 
@@ -19653,15 +19655,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 		}
 
@@ -19740,7 +19742,7 @@ namespace Kafka.Protocol
 
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 
 		}
@@ -19780,19 +19782,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(GroupsCollection);
+				await writer.WriteAsync(cancellationToken, GroupsCollection);
 			}
 		}
 
@@ -19906,15 +19908,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(GroupId.Value);
+					await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(ProtocolType.Value);
+					await writer.WriteStringAsync(ProtocolType.Value, cancellationToken);
 				}
 			}
 
@@ -20010,19 +20012,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ReplicaId.Value);
+				await writer.WriteInt32Async(ReplicaId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteInt8(IsolationLevel.Value);
+				await writer.WriteInt8Async(IsolationLevel.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -20141,15 +20143,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -20247,23 +20249,23 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(4, 2147483647))) 
 					{
-						writer.WriteInt32(CurrentLeaderEpoch.Value);
+						await writer.WriteInt32Async(CurrentLeaderEpoch.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(Timestamp.Value);
+						await writer.WriteInt64Async(Timestamp.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 0))) 
 					{
-						writer.WriteInt32(MaxNumOffsets.Value);
+						await writer.WriteInt32Async(MaxNumOffsets.Value, cancellationToken);
 					}
 				}
 
@@ -20414,15 +20416,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -20507,15 +20509,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -20621,31 +20623,31 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 0))) 
 					{
-						writer.Write(OldStyleOffsetsCollection);
+						await writer.WriteAsync(cancellationToken, OldStyleOffsetsCollection);
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.WriteInt64(Timestamp.Value);
+						await writer.WriteInt64Async(Timestamp.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.WriteInt64(Offset.Value);
+						await writer.WriteInt64Async(Offset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(4, 2147483647))) 
 					{
-						writer.WriteInt32(LeaderEpoch.Value);
+						await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
 					}
 				}
 
@@ -20859,23 +20861,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(new VersionRange(4, 2147483647))) 
 			{
-				writer.WriteBoolean(AllowAutoTopicCreation.Value);
+				await writer.WriteBooleanAsync(AllowAutoTopicCreation.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(8, 2147483647))) 
 			{
-				writer.WriteBoolean(IncludeClusterAuthorizedOperations.Value);
+				await writer.WriteBooleanAsync(IncludeClusterAuthorizedOperations.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(8, 2147483647))) 
 			{
-				writer.WriteBoolean(IncludeTopicAuthorizedOperations.Value);
+				await writer.WriteBooleanAsync(IncludeTopicAuthorizedOperations.Value, cancellationToken);
 			}
 		}
 
@@ -20933,11 +20935,11 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 			}
 
@@ -21103,31 +21105,31 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(BrokersCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, BrokersCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteString(ClusterId.Value);
+				await writer.WriteStringAsync(ClusterId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ControllerId.Value);
+				await writer.WriteInt32Async(ControllerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection.Values.ToArray());
+				await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
 			}
 			if (Version.InRange(new VersionRange(8, 2147483647))) 
 			{
-				writer.WriteInt32(ClusterAuthorizedOperations.Value);
+				await writer.WriteInt32Async(ClusterAuthorizedOperations.Value, cancellationToken);
 			}
 		}
 
@@ -21225,23 +21227,23 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(NodeId.Value);
+					await writer.WriteInt32Async(NodeId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Host.Value);
+					await writer.WriteStringAsync(Host.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(Port.Value);
+					await writer.WriteInt32Async(Port.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.WriteString(Rack.Value);
+					await writer.WriteStringAsync(Rack.Value, cancellationToken);
 				}
 			}
 
@@ -21476,27 +21478,27 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.WriteBoolean(IsInternal.Value);
+					await writer.WriteBooleanAsync(IsInternal.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 				if (Version.InRange(new VersionRange(8, 2147483647))) 
 				{
-					writer.WriteInt32(TopicAuthorizedOperations.Value);
+					await writer.WriteInt32Async(TopicAuthorizedOperations.Value, cancellationToken);
 				}
 			}
 
@@ -21659,35 +21661,35 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(LeaderId.Value);
+						await writer.WriteInt32Async(LeaderId.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(7, 2147483647))) 
 					{
-						writer.WriteInt32(LeaderEpoch.Value);
+						await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.Write(ReplicaNodesCollection);
+						await writer.WriteAsync(cancellationToken, ReplicaNodesCollection);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.Write(IsrNodesCollection);
+						await writer.WriteAsync(cancellationToken, IsrNodesCollection);
 					}
 					if (Version.InRange(new VersionRange(5, 2147483647))) 
 					{
-						writer.Write(OfflineReplicasCollection);
+						await writer.WriteAsync(cancellationToken, OfflineReplicasCollection);
 					}
 				}
 
@@ -21989,31 +21991,31 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(GroupId.Value);
+				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(GenerationId.Value);
+				await writer.WriteInt32Async(GenerationId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteString(MemberId.Value);
+				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(7, 2147483647))) 
 			{
-				writer.WriteString(GroupInstanceId.Value);
+				await writer.WriteStringAsync(GroupInstanceId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(2, 4))) 
 			{
-				writer.WriteInt64(RetentionTimeMs.Value);
+				await writer.WriteInt64Async(RetentionTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -22205,15 +22207,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -22315,27 +22317,27 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(CommittedOffset.Value);
+						await writer.WriteInt64Async(CommittedOffset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(6, 2147483647))) 
 					{
-						writer.WriteInt32(CommittedLeaderEpoch.Value);
+						await writer.WriteInt32Async(CommittedLeaderEpoch.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(1, 1))) 
 					{
-						writer.WriteInt64(CommitTimestamp.Value);
+						await writer.WriteInt64Async(CommitTimestamp.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(CommittedMetadata.Value);
+						await writer.WriteStringAsync(CommittedMetadata.Value, cancellationToken);
 					}
 				}
 
@@ -22511,15 +22513,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -22604,15 +22606,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -22702,15 +22704,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 				}
 
@@ -22803,15 +22805,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(GroupId.Value);
+				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -22902,15 +22904,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionIndexesCollection);
+					await writer.WriteAsync(cancellationToken, PartitionIndexesCollection);
 				}
 			}
 
@@ -23006,19 +23008,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 		}
 
@@ -23103,15 +23105,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -23213,27 +23215,27 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(CommittedOffset.Value);
+						await writer.WriteInt64Async(CommittedOffset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(5, 2147483647))) 
 					{
-						writer.WriteInt32(CommittedLeaderEpoch.Value);
+						await writer.WriteInt32Async(CommittedLeaderEpoch.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Metadata.Value);
+						await writer.WriteStringAsync(Metadata.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 				}
 
@@ -23443,15 +23445,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteInt32(ReplicaId.Value);
+				await writer.WriteInt32Async(ReplicaId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -23536,15 +23538,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -23638,19 +23640,19 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(2, 2147483647))) 
 					{
-						writer.WriteInt32(CurrentLeaderEpoch.Value);
+						await writer.WriteInt32Async(CurrentLeaderEpoch.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(LeaderEpoch.Value);
+						await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
 					}
 				}
 
@@ -23767,15 +23769,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(2, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -23860,15 +23862,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -23966,23 +23968,23 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.WriteInt32(LeaderEpoch.Value);
+						await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(EndOffset.Value);
+						await writer.WriteInt64Async(EndOffset.Value, cancellationToken);
 					}
 				}
 
@@ -24136,23 +24138,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteString(TransactionalId.Value);
+				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(Acks.Value);
+				await writer.WriteInt16Async(Acks.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(TimeoutMs.Value);
+				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -24301,15 +24303,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -24399,15 +24401,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteBytes(Records.Value);
+						await writer.WriteBytesAsync(Records.Value, cancellationToken);
 					}
 				}
 
@@ -24501,15 +24503,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(ResponsesCollection);
+				await writer.WriteAsync(cancellationToken, ResponsesCollection);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 		}
 
@@ -24570,15 +24572,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -24680,27 +24682,27 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(BaseOffset.Value);
+						await writer.WriteInt64Async(BaseOffset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(2, 2147483647))) 
 					{
-						writer.WriteInt64(LogAppendTimeMs.Value);
+						await writer.WriteInt64Async(LogAppendTimeMs.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(5, 2147483647))) 
 					{
-						writer.WriteInt64(LogStartOffset.Value);
+						await writer.WriteInt64Async(LogStartOffset.Value, cancellationToken);
 					}
 				}
 
@@ -24894,15 +24896,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBytes(Hmac.Value);
+				await writer.WriteBytesAsync(Hmac.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(RenewPeriodMs.Value);
+				await writer.WriteInt64Async(RenewPeriodMs.Value, cancellationToken);
 			}
 		}
 
@@ -24997,19 +24999,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ExpiryTimestampMs.Value);
+				await writer.WriteInt64Async(ExpiryTimestampMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 		}
 
@@ -25137,23 +25139,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(RequestApiKey.Value);
+				await writer.WriteInt16Async(RequestApiKey.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(RequestApiVersion.Value);
+				await writer.WriteInt16Async(RequestApiVersion.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(CorrelationId.Value);
+				await writer.WriteInt32Async(CorrelationId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(ClientId.Value);
+				await writer.WriteStringAsync(ClientId.Value, cancellationToken);
 			}
 		}
 
@@ -25298,11 +25300,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(CorrelationId.Value);
+				await writer.WriteInt32Async(CorrelationId.Value, cancellationToken);
 			}
 		}
 
@@ -25360,11 +25362,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBytes(AuthBytes.Value);
+				await writer.WriteBytesAsync(AuthBytes.Value, cancellationToken);
 			}
 		}
 
@@ -25434,23 +25436,23 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(ErrorMessage.Value);
+				await writer.WriteStringAsync(ErrorMessage.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBytes(AuthBytes.Value);
+				await writer.WriteBytesAsync(AuthBytes.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt64(SessionLifetimeMs.Value);
+				await writer.WriteInt64Async(SessionLifetimeMs.Value, cancellationToken);
 			}
 		}
 
@@ -25596,11 +25598,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(Mechanism.Value);
+				await writer.WriteStringAsync(Mechanism.Value, cancellationToken);
 			}
 		}
 
@@ -25662,15 +25664,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(MechanismsCollection);
+				await writer.WriteAsync(cancellationToken, MechanismsCollection);
 			}
 		}
 
@@ -25777,31 +25779,31 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ControllerId.Value);
+				await writer.WriteInt32Async(ControllerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ControllerEpoch.Value);
+				await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt64(BrokerEpoch.Value);
+				await writer.WriteInt64Async(BrokerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBoolean(DeletePartitions.Value);
+				await writer.WriteBooleanAsync(DeletePartitions.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 0))) 
 			{
-				writer.Write(PartitionsV0Collection);
+				await writer.WriteAsync(cancellationToken, PartitionsV0Collection);
 			}
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -25973,15 +25975,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 0))) 
 				{
-					writer.WriteString(TopicName.Value);
+					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 0))) 
 				{
-					writer.WriteInt32(PartitionIndex.Value);
+					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 				}
 			}
 
@@ -26101,15 +26103,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.Write(PartitionIndexesCollection);
+					await writer.WriteAsync(cancellationToken, PartitionIndexesCollection);
 				}
 			}
 
@@ -26201,15 +26203,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(PartitionsCollection);
+				await writer.WriteAsync(cancellationToken, PartitionsCollection);
 			}
 		}
 
@@ -26303,19 +26305,19 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(TopicName.Value);
+					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(PartitionIndex.Value);
+					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ErrorCode.Value);
+					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 				}
 			}
 
@@ -26448,27 +26450,27 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(GroupId.Value);
+				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(GenerationId.Value);
+				await writer.WriteInt32Async(GenerationId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(MemberId.Value);
+				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(3, 2147483647))) 
 			{
-				writer.WriteString(GroupInstanceId.Value);
+				await writer.WriteStringAsync(GroupInstanceId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(AssignmentsCollection);
+				await writer.WriteAsync(cancellationToken, AssignmentsCollection);
 			}
 		}
 
@@ -26646,15 +26648,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(MemberId.Value);
+					await writer.WriteStringAsync(MemberId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteBytes(Assignment.Value);
+					await writer.WriteBytesAsync(Assignment.Value, cancellationToken);
 				}
 			}
 
@@ -26750,19 +26752,19 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(1, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteBytes(Assignment.Value);
+				await writer.WriteBytesAsync(Assignment.Value, cancellationToken);
 			}
 		}
 
@@ -26889,27 +26891,27 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(TransactionalId.Value);
+				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteString(GroupId.Value);
+				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt64(ProducerId.Value);
+				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ProducerEpoch.Value);
+				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -27086,15 +27088,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -27192,23 +27194,23 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt64(CommittedOffset.Value);
+						await writer.WriteInt64Async(CommittedOffset.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(2, 2147483647))) 
 					{
-						writer.WriteInt32(CommittedLeaderEpoch.Value);
+						await writer.WriteInt32Async(CommittedLeaderEpoch.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(CommittedMetadata.Value);
+						await writer.WriteStringAsync(CommittedMetadata.Value, cancellationToken);
 					}
 				}
 
@@ -27355,15 +27357,15 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ThrottleTimeMs.Value);
+				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(TopicsCollection);
+				await writer.WriteAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -27453,15 +27455,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteString(Name.Value);
+					await writer.WriteStringAsync(Name.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(PartitionsCollection);
+					await writer.WriteAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -27551,15 +27553,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt32(PartitionIndex.Value);
+						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteInt16(ErrorCode.Value);
+						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 					}
 				}
 
@@ -27668,31 +27670,31 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ControllerId.Value);
+				await writer.WriteInt32Async(ControllerId.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt32(ControllerEpoch.Value);
+				await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(5, 2147483647))) 
 			{
-				writer.WriteInt64(BrokerEpoch.Value);
+				await writer.WriteInt64Async(BrokerEpoch.Value, cancellationToken);
 			}
 			if (Version.InRange(new VersionRange(0, 4))) 
 			{
-				writer.Write(LegacyPartitionStatesCollection);
+				await writer.WriteAsync(cancellationToken, LegacyPartitionStatesCollection);
 			}
 			if (Version.InRange(new VersionRange(5, 2147483647))) 
 			{
-				writer.Write(TopicStatesCollection);
+				await writer.WriteAsync(cancellationToken, TopicStatesCollection);
 			}
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(BrokersCollection);
+				await writer.WriteAsync(cancellationToken, BrokersCollection);
 			}
 		}
 
@@ -27864,15 +27866,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(5, 2147483647))) 
 				{
-					writer.WriteString(TopicName.Value);
+					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(5, 2147483647))) 
 				{
-					writer.Write(PartitionStatesCollection);
+					await writer.WriteAsync(cancellationToken, PartitionStatesCollection);
 				}
 			}
 
@@ -28001,27 +28003,27 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(Id.Value);
+					await writer.WriteInt32Async(Id.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 0))) 
 				{
-					writer.WriteString(V0Host.Value);
+					await writer.WriteStringAsync(V0Host.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 0))) 
 				{
-					writer.WriteInt32(V0Port.Value);
+					await writer.WriteInt32Async(V0Port.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(1, 2147483647))) 
 				{
-					writer.Write(EndpointsCollection);
+					await writer.WriteAsync(cancellationToken, EndpointsCollection);
 				}
 				if (Version.InRange(new VersionRange(2, 2147483647))) 
 				{
-					writer.WriteString(Rack.Value);
+					await writer.WriteStringAsync(Rack.Value, cancellationToken);
 				}
 			}
 
@@ -28167,23 +28169,23 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.WriteInt32(Port.Value);
+						await writer.WriteInt32Async(Port.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.WriteString(Host.Value);
+						await writer.WriteStringAsync(Host.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(3, 2147483647))) 
 					{
-						writer.WriteString(Listener.Value);
+						await writer.WriteStringAsync(Listener.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(1, 2147483647))) 
 					{
-						writer.WriteInt16(SecurityProtocol.Value);
+						await writer.WriteInt16Async(SecurityProtocol.Value, cancellationToken);
 					}
 				}
 
@@ -28384,43 +28386,43 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 4))) 
 				{
-					writer.WriteString(TopicName.Value);
+					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(PartitionIndex.Value);
+					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(ControllerEpoch.Value);
+					await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(Leader.Value);
+					await writer.WriteInt32Async(Leader.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(LeaderEpoch.Value);
+					await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(IsrCollection);
+					await writer.WriteAsync(cancellationToken, IsrCollection);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(ZkVersion.Value);
+					await writer.WriteInt32Async(ZkVersion.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(ReplicasCollection);
+					await writer.WriteAsync(cancellationToken, ReplicasCollection);
 				}
 				if (Version.InRange(new VersionRange(4, 2147483647))) 
 				{
-					writer.Write(OfflineReplicasCollection);
+					await writer.WriteAsync(cancellationToken, OfflineReplicasCollection);
 				}
 			}
 
@@ -28711,11 +28713,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.WriteInt16(ErrorCode.Value);
+				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 			}
 		}
 
@@ -28773,11 +28775,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(MarkersCollection);
+				await writer.WriteAsync(cancellationToken, MarkersCollection);
 			}
 		}
 
@@ -28850,27 +28852,27 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt64(ProducerId.Value);
+					await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt16(ProducerEpoch.Value);
+					await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteBoolean(TransactionResult.Value);
+					await writer.WriteBooleanAsync(TransactionResult.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(TopicsCollection);
+					await writer.WriteAsync(cancellationToken, TopicsCollection);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt32(CoordinatorEpoch.Value);
+					await writer.WriteInt32Async(CoordinatorEpoch.Value, cancellationToken);
 				}
 			}
 
@@ -29018,15 +29020,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Name.Value);
+						await writer.WriteStringAsync(Name.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.Write(PartitionIndexesCollection);
+						await writer.WriteAsync(cancellationToken, PartitionIndexesCollection);
 					}
 				}
 
@@ -29144,11 +29146,11 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public override void WriteTo(IKafkaWriter writer)
+		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(new VersionRange(0, 2147483647))) 
 			{
-				writer.Write(MarkersCollection);
+				await writer.WriteAsync(cancellationToken, MarkersCollection);
 			}
 		}
 
@@ -29209,15 +29211,15 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public void WriteTo(IKafkaWriter writer)
+			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.WriteInt64(ProducerId.Value);
+					await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
 				}
 				if (Version.InRange(new VersionRange(0, 2147483647))) 
 				{
-					writer.Write(TopicsCollection);
+					await writer.WriteAsync(cancellationToken, TopicsCollection);
 				}
 			}
 
@@ -29307,15 +29309,15 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public void WriteTo(IKafkaWriter writer)
+				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.WriteString(Name.Value);
+						await writer.WriteStringAsync(Name.Value, cancellationToken);
 					}
 					if (Version.InRange(new VersionRange(0, 2147483647))) 
 					{
-						writer.Write(PartitionsCollection);
+						await writer.WriteAsync(cancellationToken, PartitionsCollection);
 					}
 				}
 
@@ -29405,15 +29407,15 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public void WriteTo(IKafkaWriter writer)
+					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 					{
 						if (Version.InRange(new VersionRange(0, 2147483647))) 
 						{
-							writer.WriteInt32(PartitionIndex.Value);
+							await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
 						}
 						if (Version.InRange(new VersionRange(0, 2147483647))) 
 						{
-							writer.WriteInt16(ErrorCode.Value);
+							await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
 						}
 					}
 

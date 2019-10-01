@@ -1,4 +1,7 @@
-﻿namespace Kafka.Protocol.Records
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace Kafka.Protocol.Records
 {
     public class ControlRecordKey : ISerialize
     {
@@ -37,10 +40,10 @@
             _type = Int16.From(reader.ReadInt16());
         }
 
-        public void WriteTo(IKafkaWriter writer)
+        public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
         {
-            writer.WriteInt16(Version.Value);
-            writer.WriteInt16(_type.Value);
+            await writer.WriteInt16Async(Version.Value, cancellationToken);
+            await writer.WriteInt16Async(_type.Value, cancellationToken);
         }
     }
 }
