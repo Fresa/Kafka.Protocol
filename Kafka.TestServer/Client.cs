@@ -40,13 +40,13 @@ namespace Kafka.TestServer
             CancellationToken cancellationToken)
         {
             var pipe = new Pipe();
-            var payloadBytes = await payload.WriteAsync();
+            var payloadBytes = await payload.WriteAsync(cancellationToken);
 
             await using (var buffer = new MemoryStream())
             {
                 await using (var writer = new KafkaWriter(buffer))
                 {
-                    writer.WriteBytesAsync(payloadBytes);
+                    await writer.WriteBytesAsync(payloadBytes, cancellationToken);
                 }
 
                 await pipe.Writer.WriteAsync(
