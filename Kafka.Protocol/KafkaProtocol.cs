@@ -4566,8 +4566,6 @@ namespace Kafka.Protocol
 		{
 			await Task.CompletedTask;
 		}
-
-
 	}
 
 	public class ApiVersionsResponse : Message
@@ -19746,8 +19744,6 @@ namespace Kafka.Protocol
 		{
 			await Task.CompletedTask;
 		}
-
-
 	}
 
 	public class ListGroupsResponse : Message

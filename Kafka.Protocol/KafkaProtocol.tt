@@ -206,7 +206,7 @@ namespace Kafka.Protocol<# Block(() =>
 				{
 					PrintWriteTo(messageField);
 				});
-			}); _(2);
+			}); if (messageDefinition.Fields.Any()) _(2);
 
 			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
 			{
