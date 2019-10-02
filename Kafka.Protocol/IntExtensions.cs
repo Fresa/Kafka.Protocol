@@ -9,9 +9,10 @@ namespace Kafka.Protocol
             return (uint)((value << 1) ^ (value >> 31));
         }
 
-        internal static bool InRange(this int value, IRange<int> range)
+        internal static bool InRange(this int value, int start, int end)
         {
-            return range.InRange(value);
+            return value >= start &&
+                   value <= end;
         }
     }
 }

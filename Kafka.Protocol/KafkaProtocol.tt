@@ -175,7 +175,7 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public <#= messageDefinition.Name #>(int version)<# Block(() => 
 			{
 				var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
-				#>if (version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>)) == false) <# Block(() => 
+				#>if (version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
 				{
 					#>throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<#
 				}); _(2);
@@ -225,7 +225,7 @@ namespace Kafka.Protocol<# Block(() =>
 void PrintReadFrom(Kafka.Protocol.Generator.Definitions.Messages.Field messageField)
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
-	#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
+	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
@@ -266,7 +266,7 @@ void PrintReadFrom(Kafka.Protocol.Generator.Definitions.Messages.Field messageFi
 void PrintWriteTo(Kafka.Protocol.Generator.Definitions.Messages.Field messageField)
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
-	#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>))) <# Block(() => 
+	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
 		if (messageField.Fields == null)
@@ -332,7 +332,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field, strin
 			if (field.Ignorable == false)
 			{
 				var versionRange = VersionRange.Parse(field.Versions);
-				#>if (Version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>)) == false) <# Block(() => 
+				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
 				{
 					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<#
 				}); _(2);
@@ -348,7 +348,7 @@ void PrintField(Kafka.Protocol.Generator.Definitions.Messages.Field field, strin
 			else
 			{
 				var nullableVersionRange = VersionRange.Parse(field.NullableVersions);
-				#>if (Version.InRange(new VersionRange(<#= nullableVersionRange.From #>, <#= nullableVersionRange.To #>)) == false &&<# _();
+				#>if (Version.InRange(<#= nullableVersionRange.From #>, <#= nullableVersionRange.To #>) == false &&<# _();
 				#>	value == null) <# Block(() => 
 				{					
 					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<#
@@ -445,7 +445,7 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Definitions.Messages.CommonStruc
 		#>internal <#= commonStruct.Name #>(int version)<# Block(() => 
 		{
 			var versionRange = VersionRange.Parse(commonStruct.Versions);
-			#>if (version.InRange(new VersionRange(<#= versionRange.From #>, <#= versionRange.To #>)) == false) <# Block(() => 
+			#>if (version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
 			{
 				#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<#
 			}); _(2);
