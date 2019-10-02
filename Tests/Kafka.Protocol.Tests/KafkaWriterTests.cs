@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Test.It.With.XUnit;
 using Xunit;
@@ -10,20 +11,21 @@ namespace Kafka.Protocol.Tests
 {
     public partial class Given_a_kafka_writer
     {
-        public class When_writing_true : XUnit2Specification
+        public class When_writing_true : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[1];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteBooleanAsync(true);
+                await _writer.WriteBooleanAsync(true);
             }
 
             [Fact]
@@ -33,20 +35,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_false : XUnit2Specification
+        public class When_writing_false : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[1];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteBooleanAsync(false);
+                await _writer.WriteBooleanAsync(false);
             }
 
             [Fact]
@@ -56,20 +59,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_int8 : XUnit2Specification
+        public class When_writing_int8 : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[1];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteInt8Async(65);
+                await _writer.WriteInt8Async(65);
             }
 
             [Fact]
@@ -79,20 +83,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_int16 : XUnit2Specification
+        public class When_writing_int16 : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[2];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteInt16Async(256);
+                await _writer.WriteInt16Async(256);
             }
 
             [Fact]
@@ -102,20 +107,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_int32 : XUnit2Specification
+        public class When_writing_int32 : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[4];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteInt32Async(257);
+                await _writer.WriteInt32Async(257);
             }
 
             [Fact]
@@ -125,20 +131,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_int64 : XUnit2Specification
+        public class When_writing_int64 : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[8];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteInt64Async(65);
+                await _writer.WriteInt64Async(65);
             }
 
             [Fact]
@@ -148,20 +155,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_an_unsigned_int32 : XUnit2Specification
+        public class When_writing_an_unsigned_int32 : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[4];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteUInt32Async(2);
+                await _writer.WriteUInt32Async(2);
             }
 
             [Fact]
@@ -171,20 +179,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_a_string : XUnit2Specification
+        public class When_writing_a_string : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[7];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteStringAsync("ABCDE");
+                await _writer.WriteStringAsync("ABCDE");
             }
 
             [Fact]
@@ -194,21 +203,23 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_null_as_string : XUnit2Specification
+        public class When_writing_null_as_string : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[7];
-            private Action _action;
+            private Func<Task> _action;
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override Task WhenAsync()
             {
-                _action = _writer.Invoking(writer => writer.WriteStringAsync(null));
+                _action = _writer.Awaiting(writer => writer.WriteStringAsync(null));
+                return base.WhenAsync();
             }
 
             [Fact]
@@ -218,20 +229,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_a_string_as_nullable_string : XUnit2Specification
+        public class When_writing_a_string_as_nullable_string : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[7];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteNullableStringAsync("ABCDE");
+                await _writer.WriteNullableStringAsync("ABCDE");
             }
 
             [Fact]
@@ -241,20 +253,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_null_as_nullable_string : XUnit2Specification
+        public class When_writing_null_as_nullable_string : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[2];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteNullableStringAsync(null);
+                await _writer.WriteNullableStringAsync(null);
             }
 
             [Fact]
@@ -264,20 +277,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_bytes : XUnit2Specification
+        public class When_writing_bytes : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[7];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteBytesAsync(new byte[] { 1, 0, 6 });
+                await _writer.WriteBytesAsync(new byte[] { 1, 0, 6 });
             }
 
             [Fact]
@@ -287,20 +301,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_bytes_as_nullable_bytes : XUnit2Specification
+        public class When_writing_bytes_as_nullable_bytes : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[7];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteNullableBytesAsync(new byte[] { 1, 0, 6 });
+                await _writer.WriteNullableBytesAsync(new byte[] { 1, 0, 6 });
             }
 
             [Fact]
@@ -310,20 +325,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_null_as_nullable_bytes : XUnit2Specification
+        public class When_writing_null_as_nullable_bytes : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[4];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteNullableBytesAsync(null);
+                await _writer.WriteNullableBytesAsync(null);
             }
 
             [Fact]
@@ -333,20 +349,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_var_int : XUnit2Specification
+        public class When_writing_var_int : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[2];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteVarIntAsync(300);
+                await _writer.WriteVarIntAsync(300);
             }
 
             [Fact]
@@ -356,20 +373,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_var_long : XUnit2Specification
+        public class When_writing_var_long : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[2];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteVarLongAsync(value: 300);
+                await _writer.WriteVarLongAsync(value: 300);
             }
 
             [Fact]
@@ -379,20 +397,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_array_of_int32 : XUnit2Specification
+        public class When_writing_array_of_int32 : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[12];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteAsync(new Int32(257), new Int32(1));
+                await _writer.WriteAsync(new Int32(257), new Int32(1));
             }
 
             [Fact]
@@ -402,20 +421,21 @@ namespace Kafka.Protocol.Tests
             }
         }
 
-        public class When_writing_null_to_array_of_int32 : XUnit2Specification
+        public class When_writing_null_to_array_of_int32 : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
             private readonly byte[] _buffer = new byte[4];
 
-            protected override void Given()
+            protected override Task GivenAsync()
             {
                 var stream = new MemoryStream(_buffer);
                 _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
             }
 
-            protected override void When()
+            protected override async Task WhenAsync()
             {
-                _writer.WriteAsync<Int32>(null);
+                await _writer.WriteAsync<Int32>(null);
             }
 
             [Fact]
