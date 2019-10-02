@@ -26,7 +26,7 @@ namespace Kafka.TestServer.Tests
             {
                 var hostName = Dns.GetHostName();
 
-                using var server = SocketServer.Start(hostName);
+                await using var server = SocketServer.Start(hostName);
                 var clientAcceptedSocket = server.WaitForConnectedClientAsync(CancellationToken.None);
 
                 var clientTask = ProduceMessageFromClientAsync(hostName, server.Port);

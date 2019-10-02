@@ -8,7 +8,7 @@ using System.Threading.Tasks.Dataflow;
 
 namespace Kafka.TestServer
 {
-    internal class SocketServer : IDisposable
+    internal class SocketServer : IAsyncDisposable
     {
         private readonly ConcurrentQueue<Socket> _clients = new ConcurrentQueue<Socket>();
         private readonly BufferBlock<Socket> _waitingClients = new BufferBlock<Socket>();
@@ -74,11 +74,11 @@ namespace Kafka.TestServer
             return listener;
         }
 
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
             _cancellationSource.Cancel();
             _clientAcceptingSocket.Shutdown(SocketShutdown.Both);
-            _acceptingClientsBackgroundTask.Wait(TimeSpan.FromSeconds(10));
+            await _acceptingClientsBackgroundTask;
             while (_clients.TryDequeue(out var client))
             {
                 client.Shutdown(SocketShutdown.Both);
