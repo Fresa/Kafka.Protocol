@@ -8,7 +8,7 @@ using Kafka.Protocol;
 
 namespace Kafka.TestServer
 {
-    internal class Client : IDisposable
+    internal class Client : IAsyncDisposable
     {
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
 
@@ -21,13 +21,6 @@ namespace Kafka.TestServer
         {
             _socket = socket;
             _reader = new RequestReader(_pipe.Reader);
-        }
-
-        public void Dispose()
-        {
-            _cancellationSource.Cancel();
-
-            _sendAndReceiveBackgroundTask.Wait(TimeSpan.FromSeconds(3));
         }
 
         internal async Task<RequestPayload> ReadAsync(CancellationToken cancellationToken)
@@ -92,6 +85,13 @@ namespace Kafka.TestServer
                         // Shutdown in progress
                     }
                 });
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            _cancellationSource.Cancel();
+
+            await _sendAndReceiveBackgroundTask;
         }
     }
 }
