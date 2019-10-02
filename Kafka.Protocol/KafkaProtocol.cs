@@ -4564,7 +4564,7 @@ namespace Kafka.Protocol
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-
+			await Task.CompletedTask;
 		}
 
 
@@ -19744,7 +19744,7 @@ namespace Kafka.Protocol
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-
+			await Task.CompletedTask;
 		}
 
 

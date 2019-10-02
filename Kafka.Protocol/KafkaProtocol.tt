@@ -197,6 +197,11 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
+				if (messageDefinition.Fields.Any() == false)
+				{
+					#>await Task.CompletedTask;<#
+				}
+
 				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
 				{
 					PrintWriteTo(messageField);
