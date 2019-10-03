@@ -17,16 +17,17 @@ namespace Kafka.Protocol
             Message = message;
         }
 
-        public async Task<byte[]> WriteAsync(CancellationToken cancellationToken = default)
+        public async Task<MemoryStream> WriteAsync(CancellationToken cancellationToken = default)
         {
-            await using var stream = new MemoryStream();
+            var stream = new MemoryStream();
             await using (var writer = new KafkaWriter(stream))
             {
                 await Header.WriteToAsync(writer, cancellationToken);
                 await Message.WriteToAsync(writer, cancellationToken);
             }
 
-            return stream.GetBuffer();
+            await stream.FlushAsync(cancellationToken);
+            return stream;
         }
 
         public static ResponsePayload ReadFrom(RequestPayload requestPayload, byte[] payload)

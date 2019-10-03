@@ -32,26 +32,16 @@ namespace Kafka.TestServer
             ResponsePayload payload,
             CancellationToken cancellationToken)
         {
-            var pipe = new Pipe();
-            var payloadBytes = await payload.WriteAsync(cancellationToken);
-
-            await using (var buffer = new MemoryStream())
+            await using var buffer = await payload.WriteAsync(cancellationToken);
+            buffer.Position = 0;
+            await using (var writer = new KafkaWriter(buffer))
             {
-                await using (var writer = new KafkaWriter(buffer))
-                {
-                    await writer.WriteBytesAsync(payloadBytes, cancellationToken);
-                }
-
-                await pipe.Writer.WriteAsync(
-                    new ReadOnlyMemory<byte>(buffer.GetBuffer()),
-                    cancellationToken);
-
-                await pipe.Writer.FlushAsync(cancellationToken);
+                await writer.WriteInt32Async((int)buffer.Length, cancellationToken);
             }
 
-            var memory = pipe.Writer.GetMemory(512);
+            await buffer.FlushAsync(cancellationToken);
             await _socket.SendAsync(
-                memory,
+                new ReadOnlyMemory<byte>(buffer.GetBuffer()),
                 SocketFlags.None,
                 cancellationToken);
         }
