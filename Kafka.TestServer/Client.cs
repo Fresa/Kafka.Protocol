@@ -13,6 +13,8 @@ namespace Kafka.TestServer
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
 
         private readonly Pipe _pipe = new Pipe();
+
+        private readonly Pipe _sendPipe = new Pipe();
         private readonly RequestReader _reader;
         private readonly Socket _socket;
         private Task _sendAndReceiveBackgroundTask;
@@ -32,16 +34,17 @@ namespace Kafka.TestServer
             ResponsePayload payload,
             CancellationToken cancellationToken)
         {
-            await using var buffer = await payload.WriteAsync(cancellationToken);
-            buffer.Position = 0;
-            await using (var writer = new KafkaWriter(buffer))
+            await using var buffer = new MemoryStream();
+            await using var writer = new KafkaWriter(buffer);
             {
+                await payload.WriteToAsync(writer, cancellationToken);
+                await buffer.FlushAsync(cancellationToken);
+                buffer.Position = 0;
                 await writer.WriteInt32Async((int)buffer.Length, cancellationToken);
             }
 
-            await buffer.FlushAsync(cancellationToken);
             await _socket.SendAsync(
-                new ReadOnlyMemory<byte>(buffer.GetBuffer()),
+                buffer.GetBuffer(),
                 SocketFlags.None,
                 cancellationToken);
         }
@@ -64,10 +67,8 @@ namespace Kafka.TestServer
                         var dataReceiver = new DataReceiver(_socket);
                         while (cancellationToken.IsCancellationRequested == false)
                         {
-                            // todo: alternate send
                             await dataReceiver
-                                .ReceiveAsync(_pipe.Writer, cancellationToken)
-                                .ConfigureAwait(false);
+                                .ReceiveAsync(_pipe.Writer, cancellationToken);
                         }
                     }
                     catch when (_cancellationSource.IsCancellationRequested)
