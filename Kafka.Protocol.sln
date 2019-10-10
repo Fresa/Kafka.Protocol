@@ -5,22 +5,26 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol", "Kafka.Protocol\Kafka.Protocol.csproj", "{653865A8-71A6-4E0F-8625-DDF8A3E51B39}"
 	ProjectSection(ProjectDependencies) = postProject
-		{748F35A5-87E7-411B-98E7-56D35472EC50} = {748F35A5-87E7-411B-98E7-56D35472EC50}
+		{7952E593-14F3-4EFB-8F82-76475DF3C9AC} = {7952E593-14F3-4EFB-8F82-76475DF3C9AC}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D896A914-149B-4AB4-8C8B-405753509786}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Tests", "Tests\Kafka.Protocol.Tests\Kafka.Protocol.Tests.csproj", "{90B84C2C-E103-4F94-A76E-4FB74D64BD76}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator", "Kafka.Protocol.Generator\Kafka.Protocol.Generator.csproj", "{748F35A5-87E7-411B-98E7-56D35472EC50}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator.Tests", "Tests\Kafka.Protocol.Generator.Tests\Kafka.Protocol.Generator.Tests.csproj", "{B6F3A296-464C-4B91-8412-066B78D6E3C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator.Helpers.Tests", "Tests\Kafka.Protocol.Generator.Tests\Kafka.Protocol.Generator.Helpers.Tests.csproj", "{B6F3A296-464C-4B91-8412-066B78D6E3C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.MessageDefinitionsDownloader", "Kafka.Protocol.MessageDefinitionsDownloader\Kafka.Protocol.MessageDefinitionsDownloader.csproj", "{C290288B-7332-4D16-9DC0-DE2397D12125}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.TestServer", "Kafka.TestServer\Kafka.TestServer.csproj", "{E7CB5461-9336-4CF2-B6A4-342F9865854D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.TestServer", "Kafka.TestServer\Kafka.TestServer.csproj", "{E7CB5461-9336-4CF2-B6A4-342F9865854D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.TestServer.Tests", "Kafka.TestServer.Tests\Kafka.TestServer.Tests.csproj", "{75CB2375-13BC-467B-9A75-FAEC26098F71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.TestServer.Tests", "Kafka.TestServer.Tests\Kafka.TestServer.Tests.csproj", "{75CB2375-13BC-467B-9A75-FAEC26098F71}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator.Helpers", "Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj", "{7988D25A-A761-42F2-B1E7-CDE857B573AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator", "Kafka.Protocol.Generator\Kafka.Protocol.Generator.csproj", "{7952E593-14F3-4EFB-8F82-76475DF3C9AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.Protocol.MessageDefinitionsDownloader.Tests", "Kafka.Protocol.MessageDefinitionsDownloader.Tests\Kafka.Protocol.MessageDefinitionsDownloader.Tests.csproj", "{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +40,6 @@ Global
 		{90B84C2C-E103-4F94-A76E-4FB74D64BD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90B84C2C-E103-4F94-A76E-4FB74D64BD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90B84C2C-E103-4F94-A76E-4FB74D64BD76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{748F35A5-87E7-411B-98E7-56D35472EC50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{748F35A5-87E7-411B-98E7-56D35472EC50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{748F35A5-87E7-411B-98E7-56D35472EC50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{748F35A5-87E7-411B-98E7-56D35472EC50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6F3A296-464C-4B91-8412-066B78D6E3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6F3A296-464C-4B91-8412-066B78D6E3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6F3A296-464C-4B91-8412-066B78D6E3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +56,18 @@ Global
 		{75CB2375-13BC-467B-9A75-FAEC26098F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75CB2375-13BC-467B-9A75-FAEC26098F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75CB2375-13BC-467B-9A75-FAEC26098F71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7988D25A-A761-42F2-B1E7-CDE857B573AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7988D25A-A761-42F2-B1E7-CDE857B573AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7988D25A-A761-42F2-B1E7-CDE857B573AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7988D25A-A761-42F2-B1E7-CDE857B573AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7952E593-14F3-4EFB-8F82-76475DF3C9AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7952E593-14F3-4EFB-8F82-76475DF3C9AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7952E593-14F3-4EFB-8F82-76475DF3C9AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7952E593-14F3-4EFB-8F82-76475DF3C9AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +76,7 @@ Global
 		{90B84C2C-E103-4F94-A76E-4FB74D64BD76} = {D896A914-149B-4AB4-8C8B-405753509786}
 		{B6F3A296-464C-4B91-8412-066B78D6E3C8} = {D896A914-149B-4AB4-8C8B-405753509786}
 		{75CB2375-13BC-467B-9A75-FAEC26098F71} = {D896A914-149B-4AB4-8C8B-405753509786}
+		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6} = {D896A914-149B-4AB4-8C8B-405753509786}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75056C89-9C3C-4F96-A5B4-502CFFBEEC21}

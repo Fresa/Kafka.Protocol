@@ -1,38 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <LangVersion>7.1</LangVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <TransformOnBuild>true</TransformOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="5.6.0" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.9.0" />
-    <PackageReference Include="Octokit" Version="0.32.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.TextTemplating.15.0">
-      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.TextTemplating.15.0.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\9.0.1\lib\netstandard1.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Amqp091Protocol.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Amqp091Protocol.cs</LastGenOutput>
+    <None Update="KafkaProtocol.cs.generated">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>KafkaProtocol.tt</DependentUpon>
     </None>
-    <None Update="Protocol.tt">
+    <None Update="KafkaProtocol.tt">
+      <OutputFilePath>..\Kafka.Protocol\</OutputFilePath>
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Protocol.cs</LastGenOutput>
+      <LastGenOutput>KafkaProtocol.cs.generated</LastGenOutput>
     </None>
   </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-  
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <Target Name="BeforeBuild" BeforeTargets="Build">
+    <Copy SourceFiles="KafkaProtocol.cs.generated" DestinationFiles="../Kafka.Protocol/KafkaProtocol.cs" ContinueOnError="false" />
+  </Target>
 </Project>

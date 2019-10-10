@@ -13,7 +13,7 @@ namespace Kafka.Protocol.Records
         public Bytes Key { get; set; } = Bytes.Default;
         public VarInt ValueLen { get; set; } = VarInt.Default;
         public Bytes Value { get; set; } = Bytes.Default;
-        public Header[] Headers { get; set; } = new Header[0];
+        public Header[]? Headers { get; set; } = new Header[0];
 
         public void ReadFrom(IKafkaReader reader)
         {

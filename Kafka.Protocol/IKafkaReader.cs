@@ -15,12 +15,12 @@ namespace Kafka.Protocol
         long ReadVarLong();
 
         string ReadString();
-        string ReadNullableString();
+        string? ReadNullableString();
 
         byte[] ReadBytes();
-        byte[] ReadNullableBytes();
+        byte[]? ReadNullableBytes();
 
-        T[] Read<T>(Func<T> factory) 
+        T[]? Read<T>(Func<T> factory) 
             where T : ISerialize;
     }
 }

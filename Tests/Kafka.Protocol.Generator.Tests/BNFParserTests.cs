@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Kafka.Protocol.Generator.BackusNaurForm;
-using Kafka.Protocol.Generator.BackusNaurForm.Parsers;
+using Kafka.Protocol.Generator.Helpers.BackusNaurForm;
+using Kafka.Protocol.Generator.Helpers.BackusNaurForm.Parsers;
 using Test.It.With.XUnit;
 using Xunit;
 
-namespace Kafka.Protocol.Generator.Tests
+namespace Kafka.Protocol.Generator.Helpers.Tests
 {
     public partial class Given_a_BNF_parser
     {

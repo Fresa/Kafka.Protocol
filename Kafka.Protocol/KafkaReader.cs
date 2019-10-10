@@ -86,7 +86,7 @@ namespace Kafka.Protocol
             return Encoding.UTF8.GetString(bytes);
         }
 
-        public string ReadNullableString()
+        public string? ReadNullableString()
         {
             var length = ReadInt16();
             if (length == -1)
@@ -104,7 +104,7 @@ namespace Kafka.Protocol
             return ReadAsLittleEndian(length);
         }
 
-        public byte[] ReadNullableBytes()
+        public byte[]? ReadNullableBytes()
         {
             var length = ReadInt32();
             if (length == -1)
@@ -114,7 +114,7 @@ namespace Kafka.Protocol
             return ReadAsLittleEndian(length);
         }
         
-        public T[] Read<T>(Func<T> createItem) 
+        public T[]? Read<T>(Func<T> createItem) 
             where T : ISerialize
         {
             var length = ReadInt32();

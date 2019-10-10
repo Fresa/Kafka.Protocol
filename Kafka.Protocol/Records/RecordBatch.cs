@@ -17,7 +17,7 @@ namespace Kafka.Protocol.Records
         public Int64 ProducerId { get; set; } = Int64.Default;
         public Int16 ProducerEpoch { get; set; } = Int16.Default;
         public Int32 BaseSequence { get; set; } = Int32.Default;
-        public Record[] Records { get; set; } = new Record[0];
+        public Record[]? Records { get; set; } = new Record[0];
 
         public Compressions Compression => new Compressions(this);
 

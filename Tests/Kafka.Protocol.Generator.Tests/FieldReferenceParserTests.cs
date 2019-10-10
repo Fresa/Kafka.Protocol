@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
-using Kafka.Protocol.Generator.BackusNaurForm;
-using Kafka.Protocol.Generator.Definitions;
-using Kafka.Protocol.Generator.Definitions.FieldExpression;
-using Kafka.Protocol.Generator.Definitions.Parsers;
+using Kafka.Protocol.Generator.Helpers.BackusNaurForm;
+using Kafka.Protocol.Generator.Helpers.Definitions;
+using Kafka.Protocol.Generator.Helpers.Definitions.FieldExpression;
+using Kafka.Protocol.Generator.Helpers.Definitions.Parsers;
 using Test.It.With.XUnit;
 using Xunit;
 
-namespace Kafka.Protocol.Generator.Tests
+namespace Kafka.Protocol.Generator.Helpers.Tests
 {
     public partial class Given_a_field_reference_parser
     {

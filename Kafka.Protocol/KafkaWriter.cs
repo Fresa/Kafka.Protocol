@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.IO;
+using System.IO.Pipelines;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -80,7 +81,7 @@ namespace Kafka.Protocol
             await WriteAsLittleEndianAsync(bytes, cancellationToken);
         }
 
-        public async Task WriteNullableStringAsync(string value, CancellationToken cancellationToken = default)
+        public async Task WriteNullableStringAsync(string? value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
@@ -99,7 +100,7 @@ namespace Kafka.Protocol
             await WriteAsLittleEndianAsync(value, cancellationToken);
         }
 
-        public async Task WriteNullableBytesAsync(byte[] value, CancellationToken cancellationToken = default)
+        public async Task WriteNullableBytesAsync(byte[]? value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
@@ -111,7 +112,7 @@ namespace Kafka.Protocol
             }
         }
 
-        public async Task WriteAsync<T>(CancellationToken cancellationToken, params T[] items)
+        public async Task WriteAsync<T>(CancellationToken cancellationToken, params T[]? items)
             where T : ISerialize
         {
             if (items == null)
@@ -127,7 +128,7 @@ namespace Kafka.Protocol
             }
         }
 
-        public async Task WriteAsync<T>(params T[] items) 
+        public async Task WriteAsync<T>(params T[]? items) 
             where T : ISerialize
         {
             await WriteAsync(default, items);

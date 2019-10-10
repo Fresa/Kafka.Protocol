@@ -1,8 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-  </PropertyGroup>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>CS8600;CS8601;CS8603;CS8614;CS8618;CS8625</WarningsAsErrors>
+ </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.9.0" />
@@ -17,21 +19,14 @@
 
   <ItemGroup>
     <None Update="KafkaProtocol.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
+      <OutputFilePath>..\Kafka.Protocol\</OutputFilePath>
       <LastGenOutput>KafkaProtocol.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
     </None>
   </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="KafkaProtocol.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>KafkaProtocol.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
 
 </Project>

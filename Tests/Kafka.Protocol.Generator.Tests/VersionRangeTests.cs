@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
-using Kafka.Protocol.Generator.Definitions;
+using Kafka.Protocol.Generator.Helpers.Definitions;
 using Test.It.With.XUnit;
 using Xunit;
 
-namespace Kafka.Protocol.Generator.Tests
+namespace Kafka.Protocol.Generator.Helpers.Tests
 {
     public partial class Given_an_open_end_range_expression
     {

@@ -1,0 +1,500 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" #>
+<#@ output extension=".cs.generated" #>
+<#@ assembly name="netstandard" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Text.RegularExpressions" #>
+<#@ assembly name="$(SolutionDir)\Kafka.Protocol.Generator.Helpers\bin\Debug\netstandard2.0\Kafka.Protocol.Generator.Helpers.dll" #>
+<#@ assembly name="$(NuGetPackageRoot)\htmlagilitypack\1.11.15\lib\netstandard2.0\HtmlAgilityPack.dll" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="HtmlAgilityPack" #>
+<#@ import namespace="Kafka.Protocol.Generator.Helpers" #>
+<#@ import namespace="Kafka.Protocol.Generator.Helpers.Definitions" #>
+<#@ import namespace="Kafka.Protocol.Generator.Helpers.Extensions" #>
+<#@ import namespace="Kafka.Protocol.Generator.Helpers.Definitions.Messages" #>
+<#
+    var path = Path.Combine(Host.ResolvePath(@"ProtocolSpecifications\Apache Kafka.html"));
+    var apacheKafkaDefinitionPage = new HtmlDocument();
+    apacheKafkaDefinitionPage.LoadHtml(File.ReadAllText(path));
+
+    var protocol = ProtocolSpecification.Load(apacheKafkaDefinitionPage);
+
+	var messageDefinitionPath = Path.Combine(Host.ResolvePath(@"..\Kafka.Protocol.MessageDefinitionsDownloader\MessageDefinitions\"));
+	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath);
+
+    void Block(Action action) { this.Block(action); }
+	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
+	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
+	void _(int count = 1) { this.WriteNewLine(count); }
+
+	void GenerateDocumentation(string documentation)
+    {
+        if (string.IsNullOrEmpty(documentation))
+        {
+            return;
+        }
+
+        #>/// <summary><# _();
+        foreach (var documentationRow in documentation.Trim().Split('\n'))
+        {
+            #>/// <#= documentationRow.Trim() #><# _();
+        }
+		#>/// </summary><# _();
+    }
+
+	var primitiveTypeNames = protocol.PrimitiveTypes.Values
+        .Where(type => 
+            type.Type!="RequestMessage" && 
+            type.Type!="ResponseMessage")
+		.Select(type => type.GetClassName());
+
+	bool IsPrimitiveType(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field)
+	{
+		return primitiveTypeNames
+			.Any(primitiveTypeName => 
+			field.GetTypeNameWithoutArrayCharacters() == primitiveTypeName);
+	}
+#>
+// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Kafka.Protocol<# Block(() =>
+{
+	// Primitive types
+	// todo: Ignore request and response messages until we have a proper way to deal with them
+    PrintOnNewRowForEach(protocol.PrimitiveTypes.Values
+        .Where(type => 
+            type.Type!="RequestMessage" && 
+            type.Type!="ResponseMessage"), primitiveType =>
+    {
+        var className = primitiveType.GetClassName();
+        var type = primitiveType.GetTypeName();
+		var defaultValue = primitiveType.GetDefaultValue();
+		var isNullable = primitiveType.IsNullable();
+
+        GenerateDocumentation(primitiveType.Description);
+        #>public struct <#= className #> : ISerialize <# Block(() =>
+        {
+            #>public <#= type #> Value { get; private set; }<# _(2);
+
+            #>public <#= className #>(<#= type #> value)<# Block(() =>
+            {
+                #>Value = value;<#
+            }); _(2);
+
+			#>public override bool Equals(object obj) <# Block(() =>
+            {
+                #>return obj is <#= className #> comparing<#= className #> && this == comparing<#= className #>;<#
+            }); _(2);
+
+			#>public override int GetHashCode() <# Block(() => 
+			{
+				if (isNullable)
+				{
+					#>return Value?.GetHashCode() ?? 0;<#
+				} else 
+				{
+					#>return Value.GetHashCode();<#
+				}
+			}); _(2);
+
+			#>public override string ToString() <# Block(() => 
+			{
+				if (isNullable)
+				{
+					#>return Value?.ToString() ?? string.Empty;<#
+				} else 
+				{
+					#>return Value.ToString();<#
+				}				
+			}); _(2);
+
+			#>public static bool operator == (<#= className #> x, <#= className #> y)<# Block(() => 
+			{
+				#>return x.Value == y.Value;<#
+			}); _(2);
+
+			#>public static bool operator != (<#= className #> x, <#= className #> y)<# Block(() =>
+            {
+                #>return !(x == y);<#
+            }); _(2);
+
+			#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
+			{
+				#>Value = reader.Read<#= className #>();<#
+			}); _(2);
+
+			#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+			{
+				#>await writer.Write<#= className #>Async(Value, cancellationToken);<#
+			}); _(2);
+
+			#>public static <#= className #> From(<#= type #> value)<# Block(() =>
+            {
+                #>return new <#= className #>(value);<#
+            }); _(2);
+
+			#>public static <#= className #> Default => <#= className #>.From(<#= defaultValue #>);<#
+        }); _();
+    });
+
+	// Exceptions
+    PrintOnNewRowForEachWithIndex(protocol.ErrorCodes.Values, (errorCode, index, count) =>
+    {
+        var exceptionName = errorCode.Error.ToPascalCase('_');
+        GenerateDocumentation(errorCode.Description);
+        #>public class <#= exceptionName #>Exception : Exception<# Block(() =>
+        {
+			#>public <#= exceptionName #>Exception()<# Block(() =>
+			{
+			}); _(2);
+
+            #>public <#= exceptionName #>Exception(string message) : base(message)<# Block(() =>
+			{
+			}); _(2);
+
+			#>public int Code { get; } = <#= errorCode.Code #>;<# 
+        });
+
+		if (index + 1 != count) _();
+    }); _(2);
+
+	#>public static class Messages <# Block(() =>
+    {
+		#>public static Message Create(int apiKey, int version)<# Block(() =>
+		{
+			PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
+			{
+				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# Block(() =>
+				{
+					#>return new <#= messageDefinition.Name #>(version);<#
+				}); _();
+			}); _();
+
+			#>throw new ArgumentException($"{apiKey} is not supported");<#
+		});
+	}); _(2);
+	
+	// Messages
+	PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
+	{
+		#>public class <#= messageDefinition.Name #> : Message<# Block(() => 
+		{
+			#>public <#= messageDefinition.Name #>(int version)<# Block(() => 
+			{
+				var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
+				#>if (version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
+				{
+					#>throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<#
+				}); _(2);
+
+				 #>Version = version;<#
+			}); _(2);
+
+			#>public const int ApiKey = <#= messageDefinition.ApiKey #>;<# _(2);
+
+			#>public override int Version { get; }<# _(2);
+
+			#>public override void ReadFrom(IKafkaReader reader)<# Block(() => 
+			{
+				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
+				{
+					PrintReadFrom(messageField);
+				});
+			}); _(2);
+
+			#>public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+			{
+				if (messageDefinition.Fields.Any() == false)
+				{
+					#>await Task.CompletedTask;<#
+				}
+
+				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
+				{
+					PrintWriteTo(messageField);
+				});
+			}); if (messageDefinition.Fields.Any()) _(2);
+
+			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
+			{
+				PrintField(messageField, messageDefinition.Name);
+				if (messageFieldIndex + 1 != messageFieldCount) _();
+			});
+
+			if (messageDefinition.CommonStructs != null)
+			{
+				_(2);
+				PrintOnNewRowForEachWithIndex(messageDefinition.CommonStructs, (commonStruct, commonStructIndex, commonStructCount) =>
+				{
+					PrintCommonStruct(commonStruct);
+					if (commonStructIndex + 1 != commonStructCount) _();
+				});
+			}
+		}); _();
+	}); 
+});
+
+void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+{
+	var versionRange = VersionRange.Parse(messageField.Versions);
+	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
+	{
+		var fieldTypeName = messageField.GetTypeName();
+		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
+		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
+		if (messageField.Fields == null)
+		{
+			if (messageField.IsArray())
+			{
+				if (IsPrimitiveType(messageField))
+				{
+					#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>());<# 	
+				} 
+				else 
+				{
+					#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version));<# 	
+				}
+			} 
+			else 
+			{
+				#><#= fieldName #> = new <#= fieldTypeName #>(reader.Read<#= fieldTypeName #>());<# 
+			}
+		}
+		else 
+		{
+			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
+			if (mapKeyField == null)
+			{
+				#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version));<# 
+			}
+			else 
+			{
+				#><#= fieldName #> = reader.Read(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+			}
+		}
+	});		
+}
+
+void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+{
+	var versionRange = VersionRange.Parse(messageField.Versions);
+	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
+	{
+		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
+		if (messageField.Fields == null)
+		{
+			var fieldTypeName = messageField.GetTypeName();
+			if (messageField.IsArray())
+			{
+			#>await writer.WriteAsync(cancellationToken, <#= fieldName #>);<# 	
+			} 
+			else 
+			{
+			#>await writer.Write<#= fieldTypeName #>Async(<#= fieldName #>.Value, cancellationToken);<# 
+			}
+		}
+		else 
+		{
+			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
+			if (mapKeyField == null)
+			{
+				#>await writer.WriteAsync(cancellationToken, <#= fieldName #>);<# 
+			} 
+			else 
+			{
+				#>await writer.WriteAsync(cancellationToken, <#= fieldName #>.Values.ToArray());<#
+			}
+		}
+	});		
+}
+
+void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field, string className)
+{
+	GenerateDocumentation(field.About);
+
+	var fieldTypeName = field.GetTypeName();
+	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
+	var privateFieldName = field.GetName().FirstCharacterToLowerCase();
+	var fieldName = field.GetName().FirstCharacterToUpperCase();
+
+	#>private <#= fieldTypeName #> _<#= privateFieldName #><#
+	
+	if(field.Default != null) 
+	{ 
+		#> = new <#= fieldTypeName #>(<#= field.Default #>);<# 
+	} 
+	else if (field.IsDictionary())
+	{
+		#> = new <#= fieldTypeName #>();<# 
+	}
+	else if (field.IsArray())
+	{
+		#> = System.Array.Empty<<#= fieldTypeNameWithoutArrayCharacters #>>();<# 
+	}
+	else 
+	{
+		#> = <#= fieldTypeName #>.Default;<# 
+	} _();
+
+	#>public <#= fieldTypeName #> <#= fieldName #> <# Block(() => 
+	{
+		#>get => _<#= privateFieldName #>;<# _();
+		#>set <# Block(() => 
+		{
+			if (field.Ignorable == false)
+			{
+				var versionRange = VersionRange.Parse(field.Versions);
+				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
+				{
+					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<#
+				}); _(2);
+			}
+
+			if (field.NullableVersions == null)
+			{
+				#>if (value == null) <# Block(() => 
+				{					
+					#>throw new UnsupportedVersionException($"<#= fieldName #> is non-nullable.");<#
+				}); _(2);
+			}
+			else
+			{
+				var nullableVersionRange = VersionRange.Parse(field.NullableVersions);
+				#>if (Version.InRange(<#= nullableVersionRange.From #>, <#= nullableVersionRange.To #>) == false &&<# _();
+				#>	value == null) <# Block(() => 
+				{					
+					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<#
+				}); _(2);
+			}
+
+			#>_<#= privateFieldName #> = value;<#
+		});
+	}); _(2); 
+	
+	if (field.Fields == null) 
+	{
+		var argumentName = field.GetName().FirstCharacterToLowerCase();
+		#>public <#= className #> With<#= fieldName #>(<#= fieldTypeName #> <#= argumentName #>)<# Block(() => 
+		{
+			#><#= fieldName #> = <#= argumentName #>;<# _();
+			#>return this;<#
+		}); 
+
+		return;
+	} 
+
+	if (field.TryGetMapKeyField(out var mapKeyField))
+	{
+		#>public <#= className #> With<#= fieldName #>(params Func<<#= fieldTypeNameWithoutArrayCharacters #>, <#= fieldTypeNameWithoutArrayCharacters #>>[] createFields)<# Block(() => 
+		{
+			#><#= fieldName #> = createFields<# _();
+			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# _();
+			#>	.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# _();
+			#>return this;<#
+		}); _(2);
+	}
+	else if (field.IsArray())
+	{
+		#>public <#= className #> With<#= fieldName #>(params Func<<#= fieldTypeNameWithoutArrayCharacters #>, <#= fieldTypeNameWithoutArrayCharacters #>>[] createFields)<# Block(() => 
+		{
+			#><#= fieldName #> = createFields<# _();
+			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# _();
+			#>	.ToArray();<# _();
+			#>return this;<#
+		}); _(2);
+	}
+	else 
+	{
+		#>public <#= className #> With<#= fieldName #>s(Func<<#= fieldTypeName #>, <#= fieldTypeName #>> createField)<# Block(() => 
+		{
+			#><#= fieldName #> = createField(Create<#= fieldTypeName #>());<# _();
+			#>return this;<#
+		}); _(2);
+	}
+	
+	#>internal <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>()<# Block(() => 
+	{
+		#>return new <#= fieldTypeNameWithoutArrayCharacters #>(Version);<#
+	}); _(2);
+
+	#>public class <#= fieldTypeNameWithoutArrayCharacters #> : ISerialize<# Block(() => 
+	{
+		#>internal <#= fieldTypeNameWithoutArrayCharacters #>(int version)<# Block(() => 
+		{
+			#>Version = version;<#
+		}); _(2);
+
+		#>internal int Version { get; }<# _(2);
+
+		#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
+		{
+			PrintOnNewRowForEach(field.Fields, messageField => 
+			{
+				PrintReadFrom(messageField);
+			});
+		}); _(2);
+
+		#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+		{
+			PrintOnNewRowForEach(field.Fields, messageField => 
+			{
+				PrintWriteTo(messageField);
+			});
+		}); _(2);
+
+		PrintOnNewRowForEachWithIndex(field.Fields, (nestedField, index, count) =>
+		{
+			PrintField(nestedField, fieldTypeNameWithoutArrayCharacters); 
+			if (index + 1 != count) _();
+		});					
+	});
+}
+
+void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.CommonStruct commonStruct)
+{
+	#>public class <#= commonStruct.Name #> : ISerialize<# Block(() => 
+	{
+		#>internal <#= commonStruct.Name #>(int version)<# Block(() => 
+		{
+			var versionRange = VersionRange.Parse(commonStruct.Versions);
+			#>if (version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
+			{
+				#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<#
+			}); _(2);
+
+			#>Version = version;<#
+		}); _(2);
+
+		#>internal int Version { get; }<# _(2);
+
+		#>public void ReadFrom(IKafkaReader reader)<# Block(() => 
+		{
+			PrintOnNewRowForEach(commonStruct.Fields, field => 
+			{
+				PrintReadFrom(field);
+			});
+		}); _(2);
+
+		#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+		{
+			PrintOnNewRowForEach(commonStruct.Fields, field => 
+			{
+				PrintWriteTo(field);
+			});
+		}); _(2);
+
+		PrintOnNewRowForEachWithIndex(commonStruct.Fields, (field, index, count) =>
+		{
+			PrintField(field, commonStruct.Name); 
+			if (index + 1 != count) _();
+		});					
+	});	
+}
+#>

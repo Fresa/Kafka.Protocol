@@ -17,14 +17,14 @@ namespace Kafka.Protocol
         Task WriteVarLongAsync(long value, CancellationToken cancellationToken = default);
 
         Task WriteStringAsync(string value, CancellationToken cancellationToken = default);
-        Task WriteNullableStringAsync(string value, CancellationToken cancellationToken = default);
+        Task WriteNullableStringAsync(string? value, CancellationToken cancellationToken = default);
 
         Task WriteBytesAsync(byte[] value, CancellationToken cancellationToken = default);
-        Task WriteNullableBytesAsync(byte[] value, CancellationToken cancellationToken = default);
+        Task WriteNullableBytesAsync(byte[]? value, CancellationToken cancellationToken = default);
 
-        Task WriteAsync<T>(CancellationToken cancellationToken, params T[] items)
+        Task WriteAsync<T>(CancellationToken cancellationToken, params T[]? items)
             where T : ISerialize;
-        Task WriteAsync<T>(params T[] items) 
+        Task WriteAsync<T>(params T[]? items) 
             where T : ISerialize;
     }
 }
