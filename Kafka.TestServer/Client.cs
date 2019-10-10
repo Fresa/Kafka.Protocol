@@ -14,10 +14,9 @@ namespace Kafka.TestServer
 
         private readonly Pipe _pipe = new Pipe();
 
-        private readonly Pipe _sendPipe = new Pipe();
         private readonly RequestReader _reader;
         private readonly Socket _socket;
-        private Task _sendAndReceiveBackgroundTask;
+        private Task _sendAndReceiveBackgroundTask = default!;
 
         private Client(Socket socket)
         {

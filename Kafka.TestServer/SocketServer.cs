@@ -13,8 +13,8 @@ namespace Kafka.TestServer
         private readonly ConcurrentQueue<Socket> _clients = new ConcurrentQueue<Socket>();
         private readonly BufferBlock<Socket> _waitingClients = new BufferBlock<Socket>();
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
-        private Task _acceptingClientsBackgroundTask;
-        private static Socket _clientAcceptingSocket;
+        private Task _acceptingClientsBackgroundTask = default!;
+        private Socket _clientAcceptingSocket = default!;
 
         internal int Port { get; private set; }
 
@@ -28,7 +28,7 @@ namespace Kafka.TestServer
         internal static SocketServer Start(string hostname)
         {
             var server = new SocketServer();
-            _clientAcceptingSocket = server.Connect(hostname);
+            server.Connect(hostname);
             server.StartAcceptingClients();
             return server;
         }
@@ -55,33 +55,47 @@ namespace Kafka.TestServer
                 });
         }
 
-        private Socket Connect(string hostname)
+        private void Connect(string hostname)
         {
             var host = Dns.GetHostEntry(hostname);
             var address = host.AddressList[0];
             var endPoint = new IPEndPoint(address, 0);
             Port = endPoint.Port;
 
-            var listener = new Socket(
+            _clientAcceptingSocket = new Socket(
                 address.AddressFamily,
                 SocketType.Stream,
                 ProtocolType.Tcp);
 
-            listener.Bind(endPoint);
-            Port = ((IPEndPoint)listener.LocalEndPoint).Port;
-            listener.Listen(100);
-
-            return listener;
+            _clientAcceptingSocket.Bind(endPoint);
+            Port = ((IPEndPoint)_clientAcceptingSocket.LocalEndPoint).Port;
+            _clientAcceptingSocket.Listen(100);
         }
 
         public async ValueTask DisposeAsync()
         {
             _cancellationSource.Cancel();
-            _clientAcceptingSocket.Shutdown(SocketShutdown.Both);
+            try
+            {
+                _clientAcceptingSocket.Shutdown(SocketShutdown.Both);
+            }
+            catch 
+            {
+                // Try shutting down
+            }
+
             await _acceptingClientsBackgroundTask;
             while (_clients.TryDequeue(out var client))
             {
-                client.Shutdown(SocketShutdown.Both);
+                try
+                {
+                    client.Shutdown(SocketShutdown.Both);
+                }
+                catch
+                {
+                    // Try shutting down
+                }
+
                 client.Close();
                 client.Dispose();
             }
