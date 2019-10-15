@@ -366,8 +366,16 @@ namespace Kafka.Protocol
             do
             {
                 result = await _reader.ReadAsync(cancellationToken);
-            } while (result.Buffer.Length < length);
+            } while (result.Buffer.Length < length &&
+                     result.IsCanceled == false &&
+                     result.IsCompleted == false);
 
+            if (result.Buffer.Length != length)
+            {
+                throw new InvalidOperationException(
+                    $"Expected {length} bytes, got {result.Buffer.Length}");
+            }
+            
             var bytes = result.Buffer.Slice(0, length).ToArray();
             _reader.AdvanceTo(result.Buffer.GetPosition(length));
             return bytes;
