@@ -370,7 +370,7 @@ namespace Kafka.Protocol
                      result.IsCanceled == false &&
                      result.IsCompleted == false);
 
-            if (result.Buffer.Length != length)
+            if (result.Buffer.Length < length)
             {
                 throw new InvalidOperationException(
                     $"Expected {length} bytes, got {result.Buffer.Length}");
