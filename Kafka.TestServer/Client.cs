@@ -14,19 +14,19 @@ namespace Kafka.TestServer
 
         private readonly Pipe _pipe = new Pipe();
 
-        private readonly RequestReader _reader;
+        private readonly IKafkaReader _reader;
         private readonly Socket _socket;
         private Task _sendAndReceiveBackgroundTask = default!;
 
         private Client(Socket socket)
         {
             _socket = socket;
-            _reader = new RequestReader(_pipe.Reader);
+            _reader = new KafkaReader(_pipe.Reader);
         }
 
         internal async Task<RequestPayload> ReadAsync(CancellationToken cancellationToken)
         {
-            return await _reader.ReadAsync(cancellationToken);
+            return await RequestPayload.ReadFrom(0, _reader, cancellationToken);
         }
 
         internal async Task SendAsync(

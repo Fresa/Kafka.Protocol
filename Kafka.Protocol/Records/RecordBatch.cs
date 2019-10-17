@@ -133,21 +133,22 @@ namespace Kafka.Protocol.Records
             set => Attributes = Attributes.SetBit(5, value);
         }
 
-        public void ReadFrom(IKafkaReader reader)
+        public async ValueTask ReadFromAsync(IKafkaReader reader,
+            CancellationToken cancellationToken = default)
         {
-            BaseOffset = Int64.From(reader.ReadInt64());
-            BatchLength = Int32.From(reader.ReadInt32());
-            PartitionLeaderEpoch = Int32.From(reader.ReadInt32());
-            Magic = Int8.From(reader.ReadInt8());
-            Crc = Int32.From(reader.ReadInt32());
-            Attributes = Int16.From(reader.ReadInt16());
-            LastOffsetDelta = Int32.From(reader.ReadInt32());
-            FirstTimestamp = Int64.From(reader.ReadInt64());
-            MaxTimestamp = Int64.From(reader.ReadInt64());
-            ProducerId = Int64.From(reader.ReadInt64());
-            ProducerEpoch = Int16.From(reader.ReadInt16());
-            BaseSequence = Int32.From(reader.ReadInt32());
-            Records = reader.Read(() => new Record());
+            BaseOffset = Int64.From(await reader.ReadInt64Async(cancellationToken));
+            BatchLength = Int32.From(await reader.ReadInt32Async(cancellationToken));
+            PartitionLeaderEpoch = Int32.From(await reader.ReadInt32Async(cancellationToken));
+            Magic = Int8.From(await reader.ReadInt8Async(cancellationToken));
+            Crc = Int32.From(await reader.ReadInt32Async(cancellationToken));
+            Attributes = Int16.From(await reader.ReadInt16Async(cancellationToken));
+            LastOffsetDelta = Int32.From(await reader.ReadInt32Async(cancellationToken));
+            FirstTimestamp = Int64.From(await reader.ReadInt64Async(cancellationToken));
+            MaxTimestamp = Int64.From(await reader.ReadInt64Async(cancellationToken));
+            ProducerId = Int64.From(await reader.ReadInt64Async(cancellationToken));
+            ProducerEpoch = Int16.From(await reader.ReadInt16Async(cancellationToken));
+            BaseSequence = Int32.From(await reader.ReadInt32Async(cancellationToken));
+            Records = await reader.ReadAsync(() => new Record(), cancellationToken);
         }
 
         public async Task WriteToAsync(IKafkaWriter writer,

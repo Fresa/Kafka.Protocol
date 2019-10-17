@@ -1,26 +1,49 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
     public interface IKafkaReader
     {
-        bool ReadBoolean();
-        sbyte ReadInt8();
-        short ReadInt16();
-        int ReadInt32();
-        long ReadInt64();
-        uint ReadUInt32();
+        ValueTask<bool> ReadBooleanAsync(
+            CancellationToken cancellationToken = default);
 
-        int ReadVarInt();
-        long ReadVarLong();
+        ValueTask<sbyte> ReadInt8Async(
+            CancellationToken cancellationToken = default);
 
-        string ReadString();
-        string? ReadNullableString();
+        ValueTask<short> ReadInt16Async(
+            CancellationToken cancellationToken = default);
 
-        byte[] ReadBytes();
-        byte[]? ReadNullableBytes();
+        ValueTask<int> ReadInt32Async(
+            CancellationToken cancellationToken = default);
 
-        T[]? Read<T>(Func<T> factory) 
+        ValueTask<long> ReadInt64Async(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<uint> ReadUInt32Async(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<int> ReadVarIntAsync(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<long> ReadVarLongAsync(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<string> ReadStringAsync(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<string?> ReadNullableStringAsync(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<byte[]> ReadBytesAsync(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<byte[]?> ReadNullableBytesAsync(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<T[]?> ReadAsync<T>(Func<T> factory,
+            CancellationToken cancellationToken = default)
             where T : ISerialize;
     }
 }

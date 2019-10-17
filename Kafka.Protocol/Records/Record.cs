@@ -15,17 +15,18 @@ namespace Kafka.Protocol.Records
         public Bytes Value { get; set; } = Bytes.Default;
         public Header[]? Headers { get; set; } = new Header[0];
 
-        public void ReadFrom(IKafkaReader reader)
+        public async ValueTask ReadFromAsync(IKafkaReader reader,
+            CancellationToken cancellationToken = default)
         {
-            Length = VarInt.From(reader.ReadVarInt());
-            Attributes = Int8.From(reader.ReadInt8());
-            TimestampDelta = VarInt.From(reader.ReadVarInt());
-            OffsetDelta = VarInt.From(reader.ReadVarInt());
-            KeyLength = VarInt.From(reader.ReadVarInt());
-            Key = Bytes.From(reader.ReadBytes());
-            ValueLen = VarInt.From(reader.ReadVarInt());
-            Value = Bytes.From(reader.ReadBytes());
-            Headers = reader.Read(() => new Header());
+            Length = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
+            Attributes = Int8.From(await reader.ReadInt8Async(cancellationToken));
+            TimestampDelta = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
+            OffsetDelta = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
+            KeyLength = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
+            Key = Bytes.From(await reader.ReadBytesAsync(cancellationToken));
+            ValueLen = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
+            Value = Bytes.From(await reader.ReadBytesAsync(cancellationToken));
+            Headers = await reader.ReadAsync(() => new Header(), cancellationToken);
         }
 
         public async Task WriteToAsync(IKafkaWriter writer,

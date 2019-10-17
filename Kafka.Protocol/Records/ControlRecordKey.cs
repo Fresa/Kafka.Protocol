@@ -34,13 +34,16 @@ namespace Kafka.Protocol.Records
             set => _type = Int16.From(value ? (short)1 : (short)0);
         }
 
-        public void ReadFrom(IKafkaReader reader)
+        public async ValueTask ReadFromAsync(
+            IKafkaReader reader,
+            CancellationToken cancellationToken = default)
         {
-            Version = Int16.From(reader.ReadInt16());
-            _type = Int16.From(reader.ReadInt16());
+            Version = Int16.From(await reader.ReadInt16Async(cancellationToken));
+            _type = Int16.From(await reader.ReadInt16Async(cancellationToken));
         }
 
-        public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+        public async Task WriteToAsync(IKafkaWriter writer, 
+            CancellationToken cancellationToken = default)
         {
             await writer.WriteInt16Async(Version.Value, cancellationToken);
             await writer.WriteInt16Async(_type.Value, cancellationToken);

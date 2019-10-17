@@ -10,12 +10,13 @@ namespace Kafka.Protocol.Records
         public VarInt HeaderValueLength { get; set; } = VarInt.Default;
         public Bytes Value { get; set; } = Bytes.Default;
 
-        public void ReadFrom(IKafkaReader reader)
+        public async ValueTask ReadFromAsync(IKafkaReader reader,
+            CancellationToken cancellationToken = default)
         {
-            HeaderKeyLength = VarInt.From(reader.ReadVarInt());
-            HeaderKey = String.From(reader.ReadString());
-            HeaderValueLength = VarInt.From(reader.ReadVarInt());
-            Value = Bytes.From(reader.ReadBytes());
+            HeaderKeyLength = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
+            HeaderKey = String.From(await reader.ReadStringAsync(cancellationToken));
+            HeaderValueLength = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
+            Value = Bytes.From(await reader.ReadBytesAsync(cancellationToken));
         }
 
         public async Task WriteToAsync(IKafkaWriter writer,

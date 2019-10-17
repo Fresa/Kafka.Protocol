@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +16,8 @@ namespace Kafka.Protocol
             Message = message;
         }
 
-        internal async Task<byte[]> WriteToAsync(CancellationToken cancellationToken = default)
+        internal async Task<byte[]> WriteToAsync(
+            CancellationToken cancellationToken = default)
         {
             await using var stream = new MemoryStream();
             await using (var writer = new KafkaWriter(stream))
@@ -27,15 +29,17 @@ namespace Kafka.Protocol
             return stream.GetBuffer();
         }
 
-        public static RequestPayload ReadFrom(int version, byte[] payload)
+        public static async ValueTask<RequestPayload> ReadFrom(
+            int version, 
+            IKafkaReader kafkaReader,
+            CancellationToken cancellationToken = default)
         {
-            var kafkaReader = new KafkaReader(payload);
             var header = new RequestHeader(version);
-            header.ReadFrom(kafkaReader);
+            await header.ReadFromAsync(kafkaReader, cancellationToken);
             var message = Messages.Create(
                 header.RequestApiKey.Value,
                 header.RequestApiVersion.Value);
-            message.ReadFrom(kafkaReader);
+            await message.ReadFromAsync(kafkaReader, cancellationToken);
 
             return new RequestPayload(header, message);
         }

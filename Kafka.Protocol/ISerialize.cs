@@ -5,7 +5,10 @@ namespace Kafka.Protocol
 {
     public interface ISerialize
     {
-        void ReadFrom(IKafkaReader reader);
-        Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default);
+        ValueTask ReadFromAsync(IKafkaReader reader, 
+            CancellationToken cancellationToken = default);
+
+        Task WriteToAsync(IKafkaWriter writer, 
+            CancellationToken cancellationToken = default);
     }
 }

@@ -26,13 +26,15 @@ namespace Kafka.Protocol
             await Message.WriteToAsync(writer, cancellationToken);
         }
 
-        public static ResponsePayload ReadFrom(RequestPayload requestPayload, byte[] payload)
+        public static async ValueTask<ResponsePayload> ReadFromAsync(
+            RequestPayload requestPayload, 
+            IKafkaReader reader,
+            CancellationToken cancellationToken = default)
         {
-            var reader = new KafkaReader(payload);
             var header = new ResponseHeader(requestPayload.Header.Version);
-            header.ReadFrom(reader);
+            await header.ReadFromAsync(reader, cancellationToken);
             var message = Messages.Create(requestPayload.Header.RequestApiKey.Value, requestPayload.Header.Version);
-            message.ReadFrom(reader);
+            await message.ReadFromAsync(reader, cancellationToken);
 
             return new ResponsePayload(requestPayload, header, message);
         }
