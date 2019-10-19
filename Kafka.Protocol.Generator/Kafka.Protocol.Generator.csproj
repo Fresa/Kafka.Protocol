@@ -16,7 +16,11 @@
       <LastGenOutput>KafkaProtocol.cs.generated</LastGenOutput>
     </None>
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <None Remove="KafkaProtocol.cs" />
+  </ItemGroup>
+  
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>

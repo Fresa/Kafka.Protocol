@@ -349,7 +349,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadAsync(() => new Int32());
+                _value = await _reader.ReadAsync(async () => await Int32.FromReaderAsync(_reader));
             }
 
             [Fact]
@@ -371,7 +371,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadAsync(() => new Int32());
+                _value = await _reader.ReadAsync(async () => await Int32.FromReaderAsync(_reader));
             }
 
             [Fact]

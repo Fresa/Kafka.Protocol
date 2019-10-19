@@ -125,11 +125,6 @@ namespace Kafka.Protocol<# Block(() =>
                 #>return !(x == y);<#
             }); _(2);
 
-			#>public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
-			{
-				#>Value = await reader.Read<#= className #>Async(cancellationToken);<#
-			}); _(2);
-
 			#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				#>await writer.Write<#= className #>Async(Value, cancellationToken);<#
@@ -139,6 +134,12 @@ namespace Kafka.Protocol<# Block(() =>
             {
                 #>return new <#= className #>(value);<#
             }); _(2);
+
+			#>public static async ValueTask<<#= className #>> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+			{
+				#>var value = await reader.Read<#= className #>Async(cancellationToken);<#
+				#>return new <#= className #>(value);<#
+			}); _(2);
 
 			#>public static <#= className #> Default => <#= className #>.From(<#= defaultValue #>);<#
         }); _();
@@ -167,13 +168,17 @@ namespace Kafka.Protocol<# Block(() =>
 
 	#>public static class Messages <# Block(() =>
     {
-		#>public static Message Create(int apiKey, int version)<# Block(() =>
+		#>public static async ValueTask<Message> CreateMessageFromReaderAsync(<# _();
+		#>	int apiKey, <# _();
+		#>	int version, <# _();
+		#>	IKafkaReader reader, <# _();
+		#>	CancellationToken cancellationToken = default)<# Block(() =>
 		{
 			PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
 			{
 				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# Block(() =>
 				{
-					#>return new <#= messageDefinition.Name #>(version);<#
+					#>return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken);<#
 				}); _();
 			}); _();
 
@@ -201,12 +206,14 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public override int Version { get; }<# _(2);
 
-			#>public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+			#>public static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
+				#>var instance = new <#= messageDefinition.Name #>(version);<# _();
 				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
 				{
-					PrintReadFrom(messageField);
-				});
+					PrintReadFrom(messageField, "instance.");
+				}); _();
+				#>return instance;<#
 			}); _(2);
 
 			#>public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
@@ -241,10 +248,10 @@ namespace Kafka.Protocol<# Block(() =>
 	}); 
 });
 
-void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, string prependBeforeField = "")
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
-	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
+	#>if (<#= prependBeforeField #>Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
@@ -255,16 +262,16 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 			{
 				if (IsPrimitiveType(messageField))
 				{
-					#><#= fieldName #> = await reader.ReadAsync(() => new <#= fieldTypeNameWithoutArrayCharacters #>(), cancellationToken);<# 	
+					#><#= prependBeforeField #><#= fieldName #> = await reader.ReadAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken);<# 	
 				} 
 				else 
 				{
-					#><#= fieldName #> = await reader.ReadAsync(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version), cancellationToken);<# 	
+					#><#= prependBeforeField #><#= fieldName #> = await reader.ReadAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 	
 				}
 			} 
 			else 
 			{
-				#><#= fieldName #> = new <#= fieldTypeName #>(await reader.Read<#= fieldTypeName #>Async(cancellationToken));<# 
+				#><#= prependBeforeField #><#= fieldName #> = new <#= fieldTypeName #>(await reader.Read<#= fieldTypeName #>Async(cancellationToken));<# 
 			}
 		}
 		else 
@@ -272,11 +279,11 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 			if (mapKeyField == null)
 			{
-				#><#= fieldName #> = await reader.ReadAsync(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version), cancellationToken);<# 
+				#><#= prependBeforeField #><#= fieldName #> = await reader.ReadAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 
 			}
 			else 
 			{
-				#><#= fieldName #> = (await reader.ReadAsync(() => new <#= fieldTypeNameWithoutArrayCharacters #>(Version), cancellationToken)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+				#><#= prependBeforeField #><#= fieldName #> = (await reader.ReadAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
 			}
 		}
 	});		
@@ -433,12 +440,14 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 
 		#>internal int Version { get; }<# _(2);
 
-		#>public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
+			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();
 			PrintOnNewRowForEach(field.Fields, messageField => 
 			{
-				PrintReadFrom(messageField);
-			});
+				PrintReadFrom(messageField, "instance.");
+			}); _();
+			#>return instance;<#
 		}); _(2);
 
 		#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
@@ -474,12 +483,14 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 
 		#>internal int Version { get; }<# _(2);
 
-		#>public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
-			PrintOnNewRowForEach(commonStruct.Fields, field => 
+			#>var instance = new <#= commonStruct.Name #>(version);<# _();
+			PrintOnNewRowForEach(commonStruct.Fields, messageField => 
 			{
-				PrintReadFrom(field);
-			});
+				PrintReadFrom(messageField, "instance.");
+			}); _();
+			#>return instance;<#
 		}); _(2);
 
 		#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 

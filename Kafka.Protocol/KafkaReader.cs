@@ -127,7 +127,7 @@ namespace Kafka.Protocol
             return await ReadAsLittleEndianAsync(length, cancellationToken);
         }
 
-        public async ValueTask<T[]?> ReadAsync<T>(Func<T> createItem,
+        public async ValueTask<T[]?> ReadAsync<T>(Func<ValueTask<T>> createItem,
             CancellationToken cancellationToken = default)
             where T : ISerialize
         {
@@ -140,9 +140,7 @@ namespace Kafka.Protocol
             var result = new T[length];
             for (var i = 0; i < length; i++)
             {
-                var item = createItem();
-                await item.ReadFromAsync(this, cancellationToken);
-                result[i] = item;
+                result[i] = await createItem();
             }
 
             return result;

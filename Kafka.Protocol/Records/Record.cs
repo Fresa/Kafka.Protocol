@@ -15,18 +15,22 @@ namespace Kafka.Protocol.Records
         public Bytes Value { get; set; } = Bytes.Default;
         public Header[]? Headers { get; set; } = new Header[0];
 
-        public async ValueTask ReadFromAsync(IKafkaReader reader,
+        public static async ValueTask<Record> FromReaderAsync(IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            Length = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
-            Attributes = Int8.From(await reader.ReadInt8Async(cancellationToken));
-            TimestampDelta = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
-            OffsetDelta = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
-            KeyLength = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
-            Key = Bytes.From(await reader.ReadBytesAsync(cancellationToken));
-            ValueLen = VarInt.From(await reader.ReadVarIntAsync(cancellationToken));
-            Value = Bytes.From(await reader.ReadBytesAsync(cancellationToken));
-            Headers = await reader.ReadAsync(() => new Header(), cancellationToken);
+            return new Record
+            {
+                Length = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
+                Attributes = Int8.From(await reader.ReadInt8Async(cancellationToken)),
+                TimestampDelta = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
+                OffsetDelta = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
+                KeyLength = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
+                Key = Bytes.From(await reader.ReadBytesAsync(cancellationToken)),
+                ValueLen = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
+                Value = Bytes.From(await reader.ReadBytesAsync(cancellationToken)),
+                Headers = await reader.ReadAsync(async () => await Header.FromReaderAsync(reader, cancellationToken),
+                cancellationToken)
+            };
         }
 
         public async Task WriteToAsync(IKafkaWriter writer,

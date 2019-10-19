@@ -42,7 +42,7 @@ namespace Kafka.Protocol
         ValueTask<byte[]?> ReadNullableBytesAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<T[]?> ReadAsync<T>(Func<T> factory,
+        ValueTask<T[]?> ReadAsync<T>(Func<ValueTask<T>> factory,
             CancellationToken cancellationToken = default)
             where T : ISerialize;
     }

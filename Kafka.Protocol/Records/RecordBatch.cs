@@ -148,7 +148,7 @@ namespace Kafka.Protocol.Records
             ProducerId = Int64.From(await reader.ReadInt64Async(cancellationToken));
             ProducerEpoch = Int16.From(await reader.ReadInt16Async(cancellationToken));
             BaseSequence = Int32.From(await reader.ReadInt32Async(cancellationToken));
-            Records = await reader.ReadAsync(() => new Record(), cancellationToken);
+            Records = await reader.ReadAsync(async () => await Record.FromReaderAsync(reader, cancellationToken), cancellationToken);
         }
 
         public async Task WriteToAsync(IKafkaWriter writer,

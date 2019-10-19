@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,12 +33,16 @@ namespace Kafka.Protocol
             IKafkaReader kafkaReader,
             CancellationToken cancellationToken = default)
         {
-            var header = new RequestHeader(version);
-            await header.ReadFromAsync(kafkaReader, cancellationToken);
-            var message = Messages.Create(
+            var header = await RequestHeader.FromReaderAsync(
+                version, 
+                kafkaReader, 
+                cancellationToken);
+
+            var message = await Messages.CreateMessageFromReaderAsync(
                 header.RequestApiKey.Value,
-                header.RequestApiVersion.Value);
-            await message.ReadFromAsync(kafkaReader, cancellationToken);
+                header.RequestApiVersion.Value,
+                kafkaReader,
+                cancellationToken);
 
             return new RequestPayload(header, message);
         }

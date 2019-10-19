@@ -44,11 +44,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadBooleanAsync(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteBooleanAsync(Value, cancellationToken);
@@ -57,6 +52,11 @@ namespace Kafka.Protocol
 		public static Boolean From(System.Boolean value)
 		{
 			return new Boolean(value);
+		}
+
+		public static async ValueTask<Boolean> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadBooleanAsync(cancellationToken);return new Boolean(value);
 		}
 
 		public static Boolean Default => Boolean.From(default);
@@ -99,11 +99,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadInt8Async(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt8Async(Value, cancellationToken);
@@ -112,6 +107,11 @@ namespace Kafka.Protocol
 		public static Int8 From(System.SByte value)
 		{
 			return new Int8(value);
+		}
+
+		public static async ValueTask<Int8> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadInt8Async(cancellationToken);return new Int8(value);
 		}
 
 		public static Int8 Default => Int8.From(default);
@@ -154,11 +154,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadInt16Async(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt16Async(Value, cancellationToken);
@@ -167,6 +162,11 @@ namespace Kafka.Protocol
 		public static Int16 From(System.Int16 value)
 		{
 			return new Int16(value);
+		}
+
+		public static async ValueTask<Int16> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadInt16Async(cancellationToken);return new Int16(value);
 		}
 
 		public static Int16 Default => Int16.From(default);
@@ -209,11 +209,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadInt32Async(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt32Async(Value, cancellationToken);
@@ -222,6 +217,11 @@ namespace Kafka.Protocol
 		public static Int32 From(System.Int32 value)
 		{
 			return new Int32(value);
+		}
+
+		public static async ValueTask<Int32> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadInt32Async(cancellationToken);return new Int32(value);
 		}
 
 		public static Int32 Default => Int32.From(default);
@@ -264,11 +264,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadInt64Async(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt64Async(Value, cancellationToken);
@@ -277,6 +272,11 @@ namespace Kafka.Protocol
 		public static Int64 From(System.Int64 value)
 		{
 			return new Int64(value);
+		}
+
+		public static async ValueTask<Int64> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadInt64Async(cancellationToken);return new Int64(value);
 		}
 
 		public static Int64 Default => Int64.From(default);
@@ -319,11 +319,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadUInt32Async(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteUInt32Async(Value, cancellationToken);
@@ -332,6 +327,11 @@ namespace Kafka.Protocol
 		public static UInt32 From(System.UInt32 value)
 		{
 			return new UInt32(value);
+		}
+
+		public static async ValueTask<UInt32> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadUInt32Async(cancellationToken);return new UInt32(value);
 		}
 
 		public static UInt32 Default => UInt32.From(default);
@@ -374,11 +374,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadVarIntAsync(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteVarIntAsync(Value, cancellationToken);
@@ -387,6 +382,11 @@ namespace Kafka.Protocol
 		public static VarInt From(System.Int32 value)
 		{
 			return new VarInt(value);
+		}
+
+		public static async ValueTask<VarInt> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadVarIntAsync(cancellationToken);return new VarInt(value);
 		}
 
 		public static VarInt Default => VarInt.From(default);
@@ -429,11 +429,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadVarLongAsync(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteVarLongAsync(Value, cancellationToken);
@@ -442,6 +437,11 @@ namespace Kafka.Protocol
 		public static VarLong From(System.Int64 value)
 		{
 			return new VarLong(value);
+		}
+
+		public static async ValueTask<VarLong> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadVarLongAsync(cancellationToken);return new VarLong(value);
 		}
 
 		public static VarLong Default => VarLong.From(default);
@@ -484,11 +484,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadStringAsync(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteStringAsync(Value, cancellationToken);
@@ -497,6 +492,11 @@ namespace Kafka.Protocol
 		public static String From(System.String value)
 		{
 			return new String(value);
+		}
+
+		public static async ValueTask<String> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadStringAsync(cancellationToken);return new String(value);
 		}
 
 		public static String Default => String.From(System.String.Empty);
@@ -539,11 +539,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadNullableStringAsync(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteNullableStringAsync(Value, cancellationToken);
@@ -552,6 +547,11 @@ namespace Kafka.Protocol
 		public static NullableString From(System.String? value)
 		{
 			return new NullableString(value);
+		}
+
+		public static async ValueTask<NullableString> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadNullableStringAsync(cancellationToken);return new NullableString(value);
 		}
 
 		public static NullableString Default => NullableString.From(System.String.Empty);
@@ -594,11 +594,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadBytesAsync(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteBytesAsync(Value, cancellationToken);
@@ -607,6 +602,11 @@ namespace Kafka.Protocol
 		public static Bytes From(System.Byte[] value)
 		{
 			return new Bytes(value);
+		}
+
+		public static async ValueTask<Bytes> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadBytesAsync(cancellationToken);return new Bytes(value);
 		}
 
 		public static Bytes Default => Bytes.From(new System.Byte[0]);
@@ -649,11 +649,6 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			Value = await reader.ReadNullableBytesAsync(cancellationToken);
-		}
-
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteNullableBytesAsync(Value, cancellationToken);
@@ -662,6 +657,11 @@ namespace Kafka.Protocol
 		public static NullableBytes From(System.Byte[]? value)
 		{
 			return new NullableBytes(value);
+		}
+
+		public static async ValueTask<NullableBytes> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			var value = await reader.ReadNullableBytesAsync(cancellationToken);return new NullableBytes(value);
 		}
 
 		public static NullableBytes Default => NullableBytes.From(new System.Byte[0]);
@@ -2069,466 +2069,470 @@ namespace Kafka.Protocol
 
 	public static class Messages 
 	{
-		public static Message Create(int apiKey, int version)
+		public static async ValueTask<Message> CreateMessageFromReaderAsync(
+			int apiKey, 
+			int version, 
+			IKafkaReader reader, 
+			CancellationToken cancellationToken = default)
 		{
 			if (AddOffsetsToTxnRequest.ApiKey == apiKey)
 			{
-				return new AddOffsetsToTxnRequest(version);
+				return await AddOffsetsToTxnRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (AddOffsetsToTxnResponse.ApiKey == apiKey)
 			{
-				return new AddOffsetsToTxnResponse(version);
+				return await AddOffsetsToTxnResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (AddPartitionsToTxnRequest.ApiKey == apiKey)
 			{
-				return new AddPartitionsToTxnRequest(version);
+				return await AddPartitionsToTxnRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
 			{
-				return new AddPartitionsToTxnResponse(version);
+				return await AddPartitionsToTxnResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (AlterConfigsRequest.ApiKey == apiKey)
 			{
-				return new AlterConfigsRequest(version);
+				return await AlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (AlterConfigsResponse.ApiKey == apiKey)
 			{
-				return new AlterConfigsResponse(version);
+				return await AlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (AlterReplicaLogDirsRequest.ApiKey == apiKey)
 			{
-				return new AlterReplicaLogDirsRequest(version);
+				return await AlterReplicaLogDirsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (AlterReplicaLogDirsResponse.ApiKey == apiKey)
 			{
-				return new AlterReplicaLogDirsResponse(version);
+				return await AlterReplicaLogDirsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ApiVersionsRequest.ApiKey == apiKey)
 			{
-				return new ApiVersionsRequest(version);
+				return await ApiVersionsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ApiVersionsResponse.ApiKey == apiKey)
 			{
-				return new ApiVersionsResponse(version);
+				return await ApiVersionsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ControlledShutdownRequest.ApiKey == apiKey)
 			{
-				return new ControlledShutdownRequest(version);
+				return await ControlledShutdownRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ControlledShutdownResponse.ApiKey == apiKey)
 			{
-				return new ControlledShutdownResponse(version);
+				return await ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (CreateAclsRequest.ApiKey == apiKey)
 			{
-				return new CreateAclsRequest(version);
+				return await CreateAclsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (CreateAclsResponse.ApiKey == apiKey)
 			{
-				return new CreateAclsResponse(version);
+				return await CreateAclsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (CreateDelegationTokenRequest.ApiKey == apiKey)
 			{
-				return new CreateDelegationTokenRequest(version);
+				return await CreateDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (CreateDelegationTokenResponse.ApiKey == apiKey)
 			{
-				return new CreateDelegationTokenResponse(version);
+				return await CreateDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (CreatePartitionsRequest.ApiKey == apiKey)
 			{
-				return new CreatePartitionsRequest(version);
+				return await CreatePartitionsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (CreatePartitionsResponse.ApiKey == apiKey)
 			{
-				return new CreatePartitionsResponse(version);
+				return await CreatePartitionsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (CreateTopicsRequest.ApiKey == apiKey)
 			{
-				return new CreateTopicsRequest(version);
+				return await CreateTopicsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (CreateTopicsResponse.ApiKey == apiKey)
 			{
-				return new CreateTopicsResponse(version);
+				return await CreateTopicsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DeleteAclsRequest.ApiKey == apiKey)
 			{
-				return new DeleteAclsRequest(version);
+				return await DeleteAclsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DeleteAclsResponse.ApiKey == apiKey)
 			{
-				return new DeleteAclsResponse(version);
+				return await DeleteAclsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DeleteGroupsRequest.ApiKey == apiKey)
 			{
-				return new DeleteGroupsRequest(version);
+				return await DeleteGroupsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DeleteGroupsResponse.ApiKey == apiKey)
 			{
-				return new DeleteGroupsResponse(version);
+				return await DeleteGroupsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DeleteRecordsRequest.ApiKey == apiKey)
 			{
-				return new DeleteRecordsRequest(version);
+				return await DeleteRecordsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DeleteRecordsResponse.ApiKey == apiKey)
 			{
-				return new DeleteRecordsResponse(version);
+				return await DeleteRecordsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DeleteTopicsRequest.ApiKey == apiKey)
 			{
-				return new DeleteTopicsRequest(version);
+				return await DeleteTopicsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DeleteTopicsResponse.ApiKey == apiKey)
 			{
-				return new DeleteTopicsResponse(version);
+				return await DeleteTopicsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeAclsRequest.ApiKey == apiKey)
 			{
-				return new DescribeAclsRequest(version);
+				return await DescribeAclsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeAclsResponse.ApiKey == apiKey)
 			{
-				return new DescribeAclsResponse(version);
+				return await DescribeAclsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeConfigsRequest.ApiKey == apiKey)
 			{
-				return new DescribeConfigsRequest(version);
+				return await DescribeConfigsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeConfigsResponse.ApiKey == apiKey)
 			{
-				return new DescribeConfigsResponse(version);
+				return await DescribeConfigsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeDelegationTokenRequest.ApiKey == apiKey)
 			{
-				return new DescribeDelegationTokenRequest(version);
+				return await DescribeDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeDelegationTokenResponse.ApiKey == apiKey)
 			{
-				return new DescribeDelegationTokenResponse(version);
+				return await DescribeDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeGroupsRequest.ApiKey == apiKey)
 			{
-				return new DescribeGroupsRequest(version);
+				return await DescribeGroupsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeGroupsResponse.ApiKey == apiKey)
 			{
-				return new DescribeGroupsResponse(version);
+				return await DescribeGroupsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeLogDirsRequest.ApiKey == apiKey)
 			{
-				return new DescribeLogDirsRequest(version);
+				return await DescribeLogDirsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (DescribeLogDirsResponse.ApiKey == apiKey)
 			{
-				return new DescribeLogDirsResponse(version);
+				return await DescribeLogDirsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ElectLeadersRequest.ApiKey == apiKey)
 			{
-				return new ElectLeadersRequest(version);
+				return await ElectLeadersRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ElectLeadersResponse.ApiKey == apiKey)
 			{
-				return new ElectLeadersResponse(version);
+				return await ElectLeadersResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (EndTxnRequest.ApiKey == apiKey)
 			{
-				return new EndTxnRequest(version);
+				return await EndTxnRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (EndTxnResponse.ApiKey == apiKey)
 			{
-				return new EndTxnResponse(version);
+				return await EndTxnResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ExpireDelegationTokenRequest.ApiKey == apiKey)
 			{
-				return new ExpireDelegationTokenRequest(version);
+				return await ExpireDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ExpireDelegationTokenResponse.ApiKey == apiKey)
 			{
-				return new ExpireDelegationTokenResponse(version);
+				return await ExpireDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (FetchRequest.ApiKey == apiKey)
 			{
-				return new FetchRequest(version);
+				return await FetchRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (FetchResponse.ApiKey == apiKey)
 			{
-				return new FetchResponse(version);
+				return await FetchResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (FindCoordinatorRequest.ApiKey == apiKey)
 			{
-				return new FindCoordinatorRequest(version);
+				return await FindCoordinatorRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (FindCoordinatorResponse.ApiKey == apiKey)
 			{
-				return new FindCoordinatorResponse(version);
+				return await FindCoordinatorResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (HeartbeatRequest.ApiKey == apiKey)
 			{
-				return new HeartbeatRequest(version);
+				return await HeartbeatRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (HeartbeatResponse.ApiKey == apiKey)
 			{
-				return new HeartbeatResponse(version);
+				return await HeartbeatResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (IncrementalAlterConfigsRequest.ApiKey == apiKey)
 			{
-				return new IncrementalAlterConfigsRequest(version);
+				return await IncrementalAlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
 			{
-				return new IncrementalAlterConfigsResponse(version);
+				return await IncrementalAlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (InitProducerIdRequest.ApiKey == apiKey)
 			{
-				return new InitProducerIdRequest(version);
+				return await InitProducerIdRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (InitProducerIdResponse.ApiKey == apiKey)
 			{
-				return new InitProducerIdResponse(version);
+				return await InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (JoinGroupRequest.ApiKey == apiKey)
 			{
-				return new JoinGroupRequest(version);
+				return await JoinGroupRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (JoinGroupResponse.ApiKey == apiKey)
 			{
-				return new JoinGroupResponse(version);
+				return await JoinGroupResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (LeaderAndIsrRequest.ApiKey == apiKey)
 			{
-				return new LeaderAndIsrRequest(version);
+				return await LeaderAndIsrRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (LeaderAndIsrResponse.ApiKey == apiKey)
 			{
-				return new LeaderAndIsrResponse(version);
+				return await LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (LeaveGroupRequest.ApiKey == apiKey)
 			{
-				return new LeaveGroupRequest(version);
+				return await LeaveGroupRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (LeaveGroupResponse.ApiKey == apiKey)
 			{
-				return new LeaveGroupResponse(version);
+				return await LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ListGroupsRequest.ApiKey == apiKey)
 			{
-				return new ListGroupsRequest(version);
+				return await ListGroupsRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ListGroupsResponse.ApiKey == apiKey)
 			{
-				return new ListGroupsResponse(version);
+				return await ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ListOffsetRequest.ApiKey == apiKey)
 			{
-				return new ListOffsetRequest(version);
+				return await ListOffsetRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ListOffsetResponse.ApiKey == apiKey)
 			{
-				return new ListOffsetResponse(version);
+				return await ListOffsetResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (MetadataRequest.ApiKey == apiKey)
 			{
-				return new MetadataRequest(version);
+				return await MetadataRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (MetadataResponse.ApiKey == apiKey)
 			{
-				return new MetadataResponse(version);
+				return await MetadataResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (OffsetCommitRequest.ApiKey == apiKey)
 			{
-				return new OffsetCommitRequest(version);
+				return await OffsetCommitRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (OffsetCommitResponse.ApiKey == apiKey)
 			{
-				return new OffsetCommitResponse(version);
+				return await OffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (OffsetFetchRequest.ApiKey == apiKey)
 			{
-				return new OffsetFetchRequest(version);
+				return await OffsetFetchRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (OffsetFetchResponse.ApiKey == apiKey)
 			{
-				return new OffsetFetchResponse(version);
+				return await OffsetFetchResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (OffsetForLeaderEpochRequest.ApiKey == apiKey)
 			{
-				return new OffsetForLeaderEpochRequest(version);
+				return await OffsetForLeaderEpochRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (OffsetForLeaderEpochResponse.ApiKey == apiKey)
 			{
-				return new OffsetForLeaderEpochResponse(version);
+				return await OffsetForLeaderEpochResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ProduceRequest.ApiKey == apiKey)
 			{
-				return new ProduceRequest(version);
+				return await ProduceRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ProduceResponse.ApiKey == apiKey)
 			{
-				return new ProduceResponse(version);
+				return await ProduceResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (RenewDelegationTokenRequest.ApiKey == apiKey)
 			{
-				return new RenewDelegationTokenRequest(version);
+				return await RenewDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (RenewDelegationTokenResponse.ApiKey == apiKey)
 			{
-				return new RenewDelegationTokenResponse(version);
+				return await RenewDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (RequestHeader.ApiKey == apiKey)
 			{
-				return new RequestHeader(version);
+				return await RequestHeader.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (ResponseHeader.ApiKey == apiKey)
 			{
-				return new ResponseHeader(version);
+				return await ResponseHeader.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (SaslAuthenticateRequest.ApiKey == apiKey)
 			{
-				return new SaslAuthenticateRequest(version);
+				return await SaslAuthenticateRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (SaslAuthenticateResponse.ApiKey == apiKey)
 			{
-				return new SaslAuthenticateResponse(version);
+				return await SaslAuthenticateResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (SaslHandshakeRequest.ApiKey == apiKey)
 			{
-				return new SaslHandshakeRequest(version);
+				return await SaslHandshakeRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (SaslHandshakeResponse.ApiKey == apiKey)
 			{
-				return new SaslHandshakeResponse(version);
+				return await SaslHandshakeResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (StopReplicaRequest.ApiKey == apiKey)
 			{
-				return new StopReplicaRequest(version);
+				return await StopReplicaRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (StopReplicaResponse.ApiKey == apiKey)
 			{
-				return new StopReplicaResponse(version);
+				return await StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (SyncGroupRequest.ApiKey == apiKey)
 			{
-				return new SyncGroupRequest(version);
+				return await SyncGroupRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (SyncGroupResponse.ApiKey == apiKey)
 			{
-				return new SyncGroupResponse(version);
+				return await SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (TxnOffsetCommitRequest.ApiKey == apiKey)
 			{
-				return new TxnOffsetCommitRequest(version);
+				return await TxnOffsetCommitRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (TxnOffsetCommitResponse.ApiKey == apiKey)
 			{
-				return new TxnOffsetCommitResponse(version);
+				return await TxnOffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (UpdateMetadataRequest.ApiKey == apiKey)
 			{
-				return new UpdateMetadataRequest(version);
+				return await UpdateMetadataRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (UpdateMetadataResponse.ApiKey == apiKey)
 			{
-				return new UpdateMetadataResponse(version);
+				return await UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (WriteTxnMarkersRequest.ApiKey == apiKey)
 			{
-				return new WriteTxnMarkersRequest(version);
+				return await WriteTxnMarkersRequest.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			if (WriteTxnMarkersResponse.ApiKey == apiKey)
 			{
-				return new WriteTxnMarkersResponse(version);
+				return await WriteTxnMarkersResponse.FromReaderAsync(version, reader, cancellationToken);
 			}
 
 			throw new ArgumentException($"{apiKey} is not supported");
@@ -2551,24 +2555,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<AddOffsetsToTxnRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new AddOffsetsToTxnRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -2724,16 +2730,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<AddOffsetsToTxnResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new AddOffsetsToTxnResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -2823,24 +2831,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<AddPartitionsToTxnRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new AddPartitionsToTxnRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = (await reader.ReadAsync(() => new AddPartitionsToTxnTopic(Version), cancellationToken)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = (await reader.ReadAsync(async () => await AddPartitionsToTxnTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -2995,16 +3005,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AddPartitionsToTxnTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new AddPartitionsToTxnTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -3095,16 +3107,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<AddPartitionsToTxnResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new AddPartitionsToTxnResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResultsCollection = (await reader.ReadAsync(() => new AddPartitionsToTxnTopicResult(Version), cancellationToken)).ToDictionary(field => field.Name);
+				instance.ResultsCollection = (await reader.ReadAsync(async () => await AddPartitionsToTxnTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -3193,16 +3207,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AddPartitionsToTxnTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new AddPartitionsToTxnTopicResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResultsCollection = (await reader.ReadAsync(() => new AddPartitionsToTxnPartitionResult(Version), cancellationToken)).ToDictionary(field => field.PartitionIndex);
+					instance.ResultsCollection = (await reader.ReadAsync(async () => await AddPartitionsToTxnPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.PartitionIndex);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -3291,16 +3307,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AddPartitionsToTxnPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new AddPartitionsToTxnPartitionResult(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -3392,16 +3410,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<AlterConfigsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new AlterConfigsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResourcesCollection = (await reader.ReadAsync(() => new AlterConfigsResource(Version), cancellationToken)).ToDictionary(field => field.ResourceType);
+				instance.ResourcesCollection = (await reader.ReadAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.ResourceType);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -3461,20 +3481,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterConfigsResource> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new AlterConfigsResource(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ConfigsCollection = (await reader.ReadAsync(() => new AlterableConfig(Version), cancellationToken)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = (await reader.ReadAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -3596,16 +3618,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AlterableConfig> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new AlterableConfig(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -3727,16 +3751,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<AlterConfigsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new AlterConfigsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResponsesCollection = await reader.ReadAsync(() => new AlterConfigsResourceResponse(Version), cancellationToken);
+				instance.ResponsesCollection = await reader.ReadAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -3825,24 +3851,26 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new AlterConfigsResourceResponse(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4000,12 +4028,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<AlterReplicaLogDirsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new AlterReplicaLogDirsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				DirsCollection = (await reader.ReadAsync(() => new AlterReplicaLogDir(Version), cancellationToken)).ToDictionary(field => field.Path);
+				instance.DirsCollection = (await reader.ReadAsync(async () => await AlterReplicaLogDir.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Path);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4061,16 +4091,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterReplicaLogDir> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new AlterReplicaLogDir(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Path = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Path = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TopicsCollection = (await reader.ReadAsync(() => new AlterReplicaLogDirTopic(Version), cancellationToken)).ToDictionary(field => field.Name);
+					instance.TopicsCollection = (await reader.ReadAsync(async () => await AlterReplicaLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4159,16 +4191,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AlterReplicaLogDirTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new AlterReplicaLogDirTopic(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionsCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+						instance.PartitionsCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4260,16 +4294,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<AlterReplicaLogDirsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new AlterReplicaLogDirsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResultsCollection = await reader.ReadAsync(() => new AlterReplicaLogDirTopicResult(Version), cancellationToken);
+				instance.ResultsCollection = await reader.ReadAsync(async () => await AlterReplicaLogDirTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4358,16 +4394,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterReplicaLogDirTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new AlterReplicaLogDirTopicResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new AlterReplicaLogDirPartitionResult(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await AlterReplicaLogDirPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4456,16 +4494,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AlterReplicaLogDirPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new AlterReplicaLogDirPartitionResult(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4557,9 +4597,11 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ApiVersionsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
+			var instance = new ApiVersionsRequest(version);
 
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4584,20 +4626,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ApiVersionsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ApiVersionsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ApiKeysCollection = (await reader.ReadAsync(() => new ApiVersionsResponseKey(Version), cancellationToken)).ToDictionary(field => field.Index);
+				instance.ApiKeysCollection = (await reader.ReadAsync(async () => await ApiVersionsResponseKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Index);
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4690,20 +4734,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ApiVersionsResponseKey> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new ApiVersionsResponseKey(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Index = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.Index = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					MinVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.MinVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					MaxVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.MaxVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4851,16 +4897,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ControlledShutdownRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ControlledShutdownRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				BrokerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.BrokerId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(2, 2147483647)) 
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -4945,16 +4993,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ControlledShutdownResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ControlledShutdownResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				RemainingPartitionsCollection = (await reader.ReadAsync(() => new RemainingPartition(Version), cancellationToken)).ToDictionary(field => field.TopicName);
+				instance.RemainingPartitionsCollection = (await reader.ReadAsync(async () => await RemainingPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.TopicName);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -5043,16 +5093,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<RemainingPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new RemainingPartition(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -5143,12 +5195,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<CreateAclsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new CreateAclsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				CreationsCollection = await reader.ReadAsync(() => new CreatableAcl(Version), cancellationToken);
+				instance.CreationsCollection = await reader.ReadAsync(async () => await CreatableAcl.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -5204,36 +5258,38 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableAcl> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new CreatableAcl(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					ResourcePatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourcePatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Principal = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Principal = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Host = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -5489,16 +5545,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<CreateAclsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new CreateAclsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResultsCollection = await reader.ReadAsync(() => new CreatableAclResult(Version), cancellationToken);
+				instance.ResultsCollection = await reader.ReadAsync(async () => await CreatableAclResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -5587,16 +5645,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableAclResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new CreatableAclResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -5688,16 +5748,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<CreateDelegationTokenRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new CreateDelegationTokenRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				RenewersCollection = await reader.ReadAsync(() => new CreatableRenewers(Version), cancellationToken);
+				instance.RenewersCollection = await reader.ReadAsync(async () => await CreatableRenewers.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MaxLifetimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.MaxLifetimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -5757,16 +5819,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableRenewers> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new CreatableRenewers(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -5886,44 +5950,46 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<CreateDelegationTokenResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new CreateDelegationTokenResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				IssueTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.IssueTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MaxTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.MaxTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TokenId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TokenId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -6244,20 +6310,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<CreatePartitionsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new CreatePartitionsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new CreatePartitionsTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await CreatePartitionsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -6321,20 +6389,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatePartitionsTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new CreatePartitionsTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Count = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Count = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					AssignmentsCollection = await reader.ReadAsync(() => new CreatePartitionsAssignment(Version), cancellationToken);
+					instance.AssignmentsCollection = await reader.ReadAsync(async () => await CreatePartitionsAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -6457,12 +6527,14 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<CreatePartitionsAssignment> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new CreatePartitionsAssignment(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						BrokerIdsCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+						instance.BrokerIdsCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -6579,16 +6651,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<CreatePartitionsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new CreatePartitionsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResultsCollection = await reader.ReadAsync(() => new CreatePartitionsTopicResult(Version), cancellationToken);
+				instance.ResultsCollection = await reader.ReadAsync(async () => await CreatePartitionsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -6677,20 +6751,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatePartitionsTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new CreatePartitionsTopicResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -6815,20 +6891,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<CreateTopicsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new CreateTopicsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = (await reader.ReadAsync(() => new CreatableTopic(Version), cancellationToken)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = (await reader.ReadAsync(async () => await CreatableTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -6892,28 +6970,30 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new CreatableTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					NumPartitions = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.NumPartitions = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ReplicationFactor = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ReplicationFactor = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					AssignmentsCollection = (await reader.ReadAsync(() => new CreatableReplicaAssignment(Version), cancellationToken)).ToDictionary(field => field.PartitionIndex);
+					instance.AssignmentsCollection = (await reader.ReadAsync(async () => await CreatableReplicaAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.PartitionIndex);
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ConfigsCollection = (await reader.ReadAsync(() => new CreateableTopicConfig(Version), cancellationToken)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = (await reader.ReadAsync(async () => await CreateableTopicConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -7072,16 +7152,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<CreatableReplicaAssignment> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new CreatableReplicaAssignment(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						BrokerIdsCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+						instance.BrokerIdsCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -7200,16 +7282,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<CreateableTopicConfig> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new CreateableTopicConfig(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -7360,16 +7444,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<CreateTopicsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(2, 2147483647)) 
+			var instance = new CreateTopicsResponse(version);
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = (await reader.ReadAsync(() => new CreatableTopicResult(Version), cancellationToken)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = (await reader.ReadAsync(async () => await CreatableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -7453,20 +7539,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new CreatableTopicResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -7586,12 +7674,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DeleteAclsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DeleteAclsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				FiltersCollection = await reader.ReadAsync(() => new DeleteAclsFilter(Version), cancellationToken);
+				instance.FiltersCollection = await reader.ReadAsync(async () => await DeleteAclsFilter.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -7647,36 +7737,38 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeleteAclsFilter> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DeleteAclsFilter(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceTypeFilter = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceTypeFilter = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceNameFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ResourceNameFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					PatternTypeFilter = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.PatternTypeFilter = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PrincipalFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.PrincipalFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					HostFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.HostFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -7935,16 +8027,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DeleteAclsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DeleteAclsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				FilterResultsCollection = await reader.ReadAsync(() => new DeleteAclsFilterResult(Version), cancellationToken);
+				instance.FilterResultsCollection = await reader.ReadAsync(async () => await DeleteAclsFilterResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -8033,20 +8127,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeleteAclsFilterResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DeleteAclsFilterResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					MatchingAclsCollection = await reader.ReadAsync(() => new DeleteAclsMatchingAcl(Version), cancellationToken);
+					instance.MatchingAclsCollection = await reader.ReadAsync(async () => await DeleteAclsMatchingAcl.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -8169,44 +8265,46 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DeleteAclsMatchingAcl> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new DeleteAclsMatchingAcl(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(1, 2147483647)) 
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						PatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.PatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Principal = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Principal = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Host = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -8530,12 +8628,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DeleteGroupsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DeleteGroupsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupsNamesCollection = await reader.ReadAsync(() => new String(), cancellationToken);
+				instance.GroupsNamesCollection = await reader.ReadAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -8592,16 +8692,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DeleteGroupsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DeleteGroupsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResultsCollection = (await reader.ReadAsync(() => new DeletableGroupResult(Version), cancellationToken)).ToDictionary(field => field.GroupId);
+				instance.ResultsCollection = (await reader.ReadAsync(async () => await DeletableGroupResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.GroupId);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -8690,16 +8792,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeletableGroupResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DeletableGroupResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -8790,16 +8894,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DeleteRecordsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DeleteRecordsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new DeleteRecordsTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await DeleteRecordsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -8859,16 +8965,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeleteRecordsTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DeleteRecordsTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new DeleteRecordsPartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await DeleteRecordsPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -8957,16 +9065,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DeleteRecordsPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new DeleteRecordsPartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Offset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.Offset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -9087,16 +9197,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DeleteRecordsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DeleteRecordsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new DeleteRecordsTopicResult(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await DeleteRecordsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -9185,16 +9297,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeleteRecordsTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DeleteRecordsTopicResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new DeleteRecordsPartitionResult(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await DeleteRecordsPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -9283,20 +9397,22 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DeleteRecordsPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new DeleteRecordsPartitionResult(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						LowWatermark = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LowWatermark = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -9421,16 +9537,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DeleteTopicsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DeleteTopicsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicNamesCollection = await reader.ReadAsync(() => new String(), cancellationToken);
+				instance.TopicNamesCollection = await reader.ReadAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -9520,16 +9638,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DeleteTopicsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new DeleteTopicsResponse(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResponsesCollection = (await reader.ReadAsync(() => new DeletableTopicResult(Version), cancellationToken)).ToDictionary(field => field.Name);
+				instance.ResponsesCollection = (await reader.ReadAsync(async () => await DeletableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -9618,16 +9738,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeletableTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DeletableTopicResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -9718,36 +9840,38 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeAclsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeAclsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResourceNameFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ResourceNameFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ResourcePatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.ResourcePatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				PrincipalFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.PrincipalFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				HostFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.HostFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -10005,24 +10129,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeAclsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeAclsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResourcesCollection = await reader.ReadAsync(() => new DescribeAclsResource(Version), cancellationToken);
+				instance.ResourcesCollection = await reader.ReadAsync(async () => await DescribeAclsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -10178,24 +10304,26 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeAclsResource> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DescribeAclsResource(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Type = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.Type = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					PatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.PatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					AclsCollection = await reader.ReadAsync(() => new AclDescription(Version), cancellationToken);
+					instance.AclsCollection = await reader.ReadAsync(async () => await AclDescription.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -10350,24 +10478,26 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AclDescription> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new AclDescription(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Principal = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Principal = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Host = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -10525,16 +10655,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeConfigsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeConfigsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResourcesCollection = await reader.ReadAsync(() => new DescribeConfigsResource(Version), cancellationToken);
+				instance.ResourcesCollection = await reader.ReadAsync(async () => await DescribeConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				IncludeSynoyms = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.IncludeSynoyms = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -10594,20 +10726,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeConfigsResource> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DescribeConfigsResource(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ConfigurationKeysCollection = await reader.ReadAsync(() => new NullableString(), cancellationToken);
+					instance.ConfigurationKeysCollection = await reader.ReadAsync(async () => await NullableString.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -10761,16 +10895,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeConfigsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeConfigsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResultsCollection = await reader.ReadAsync(() => new DescribeConfigsResult(Version), cancellationToken);
+				instance.ResultsCollection = await reader.ReadAsync(async () => await DescribeConfigsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -10859,28 +10995,30 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeConfigsResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DescribeConfigsResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ConfigsCollection = await reader.ReadAsync(() => new DescribeConfigsResourceResult(Version), cancellationToken);
+					instance.ConfigsCollection = await reader.ReadAsync(async () => await DescribeConfigsResourceResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -11069,36 +11207,38 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DescribeConfigsResourceResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new DescribeConfigsResourceResult(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ReadOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+						instance.ReadOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 0)) 
+					if (instance.Version.InRange(0, 0)) 
 					{
-						IsDefault = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+						instance.IsDefault = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 					}
-					if (Version.InRange(1, 2147483647)) 
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						ConfigSource = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.ConfigSource = new Int8(await reader.ReadInt8Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						IsSensitive = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+						instance.IsSensitive = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 					}
-					if (Version.InRange(1, 2147483647)) 
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						SynonymsCollection = await reader.ReadAsync(() => new DescribeConfigsSynonym(Version), cancellationToken);
+						instance.SynonymsCollection = await reader.ReadAsync(async () => await DescribeConfigsSynonym.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -11343,20 +11483,22 @@ namespace Kafka.Protocol
 
 					internal int Version { get; }
 
-					public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+					public static async ValueTask<DescribeConfigsSynonym> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(1, 2147483647)) 
+						var instance = new DescribeConfigsSynonym(version);
+						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							Name = new String(await reader.ReadStringAsync(cancellationToken));
+							instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 						}
-						if (Version.InRange(1, 2147483647)) 
+						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+							instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 						}
-						if (Version.InRange(1, 2147483647)) 
+						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							Source = new Int8(await reader.ReadInt8Async(cancellationToken));
+							instance.Source = new Int8(await reader.ReadInt8Async(cancellationToken));
 						}
+						return instance;
 					}
 
 					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -11483,12 +11625,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeDelegationTokenRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeDelegationTokenRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				OwnersCollection = await reader.ReadAsync(() => new DescribeDelegationTokenOwner(Version), cancellationToken);
+				instance.OwnersCollection = await reader.ReadAsync(async () => await DescribeDelegationTokenOwner.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -11545,16 +11689,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeDelegationTokenOwner> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DescribeDelegationTokenOwner(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -11645,20 +11791,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeDelegationTokenResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeDelegationTokenResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TokensCollection = await reader.ReadAsync(() => new DescribedDelegationToken(Version), cancellationToken);
+				instance.TokensCollection = await reader.ReadAsync(async () => await DescribedDelegationToken.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -11751,40 +11899,42 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribedDelegationToken> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DescribedDelegationToken(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					IssueTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.IssueTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ExpiryTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.ExpiryTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					MaxTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.MaxTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TokenId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TokenId = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+					instance.Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					RenewersCollection = await reader.ReadAsync(() => new DescribedDelegationTokenRenewer(Version), cancellationToken);
+					instance.RenewersCollection = await reader.ReadAsync(async () => await DescribedDelegationTokenRenewer.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -12071,16 +12221,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DescribedDelegationTokenRenewer> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new DescribedDelegationTokenRenewer(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -12201,16 +12353,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeGroupsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeGroupsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupsCollection = await reader.ReadAsync(() => new String(), cancellationToken);
+				instance.GroupsCollection = await reader.ReadAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(3, 2147483647)) 
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				IncludeAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.IncludeAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -12300,16 +12454,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeGroupsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new DescribeGroupsResponse(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupsCollection = await reader.ReadAsync(() => new DescribedGroup(Version), cancellationToken);
+				instance.GroupsCollection = await reader.ReadAsync(async () => await DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -12393,36 +12549,38 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribedGroup> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DescribedGroup(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					GroupState = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.GroupState = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ProtocolData = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ProtocolData = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					MembersCollection = await reader.ReadAsync(() => new DescribedGroupMember(Version), cancellationToken);
+					instance.MembersCollection = await reader.ReadAsync(async () => await DescribedGroupMember.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
-				if (Version.InRange(3, 2147483647)) 
+				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					AuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.AuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -12647,32 +12805,34 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DescribedGroupMember> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new DescribedGroupMember(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(4, 2147483647)) 
+					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ClientId = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.ClientId = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ClientHost = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.ClientHost = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						MemberMetadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+						instance.MemberMetadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						MemberAssignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+						instance.MemberAssignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -12926,12 +13086,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeLogDirsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeLogDirsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new DescribableLogDirTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -12988,16 +13150,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribableLogDirTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DescribableLogDirTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Topic = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Topic = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionIndexCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.PartitionIndexCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -13088,16 +13252,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<DescribeLogDirsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new DescribeLogDirsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResultsCollection = await reader.ReadAsync(() => new DescribeLogDirsResult(Version), cancellationToken);
+				instance.ResultsCollection = await reader.ReadAsync(async () => await DescribeLogDirsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -13186,20 +13352,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeLogDirsResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new DescribeLogDirsResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					LogDir = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.LogDir = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TopicsCollection = await reader.ReadAsync(() => new DescribeLogDirsTopic(Version), cancellationToken);
+					instance.TopicsCollection = await reader.ReadAsync(async () => await DescribeLogDirsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -13321,16 +13489,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DescribeLogDirsTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new DescribeLogDirsTopic(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionsCollection = await reader.ReadAsync(() => new DescribeLogDirsPartition(Version), cancellationToken);
+						instance.PartitionsCollection = await reader.ReadAsync(async () => await DescribeLogDirsPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -13416,24 +13586,26 @@ namespace Kafka.Protocol
 
 					internal int Version { get; }
 
-					public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+					public static async ValueTask<DescribeLogDirsPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
+						var instance = new DescribeLogDirsPartition(version);
+						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+							instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 						}
-						if (Version.InRange(0, 2147483647)) 
+						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							PartitionSize = new Int64(await reader.ReadInt64Async(cancellationToken));
+							instance.PartitionSize = new Int64(await reader.ReadInt64Async(cancellationToken));
 						}
-						if (Version.InRange(0, 2147483647)) 
+						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							OffsetLag = new Int64(await reader.ReadInt64Async(cancellationToken));
+							instance.OffsetLag = new Int64(await reader.ReadInt64Async(cancellationToken));
 						}
-						if (Version.InRange(0, 2147483647)) 
+						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							IsFutureKey = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+							instance.IsFutureKey = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 						}
+						return instance;
 					}
 
 					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -13592,20 +13764,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ElectLeadersRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new ElectLeadersRequest(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ElectionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.ElectionType = new Int8(await reader.ReadInt8Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicPartitionsCollection = await reader.ReadAsync(() => new TopicPartitions(Version), cancellationToken);
+				instance.TopicPartitionsCollection = await reader.ReadAsync(async () => await TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -13699,16 +13873,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TopicPartitions> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new TopicPartitions(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Topic = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Topic = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionIdCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.PartitionIdCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -13828,20 +14004,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ElectLeadersResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ElectLeadersResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ReplicaElectionResultsCollection = await reader.ReadAsync(() => new ReplicaElectionResult(Version), cancellationToken);
+				instance.ReplicaElectionResultsCollection = await reader.ReadAsync(async () => await ReplicaElectionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -13963,16 +14141,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ReplicaElectionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new ReplicaElectionResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Topic = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Topic = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionResultCollection = await reader.ReadAsync(() => new PartitionResult(Version), cancellationToken);
+					instance.PartitionResultCollection = await reader.ReadAsync(async () => await PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -14061,20 +14241,22 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<PartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new PartitionResult(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionId = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionId = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -14200,24 +14382,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<EndTxnRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new EndTxnRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Committed = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.Committed = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -14373,16 +14557,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<EndTxnResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new EndTxnResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -14472,16 +14658,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ExpireDelegationTokenRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ExpireDelegationTokenRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ExpiryTimePeriodMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ExpiryTimePeriodMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -14571,20 +14759,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ExpireDelegationTokenResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ExpireDelegationTokenResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -14707,48 +14897,50 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<FetchRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new FetchRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MaxWait = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.MaxWait = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MinBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.MinBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(3, 2147483647)) 
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				MaxBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.MaxBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(4, 2147483647)) 
+			if (instance.Version.InRange(4, 2147483647)) 
 			{
-				IsolationLevel = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.IsolationLevel = new Int8(await reader.ReadInt8Async(cancellationToken));
 			}
-			if (Version.InRange(7, 2147483647)) 
+			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				SessionId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.SessionId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(7, 2147483647)) 
+			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				Epoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.Epoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new FetchableTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await FetchableTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(7, 2147483647)) 
+			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				ForgottenCollection = await reader.ReadAsync(() => new ForgottenTopic(Version), cancellationToken);
+				instance.ForgottenCollection = await reader.ReadAsync(async () => await ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(11, 2147483647)) 
+			if (instance.Version.InRange(11, 2147483647)) 
 			{
-				RackId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.RackId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -15038,16 +15230,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<FetchableTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new FetchableTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					FetchPartitionsCollection = await reader.ReadAsync(() => new FetchPartition(Version), cancellationToken);
+					instance.FetchPartitionsCollection = await reader.ReadAsync(async () => await FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -15136,28 +15330,30 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<FetchPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new FetchPartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(9, 2147483647)) 
+					if (instance.Version.InRange(9, 2147483647)) 
 					{
-						CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						FetchOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.FetchOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(5, 2147483647)) 
+					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						MaxBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.MaxBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -15371,16 +15567,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ForgottenTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(7, 2147483647)) 
+				var instance = new ForgottenTopic(version);
+				if (instance.Version.InRange(7, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(7, 2147483647)) 
+				if (instance.Version.InRange(7, 2147483647)) 
 				{
-					ForgottenPartitionIndexesCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.ForgottenPartitionIndexesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -15495,24 +15693,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<FetchResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new FetchResponse(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(7, 2147483647)) 
+			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(7, 2147483647)) 
+			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				SessionId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.SessionId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new FetchableTopicResponse(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await FetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -15662,16 +15862,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<FetchableTopicResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new FetchableTopicResponse(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new FetchablePartitionResponse(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await FetchablePartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -15760,40 +15962,42 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<FetchablePartitionResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new FetchablePartitionResponse(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						HighWatermark = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.HighWatermark = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(4, 2147483647)) 
+					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						LastStableOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LastStableOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(5, 2147483647)) 
+					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(4, 2147483647)) 
+					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						AbortedCollection = await reader.ReadAsync(() => new AbortedTransaction(Version), cancellationToken);
+						instance.AbortedCollection = await reader.ReadAsync(async () => await AbortedTransaction.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 					}
-					if (Version.InRange(11, 2147483647)) 
+					if (instance.Version.InRange(11, 2147483647)) 
 					{
-						PreferredReadReplica = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PreferredReadReplica = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Records = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+						instance.Records = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -16013,16 +16217,18 @@ namespace Kafka.Protocol
 
 					internal int Version { get; }
 
-					public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+					public static async ValueTask<AbortedTransaction> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(4, 2147483647)) 
+						var instance = new AbortedTransaction(version);
+						if (instance.Version.InRange(4, 2147483647)) 
 						{
-							ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+							instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
 						}
-						if (Version.InRange(4, 2147483647)) 
+						if (instance.Version.InRange(4, 2147483647)) 
 						{
-							FirstOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+							instance.FirstOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 						}
+						return instance;
 					}
 
 					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -16169,16 +16375,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<FindCoordinatorRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new FindCoordinatorRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Key = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.Key = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				KeyType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.KeyType = new Int8(await reader.ReadInt8Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -16268,32 +16476,34 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<FindCoordinatorResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new FindCoordinatorResponse(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				NodeId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.NodeId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Host = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.Port = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -16506,24 +16716,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<HeartbeatRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new HeartbeatRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(3, 2147483647)) 
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -16680,16 +16892,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<HeartbeatResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new HeartbeatResponse(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -16774,16 +16988,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<IncrementalAlterConfigsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new IncrementalAlterConfigsRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResourcesCollection = (await reader.ReadAsync(() => new AlterConfigsResource(Version), cancellationToken)).ToDictionary(field => field.ResourceType);
+				instance.ResourcesCollection = (await reader.ReadAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.ResourceType);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -16843,20 +17059,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterConfigsResource> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new AlterConfigsResource(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ConfigsCollection = (await reader.ReadAsync(() => new AlterableConfig(Version), cancellationToken)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = (await reader.ReadAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -16978,20 +17196,22 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AlterableConfig> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new AlterableConfig(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ConfigOperation = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.ConfigOperation = new Int8(await reader.ReadInt8Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -17146,16 +17366,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<IncrementalAlterConfigsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new IncrementalAlterConfigsResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResponsesCollection = await reader.ReadAsync(() => new AlterConfigsResourceResponse(Version), cancellationToken);
+				instance.ResponsesCollection = await reader.ReadAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -17244,24 +17466,26 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new AlterConfigsResourceResponse(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -17419,16 +17643,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<InitProducerIdRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new InitProducerIdRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TransactionalId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.TransactionalId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TransactionTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TransactionTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -17519,24 +17745,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<InitProducerIdResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new InitProducerIdResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -17687,36 +17915,38 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<JoinGroupRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new JoinGroupRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				SessionTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.SessionTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				RebalanceTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.RebalanceTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(5, 2147483647)) 
+			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProtocolsCollection = (await reader.ReadAsync(() => new JoinGroupRequestProtocol(Version), cancellationToken)).ToDictionary(field => field.Name);
+				instance.ProtocolsCollection = (await reader.ReadAsync(async () => await JoinGroupRequestProtocol.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -17966,16 +18196,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<JoinGroupRequestProtocol> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new JoinGroupRequestProtocol(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Metadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+					instance.Metadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -18066,36 +18298,38 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<JoinGroupResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(2, 2147483647)) 
+			var instance = new JoinGroupResponse(version);
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProtocolName = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.ProtocolName = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Leader = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.Leader = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MembersCollection = await reader.ReadAsync(() => new JoinGroupResponseMember(Version), cancellationToken);
+				instance.MembersCollection = await reader.ReadAsync(async () => await JoinGroupResponseMember.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -18341,20 +18575,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<JoinGroupResponseMember> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new JoinGroupResponseMember(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(5, 2147483647)) 
+				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Metadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+					instance.Metadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -18479,32 +18715,34 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<LeaderAndIsrRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new LeaderAndIsrRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(2, 2147483647)) 
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 1)) 
+			if (instance.Version.InRange(0, 1)) 
 			{
-				PartitionStatesV0Collection = await reader.ReadAsync(() => new LeaderAndIsrRequestPartition(Version), cancellationToken);
+				instance.PartitionStatesV0Collection = await reader.ReadAsync(async () => await LeaderAndIsrRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(2, 2147483647)) 
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				TopicStatesCollection = await reader.ReadAsync(() => new LeaderAndIsrRequestTopicState(Version), cancellationToken);
+				instance.TopicStatesCollection = await reader.ReadAsync(async () => await LeaderAndIsrRequestTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				LiveLeadersCollection = await reader.ReadAsync(() => new LeaderAndIsrLiveLeader(Version), cancellationToken);
+				instance.LiveLeadersCollection = await reader.ReadAsync(async () => await LeaderAndIsrLiveLeader.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -18691,16 +18929,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<LeaderAndIsrRequestTopicState> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(2, 2147483647)) 
+				var instance = new LeaderAndIsrRequestTopicState(version);
+				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(2, 2147483647)) 
+				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					PartitionStatesV0Collection = await reader.ReadAsync(() => new LeaderAndIsrRequestPartition(Version), cancellationToken);
+					instance.PartitionStatesV0Collection = await reader.ReadAsync(async () => await LeaderAndIsrRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -18819,20 +19059,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<LeaderAndIsrLiveLeader> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new LeaderAndIsrLiveLeader(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					BrokerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.BrokerId = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					HostName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.HostName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Port = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -18953,44 +19195,46 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<LeaderAndIsrRequestPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 1)) 
+				var instance = new LeaderAndIsrRequestPartition(version);
+				if (instance.Version.InRange(0, 1)) 
 				{
-					TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					LeaderKey = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.LeaderKey = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					IsrReplicasCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.IsrReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ZkVersion = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.ZkVersion = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ReplicasCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.ReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					IsNew = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+					instance.IsNew = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -19307,16 +19551,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<LeaderAndIsrResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new LeaderAndIsrResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				PartitionsCollection = await reader.ReadAsync(() => new LeaderAndIsrResponsePartition(Version), cancellationToken);
+				instance.PartitionsCollection = await reader.ReadAsync(async () => await LeaderAndIsrResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -19405,20 +19651,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<LeaderAndIsrResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new LeaderAndIsrResponsePartition(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -19542,16 +19790,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<LeaveGroupRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new LeaveGroupRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -19641,16 +19891,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<LeaveGroupResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new LeaveGroupResponse(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -19735,9 +19987,11 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ListGroupsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
+			var instance = new ListGroupsRequest(version);
 
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -19762,20 +20016,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ListGroupsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new ListGroupsResponse(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupsCollection = await reader.ReadAsync(() => new ListedGroup(Version), cancellationToken);
+				instance.GroupsCollection = await reader.ReadAsync(async () => await ListedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -19892,16 +20148,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ListedGroup> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new ListedGroup(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -19992,20 +20250,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ListOffsetRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ListOffsetRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(2, 2147483647)) 
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				IsolationLevel = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.IsolationLevel = new Int8(await reader.ReadInt8Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new ListOffsetTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await ListOffsetTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -20127,16 +20387,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ListOffsetTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new ListOffsetTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new ListOffsetPartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await ListOffsetPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -20225,24 +20487,26 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<ListOffsetPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new ListOffsetPartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(4, 2147483647)) 
+					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Timestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.Timestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(0, 0)) 
+					if (instance.Version.InRange(0, 0)) 
 					{
-						MaxNumOffsets = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.MaxNumOffsets = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -20400,16 +20664,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ListOffsetResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(2, 2147483647)) 
+			var instance = new ListOffsetResponse(version);
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new ListOffsetTopicResponse(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await ListOffsetTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -20493,16 +20759,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ListOffsetTopicResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new ListOffsetTopicResponse(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new ListOffsetPartitionResponse(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await ListOffsetPartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -20591,32 +20859,34 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<ListOffsetPartitionResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new ListOffsetPartitionResponse(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
-					if (Version.InRange(0, 0)) 
+					if (instance.Version.InRange(0, 0)) 
 					{
-						OldStyleOffsetsCollection = await reader.ReadAsync(() => new Int64(), cancellationToken);
+						instance.OldStyleOffsetsCollection = await reader.ReadAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
-					if (Version.InRange(1, 2147483647)) 
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						Timestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.Timestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(1, 2147483647)) 
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						Offset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.Offset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(4, 2147483647)) 
+					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -20837,24 +21107,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<MetadataRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new MetadataRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new MetadataRequestTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await MetadataRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(4, 2147483647)) 
+			if (instance.Version.InRange(4, 2147483647)) 
 			{
-				AllowAutoTopicCreation = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.AllowAutoTopicCreation = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
-			if (Version.InRange(8, 2147483647)) 
+			if (instance.Version.InRange(8, 2147483647)) 
 			{
-				IncludeClusterAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.IncludeClusterAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
-			if (Version.InRange(8, 2147483647)) 
+			if (instance.Version.InRange(8, 2147483647)) 
 			{
-				IncludeTopicAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.IncludeTopicAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -20923,12 +21195,14 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<MetadataRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new MetadataRequestTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -21073,32 +21347,34 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<MetadataResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
+			var instance = new MetadataResponse(version);
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				BrokersCollection = (await reader.ReadAsync(() => new MetadataResponseBroker(Version), cancellationToken)).ToDictionary(field => field.NodeId);
+				instance.BrokersCollection = (await reader.ReadAsync(async () => await MetadataResponseBroker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.NodeId);
 			}
-			if (Version.InRange(2, 2147483647)) 
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				ClusterId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ClusterId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = (await reader.ReadAsync(() => new MetadataResponseTopic(Version), cancellationToken)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = (await reader.ReadAsync(async () => await MetadataResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
-			if (Version.InRange(8, 2147483647)) 
+			if (instance.Version.InRange(8, 2147483647)) 
 			{
-				ClusterAuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ClusterAuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -21203,24 +21479,26 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<MetadataResponseBroker> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new MetadataResponseBroker(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					NodeId = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.NodeId = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Host = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Port = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					Rack = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.Rack = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -21450,28 +21728,30 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<MetadataResponseTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new MetadataResponseTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					IsInternal = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+					instance.IsInternal = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new MetadataResponsePartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await MetadataResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
-				if (Version.InRange(8, 2147483647)) 
+				if (instance.Version.InRange(8, 2147483647)) 
 				{
-					TopicAuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.TopicAuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -21625,36 +21905,38 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<MetadataResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new MetadataResponsePartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						LeaderId = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderId = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(7, 2147483647)) 
+					if (instance.Version.InRange(7, 2147483647)) 
 					{
-						LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ReplicaNodesCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+						instance.ReplicaNodesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						IsrNodesCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+						instance.IsrNodesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
-					if (Version.InRange(5, 2147483647)) 
+					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						OfflineReplicasCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+						instance.OfflineReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -21959,32 +22241,34 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<OffsetCommitRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new OffsetCommitRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(7, 2147483647)) 
+			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(2, 4)) 
+			if (instance.Version.InRange(2, 4)) 
 			{
-				RetentionTimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.RetentionTimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new OffsetCommitRequestTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -22191,16 +22475,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetCommitRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new OffsetCommitRequestTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new OffsetCommitRequestPartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -22289,28 +22575,30 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetCommitRequestPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new OffsetCommitRequestPartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(6, 2147483647)) 
+					if (instance.Version.InRange(6, 2147483647)) 
 					{
-						CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(1, 1)) 
+					if (instance.Version.InRange(1, 1)) 
 					{
-						CommitTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.CommitTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						CommittedMetadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.CommittedMetadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -22497,16 +22785,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<OffsetCommitResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
+			var instance = new OffsetCommitResponse(version);
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new OffsetCommitResponseTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -22590,16 +22880,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetCommitResponseTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new OffsetCommitResponseTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new OffsetCommitResponsePartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -22688,16 +22980,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetCommitResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new OffsetCommitResponsePartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -22789,16 +23083,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<OffsetFetchRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new OffsetFetchRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new OffsetFetchRequestTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetFetchRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -22888,16 +23184,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetFetchRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new OffsetFetchRequestTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionIndexesCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.PartitionIndexesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -22988,20 +23286,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<OffsetFetchResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
+			var instance = new OffsetFetchResponse(version);
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new OffsetFetchResponseTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetFetchResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(2, 2147483647)) 
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -23089,16 +23389,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetFetchResponseTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new OffsetFetchResponseTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new OffsetFetchResponsePartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetFetchResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -23187,28 +23489,30 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetFetchResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new OffsetFetchResponsePartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(5, 2147483647)) 
+					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Metadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Metadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -23429,16 +23733,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<OffsetForLeaderEpochRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
+			var instance = new OffsetForLeaderEpochRequest(version);
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new OffsetForLeaderTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetForLeaderTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -23522,16 +23828,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetForLeaderTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new OffsetForLeaderTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new OffsetForLeaderPartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetForLeaderPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -23620,20 +23928,22 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetForLeaderPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new OffsetForLeaderPartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(2, 2147483647)) 
+					if (instance.Version.InRange(2, 2147483647)) 
 					{
-						CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -23753,16 +24063,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<OffsetForLeaderEpochResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(2, 2147483647)) 
+			var instance = new OffsetForLeaderEpochResponse(version);
+			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new OffsetForLeaderTopicResult(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetForLeaderTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -23846,16 +24158,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetForLeaderTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new OffsetForLeaderTopicResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new OffsetForLeaderPartitionResult(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetForLeaderPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -23944,24 +24258,26 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetForLeaderPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new OffsetForLeaderPartitionResult(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(1, 2147483647)) 
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						EndOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.EndOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -24114,24 +24430,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ProduceRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
+			var instance = new ProduceRequest(version);
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				TransactionalId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.TransactionalId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Acks = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.Acks = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new TopicProduceData(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await TopicProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -24287,16 +24605,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TopicProduceData> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new TopicProduceData(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new PartitionProduceData(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await PartitionProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -24385,16 +24705,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<PartitionProduceData> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new PartitionProduceData(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Records = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+						instance.Records = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -24487,16 +24809,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ProduceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ProduceResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ResponsesCollection = await reader.ReadAsync(() => new TopicProduceResponse(Version), cancellationToken);
+				instance.ResponsesCollection = await reader.ReadAsync(async () => await TopicProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -24556,16 +24880,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TopicProduceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new TopicProduceResponse(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new PartitionProduceResponse(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await PartitionProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -24654,28 +24980,30 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<PartitionProduceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new PartitionProduceResponse(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						BaseOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.BaseOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(2, 2147483647)) 
+					if (instance.Version.InRange(2, 2147483647)) 
 					{
-						LogAppendTimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LogAppendTimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(5, 2147483647)) 
+					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -24880,16 +25208,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<RenewDelegationTokenRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new RenewDelegationTokenRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				RenewPeriodMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.RenewPeriodMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -24979,20 +25309,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<RenewDelegationTokenResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new RenewDelegationTokenResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -25115,24 +25447,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<RequestHeader> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new RequestHeader(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				RequestApiKey = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.RequestApiKey = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				RequestApiVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.RequestApiVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				CorrelationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.CorrelationId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ClientId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.ClientId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -25288,12 +25622,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<ResponseHeader> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new ResponseHeader(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				CorrelationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.CorrelationId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -25350,12 +25686,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<SaslAuthenticateRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new SaslAuthenticateRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				AuthBytes = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.AuthBytes = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -25412,24 +25750,26 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<SaslAuthenticateResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new SaslAuthenticateResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				AuthBytes = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.AuthBytes = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				SessionLifetimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.SessionLifetimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -25586,12 +25926,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<SaslHandshakeRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new SaslHandshakeRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Mechanism = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.Mechanism = new String(await reader.ReadStringAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -25648,16 +25990,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<SaslHandshakeResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new SaslHandshakeResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MechanismsCollection = await reader.ReadAsync(() => new String(), cancellationToken);
+				instance.MechanismsCollection = await reader.ReadAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -25747,32 +26091,34 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<StopReplicaRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new StopReplicaRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				DeletePartitions = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.DeletePartitions = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 0)) 
+			if (instance.Version.InRange(0, 0)) 
 			{
-				PartitionsV0Collection = await reader.ReadAsync(() => new StopReplicaRequestPartitionV0(Version), cancellationToken);
+				instance.PartitionsV0Collection = await reader.ReadAsync(async () => await StopReplicaRequestPartitionV0.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(1, 2147483647)) 
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new StopReplicaRequestTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await StopReplicaRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -25959,16 +26305,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<StopReplicaRequestPartitionV0> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 0)) 
+				var instance = new StopReplicaRequestPartitionV0(version);
+				if (instance.Version.InRange(0, 0)) 
 				{
-					TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 0)) 
+				if (instance.Version.InRange(0, 0)) 
 				{
-					PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -26087,16 +26435,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<StopReplicaRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(1, 2147483647)) 
+				var instance = new StopReplicaRequestTopic(version);
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					PartitionIndexesCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.PartitionIndexesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -26187,16 +26537,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<StopReplicaResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new StopReplicaResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				PartitionsCollection = await reader.ReadAsync(() => new StopReplicaResponsePartition(Version), cancellationToken);
+				instance.PartitionsCollection = await reader.ReadAsync(async () => await StopReplicaResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -26285,20 +26637,22 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<StopReplicaResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new StopReplicaResponsePartition(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -26422,28 +26776,30 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<SyncGroupRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new SyncGroupRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(3, 2147483647)) 
+			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				AssignmentsCollection = await reader.ReadAsync(() => new SyncGroupRequestAssignment(Version), cancellationToken);
+				instance.AssignmentsCollection = await reader.ReadAsync(async () => await SyncGroupRequestAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -26632,16 +26988,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<SyncGroupRequestAssignment> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new SyncGroupRequestAssignment(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Assignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+					instance.Assignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -26732,20 +27090,22 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<SyncGroupResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
+			var instance = new SyncGroupResponse(version);
+			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				Assignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.Assignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -26863,28 +27223,30 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<TxnOffsetCommitRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new TxnOffsetCommitRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new TxnOffsetCommitRequestTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await TxnOffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -27072,16 +27434,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TxnOffsetCommitRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new TxnOffsetCommitRequestTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new TxnOffsetCommitRequestPartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await TxnOffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -27170,24 +27534,26 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<TxnOffsetCommitRequestPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new TxnOffsetCommitRequestPartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
 					}
-					if (Version.InRange(2, 2147483647)) 
+					if (instance.Version.InRange(2, 2147483647)) 
 					{
-						CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						CommittedMetadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.CommittedMetadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -27341,16 +27707,18 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<TxnOffsetCommitResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new TxnOffsetCommitResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				TopicsCollection = await reader.ReadAsync(() => new TxnOffsetCommitResponseTopic(Version), cancellationToken);
+				instance.TopicsCollection = await reader.ReadAsync(async () => await TxnOffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -27439,16 +27807,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TxnOffsetCommitResponseTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new TxnOffsetCommitResponseTopic(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionsCollection = await reader.ReadAsync(() => new TxnOffsetCommitResponsePartition(Version), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadAsync(async () => await TxnOffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -27537,16 +27907,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<TxnOffsetCommitResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new TxnOffsetCommitResponsePartition(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -27638,32 +28010,34 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<UpdateMetadataRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new UpdateMetadataRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 			}
-			if (Version.InRange(5, 2147483647)) 
+			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
 			}
-			if (Version.InRange(0, 4)) 
+			if (instance.Version.InRange(0, 4)) 
 			{
-				LegacyPartitionStatesCollection = await reader.ReadAsync(() => new UpdateMetadataPartitionState(Version), cancellationToken);
+				instance.LegacyPartitionStatesCollection = await reader.ReadAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(5, 2147483647)) 
+			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				TopicStatesCollection = await reader.ReadAsync(() => new UpdateMetadataRequestTopicState(Version), cancellationToken);
+				instance.TopicStatesCollection = await reader.ReadAsync(async () => await UpdateMetadataRequestTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
-			if (Version.InRange(0, 2147483647)) 
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				BrokersCollection = await reader.ReadAsync(() => new UpdateMetadataRequestBroker(Version), cancellationToken);
+				instance.BrokersCollection = await reader.ReadAsync(async () => await UpdateMetadataRequestBroker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -27850,16 +28224,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<UpdateMetadataRequestTopicState> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(5, 2147483647)) 
+				var instance = new UpdateMetadataRequestTopicState(version);
+				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(5, 2147483647)) 
+				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					PartitionStatesCollection = await reader.ReadAsync(() => new UpdateMetadataPartitionState(Version), cancellationToken);
+					instance.PartitionStatesCollection = await reader.ReadAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -27975,28 +28351,30 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<UpdateMetadataRequestBroker> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new UpdateMetadataRequestBroker(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Id = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Id = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 0)) 
+				if (instance.Version.InRange(0, 0)) 
 				{
-					V0Host = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.V0Host = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 0)) 
+				if (instance.Version.InRange(0, 0)) 
 				{
-					V0Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.V0Port = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(1, 2147483647)) 
+				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					EndpointsCollection = await reader.ReadAsync(() => new UpdateMetadataRequestEndpoint(Version), cancellationToken);
+					instance.EndpointsCollection = await reader.ReadAsync(async () => await UpdateMetadataRequestEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
-				if (Version.InRange(2, 2147483647)) 
+				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					Rack = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.Rack = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -28145,24 +28523,26 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<UpdateMetadataRequestEndpoint> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(1, 2147483647)) 
+					var instance = new UpdateMetadataRequestEndpoint(version);
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.Port = new Int32(await reader.ReadInt32Async(cancellationToken));
 					}
-					if (Version.InRange(1, 2147483647)) 
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						Host = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(3, 2147483647)) 
+					if (instance.Version.InRange(3, 2147483647)) 
 					{
-						Listener = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Listener = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(1, 2147483647)) 
+					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						SecurityProtocol = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.SecurityProtocol = new Int16(await reader.ReadInt16Async(cancellationToken));
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -28342,44 +28722,46 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<UpdateMetadataPartitionState> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 4)) 
+				var instance = new UpdateMetadataPartitionState(version);
+				if (instance.Version.InRange(0, 4)) 
 				{
-					TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					Leader = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Leader = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					IsrCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.IsrCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ZkVersion = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.ZkVersion = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ReplicasCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.ReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
-				if (Version.InRange(4, 2147483647)) 
+				if (instance.Version.InRange(4, 2147483647)) 
 				{
-					OfflineReplicasCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+					instance.OfflineReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -28701,12 +29083,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<UpdateMetadataResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new UpdateMetadataResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -28763,12 +29147,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<WriteTxnMarkersRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new WriteTxnMarkersRequest(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MarkersCollection = await reader.ReadAsync(() => new WritableTxnMarker(Version), cancellationToken);
+				instance.MarkersCollection = await reader.ReadAsync(async () => await WritableTxnMarker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -28824,28 +29210,30 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<WritableTxnMarker> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new WritableTxnMarker(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TransactionResult = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+					instance.TransactionResult = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TopicsCollection = await reader.ReadAsync(() => new WritableTxnMarkerTopic(Version), cancellationToken);
+					instance.TopicsCollection = await reader.ReadAsync(async () => await WritableTxnMarkerTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					CoordinatorEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.CoordinatorEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -29004,16 +29392,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<WritableTxnMarkerTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new WritableTxnMarkerTopic(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionIndexesCollection = await reader.ReadAsync(() => new Int32(), cancellationToken);
+						instance.PartitionIndexesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -29134,12 +29524,14 @@ namespace Kafka.Protocol
 
 		public override int Version { get; }
 
-		public override async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static async ValueTask<WriteTxnMarkersResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
+			var instance = new WriteTxnMarkersResponse(version);
+			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				MarkersCollection = await reader.ReadAsync(() => new WritableTxnMarkerResult(Version), cancellationToken);
+				instance.MarkersCollection = await reader.ReadAsync(async () => await WritableTxnMarkerResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
+			return instance;
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -29195,16 +29587,18 @@ namespace Kafka.Protocol
 
 			internal int Version { get; }
 
-			public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<WritableTxnMarkerResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
+				var instance = new WritableTxnMarkerResult(version);
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
 				}
-				if (Version.InRange(0, 2147483647)) 
+				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					TopicsCollection = await reader.ReadAsync(() => new WritableTxnMarkerTopicResult(Version), cancellationToken);
+					instance.TopicsCollection = await reader.ReadAsync(async () => await WritableTxnMarkerTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
+				return instance;
 			}
 
 			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -29293,16 +29687,18 @@ namespace Kafka.Protocol
 
 				internal int Version { get; }
 
-				public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<WritableTxnMarkerTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
+					var instance = new WritableTxnMarkerTopicResult(version);
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
 					}
-					if (Version.InRange(0, 2147483647)) 
+					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						PartitionsCollection = await reader.ReadAsync(() => new WritableTxnMarkerPartitionResult(Version), cancellationToken);
+						instance.PartitionsCollection = await reader.ReadAsync(async () => await WritableTxnMarkerPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 					}
+					return instance;
 				}
 
 				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -29391,16 +29787,18 @@ namespace Kafka.Protocol
 
 					internal int Version { get; }
 
-					public async ValueTask ReadFromAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+					public static async ValueTask<WritableTxnMarkerPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
+						var instance = new WritableTxnMarkerPartitionResult(version);
+						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+							instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
 						}
-						if (Version.InRange(0, 2147483647)) 
+						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+							instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
 						}
+						return instance;
 					}
 
 					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
