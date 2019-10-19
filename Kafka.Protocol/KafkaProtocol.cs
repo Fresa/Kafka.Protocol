@@ -12,9 +12,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct Boolean : ISerialize 
 	{
-		public System.Boolean Value { get; }
+		public bool Value { get; }
 
-		public Boolean(System.Boolean value)
+		public Boolean(bool value)
 		{
 			Value = value;
 		}
@@ -49,17 +49,17 @@ namespace Kafka.Protocol
 			await writer.WriteBooleanAsync(Value, cancellationToken);
 		}
 
-		public static Boolean From(System.Boolean value)
+		public static Boolean From(bool value)
 		{
 			return new Boolean(value);
 		}
 
 		public static async ValueTask<Boolean> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadBooleanAsync(cancellationToken);return new Boolean(value);
+			return From(await reader.ReadBooleanAsync(cancellationToken));
 		}
 
-		public static Boolean Default => Boolean.From(default);
+		public static Boolean Default => From(default);
 	}
 
 	/// <summary>
@@ -111,10 +111,10 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Int8> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadInt8Async(cancellationToken);return new Int8(value);
+			return From(await reader.ReadInt8Async(cancellationToken));
 		}
 
-		public static Int8 Default => Int8.From(default);
+		public static Int8 Default => From(default);
 	}
 
 	/// <summary>
@@ -166,10 +166,10 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Int16> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadInt16Async(cancellationToken);return new Int16(value);
+			return From(await reader.ReadInt16Async(cancellationToken));
 		}
 
-		public static Int16 Default => Int16.From(default);
+		public static Int16 Default => From(default);
 	}
 
 	/// <summary>
@@ -177,9 +177,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct Int32 : ISerialize 
 	{
-		public System.Int32 Value { get; }
+		public int Value { get; }
 
-		public Int32(System.Int32 value)
+		public Int32(int value)
 		{
 			Value = value;
 		}
@@ -214,17 +214,17 @@ namespace Kafka.Protocol
 			await writer.WriteInt32Async(Value, cancellationToken);
 		}
 
-		public static Int32 From(System.Int32 value)
+		public static Int32 From(int value)
 		{
 			return new Int32(value);
 		}
 
 		public static async ValueTask<Int32> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadInt32Async(cancellationToken);return new Int32(value);
+			return From(await reader.ReadInt32Async(cancellationToken));
 		}
 
-		public static Int32 Default => Int32.From(default);
+		public static Int32 Default => From(default);
 	}
 
 	/// <summary>
@@ -276,10 +276,10 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Int64> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadInt64Async(cancellationToken);return new Int64(value);
+			return From(await reader.ReadInt64Async(cancellationToken));
 		}
 
-		public static Int64 Default => Int64.From(default);
+		public static Int64 Default => From(default);
 	}
 
 	/// <summary>
@@ -331,10 +331,10 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<UInt32> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadUInt32Async(cancellationToken);return new UInt32(value);
+			return From(await reader.ReadUInt32Async(cancellationToken));
 		}
 
-		public static UInt32 Default => UInt32.From(default);
+		public static UInt32 Default => From(default);
 	}
 
 	/// <summary>
@@ -342,9 +342,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct VarInt : ISerialize 
 	{
-		public System.Int32 Value { get; }
+		public int Value { get; }
 
-		public VarInt(System.Int32 value)
+		public VarInt(int value)
 		{
 			Value = value;
 		}
@@ -379,17 +379,17 @@ namespace Kafka.Protocol
 			await writer.WriteVarIntAsync(Value, cancellationToken);
 		}
 
-		public static VarInt From(System.Int32 value)
+		public static VarInt From(int value)
 		{
 			return new VarInt(value);
 		}
 
 		public static async ValueTask<VarInt> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadVarIntAsync(cancellationToken);return new VarInt(value);
+			return From(await reader.ReadVarIntAsync(cancellationToken));
 		}
 
-		public static VarInt Default => VarInt.From(default);
+		public static VarInt Default => From(default);
 	}
 
 	/// <summary>
@@ -441,10 +441,10 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<VarLong> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadVarLongAsync(cancellationToken);return new VarLong(value);
+			return From(await reader.ReadVarLongAsync(cancellationToken));
 		}
 
-		public static VarLong Default => VarLong.From(default);
+		public static VarLong Default => From(default);
 	}
 
 	/// <summary>
@@ -452,9 +452,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct String : ISerialize 
 	{
-		public System.String Value { get; }
+		public string Value { get; }
 
-		public String(System.String value)
+		public String(string value)
 		{
 			Value = value;
 		}
@@ -489,17 +489,17 @@ namespace Kafka.Protocol
 			await writer.WriteStringAsync(Value, cancellationToken);
 		}
 
-		public static String From(System.String value)
+		public static String From(string value)
 		{
 			return new String(value);
 		}
 
 		public static async ValueTask<String> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadStringAsync(cancellationToken);return new String(value);
+			return From(await reader.ReadStringAsync(cancellationToken));
 		}
 
-		public static String Default => String.From(System.String.Empty);
+		public static String Default => From(string.Empty);
 	}
 
 	/// <summary>
@@ -507,9 +507,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct NullableString : ISerialize 
 	{
-		public System.String? Value { get; }
+		public string? Value { get; }
 
-		public NullableString(System.String? value)
+		public NullableString(string? value)
 		{
 			Value = value;
 		}
@@ -544,17 +544,17 @@ namespace Kafka.Protocol
 			await writer.WriteNullableStringAsync(Value, cancellationToken);
 		}
 
-		public static NullableString From(System.String? value)
+		public static NullableString From(string? value)
 		{
 			return new NullableString(value);
 		}
 
 		public static async ValueTask<NullableString> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadNullableStringAsync(cancellationToken);return new NullableString(value);
+			return From(await reader.ReadNullableStringAsync(cancellationToken));
 		}
 
-		public static NullableString Default => NullableString.From(System.String.Empty);
+		public static NullableString Default => From(string.Empty);
 	}
 
 	/// <summary>
@@ -562,9 +562,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct Bytes : ISerialize 
 	{
-		public System.Byte[] Value { get; }
+		public byte[] Value { get; }
 
-		public Bytes(System.Byte[] value)
+		public Bytes(byte[] value)
 		{
 			Value = value;
 		}
@@ -599,17 +599,17 @@ namespace Kafka.Protocol
 			await writer.WriteBytesAsync(Value, cancellationToken);
 		}
 
-		public static Bytes From(System.Byte[] value)
+		public static Bytes From(byte[] value)
 		{
 			return new Bytes(value);
 		}
 
 		public static async ValueTask<Bytes> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadBytesAsync(cancellationToken);return new Bytes(value);
+			return From(await reader.ReadBytesAsync(cancellationToken));
 		}
 
-		public static Bytes Default => Bytes.From(new System.Byte[0]);
+		public static Bytes Default => From(new byte[0]);
 	}
 
 	/// <summary>
@@ -617,9 +617,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct NullableBytes : ISerialize 
 	{
-		public System.Byte[]? Value { get; }
+		public byte[]? Value { get; }
 
-		public NullableBytes(System.Byte[]? value)
+		public NullableBytes(byte[]? value)
 		{
 			Value = value;
 		}
@@ -654,17 +654,17 @@ namespace Kafka.Protocol
 			await writer.WriteNullableBytesAsync(Value, cancellationToken);
 		}
 
-		public static NullableBytes From(System.Byte[]? value)
+		public static NullableBytes From(byte[]? value)
 		{
 			return new NullableBytes(value);
 		}
 
 		public static async ValueTask<NullableBytes> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			var value = await reader.ReadNullableBytesAsync(cancellationToken);return new NullableBytes(value);
+			return From(await reader.ReadNullableBytesAsync(cancellationToken));
 		}
 
-		public static NullableBytes Default => NullableBytes.From(new System.Byte[0]);
+		public static NullableBytes Default => From(new byte[0]);
 	}
 	/// <summary>
 	/// The server experienced an unexpected error when processing the request.

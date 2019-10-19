@@ -5,14 +5,45 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
 {
     public static class TypeExtensions
     {
-        public static string GetPrettyFullName(this Type type)
+        public static string GetPrettyName(this Type type)
         {
             if (type == null)
             {
                 return "";
             }
+            
+            var elementType = type.IsArray ? 
+                type.GetElementType() : 
+                type;
 
-            var prettyName = type.FullName;
+            var prettyName = elementType?.FullName;
+            switch (Type.GetTypeCode(elementType))
+            {
+                case TypeCode.Boolean:
+                    prettyName = "bool";
+                    break;
+                case TypeCode.Int32:
+                    prettyName = "int";
+                    break;
+                case TypeCode.String:
+                    prettyName = "string";
+                    break;
+                case TypeCode.Byte:
+                    prettyName = "byte";
+                    break;
+                case TypeCode.Char:
+                    prettyName = "char";
+                    break;
+                case TypeCode.Decimal:
+                    prettyName = "decimal";
+                    break;
+                case TypeCode.Double:
+                    prettyName = "double";
+                    break;
+            }
+
+            prettyName += type.IsArray ? "[]" : "";
+
             if (type.IsGenericType == false)
             {
                 return prettyName;
@@ -24,7 +55,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
             }
 
             var genericArguments = type.GetGenericArguments()
-                .Select(GetPrettyFullName);
+                .Select(GetPrettyName);
 
             return $"{prettyName}<{string.Join(", ", genericArguments)}>";
         }

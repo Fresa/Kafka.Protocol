@@ -98,7 +98,8 @@ namespace Kafka.Protocol<# Block(() =>
 				if (isNullable)
 				{
 					#>return Value?.GetHashCode() ?? 0;<#
-				} else 
+				} 
+				else 
 				{
 					#>return Value.GetHashCode();<#
 				}
@@ -109,7 +110,8 @@ namespace Kafka.Protocol<# Block(() =>
 				if (isNullable)
 				{
 					#>return Value?.ToString() ?? string.Empty;<#
-				} else 
+				} 
+				else 
 				{
 					#>return Value.ToString();<#
 				}				
@@ -137,11 +139,10 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public static async ValueTask<<#= className #>> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
-				#>var value = await reader.Read<#= className #>Async(cancellationToken);<#
-				#>return new <#= className #>(value);<#
+				#>return From(await reader.Read<#= className #>Async(cancellationToken));<#
 			}); _(2);
 
-			#>public static <#= className #> Default => <#= className #>.From(<#= defaultValue #>);<#
+			#>public static <#= className #> Default => From(<#= defaultValue #>);<#
         }); _();
     });
 

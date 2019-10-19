@@ -56,7 +56,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
         {
             return primitiveType
                 .ResolveType()
-                .GetPrettyFullName() + 
+                .GetPrettyName() + 
                    (primitiveType.IsNullable() ? "?" : "");
         }
 
@@ -112,13 +112,13 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
             var type = primitiveType.ResolveType();
             if (type.IsArray)
             {
-                return $"new {type.GetPrettyFullName().Replace("[]", "[0]")}";
+                return $"new {type.GetPrettyName().Replace("[]", "[0]")}";
             }
 
             switch (type)
             {
                 case System.Type t when t == typeof(string):
-                    return "System.String.Empty";
+                    return "string.Empty";
                 default:
                     return "default";
             }
