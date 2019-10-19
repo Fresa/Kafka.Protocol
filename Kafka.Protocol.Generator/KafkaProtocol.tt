@@ -79,9 +79,9 @@ namespace Kafka.Protocol<# Block(() =>
 		var isNullable = primitiveType.IsNullable();
 
         GenerateDocumentation(primitiveType.Description);
-        #>public struct <#= className #> : ISerialize <# Block(() =>
+        #>public readonly struct <#= className #> : ISerialize <# Block(() =>
         {
-            #>public <#= type #> Value { get; private set; }<# _(2);
+            #>public <#= type #> Value { get; }<# _(2);
 
             #>public <#= className #>(<#= type #> value)<# Block(() =>
             {

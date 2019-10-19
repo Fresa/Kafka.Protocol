@@ -10,9 +10,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents a boolean value in a byte. Values 0 and 1 are used to represent false and true respectively. When reading a boolean value, any non-zero value is considered true.
 	/// </summary>
-	public struct Boolean : ISerialize 
+	public readonly struct Boolean : ISerialize 
 	{
-		public System.Boolean Value { get; private set; }
+		public System.Boolean Value { get; }
 
 		public Boolean(System.Boolean value)
 		{
@@ -65,9 +65,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents an integer between -2^7 and 2^7-1 inclusive.
 	/// </summary>
-	public struct Int8 : ISerialize 
+	public readonly struct Int8 : ISerialize 
 	{
-		public System.SByte Value { get; private set; }
+		public System.SByte Value { get; }
 
 		public Int8(System.SByte value)
 		{
@@ -120,9 +120,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents an integer between -2^15 and 2^15-1 inclusive. The values are encoded using two bytes in network byte order (big-endian).
 	/// </summary>
-	public struct Int16 : ISerialize 
+	public readonly struct Int16 : ISerialize 
 	{
-		public System.Int16 Value { get; private set; }
+		public System.Int16 Value { get; }
 
 		public Int16(System.Int16 value)
 		{
@@ -175,9 +175,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents an integer between -2^31 and 2^31-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).
 	/// </summary>
-	public struct Int32 : ISerialize 
+	public readonly struct Int32 : ISerialize 
 	{
-		public System.Int32 Value { get; private set; }
+		public System.Int32 Value { get; }
 
 		public Int32(System.Int32 value)
 		{
@@ -230,9 +230,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents an integer between -2^63 and 2^63-1 inclusive. The values are encoded using eight bytes in network byte order (big-endian).
 	/// </summary>
-	public struct Int64 : ISerialize 
+	public readonly struct Int64 : ISerialize 
 	{
-		public System.Int64 Value { get; private set; }
+		public System.Int64 Value { get; }
 
 		public Int64(System.Int64 value)
 		{
@@ -285,9 +285,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents an integer between 0 and 2^32-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).
 	/// </summary>
-	public struct UInt32 : ISerialize 
+	public readonly struct UInt32 : ISerialize 
 	{
-		public System.UInt32 Value { get; private set; }
+		public System.UInt32 Value { get; }
 
 		public UInt32(System.UInt32 value)
 		{
@@ -340,9 +340,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents an integer between -2^31 and 2^31-1 inclusive. Encoding follows the variable-length zig-zag encoding from  <a href="http://code.google.com/apis/protocolbuffers/docs/encoding.html"> Google Protocol Buffers</a>.
 	/// </summary>
-	public struct VarInt : ISerialize 
+	public readonly struct VarInt : ISerialize 
 	{
-		public System.Int32 Value { get; private set; }
+		public System.Int32 Value { get; }
 
 		public VarInt(System.Int32 value)
 		{
@@ -395,9 +395,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents an integer between -2^63 and 2^63-1 inclusive. Encoding follows the variable-length zig-zag encoding from  <a href="http://code.google.com/apis/protocolbuffers/docs/encoding.html"> Google Protocol Buffers</a>.
 	/// </summary>
-	public struct VarLong : ISerialize 
+	public readonly struct VarLong : ISerialize 
 	{
-		public System.Int64 Value { get; private set; }
+		public System.Int64 Value { get; }
 
 		public VarLong(System.Int64 value)
 		{
@@ -450,9 +450,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents a sequence of characters. First the length N is given as an INT16. Then N bytes follow which are the UTF-8 encoding of the character sequence. Length must not be negative.
 	/// </summary>
-	public struct String : ISerialize 
+	public readonly struct String : ISerialize 
 	{
-		public System.String Value { get; private set; }
+		public System.String Value { get; }
 
 		public String(System.String value)
 		{
@@ -505,9 +505,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents a sequence of characters or null. For non-null strings, first the length N is given as an INT16. Then N bytes follow which are the UTF-8 encoding of the character sequence. A null value is encoded with length of -1 and there are no following bytes.
 	/// </summary>
-	public struct NullableString : ISerialize 
+	public readonly struct NullableString : ISerialize 
 	{
-		public System.String? Value { get; private set; }
+		public System.String? Value { get; }
 
 		public NullableString(System.String? value)
 		{
@@ -560,9 +560,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents a raw sequence of bytes. First the length N is given as an INT32. Then N bytes follow.
 	/// </summary>
-	public struct Bytes : ISerialize 
+	public readonly struct Bytes : ISerialize 
 	{
-		public System.Byte[] Value { get; private set; }
+		public System.Byte[] Value { get; }
 
 		public Bytes(System.Byte[] value)
 		{
@@ -615,9 +615,9 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// Represents a raw sequence of bytes or null. For non-null values, first the length N is given as an INT32. Then N bytes follow. A null value is encoded with length of -1 and there are no following bytes.
 	/// </summary>
-	public struct NullableBytes : ISerialize 
+	public readonly struct NullableBytes : ISerialize 
 	{
-		public System.Byte[]? Value { get; private set; }
+		public System.Byte[]? Value { get; }
 
 		public NullableBytes(System.Byte[]? value)
 		{
