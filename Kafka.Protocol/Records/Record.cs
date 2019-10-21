@@ -20,15 +20,15 @@ namespace Kafka.Protocol.Records
         {
             return new Record
             {
-                Length = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
-                Attributes = Int8.From(await reader.ReadInt8Async(cancellationToken)),
-                TimestampDelta = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
-                OffsetDelta = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
-                KeyLength = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
-                Key = Bytes.From(await reader.ReadBytesAsync(cancellationToken)),
-                ValueLen = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
-                Value = Bytes.From(await reader.ReadBytesAsync(cancellationToken)),
-                Headers = await reader.ReadAsync(async () => await Header.FromReaderAsync(reader, cancellationToken),
+                Length = await reader.ReadVarIntAsync(cancellationToken),
+                Attributes = await reader.ReadInt8Async(cancellationToken),
+                TimestampDelta = await reader.ReadVarIntAsync(cancellationToken),
+                OffsetDelta = await reader.ReadVarIntAsync(cancellationToken),
+                KeyLength = await reader.ReadVarIntAsync(cancellationToken),
+                Key = await reader.ReadBytesAsync(cancellationToken),
+                ValueLen = await reader.ReadVarIntAsync(cancellationToken),
+                Value = await reader.ReadBytesAsync(cancellationToken),
+                Headers = await reader.ReadArrayAsync(async () => await Header.FromReaderAsync(reader, cancellationToken),
                 cancellationToken)
             };
         }
@@ -36,15 +36,15 @@ namespace Kafka.Protocol.Records
         public async Task WriteToAsync(IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteVarIntAsync(Length.Value, cancellationToken);
-            await writer.WriteInt8Async(Attributes.Value, cancellationToken);
-            await writer.WriteVarIntAsync(TimestampDelta.Value, cancellationToken);
-            await writer.WriteVarIntAsync(OffsetDelta.Value, cancellationToken);
-            await writer.WriteVarIntAsync(KeyLength.Value, cancellationToken);
-            await writer.WriteBytesAsync(Key.Value, cancellationToken);
-            await writer.WriteVarIntAsync(ValueLen.Value, cancellationToken);
-            await writer.WriteBytesAsync(Value.Value, cancellationToken);
-            await writer.WriteAsync(cancellationToken, Headers);
+            await writer.WriteVarIntAsync(Length, cancellationToken);
+            await writer.WriteInt8Async(Attributes, cancellationToken);
+            await writer.WriteVarIntAsync(TimestampDelta, cancellationToken);
+            await writer.WriteVarIntAsync(OffsetDelta, cancellationToken);
+            await writer.WriteVarIntAsync(KeyLength, cancellationToken);
+            await writer.WriteBytesAsync(Key, cancellationToken);
+            await writer.WriteVarIntAsync(ValueLen, cancellationToken);
+            await writer.WriteBytesAsync(Value, cancellationToken);
+            await writer.WriteNullableArrayAsync(cancellationToken, Headers);
         }
     }
 }

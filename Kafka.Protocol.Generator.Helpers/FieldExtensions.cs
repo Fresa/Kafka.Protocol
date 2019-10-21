@@ -46,7 +46,7 @@ namespace Kafka.Protocol.Generator.Helpers
                 return $"Dictionary<{mapKeyField.GetTypeName()}, {name}>";
             }
 
-            return name + ArrayTypeCharacter + "?";
+            return name + ArrayTypeCharacter;
         }
 
         public static string GetTypeNameWithoutArrayCharacters(this Field field)
@@ -61,13 +61,6 @@ namespace Kafka.Protocol.Generator.Helpers
             {
                 case "bool":
                     typeName = "Boolean";
-                    break;
-                case "string" when field.IsNullable() :
-                    typeName = "NullableString";
-                    break;
-                case "byte" when field.IsNullable() &&
-                                 field.IsArray():
-                    typeName = "NullableBytes";
                     break;
             }
 

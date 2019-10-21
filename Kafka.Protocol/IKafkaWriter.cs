@@ -6,25 +6,25 @@ namespace Kafka.Protocol
 {
     public interface IKafkaWriter : IAsyncDisposable
     {
-        Task WriteBooleanAsync(bool value, CancellationToken cancellationToken = default);
-        Task WriteInt8Async(sbyte value, CancellationToken cancellationToken = default);
-        Task WriteInt16Async(short value, CancellationToken cancellationToken = default);
-        Task WriteInt32Async(int value, CancellationToken cancellationToken = default);
-        Task WriteInt64Async(long value, CancellationToken cancellationToken = default);
-        Task WriteUInt32Async(uint value, CancellationToken cancellationToken = default);
+        Task WriteBooleanAsync(Boolean value, CancellationToken cancellationToken = default);
+        Task WriteInt8Async(Int8 value, CancellationToken cancellationToken = default);
+        Task WriteInt16Async(Int16 value, CancellationToken cancellationToken = default);
+        Task WriteInt32Async(Int32 value, CancellationToken cancellationToken = default);
+        Task WriteInt64Async(Int64 value, CancellationToken cancellationToken = default);
+        Task WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default);
 
-        Task WriteVarIntAsync(int value, CancellationToken cancellationToken = default);
-        Task WriteVarLongAsync(long value, CancellationToken cancellationToken = default);
+        Task WriteVarIntAsync(VarInt value, CancellationToken cancellationToken = default);
+        Task WriteVarLongAsync(VarLong value, CancellationToken cancellationToken = default);
 
-        Task WriteStringAsync(string value, CancellationToken cancellationToken = default);
-        Task WriteNullableStringAsync(string? value, CancellationToken cancellationToken = default);
+        Task WriteStringAsync(String value, CancellationToken cancellationToken = default);
+        Task WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default);
+        
+        Task WriteBytesAsync(Bytes value, CancellationToken cancellationToken = default);
+        Task WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default);
 
-        Task WriteBytesAsync(byte[] value, CancellationToken cancellationToken = default);
-        Task WriteNullableBytesAsync(byte[]? value, CancellationToken cancellationToken = default);
-
-        Task WriteAsync<T>(CancellationToken cancellationToken, params T[]? items)
+        Task WriteNullableArrayAsync<T>(CancellationToken cancellationToken, params T[]? items)
             where T : ISerialize;
-        Task WriteAsync<T>(params T[]? items) 
+        Task WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)
             where T : ISerialize;
     }
 }

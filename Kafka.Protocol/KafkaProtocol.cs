@@ -46,7 +46,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteBooleanAsync(Value, cancellationToken);
+			await writer.WriteBooleanAsync(this, cancellationToken);
 		}
 
 		public static Boolean From(bool value)
@@ -56,7 +56,7 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Boolean> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadBooleanAsync(cancellationToken));
+			return await reader.ReadBooleanAsync(cancellationToken);
 		}
 
 		public static Boolean Default => From(default);
@@ -101,7 +101,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteInt8Async(Value, cancellationToken);
+			await writer.WriteInt8Async(this, cancellationToken);
 		}
 
 		public static Int8 From(System.SByte value)
@@ -111,7 +111,7 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Int8> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadInt8Async(cancellationToken));
+			return await reader.ReadInt8Async(cancellationToken);
 		}
 
 		public static Int8 Default => From(default);
@@ -156,7 +156,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteInt16Async(Value, cancellationToken);
+			await writer.WriteInt16Async(this, cancellationToken);
 		}
 
 		public static Int16 From(System.Int16 value)
@@ -166,7 +166,7 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Int16> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadInt16Async(cancellationToken));
+			return await reader.ReadInt16Async(cancellationToken);
 		}
 
 		public static Int16 Default => From(default);
@@ -211,7 +211,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteInt32Async(Value, cancellationToken);
+			await writer.WriteInt32Async(this, cancellationToken);
 		}
 
 		public static Int32 From(int value)
@@ -221,7 +221,7 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Int32> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadInt32Async(cancellationToken));
+			return await reader.ReadInt32Async(cancellationToken);
 		}
 
 		public static Int32 Default => From(default);
@@ -266,7 +266,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteInt64Async(Value, cancellationToken);
+			await writer.WriteInt64Async(this, cancellationToken);
 		}
 
 		public static Int64 From(System.Int64 value)
@@ -276,7 +276,7 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Int64> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadInt64Async(cancellationToken));
+			return await reader.ReadInt64Async(cancellationToken);
 		}
 
 		public static Int64 Default => From(default);
@@ -321,7 +321,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteUInt32Async(Value, cancellationToken);
+			await writer.WriteUInt32Async(this, cancellationToken);
 		}
 
 		public static UInt32 From(System.UInt32 value)
@@ -331,7 +331,7 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<UInt32> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadUInt32Async(cancellationToken));
+			return await reader.ReadUInt32Async(cancellationToken);
 		}
 
 		public static UInt32 Default => From(default);
@@ -376,7 +376,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteVarIntAsync(Value, cancellationToken);
+			await writer.WriteVarIntAsync(this, cancellationToken);
 		}
 
 		public static VarInt From(int value)
@@ -386,7 +386,7 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<VarInt> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadVarIntAsync(cancellationToken));
+			return await reader.ReadVarIntAsync(cancellationToken);
 		}
 
 		public static VarInt Default => From(default);
@@ -431,7 +431,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteVarLongAsync(Value, cancellationToken);
+			await writer.WriteVarLongAsync(this, cancellationToken);
 		}
 
 		public static VarLong From(System.Int64 value)
@@ -441,7 +441,7 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<VarLong> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadVarLongAsync(cancellationToken));
+			return await reader.ReadVarLongAsync(cancellationToken);
 		}
 
 		public static VarLong Default => From(default);
@@ -486,7 +486,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteStringAsync(Value, cancellationToken);
+			await writer.WriteStringAsync(this, cancellationToken);
 		}
 
 		public static String From(string value)
@@ -496,65 +496,10 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<String> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadStringAsync(cancellationToken));
+			return await reader.ReadStringAsync(cancellationToken);
 		}
 
 		public static String Default => From(string.Empty);
-	}
-
-	/// <summary>
-	/// Represents a sequence of characters or null. For non-null strings, first the length N is given as an INT16. Then N bytes follow which are the UTF-8 encoding of the character sequence. A null value is encoded with length of -1 and there are no following bytes.
-	/// </summary>
-	public readonly struct NullableString : ISerialize 
-	{
-		public string? Value { get; }
-
-		public NullableString(string? value)
-		{
-			Value = value;
-		}
-
-		public override bool Equals(object obj) 
-		{
-			return obj is NullableString comparingNullableString && this == comparingNullableString;
-		}
-
-		public override int GetHashCode() 
-		{
-			return Value?.GetHashCode() ?? 0;
-		}
-
-		public override string ToString() 
-		{
-			return Value?.ToString() ?? string.Empty;
-		}
-
-		public static bool operator == (NullableString x, NullableString y)
-		{
-			return x.Value == y.Value;
-		}
-
-		public static bool operator != (NullableString x, NullableString y)
-		{
-			return !(x == y);
-		}
-
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteNullableStringAsync(Value, cancellationToken);
-		}
-
-		public static NullableString From(string? value)
-		{
-			return new NullableString(value);
-		}
-
-		public static async ValueTask<NullableString> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return From(await reader.ReadNullableStringAsync(cancellationToken));
-		}
-
-		public static NullableString Default => From(string.Empty);
 	}
 
 	/// <summary>
@@ -596,7 +541,7 @@ namespace Kafka.Protocol
 
 		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
-			await writer.WriteBytesAsync(Value, cancellationToken);
+			await writer.WriteBytesAsync(this, cancellationToken);
 		}
 
 		public static Bytes From(byte[] value)
@@ -606,65 +551,10 @@ namespace Kafka.Protocol
 
 		public static async ValueTask<Bytes> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
-			return From(await reader.ReadBytesAsync(cancellationToken));
+			return await reader.ReadBytesAsync(cancellationToken);
 		}
 
 		public static Bytes Default => From(new byte[0]);
-	}
-
-	/// <summary>
-	/// Represents a raw sequence of bytes or null. For non-null values, first the length N is given as an INT32. Then N bytes follow. A null value is encoded with length of -1 and there are no following bytes.
-	/// </summary>
-	public readonly struct NullableBytes : ISerialize 
-	{
-		public byte[]? Value { get; }
-
-		public NullableBytes(byte[]? value)
-		{
-			Value = value;
-		}
-
-		public override bool Equals(object obj) 
-		{
-			return obj is NullableBytes comparingNullableBytes && this == comparingNullableBytes;
-		}
-
-		public override int GetHashCode() 
-		{
-			return Value?.GetHashCode() ?? 0;
-		}
-
-		public override string ToString() 
-		{
-			return Value?.ToString() ?? string.Empty;
-		}
-
-		public static bool operator == (NullableBytes x, NullableBytes y)
-		{
-			return x.Value == y.Value;
-		}
-
-		public static bool operator != (NullableBytes x, NullableBytes y)
-		{
-			return !(x == y);
-		}
-
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteNullableBytesAsync(Value, cancellationToken);
-		}
-
-		public static NullableBytes From(byte[]? value)
-		{
-			return new NullableBytes(value);
-		}
-
-		public static async ValueTask<NullableBytes> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return From(await reader.ReadNullableBytesAsync(cancellationToken));
-		}
-
-		public static NullableBytes Default => From(new byte[0]);
 	}
 	/// <summary>
 	/// The server experienced an unexpected error when processing the request.
@@ -2560,19 +2450,19 @@ namespace Kafka.Protocol
 			var instance = new AddOffsetsToTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -2581,19 +2471,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
+				await writer.WriteStringAsync(TransactionalId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+				await writer.WriteInt64Async(ProducerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
+				await writer.WriteInt16Async(ProducerEpoch, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+				await writer.WriteStringAsync(GroupId, cancellationToken);
 			}
 		}
 
@@ -2609,11 +2499,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TransactionalId is non-nullable.");
 				}
 
 				_transactionalId = value;
@@ -2640,11 +2525,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
-				}
-
 				_producerId = value;
 			}
 		}
@@ -2669,11 +2549,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
-				}
-
 				_producerEpoch = value;
 			}
 		}
@@ -2696,11 +2571,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
 				_groupId = value;
@@ -2735,11 +2605,11 @@ namespace Kafka.Protocol
 			var instance = new AddOffsetsToTxnResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -2748,11 +2618,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 		}
 
@@ -2768,11 +2638,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -2797,11 +2662,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -2836,19 +2696,19 @@ namespace Kafka.Protocol
 			var instance = new AddPartitionsToTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadAsync(async () => await AddPartitionsToTxnTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await AddPartitionsToTxnTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -2857,19 +2717,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
+				await writer.WriteStringAsync(TransactionalId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+				await writer.WriteInt64Async(ProducerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
+				await writer.WriteInt16Async(ProducerEpoch, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray());
 			}
 		}
 
@@ -2885,11 +2745,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TransactionalId is non-nullable.");
 				}
 
 				_transactionalId = value;
@@ -2916,11 +2771,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
-				}
-
 				_producerId = value;
 			}
 		}
@@ -2945,11 +2795,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
-				}
-
 				_producerEpoch = value;
 			}
 		}
@@ -2972,11 +2817,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -3010,11 +2850,11 @@ namespace Kafka.Protocol
 				var instance = new AddPartitionsToTxnTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -3023,11 +2863,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -3045,11 +2885,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -3063,8 +2898,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partition indexes to add to the transaction
 			/// </summary>
-			private Int32[]? _partitionsCollection = System.Array.Empty<Int32>();
-			public Int32[]? PartitionsCollection 
+			private Int32[] _partitionsCollection = Array.Empty<Int32>();
+			public Int32[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -3074,16 +2909,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
-					}
-
 					_partitionsCollection = value;
 				}
 			}
 
-			public AddPartitionsToTxnTopic WithPartitionsCollection(Int32[]? partitionsCollection)
+			public AddPartitionsToTxnTopic WithPartitionsCollection(Int32[] partitionsCollection)
 			{
 				PartitionsCollection = partitionsCollection;
 				return this;
@@ -3112,11 +2942,11 @@ namespace Kafka.Protocol
 			var instance = new AddPartitionsToTxnResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = (await reader.ReadAsync(async () => await AddPartitionsToTxnTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+				instance.ResultsCollection = (await reader.ReadArrayAsync(async () => await AddPartitionsToTxnTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -3125,11 +2955,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResultsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray());
 			}
 		}
 
@@ -3145,11 +2975,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -3174,11 +2999,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
 				_resultsCollection = value;
@@ -3212,11 +3032,11 @@ namespace Kafka.Protocol
 				var instance = new AddPartitionsToTxnTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResultsCollection = (await reader.ReadAsync(async () => await AddPartitionsToTxnPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.PartitionIndex);
+					instance.ResultsCollection = (await reader.ReadArrayAsync(async () => await AddPartitionsToTxnPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.PartitionIndex);
 				}
 				return instance;
 			}
@@ -3225,11 +3045,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ResultsCollection.Values.ToArray());
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray());
 				}
 			}
 
@@ -3245,11 +3065,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
 					_name = value;
@@ -3274,11 +3089,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 					}
 
 					_resultsCollection = value;
@@ -3312,11 +3122,11 @@ namespace Kafka.Protocol
 					var instance = new AddPartitionsToTxnPartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -3325,11 +3135,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 				}
 
@@ -3345,11 +3155,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -3374,11 +3179,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
 						_errorCode = value;
@@ -3415,11 +3215,11 @@ namespace Kafka.Protocol
 			var instance = new AlterConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourcesCollection = (await reader.ReadAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.ResourceType);
+				instance.ResourcesCollection = (await reader.ReadArrayAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.ResourceType);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -3428,11 +3228,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResourcesCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, ResourcesCollection.Values.ToArray());
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(ValidateOnly.Value, cancellationToken);
+				await writer.WriteBooleanAsync(ValidateOnly, cancellationToken);
 			}
 		}
 
@@ -3448,11 +3248,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
 				}
 
 				_resourcesCollection = value;
@@ -3486,15 +3281,15 @@ namespace Kafka.Protocol
 				var instance = new AlterConfigsResource(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigsCollection = (await reader.ReadAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = (await reader.ReadArrayAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 				}
 				return instance;
 			}
@@ -3503,15 +3298,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourceType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
+					await writer.WriteStringAsync(ResourceName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ConfigsCollection.Values.ToArray());
+					await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray());
 				}
 			}
 
@@ -3527,11 +3322,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
 					_resourceType = value;
@@ -3558,11 +3348,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
-					}
-
 					_resourceName = value;
 				}
 			}
@@ -3585,11 +3370,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ConfigsCollection is non-nullable.");
 					}
 
 					_configsCollection = value;
@@ -3623,11 +3403,11 @@ namespace Kafka.Protocol
 					var instance = new AlterableConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Value = await reader.ReadStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -3636,11 +3416,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name.Value, cancellationToken);
+						await writer.WriteStringAsync(Name, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(Value, cancellationToken);
 					}
 				}
 
@@ -3658,11 +3438,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Name is non-nullable.");
-						}
-
 						_name = value;
 					}
 				}
@@ -3676,8 +3451,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The value to set for the configuration key.
 				/// </summary>
-				private NullableString _value = NullableString.Default;
-				public NullableString Value 
+				private String? _value = String.Default;
+				public String? Value 
 				{
 					get => _value;
 					set 
@@ -3697,7 +3472,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AlterableConfig WithValue(NullableString value)
+				public AlterableConfig WithValue(String value)
 				{
 					Value = value;
 					return this;
@@ -3717,11 +3492,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ValidateOnly is non-nullable.");
 				}
 
 				_validateOnly = value;
@@ -3756,11 +3526,11 @@ namespace Kafka.Protocol
 			var instance = new AlterConfigsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = await reader.ReadAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResponsesCollection = await reader.ReadArrayAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -3769,11 +3539,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResponsesCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection);
 			}
 		}
 
@@ -3791,11 +3561,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -3809,8 +3574,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The responses for each resource.
 		/// </summary>
-		private AlterConfigsResourceResponse[]? _responsesCollection = System.Array.Empty<AlterConfigsResourceResponse>();
-		public AlterConfigsResourceResponse[]? ResponsesCollection 
+		private AlterConfigsResourceResponse[] _responsesCollection = Array.Empty<AlterConfigsResourceResponse>();
+		public AlterConfigsResourceResponse[] ResponsesCollection 
 		{
 			get => _responsesCollection;
 			set 
@@ -3818,11 +3583,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResponsesCollection is non-nullable.");
 				}
 
 				_responsesCollection = value;
@@ -3856,19 +3616,19 @@ namespace Kafka.Protocol
 				var instance = new AlterConfigsResourceResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -3877,19 +3637,19 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourceType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
+					await writer.WriteStringAsync(ResourceName, cancellationToken);
 				}
 			}
 
@@ -3907,11 +3667,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-					}
-
 					_errorCode = value;
 				}
 			}
@@ -3925,8 +3680,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource error message, or null if there was no error.
 			/// </summary>
-			private NullableString _errorMessage = NullableString.Default;
-			public NullableString ErrorMessage 
+			private String? _errorMessage = String.Default;
+			public String? ErrorMessage 
 			{
 				get => _errorMessage;
 				set 
@@ -3946,7 +3701,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResourceResponse WithErrorMessage(NullableString errorMessage)
+			public AlterConfigsResourceResponse WithErrorMessage(String errorMessage)
 			{
 				ErrorMessage = errorMessage;
 				return this;
@@ -3964,11 +3719,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
 					_resourceType = value;
@@ -3993,11 +3743,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
 					}
 
 					_resourceName = value;
@@ -4033,7 +3778,7 @@ namespace Kafka.Protocol
 			var instance = new AlterReplicaLogDirsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.DirsCollection = (await reader.ReadAsync(async () => await AlterReplicaLogDir.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Path);
+				instance.DirsCollection = (await reader.ReadArrayAsync(async () => await AlterReplicaLogDir.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Path);
 			}
 			return instance;
 		}
@@ -4042,7 +3787,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, DirsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, DirsCollection.Values.ToArray());
 			}
 		}
 
@@ -4058,11 +3803,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"DirsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"DirsCollection is non-nullable.");
 				}
 
 				_dirsCollection = value;
@@ -4096,11 +3836,11 @@ namespace Kafka.Protocol
 				var instance = new AlterReplicaLogDir(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Path = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Path = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = (await reader.ReadAsync(async () => await AlterReplicaLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+					instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await AlterReplicaLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 				}
 				return instance;
 			}
@@ -4109,11 +3849,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Path.Value, cancellationToken);
+					await writer.WriteStringAsync(Path, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray());
 				}
 			}
 
@@ -4129,11 +3869,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Path does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Path is non-nullable.");
 					}
 
 					_path = value;
@@ -4158,11 +3893,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 					}
 
 					_topicsCollection = value;
@@ -4196,11 +3926,11 @@ namespace Kafka.Protocol
 					var instance = new AlterReplicaLogDirTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionsCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+						instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
 					return instance;
 				}
@@ -4209,11 +3939,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name.Value, cancellationToken);
+						await writer.WriteStringAsync(Name, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, PartitionsCollection);
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 					}
 				}
 
@@ -4231,11 +3961,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Name is non-nullable.");
-						}
-
 						_name = value;
 					}
 				}
@@ -4249,8 +3974,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition indexes.
 				/// </summary>
-				private Int32[]? _partitionsCollection = System.Array.Empty<Int32>();
-				public Int32[]? PartitionsCollection 
+				private Int32[] _partitionsCollection = Array.Empty<Int32>();
+				public Int32[] PartitionsCollection 
 				{
 					get => _partitionsCollection;
 					set 
@@ -4260,16 +3985,11 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
-						}
-
 						_partitionsCollection = value;
 					}
 				}
 
-				public AlterReplicaLogDirTopic WithPartitionsCollection(Int32[]? partitionsCollection)
+				public AlterReplicaLogDirTopic WithPartitionsCollection(Int32[] partitionsCollection)
 				{
 					PartitionsCollection = partitionsCollection;
 					return this;
@@ -4299,11 +4019,11 @@ namespace Kafka.Protocol
 			var instance = new AlterReplicaLogDirsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadAsync(async () => await AlterReplicaLogDirTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await AlterReplicaLogDirTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -4312,11 +4032,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResultsCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -4334,11 +4054,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -4352,8 +4067,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for each topic.
 		/// </summary>
-		private AlterReplicaLogDirTopicResult[]? _resultsCollection = System.Array.Empty<AlterReplicaLogDirTopicResult>();
-		public AlterReplicaLogDirTopicResult[]? ResultsCollection 
+		private AlterReplicaLogDirTopicResult[] _resultsCollection = Array.Empty<AlterReplicaLogDirTopicResult>();
+		public AlterReplicaLogDirTopicResult[] ResultsCollection 
 		{
 			get => _resultsCollection;
 			set 
@@ -4361,11 +4076,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
 				_resultsCollection = value;
@@ -4399,11 +4109,11 @@ namespace Kafka.Protocol
 				var instance = new AlterReplicaLogDirTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await AlterReplicaLogDirPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await AlterReplicaLogDirPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -4412,11 +4122,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
+					await writer.WriteStringAsync(TopicName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -4434,11 +4144,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
-					}
-
 					_topicName = value;
 				}
 			}
@@ -4452,8 +4157,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The results for each partition.
 			/// </summary>
-			private AlterReplicaLogDirPartitionResult[]? _partitionsCollection = System.Array.Empty<AlterReplicaLogDirPartitionResult>();
-			public AlterReplicaLogDirPartitionResult[]? PartitionsCollection 
+			private AlterReplicaLogDirPartitionResult[] _partitionsCollection = Array.Empty<AlterReplicaLogDirPartitionResult>();
+			public AlterReplicaLogDirPartitionResult[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -4461,11 +4166,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -4499,11 +4199,11 @@ namespace Kafka.Protocol
 					var instance = new AlterReplicaLogDirPartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -4512,11 +4212,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 				}
 
@@ -4532,11 +4232,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -4561,11 +4256,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
 						_errorCode = value;
@@ -4631,15 +4321,15 @@ namespace Kafka.Protocol
 			var instance = new ApiVersionsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ApiKeysCollection = (await reader.ReadAsync(async () => await ApiVersionsResponseKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Index);
+				instance.ApiKeysCollection = (await reader.ReadArrayAsync(async () => await ApiVersionsResponseKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Index);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -4648,15 +4338,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ApiKeysCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, ApiKeysCollection.Values.ToArray());
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 		}
 
@@ -4672,11 +4362,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -4701,11 +4386,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ApiKeysCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ApiKeysCollection is non-nullable.");
 				}
 
 				_apiKeysCollection = value;
@@ -4739,15 +4419,15 @@ namespace Kafka.Protocol
 				var instance = new ApiVersionsResponseKey(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Index = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.Index = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MinVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.MinVersion = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MaxVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.MaxVersion = await reader.ReadInt16Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -4756,15 +4436,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(Index.Value, cancellationToken);
+					await writer.WriteInt16Async(Index, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(MinVersion.Value, cancellationToken);
+					await writer.WriteInt16Async(MinVersion, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(MaxVersion.Value, cancellationToken);
+					await writer.WriteInt16Async(MaxVersion, cancellationToken);
 				}
 			}
 
@@ -4780,11 +4460,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Index does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Index is non-nullable.");
 					}
 
 					_index = value;
@@ -4811,11 +4486,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MinVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"MinVersion is non-nullable.");
-					}
-
 					_minVersion = value;
 				}
 			}
@@ -4840,11 +4510,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MaxVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"MaxVersion is non-nullable.");
-					}
-
 					_maxVersion = value;
 				}
 			}
@@ -4865,11 +4530,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -4902,11 +4562,11 @@ namespace Kafka.Protocol
 			var instance = new ControlledShutdownRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.BrokerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.BrokerId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.BrokerEpoch = await reader.ReadInt64Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -4915,11 +4575,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(BrokerId.Value, cancellationToken);
+				await writer.WriteInt32Async(BrokerId, cancellationToken);
 			}
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteInt64Async(BrokerEpoch.Value, cancellationToken);
+				await writer.WriteInt64Async(BrokerEpoch, cancellationToken);
 			}
 		}
 
@@ -4935,11 +4595,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"BrokerId is non-nullable.");
 				}
 
 				_brokerId = value;
@@ -4961,11 +4616,6 @@ namespace Kafka.Protocol
 			get => _brokerEpoch;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"BrokerEpoch is non-nullable.");
-				}
-
 				_brokerEpoch = value;
 			}
 		}
@@ -4998,11 +4648,11 @@ namespace Kafka.Protocol
 			var instance = new ControlledShutdownResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.RemainingPartitionsCollection = (await reader.ReadAsync(async () => await RemainingPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.TopicName);
+				instance.RemainingPartitionsCollection = (await reader.ReadArrayAsync(async () => await RemainingPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.TopicName);
 			}
 			return instance;
 		}
@@ -5011,11 +4661,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, RemainingPartitionsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, RemainingPartitionsCollection.Values.ToArray());
 			}
 		}
 
@@ -5031,11 +4681,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -5060,11 +4705,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"RemainingPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"RemainingPartitionsCollection is non-nullable.");
 				}
 
 				_remainingPartitionsCollection = value;
@@ -5098,11 +4738,11 @@ namespace Kafka.Protocol
 				var instance = new RemainingPartition(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -5111,11 +4751,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
+					await writer.WriteStringAsync(TopicName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+					await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 				}
 			}
 
@@ -5131,11 +4771,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
 					_topicName = value;
@@ -5160,11 +4795,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 					}
 
 					_partitionIndex = value;
@@ -5200,7 +4830,7 @@ namespace Kafka.Protocol
 			var instance = new CreateAclsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.CreationsCollection = await reader.ReadAsync(async () => await CreatableAcl.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.CreationsCollection = await reader.ReadArrayAsync(async () => await CreatableAcl.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -5209,15 +4839,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, CreationsCollection);
+				await writer.WriteArrayAsync(cancellationToken, CreationsCollection);
 			}
 		}
 
 		/// <summary>
 		/// The ACLs that we want to create.
 		/// </summary>
-		private CreatableAcl[]? _creationsCollection = System.Array.Empty<CreatableAcl>();
-		public CreatableAcl[]? CreationsCollection 
+		private CreatableAcl[] _creationsCollection = Array.Empty<CreatableAcl>();
+		public CreatableAcl[] CreationsCollection 
 		{
 			get => _creationsCollection;
 			set 
@@ -5225,11 +4855,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"CreationsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"CreationsCollection is non-nullable.");
 				}
 
 				_creationsCollection = value;
@@ -5263,31 +4888,31 @@ namespace Kafka.Protocol
 				var instance = new CreatableAcl(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.ResourcePatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourcePatternType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Principal = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Principal = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Host = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.Operation = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.PermissionType = await reader.ReadInt8Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -5296,31 +4921,31 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourceType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
+					await writer.WriteStringAsync(ResourceName, cancellationToken);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourcePatternType.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourcePatternType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Principal.Value, cancellationToken);
+					await writer.WriteStringAsync(Principal, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Host.Value, cancellationToken);
+					await writer.WriteStringAsync(Host, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(Operation.Value, cancellationToken);
+					await writer.WriteInt8Async(Operation, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
+					await writer.WriteInt8Async(PermissionType, cancellationToken);
 				}
 			}
 
@@ -5336,11 +4961,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
 					_resourceType = value;
@@ -5367,11 +4987,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
-					}
-
 					_resourceName = value;
 				}
 			}
@@ -5394,11 +5009,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(1, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourcePatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourcePatternType is non-nullable.");
 					}
 
 					_resourcePatternType = value;
@@ -5425,11 +5035,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Principal is non-nullable.");
-					}
-
 					_principal = value;
 				}
 			}
@@ -5452,11 +5057,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Host is non-nullable.");
 					}
 
 					_host = value;
@@ -5483,11 +5083,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Operation is non-nullable.");
-					}
-
 					_operation = value;
 				}
 			}
@@ -5510,11 +5105,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 					}
 
 					_permissionType = value;
@@ -5550,11 +5140,11 @@ namespace Kafka.Protocol
 			var instance = new CreateAclsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadAsync(async () => await CreatableAclResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await CreatableAclResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -5563,11 +5153,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResultsCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -5585,11 +5175,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -5603,8 +5188,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for each ACL creation.
 		/// </summary>
-		private CreatableAclResult[]? _resultsCollection = System.Array.Empty<CreatableAclResult>();
-		public CreatableAclResult[]? ResultsCollection 
+		private CreatableAclResult[] _resultsCollection = Array.Empty<CreatableAclResult>();
+		public CreatableAclResult[] ResultsCollection 
 		{
 			get => _resultsCollection;
 			set 
@@ -5612,11 +5197,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
 				_resultsCollection = value;
@@ -5650,11 +5230,11 @@ namespace Kafka.Protocol
 				var instance = new CreatableAclResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -5663,11 +5243,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 				}
 			}
 
@@ -5685,11 +5265,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-					}
-
 					_errorCode = value;
 				}
 			}
@@ -5703,8 +5278,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The result message, or null if there was no error.
 			/// </summary>
-			private NullableString _errorMessage = NullableString.Default;
-			public NullableString ErrorMessage 
+			private String? _errorMessage = String.Default;
+			public String? ErrorMessage 
 			{
 				get => _errorMessage;
 				set 
@@ -5724,7 +5299,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableAclResult WithErrorMessage(NullableString errorMessage)
+			public CreatableAclResult WithErrorMessage(String errorMessage)
 			{
 				ErrorMessage = errorMessage;
 				return this;
@@ -5753,11 +5328,11 @@ namespace Kafka.Protocol
 			var instance = new CreateDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.RenewersCollection = await reader.ReadAsync(async () => await CreatableRenewers.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.RenewersCollection = await reader.ReadArrayAsync(async () => await CreatableRenewers.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MaxLifetimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.MaxLifetimeMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -5766,19 +5341,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, RenewersCollection);
+				await writer.WriteArrayAsync(cancellationToken, RenewersCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(MaxLifetimeMs.Value, cancellationToken);
+				await writer.WriteInt64Async(MaxLifetimeMs, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// A list of those who are allowed to renew this token before it expires.
 		/// </summary>
-		private CreatableRenewers[]? _renewersCollection = System.Array.Empty<CreatableRenewers>();
-		public CreatableRenewers[]? RenewersCollection 
+		private CreatableRenewers[] _renewersCollection = Array.Empty<CreatableRenewers>();
+		public CreatableRenewers[] RenewersCollection 
 		{
 			get => _renewersCollection;
 			set 
@@ -5786,11 +5361,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"RenewersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"RenewersCollection is non-nullable.");
 				}
 
 				_renewersCollection = value;
@@ -5824,11 +5394,11 @@ namespace Kafka.Protocol
 				var instance = new CreatableRenewers(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalType = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalName = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -5837,11 +5407,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
+					await writer.WriteStringAsync(PrincipalType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
+					await writer.WriteStringAsync(PrincipalName, cancellationToken);
 				}
 			}
 
@@ -5857,11 +5427,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 					}
 
 					_principalType = value;
@@ -5888,11 +5453,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
-					}
-
 					_principalName = value;
 				}
 			}
@@ -5916,11 +5476,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"MaxLifetimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MaxLifetimeMs is non-nullable.");
 				}
 
 				_maxLifetimeMs = value;
@@ -5955,39 +5510,39 @@ namespace Kafka.Protocol
 			var instance = new CreateDelegationTokenResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.PrincipalType = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.PrincipalName = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.IssueTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.IssueTimestampMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ExpiryTimestampMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MaxTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.MaxTimestampMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TokenId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TokenId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.Hmac = await reader.ReadBytesAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -5996,39 +5551,39 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
+				await writer.WriteStringAsync(PrincipalType, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
+				await writer.WriteStringAsync(PrincipalName, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(IssueTimestampMs.Value, cancellationToken);
+				await writer.WriteInt64Async(IssueTimestampMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ExpiryTimestampMs.Value, cancellationToken);
+				await writer.WriteInt64Async(ExpiryTimestampMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(MaxTimestampMs.Value, cancellationToken);
+				await writer.WriteInt64Async(MaxTimestampMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TokenId.Value, cancellationToken);
+				await writer.WriteStringAsync(TokenId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBytesAsync(Hmac.Value, cancellationToken);
+				await writer.WriteBytesAsync(Hmac, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 		}
 
@@ -6044,11 +5599,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -6075,11 +5625,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
-				}
-
 				_principalType = value;
 			}
 		}
@@ -6102,11 +5647,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
 				}
 
 				_principalName = value;
@@ -6133,11 +5673,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IssueTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"IssueTimestampMs is non-nullable.");
-				}
-
 				_issueTimestampMs = value;
 			}
 		}
@@ -6160,11 +5695,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ExpiryTimestampMs is non-nullable.");
 				}
 
 				_expiryTimestampMs = value;
@@ -6191,11 +5721,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MaxTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MaxTimestampMs is non-nullable.");
-				}
-
 				_maxTimestampMs = value;
 			}
 		}
@@ -6218,11 +5743,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TokenId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TokenId is non-nullable.");
 				}
 
 				_tokenId = value;
@@ -6249,11 +5769,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Hmac is non-nullable.");
-				}
-
 				_hmac = value;
 			}
 		}
@@ -6276,11 +5791,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -6315,15 +5825,15 @@ namespace Kafka.Protocol
 			var instance = new CreatePartitionsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await CreatePartitionsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await CreatePartitionsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -6332,23 +5842,23 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(TimeoutMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(ValidateOnly.Value, cancellationToken);
+				await writer.WriteBooleanAsync(ValidateOnly, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// Each topic that we want to create new partitions inside.
 		/// </summary>
-		private CreatePartitionsTopic[]? _topicsCollection = System.Array.Empty<CreatePartitionsTopic>();
-		public CreatePartitionsTopic[]? TopicsCollection 
+		private CreatePartitionsTopic[] _topicsCollection = Array.Empty<CreatePartitionsTopic>();
+		public CreatePartitionsTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -6356,11 +5866,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -6394,15 +5899,15 @@ namespace Kafka.Protocol
 				var instance = new CreatePartitionsTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Count = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Count = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.AssignmentsCollection = await reader.ReadAsync(async () => await CreatePartitionsAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.AssignmentsCollection = await reader.ReadNullableArrayAsync(async () => await CreatePartitionsAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -6411,15 +5916,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(Count.Value, cancellationToken);
+					await writer.WriteInt32Async(Count, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, AssignmentsCollection);
+					await writer.WriteArrayAsync(cancellationToken, AssignmentsCollection);
 				}
 			}
 
@@ -6435,11 +5940,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
 					_name = value;
@@ -6466,11 +5966,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Count does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Count is non-nullable.");
-					}
-
 					_count = value;
 				}
 			}
@@ -6484,7 +5979,7 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The new partition assignments.
 			/// </summary>
-			private CreatePartitionsAssignment[]? _assignmentsCollection = System.Array.Empty<CreatePartitionsAssignment>();
+			private CreatePartitionsAssignment[]? _assignmentsCollection = Array.Empty<CreatePartitionsAssignment>();
 			public CreatePartitionsAssignment[]? AssignmentsCollection 
 			{
 				get => _assignmentsCollection;
@@ -6532,7 +6027,7 @@ namespace Kafka.Protocol
 					var instance = new CreatePartitionsAssignment(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.BrokerIdsCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+						instance.BrokerIdsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
 					return instance;
 				}
@@ -6541,15 +6036,15 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, BrokerIdsCollection);
+						await writer.WriteArrayAsync(cancellationToken, BrokerIdsCollection);
 					}
 				}
 
 				/// <summary>
 				/// The assigned broker IDs.
 				/// </summary>
-				private Int32[]? _brokerIdsCollection = System.Array.Empty<Int32>();
-				public Int32[]? BrokerIdsCollection 
+				private Int32[] _brokerIdsCollection = Array.Empty<Int32>();
+				public Int32[] BrokerIdsCollection 
 				{
 					get => _brokerIdsCollection;
 					set 
@@ -6559,16 +6054,11 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"BrokerIdsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"BrokerIdsCollection is non-nullable.");
-						}
-
 						_brokerIdsCollection = value;
 					}
 				}
 
-				public CreatePartitionsAssignment WithBrokerIdsCollection(Int32[]? brokerIdsCollection)
+				public CreatePartitionsAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
 				{
 					BrokerIdsCollection = brokerIdsCollection;
 					return this;
@@ -6588,11 +6078,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
 				_timeoutMs = value;
@@ -6617,11 +6102,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ValidateOnly is non-nullable.");
 				}
 
 				_validateOnly = value;
@@ -6656,11 +6136,11 @@ namespace Kafka.Protocol
 			var instance = new CreatePartitionsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadAsync(async () => await CreatePartitionsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await CreatePartitionsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -6669,11 +6149,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResultsCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -6691,11 +6171,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -6709,8 +6184,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The partition creation results for each topic.
 		/// </summary>
-		private CreatePartitionsTopicResult[]? _resultsCollection = System.Array.Empty<CreatePartitionsTopicResult>();
-		public CreatePartitionsTopicResult[]? ResultsCollection 
+		private CreatePartitionsTopicResult[] _resultsCollection = Array.Empty<CreatePartitionsTopicResult>();
+		public CreatePartitionsTopicResult[] ResultsCollection 
 		{
 			get => _resultsCollection;
 			set 
@@ -6718,11 +6193,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
 				_resultsCollection = value;
@@ -6756,15 +6226,15 @@ namespace Kafka.Protocol
 				var instance = new CreatePartitionsTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -6773,15 +6243,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 				}
 			}
 
@@ -6797,11 +6267,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
 					_name = value;
@@ -6828,11 +6293,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-					}
-
 					_errorCode = value;
 				}
 			}
@@ -6846,8 +6306,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The result message, or null if there was no error.
 			/// </summary>
-			private NullableString _errorMessage = NullableString.Default;
-			public NullableString ErrorMessage 
+			private String? _errorMessage = String.Default;
+			public String? ErrorMessage 
 			{
 				get => _errorMessage;
 				set 
@@ -6867,7 +6327,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatePartitionsTopicResult WithErrorMessage(NullableString errorMessage)
+			public CreatePartitionsTopicResult WithErrorMessage(String errorMessage)
 			{
 				ErrorMessage = errorMessage;
 				return this;
@@ -6896,15 +6356,15 @@ namespace Kafka.Protocol
 			var instance = new CreateTopicsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadAsync(async () => await CreatableTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await CreatableTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -6913,15 +6373,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray());
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(TimeoutMs, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(ValidateOnly.Value, cancellationToken);
+				await writer.WriteBooleanAsync(ValidateOnly, cancellationToken);
 			}
 		}
 
@@ -6937,11 +6397,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -6975,23 +6430,23 @@ namespace Kafka.Protocol
 				var instance = new CreatableTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.NumPartitions = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.NumPartitions = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ReplicationFactor = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ReplicationFactor = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.AssignmentsCollection = (await reader.ReadAsync(async () => await CreatableReplicaAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.PartitionIndex);
+					instance.AssignmentsCollection = (await reader.ReadArrayAsync(async () => await CreatableReplicaAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.PartitionIndex);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigsCollection = (await reader.ReadAsync(async () => await CreateableTopicConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = (await reader.ReadArrayAsync(async () => await CreateableTopicConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 				}
 				return instance;
 			}
@@ -7000,23 +6455,23 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(NumPartitions.Value, cancellationToken);
+					await writer.WriteInt32Async(NumPartitions, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ReplicationFactor.Value, cancellationToken);
+					await writer.WriteInt16Async(ReplicationFactor, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, AssignmentsCollection.Values.ToArray());
+					await writer.WriteArrayAsync(cancellationToken, AssignmentsCollection.Values.ToArray());
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ConfigsCollection.Values.ToArray());
+					await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray());
 				}
 			}
 
@@ -7032,11 +6487,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
 					_name = value;
@@ -7063,11 +6513,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"NumPartitions does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"NumPartitions is non-nullable.");
-					}
-
 					_numPartitions = value;
 				}
 			}
@@ -7092,11 +6537,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ReplicationFactor does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ReplicationFactor is non-nullable.");
-					}
-
 					_replicationFactor = value;
 				}
 			}
@@ -7119,11 +6559,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"AssignmentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"AssignmentsCollection is non-nullable.");
 					}
 
 					_assignmentsCollection = value;
@@ -7157,11 +6592,11 @@ namespace Kafka.Protocol
 					var instance = new CreatableReplicaAssignment(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.BrokerIdsCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+						instance.BrokerIdsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
 					return instance;
 				}
@@ -7170,11 +6605,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, BrokerIdsCollection);
+						await writer.WriteArrayAsync(cancellationToken, BrokerIdsCollection);
 					}
 				}
 
@@ -7192,11 +6627,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-						}
-
 						_partitionIndex = value;
 					}
 				}
@@ -7210,8 +6640,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The brokers to place the partition on.
 				/// </summary>
-				private Int32[]? _brokerIdsCollection = System.Array.Empty<Int32>();
-				public Int32[]? BrokerIdsCollection 
+				private Int32[] _brokerIdsCollection = Array.Empty<Int32>();
+				public Int32[] BrokerIdsCollection 
 				{
 					get => _brokerIdsCollection;
 					set 
@@ -7221,16 +6651,11 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"BrokerIdsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"BrokerIdsCollection is non-nullable.");
-						}
-
 						_brokerIdsCollection = value;
 					}
 				}
 
-				public CreatableReplicaAssignment WithBrokerIdsCollection(Int32[]? brokerIdsCollection)
+				public CreatableReplicaAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
 				{
 					BrokerIdsCollection = brokerIdsCollection;
 					return this;
@@ -7249,11 +6674,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ConfigsCollection is non-nullable.");
 					}
 
 					_configsCollection = value;
@@ -7287,11 +6707,11 @@ namespace Kafka.Protocol
 					var instance = new CreateableTopicConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Value = await reader.ReadStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -7300,11 +6720,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name.Value, cancellationToken);
+						await writer.WriteStringAsync(Name, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(Value, cancellationToken);
 					}
 				}
 
@@ -7322,11 +6742,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Name is non-nullable.");
-						}
-
 						_name = value;
 					}
 				}
@@ -7340,8 +6755,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration value.
 				/// </summary>
-				private NullableString _value = NullableString.Default;
-				public NullableString Value 
+				private String? _value = String.Default;
+				public String? Value 
 				{
 					get => _value;
 					set 
@@ -7361,7 +6776,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public CreateableTopicConfig WithValue(NullableString value)
+				public CreateableTopicConfig WithValue(String value)
 				{
 					Value = value;
 					return this;
@@ -7381,11 +6796,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
 				_timeoutMs = value;
@@ -7410,11 +6820,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ValidateOnly is non-nullable.");
 				}
 
 				_validateOnly = value;
@@ -7449,11 +6854,11 @@ namespace Kafka.Protocol
 			var instance = new CreateTopicsResponse(version);
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadAsync(async () => await CreatableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await CreatableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -7462,11 +6867,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray());
 			}
 		}
 
@@ -7479,11 +6884,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -7506,11 +6906,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -7544,15 +6939,15 @@ namespace Kafka.Protocol
 				var instance = new CreatableTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -7561,15 +6956,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 				}
 			}
 
@@ -7585,11 +6980,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
 					_name = value;
@@ -7616,11 +7006,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-					}
-
 					_errorCode = value;
 				}
 			}
@@ -7634,8 +7019,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error message, or null if there was no error.
 			/// </summary>
-			private NullableString _errorMessage = NullableString.Default;
-			public NullableString ErrorMessage 
+			private String? _errorMessage = String.Default;
+			public String? ErrorMessage 
 			{
 				get => _errorMessage;
 				set 
@@ -7650,7 +7035,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public CreatableTopicResult WithErrorMessage(NullableString errorMessage)
+			public CreatableTopicResult WithErrorMessage(String errorMessage)
 			{
 				ErrorMessage = errorMessage;
 				return this;
@@ -7679,7 +7064,7 @@ namespace Kafka.Protocol
 			var instance = new DeleteAclsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.FiltersCollection = await reader.ReadAsync(async () => await DeleteAclsFilter.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.FiltersCollection = await reader.ReadArrayAsync(async () => await DeleteAclsFilter.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -7688,15 +7073,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, FiltersCollection);
+				await writer.WriteArrayAsync(cancellationToken, FiltersCollection);
 			}
 		}
 
 		/// <summary>
 		/// The filters to use when deleting ACLs.
 		/// </summary>
-		private DeleteAclsFilter[]? _filtersCollection = System.Array.Empty<DeleteAclsFilter>();
-		public DeleteAclsFilter[]? FiltersCollection 
+		private DeleteAclsFilter[] _filtersCollection = Array.Empty<DeleteAclsFilter>();
+		public DeleteAclsFilter[] FiltersCollection 
 		{
 			get => _filtersCollection;
 			set 
@@ -7704,11 +7089,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"FiltersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"FiltersCollection is non-nullable.");
 				}
 
 				_filtersCollection = value;
@@ -7742,31 +7122,31 @@ namespace Kafka.Protocol
 				var instance = new DeleteAclsFilter(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceTypeFilter = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceTypeFilter = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceNameFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ResourceNameFilter = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.PatternTypeFilter = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.PatternTypeFilter = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.PrincipalFilter = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.HostFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.HostFilter = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.Operation = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.PermissionType = await reader.ReadInt8Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -7775,31 +7155,31 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourceTypeFilter.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourceTypeFilter, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ResourceNameFilter.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(ResourceNameFilter, cancellationToken);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteInt8Async(PatternTypeFilter.Value, cancellationToken);
+					await writer.WriteInt8Async(PatternTypeFilter, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(PrincipalFilter.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(PrincipalFilter, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(HostFilter.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(HostFilter, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(Operation.Value, cancellationToken);
+					await writer.WriteInt8Async(Operation, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
+					await writer.WriteInt8Async(PermissionType, cancellationToken);
 				}
 			}
 
@@ -7817,11 +7197,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceTypeFilter is non-nullable.");
-					}
-
 					_resourceTypeFilter = value;
 				}
 			}
@@ -7835,8 +7210,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource name.
 			/// </summary>
-			private NullableString _resourceNameFilter = NullableString.Default;
-			public NullableString ResourceNameFilter 
+			private String? _resourceNameFilter = String.Default;
+			public String? ResourceNameFilter 
 			{
 				get => _resourceNameFilter;
 				set 
@@ -7856,7 +7231,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithResourceNameFilter(NullableString resourceNameFilter)
+			public DeleteAclsFilter WithResourceNameFilter(String resourceNameFilter)
 			{
 				ResourceNameFilter = resourceNameFilter;
 				return this;
@@ -7876,11 +7251,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PatternTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PatternTypeFilter is non-nullable.");
-					}
-
 					_patternTypeFilter = value;
 				}
 			}
@@ -7894,8 +7264,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The principal filter, or null to accept all principals.
 			/// </summary>
-			private NullableString _principalFilter = NullableString.Default;
-			public NullableString PrincipalFilter 
+			private String? _principalFilter = String.Default;
+			public String? PrincipalFilter 
 			{
 				get => _principalFilter;
 				set 
@@ -7915,7 +7285,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithPrincipalFilter(NullableString principalFilter)
+			public DeleteAclsFilter WithPrincipalFilter(String principalFilter)
 			{
 				PrincipalFilter = principalFilter;
 				return this;
@@ -7924,8 +7294,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The host filter, or null to accept all hosts.
 			/// </summary>
-			private NullableString _hostFilter = NullableString.Default;
-			public NullableString HostFilter 
+			private String? _hostFilter = String.Default;
+			public String? HostFilter 
 			{
 				get => _hostFilter;
 				set 
@@ -7945,7 +7315,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilter WithHostFilter(NullableString hostFilter)
+			public DeleteAclsFilter WithHostFilter(String hostFilter)
 			{
 				HostFilter = hostFilter;
 				return this;
@@ -7963,11 +7333,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Operation is non-nullable.");
 					}
 
 					_operation = value;
@@ -7992,11 +7357,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 					}
 
 					_permissionType = value;
@@ -8032,11 +7392,11 @@ namespace Kafka.Protocol
 			var instance = new DeleteAclsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.FilterResultsCollection = await reader.ReadAsync(async () => await DeleteAclsFilterResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.FilterResultsCollection = await reader.ReadArrayAsync(async () => await DeleteAclsFilterResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -8045,11 +7405,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, FilterResultsCollection);
+				await writer.WriteArrayAsync(cancellationToken, FilterResultsCollection);
 			}
 		}
 
@@ -8067,11 +7427,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -8085,8 +7440,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for each filter.
 		/// </summary>
-		private DeleteAclsFilterResult[]? _filterResultsCollection = System.Array.Empty<DeleteAclsFilterResult>();
-		public DeleteAclsFilterResult[]? FilterResultsCollection 
+		private DeleteAclsFilterResult[] _filterResultsCollection = Array.Empty<DeleteAclsFilterResult>();
+		public DeleteAclsFilterResult[] FilterResultsCollection 
 		{
 			get => _filterResultsCollection;
 			set 
@@ -8094,11 +7449,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"FilterResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"FilterResultsCollection is non-nullable.");
 				}
 
 				_filterResultsCollection = value;
@@ -8132,15 +7482,15 @@ namespace Kafka.Protocol
 				var instance = new DeleteAclsFilterResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MatchingAclsCollection = await reader.ReadAsync(async () => await DeleteAclsMatchingAcl.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.MatchingAclsCollection = await reader.ReadArrayAsync(async () => await DeleteAclsMatchingAcl.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -8149,15 +7499,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, MatchingAclsCollection);
+					await writer.WriteArrayAsync(cancellationToken, MatchingAclsCollection);
 				}
 			}
 
@@ -8175,11 +7525,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-					}
-
 					_errorCode = value;
 				}
 			}
@@ -8193,8 +7538,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error message, or null if the filter succeeded.
 			/// </summary>
-			private NullableString _errorMessage = NullableString.Default;
-			public NullableString ErrorMessage 
+			private String? _errorMessage = String.Default;
+			public String? ErrorMessage 
 			{
 				get => _errorMessage;
 				set 
@@ -8214,7 +7559,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DeleteAclsFilterResult WithErrorMessage(NullableString errorMessage)
+			public DeleteAclsFilterResult WithErrorMessage(String errorMessage)
 			{
 				ErrorMessage = errorMessage;
 				return this;
@@ -8223,8 +7568,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The ACLs which matched this filter.
 			/// </summary>
-			private DeleteAclsMatchingAcl[]? _matchingAclsCollection = System.Array.Empty<DeleteAclsMatchingAcl>();
-			public DeleteAclsMatchingAcl[]? MatchingAclsCollection 
+			private DeleteAclsMatchingAcl[] _matchingAclsCollection = Array.Empty<DeleteAclsMatchingAcl>();
+			public DeleteAclsMatchingAcl[] MatchingAclsCollection 
 			{
 				get => _matchingAclsCollection;
 				set 
@@ -8232,11 +7577,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"MatchingAclsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"MatchingAclsCollection is non-nullable.");
 					}
 
 					_matchingAclsCollection = value;
@@ -8270,39 +7610,39 @@ namespace Kafka.Protocol
 					var instance = new DeleteAclsMatchingAcl(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.ResourceName = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.PatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.PatternType = await reader.ReadInt8Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Principal = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Principal = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Host = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.Operation = await reader.ReadInt8Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.PermissionType = await reader.ReadInt8Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -8311,39 +7651,39 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+						await writer.WriteInt8Async(ResourceType, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
+						await writer.WriteStringAsync(ResourceName, cancellationToken);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteInt8Async(PatternType.Value, cancellationToken);
+						await writer.WriteInt8Async(PatternType, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Principal.Value, cancellationToken);
+						await writer.WriteStringAsync(Principal, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Host.Value, cancellationToken);
+						await writer.WriteStringAsync(Host, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt8Async(Operation.Value, cancellationToken);
+						await writer.WriteInt8Async(Operation, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
+						await writer.WriteInt8Async(PermissionType, cancellationToken);
 					}
 				}
 
@@ -8361,11 +7701,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-						}
-
 						_errorCode = value;
 					}
 				}
@@ -8379,8 +7714,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The deletion error message, or null if the deletion succeeded.
 				/// </summary>
-				private NullableString _errorMessage = NullableString.Default;
-				public NullableString ErrorMessage 
+				private String? _errorMessage = String.Default;
+				public String? ErrorMessage 
 				{
 					get => _errorMessage;
 					set 
@@ -8400,7 +7735,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DeleteAclsMatchingAcl WithErrorMessage(NullableString errorMessage)
+				public DeleteAclsMatchingAcl WithErrorMessage(String errorMessage)
 				{
 					ErrorMessage = errorMessage;
 					return this;
@@ -8418,11 +7753,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 						}
 
 						_resourceType = value;
@@ -8449,11 +7779,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ResourceName is non-nullable.");
-						}
-
 						_resourceName = value;
 					}
 				}
@@ -8476,11 +7801,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(1, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PatternType is non-nullable.");
 						}
 
 						_patternType = value;
@@ -8507,11 +7827,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Principal is non-nullable.");
-						}
-
 						_principal = value;
 					}
 				}
@@ -8534,11 +7849,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Host is non-nullable.");
 						}
 
 						_host = value;
@@ -8565,11 +7875,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Operation is non-nullable.");
-						}
-
 						_operation = value;
 					}
 				}
@@ -8592,11 +7897,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 						}
 
 						_permissionType = value;
@@ -8633,7 +7933,7 @@ namespace Kafka.Protocol
 			var instance = new DeleteGroupsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupsNamesCollection = await reader.ReadAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
+				instance.GroupsNamesCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -8642,15 +7942,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, GroupsNamesCollection);
+				await writer.WriteArrayAsync(cancellationToken, GroupsNamesCollection);
 			}
 		}
 
 		/// <summary>
 		/// The group names to delete.
 		/// </summary>
-		private String[]? _groupsNamesCollection = System.Array.Empty<String>();
-		public String[]? GroupsNamesCollection 
+		private String[] _groupsNamesCollection = Array.Empty<String>();
+		public String[] GroupsNamesCollection 
 		{
 			get => _groupsNamesCollection;
 			set 
@@ -8660,16 +7960,11 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupsNamesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupsNamesCollection is non-nullable.");
-				}
-
 				_groupsNamesCollection = value;
 			}
 		}
 
-		public DeleteGroupsRequest WithGroupsNamesCollection(String[]? groupsNamesCollection)
+		public DeleteGroupsRequest WithGroupsNamesCollection(String[] groupsNamesCollection)
 		{
 			GroupsNamesCollection = groupsNamesCollection;
 			return this;
@@ -8697,11 +7992,11 @@ namespace Kafka.Protocol
 			var instance = new DeleteGroupsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = (await reader.ReadAsync(async () => await DeletableGroupResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.GroupId);
+				instance.ResultsCollection = (await reader.ReadArrayAsync(async () => await DeletableGroupResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.GroupId);
 			}
 			return instance;
 		}
@@ -8710,11 +8005,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResultsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray());
 			}
 		}
 
@@ -8730,11 +8025,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -8759,11 +8049,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
 				_resultsCollection = value;
@@ -8797,11 +8082,11 @@ namespace Kafka.Protocol
 				var instance = new DeletableGroupResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -8810,11 +8095,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+					await writer.WriteStringAsync(GroupId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 			}
 
@@ -8830,11 +8115,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"GroupId is non-nullable.");
 					}
 
 					_groupId = value;
@@ -8859,11 +8139,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
 					_errorCode = value;
@@ -8899,11 +8174,11 @@ namespace Kafka.Protocol
 			var instance = new DeleteRecordsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await DeleteRecordsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await DeleteRecordsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -8912,19 +8187,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(TimeoutMs, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// Each topic that we want to delete records from.
 		/// </summary>
-		private DeleteRecordsTopic[]? _topicsCollection = System.Array.Empty<DeleteRecordsTopic>();
-		public DeleteRecordsTopic[]? TopicsCollection 
+		private DeleteRecordsTopic[] _topicsCollection = Array.Empty<DeleteRecordsTopic>();
+		public DeleteRecordsTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -8932,11 +8207,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -8970,11 +8240,11 @@ namespace Kafka.Protocol
 				var instance = new DeleteRecordsTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await DeleteRecordsPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await DeleteRecordsPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -8983,11 +8253,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -9005,11 +8275,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -9023,8 +8288,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition that we want to delete records from.
 			/// </summary>
-			private DeleteRecordsPartition[]? _partitionsCollection = System.Array.Empty<DeleteRecordsPartition>();
-			public DeleteRecordsPartition[]? PartitionsCollection 
+			private DeleteRecordsPartition[] _partitionsCollection = Array.Empty<DeleteRecordsPartition>();
+			public DeleteRecordsPartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -9032,11 +8297,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -9070,11 +8330,11 @@ namespace Kafka.Protocol
 					var instance = new DeleteRecordsPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Offset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.Offset = await reader.ReadInt64Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -9083,11 +8343,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(Offset.Value, cancellationToken);
+						await writer.WriteInt64Async(Offset, cancellationToken);
 					}
 				}
 
@@ -9103,11 +8363,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -9134,11 +8389,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Offset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Offset is non-nullable.");
-						}
-
 						_offset = value;
 					}
 				}
@@ -9163,11 +8413,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
 				_timeoutMs = value;
@@ -9202,11 +8447,11 @@ namespace Kafka.Protocol
 			var instance = new DeleteRecordsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await DeleteRecordsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await DeleteRecordsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -9215,11 +8460,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -9237,11 +8482,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -9255,8 +8495,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we wanted to delete records from.
 		/// </summary>
-		private DeleteRecordsTopicResult[]? _topicsCollection = System.Array.Empty<DeleteRecordsTopicResult>();
-		public DeleteRecordsTopicResult[]? TopicsCollection 
+		private DeleteRecordsTopicResult[] _topicsCollection = Array.Empty<DeleteRecordsTopicResult>();
+		public DeleteRecordsTopicResult[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -9264,11 +8504,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -9302,11 +8537,11 @@ namespace Kafka.Protocol
 				var instance = new DeleteRecordsTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await DeleteRecordsPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await DeleteRecordsPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -9315,11 +8550,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -9337,11 +8572,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -9355,8 +8585,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition that we wanted to delete records from.
 			/// </summary>
-			private DeleteRecordsPartitionResult[]? _partitionsCollection = System.Array.Empty<DeleteRecordsPartitionResult>();
-			public DeleteRecordsPartitionResult[]? PartitionsCollection 
+			private DeleteRecordsPartitionResult[] _partitionsCollection = Array.Empty<DeleteRecordsPartitionResult>();
+			public DeleteRecordsPartitionResult[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -9364,11 +8594,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -9402,15 +8627,15 @@ namespace Kafka.Protocol
 					var instance = new DeleteRecordsPartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.LowWatermark = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LowWatermark = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -9419,15 +8644,15 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(LowWatermark.Value, cancellationToken);
+						await writer.WriteInt64Async(LowWatermark, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 				}
 
@@ -9443,11 +8668,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -9474,11 +8694,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LowWatermark does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LowWatermark is non-nullable.");
-						}
-
 						_lowWatermark = value;
 					}
 				}
@@ -9501,11 +8716,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
 						_errorCode = value;
@@ -9542,11 +8752,11 @@ namespace Kafka.Protocol
 			var instance = new DeleteTopicsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicNamesCollection = await reader.ReadAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
+				instance.TopicNamesCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -9555,19 +8765,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicNamesCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicNamesCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(TimeoutMs, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// The names of the topics to delete
 		/// </summary>
-		private String[]? _topicNamesCollection = System.Array.Empty<String>();
-		public String[]? TopicNamesCollection 
+		private String[] _topicNamesCollection = Array.Empty<String>();
+		public String[] TopicNamesCollection 
 		{
 			get => _topicNamesCollection;
 			set 
@@ -9577,16 +8787,11 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicNamesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicNamesCollection is non-nullable.");
-				}
-
 				_topicNamesCollection = value;
 			}
 		}
 
-		public DeleteTopicsRequest WithTopicNamesCollection(String[]? topicNamesCollection)
+		public DeleteTopicsRequest WithTopicNamesCollection(String[] topicNamesCollection)
 		{
 			TopicNamesCollection = topicNamesCollection;
 			return this;
@@ -9604,11 +8809,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
 				_timeoutMs = value;
@@ -9643,11 +8843,11 @@ namespace Kafka.Protocol
 			var instance = new DeleteTopicsResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = (await reader.ReadAsync(async () => await DeletableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+				instance.ResponsesCollection = (await reader.ReadArrayAsync(async () => await DeletableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -9656,11 +8856,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResponsesCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection.Values.ToArray());
 			}
 		}
 
@@ -9676,11 +8876,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -9705,11 +8900,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResponsesCollection is non-nullable.");
 				}
 
 				_responsesCollection = value;
@@ -9743,11 +8933,11 @@ namespace Kafka.Protocol
 				var instance = new DeletableTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -9756,11 +8946,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 			}
 
@@ -9776,11 +8966,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
 					_name = value;
@@ -9805,11 +8990,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
 					_errorCode = value;
@@ -9845,31 +9025,31 @@ namespace Kafka.Protocol
 			var instance = new DescribeAclsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourceNameFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ResourceNameFilter = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ResourcePatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.ResourcePatternType = await reader.ReadInt8Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PrincipalFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.PrincipalFilter = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.HostFilter = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.HostFilter = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.Operation = await reader.ReadInt8Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.PermissionType = await reader.ReadInt8Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -9878,31 +9058,31 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+				await writer.WriteInt8Async(ResourceType, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ResourceNameFilter.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(ResourceNameFilter, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt8Async(ResourcePatternType.Value, cancellationToken);
+				await writer.WriteInt8Async(ResourcePatternType, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(PrincipalFilter.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(PrincipalFilter, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(HostFilter.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(HostFilter, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt8Async(Operation.Value, cancellationToken);
+				await writer.WriteInt8Async(Operation, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
+				await writer.WriteInt8Async(PermissionType, cancellationToken);
 			}
 		}
 
@@ -9920,11 +9100,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResourceType is non-nullable.");
-				}
-
 				_resourceType = value;
 			}
 		}
@@ -9938,8 +9113,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The resource name, or null to match any resource name.
 		/// </summary>
-		private NullableString _resourceNameFilter = NullableString.Default;
-		public NullableString ResourceNameFilter 
+		private String? _resourceNameFilter = String.Default;
+		public String? ResourceNameFilter 
 		{
 			get => _resourceNameFilter;
 			set 
@@ -9959,7 +9134,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeAclsRequest WithResourceNameFilter(NullableString resourceNameFilter)
+		public DescribeAclsRequest WithResourceNameFilter(String resourceNameFilter)
 		{
 			ResourceNameFilter = resourceNameFilter;
 			return this;
@@ -9979,11 +9154,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ResourcePatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResourcePatternType is non-nullable.");
-				}
-
 				_resourcePatternType = value;
 			}
 		}
@@ -9997,8 +9167,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The principal to match, or null to match any principal.
 		/// </summary>
-		private NullableString _principalFilter = NullableString.Default;
-		public NullableString PrincipalFilter 
+		private String? _principalFilter = String.Default;
+		public String? PrincipalFilter 
 		{
 			get => _principalFilter;
 			set 
@@ -10018,7 +9188,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeAclsRequest WithPrincipalFilter(NullableString principalFilter)
+		public DescribeAclsRequest WithPrincipalFilter(String principalFilter)
 		{
 			PrincipalFilter = principalFilter;
 			return this;
@@ -10027,8 +9197,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The host to match, or null to match any host.
 		/// </summary>
-		private NullableString _hostFilter = NullableString.Default;
-		public NullableString HostFilter 
+		private String? _hostFilter = String.Default;
+		public String? HostFilter 
 		{
 			get => _hostFilter;
 			set 
@@ -10048,7 +9218,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeAclsRequest WithHostFilter(NullableString hostFilter)
+		public DescribeAclsRequest WithHostFilter(String hostFilter)
 		{
 			HostFilter = hostFilter;
 			return this;
@@ -10066,11 +9236,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Operation is non-nullable.");
 				}
 
 				_operation = value;
@@ -10095,11 +9260,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 				}
 
 				_permissionType = value;
@@ -10134,19 +9294,19 @@ namespace Kafka.Protocol
 			var instance = new DescribeAclsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourcesCollection = await reader.ReadAsync(async () => await DescribeAclsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResourcesCollection = await reader.ReadArrayAsync(async () => await DescribeAclsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -10155,19 +9315,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResourcesCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResourcesCollection);
 			}
 		}
 
@@ -10183,11 +9343,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -10214,11 +9369,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -10232,8 +9382,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		private NullableString _errorMessage = NullableString.Default;
-		public NullableString ErrorMessage 
+		private String? _errorMessage = String.Default;
+		public String? ErrorMessage 
 		{
 			get => _errorMessage;
 			set 
@@ -10253,7 +9403,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public DescribeAclsResponse WithErrorMessage(NullableString errorMessage)
+		public DescribeAclsResponse WithErrorMessage(String errorMessage)
 		{
 			ErrorMessage = errorMessage;
 			return this;
@@ -10262,8 +9412,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each Resource that is referenced in an ACL.
 		/// </summary>
-		private DescribeAclsResource[]? _resourcesCollection = System.Array.Empty<DescribeAclsResource>();
-		public DescribeAclsResource[]? ResourcesCollection 
+		private DescribeAclsResource[] _resourcesCollection = Array.Empty<DescribeAclsResource>();
+		public DescribeAclsResource[] ResourcesCollection 
 		{
 			get => _resourcesCollection;
 			set 
@@ -10271,11 +9421,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
 				}
 
 				_resourcesCollection = value;
@@ -10309,19 +9454,19 @@ namespace Kafka.Protocol
 				var instance = new DescribeAclsResource(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Type = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.Type = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.PatternType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.PatternType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.AclsCollection = await reader.ReadAsync(async () => await AclDescription.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.AclsCollection = await reader.ReadArrayAsync(async () => await AclDescription.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -10330,19 +9475,19 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(Type.Value, cancellationToken);
+					await writer.WriteInt8Async(Type, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteInt8Async(PatternType.Value, cancellationToken);
+					await writer.WriteInt8Async(PatternType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, AclsCollection);
+					await writer.WriteArrayAsync(cancellationToken, AclsCollection);
 				}
 			}
 
@@ -10358,11 +9503,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Type does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Type is non-nullable.");
 					}
 
 					_type = value;
@@ -10389,11 +9529,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -10418,11 +9553,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PatternType is non-nullable.");
-					}
-
 					_patternType = value;
 				}
 			}
@@ -10436,8 +9566,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The ACLs.
 			/// </summary>
-			private AclDescription[]? _aclsCollection = System.Array.Empty<AclDescription>();
-			public AclDescription[]? AclsCollection 
+			private AclDescription[] _aclsCollection = Array.Empty<AclDescription>();
+			public AclDescription[] AclsCollection 
 			{
 				get => _aclsCollection;
 				set 
@@ -10445,11 +9575,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"AclsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"AclsCollection is non-nullable.");
 					}
 
 					_aclsCollection = value;
@@ -10483,19 +9608,19 @@ namespace Kafka.Protocol
 					var instance = new AclDescription(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Principal = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Principal = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Host = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Operation = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.Operation = await reader.ReadInt8Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PermissionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.PermissionType = await reader.ReadInt8Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -10504,19 +9629,19 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Principal.Value, cancellationToken);
+						await writer.WriteStringAsync(Principal, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Host.Value, cancellationToken);
+						await writer.WriteStringAsync(Host, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt8Async(Operation.Value, cancellationToken);
+						await writer.WriteInt8Async(Operation, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt8Async(PermissionType.Value, cancellationToken);
+						await writer.WriteInt8Async(PermissionType, cancellationToken);
 					}
 				}
 
@@ -10532,11 +9657,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Principal is non-nullable.");
 						}
 
 						_principal = value;
@@ -10563,11 +9683,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Host is non-nullable.");
-						}
-
 						_host = value;
 					}
 				}
@@ -10592,11 +9707,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Operation is non-nullable.");
-						}
-
 						_operation = value;
 					}
 				}
@@ -10619,11 +9729,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PermissionType is non-nullable.");
 						}
 
 						_permissionType = value;
@@ -10660,11 +9765,11 @@ namespace Kafka.Protocol
 			var instance = new DescribeConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourcesCollection = await reader.ReadAsync(async () => await DescribeConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResourcesCollection = await reader.ReadArrayAsync(async () => await DescribeConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.IncludeSynoyms = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.IncludeSynoyms = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -10673,19 +9778,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResourcesCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResourcesCollection);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(IncludeSynoyms.Value, cancellationToken);
+				await writer.WriteBooleanAsync(IncludeSynoyms, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// The resources whose configurations we want to describe.
 		/// </summary>
-		private DescribeConfigsResource[]? _resourcesCollection = System.Array.Empty<DescribeConfigsResource>();
-		public DescribeConfigsResource[]? ResourcesCollection 
+		private DescribeConfigsResource[] _resourcesCollection = Array.Empty<DescribeConfigsResource>();
+		public DescribeConfigsResource[] ResourcesCollection 
 		{
 			get => _resourcesCollection;
 			set 
@@ -10693,11 +9798,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
 				}
 
 				_resourcesCollection = value;
@@ -10731,15 +9831,15 @@ namespace Kafka.Protocol
 				var instance = new DescribeConfigsResource(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigurationKeysCollection = await reader.ReadAsync(async () => await NullableString.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.ConfigurationKeysCollection = await reader.ReadNullableArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -10748,15 +9848,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourceType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
+					await writer.WriteStringAsync(ResourceName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ConfigurationKeysCollection);
+					await writer.WriteArrayAsync(cancellationToken, ConfigurationKeysCollection);
 				}
 			}
 
@@ -10772,11 +9872,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
 					_resourceType = value;
@@ -10803,11 +9898,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
-					}
-
 					_resourceName = value;
 				}
 			}
@@ -10821,8 +9911,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The configuration keys to list, or null to list all configuration keys.
 			/// </summary>
-			private NullableString[]? _configurationKeysCollection = System.Array.Empty<NullableString>();
-			public NullableString[]? ConfigurationKeysCollection 
+			private String[]? _configurationKeysCollection = Array.Empty<String>();
+			public String[]? ConfigurationKeysCollection 
 			{
 				get => _configurationKeysCollection;
 				set 
@@ -10842,7 +9932,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResource WithConfigurationKeysCollection(NullableString[]? configurationKeysCollection)
+			public DescribeConfigsResource WithConfigurationKeysCollection(String[] configurationKeysCollection)
 			{
 				ConfigurationKeysCollection = configurationKeysCollection;
 				return this;
@@ -10861,11 +9951,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"IncludeSynoyms does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"IncludeSynoyms is non-nullable.");
 				}
 
 				_includeSynoyms = value;
@@ -10900,11 +9985,11 @@ namespace Kafka.Protocol
 			var instance = new DescribeConfigsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadAsync(async () => await DescribeConfigsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await DescribeConfigsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -10913,11 +9998,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResultsCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -10935,11 +10020,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -10953,8 +10033,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The results for each resource.
 		/// </summary>
-		private DescribeConfigsResult[]? _resultsCollection = System.Array.Empty<DescribeConfigsResult>();
-		public DescribeConfigsResult[]? ResultsCollection 
+		private DescribeConfigsResult[] _resultsCollection = Array.Empty<DescribeConfigsResult>();
+		public DescribeConfigsResult[] ResultsCollection 
 		{
 			get => _resultsCollection;
 			set 
@@ -10962,11 +10042,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
 				_resultsCollection = value;
@@ -11000,23 +10075,23 @@ namespace Kafka.Protocol
 				var instance = new DescribeConfigsResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigsCollection = await reader.ReadAsync(async () => await DescribeConfigsResourceResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.ConfigsCollection = await reader.ReadArrayAsync(async () => await DescribeConfigsResourceResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -11025,23 +10100,23 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourceType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
+					await writer.WriteStringAsync(ResourceName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ConfigsCollection);
+					await writer.WriteArrayAsync(cancellationToken, ConfigsCollection);
 				}
 			}
 
@@ -11059,11 +10134,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-					}
-
 					_errorCode = value;
 				}
 			}
@@ -11077,8 +10147,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The error message, or null if we were able to successfully describe the configurations.
 			/// </summary>
-			private NullableString _errorMessage = NullableString.Default;
-			public NullableString ErrorMessage 
+			private String? _errorMessage = String.Default;
+			public String? ErrorMessage 
 			{
 				get => _errorMessage;
 				set 
@@ -11098,7 +10168,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public DescribeConfigsResult WithErrorMessage(NullableString errorMessage)
+			public DescribeConfigsResult WithErrorMessage(String errorMessage)
 			{
 				ErrorMessage = errorMessage;
 				return this;
@@ -11116,11 +10186,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
 					_resourceType = value;
@@ -11147,11 +10212,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
-					}
-
 					_resourceName = value;
 				}
 			}
@@ -11165,8 +10225,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each listed configuration.
 			/// </summary>
-			private DescribeConfigsResourceResult[]? _configsCollection = System.Array.Empty<DescribeConfigsResourceResult>();
-			public DescribeConfigsResourceResult[]? ConfigsCollection 
+			private DescribeConfigsResourceResult[] _configsCollection = Array.Empty<DescribeConfigsResourceResult>();
+			public DescribeConfigsResourceResult[] ConfigsCollection 
 			{
 				get => _configsCollection;
 				set 
@@ -11174,11 +10234,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ConfigsCollection is non-nullable.");
 					}
 
 					_configsCollection = value;
@@ -11212,31 +10267,31 @@ namespace Kafka.Protocol
 					var instance = new DescribeConfigsResourceResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Value = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ReadOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+						instance.ReadOnly = await reader.ReadBooleanAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 0)) 
 					{
-						instance.IsDefault = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+						instance.IsDefault = await reader.ReadBooleanAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.ConfigSource = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.ConfigSource = await reader.ReadInt8Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.IsSensitive = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+						instance.IsSensitive = await reader.ReadBooleanAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.SynonymsCollection = await reader.ReadAsync(async () => await DescribeConfigsSynonym.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+						instance.SynonymsCollection = await reader.ReadArrayAsync(async () => await DescribeConfigsSynonym.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 					}
 					return instance;
 				}
@@ -11245,31 +10300,31 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name.Value, cancellationToken);
+						await writer.WriteStringAsync(Name, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(Value, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteBooleanAsync(ReadOnly.Value, cancellationToken);
+						await writer.WriteBooleanAsync(ReadOnly, cancellationToken);
 					}
 					if (Version.InRange(0, 0)) 
 					{
-						await writer.WriteBooleanAsync(IsDefault.Value, cancellationToken);
+						await writer.WriteBooleanAsync(IsDefault, cancellationToken);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteInt8Async(ConfigSource.Value, cancellationToken);
+						await writer.WriteInt8Async(ConfigSource, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteBooleanAsync(IsSensitive.Value, cancellationToken);
+						await writer.WriteBooleanAsync(IsSensitive, cancellationToken);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, SynonymsCollection);
+						await writer.WriteArrayAsync(cancellationToken, SynonymsCollection);
 					}
 				}
 
@@ -11287,11 +10342,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Name is non-nullable.");
-						}
-
 						_name = value;
 					}
 				}
@@ -11305,8 +10355,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The configuration value.
 				/// </summary>
-				private NullableString _value = NullableString.Default;
-				public NullableString Value 
+				private String? _value = String.Default;
+				public String? Value 
 				{
 					get => _value;
 					set 
@@ -11326,7 +10376,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribeConfigsResourceResult WithValue(NullableString value)
+				public DescribeConfigsResourceResult WithValue(String value)
 				{
 					Value = value;
 					return this;
@@ -11344,11 +10394,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ReadOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ReadOnly is non-nullable.");
 						}
 
 						_readOnly = value;
@@ -11375,11 +10420,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsDefault does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"IsDefault is non-nullable.");
-						}
-
 						_isDefault = value;
 					}
 				}
@@ -11399,11 +10439,6 @@ namespace Kafka.Protocol
 					get => _configSource;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ConfigSource is non-nullable.");
-						}
-
 						_configSource = value;
 					}
 				}
@@ -11428,11 +10463,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsSensitive does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"IsSensitive is non-nullable.");
-						}
-
 						_isSensitive = value;
 					}
 				}
@@ -11446,17 +10476,12 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The synonyms for this configuration key.
 				/// </summary>
-				private DescribeConfigsSynonym[]? _synonymsCollection = System.Array.Empty<DescribeConfigsSynonym>();
-				public DescribeConfigsSynonym[]? SynonymsCollection 
+				private DescribeConfigsSynonym[] _synonymsCollection = Array.Empty<DescribeConfigsSynonym>();
+				public DescribeConfigsSynonym[] SynonymsCollection 
 				{
 					get => _synonymsCollection;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"SynonymsCollection is non-nullable.");
-						}
-
 						_synonymsCollection = value;
 					}
 				}
@@ -11488,15 +10513,15 @@ namespace Kafka.Protocol
 						var instance = new DescribeConfigsSynonym(version);
 						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+							instance.Name = await reader.ReadStringAsync(cancellationToken);
 						}
 						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+							instance.Value = await reader.ReadStringAsync(cancellationToken);
 						}
 						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							instance.Source = new Int8(await reader.ReadInt8Async(cancellationToken));
+							instance.Source = await reader.ReadInt8Async(cancellationToken);
 						}
 						return instance;
 					}
@@ -11505,15 +10530,15 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(1, 2147483647)) 
 						{
-							await writer.WriteStringAsync(Name.Value, cancellationToken);
+							await writer.WriteStringAsync(Name, cancellationToken);
 						}
 						if (Version.InRange(1, 2147483647)) 
 						{
-							await writer.WriteNullableStringAsync(Value.Value, cancellationToken);
+							await writer.WriteNullableStringAsync(Value, cancellationToken);
 						}
 						if (Version.InRange(1, 2147483647)) 
 						{
-							await writer.WriteInt8Async(Source.Value, cancellationToken);
+							await writer.WriteInt8Async(Source, cancellationToken);
 						}
 					}
 
@@ -11531,11 +10556,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 							}
 
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"Name is non-nullable.");
-							}
-
 							_name = value;
 						}
 					}
@@ -11549,8 +10569,8 @@ namespace Kafka.Protocol
 					/// <summary>
 					/// The synonym value.
 					/// </summary>
-					private NullableString _value = NullableString.Default;
-					public NullableString Value 
+					private String? _value = String.Default;
+					public String? Value 
 					{
 						get => _value;
 						set 
@@ -11570,7 +10590,7 @@ namespace Kafka.Protocol
 						}
 					}
 
-					public DescribeConfigsSynonym WithValue(NullableString value)
+					public DescribeConfigsSynonym WithValue(String value)
 					{
 						Value = value;
 						return this;
@@ -11588,11 +10608,6 @@ namespace Kafka.Protocol
 							if (Version.InRange(1, 2147483647) == false) 
 							{
 								throw new UnsupportedVersionException($"Source does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-							}
-
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"Source is non-nullable.");
 							}
 
 							_source = value;
@@ -11630,7 +10645,7 @@ namespace Kafka.Protocol
 			var instance = new DescribeDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.OwnersCollection = await reader.ReadAsync(async () => await DescribeDelegationTokenOwner.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.OwnersCollection = await reader.ReadNullableArrayAsync(async () => await DescribeDelegationTokenOwner.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -11639,14 +10654,14 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, OwnersCollection);
+				await writer.WriteArrayAsync(cancellationToken, OwnersCollection);
 			}
 		}
 
 		/// <summary>
 		/// Each owner that we want to describe delegation tokens for, or null to describe all tokens.
 		/// </summary>
-		private DescribeDelegationTokenOwner[]? _ownersCollection = System.Array.Empty<DescribeDelegationTokenOwner>();
+		private DescribeDelegationTokenOwner[]? _ownersCollection = Array.Empty<DescribeDelegationTokenOwner>();
 		public DescribeDelegationTokenOwner[]? OwnersCollection 
 		{
 			get => _ownersCollection;
@@ -11694,11 +10709,11 @@ namespace Kafka.Protocol
 				var instance = new DescribeDelegationTokenOwner(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalType = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalName = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -11707,11 +10722,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
+					await writer.WriteStringAsync(PrincipalType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
+					await writer.WriteStringAsync(PrincipalName, cancellationToken);
 				}
 			}
 
@@ -11727,11 +10742,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 					}
 
 					_principalType = value;
@@ -11756,11 +10766,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
 					}
 
 					_principalName = value;
@@ -11796,15 +10801,15 @@ namespace Kafka.Protocol
 			var instance = new DescribeDelegationTokenResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TokensCollection = await reader.ReadAsync(async () => await DescribedDelegationToken.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TokensCollection = await reader.ReadArrayAsync(async () => await DescribedDelegationToken.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -11813,15 +10818,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TokensCollection);
+				await writer.WriteArrayAsync(cancellationToken, TokensCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 		}
 
@@ -11839,11 +10844,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -11857,8 +10857,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The tokens.
 		/// </summary>
-		private DescribedDelegationToken[]? _tokensCollection = System.Array.Empty<DescribedDelegationToken>();
-		public DescribedDelegationToken[]? TokensCollection 
+		private DescribedDelegationToken[] _tokensCollection = Array.Empty<DescribedDelegationToken>();
+		public DescribedDelegationToken[] TokensCollection 
 		{
 			get => _tokensCollection;
 			set 
@@ -11866,11 +10866,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TokensCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TokensCollection is non-nullable.");
 				}
 
 				_tokensCollection = value;
@@ -11904,35 +10899,35 @@ namespace Kafka.Protocol
 				var instance = new DescribedDelegationToken(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalType = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.PrincipalName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.IssueTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.IssueTimestamp = await reader.ReadInt64Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ExpiryTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.ExpiryTimestamp = await reader.ReadInt64Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MaxTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.MaxTimestamp = await reader.ReadInt64Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TokenId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TokenId = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+					instance.Hmac = await reader.ReadBytesAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.RenewersCollection = await reader.ReadAsync(async () => await DescribedDelegationTokenRenewer.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.RenewersCollection = await reader.ReadArrayAsync(async () => await DescribedDelegationTokenRenewer.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -11941,35 +10936,35 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
+					await writer.WriteStringAsync(PrincipalType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
+					await writer.WriteStringAsync(PrincipalName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt64Async(IssueTimestamp.Value, cancellationToken);
+					await writer.WriteInt64Async(IssueTimestamp, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt64Async(ExpiryTimestamp.Value, cancellationToken);
+					await writer.WriteInt64Async(ExpiryTimestamp, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt64Async(MaxTimestamp.Value, cancellationToken);
+					await writer.WriteInt64Async(MaxTimestamp, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TokenId.Value, cancellationToken);
+					await writer.WriteStringAsync(TokenId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteBytesAsync(Hmac.Value, cancellationToken);
+					await writer.WriteBytesAsync(Hmac, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, RenewersCollection);
+					await writer.WriteArrayAsync(cancellationToken, RenewersCollection);
 				}
 			}
 
@@ -11985,11 +10980,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 					}
 
 					_principalType = value;
@@ -12016,11 +11006,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
-					}
-
 					_principalName = value;
 				}
 			}
@@ -12043,11 +11028,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"IssueTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"IssueTimestamp is non-nullable.");
 					}
 
 					_issueTimestamp = value;
@@ -12074,11 +11054,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ExpiryTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ExpiryTimestamp is non-nullable.");
-					}
-
 					_expiryTimestamp = value;
 				}
 			}
@@ -12101,11 +11076,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"MaxTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"MaxTimestamp is non-nullable.");
 					}
 
 					_maxTimestamp = value;
@@ -12132,11 +11102,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TokenId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TokenId is non-nullable.");
-					}
-
 					_tokenId = value;
 				}
 			}
@@ -12161,11 +11126,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Hmac is non-nullable.");
-					}
-
 					_hmac = value;
 				}
 			}
@@ -12179,8 +11139,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Those who are able to renew this token before it expires.
 			/// </summary>
-			private DescribedDelegationTokenRenewer[]? _renewersCollection = System.Array.Empty<DescribedDelegationTokenRenewer>();
-			public DescribedDelegationTokenRenewer[]? RenewersCollection 
+			private DescribedDelegationTokenRenewer[] _renewersCollection = Array.Empty<DescribedDelegationTokenRenewer>();
+			public DescribedDelegationTokenRenewer[] RenewersCollection 
 			{
 				get => _renewersCollection;
 				set 
@@ -12188,11 +11148,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"RenewersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"RenewersCollection is non-nullable.");
 					}
 
 					_renewersCollection = value;
@@ -12226,11 +11181,11 @@ namespace Kafka.Protocol
 					var instance = new DescribedDelegationTokenRenewer(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PrincipalType = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.PrincipalType = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PrincipalName = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.PrincipalName = await reader.ReadStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -12239,11 +11194,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(PrincipalType.Value, cancellationToken);
+						await writer.WriteStringAsync(PrincipalType, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(PrincipalName.Value, cancellationToken);
+						await writer.WriteStringAsync(PrincipalName, cancellationToken);
 					}
 				}
 
@@ -12259,11 +11214,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PrincipalType is non-nullable.");
 						}
 
 						_principalType = value;
@@ -12290,11 +11240,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PrincipalName is non-nullable.");
-						}
-
 						_principalName = value;
 					}
 				}
@@ -12319,11 +11264,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -12358,11 +11298,11 @@ namespace Kafka.Protocol
 			var instance = new DescribeGroupsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupsCollection = await reader.ReadAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
+				instance.GroupsCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.IncludeAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.IncludeAuthorizedOperations = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -12371,19 +11311,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, GroupsCollection);
+				await writer.WriteArrayAsync(cancellationToken, GroupsCollection);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(IncludeAuthorizedOperations.Value, cancellationToken);
+				await writer.WriteBooleanAsync(IncludeAuthorizedOperations, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// The names of the groups to describe
 		/// </summary>
-		private String[]? _groupsCollection = System.Array.Empty<String>();
-		public String[]? GroupsCollection 
+		private String[] _groupsCollection = Array.Empty<String>();
+		public String[] GroupsCollection 
 		{
 			get => _groupsCollection;
 			set 
@@ -12393,16 +11333,11 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupsCollection is non-nullable.");
-				}
-
 				_groupsCollection = value;
 			}
 		}
 
-		public DescribeGroupsRequest WithGroupsCollection(String[]? groupsCollection)
+		public DescribeGroupsRequest WithGroupsCollection(String[] groupsCollection)
 		{
 			GroupsCollection = groupsCollection;
 			return this;
@@ -12420,11 +11355,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(3, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"IncludeAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"IncludeAuthorizedOperations is non-nullable.");
 				}
 
 				_includeAuthorizedOperations = value;
@@ -12459,11 +11389,11 @@ namespace Kafka.Protocol
 			var instance = new DescribeGroupsResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupsCollection = await reader.ReadAsync(async () => await DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.GroupsCollection = await reader.ReadArrayAsync(async () => await DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -12472,11 +11402,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, GroupsCollection);
+				await writer.WriteArrayAsync(cancellationToken, GroupsCollection);
 			}
 		}
 
@@ -12489,11 +11419,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -12507,8 +11432,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each described group.
 		/// </summary>
-		private DescribedGroup[]? _groupsCollection = System.Array.Empty<DescribedGroup>();
-		public DescribedGroup[]? GroupsCollection 
+		private DescribedGroup[] _groupsCollection = Array.Empty<DescribedGroup>();
+		public DescribedGroup[] GroupsCollection 
 		{
 			get => _groupsCollection;
 			set 
@@ -12516,11 +11441,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupsCollection is non-nullable.");
 				}
 
 				_groupsCollection = value;
@@ -12554,31 +11474,31 @@ namespace Kafka.Protocol
 				var instance = new DescribedGroup(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.GroupState = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.GroupState = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ProtocolType = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProtocolData = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ProtocolData = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MembersCollection = await reader.ReadAsync(async () => await DescribedGroupMember.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.MembersCollection = await reader.ReadArrayAsync(async () => await DescribedGroupMember.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.AuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.AuthorizedOperations = await reader.ReadInt32Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -12587,31 +11507,31 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+					await writer.WriteStringAsync(GroupId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupState.Value, cancellationToken);
+					await writer.WriteStringAsync(GroupState, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ProtocolType.Value, cancellationToken);
+					await writer.WriteStringAsync(ProtocolType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ProtocolData.Value, cancellationToken);
+					await writer.WriteStringAsync(ProtocolData, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, MembersCollection);
+					await writer.WriteArrayAsync(cancellationToken, MembersCollection);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteInt32Async(AuthorizedOperations.Value, cancellationToken);
+					await writer.WriteInt32Async(AuthorizedOperations, cancellationToken);
 				}
 			}
 
@@ -12627,11 +11547,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
 					_errorCode = value;
@@ -12658,11 +11573,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"GroupId is non-nullable.");
-					}
-
 					_groupId = value;
 				}
 			}
@@ -12685,11 +11595,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"GroupState does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"GroupState is non-nullable.");
 					}
 
 					_groupState = value;
@@ -12716,11 +11621,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ProtocolType is non-nullable.");
-					}
-
 					_protocolType = value;
 				}
 			}
@@ -12745,11 +11645,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProtocolData does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ProtocolData is non-nullable.");
-					}
-
 					_protocolData = value;
 				}
 			}
@@ -12763,8 +11658,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The group members.
 			/// </summary>
-			private DescribedGroupMember[]? _membersCollection = System.Array.Empty<DescribedGroupMember>();
-			public DescribedGroupMember[]? MembersCollection 
+			private DescribedGroupMember[] _membersCollection = Array.Empty<DescribedGroupMember>();
+			public DescribedGroupMember[] MembersCollection 
 			{
 				get => _membersCollection;
 				set 
@@ -12772,11 +11667,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"MembersCollection is non-nullable.");
 					}
 
 					_membersCollection = value;
@@ -12810,27 +11700,27 @@ namespace Kafka.Protocol
 					var instance = new DescribedGroupMember(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ClientId = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.ClientId = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ClientHost = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.ClientHost = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.MemberMetadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+						instance.MemberMetadata = await reader.ReadBytesAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.MemberAssignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+						instance.MemberAssignment = await reader.ReadBytesAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -12839,27 +11729,27 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+						await writer.WriteStringAsync(MemberId, cancellationToken);
 					}
 					if (Version.InRange(4, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(GroupInstanceId.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(ClientId.Value, cancellationToken);
+						await writer.WriteStringAsync(ClientId, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(ClientHost.Value, cancellationToken);
+						await writer.WriteStringAsync(ClientHost, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteBytesAsync(MemberMetadata.Value, cancellationToken);
+						await writer.WriteBytesAsync(MemberMetadata, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteBytesAsync(MemberAssignment.Value, cancellationToken);
+						await writer.WriteBytesAsync(MemberAssignment, cancellationToken);
 					}
 				}
 
@@ -12877,11 +11767,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"MemberId is non-nullable.");
-						}
-
 						_memberId = value;
 					}
 				}
@@ -12895,8 +11780,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The unique identifier of the consumer instance provided by end user.
 				/// </summary>
-				private NullableString _groupInstanceId = new NullableString(null);
-				public NullableString GroupInstanceId 
+				private String? _groupInstanceId;
+				public String? GroupInstanceId 
 				{
 					get => _groupInstanceId;
 					set 
@@ -12916,7 +11801,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public DescribedGroupMember WithGroupInstanceId(NullableString groupInstanceId)
+				public DescribedGroupMember WithGroupInstanceId(String groupInstanceId)
 				{
 					GroupInstanceId = groupInstanceId;
 					return this;
@@ -12934,11 +11819,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ClientId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ClientId is non-nullable.");
 						}
 
 						_clientId = value;
@@ -12965,11 +11845,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ClientHost does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ClientHost is non-nullable.");
-						}
-
 						_clientHost = value;
 					}
 				}
@@ -12992,11 +11867,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"MemberMetadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"MemberMetadata is non-nullable.");
 						}
 
 						_memberMetadata = value;
@@ -13023,11 +11893,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"MemberAssignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"MemberAssignment is non-nullable.");
-						}
-
 						_memberAssignment = value;
 					}
 				}
@@ -13051,11 +11916,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(3, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"AuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"AuthorizedOperations is non-nullable.");
 					}
 
 					_authorizedOperations = value;
@@ -13091,7 +11951,7 @@ namespace Kafka.Protocol
 			var instance = new DescribeLogDirsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadNullableArrayAsync(async () => await DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -13100,14 +11960,14 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
 		/// <summary>
 		/// Each topic that we want to describe log directories for, or null for all topics.
 		/// </summary>
-		private DescribableLogDirTopic[]? _topicsCollection = System.Array.Empty<DescribableLogDirTopic>();
+		private DescribableLogDirTopic[]? _topicsCollection = Array.Empty<DescribableLogDirTopic>();
 		public DescribableLogDirTopic[]? TopicsCollection 
 		{
 			get => _topicsCollection;
@@ -13155,11 +12015,11 @@ namespace Kafka.Protocol
 				var instance = new DescribableLogDirTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Topic = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndexCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.PartitionIndexCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -13168,11 +12028,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic.Value, cancellationToken);
+					await writer.WriteStringAsync(Topic, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionIndexCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionIndexCollection);
 				}
 			}
 
@@ -13190,11 +12050,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Topic is non-nullable.");
-					}
-
 					_topic = value;
 				}
 			}
@@ -13208,8 +12063,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partition indxes.
 			/// </summary>
-			private Int32[]? _partitionIndexCollection = System.Array.Empty<Int32>();
-			public Int32[]? PartitionIndexCollection 
+			private Int32[] _partitionIndexCollection = Array.Empty<Int32>();
+			public Int32[] PartitionIndexCollection 
 			{
 				get => _partitionIndexCollection;
 				set 
@@ -13219,16 +12074,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndexCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndexCollection is non-nullable.");
-					}
-
 					_partitionIndexCollection = value;
 				}
 			}
 
-			public DescribableLogDirTopic WithPartitionIndexCollection(Int32[]? partitionIndexCollection)
+			public DescribableLogDirTopic WithPartitionIndexCollection(Int32[] partitionIndexCollection)
 			{
 				PartitionIndexCollection = partitionIndexCollection;
 				return this;
@@ -13257,11 +12107,11 @@ namespace Kafka.Protocol
 			var instance = new DescribeLogDirsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadAsync(async () => await DescribeLogDirsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await DescribeLogDirsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -13270,11 +12120,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResultsCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResultsCollection);
 			}
 		}
 
@@ -13292,11 +12142,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -13310,8 +12155,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The log directories.
 		/// </summary>
-		private DescribeLogDirsResult[]? _resultsCollection = System.Array.Empty<DescribeLogDirsResult>();
-		public DescribeLogDirsResult[]? ResultsCollection 
+		private DescribeLogDirsResult[] _resultsCollection = Array.Empty<DescribeLogDirsResult>();
+		public DescribeLogDirsResult[] ResultsCollection 
 		{
 			get => _resultsCollection;
 			set 
@@ -13319,11 +12164,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResultsCollection is non-nullable.");
 				}
 
 				_resultsCollection = value;
@@ -13357,15 +12197,15 @@ namespace Kafka.Protocol
 				var instance = new DescribeLogDirsResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.LogDir = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.LogDir = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = await reader.ReadAsync(async () => await DescribeLogDirsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.TopicsCollection = await reader.ReadArrayAsync(async () => await DescribeLogDirsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -13374,15 +12214,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(LogDir.Value, cancellationToken);
+					await writer.WriteStringAsync(LogDir, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, TopicsCollection);
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 				}
 			}
 
@@ -13398,11 +12238,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
 					_errorCode = value;
@@ -13429,11 +12264,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"LogDir does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"LogDir is non-nullable.");
-					}
-
 					_logDir = value;
 				}
 			}
@@ -13447,8 +12277,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each topic.
 			/// </summary>
-			private DescribeLogDirsTopic[]? _topicsCollection = System.Array.Empty<DescribeLogDirsTopic>();
-			public DescribeLogDirsTopic[]? TopicsCollection 
+			private DescribeLogDirsTopic[] _topicsCollection = Array.Empty<DescribeLogDirsTopic>();
+			public DescribeLogDirsTopic[] TopicsCollection 
 			{
 				get => _topicsCollection;
 				set 
@@ -13456,11 +12286,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 					}
 
 					_topicsCollection = value;
@@ -13494,11 +12319,11 @@ namespace Kafka.Protocol
 					var instance = new DescribeLogDirsTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionsCollection = await reader.ReadAsync(async () => await DescribeLogDirsPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+						instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await DescribeLogDirsPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 					}
 					return instance;
 				}
@@ -13507,11 +12332,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name.Value, cancellationToken);
+						await writer.WriteStringAsync(Name, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, PartitionsCollection);
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 					}
 				}
 
@@ -13529,11 +12354,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Name is non-nullable.");
-						}
-
 						_name = value;
 					}
 				}
@@ -13544,8 +12364,8 @@ namespace Kafka.Protocol
 					return this;
 				}
 
-				private DescribeLogDirsPartition[]? _partitionsCollection = System.Array.Empty<DescribeLogDirsPartition>();
-				public DescribeLogDirsPartition[]? PartitionsCollection 
+				private DescribeLogDirsPartition[] _partitionsCollection = Array.Empty<DescribeLogDirsPartition>();
+				public DescribeLogDirsPartition[] PartitionsCollection 
 				{
 					get => _partitionsCollection;
 					set 
@@ -13553,11 +12373,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 						}
 
 						_partitionsCollection = value;
@@ -13591,19 +12406,19 @@ namespace Kafka.Protocol
 						var instance = new DescribeLogDirsPartition(version);
 						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+							instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 						}
 						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							instance.PartitionSize = new Int64(await reader.ReadInt64Async(cancellationToken));
+							instance.PartitionSize = await reader.ReadInt64Async(cancellationToken);
 						}
 						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							instance.OffsetLag = new Int64(await reader.ReadInt64Async(cancellationToken));
+							instance.OffsetLag = await reader.ReadInt64Async(cancellationToken);
 						}
 						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							instance.IsFutureKey = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+							instance.IsFutureKey = await reader.ReadBooleanAsync(cancellationToken);
 						}
 						return instance;
 					}
@@ -13612,19 +12427,19 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(0, 2147483647)) 
 						{
-							await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+							await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 						}
 						if (Version.InRange(0, 2147483647)) 
 						{
-							await writer.WriteInt64Async(PartitionSize.Value, cancellationToken);
+							await writer.WriteInt64Async(PartitionSize, cancellationToken);
 						}
 						if (Version.InRange(0, 2147483647)) 
 						{
-							await writer.WriteInt64Async(OffsetLag.Value, cancellationToken);
+							await writer.WriteInt64Async(OffsetLag, cancellationToken);
 						}
 						if (Version.InRange(0, 2147483647)) 
 						{
-							await writer.WriteBooleanAsync(IsFutureKey.Value, cancellationToken);
+							await writer.WriteBooleanAsync(IsFutureKey, cancellationToken);
 						}
 					}
 
@@ -13640,11 +12455,6 @@ namespace Kafka.Protocol
 							if (Version.InRange(0, 2147483647) == false) 
 							{
 								throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
-
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 							}
 
 							_partitionIndex = value;
@@ -13671,11 +12481,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"PartitionSize does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 							}
 
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"PartitionSize is non-nullable.");
-							}
-
 							_partitionSize = value;
 						}
 					}
@@ -13700,11 +12505,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"OffsetLag does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 							}
 
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"OffsetLag is non-nullable.");
-							}
-
 							_offsetLag = value;
 						}
 					}
@@ -13727,11 +12527,6 @@ namespace Kafka.Protocol
 							if (Version.InRange(0, 2147483647) == false) 
 							{
 								throw new UnsupportedVersionException($"IsFutureKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
-
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"IsFutureKey is non-nullable.");
 							}
 
 							_isFutureKey = value;
@@ -13769,15 +12564,15 @@ namespace Kafka.Protocol
 			var instance = new ElectLeadersRequest(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ElectionType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.ElectionType = await reader.ReadInt8Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicPartitionsCollection = await reader.ReadAsync(async () => await TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicPartitionsCollection = await reader.ReadNullableArrayAsync(async () => await TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -13786,15 +12581,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt8Async(ElectionType.Value, cancellationToken);
+				await writer.WriteInt8Async(ElectionType, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicPartitionsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicPartitionsCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(TimeoutMs, cancellationToken);
 			}
 		}
 
@@ -13812,11 +12607,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ElectionType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ElectionType is non-nullable.");
-				}
-
 				_electionType = value;
 			}
 		}
@@ -13830,7 +12620,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topic partitions to elect leaders.
 		/// </summary>
-		private TopicPartitions[]? _topicPartitionsCollection = System.Array.Empty<TopicPartitions>();
+		private TopicPartitions[]? _topicPartitionsCollection = Array.Empty<TopicPartitions>();
 		public TopicPartitions[]? TopicPartitionsCollection 
 		{
 			get => _topicPartitionsCollection;
@@ -13878,11 +12668,11 @@ namespace Kafka.Protocol
 				var instance = new TopicPartitions(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Topic = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIdCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.PartitionIdCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -13891,11 +12681,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic.Value, cancellationToken);
+					await writer.WriteStringAsync(Topic, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionIdCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionIdCollection);
 				}
 			}
 
@@ -13913,11 +12703,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Topic is non-nullable.");
-					}
-
 					_topic = value;
 				}
 			}
@@ -13931,8 +12716,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partitions of this topic whose leader should be elected.
 			/// </summary>
-			private Int32[]? _partitionIdCollection = System.Array.Empty<Int32>();
-			public Int32[]? PartitionIdCollection 
+			private Int32[] _partitionIdCollection = Array.Empty<Int32>();
+			public Int32[] PartitionIdCollection 
 			{
 				get => _partitionIdCollection;
 				set 
@@ -13942,16 +12727,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIdCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIdCollection is non-nullable.");
-					}
-
 					_partitionIdCollection = value;
 				}
 			}
 
-			public TopicPartitions WithPartitionIdCollection(Int32[]? partitionIdCollection)
+			public TopicPartitions WithPartitionIdCollection(Int32[] partitionIdCollection)
 			{
 				PartitionIdCollection = partitionIdCollection;
 				return this;
@@ -13970,11 +12750,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
 				}
 
 				_timeoutMs = value;
@@ -14009,15 +12784,15 @@ namespace Kafka.Protocol
 			var instance = new ElectLeadersResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ReplicaElectionResultsCollection = await reader.ReadAsync(async () => await ReplicaElectionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ReplicaElectionResultsCollection = await reader.ReadArrayAsync(async () => await ReplicaElectionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -14026,15 +12801,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ReplicaElectionResultsCollection);
+				await writer.WriteArrayAsync(cancellationToken, ReplicaElectionResultsCollection);
 			}
 		}
 
@@ -14050,11 +12825,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -14081,11 +12851,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -14099,8 +12864,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The election results, or an empty array if the requester did not have permission and the request asks for all partitions.
 		/// </summary>
-		private ReplicaElectionResult[]? _replicaElectionResultsCollection = System.Array.Empty<ReplicaElectionResult>();
-		public ReplicaElectionResult[]? ReplicaElectionResultsCollection 
+		private ReplicaElectionResult[] _replicaElectionResultsCollection = Array.Empty<ReplicaElectionResult>();
+		public ReplicaElectionResult[] ReplicaElectionResultsCollection 
 		{
 			get => _replicaElectionResultsCollection;
 			set 
@@ -14108,11 +12873,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ReplicaElectionResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ReplicaElectionResultsCollection is non-nullable.");
 				}
 
 				_replicaElectionResultsCollection = value;
@@ -14146,11 +12906,11 @@ namespace Kafka.Protocol
 				var instance = new ReplicaElectionResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Topic = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionResultCollection = await reader.ReadAsync(async () => await PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionResultCollection = await reader.ReadArrayAsync(async () => await PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -14159,11 +12919,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic.Value, cancellationToken);
+					await writer.WriteStringAsync(Topic, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionResultCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionResultCollection);
 				}
 			}
 
@@ -14181,11 +12941,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Topic is non-nullable.");
-					}
-
 					_topic = value;
 				}
 			}
@@ -14199,8 +12954,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The results for each partition
 			/// </summary>
-			private PartitionResult[]? _partitionResultCollection = System.Array.Empty<PartitionResult>();
-			public PartitionResult[]? PartitionResultCollection 
+			private PartitionResult[] _partitionResultCollection = Array.Empty<PartitionResult>();
+			public PartitionResult[] PartitionResultCollection 
 			{
 				get => _partitionResultCollection;
 				set 
@@ -14208,11 +12963,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionResultCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionResultCollection is non-nullable.");
 					}
 
 					_partitionResultCollection = value;
@@ -14246,15 +12996,15 @@ namespace Kafka.Protocol
 					var instance = new PartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionId = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionId = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -14263,15 +13013,15 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionId.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionId, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 					}
 				}
 
@@ -14287,11 +13037,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionId is non-nullable.");
 						}
 
 						_partitionId = value;
@@ -14318,11 +13063,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-						}
-
 						_errorCode = value;
 					}
 				}
@@ -14336,8 +13076,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The result message, or null if there was no error.
 				/// </summary>
-				private NullableString _errorMessage = NullableString.Default;
-				public NullableString ErrorMessage 
+				private String? _errorMessage = String.Default;
+				public String? ErrorMessage 
 				{
 					get => _errorMessage;
 					set 
@@ -14357,7 +13097,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public PartitionResult WithErrorMessage(NullableString errorMessage)
+				public PartitionResult WithErrorMessage(String errorMessage)
 				{
 					ErrorMessage = errorMessage;
 					return this;
@@ -14387,19 +13127,19 @@ namespace Kafka.Protocol
 			var instance = new EndTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Committed = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.Committed = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -14408,19 +13148,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
+				await writer.WriteStringAsync(TransactionalId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+				await writer.WriteInt64Async(ProducerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
+				await writer.WriteInt16Async(ProducerEpoch, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(Committed.Value, cancellationToken);
+				await writer.WriteBooleanAsync(Committed, cancellationToken);
 			}
 		}
 
@@ -14436,11 +13176,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TransactionalId is non-nullable.");
 				}
 
 				_transactionalId = value;
@@ -14467,11 +13202,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
-				}
-
 				_producerId = value;
 			}
 		}
@@ -14496,11 +13226,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
-				}
-
 				_producerEpoch = value;
 			}
 		}
@@ -14523,11 +13248,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Committed does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Committed is non-nullable.");
 				}
 
 				_committed = value;
@@ -14562,11 +13282,11 @@ namespace Kafka.Protocol
 			var instance = new EndTxnResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -14575,11 +13295,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 		}
 
@@ -14595,11 +13315,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -14624,11 +13339,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -14663,11 +13373,11 @@ namespace Kafka.Protocol
 			var instance = new ExpireDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.Hmac = await reader.ReadBytesAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ExpiryTimePeriodMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ExpiryTimePeriodMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -14676,11 +13386,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBytesAsync(Hmac.Value, cancellationToken);
+				await writer.WriteBytesAsync(Hmac, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ExpiryTimePeriodMs.Value, cancellationToken);
+				await writer.WriteInt64Async(ExpiryTimePeriodMs, cancellationToken);
 			}
 		}
 
@@ -14696,11 +13406,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Hmac is non-nullable.");
 				}
 
 				_hmac = value;
@@ -14725,11 +13430,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ExpiryTimePeriodMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ExpiryTimePeriodMs is non-nullable.");
 				}
 
 				_expiryTimePeriodMs = value;
@@ -14764,15 +13464,15 @@ namespace Kafka.Protocol
 			var instance = new ExpireDelegationTokenResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ExpiryTimestampMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -14781,15 +13481,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ExpiryTimestampMs.Value, cancellationToken);
+				await writer.WriteInt64Async(ExpiryTimestampMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 		}
 
@@ -14805,11 +13505,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -14836,11 +13531,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ExpiryTimestampMs is non-nullable.");
-				}
-
 				_expiryTimestampMs = value;
 			}
 		}
@@ -14863,11 +13553,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -14902,43 +13587,43 @@ namespace Kafka.Protocol
 			var instance = new FetchRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ReplicaId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MaxWait = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.MaxWait = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MinBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.MinBytes = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.MaxBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.MaxBytes = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(4, 2147483647)) 
 			{
-				instance.IsolationLevel = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.IsolationLevel = await reader.ReadInt8Async(cancellationToken);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.SessionId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.SessionId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.Epoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.Epoch = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await FetchableTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await FetchableTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.ForgottenCollection = await reader.ReadAsync(async () => await ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ForgottenCollection = await reader.ReadArrayAsync(async () => await ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(11, 2147483647)) 
 			{
-				instance.RackId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.RackId = await reader.ReadStringAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -14947,43 +13632,43 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ReplicaId.Value, cancellationToken);
+				await writer.WriteInt32Async(ReplicaId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(MaxWait.Value, cancellationToken);
+				await writer.WriteInt32Async(MaxWait, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(MinBytes.Value, cancellationToken);
+				await writer.WriteInt32Async(MinBytes, cancellationToken);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteInt32Async(MaxBytes.Value, cancellationToken);
+				await writer.WriteInt32Async(MaxBytes, cancellationToken);
 			}
 			if (Version.InRange(4, 2147483647)) 
 			{
-				await writer.WriteInt8Async(IsolationLevel.Value, cancellationToken);
+				await writer.WriteInt8Async(IsolationLevel, cancellationToken);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteInt32Async(SessionId.Value, cancellationToken);
+				await writer.WriteInt32Async(SessionId, cancellationToken);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteInt32Async(Epoch.Value, cancellationToken);
+				await writer.WriteInt32Async(Epoch, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ForgottenCollection);
+				await writer.WriteArrayAsync(cancellationToken, ForgottenCollection);
 			}
 			if (Version.InRange(11, 2147483647)) 
 			{
-				await writer.WriteStringAsync(RackId.Value, cancellationToken);
+				await writer.WriteStringAsync(RackId, cancellationToken);
 			}
 		}
 
@@ -14999,11 +13684,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ReplicaId is non-nullable.");
 				}
 
 				_replicaId = value;
@@ -15030,11 +13710,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MaxWait does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MaxWait is non-nullable.");
-				}
-
 				_maxWait = value;
 			}
 		}
@@ -15059,11 +13734,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MinBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MinBytes is non-nullable.");
-				}
-
 				_minBytes = value;
 			}
 		}
@@ -15083,11 +13753,6 @@ namespace Kafka.Protocol
 			get => _maxBytes;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MaxBytes is non-nullable.");
-				}
-
 				_maxBytes = value;
 			}
 		}
@@ -15110,11 +13775,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(4, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"IsolationLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"IsolationLevel is non-nullable.");
 				}
 
 				_isolationLevel = value;
@@ -15141,11 +13801,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"SessionId does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"SessionId is non-nullable.");
-				}
-
 				_sessionId = value;
 			}
 		}
@@ -15170,11 +13825,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Epoch does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Epoch is non-nullable.");
-				}
-
 				_epoch = value;
 			}
 		}
@@ -15188,8 +13838,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to fetch.
 		/// </summary>
-		private FetchableTopic[]? _topicsCollection = System.Array.Empty<FetchableTopic>();
-		public FetchableTopic[]? TopicsCollection 
+		private FetchableTopic[] _topicsCollection = Array.Empty<FetchableTopic>();
+		public FetchableTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -15197,11 +13847,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -15235,11 +13880,11 @@ namespace Kafka.Protocol
 				var instance = new FetchableTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.FetchPartitionsCollection = await reader.ReadAsync(async () => await FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.FetchPartitionsCollection = await reader.ReadArrayAsync(async () => await FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -15248,11 +13893,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, FetchPartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, FetchPartitionsCollection);
 				}
 			}
 
@@ -15270,11 +13915,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -15288,8 +13928,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partitions to fetch.
 			/// </summary>
-			private FetchPartition[]? _fetchPartitionsCollection = System.Array.Empty<FetchPartition>();
-			public FetchPartition[]? FetchPartitionsCollection 
+			private FetchPartition[] _fetchPartitionsCollection = Array.Empty<FetchPartition>();
+			public FetchPartition[] FetchPartitionsCollection 
 			{
 				get => _fetchPartitionsCollection;
 				set 
@@ -15297,11 +13937,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"FetchPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"FetchPartitionsCollection is non-nullable.");
 					}
 
 					_fetchPartitionsCollection = value;
@@ -15335,23 +13970,23 @@ namespace Kafka.Protocol
 					var instance = new FetchPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(9, 2147483647)) 
 					{
-						instance.CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CurrentLeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.FetchOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.FetchOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						instance.LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LogStartOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.MaxBytes = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.MaxBytes = await reader.ReadInt32Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -15360,23 +13995,23 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(9, 2147483647)) 
 					{
-						await writer.WriteInt32Async(CurrentLeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(CurrentLeaderEpoch, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(FetchOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(FetchOffset, cancellationToken);
 					}
 					if (Version.InRange(5, 2147483647)) 
 					{
-						await writer.WriteInt64Async(LogStartOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(LogStartOffset, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(MaxBytes.Value, cancellationToken);
+						await writer.WriteInt32Async(MaxBytes, cancellationToken);
 					}
 				}
 
@@ -15392,11 +14027,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -15418,11 +14048,6 @@ namespace Kafka.Protocol
 					get => _currentLeaderEpoch;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CurrentLeaderEpoch is non-nullable.");
-						}
-
 						_currentLeaderEpoch = value;
 					}
 				}
@@ -15445,11 +14070,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"FetchOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"FetchOffset is non-nullable.");
 						}
 
 						_fetchOffset = value;
@@ -15476,11 +14096,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LogStartOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LogStartOffset is non-nullable.");
-						}
-
 						_logStartOffset = value;
 					}
 				}
@@ -15505,11 +14120,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"MaxBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"MaxBytes is non-nullable.");
-						}
-
 						_maxBytes = value;
 					}
 				}
@@ -15525,8 +14135,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// In an incremental fetch request, the partitions to remove.
 		/// </summary>
-		private ForgottenTopic[]? _forgottenCollection = System.Array.Empty<ForgottenTopic>();
-		public ForgottenTopic[]? ForgottenCollection 
+		private ForgottenTopic[] _forgottenCollection = Array.Empty<ForgottenTopic>();
+		public ForgottenTopic[] ForgottenCollection 
 		{
 			get => _forgottenCollection;
 			set 
@@ -15534,11 +14144,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(7, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ForgottenCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ForgottenCollection is non-nullable.");
 				}
 
 				_forgottenCollection = value;
@@ -15572,11 +14177,11 @@ namespace Kafka.Protocol
 				var instance = new ForgottenTopic(version);
 				if (instance.Version.InRange(7, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(7, 2147483647)) 
 				{
-					instance.ForgottenPartitionIndexesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.ForgottenPartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -15585,11 +14190,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(7, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(7, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ForgottenPartitionIndexesCollection);
+					await writer.WriteArrayAsync(cancellationToken, ForgottenPartitionIndexesCollection);
 				}
 			}
 
@@ -15607,11 +14212,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -15625,8 +14225,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partitions indexes to forget.
 			/// </summary>
-			private Int32[]? _forgottenPartitionIndexesCollection = System.Array.Empty<Int32>();
-			public Int32[]? ForgottenPartitionIndexesCollection 
+			private Int32[] _forgottenPartitionIndexesCollection = Array.Empty<Int32>();
+			public Int32[] ForgottenPartitionIndexesCollection 
 			{
 				get => _forgottenPartitionIndexesCollection;
 				set 
@@ -15636,16 +14236,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ForgottenPartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ForgottenPartitionIndexesCollection is non-nullable.");
-					}
-
 					_forgottenPartitionIndexesCollection = value;
 				}
 			}
 
-			public ForgottenTopic WithForgottenPartitionIndexesCollection(Int32[]? forgottenPartitionIndexesCollection)
+			public ForgottenTopic WithForgottenPartitionIndexesCollection(Int32[] forgottenPartitionIndexesCollection)
 			{
 				ForgottenPartitionIndexesCollection = forgottenPartitionIndexesCollection;
 				return this;
@@ -15661,11 +14256,6 @@ namespace Kafka.Protocol
 			get => _rackId;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"RackId is non-nullable.");
-				}
-
 				_rackId = value;
 			}
 		}
@@ -15698,19 +14288,19 @@ namespace Kafka.Protocol
 			var instance = new FetchResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.SessionId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.SessionId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await FetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await FetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -15719,19 +14309,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteInt32Async(SessionId.Value, cancellationToken);
+				await writer.WriteInt32Async(SessionId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -15744,11 +14334,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -15771,11 +14356,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(7, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -15802,11 +14382,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"SessionId does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"SessionId is non-nullable.");
-				}
-
 				_sessionId = value;
 			}
 		}
@@ -15820,8 +14395,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The response topics.
 		/// </summary>
-		private FetchableTopicResponse[]? _topicsCollection = System.Array.Empty<FetchableTopicResponse>();
-		public FetchableTopicResponse[]? TopicsCollection 
+		private FetchableTopicResponse[] _topicsCollection = Array.Empty<FetchableTopicResponse>();
+		public FetchableTopicResponse[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -15829,11 +14404,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -15867,11 +14437,11 @@ namespace Kafka.Protocol
 				var instance = new FetchableTopicResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await FetchablePartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await FetchablePartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -15880,11 +14450,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -15902,11 +14472,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -15920,8 +14485,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The topic partitions.
 			/// </summary>
-			private FetchablePartitionResponse[]? _partitionsCollection = System.Array.Empty<FetchablePartitionResponse>();
-			public FetchablePartitionResponse[]? PartitionsCollection 
+			private FetchablePartitionResponse[] _partitionsCollection = Array.Empty<FetchablePartitionResponse>();
+			public FetchablePartitionResponse[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -15929,11 +14494,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -15967,35 +14527,35 @@ namespace Kafka.Protocol
 					var instance = new FetchablePartitionResponse(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.HighWatermark = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.HighWatermark = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						instance.LastStableOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LastStableOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						instance.LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LogStartOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						instance.AbortedCollection = await reader.ReadAsync(async () => await AbortedTransaction.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+						instance.AbortedCollection = await reader.ReadNullableArrayAsync(async () => await AbortedTransaction.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 					}
 					if (instance.Version.InRange(11, 2147483647)) 
 					{
-						instance.PreferredReadReplica = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PreferredReadReplica = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Records = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+						instance.Records = await reader.ReadBytesAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -16004,35 +14564,35 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(HighWatermark.Value, cancellationToken);
+						await writer.WriteInt64Async(HighWatermark, cancellationToken);
 					}
 					if (Version.InRange(4, 2147483647)) 
 					{
-						await writer.WriteInt64Async(LastStableOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(LastStableOffset, cancellationToken);
 					}
 					if (Version.InRange(5, 2147483647)) 
 					{
-						await writer.WriteInt64Async(LogStartOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(LogStartOffset, cancellationToken);
 					}
 					if (Version.InRange(4, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, AbortedCollection);
+						await writer.WriteArrayAsync(cancellationToken, AbortedCollection);
 					}
 					if (Version.InRange(11, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PreferredReadReplica.Value, cancellationToken);
+						await writer.WriteInt32Async(PreferredReadReplica, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteBytesAsync(Records.Value, cancellationToken);
+						await writer.WriteNullableBytesAsync(Records, cancellationToken);
 					}
 				}
 
@@ -16048,11 +14608,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -16079,11 +14634,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-						}
-
 						_errorCode = value;
 					}
 				}
@@ -16108,11 +14658,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"HighWatermark does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"HighWatermark is non-nullable.");
-						}
-
 						_highWatermark = value;
 					}
 				}
@@ -16132,11 +14677,6 @@ namespace Kafka.Protocol
 					get => _lastStableOffset;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LastStableOffset is non-nullable.");
-						}
-
 						_lastStableOffset = value;
 					}
 				}
@@ -16156,11 +14696,6 @@ namespace Kafka.Protocol
 					get => _logStartOffset;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LogStartOffset is non-nullable.");
-						}
-
 						_logStartOffset = value;
 					}
 				}
@@ -16174,7 +14709,7 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The aborted transactions.
 				/// </summary>
-				private AbortedTransaction[]? _abortedCollection = System.Array.Empty<AbortedTransaction>();
+				private AbortedTransaction[]? _abortedCollection = Array.Empty<AbortedTransaction>();
 				public AbortedTransaction[]? AbortedCollection 
 				{
 					get => _abortedCollection;
@@ -16222,11 +14757,11 @@ namespace Kafka.Protocol
 						var instance = new AbortedTransaction(version);
 						if (instance.Version.InRange(4, 2147483647)) 
 						{
-							instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+							instance.ProducerId = await reader.ReadInt64Async(cancellationToken);
 						}
 						if (instance.Version.InRange(4, 2147483647)) 
 						{
-							instance.FirstOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+							instance.FirstOffset = await reader.ReadInt64Async(cancellationToken);
 						}
 						return instance;
 					}
@@ -16235,11 +14770,11 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(4, 2147483647)) 
 						{
-							await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+							await writer.WriteInt64Async(ProducerId, cancellationToken);
 						}
 						if (Version.InRange(4, 2147483647)) 
 						{
-							await writer.WriteInt64Async(FirstOffset.Value, cancellationToken);
+							await writer.WriteInt64Async(FirstOffset, cancellationToken);
 						}
 					}
 
@@ -16255,11 +14790,6 @@ namespace Kafka.Protocol
 							if (Version.InRange(4, 2147483647) == false) 
 							{
 								throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-							}
-
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 							}
 
 							_producerId = value;
@@ -16286,11 +14816,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"FirstOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 							}
 
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"FirstOffset is non-nullable.");
-							}
-
 							_firstOffset = value;
 						}
 					}
@@ -16311,11 +14836,6 @@ namespace Kafka.Protocol
 					get => _preferredReadReplica;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PreferredReadReplica is non-nullable.");
-						}
-
 						_preferredReadReplica = value;
 					}
 				}
@@ -16329,8 +14849,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The record data.
 				/// </summary>
-				private Bytes _records = Bytes.Default;
-				public Bytes Records 
+				private Bytes? _records = Bytes.Default;
+				public Bytes? Records 
 				{
 					get => _records;
 					set 
@@ -16380,11 +14900,11 @@ namespace Kafka.Protocol
 			var instance = new FindCoordinatorRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Key = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.Key = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.KeyType = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.KeyType = await reader.ReadInt8Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -16393,11 +14913,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(Key.Value, cancellationToken);
+				await writer.WriteStringAsync(Key, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt8Async(KeyType.Value, cancellationToken);
+				await writer.WriteInt8Async(KeyType, cancellationToken);
 			}
 		}
 
@@ -16413,11 +14933,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Key is non-nullable.");
 				}
 
 				_key = value;
@@ -16442,11 +14957,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"KeyType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"KeyType is non-nullable.");
 				}
 
 				_keyType = value;
@@ -16481,27 +14991,27 @@ namespace Kafka.Protocol
 			var instance = new FindCoordinatorResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.NodeId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.NodeId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.Host = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.Port = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -16510,27 +15020,27 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(NodeId.Value, cancellationToken);
+				await writer.WriteInt32Async(NodeId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(Host.Value, cancellationToken);
+				await writer.WriteStringAsync(Host, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(Port.Value, cancellationToken);
+				await writer.WriteInt32Async(Port, cancellationToken);
 			}
 		}
 
@@ -16543,11 +15053,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -16572,11 +15077,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -16590,8 +15090,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		private NullableString _errorMessage = NullableString.Default;
-		public NullableString ErrorMessage 
+		private String? _errorMessage = String.Default;
+		public String? ErrorMessage 
 		{
 			get => _errorMessage;
 			set 
@@ -16606,7 +15106,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public FindCoordinatorResponse WithErrorMessage(NullableString errorMessage)
+		public FindCoordinatorResponse WithErrorMessage(String errorMessage)
 		{
 			ErrorMessage = errorMessage;
 			return this;
@@ -16624,11 +15124,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"NodeId is non-nullable.");
 				}
 
 				_nodeId = value;
@@ -16655,11 +15150,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Host is non-nullable.");
-				}
-
 				_host = value;
 			}
 		}
@@ -16682,11 +15172,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Port is non-nullable.");
 				}
 
 				_port = value;
@@ -16721,19 +15206,19 @@ namespace Kafka.Protocol
 			var instance = new HeartbeatRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.GenerationId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -16742,19 +15227,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+				await writer.WriteStringAsync(GroupId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(GenerationId.Value, cancellationToken);
+				await writer.WriteInt32Async(GenerationId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+				await writer.WriteStringAsync(MemberId, cancellationToken);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken);
 			}
 		}
 
@@ -16770,11 +15255,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
 				_groupId = value;
@@ -16801,11 +15281,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GenerationId is non-nullable.");
-				}
-
 				_generationId = value;
 			}
 		}
@@ -16830,11 +15305,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MemberId is non-nullable.");
-				}
-
 				_memberId = value;
 			}
 		}
@@ -16848,8 +15318,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
 		/// </summary>
-		private NullableString _groupInstanceId = new NullableString(null);
-		public NullableString GroupInstanceId 
+		private String? _groupInstanceId;
+		public String? GroupInstanceId 
 		{
 			get => _groupInstanceId;
 			set 
@@ -16869,7 +15339,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public HeartbeatRequest WithGroupInstanceId(NullableString groupInstanceId)
+		public HeartbeatRequest WithGroupInstanceId(String groupInstanceId)
 		{
 			GroupInstanceId = groupInstanceId;
 			return this;
@@ -16897,11 +15367,11 @@ namespace Kafka.Protocol
 			var instance = new HeartbeatResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -16910,11 +15380,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 		}
 
@@ -16927,11 +15397,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -16954,11 +15419,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -16993,11 +15453,11 @@ namespace Kafka.Protocol
 			var instance = new IncrementalAlterConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourcesCollection = (await reader.ReadAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.ResourceType);
+				instance.ResourcesCollection = (await reader.ReadArrayAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.ResourceType);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ValidateOnly = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -17006,11 +15466,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResourcesCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, ResourcesCollection.Values.ToArray());
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(ValidateOnly.Value, cancellationToken);
+				await writer.WriteBooleanAsync(ValidateOnly, cancellationToken);
 			}
 		}
 
@@ -17026,11 +15486,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResourcesCollection is non-nullable.");
 				}
 
 				_resourcesCollection = value;
@@ -17064,15 +15519,15 @@ namespace Kafka.Protocol
 				var instance = new AlterConfigsResource(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigsCollection = (await reader.ReadAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = (await reader.ReadArrayAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 				}
 				return instance;
 			}
@@ -17081,15 +15536,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourceType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
+					await writer.WriteStringAsync(ResourceName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ConfigsCollection.Values.ToArray());
+					await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray());
 				}
 			}
 
@@ -17105,11 +15560,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
 					_resourceType = value;
@@ -17136,11 +15586,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
-					}
-
 					_resourceName = value;
 				}
 			}
@@ -17163,11 +15608,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ConfigsCollection is non-nullable.");
 					}
 
 					_configsCollection = value;
@@ -17201,15 +15641,15 @@ namespace Kafka.Protocol
 					var instance = new AlterableConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ConfigOperation = new Int8(await reader.ReadInt8Async(cancellationToken));
+						instance.ConfigOperation = await reader.ReadInt8Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Value = await reader.ReadStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -17218,15 +15658,15 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name.Value, cancellationToken);
+						await writer.WriteStringAsync(Name, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt8Async(ConfigOperation.Value, cancellationToken);
+						await writer.WriteInt8Async(ConfigOperation, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(Value, cancellationToken);
 					}
 				}
 
@@ -17242,11 +15682,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Name is non-nullable.");
 						}
 
 						_name = value;
@@ -17273,11 +15708,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ConfigOperation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ConfigOperation is non-nullable.");
-						}
-
 						_configOperation = value;
 					}
 				}
@@ -17291,8 +15721,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The value to set for the configuration key.
 				/// </summary>
-				private NullableString _value = NullableString.Default;
-				public NullableString Value 
+				private String? _value = String.Default;
+				public String? Value 
 				{
 					get => _value;
 					set 
@@ -17312,7 +15742,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public AlterableConfig WithValue(NullableString value)
+				public AlterableConfig WithValue(String value)
 				{
 					Value = value;
 					return this;
@@ -17332,11 +15762,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ValidateOnly is non-nullable.");
 				}
 
 				_validateOnly = value;
@@ -17371,11 +15796,11 @@ namespace Kafka.Protocol
 			var instance = new IncrementalAlterConfigsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = await reader.ReadAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResponsesCollection = await reader.ReadArrayAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -17384,11 +15809,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResponsesCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection);
 			}
 		}
 
@@ -17406,11 +15831,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -17424,8 +15844,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The responses for each resource.
 		/// </summary>
-		private AlterConfigsResourceResponse[]? _responsesCollection = System.Array.Empty<AlterConfigsResourceResponse>();
-		public AlterConfigsResourceResponse[]? ResponsesCollection 
+		private AlterConfigsResourceResponse[] _responsesCollection = Array.Empty<AlterConfigsResourceResponse>();
+		public AlterConfigsResourceResponse[] ResponsesCollection 
 		{
 			get => _responsesCollection;
 			set 
@@ -17433,11 +15853,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResponsesCollection is non-nullable.");
 				}
 
 				_responsesCollection = value;
@@ -17471,19 +15886,19 @@ namespace Kafka.Protocol
 				var instance = new AlterConfigsResourceResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceType = new Int8(await reader.ReadInt8Async(cancellationToken));
+					instance.ResourceType = await reader.ReadInt8Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ResourceName = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -17492,19 +15907,19 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt8Async(ResourceType.Value, cancellationToken);
+					await writer.WriteInt8Async(ResourceType, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName.Value, cancellationToken);
+					await writer.WriteStringAsync(ResourceName, cancellationToken);
 				}
 			}
 
@@ -17522,11 +15937,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-					}
-
 					_errorCode = value;
 				}
 			}
@@ -17540,8 +15950,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The resource error message, or null if there was no error.
 			/// </summary>
-			private NullableString _errorMessage = NullableString.Default;
-			public NullableString ErrorMessage 
+			private String? _errorMessage = String.Default;
+			public String? ErrorMessage 
 			{
 				get => _errorMessage;
 				set 
@@ -17561,7 +15971,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public AlterConfigsResourceResponse WithErrorMessage(NullableString errorMessage)
+			public AlterConfigsResourceResponse WithErrorMessage(String errorMessage)
 			{
 				ErrorMessage = errorMessage;
 				return this;
@@ -17579,11 +15989,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceType is non-nullable.");
 					}
 
 					_resourceType = value;
@@ -17608,11 +16013,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ResourceName is non-nullable.");
 					}
 
 					_resourceName = value;
@@ -17648,11 +16048,11 @@ namespace Kafka.Protocol
 			var instance = new InitProducerIdRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TransactionTimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -17661,19 +16061,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(TransactionalId.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(TransactionalId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(TransactionTimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(TransactionTimeoutMs, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// The transactional id, or null if the producer is not transactional.
 		/// </summary>
-		private NullableString _transactionalId = NullableString.Default;
-		public NullableString TransactionalId 
+		private String? _transactionalId = String.Default;
+		public String? TransactionalId 
 		{
 			get => _transactionalId;
 			set 
@@ -17693,7 +16093,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public InitProducerIdRequest WithTransactionalId(NullableString transactionalId)
+		public InitProducerIdRequest WithTransactionalId(String transactionalId)
 		{
 			TransactionalId = transactionalId;
 			return this;
@@ -17711,11 +16111,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TransactionTimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TransactionTimeoutMs is non-nullable.");
 				}
 
 				_transactionTimeoutMs = value;
@@ -17750,19 +16145,19 @@ namespace Kafka.Protocol
 			var instance = new InitProducerIdResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = await reader.ReadInt16Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -17771,19 +16166,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+				await writer.WriteInt64Async(ProducerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
+				await writer.WriteInt16Async(ProducerEpoch, cancellationToken);
 			}
 		}
 
@@ -17796,11 +16191,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -17823,11 +16213,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -17854,11 +16239,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
-				}
-
 				_producerId = value;
 			}
 		}
@@ -17881,11 +16261,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
 				}
 
 				_producerEpoch = value;
@@ -17920,31 +16295,31 @@ namespace Kafka.Protocol
 			var instance = new JoinGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.SessionTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.SessionTimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.RebalanceTimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.RebalanceTimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.ProtocolType = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProtocolsCollection = (await reader.ReadAsync(async () => await JoinGroupRequestProtocol.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+				instance.ProtocolsCollection = (await reader.ReadArrayAsync(async () => await JoinGroupRequestProtocol.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -17953,31 +16328,31 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+				await writer.WriteStringAsync(GroupId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(SessionTimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(SessionTimeoutMs, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(RebalanceTimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(RebalanceTimeoutMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+				await writer.WriteStringAsync(MemberId, cancellationToken);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(ProtocolType.Value, cancellationToken);
+				await writer.WriteStringAsync(ProtocolType, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ProtocolsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, ProtocolsCollection.Values.ToArray());
 			}
 		}
 
@@ -17993,11 +16368,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
 				_groupId = value;
@@ -18024,11 +16394,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"SessionTimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"SessionTimeoutMs is non-nullable.");
-				}
-
 				_sessionTimeoutMs = value;
 			}
 		}
@@ -18048,11 +16413,6 @@ namespace Kafka.Protocol
 			get => _rebalanceTimeoutMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"RebalanceTimeoutMs is non-nullable.");
-				}
-
 				_rebalanceTimeoutMs = value;
 			}
 		}
@@ -18077,11 +16437,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MemberId is non-nullable.");
-				}
-
 				_memberId = value;
 			}
 		}
@@ -18095,8 +16450,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
 		/// </summary>
-		private NullableString _groupInstanceId = new NullableString(null);
-		public NullableString GroupInstanceId 
+		private String? _groupInstanceId;
+		public String? GroupInstanceId 
 		{
 			get => _groupInstanceId;
 			set 
@@ -18116,7 +16471,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public JoinGroupRequest WithGroupInstanceId(NullableString groupInstanceId)
+		public JoinGroupRequest WithGroupInstanceId(String groupInstanceId)
 		{
 			GroupInstanceId = groupInstanceId;
 			return this;
@@ -18134,11 +16489,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProtocolType is non-nullable.");
 				}
 
 				_protocolType = value;
@@ -18163,11 +16513,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ProtocolsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProtocolsCollection is non-nullable.");
 				}
 
 				_protocolsCollection = value;
@@ -18201,11 +16546,11 @@ namespace Kafka.Protocol
 				var instance = new JoinGroupRequestProtocol(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Metadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+					instance.Metadata = await reader.ReadBytesAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -18214,11 +16559,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteBytesAsync(Metadata.Value, cancellationToken);
+					await writer.WriteBytesAsync(Metadata, cancellationToken);
 				}
 			}
 
@@ -18234,11 +16579,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
 					_name = value;
@@ -18263,11 +16603,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Metadata is non-nullable.");
 					}
 
 					_metadata = value;
@@ -18303,31 +16638,31 @@ namespace Kafka.Protocol
 			var instance = new JoinGroupResponse(version);
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.GenerationId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProtocolName = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.ProtocolName = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Leader = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.Leader = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MembersCollection = await reader.ReadAsync(async () => await JoinGroupResponseMember.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.MembersCollection = await reader.ReadArrayAsync(async () => await JoinGroupResponseMember.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -18336,31 +16671,31 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(GenerationId.Value, cancellationToken);
+				await writer.WriteInt32Async(GenerationId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(ProtocolName.Value, cancellationToken);
+				await writer.WriteStringAsync(ProtocolName, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(Leader.Value, cancellationToken);
+				await writer.WriteStringAsync(Leader, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+				await writer.WriteStringAsync(MemberId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, MembersCollection);
+				await writer.WriteArrayAsync(cancellationToken, MembersCollection);
 			}
 		}
 
@@ -18373,11 +16708,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -18400,11 +16730,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -18431,11 +16756,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GenerationId is non-nullable.");
-				}
-
 				_generationId = value;
 			}
 		}
@@ -18458,11 +16778,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ProtocolName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProtocolName is non-nullable.");
 				}
 
 				_protocolName = value;
@@ -18489,11 +16804,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Leader is non-nullable.");
-				}
-
 				_leader = value;
 			}
 		}
@@ -18518,11 +16828,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MemberId is non-nullable.");
-				}
-
 				_memberId = value;
 			}
 		}
@@ -18533,8 +16838,8 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private JoinGroupResponseMember[]? _membersCollection = System.Array.Empty<JoinGroupResponseMember>();
-		public JoinGroupResponseMember[]? MembersCollection 
+		private JoinGroupResponseMember[] _membersCollection = Array.Empty<JoinGroupResponseMember>();
+		public JoinGroupResponseMember[] MembersCollection 
 		{
 			get => _membersCollection;
 			set 
@@ -18542,11 +16847,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MembersCollection is non-nullable.");
 				}
 
 				_membersCollection = value;
@@ -18580,15 +16880,15 @@ namespace Kafka.Protocol
 				var instance = new JoinGroupResponseMember(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Metadata = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+					instance.Metadata = await reader.ReadBytesAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -18597,15 +16897,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+					await writer.WriteStringAsync(MemberId, cancellationToken);
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(GroupInstanceId.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteBytesAsync(Metadata.Value, cancellationToken);
+					await writer.WriteBytesAsync(Metadata, cancellationToken);
 				}
 			}
 
@@ -18623,11 +16923,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"MemberId is non-nullable.");
-					}
-
 					_memberId = value;
 				}
 			}
@@ -18641,8 +16936,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The unique identifier of the consumer instance provided by end user.
 			/// </summary>
-			private NullableString _groupInstanceId = new NullableString(null);
-			public NullableString GroupInstanceId 
+			private String? _groupInstanceId;
+			public String? GroupInstanceId 
 			{
 				get => _groupInstanceId;
 				set 
@@ -18662,7 +16957,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public JoinGroupResponseMember WithGroupInstanceId(NullableString groupInstanceId)
+			public JoinGroupResponseMember WithGroupInstanceId(String groupInstanceId)
 			{
 				GroupInstanceId = groupInstanceId;
 				return this;
@@ -18680,11 +16975,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Metadata is non-nullable.");
 					}
 
 					_metadata = value;
@@ -18720,27 +17010,27 @@ namespace Kafka.Protocol
 			var instance = new LeaderAndIsrRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerEpoch = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.BrokerEpoch = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 1)) 
 			{
-				instance.PartitionStatesV0Collection = await reader.ReadAsync(async () => await LeaderAndIsrRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.PartitionStatesV0Collection = await reader.ReadArrayAsync(async () => await LeaderAndIsrRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.TopicStatesCollection = await reader.ReadAsync(async () => await LeaderAndIsrRequestTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicStatesCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrRequestTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.LiveLeadersCollection = await reader.ReadAsync(async () => await LeaderAndIsrLiveLeader.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.LiveLeadersCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrLiveLeader.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -18749,27 +17039,27 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ControllerId.Value, cancellationToken);
+				await writer.WriteInt32Async(ControllerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
+				await writer.WriteInt32Async(ControllerEpoch, cancellationToken);
 			}
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteInt64Async(BrokerEpoch.Value, cancellationToken);
+				await writer.WriteInt64Async(BrokerEpoch, cancellationToken);
 			}
 			if (Version.InRange(0, 1)) 
 			{
-				await writer.WriteAsync(cancellationToken, PartitionStatesV0Collection);
+				await writer.WriteArrayAsync(cancellationToken, PartitionStatesV0Collection);
 			}
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicStatesCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicStatesCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, LiveLeadersCollection);
+				await writer.WriteArrayAsync(cancellationToken, LiveLeadersCollection);
 			}
 		}
 
@@ -18785,11 +17075,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ControllerId is non-nullable.");
 				}
 
 				_controllerId = value;
@@ -18816,11 +17101,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
-				}
-
 				_controllerEpoch = value;
 			}
 		}
@@ -18840,11 +17120,6 @@ namespace Kafka.Protocol
 			get => _brokerEpoch;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"BrokerEpoch is non-nullable.");
-				}
-
 				_brokerEpoch = value;
 			}
 		}
@@ -18858,8 +17133,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The state of each partition, in a v0 or v1 message.
 		/// </summary>
-		private LeaderAndIsrRequestPartition[]? _partitionStatesV0Collection = System.Array.Empty<LeaderAndIsrRequestPartition>();
-		public LeaderAndIsrRequestPartition[]? PartitionStatesV0Collection 
+		private LeaderAndIsrRequestPartition[] _partitionStatesV0Collection = Array.Empty<LeaderAndIsrRequestPartition>();
+		public LeaderAndIsrRequestPartition[] PartitionStatesV0Collection 
 		{
 			get => _partitionStatesV0Collection;
 			set 
@@ -18869,16 +17144,11 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PartitionStatesV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PartitionStatesV0Collection is non-nullable.");
-				}
-
 				_partitionStatesV0Collection = value;
 			}
 		}
 
-		public LeaderAndIsrRequest WithPartitionStatesV0Collection(LeaderAndIsrRequestPartition[]? partitionStatesV0Collection)
+		public LeaderAndIsrRequest WithPartitionStatesV0Collection(LeaderAndIsrRequestPartition[] partitionStatesV0Collection)
 		{
 			PartitionStatesV0Collection = partitionStatesV0Collection;
 			return this;
@@ -18887,8 +17157,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic.
 		/// </summary>
-		private LeaderAndIsrRequestTopicState[]? _topicStatesCollection = System.Array.Empty<LeaderAndIsrRequestTopicState>();
-		public LeaderAndIsrRequestTopicState[]? TopicStatesCollection 
+		private LeaderAndIsrRequestTopicState[] _topicStatesCollection = Array.Empty<LeaderAndIsrRequestTopicState>();
+		public LeaderAndIsrRequestTopicState[] TopicStatesCollection 
 		{
 			get => _topicStatesCollection;
 			set 
@@ -18896,11 +17166,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(2, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicStatesCollection is non-nullable.");
 				}
 
 				_topicStatesCollection = value;
@@ -18934,11 +17199,11 @@ namespace Kafka.Protocol
 				var instance = new LeaderAndIsrRequestTopicState(version);
 				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					instance.PartitionStatesV0Collection = await reader.ReadAsync(async () => await LeaderAndIsrRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionStatesV0Collection = await reader.ReadArrayAsync(async () => await LeaderAndIsrRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -18947,11 +17212,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(2, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(2, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionStatesV0Collection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionStatesV0Collection);
 				}
 			}
 
@@ -18969,11 +17234,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -18987,8 +17247,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The state of each partition
 			/// </summary>
-			private LeaderAndIsrRequestPartition[]? _partitionStatesV0Collection = System.Array.Empty<LeaderAndIsrRequestPartition>();
-			public LeaderAndIsrRequestPartition[]? PartitionStatesV0Collection 
+			private LeaderAndIsrRequestPartition[] _partitionStatesV0Collection = Array.Empty<LeaderAndIsrRequestPartition>();
+			public LeaderAndIsrRequestPartition[] PartitionStatesV0Collection 
 			{
 				get => _partitionStatesV0Collection;
 				set 
@@ -18998,16 +17258,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionStatesV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionStatesV0Collection is non-nullable.");
-					}
-
 					_partitionStatesV0Collection = value;
 				}
 			}
 
-			public LeaderAndIsrRequestTopicState WithPartitionStatesV0Collection(LeaderAndIsrRequestPartition[]? partitionStatesV0Collection)
+			public LeaderAndIsrRequestTopicState WithPartitionStatesV0Collection(LeaderAndIsrRequestPartition[] partitionStatesV0Collection)
 			{
 				PartitionStatesV0Collection = partitionStatesV0Collection;
 				return this;
@@ -19017,8 +17272,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The current live leaders.
 		/// </summary>
-		private LeaderAndIsrLiveLeader[]? _liveLeadersCollection = System.Array.Empty<LeaderAndIsrLiveLeader>();
-		public LeaderAndIsrLiveLeader[]? LiveLeadersCollection 
+		private LeaderAndIsrLiveLeader[] _liveLeadersCollection = Array.Empty<LeaderAndIsrLiveLeader>();
+		public LeaderAndIsrLiveLeader[] LiveLeadersCollection 
 		{
 			get => _liveLeadersCollection;
 			set 
@@ -19026,11 +17281,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"LiveLeadersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"LiveLeadersCollection is non-nullable.");
 				}
 
 				_liveLeadersCollection = value;
@@ -19064,15 +17314,15 @@ namespace Kafka.Protocol
 				var instance = new LeaderAndIsrLiveLeader(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.BrokerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.BrokerId = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.HostName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.HostName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Port = await reader.ReadInt32Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -19081,15 +17331,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(BrokerId.Value, cancellationToken);
+					await writer.WriteInt32Async(BrokerId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(HostName.Value, cancellationToken);
+					await writer.WriteStringAsync(HostName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(Port.Value, cancellationToken);
+					await writer.WriteInt32Async(Port, cancellationToken);
 				}
 			}
 
@@ -19105,11 +17355,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"BrokerId is non-nullable.");
 					}
 
 					_brokerId = value;
@@ -19136,11 +17381,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"HostName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"HostName is non-nullable.");
-					}
-
 					_hostName = value;
 				}
 			}
@@ -19163,11 +17403,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Port is non-nullable.");
 					}
 
 					_port = value;
@@ -19200,39 +17435,39 @@ namespace Kafka.Protocol
 				var instance = new LeaderAndIsrRequestPartition(version);
 				if (instance.Version.InRange(0, 1)) 
 				{
-					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.ControllerEpoch = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.LeaderKey = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.LeaderKey = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.LeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.IsrReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.IsrReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ZkVersion = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.ZkVersion = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.ReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.IsNew = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+					instance.IsNew = await reader.ReadBooleanAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -19241,39 +17476,39 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 1)) 
 				{
-					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
+					await writer.WriteStringAsync(TopicName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+					await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
+					await writer.WriteInt32Async(ControllerEpoch, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(LeaderKey.Value, cancellationToken);
+					await writer.WriteInt32Async(LeaderKey, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
+					await writer.WriteInt32Async(LeaderEpoch, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, IsrReplicasCollection);
+					await writer.WriteArrayAsync(cancellationToken, IsrReplicasCollection);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(ZkVersion.Value, cancellationToken);
+					await writer.WriteInt32Async(ZkVersion, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ReplicasCollection);
+					await writer.WriteArrayAsync(cancellationToken, ReplicasCollection);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteBooleanAsync(IsNew.Value, cancellationToken);
+					await writer.WriteBooleanAsync(IsNew, cancellationToken);
 				}
 			}
 
@@ -19289,11 +17524,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 1) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
 					_topicName = value;
@@ -19320,11 +17550,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-					}
-
 					_partitionIndex = value;
 				}
 			}
@@ -19347,11 +17572,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 					}
 
 					_controllerEpoch = value;
@@ -19378,11 +17598,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"LeaderKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"LeaderKey is non-nullable.");
-					}
-
 					_leaderKey = value;
 				}
 			}
@@ -19407,11 +17622,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
-					}
-
 					_leaderEpoch = value;
 				}
 			}
@@ -19425,8 +17635,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The in-sync replica IDs.
 			/// </summary>
-			private Int32[]? _isrReplicasCollection = System.Array.Empty<Int32>();
-			public Int32[]? IsrReplicasCollection 
+			private Int32[] _isrReplicasCollection = Array.Empty<Int32>();
+			public Int32[] IsrReplicasCollection 
 			{
 				get => _isrReplicasCollection;
 				set 
@@ -19436,16 +17646,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"IsrReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"IsrReplicasCollection is non-nullable.");
-					}
-
 					_isrReplicasCollection = value;
 				}
 			}
 
-			public LeaderAndIsrRequestPartition WithIsrReplicasCollection(Int32[]? isrReplicasCollection)
+			public LeaderAndIsrRequestPartition WithIsrReplicasCollection(Int32[] isrReplicasCollection)
 			{
 				IsrReplicasCollection = isrReplicasCollection;
 				return this;
@@ -19465,11 +17670,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
-					}
-
 					_zkVersion = value;
 				}
 			}
@@ -19483,8 +17683,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The replica IDs.
 			/// </summary>
-			private Int32[]? _replicasCollection = System.Array.Empty<Int32>();
-			public Int32[]? ReplicasCollection 
+			private Int32[] _replicasCollection = Array.Empty<Int32>();
+			public Int32[] ReplicasCollection 
 			{
 				get => _replicasCollection;
 				set 
@@ -19494,16 +17694,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
-					}
-
 					_replicasCollection = value;
 				}
 			}
 
-			public LeaderAndIsrRequestPartition WithReplicasCollection(Int32[]? replicasCollection)
+			public LeaderAndIsrRequestPartition WithReplicasCollection(Int32[] replicasCollection)
 			{
 				ReplicasCollection = replicasCollection;
 				return this;
@@ -19518,11 +17713,6 @@ namespace Kafka.Protocol
 				get => _isNew;
 				set 
 				{
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"IsNew is non-nullable.");
-					}
-
 					_isNew = value;
 				}
 			}
@@ -19556,11 +17746,11 @@ namespace Kafka.Protocol
 			var instance = new LeaderAndIsrResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PartitionsCollection = await reader.ReadAsync(async () => await LeaderAndIsrResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -19569,11 +17759,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, PartitionsCollection);
+				await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 			}
 		}
 
@@ -19591,11 +17781,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -19609,8 +17794,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each partition.
 		/// </summary>
-		private LeaderAndIsrResponsePartition[]? _partitionsCollection = System.Array.Empty<LeaderAndIsrResponsePartition>();
-		public LeaderAndIsrResponsePartition[]? PartitionsCollection 
+		private LeaderAndIsrResponsePartition[] _partitionsCollection = Array.Empty<LeaderAndIsrResponsePartition>();
+		public LeaderAndIsrResponsePartition[] PartitionsCollection 
 		{
 			get => _partitionsCollection;
 			set 
@@ -19618,11 +17803,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 				}
 
 				_partitionsCollection = value;
@@ -19656,15 +17836,15 @@ namespace Kafka.Protocol
 				var instance = new LeaderAndIsrResponsePartition(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -19673,15 +17853,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
+					await writer.WriteStringAsync(TopicName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+					await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 			}
 
@@ -19697,11 +17877,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
 					_topicName = value;
@@ -19728,11 +17903,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-					}
-
 					_partitionIndex = value;
 				}
 			}
@@ -19755,11 +17925,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
 					_errorCode = value;
@@ -19795,11 +17960,11 @@ namespace Kafka.Protocol
 			var instance = new LeaveGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -19808,11 +17973,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+				await writer.WriteStringAsync(GroupId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+				await writer.WriteStringAsync(MemberId, cancellationToken);
 			}
 		}
 
@@ -19828,11 +17993,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
 				_groupId = value;
@@ -19857,11 +18017,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MemberId is non-nullable.");
 				}
 
 				_memberId = value;
@@ -19896,11 +18051,11 @@ namespace Kafka.Protocol
 			var instance = new LeaveGroupResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -19909,11 +18064,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 		}
 
@@ -19926,11 +18081,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -19953,11 +18103,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -20021,15 +18166,15 @@ namespace Kafka.Protocol
 			var instance = new ListGroupsResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupsCollection = await reader.ReadAsync(async () => await ListedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.GroupsCollection = await reader.ReadArrayAsync(async () => await ListedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -20038,15 +18183,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, GroupsCollection);
+				await writer.WriteArrayAsync(cancellationToken, GroupsCollection);
 			}
 		}
 
@@ -20059,11 +18204,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -20088,11 +18228,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -20106,8 +18241,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each group in the response.
 		/// </summary>
-		private ListedGroup[]? _groupsCollection = System.Array.Empty<ListedGroup>();
-		public ListedGroup[]? GroupsCollection 
+		private ListedGroup[] _groupsCollection = Array.Empty<ListedGroup>();
+		public ListedGroup[] GroupsCollection 
 		{
 			get => _groupsCollection;
 			set 
@@ -20115,11 +18250,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupsCollection is non-nullable.");
 				}
 
 				_groupsCollection = value;
@@ -20153,11 +18283,11 @@ namespace Kafka.Protocol
 				var instance = new ListedGroup(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProtocolType = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.ProtocolType = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -20166,11 +18296,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+					await writer.WriteStringAsync(GroupId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ProtocolType.Value, cancellationToken);
+					await writer.WriteStringAsync(ProtocolType, cancellationToken);
 				}
 			}
 
@@ -20186,11 +18316,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"GroupId is non-nullable.");
 					}
 
 					_groupId = value;
@@ -20215,11 +18340,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ProtocolType is non-nullable.");
 					}
 
 					_protocolType = value;
@@ -20255,15 +18375,15 @@ namespace Kafka.Protocol
 			var instance = new ListOffsetRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ReplicaId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.IsolationLevel = new Int8(await reader.ReadInt8Async(cancellationToken));
+				instance.IsolationLevel = await reader.ReadInt8Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await ListOffsetTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await ListOffsetTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -20272,15 +18392,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ReplicaId.Value, cancellationToken);
+				await writer.WriteInt32Async(ReplicaId, cancellationToken);
 			}
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteInt8Async(IsolationLevel.Value, cancellationToken);
+				await writer.WriteInt8Async(IsolationLevel, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -20296,11 +18416,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ReplicaId is non-nullable.");
 				}
 
 				_replicaId = value;
@@ -20327,11 +18442,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IsolationLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"IsolationLevel is non-nullable.");
-				}
-
 				_isolationLevel = value;
 			}
 		}
@@ -20345,8 +18455,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic in the request.
 		/// </summary>
-		private ListOffsetTopic[]? _topicsCollection = System.Array.Empty<ListOffsetTopic>();
-		public ListOffsetTopic[]? TopicsCollection 
+		private ListOffsetTopic[] _topicsCollection = Array.Empty<ListOffsetTopic>();
+		public ListOffsetTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -20354,11 +18464,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -20392,11 +18497,11 @@ namespace Kafka.Protocol
 				var instance = new ListOffsetTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await ListOffsetPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await ListOffsetPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -20405,11 +18510,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -20427,11 +18532,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -20445,8 +18545,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition in the request.
 			/// </summary>
-			private ListOffsetPartition[]? _partitionsCollection = System.Array.Empty<ListOffsetPartition>();
-			public ListOffsetPartition[]? PartitionsCollection 
+			private ListOffsetPartition[] _partitionsCollection = Array.Empty<ListOffsetPartition>();
+			public ListOffsetPartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -20454,11 +18554,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -20492,19 +18587,19 @@ namespace Kafka.Protocol
 					var instance = new ListOffsetPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						instance.CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CurrentLeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Timestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.Timestamp = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 0)) 
 					{
-						instance.MaxNumOffsets = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.MaxNumOffsets = await reader.ReadInt32Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -20513,19 +18608,19 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(4, 2147483647)) 
 					{
-						await writer.WriteInt32Async(CurrentLeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(CurrentLeaderEpoch, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(Timestamp.Value, cancellationToken);
+						await writer.WriteInt64Async(Timestamp, cancellationToken);
 					}
 					if (Version.InRange(0, 0)) 
 					{
-						await writer.WriteInt32Async(MaxNumOffsets.Value, cancellationToken);
+						await writer.WriteInt32Async(MaxNumOffsets, cancellationToken);
 					}
 				}
 
@@ -20541,11 +18636,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -20572,11 +18662,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CurrentLeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CurrentLeaderEpoch is non-nullable.");
-						}
-
 						_currentLeaderEpoch = value;
 					}
 				}
@@ -20601,11 +18686,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Timestamp is non-nullable.");
-						}
-
 						_timestamp = value;
 					}
 				}
@@ -20628,11 +18708,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 0) == false) 
 						{
 							throw new UnsupportedVersionException($"MaxNumOffsets does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"MaxNumOffsets is non-nullable.");
 						}
 
 						_maxNumOffsets = value;
@@ -20669,11 +18744,11 @@ namespace Kafka.Protocol
 			var instance = new ListOffsetResponse(version);
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await ListOffsetTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await ListOffsetTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -20682,11 +18757,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -20699,11 +18774,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -20717,8 +18787,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic in the response.
 		/// </summary>
-		private ListOffsetTopicResponse[]? _topicsCollection = System.Array.Empty<ListOffsetTopicResponse>();
-		public ListOffsetTopicResponse[]? TopicsCollection 
+		private ListOffsetTopicResponse[] _topicsCollection = Array.Empty<ListOffsetTopicResponse>();
+		public ListOffsetTopicResponse[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -20726,11 +18796,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -20764,11 +18829,11 @@ namespace Kafka.Protocol
 				var instance = new ListOffsetTopicResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await ListOffsetPartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await ListOffsetPartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -20777,11 +18842,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -20799,11 +18864,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -20817,8 +18877,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition in the response.
 			/// </summary>
-			private ListOffsetPartitionResponse[]? _partitionsCollection = System.Array.Empty<ListOffsetPartitionResponse>();
-			public ListOffsetPartitionResponse[]? PartitionsCollection 
+			private ListOffsetPartitionResponse[] _partitionsCollection = Array.Empty<ListOffsetPartitionResponse>();
+			public ListOffsetPartitionResponse[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -20826,11 +18886,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -20864,27 +18919,27 @@ namespace Kafka.Protocol
 					var instance = new ListOffsetPartitionResponse(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 0)) 
 					{
-						instance.OldStyleOffsetsCollection = await reader.ReadAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken), cancellationToken);
+						instance.OldStyleOffsetsCollection = await reader.ReadArrayAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.Timestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.Timestamp = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.Offset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.Offset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -20893,27 +18948,27 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 					if (Version.InRange(0, 0)) 
 					{
-						await writer.WriteAsync(cancellationToken, OldStyleOffsetsCollection);
+						await writer.WriteArrayAsync(cancellationToken, OldStyleOffsetsCollection);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteInt64Async(Timestamp.Value, cancellationToken);
+						await writer.WriteInt64Async(Timestamp, cancellationToken);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteInt64Async(Offset.Value, cancellationToken);
+						await writer.WriteInt64Async(Offset, cancellationToken);
 					}
 					if (Version.InRange(4, 2147483647)) 
 					{
-						await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(LeaderEpoch, cancellationToken);
 					}
 				}
 
@@ -20929,11 +18984,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -20960,11 +19010,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-						}
-
 						_errorCode = value;
 					}
 				}
@@ -20978,8 +19023,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The result offsets.
 				/// </summary>
-				private Int64[]? _oldStyleOffsetsCollection = System.Array.Empty<Int64>();
-				public Int64[]? OldStyleOffsetsCollection 
+				private Int64[] _oldStyleOffsetsCollection = Array.Empty<Int64>();
+				public Int64[] OldStyleOffsetsCollection 
 				{
 					get => _oldStyleOffsetsCollection;
 					set 
@@ -20989,16 +19034,11 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"OldStyleOffsetsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"OldStyleOffsetsCollection is non-nullable.");
-						}
-
 						_oldStyleOffsetsCollection = value;
 					}
 				}
 
-				public ListOffsetPartitionResponse WithOldStyleOffsetsCollection(Int64[]? oldStyleOffsetsCollection)
+				public ListOffsetPartitionResponse WithOldStyleOffsetsCollection(Int64[] oldStyleOffsetsCollection)
 				{
 					OldStyleOffsetsCollection = oldStyleOffsetsCollection;
 					return this;
@@ -21016,11 +19056,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(1, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Timestamp is non-nullable.");
 						}
 
 						_timestamp = value;
@@ -21047,11 +19082,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Offset does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Offset is non-nullable.");
-						}
-
 						_offset = value;
 					}
 				}
@@ -21071,11 +19101,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(4, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 						}
 
 						_leaderEpoch = value;
@@ -21112,19 +19137,19 @@ namespace Kafka.Protocol
 			var instance = new MetadataRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await MetadataRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadNullableArrayAsync(async () => await MetadataRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(4, 2147483647)) 
 			{
-				instance.AllowAutoTopicCreation = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.AllowAutoTopicCreation = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(8, 2147483647)) 
 			{
-				instance.IncludeClusterAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.IncludeClusterAuthorizedOperations = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(8, 2147483647)) 
 			{
-				instance.IncludeTopicAuthorizedOperations = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.IncludeTopicAuthorizedOperations = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -21133,26 +19158,26 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(4, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(AllowAutoTopicCreation.Value, cancellationToken);
+				await writer.WriteBooleanAsync(AllowAutoTopicCreation, cancellationToken);
 			}
 			if (Version.InRange(8, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(IncludeClusterAuthorizedOperations.Value, cancellationToken);
+				await writer.WriteBooleanAsync(IncludeClusterAuthorizedOperations, cancellationToken);
 			}
 			if (Version.InRange(8, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(IncludeTopicAuthorizedOperations.Value, cancellationToken);
+				await writer.WriteBooleanAsync(IncludeTopicAuthorizedOperations, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// The topics to fetch metadata for.
 		/// </summary>
-		private MetadataRequestTopic[]? _topicsCollection = System.Array.Empty<MetadataRequestTopic>();
+		private MetadataRequestTopic[]? _topicsCollection = Array.Empty<MetadataRequestTopic>();
 		public MetadataRequestTopic[]? TopicsCollection 
 		{
 			get => _topicsCollection;
@@ -21200,7 +19225,7 @@ namespace Kafka.Protocol
 				var instance = new MetadataRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -21209,7 +19234,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 			}
 
@@ -21225,11 +19250,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
 					}
 
 					_name = value;
@@ -21257,11 +19277,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"AllowAutoTopicCreation does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"AllowAutoTopicCreation is non-nullable.");
-				}
-
 				_allowAutoTopicCreation = value;
 			}
 		}
@@ -21286,11 +19301,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"IncludeClusterAuthorizedOperations is non-nullable.");
-				}
-
 				_includeClusterAuthorizedOperations = value;
 			}
 		}
@@ -21313,11 +19323,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(8, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"IncludeTopicAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"IncludeTopicAuthorizedOperations is non-nullable.");
 				}
 
 				_includeTopicAuthorizedOperations = value;
@@ -21352,27 +19357,27 @@ namespace Kafka.Protocol
 			var instance = new MetadataResponse(version);
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.BrokersCollection = (await reader.ReadAsync(async () => await MetadataResponseBroker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.NodeId);
+				instance.BrokersCollection = (await reader.ReadArrayAsync(async () => await MetadataResponseBroker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.NodeId);
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.ClusterId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ClusterId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadAsync(async () => await MetadataResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await MetadataResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(8, 2147483647)) 
 			{
-				instance.ClusterAuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ClusterAuthorizedOperations = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -21381,27 +19386,27 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, BrokersCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, BrokersCollection.Values.ToArray());
 			}
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ClusterId.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(ClusterId, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ControllerId.Value, cancellationToken);
+				await writer.WriteInt32Async(ControllerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection.Values.ToArray());
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray());
 			}
 			if (Version.InRange(8, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ClusterAuthorizedOperations.Value, cancellationToken);
+				await writer.WriteInt32Async(ClusterAuthorizedOperations, cancellationToken);
 			}
 		}
 
@@ -21417,11 +19422,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(3, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -21446,11 +19446,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"BrokersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"BrokersCollection is non-nullable.");
 				}
 
 				_brokersCollection = value;
@@ -21484,19 +19479,19 @@ namespace Kafka.Protocol
 				var instance = new MetadataResponseBroker(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.NodeId = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.NodeId = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Host = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Port = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.Rack = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.Rack = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -21505,19 +19500,19 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(NodeId.Value, cancellationToken);
+					await writer.WriteInt32Async(NodeId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Host.Value, cancellationToken);
+					await writer.WriteStringAsync(Host, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(Port.Value, cancellationToken);
+					await writer.WriteInt32Async(Port, cancellationToken);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Rack.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(Rack, cancellationToken);
 				}
 			}
 
@@ -21533,11 +19528,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"NodeId is non-nullable.");
 					}
 
 					_nodeId = value;
@@ -21564,11 +19554,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Host is non-nullable.");
-					}
-
 					_host = value;
 				}
 			}
@@ -21593,11 +19578,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Port is non-nullable.");
-					}
-
 					_port = value;
 				}
 			}
@@ -21611,8 +19591,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The rack of the broker, or null if it has not been assigned to a rack.
 			/// </summary>
-			private NullableString _rack = new NullableString(null);
-			public NullableString Rack 
+			private String? _rack;
+			public String? Rack 
 			{
 				get => _rack;
 				set 
@@ -21627,7 +19607,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public MetadataResponseBroker WithRack(NullableString rack)
+			public MetadataResponseBroker WithRack(String rack)
 			{
 				Rack = rack;
 				return this;
@@ -21637,8 +19617,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The cluster ID that responding broker belongs to.
 		/// </summary>
-		private NullableString _clusterId = new NullableString(null);
-		public NullableString ClusterId 
+		private String? _clusterId;
+		public String? ClusterId 
 		{
 			get => _clusterId;
 			set 
@@ -21653,7 +19633,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public MetadataResponse WithClusterId(NullableString clusterId)
+		public MetadataResponse WithClusterId(String clusterId)
 		{
 			ClusterId = clusterId;
 			return this;
@@ -21668,11 +19648,6 @@ namespace Kafka.Protocol
 			get => _controllerId;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ControllerId is non-nullable.");
-				}
-
 				_controllerId = value;
 			}
 		}
@@ -21695,11 +19670,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -21733,23 +19703,23 @@ namespace Kafka.Protocol
 				var instance = new MetadataResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.IsInternal = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+					instance.IsInternal = await reader.ReadBooleanAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await MetadataResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await MetadataResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				if (instance.Version.InRange(8, 2147483647)) 
 				{
-					instance.TopicAuthorizedOperations = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.TopicAuthorizedOperations = await reader.ReadInt32Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -21758,23 +19728,23 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteBooleanAsync(IsInternal.Value, cancellationToken);
+					await writer.WriteBooleanAsync(IsInternal, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 				if (Version.InRange(8, 2147483647)) 
 				{
-					await writer.WriteInt32Async(TopicAuthorizedOperations.Value, cancellationToken);
+					await writer.WriteInt32Async(TopicAuthorizedOperations, cancellationToken);
 				}
 			}
 
@@ -21790,11 +19760,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
 					_errorCode = value;
@@ -21821,11 +19786,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -21845,11 +19805,6 @@ namespace Kafka.Protocol
 				get => _isInternal;
 				set 
 				{
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"IsInternal is non-nullable.");
-					}
-
 					_isInternal = value;
 				}
 			}
@@ -21863,8 +19818,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition in the topic.
 			/// </summary>
-			private MetadataResponsePartition[]? _partitionsCollection = System.Array.Empty<MetadataResponsePartition>();
-			public MetadataResponsePartition[]? PartitionsCollection 
+			private MetadataResponsePartition[] _partitionsCollection = Array.Empty<MetadataResponsePartition>();
+			public MetadataResponsePartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -21872,11 +19827,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -21910,31 +19860,31 @@ namespace Kafka.Protocol
 					var instance = new MetadataResponsePartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.LeaderId = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderId = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(7, 2147483647)) 
 					{
-						instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ReplicaNodesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+						instance.ReplicaNodesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.IsrNodesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+						instance.IsrNodesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						instance.OfflineReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+						instance.OfflineReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
 					return instance;
 				}
@@ -21943,31 +19893,31 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(LeaderId.Value, cancellationToken);
+						await writer.WriteInt32Async(LeaderId, cancellationToken);
 					}
 					if (Version.InRange(7, 2147483647)) 
 					{
-						await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(LeaderEpoch, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, ReplicaNodesCollection);
+						await writer.WriteArrayAsync(cancellationToken, ReplicaNodesCollection);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, IsrNodesCollection);
+						await writer.WriteArrayAsync(cancellationToken, IsrNodesCollection);
 					}
 					if (Version.InRange(5, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, OfflineReplicasCollection);
+						await writer.WriteArrayAsync(cancellationToken, OfflineReplicasCollection);
 					}
 				}
 
@@ -21983,11 +19933,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
 						_errorCode = value;
@@ -22014,11 +19959,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-						}
-
 						_partitionIndex = value;
 					}
 				}
@@ -22043,11 +19983,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LeaderId is non-nullable.");
-						}
-
 						_leaderId = value;
 					}
 				}
@@ -22067,11 +20002,6 @@ namespace Kafka.Protocol
 					get => _leaderEpoch;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
-						}
-
 						_leaderEpoch = value;
 					}
 				}
@@ -22085,8 +20015,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The set of all nodes that host this partition.
 				/// </summary>
-				private Int32[]? _replicaNodesCollection = System.Array.Empty<Int32>();
-				public Int32[]? ReplicaNodesCollection 
+				private Int32[] _replicaNodesCollection = Array.Empty<Int32>();
+				public Int32[] ReplicaNodesCollection 
 				{
 					get => _replicaNodesCollection;
 					set 
@@ -22096,16 +20026,11 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ReplicaNodesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ReplicaNodesCollection is non-nullable.");
-						}
-
 						_replicaNodesCollection = value;
 					}
 				}
 
-				public MetadataResponsePartition WithReplicaNodesCollection(Int32[]? replicaNodesCollection)
+				public MetadataResponsePartition WithReplicaNodesCollection(Int32[] replicaNodesCollection)
 				{
 					ReplicaNodesCollection = replicaNodesCollection;
 					return this;
@@ -22114,8 +20039,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The set of nodes that are in sync with the leader for this partition.
 				/// </summary>
-				private Int32[]? _isrNodesCollection = System.Array.Empty<Int32>();
-				public Int32[]? IsrNodesCollection 
+				private Int32[] _isrNodesCollection = Array.Empty<Int32>();
+				public Int32[] IsrNodesCollection 
 				{
 					get => _isrNodesCollection;
 					set 
@@ -22125,16 +20050,11 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsrNodesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"IsrNodesCollection is non-nullable.");
-						}
-
 						_isrNodesCollection = value;
 					}
 				}
 
-				public MetadataResponsePartition WithIsrNodesCollection(Int32[]? isrNodesCollection)
+				public MetadataResponsePartition WithIsrNodesCollection(Int32[] isrNodesCollection)
 				{
 					IsrNodesCollection = isrNodesCollection;
 					return this;
@@ -22143,22 +20063,17 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The set of offline replicas of this partition.
 				/// </summary>
-				private Int32[]? _offlineReplicasCollection = System.Array.Empty<Int32>();
-				public Int32[]? OfflineReplicasCollection 
+				private Int32[] _offlineReplicasCollection = Array.Empty<Int32>();
+				public Int32[] OfflineReplicasCollection 
 				{
 					get => _offlineReplicasCollection;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"OfflineReplicasCollection is non-nullable.");
-						}
-
 						_offlineReplicasCollection = value;
 					}
 				}
 
-				public MetadataResponsePartition WithOfflineReplicasCollection(Int32[]? offlineReplicasCollection)
+				public MetadataResponsePartition WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
 				{
 					OfflineReplicasCollection = offlineReplicasCollection;
 					return this;
@@ -22177,11 +20092,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(8, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicAuthorizedOperations is non-nullable.");
 					}
 
 					_topicAuthorizedOperations = value;
@@ -22207,11 +20117,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(8, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ClusterAuthorizedOperations is non-nullable.");
 				}
 
 				_clusterAuthorizedOperations = value;
@@ -22246,27 +20151,27 @@ namespace Kafka.Protocol
 			var instance = new OffsetCommitRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.GenerationId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(2, 4)) 
 			{
-				instance.RetentionTimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.RetentionTimeMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -22275,27 +20180,27 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+				await writer.WriteStringAsync(GroupId, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(GenerationId.Value, cancellationToken);
+				await writer.WriteInt32Async(GenerationId, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+				await writer.WriteStringAsync(MemberId, cancellationToken);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken);
 			}
 			if (Version.InRange(2, 4)) 
 			{
-				await writer.WriteInt64Async(RetentionTimeMs.Value, cancellationToken);
+				await writer.WriteInt64Async(RetentionTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -22311,11 +20216,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
 				_groupId = value;
@@ -22337,11 +20237,6 @@ namespace Kafka.Protocol
 			get => _generationId;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GenerationId is non-nullable.");
-				}
-
 				_generationId = value;
 			}
 		}
@@ -22361,11 +20256,6 @@ namespace Kafka.Protocol
 			get => _memberId;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MemberId is non-nullable.");
-				}
-
 				_memberId = value;
 			}
 		}
@@ -22379,8 +20269,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
 		/// </summary>
-		private NullableString _groupInstanceId = new NullableString(null);
-		public NullableString GroupInstanceId 
+		private String? _groupInstanceId;
+		public String? GroupInstanceId 
 		{
 			get => _groupInstanceId;
 			set 
@@ -22400,7 +20290,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public OffsetCommitRequest WithGroupInstanceId(NullableString groupInstanceId)
+		public OffsetCommitRequest WithGroupInstanceId(String groupInstanceId)
 		{
 			GroupInstanceId = groupInstanceId;
 			return this;
@@ -22415,11 +20305,6 @@ namespace Kafka.Protocol
 			get => _retentionTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"RetentionTimeMs is non-nullable.");
-				}
-
 				_retentionTimeMs = value;
 			}
 		}
@@ -22433,8 +20318,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to commit offsets for.
 		/// </summary>
-		private OffsetCommitRequestTopic[]? _topicsCollection = System.Array.Empty<OffsetCommitRequestTopic>();
-		public OffsetCommitRequestTopic[]? TopicsCollection 
+		private OffsetCommitRequestTopic[] _topicsCollection = Array.Empty<OffsetCommitRequestTopic>();
+		public OffsetCommitRequestTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -22442,11 +20327,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -22480,11 +20360,11 @@ namespace Kafka.Protocol
 				var instance = new OffsetCommitRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -22493,11 +20373,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -22515,11 +20395,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -22533,8 +20408,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition to commit offsets for.
 			/// </summary>
-			private OffsetCommitRequestPartition[]? _partitionsCollection = System.Array.Empty<OffsetCommitRequestPartition>();
-			public OffsetCommitRequestPartition[]? PartitionsCollection 
+			private OffsetCommitRequestPartition[] _partitionsCollection = Array.Empty<OffsetCommitRequestPartition>();
+			public OffsetCommitRequestPartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -22542,11 +20417,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -22580,23 +20450,23 @@ namespace Kafka.Protocol
 					var instance = new OffsetCommitRequestPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.CommittedOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(6, 2147483647)) 
 					{
-						instance.CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CommittedLeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(1, 1)) 
 					{
-						instance.CommitTimestamp = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.CommitTimestamp = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedMetadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.CommittedMetadata = await reader.ReadStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -22605,23 +20475,23 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(CommittedOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(CommittedOffset, cancellationToken);
 					}
 					if (Version.InRange(6, 2147483647)) 
 					{
-						await writer.WriteInt32Async(CommittedLeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(CommittedLeaderEpoch, cancellationToken);
 					}
 					if (Version.InRange(1, 1)) 
 					{
-						await writer.WriteInt64Async(CommitTimestamp.Value, cancellationToken);
+						await writer.WriteInt64Async(CommitTimestamp, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(CommittedMetadata.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(CommittedMetadata, cancellationToken);
 					}
 				}
 
@@ -22637,11 +20507,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -22668,11 +20533,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CommittedOffset is non-nullable.");
-						}
-
 						_committedOffset = value;
 					}
 				}
@@ -22692,11 +20552,6 @@ namespace Kafka.Protocol
 					get => _committedLeaderEpoch;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CommittedLeaderEpoch is non-nullable.");
-						}
-
 						_committedLeaderEpoch = value;
 					}
 				}
@@ -22721,11 +20576,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommitTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CommitTimestamp is non-nullable.");
-						}
-
 						_commitTimestamp = value;
 					}
 				}
@@ -22739,8 +20589,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
 				/// </summary>
-				private NullableString _committedMetadata = NullableString.Default;
-				public NullableString CommittedMetadata 
+				private String? _committedMetadata = String.Default;
+				public String? CommittedMetadata 
 				{
 					get => _committedMetadata;
 					set 
@@ -22760,7 +20610,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetCommitRequestPartition WithCommittedMetadata(NullableString committedMetadata)
+				public OffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
 				{
 					CommittedMetadata = committedMetadata;
 					return this;
@@ -22790,11 +20640,11 @@ namespace Kafka.Protocol
 			var instance = new OffsetCommitResponse(version);
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -22803,11 +20653,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -22820,11 +20670,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -22838,8 +20683,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
-		private OffsetCommitResponseTopic[]? _topicsCollection = System.Array.Empty<OffsetCommitResponseTopic>();
-		public OffsetCommitResponseTopic[]? TopicsCollection 
+		private OffsetCommitResponseTopic[] _topicsCollection = Array.Empty<OffsetCommitResponseTopic>();
+		public OffsetCommitResponseTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -22847,11 +20692,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -22885,11 +20725,11 @@ namespace Kafka.Protocol
 				var instance = new OffsetCommitResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -22898,11 +20738,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -22920,11 +20760,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -22938,8 +20773,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The responses for each partition in the topic.
 			/// </summary>
-			private OffsetCommitResponsePartition[]? _partitionsCollection = System.Array.Empty<OffsetCommitResponsePartition>();
-			public OffsetCommitResponsePartition[]? PartitionsCollection 
+			private OffsetCommitResponsePartition[] _partitionsCollection = Array.Empty<OffsetCommitResponsePartition>();
+			public OffsetCommitResponsePartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -22947,11 +20782,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -22985,11 +20815,11 @@ namespace Kafka.Protocol
 					var instance = new OffsetCommitResponsePartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -22998,11 +20828,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 				}
 
@@ -23018,11 +20848,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -23047,11 +20872,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
 						_errorCode = value;
@@ -23088,11 +20908,11 @@ namespace Kafka.Protocol
 			var instance = new OffsetFetchRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetFetchRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadNullableArrayAsync(async () => await OffsetFetchRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -23101,11 +20921,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+				await writer.WriteStringAsync(GroupId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -23123,11 +20943,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupId is non-nullable.");
-				}
-
 				_groupId = value;
 			}
 		}
@@ -23141,7 +20956,7 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.
 		/// </summary>
-		private OffsetFetchRequestTopic[]? _topicsCollection = System.Array.Empty<OffsetFetchRequestTopic>();
+		private OffsetFetchRequestTopic[]? _topicsCollection = Array.Empty<OffsetFetchRequestTopic>();
 		public OffsetFetchRequestTopic[]? TopicsCollection 
 		{
 			get => _topicsCollection;
@@ -23189,11 +21004,11 @@ namespace Kafka.Protocol
 				var instance = new OffsetFetchRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndexesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -23202,11 +21017,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionIndexesCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection);
 				}
 			}
 
@@ -23224,11 +21039,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -23242,8 +21052,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partition indexes we would like to fetch offsets for.
 			/// </summary>
-			private Int32[]? _partitionIndexesCollection = System.Array.Empty<Int32>();
-			public Int32[]? PartitionIndexesCollection 
+			private Int32[] _partitionIndexesCollection = Array.Empty<Int32>();
+			public Int32[] PartitionIndexesCollection 
 			{
 				get => _partitionIndexesCollection;
 				set 
@@ -23253,16 +21063,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndexesCollection is non-nullable.");
-					}
-
 					_partitionIndexesCollection = value;
 				}
 			}
 
-			public OffsetFetchRequestTopic WithPartitionIndexesCollection(Int32[]? partitionIndexesCollection)
+			public OffsetFetchRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
 			{
 				PartitionIndexesCollection = partitionIndexesCollection;
 				return this;
@@ -23291,15 +21096,15 @@ namespace Kafka.Protocol
 			var instance = new OffsetFetchResponse(version);
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetFetchResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetFetchResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -23308,15 +21113,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 		}
 
@@ -23329,11 +21134,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -23347,8 +21147,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The responses per topic.
 		/// </summary>
-		private OffsetFetchResponseTopic[]? _topicsCollection = System.Array.Empty<OffsetFetchResponseTopic>();
-		public OffsetFetchResponseTopic[]? TopicsCollection 
+		private OffsetFetchResponseTopic[] _topicsCollection = Array.Empty<OffsetFetchResponseTopic>();
+		public OffsetFetchResponseTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -23356,11 +21156,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -23394,11 +21189,11 @@ namespace Kafka.Protocol
 				var instance = new OffsetFetchResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetFetchResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetFetchResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -23407,11 +21202,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -23429,11 +21224,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -23447,8 +21237,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The responses per partition
 			/// </summary>
-			private OffsetFetchResponsePartition[]? _partitionsCollection = System.Array.Empty<OffsetFetchResponsePartition>();
-			public OffsetFetchResponsePartition[]? PartitionsCollection 
+			private OffsetFetchResponsePartition[] _partitionsCollection = Array.Empty<OffsetFetchResponsePartition>();
+			public OffsetFetchResponsePartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -23456,11 +21246,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -23494,23 +21279,23 @@ namespace Kafka.Protocol
 					var instance = new OffsetFetchResponsePartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.CommittedOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						instance.CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CommittedLeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Metadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.Metadata = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -23519,23 +21304,23 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(CommittedOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(CommittedOffset, cancellationToken);
 					}
 					if (Version.InRange(5, 2147483647)) 
 					{
-						await writer.WriteInt32Async(CommittedLeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(CommittedLeaderEpoch, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Metadata.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(Metadata, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 				}
 
@@ -23551,11 +21336,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -23582,11 +21362,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CommittedOffset is non-nullable.");
-						}
-
 						_committedOffset = value;
 					}
 				}
@@ -23611,11 +21386,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedLeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CommittedLeaderEpoch is non-nullable.");
-						}
-
 						_committedLeaderEpoch = value;
 					}
 				}
@@ -23629,8 +21399,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The partition metadata.
 				/// </summary>
-				private NullableString _metadata = NullableString.Default;
-				public NullableString Metadata 
+				private String? _metadata = String.Default;
+				public String? Metadata 
 				{
 					get => _metadata;
 					set 
@@ -23650,7 +21420,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public OffsetFetchResponsePartition WithMetadata(NullableString metadata)
+				public OffsetFetchResponsePartition WithMetadata(String metadata)
 				{
 					Metadata = metadata;
 					return this;
@@ -23668,11 +21438,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
 						_errorCode = value;
@@ -23699,11 +21464,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(2, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -23738,11 +21498,11 @@ namespace Kafka.Protocol
 			var instance = new OffsetForLeaderEpochRequest(version);
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.ReplicaId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ReplicaId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetForLeaderTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetForLeaderTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -23751,11 +21511,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ReplicaId.Value, cancellationToken);
+				await writer.WriteInt32Async(ReplicaId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -23768,11 +21528,6 @@ namespace Kafka.Protocol
 			get => _replicaId;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ReplicaId is non-nullable.");
-				}
-
 				_replicaId = value;
 			}
 		}
@@ -23786,8 +21541,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic to get offsets for.
 		/// </summary>
-		private OffsetForLeaderTopic[]? _topicsCollection = System.Array.Empty<OffsetForLeaderTopic>();
-		public OffsetForLeaderTopic[]? TopicsCollection 
+		private OffsetForLeaderTopic[] _topicsCollection = Array.Empty<OffsetForLeaderTopic>();
+		public OffsetForLeaderTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -23795,11 +21550,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -23833,11 +21583,11 @@ namespace Kafka.Protocol
 				var instance = new OffsetForLeaderTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetForLeaderPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetForLeaderPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -23846,11 +21596,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -23868,11 +21618,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -23886,8 +21631,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition to get offsets for.
 			/// </summary>
-			private OffsetForLeaderPartition[]? _partitionsCollection = System.Array.Empty<OffsetForLeaderPartition>();
-			public OffsetForLeaderPartition[]? PartitionsCollection 
+			private OffsetForLeaderPartition[] _partitionsCollection = Array.Empty<OffsetForLeaderPartition>();
+			public OffsetForLeaderPartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -23895,11 +21640,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -23933,15 +21673,15 @@ namespace Kafka.Protocol
 					var instance = new OffsetForLeaderPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(2, 2147483647)) 
 					{
-						instance.CurrentLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CurrentLeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -23950,15 +21690,15 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(2, 2147483647)) 
 					{
-						await writer.WriteInt32Async(CurrentLeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(CurrentLeaderEpoch, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(LeaderEpoch, cancellationToken);
 					}
 				}
 
@@ -23974,11 +21714,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -24000,11 +21735,6 @@ namespace Kafka.Protocol
 					get => _currentLeaderEpoch;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CurrentLeaderEpoch is non-nullable.");
-						}
-
 						_currentLeaderEpoch = value;
 					}
 				}
@@ -24027,11 +21757,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
 						}
 
 						_leaderEpoch = value;
@@ -24068,11 +21793,11 @@ namespace Kafka.Protocol
 			var instance = new OffsetForLeaderEpochResponse(version);
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await OffsetForLeaderTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetForLeaderTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -24081,11 +21806,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -24098,11 +21823,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -24116,8 +21836,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic we fetched offsets for.
 		/// </summary>
-		private OffsetForLeaderTopicResult[]? _topicsCollection = System.Array.Empty<OffsetForLeaderTopicResult>();
-		public OffsetForLeaderTopicResult[]? TopicsCollection 
+		private OffsetForLeaderTopicResult[] _topicsCollection = Array.Empty<OffsetForLeaderTopicResult>();
+		public OffsetForLeaderTopicResult[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -24125,11 +21845,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -24163,11 +21878,11 @@ namespace Kafka.Protocol
 				var instance = new OffsetForLeaderTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await OffsetForLeaderPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetForLeaderPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -24176,11 +21891,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -24198,11 +21913,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -24216,8 +21926,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition in the topic we fetched offsets for.
 			/// </summary>
-			private OffsetForLeaderPartitionResult[]? _partitionsCollection = System.Array.Empty<OffsetForLeaderPartitionResult>();
-			public OffsetForLeaderPartitionResult[]? PartitionsCollection 
+			private OffsetForLeaderPartitionResult[] _partitionsCollection = Array.Empty<OffsetForLeaderPartitionResult>();
+			public OffsetForLeaderPartitionResult[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -24225,11 +21935,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -24263,19 +21968,19 @@ namespace Kafka.Protocol
 					var instance = new OffsetForLeaderPartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.LeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.EndOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.EndOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -24284,19 +21989,19 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(LeaderEpoch, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(EndOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(EndOffset, cancellationToken);
 					}
 				}
 
@@ -24312,11 +22017,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
 						_errorCode = value;
@@ -24343,11 +22043,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-						}
-
 						_partitionIndex = value;
 					}
 				}
@@ -24367,11 +22062,6 @@ namespace Kafka.Protocol
 					get => _leaderEpoch;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
-						}
-
 						_leaderEpoch = value;
 					}
 				}
@@ -24394,11 +22084,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"EndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"EndOffset is non-nullable.");
 						}
 
 						_endOffset = value;
@@ -24435,19 +22120,19 @@ namespace Kafka.Protocol
 			var instance = new ProduceRequest(version);
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.TransactionalId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Acks = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.Acks = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TimeoutMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await TopicProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -24456,27 +22141,27 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(TransactionalId.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(TransactionalId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(Acks.Value, cancellationToken);
+				await writer.WriteInt16Async(Acks, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(TimeoutMs.Value, cancellationToken);
+				await writer.WriteInt32Async(TimeoutMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
 		/// <summary>
 		/// The transactional ID, or null if the producer is not transactional.
 		/// </summary>
-		private NullableString _transactionalId = NullableString.Default;
-		public NullableString TransactionalId 
+		private String? _transactionalId = String.Default;
+		public String? TransactionalId 
 		{
 			get => _transactionalId;
 			set 
@@ -24496,7 +22181,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ProduceRequest WithTransactionalId(NullableString transactionalId)
+		public ProduceRequest WithTransactionalId(String transactionalId)
 		{
 			TransactionalId = transactionalId;
 			return this;
@@ -24514,11 +22199,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Acks does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Acks is non-nullable.");
 				}
 
 				_acks = value;
@@ -24545,11 +22225,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TimeoutMs is non-nullable.");
-				}
-
 				_timeoutMs = value;
 			}
 		}
@@ -24563,8 +22238,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic to produce to.
 		/// </summary>
-		private TopicProduceData[]? _topicsCollection = System.Array.Empty<TopicProduceData>();
-		public TopicProduceData[]? TopicsCollection 
+		private TopicProduceData[] _topicsCollection = Array.Empty<TopicProduceData>();
+		public TopicProduceData[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -24572,11 +22247,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -24610,11 +22280,11 @@ namespace Kafka.Protocol
 				var instance = new TopicProduceData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await PartitionProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -24623,11 +22293,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -24645,11 +22315,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -24663,8 +22328,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition to produce to.
 			/// </summary>
-			private PartitionProduceData[]? _partitionsCollection = System.Array.Empty<PartitionProduceData>();
-			public PartitionProduceData[]? PartitionsCollection 
+			private PartitionProduceData[] _partitionsCollection = Array.Empty<PartitionProduceData>();
+			public PartitionProduceData[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -24672,11 +22337,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -24710,11 +22370,11 @@ namespace Kafka.Protocol
 					var instance = new PartitionProduceData(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Records = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+						instance.Records = await reader.ReadBytesAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -24723,11 +22383,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteBytesAsync(Records.Value, cancellationToken);
+						await writer.WriteNullableBytesAsync(Records, cancellationToken);
 					}
 				}
 
@@ -24745,11 +22405,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-						}
-
 						_partitionIndex = value;
 					}
 				}
@@ -24763,8 +22418,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The record data to be produced.
 				/// </summary>
-				private Bytes _records = Bytes.Default;
-				public Bytes Records 
+				private Bytes? _records = Bytes.Default;
+				public Bytes? Records 
 				{
 					get => _records;
 					set 
@@ -24814,11 +22469,11 @@ namespace Kafka.Protocol
 			var instance = new ProduceResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = await reader.ReadAsync(async () => await TopicProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.ResponsesCollection = await reader.ReadArrayAsync(async () => await TopicProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -24827,19 +22482,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, ResponsesCollection);
+				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 		}
 
 		/// <summary>
 		/// Each produce response
 		/// </summary>
-		private TopicProduceResponse[]? _responsesCollection = System.Array.Empty<TopicProduceResponse>();
-		public TopicProduceResponse[]? ResponsesCollection 
+		private TopicProduceResponse[] _responsesCollection = Array.Empty<TopicProduceResponse>();
+		public TopicProduceResponse[] ResponsesCollection 
 		{
 			get => _responsesCollection;
 			set 
@@ -24847,11 +22502,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ResponsesCollection is non-nullable.");
 				}
 
 				_responsesCollection = value;
@@ -24885,11 +22535,11 @@ namespace Kafka.Protocol
 				var instance = new TopicProduceResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await PartitionProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -24898,11 +22548,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -24920,11 +22570,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -24938,8 +22583,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each partition that we produced to within the topic.
 			/// </summary>
-			private PartitionProduceResponse[]? _partitionsCollection = System.Array.Empty<PartitionProduceResponse>();
-			public PartitionProduceResponse[]? PartitionsCollection 
+			private PartitionProduceResponse[] _partitionsCollection = Array.Empty<PartitionProduceResponse>();
+			public PartitionProduceResponse[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -24947,11 +22592,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -24985,23 +22625,23 @@ namespace Kafka.Protocol
 					var instance = new PartitionProduceResponse(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.BaseOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.BaseOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(2, 2147483647)) 
 					{
-						instance.LogAppendTimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LogAppendTimeMs = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						instance.LogStartOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.LogStartOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -25010,23 +22650,23 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(BaseOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(BaseOffset, cancellationToken);
 					}
 					if (Version.InRange(2, 2147483647)) 
 					{
-						await writer.WriteInt64Async(LogAppendTimeMs.Value, cancellationToken);
+						await writer.WriteInt64Async(LogAppendTimeMs, cancellationToken);
 					}
 					if (Version.InRange(5, 2147483647)) 
 					{
-						await writer.WriteInt64Async(LogStartOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(LogStartOffset, cancellationToken);
 					}
 				}
 
@@ -25042,11 +22682,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -25073,11 +22708,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-						}
-
 						_errorCode = value;
 					}
 				}
@@ -25102,11 +22732,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"BaseOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"BaseOffset is non-nullable.");
-						}
-
 						_baseOffset = value;
 					}
 				}
@@ -25126,11 +22751,6 @@ namespace Kafka.Protocol
 					get => _logAppendTimeMs;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LogAppendTimeMs is non-nullable.");
-						}
-
 						_logAppendTimeMs = value;
 					}
 				}
@@ -25150,11 +22770,6 @@ namespace Kafka.Protocol
 					get => _logStartOffset;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"LogStartOffset is non-nullable.");
-						}
-
 						_logStartOffset = value;
 					}
 				}
@@ -25176,11 +22791,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -25213,11 +22823,11 @@ namespace Kafka.Protocol
 			var instance = new RenewDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Hmac = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.Hmac = await reader.ReadBytesAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.RenewPeriodMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.RenewPeriodMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -25226,11 +22836,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBytesAsync(Hmac.Value, cancellationToken);
+				await writer.WriteBytesAsync(Hmac, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(RenewPeriodMs.Value, cancellationToken);
+				await writer.WriteInt64Async(RenewPeriodMs, cancellationToken);
 			}
 		}
 
@@ -25246,11 +22856,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Hmac is non-nullable.");
 				}
 
 				_hmac = value;
@@ -25275,11 +22880,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"RenewPeriodMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"RenewPeriodMs is non-nullable.");
 				}
 
 				_renewPeriodMs = value;
@@ -25314,15 +22914,15 @@ namespace Kafka.Protocol
 			var instance = new RenewDelegationTokenResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ExpiryTimestampMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ExpiryTimestampMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -25331,15 +22931,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ExpiryTimestampMs.Value, cancellationToken);
+				await writer.WriteInt64Async(ExpiryTimestampMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 		}
 
@@ -25355,11 +22955,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -25386,11 +22981,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ExpiryTimestampMs is non-nullable.");
-				}
-
 				_expiryTimestampMs = value;
 			}
 		}
@@ -25413,11 +23003,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
 				}
 
 				_throttleTimeMs = value;
@@ -25452,19 +23037,19 @@ namespace Kafka.Protocol
 			var instance = new RequestHeader(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.RequestApiKey = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.RequestApiKey = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.RequestApiVersion = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.RequestApiVersion = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.CorrelationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.CorrelationId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ClientId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.ClientId = await reader.ReadStringAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -25473,19 +23058,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(RequestApiKey.Value, cancellationToken);
+				await writer.WriteInt16Async(RequestApiKey, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(RequestApiVersion.Value, cancellationToken);
+				await writer.WriteInt16Async(RequestApiVersion, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(CorrelationId.Value, cancellationToken);
+				await writer.WriteInt32Async(CorrelationId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(ClientId.Value, cancellationToken);
+				await writer.WriteStringAsync(ClientId, cancellationToken);
 			}
 		}
 
@@ -25501,11 +23086,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"RequestApiKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"RequestApiKey is non-nullable.");
 				}
 
 				_requestApiKey = value;
@@ -25532,11 +23112,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RequestApiVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"RequestApiVersion is non-nullable.");
-				}
-
 				_requestApiVersion = value;
 			}
 		}
@@ -25561,11 +23136,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"CorrelationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"CorrelationId is non-nullable.");
-				}
-
 				_correlationId = value;
 			}
 		}
@@ -25588,11 +23158,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ClientId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ClientId is non-nullable.");
 				}
 
 				_clientId = value;
@@ -25627,7 +23192,7 @@ namespace Kafka.Protocol
 			var instance = new ResponseHeader(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.CorrelationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.CorrelationId = await reader.ReadInt32Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -25636,7 +23201,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(CorrelationId.Value, cancellationToken);
+				await writer.WriteInt32Async(CorrelationId, cancellationToken);
 			}
 		}
 
@@ -25652,11 +23217,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"CorrelationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"CorrelationId is non-nullable.");
 				}
 
 				_correlationId = value;
@@ -25691,7 +23251,7 @@ namespace Kafka.Protocol
 			var instance = new SaslAuthenticateRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.AuthBytes = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.AuthBytes = await reader.ReadBytesAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -25700,7 +23260,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBytesAsync(AuthBytes.Value, cancellationToken);
+				await writer.WriteBytesAsync(AuthBytes, cancellationToken);
 			}
 		}
 
@@ -25716,11 +23276,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"AuthBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"AuthBytes is non-nullable.");
 				}
 
 				_authBytes = value;
@@ -25755,19 +23310,19 @@ namespace Kafka.Protocol
 			var instance = new SaslAuthenticateResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.AuthBytes = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.AuthBytes = await reader.ReadBytesAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.SessionLifetimeMs = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.SessionLifetimeMs = await reader.ReadInt64Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -25776,19 +23331,19 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBytesAsync(AuthBytes.Value, cancellationToken);
+				await writer.WriteBytesAsync(AuthBytes, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt64Async(SessionLifetimeMs.Value, cancellationToken);
+				await writer.WriteInt64Async(SessionLifetimeMs, cancellationToken);
 			}
 		}
 
@@ -25806,11 +23361,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -25824,8 +23374,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The error message, or null if there was no error.
 		/// </summary>
-		private NullableString _errorMessage = NullableString.Default;
-		public NullableString ErrorMessage 
+		private String? _errorMessage = String.Default;
+		public String? ErrorMessage 
 		{
 			get => _errorMessage;
 			set 
@@ -25845,7 +23395,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public SaslAuthenticateResponse WithErrorMessage(NullableString errorMessage)
+		public SaslAuthenticateResponse WithErrorMessage(String errorMessage)
 		{
 			ErrorMessage = errorMessage;
 			return this;
@@ -25863,11 +23413,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"AuthBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"AuthBytes is non-nullable.");
 				}
 
 				_authBytes = value;
@@ -25892,11 +23437,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"SessionLifetimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"SessionLifetimeMs is non-nullable.");
 				}
 
 				_sessionLifetimeMs = value;
@@ -25931,7 +23471,7 @@ namespace Kafka.Protocol
 			var instance = new SaslHandshakeRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Mechanism = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.Mechanism = await reader.ReadStringAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -25940,7 +23480,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(Mechanism.Value, cancellationToken);
+				await writer.WriteStringAsync(Mechanism, cancellationToken);
 			}
 		}
 
@@ -25956,11 +23496,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Mechanism does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Mechanism is non-nullable.");
 				}
 
 				_mechanism = value;
@@ -25995,11 +23530,11 @@ namespace Kafka.Protocol
 			var instance = new SaslHandshakeResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MechanismsCollection = await reader.ReadAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
+				instance.MechanismsCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -26008,11 +23543,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, MechanismsCollection);
+				await writer.WriteArrayAsync(cancellationToken, MechanismsCollection);
 			}
 		}
 
@@ -26030,11 +23565,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -26048,8 +23578,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The mechanisms enabled in the server.
 		/// </summary>
-		private String[]? _mechanismsCollection = System.Array.Empty<String>();
-		public String[]? MechanismsCollection 
+		private String[] _mechanismsCollection = Array.Empty<String>();
+		public String[] MechanismsCollection 
 		{
 			get => _mechanismsCollection;
 			set 
@@ -26059,16 +23589,11 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MechanismsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MechanismsCollection is non-nullable.");
-				}
-
 				_mechanismsCollection = value;
 			}
 		}
 
-		public SaslHandshakeResponse WithMechanismsCollection(String[]? mechanismsCollection)
+		public SaslHandshakeResponse WithMechanismsCollection(String[] mechanismsCollection)
 		{
 			MechanismsCollection = mechanismsCollection;
 			return this;
@@ -26096,27 +23621,27 @@ namespace Kafka.Protocol
 			var instance = new StopReplicaRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerEpoch = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.BrokerEpoch = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.DeletePartitions = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+				instance.DeletePartitions = await reader.ReadBooleanAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 0)) 
 			{
-				instance.PartitionsV0Collection = await reader.ReadAsync(async () => await StopReplicaRequestPartitionV0.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.PartitionsV0Collection = await reader.ReadArrayAsync(async () => await StopReplicaRequestPartitionV0.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await StopReplicaRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await StopReplicaRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -26125,27 +23650,27 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ControllerId.Value, cancellationToken);
+				await writer.WriteInt32Async(ControllerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
+				await writer.WriteInt32Async(ControllerEpoch, cancellationToken);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt64Async(BrokerEpoch.Value, cancellationToken);
+				await writer.WriteInt64Async(BrokerEpoch, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBooleanAsync(DeletePartitions.Value, cancellationToken);
+				await writer.WriteBooleanAsync(DeletePartitions, cancellationToken);
 			}
 			if (Version.InRange(0, 0)) 
 			{
-				await writer.WriteAsync(cancellationToken, PartitionsV0Collection);
+				await writer.WriteArrayAsync(cancellationToken, PartitionsV0Collection);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -26161,11 +23686,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ControllerId is non-nullable.");
 				}
 
 				_controllerId = value;
@@ -26192,11 +23712,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
-				}
-
 				_controllerEpoch = value;
 			}
 		}
@@ -26216,11 +23731,6 @@ namespace Kafka.Protocol
 			get => _brokerEpoch;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"BrokerEpoch is non-nullable.");
-				}
-
 				_brokerEpoch = value;
 			}
 		}
@@ -26245,11 +23755,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"DeletePartitions does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"DeletePartitions is non-nullable.");
-				}
-
 				_deletePartitions = value;
 			}
 		}
@@ -26263,8 +23768,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The partitions to stop.
 		/// </summary>
-		private StopReplicaRequestPartitionV0[]? _partitionsV0Collection = System.Array.Empty<StopReplicaRequestPartitionV0>();
-		public StopReplicaRequestPartitionV0[]? PartitionsV0Collection 
+		private StopReplicaRequestPartitionV0[] _partitionsV0Collection = Array.Empty<StopReplicaRequestPartitionV0>();
+		public StopReplicaRequestPartitionV0[] PartitionsV0Collection 
 		{
 			get => _partitionsV0Collection;
 			set 
@@ -26272,11 +23777,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 0) == false) 
 				{
 					throw new UnsupportedVersionException($"PartitionsV0Collection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PartitionsV0Collection is non-nullable.");
 				}
 
 				_partitionsV0Collection = value;
@@ -26310,11 +23810,11 @@ namespace Kafka.Protocol
 				var instance = new StopReplicaRequestPartitionV0(version);
 				if (instance.Version.InRange(0, 0)) 
 				{
-					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 0)) 
 				{
-					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -26323,11 +23823,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 0)) 
 				{
-					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
+					await writer.WriteStringAsync(TopicName, cancellationToken);
 				}
 				if (Version.InRange(0, 0)) 
 				{
-					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+					await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 				}
 			}
 
@@ -26343,11 +23843,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 0) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
 					_topicName = value;
@@ -26374,11 +23869,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-					}
-
 					_partitionIndex = value;
 				}
 			}
@@ -26393,8 +23883,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The topics to stop.
 		/// </summary>
-		private StopReplicaRequestTopic[]? _topicsCollection = System.Array.Empty<StopReplicaRequestTopic>();
-		public StopReplicaRequestTopic[]? TopicsCollection 
+		private StopReplicaRequestTopic[] _topicsCollection = Array.Empty<StopReplicaRequestTopic>();
+		public StopReplicaRequestTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -26402,11 +23892,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -26440,11 +23925,11 @@ namespace Kafka.Protocol
 				var instance = new StopReplicaRequestTopic(version);
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.PartitionIndexesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -26453,11 +23938,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionIndexesCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection);
 				}
 			}
 
@@ -26475,11 +23960,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -26493,8 +23973,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partition indexes.
 			/// </summary>
-			private Int32[]? _partitionIndexesCollection = System.Array.Empty<Int32>();
-			public Int32[]? PartitionIndexesCollection 
+			private Int32[] _partitionIndexesCollection = Array.Empty<Int32>();
+			public Int32[] PartitionIndexesCollection 
 			{
 				get => _partitionIndexesCollection;
 				set 
@@ -26504,16 +23984,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndexesCollection is non-nullable.");
-					}
-
 					_partitionIndexesCollection = value;
 				}
 			}
 
-			public StopReplicaRequestTopic WithPartitionIndexesCollection(Int32[]? partitionIndexesCollection)
+			public StopReplicaRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
 			{
 				PartitionIndexesCollection = partitionIndexesCollection;
 				return this;
@@ -26542,11 +24017,11 @@ namespace Kafka.Protocol
 			var instance = new StopReplicaResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PartitionsCollection = await reader.ReadAsync(async () => await StopReplicaResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await StopReplicaResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -26555,11 +24030,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, PartitionsCollection);
+				await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 			}
 		}
 
@@ -26577,11 +24052,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -26595,8 +24065,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The responses for each partition.
 		/// </summary>
-		private StopReplicaResponsePartition[]? _partitionsCollection = System.Array.Empty<StopReplicaResponsePartition>();
-		public StopReplicaResponsePartition[]? PartitionsCollection 
+		private StopReplicaResponsePartition[] _partitionsCollection = Array.Empty<StopReplicaResponsePartition>();
+		public StopReplicaResponsePartition[] PartitionsCollection 
 		{
 			get => _partitionsCollection;
 			set 
@@ -26604,11 +24074,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 				}
 
 				_partitionsCollection = value;
@@ -26642,15 +24107,15 @@ namespace Kafka.Protocol
 				var instance = new StopReplicaResponsePartition(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -26659,15 +24124,15 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
+					await writer.WriteStringAsync(TopicName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+					await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+					await writer.WriteInt16Async(ErrorCode, cancellationToken);
 				}
 			}
 
@@ -26683,11 +24148,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
 					_topicName = value;
@@ -26714,11 +24174,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-					}
-
 					_partitionIndex = value;
 				}
 			}
@@ -26741,11 +24196,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 					}
 
 					_errorCode = value;
@@ -26781,23 +24231,23 @@ namespace Kafka.Protocol
 			var instance = new SyncGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GenerationId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.GenerationId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.GroupInstanceId = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+				instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.AssignmentsCollection = await reader.ReadAsync(async () => await SyncGroupRequestAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.AssignmentsCollection = await reader.ReadArrayAsync(async () => await SyncGroupRequestAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -26806,23 +24256,23 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+				await writer.WriteStringAsync(GroupId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(GenerationId.Value, cancellationToken);
+				await writer.WriteInt32Async(GenerationId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+				await writer.WriteStringAsync(MemberId, cancellationToken);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId.Value, cancellationToken);
+				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, AssignmentsCollection);
+				await writer.WriteArrayAsync(cancellationToken, AssignmentsCollection);
 			}
 		}
 
@@ -26838,11 +24288,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupId is non-nullable.");
 				}
 
 				_groupId = value;
@@ -26869,11 +24314,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GenerationId is non-nullable.");
-				}
-
 				_generationId = value;
 			}
 		}
@@ -26898,11 +24338,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MemberId is non-nullable.");
-				}
-
 				_memberId = value;
 			}
 		}
@@ -26916,8 +24351,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
 		/// </summary>
-		private NullableString _groupInstanceId = new NullableString(null);
-		public NullableString GroupInstanceId 
+		private String? _groupInstanceId;
+		public String? GroupInstanceId 
 		{
 			get => _groupInstanceId;
 			set 
@@ -26937,7 +24372,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public SyncGroupRequest WithGroupInstanceId(NullableString groupInstanceId)
+		public SyncGroupRequest WithGroupInstanceId(String groupInstanceId)
 		{
 			GroupInstanceId = groupInstanceId;
 			return this;
@@ -26946,8 +24381,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each assignment.
 		/// </summary>
-		private SyncGroupRequestAssignment[]? _assignmentsCollection = System.Array.Empty<SyncGroupRequestAssignment>();
-		public SyncGroupRequestAssignment[]? AssignmentsCollection 
+		private SyncGroupRequestAssignment[] _assignmentsCollection = Array.Empty<SyncGroupRequestAssignment>();
+		public SyncGroupRequestAssignment[] AssignmentsCollection 
 		{
 			get => _assignmentsCollection;
 			set 
@@ -26955,11 +24390,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"AssignmentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"AssignmentsCollection is non-nullable.");
 				}
 
 				_assignmentsCollection = value;
@@ -26993,11 +24423,11 @@ namespace Kafka.Protocol
 				var instance = new SyncGroupRequestAssignment(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MemberId = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.MemberId = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Assignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+					instance.Assignment = await reader.ReadBytesAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -27006,11 +24436,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(MemberId.Value, cancellationToken);
+					await writer.WriteStringAsync(MemberId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteBytesAsync(Assignment.Value, cancellationToken);
+					await writer.WriteBytesAsync(Assignment, cancellationToken);
 				}
 			}
 
@@ -27026,11 +24456,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"MemberId is non-nullable.");
 					}
 
 					_memberId = value;
@@ -27055,11 +24480,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Assignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Assignment is non-nullable.");
 					}
 
 					_assignment = value;
@@ -27095,15 +24515,15 @@ namespace Kafka.Protocol
 			var instance = new SyncGroupResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Assignment = new Bytes(await reader.ReadBytesAsync(cancellationToken));
+				instance.Assignment = await reader.ReadBytesAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -27112,15 +24532,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteBytesAsync(Assignment.Value, cancellationToken);
+				await writer.WriteBytesAsync(Assignment, cancellationToken);
 			}
 		}
 
@@ -27133,11 +24553,6 @@ namespace Kafka.Protocol
 			get => _throttleTimeMs;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -27162,11 +24577,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
-				}
-
 				_errorCode = value;
 			}
 		}
@@ -27189,11 +24599,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"Assignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"Assignment is non-nullable.");
 				}
 
 				_assignment = value;
@@ -27228,23 +24633,23 @@ namespace Kafka.Protocol
 			var instance = new TxnOffsetCommitRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = new String(await reader.ReadStringAsync(cancellationToken));
+				instance.GroupId = await reader.ReadStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.ProducerId = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ProducerEpoch = await reader.ReadInt16Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await TxnOffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TxnOffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -27253,23 +24658,23 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TransactionalId.Value, cancellationToken);
+				await writer.WriteStringAsync(TransactionalId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId.Value, cancellationToken);
+				await writer.WriteStringAsync(GroupId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+				await writer.WriteInt64Async(ProducerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
+				await writer.WriteInt16Async(ProducerEpoch, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -27285,11 +24690,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TransactionalId is non-nullable.");
 				}
 
 				_transactionalId = value;
@@ -27316,11 +24716,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"GroupId is non-nullable.");
-				}
-
 				_groupId = value;
 			}
 		}
@@ -27343,11 +24738,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 				}
 
 				_producerId = value;
@@ -27374,11 +24764,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
-				}
-
 				_producerEpoch = value;
 			}
 		}
@@ -27392,8 +24777,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// Each topic that we want to committ offsets for.
 		/// </summary>
-		private TxnOffsetCommitRequestTopic[]? _topicsCollection = System.Array.Empty<TxnOffsetCommitRequestTopic>();
-		public TxnOffsetCommitRequestTopic[]? TopicsCollection 
+		private TxnOffsetCommitRequestTopic[] _topicsCollection = Array.Empty<TxnOffsetCommitRequestTopic>();
+		public TxnOffsetCommitRequestTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -27401,11 +24786,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -27439,11 +24819,11 @@ namespace Kafka.Protocol
 				var instance = new TxnOffsetCommitRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await TxnOffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await TxnOffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -27452,11 +24832,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -27474,11 +24854,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -27492,8 +24867,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partitions inside the topic that we want to committ offsets for.
 			/// </summary>
-			private TxnOffsetCommitRequestPartition[]? _partitionsCollection = System.Array.Empty<TxnOffsetCommitRequestPartition>();
-			public TxnOffsetCommitRequestPartition[]? PartitionsCollection 
+			private TxnOffsetCommitRequestPartition[] _partitionsCollection = Array.Empty<TxnOffsetCommitRequestPartition>();
+			public TxnOffsetCommitRequestPartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -27501,11 +24876,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -27539,19 +24909,19 @@ namespace Kafka.Protocol
 					var instance = new TxnOffsetCommitRequestPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedOffset = new Int64(await reader.ReadInt64Async(cancellationToken));
+						instance.CommittedOffset = await reader.ReadInt64Async(cancellationToken);
 					}
 					if (instance.Version.InRange(2, 2147483647)) 
 					{
-						instance.CommittedLeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.CommittedLeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedMetadata = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+						instance.CommittedMetadata = await reader.ReadStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -27560,19 +24930,19 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt64Async(CommittedOffset.Value, cancellationToken);
+						await writer.WriteInt64Async(CommittedOffset, cancellationToken);
 					}
 					if (Version.InRange(2, 2147483647)) 
 					{
-						await writer.WriteInt32Async(CommittedLeaderEpoch.Value, cancellationToken);
+						await writer.WriteInt32Async(CommittedLeaderEpoch, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(CommittedMetadata.Value, cancellationToken);
+						await writer.WriteNullableStringAsync(CommittedMetadata, cancellationToken);
 					}
 				}
 
@@ -27588,11 +24958,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -27619,11 +24984,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CommittedOffset is non-nullable.");
-						}
-
 						_committedOffset = value;
 					}
 				}
@@ -27643,11 +25003,6 @@ namespace Kafka.Protocol
 					get => _committedLeaderEpoch;
 					set 
 					{
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"CommittedLeaderEpoch is non-nullable.");
-						}
-
 						_committedLeaderEpoch = value;
 					}
 				}
@@ -27661,8 +25016,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
 				/// </summary>
-				private NullableString _committedMetadata = NullableString.Default;
-				public NullableString CommittedMetadata 
+				private String? _committedMetadata = String.Default;
+				public String? CommittedMetadata 
 				{
 					get => _committedMetadata;
 					set 
@@ -27682,7 +25037,7 @@ namespace Kafka.Protocol
 					}
 				}
 
-				public TxnOffsetCommitRequestPartition WithCommittedMetadata(NullableString committedMetadata)
+				public TxnOffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
 				{
 					CommittedMetadata = committedMetadata;
 					return this;
@@ -27712,11 +25067,11 @@ namespace Kafka.Protocol
 			var instance = new TxnOffsetCommitResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ThrottleTimeMs = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadAsync(async () => await TxnOffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TxnOffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -27725,11 +25080,11 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ThrottleTimeMs.Value, cancellationToken);
+				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicsCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -27747,11 +25102,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ThrottleTimeMs is non-nullable.");
-				}
-
 				_throttleTimeMs = value;
 			}
 		}
@@ -27765,8 +25115,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// The responses for each topic.
 		/// </summary>
-		private TxnOffsetCommitResponseTopic[]? _topicsCollection = System.Array.Empty<TxnOffsetCommitResponseTopic>();
-		public TxnOffsetCommitResponseTopic[]? TopicsCollection 
+		private TxnOffsetCommitResponseTopic[] _topicsCollection = Array.Empty<TxnOffsetCommitResponseTopic>();
+		public TxnOffsetCommitResponseTopic[] TopicsCollection 
 		{
 			get => _topicsCollection;
 			set 
@@ -27774,11 +25124,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 				}
 
 				_topicsCollection = value;
@@ -27812,11 +25157,11 @@ namespace Kafka.Protocol
 				var instance = new TxnOffsetCommitResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.Name = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadAsync(async () => await TxnOffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await TxnOffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -27825,11 +25170,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name.Value, cancellationToken);
+					await writer.WriteStringAsync(Name, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionsCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 				}
 			}
 
@@ -27847,11 +25192,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Name is non-nullable.");
-					}
-
 					_name = value;
 				}
 			}
@@ -27865,8 +25205,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The responses for each partition in the topic.
 			/// </summary>
-			private TxnOffsetCommitResponsePartition[]? _partitionsCollection = System.Array.Empty<TxnOffsetCommitResponsePartition>();
-			public TxnOffsetCommitResponsePartition[]? PartitionsCollection 
+			private TxnOffsetCommitResponsePartition[] _partitionsCollection = Array.Empty<TxnOffsetCommitResponsePartition>();
+			public TxnOffsetCommitResponsePartition[] PartitionsCollection 
 			{
 				get => _partitionsCollection;
 				set 
@@ -27874,11 +25214,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 					}
 
 					_partitionsCollection = value;
@@ -27912,11 +25247,11 @@ namespace Kafka.Protocol
 					var instance = new TxnOffsetCommitResponsePartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -27925,11 +25260,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+						await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+						await writer.WriteInt16Async(ErrorCode, cancellationToken);
 					}
 				}
 
@@ -27945,11 +25280,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 						}
 
 						_partitionIndex = value;
@@ -27974,11 +25304,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 						}
 
 						_errorCode = value;
@@ -28015,27 +25340,27 @@ namespace Kafka.Protocol
 			var instance = new UpdateMetadataRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ControllerId = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerId = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+				instance.ControllerEpoch = await reader.ReadInt32Async(cancellationToken);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.BrokerEpoch = new Int64(await reader.ReadInt64Async(cancellationToken));
+				instance.BrokerEpoch = await reader.ReadInt64Async(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 4)) 
 			{
-				instance.LegacyPartitionStatesCollection = await reader.ReadAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.LegacyPartitionStatesCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.TopicStatesCollection = await reader.ReadAsync(async () => await UpdateMetadataRequestTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.TopicStatesCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataRequestTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.BrokersCollection = await reader.ReadAsync(async () => await UpdateMetadataRequestBroker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.BrokersCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataRequestBroker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -28044,27 +25369,27 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ControllerId.Value, cancellationToken);
+				await writer.WriteInt32Async(ControllerId, cancellationToken);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
+				await writer.WriteInt32Async(ControllerEpoch, cancellationToken);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteInt64Async(BrokerEpoch.Value, cancellationToken);
+				await writer.WriteInt64Async(BrokerEpoch, cancellationToken);
 			}
 			if (Version.InRange(0, 4)) 
 			{
-				await writer.WriteAsync(cancellationToken, LegacyPartitionStatesCollection);
+				await writer.WriteArrayAsync(cancellationToken, LegacyPartitionStatesCollection);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, TopicStatesCollection);
+				await writer.WriteArrayAsync(cancellationToken, TopicStatesCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, BrokersCollection);
+				await writer.WriteArrayAsync(cancellationToken, BrokersCollection);
 			}
 		}
 
@@ -28080,11 +25405,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ControllerId is non-nullable.");
 				}
 
 				_controllerId = value;
@@ -28111,11 +25431,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
-				}
-
 				_controllerEpoch = value;
 			}
 		}
@@ -28135,11 +25450,6 @@ namespace Kafka.Protocol
 			get => _brokerEpoch;
 			set 
 			{
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"BrokerEpoch is non-nullable.");
-				}
-
 				_brokerEpoch = value;
 			}
 		}
@@ -28153,8 +25463,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// In older versions of this RPC, each partition that we would like to update.
 		/// </summary>
-		private UpdateMetadataPartitionState[]? _legacyPartitionStatesCollection = System.Array.Empty<UpdateMetadataPartitionState>();
-		public UpdateMetadataPartitionState[]? LegacyPartitionStatesCollection 
+		private UpdateMetadataPartitionState[] _legacyPartitionStatesCollection = Array.Empty<UpdateMetadataPartitionState>();
+		public UpdateMetadataPartitionState[] LegacyPartitionStatesCollection 
 		{
 			get => _legacyPartitionStatesCollection;
 			set 
@@ -28164,16 +25474,11 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"LegacyPartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
 				}
 
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"LegacyPartitionStatesCollection is non-nullable.");
-				}
-
 				_legacyPartitionStatesCollection = value;
 			}
 		}
 
-		public UpdateMetadataRequest WithLegacyPartitionStatesCollection(UpdateMetadataPartitionState[]? legacyPartitionStatesCollection)
+		public UpdateMetadataRequest WithLegacyPartitionStatesCollection(UpdateMetadataPartitionState[] legacyPartitionStatesCollection)
 		{
 			LegacyPartitionStatesCollection = legacyPartitionStatesCollection;
 			return this;
@@ -28182,8 +25487,8 @@ namespace Kafka.Protocol
 		/// <summary>
 		/// In newer versions of this RPC, each topic that we would like to update.
 		/// </summary>
-		private UpdateMetadataRequestTopicState[]? _topicStatesCollection = System.Array.Empty<UpdateMetadataRequestTopicState>();
-		public UpdateMetadataRequestTopicState[]? TopicStatesCollection 
+		private UpdateMetadataRequestTopicState[] _topicStatesCollection = Array.Empty<UpdateMetadataRequestTopicState>();
+		public UpdateMetadataRequestTopicState[] TopicStatesCollection 
 		{
 			get => _topicStatesCollection;
 			set 
@@ -28191,11 +25496,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(5, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"TopicStatesCollection is non-nullable.");
 				}
 
 				_topicStatesCollection = value;
@@ -28229,11 +25529,11 @@ namespace Kafka.Protocol
 				var instance = new UpdateMetadataRequestTopicState(version);
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.PartitionStatesCollection = await reader.ReadAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.PartitionStatesCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -28242,11 +25542,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
+					await writer.WriteStringAsync(TopicName, cancellationToken);
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, PartitionStatesCollection);
+					await writer.WriteArrayAsync(cancellationToken, PartitionStatesCollection);
 				}
 			}
 
@@ -28264,11 +25564,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
-					}
-
 					_topicName = value;
 				}
 			}
@@ -28282,8 +25577,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The partition that we would like to update.
 			/// </summary>
-			private UpdateMetadataPartitionState[]? _partitionStatesCollection = System.Array.Empty<UpdateMetadataPartitionState>();
-			public UpdateMetadataPartitionState[]? PartitionStatesCollection 
+			private UpdateMetadataPartitionState[] _partitionStatesCollection = Array.Empty<UpdateMetadataPartitionState>();
+			public UpdateMetadataPartitionState[] PartitionStatesCollection 
 			{
 				get => _partitionStatesCollection;
 				set 
@@ -28293,24 +25588,19 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionStatesCollection is non-nullable.");
-					}
-
 					_partitionStatesCollection = value;
 				}
 			}
 
-			public UpdateMetadataRequestTopicState WithPartitionStatesCollection(UpdateMetadataPartitionState[]? partitionStatesCollection)
+			public UpdateMetadataRequestTopicState WithPartitionStatesCollection(UpdateMetadataPartitionState[] partitionStatesCollection)
 			{
 				PartitionStatesCollection = partitionStatesCollection;
 				return this;
 			}
 		}
 
-		private UpdateMetadataRequestBroker[]? _brokersCollection = System.Array.Empty<UpdateMetadataRequestBroker>();
-		public UpdateMetadataRequestBroker[]? BrokersCollection 
+		private UpdateMetadataRequestBroker[] _brokersCollection = Array.Empty<UpdateMetadataRequestBroker>();
+		public UpdateMetadataRequestBroker[] BrokersCollection 
 		{
 			get => _brokersCollection;
 			set 
@@ -28318,11 +25608,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"BrokersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"BrokersCollection is non-nullable.");
 				}
 
 				_brokersCollection = value;
@@ -28356,23 +25641,23 @@ namespace Kafka.Protocol
 				var instance = new UpdateMetadataRequestBroker(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Id = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Id = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 0)) 
 				{
-					instance.V0Host = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.V0Host = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 0)) 
 				{
-					instance.V0Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.V0Port = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.EndpointsCollection = await reader.ReadAsync(async () => await UpdateMetadataRequestEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.EndpointsCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataRequestEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					instance.Rack = new NullableString(await reader.ReadNullableStringAsync(cancellationToken));
+					instance.Rack = await reader.ReadStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -28381,23 +25666,23 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(Id.Value, cancellationToken);
+					await writer.WriteInt32Async(Id, cancellationToken);
 				}
 				if (Version.InRange(0, 0)) 
 				{
-					await writer.WriteStringAsync(V0Host.Value, cancellationToken);
+					await writer.WriteStringAsync(V0Host, cancellationToken);
 				}
 				if (Version.InRange(0, 0)) 
 				{
-					await writer.WriteInt32Async(V0Port.Value, cancellationToken);
+					await writer.WriteInt32Async(V0Port, cancellationToken);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, EndpointsCollection);
+					await writer.WriteArrayAsync(cancellationToken, EndpointsCollection);
 				}
 				if (Version.InRange(2, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Rack.Value, cancellationToken);
+					await writer.WriteNullableStringAsync(Rack, cancellationToken);
 				}
 			}
 
@@ -28413,11 +25698,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"Id does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Id is non-nullable.");
 					}
 
 					_id = value;
@@ -28439,11 +25719,6 @@ namespace Kafka.Protocol
 				get => _v0Host;
 				set 
 				{
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"V0Host is non-nullable.");
-					}
-
 					_v0Host = value;
 				}
 			}
@@ -28463,11 +25738,6 @@ namespace Kafka.Protocol
 				get => _v0Port;
 				set 
 				{
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"V0Port is non-nullable.");
-					}
-
 					_v0Port = value;
 				}
 			}
@@ -28481,8 +25751,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The broker endpoints.
 			/// </summary>
-			private UpdateMetadataRequestEndpoint[]? _endpointsCollection = System.Array.Empty<UpdateMetadataRequestEndpoint>();
-			public UpdateMetadataRequestEndpoint[]? EndpointsCollection 
+			private UpdateMetadataRequestEndpoint[] _endpointsCollection = Array.Empty<UpdateMetadataRequestEndpoint>();
+			public UpdateMetadataRequestEndpoint[] EndpointsCollection 
 			{
 				get => _endpointsCollection;
 				set 
@@ -28490,11 +25760,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(1, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"EndpointsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"EndpointsCollection is non-nullable.");
 					}
 
 					_endpointsCollection = value;
@@ -28528,19 +25793,19 @@ namespace Kafka.Protocol
 					var instance = new UpdateMetadataRequestEndpoint(version);
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.Port = new Int32(await reader.ReadInt32Async(cancellationToken));
+						instance.Port = await reader.ReadInt32Async(cancellationToken);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.Host = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Host = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(3, 2147483647)) 
 					{
-						instance.Listener = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Listener = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.SecurityProtocol = new Int16(await reader.ReadInt16Async(cancellationToken));
+						instance.SecurityProtocol = await reader.ReadInt16Async(cancellationToken);
 					}
 					return instance;
 				}
@@ -28549,19 +25814,19 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteInt32Async(Port.Value, cancellationToken);
+						await writer.WriteInt32Async(Port, cancellationToken);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Host.Value, cancellationToken);
+						await writer.WriteStringAsync(Host, cancellationToken);
 					}
 					if (Version.InRange(3, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Listener.Value, cancellationToken);
+						await writer.WriteStringAsync(Listener, cancellationToken);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteInt16Async(SecurityProtocol.Value, cancellationToken);
+						await writer.WriteInt16Async(SecurityProtocol, cancellationToken);
 					}
 				}
 
@@ -28577,11 +25842,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(1, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Port is non-nullable.");
 						}
 
 						_port = value;
@@ -28608,11 +25868,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Host is non-nullable.");
-						}
-
 						_host = value;
 					}
 				}
@@ -28635,11 +25890,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(3, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"Listener does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Listener is non-nullable.");
 						}
 
 						_listener = value;
@@ -28666,11 +25916,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"SecurityProtocol does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"SecurityProtocol is non-nullable.");
-						}
-
 						_securityProtocol = value;
 					}
 				}
@@ -28685,8 +25930,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The rack which this broker belongs to.
 			/// </summary>
-			private NullableString _rack = NullableString.Default;
-			public NullableString Rack 
+			private String? _rack = String.Default;
+			public String? Rack 
 			{
 				get => _rack;
 				set 
@@ -28701,7 +25946,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			public UpdateMetadataRequestBroker WithRack(NullableString rack)
+			public UpdateMetadataRequestBroker WithRack(String rack)
 			{
 				Rack = rack;
 				return this;
@@ -28727,39 +25972,39 @@ namespace Kafka.Protocol
 				var instance = new UpdateMetadataPartitionState(version);
 				if (instance.Version.InRange(0, 4)) 
 				{
-					instance.TopicName = new String(await reader.ReadStringAsync(cancellationToken));
+					instance.TopicName = await reader.ReadStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ControllerEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.ControllerEpoch = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Leader = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.Leader = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.LeaderEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.LeaderEpoch = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.IsrCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.IsrCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ZkVersion = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.ZkVersion = await reader.ReadInt32Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.ReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				if (instance.Version.InRange(4, 2147483647)) 
 				{
-					instance.OfflineReplicasCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+					instance.OfflineReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -28768,39 +26013,39 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 4)) 
 				{
-					await writer.WriteStringAsync(TopicName.Value, cancellationToken);
+					await writer.WriteStringAsync(TopicName, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+					await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(ControllerEpoch.Value, cancellationToken);
+					await writer.WriteInt32Async(ControllerEpoch, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(Leader.Value, cancellationToken);
+					await writer.WriteInt32Async(Leader, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(LeaderEpoch.Value, cancellationToken);
+					await writer.WriteInt32Async(LeaderEpoch, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, IsrCollection);
+					await writer.WriteArrayAsync(cancellationToken, IsrCollection);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(ZkVersion.Value, cancellationToken);
+					await writer.WriteInt32Async(ZkVersion, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, ReplicasCollection);
+					await writer.WriteArrayAsync(cancellationToken, ReplicasCollection);
 				}
 				if (Version.InRange(4, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, OfflineReplicasCollection);
+					await writer.WriteArrayAsync(cancellationToken, OfflineReplicasCollection);
 				}
 			}
 
@@ -28816,11 +26061,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 4) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicName is non-nullable.");
 					}
 
 					_topicName = value;
@@ -28847,11 +26087,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
-					}
-
 					_partitionIndex = value;
 				}
 			}
@@ -28874,11 +26109,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ControllerEpoch is non-nullable.");
 					}
 
 					_controllerEpoch = value;
@@ -28905,11 +26135,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"Leader is non-nullable.");
-					}
-
 					_leader = value;
 				}
 			}
@@ -28934,11 +26159,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"LeaderEpoch is non-nullable.");
-					}
-
 					_leaderEpoch = value;
 				}
 			}
@@ -28952,8 +26172,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The brokers which are in the ISR for this partition.
 			/// </summary>
-			private Int32[]? _isrCollection = System.Array.Empty<Int32>();
-			public Int32[]? IsrCollection 
+			private Int32[] _isrCollection = Array.Empty<Int32>();
+			public Int32[] IsrCollection 
 			{
 				get => _isrCollection;
 				set 
@@ -28963,16 +26183,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"IsrCollection is non-nullable.");
-					}
-
 					_isrCollection = value;
 				}
 			}
 
-			public UpdateMetadataPartitionState WithIsrCollection(Int32[]? isrCollection)
+			public UpdateMetadataPartitionState WithIsrCollection(Int32[] isrCollection)
 			{
 				IsrCollection = isrCollection;
 				return this;
@@ -28992,11 +26207,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ZkVersion is non-nullable.");
-					}
-
 					_zkVersion = value;
 				}
 			}
@@ -29010,8 +26220,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// All the replicas of this partition.
 			/// </summary>
-			private Int32[]? _replicasCollection = System.Array.Empty<Int32>();
-			public Int32[]? ReplicasCollection 
+			private Int32[] _replicasCollection = Array.Empty<Int32>();
+			public Int32[] ReplicasCollection 
 			{
 				get => _replicasCollection;
 				set 
@@ -29021,16 +26231,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ReplicasCollection is non-nullable.");
-					}
-
 					_replicasCollection = value;
 				}
 			}
 
-			public UpdateMetadataPartitionState WithReplicasCollection(Int32[]? replicasCollection)
+			public UpdateMetadataPartitionState WithReplicasCollection(Int32[] replicasCollection)
 			{
 				ReplicasCollection = replicasCollection;
 				return this;
@@ -29039,8 +26244,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The replicas of this partition which are offline.
 			/// </summary>
-			private Int32[]? _offlineReplicasCollection = System.Array.Empty<Int32>();
-			public Int32[]? OfflineReplicasCollection 
+			private Int32[] _offlineReplicasCollection = Array.Empty<Int32>();
+			public Int32[] OfflineReplicasCollection 
 			{
 				get => _offlineReplicasCollection;
 				set 
@@ -29050,16 +26255,11 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"OfflineReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"OfflineReplicasCollection is non-nullable.");
-					}
-
 					_offlineReplicasCollection = value;
 				}
 			}
 
-			public UpdateMetadataPartitionState WithOfflineReplicasCollection(Int32[]? offlineReplicasCollection)
+			public UpdateMetadataPartitionState WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
 			{
 				OfflineReplicasCollection = offlineReplicasCollection;
 				return this;
@@ -29088,7 +26288,7 @@ namespace Kafka.Protocol
 			var instance = new UpdateMetadataResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 			}
 			return instance;
 		}
@@ -29097,7 +26297,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+				await writer.WriteInt16Async(ErrorCode, cancellationToken);
 			}
 		}
 
@@ -29113,11 +26313,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 				}
 
 				_errorCode = value;
@@ -29152,7 +26347,7 @@ namespace Kafka.Protocol
 			var instance = new WriteTxnMarkersRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MarkersCollection = await reader.ReadAsync(async () => await WritableTxnMarker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.MarkersCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -29161,15 +26356,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, MarkersCollection);
+				await writer.WriteArrayAsync(cancellationToken, MarkersCollection);
 			}
 		}
 
 		/// <summary>
 		/// The transaction markers to be written.
 		/// </summary>
-		private WritableTxnMarker[]? _markersCollection = System.Array.Empty<WritableTxnMarker>();
-		public WritableTxnMarker[]? MarkersCollection 
+		private WritableTxnMarker[] _markersCollection = Array.Empty<WritableTxnMarker>();
+		public WritableTxnMarker[] MarkersCollection 
 		{
 			get => _markersCollection;
 			set 
@@ -29177,11 +26372,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"MarkersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MarkersCollection is non-nullable.");
 				}
 
 				_markersCollection = value;
@@ -29215,23 +26405,23 @@ namespace Kafka.Protocol
 				var instance = new WritableTxnMarker(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.ProducerId = await reader.ReadInt64Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProducerEpoch = new Int16(await reader.ReadInt16Async(cancellationToken));
+					instance.ProducerEpoch = await reader.ReadInt16Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TransactionResult = new Boolean(await reader.ReadBooleanAsync(cancellationToken));
+					instance.TransactionResult = await reader.ReadBooleanAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = await reader.ReadAsync(async () => await WritableTxnMarkerTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.TopicsCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarkerTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.CoordinatorEpoch = new Int32(await reader.ReadInt32Async(cancellationToken));
+					instance.CoordinatorEpoch = await reader.ReadInt32Async(cancellationToken);
 				}
 				return instance;
 			}
@@ -29240,23 +26430,23 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+					await writer.WriteInt64Async(ProducerId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
+					await writer.WriteInt16Async(ProducerEpoch, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteBooleanAsync(TransactionResult.Value, cancellationToken);
+					await writer.WriteBooleanAsync(TransactionResult, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, TopicsCollection);
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt32Async(CoordinatorEpoch.Value, cancellationToken);
+					await writer.WriteInt32Async(CoordinatorEpoch, cancellationToken);
 				}
 			}
 
@@ -29272,11 +26462,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ProducerId is non-nullable.");
 					}
 
 					_producerId = value;
@@ -29303,11 +26488,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ProducerEpoch is non-nullable.");
-					}
-
 					_producerEpoch = value;
 				}
 			}
@@ -29332,11 +26512,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TransactionResult does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TransactionResult is non-nullable.");
-					}
-
 					_transactionResult = value;
 				}
 			}
@@ -29350,8 +26525,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// Each topic that we want to write transaction marker(s) for.
 			/// </summary>
-			private WritableTxnMarkerTopic[]? _topicsCollection = System.Array.Empty<WritableTxnMarkerTopic>();
-			public WritableTxnMarkerTopic[]? TopicsCollection 
+			private WritableTxnMarkerTopic[] _topicsCollection = Array.Empty<WritableTxnMarkerTopic>();
+			public WritableTxnMarkerTopic[] TopicsCollection 
 			{
 				get => _topicsCollection;
 				set 
@@ -29359,11 +26534,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 					}
 
 					_topicsCollection = value;
@@ -29397,11 +26567,11 @@ namespace Kafka.Protocol
 					var instance = new WritableTxnMarkerTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndexesCollection = await reader.ReadAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
+						instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken), cancellationToken);
 					}
 					return instance;
 				}
@@ -29410,11 +26580,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name.Value, cancellationToken);
+						await writer.WriteStringAsync(Name, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, PartitionIndexesCollection);
+						await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection);
 					}
 				}
 
@@ -29432,11 +26602,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Name is non-nullable.");
-						}
-
 						_name = value;
 					}
 				}
@@ -29450,8 +26615,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The indexes of the partitions to write transaction markers for.
 				/// </summary>
-				private Int32[]? _partitionIndexesCollection = System.Array.Empty<Int32>();
-				public Int32[]? PartitionIndexesCollection 
+				private Int32[] _partitionIndexesCollection = Array.Empty<Int32>();
+				public Int32[] PartitionIndexesCollection 
 				{
 					get => _partitionIndexesCollection;
 					set 
@@ -29461,16 +26626,11 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndexesCollection is non-nullable.");
-						}
-
 						_partitionIndexesCollection = value;
 					}
 				}
 
-				public WritableTxnMarkerTopic WithPartitionIndexesCollection(Int32[]? partitionIndexesCollection)
+				public WritableTxnMarkerTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
 				{
 					PartitionIndexesCollection = partitionIndexesCollection;
 					return this;
@@ -29489,11 +26649,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"CoordinatorEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"CoordinatorEpoch is non-nullable.");
 					}
 
 					_coordinatorEpoch = value;
@@ -29529,7 +26684,7 @@ namespace Kafka.Protocol
 			var instance = new WriteTxnMarkersResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MarkersCollection = await reader.ReadAsync(async () => await WritableTxnMarkerResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+				instance.MarkersCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarkerResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 			}
 			return instance;
 		}
@@ -29538,15 +26693,15 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteAsync(cancellationToken, MarkersCollection);
+				await writer.WriteArrayAsync(cancellationToken, MarkersCollection);
 			}
 		}
 
 		/// <summary>
 		/// The results for writing makers.
 		/// </summary>
-		private WritableTxnMarkerResult[]? _markersCollection = System.Array.Empty<WritableTxnMarkerResult>();
-		public WritableTxnMarkerResult[]? MarkersCollection 
+		private WritableTxnMarkerResult[] _markersCollection = Array.Empty<WritableTxnMarkerResult>();
+		public WritableTxnMarkerResult[] MarkersCollection 
 		{
 			get => _markersCollection;
 			set 
@@ -29554,11 +26709,6 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647) == false) 
 				{
 					throw new UnsupportedVersionException($"MarkersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				if (value == null) 
-				{
-					throw new UnsupportedVersionException($"MarkersCollection is non-nullable.");
 				}
 
 				_markersCollection = value;
@@ -29592,11 +26742,11 @@ namespace Kafka.Protocol
 				var instance = new WritableTxnMarkerResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProducerId = new Int64(await reader.ReadInt64Async(cancellationToken));
+					instance.ProducerId = await reader.ReadInt64Async(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = await reader.ReadAsync(async () => await WritableTxnMarkerTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+					instance.TopicsCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarkerTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 				}
 				return instance;
 			}
@@ -29605,11 +26755,11 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
+					await writer.WriteInt64Async(ProducerId, cancellationToken);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteAsync(cancellationToken, TopicsCollection);
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
 				}
 			}
 
@@ -29627,11 +26777,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 					}
 
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"ProducerId is non-nullable.");
-					}
-
 					_producerId = value;
 				}
 			}
@@ -29645,8 +26790,8 @@ namespace Kafka.Protocol
 			/// <summary>
 			/// The results by topic.
 			/// </summary>
-			private WritableTxnMarkerTopicResult[]? _topicsCollection = System.Array.Empty<WritableTxnMarkerTopicResult>();
-			public WritableTxnMarkerTopicResult[]? TopicsCollection 
+			private WritableTxnMarkerTopicResult[] _topicsCollection = Array.Empty<WritableTxnMarkerTopicResult>();
+			public WritableTxnMarkerTopicResult[] TopicsCollection 
 			{
 				get => _topicsCollection;
 				set 
@@ -29654,11 +26799,6 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647) == false) 
 					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					if (value == null) 
-					{
-						throw new UnsupportedVersionException($"TopicsCollection is non-nullable.");
 					}
 
 					_topicsCollection = value;
@@ -29692,11 +26832,11 @@ namespace Kafka.Protocol
 					var instance = new WritableTxnMarkerTopicResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = new String(await reader.ReadStringAsync(cancellationToken));
+						instance.Name = await reader.ReadStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionsCollection = await reader.ReadAsync(async () => await WritableTxnMarkerPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
+						instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarkerPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken);
 					}
 					return instance;
 				}
@@ -29705,11 +26845,11 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name.Value, cancellationToken);
+						await writer.WriteStringAsync(Name, cancellationToken);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteAsync(cancellationToken, PartitionsCollection);
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection);
 					}
 				}
 
@@ -29727,11 +26867,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
 						}
 
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"Name is non-nullable.");
-						}
-
 						_name = value;
 					}
 				}
@@ -29745,8 +26880,8 @@ namespace Kafka.Protocol
 				/// <summary>
 				/// The results by partition.
 				/// </summary>
-				private WritableTxnMarkerPartitionResult[]? _partitionsCollection = System.Array.Empty<WritableTxnMarkerPartitionResult>();
-				public WritableTxnMarkerPartitionResult[]? PartitionsCollection 
+				private WritableTxnMarkerPartitionResult[] _partitionsCollection = Array.Empty<WritableTxnMarkerPartitionResult>();
+				public WritableTxnMarkerPartitionResult[] PartitionsCollection 
 				{
 					get => _partitionsCollection;
 					set 
@@ -29754,11 +26889,6 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647) == false) 
 						{
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						if (value == null) 
-						{
-							throw new UnsupportedVersionException($"PartitionsCollection is non-nullable.");
 						}
 
 						_partitionsCollection = value;
@@ -29792,11 +26922,11 @@ namespace Kafka.Protocol
 						var instance = new WritableTxnMarkerPartitionResult(version);
 						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							instance.PartitionIndex = new Int32(await reader.ReadInt32Async(cancellationToken));
+							instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken);
 						}
 						if (instance.Version.InRange(0, 2147483647)) 
 						{
-							instance.ErrorCode = new Int16(await reader.ReadInt16Async(cancellationToken));
+							instance.ErrorCode = await reader.ReadInt16Async(cancellationToken);
 						}
 						return instance;
 					}
@@ -29805,11 +26935,11 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(0, 2147483647)) 
 						{
-							await writer.WriteInt32Async(PartitionIndex.Value, cancellationToken);
+							await writer.WriteInt32Async(PartitionIndex, cancellationToken);
 						}
 						if (Version.InRange(0, 2147483647)) 
 						{
-							await writer.WriteInt16Async(ErrorCode.Value, cancellationToken);
+							await writer.WriteInt16Async(ErrorCode, cancellationToken);
 						}
 					}
 
@@ -29825,11 +26955,6 @@ namespace Kafka.Protocol
 							if (Version.InRange(0, 2147483647) == false) 
 							{
 								throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
-
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"PartitionIndex is non-nullable.");
 							}
 
 							_partitionIndex = value;
@@ -29854,11 +26979,6 @@ namespace Kafka.Protocol
 							if (Version.InRange(0, 2147483647) == false) 
 							{
 								throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
-
-							if (value == null) 
-							{
-								throw new UnsupportedVersionException($"ErrorCode is non-nullable.");
 							}
 
 							_errorCode = value;

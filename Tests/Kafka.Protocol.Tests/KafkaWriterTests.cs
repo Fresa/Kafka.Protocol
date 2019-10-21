@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Test.It.With.XUnit;
@@ -25,8 +26,8 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteBooleanAsync(true);
-            }
+                await _writer.WriteBooleanAsync(Boolean.From(true));
+            }       
 
             [Fact]
             public void It_should_parse_correctly()
@@ -49,7 +50,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteBooleanAsync(false);
+                await _writer.WriteBooleanAsync(Boolean.From(false));
             }
 
             [Fact]
@@ -73,7 +74,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteInt8Async(65);
+                await _writer.WriteInt8Async(Int8.From(65));
             }
 
             [Fact]
@@ -97,7 +98,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteInt16Async(256);
+                await _writer.WriteInt16Async(Int16.From(256));
             }
 
             [Fact]
@@ -121,7 +122,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteInt32Async(257);
+                await _writer.WriteInt32Async(Int32.From(257));
             }
 
             [Fact]
@@ -145,7 +146,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteInt64Async(65);
+                await _writer.WriteInt64Async(Int64.From(65));
             }
 
             [Fact]
@@ -169,7 +170,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteUInt32Async(2);
+                await _writer.WriteUInt32Async(UInt32.From(2));
             }
 
             [Fact]
@@ -193,39 +194,13 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteStringAsync("ABCDE");
+                await _writer.WriteStringAsync(String.From("ABCDE"));
             }
 
             [Fact]
             public void It_should_parse_correctly()
             {
                 _buffer.Should().Equal(0, 5, 65, 66, 67, 68, 69);
-            }
-        }
-
-        public class When_writing_null_as_string : XUnit2SpecificationAsync
-        {
-            private KafkaWriter _writer;
-            private readonly byte[] _buffer = new byte[7];
-            private Func<Task> _action;
-
-            protected override Task GivenAsync()
-            {
-                var stream = new MemoryStream(_buffer);
-                _writer = new KafkaWriter(stream);
-                return base.GivenAsync();
-            }
-
-            protected override Task WhenAsync()
-            {
-                _action = _writer.Awaiting(writer => writer.WriteStringAsync(null));
-                return base.WhenAsync();
-            }
-
-            [Fact]
-            public void It_should_throw()
-            {
-                _action.Should().Throw<ArgumentNullException>();
             }
         }
 
@@ -243,7 +218,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteNullableStringAsync("ABCDE");
+                await _writer.WriteNullableStringAsync(String.From("ABCDE"));
             }
 
             [Fact]
@@ -291,7 +266,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteBytesAsync(new byte[] { 1, 0, 6 });
+                await _writer.WriteBytesAsync(Bytes.From(new byte[] { 1, 0, 6 }));
             }
 
             [Fact]
@@ -315,7 +290,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteNullableBytesAsync(new byte[] { 1, 0, 6 });
+                await _writer.WriteNullableBytesAsync(Bytes.From(new byte[] { 1, 0, 6 }));
             }
 
             [Fact]
@@ -363,7 +338,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteVarIntAsync(300);
+                await _writer.WriteVarIntAsync(VarInt.From(300));
             }
 
             [Fact]
@@ -387,7 +362,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteVarLongAsync(value: 300);
+                await _writer.WriteVarLongAsync(value: VarLong.From(300));
             }
 
             [Fact]
@@ -411,7 +386,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteAsync(new Int32(257), new Int32(1));
+                await _writer.WriteArrayAsync(CancellationToken.None, new Int32(257), new Int32(1));
             }
 
             [Fact]
@@ -435,7 +410,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteAsync<Int32>(null);
+                await _writer.WriteNullableArrayAsync<Int32>(CancellationToken.None, null);
             }
 
             [Fact]

@@ -15,20 +15,20 @@ namespace Kafka.Protocol.Records
         {
             return new Header
             {
-                HeaderKeyLength = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
-                HeaderKey = String.From(await reader.ReadStringAsync(cancellationToken)),
-                HeaderValueLength = VarInt.From(await reader.ReadVarIntAsync(cancellationToken)),
-                Value = Bytes.From(await reader.ReadBytesAsync(cancellationToken))
+                HeaderKeyLength = await reader.ReadVarIntAsync(cancellationToken),
+                HeaderKey = await reader.ReadStringAsync(cancellationToken),
+                HeaderValueLength = await reader.ReadVarIntAsync(cancellationToken),
+                Value = await reader.ReadBytesAsync(cancellationToken)
             };
         }
 
         public async Task WriteToAsync(IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteVarIntAsync(HeaderKeyLength.Value, cancellationToken);
-            await writer.WriteStringAsync(HeaderKey.Value, cancellationToken);
-            await writer.WriteVarIntAsync(HeaderValueLength.Value, cancellationToken);
-            await writer.WriteBytesAsync(Value.Value, cancellationToken);
+            await writer.WriteVarIntAsync(HeaderKeyLength, cancellationToken);
+            await writer.WriteStringAsync(HeaderKey, cancellationToken);
+            await writer.WriteVarIntAsync(HeaderValueLength, cancellationToken);
+            await writer.WriteBytesAsync(Value, cancellationToken);
         }
     }
 }

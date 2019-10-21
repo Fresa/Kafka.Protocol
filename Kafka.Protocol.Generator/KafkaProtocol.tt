@@ -71,7 +71,9 @@ namespace Kafka.Protocol<# Block(() =>
     PrintOnNewRowForEach(protocol.PrimitiveTypes.Values
         .Where(type => 
             type.Type!="RequestMessage" && 
-            type.Type!="ResponseMessage"), primitiveType =>
+            type.Type!="ResponseMessage" &&
+			type.GetClassName()!="NullableString" &&
+			type.GetClassName()!="NullableBytes"), primitiveType =>
     {
         var className = primitiveType.GetClassName();
         var type = primitiveType.GetTypeName();
@@ -129,7 +131,7 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
-				#>await writer.Write<#= className #>Async(Value, cancellationToken);<#
+				#>await writer.Write<#= className #>Async(this, cancellationToken);<#
 			}); _(2);
 
 			#>public static <#= className #> From(<#= type #> value)<# Block(() =>
@@ -139,7 +141,7 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public static async ValueTask<<#= className #>> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
-				#>return From(await reader.Read<#= className #>Async(cancellationToken));<#
+				#>return await reader.Read<#= className #>Async(cancellationToken);<#
 			}); _(2);
 
 			#>public static <#= className #> Default => From(<#= defaultValue #>);<#
@@ -257,22 +259,23 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
 		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
+		var readArrayMethodName = messageField.IsNullable() ? "ReadNullableArrayAsync" : "ReadArrayAsync";
 		if (messageField.Fields == null)
 		{
 			if (messageField.IsArray())
 			{
 				if (IsPrimitiveType(messageField))
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.ReadAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken);<# 	
+					#><#= prependBeforeField #><#= fieldName #> = await reader.<#= readArrayMethodName #>(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken);<# 	
 				} 
 				else 
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.ReadAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 	
+					#><#= prependBeforeField #><#= fieldName #> = await reader.<#= readArrayMethodName #>(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 	
 				}
 			} 
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = new <#= fieldTypeName #>(await reader.Read<#= fieldTypeName #>Async(cancellationToken));<# 
+				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= fieldTypeName #>Async(cancellationToken);<# 
 			}
 		}
 		else 
@@ -280,11 +283,11 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 			if (mapKeyField == null)
 			{
-				#><#= prependBeforeField #><#= fieldName #> = await reader.ReadAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 
+				#><#= prependBeforeField #><#= fieldName #> = await reader.<#= readArrayMethodName #>(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 
 			}
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = (await reader.ReadAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+				#><#= prependBeforeField #><#= fieldName #> = (await reader.<#= readArrayMethodName #>(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
 			}
 		}
 	});		
@@ -296,16 +299,17 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
+		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		if (messageField.Fields == null)
 		{
 			var fieldTypeName = messageField.GetTypeName();
 			if (messageField.IsArray())
 			{
-			#>await writer.WriteAsync(cancellationToken, <#= fieldName #>);<# 	
+			#>await writer.WriteArrayAsync(cancellationToken, <#= fieldName #>);<# 	
 			} 
 			else 
 			{
-			#>await writer.Write<#= fieldTypeName #>Async(<#= fieldName #>.Value, cancellationToken);<# 
+			#>await writer.Write<#= nullable + fieldTypeName #>Async(<#= fieldName #>, cancellationToken);<# 
 			}
 		}
 		else 
@@ -313,11 +317,11 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 			if (mapKeyField == null)
 			{
-				#>await writer.WriteAsync(cancellationToken, <#= fieldName #>);<# 
+				#>await writer.WriteArrayAsync(cancellationToken, <#= fieldName #>);<# 
 			} 
 			else 
 			{
-				#>await writer.WriteAsync(cancellationToken, <#= fieldName #>.Values.ToArray());<#
+				#>await writer.WriteArrayAsync(cancellationToken, <#= fieldName #>.Values.ToArray());<#
 			}
 		}
 	});		
@@ -331,12 +335,17 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
 	var privateFieldName = field.GetName().FirstCharacterToLowerCase();
 	var fieldName = field.GetName().FirstCharacterToUpperCase();
+	var nullableSign = field.IsNullable() ? "?" : "";
 
-	#>private <#= fieldTypeName #> _<#= privateFieldName #><#
+	#>private <#= fieldTypeName #><#= nullableSign #> _<#= privateFieldName #><#
 	
 	if(field.Default != null) 
 	{ 
-		#> = new <#= fieldTypeName #>(<#= field.Default #>);<# 
+		if (field.Default != "null") 
+		{
+			#> = new <#= fieldTypeName #>(<#= field.Default #>)<# 
+		}
+		#>;<#
 	} 
 	else if (field.IsDictionary())
 	{
@@ -344,14 +353,14 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	}
 	else if (field.IsArray())
 	{
-		#> = System.Array.Empty<<#= fieldTypeNameWithoutArrayCharacters #>>();<# 
+		#> = Array.Empty<<#= fieldTypeNameWithoutArrayCharacters #>>();<# 
 	}
 	else 
 	{
 		#> = <#= fieldTypeName #>.Default;<# 
 	} _();
 
-	#>public <#= fieldTypeName #> <#= fieldName #> <# Block(() => 
+	#>public <#= fieldTypeName #><#= nullableSign #> <#= fieldName #> <# Block(() => 
 	{
 		#>get => _<#= privateFieldName #>;<# _();
 		#>set <# Block(() => 
@@ -365,14 +374,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				}); _(2);
 			}
 
-			if (field.NullableVersions == null)
-			{
-				#>if (value == null) <# Block(() => 
-				{					
-					#>throw new UnsupportedVersionException($"<#= fieldName #> is non-nullable.");<#
-				}); _(2);
-			}
-			else
+			if (field.IsNullable())
 			{
 				var nullableVersionRange = VersionRange.Parse(field.NullableVersions);
 				#>if (Version.InRange(<#= nullableVersionRange.From #>, <#= nullableVersionRange.To #>) == false &&<# _();
@@ -380,9 +382,9 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				{					
 					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<#
 				}); _(2);
-			}
-
-			#>_<#= privateFieldName #> = value;<#
+			} 
+			
+			#>_<#= privateFieldName #> = value;<# 
 		});
 	}); _(2); 
 	

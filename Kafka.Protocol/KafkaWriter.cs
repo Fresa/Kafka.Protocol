@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.IO;
-using System.IO.Pipelines;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,121 +16,120 @@ namespace Kafka.Protocol
             _buffer = buffer;
         }
 
-        public async Task WriteBooleanAsync(bool value, CancellationToken cancellationToken = default)
+        public async Task WriteBooleanAsync(Boolean value, CancellationToken cancellationToken = default)
         {
-            await WriteAsLittleEndianAsync(BitConverter.GetBytes(value), cancellationToken);
+            await WriteAsLittleEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteInt8Async(sbyte value, CancellationToken cancellationToken = default)
+        public async Task WriteInt8Async(Int8 value, CancellationToken cancellationToken = default)
         {
-            await WriteByteAsync((byte)value, cancellationToken);
+            await WriteByteAsync((byte)value.Value, cancellationToken);
         }
 
-        public async Task WriteInt16Async(short value, CancellationToken cancellationToken = default)
+        public async Task WriteInt16Async(Int16 value, CancellationToken cancellationToken = default)
         {
-            await WriteAsBigEndianAsync(BitConverter.GetBytes(value), cancellationToken);
+            await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteInt32Async(int value, CancellationToken cancellationToken = default)
+        public async Task WriteInt32Async(Int32 value, CancellationToken cancellationToken = default)
         {
-            await WriteAsBigEndianAsync(BitConverter.GetBytes(value), cancellationToken);
+            await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteInt64Async(long value, CancellationToken cancellationToken = default)
+        public async Task WriteInt64Async(Int64 value, CancellationToken cancellationToken = default)
         {
-            await WriteAsBigEndianAsync(BitConverter.GetBytes(value), cancellationToken);
+            await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteUInt32Async(uint value, CancellationToken cancellationToken = default)
+        public async Task WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default)
         {
-            await WriteAsBigEndianAsync(BitConverter.GetBytes(value), cancellationToken);
+            await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteVarIntAsync(int value, CancellationToken cancellationToken = default)
+        public async Task WriteVarIntAsync(VarInt value, CancellationToken cancellationToken = default)
         {
             await WriteAsLittleEndianAsync(
-                value
+                value.Value
                     .EncodeAsZigZag()
                     .EncodeAsVarInt(), cancellationToken);
         }
 
-        public async Task WriteVarLongAsync(long value, CancellationToken cancellationToken = default)
+        public async Task WriteVarLongAsync(VarLong value, CancellationToken cancellationToken = default)
         {
             await WriteAsLittleEndianAsync(
-                value
+                value.Value
                     .EncodeAsZigZag()
                     .EncodeAsVarInt(), cancellationToken);
         }
 
-        public async Task WriteStringAsync(string value, CancellationToken cancellationToken = default)
+        public async Task WriteStringAsync(String value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            var bytes = Encoding.UTF8.GetBytes(value);
+            var bytes = Encoding.UTF8.GetBytes(value.Value);
 
             if (bytes.Length > short.MaxValue)
             {
                 throw new SyntaxErrorException($"{value} is to long");
             }
 
-            await WriteInt16Async((short)bytes.Length, cancellationToken);
+            await WriteInt16Async(Int16.From((short)bytes.Length), cancellationToken);
             await WriteAsLittleEndianAsync(bytes, cancellationToken);
         }
 
-        public async Task WriteNullableStringAsync(string? value, CancellationToken cancellationToken = default)
+        public async Task WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
-                await WriteInt16Async(-1, cancellationToken);
+                await WriteInt16Async(Int16.From(-1), cancellationToken);
             }
             else
             {
-                await WriteStringAsync(value, cancellationToken);
+                await WriteStringAsync(value.Value, cancellationToken);
             }
         }
 
-        public async Task WriteBytesAsync(byte[] value, CancellationToken cancellationToken = default)
+        public async Task WriteBytesAsync(Bytes value, CancellationToken cancellationToken = default)
         {
-            value ??= Array.Empty<byte>();
-            await WriteInt32Async(value.Length, cancellationToken);
-            await WriteAsLittleEndianAsync(value, cancellationToken);
+            await WriteInt32Async(Int32.From(value.Value.Length), cancellationToken);
+            await WriteAsLittleEndianAsync(value.Value, cancellationToken);
         }
 
-        public async Task WriteNullableBytesAsync(byte[]? value, CancellationToken cancellationToken = default)
+        public async Task WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
-                await WriteInt32Async(-1, cancellationToken);
+                await WriteInt32Async( Int32.From(-1), cancellationToken);
             }
             else
             {
-                await WriteBytesAsync(value, cancellationToken);
+                await WriteBytesAsync(value.Value, cancellationToken);
             }
         }
 
-        public async Task WriteAsync<T>(CancellationToken cancellationToken, params T[]? items)
+        public async Task WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)
+            where T : ISerialize
+        {
+            await WriteNullableArrayAsync(cancellationToken, items);
+        }
+
+        public async Task WriteNullableArrayAsync<T>(CancellationToken cancellationToken, params T[]? items)
             where T : ISerialize
         {
             if (items == null)
             {
-                await WriteInt32Async(-1, cancellationToken);
+                await WriteInt32Async( Int32.From(-1), cancellationToken);
                 return;
             }
 
-            await WriteInt32Async(items.Length, cancellationToken);
+            await WriteInt32Async(Int32.From(items.Length), cancellationToken);
             foreach (var item in items)
             {
                 await item.WriteToAsync(this, cancellationToken);
             }
-        }
-
-        public async Task WriteAsync<T>(params T[]? items) 
-            where T : ISerialize
-        {
-            await WriteAsync(default, items);
         }
 
         private async Task WriteByteAsync(byte value, CancellationToken cancellationToken = default)

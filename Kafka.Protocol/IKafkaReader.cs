@@ -6,43 +6,47 @@ namespace Kafka.Protocol
 {
     public interface IKafkaReader
     {
-        ValueTask<bool> ReadBooleanAsync(
+        ValueTask<Boolean> ReadBooleanAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<sbyte> ReadInt8Async(
+        ValueTask<Int8> ReadInt8Async(
             CancellationToken cancellationToken = default);
 
-        ValueTask<short> ReadInt16Async(
+        ValueTask<Int16> ReadInt16Async(
             CancellationToken cancellationToken = default);
 
-        ValueTask<int> ReadInt32Async(
+        ValueTask<Int32> ReadInt32Async(
             CancellationToken cancellationToken = default);
 
-        ValueTask<long> ReadInt64Async(
+        ValueTask<Int64> ReadInt64Async(
             CancellationToken cancellationToken = default);
 
-        ValueTask<uint> ReadUInt32Async(
+        ValueTask<UInt32> ReadUInt32Async(
             CancellationToken cancellationToken = default);
 
-        ValueTask<int> ReadVarIntAsync(
+        ValueTask<VarInt> ReadVarIntAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<long> ReadVarLongAsync(
+        ValueTask<VarLong> ReadVarLongAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<string> ReadStringAsync(
+        ValueTask<String> ReadStringAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<string?> ReadNullableStringAsync(
+        ValueTask<String?> ReadNullableStringAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<byte[]> ReadBytesAsync(
+        ValueTask<Bytes> ReadBytesAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<byte[]?> ReadNullableBytesAsync(
+        ValueTask<Bytes?> ReadNullableBytesAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<T[]?> ReadAsync<T>(Func<ValueTask<T>> factory,
+        ValueTask<T[]> ReadArrayAsync<T>(Func<ValueTask<T>> factory,
+            CancellationToken cancellationToken = default)
+            where T : ISerialize;
+
+        ValueTask<T[]?> ReadNullableArrayAsync<T>(Func<ValueTask<T>> factory,
             CancellationToken cancellationToken = default)
             where T : ISerialize;
     }

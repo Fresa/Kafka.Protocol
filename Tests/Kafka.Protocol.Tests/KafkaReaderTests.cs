@@ -10,7 +10,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_a_truthy_boolean : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private bool _value;
+            private Boolean _value;
 
             protected override async Task GivenAsync()
             {
@@ -25,14 +25,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().BeTrue();
+                _value.Value.Should().BeTrue();
             }
         }
 
         public class When_reading_a_falsy_boolean : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private bool _value;
+            private Boolean _value;
 
             protected override async Task GivenAsync()
             {
@@ -47,14 +47,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().BeFalse();
+                _value.Value.Should().BeFalse();
             }
         }
 
         public class When_reading_int8 : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private sbyte _value;
+            private Int8 _value;
 
             protected override async Task GivenAsync()
             {
@@ -69,14 +69,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be(65);
+                _value.Value.Should().Be(65);
             }
         }
 
         public class When_reading_int16 : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private short _value;
+            private Int16 _value;
 
             protected override async Task GivenAsync()
             {
@@ -91,14 +91,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be(256);
+                _value.Value.Should().Be(256);
             }
         }
 
         public class When_reading_int32 : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private int _value;
+            private Int32 _value;
 
             protected override async Task GivenAsync()
             {
@@ -113,14 +113,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be(257);
+                _value.Value.Should().Be(257);
             }
         }
 
         public class When_reading_int64 : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private long _value;
+            private Int64 _value;
 
             protected override async Task GivenAsync()
             {
@@ -135,14 +135,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be(65);
+                _value.Value.Should().Be(65);
             }
         }
 
         public class When_reading_an_unsigned_int32 : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private uint _value;
+            private UInt32 _value;
 
             protected override async Task GivenAsync()
             {
@@ -157,14 +157,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be(2);
+                _value.Value.Should().Be(2);
             }
         }
 
         public class When_reading_a_string : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private string _value;
+            private String _value;
 
             protected override async Task GivenAsync()
             {
@@ -179,14 +179,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be("ABCDE");
+                _value.Value.Should().Be("ABCDE");
             }
         }
 
         public class When_reading_a_nullable_string : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private string _value;
+            private String? _value;
 
             protected override async Task GivenAsync()
             {
@@ -201,14 +201,15 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be("ABCDE");
+                _value.Should().NotBeNull();
+                _value?.Value.Should().Be("ABCDE");
             }
         }
 
         public class When_reading_a_null_string : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private string _value;
+            private String? _value;
 
             protected override async Task GivenAsync()
             {
@@ -230,7 +231,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_bytes : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private byte[] _value;
+            private Bytes _value;
 
             protected override async Task GivenAsync()
             {
@@ -245,14 +246,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().BeEquivalentTo(1, 0, 6);
+                _value.Value.Should().BeEquivalentTo(1, 0, 6);
             }
         }
 
         public class When_reading_nullable_bytes : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private byte[] _value;
+            private Bytes? _value;
 
             protected override async Task GivenAsync()
             {
@@ -267,14 +268,15 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().BeEquivalentTo(1, 0, 6);
+                _value.Should().NotBeNull();
+                _value?.Value.Should().BeEquivalentTo(1, 0, 6);
             }
         }
 
         public class When_reading_a_null_byte_array : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private byte[] _value;
+            private Bytes? _value;
 
             protected override async Task GivenAsync()
             {
@@ -296,7 +298,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_var_int : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private int _value;
+            private VarInt _value;
 
             protected override async Task GivenAsync()
             {
@@ -311,14 +313,14 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be(300);
+                _value.Value.Should().Be(300);
             }
         }
 
         public class When_reading_var_long : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private long _value;
+            private VarLong _value;
 
             protected override async Task GivenAsync()
             {
@@ -333,7 +335,7 @@ namespace Kafka.Protocol.Tests
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().Be(300);
+                _value.Value.Should().Be(300);
             }
         }
 
@@ -349,7 +351,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadAsync(async () => await Int32.FromReaderAsync(_reader));
+                _value = await _reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(_reader));
             }
 
             [Fact]
@@ -371,7 +373,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadAsync(async () => await Int32.FromReaderAsync(_reader));
+                _value = await _reader.ReadNullableArrayAsync(async () => await Int32.FromReaderAsync(_reader));
             }
 
             [Fact]

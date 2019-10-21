@@ -38,15 +38,15 @@ namespace Kafka.Protocol.Records
             IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            Version = Int16.From(await reader.ReadInt16Async(cancellationToken));
-            _type = Int16.From(await reader.ReadInt16Async(cancellationToken));
+            Version = await reader.ReadInt16Async(cancellationToken);
+            _type = await reader.ReadInt16Async(cancellationToken);
         }
 
         public async Task WriteToAsync(IKafkaWriter writer, 
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteInt16Async(Version.Value, cancellationToken);
-            await writer.WriteInt16Async(_type.Value, cancellationToken);
+            await writer.WriteInt16Async(Version, cancellationToken);
+            await writer.WriteInt16Async(_type, cancellationToken);
         }
     }
 }

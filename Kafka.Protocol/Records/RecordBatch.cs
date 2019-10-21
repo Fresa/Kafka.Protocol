@@ -136,37 +136,37 @@ namespace Kafka.Protocol.Records
         public async ValueTask ReadFromAsync(IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            BaseOffset = Int64.From(await reader.ReadInt64Async(cancellationToken));
-            BatchLength = Int32.From(await reader.ReadInt32Async(cancellationToken));
-            PartitionLeaderEpoch = Int32.From(await reader.ReadInt32Async(cancellationToken));
-            Magic = Int8.From(await reader.ReadInt8Async(cancellationToken));
-            Crc = Int32.From(await reader.ReadInt32Async(cancellationToken));
-            Attributes = Int16.From(await reader.ReadInt16Async(cancellationToken));
-            LastOffsetDelta = Int32.From(await reader.ReadInt32Async(cancellationToken));
-            FirstTimestamp = Int64.From(await reader.ReadInt64Async(cancellationToken));
-            MaxTimestamp = Int64.From(await reader.ReadInt64Async(cancellationToken));
-            ProducerId = Int64.From(await reader.ReadInt64Async(cancellationToken));
-            ProducerEpoch = Int16.From(await reader.ReadInt16Async(cancellationToken));
-            BaseSequence = Int32.From(await reader.ReadInt32Async(cancellationToken));
-            Records = await reader.ReadAsync(async () => await Record.FromReaderAsync(reader, cancellationToken), cancellationToken);
+            BaseOffset = await reader.ReadInt64Async(cancellationToken);
+            BatchLength = await reader.ReadInt32Async(cancellationToken);
+            PartitionLeaderEpoch = await reader.ReadInt32Async(cancellationToken);
+            Magic = await reader.ReadInt8Async(cancellationToken);
+            Crc = await reader.ReadInt32Async(cancellationToken);
+            Attributes = await reader.ReadInt16Async(cancellationToken);
+            LastOffsetDelta = await reader.ReadInt32Async(cancellationToken);
+            FirstTimestamp = await reader.ReadInt64Async(cancellationToken);
+            MaxTimestamp = await reader.ReadInt64Async(cancellationToken);
+            ProducerId = await reader.ReadInt64Async(cancellationToken);
+            ProducerEpoch = await reader.ReadInt16Async(cancellationToken);
+            BaseSequence = await reader.ReadInt32Async(cancellationToken);
+            Records = await reader.ReadArrayAsync(async () => await Record.FromReaderAsync(reader, cancellationToken), cancellationToken);
         }
 
         public async Task WriteToAsync(IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteInt64Async(BaseOffset.Value, cancellationToken);
-            await writer.WriteInt32Async(BatchLength.Value, cancellationToken);
-            await writer.WriteInt32Async(PartitionLeaderEpoch.Value, cancellationToken);
-            await writer.WriteInt8Async(Magic.Value, cancellationToken);
-            await writer.WriteInt32Async(Crc.Value, cancellationToken);
-            await writer.WriteInt16Async(Attributes.Value, cancellationToken);
-            await writer.WriteInt32Async(LastOffsetDelta.Value, cancellationToken);
-            await writer.WriteInt64Async(FirstTimestamp.Value, cancellationToken);
-            await writer.WriteInt64Async(MaxTimestamp.Value, cancellationToken);
-            await writer.WriteInt64Async(ProducerId.Value, cancellationToken);
-            await writer.WriteInt16Async(ProducerEpoch.Value, cancellationToken);
-            await writer.WriteInt32Async(BaseSequence.Value, cancellationToken);
-            await writer.WriteAsync(cancellationToken, Records);
+            await writer.WriteInt64Async(BaseOffset, cancellationToken);
+            await writer.WriteInt32Async(BatchLength, cancellationToken);
+            await writer.WriteInt32Async(PartitionLeaderEpoch, cancellationToken);
+            await writer.WriteInt8Async(Magic, cancellationToken);
+            await writer.WriteInt32Async(Crc, cancellationToken);
+            await writer.WriteInt16Async(Attributes, cancellationToken);
+            await writer.WriteInt32Async(LastOffsetDelta, cancellationToken);
+            await writer.WriteInt64Async(FirstTimestamp, cancellationToken);
+            await writer.WriteInt64Async(MaxTimestamp, cancellationToken);
+            await writer.WriteInt64Async(ProducerId, cancellationToken);
+            await writer.WriteInt16Async(ProducerEpoch, cancellationToken);
+            await writer.WriteInt32Async(BaseSequence, cancellationToken);
+            await writer.WriteNullableArrayAsync(cancellationToken, Records);
         }
     }
 }

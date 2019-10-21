@@ -17,60 +17,67 @@ namespace Kafka.Protocol
             _reader = reader;
         }
 
-        public async ValueTask<bool> ReadBooleanAsync(
+        public async ValueTask<Boolean> ReadBooleanAsync(
             CancellationToken cancellationToken = default)
         {
-            return BitConverter.ToBoolean(
+            return Boolean.From(
+                BitConverter.ToBoolean(
                 await ReadAsLittleEndianAsync(1, cancellationToken),
-                0);
+                0));
         }
 
-        public async ValueTask<sbyte> ReadInt8Async(
+        public async ValueTask<Int8> ReadInt8Async(
             CancellationToken cancellationToken = default)
         {
-            return Convert.ToSByte(
-                await ReadByteAsync(cancellationToken));
+            return Int8.From(
+                Convert.ToSByte(
+                await ReadByteAsync(cancellationToken)));
         }
 
-        public async ValueTask<short> ReadInt16Async(
+        public async ValueTask<Int16> ReadInt16Async(
             CancellationToken cancellationToken = default)
         {
-            return BitConverter.ToInt16(
+            return Int16.From(
+                BitConverter.ToInt16(
                 await ReadAsBigEndianAsync(2, cancellationToken),
-                0);
+                0));
         }
 
-        public async ValueTask<int> ReadInt32Async(
+        public async ValueTask<Int32> ReadInt32Async(
             CancellationToken cancellationToken = default)
         {
-            return BitConverter.ToInt32(
+            return Int32.From(
+                BitConverter.ToInt32(
                 await ReadAsBigEndianAsync(4, cancellationToken),
-                0);
+                0));
         }
 
-        public async ValueTask<long> ReadInt64Async(
+        public async ValueTask<Int64> ReadInt64Async(
             CancellationToken cancellationToken = default)
         {
-            return BitConverter.ToInt64(
+            return Int64.From(
+                BitConverter.ToInt64(
                 await ReadAsBigEndianAsync(8, cancellationToken),
-                0);
+                0));
         }
 
-        public async ValueTask<uint> ReadUInt32Async(
+        public async ValueTask<UInt32> ReadUInt32Async(
             CancellationToken cancellationToken = default)
         {
-            return BitConverter.ToUInt32(
+            return UInt32.From(
+                BitConverter.ToUInt32(
                 await ReadAsBigEndianAsync(4, cancellationToken),
-                0);
+                0));
         }
 
-        public async ValueTask<int> ReadVarIntAsync(
+        public async ValueTask<VarInt> ReadVarIntAsync(
             CancellationToken cancellationToken = default)
         {
-            return (int)await ReadVarLongAsync(cancellationToken);
+            return VarInt.From(
+                (int)(await ReadVarLongAsync(cancellationToken)).Value);
         }
 
-        public async ValueTask<long> ReadVarLongAsync(
+        public async ValueTask<VarLong> ReadVarLongAsync(
             CancellationToken cancellationToken = default)
         {
             var more = true;
@@ -84,61 +91,73 @@ namespace Kafka.Protocol
                 shift += 7;
             }
 
-            return value.DecodeFromZigZag();
+            return VarLong.From(
+                value.DecodeFromZigZag());
         }
 
-        public async ValueTask<string> ReadStringAsync(
+        public async ValueTask<String> ReadStringAsync(
             CancellationToken cancellationToken = default)
         {
             var length = await ReadInt16Async(cancellationToken);
-            var bytes = await ReadAsLittleEndianAsync(length, cancellationToken);
-            return Encoding.UTF8.GetString(bytes);
+            var bytes = await ReadAsLittleEndianAsync(length.Value, cancellationToken);
+            return String.From(
+                Encoding.UTF8.GetString(bytes));
         }
 
-        public async ValueTask<string?> ReadNullableStringAsync(
+        public async ValueTask<String?> ReadNullableStringAsync(
             CancellationToken cancellationToken = default)
         {
             var length = await ReadInt16Async(cancellationToken);
-            if (length == -1)
+            if (length.Value == -1)
             {
                 return null;
             }
 
-            var bytes = await ReadAsLittleEndianAsync(length, cancellationToken);
-            return Encoding.UTF8.GetString(bytes);
+            var bytes = await ReadAsLittleEndianAsync(length.Value, cancellationToken);
+            return String.From(
+                Encoding.UTF8.GetString(bytes));
         }
 
-        public async ValueTask<byte[]> ReadBytesAsync(
+        public async ValueTask<Bytes> ReadBytesAsync(
             CancellationToken cancellationToken = default)
         {
             var length = await ReadInt32Async(cancellationToken);
-            return await ReadAsLittleEndianAsync(length, cancellationToken);
+            return Bytes.From(
+                await ReadAsLittleEndianAsync(length.Value, cancellationToken));
         }
 
-        public async ValueTask<byte[]?> ReadNullableBytesAsync(
+        public async ValueTask<Bytes?> ReadNullableBytesAsync(
             CancellationToken cancellationToken = default)
         {
             var length = await ReadInt32Async(cancellationToken);
-            if (length == -1)
+            if (length.Value == -1)
             {
                 return null;
             }
 
-            return await ReadAsLittleEndianAsync(length, cancellationToken);
+            return Bytes.From(
+                await ReadAsLittleEndianAsync(length.Value, cancellationToken));
         }
 
-        public async ValueTask<T[]?> ReadAsync<T>(Func<ValueTask<T>> createItem,
+        public async ValueTask<T[]> ReadArrayAsync<T>(Func<ValueTask<T>> createItem,
             CancellationToken cancellationToken = default)
             where T : ISerialize
         {
+            return await ReadNullableArrayAsync(createItem, cancellationToken) ?? 
+                throw new NotSupportedException($"The array cannot be null. Consider changing to {nameof(ReadNullableArrayAsync)}");
+        }
+
+        public async ValueTask<T[]?> ReadNullableArrayAsync<T>(Func<ValueTask<T>> createItem, 
+            CancellationToken cancellationToken = default) where T : ISerialize
+        {
             var length = await ReadInt32Async(cancellationToken);
-            if (length == -1)
+            if (length.Value == -1)
             {
                 return null;
             }
 
-            var result = new T[length];
-            for (var i = 0; i < length; i++)
+            var result = new T[length.Value];
+            for (var i = 0; i < length.Value; i++)
             {
                 result[i] = await createItem();
             }

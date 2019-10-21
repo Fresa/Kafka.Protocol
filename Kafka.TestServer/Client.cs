@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Kafka.Protocol;
+using Int32 = Kafka.Protocol.Int32;
 
 namespace Kafka.TestServer
 {
@@ -39,7 +40,7 @@ namespace Kafka.TestServer
                 await payload.WriteToAsync(writer, cancellationToken);
                 await buffer.FlushAsync(cancellationToken);
                 buffer.Position = 0;
-                await writer.WriteInt32Async((int)buffer.Length, cancellationToken);
+                await writer.WriteInt32Async(Int32.From((int)buffer.Length), cancellationToken);
             }
 
             await _socket.SendAsync(
