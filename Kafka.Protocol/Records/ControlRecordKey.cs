@@ -42,7 +42,7 @@ namespace Kafka.Protocol.Records
             _type = await reader.ReadInt16Async(cancellationToken);
         }
 
-        public async Task WriteToAsync(IKafkaWriter writer, 
+        public async ValueTask WriteToAsync(IKafkaWriter writer, 
             CancellationToken cancellationToken = default)
         {
             await writer.WriteInt16Async(Version, cancellationToken);

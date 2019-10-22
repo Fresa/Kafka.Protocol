@@ -151,7 +151,7 @@ namespace Kafka.Protocol.Records
             Records = await reader.ReadArrayAsync(async () => await Record.FromReaderAsync(reader, cancellationToken), cancellationToken);
         }
 
-        public async Task WriteToAsync(IKafkaWriter writer,
+        public async ValueTask WriteToAsync(IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
             await writer.WriteInt64Async(BaseOffset, cancellationToken);

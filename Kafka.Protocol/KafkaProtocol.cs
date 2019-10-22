@@ -45,7 +45,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteBooleanAsync(this, cancellationToken);
 		}
@@ -100,7 +100,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt8Async(this, cancellationToken);
 		}
@@ -155,7 +155,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt16Async(this, cancellationToken);
 		}
@@ -210,7 +210,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt32Async(this, cancellationToken);
 		}
@@ -265,7 +265,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt64Async(this, cancellationToken);
 		}
@@ -320,7 +320,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteUInt32Async(this, cancellationToken);
 		}
@@ -375,7 +375,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteVarIntAsync(this, cancellationToken);
 		}
@@ -430,7 +430,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteVarLongAsync(this, cancellationToken);
 		}
@@ -485,7 +485,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteStringAsync(this, cancellationToken);
 		}
@@ -540,7 +540,7 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteBytesAsync(this, cancellationToken);
 		}
@@ -2468,7 +2468,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -2615,7 +2615,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -2714,7 +2714,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -2860,7 +2860,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -2952,7 +2952,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -3042,7 +3042,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -3132,7 +3132,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -3225,7 +3225,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -3295,7 +3295,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -3413,7 +3413,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -3536,7 +3536,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -3634,7 +3634,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -3784,7 +3784,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -3846,7 +3846,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -3936,7 +3936,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -4029,7 +4029,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -4119,7 +4119,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -4209,7 +4209,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -4295,7 +4295,7 @@ namespace Kafka.Protocol
 			return await new ValueTask<ApiVersionsRequest>(instance);
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await Task.CompletedTask;
 		}
@@ -4335,7 +4335,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -4433,7 +4433,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -4572,7 +4572,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -4658,7 +4658,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -4748,7 +4748,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -4836,7 +4836,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -4918,7 +4918,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -5150,7 +5150,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -5240,7 +5240,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -5338,7 +5338,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -5404,7 +5404,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -5548,7 +5548,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -5839,7 +5839,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -5913,7 +5913,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -6033,7 +6033,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -6146,7 +6146,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -6240,7 +6240,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -6370,7 +6370,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -6452,7 +6452,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -6602,7 +6602,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -6717,7 +6717,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -6864,7 +6864,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(2, 2147483647)) 
 			{
@@ -6953,7 +6953,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -7070,7 +7070,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -7152,7 +7152,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -7402,7 +7402,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -7496,7 +7496,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -7648,7 +7648,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -7939,7 +7939,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -8002,7 +8002,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -8092,7 +8092,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -8184,7 +8184,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -8250,7 +8250,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -8340,7 +8340,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -8457,7 +8457,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -8547,7 +8547,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -8641,7 +8641,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -8762,7 +8762,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -8853,7 +8853,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -8943,7 +8943,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -9055,7 +9055,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -9312,7 +9312,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -9472,7 +9472,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -9626,7 +9626,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -9775,7 +9775,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -9845,7 +9845,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -9995,7 +9995,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -10097,7 +10097,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -10297,7 +10297,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -10527,7 +10527,7 @@ namespace Kafka.Protocol
 						return instance;
 					}
 
-					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+					public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 					{
 						if (Version.InRange(1, 2147483647)) 
 						{
@@ -10651,7 +10651,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -10719,7 +10719,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -10815,7 +10815,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -10933,7 +10933,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -11191,7 +11191,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -11308,7 +11308,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -11399,7 +11399,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -11504,7 +11504,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -11726,7 +11726,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -11957,7 +11957,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -12025,7 +12025,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -12117,7 +12117,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -12211,7 +12211,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -12329,7 +12329,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -12424,7 +12424,7 @@ namespace Kafka.Protocol
 						return instance;
 					}
 
-					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+					public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 					{
 						if (Version.InRange(0, 2147483647)) 
 						{
@@ -12578,7 +12578,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -12678,7 +12678,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -12798,7 +12798,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -12916,7 +12916,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -13010,7 +13010,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -13145,7 +13145,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13292,7 +13292,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13383,7 +13383,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13478,7 +13478,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13629,7 +13629,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13890,7 +13890,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -13992,7 +13992,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -14187,7 +14187,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(7, 2147483647)) 
 				{
@@ -14306,7 +14306,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -14447,7 +14447,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -14561,7 +14561,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -14767,7 +14767,7 @@ namespace Kafka.Protocol
 						return instance;
 					}
 
-					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+					public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 					{
 						if (Version.InRange(4, 2147483647)) 
 						{
@@ -14910,7 +14910,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -15017,7 +15017,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -15224,7 +15224,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -15377,7 +15377,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -15463,7 +15463,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -15533,7 +15533,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -15655,7 +15655,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -15806,7 +15806,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -15904,7 +15904,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -16058,7 +16058,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -16163,7 +16163,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -16325,7 +16325,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -16556,7 +16556,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -16668,7 +16668,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(2, 2147483647)) 
 			{
@@ -16894,7 +16894,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -17036,7 +17036,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -17209,7 +17209,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(2, 2147483647)) 
 				{
@@ -17328,7 +17328,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -17473,7 +17473,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 1)) 
 				{
@@ -17756,7 +17756,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -17850,7 +17850,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -17970,7 +17970,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -18061,7 +18061,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -18140,7 +18140,7 @@ namespace Kafka.Protocol
 			return await new ValueTask<ListGroupsRequest>(instance);
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await Task.CompletedTask;
 		}
@@ -18180,7 +18180,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -18293,7 +18293,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -18389,7 +18389,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -18507,7 +18507,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -18605,7 +18605,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -18754,7 +18754,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(2, 2147483647)) 
 			{
@@ -18839,7 +18839,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -18945,7 +18945,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -19155,7 +19155,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -19231,7 +19231,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -19383,7 +19383,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
@@ -19497,7 +19497,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -19725,7 +19725,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -19890,7 +19890,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -20177,7 +20177,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -20370,7 +20370,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -20472,7 +20472,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -20650,7 +20650,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
@@ -20735,7 +20735,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -20825,7 +20825,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -20918,7 +20918,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -21014,7 +21014,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -21110,7 +21110,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
@@ -21199,7 +21199,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -21301,7 +21301,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -21508,7 +21508,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
@@ -21593,7 +21593,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -21687,7 +21687,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -21803,7 +21803,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(2, 2147483647)) 
 			{
@@ -21888,7 +21888,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -21986,7 +21986,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -22138,7 +22138,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
@@ -22290,7 +22290,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -22380,7 +22380,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -22479,7 +22479,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -22545,7 +22545,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -22647,7 +22647,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -22833,7 +22833,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -22928,7 +22928,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -23055,7 +23055,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -23198,7 +23198,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -23257,7 +23257,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -23328,7 +23328,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -23477,7 +23477,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -23540,7 +23540,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -23647,7 +23647,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -23820,7 +23820,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 0)) 
 				{
@@ -23935,7 +23935,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(1, 2147483647)) 
 				{
@@ -24027,7 +24027,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -24121,7 +24121,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -24253,7 +24253,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -24433,7 +24433,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -24529,7 +24529,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -24655,7 +24655,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -24829,7 +24829,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -24927,7 +24927,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -25077,7 +25077,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -25167,7 +25167,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -25257,7 +25257,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -25366,7 +25366,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -25539,7 +25539,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(5, 2147483647)) 
 				{
@@ -25663,7 +25663,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -25811,7 +25811,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(1, 2147483647)) 
 					{
@@ -26010,7 +26010,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 4)) 
 				{
@@ -26294,7 +26294,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -26353,7 +26353,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -26427,7 +26427,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -26577,7 +26577,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -26690,7 +26690,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -26752,7 +26752,7 @@ namespace Kafka.Protocol
 				return instance;
 			}
 
-			public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -26842,7 +26842,7 @@ namespace Kafka.Protocol
 					return instance;
 				}
 
-				public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -26932,7 +26932,7 @@ namespace Kafka.Protocol
 						return instance;
 					}
 
-					public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+					public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 					{
 						if (Version.InRange(0, 2147483647)) 
 						{

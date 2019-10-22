@@ -5,7 +5,7 @@ namespace Kafka.Protocol
 {
     public interface ISerialize
     {
-        Task WriteToAsync(IKafkaWriter writer, 
+        ValueTask WriteToAsync(IKafkaWriter writer, 
             CancellationToken cancellationToken = default);
     }
 }

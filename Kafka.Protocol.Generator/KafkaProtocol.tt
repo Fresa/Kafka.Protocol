@@ -129,7 +129,7 @@ namespace Kafka.Protocol<# Block(() =>
                 #>return !(x == y);<#
             }); _(2);
 
-			#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+			#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				#>await writer.Write<#= className #>Async(this, cancellationToken);<#
 			}); _(2);
@@ -228,7 +228,7 @@ namespace Kafka.Protocol<# Block(() =>
 				}
 			}); _(2);
 
-			#>public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+			#>public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				if (messageDefinition.Fields.Any() == false)
 				{
@@ -463,7 +463,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			#>return instance;<#
 		}); _(2);
 
-		#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			PrintOnNewRowForEach(field.Fields, messageField => 
 			{
@@ -506,7 +506,7 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			#>return instance;<#
 		}); _(2);
 
-		#>public async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			PrintOnNewRowForEach(commonStruct.Fields, field => 
 			{

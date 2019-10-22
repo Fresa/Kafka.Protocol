@@ -16,37 +16,37 @@ namespace Kafka.Protocol
             _buffer = buffer;
         }
 
-        public async Task WriteBooleanAsync(Boolean value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteBooleanAsync(Boolean value, CancellationToken cancellationToken = default)
         {
             await WriteAsLittleEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteInt8Async(Int8 value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteInt8Async(Int8 value, CancellationToken cancellationToken = default)
         {
             await WriteByteAsync((byte)value.Value, cancellationToken);
         }
 
-        public async Task WriteInt16Async(Int16 value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteInt16Async(Int16 value, CancellationToken cancellationToken = default)
         {
             await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteInt32Async(Int32 value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteInt32Async(Int32 value, CancellationToken cancellationToken = default)
         {
             await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteInt64Async(Int64 value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteInt64Async(Int64 value, CancellationToken cancellationToken = default)
         {
             await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default)
         {
             await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
         }
 
-        public async Task WriteVarIntAsync(VarInt value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteVarIntAsync(VarInt value, CancellationToken cancellationToken = default)
         {
             await WriteAsLittleEndianAsync(
                 value.Value
@@ -54,7 +54,7 @@ namespace Kafka.Protocol
                     .EncodeAsVarInt(), cancellationToken);
         }
 
-        public async Task WriteVarLongAsync(VarLong value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteVarLongAsync(VarLong value, CancellationToken cancellationToken = default)
         {
             await WriteAsLittleEndianAsync(
                 value.Value
@@ -62,7 +62,7 @@ namespace Kafka.Protocol
                     .EncodeAsVarInt(), cancellationToken);
         }
 
-        public async Task WriteStringAsync(String value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteStringAsync(String value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
@@ -80,7 +80,7 @@ namespace Kafka.Protocol
             await WriteAsLittleEndianAsync(bytes, cancellationToken);
         }
 
-        public async Task WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
@@ -92,13 +92,13 @@ namespace Kafka.Protocol
             }
         }
 
-        public async Task WriteBytesAsync(Bytes value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteBytesAsync(Bytes value, CancellationToken cancellationToken = default)
         {
             await WriteInt32Async(Int32.From(value.Value.Length), cancellationToken);
             await WriteAsLittleEndianAsync(value.Value, cancellationToken);
         }
 
-        public async Task WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default)
+        public async ValueTask WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
@@ -110,13 +110,13 @@ namespace Kafka.Protocol
             }
         }
 
-        public async Task WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)
+        public async ValueTask WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)
             where T : ISerialize
         {
             await WriteNullableArrayAsync(cancellationToken, items);
         }
 
-        public async Task WriteNullableArrayAsync<T>(CancellationToken cancellationToken, params T[]? items)
+        public async ValueTask WriteNullableArrayAsync<T>(CancellationToken cancellationToken, params T[]? items)
             where T : ISerialize
         {
             if (items == null)
@@ -132,12 +132,12 @@ namespace Kafka.Protocol
             }
         }
 
-        private async Task WriteByteAsync(byte value, CancellationToken cancellationToken = default)
+        private async ValueTask WriteByteAsync(byte value, CancellationToken cancellationToken = default)
         {
             await WriteAsLittleEndianAsync(new[] { value }, cancellationToken);
         }
 
-        private async Task WriteAsLittleEndianAsync(byte[] value, CancellationToken cancellationToken = default)
+        private async ValueTask WriteAsLittleEndianAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             if (BitConverter.IsLittleEndian == false)
             {
@@ -147,7 +147,7 @@ namespace Kafka.Protocol
             await WriteAsync(value, cancellationToken);
         }
 
-        private async Task WriteAsBigEndianAsync(byte[] value, CancellationToken cancellationToken = default)
+        private async ValueTask WriteAsBigEndianAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             if (BitConverter.IsLittleEndian)
             {
@@ -157,9 +157,9 @@ namespace Kafka.Protocol
             await WriteAsync(value, cancellationToken);
         }
 
-        private async Task WriteAsync(byte[] value, CancellationToken cancellationToken = default)
+        private async ValueTask WriteAsync(byte[] value, CancellationToken cancellationToken = default)
         {
-            await _buffer.WriteAsync(value, 0, value.Length, cancellationToken);
+            await _buffer.WriteAsync(value.AsMemory(), cancellationToken);
         }
 
         public async ValueTask DisposeAsync()

@@ -33,7 +33,7 @@ namespace Kafka.Protocol.Records
             };
         }
 
-        public async Task WriteToAsync(IKafkaWriter writer,
+        public async ValueTask WriteToAsync(IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
             await writer.WriteVarIntAsync(Length, cancellationToken);

@@ -7,7 +7,7 @@ namespace Kafka.Protocol
     {
         public abstract int Version { get; }
 
-        public abstract Task WriteToAsync(
+        public abstract ValueTask WriteToAsync(
             IKafkaWriter writer, 
             CancellationToken cancellationToken = default);
     }
