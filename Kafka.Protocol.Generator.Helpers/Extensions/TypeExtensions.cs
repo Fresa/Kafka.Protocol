@@ -1,59 +1,47 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Kafka.Protocol.Generator.Helpers.Extensions
 {
     public static class TypeExtensions
     {
+        private static readonly Dictionary<Type, string> TypeAliasMapping = new Dictionary<Type, string>
+        {
+            { typeof(bool), "bool" },
+            { typeof(short), "short" },
+            { typeof(int), "int" },
+            { typeof(uint), "uint" },
+            { typeof(long), "long" },
+            { typeof(string), "string" },
+            { typeof(byte), "byte" },
+            { typeof(sbyte), "sbyte" },
+            { typeof(char), "char" },
+            { typeof(decimal), "decimal" },
+            { typeof(double), "double" }
+        };
+
         public static string GetPrettyName(this Type type)
         {
             if (type == null)
             {
                 return "";
             }
-            
-            var elementType = type.IsArray ? 
-                type.GetElementType() : 
+
+            var elementType = type.IsArray ?
+                type.GetElementType() :
                 type;
 
-            var prettyName = elementType?.FullName;
-            switch (Type.GetTypeCode(elementType))
+            if (elementType == null)
             {
-                case TypeCode.Boolean:
-                    prettyName = "bool";
-                    break;
-                case TypeCode.Int16:
-                    prettyName = "short";
-                    break;
-                case TypeCode.Int32:
-                    prettyName = "int";
-                    break;
-                case TypeCode.UInt32:
-                    prettyName = "uint";
-                    break;
-                case TypeCode.Int64:
-                    prettyName = "long";
-                    break;
-                case TypeCode.String:
-                    prettyName = "string";
-                    break;
-                case TypeCode.Byte:
-                    prettyName = "byte";
-                    break;
-                case TypeCode.SByte:
-                    prettyName = "sbyte";
-                    break;
-                case TypeCode.Char:
-                    prettyName = "char";
-                    break;
-                case TypeCode.Decimal:
-                    prettyName = "decimal";
-                    break;
-                case TypeCode.Double:
-                    prettyName = "double";
-                    break;
+                throw new InvalidOperationException($"{type} is an array but has unknown element type");
             }
 
+            if (TypeAliasMapping.TryGetValue(elementType, out var prettyName) == false)
+            {
+                prettyName = elementType.FullName;
+            }
+            
             prettyName += type.IsArray ? "[]" : "";
 
             if (type.IsGenericType == false)
