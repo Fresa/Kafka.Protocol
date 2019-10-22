@@ -72,8 +72,7 @@ namespace Kafka.Protocol<# Block(() =>
         .Where(type => 
             type.Type!="RequestMessage" && 
             type.Type!="ResponseMessage" &&
-			type.GetClassName()!="NullableString" &&
-			type.GetClassName()!="NullableBytes"), primitiveType =>
+			type.IsNullable() == false), primitiveType =>
     {
         var className = primitiveType.GetClassName();
         var type = primitiveType.GetTypeName();
