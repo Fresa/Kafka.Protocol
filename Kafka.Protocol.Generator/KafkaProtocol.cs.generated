@@ -4291,7 +4291,7 @@ namespace Kafka.Protocol
 		{
 			var instance = new ApiVersionsRequest(version);
 
-			return instance;
+			return await new ValueTask<ApiVersionsRequest>(instance);
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
@@ -18136,7 +18136,7 @@ namespace Kafka.Protocol
 		{
 			var instance = new ListGroupsRequest(version);
 
-			return instance;
+			return await new ValueTask<ListGroupsRequest>(instance);
 		}
 
 		public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)

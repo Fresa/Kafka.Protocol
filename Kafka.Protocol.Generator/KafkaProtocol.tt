@@ -212,11 +212,20 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				#>var instance = new <#= messageDefinition.Name #>(version);<# _();
+				
 				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
 				{
 					PrintReadFrom(messageField, "instance.");
 				}); _();
-				#>return instance;<#
+
+				if (messageDefinition.Fields.Any())
+				{
+					#>return instance;<#
+				}
+				else 
+				{
+					#>return await new ValueTask<<#= messageDefinition.Name #>>(instance);<#
+				}
 			}); _(2);
 
 			#>public override async Task WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
