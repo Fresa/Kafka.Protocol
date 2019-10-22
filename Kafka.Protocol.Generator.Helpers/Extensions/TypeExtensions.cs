@@ -22,14 +22,26 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
                 case TypeCode.Boolean:
                     prettyName = "bool";
                     break;
+                case TypeCode.Int16:
+                    prettyName = "short";
+                    break;
                 case TypeCode.Int32:
                     prettyName = "int";
+                    break;
+                case TypeCode.UInt32:
+                    prettyName = "uint";
+                    break;
+                case TypeCode.Int64:
+                    prettyName = "long";
                     break;
                 case TypeCode.String:
                     prettyName = "string";
                     break;
                 case TypeCode.Byte:
                     prettyName = "byte";
+                    break;
+                case TypeCode.SByte:
+                    prettyName = "sbyte";
                     break;
                 case TypeCode.Char:
                     prettyName = "char";
@@ -49,7 +61,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
                 return prettyName;
             }
 
-            if (prettyName?.IndexOf('`') > 0)
+            if (prettyName.IndexOf('`') > 0)
             {
                 prettyName = prettyName.Remove(prettyName.IndexOf('`'));
             }

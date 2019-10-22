@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+// ReSharper disable MemberHidesStaticFromOuterClass FromReaderAsync will cause a lot of these warnings
 
 namespace Kafka.Protocol
 {
@@ -67,9 +68,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct Int8 : ISerialize 
 	{
-		public System.SByte Value { get; }
+		public sbyte Value { get; }
 
-		public Int8(System.SByte value)
+		public Int8(sbyte value)
 		{
 			Value = value;
 		}
@@ -104,7 +105,7 @@ namespace Kafka.Protocol
 			await writer.WriteInt8Async(this, cancellationToken);
 		}
 
-		public static Int8 From(System.SByte value)
+		public static Int8 From(sbyte value)
 		{
 			return new Int8(value);
 		}
@@ -122,9 +123,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct Int16 : ISerialize 
 	{
-		public System.Int16 Value { get; }
+		public short Value { get; }
 
-		public Int16(System.Int16 value)
+		public Int16(short value)
 		{
 			Value = value;
 		}
@@ -159,7 +160,7 @@ namespace Kafka.Protocol
 			await writer.WriteInt16Async(this, cancellationToken);
 		}
 
-		public static Int16 From(System.Int16 value)
+		public static Int16 From(short value)
 		{
 			return new Int16(value);
 		}
@@ -232,9 +233,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct Int64 : ISerialize 
 	{
-		public System.Int64 Value { get; }
+		public long Value { get; }
 
-		public Int64(System.Int64 value)
+		public Int64(long value)
 		{
 			Value = value;
 		}
@@ -269,7 +270,7 @@ namespace Kafka.Protocol
 			await writer.WriteInt64Async(this, cancellationToken);
 		}
 
-		public static Int64 From(System.Int64 value)
+		public static Int64 From(long value)
 		{
 			return new Int64(value);
 		}
@@ -287,9 +288,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct UInt32 : ISerialize 
 	{
-		public System.UInt32 Value { get; }
+		public uint Value { get; }
 
-		public UInt32(System.UInt32 value)
+		public UInt32(uint value)
 		{
 			Value = value;
 		}
@@ -324,7 +325,7 @@ namespace Kafka.Protocol
 			await writer.WriteUInt32Async(this, cancellationToken);
 		}
 
-		public static UInt32 From(System.UInt32 value)
+		public static UInt32 From(uint value)
 		{
 			return new UInt32(value);
 		}
@@ -397,9 +398,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly struct VarLong : ISerialize 
 	{
-		public System.Int64 Value { get; }
+		public long Value { get; }
 
-		public VarLong(System.Int64 value)
+		public VarLong(long value)
 		{
 			Value = value;
 		}
@@ -434,7 +435,7 @@ namespace Kafka.Protocol
 			await writer.WriteVarLongAsync(this, cancellationToken);
 		}
 
-		public static VarLong From(System.Int64 value)
+		public static VarLong From(long value)
 		{
 			return new VarLong(value);
 		}
