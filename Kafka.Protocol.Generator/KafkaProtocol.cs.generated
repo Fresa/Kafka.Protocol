@@ -3407,7 +3407,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = await reader.ReadStringAsync(cancellationToken);
+						instance.Value = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -3620,7 +3620,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -5234,7 +5234,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -5924,7 +5924,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, AssignmentsCollection);
+					await writer.WriteNullableArrayAsync(cancellationToken, AssignmentsCollection);
 				}
 			}
 
@@ -6234,7 +6234,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -6711,7 +6711,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = await reader.ReadStringAsync(cancellationToken);
+						instance.Value = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -6947,7 +6947,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -7126,7 +7126,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceNameFilter = await reader.ReadStringAsync(cancellationToken);
+					instance.ResourceNameFilter = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
@@ -7134,11 +7134,11 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalFilter = await reader.ReadStringAsync(cancellationToken);
+					instance.PrincipalFilter = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.HostFilter = await reader.ReadStringAsync(cancellationToken);
+					instance.HostFilter = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -7486,7 +7486,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -7614,7 +7614,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+						instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -9029,7 +9029,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourceNameFilter = await reader.ReadStringAsync(cancellationToken);
+				instance.ResourceNameFilter = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -9037,11 +9037,11 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PrincipalFilter = await reader.ReadStringAsync(cancellationToken);
+				instance.PrincipalFilter = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.HostFilter = await reader.ReadStringAsync(cancellationToken);
+				instance.HostFilter = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -9302,7 +9302,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -9856,7 +9856,7 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ConfigurationKeysCollection);
+					await writer.WriteNullableArrayAsync(cancellationToken, ConfigurationKeysCollection);
 				}
 			}
 
@@ -10079,7 +10079,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -10271,7 +10271,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = await reader.ReadStringAsync(cancellationToken);
+						instance.Value = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -10517,7 +10517,7 @@ namespace Kafka.Protocol
 						}
 						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							instance.Value = await reader.ReadStringAsync(cancellationToken);
+							instance.Value = await reader.ReadNullableStringAsync(cancellationToken);
 						}
 						if (instance.Version.InRange(1, 2147483647)) 
 						{
@@ -10654,7 +10654,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, OwnersCollection);
+				await writer.WriteNullableArrayAsync(cancellationToken, OwnersCollection);
 			}
 		}
 
@@ -11704,7 +11704,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
+						instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -11960,7 +11960,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
+				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -12585,7 +12585,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicPartitionsCollection);
+				await writer.WriteNullableArrayAsync(cancellationToken, TopicPartitionsCollection);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13004,7 +13004,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+						instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -14555,7 +14555,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Records = await reader.ReadBytesAsync(cancellationToken);
+						instance.Records = await reader.ReadNullableBytesAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -14584,7 +14584,7 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(4, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, AbortedCollection);
+						await writer.WriteNullableArrayAsync(cancellationToken, AbortedCollection);
 					}
 					if (Version.InRange(11, 2147483647)) 
 					{
@@ -14999,7 +14999,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -15218,7 +15218,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
+				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			return instance;
 		}
@@ -15649,7 +15649,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = await reader.ReadStringAsync(cancellationToken);
+						instance.Value = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -15890,7 +15890,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -16048,7 +16048,7 @@ namespace Kafka.Protocol
 			var instance = new InitProducerIdRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken);
+				instance.TransactionalId = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -16311,7 +16311,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
+				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -16884,7 +16884,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
+					instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -19158,7 +19158,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
+				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection);
 			}
 			if (Version.InRange(4, 2147483647)) 
 			{
@@ -19365,7 +19365,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadStringAsync(cancellationToken);
+				instance.ClusterId = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -19491,7 +19491,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.Rack = await reader.ReadStringAsync(cancellationToken);
+					instance.Rack = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				return instance;
 			}
@@ -20163,7 +20163,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
+				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(2, 4)) 
 			{
@@ -20466,7 +20466,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedMetadata = await reader.ReadStringAsync(cancellationToken);
+						instance.CommittedMetadata = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -20925,7 +20925,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection);
+				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection);
 			}
 		}
 
@@ -21291,7 +21291,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Metadata = await reader.ReadStringAsync(cancellationToken);
+						instance.Metadata = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -22120,7 +22120,7 @@ namespace Kafka.Protocol
 			var instance = new ProduceRequest(version);
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken);
+				instance.TransactionalId = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -22374,7 +22374,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Records = await reader.ReadBytesAsync(cancellationToken);
+						instance.Records = await reader.ReadNullableBytesAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -23314,7 +23314,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadStringAsync(cancellationToken);
+				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -24243,7 +24243,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadStringAsync(cancellationToken);
+				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -24921,7 +24921,7 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedMetadata = await reader.ReadStringAsync(cancellationToken);
+						instance.CommittedMetadata = await reader.ReadNullableStringAsync(cancellationToken);
 					}
 					return instance;
 				}
@@ -25657,7 +25657,7 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					instance.Rack = await reader.ReadStringAsync(cancellationToken);
+					instance.Rack = await reader.ReadNullableStringAsync(cancellationToken);
 				}
 				return instance;
 			}

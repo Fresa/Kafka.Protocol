@@ -260,22 +260,23 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
 		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
 		var readArrayMethodName = messageField.IsNullable() ? "ReadNullableArrayAsync" : "ReadArrayAsync";
+		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		if (messageField.Fields == null)
 		{
 			if (messageField.IsArray())
 			{
 				if (IsPrimitiveType(messageField))
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.<#= readArrayMethodName #>(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken);<# 	
+					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken);<# 	
 				} 
 				else 
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.<#= readArrayMethodName #>(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 	
+					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 	
 				}
 			} 
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= fieldTypeName #>Async(cancellationToken);<# 
+				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable + fieldTypeName #>Async(cancellationToken);<# 
 			}
 		}
 		else 
@@ -283,11 +284,11 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 			if (mapKeyField == null)
 			{
-				#><#= prependBeforeField #><#= fieldName #> = await reader.<#= readArrayMethodName #>(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 
+				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 
 			}
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = (await reader.<#= readArrayMethodName #>(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+				#><#= prependBeforeField #><#= fieldName #> = (await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
 			}
 		}
 	});		
@@ -305,7 +306,7 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 			var fieldTypeName = messageField.GetTypeName();
 			if (messageField.IsArray())
 			{
-			#>await writer.WriteArrayAsync(cancellationToken, <#= fieldName #>);<# 	
+			#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>);<# 	
 			} 
 			else 
 			{
@@ -317,11 +318,11 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 			if (mapKeyField == null)
 			{
-				#>await writer.WriteArrayAsync(cancellationToken, <#= fieldName #>);<# 
+				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>);<# 
 			} 
 			else 
 			{
-				#>await writer.WriteArrayAsync(cancellationToken, <#= fieldName #>.Values.ToArray());<#
+				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>.Values.ToArray());<#
 			}
 		}
 	});		
