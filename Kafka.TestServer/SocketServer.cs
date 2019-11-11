@@ -94,10 +94,4 @@ namespace Kafka.TestServer
             }
         }
     }
-
-    internal interface INetworkServer
-    {
-        Task<INetworkClient> WaitForConnectedClientAsync
-            (CancellationToken cancellationToken = default);
-    }
 }
