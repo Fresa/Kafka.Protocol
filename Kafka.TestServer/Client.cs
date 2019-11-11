@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.IO.Pipelines;
-using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Kafka.Protocol;
@@ -16,16 +15,17 @@ namespace Kafka.TestServer
         private readonly Pipe _pipe = new Pipe();
 
         private readonly IKafkaReader _reader;
-        private readonly Socket _socket;
+        private readonly INetworkClient _networkClient;
         private Task _sendAndReceiveBackgroundTask = default!;
 
-        private Client(Socket socket)
+        private Client(INetworkClient networkClient)
         {
-            _socket = socket;
+            _networkClient = networkClient;
             _reader = new KafkaReader(_pipe.Reader);
         }
 
-        internal async Task<RequestPayload> ReadAsync(CancellationToken cancellationToken)
+        internal async Task<RequestPayload> ReadAsync(
+            CancellationToken cancellationToken = default)
         {
             return await RequestPayload.ReadFrom(0, _reader, cancellationToken);
         }
@@ -43,20 +43,19 @@ namespace Kafka.TestServer
                 await writer.WriteInt32Async(Int32.From((int)buffer.Length), cancellationToken);
             }
 
-            await _socket.SendAsync(
+            await _networkClient.SendAsync(
                 buffer.GetBuffer(),
-                SocketFlags.None,
                 cancellationToken);
         }
 
-        internal static Client Start(Socket clientSocket)
+        internal static Client Start(INetworkClient networkClient)
         {
-            var client = new Client(clientSocket);
-            client.StartSendingAndReceiving();
+            var client = new Client(networkClient);
+            client.StartReceiving();
             return client;
         }
 
-        private void StartSendingAndReceiving()
+        private void StartReceiving()
         {
             _sendAndReceiveBackgroundTask = Task.Run(
                 async () =>
@@ -64,7 +63,7 @@ namespace Kafka.TestServer
                     var cancellationToken = _cancellationSource.Token;
                     try
                     {
-                        var dataReceiver = new DataReceiver(_socket);
+                        var dataReceiver = new DataReceiver(_networkClient);
                         while (cancellationToken.IsCancellationRequested == false)
                         {
                             await dataReceiver

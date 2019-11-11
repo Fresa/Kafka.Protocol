@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO.Pipelines;
-using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,12 +8,12 @@ namespace Kafka.TestServer
 {
     internal class DataReceiver
     {
-        private readonly Socket _socket;
+        private readonly INetworkClient _networkClient;
         private const int MinimumBufferSize = 512;
 
-        internal DataReceiver(Socket socket)
+        internal DataReceiver(INetworkClient networkClient)
         {
-            _socket = socket;
+            _networkClient = networkClient;
         }
 
         internal async Task ReceiveAsync(PipeWriter writer, CancellationToken cancellationToken)
@@ -25,9 +24,8 @@ namespace Kafka.TestServer
                 do
                 {
                     var memory = writer.GetMemory(MinimumBufferSize);
-                    var bytesRead = await _socket.ReceiveAsync(
+                    var bytesRead = await _networkClient.ReceiveAsync(
                         memory,
-                        SocketFlags.None,
                         cancellationToken);
 
                     if (bytesRead == 0)

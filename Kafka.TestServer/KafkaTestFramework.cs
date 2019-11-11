@@ -5,7 +5,13 @@ namespace Kafka.TestServer
 {
     internal class KafkaTestFramework
     {
-        public KafkaTestFramework On<TServerMethod, TClientMethod>()
+        //public static KafkaTestFramework Start(string hostname)
+        //{
+
+        //}
+
+        public KafkaTestFramework On<TServerMethod, TClientMethod>(
+            Func<TServerMethod, TClientMethod> subscription)
             where TServerMethod : Message
             where TClientMethod : Message
         {

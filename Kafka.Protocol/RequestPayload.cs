@@ -9,13 +9,15 @@ namespace Kafka.Protocol
         public RequestHeader Header { get; }
         public Message Message { get; }
 
-        private RequestPayload(RequestHeader header, Message message)
+        public RequestPayload(
+            RequestHeader header, 
+            Message message)
         {
             Header = header;
             Message = message;
         }
 
-        internal async Task<byte[]> WriteToAsync(
+        internal async ValueTask<byte[]> WriteToAsync(
             CancellationToken cancellationToken = default)
         {
             await using var stream = new MemoryStream();

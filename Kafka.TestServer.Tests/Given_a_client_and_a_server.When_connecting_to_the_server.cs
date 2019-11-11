@@ -27,13 +27,13 @@ namespace Kafka.TestServer.Tests
                 var hostName = Dns.GetHostName();
 
                 await using var server = SocketServer.Start(hostName);
-                var clientAcceptedSocket = server.WaitForConnectedClientAsync(CancellationToken.None);
+                var connectedClientTask = server.WaitForConnectedClientAsync();
 
                 var clientTask = ProduceMessageFromClientAsync(hostName, server.Port);
-                var connectedClientSocket = await clientAcceptedSocket;
+                var connectedClient = await connectedClientTask;
 
-                await using var client = Client.Start(connectedClientSocket);
-                var message = await client.ReadAsync(CancellationToken.None);
+                await using var client = Client.Start(connectedClient);
+                var message = await client.ReadAsync();
                 await clientTask;
             }
 

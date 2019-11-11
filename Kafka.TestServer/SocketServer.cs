@@ -8,17 +8,17 @@ using System.Threading.Tasks.Dataflow;
 
 namespace Kafka.TestServer
 {
-    internal class SocketServer : IAsyncDisposable
+    internal class SocketServer : INetworkServer, IAsyncDisposable
     {
-        private readonly ConcurrentQueue<Socket> _clients = new ConcurrentQueue<Socket>();
-        private readonly BufferBlock<Socket> _waitingClients = new BufferBlock<Socket>();
+        private readonly ConcurrentQueue<INetworkClient> _clients = new ConcurrentQueue<INetworkClient>();
+        private readonly BufferBlock<INetworkClient> _waitingClients = new BufferBlock<INetworkClient>();
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
         private Task _acceptingClientsBackgroundTask = default!;
         private Socket _clientAcceptingSocket = default!;
 
         internal int Port { get; private set; }
 
-        internal async Task<Socket> WaitForConnectedClientAsync(CancellationToken cancellationToken)
+        public async Task<INetworkClient> WaitForConnectedClientAsync(CancellationToken cancellationToken = default)
         {
             var client = await _waitingClients.ReceiveAsync(cancellationToken);
             _clients.Enqueue(client);
@@ -43,7 +43,9 @@ namespace Kafka.TestServer
                         {
                             var clientSocket = await _clientAcceptingSocket.AcceptAsync()
                                 .ConfigureAwait(false);
-                            await _waitingClients.SendAsync(clientSocket, _cancellationSource.Token)
+                            await _waitingClients.SendAsync(
+                                    new SocketNetworkClient(clientSocket), 
+                                    _cancellationSource.Token)
                                 .ConfigureAwait(false);
                         }
                         catch when (_cancellationSource.IsCancellationRequested)
@@ -78,27 +80,24 @@ namespace Kafka.TestServer
             try
             {
                 _clientAcceptingSocket.Shutdown(SocketShutdown.Both);
+                _clientAcceptingSocket.Close();
             }
-            catch 
+            finally
             {
-                // Try shutting down
+                _clientAcceptingSocket.Dispose();
             }
 
             await _acceptingClientsBackgroundTask;
             while (_clients.TryDequeue(out var client))
             {
-                try
-                {
-                    client.Shutdown(SocketShutdown.Both);
-                }
-                catch
-                {
-                    // Try shutting down
-                }
-
-                client.Close();
-                client.Dispose();
+                await client.DisposeAsync();
             }
         }
+    }
+
+    internal interface INetworkServer
+    {
+        Task<INetworkClient> WaitForConnectedClientAsync
+            (CancellationToken cancellationToken = default);
     }
 }
