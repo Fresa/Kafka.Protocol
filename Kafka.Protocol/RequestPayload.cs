@@ -35,6 +35,7 @@ namespace Kafka.Protocol
             IKafkaReader kafkaReader,
             CancellationToken cancellationToken = default)
         {
+            await kafkaReader.ReadInt32Async(cancellationToken);
             var header = await RequestHeader.FromReaderAsync(
                 version, 
                 kafkaReader, 

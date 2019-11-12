@@ -34,7 +34,7 @@ namespace Kafka.TestServer.Tests
 
                 await using var client = Client.Start(connectedClient);
                 var message = await client.ReadAsync();
-                await clientTask;
+                //await clientTask;
             }
 
             private static async Task ProduceMessageFromClientAsync(string host, int port)
