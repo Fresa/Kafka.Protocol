@@ -24,12 +24,12 @@ namespace Kafka.TestServer.Tests
             [Fact]
             public async Task It_should_connect()
             {
-                var hostName = Dns.GetHostName();
-
-                await using var server = SocketServer.Start(hostName);
+                await using var server = SocketServer.Start();
                 var connectedClientTask = server.WaitForConnectedClientAsync();
 
-                var clientTask = ProduceMessageFromClientAsync(hostName, server.Port);
+                var clientTask = ProduceMessageFromClientAsync(
+                    "localhost", 
+                    server.Port);
                 var connectedClient = await connectedClientTask;
 
                 await using var client = Client.Start(connectedClient);

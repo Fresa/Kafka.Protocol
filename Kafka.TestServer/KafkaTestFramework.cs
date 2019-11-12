@@ -5,7 +5,7 @@ namespace Kafka.TestServer
 {
     internal class KafkaTestFramework
     {
-        //public static KafkaTestFramework Start(string hostname)
+        //public static KafkaTestFramework Start()
         //{
 
         //}

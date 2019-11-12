@@ -17,6 +17,7 @@ namespace Kafka.TestServer
         private Socket _clientAcceptingSocket = default!;
 
         internal int Port { get; private set; }
+        internal IPAddress Address { get; private set; } = IPAddress.Any;
 
         public async Task<INetworkClient> WaitForConnectedClientAsync(CancellationToken cancellationToken = default)
         {
@@ -25,10 +26,17 @@ namespace Kafka.TestServer
             return client;
         }
 
-        internal static SocketServer Start(string hostname)
+        internal static SocketServer Start()
+        {
+            return Start(IPAddress.Any);
+        }
+
+        internal static SocketServer Start(
+            IPAddress address, 
+            int port = 0)
         {
             var server = new SocketServer();
-            server.Connect(hostname);
+            server.Connect(address, port);
             server.StartAcceptingClients();
             return server;
         }
@@ -57,12 +65,9 @@ namespace Kafka.TestServer
                 });
         }
 
-        private void Connect(string hostname)
+        private void Connect(IPAddress address, int port)
         {
-            var host = Dns.GetHostEntry(hostname);
-            var address = host.AddressList[0];
-            var endPoint = new IPEndPoint(address, 0);
-            Port = endPoint.Port;
+            var endPoint = new IPEndPoint(address, port);
 
             _clientAcceptingSocket = new Socket(
                 address.AddressFamily,
@@ -70,7 +75,9 @@ namespace Kafka.TestServer
                 ProtocolType.Tcp);
 
             _clientAcceptingSocket.Bind(endPoint);
-            Port = ((IPEndPoint)_clientAcceptingSocket.LocalEndPoint).Port;
+            var localEndPoint = (IPEndPoint) _clientAcceptingSocket.LocalEndPoint;
+            Port = localEndPoint.Port;
+            Address = localEndPoint.Address;
             _clientAcceptingSocket.Listen(100);
         }
 
@@ -82,6 +89,7 @@ namespace Kafka.TestServer
                 _clientAcceptingSocket.Shutdown(SocketShutdown.Both);
                 _clientAcceptingSocket.Close();
             }
+            catch { }
             finally
             {
                 _clientAcceptingSocket.Dispose();

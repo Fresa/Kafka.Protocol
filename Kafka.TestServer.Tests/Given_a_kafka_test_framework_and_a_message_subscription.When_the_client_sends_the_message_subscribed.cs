@@ -15,7 +15,7 @@ namespace Kafka.TestServer.Tests
             {
                 _testServer = new KafkaTestFramework();
                 _testServer.On<ApiVersionsRequest, ApiVersionsResponse>(
-                    request => new ApiVersionsResponse(2)
+                    request => request.Respond()
                         .WithThrottleTimeMs(Int32.From(100))
                         .WithApiKeysCollection(
                             key => key
