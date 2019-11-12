@@ -192,7 +192,8 @@ namespace Kafka.Protocol<# Block(() =>
 	// Messages
 	PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
 	{
-		#>public class <#= messageDefinition.Name #> : Message<# Block(() => 
+		var hasResponse = messageDefinitions.TryGetResponseMessageDefinitionFrom(messageDefinition, out var responseMessageDefinition);
+		#>public class <#= messageDefinition.Name #> : Message<#= hasResponse ? $", IRespond<{responseMessageDefinition.Name}>" : "" #><# Block(() => 
 		{
 			#>public <#= messageDefinition.Name #>(int version)<# Block(() => 
 			{
@@ -255,6 +256,13 @@ namespace Kafka.Protocol<# Block(() =>
 					PrintCommonStruct(commonStruct);
 					if (commonStructIndex + 1 != commonStructCount) _();
 				});
+			}
+
+			if (hasResponse)
+			{
+				_(2);
+				#>public <#= responseMessageDefinition.Name #> Respond()<# _();
+				#>	=> new <#= responseMessageDefinition.Name #>(Version);<#
 			}
 		}); _();
 	}); 

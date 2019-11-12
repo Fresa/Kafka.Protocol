@@ -10,10 +10,10 @@ namespace Kafka.TestServer
 
         //}
 
-        public KafkaTestFramework On<TServerMethod, TClientMethod>(
-            Func<TServerMethod, TClientMethod> subscription)
+        public KafkaTestFramework On<TClientMethod, TServerMethod>(
+            Func<TClientMethod, TServerMethod> subscription)
+            where TClientMethod : Message, IRespond<TServerMethod>
             where TServerMethod : Message
-            where TClientMethod : Message
         {
             throw new NotImplementedException();
         }

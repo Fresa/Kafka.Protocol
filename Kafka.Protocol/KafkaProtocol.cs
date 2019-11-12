@@ -2430,7 +2430,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AddOffsetsToTxnRequest : Message
+	public class AddOffsetsToTxnRequest : Message, IRespond<AddOffsetsToTxnResponse>
 	{
 		public AddOffsetsToTxnRequest(int version)
 		{
@@ -2583,6 +2583,9 @@ namespace Kafka.Protocol
 			GroupId = groupId;
 			return this;
 		}
+
+		public AddOffsetsToTxnResponse Respond()
+			=> new AddOffsetsToTxnResponse(Version);
 	}
 
 	public class AddOffsetsToTxnResponse : Message
@@ -2676,7 +2679,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AddPartitionsToTxnRequest : Message
+	public class AddPartitionsToTxnRequest : Message, IRespond<AddPartitionsToTxnResponse>
 	{
 		public AddPartitionsToTxnRequest(int version)
 		{
@@ -2920,6 +2923,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public AddPartitionsToTxnResponse Respond()
+			=> new AddPartitionsToTxnResponse(Version);
 	}
 
 	public class AddPartitionsToTxnResponse : Message
@@ -3195,7 +3201,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AlterConfigsRequest : Message
+	public class AlterConfigsRequest : Message, IRespond<AlterConfigsResponse>
 	{
 		public AlterConfigsRequest(int version)
 		{
@@ -3504,6 +3510,9 @@ namespace Kafka.Protocol
 			ValidateOnly = validateOnly;
 			return this;
 		}
+
+		public AlterConfigsResponse Respond()
+			=> new AlterConfigsResponse(Version);
 	}
 
 	public class AlterConfigsResponse : Message
@@ -3758,7 +3767,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class AlterReplicaLogDirsRequest : Message
+	public class AlterReplicaLogDirsRequest : Message, IRespond<AlterReplicaLogDirsResponse>
 	{
 		public AlterReplicaLogDirsRequest(int version)
 		{
@@ -3997,6 +4006,9 @@ namespace Kafka.Protocol
 				}
 			}
 		}
+
+		public AlterReplicaLogDirsResponse Respond()
+			=> new AlterReplicaLogDirsResponse(Version);
 	}
 
 	public class AlterReplicaLogDirsResponse : Message
@@ -4272,7 +4284,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ApiVersionsRequest : Message
+	public class ApiVersionsRequest : Message, IRespond<ApiVersionsResponse>
 	{
 		public ApiVersionsRequest(int version)
 		{
@@ -4299,6 +4311,9 @@ namespace Kafka.Protocol
 		{
 			await Task.CompletedTask;
 		}
+
+		public ApiVersionsResponse Respond()
+			=> new ApiVersionsResponse(Version);
 	}
 
 	public class ApiVersionsResponse : Message
@@ -4542,7 +4557,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ControlledShutdownRequest : Message
+	public class ControlledShutdownRequest : Message, IRespond<ControlledShutdownResponse>
 	{
 		public ControlledShutdownRequest(int version)
 		{
@@ -4626,6 +4641,9 @@ namespace Kafka.Protocol
 			BrokerEpoch = brokerEpoch;
 			return this;
 		}
+
+		public ControlledShutdownResponse Respond()
+			=> new ControlledShutdownResponse(Version);
 	}
 
 	public class ControlledShutdownResponse : Message
@@ -4810,7 +4828,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateAclsRequest : Message
+	public class CreateAclsRequest : Message, IRespond<CreateAclsResponse>
 	{
 		public CreateAclsRequest(int version)
 		{
@@ -5118,6 +5136,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public CreateAclsResponse Respond()
+			=> new CreateAclsResponse(Version);
 	}
 
 	public class CreateAclsResponse : Message
@@ -5308,7 +5329,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateDelegationTokenRequest : Message
+	public class CreateDelegationTokenRequest : Message, IRespond<CreateDelegationTokenResponse>
 	{
 		public CreateDelegationTokenRequest(int version)
 		{
@@ -5488,6 +5509,9 @@ namespace Kafka.Protocol
 			MaxLifetimeMs = maxLifetimeMs;
 			return this;
 		}
+
+		public CreateDelegationTokenResponse Respond()
+			=> new CreateDelegationTokenResponse(Version);
 	}
 
 	public class CreateDelegationTokenResponse : Message
@@ -5805,7 +5829,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreatePartitionsRequest : Message
+	public class CreatePartitionsRequest : Message, IRespond<CreatePartitionsResponse>
 	{
 		public CreatePartitionsRequest(int version)
 		{
@@ -6114,6 +6138,9 @@ namespace Kafka.Protocol
 			ValidateOnly = validateOnly;
 			return this;
 		}
+
+		public CreatePartitionsResponse Respond()
+			=> new CreatePartitionsResponse(Version);
 	}
 
 	public class CreatePartitionsResponse : Message
@@ -6336,7 +6363,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class CreateTopicsRequest : Message
+	public class CreateTopicsRequest : Message, IRespond<CreateTopicsResponse>
 	{
 		public CreateTopicsRequest(int version)
 		{
@@ -6832,6 +6859,9 @@ namespace Kafka.Protocol
 			ValidateOnly = validateOnly;
 			return this;
 		}
+
+		public CreateTopicsResponse Respond()
+			=> new CreateTopicsResponse(Version);
 	}
 
 	public class CreateTopicsResponse : Message
@@ -7044,7 +7074,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteAclsRequest : Message
+	public class DeleteAclsRequest : Message, IRespond<DeleteAclsResponse>
 	{
 		public DeleteAclsRequest(int version)
 		{
@@ -7370,6 +7400,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public DeleteAclsResponse Respond()
+			=> new DeleteAclsResponse(Version);
 	}
 
 	public class DeleteAclsResponse : Message
@@ -7913,7 +7946,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteGroupsRequest : Message
+	public class DeleteGroupsRequest : Message, IRespond<DeleteGroupsResponse>
 	{
 		public DeleteGroupsRequest(int version)
 		{
@@ -7970,6 +8003,9 @@ namespace Kafka.Protocol
 			GroupsNamesCollection = groupsNamesCollection;
 			return this;
 		}
+
+		public DeleteGroupsResponse Respond()
+			=> new DeleteGroupsResponse(Version);
 	}
 
 	public class DeleteGroupsResponse : Message
@@ -8154,7 +8190,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteRecordsRequest : Message
+	public class DeleteRecordsRequest : Message, IRespond<DeleteRecordsResponse>
 	{
 		public DeleteRecordsRequest(int version)
 		{
@@ -8425,6 +8461,9 @@ namespace Kafka.Protocol
 			TimeoutMs = timeoutMs;
 			return this;
 		}
+
+		public DeleteRecordsResponse Respond()
+			=> new DeleteRecordsResponse(Version);
 	}
 
 	public class DeleteRecordsResponse : Message
@@ -8732,7 +8771,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DeleteTopicsRequest : Message
+	public class DeleteTopicsRequest : Message, IRespond<DeleteTopicsResponse>
 	{
 		public DeleteTopicsRequest(int version)
 		{
@@ -8821,6 +8860,9 @@ namespace Kafka.Protocol
 			TimeoutMs = timeoutMs;
 			return this;
 		}
+
+		public DeleteTopicsResponse Respond()
+			=> new DeleteTopicsResponse(Version);
 	}
 
 	public class DeleteTopicsResponse : Message
@@ -9005,7 +9047,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeAclsRequest : Message
+	public class DescribeAclsRequest : Message, IRespond<DescribeAclsResponse>
 	{
 		public DescribeAclsRequest(int version)
 		{
@@ -9272,6 +9314,9 @@ namespace Kafka.Protocol
 			PermissionType = permissionType;
 			return this;
 		}
+
+		public DescribeAclsResponse Respond()
+			=> new DescribeAclsResponse(Version);
 	}
 
 	public class DescribeAclsResponse : Message
@@ -9745,7 +9790,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeConfigsRequest : Message
+	public class DescribeConfigsRequest : Message, IRespond<DescribeConfigsResponse>
 	{
 		public DescribeConfigsRequest(int version)
 		{
@@ -9963,6 +10008,9 @@ namespace Kafka.Protocol
 			IncludeSynoyms = includeSynoyms;
 			return this;
 		}
+
+		public DescribeConfigsResponse Respond()
+			=> new DescribeConfigsResponse(Version);
 	}
 
 	public class DescribeConfigsResponse : Message
@@ -10625,7 +10673,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeDelegationTokenRequest : Message
+	public class DescribeDelegationTokenRequest : Message, IRespond<DescribeDelegationTokenResponse>
 	{
 		public DescribeDelegationTokenRequest(int version)
 		{
@@ -10779,6 +10827,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public DescribeDelegationTokenResponse Respond()
+			=> new DescribeDelegationTokenResponse(Version);
 	}
 
 	public class DescribeDelegationTokenResponse : Message
@@ -11278,7 +11329,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeGroupsRequest : Message
+	public class DescribeGroupsRequest : Message, IRespond<DescribeGroupsResponse>
 	{
 		public DescribeGroupsRequest(int version)
 		{
@@ -11367,6 +11418,9 @@ namespace Kafka.Protocol
 			IncludeAuthorizedOperations = includeAuthorizedOperations;
 			return this;
 		}
+
+		public DescribeGroupsResponse Respond()
+			=> new DescribeGroupsResponse(Version);
 	}
 
 	public class DescribeGroupsResponse : Message
@@ -11931,7 +11985,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class DescribeLogDirsRequest : Message
+	public class DescribeLogDirsRequest : Message, IRespond<DescribeLogDirsResponse>
 	{
 		public DescribeLogDirsRequest(int version)
 		{
@@ -12085,6 +12139,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public DescribeLogDirsResponse Respond()
+			=> new DescribeLogDirsResponse(Version);
 	}
 
 	public class DescribeLogDirsResponse : Message
@@ -12544,7 +12601,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ElectLeadersRequest : Message
+	public class ElectLeadersRequest : Message, IRespond<ElectLeadersResponse>
 	{
 		public ElectLeadersRequest(int version)
 		{
@@ -12762,6 +12819,9 @@ namespace Kafka.Protocol
 			TimeoutMs = timeoutMs;
 			return this;
 		}
+
+		public ElectLeadersResponse Respond()
+			=> new ElectLeadersResponse(Version);
 	}
 
 	public class ElectLeadersResponse : Message
@@ -13107,7 +13167,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class EndTxnRequest : Message
+	public class EndTxnRequest : Message, IRespond<EndTxnResponse>
 	{
 		public EndTxnRequest(int version)
 		{
@@ -13260,6 +13320,9 @@ namespace Kafka.Protocol
 			Committed = committed;
 			return this;
 		}
+
+		public EndTxnResponse Respond()
+			=> new EndTxnResponse(Version);
 	}
 
 	public class EndTxnResponse : Message
@@ -13353,7 +13416,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ExpireDelegationTokenRequest : Message
+	public class ExpireDelegationTokenRequest : Message, IRespond<ExpireDelegationTokenResponse>
 	{
 		public ExpireDelegationTokenRequest(int version)
 		{
@@ -13442,6 +13505,9 @@ namespace Kafka.Protocol
 			ExpiryTimePeriodMs = expiryTimePeriodMs;
 			return this;
 		}
+
+		public ExpireDelegationTokenResponse Respond()
+			=> new ExpireDelegationTokenResponse(Version);
 	}
 
 	public class ExpireDelegationTokenResponse : Message
@@ -13567,7 +13633,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class FetchRequest : Message
+	public class FetchRequest : Message, IRespond<FetchResponse>
 	{
 		public FetchRequest(int version)
 		{
@@ -14266,6 +14332,9 @@ namespace Kafka.Protocol
 			RackId = rackId;
 			return this;
 		}
+
+		public FetchResponse Respond()
+			=> new FetchResponse(Version);
 	}
 
 	public class FetchResponse : Message
@@ -14880,7 +14949,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class FindCoordinatorRequest : Message
+	public class FindCoordinatorRequest : Message, IRespond<FindCoordinatorResponse>
 	{
 		public FindCoordinatorRequest(int version)
 		{
@@ -14969,6 +15038,9 @@ namespace Kafka.Protocol
 			KeyType = keyType;
 			return this;
 		}
+
+		public FindCoordinatorResponse Respond()
+			=> new FindCoordinatorResponse(Version);
 	}
 
 	public class FindCoordinatorResponse : Message
@@ -15186,7 +15258,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class HeartbeatRequest : Message
+	public class HeartbeatRequest : Message, IRespond<HeartbeatResponse>
 	{
 		public HeartbeatRequest(int version)
 		{
@@ -15345,6 +15417,9 @@ namespace Kafka.Protocol
 			GroupInstanceId = groupInstanceId;
 			return this;
 		}
+
+		public HeartbeatResponse Respond()
+			=> new HeartbeatResponse(Version);
 	}
 
 	public class HeartbeatResponse : Message
@@ -15433,7 +15508,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class IncrementalAlterConfigsRequest : Message
+	public class IncrementalAlterConfigsRequest : Message, IRespond<IncrementalAlterConfigsResponse>
 	{
 		public IncrementalAlterConfigsRequest(int version)
 		{
@@ -15774,6 +15849,9 @@ namespace Kafka.Protocol
 			ValidateOnly = validateOnly;
 			return this;
 		}
+
+		public IncrementalAlterConfigsResponse Respond()
+			=> new IncrementalAlterConfigsResponse(Version);
 	}
 
 	public class IncrementalAlterConfigsResponse : Message
@@ -16028,7 +16106,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class InitProducerIdRequest : Message
+	public class InitProducerIdRequest : Message, IRespond<InitProducerIdResponse>
 	{
 		public InitProducerIdRequest(int version)
 		{
@@ -16123,6 +16201,9 @@ namespace Kafka.Protocol
 			TransactionTimeoutMs = transactionTimeoutMs;
 			return this;
 		}
+
+		public InitProducerIdResponse Respond()
+			=> new InitProducerIdResponse(Version);
 	}
 
 	public class InitProducerIdResponse : Message
@@ -16275,7 +16356,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class JoinGroupRequest : Message
+	public class JoinGroupRequest : Message, IRespond<JoinGroupResponse>
 	{
 		public JoinGroupRequest(int version)
 		{
@@ -16616,6 +16697,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public JoinGroupResponse Respond()
+			=> new JoinGroupResponse(Version);
 	}
 
 	public class JoinGroupResponse : Message
@@ -16990,7 +17074,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class LeaderAndIsrRequest : Message
+	public class LeaderAndIsrRequest : Message, IRespond<LeaderAndIsrResponse>
 	{
 		public LeaderAndIsrRequest(int version)
 		{
@@ -17724,6 +17808,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public LeaderAndIsrResponse Respond()
+			=> new LeaderAndIsrResponse(Version);
 	}
 
 	public class LeaderAndIsrResponse : Message
@@ -17940,7 +18027,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class LeaveGroupRequest : Message
+	public class LeaveGroupRequest : Message, IRespond<LeaveGroupResponse>
 	{
 		public LeaveGroupRequest(int version)
 		{
@@ -18029,6 +18116,9 @@ namespace Kafka.Protocol
 			MemberId = memberId;
 			return this;
 		}
+
+		public LeaveGroupResponse Respond()
+			=> new LeaveGroupResponse(Version);
 	}
 
 	public class LeaveGroupResponse : Message
@@ -18117,7 +18207,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ListGroupsRequest : Message
+	public class ListGroupsRequest : Message, IRespond<ListGroupsResponse>
 	{
 		public ListGroupsRequest(int version)
 		{
@@ -18144,6 +18234,9 @@ namespace Kafka.Protocol
 		{
 			await Task.CompletedTask;
 		}
+
+		public ListGroupsResponse Respond()
+			=> new ListGroupsResponse(Version);
 	}
 
 	public class ListGroupsResponse : Message
@@ -18355,7 +18448,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ListOffsetRequest : Message
+	public class ListOffsetRequest : Message, IRespond<ListOffsetResponse>
 	{
 		public ListOffsetRequest(int version)
 		{
@@ -18722,6 +18815,9 @@ namespace Kafka.Protocol
 				}
 			}
 		}
+
+		public ListOffsetResponse Respond()
+			=> new ListOffsetResponse(Version);
 	}
 
 	public class ListOffsetResponse : Message
@@ -19117,7 +19213,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class MetadataRequest : Message
+	public class MetadataRequest : Message, IRespond<MetadataResponse>
 	{
 		public MetadataRequest(int version)
 		{
@@ -19335,6 +19431,9 @@ namespace Kafka.Protocol
 			IncludeTopicAuthorizedOperations = includeTopicAuthorizedOperations;
 			return this;
 		}
+
+		public MetadataResponse Respond()
+			=> new MetadataResponse(Version);
 	}
 
 	public class MetadataResponse : Message
@@ -20131,7 +20230,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetCommitRequest : Message
+	public class OffsetCommitRequest : Message, IRespond<OffsetCommitResponse>
 	{
 		public OffsetCommitRequest(int version)
 		{
@@ -20618,6 +20717,9 @@ namespace Kafka.Protocol
 				}
 			}
 		}
+
+		public OffsetCommitResponse Respond()
+			=> new OffsetCommitResponse(Version);
 	}
 
 	public class OffsetCommitResponse : Message
@@ -20888,7 +20990,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetFetchRequest : Message
+	public class OffsetFetchRequest : Message, IRespond<OffsetFetchResponse>
 	{
 		public OffsetFetchRequest(int version)
 		{
@@ -21074,6 +21176,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public OffsetFetchResponse Respond()
+			=> new OffsetFetchResponse(Version);
 	}
 
 	public class OffsetFetchResponse : Message
@@ -21478,7 +21583,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class OffsetForLeaderEpochRequest : Message
+	public class OffsetForLeaderEpochRequest : Message, IRespond<OffsetForLeaderEpochResponse>
 	{
 		public OffsetForLeaderEpochRequest(int version)
 		{
@@ -21771,6 +21876,9 @@ namespace Kafka.Protocol
 				}
 			}
 		}
+
+		public OffsetForLeaderEpochResponse Respond()
+			=> new OffsetForLeaderEpochResponse(Version);
 	}
 
 	public class OffsetForLeaderEpochResponse : Message
@@ -22100,7 +22208,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ProduceRequest : Message
+	public class ProduceRequest : Message, IRespond<ProduceResponse>
 	{
 		public ProduceRequest(int version)
 		{
@@ -22447,6 +22555,9 @@ namespace Kafka.Protocol
 				}
 			}
 		}
+
+		public ProduceResponse Respond()
+			=> new ProduceResponse(Version);
 	}
 
 	public class ProduceResponse : Message
@@ -22803,7 +22914,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class RenewDelegationTokenRequest : Message
+	public class RenewDelegationTokenRequest : Message, IRespond<RenewDelegationTokenResponse>
 	{
 		public RenewDelegationTokenRequest(int version)
 		{
@@ -22892,6 +23003,9 @@ namespace Kafka.Protocol
 			RenewPeriodMs = renewPeriodMs;
 			return this;
 		}
+
+		public RenewDelegationTokenResponse Respond()
+			=> new RenewDelegationTokenResponse(Version);
 	}
 
 	public class RenewDelegationTokenResponse : Message
@@ -23017,7 +23131,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class RequestHeader : Message
+	public class RequestHeader : Message, IRespond<ProduceResponse>
 	{
 		public RequestHeader(int version)
 		{
@@ -23170,9 +23284,12 @@ namespace Kafka.Protocol
 			ClientId = clientId;
 			return this;
 		}
+
+		public ProduceResponse Respond()
+			=> new ProduceResponse(Version);
 	}
 
-	public class ResponseHeader : Message
+	public class ResponseHeader : Message, IRespond<ProduceResponse>
 	{
 		public ResponseHeader(int version)
 		{
@@ -23229,9 +23346,12 @@ namespace Kafka.Protocol
 			CorrelationId = correlationId;
 			return this;
 		}
+
+		public ProduceResponse Respond()
+			=> new ProduceResponse(Version);
 	}
 
-	public class SaslAuthenticateRequest : Message
+	public class SaslAuthenticateRequest : Message, IRespond<SaslAuthenticateResponse>
 	{
 		public SaslAuthenticateRequest(int version)
 		{
@@ -23288,6 +23408,9 @@ namespace Kafka.Protocol
 			AuthBytes = authBytes;
 			return this;
 		}
+
+		public SaslAuthenticateResponse Respond()
+			=> new SaslAuthenticateResponse(Version);
 	}
 
 	public class SaslAuthenticateResponse : Message
@@ -23451,7 +23574,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class SaslHandshakeRequest : Message
+	public class SaslHandshakeRequest : Message, IRespond<SaslHandshakeResponse>
 	{
 		public SaslHandshakeRequest(int version)
 		{
@@ -23508,6 +23631,9 @@ namespace Kafka.Protocol
 			Mechanism = mechanism;
 			return this;
 		}
+
+		public SaslHandshakeResponse Respond()
+			=> new SaslHandshakeResponse(Version);
 	}
 
 	public class SaslHandshakeResponse : Message
@@ -23601,7 +23727,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class StopReplicaRequest : Message
+	public class StopReplicaRequest : Message, IRespond<StopReplicaResponse>
 	{
 		public StopReplicaRequest(int version)
 		{
@@ -23995,6 +24121,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public StopReplicaResponse Respond()
+			=> new StopReplicaResponse(Version);
 	}
 
 	public class StopReplicaResponse : Message
@@ -24211,7 +24340,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class SyncGroupRequest : Message
+	public class SyncGroupRequest : Message, IRespond<SyncGroupResponse>
 	{
 		public SyncGroupRequest(int version)
 		{
@@ -24493,6 +24622,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public SyncGroupResponse Respond()
+			=> new SyncGroupResponse(Version);
 	}
 
 	public class SyncGroupResponse : Message
@@ -24613,7 +24745,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class TxnOffsetCommitRequest : Message
+	public class TxnOffsetCommitRequest : Message, IRespond<TxnOffsetCommitResponse>
 	{
 		public TxnOffsetCommitRequest(int version)
 		{
@@ -25045,6 +25177,9 @@ namespace Kafka.Protocol
 				}
 			}
 		}
+
+		public TxnOffsetCommitResponse Respond()
+			=> new TxnOffsetCommitResponse(Version);
 	}
 
 	public class TxnOffsetCommitResponse : Message
@@ -25320,7 +25455,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class UpdateMetadataRequest : Message
+	public class UpdateMetadataRequest : Message, IRespond<UpdateMetadataResponse>
 	{
 		public UpdateMetadataRequest(int version)
 		{
@@ -26266,6 +26401,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public UpdateMetadataResponse Respond()
+			=> new UpdateMetadataResponse(Version);
 	}
 
 	public class UpdateMetadataResponse : Message
@@ -26327,7 +26465,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class WriteTxnMarkersRequest : Message
+	public class WriteTxnMarkersRequest : Message, IRespond<WriteTxnMarkersResponse>
 	{
 		public WriteTxnMarkersRequest(int version)
 		{
@@ -26662,6 +26800,9 @@ namespace Kafka.Protocol
 				return this;
 			}
 		}
+
+		public WriteTxnMarkersResponse Respond()
+			=> new WriteTxnMarkersResponse(Version);
 	}
 
 	public class WriteTxnMarkersResponse : Message
