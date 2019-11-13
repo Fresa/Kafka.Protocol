@@ -29,7 +29,7 @@ namespace Kafka.TestServer.Tests
                 //_testServer.Send()
             }
 
-            [Fact]
+            [Fact(Skip = "Not implemented")]
             public void The_subscription_should_receive_the_message()
             {
 
