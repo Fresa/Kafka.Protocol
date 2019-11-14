@@ -7,7 +7,7 @@ namespace Kafka.Protocol.Generator.Helpers.BackusNaurForm.Parsers
     internal class ExpressionParser
     {
         private readonly IBuffer<char> _buffer;
-        private const string End = "\n";
+        private static readonly string[] End = { " \r\n", "\r\n", " \n", "\n" };
         private static readonly string Or = SymbolSequence.Operators.Or.SymbolReference.Name;
         private static readonly string And = SymbolSequence.Operators.And.SymbolReference.Name;
         private static readonly string StartOfGroup = SymbolSequence.Operators.StartOfGroup.SymbolReference.Name;
@@ -100,7 +100,7 @@ namespace Kafka.Protocol.Generator.Helpers.BackusNaurForm.Parsers
                     }
 
                     PushOperator(@operator);
-                    continue;                   
+                    continue;
                 }
 
                 _operandBuffer += _buffer.Current;
@@ -121,12 +121,7 @@ namespace Kafka.Protocol.Generator.Helpers.BackusNaurForm.Parsers
                 return false;
             }
 
-            if (_buffer.CurrentSequenceIs(End))
-            {
-                return false;
-            }
-
-            if (_buffer.CurrentSequenceIs($" {End}"))
+            if (_buffer.CurrentSequenceIsAny(End))
             {
                 return false;
             }
@@ -243,7 +238,7 @@ namespace Kafka.Protocol.Generator.Helpers.BackusNaurForm.Parsers
             var symbolName = symbolSequence;
 
             HandleInconsistentArraySpecification(ref symbolName);
-            
+
             return SymbolSequence.Operand(symbolName);
         }
 

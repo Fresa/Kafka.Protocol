@@ -1,10 +1,17 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace Kafka.Protocol.Generator.Helpers.Extensions
 {
     internal static class BufferExtensions
     {
+        internal static bool CurrentSequenceIsAny(this IBuffer<char> buffer, string[] comparers)
+        {
+            return comparers.Any(buffer.CurrentSequenceIs);
+        }
+
         internal static bool CurrentSequenceIs(this IBuffer<char> buffer, string comparer)
         {
             var currentSequence = "";
@@ -46,7 +53,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
         {
             var rows = string
                 .Concat(buffer.Items)
-                .Split('\n');
+                .Split(new[]{ "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             var position = buffer.Position;
 
