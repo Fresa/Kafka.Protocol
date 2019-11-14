@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TextTemplating;
 
-namespace Kafka.Protocol.Generator.Helpers.Extensions
+namespace Kafka.Protocol.Generator.Transformation
 {
     public static class TextTransformationExtensions
     {

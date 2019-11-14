@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Kafka.Protocol.Generator;
 
 namespace Kafka.Protocol.MessageDefinitionsDownloader
 {
