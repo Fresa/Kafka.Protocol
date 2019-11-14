@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: 0.0.{build}
 skip_tags: true
 image: Visual Studio 2019
 configuration: Release
@@ -16,13 +16,11 @@ environment:
     secure: V8i7UZRY6IQFpngUi2sgnunCFZKvE4al96flaBKyWqXyRLmTabX0/1Z0Tpl8BWKr
   nuget_api_key:
     secure: G3elGsHVT/nrtJRt9NrbfR7ti1D+fplulUUZWDK3lzjsqbrX1Tvn6Lr8HV38D3VI
-nuget:
-  account_feed: true
-  disable_publish_on_pr: true
 before_build:
-- cmd: nuget restore
-build:
-  publish_nuget: true
-  verbosity: minimal
+- cmd: dotnet restore
+build_script:
+- dotnet build -c %CONFIGURATION%
+test_script:
+- dotnet test -c %CONFIGURATION%
 before_package:
 - ps: "git fetch --tags\n$tags = git tag -l v*\nif ($tags)\n{\n    $releaseNotes = git log \"$(git describe --tags --match v* --abbrev=0)..$($env:APPVEYOR_REPO_COMMIT)\" --pretty=format:\"-%s\" --no-merges\n} \nelse\n{\n    $releaseNotes = git log $($env:APPVEYOR_REPO_COMMIT) --pretty=format:\"-%s\" --no-merges\n}\n\n$releaseNotesAsString = if ($releaseNotes -eq $null) { \"\" } else { [string]::join(\"`n\", $releaseNotes) }\n\nWrite-Host \"Release notes: '$($releaseNotesAsString)'\"\n\n$path = \"$env:APPVEYOR_PROJECT_NAME/$env:APPVEYOR_PROJECT_NAME.csproj\"\n[xml]$xml = Get-Content -Path $path\n$xml.GetElementsByTagName(\"PackageReleaseNotes\").set_InnerXML(\"$releaseNotesAsString\")\nSet-Content $path -Value $xml.InnerXml -Force"
