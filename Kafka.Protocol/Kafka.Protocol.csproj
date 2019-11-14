@@ -5,10 +5,17 @@
     <Nullable>enable</Nullable>
     <WarningsAsErrors>CS8600;CS8601;CS8603;CS8614;CS8618;CS8625</WarningsAsErrors>
     <PackageReleaseNotes></PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.9.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19554-01">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.IO.Pipelines" Version="4.5.3" />
   </ItemGroup>
 
