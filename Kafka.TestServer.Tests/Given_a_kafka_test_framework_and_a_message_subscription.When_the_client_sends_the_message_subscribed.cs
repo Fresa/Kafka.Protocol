@@ -13,7 +13,6 @@ namespace Kafka.TestServer.Tests
 
             protected override void Given()
             {
-                _testServer = new KafkaTestFramework();
                 _testServer.On<ApiVersionsRequest, ApiVersionsResponse>(
                     request => request.Respond()
                         .WithThrottleTimeMs(Int32.From(100))
