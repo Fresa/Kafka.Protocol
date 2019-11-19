@@ -21,7 +21,7 @@ namespace Kafka.TestServer
             await _clients.SendAsync(new InMemoryNetworkClient(pipe));
         }
 
-        public async Task<ISendingNetworkClient> CreateClientAsync(
+        public async Task<INetworkClient> CreateClientAsync(
             CancellationToken cancellationToken = default)
         {
             var client = new InMemoryNetworkClient(new Pipe());
