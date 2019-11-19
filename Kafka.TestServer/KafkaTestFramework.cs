@@ -10,11 +10,15 @@ namespace Kafka.TestServer
 {
     public abstract class KafkaTestFramework : IAsyncDisposable
     {
+        private readonly INetworkServer _networkServer;
+
         private readonly CancellationTokenSource _cancellationTokenSource = 
             new CancellationTokenSource();
-        private readonly List<INetworkClient> _clients = 
-            new List<INetworkClient>();
         private readonly List<Task> _backgroundTasks = new List<Task>();
+        
+        private const int Stopped = 0;
+        private const int Started = 1;
+        private int _status = Stopped;
 
         public static InMemoryKafkaTestFramework InMemory()
         {
@@ -36,6 +40,17 @@ namespace Kafka.TestServer
 
         internal KafkaTestFramework(INetworkServer networkServer)
         {
+            _networkServer = networkServer;
+        }
+
+        public IAsyncDisposable Start()
+        {
+            var previousStatus = Interlocked.Exchange(ref _status, Started);
+            if (previousStatus == Started)
+            {
+                return this;
+            }
+
             var task = Task.Run(
                 async () =>
                 {
@@ -43,9 +58,8 @@ namespace Kafka.TestServer
                     {
                         try
                         {
-                            var client = await networkServer.WaitForConnectedClientAsync(_cancellationTokenSource.Token);
-                            _clients.Add(client);
-
+                            var client = await _networkServer.WaitForConnectedClientAsync(_cancellationTokenSource.Token);
+                            ReceiveMessagesFor(client);
                         }
                         catch when (_cancellationTokenSource.IsCancellationRequested)
                         {
@@ -54,6 +68,7 @@ namespace Kafka.TestServer
                     }
                 });
             _backgroundTasks.Add(task);
+            return this;
         }
 
         private void ReceiveMessagesFor(INetworkClient networkClient)

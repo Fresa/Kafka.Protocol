@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 
 namespace Kafka.TestServer
 {
-    public interface INetworkClient : ISendingNetworkClient
+    public interface ISendingNetworkClient : IAsyncDisposable
     {
-        ValueTask<int> ReceiveAsync(
-            Memory<byte> buffer,
+        ValueTask<int> SendAsync(
+            ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken = default);
     }
 }
