@@ -8,12 +8,7 @@ namespace Kafka.TestServer
 {
     internal sealed class InMemoryNetworkClient : INetworkClient
     {
-        private readonly Pipe _pipe;
-
-        public InMemoryNetworkClient(Pipe pipe)
-        {
-            _pipe = pipe;
-        }
+        private readonly Pipe _pipe = new Pipe();
 
         public async ValueTask DisposeAsync()
         {
@@ -22,14 +17,18 @@ namespace Kafka.TestServer
 
         public async ValueTask<int> SendAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
         {
-            await _pipe.Writer.WriteAsync(buffer, cancellationToken);
-            _pipe.Writer.Advance(buffer.Length);
+            await _pipe.Writer
+                .WriteAsync(buffer, cancellationToken)
+                .ConfigureAwait(false);
             return buffer.Length;
         }
 
         public async ValueTask<int> ReceiveAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
         {
-            var result = await _pipe.Reader.ReadAsync(cancellationToken);
+            var result = await _pipe.Reader
+                .ReadAsync(cancellationToken)
+                .ConfigureAwait(false);
+
             var length = result.Buffer.Length > buffer.Length ?
                 buffer.Length :
                 (int)result.Buffer.Length;

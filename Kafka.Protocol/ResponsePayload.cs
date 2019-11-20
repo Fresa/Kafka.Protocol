@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
-    public sealed class ResponsePayload
+    public sealed class ResponsePayload : IPayload
     {
         public RequestPayload RequestPayload { get; }
         public ResponseHeader Header { get; }
@@ -19,7 +19,7 @@ namespace Kafka.Protocol
             Message = message;
         }
 
-        public async Task WriteToAsync(
+        public async ValueTask WriteToAsync(
             IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
@@ -46,4 +46,6 @@ namespace Kafka.Protocol
             return new ResponsePayload(requestPayload, header, message);
         }
     }
+
+    public interface IPayload : ISerialize { }
 }

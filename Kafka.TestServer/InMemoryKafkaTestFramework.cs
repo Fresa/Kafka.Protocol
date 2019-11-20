@@ -1,5 +1,4 @@
-﻿using System.IO.Pipelines;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
@@ -16,17 +15,17 @@ namespace Kafka.TestServer
             _clients = clients;
         }
 
-        public async ValueTask SendAsync(Pipe pipe)
-        {
-            await _clients.SendAsync(new InMemoryNetworkClient(pipe));
-        }
-
-        public async Task<INetworkClient> CreateClientAsync(
+        public async Task<IRequestClient> CreateRequestClientAsync(
             CancellationToken cancellationToken = default)
         {
-            var client = new InMemoryNetworkClient(new Pipe());
-            await _clients.SendAsync(client, cancellationToken);
-            return client;
+            var first = new InMemoryNetworkClient();
+            var second = new InMemoryNetworkClient();
+            var requestClient = new CrossWiredMemoryNetworkClient(first, second);
+            var responseClient = new CrossWiredMemoryNetworkClient(second, first);
+            await _clients
+                .SendAsync(requestClient, cancellationToken)
+                .ConfigureAwait(false);
+            return RequestClient.Start(responseClient);
         }
     }
 }

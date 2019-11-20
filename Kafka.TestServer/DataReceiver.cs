@@ -25,8 +25,9 @@ namespace Kafka.TestServer
                 {
                     var memory = writer.GetMemory(MinimumBufferSize);
                     var bytesRead = await _networkClient.ReceiveAsync(
-                        memory,
-                        cancellationToken);
+                            memory,
+                            cancellationToken)
+                        .ConfigureAwait(false);
 
                     if (bytesRead == 0)
                     {
@@ -36,7 +37,9 @@ namespace Kafka.TestServer
                     Debug.WriteLine($"Wrote {bytesRead} bytes");
                     writer.Advance(bytesRead);
 
-                    result = await writer.FlushAsync(cancellationToken);
+                    result = await writer
+                        .FlushAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 } while (result.IsCanceled == false &&
                          result.IsCompleted == false);
             }

@@ -12,10 +12,10 @@ namespace Kafka.TestServer
     {
         private readonly INetworkServer _networkServer;
 
-        private readonly CancellationTokenSource _cancellationTokenSource = 
+        private readonly CancellationTokenSource _cancellationTokenSource =
             new CancellationTokenSource();
         private readonly List<Task> _backgroundTasks = new List<Task>();
-        
+
         private const int Stopped = 0;
         private const int Started = 1;
         private int _status = Stopped;
@@ -58,7 +58,9 @@ namespace Kafka.TestServer
                     {
                         try
                         {
-                            var client = await _networkServer.WaitForConnectedClientAsync(_cancellationTokenSource.Token);
+                            var client = await _networkServer
+                                .WaitForConnectedClientAsync(_cancellationTokenSource.Token)
+                                .ConfigureAwait(false);
                             ReceiveMessagesFor(client);
                         }
                         catch when (_cancellationTokenSource.IsCancellationRequested)
@@ -76,22 +78,27 @@ namespace Kafka.TestServer
             var task = Task.Run(
                 async () =>
                 {
-                    await using var client = Client.Start(networkClient);
+                    var client = ResponseClient.Start(networkClient);
+                    await using var _ = client.ConfigureAwait(false);
                     while (_cancellationTokenSource.IsCancellationRequested == false)
                     {
                         try
                         {
-                            var payload = await client.ReadAsync(_cancellationTokenSource.Token);
+                            var payload = await client
+                                .ReadAsync(_cancellationTokenSource.Token)
+                                .ConfigureAwait(false);
                             if (_subscriptions.TryGetValue(payload.Message.GetType(), out var subscription))
                             {
                                 var response = subscription(payload.Message);
-                                await client.SendAsync(
-                                    new ResponsePayload(
-                                        payload,
-                                        new ResponseHeader(0)
-                                            .WithCorrelationId(payload.Header.CorrelationId),
-                                        response),
-                                    _cancellationTokenSource.Token);
+                                await client
+                                    .SendAsync(
+                                        new ResponsePayload(
+                                            payload,
+                                            new ResponseHeader(0)
+                                                .WithCorrelationId(payload.Header.CorrelationId),
+                                            response),
+                                        _cancellationTokenSource.Token)
+                                    .ConfigureAwait(false);
                             }
                         }
                         catch when (_cancellationTokenSource.IsCancellationRequested)
@@ -99,6 +106,7 @@ namespace Kafka.TestServer
                             return;
                         }
                     }
+
                 });
             _backgroundTasks.Add(task);
         }

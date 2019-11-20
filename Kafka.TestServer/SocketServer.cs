@@ -49,9 +49,11 @@ namespace Kafka.TestServer
                     {
                         try
                         {
-                            var clientSocket = await _clientAcceptingSocket.AcceptAsync()
+                            var clientSocket = await _clientAcceptingSocket
+                                .AcceptAsync()
                                 .ConfigureAwait(false);
-                            await _waitingClients.SendAsync(
+                            await _waitingClients
+                                .SendAsync(
                                     new SocketNetworkClient(clientSocket), 
                                     _cancellationSource.Token)
                                 .ConfigureAwait(false);
@@ -89,16 +91,19 @@ namespace Kafka.TestServer
                 _clientAcceptingSocket.Shutdown(SocketShutdown.Both);
                 _clientAcceptingSocket.Close();
             }
-            catch { }
+            catch { } // Ignore unhandled exceptions during shutdown 
             finally
             {
                 _clientAcceptingSocket.Dispose();
             }
 
-            await _acceptingClientsBackgroundTask;
+            await _acceptingClientsBackgroundTask
+                .ConfigureAwait(false);
             while (_clients.TryDequeue(out var client))
             {
-                await client.DisposeAsync();
+                await client
+                    .DisposeAsync()
+                    .ConfigureAwait(false);
             }
         }
     }

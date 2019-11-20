@@ -30,7 +30,20 @@ namespace Kafka.TestServer.Tests
             {
                 await using (_testServer.Start())
                 {
-                    await using var client = await _testServer.CreateClientAsync();
+                    var client = await _testServer
+                        .CreateRequestClientAsync()
+                        .ConfigureAwait(false);
+                    await using var _ = client
+                        .ConfigureAwait(false);
+                    var requestPayload = new RequestPayload(
+                        new RequestHeader(0).WithCorrelationId(Int32.From(12)),
+                        new ApiVersionsRequest(0));
+                    await client
+                        .SendAsync(requestPayload)
+                        .ConfigureAwait(false);
+                    await client
+                        .ReadAsync(requestPayload)
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -42,7 +55,9 @@ namespace Kafka.TestServer.Tests
 
             protected override async Task DisposeAsync(bool disposing)
             {
-                await _testServer.DisposeAsync();
+                await _testServer
+                    .DisposeAsync()
+                    .ConfigureAwait(false);
             }
         }
     }

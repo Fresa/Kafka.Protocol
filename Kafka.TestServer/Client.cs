@@ -8,54 +8,50 @@ using Int32 = Kafka.Protocol.Int32;
 
 namespace Kafka.TestServer
 {
-    internal class Client : IAsyncDisposable
+    internal abstract class Client<TSendPayload> : IAsyncDisposable
+        where TSendPayload : IPayload
     {
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
-
         private readonly Pipe _pipe = new Pipe();
-
-        private readonly IKafkaReader _reader;
         private readonly INetworkClient _networkClient;
         private Task _sendAndReceiveBackgroundTask = default!;
 
-        private Client(INetworkClient networkClient)
+        protected Client(INetworkClient networkClient)
         {
             _networkClient = networkClient;
-            _reader = new KafkaReader(_pipe.Reader);
+            Reader = new KafkaReader(_pipe.Reader);
         }
 
-        internal async Task<RequestPayload> ReadAsync(
+        protected IKafkaReader Reader { get; }
+
+        public async ValueTask SendAsync(
+            TSendPayload payload,
             CancellationToken cancellationToken = default)
         {
-            return await RequestPayload.ReadFrom(0, _reader, cancellationToken);
-        }
-
-        internal async Task SendAsync(
-            ResponsePayload payload,
-            CancellationToken cancellationToken)
-        {
-            await using var buffer = new MemoryStream();
-            await using var writer = new KafkaWriter(buffer);
+            var buffer = new MemoryStream();
+            await using var _ = buffer.ConfigureAwait(false);
+            var writer = new KafkaWriter(buffer);
+            await using (writer.ConfigureAwait(false))
             {
-                await payload.WriteToAsync(writer, cancellationToken);
-                await buffer.FlushAsync(cancellationToken);
+                await payload
+                    .WriteToAsync(writer, cancellationToken)
+                    .ConfigureAwait(false);
+                await buffer
+                    .FlushAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 buffer.Position = 0;
-                await writer.WriteInt32Async(Int32.From((int)buffer.Length), cancellationToken);
+                await writer
+                    .WriteInt32Async(Int32.From((int)buffer.Length), cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             await _networkClient.SendAsync(
-                buffer.GetBuffer(),
-                cancellationToken);
+                    buffer.GetBuffer(),
+                    cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        internal static Client Start(INetworkClient networkClient)
-        {
-            var client = new Client(networkClient);
-            client.StartReceiving();
-            return client;
-        }
-
-        private void StartReceiving()
+        protected void StartReceiving()
         {
             _sendAndReceiveBackgroundTask = Task.Run(
                 async () =>
@@ -67,7 +63,8 @@ namespace Kafka.TestServer
                         while (cancellationToken.IsCancellationRequested == false)
                         {
                             await dataReceiver
-                                .ReceiveAsync(_pipe.Writer, cancellationToken);
+                                .ReceiveAsync(_pipe.Writer, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                     }
                     catch when (_cancellationSource.IsCancellationRequested)
@@ -81,7 +78,8 @@ namespace Kafka.TestServer
         {
             _cancellationSource.Cancel();
 
-            await _sendAndReceiveBackgroundTask;
+            await _sendAndReceiveBackgroundTask
+                .ConfigureAwait(false);
         }
     }
 }

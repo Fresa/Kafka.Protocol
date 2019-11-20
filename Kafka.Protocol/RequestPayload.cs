@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
-    public sealed class RequestPayload
+    public sealed class RequestPayload : IPayload
     {
         public RequestHeader Header { get; }
         public Message Message { get; }
@@ -16,7 +16,7 @@ namespace Kafka.Protocol
             Message = message;
         }
 
-        internal async ValueTask WriteToAsync(
+        public async ValueTask WriteToAsync(
             IKafkaWriter kafkaWriter,
             CancellationToken cancellationToken = default)
         {
@@ -24,7 +24,7 @@ namespace Kafka.Protocol
             await Message.WriteToAsync(kafkaWriter, cancellationToken);
         }
 
-        public static async ValueTask<RequestPayload> ReadFrom(
+        public static async ValueTask<RequestPayload> ReadFromAsync(
             int version,
             IKafkaReader kafkaReader,
             CancellationToken cancellationToken = default)

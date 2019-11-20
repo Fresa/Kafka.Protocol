@@ -14,22 +14,26 @@ namespace Kafka.TestServer
             _socket = socket;
         }
 
-        public async ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()
         {
             _socket.Shutdown(SocketShutdown.Both);
             _socket.Close();
             _socket.Dispose();
-            await new ValueTask();
+            return new ValueTask();
         }
 
         public async ValueTask<int> SendAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
         {
-            return await _socket.SendAsync(buffer, SocketFlags.None, cancellationToken);
+            return await _socket
+                .SendAsync(buffer, SocketFlags.None, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public async ValueTask<int> ReceiveAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
         {
-            return await _socket.ReceiveAsync(buffer, SocketFlags.None, cancellationToken);
+            return await _socket
+                .ReceiveAsync(buffer, SocketFlags.None, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

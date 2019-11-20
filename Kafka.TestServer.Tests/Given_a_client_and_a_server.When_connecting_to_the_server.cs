@@ -32,7 +32,7 @@ namespace Kafka.TestServer.Tests
                     server.Port);
                 var connectedClient = await connectedClientTask;
 
-                await using var client = Client.Start(connectedClient);
+                await using var client = ResponseClient.Start(connectedClient);
                 var message = await client.ReadAsync();
                 //await clientTask;
             }
