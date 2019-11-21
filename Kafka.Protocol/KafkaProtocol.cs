@@ -1961,7 +1961,7 @@ namespace Kafka.Protocol
 	public static class Messages 
 	{
 		public static async ValueTask<Message> CreateMessageFromReaderAsync(
-			int apiKey, 
+			Int16 apiKey, 
 			int version, 
 			IKafkaReader reader, 
 			CancellationToken cancellationToken = default)
@@ -2442,7 +2442,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 25;
+		public static readonly Int16 ApiKey = Int16.From(25);
 
 		public override int Version { get; }
 
@@ -2600,7 +2600,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 25;
+		public static readonly Int16 ApiKey = Int16.From(25);
 
 		public override int Version { get; }
 
@@ -2691,7 +2691,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 24;
+		public static readonly Int16 ApiKey = Int16.From(24);
 
 		public override int Version { get; }
 
@@ -2940,7 +2940,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 24;
+		public static readonly Int16 ApiKey = Int16.From(24);
 
 		public override int Version { get; }
 
@@ -3213,7 +3213,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 33;
+		public static readonly Int16 ApiKey = Int16.From(33);
 
 		public override int Version { get; }
 
@@ -3527,7 +3527,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 33;
+		public static readonly Int16 ApiKey = Int16.From(33);
 
 		public override int Version { get; }
 
@@ -3779,7 +3779,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 34;
+		public static readonly Int16 ApiKey = Int16.From(34);
 
 		public override int Version { get; }
 
@@ -4023,7 +4023,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 34;
+		public static readonly Int16 ApiKey = Int16.From(34);
 
 		public override int Version { get; }
 
@@ -4296,7 +4296,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 18;
+		public static readonly Int16 ApiKey = Int16.From(18);
 
 		public override int Version { get; }
 
@@ -4328,7 +4328,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 18;
+		public static readonly Int16 ApiKey = Int16.From(18);
 
 		public override int Version { get; }
 
@@ -4569,7 +4569,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 7;
+		public static readonly Int16 ApiKey = Int16.From(7);
 
 		public override int Version { get; }
 
@@ -4658,7 +4658,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 7;
+		public static readonly Int16 ApiKey = Int16.From(7);
 
 		public override int Version { get; }
 
@@ -4840,7 +4840,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 30;
+		public static readonly Int16 ApiKey = Int16.From(30);
 
 		public override int Version { get; }
 
@@ -5153,7 +5153,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 30;
+		public static readonly Int16 ApiKey = Int16.From(30);
 
 		public override int Version { get; }
 
@@ -5341,7 +5341,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 38;
+		public static readonly Int16 ApiKey = Int16.From(38);
 
 		public override int Version { get; }
 
@@ -5526,7 +5526,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 38;
+		public static readonly Int16 ApiKey = Int16.From(38);
 
 		public override int Version { get; }
 
@@ -5841,7 +5841,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 37;
+		public static readonly Int16 ApiKey = Int16.From(37);
 
 		public override int Version { get; }
 
@@ -6155,7 +6155,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 37;
+		public static readonly Int16 ApiKey = Int16.From(37);
 
 		public override int Version { get; }
 
@@ -6375,7 +6375,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 19;
+		public static readonly Int16 ApiKey = Int16.From(19);
 
 		public override int Version { get; }
 
@@ -6876,7 +6876,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 19;
+		public static readonly Int16 ApiKey = Int16.From(19);
 
 		public override int Version { get; }
 
@@ -7086,7 +7086,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 31;
+		public static readonly Int16 ApiKey = Int16.From(31);
 
 		public override int Version { get; }
 
@@ -7417,7 +7417,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 31;
+		public static readonly Int16 ApiKey = Int16.From(31);
 
 		public override int Version { get; }
 
@@ -7958,7 +7958,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 42;
+		public static readonly Int16 ApiKey = Int16.From(42);
 
 		public override int Version { get; }
 
@@ -8020,7 +8020,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 42;
+		public static readonly Int16 ApiKey = Int16.From(42);
 
 		public override int Version { get; }
 
@@ -8202,7 +8202,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 21;
+		public static readonly Int16 ApiKey = Int16.From(21);
 
 		public override int Version { get; }
 
@@ -8478,7 +8478,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 21;
+		public static readonly Int16 ApiKey = Int16.From(21);
 
 		public override int Version { get; }
 
@@ -8783,7 +8783,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 20;
+		public static readonly Int16 ApiKey = Int16.From(20);
 
 		public override int Version { get; }
 
@@ -8877,7 +8877,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 20;
+		public static readonly Int16 ApiKey = Int16.From(20);
 
 		public override int Version { get; }
 
@@ -9059,7 +9059,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 29;
+		public static readonly Int16 ApiKey = Int16.From(29);
 
 		public override int Version { get; }
 
@@ -9331,7 +9331,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 29;
+		public static readonly Int16 ApiKey = Int16.From(29);
 
 		public override int Version { get; }
 
@@ -9802,7 +9802,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 32;
+		public static readonly Int16 ApiKey = Int16.From(32);
 
 		public override int Version { get; }
 
@@ -10025,7 +10025,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 32;
+		public static readonly Int16 ApiKey = Int16.From(32);
 
 		public override int Version { get; }
 
@@ -10685,7 +10685,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 41;
+		public static readonly Int16 ApiKey = Int16.From(41);
 
 		public override int Version { get; }
 
@@ -10844,7 +10844,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 41;
+		public static readonly Int16 ApiKey = Int16.From(41);
 
 		public override int Version { get; }
 
@@ -11341,7 +11341,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 15;
+		public static readonly Int16 ApiKey = Int16.From(15);
 
 		public override int Version { get; }
 
@@ -11435,7 +11435,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 15;
+		public static readonly Int16 ApiKey = Int16.From(15);
 
 		public override int Version { get; }
 
@@ -11997,7 +11997,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 35;
+		public static readonly Int16 ApiKey = Int16.From(35);
 
 		public override int Version { get; }
 
@@ -12156,7 +12156,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 35;
+		public static readonly Int16 ApiKey = Int16.From(35);
 
 		public override int Version { get; }
 
@@ -12613,7 +12613,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 43;
+		public static readonly Int16 ApiKey = Int16.From(43);
 
 		public override int Version { get; }
 
@@ -12836,7 +12836,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 43;
+		public static readonly Int16 ApiKey = Int16.From(43);
 
 		public override int Version { get; }
 
@@ -13179,7 +13179,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 26;
+		public static readonly Int16 ApiKey = Int16.From(26);
 
 		public override int Version { get; }
 
@@ -13337,7 +13337,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 26;
+		public static readonly Int16 ApiKey = Int16.From(26);
 
 		public override int Version { get; }
 
@@ -13428,7 +13428,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 40;
+		public static readonly Int16 ApiKey = Int16.From(40);
 
 		public override int Version { get; }
 
@@ -13522,7 +13522,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 40;
+		public static readonly Int16 ApiKey = Int16.From(40);
 
 		public override int Version { get; }
 
@@ -13645,7 +13645,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 1;
+		public static readonly Int16 ApiKey = Int16.From(1);
 
 		public override int Version { get; }
 
@@ -14349,7 +14349,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 1;
+		public static readonly Int16 ApiKey = Int16.From(1);
 
 		public override int Version { get; }
 
@@ -14961,7 +14961,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 10;
+		public static readonly Int16 ApiKey = Int16.From(10);
 
 		public override int Version { get; }
 
@@ -15055,7 +15055,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 10;
+		public static readonly Int16 ApiKey = Int16.From(10);
 
 		public override int Version { get; }
 
@@ -15270,7 +15270,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 12;
+		public static readonly Int16 ApiKey = Int16.From(12);
 
 		public override int Version { get; }
 
@@ -15434,7 +15434,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 12;
+		public static readonly Int16 ApiKey = Int16.From(12);
 
 		public override int Version { get; }
 
@@ -15520,7 +15520,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 44;
+		public static readonly Int16 ApiKey = Int16.From(44);
 
 		public override int Version { get; }
 
@@ -15866,7 +15866,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 44;
+		public static readonly Int16 ApiKey = Int16.From(44);
 
 		public override int Version { get; }
 
@@ -16118,7 +16118,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 22;
+		public static readonly Int16 ApiKey = Int16.From(22);
 
 		public override int Version { get; }
 
@@ -16218,7 +16218,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 22;
+		public static readonly Int16 ApiKey = Int16.From(22);
 
 		public override int Version { get; }
 
@@ -16368,7 +16368,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 11;
+		public static readonly Int16 ApiKey = Int16.From(11);
 
 		public override int Version { get; }
 
@@ -16714,7 +16714,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 11;
+		public static readonly Int16 ApiKey = Int16.From(11);
 
 		public override int Version { get; }
 
@@ -17086,7 +17086,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 4;
+		public static readonly Int16 ApiKey = Int16.From(4);
 
 		public override int Version { get; }
 
@@ -17825,7 +17825,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 4;
+		public static readonly Int16 ApiKey = Int16.From(4);
 
 		public override int Version { get; }
 
@@ -18039,7 +18039,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 13;
+		public static readonly Int16 ApiKey = Int16.From(13);
 
 		public override int Version { get; }
 
@@ -18133,7 +18133,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 13;
+		public static readonly Int16 ApiKey = Int16.From(13);
 
 		public override int Version { get; }
 
@@ -18219,7 +18219,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 16;
+		public static readonly Int16 ApiKey = Int16.From(16);
 
 		public override int Version { get; }
 
@@ -18251,7 +18251,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 16;
+		public static readonly Int16 ApiKey = Int16.From(16);
 
 		public override int Version { get; }
 
@@ -18460,7 +18460,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 2;
+		public static readonly Int16 ApiKey = Int16.From(2);
 
 		public override int Version { get; }
 
@@ -18832,7 +18832,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 2;
+		public static readonly Int16 ApiKey = Int16.From(2);
 
 		public override int Version { get; }
 
@@ -19225,7 +19225,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 3;
+		public static readonly Int16 ApiKey = Int16.From(3);
 
 		public override int Version { get; }
 
@@ -19448,7 +19448,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 3;
+		public static readonly Int16 ApiKey = Int16.From(3);
 
 		public override int Version { get; }
 
@@ -20242,7 +20242,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 8;
+		public static readonly Int16 ApiKey = Int16.From(8);
 
 		public override int Version { get; }
 
@@ -20734,7 +20734,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 8;
+		public static readonly Int16 ApiKey = Int16.From(8);
 
 		public override int Version { get; }
 
@@ -21002,7 +21002,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 9;
+		public static readonly Int16 ApiKey = Int16.From(9);
 
 		public override int Version { get; }
 
@@ -21193,7 +21193,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 9;
+		public static readonly Int16 ApiKey = Int16.From(9);
 
 		public override int Version { get; }
 
@@ -21595,7 +21595,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 23;
+		public static readonly Int16 ApiKey = Int16.From(23);
 
 		public override int Version { get; }
 
@@ -21893,7 +21893,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 23;
+		public static readonly Int16 ApiKey = Int16.From(23);
 
 		public override int Version { get; }
 
@@ -22220,7 +22220,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 0;
+		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public override int Version { get; }
 
@@ -22572,7 +22572,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 0;
+		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public override int Version { get; }
 
@@ -22926,7 +22926,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 39;
+		public static readonly Int16 ApiKey = Int16.From(39);
 
 		public override int Version { get; }
 
@@ -23020,7 +23020,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 39;
+		public static readonly Int16 ApiKey = Int16.From(39);
 
 		public override int Version { get; }
 
@@ -23143,7 +23143,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 0;
+		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public override int Version { get; }
 
@@ -23301,7 +23301,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 0;
+		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public override int Version { get; }
 
@@ -23363,7 +23363,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 36;
+		public static readonly Int16 ApiKey = Int16.From(36);
 
 		public override int Version { get; }
 
@@ -23425,7 +23425,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 36;
+		public static readonly Int16 ApiKey = Int16.From(36);
 
 		public override int Version { get; }
 
@@ -23586,7 +23586,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 17;
+		public static readonly Int16 ApiKey = Int16.From(17);
 
 		public override int Version { get; }
 
@@ -23648,7 +23648,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 17;
+		public static readonly Int16 ApiKey = Int16.From(17);
 
 		public override int Version { get; }
 
@@ -23739,7 +23739,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 5;
+		public static readonly Int16 ApiKey = Int16.From(5);
 
 		public override int Version { get; }
 
@@ -24138,7 +24138,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 5;
+		public static readonly Int16 ApiKey = Int16.From(5);
 
 		public override int Version { get; }
 
@@ -24352,7 +24352,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 14;
+		public static readonly Int16 ApiKey = Int16.From(14);
 
 		public override int Version { get; }
 
@@ -24639,7 +24639,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 14;
+		public static readonly Int16 ApiKey = Int16.From(14);
 
 		public override int Version { get; }
 
@@ -24757,7 +24757,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 28;
+		public static readonly Int16 ApiKey = Int16.From(28);
 
 		public override int Version { get; }
 
@@ -25194,7 +25194,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 28;
+		public static readonly Int16 ApiKey = Int16.From(28);
 
 		public override int Version { get; }
 
@@ -25467,7 +25467,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 6;
+		public static readonly Int16 ApiKey = Int16.From(6);
 
 		public override int Version { get; }
 
@@ -26418,7 +26418,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 6;
+		public static readonly Int16 ApiKey = Int16.From(6);
 
 		public override int Version { get; }
 
@@ -26477,7 +26477,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 27;
+		public static readonly Int16 ApiKey = Int16.From(27);
 
 		public override int Version { get; }
 
@@ -26817,7 +26817,7 @@ namespace Kafka.Protocol
 			Version = version;
 		}
 
-		public const int ApiKey = 27;
+		public static readonly Int16 ApiKey = Int16.From(27);
 
 		public override int Version { get; }
 

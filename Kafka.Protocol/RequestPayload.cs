@@ -36,7 +36,7 @@ namespace Kafka.Protocol
                 cancellationToken);
 
             var message = await Messages.CreateMessageFromReaderAsync(
-                header.RequestApiKey.Value,
+                header.RequestApiKey,
                 header.RequestApiVersion.Value,
                 kafkaReader,
                 cancellationToken);

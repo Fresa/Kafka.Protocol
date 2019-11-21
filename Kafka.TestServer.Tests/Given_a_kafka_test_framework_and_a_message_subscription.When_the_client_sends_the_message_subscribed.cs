@@ -39,7 +39,7 @@ namespace Kafka.TestServer.Tests
                     
                     var requestPayload = new RequestPayload(
                         new RequestHeader(0)
-                            .WithRequestApiKey(Int16.From(ApiVersionsRequest.ApiKey))
+                            .WithRequestApiKey(ApiVersionsRequest.ApiKey)
                             .WithRequestApiVersion(Int16.From(0))
                             .WithCorrelationId(Int32.From(12)),
                         new ApiVersionsRequest(0));

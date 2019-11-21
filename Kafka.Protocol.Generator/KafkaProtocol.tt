@@ -174,7 +174,7 @@ namespace Kafka.Protocol<# Block(() =>
 	#>public static class Messages <# Block(() =>
     {
 		#>public static async ValueTask<Message> CreateMessageFromReaderAsync(<# _();
-		#>	int apiKey, <# _();
+		#>	Int16 apiKey, <# _();
 		#>	int version, <# _();
 		#>	IKafkaReader reader, <# _();
 		#>	CancellationToken cancellationToken = default)<# Block(() =>
@@ -208,7 +208,7 @@ namespace Kafka.Protocol<# Block(() =>
 				 #>Version = version;<#
 			}); _(2);
 
-			#>public const int ApiKey = <#= messageDefinition.ApiKey #>;<# _(2);
+			#>public static readonly Int16 ApiKey = Int16.From(<#= messageDefinition.ApiKey #>);<# _(2);
 
 			#>public override int Version { get; }<# _(2);
 
