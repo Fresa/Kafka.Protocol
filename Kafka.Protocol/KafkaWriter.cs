@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -159,6 +160,11 @@ namespace Kafka.Protocol
 
         private async ValueTask WriteAsync(byte[] value, CancellationToken cancellationToken = default)
         {
+            if (value.Any() == false)
+            {
+                return;
+            }
+
             await _buffer.WriteAsync(value.AsMemory(), cancellationToken);
         }
 
