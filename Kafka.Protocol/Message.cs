@@ -5,7 +5,7 @@ namespace Kafka.Protocol
 {
     public abstract class Message : ISerialize
     {
-        public abstract int Version { get; }
+        public abstract Int16 Version { get; }
 
         public abstract ValueTask WriteToAsync(
             IKafkaWriter writer, 

@@ -8,6 +8,9 @@ namespace Kafka.Protocol
         public RequestHeader Header { get; }
         public Message Message { get; }
 
+        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(0);
+
         public RequestPayload(
             RequestHeader header,
             Message message)
@@ -25,7 +28,7 @@ namespace Kafka.Protocol
         }
 
         public static async ValueTask<RequestPayload> ReadFromAsync(
-            int version,
+            Int16 version,
             IKafkaReader kafkaReader,
             CancellationToken cancellationToken = default)
         {
@@ -37,7 +40,7 @@ namespace Kafka.Protocol
 
             var message = await Messages.CreateMessageFromReaderAsync(
                 header.RequestApiKey,
-                header.RequestApiVersion.Value,
+                header.RequestApiVersion,
                 kafkaReader,
                 cancellationToken);
 

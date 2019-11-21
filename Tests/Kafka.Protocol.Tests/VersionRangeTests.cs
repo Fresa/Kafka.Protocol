@@ -14,9 +14,9 @@ namespace Kafka.Protocol.Tests
             [InlineData(2, true)]
             [InlineData(5, true)]
             [InlineData(7, false)]
-            public void It_should_report_if_the_value_is_within_range(int value, bool isInRange)
+            public void It_should_report_if_the_value_is_within_range(short value, bool isInRange)
             {
-                value.InRange(0, 5).Should().Be(isInRange);
+                Int16.From(value).InRange(0, 5).Should().Be(isInRange);
             }
         }
     }

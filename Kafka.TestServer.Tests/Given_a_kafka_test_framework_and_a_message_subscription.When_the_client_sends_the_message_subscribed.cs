@@ -19,9 +19,9 @@ namespace Kafka.TestServer.Tests
                         .WithThrottleTimeMs(Int32.From(100))
                         .WithApiKeysCollection(
                             key => key
-                                .WithIndex(Int16.From(1))
-                                .WithMaxVersion(Int16.From(10))
-                                .WithMinVersion(Int16.From(0))));
+                                .WithIndex(FetchRequest.ApiKey)
+                                .WithMinVersion(FetchRequest.MinVersion)
+                                .WithMaxVersion(FetchRequest.MaxVersion)));
 
                 return Task.CompletedTask;
             }
@@ -38,11 +38,11 @@ namespace Kafka.TestServer.Tests
                         .ConfigureAwait(false);
                     
                     var requestPayload = new RequestPayload(
-                        new RequestHeader(0)
+                        new RequestHeader(RequestHeader.MaxVersion)
                             .WithRequestApiKey(ApiVersionsRequest.ApiKey)
-                            .WithRequestApiVersion(Int16.From(0))
+                            .WithRequestApiVersion(ApiVersionsRequest.MaxVersion)
                             .WithCorrelationId(Int32.From(12)),
-                        new ApiVersionsRequest(0));
+                        new ApiVersionsRequest(ApiVersionsRequest.MaxVersion));
 
                     await client
                         .SendAsync(requestPayload)

@@ -1962,7 +1962,7 @@ namespace Kafka.Protocol
 	{
 		public static async ValueTask<Message> CreateMessageFromReaderAsync(
 			Int16 apiKey, 
-			int version, 
+			Int16 version, 
 			IKafkaReader reader, 
 			CancellationToken cancellationToken = default)
 		{
@@ -2432,9 +2432,9 @@ namespace Kafka.Protocol
 
 	public class AddOffsetsToTxnRequest : Message, IRespond<AddOffsetsToTxnResponse>
 	{
-		public AddOffsetsToTxnRequest(int version)
+		public AddOffsetsToTxnRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"AddOffsetsToTxnRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -2444,9 +2444,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(25);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<AddOffsetsToTxnRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<AddOffsetsToTxnRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AddOffsetsToTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -2590,9 +2593,9 @@ namespace Kafka.Protocol
 
 	public class AddOffsetsToTxnResponse : Message
 	{
-		public AddOffsetsToTxnResponse(int version)
+		public AddOffsetsToTxnResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"AddOffsetsToTxnResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -2602,9 +2605,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(25);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<AddOffsetsToTxnResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<AddOffsetsToTxnResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AddOffsetsToTxnResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -2681,9 +2687,9 @@ namespace Kafka.Protocol
 
 	public class AddPartitionsToTxnRequest : Message, IRespond<AddPartitionsToTxnResponse>
 	{
-		public AddPartitionsToTxnRequest(int version)
+		public AddPartitionsToTxnRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"AddPartitionsToTxnRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -2693,9 +2699,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(24);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<AddPartitionsToTxnRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<AddPartitionsToTxnRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AddPartitionsToTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -2842,14 +2851,14 @@ namespace Kafka.Protocol
 
 		public class AddPartitionsToTxnTopic : ISerialize
 		{
-			internal AddPartitionsToTxnTopic(int version)
+			internal AddPartitionsToTxnTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<AddPartitionsToTxnTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AddPartitionsToTxnTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AddPartitionsToTxnTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -2930,9 +2939,9 @@ namespace Kafka.Protocol
 
 	public class AddPartitionsToTxnResponse : Message
 	{
-		public AddPartitionsToTxnResponse(int version)
+		public AddPartitionsToTxnResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"AddPartitionsToTxnResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -2942,9 +2951,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(24);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<AddPartitionsToTxnResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<AddPartitionsToTxnResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AddPartitionsToTxnResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -3027,14 +3039,14 @@ namespace Kafka.Protocol
 
 		public class AddPartitionsToTxnTopicResult : ISerialize
 		{
-			internal AddPartitionsToTxnTopicResult(int version)
+			internal AddPartitionsToTxnTopicResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<AddPartitionsToTxnTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AddPartitionsToTxnTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AddPartitionsToTxnTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -3117,14 +3129,14 @@ namespace Kafka.Protocol
 
 			public class AddPartitionsToTxnPartitionResult : ISerialize
 			{
-				internal AddPartitionsToTxnPartitionResult(int version)
+				internal AddPartitionsToTxnPartitionResult(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<AddPartitionsToTxnPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AddPartitionsToTxnPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AddPartitionsToTxnPartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -3203,9 +3215,9 @@ namespace Kafka.Protocol
 
 	public class AlterConfigsRequest : Message, IRespond<AlterConfigsResponse>
 	{
-		public AlterConfigsRequest(int version)
+		public AlterConfigsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"AlterConfigsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -3215,9 +3227,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(33);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<AlterConfigsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<AlterConfigsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AlterConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -3276,14 +3291,14 @@ namespace Kafka.Protocol
 
 		public class AlterConfigsResource : ISerialize
 		{
-			internal AlterConfigsResource(int version)
+			internal AlterConfigsResource(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<AlterConfigsResource> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterConfigsResource(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -3398,14 +3413,14 @@ namespace Kafka.Protocol
 
 			public class AlterableConfig : ISerialize
 			{
-				internal AlterableConfig(int version)
+				internal AlterableConfig(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<AlterableConfig> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AlterableConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -3517,9 +3532,9 @@ namespace Kafka.Protocol
 
 	public class AlterConfigsResponse : Message
 	{
-		public AlterConfigsResponse(int version)
+		public AlterConfigsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"AlterConfigsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -3529,9 +3544,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(33);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<AlterConfigsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<AlterConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AlterConfigsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -3614,14 +3632,14 @@ namespace Kafka.Protocol
 
 		public class AlterConfigsResourceResponse : ISerialize
 		{
-			internal AlterConfigsResourceResponse(int version)
+			internal AlterConfigsResourceResponse(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterConfigsResourceResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -3769,9 +3787,9 @@ namespace Kafka.Protocol
 
 	public class AlterReplicaLogDirsRequest : Message, IRespond<AlterReplicaLogDirsResponse>
 	{
-		public AlterReplicaLogDirsRequest(int version)
+		public AlterReplicaLogDirsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"AlterReplicaLogDirsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -3781,9 +3799,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(34);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<AlterReplicaLogDirsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<AlterReplicaLogDirsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AlterReplicaLogDirsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -3834,14 +3855,14 @@ namespace Kafka.Protocol
 
 		public class AlterReplicaLogDir : ISerialize
 		{
-			internal AlterReplicaLogDir(int version)
+			internal AlterReplicaLogDir(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<AlterReplicaLogDir> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterReplicaLogDir> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterReplicaLogDir(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -3924,14 +3945,14 @@ namespace Kafka.Protocol
 
 			public class AlterReplicaLogDirTopic : ISerialize
 			{
-				internal AlterReplicaLogDirTopic(int version)
+				internal AlterReplicaLogDirTopic(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<AlterReplicaLogDirTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AlterReplicaLogDirTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AlterReplicaLogDirTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -4013,9 +4034,9 @@ namespace Kafka.Protocol
 
 	public class AlterReplicaLogDirsResponse : Message
 	{
-		public AlterReplicaLogDirsResponse(int version)
+		public AlterReplicaLogDirsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"AlterReplicaLogDirsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -4025,9 +4046,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(34);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<AlterReplicaLogDirsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<AlterReplicaLogDirsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AlterReplicaLogDirsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -4110,14 +4134,14 @@ namespace Kafka.Protocol
 
 		public class AlterReplicaLogDirTopicResult : ISerialize
 		{
-			internal AlterReplicaLogDirTopicResult(int version)
+			internal AlterReplicaLogDirTopicResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<AlterReplicaLogDirTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterReplicaLogDirTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterReplicaLogDirTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -4200,14 +4224,14 @@ namespace Kafka.Protocol
 
 			public class AlterReplicaLogDirPartitionResult : ISerialize
 			{
-				internal AlterReplicaLogDirPartitionResult(int version)
+				internal AlterReplicaLogDirPartitionResult(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<AlterReplicaLogDirPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AlterReplicaLogDirPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AlterReplicaLogDirPartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -4286,9 +4310,9 @@ namespace Kafka.Protocol
 
 	public class ApiVersionsRequest : Message, IRespond<ApiVersionsResponse>
 	{
-		public ApiVersionsRequest(int version)
+		public ApiVersionsRequest(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ApiVersionsRequest does not support version {version}. Valid versions are: 0-2");
 			}
@@ -4298,9 +4322,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(18);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<ApiVersionsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ApiVersionsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ApiVersionsRequest(version);
 
@@ -4318,9 +4345,9 @@ namespace Kafka.Protocol
 
 	public class ApiVersionsResponse : Message
 	{
-		public ApiVersionsResponse(int version)
+		public ApiVersionsResponse(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ApiVersionsResponse does not support version {version}. Valid versions are: 0-2");
 			}
@@ -4330,9 +4357,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(18);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<ApiVersionsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ApiVersionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ApiVersionsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -4423,14 +4453,14 @@ namespace Kafka.Protocol
 
 		public class ApiVersionsResponseKey : ISerialize
 		{
-			internal ApiVersionsResponseKey(int version)
+			internal ApiVersionsResponseKey(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<ApiVersionsResponseKey> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ApiVersionsResponseKey> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ApiVersionsResponseKey(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -4559,9 +4589,9 @@ namespace Kafka.Protocol
 
 	public class ControlledShutdownRequest : Message, IRespond<ControlledShutdownResponse>
 	{
-		public ControlledShutdownRequest(int version)
+		public ControlledShutdownRequest(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ControlledShutdownRequest does not support version {version}. Valid versions are: 0-2");
 			}
@@ -4571,9 +4601,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(7);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<ControlledShutdownRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ControlledShutdownRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ControlledShutdownRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -4648,9 +4681,9 @@ namespace Kafka.Protocol
 
 	public class ControlledShutdownResponse : Message
 	{
-		public ControlledShutdownResponse(int version)
+		public ControlledShutdownResponse(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ControlledShutdownResponse does not support version {version}. Valid versions are: 0-2");
 			}
@@ -4660,9 +4693,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(7);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<ControlledShutdownResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ControlledShutdownResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ControlledShutdownResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -4745,14 +4781,14 @@ namespace Kafka.Protocol
 
 		public class RemainingPartition : ISerialize
 		{
-			internal RemainingPartition(int version)
+			internal RemainingPartition(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<RemainingPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<RemainingPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new RemainingPartition(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -4830,9 +4866,9 @@ namespace Kafka.Protocol
 
 	public class CreateAclsRequest : Message, IRespond<CreateAclsResponse>
 	{
-		public CreateAclsRequest(int version)
+		public CreateAclsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"CreateAclsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -4842,9 +4878,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(30);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<CreateAclsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<CreateAclsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateAclsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -4895,14 +4934,14 @@ namespace Kafka.Protocol
 
 		public class CreatableAcl : ISerialize
 		{
-			internal CreatableAcl(int version)
+			internal CreatableAcl(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<CreatableAcl> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableAcl> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatableAcl(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -5143,9 +5182,9 @@ namespace Kafka.Protocol
 
 	public class CreateAclsResponse : Message
 	{
-		public CreateAclsResponse(int version)
+		public CreateAclsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"CreateAclsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -5155,9 +5194,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(30);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<CreateAclsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<CreateAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateAclsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -5240,14 +5282,14 @@ namespace Kafka.Protocol
 
 		public class CreatableAclResult : ISerialize
 		{
-			internal CreatableAclResult(int version)
+			internal CreatableAclResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<CreatableAclResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableAclResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatableAclResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -5331,9 +5373,9 @@ namespace Kafka.Protocol
 
 	public class CreateDelegationTokenRequest : Message, IRespond<CreateDelegationTokenResponse>
 	{
-		public CreateDelegationTokenRequest(int version)
+		public CreateDelegationTokenRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"CreateDelegationTokenRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -5343,9 +5385,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(38);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<CreateDelegationTokenRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<CreateDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -5404,14 +5449,14 @@ namespace Kafka.Protocol
 
 		public class CreatableRenewers : ISerialize
 		{
-			internal CreatableRenewers(int version)
+			internal CreatableRenewers(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<CreatableRenewers> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableRenewers> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatableRenewers(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -5516,9 +5561,9 @@ namespace Kafka.Protocol
 
 	public class CreateDelegationTokenResponse : Message
 	{
-		public CreateDelegationTokenResponse(int version)
+		public CreateDelegationTokenResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"CreateDelegationTokenResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -5528,9 +5573,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(38);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<CreateDelegationTokenResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<CreateDelegationTokenResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateDelegationTokenResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -5831,9 +5879,9 @@ namespace Kafka.Protocol
 
 	public class CreatePartitionsRequest : Message, IRespond<CreatePartitionsResponse>
 	{
-		public CreatePartitionsRequest(int version)
+		public CreatePartitionsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"CreatePartitionsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -5843,9 +5891,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(37);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<CreatePartitionsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<CreatePartitionsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreatePartitionsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -5912,14 +5963,14 @@ namespace Kafka.Protocol
 
 		public class CreatePartitionsTopic : ISerialize
 		{
-			internal CreatePartitionsTopic(int version)
+			internal CreatePartitionsTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<CreatePartitionsTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatePartitionsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatePartitionsTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -6040,14 +6091,14 @@ namespace Kafka.Protocol
 
 			public class CreatePartitionsAssignment : ISerialize
 			{
-				internal CreatePartitionsAssignment(int version)
+				internal CreatePartitionsAssignment(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<CreatePartitionsAssignment> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<CreatePartitionsAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new CreatePartitionsAssignment(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -6145,9 +6196,9 @@ namespace Kafka.Protocol
 
 	public class CreatePartitionsResponse : Message
 	{
-		public CreatePartitionsResponse(int version)
+		public CreatePartitionsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"CreatePartitionsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -6157,9 +6208,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(37);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<CreatePartitionsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<CreatePartitionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreatePartitionsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -6242,14 +6296,14 @@ namespace Kafka.Protocol
 
 		public class CreatePartitionsTopicResult : ISerialize
 		{
-			internal CreatePartitionsTopicResult(int version)
+			internal CreatePartitionsTopicResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<CreatePartitionsTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatePartitionsTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatePartitionsTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -6365,9 +6419,9 @@ namespace Kafka.Protocol
 
 	public class CreateTopicsRequest : Message, IRespond<CreateTopicsResponse>
 	{
-		public CreateTopicsRequest(int version)
+		public CreateTopicsRequest(Int16 version)
 		{
-			if (version.InRange(0, 4) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"CreateTopicsRequest does not support version {version}. Valid versions are: 0-4");
 			}
@@ -6377,9 +6431,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(19);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
-		public static async ValueTask<CreateTopicsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<CreateTopicsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateTopicsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -6446,14 +6503,14 @@ namespace Kafka.Protocol
 
 		public class CreatableTopic : ISerialize
 		{
-			internal CreatableTopic(int version)
+			internal CreatableTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<CreatableTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatableTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -6608,14 +6665,14 @@ namespace Kafka.Protocol
 
 			public class CreatableReplicaAssignment : ISerialize
 			{
-				internal CreatableReplicaAssignment(int version)
+				internal CreatableReplicaAssignment(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<CreatableReplicaAssignment> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<CreatableReplicaAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new CreatableReplicaAssignment(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -6723,14 +6780,14 @@ namespace Kafka.Protocol
 
 			public class CreateableTopicConfig : ISerialize
 			{
-				internal CreateableTopicConfig(int version)
+				internal CreateableTopicConfig(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<CreateableTopicConfig> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<CreateableTopicConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new CreateableTopicConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -6866,9 +6923,9 @@ namespace Kafka.Protocol
 
 	public class CreateTopicsResponse : Message
 	{
-		public CreateTopicsResponse(int version)
+		public CreateTopicsResponse(Int16 version)
 		{
-			if (version.InRange(0, 4) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"CreateTopicsResponse does not support version {version}. Valid versions are: 0-4");
 			}
@@ -6878,9 +6935,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(19);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
-		public static async ValueTask<CreateTopicsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<CreateTopicsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateTopicsResponse(version);
 			if (instance.Version.InRange(2, 2147483647)) 
@@ -6958,14 +7018,14 @@ namespace Kafka.Protocol
 
 		public class CreatableTopicResult : ISerialize
 		{
-			internal CreatableTopicResult(int version)
+			internal CreatableTopicResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<CreatableTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<CreatableTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatableTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -7076,9 +7136,9 @@ namespace Kafka.Protocol
 
 	public class DeleteAclsRequest : Message, IRespond<DeleteAclsResponse>
 	{
-		public DeleteAclsRequest(int version)
+		public DeleteAclsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DeleteAclsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -7088,9 +7148,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(31);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DeleteAclsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DeleteAclsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteAclsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -7141,14 +7204,14 @@ namespace Kafka.Protocol
 
 		public class DeleteAclsFilter : ISerialize
 		{
-			internal DeleteAclsFilter(int version)
+			internal DeleteAclsFilter(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DeleteAclsFilter> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeleteAclsFilter> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeleteAclsFilter(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -7407,9 +7470,9 @@ namespace Kafka.Protocol
 
 	public class DeleteAclsResponse : Message
 	{
-		public DeleteAclsResponse(int version)
+		public DeleteAclsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DeleteAclsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -7419,9 +7482,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(31);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DeleteAclsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DeleteAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteAclsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -7504,14 +7570,14 @@ namespace Kafka.Protocol
 
 		public class DeleteAclsFilterResult : ISerialize
 		{
-			internal DeleteAclsFilterResult(int version)
+			internal DeleteAclsFilterResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DeleteAclsFilterResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeleteAclsFilterResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeleteAclsFilterResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -7632,14 +7698,14 @@ namespace Kafka.Protocol
 
 			public class DeleteAclsMatchingAcl : ISerialize
 			{
-				internal DeleteAclsMatchingAcl(int version)
+				internal DeleteAclsMatchingAcl(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<DeleteAclsMatchingAcl> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DeleteAclsMatchingAcl> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DeleteAclsMatchingAcl(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -7948,9 +8014,9 @@ namespace Kafka.Protocol
 
 	public class DeleteGroupsRequest : Message, IRespond<DeleteGroupsResponse>
 	{
-		public DeleteGroupsRequest(int version)
+		public DeleteGroupsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DeleteGroupsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -7960,9 +8026,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(42);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DeleteGroupsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DeleteGroupsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteGroupsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -8010,9 +8079,9 @@ namespace Kafka.Protocol
 
 	public class DeleteGroupsResponse : Message
 	{
-		public DeleteGroupsResponse(int version)
+		public DeleteGroupsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DeleteGroupsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -8022,9 +8091,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(42);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DeleteGroupsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DeleteGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteGroupsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -8107,14 +8179,14 @@ namespace Kafka.Protocol
 
 		public class DeletableGroupResult : ISerialize
 		{
-			internal DeletableGroupResult(int version)
+			internal DeletableGroupResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DeletableGroupResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeletableGroupResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeletableGroupResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -8192,9 +8264,9 @@ namespace Kafka.Protocol
 
 	public class DeleteRecordsRequest : Message, IRespond<DeleteRecordsResponse>
 	{
-		public DeleteRecordsRequest(int version)
+		public DeleteRecordsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DeleteRecordsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -8204,9 +8276,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(21);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DeleteRecordsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DeleteRecordsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteRecordsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -8265,14 +8340,14 @@ namespace Kafka.Protocol
 
 		public class DeleteRecordsTopic : ISerialize
 		{
-			internal DeleteRecordsTopic(int version)
+			internal DeleteRecordsTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DeleteRecordsTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeleteRecordsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeleteRecordsTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -8355,14 +8430,14 @@ namespace Kafka.Protocol
 
 			public class DeleteRecordsPartition : ISerialize
 			{
-				internal DeleteRecordsPartition(int version)
+				internal DeleteRecordsPartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<DeleteRecordsPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DeleteRecordsPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DeleteRecordsPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -8468,9 +8543,9 @@ namespace Kafka.Protocol
 
 	public class DeleteRecordsResponse : Message
 	{
-		public DeleteRecordsResponse(int version)
+		public DeleteRecordsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DeleteRecordsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -8480,9 +8555,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(21);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DeleteRecordsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DeleteRecordsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteRecordsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -8565,14 +8643,14 @@ namespace Kafka.Protocol
 
 		public class DeleteRecordsTopicResult : ISerialize
 		{
-			internal DeleteRecordsTopicResult(int version)
+			internal DeleteRecordsTopicResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DeleteRecordsTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeleteRecordsTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeleteRecordsTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -8655,14 +8733,14 @@ namespace Kafka.Protocol
 
 			public class DeleteRecordsPartitionResult : ISerialize
 			{
-				internal DeleteRecordsPartitionResult(int version)
+				internal DeleteRecordsPartitionResult(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<DeleteRecordsPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DeleteRecordsPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DeleteRecordsPartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -8773,9 +8851,9 @@ namespace Kafka.Protocol
 
 	public class DeleteTopicsRequest : Message, IRespond<DeleteTopicsResponse>
 	{
-		public DeleteTopicsRequest(int version)
+		public DeleteTopicsRequest(Int16 version)
 		{
-			if (version.InRange(0, 3) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DeleteTopicsRequest does not support version {version}. Valid versions are: 0-3");
 			}
@@ -8785,9 +8863,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(20);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
-		public static async ValueTask<DeleteTopicsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DeleteTopicsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteTopicsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -8867,9 +8948,9 @@ namespace Kafka.Protocol
 
 	public class DeleteTopicsResponse : Message
 	{
-		public DeleteTopicsResponse(int version)
+		public DeleteTopicsResponse(Int16 version)
 		{
-			if (version.InRange(0, 3) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DeleteTopicsResponse does not support version {version}. Valid versions are: 0-3");
 			}
@@ -8879,9 +8960,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(20);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
-		public static async ValueTask<DeleteTopicsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DeleteTopicsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteTopicsResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -8964,14 +9048,14 @@ namespace Kafka.Protocol
 
 		public class DeletableTopicResult : ISerialize
 		{
-			internal DeletableTopicResult(int version)
+			internal DeletableTopicResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DeletableTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DeletableTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeletableTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -9049,9 +9133,9 @@ namespace Kafka.Protocol
 
 	public class DescribeAclsRequest : Message, IRespond<DescribeAclsResponse>
 	{
-		public DescribeAclsRequest(int version)
+		public DescribeAclsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeAclsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -9061,9 +9145,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(29);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DescribeAclsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeAclsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeAclsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -9321,9 +9408,9 @@ namespace Kafka.Protocol
 
 	public class DescribeAclsResponse : Message
 	{
-		public DescribeAclsResponse(int version)
+		public DescribeAclsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeAclsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -9333,9 +9420,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(29);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DescribeAclsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeAclsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -9488,14 +9578,14 @@ namespace Kafka.Protocol
 
 		public class DescribeAclsResource : ISerialize
 		{
-			internal DescribeAclsResource(int version)
+			internal DescribeAclsResource(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DescribeAclsResource> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeAclsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribeAclsResource(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -9642,14 +9732,14 @@ namespace Kafka.Protocol
 
 			public class AclDescription : ISerialize
 			{
-				internal AclDescription(int version)
+				internal AclDescription(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<AclDescription> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AclDescription> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AclDescription(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -9792,9 +9882,9 @@ namespace Kafka.Protocol
 
 	public class DescribeConfigsRequest : Message, IRespond<DescribeConfigsResponse>
 	{
-		public DescribeConfigsRequest(int version)
+		public DescribeConfigsRequest(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeConfigsRequest does not support version {version}. Valid versions are: 0-2");
 			}
@@ -9804,9 +9894,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(32);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<DescribeConfigsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeConfigsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -9865,14 +9958,14 @@ namespace Kafka.Protocol
 
 		public class DescribeConfigsResource : ISerialize
 		{
-			internal DescribeConfigsResource(int version)
+			internal DescribeConfigsResource(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DescribeConfigsResource> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribeConfigsResource(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -10015,9 +10108,9 @@ namespace Kafka.Protocol
 
 	public class DescribeConfigsResponse : Message
 	{
-		public DescribeConfigsResponse(int version)
+		public DescribeConfigsResponse(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeConfigsResponse does not support version {version}. Valid versions are: 0-2");
 			}
@@ -10027,9 +10120,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(32);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<DescribeConfigsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeConfigsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -10112,14 +10208,14 @@ namespace Kafka.Protocol
 
 		public class DescribeConfigsResult : ISerialize
 		{
-			internal DescribeConfigsResult(int version)
+			internal DescribeConfigsResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DescribeConfigsResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeConfigsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribeConfigsResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -10304,14 +10400,14 @@ namespace Kafka.Protocol
 
 			public class DescribeConfigsResourceResult : ISerialize
 			{
-				internal DescribeConfigsResourceResult(int version)
+				internal DescribeConfigsResourceResult(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<DescribeConfigsResourceResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DescribeConfigsResourceResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DescribeConfigsResourceResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -10550,14 +10646,14 @@ namespace Kafka.Protocol
 
 				public class DescribeConfigsSynonym : ISerialize
 				{
-					internal DescribeConfigsSynonym(int version)
+					internal DescribeConfigsSynonym(Int16 version)
 					{
 						Version = version;
 					}
 
-					internal int Version { get; }
+					internal Int16 Version { get; }
 
-					public static async ValueTask<DescribeConfigsSynonym> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+					public static async ValueTask<DescribeConfigsSynonym> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
 						var instance = new DescribeConfigsSynonym(version);
 						if (instance.Version.InRange(1, 2147483647)) 
@@ -10675,9 +10771,9 @@ namespace Kafka.Protocol
 
 	public class DescribeDelegationTokenRequest : Message, IRespond<DescribeDelegationTokenResponse>
 	{
-		public DescribeDelegationTokenRequest(int version)
+		public DescribeDelegationTokenRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeDelegationTokenRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -10687,9 +10783,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(41);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DescribeDelegationTokenRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -10746,14 +10845,14 @@ namespace Kafka.Protocol
 
 		public class DescribeDelegationTokenOwner : ISerialize
 		{
-			internal DescribeDelegationTokenOwner(int version)
+			internal DescribeDelegationTokenOwner(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DescribeDelegationTokenOwner> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeDelegationTokenOwner> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribeDelegationTokenOwner(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -10834,9 +10933,9 @@ namespace Kafka.Protocol
 
 	public class DescribeDelegationTokenResponse : Message
 	{
-		public DescribeDelegationTokenResponse(int version)
+		public DescribeDelegationTokenResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeDelegationTokenResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -10846,9 +10945,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(41);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DescribeDelegationTokenResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeDelegationTokenResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeDelegationTokenResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -10939,14 +11041,14 @@ namespace Kafka.Protocol
 
 		public class DescribedDelegationToken : ISerialize
 		{
-			internal DescribedDelegationToken(int version)
+			internal DescribedDelegationToken(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DescribedDelegationToken> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribedDelegationToken> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribedDelegationToken(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -11221,14 +11323,14 @@ namespace Kafka.Protocol
 
 			public class DescribedDelegationTokenRenewer : ISerialize
 			{
-				internal DescribedDelegationTokenRenewer(int version)
+				internal DescribedDelegationTokenRenewer(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<DescribedDelegationTokenRenewer> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DescribedDelegationTokenRenewer> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DescribedDelegationTokenRenewer(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -11331,9 +11433,9 @@ namespace Kafka.Protocol
 
 	public class DescribeGroupsRequest : Message, IRespond<DescribeGroupsResponse>
 	{
-		public DescribeGroupsRequest(int version)
+		public DescribeGroupsRequest(Int16 version)
 		{
-			if (version.InRange(0, 4) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeGroupsRequest does not support version {version}. Valid versions are: 0-4");
 			}
@@ -11343,9 +11445,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(15);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
-		public static async ValueTask<DescribeGroupsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeGroupsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeGroupsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -11425,9 +11530,9 @@ namespace Kafka.Protocol
 
 	public class DescribeGroupsResponse : Message
 	{
-		public DescribeGroupsResponse(int version)
+		public DescribeGroupsResponse(Int16 version)
 		{
-			if (version.InRange(0, 4) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeGroupsResponse does not support version {version}. Valid versions are: 0-4");
 			}
@@ -11437,9 +11542,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(15);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
-		public static async ValueTask<DescribeGroupsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeGroupsResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -11517,14 +11625,14 @@ namespace Kafka.Protocol
 
 		public class DescribedGroup : ISerialize
 		{
-			internal DescribedGroup(int version)
+			internal DescribedGroup(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DescribedGroup> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribedGroup> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribedGroup(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -11743,14 +11851,14 @@ namespace Kafka.Protocol
 
 			public class DescribedGroupMember : ISerialize
 			{
-				internal DescribedGroupMember(int version)
+				internal DescribedGroupMember(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<DescribedGroupMember> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DescribedGroupMember> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DescribedGroupMember(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -11987,9 +12095,9 @@ namespace Kafka.Protocol
 
 	public class DescribeLogDirsRequest : Message, IRespond<DescribeLogDirsResponse>
 	{
-		public DescribeLogDirsRequest(int version)
+		public DescribeLogDirsRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeLogDirsRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -11999,9 +12107,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(35);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DescribeLogDirsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeLogDirsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeLogDirsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -12058,14 +12169,14 @@ namespace Kafka.Protocol
 
 		public class DescribableLogDirTopic : ISerialize
 		{
-			internal DescribableLogDirTopic(int version)
+			internal DescribableLogDirTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DescribableLogDirTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribableLogDirTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribableLogDirTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -12146,9 +12257,9 @@ namespace Kafka.Protocol
 
 	public class DescribeLogDirsResponse : Message
 	{
-		public DescribeLogDirsResponse(int version)
+		public DescribeLogDirsResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"DescribeLogDirsResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -12158,9 +12269,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(35);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<DescribeLogDirsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<DescribeLogDirsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeLogDirsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -12243,14 +12357,14 @@ namespace Kafka.Protocol
 
 		public class DescribeLogDirsResult : ISerialize
 		{
-			internal DescribeLogDirsResult(int version)
+			internal DescribeLogDirsResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<DescribeLogDirsResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<DescribeLogDirsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribeLogDirsResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -12365,14 +12479,14 @@ namespace Kafka.Protocol
 
 			public class DescribeLogDirsTopic : ISerialize
 			{
-				internal DescribeLogDirsTopic(int version)
+				internal DescribeLogDirsTopic(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<DescribeLogDirsTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<DescribeLogDirsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DescribeLogDirsTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -12452,14 +12566,14 @@ namespace Kafka.Protocol
 
 				public class DescribeLogDirsPartition : ISerialize
 				{
-					internal DescribeLogDirsPartition(int version)
+					internal DescribeLogDirsPartition(Int16 version)
 					{
 						Version = version;
 					}
 
-					internal int Version { get; }
+					internal Int16 Version { get; }
 
-					public static async ValueTask<DescribeLogDirsPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+					public static async ValueTask<DescribeLogDirsPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
 						var instance = new DescribeLogDirsPartition(version);
 						if (instance.Version.InRange(0, 2147483647)) 
@@ -12603,9 +12717,9 @@ namespace Kafka.Protocol
 
 	public class ElectLeadersRequest : Message, IRespond<ElectLeadersResponse>
 	{
-		public ElectLeadersRequest(int version)
+		public ElectLeadersRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ElectLeadersRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -12615,9 +12729,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(43);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<ElectLeadersRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ElectLeadersRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ElectLeadersRequest(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -12714,14 +12831,14 @@ namespace Kafka.Protocol
 
 		public class TopicPartitions : ISerialize
 		{
-			internal TopicPartitions(int version)
+			internal TopicPartitions(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<TopicPartitions> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TopicPartitions> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicPartitions(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -12826,9 +12943,9 @@ namespace Kafka.Protocol
 
 	public class ElectLeadersResponse : Message
 	{
-		public ElectLeadersResponse(int version)
+		public ElectLeadersResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ElectLeadersResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -12838,9 +12955,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(43);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<ElectLeadersResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ElectLeadersResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ElectLeadersResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -12955,14 +13075,14 @@ namespace Kafka.Protocol
 
 		public class ReplicaElectionResult : ISerialize
 		{
-			internal ReplicaElectionResult(int version)
+			internal ReplicaElectionResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<ReplicaElectionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ReplicaElectionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ReplicaElectionResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -13045,14 +13165,14 @@ namespace Kafka.Protocol
 
 			public class PartitionResult : ISerialize
 			{
-				internal PartitionResult(int version)
+				internal PartitionResult(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<PartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new PartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -13169,9 +13289,9 @@ namespace Kafka.Protocol
 
 	public class EndTxnRequest : Message, IRespond<EndTxnResponse>
 	{
-		public EndTxnRequest(int version)
+		public EndTxnRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"EndTxnRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -13181,9 +13301,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(26);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<EndTxnRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<EndTxnRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new EndTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -13327,9 +13450,9 @@ namespace Kafka.Protocol
 
 	public class EndTxnResponse : Message
 	{
-		public EndTxnResponse(int version)
+		public EndTxnResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"EndTxnResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -13339,9 +13462,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(26);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<EndTxnResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<EndTxnResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new EndTxnResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -13418,9 +13544,9 @@ namespace Kafka.Protocol
 
 	public class ExpireDelegationTokenRequest : Message, IRespond<ExpireDelegationTokenResponse>
 	{
-		public ExpireDelegationTokenRequest(int version)
+		public ExpireDelegationTokenRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ExpireDelegationTokenRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -13430,9 +13556,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(40);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<ExpireDelegationTokenRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ExpireDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ExpireDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -13512,9 +13641,9 @@ namespace Kafka.Protocol
 
 	public class ExpireDelegationTokenResponse : Message
 	{
-		public ExpireDelegationTokenResponse(int version)
+		public ExpireDelegationTokenResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ExpireDelegationTokenResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -13524,9 +13653,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(40);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<ExpireDelegationTokenResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ExpireDelegationTokenResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ExpireDelegationTokenResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -13635,9 +13767,9 @@ namespace Kafka.Protocol
 
 	public class FetchRequest : Message, IRespond<FetchResponse>
 	{
-		public FetchRequest(int version)
+		public FetchRequest(Int16 version)
 		{
-			if (version.InRange(0, 11) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 0-11");
 			}
@@ -13647,9 +13779,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(1);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(11);
 
-		public static async ValueTask<FetchRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<FetchRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FetchRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -13935,14 +14070,14 @@ namespace Kafka.Protocol
 
 		public class FetchableTopic : ISerialize
 		{
-			internal FetchableTopic(int version)
+			internal FetchableTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<FetchableTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<FetchableTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new FetchableTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -14025,14 +14160,14 @@ namespace Kafka.Protocol
 
 			public class FetchPartition : ISerialize
 			{
-				internal FetchPartition(int version)
+				internal FetchPartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<FetchPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<FetchPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new FetchPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -14232,14 +14367,14 @@ namespace Kafka.Protocol
 
 		public class ForgottenTopic : ISerialize
 		{
-			internal ForgottenTopic(int version)
+			internal ForgottenTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<ForgottenTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ForgottenTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ForgottenTopic(version);
 				if (instance.Version.InRange(7, 2147483647)) 
@@ -14339,9 +14474,9 @@ namespace Kafka.Protocol
 
 	public class FetchResponse : Message
 	{
-		public FetchResponse(int version)
+		public FetchResponse(Int16 version)
 		{
-			if (version.InRange(0, 11) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 0-11");
 			}
@@ -14351,9 +14486,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(1);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(11);
 
-		public static async ValueTask<FetchResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<FetchResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FetchResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -14495,14 +14633,14 @@ namespace Kafka.Protocol
 
 		public class FetchableTopicResponse : ISerialize
 		{
-			internal FetchableTopicResponse(int version)
+			internal FetchableTopicResponse(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<FetchableTopicResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<FetchableTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new FetchableTopicResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -14585,14 +14723,14 @@ namespace Kafka.Protocol
 
 			public class FetchablePartitionResponse : ISerialize
 			{
-				internal FetchablePartitionResponse(int version)
+				internal FetchablePartitionResponse(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<FetchablePartitionResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<FetchablePartitionResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new FetchablePartitionResponse(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -14815,14 +14953,14 @@ namespace Kafka.Protocol
 
 				public class AbortedTransaction : ISerialize
 				{
-					internal AbortedTransaction(int version)
+					internal AbortedTransaction(Int16 version)
 					{
 						Version = version;
 					}
 
-					internal int Version { get; }
+					internal Int16 Version { get; }
 
-					public static async ValueTask<AbortedTransaction> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+					public static async ValueTask<AbortedTransaction> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
 						var instance = new AbortedTransaction(version);
 						if (instance.Version.InRange(4, 2147483647)) 
@@ -14951,9 +15089,9 @@ namespace Kafka.Protocol
 
 	public class FindCoordinatorRequest : Message, IRespond<FindCoordinatorResponse>
 	{
-		public FindCoordinatorRequest(int version)
+		public FindCoordinatorRequest(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"FindCoordinatorRequest does not support version {version}. Valid versions are: 0-2");
 			}
@@ -14963,9 +15101,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(10);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<FindCoordinatorRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<FindCoordinatorRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FindCoordinatorRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -15045,9 +15186,9 @@ namespace Kafka.Protocol
 
 	public class FindCoordinatorResponse : Message
 	{
-		public FindCoordinatorResponse(int version)
+		public FindCoordinatorResponse(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"FindCoordinatorResponse does not support version {version}. Valid versions are: 0-2");
 			}
@@ -15057,9 +15198,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(10);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<FindCoordinatorResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<FindCoordinatorResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FindCoordinatorResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -15260,9 +15404,9 @@ namespace Kafka.Protocol
 
 	public class HeartbeatRequest : Message, IRespond<HeartbeatResponse>
 	{
-		public HeartbeatRequest(int version)
+		public HeartbeatRequest(Int16 version)
 		{
-			if (version.InRange(0, 3) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"HeartbeatRequest does not support version {version}. Valid versions are: 0-3");
 			}
@@ -15272,9 +15416,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(12);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
-		public static async ValueTask<HeartbeatRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<HeartbeatRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new HeartbeatRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -15424,9 +15571,9 @@ namespace Kafka.Protocol
 
 	public class HeartbeatResponse : Message
 	{
-		public HeartbeatResponse(int version)
+		public HeartbeatResponse(Int16 version)
 		{
-			if (version.InRange(0, 3) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"HeartbeatResponse does not support version {version}. Valid versions are: 0-3");
 			}
@@ -15436,9 +15583,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(12);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
-		public static async ValueTask<HeartbeatResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<HeartbeatResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new HeartbeatResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -15510,9 +15660,9 @@ namespace Kafka.Protocol
 
 	public class IncrementalAlterConfigsRequest : Message, IRespond<IncrementalAlterConfigsResponse>
 	{
-		public IncrementalAlterConfigsRequest(int version)
+		public IncrementalAlterConfigsRequest(Int16 version)
 		{
-			if (version.InRange(0, 0) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"IncrementalAlterConfigsRequest does not support version {version}. Valid versions are: 0");
 			}
@@ -15522,9 +15672,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(44);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
 
-		public static async ValueTask<IncrementalAlterConfigsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<IncrementalAlterConfigsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new IncrementalAlterConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -15583,14 +15736,14 @@ namespace Kafka.Protocol
 
 		public class AlterConfigsResource : ISerialize
 		{
-			internal AlterConfigsResource(int version)
+			internal AlterConfigsResource(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<AlterConfigsResource> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterConfigsResource(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -15705,14 +15858,14 @@ namespace Kafka.Protocol
 
 			public class AlterableConfig : ISerialize
 			{
-				internal AlterableConfig(int version)
+				internal AlterableConfig(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<AlterableConfig> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AlterableConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -15856,9 +16009,9 @@ namespace Kafka.Protocol
 
 	public class IncrementalAlterConfigsResponse : Message
 	{
-		public IncrementalAlterConfigsResponse(int version)
+		public IncrementalAlterConfigsResponse(Int16 version)
 		{
-			if (version.InRange(0, 0) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"IncrementalAlterConfigsResponse does not support version {version}. Valid versions are: 0");
 			}
@@ -15868,9 +16021,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(44);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
 
-		public static async ValueTask<IncrementalAlterConfigsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<IncrementalAlterConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new IncrementalAlterConfigsResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -15953,14 +16109,14 @@ namespace Kafka.Protocol
 
 		public class AlterConfigsResourceResponse : ISerialize
 		{
-			internal AlterConfigsResourceResponse(int version)
+			internal AlterConfigsResourceResponse(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterConfigsResourceResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -16108,9 +16264,9 @@ namespace Kafka.Protocol
 
 	public class InitProducerIdRequest : Message, IRespond<InitProducerIdResponse>
 	{
-		public InitProducerIdRequest(int version)
+		public InitProducerIdRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"InitProducerIdRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -16120,9 +16276,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(22);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<InitProducerIdRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<InitProducerIdRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new InitProducerIdRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -16208,9 +16367,9 @@ namespace Kafka.Protocol
 
 	public class InitProducerIdResponse : Message
 	{
-		public InitProducerIdResponse(int version)
+		public InitProducerIdResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"InitProducerIdResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -16220,9 +16379,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(22);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<InitProducerIdResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<InitProducerIdResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new InitProducerIdResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -16358,9 +16520,9 @@ namespace Kafka.Protocol
 
 	public class JoinGroupRequest : Message, IRespond<JoinGroupResponse>
 	{
-		public JoinGroupRequest(int version)
+		public JoinGroupRequest(Int16 version)
 		{
-			if (version.InRange(0, 5) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"JoinGroupRequest does not support version {version}. Valid versions are: 0-5");
 			}
@@ -16370,9 +16532,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(11);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
-		public static async ValueTask<JoinGroupRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<JoinGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new JoinGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -16616,14 +16781,14 @@ namespace Kafka.Protocol
 
 		public class JoinGroupRequestProtocol : ISerialize
 		{
-			internal JoinGroupRequestProtocol(int version)
+			internal JoinGroupRequestProtocol(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<JoinGroupRequestProtocol> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<JoinGroupRequestProtocol> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new JoinGroupRequestProtocol(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -16704,9 +16869,9 @@ namespace Kafka.Protocol
 
 	public class JoinGroupResponse : Message
 	{
-		public JoinGroupResponse(int version)
+		public JoinGroupResponse(Int16 version)
 		{
-			if (version.InRange(0, 5) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"JoinGroupResponse does not support version {version}. Valid versions are: 0-5");
 			}
@@ -16716,9 +16881,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(11);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
-		public static async ValueTask<JoinGroupResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<JoinGroupResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new JoinGroupResponse(version);
 			if (instance.Version.InRange(2, 2147483647)) 
@@ -16953,14 +17121,14 @@ namespace Kafka.Protocol
 
 		public class JoinGroupResponseMember : ISerialize
 		{
-			internal JoinGroupResponseMember(int version)
+			internal JoinGroupResponseMember(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<JoinGroupResponseMember> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<JoinGroupResponseMember> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new JoinGroupResponseMember(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -17076,9 +17244,9 @@ namespace Kafka.Protocol
 
 	public class LeaderAndIsrRequest : Message, IRespond<LeaderAndIsrResponse>
 	{
-		public LeaderAndIsrRequest(int version)
+		public LeaderAndIsrRequest(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"LeaderAndIsrRequest does not support version {version}. Valid versions are: 0-2");
 			}
@@ -17088,9 +17256,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(4);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<LeaderAndIsrRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<LeaderAndIsrRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new LeaderAndIsrRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -17272,14 +17443,14 @@ namespace Kafka.Protocol
 
 		public class LeaderAndIsrRequestTopicState : ISerialize
 		{
-			internal LeaderAndIsrRequestTopicState(int version)
+			internal LeaderAndIsrRequestTopicState(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<LeaderAndIsrRequestTopicState> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<LeaderAndIsrRequestTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrRequestTopicState(version);
 				if (instance.Version.InRange(2, 2147483647)) 
@@ -17387,14 +17558,14 @@ namespace Kafka.Protocol
 
 		public class LeaderAndIsrLiveLeader : ISerialize
 		{
-			internal LeaderAndIsrLiveLeader(int version)
+			internal LeaderAndIsrLiveLeader(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<LeaderAndIsrLiveLeader> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<LeaderAndIsrLiveLeader> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrLiveLeader(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -17503,7 +17674,7 @@ namespace Kafka.Protocol
 
 		public class LeaderAndIsrRequestPartition : ISerialize
 		{
-			internal LeaderAndIsrRequestPartition(int version)
+			internal LeaderAndIsrRequestPartition(Int16 version)
 			{
 				if (version.InRange(0, 2147483647) == false) 
 				{
@@ -17513,9 +17684,9 @@ namespace Kafka.Protocol
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<LeaderAndIsrRequestPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<LeaderAndIsrRequestPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrRequestPartition(version);
 				if (instance.Version.InRange(0, 1)) 
@@ -17815,9 +17986,9 @@ namespace Kafka.Protocol
 
 	public class LeaderAndIsrResponse : Message
 	{
-		public LeaderAndIsrResponse(int version)
+		public LeaderAndIsrResponse(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"LeaderAndIsrResponse does not support version {version}. Valid versions are: 0-2");
 			}
@@ -17827,9 +17998,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(4);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<LeaderAndIsrResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<LeaderAndIsrResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new LeaderAndIsrResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -17912,14 +18086,14 @@ namespace Kafka.Protocol
 
 		public class LeaderAndIsrResponsePartition : ISerialize
 		{
-			internal LeaderAndIsrResponsePartition(int version)
+			internal LeaderAndIsrResponsePartition(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<LeaderAndIsrResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<LeaderAndIsrResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrResponsePartition(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -18029,9 +18203,9 @@ namespace Kafka.Protocol
 
 	public class LeaveGroupRequest : Message, IRespond<LeaveGroupResponse>
 	{
-		public LeaveGroupRequest(int version)
+		public LeaveGroupRequest(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"LeaveGroupRequest does not support version {version}. Valid versions are: 0-2");
 			}
@@ -18041,9 +18215,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(13);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<LeaveGroupRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<LeaveGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new LeaveGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -18123,9 +18300,9 @@ namespace Kafka.Protocol
 
 	public class LeaveGroupResponse : Message
 	{
-		public LeaveGroupResponse(int version)
+		public LeaveGroupResponse(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"LeaveGroupResponse does not support version {version}. Valid versions are: 0-2");
 			}
@@ -18135,9 +18312,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(13);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<LeaveGroupResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<LeaveGroupResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new LeaveGroupResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -18209,9 +18389,9 @@ namespace Kafka.Protocol
 
 	public class ListGroupsRequest : Message, IRespond<ListGroupsResponse>
 	{
-		public ListGroupsRequest(int version)
+		public ListGroupsRequest(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ListGroupsRequest does not support version {version}. Valid versions are: 0-2");
 			}
@@ -18221,9 +18401,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(16);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<ListGroupsRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ListGroupsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ListGroupsRequest(version);
 
@@ -18241,9 +18424,9 @@ namespace Kafka.Protocol
 
 	public class ListGroupsResponse : Message
 	{
-		public ListGroupsResponse(int version)
+		public ListGroupsResponse(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ListGroupsResponse does not support version {version}. Valid versions are: 0-2");
 			}
@@ -18253,9 +18436,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(16);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<ListGroupsResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ListGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ListGroupsResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -18365,14 +18551,14 @@ namespace Kafka.Protocol
 
 		public class ListedGroup : ISerialize
 		{
-			internal ListedGroup(int version)
+			internal ListedGroup(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<ListedGroup> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ListedGroup> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ListedGroup(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -18450,9 +18636,9 @@ namespace Kafka.Protocol
 
 	public class ListOffsetRequest : Message, IRespond<ListOffsetResponse>
 	{
-		public ListOffsetRequest(int version)
+		public ListOffsetRequest(Int16 version)
 		{
-			if (version.InRange(0, 5) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ListOffsetRequest does not support version {version}. Valid versions are: 0-5");
 			}
@@ -18462,9 +18648,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(2);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
-		public static async ValueTask<ListOffsetRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ListOffsetRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ListOffsetRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -18579,14 +18768,14 @@ namespace Kafka.Protocol
 
 		public class ListOffsetTopic : ISerialize
 		{
-			internal ListOffsetTopic(int version)
+			internal ListOffsetTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<ListOffsetTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ListOffsetTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ListOffsetTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -18669,14 +18858,14 @@ namespace Kafka.Protocol
 
 			public class ListOffsetPartition : ISerialize
 			{
-				internal ListOffsetPartition(int version)
+				internal ListOffsetPartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<ListOffsetPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<ListOffsetPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new ListOffsetPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -18822,9 +19011,9 @@ namespace Kafka.Protocol
 
 	public class ListOffsetResponse : Message
 	{
-		public ListOffsetResponse(int version)
+		public ListOffsetResponse(Int16 version)
 		{
-			if (version.InRange(0, 5) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ListOffsetResponse does not support version {version}. Valid versions are: 0-5");
 			}
@@ -18834,9 +19023,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(2);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
-		public static async ValueTask<ListOffsetResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ListOffsetResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ListOffsetResponse(version);
 			if (instance.Version.InRange(2, 2147483647)) 
@@ -18914,14 +19106,14 @@ namespace Kafka.Protocol
 
 		public class ListOffsetTopicResponse : ISerialize
 		{
-			internal ListOffsetTopicResponse(int version)
+			internal ListOffsetTopicResponse(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<ListOffsetTopicResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<ListOffsetTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ListOffsetTopicResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -19004,14 +19196,14 @@ namespace Kafka.Protocol
 
 			public class ListOffsetPartitionResponse : ISerialize
 			{
-				internal ListOffsetPartitionResponse(int version)
+				internal ListOffsetPartitionResponse(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<ListOffsetPartitionResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<ListOffsetPartitionResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new ListOffsetPartitionResponse(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -19215,9 +19407,9 @@ namespace Kafka.Protocol
 
 	public class MetadataRequest : Message, IRespond<MetadataResponse>
 	{
-		public MetadataRequest(int version)
+		public MetadataRequest(Int16 version)
 		{
-			if (version.InRange(0, 8) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"MetadataRequest does not support version {version}. Valid versions are: 0-8");
 			}
@@ -19227,9 +19419,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(3);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(8);
 
-		public static async ValueTask<MetadataRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<MetadataRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new MetadataRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -19310,14 +19505,14 @@ namespace Kafka.Protocol
 
 		public class MetadataRequestTopic : ISerialize
 		{
-			internal MetadataRequestTopic(int version)
+			internal MetadataRequestTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<MetadataRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<MetadataRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new MetadataRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -19438,9 +19633,9 @@ namespace Kafka.Protocol
 
 	public class MetadataResponse : Message
 	{
-		public MetadataResponse(int version)
+		public MetadataResponse(Int16 version)
 		{
-			if (version.InRange(0, 8) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"MetadataResponse does not support version {version}. Valid versions are: 0-8");
 			}
@@ -19450,9 +19645,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(3);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(8);
 
-		public static async ValueTask<MetadataResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<MetadataResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new MetadataResponse(version);
 			if (instance.Version.InRange(3, 2147483647)) 
@@ -19567,14 +19765,14 @@ namespace Kafka.Protocol
 
 		public class MetadataResponseBroker : ISerialize
 		{
-			internal MetadataResponseBroker(int version)
+			internal MetadataResponseBroker(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<MetadataResponseBroker> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<MetadataResponseBroker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new MetadataResponseBroker(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -19791,14 +19989,14 @@ namespace Kafka.Protocol
 
 		public class MetadataResponseTopic : ISerialize
 		{
-			internal MetadataResponseTopic(int version)
+			internal MetadataResponseTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<MetadataResponseTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<MetadataResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new MetadataResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -19948,14 +20146,14 @@ namespace Kafka.Protocol
 
 			public class MetadataResponsePartition : ISerialize
 			{
-				internal MetadataResponsePartition(int version)
+				internal MetadataResponsePartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<MetadataResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<MetadataResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new MetadataResponsePartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -20232,9 +20430,9 @@ namespace Kafka.Protocol
 
 	public class OffsetCommitRequest : Message, IRespond<OffsetCommitResponse>
 	{
-		public OffsetCommitRequest(int version)
+		public OffsetCommitRequest(Int16 version)
 		{
-			if (version.InRange(0, 7) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 0-7");
 			}
@@ -20244,9 +20442,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(8);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(7);
 
-		public static async ValueTask<OffsetCommitRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<OffsetCommitRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetCommitRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -20448,14 +20649,14 @@ namespace Kafka.Protocol
 
 		public class OffsetCommitRequestTopic : ISerialize
 		{
-			internal OffsetCommitRequestTopic(int version)
+			internal OffsetCommitRequestTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<OffsetCommitRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetCommitRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetCommitRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -20538,14 +20739,14 @@ namespace Kafka.Protocol
 
 			public class OffsetCommitRequestPartition : ISerialize
 			{
-				internal OffsetCommitRequestPartition(int version)
+				internal OffsetCommitRequestPartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<OffsetCommitRequestPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetCommitRequestPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OffsetCommitRequestPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -20724,9 +20925,9 @@ namespace Kafka.Protocol
 
 	public class OffsetCommitResponse : Message
 	{
-		public OffsetCommitResponse(int version)
+		public OffsetCommitResponse(Int16 version)
 		{
-			if (version.InRange(0, 7) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"OffsetCommitResponse does not support version {version}. Valid versions are: 0-7");
 			}
@@ -20736,9 +20937,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(8);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(7);
 
-		public static async ValueTask<OffsetCommitResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<OffsetCommitResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetCommitResponse(version);
 			if (instance.Version.InRange(3, 2147483647)) 
@@ -20816,14 +21020,14 @@ namespace Kafka.Protocol
 
 		public class OffsetCommitResponseTopic : ISerialize
 		{
-			internal OffsetCommitResponseTopic(int version)
+			internal OffsetCommitResponseTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<OffsetCommitResponseTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetCommitResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetCommitResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -20906,14 +21110,14 @@ namespace Kafka.Protocol
 
 			public class OffsetCommitResponsePartition : ISerialize
 			{
-				internal OffsetCommitResponsePartition(int version)
+				internal OffsetCommitResponsePartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<OffsetCommitResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetCommitResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OffsetCommitResponsePartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -20992,9 +21196,9 @@ namespace Kafka.Protocol
 
 	public class OffsetFetchRequest : Message, IRespond<OffsetFetchResponse>
 	{
-		public OffsetFetchRequest(int version)
+		public OffsetFetchRequest(Int16 version)
 		{
-			if (version.InRange(0, 5) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 0-5");
 			}
@@ -21004,9 +21208,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(9);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
-		public static async ValueTask<OffsetFetchRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<OffsetFetchRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetFetchRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -21095,14 +21302,14 @@ namespace Kafka.Protocol
 
 		public class OffsetFetchRequestTopic : ISerialize
 		{
-			internal OffsetFetchRequestTopic(int version)
+			internal OffsetFetchRequestTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<OffsetFetchRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetFetchRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetFetchRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -21183,9 +21390,9 @@ namespace Kafka.Protocol
 
 	public class OffsetFetchResponse : Message
 	{
-		public OffsetFetchResponse(int version)
+		public OffsetFetchResponse(Int16 version)
 		{
-			if (version.InRange(0, 5) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"OffsetFetchResponse does not support version {version}. Valid versions are: 0-5");
 			}
@@ -21195,9 +21402,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(9);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
-		public static async ValueTask<OffsetFetchResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<OffsetFetchResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetFetchResponse(version);
 			if (instance.Version.InRange(3, 2147483647)) 
@@ -21283,14 +21493,14 @@ namespace Kafka.Protocol
 
 		public class OffsetFetchResponseTopic : ISerialize
 		{
-			internal OffsetFetchResponseTopic(int version)
+			internal OffsetFetchResponseTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<OffsetFetchResponseTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetFetchResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetFetchResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -21373,14 +21583,14 @@ namespace Kafka.Protocol
 
 			public class OffsetFetchResponsePartition : ISerialize
 			{
-				internal OffsetFetchResponsePartition(int version)
+				internal OffsetFetchResponsePartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<OffsetFetchResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetFetchResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OffsetFetchResponsePartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -21585,9 +21795,9 @@ namespace Kafka.Protocol
 
 	public class OffsetForLeaderEpochRequest : Message, IRespond<OffsetForLeaderEpochResponse>
 	{
-		public OffsetForLeaderEpochRequest(int version)
+		public OffsetForLeaderEpochRequest(Int16 version)
 		{
-			if (version.InRange(0, 3) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"OffsetForLeaderEpochRequest does not support version {version}. Valid versions are: 0-3");
 			}
@@ -21597,9 +21807,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(23);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
-		public static async ValueTask<OffsetForLeaderEpochRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<OffsetForLeaderEpochRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetForLeaderEpochRequest(version);
 			if (instance.Version.InRange(3, 2147483647)) 
@@ -21677,14 +21890,14 @@ namespace Kafka.Protocol
 
 		public class OffsetForLeaderTopic : ISerialize
 		{
-			internal OffsetForLeaderTopic(int version)
+			internal OffsetForLeaderTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<OffsetForLeaderTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetForLeaderTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetForLeaderTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -21767,14 +21980,14 @@ namespace Kafka.Protocol
 
 			public class OffsetForLeaderPartition : ISerialize
 			{
-				internal OffsetForLeaderPartition(int version)
+				internal OffsetForLeaderPartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<OffsetForLeaderPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetForLeaderPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OffsetForLeaderPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -21883,9 +22096,9 @@ namespace Kafka.Protocol
 
 	public class OffsetForLeaderEpochResponse : Message
 	{
-		public OffsetForLeaderEpochResponse(int version)
+		public OffsetForLeaderEpochResponse(Int16 version)
 		{
-			if (version.InRange(0, 3) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"OffsetForLeaderEpochResponse does not support version {version}. Valid versions are: 0-3");
 			}
@@ -21895,9 +22108,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(23);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
-		public static async ValueTask<OffsetForLeaderEpochResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<OffsetForLeaderEpochResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetForLeaderEpochResponse(version);
 			if (instance.Version.InRange(2, 2147483647)) 
@@ -21975,14 +22191,14 @@ namespace Kafka.Protocol
 
 		public class OffsetForLeaderTopicResult : ISerialize
 		{
-			internal OffsetForLeaderTopicResult(int version)
+			internal OffsetForLeaderTopicResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<OffsetForLeaderTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<OffsetForLeaderTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetForLeaderTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -22065,14 +22281,14 @@ namespace Kafka.Protocol
 
 			public class OffsetForLeaderPartitionResult : ISerialize
 			{
-				internal OffsetForLeaderPartitionResult(int version)
+				internal OffsetForLeaderPartitionResult(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<OffsetForLeaderPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<OffsetForLeaderPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OffsetForLeaderPartitionResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -22210,9 +22426,9 @@ namespace Kafka.Protocol
 
 	public class ProduceRequest : Message, IRespond<ProduceResponse>
 	{
-		public ProduceRequest(int version)
+		public ProduceRequest(Int16 version)
 		{
-			if (version.InRange(0, 7) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ProduceRequest does not support version {version}. Valid versions are: 0-7");
 			}
@@ -22222,9 +22438,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(0);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(7);
 
-		public static async ValueTask<ProduceRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ProduceRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ProduceRequest(version);
 			if (instance.Version.InRange(3, 2147483647)) 
@@ -22377,14 +22596,14 @@ namespace Kafka.Protocol
 
 		public class TopicProduceData : ISerialize
 		{
-			internal TopicProduceData(int version)
+			internal TopicProduceData(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<TopicProduceData> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TopicProduceData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicProduceData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -22467,14 +22686,14 @@ namespace Kafka.Protocol
 
 			public class PartitionProduceData : ISerialize
 			{
-				internal PartitionProduceData(int version)
+				internal PartitionProduceData(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<PartitionProduceData> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<PartitionProduceData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new PartitionProduceData(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -22562,9 +22781,9 @@ namespace Kafka.Protocol
 
 	public class ProduceResponse : Message
 	{
-		public ProduceResponse(int version)
+		public ProduceResponse(Int16 version)
 		{
-			if (version.InRange(0, 7) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ProduceResponse does not support version {version}. Valid versions are: 0-7");
 			}
@@ -22574,9 +22793,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(0);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(7);
 
-		public static async ValueTask<ProduceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ProduceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ProduceResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -22635,14 +22857,14 @@ namespace Kafka.Protocol
 
 		public class TopicProduceResponse : ISerialize
 		{
-			internal TopicProduceResponse(int version)
+			internal TopicProduceResponse(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<TopicProduceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TopicProduceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicProduceResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -22725,14 +22947,14 @@ namespace Kafka.Protocol
 
 			public class PartitionProduceResponse : ISerialize
 			{
-				internal PartitionProduceResponse(int version)
+				internal PartitionProduceResponse(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<PartitionProduceResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<PartitionProduceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new PartitionProduceResponse(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -22916,9 +23138,9 @@ namespace Kafka.Protocol
 
 	public class RenewDelegationTokenRequest : Message, IRespond<RenewDelegationTokenResponse>
 	{
-		public RenewDelegationTokenRequest(int version)
+		public RenewDelegationTokenRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"RenewDelegationTokenRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -22928,9 +23150,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(39);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<RenewDelegationTokenRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<RenewDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new RenewDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23010,9 +23235,9 @@ namespace Kafka.Protocol
 
 	public class RenewDelegationTokenResponse : Message
 	{
-		public RenewDelegationTokenResponse(int version)
+		public RenewDelegationTokenResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"RenewDelegationTokenResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -23022,9 +23247,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(39);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<RenewDelegationTokenResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<RenewDelegationTokenResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new RenewDelegationTokenResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23133,9 +23361,9 @@ namespace Kafka.Protocol
 
 	public class RequestHeader : Message, IRespond<ProduceResponse>
 	{
-		public RequestHeader(int version)
+		public RequestHeader(Int16 version)
 		{
-			if (version.InRange(0, 0) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"RequestHeader does not support version {version}. Valid versions are: 0");
 			}
@@ -23145,9 +23373,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(0);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
 
-		public static async ValueTask<RequestHeader> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<RequestHeader> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new RequestHeader(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23291,9 +23522,9 @@ namespace Kafka.Protocol
 
 	public class ResponseHeader : Message, IRespond<ProduceResponse>
 	{
-		public ResponseHeader(int version)
+		public ResponseHeader(Int16 version)
 		{
-			if (version.InRange(0, 0) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"ResponseHeader does not support version {version}. Valid versions are: 0");
 			}
@@ -23303,9 +23534,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(0);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
 
-		public static async ValueTask<ResponseHeader> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<ResponseHeader> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ResponseHeader(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23353,9 +23587,9 @@ namespace Kafka.Protocol
 
 	public class SaslAuthenticateRequest : Message, IRespond<SaslAuthenticateResponse>
 	{
-		public SaslAuthenticateRequest(int version)
+		public SaslAuthenticateRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"SaslAuthenticateRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -23365,9 +23599,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(36);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<SaslAuthenticateRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<SaslAuthenticateRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new SaslAuthenticateRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23415,9 +23652,9 @@ namespace Kafka.Protocol
 
 	public class SaslAuthenticateResponse : Message
 	{
-		public SaslAuthenticateResponse(int version)
+		public SaslAuthenticateResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"SaslAuthenticateResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -23427,9 +23664,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(36);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<SaslAuthenticateResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<SaslAuthenticateResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new SaslAuthenticateResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23576,9 +23816,9 @@ namespace Kafka.Protocol
 
 	public class SaslHandshakeRequest : Message, IRespond<SaslHandshakeResponse>
 	{
-		public SaslHandshakeRequest(int version)
+		public SaslHandshakeRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"SaslHandshakeRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -23588,9 +23828,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(17);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<SaslHandshakeRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<SaslHandshakeRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new SaslHandshakeRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23638,9 +23881,9 @@ namespace Kafka.Protocol
 
 	public class SaslHandshakeResponse : Message
 	{
-		public SaslHandshakeResponse(int version)
+		public SaslHandshakeResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"SaslHandshakeResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -23650,9 +23893,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(17);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<SaslHandshakeResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<SaslHandshakeResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new SaslHandshakeResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23729,9 +23975,9 @@ namespace Kafka.Protocol
 
 	public class StopReplicaRequest : Message, IRespond<StopReplicaResponse>
 	{
-		public StopReplicaRequest(int version)
+		public StopReplicaRequest(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"StopReplicaRequest does not support version {version}. Valid versions are: 0-1");
 			}
@@ -23741,9 +23987,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(5);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<StopReplicaRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<StopReplicaRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new StopReplicaRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -23925,14 +24174,14 @@ namespace Kafka.Protocol
 
 		public class StopReplicaRequestPartitionV0 : ISerialize
 		{
-			internal StopReplicaRequestPartitionV0(int version)
+			internal StopReplicaRequestPartitionV0(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<StopReplicaRequestPartitionV0> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<StopReplicaRequestPartitionV0> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new StopReplicaRequestPartitionV0(version);
 				if (instance.Version.InRange(0, 0)) 
@@ -24040,14 +24289,14 @@ namespace Kafka.Protocol
 
 		public class StopReplicaRequestTopic : ISerialize
 		{
-			internal StopReplicaRequestTopic(int version)
+			internal StopReplicaRequestTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<StopReplicaRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<StopReplicaRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new StopReplicaRequestTopic(version);
 				if (instance.Version.InRange(1, 2147483647)) 
@@ -24128,9 +24377,9 @@ namespace Kafka.Protocol
 
 	public class StopReplicaResponse : Message
 	{
-		public StopReplicaResponse(int version)
+		public StopReplicaResponse(Int16 version)
 		{
-			if (version.InRange(0, 1) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"StopReplicaResponse does not support version {version}. Valid versions are: 0-1");
 			}
@@ -24140,9 +24389,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(5);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public static async ValueTask<StopReplicaResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<StopReplicaResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new StopReplicaResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -24225,14 +24477,14 @@ namespace Kafka.Protocol
 
 		public class StopReplicaResponsePartition : ISerialize
 		{
-			internal StopReplicaResponsePartition(int version)
+			internal StopReplicaResponsePartition(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<StopReplicaResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<StopReplicaResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new StopReplicaResponsePartition(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -24342,9 +24594,9 @@ namespace Kafka.Protocol
 
 	public class SyncGroupRequest : Message, IRespond<SyncGroupResponse>
 	{
-		public SyncGroupRequest(int version)
+		public SyncGroupRequest(Int16 version)
 		{
-			if (version.InRange(0, 3) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"SyncGroupRequest does not support version {version}. Valid versions are: 0-3");
 			}
@@ -24354,9 +24606,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(14);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
-		public static async ValueTask<SyncGroupRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<SyncGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new SyncGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -24541,14 +24796,14 @@ namespace Kafka.Protocol
 
 		public class SyncGroupRequestAssignment : ISerialize
 		{
-			internal SyncGroupRequestAssignment(int version)
+			internal SyncGroupRequestAssignment(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<SyncGroupRequestAssignment> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<SyncGroupRequestAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new SyncGroupRequestAssignment(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -24629,9 +24884,9 @@ namespace Kafka.Protocol
 
 	public class SyncGroupResponse : Message
 	{
-		public SyncGroupResponse(int version)
+		public SyncGroupResponse(Int16 version)
 		{
-			if (version.InRange(0, 3) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"SyncGroupResponse does not support version {version}. Valid versions are: 0-3");
 			}
@@ -24641,9 +24896,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(14);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
-		public static async ValueTask<SyncGroupResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<SyncGroupResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new SyncGroupResponse(version);
 			if (instance.Version.InRange(1, 2147483647)) 
@@ -24747,9 +25005,9 @@ namespace Kafka.Protocol
 
 	public class TxnOffsetCommitRequest : Message, IRespond<TxnOffsetCommitResponse>
 	{
-		public TxnOffsetCommitRequest(int version)
+		public TxnOffsetCommitRequest(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"TxnOffsetCommitRequest does not support version {version}. Valid versions are: 0-2");
 			}
@@ -24759,9 +25017,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(28);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<TxnOffsetCommitRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<TxnOffsetCommitRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new TxnOffsetCommitRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -24940,14 +25201,14 @@ namespace Kafka.Protocol
 
 		public class TxnOffsetCommitRequestTopic : ISerialize
 		{
-			internal TxnOffsetCommitRequestTopic(int version)
+			internal TxnOffsetCommitRequestTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<TxnOffsetCommitRequestTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TxnOffsetCommitRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TxnOffsetCommitRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -25030,14 +25291,14 @@ namespace Kafka.Protocol
 
 			public class TxnOffsetCommitRequestPartition : ISerialize
 			{
-				internal TxnOffsetCommitRequestPartition(int version)
+				internal TxnOffsetCommitRequestPartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<TxnOffsetCommitRequestPartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<TxnOffsetCommitRequestPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new TxnOffsetCommitRequestPartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -25184,9 +25445,9 @@ namespace Kafka.Protocol
 
 	public class TxnOffsetCommitResponse : Message
 	{
-		public TxnOffsetCommitResponse(int version)
+		public TxnOffsetCommitResponse(Int16 version)
 		{
-			if (version.InRange(0, 2) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"TxnOffsetCommitResponse does not support version {version}. Valid versions are: 0-2");
 			}
@@ -25196,9 +25457,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(28);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public static async ValueTask<TxnOffsetCommitResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<TxnOffsetCommitResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new TxnOffsetCommitResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -25281,14 +25545,14 @@ namespace Kafka.Protocol
 
 		public class TxnOffsetCommitResponseTopic : ISerialize
 		{
-			internal TxnOffsetCommitResponseTopic(int version)
+			internal TxnOffsetCommitResponseTopic(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<TxnOffsetCommitResponseTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<TxnOffsetCommitResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TxnOffsetCommitResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -25371,14 +25635,14 @@ namespace Kafka.Protocol
 
 			public class TxnOffsetCommitResponsePartition : ISerialize
 			{
-				internal TxnOffsetCommitResponsePartition(int version)
+				internal TxnOffsetCommitResponsePartition(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<TxnOffsetCommitResponsePartition> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<TxnOffsetCommitResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new TxnOffsetCommitResponsePartition(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -25457,9 +25721,9 @@ namespace Kafka.Protocol
 
 	public class UpdateMetadataRequest : Message, IRespond<UpdateMetadataResponse>
 	{
-		public UpdateMetadataRequest(int version)
+		public UpdateMetadataRequest(Int16 version)
 		{
-			if (version.InRange(0, 5) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"UpdateMetadataRequest does not support version {version}. Valid versions are: 0-5");
 			}
@@ -25469,9 +25733,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(6);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
-		public static async ValueTask<UpdateMetadataRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<UpdateMetadataRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new UpdateMetadataRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -25653,14 +25920,14 @@ namespace Kafka.Protocol
 
 		public class UpdateMetadataRequestTopicState : ISerialize
 		{
-			internal UpdateMetadataRequestTopicState(int version)
+			internal UpdateMetadataRequestTopicState(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<UpdateMetadataRequestTopicState> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<UpdateMetadataRequestTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new UpdateMetadataRequestTopicState(version);
 				if (instance.Version.InRange(5, 2147483647)) 
@@ -25765,14 +26032,14 @@ namespace Kafka.Protocol
 
 		public class UpdateMetadataRequestBroker : ISerialize
 		{
-			internal UpdateMetadataRequestBroker(int version)
+			internal UpdateMetadataRequestBroker(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<UpdateMetadataRequestBroker> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<UpdateMetadataRequestBroker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new UpdateMetadataRequestBroker(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -25917,14 +26184,14 @@ namespace Kafka.Protocol
 
 			public class UpdateMetadataRequestEndpoint : ISerialize
 			{
-				internal UpdateMetadataRequestEndpoint(int version)
+				internal UpdateMetadataRequestEndpoint(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<UpdateMetadataRequestEndpoint> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<UpdateMetadataRequestEndpoint> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new UpdateMetadataRequestEndpoint(version);
 					if (instance.Version.InRange(1, 2147483647)) 
@@ -26091,7 +26358,7 @@ namespace Kafka.Protocol
 
 		public class UpdateMetadataPartitionState : ISerialize
 		{
-			internal UpdateMetadataPartitionState(int version)
+			internal UpdateMetadataPartitionState(Int16 version)
 			{
 				if (version.InRange(0, 2147483647) == false) 
 				{
@@ -26101,9 +26368,9 @@ namespace Kafka.Protocol
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<UpdateMetadataPartitionState> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<UpdateMetadataPartitionState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new UpdateMetadataPartitionState(version);
 				if (instance.Version.InRange(0, 4)) 
@@ -26408,9 +26675,9 @@ namespace Kafka.Protocol
 
 	public class UpdateMetadataResponse : Message
 	{
-		public UpdateMetadataResponse(int version)
+		public UpdateMetadataResponse(Int16 version)
 		{
-			if (version.InRange(0, 5) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"UpdateMetadataResponse does not support version {version}. Valid versions are: 0-5");
 			}
@@ -26420,9 +26687,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(6);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
-		public static async ValueTask<UpdateMetadataResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<UpdateMetadataResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new UpdateMetadataResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -26467,9 +26737,9 @@ namespace Kafka.Protocol
 
 	public class WriteTxnMarkersRequest : Message, IRespond<WriteTxnMarkersResponse>
 	{
-		public WriteTxnMarkersRequest(int version)
+		public WriteTxnMarkersRequest(Int16 version)
 		{
-			if (version.InRange(0, 0) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"WriteTxnMarkersRequest does not support version {version}. Valid versions are: 0");
 			}
@@ -26479,9 +26749,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(27);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
 
-		public static async ValueTask<WriteTxnMarkersRequest> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<WriteTxnMarkersRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new WriteTxnMarkersRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -26532,14 +26805,14 @@ namespace Kafka.Protocol
 
 		public class WritableTxnMarker : ISerialize
 		{
-			internal WritableTxnMarker(int version)
+			internal WritableTxnMarker(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<WritableTxnMarker> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<WritableTxnMarker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new WritableTxnMarker(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -26694,14 +26967,14 @@ namespace Kafka.Protocol
 
 			public class WritableTxnMarkerTopic : ISerialize
 			{
-				internal WritableTxnMarkerTopic(int version)
+				internal WritableTxnMarkerTopic(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<WritableTxnMarkerTopic> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<WritableTxnMarkerTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new WritableTxnMarkerTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -26807,9 +27080,9 @@ namespace Kafka.Protocol
 
 	public class WriteTxnMarkersResponse : Message
 	{
-		public WriteTxnMarkersResponse(int version)
+		public WriteTxnMarkersResponse(Int16 version)
 		{
-			if (version.InRange(0, 0) == false) 
+			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
 				throw new UnsupportedVersionException($"WriteTxnMarkersResponse does not support version {version}. Valid versions are: 0");
 			}
@@ -26819,9 +27092,12 @@ namespace Kafka.Protocol
 
 		public static readonly Int16 ApiKey = Int16.From(27);
 
-		public override int Version { get; }
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
 
-		public static async ValueTask<WriteTxnMarkersResponse> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+		public override Int16 Version { get; }
+
+		public static async ValueTask<WriteTxnMarkersResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new WriteTxnMarkersResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -26872,14 +27148,14 @@ namespace Kafka.Protocol
 
 		public class WritableTxnMarkerResult : ISerialize
 		{
-			internal WritableTxnMarkerResult(int version)
+			internal WritableTxnMarkerResult(Int16 version)
 			{
 				Version = version;
 			}
 
-			internal int Version { get; }
+			internal Int16 Version { get; }
 
-			public static async ValueTask<WritableTxnMarkerResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+			public static async ValueTask<WritableTxnMarkerResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new WritableTxnMarkerResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
@@ -26962,14 +27238,14 @@ namespace Kafka.Protocol
 
 			public class WritableTxnMarkerTopicResult : ISerialize
 			{
-				internal WritableTxnMarkerTopicResult(int version)
+				internal WritableTxnMarkerTopicResult(Int16 version)
 				{
 					Version = version;
 				}
 
-				internal int Version { get; }
+				internal Int16 Version { get; }
 
-				public static async ValueTask<WritableTxnMarkerTopicResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+				public static async ValueTask<WritableTxnMarkerTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new WritableTxnMarkerTopicResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
@@ -27052,14 +27328,14 @@ namespace Kafka.Protocol
 
 				public class WritableTxnMarkerPartitionResult : ISerialize
 				{
-					internal WritableTxnMarkerPartitionResult(int version)
+					internal WritableTxnMarkerPartitionResult(Int16 version)
 					{
 						Version = version;
 					}
 
-					internal int Version { get; }
+					internal Int16 Version { get; }
 
-					public static async ValueTask<WritableTxnMarkerPartitionResult> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)
+					public static async ValueTask<WritableTxnMarkerPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
 						var instance = new WritableTxnMarkerPartitionResult(version);
 						if (instance.Version.InRange(0, 2147483647)) 

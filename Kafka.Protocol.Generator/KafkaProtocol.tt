@@ -175,7 +175,7 @@ namespace Kafka.Protocol<# Block(() =>
     {
 		#>public static async ValueTask<Message> CreateMessageFromReaderAsync(<# _();
 		#>	Int16 apiKey, <# _();
-		#>	int version, <# _();
+		#>	Int16 version, <# _();
 		#>	IKafkaReader reader, <# _();
 		#>	CancellationToken cancellationToken = default)<# Block(() =>
 		{
@@ -197,10 +197,10 @@ namespace Kafka.Protocol<# Block(() =>
 		var hasResponse = messageDefinitions.TryGetResponseMessageDefinitionFrom(messageDefinition, out var responseMessageDefinition);
 		#>public class <#= messageDefinition.Name #> : Message<#= hasResponse ? $", IRespond<{responseMessageDefinition.Name}>" : "" #><# Block(() => 
 		{
-			#>public <#= messageDefinition.Name #>(int version)<# Block(() => 
+			var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);			
+			#>public <#= messageDefinition.Name #>(Int16 version)<# Block(() => 
 			{
-				var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
-				#>if (version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
+				#>if (version.InRange(MinVersion, MaxVersion) == false) <# Block(() => 
 				{
 					#>throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<#
 				}); _(2);
@@ -210,9 +210,12 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public static readonly Int16 ApiKey = Int16.From(<#= messageDefinition.ApiKey #>);<# _(2);
 
-			#>public override int Version { get; }<# _(2);
+			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From #>);<# _();
+			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To #>);<# _(2);
 
-			#>public static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+			#>public override Int16 Version { get; }<# _(2);
+
+			#>public static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				#>var instance = new <#= messageDefinition.Name #>(version);<# _();
 				
@@ -456,14 +459,14 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 
 	#>public class <#= fieldTypeNameWithoutArrayCharacters #> : ISerialize<# Block(() => 
 	{
-		#>internal <#= fieldTypeNameWithoutArrayCharacters #>(int version)<# Block(() => 
+		#>internal <#= fieldTypeNameWithoutArrayCharacters #>(Int16 version)<# Block(() => 
 		{
 			#>Version = version;<#
 		}); _(2);
 
-		#>internal int Version { get; }<# _(2);
+		#>internal Int16 Version { get; }<# _(2);
 
-		#>public static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();
 			PrintOnNewRowForEach(field.Fields, messageField => 
@@ -493,7 +496,7 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 {
 	#>public class <#= commonStruct.Name #> : ISerialize<# Block(() => 
 	{
-		#>internal <#= commonStruct.Name #>(int version)<# Block(() => 
+		#>internal <#= commonStruct.Name #>(Int16 version)<# Block(() => 
 		{
 			var versionRange = VersionRange.Parse(commonStruct.Versions);
 			#>if (version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
@@ -504,9 +507,9 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			#>Version = version;<#
 		}); _(2);
 
-		#>internal int Version { get; }<# _(2);
+		#>internal Int16 Version { get; }<# _(2);
 
-		#>public static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(int version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= commonStruct.Name #>(version);<# _();
 			PrintOnNewRowForEach(commonStruct.Fields, messageField => 

@@ -84,18 +84,18 @@ namespace Kafka.TestServer
                     {
                         try
                         {
-                            var payload = await client
+                            var requestPayload = await client
                                 .ReadAsync(_cancellationTokenSource.Token)
                                 .ConfigureAwait(false);
-                            if (_subscriptions.TryGetValue(payload.Message.GetType(), out var subscription))
+                            if (_subscriptions.TryGetValue(requestPayload.Message.GetType(), out var subscription))
                             {
-                                var response = subscription(payload.Message);
+                                var response = subscription(requestPayload.Message);
                                 await client
                                     .SendAsync(
                                         new ResponsePayload(
-                                            payload,
-                                            new ResponseHeader(0)
-                                                .WithCorrelationId(payload.Header.CorrelationId),
+                                            requestPayload,
+                                            new ResponseHeader(requestPayload.Header.Version)
+                                                .WithCorrelationId(requestPayload.Header.CorrelationId),
                                             response),
                                         _cancellationTokenSource.Token)
                                     .ConfigureAwait(false);
