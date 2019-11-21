@@ -201,6 +201,11 @@ namespace Kafka.Protocol
             int length,
             CancellationToken cancellationToken = default)
         {
+            if (length == 0)
+            {
+                return new byte[0];
+            }
+
             ReadResult result;
             do
             {
