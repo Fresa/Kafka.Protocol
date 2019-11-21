@@ -33,21 +33,28 @@ namespace Kafka.TestServer.Tests
                     var client = await _testServer
                         .CreateRequestClientAsync()
                         .ConfigureAwait(false);
+                    
                     await using var _ = client
                         .ConfigureAwait(false);
+                    
                     var requestPayload = new RequestPayload(
-                        new RequestHeader(0).WithCorrelationId(Int32.From(12)),
+                        new RequestHeader(0)
+                            .WithRequestApiKey(Int16.From(ApiVersionsRequest.ApiKey))
+                            .WithRequestApiVersion(Int16.From(0))
+                            .WithCorrelationId(Int32.From(12)),
                         new ApiVersionsRequest(0));
+
                     await client
                         .SendAsync(requestPayload)
                         .ConfigureAwait(false);
-                    await client
+
+                    var response = await client
                         .ReadAsync(requestPayload)
                         .ConfigureAwait(false);
                 }
             }
 
-            [Fact(Skip = "Hangs during reading")]
+            [Fact]
             public void The_subscription_should_receive_the_message()
             {
 

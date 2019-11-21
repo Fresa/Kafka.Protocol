@@ -23,9 +23,9 @@ namespace Kafka.TestServer
             var requestClient = new CrossWiredMemoryNetworkClient(first, second);
             var responseClient = new CrossWiredMemoryNetworkClient(second, first);
             await _clients
-                .SendAsync(requestClient, cancellationToken)
+                .SendAsync(responseClient, cancellationToken)
                 .ConfigureAwait(false);
-            return RequestClient.Start(responseClient);
+            return RequestClient.Start(requestClient);
         }
     }
 }
