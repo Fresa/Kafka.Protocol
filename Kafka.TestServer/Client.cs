@@ -36,17 +36,32 @@ namespace Kafka.TestServer
                 await payload
                     .WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await buffer
-                    .FlushAsync(cancellationToken)
-                    .ConfigureAwait(false);
-                buffer.Position = 0;
-                await writer
-                    .WriteInt32Async(Int32.From((int)buffer.Length), cancellationToken)
-                    .ConfigureAwait(false);
             }
 
+            var lengthBuffer = new MemoryStream();
+            await using (lengthBuffer
+                .ConfigureAwait(false))
+            {
+                var lengthWriter = new KafkaWriter(lengthBuffer);
+                await using (lengthWriter.ConfigureAwait(false))
+                {
+                    await lengthWriter
+                        .WriteInt32Async(Int32.From((int)buffer.Length), cancellationToken)
+                        .ConfigureAwait(false);
+                }
+
+                await _networkClient.SendAsync(
+                        lengthBuffer
+                            .GetBuffer()
+                            .AsMemory()
+                            .Slice(0, (int)lengthBuffer.Length),
+                        cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            
             await _networkClient.SendAsync(
-                    buffer.GetBuffer(),
+                    buffer.GetBuffer().AsMemory()
+                        .Slice(0, (int)buffer.Length),
                     cancellationToken)
                 .ConfigureAwait(false);
         }
