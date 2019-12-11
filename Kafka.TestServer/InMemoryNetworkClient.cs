@@ -10,9 +10,9 @@ namespace Kafka.TestServer
     {
         private readonly Pipe _pipe = new Pipe();
 
-        public async ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()
         {
-            await new ValueTask();
+            return new ValueTask();
         }
 
         public async ValueTask<int> SendAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)

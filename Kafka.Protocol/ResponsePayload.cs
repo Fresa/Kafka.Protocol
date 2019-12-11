@@ -23,8 +23,10 @@ namespace Kafka.Protocol
             IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
-            await Header.WriteToAsync(writer, cancellationToken);
-            await Message.WriteToAsync(writer, cancellationToken);
+            await Header.WriteToAsync(writer, cancellationToken)
+                .ConfigureAwait(false);
+            await Message.WriteToAsync(writer, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public static async ValueTask<ResponsePayload> ReadFromAsync(
@@ -35,13 +37,15 @@ namespace Kafka.Protocol
             var header = await ResponseHeader.FromReaderAsync(
                 requestPayload.Header.Version,
                 reader,
-                cancellationToken);
+                cancellationToken)
+                .ConfigureAwait(false);
 
             var message = await Messages.CreateMessageFromReaderAsync(
                 requestPayload.Header.RequestApiKey, 
                 requestPayload.Header.Version,
                 reader,
-                cancellationToken);
+                cancellationToken)
+                .ConfigureAwait(false);
 
             return new ResponsePayload(requestPayload, header, message);
         }

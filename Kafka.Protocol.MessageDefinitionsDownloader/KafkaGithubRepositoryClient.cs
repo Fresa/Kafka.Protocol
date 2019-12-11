@@ -17,7 +17,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
 
         public async Task<IEnumerable<Message>> GetMessagesAsync()
         {
-            var files = await GetMessageFilesAsync();
+            var files = await GetMessageFilesAsync()
+                .ConfigureAwait(false);
 
             var fileClient = new HttpClient();
 
@@ -25,9 +26,11 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                 .Select(async repositoryContent =>
                     await
                         (await fileClient
-                            .GetAsync(repositoryContent.DownloadUrl))
+                            .GetAsync(repositoryContent.DownloadUrl)
+                            .ConfigureAwait(false))
                         .Content
-                        .ReadAsStringAsync()).ToArray());
+                        .ReadAsStringAsync()
+                        .ConfigureAwait(false)).ToArray());
 
             return messagesContent
                 .Select(
@@ -43,7 +46,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                         await new WebClient()
                             .DownloadFileTaskAsync(
                                 repositoryContent.DownloadUrl,
-                                $"{path}\\{repositoryContent.Name}")));
+                                $"{path}\\{repositoryContent.Name}")
+                            .ConfigureAwait(false)));
         }
         
         private async Task<IEnumerable<RepositoryContent>> GetMessageFilesAsync()
@@ -54,7 +58,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                 .GetAllContents(
                     "apache",
                     "kafka",
-                    "clients/src/main/resources/common/message");
+                    "clients/src/main/resources/common/message")
+                .ConfigureAwait(false);
 
             var messages = content
                 .Where(repositoryContent =>

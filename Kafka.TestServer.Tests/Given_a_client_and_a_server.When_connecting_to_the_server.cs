@@ -24,16 +24,19 @@ namespace Kafka.TestServer.Tests
             [Fact]
             public async Task It_should_connect()
             {
-                await using var server = SocketServer.Start();
+                var server = SocketServer.Start();
+                await using var _ = server.ConfigureAwait(false);
                 var connectedClientTask = server.WaitForConnectedClientAsync();
 
                 var clientTask = ProduceMessageFromClientAsync(
                     "localhost", 
                     server.Port);
-                var connectedClient = await connectedClientTask;
+                var connectedClient = await connectedClientTask
+                    .ConfigureAwait(false);
 
                 await using var client = ResponseClient.Start(connectedClient);
-                var message = await client.ReadAsync();
+                var message = await client.ReadAsync()
+                    .ConfigureAwait(false);
                 //await clientTask;
             }
 
@@ -52,7 +55,9 @@ namespace Kafka.TestServer.Tests
                 using var producer = new ProducerBuilder<Null, string>(producerConfig)
                     .SetLogHandler((_, message) => Debug.WriteLine(message.Message))
                     .Build();
-                await producer.ProduceAsync("my-topic", new Message<Null, string> {Value = "test"});
+                await producer
+                    .ProduceAsync("my-topic", new Message<Null, string> {Value = "test"})
+                    .ConfigureAwait(false);
                 producer.Flush();
             }
 
@@ -66,7 +71,8 @@ namespace Kafka.TestServer.Tests
                     ipAddress.AddressFamily,
                     SocketType.Stream, ProtocolType.Tcp);
 
-                await client.ConnectAsync(remoteEP);
+                await client.ConnectAsync(remoteEP)
+                    .ConfigureAwait(false);
 
                 client.Send(Encoding.ASCII.GetBytes("This is a test"));
 

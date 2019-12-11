@@ -28,7 +28,8 @@ namespace Kafka.TestServer.Tests
 
             protected override async Task WhenAsync()
             {
-                await using (_testServer.Start())
+                await using (_testServer.Start()
+                    .ConfigureAwait(false))
                 {
                     var client = await _testServer
                         .CreateRequestClientAsync()

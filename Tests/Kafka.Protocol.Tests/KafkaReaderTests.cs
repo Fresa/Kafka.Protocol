@@ -14,12 +14,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 1 }.ToReaderAsync();
+                _reader = await new byte[] { 1 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadBooleanAsync();
+                _value = await _reader.ReadBooleanAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -36,12 +38,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 0 }.ToReaderAsync();
+                _reader = await new byte[] { 0 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadBooleanAsync();
+                _value = await _reader.ReadBooleanAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -58,12 +62,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 65 }.ToReaderAsync();
+                _reader = await new byte[] { 65 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadInt8Async();
+                _value = await _reader.ReadInt8Async()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -80,12 +86,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 1, 0 }.ToReaderAsync();
+                _reader = await new byte[] { 1, 0 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadInt16Async();
+                _value = await _reader.ReadInt16Async()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -102,12 +110,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 0, 0, 1, 1 }.ToReaderAsync();
+                _reader = await new byte[] { 0, 0, 1, 1 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadInt32Async();
+                _value = await _reader.ReadInt32Async()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -124,12 +134,15 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 0, 0, 0, 0, 0, 0, 0, 65 }.ToReaderAsync();
+                _reader = await new byte[] { 0, 0, 0, 0, 0, 0, 0, 65 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadInt64Async();
+                _value = await _reader.ReadInt64Async()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -146,12 +159,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 0, 0, 0, 2 }.ToReaderAsync();
+                _reader = await new byte[] { 0, 0, 0, 2 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadUInt32Async();
+                _value = await _reader.ReadUInt32Async()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -168,12 +183,15 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 0, 5, 65, 66, 67, 68, 69 }.ToReaderAsync();
+                _reader = await new byte[] { 0, 5, 65, 66, 67, 68, 69 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadStringAsync();
+                _value = await _reader.ReadStringAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -190,12 +208,15 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 0, 5, 65, 66, 67, 68, 69 }.ToReaderAsync();
+                _reader = await new byte[] { 0, 5, 65, 66, 67, 68, 69 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadNullableStringAsync();
+                _value = await _reader.ReadNullableStringAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -213,12 +234,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 255, 255 }.ToReaderAsync();
+                _reader = await new byte[] { 255, 255 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadNullableStringAsync();
+                _value = await _reader.ReadNullableStringAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -235,12 +258,15 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 0, 0, 0, 3, 1, 0, 6 }.ToReaderAsync();
+                _reader = await new byte[] { 0, 0, 0, 3, 1, 0, 6 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadBytesAsync();
+                _value = await _reader.ReadBytesAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -257,12 +283,15 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 0, 0, 0, 3, 1, 0, 6 }.ToReaderAsync();
+                _reader = await new byte[] { 0, 0, 0, 3, 1, 0, 6 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadNullableBytesAsync();
+                _value = await _reader.ReadNullableBytesAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -280,12 +309,15 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 255, 255, 255, 255 }.ToReaderAsync();
+                _reader = await new byte[] { 255, 255, 255, 255 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadNullableBytesAsync();
+                _value = await _reader.ReadNullableBytesAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -302,12 +334,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 216, 4 }.ToReaderAsync();
+                _reader = await new byte[] { 216, 4 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadVarIntAsync();
+                _value = await _reader.ReadVarIntAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -324,12 +358,14 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 216, 4 }.ToReaderAsync();
+                _reader = await new byte[] { 216, 4 }.ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadVarLongAsync();
+                _value = await _reader.ReadVarLongAsync()
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -351,7 +387,10 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(_reader));
+                _value = await _reader.ReadArrayAsync(
+                        async () => await Int32.FromReaderAsync(_reader)
+                            .ConfigureAwait(false))
+                    .ConfigureAwait(false);
             }
 
             [Fact]
@@ -368,12 +407,18 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task GivenAsync()
             {
-                _reader = await new byte[] { 255, 255, 255, 255 }.ToReaderAsync();
+                _reader = await new byte[] { 255, 255, 255, 255 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
             }
 
             protected override async Task WhenAsync()
             {
-                _value = await _reader.ReadNullableArrayAsync(async () => await Int32.FromReaderAsync(_reader));
+                _value = await _reader
+                    .ReadNullableArrayAsync(
+                        async () => await Int32.FromReaderAsync(_reader)
+                            .ConfigureAwait(false))
+                    .ConfigureAwait(false);
             }
 
             [Fact]

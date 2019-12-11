@@ -9,7 +9,8 @@ namespace Kafka.Protocol.Tests
         internal static async Task<KafkaReader> ToReaderAsync(this byte[] bytes)
         {
             var pipe = new Pipe();
-            await pipe.Writer.WriteAsync(new ReadOnlyMemory<byte>(bytes));
+            await pipe.Writer.WriteAsync(new ReadOnlyMemory<byte>(bytes))
+                .ConfigureAwait(false);
             return new KafkaReader(pipe.Reader);
         }
     }

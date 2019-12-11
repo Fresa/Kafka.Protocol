@@ -6,6 +6,7 @@ namespace Kafka.Protocol.Records
     public class ControlRecordKey : ISerialize
     {
         private Int16 _version = Int16.Default;
+
         public Int16 Version
         {
             get => _version;
@@ -13,7 +14,8 @@ namespace Kafka.Protocol.Records
             {
                 if (value != Int16.From(0))
                 {
-                    throw new UnsupportedVersionException($"Version '{value}' is not supported. Supported version is 0");
+                    throw new UnsupportedVersionException(
+                        $"Version '{value}' is not supported. Supported version is 0");
                 }
 
                 _version = value;
@@ -25,28 +27,33 @@ namespace Kafka.Protocol.Records
         public bool IsAbortMarker
         {
             get => _type == Int16.From(0);
-            set => _type = Int16.From(value ? (short)0 : (short)1);
+            set => _type = Int16.From(value ? (short) 0 : (short) 1);
         }
 
         public bool IsCommit
         {
             get => _type == Int16.From(1);
-            set => _type = Int16.From(value ? (short)1 : (short)0);
+            set => _type = Int16.From(value ? (short) 1 : (short) 0);
         }
 
         public async ValueTask ReadFromAsync(
             IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            Version = await reader.ReadInt16Async(cancellationToken);
-            _type = await reader.ReadInt16Async(cancellationToken);
+            Version = await reader.ReadInt16Async(cancellationToken)
+                .ConfigureAwait(false);
+            _type = await reader.ReadInt16Async(cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        public async ValueTask WriteToAsync(IKafkaWriter writer, 
+        public async ValueTask WriteToAsync(
+            IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteInt16Async(Version, cancellationToken);
-            await writer.WriteInt16Async(_type, cancellationToken);
+            await writer.WriteInt16Async(Version, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt16Async(_type, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

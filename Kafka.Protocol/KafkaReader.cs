@@ -22,7 +22,8 @@ namespace Kafka.Protocol
         {
             return Boolean.From(
                 BitConverter.ToBoolean(
-                await ReadAsLittleEndianAsync(1, cancellationToken),
+                await ReadAsLittleEndianAsync(1, cancellationToken)
+                    .ConfigureAwait(false),
                 0));
         }
 
@@ -31,7 +32,8 @@ namespace Kafka.Protocol
         {
             return Int8.From(
                 Convert.ToSByte(
-                await ReadByteAsync(cancellationToken)));
+                await ReadByteAsync(cancellationToken)
+                    .ConfigureAwait(false)));
         }
 
         public async ValueTask<Int16> ReadInt16Async(
@@ -39,7 +41,8 @@ namespace Kafka.Protocol
         {
             return Int16.From(
                 BitConverter.ToInt16(
-                await ReadAsBigEndianAsync(2, cancellationToken),
+                await ReadAsBigEndianAsync(2, cancellationToken)
+                    .ConfigureAwait(false),
                 0));
         }
 
@@ -48,7 +51,8 @@ namespace Kafka.Protocol
         {
             return Int32.From(
                 BitConverter.ToInt32(
-                await ReadAsBigEndianAsync(4, cancellationToken),
+                await ReadAsBigEndianAsync(4, cancellationToken)
+                    .ConfigureAwait(false),
                 0));
         }
 
@@ -57,7 +61,8 @@ namespace Kafka.Protocol
         {
             return Int64.From(
                 BitConverter.ToInt64(
-                await ReadAsBigEndianAsync(8, cancellationToken),
+                await ReadAsBigEndianAsync(8, cancellationToken)
+                    .ConfigureAwait(false),
                 0));
         }
 
@@ -66,7 +71,8 @@ namespace Kafka.Protocol
         {
             return UInt32.From(
                 BitConverter.ToUInt32(
-                await ReadAsBigEndianAsync(4, cancellationToken),
+                await ReadAsBigEndianAsync(4, cancellationToken)
+                    .ConfigureAwait(false),
                 0));
         }
 
@@ -74,7 +80,8 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default)
         {
             return VarInt.From(
-                (int)(await ReadVarLongAsync(cancellationToken)).Value);
+                (int)(await ReadVarLongAsync(cancellationToken)
+                    .ConfigureAwait(false)).Value);
         }
 
         public async ValueTask<VarLong> ReadVarLongAsync(
@@ -85,7 +92,8 @@ namespace Kafka.Protocol
             var shift = 0;
             while (more)
             {
-                var lowerBits = await ReadByteAsync(cancellationToken);
+                var lowerBits = await ReadByteAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 more = (lowerBits & 128) != 0;
                 value |= (uint)((lowerBits & 0x7f) << shift);
                 shift += 7;
@@ -98,8 +106,10 @@ namespace Kafka.Protocol
         public async ValueTask<String> ReadStringAsync(
             CancellationToken cancellationToken = default)
         {
-            var length = await ReadInt16Async(cancellationToken);
-            var bytes = await ReadAsLittleEndianAsync(length.Value, cancellationToken);
+            var length = await ReadInt16Async(cancellationToken)
+                .ConfigureAwait(false);
+            var bytes = await ReadAsLittleEndianAsync(length.Value, cancellationToken)
+                .ConfigureAwait(false);
             return String.From(
                 Encoding.UTF8.GetString(bytes));
         }
@@ -107,13 +117,15 @@ namespace Kafka.Protocol
         public async ValueTask<String?> ReadNullableStringAsync(
             CancellationToken cancellationToken = default)
         {
-            var length = await ReadInt16Async(cancellationToken);
+            var length = await ReadInt16Async(cancellationToken)
+                .ConfigureAwait(false);
             if (length.Value == -1)
             {
                 return null;
             }
 
-            var bytes = await ReadAsLittleEndianAsync(length.Value, cancellationToken);
+            var bytes = await ReadAsLittleEndianAsync(length.Value, cancellationToken)
+                .ConfigureAwait(false);
             return String.From(
                 Encoding.UTF8.GetString(bytes));
         }
@@ -121,36 +133,42 @@ namespace Kafka.Protocol
         public async ValueTask<Bytes> ReadBytesAsync(
             CancellationToken cancellationToken = default)
         {
-            var length = await ReadInt32Async(cancellationToken);
+            var length = await ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
             return Bytes.From(
-                await ReadAsLittleEndianAsync(length.Value, cancellationToken));
+                await ReadAsLittleEndianAsync(length.Value, cancellationToken)
+                    .ConfigureAwait(false));
         }
 
         public async ValueTask<Bytes?> ReadNullableBytesAsync(
             CancellationToken cancellationToken = default)
         {
-            var length = await ReadInt32Async(cancellationToken);
+            var length = await ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
             if (length.Value == -1)
             {
                 return null;
             }
 
             return Bytes.From(
-                await ReadAsLittleEndianAsync(length.Value, cancellationToken));
+                await ReadAsLittleEndianAsync(length.Value, cancellationToken)
+                    .ConfigureAwait(false));
         }
 
         public async ValueTask<T[]> ReadArrayAsync<T>(Func<ValueTask<T>> createItem,
             CancellationToken cancellationToken = default)
             where T : ISerialize
         {
-            return await ReadNullableArrayAsync(createItem, cancellationToken) ?? 
+            return await ReadNullableArrayAsync(createItem, cancellationToken)
+                       .ConfigureAwait(false) ?? 
                 throw new NotSupportedException($"The array cannot be null. Consider changing to {nameof(ReadNullableArrayAsync)}");
         }
 
         public async ValueTask<T[]?> ReadNullableArrayAsync<T>(Func<ValueTask<T>> createItem, 
             CancellationToken cancellationToken = default) where T : ISerialize
         {
-            var length = await ReadInt32Async(cancellationToken);
+            var length = await ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
             if (length.Value == -1)
             {
                 return null;
@@ -167,7 +185,8 @@ namespace Kafka.Protocol
 
         private async ValueTask<byte> ReadByteAsync(CancellationToken cancellationToken = default)
         {
-            return (await ReadAsLittleEndianAsync(1, cancellationToken))
+            return (await ReadAsLittleEndianAsync(1, cancellationToken)
+                    .ConfigureAwait(false))
                 .First();
         }
 
@@ -175,7 +194,8 @@ namespace Kafka.Protocol
             int length,
             CancellationToken cancellationToken = default)
         {
-            var bytes = await ReadAsync(length, cancellationToken);
+            var bytes = await ReadAsync(length, cancellationToken)
+                .ConfigureAwait(false);
             if (BitConverter.IsLittleEndian == false)
             {
                 Array.Reverse(bytes);
@@ -188,7 +208,8 @@ namespace Kafka.Protocol
             int length,
             CancellationToken cancellationToken = default)
         {
-            var bytes = await ReadAsync(length, cancellationToken);
+            var bytes = await ReadAsync(length, cancellationToken)
+                .ConfigureAwait(false);
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(bytes);
@@ -209,7 +230,8 @@ namespace Kafka.Protocol
             ReadResult result;
             do
             {
-                result = await _reader.ReadAsync(cancellationToken);
+                result = await _reader.ReadAsync(cancellationToken)
+                    .ConfigureAwait(false);
             } while (result.Buffer.Length < length &&
                      result.IsCanceled == false &&
                      result.IsCompleted == false);

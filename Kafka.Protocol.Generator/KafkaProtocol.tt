@@ -133,7 +133,7 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
-				#>await writer.Write<#= className #>Async(this, cancellationToken);<#
+				#>await writer.Write<#= className #>Async(this, cancellationToken).ConfigureAwait(false);<#
 			}); _(2);
 
 			#>public static <#= className #> From(<#= type #> value)<# Block(() =>
@@ -143,7 +143,7 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public static async ValueTask<<#= className #>> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
-				#>return await reader.Read<#= className #>Async(cancellationToken);<#
+				#>return await reader.Read<#= className #>Async(cancellationToken).ConfigureAwait(false);<#
 			}); _(2);
 
 			#>public static <#= className #> Default => From(<#= defaultValue #>);<#
@@ -183,7 +183,7 @@ namespace Kafka.Protocol<# Block(() =>
 			{
 				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# Block(() =>
 				{
-					#>return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken);<#
+					#>return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<#
 				}); _();
 			}); _();
 
@@ -289,16 +289,16 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 			{
 				if (IsPrimitiveType(messageField))
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken);<# 	
+					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 	
 				} 
 				else 
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 	
+					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 	
 				}
 			} 
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable + fieldTypeName #>Async(cancellationToken);<# 
+				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 		else 
@@ -306,11 +306,11 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 			if (mapKeyField == null)
 			{
-				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken);<# 
+				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 
 			}
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = (await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken), cancellationToken)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+				#><#= prependBeforeField #><#= fieldName #> = (await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
 			}
 		}
 	});		
@@ -328,11 +328,11 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 			var fieldTypeName = messageField.GetTypeName();
 			if (messageField.IsArray())
 			{
-			#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>);<# 	
+			#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 	
 			} 
 			else 
 			{
-			#>await writer.Write<#= nullable + fieldTypeName #>Async(<#= fieldName #>, cancellationToken);<# 
+			#>await writer.Write<#= nullable + fieldTypeName #>Async(<#= fieldName #>, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 		else 
@@ -340,11 +340,11 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 			if (mapKeyField == null)
 			{
-				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>);<# 
+				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 
 			} 
 			else 
 			{
-				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>.Values.ToArray());<#
+				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>.Values.ToArray()).ConfigureAwait(false);<#
 			}
 		}
 	});		

@@ -22,7 +22,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
 
             var client = new KafkaGithubRepositoryClient();
             Console.WriteLine($"Writing files to '{path}'");
-            await client.GetMessagesAndWriteToPathAsync(path);
+            await client.GetMessagesAndWriteToPathAsync(path)
+                .ConfigureAwait(false);
             Console.WriteLine("Done");
         }
     }

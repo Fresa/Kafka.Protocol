@@ -25,7 +25,8 @@ namespace Kafka.Protocol.Records
         {
             private readonly RecordBatch _recordBatch;
 
-            internal Compressions(RecordBatch recordBatch)
+            internal Compressions(
+                RecordBatch recordBatch)
             {
                 _recordBatch = recordBatch;
             }
@@ -33,7 +34,8 @@ namespace Kafka.Protocol.Records
             private ushort Value
             {
                 get => _recordBatch.Attributes.GetValueOfBitRange(0, 2);
-                set => _recordBatch.Attributes = _recordBatch.Attributes.SetBitRangeValue(0, 2, value);
+                set => _recordBatch.Attributes =
+                    _recordBatch.Attributes.SetBitRangeValue(0, 2, value);
             }
 
             public bool None
@@ -103,7 +105,8 @@ namespace Kafka.Protocol.Records
         {
             private readonly RecordBatch _recordBatch;
 
-            internal TimestampTypes(RecordBatch recordBatch)
+            internal TimestampTypes(
+                RecordBatch recordBatch)
             {
                 _recordBatch = recordBatch;
             }
@@ -117,7 +120,8 @@ namespace Kafka.Protocol.Records
             public bool LogAppendTime
             {
                 get => _recordBatch.Attributes.IsBitSet(3);
-                set => _recordBatch.Attributes = _recordBatch.Attributes.SetBit(3, value);
+                set => _recordBatch.Attributes =
+                    _recordBatch.Attributes.SetBit(3, value);
             }
         }
 
@@ -133,40 +137,75 @@ namespace Kafka.Protocol.Records
             set => Attributes = Attributes.SetBit(5, value);
         }
 
-        public async ValueTask ReadFromAsync(IKafkaReader reader,
+        public async ValueTask ReadFromAsync(
+            IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            BaseOffset = await reader.ReadInt64Async(cancellationToken);
-            BatchLength = await reader.ReadInt32Async(cancellationToken);
-            PartitionLeaderEpoch = await reader.ReadInt32Async(cancellationToken);
-            Magic = await reader.ReadInt8Async(cancellationToken);
-            Crc = await reader.ReadInt32Async(cancellationToken);
-            Attributes = await reader.ReadInt16Async(cancellationToken);
-            LastOffsetDelta = await reader.ReadInt32Async(cancellationToken);
-            FirstTimestamp = await reader.ReadInt64Async(cancellationToken);
-            MaxTimestamp = await reader.ReadInt64Async(cancellationToken);
-            ProducerId = await reader.ReadInt64Async(cancellationToken);
-            ProducerEpoch = await reader.ReadInt16Async(cancellationToken);
-            BaseSequence = await reader.ReadInt32Async(cancellationToken);
-            Records = await reader.ReadArrayAsync(async () => await Record.FromReaderAsync(reader, cancellationToken), cancellationToken);
+            BaseOffset = await reader.ReadInt64Async(cancellationToken)
+                .ConfigureAwait(false);
+            BatchLength = await reader.ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
+            PartitionLeaderEpoch = await reader
+                .ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
+            Magic = await reader.ReadInt8Async(cancellationToken)
+                .ConfigureAwait(false);
+            Crc = await reader.ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
+            Attributes = await reader.ReadInt16Async(cancellationToken)
+                .ConfigureAwait(false);
+            LastOffsetDelta = await reader.ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
+            FirstTimestamp = await reader.ReadInt64Async(cancellationToken)
+                .ConfigureAwait(false);
+            MaxTimestamp = await reader.ReadInt64Async(cancellationToken)
+                .ConfigureAwait(false);
+            ProducerId = await reader.ReadInt64Async(cancellationToken)
+                .ConfigureAwait(false);
+            ProducerEpoch = await reader.ReadInt16Async(cancellationToken)
+                .ConfigureAwait(false);
+            BaseSequence = await reader.ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
+            Records = await reader
+                .ReadArrayAsync(
+                    async () =>
+                        await Record
+                            .FromReaderAsync(reader, cancellationToken)
+                            .ConfigureAwait(false), cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        public async ValueTask WriteToAsync(IKafkaWriter writer,
+        public async ValueTask WriteToAsync(
+            IKafkaWriter writer,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteInt64Async(BaseOffset, cancellationToken);
-            await writer.WriteInt32Async(BatchLength, cancellationToken);
-            await writer.WriteInt32Async(PartitionLeaderEpoch, cancellationToken);
-            await writer.WriteInt8Async(Magic, cancellationToken);
-            await writer.WriteInt32Async(Crc, cancellationToken);
-            await writer.WriteInt16Async(Attributes, cancellationToken);
-            await writer.WriteInt32Async(LastOffsetDelta, cancellationToken);
-            await writer.WriteInt64Async(FirstTimestamp, cancellationToken);
-            await writer.WriteInt64Async(MaxTimestamp, cancellationToken);
-            await writer.WriteInt64Async(ProducerId, cancellationToken);
-            await writer.WriteInt16Async(ProducerEpoch, cancellationToken);
-            await writer.WriteInt32Async(BaseSequence, cancellationToken);
-            await writer.WriteNullableArrayAsync(cancellationToken, Records);
+            await writer.WriteInt64Async(BaseOffset, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt32Async(BatchLength, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt32Async(
+                    PartitionLeaderEpoch, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt8Async(Magic, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt32Async(Crc, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt16Async(Attributes, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt32Async(LastOffsetDelta, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt64Async(FirstTimestamp, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt64Async(MaxTimestamp, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt64Async(ProducerId, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt16Async(ProducerEpoch, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteInt32Async(BaseSequence, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteNullableArrayAsync(cancellationToken, Records)
+                .ConfigureAwait(false);
         }
     }
 }

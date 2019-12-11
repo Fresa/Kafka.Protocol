@@ -21,7 +21,9 @@ namespace Kafka.TestServer
 
         public async Task<INetworkClient> WaitForConnectedClientAsync(CancellationToken cancellationToken = default)
         {
-            var client = await _waitingClients.ReceiveAsync(cancellationToken);
+            var client = await _waitingClients
+                .ReceiveAsync(cancellationToken)
+                .ConfigureAwait(false);
             _clients.Enqueue(client);
             return client;
         }
