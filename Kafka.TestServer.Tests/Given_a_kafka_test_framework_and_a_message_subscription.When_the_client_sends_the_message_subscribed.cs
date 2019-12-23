@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using FluentAssertions;
 using Kafka.Protocol;
 using Test.It.With.XUnit;
 using Xunit;
@@ -11,6 +12,8 @@ namespace Kafka.TestServer.Tests
         {
             private readonly InMemoryKafkaTestFramework _testServer = 
                 KafkaTestFramework.InMemory();
+
+            private ResponsePayload _response;
 
             protected override Task GivenAsync()
             {
@@ -35,9 +38,6 @@ namespace Kafka.TestServer.Tests
                         .CreateRequestClientAsync()
                         .ConfigureAwait(false);
                     
-                    await using var _ = client
-                        .ConfigureAwait(false);
-                    
                     var requestPayload = new RequestPayload(
                         new RequestHeader(RequestHeader.MaxVersion)
                             .WithRequestApiKey(ApiVersionsRequest.ApiKey)
@@ -49,16 +49,16 @@ namespace Kafka.TestServer.Tests
                         .SendAsync(requestPayload)
                         .ConfigureAwait(false);
 
-                    var response = await client
+                    _response = await client
                         .ReadAsync(requestPayload)
                         .ConfigureAwait(false);
                 }
             }
 
             [Fact]
-            public void The_subscription_should_receive_the_message()
+            public void The_subscription_should_receive_a_api_versions_response()
             {
-
+                _response.Message.Should().BeOfType<ApiVersionsResponse>();
             }
 
             protected override async Task DisposeAsync(bool disposing)

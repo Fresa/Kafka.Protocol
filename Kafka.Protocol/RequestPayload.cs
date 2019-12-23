@@ -34,15 +34,17 @@ namespace Kafka.Protocol
             IKafkaReader kafkaReader,
             CancellationToken cancellationToken = default)
         {
+            // Read payload size
             await kafkaReader.ReadInt32Async(cancellationToken)
                 .ConfigureAwait(false);
+            
             var header = await RequestHeader.FromReaderAsync(
                 version,
                 kafkaReader,
                 cancellationToken)
                 .ConfigureAwait(false);
 
-            var message = await Messages.CreateMessageFromReaderAsync(
+            var message = await Messages.CreateRequestMessageFromReaderAsync(
                 header.RequestApiKey,
                 header.RequestApiVersion,
                 kafkaReader,

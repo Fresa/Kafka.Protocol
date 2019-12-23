@@ -6,5 +6,10 @@
         {
             return message.Type.ToUpper() == "RESPONSE";
         }
+
+        public static bool IsRequest(this Message message)
+        {
+            return message.Type.ToUpper() == "REQUEST";
+        }
     }
 }

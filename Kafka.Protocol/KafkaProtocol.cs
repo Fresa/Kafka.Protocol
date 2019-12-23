@@ -1960,7 +1960,7 @@ namespace Kafka.Protocol
 
 	public static class Messages 
 	{
-		public static async ValueTask<Message> CreateMessageFromReaderAsync(
+		public static async ValueTask<Message> CreateRequestMessageFromReaderAsync(
 			Int16 apiKey, 
 			Int16 version, 
 			IKafkaReader reader, 
@@ -1971,19 +1971,9 @@ namespace Kafka.Protocol
 				return await AddOffsetsToTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (AddOffsetsToTxnResponse.ApiKey == apiKey)
-			{
-				return await AddOffsetsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (AddPartitionsToTxnRequest.ApiKey == apiKey)
 			{
 				return await AddPartitionsToTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
-			{
-				return await AddPartitionsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (AlterConfigsRequest.ApiKey == apiKey)
@@ -1991,19 +1981,9 @@ namespace Kafka.Protocol
 				return await AlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (AlterConfigsResponse.ApiKey == apiKey)
-			{
-				return await AlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (AlterReplicaLogDirsRequest.ApiKey == apiKey)
 			{
 				return await AlterReplicaLogDirsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (AlterReplicaLogDirsResponse.ApiKey == apiKey)
-			{
-				return await AlterReplicaLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (ApiVersionsRequest.ApiKey == apiKey)
@@ -2011,19 +1991,9 @@ namespace Kafka.Protocol
 				return await ApiVersionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (ApiVersionsResponse.ApiKey == apiKey)
-			{
-				return await ApiVersionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (ControlledShutdownRequest.ApiKey == apiKey)
 			{
 				return await ControlledShutdownRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (ControlledShutdownResponse.ApiKey == apiKey)
-			{
-				return await ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (CreateAclsRequest.ApiKey == apiKey)
@@ -2031,19 +2001,9 @@ namespace Kafka.Protocol
 				return await CreateAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (CreateAclsResponse.ApiKey == apiKey)
-			{
-				return await CreateAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (CreateDelegationTokenRequest.ApiKey == apiKey)
 			{
 				return await CreateDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (CreateDelegationTokenResponse.ApiKey == apiKey)
-			{
-				return await CreateDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (CreatePartitionsRequest.ApiKey == apiKey)
@@ -2051,19 +2011,9 @@ namespace Kafka.Protocol
 				return await CreatePartitionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (CreatePartitionsResponse.ApiKey == apiKey)
-			{
-				return await CreatePartitionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (CreateTopicsRequest.ApiKey == apiKey)
 			{
 				return await CreateTopicsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (CreateTopicsResponse.ApiKey == apiKey)
-			{
-				return await CreateTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (DeleteAclsRequest.ApiKey == apiKey)
@@ -2071,19 +2021,9 @@ namespace Kafka.Protocol
 				return await DeleteAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (DeleteAclsResponse.ApiKey == apiKey)
-			{
-				return await DeleteAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (DeleteGroupsRequest.ApiKey == apiKey)
 			{
 				return await DeleteGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (DeleteGroupsResponse.ApiKey == apiKey)
-			{
-				return await DeleteGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (DeleteRecordsRequest.ApiKey == apiKey)
@@ -2091,19 +2031,9 @@ namespace Kafka.Protocol
 				return await DeleteRecordsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (DeleteRecordsResponse.ApiKey == apiKey)
-			{
-				return await DeleteRecordsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (DeleteTopicsRequest.ApiKey == apiKey)
 			{
 				return await DeleteTopicsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (DeleteTopicsResponse.ApiKey == apiKey)
-			{
-				return await DeleteTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (DescribeAclsRequest.ApiKey == apiKey)
@@ -2111,19 +2041,9 @@ namespace Kafka.Protocol
 				return await DescribeAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (DescribeAclsResponse.ApiKey == apiKey)
-			{
-				return await DescribeAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (DescribeConfigsRequest.ApiKey == apiKey)
 			{
 				return await DescribeConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (DescribeConfigsResponse.ApiKey == apiKey)
-			{
-				return await DescribeConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (DescribeDelegationTokenRequest.ApiKey == apiKey)
@@ -2131,19 +2051,9 @@ namespace Kafka.Protocol
 				return await DescribeDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (DescribeDelegationTokenResponse.ApiKey == apiKey)
-			{
-				return await DescribeDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (DescribeGroupsRequest.ApiKey == apiKey)
 			{
 				return await DescribeGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (DescribeGroupsResponse.ApiKey == apiKey)
-			{
-				return await DescribeGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (DescribeLogDirsRequest.ApiKey == apiKey)
@@ -2151,19 +2061,9 @@ namespace Kafka.Protocol
 				return await DescribeLogDirsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (DescribeLogDirsResponse.ApiKey == apiKey)
-			{
-				return await DescribeLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (ElectLeadersRequest.ApiKey == apiKey)
 			{
 				return await ElectLeadersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (ElectLeadersResponse.ApiKey == apiKey)
-			{
-				return await ElectLeadersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (EndTxnRequest.ApiKey == apiKey)
@@ -2171,19 +2071,9 @@ namespace Kafka.Protocol
 				return await EndTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (EndTxnResponse.ApiKey == apiKey)
-			{
-				return await EndTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (ExpireDelegationTokenRequest.ApiKey == apiKey)
 			{
 				return await ExpireDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (ExpireDelegationTokenResponse.ApiKey == apiKey)
-			{
-				return await ExpireDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (FetchRequest.ApiKey == apiKey)
@@ -2191,19 +2081,9 @@ namespace Kafka.Protocol
 				return await FetchRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (FetchResponse.ApiKey == apiKey)
-			{
-				return await FetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (FindCoordinatorRequest.ApiKey == apiKey)
 			{
 				return await FindCoordinatorRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (FindCoordinatorResponse.ApiKey == apiKey)
-			{
-				return await FindCoordinatorResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (HeartbeatRequest.ApiKey == apiKey)
@@ -2211,19 +2091,9 @@ namespace Kafka.Protocol
 				return await HeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (HeartbeatResponse.ApiKey == apiKey)
-			{
-				return await HeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (IncrementalAlterConfigsRequest.ApiKey == apiKey)
 			{
 				return await IncrementalAlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
-			{
-				return await IncrementalAlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (InitProducerIdRequest.ApiKey == apiKey)
@@ -2231,19 +2101,9 @@ namespace Kafka.Protocol
 				return await InitProducerIdRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (InitProducerIdResponse.ApiKey == apiKey)
-			{
-				return await InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (JoinGroupRequest.ApiKey == apiKey)
 			{
 				return await JoinGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (JoinGroupResponse.ApiKey == apiKey)
-			{
-				return await JoinGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (LeaderAndIsrRequest.ApiKey == apiKey)
@@ -2251,19 +2111,9 @@ namespace Kafka.Protocol
 				return await LeaderAndIsrRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (LeaderAndIsrResponse.ApiKey == apiKey)
-			{
-				return await LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (LeaveGroupRequest.ApiKey == apiKey)
 			{
 				return await LeaveGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (LeaveGroupResponse.ApiKey == apiKey)
-			{
-				return await LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (ListGroupsRequest.ApiKey == apiKey)
@@ -2271,19 +2121,9 @@ namespace Kafka.Protocol
 				return await ListGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (ListGroupsResponse.ApiKey == apiKey)
-			{
-				return await ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (ListOffsetRequest.ApiKey == apiKey)
 			{
 				return await ListOffsetRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (ListOffsetResponse.ApiKey == apiKey)
-			{
-				return await ListOffsetResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (MetadataRequest.ApiKey == apiKey)
@@ -2291,19 +2131,9 @@ namespace Kafka.Protocol
 				return await MetadataRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (MetadataResponse.ApiKey == apiKey)
-			{
-				return await MetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (OffsetCommitRequest.ApiKey == apiKey)
 			{
 				return await OffsetCommitRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (OffsetCommitResponse.ApiKey == apiKey)
-			{
-				return await OffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (OffsetFetchRequest.ApiKey == apiKey)
@@ -2311,19 +2141,9 @@ namespace Kafka.Protocol
 				return await OffsetFetchRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (OffsetFetchResponse.ApiKey == apiKey)
-			{
-				return await OffsetFetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (OffsetForLeaderEpochRequest.ApiKey == apiKey)
 			{
 				return await OffsetForLeaderEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (OffsetForLeaderEpochResponse.ApiKey == apiKey)
-			{
-				return await OffsetForLeaderEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (ProduceRequest.ApiKey == apiKey)
@@ -2331,29 +2151,9 @@ namespace Kafka.Protocol
 				return await ProduceRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (ProduceResponse.ApiKey == apiKey)
-			{
-				return await ProduceResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (RenewDelegationTokenRequest.ApiKey == apiKey)
 			{
 				return await RenewDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (RenewDelegationTokenResponse.ApiKey == apiKey)
-			{
-				return await RenewDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (RequestHeader.ApiKey == apiKey)
-			{
-				return await RequestHeader.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (ResponseHeader.ApiKey == apiKey)
-			{
-				return await ResponseHeader.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (SaslAuthenticateRequest.ApiKey == apiKey)
@@ -2361,19 +2161,9 @@ namespace Kafka.Protocol
 				return await SaslAuthenticateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (SaslAuthenticateResponse.ApiKey == apiKey)
-			{
-				return await SaslAuthenticateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (SaslHandshakeRequest.ApiKey == apiKey)
 			{
 				return await SaslHandshakeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (SaslHandshakeResponse.ApiKey == apiKey)
-			{
-				return await SaslHandshakeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (StopReplicaRequest.ApiKey == apiKey)
@@ -2381,19 +2171,9 @@ namespace Kafka.Protocol
 				return await StopReplicaRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (StopReplicaResponse.ApiKey == apiKey)
-			{
-				return await StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (SyncGroupRequest.ApiKey == apiKey)
 			{
 				return await SyncGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
-			if (SyncGroupResponse.ApiKey == apiKey)
-			{
-				return await SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (TxnOffsetCommitRequest.ApiKey == apiKey)
@@ -2401,24 +2181,243 @@ namespace Kafka.Protocol
 				return await TxnOffsetCommitRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (TxnOffsetCommitResponse.ApiKey == apiKey)
-			{
-				return await TxnOffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (UpdateMetadataRequest.ApiKey == apiKey)
 			{
 				return await UpdateMetadataRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (UpdateMetadataResponse.ApiKey == apiKey)
-			{
-				return await UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (WriteTxnMarkersRequest.ApiKey == apiKey)
 			{
 				return await WriteTxnMarkersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			throw new ArgumentException($"{apiKey} is not supported");
+		}
+
+		public static async ValueTask<Message> CreateResponseMessageFromReaderAsync(
+			Int16 apiKey, 
+			Int16 version, 
+			IKafkaReader reader, 
+			CancellationToken cancellationToken = default)
+		{
+			if (AddOffsetsToTxnResponse.ApiKey == apiKey)
+			{
+				return await AddOffsetsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
+			{
+				return await AddPartitionsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (AlterConfigsResponse.ApiKey == apiKey)
+			{
+				return await AlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (AlterReplicaLogDirsResponse.ApiKey == apiKey)
+			{
+				return await AlterReplicaLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (ApiVersionsResponse.ApiKey == apiKey)
+			{
+				return await ApiVersionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (ControlledShutdownResponse.ApiKey == apiKey)
+			{
+				return await ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (CreateAclsResponse.ApiKey == apiKey)
+			{
+				return await CreateAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (CreateDelegationTokenResponse.ApiKey == apiKey)
+			{
+				return await CreateDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (CreatePartitionsResponse.ApiKey == apiKey)
+			{
+				return await CreatePartitionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (CreateTopicsResponse.ApiKey == apiKey)
+			{
+				return await CreateTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DeleteAclsResponse.ApiKey == apiKey)
+			{
+				return await DeleteAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DeleteGroupsResponse.ApiKey == apiKey)
+			{
+				return await DeleteGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DeleteRecordsResponse.ApiKey == apiKey)
+			{
+				return await DeleteRecordsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DeleteTopicsResponse.ApiKey == apiKey)
+			{
+				return await DeleteTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DescribeAclsResponse.ApiKey == apiKey)
+			{
+				return await DescribeAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DescribeConfigsResponse.ApiKey == apiKey)
+			{
+				return await DescribeConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DescribeDelegationTokenResponse.ApiKey == apiKey)
+			{
+				return await DescribeDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DescribeGroupsResponse.ApiKey == apiKey)
+			{
+				return await DescribeGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (DescribeLogDirsResponse.ApiKey == apiKey)
+			{
+				return await DescribeLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (ElectLeadersResponse.ApiKey == apiKey)
+			{
+				return await ElectLeadersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (EndTxnResponse.ApiKey == apiKey)
+			{
+				return await EndTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (ExpireDelegationTokenResponse.ApiKey == apiKey)
+			{
+				return await ExpireDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (FetchResponse.ApiKey == apiKey)
+			{
+				return await FetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (FindCoordinatorResponse.ApiKey == apiKey)
+			{
+				return await FindCoordinatorResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (HeartbeatResponse.ApiKey == apiKey)
+			{
+				return await HeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
+			{
+				return await IncrementalAlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (InitProducerIdResponse.ApiKey == apiKey)
+			{
+				return await InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (JoinGroupResponse.ApiKey == apiKey)
+			{
+				return await JoinGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (LeaderAndIsrResponse.ApiKey == apiKey)
+			{
+				return await LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (LeaveGroupResponse.ApiKey == apiKey)
+			{
+				return await LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (ListGroupsResponse.ApiKey == apiKey)
+			{
+				return await ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (ListOffsetResponse.ApiKey == apiKey)
+			{
+				return await ListOffsetResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (MetadataResponse.ApiKey == apiKey)
+			{
+				return await MetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (OffsetCommitResponse.ApiKey == apiKey)
+			{
+				return await OffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (OffsetFetchResponse.ApiKey == apiKey)
+			{
+				return await OffsetFetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (OffsetForLeaderEpochResponse.ApiKey == apiKey)
+			{
+				return await OffsetForLeaderEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (ProduceResponse.ApiKey == apiKey)
+			{
+				return await ProduceResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (RenewDelegationTokenResponse.ApiKey == apiKey)
+			{
+				return await RenewDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (SaslAuthenticateResponse.ApiKey == apiKey)
+			{
+				return await SaslAuthenticateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (SaslHandshakeResponse.ApiKey == apiKey)
+			{
+				return await SaslHandshakeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (StopReplicaResponse.ApiKey == apiKey)
+			{
+				return await StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (SyncGroupResponse.ApiKey == apiKey)
+			{
+				return await SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (TxnOffsetCommitResponse.ApiKey == apiKey)
+			{
+				return await TxnOffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (UpdateMetadataResponse.ApiKey == apiKey)
+			{
+				return await UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
 			if (WriteTxnMarkersResponse.ApiKey == apiKey)
