@@ -34,15 +34,19 @@ namespace Kafka.Protocol
             IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
+            // Read payload size
+            await reader.ReadInt32Async(cancellationToken)
+                .ConfigureAwait(false);
+
             var header = await ResponseHeader.FromReaderAsync(
                 requestPayload.Header.Version,
                 reader,
                 cancellationToken)
                 .ConfigureAwait(false);
 
-            var message = await Messages.CreateMessageFromReaderAsync(
+            var message = await Messages.CreateResponseMessageFromReaderAsync(
                 requestPayload.Header.RequestApiKey, 
-                requestPayload.Header.Version,
+                requestPayload.Header.RequestApiVersion,
                 reader,
                 cancellationToken)
                 .ConfigureAwait(false);
@@ -50,6 +54,4 @@ namespace Kafka.Protocol
             return new ResponsePayload(requestPayload, header, message);
         }
     }
-
-    public interface IPayload : ISerialize { }
 }
