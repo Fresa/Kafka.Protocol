@@ -61,6 +61,57 @@ namespace Kafka.TestServer.Tests
                 _response.Message.Should().BeOfType<ApiVersionsResponse>();
             }
 
+            [Fact]
+            public void The_subscription_should_receive_a_api_versions_response_with_correlation_id()
+            {
+                _response.Header.CorrelationId.Should().Be(Int32.From(12));
+            }
+
+            [Fact]
+            public void The_subscription_should_receive_a_api_versions_response_with_throttle_time()
+            {
+                _response.Message.As<ApiVersionsResponse>()
+                    .ThrottleTimeMs.Should().Be(Int32.From(100));
+            }
+
+            [Fact]
+            public void The_subscription_should_receive_a_api_versions_response_with_one_api_key()
+            {
+                _response.Message.As<ApiVersionsResponse>()
+                    .ApiKeysCollection.Should().HaveCount(1);
+            }
+
+            [Fact]
+            public void The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_key()
+            {
+                _response.Message.As<ApiVersionsResponse>()
+                    .ApiKeysCollection.Should().ContainKey(FetchRequest.ApiKey);
+            }
+
+            [Fact]
+            public void The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_index()
+            {
+                _response.Message.As<ApiVersionsResponse>()
+                    .ApiKeysCollection[FetchRequest.ApiKey].Index.Should()
+                    .Be(FetchRequest.ApiKey);
+            }
+
+            [Fact]
+            public void The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_min_version()
+            {
+                _response.Message.As<ApiVersionsResponse>()
+                    .ApiKeysCollection[FetchRequest.ApiKey].MinVersion.Should()
+                    .Be(FetchRequest.MinVersion);
+            }
+
+            [Fact]
+            public void The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_max_version()
+            {
+                _response.Message.As<ApiVersionsResponse>()
+                    .ApiKeysCollection[FetchRequest.ApiKey].MaxVersion.Should()
+                    .Be(FetchRequest.MaxVersion);
+            }
+
             protected override async Task DisposeAsync(bool disposing)
             {
                 await _testServer
