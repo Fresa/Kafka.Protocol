@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj" />
-    <ProjectReference Include="..\Kafka.Protocol.MessageDefinitionsDownloader\Kafka.Protocol.MessageDefinitionsDownloader.csproj" />
+    <ProjectReference Include="..\..\Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj" />
+    <ProjectReference Include="..\..\Kafka.Protocol.MessageDefinitionsDownloader\Kafka.Protocol.MessageDefinitionsDownloader.csproj" />
   </ItemGroup>
 
 </Project>

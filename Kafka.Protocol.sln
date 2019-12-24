@@ -18,20 +18,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.MessageDefin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.TestServer", "Kafka.TestServer\Kafka.TestServer.csproj", "{E7CB5461-9336-4CF2-B6A4-342F9865854D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.TestServer.Tests", "Kafka.TestServer.Tests\Kafka.TestServer.Tests.csproj", "{75CB2375-13BC-467B-9A75-FAEC26098F71}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator.Helpers", "Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj", "{7988D25A-A761-42F2-B1E7-CDE857B573AD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator", "Kafka.Protocol.Generator\Kafka.Protocol.Generator.csproj", "{7952E593-14F3-4EFB-8F82-76475DF3C9AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.MessageDefinitionsDownloader.Tests", "Kafka.Protocol.MessageDefinitionsDownloader.Tests\Kafka.Protocol.MessageDefinitionsDownloader.Tests.csproj", "{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE41D0DC-B682-4692-ADFB-789A405916B9}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kafka.Protocol.Generator.Transformation", "Kafka.Protocol.Generator.Transformation\Kafka.Protocol.Generator.Transformation.csproj", "{841BD9E7-817C-427D-8DA2-2723B2D9A489}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator.Transformation", "Kafka.Protocol.Generator.Transformation\Kafka.Protocol.Generator.Transformation.csproj", "{841BD9E7-817C-427D-8DA2-2723B2D9A489}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.TestServer.Tests", "Tests\Kafka.TestServer.Tests\Kafka.TestServer.Tests.csproj", "{DE1F2D80-E242-4849-AB14-618F6133D71D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.MessageDefinitionsDownloader.Tests", "Tests\Kafka.Protocol.MessageDefinitionsDownloader.Tests\Kafka.Protocol.MessageDefinitionsDownloader.Tests.csproj", "{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +60,6 @@ Global
 		{E7CB5461-9336-4CF2-B6A4-342F9865854D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7CB5461-9336-4CF2-B6A4-342F9865854D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7CB5461-9336-4CF2-B6A4-342F9865854D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75CB2375-13BC-467B-9A75-FAEC26098F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75CB2375-13BC-467B-9A75-FAEC26098F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75CB2375-13BC-467B-9A75-FAEC26098F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75CB2375-13BC-467B-9A75-FAEC26098F71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7988D25A-A761-42F2-B1E7-CDE857B573AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7988D25A-A761-42F2-B1E7-CDE857B573AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7988D25A-A761-42F2-B1E7-CDE857B573AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -71,14 +68,18 @@ Global
 		{7952E593-14F3-4EFB-8F82-76475DF3C9AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7952E593-14F3-4EFB-8F82-76475DF3C9AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7952E593-14F3-4EFB-8F82-76475DF3C9AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{841BD9E7-817C-427D-8DA2-2723B2D9A489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{841BD9E7-817C-427D-8DA2-2723B2D9A489}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{841BD9E7-817C-427D-8DA2-2723B2D9A489}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{841BD9E7-817C-427D-8DA2-2723B2D9A489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE1F2D80-E242-4849-AB14-618F6133D71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE1F2D80-E242-4849-AB14-618F6133D71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE1F2D80-E242-4849-AB14-618F6133D71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE1F2D80-E242-4849-AB14-618F6133D71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,8 +87,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{90B84C2C-E103-4F94-A76E-4FB74D64BD76} = {D896A914-149B-4AB4-8C8B-405753509786}
 		{B6F3A296-464C-4B91-8412-066B78D6E3C8} = {D896A914-149B-4AB4-8C8B-405753509786}
-		{75CB2375-13BC-467B-9A75-FAEC26098F71} = {D896A914-149B-4AB4-8C8B-405753509786}
-		{9545E8E7-294F-48CF-9341-8F8ABC55FDB6} = {D896A914-149B-4AB4-8C8B-405753509786}
+		{DE1F2D80-E242-4849-AB14-618F6133D71D} = {D896A914-149B-4AB4-8C8B-405753509786}
+		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E} = {D896A914-149B-4AB4-8C8B-405753509786}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75056C89-9C3C-4F96-A5B4-502CFFBEEC21}
