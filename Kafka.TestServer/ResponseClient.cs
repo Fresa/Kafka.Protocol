@@ -22,7 +22,7 @@ namespace Kafka.TestServer
         {
             return await RequestPayload
                 .ReadFromAsync(
-                    RequestPayload.MaxVersion,
+                    RequestHeader.MaxVersion,
                     Reader,
                     cancellationToken)
                 .ConfigureAwait(false);
