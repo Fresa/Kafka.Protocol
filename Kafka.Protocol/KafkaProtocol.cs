@@ -27412,4 +27412,191 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public static class ResponseExtensions
+	{
+		public static ApiVersionsResponse WithAllApiKeys(this ApiVersionsResponse response)
+		{
+			return response.WithApiKeysCollection(
+				key => key
+					.WithIndex(AddOffsetsToTxnRequest.ApiKey)
+					.WithMinVersion(AddOffsetsToTxnRequest.MinVersion)
+					.WithMaxVersion(AddOffsetsToTxnRequest.MaxVersion),
+				key => key
+					.WithIndex(AddPartitionsToTxnRequest.ApiKey)
+					.WithMinVersion(AddPartitionsToTxnRequest.MinVersion)
+					.WithMaxVersion(AddPartitionsToTxnRequest.MaxVersion),
+				key => key
+					.WithIndex(AlterConfigsRequest.ApiKey)
+					.WithMinVersion(AlterConfigsRequest.MinVersion)
+					.WithMaxVersion(AlterConfigsRequest.MaxVersion),
+				key => key
+					.WithIndex(AlterReplicaLogDirsRequest.ApiKey)
+					.WithMinVersion(AlterReplicaLogDirsRequest.MinVersion)
+					.WithMaxVersion(AlterReplicaLogDirsRequest.MaxVersion),
+				key => key
+					.WithIndex(ApiVersionsRequest.ApiKey)
+					.WithMinVersion(ApiVersionsRequest.MinVersion)
+					.WithMaxVersion(ApiVersionsRequest.MaxVersion),
+				key => key
+					.WithIndex(ControlledShutdownRequest.ApiKey)
+					.WithMinVersion(ControlledShutdownRequest.MinVersion)
+					.WithMaxVersion(ControlledShutdownRequest.MaxVersion),
+				key => key
+					.WithIndex(CreateAclsRequest.ApiKey)
+					.WithMinVersion(CreateAclsRequest.MinVersion)
+					.WithMaxVersion(CreateAclsRequest.MaxVersion),
+				key => key
+					.WithIndex(CreateDelegationTokenRequest.ApiKey)
+					.WithMinVersion(CreateDelegationTokenRequest.MinVersion)
+					.WithMaxVersion(CreateDelegationTokenRequest.MaxVersion),
+				key => key
+					.WithIndex(CreatePartitionsRequest.ApiKey)
+					.WithMinVersion(CreatePartitionsRequest.MinVersion)
+					.WithMaxVersion(CreatePartitionsRequest.MaxVersion),
+				key => key
+					.WithIndex(CreateTopicsRequest.ApiKey)
+					.WithMinVersion(CreateTopicsRequest.MinVersion)
+					.WithMaxVersion(CreateTopicsRequest.MaxVersion),
+				key => key
+					.WithIndex(DeleteAclsRequest.ApiKey)
+					.WithMinVersion(DeleteAclsRequest.MinVersion)
+					.WithMaxVersion(DeleteAclsRequest.MaxVersion),
+				key => key
+					.WithIndex(DeleteGroupsRequest.ApiKey)
+					.WithMinVersion(DeleteGroupsRequest.MinVersion)
+					.WithMaxVersion(DeleteGroupsRequest.MaxVersion),
+				key => key
+					.WithIndex(DeleteRecordsRequest.ApiKey)
+					.WithMinVersion(DeleteRecordsRequest.MinVersion)
+					.WithMaxVersion(DeleteRecordsRequest.MaxVersion),
+				key => key
+					.WithIndex(DeleteTopicsRequest.ApiKey)
+					.WithMinVersion(DeleteTopicsRequest.MinVersion)
+					.WithMaxVersion(DeleteTopicsRequest.MaxVersion),
+				key => key
+					.WithIndex(DescribeAclsRequest.ApiKey)
+					.WithMinVersion(DescribeAclsRequest.MinVersion)
+					.WithMaxVersion(DescribeAclsRequest.MaxVersion),
+				key => key
+					.WithIndex(DescribeConfigsRequest.ApiKey)
+					.WithMinVersion(DescribeConfigsRequest.MinVersion)
+					.WithMaxVersion(DescribeConfigsRequest.MaxVersion),
+				key => key
+					.WithIndex(DescribeDelegationTokenRequest.ApiKey)
+					.WithMinVersion(DescribeDelegationTokenRequest.MinVersion)
+					.WithMaxVersion(DescribeDelegationTokenRequest.MaxVersion),
+				key => key
+					.WithIndex(DescribeGroupsRequest.ApiKey)
+					.WithMinVersion(DescribeGroupsRequest.MinVersion)
+					.WithMaxVersion(DescribeGroupsRequest.MaxVersion),
+				key => key
+					.WithIndex(DescribeLogDirsRequest.ApiKey)
+					.WithMinVersion(DescribeLogDirsRequest.MinVersion)
+					.WithMaxVersion(DescribeLogDirsRequest.MaxVersion),
+				key => key
+					.WithIndex(ElectLeadersRequest.ApiKey)
+					.WithMinVersion(ElectLeadersRequest.MinVersion)
+					.WithMaxVersion(ElectLeadersRequest.MaxVersion),
+				key => key
+					.WithIndex(EndTxnRequest.ApiKey)
+					.WithMinVersion(EndTxnRequest.MinVersion)
+					.WithMaxVersion(EndTxnRequest.MaxVersion),
+				key => key
+					.WithIndex(ExpireDelegationTokenRequest.ApiKey)
+					.WithMinVersion(ExpireDelegationTokenRequest.MinVersion)
+					.WithMaxVersion(ExpireDelegationTokenRequest.MaxVersion),
+				key => key
+					.WithIndex(FetchRequest.ApiKey)
+					.WithMinVersion(FetchRequest.MinVersion)
+					.WithMaxVersion(FetchRequest.MaxVersion),
+				key => key
+					.WithIndex(FindCoordinatorRequest.ApiKey)
+					.WithMinVersion(FindCoordinatorRequest.MinVersion)
+					.WithMaxVersion(FindCoordinatorRequest.MaxVersion),
+				key => key
+					.WithIndex(HeartbeatRequest.ApiKey)
+					.WithMinVersion(HeartbeatRequest.MinVersion)
+					.WithMaxVersion(HeartbeatRequest.MaxVersion),
+				key => key
+					.WithIndex(IncrementalAlterConfigsRequest.ApiKey)
+					.WithMinVersion(IncrementalAlterConfigsRequest.MinVersion)
+					.WithMaxVersion(IncrementalAlterConfigsRequest.MaxVersion),
+				key => key
+					.WithIndex(InitProducerIdRequest.ApiKey)
+					.WithMinVersion(InitProducerIdRequest.MinVersion)
+					.WithMaxVersion(InitProducerIdRequest.MaxVersion),
+				key => key
+					.WithIndex(JoinGroupRequest.ApiKey)
+					.WithMinVersion(JoinGroupRequest.MinVersion)
+					.WithMaxVersion(JoinGroupRequest.MaxVersion),
+				key => key
+					.WithIndex(LeaderAndIsrRequest.ApiKey)
+					.WithMinVersion(LeaderAndIsrRequest.MinVersion)
+					.WithMaxVersion(LeaderAndIsrRequest.MaxVersion),
+				key => key
+					.WithIndex(LeaveGroupRequest.ApiKey)
+					.WithMinVersion(LeaveGroupRequest.MinVersion)
+					.WithMaxVersion(LeaveGroupRequest.MaxVersion),
+				key => key
+					.WithIndex(ListGroupsRequest.ApiKey)
+					.WithMinVersion(ListGroupsRequest.MinVersion)
+					.WithMaxVersion(ListGroupsRequest.MaxVersion),
+				key => key
+					.WithIndex(ListOffsetRequest.ApiKey)
+					.WithMinVersion(ListOffsetRequest.MinVersion)
+					.WithMaxVersion(ListOffsetRequest.MaxVersion),
+				key => key
+					.WithIndex(MetadataRequest.ApiKey)
+					.WithMinVersion(MetadataRequest.MinVersion)
+					.WithMaxVersion(MetadataRequest.MaxVersion),
+				key => key
+					.WithIndex(OffsetCommitRequest.ApiKey)
+					.WithMinVersion(OffsetCommitRequest.MinVersion)
+					.WithMaxVersion(OffsetCommitRequest.MaxVersion),
+				key => key
+					.WithIndex(OffsetFetchRequest.ApiKey)
+					.WithMinVersion(OffsetFetchRequest.MinVersion)
+					.WithMaxVersion(OffsetFetchRequest.MaxVersion),
+				key => key
+					.WithIndex(OffsetForLeaderEpochRequest.ApiKey)
+					.WithMinVersion(OffsetForLeaderEpochRequest.MinVersion)
+					.WithMaxVersion(OffsetForLeaderEpochRequest.MaxVersion),
+				key => key
+					.WithIndex(ProduceRequest.ApiKey)
+					.WithMinVersion(ProduceRequest.MinVersion)
+					.WithMaxVersion(ProduceRequest.MaxVersion),
+				key => key
+					.WithIndex(RenewDelegationTokenRequest.ApiKey)
+					.WithMinVersion(RenewDelegationTokenRequest.MinVersion)
+					.WithMaxVersion(RenewDelegationTokenRequest.MaxVersion),
+				key => key
+					.WithIndex(SaslAuthenticateRequest.ApiKey)
+					.WithMinVersion(SaslAuthenticateRequest.MinVersion)
+					.WithMaxVersion(SaslAuthenticateRequest.MaxVersion),
+				key => key
+					.WithIndex(SaslHandshakeRequest.ApiKey)
+					.WithMinVersion(SaslHandshakeRequest.MinVersion)
+					.WithMaxVersion(SaslHandshakeRequest.MaxVersion),
+				key => key
+					.WithIndex(StopReplicaRequest.ApiKey)
+					.WithMinVersion(StopReplicaRequest.MinVersion)
+					.WithMaxVersion(StopReplicaRequest.MaxVersion),
+				key => key
+					.WithIndex(SyncGroupRequest.ApiKey)
+					.WithMinVersion(SyncGroupRequest.MinVersion)
+					.WithMaxVersion(SyncGroupRequest.MaxVersion),
+				key => key
+					.WithIndex(TxnOffsetCommitRequest.ApiKey)
+					.WithMinVersion(TxnOffsetCommitRequest.MinVersion)
+					.WithMaxVersion(TxnOffsetCommitRequest.MaxVersion),
+				key => key
+					.WithIndex(UpdateMetadataRequest.ApiKey)
+					.WithMinVersion(UpdateMetadataRequest.MinVersion)
+					.WithMaxVersion(UpdateMetadataRequest.MaxVersion),
+				key => key
+					.WithIndex(WriteTxnMarkersRequest.ApiKey)
+					.WithMinVersion(WriteTxnMarkersRequest.MinVersion)
+					.WithMaxVersion(WriteTxnMarkersRequest.MaxVersion));
+		}
+	}
 }

@@ -288,7 +288,31 @@ namespace Kafka.Protocol<# Block(() =>
 				#>	=> new <#= responseMessageDefinition.Name #>(Version);<#
 			}
 		}); _();
-	}); 
+	}); _();
+	
+	#>public static class ResponseExtensions<# Block(() => 
+	{
+		#>public static ApiVersionsResponse WithAllApiKeys(this ApiVersionsResponse response)<# Block(() => 
+		{
+			if (messageDefinitions.Any()) 
+			{
+				#>return response.WithApiKeysCollection(<# _();
+				PrintOnNewRowForEachWithIndex(messageDefinitions.Where(MessageExtensions.IsRequest), (messageDefinition, index, count) =>
+				{
+					#>	key => key<# _();
+					#>		.WithIndex(<#= messageDefinition.Name #>.ApiKey)<# _();
+					#>		.WithMinVersion(<#= messageDefinition.Name #>.MinVersion)<# _();
+					#>		.WithMaxVersion(<#= messageDefinition.Name #>.MaxVersion)<#
+
+					if (index + 1 < count) 
+					{
+						#>,<#
+					}
+				});
+				#>);<#
+			}		
+		});
+	});
 });
 
 void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, string prependBeforeField = "")
