@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
+using Kafka.Protocol;
+using Test.It.With.XUnit;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -12,32 +14,41 @@ namespace Kafka.TestServer.Tests
 {
     public partial class Given_a_client_and_a_server
     {
-        public class When_connecting_to_the_server
+        public class When_connecting_to_the_server : XUnit2SpecificationAsync
         {
             private readonly ITestOutputHelper _testOutputHelper;
+            private readonly SocketBasedKafkaTestFramework _testServer =
+                KafkaTestFramework.WithSocket();
 
             public When_connecting_to_the_server(ITestOutputHelper testOutputHelper)
             {
                 _testOutputHelper = testOutputHelper;
             }
 
-            [Fact]
-            public async Task It_should_connect()
+            protected override Task GivenAsync()
             {
-                var server = SocketServer.Start();
-                await using var _ = server.ConfigureAwait(false);
-                var connectedClientTask = server.WaitForConnectedClientAsync();
+                _testServer.On<ApiVersionsRequest, ApiVersionsResponse>(
+                    request => request.Respond()
+                        .WithThrottleTimeMs(Int32.From(100))
+                        .WithAllApiKeys());
 
-                var clientTask = ProduceMessageFromClientAsync(
-                    "localhost", 
-                    server.Port);
-                var connectedClient = await connectedClientTask
-                    .ConfigureAwait(false);
+                return Task.CompletedTask;
+            }
 
-                await using var client = ResponseClient.Start(connectedClient);
-                var message = await client.ReadAsync()
-                    .ConfigureAwait(false);
-                //await clientTask;
+            protected override async Task WhenAsync()
+            {
+                await using (_testServer.Start()
+                    .ConfigureAwait(false))
+                {
+                    ProduceMessageFromClientAsync("localhost",
+                        _testServer.Port);
+                    Thread.Sleep(5000);
+                }
+            }
+
+            [Fact]
+            public void It_should_connect()
+            {
             }
 
             private static async Task ProduceMessageFromClientAsync(string host, int port)
@@ -59,25 +70,6 @@ namespace Kafka.TestServer.Tests
                     .ProduceAsync("my-topic", new Message<Null, string> {Value = "test"})
                     .ConfigureAwait(false);
                 producer.Flush();
-            }
-
-            private async Task RunClient2(string host, int port)
-            {
-                var ipHostInfo = Dns.GetHostEntry(host);
-                var ipAddress = ipHostInfo.AddressList[0];
-                var remoteEP = new IPEndPoint(ipAddress, port);
-
-                var client = new Socket(
-                    ipAddress.AddressFamily,
-                    SocketType.Stream, ProtocolType.Tcp);
-
-                await client.ConnectAsync(remoteEP)
-                    .ConfigureAwait(false);
-
-                client.Send(Encoding.ASCII.GetBytes("This is a test"));
-
-                client.Shutdown(SocketShutdown.Both);
-                client.Close();
             }
         }
     }
