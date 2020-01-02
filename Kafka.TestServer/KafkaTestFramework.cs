@@ -28,14 +28,16 @@ namespace Kafka.TestServer
 
         public static SocketBasedKafkaTestFramework WithSocket()
         {
-            return new SocketBasedKafkaTestFramework();
+            var server = SocketServer.Start();
+            return new SocketBasedKafkaTestFramework(server);
         }
 
         public static SocketBasedKafkaTestFramework WithSocket(
             IPAddress localIpAddress,
             int port = 0)
         {
-            return new SocketBasedKafkaTestFramework(localIpAddress, port);
+            var server = SocketServer.Start(localIpAddress, port);
+            return new SocketBasedKafkaTestFramework(server);
         }
 
         internal KafkaTestFramework(INetworkServer networkServer)

@@ -4,14 +4,14 @@ namespace Kafka.TestServer
 {
     public sealed class SocketBasedKafkaTestFramework : KafkaTestFramework
     {
-        internal SocketBasedKafkaTestFramework()
-            : base(SocketServer.Start())
+        private readonly SocketServer _socketServer;
+
+        internal SocketBasedKafkaTestFramework(SocketServer socketServer)
+            : base(socketServer)
         {
+            _socketServer = socketServer;
         }
 
-        internal SocketBasedKafkaTestFramework(IPAddress localIpAddress, int port)
-            : base(SocketServer.Start(localIpAddress, port))
-        {
-        }
+        public int Port => _socketServer.Port;
     }
 }
