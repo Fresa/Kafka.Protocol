@@ -3,17 +3,26 @@ using FluentAssertions;
 using Kafka.Protocol;
 using Test.It.With.XUnit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Kafka.TestServer.Tests
 {
     public partial class Given_a_kafka_test_framework_and_a_message_subscription
     {
-        public partial class When_the_client_sends_the_message_subscribed : XUnit2SpecificationAsync
+        public partial class
+            When_the_client_sends_the_message_subscribed :
+                TestSpecificationAsync
         {
-            private readonly InMemoryKafkaTestFramework _testServer = 
+            private readonly InMemoryKafkaTestFramework _testServer =
                 KafkaTestFramework.InMemory();
 
             private ResponsePayload _response;
+
+            public When_the_client_sends_the_message_subscribed(
+                ITestOutputHelper testOutputHelper)
+                : base(testOutputHelper)
+            {
+            }
 
             protected override Task GivenAsync()
             {
@@ -37,11 +46,12 @@ namespace Kafka.TestServer.Tests
                     var client = await _testServer
                         .CreateRequestClientAsync()
                         .ConfigureAwait(false);
-                    
+
                     var requestPayload = new RequestPayload(
                         new RequestHeader(RequestHeader.MaxVersion)
                             .WithRequestApiKey(ApiVersionsRequest.ApiKey)
-                            .WithRequestApiVersion(ApiVersionsRequest.MaxVersion)
+                            .WithRequestApiVersion(
+                                ApiVersionsRequest.MaxVersion)
                             .WithCorrelationId(Int32.From(12)),
                         new ApiVersionsRequest(ApiVersionsRequest.MaxVersion));
 
@@ -56,40 +66,46 @@ namespace Kafka.TestServer.Tests
             }
 
             [Fact]
-            public void The_subscription_should_receive_a_api_versions_response()
+            public void
+                The_subscription_should_receive_a_api_versions_response()
             {
                 _response.Message.Should().BeOfType<ApiVersionsResponse>();
             }
 
             [Fact]
-            public void The_subscription_should_receive_a_api_versions_response_with_correlation_id()
+            public void
+                The_subscription_should_receive_a_api_versions_response_with_correlation_id()
             {
                 _response.Header.CorrelationId.Should().Be(Int32.From(12));
             }
 
             [Fact]
-            public void The_subscription_should_receive_a_api_versions_response_with_throttle_time()
+            public void
+                The_subscription_should_receive_a_api_versions_response_with_throttle_time()
             {
                 _response.Message.As<ApiVersionsResponse>()
                     .ThrottleTimeMs.Should().Be(Int32.From(100));
             }
 
             [Fact]
-            public void The_subscription_should_receive_a_api_versions_response_with_one_api_key()
+            public void
+                The_subscription_should_receive_a_api_versions_response_with_one_api_key()
             {
                 _response.Message.As<ApiVersionsResponse>()
                     .ApiKeysCollection.Should().HaveCount(1);
             }
 
             [Fact]
-            public void The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_key()
+            public void
+                The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_key()
             {
                 _response.Message.As<ApiVersionsResponse>()
                     .ApiKeysCollection.Should().ContainKey(FetchRequest.ApiKey);
             }
 
             [Fact]
-            public void The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_index()
+            public void
+                The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_index()
             {
                 _response.Message.As<ApiVersionsResponse>()
                     .ApiKeysCollection[FetchRequest.ApiKey].Index.Should()
@@ -97,7 +113,8 @@ namespace Kafka.TestServer.Tests
             }
 
             [Fact]
-            public void The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_min_version()
+            public void
+                The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_min_version()
             {
                 _response.Message.As<ApiVersionsResponse>()
                     .ApiKeysCollection[FetchRequest.ApiKey].MinVersion.Should()
@@ -105,7 +122,8 @@ namespace Kafka.TestServer.Tests
             }
 
             [Fact]
-            public void The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_max_version()
+            public void
+                The_subscription_should_receive_a_api_versions_response_with_fetch_request_api_max_version()
             {
                 _response.Message.As<ApiVersionsResponse>()
                     .ApiKeysCollection[FetchRequest.ApiKey].MaxVersion.Should()
