@@ -49,5 +49,7 @@ namespace Kafka.Protocol
         ValueTask<T[]?> ReadNullableArrayAsync<T>(Func<ValueTask<T>> factory,
             CancellationToken cancellationToken = default)
             where T : ISerialize;
+
+        IStreamLengthReport EnsureExpectedSize(in Int32 length);
     }
 }

@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Buffers;
+using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Log.It;
 
 namespace Kafka.Protocol
 {
     public class KafkaReader : IKafkaReader
     {
         private readonly PipeReader _reader;
+        private Dictionary<Guid, StreamLengthSupervisor> _streamLengthSupervisors = new Dictionary<Guid, StreamLengthSupervisor>();
 
         public KafkaReader(PipeReader reader)
         {
@@ -224,7 +227,7 @@ namespace Kafka.Protocol
         {
             if (length == 0)
             {
-                return new byte[0];
+                return Array.Empty<byte>();
             }
 
             ReadResult result;
@@ -244,7 +247,62 @@ namespace Kafka.Protocol
             
             var bytes = result.Buffer.Slice(0, length).ToArray();
             _reader.AdvanceTo(result.Buffer.GetPosition(length));
+
+            foreach (var streamLengthSupervisor in _streamLengthSupervisors.Values)
+            {
+                streamLengthSupervisor.IncreaseReadBytes(length);
+                streamLengthSupervisor.SetUnReadBytes((int)result.Buffer.Length - length);
+            }
+
             return bytes;
+        }
+
+        public IStreamLengthReport EnsureExpectedSize(in Int32 length)
+        {
+            var id = Guid.NewGuid();
+            var streamLengthSupervisor = new StreamLengthSupervisor(length, () => _streamLengthSupervisors.Remove(id));
+            _streamLengthSupervisors.Add(id, streamLengthSupervisor);
+            return streamLengthSupervisor;
+        }
+
+        private class StreamLengthSupervisor : IStreamLengthReport
+        {
+            private readonly Int32 _expectedSize;
+            private readonly Action _onDisposed;
+            private int _unreadSize;
+
+            private static readonly ILogger Logger =
+                LogFactory.Create<StreamLengthSupervisor>();
+
+            public StreamLengthSupervisor(in Int32 expectedSize, Action onDisposed)
+            {
+                _expectedSize = expectedSize;
+                _onDisposed = onDisposed;
+            }
+
+            public void IncreaseReadBytes(int size)
+            {
+                BytesRead += size;
+            }
+
+            public void SetUnReadBytes(int size)
+            {
+                _unreadSize = size;
+            }
+
+            public void Dispose()
+            {
+                Logger.Debug("Read {readBytes} bytes, got {unreadBytes} bytes unread", BytesRead, _unreadSize);
+
+                if (BytesRead != _expectedSize.Value)
+                {
+                    throw new InvalidOperationException($"Expected {_expectedSize} bytes but read {BytesRead} bytes");
+                }
+
+                _onDisposed();
+            }
+
+            public int BytesRead { get; private set; }
         }
     }
 }

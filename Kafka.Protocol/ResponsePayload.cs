@@ -35,23 +35,26 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default)
         {
             // Read payload size
-            await reader.ReadInt32Async(cancellationToken)
+            var payloadSize = await reader.ReadInt32Async(cancellationToken)
                 .ConfigureAwait(false);
+            using (reader.EnsureExpectedSize(payloadSize))
+            {
+                var header = await ResponseHeader.FromReaderAsync(
+                        requestPayload.Header.Version,
+                        reader,
+                        cancellationToken)
+                    .ConfigureAwait(false);
 
-            var header = await ResponseHeader.FromReaderAsync(
-                requestPayload.Header.Version,
-                reader,
-                cancellationToken)
-                .ConfigureAwait(false);
+                var message = await Messages
+                    .CreateResponseMessageFromReaderAsync(
+                        requestPayload.Header.RequestApiKey,
+                        requestPayload.Header.RequestApiVersion,
+                        reader,
+                        cancellationToken)
+                    .ConfigureAwait(false);
 
-            var message = await Messages.CreateResponseMessageFromReaderAsync(
-                requestPayload.Header.RequestApiKey, 
-                requestPayload.Header.RequestApiVersion,
-                reader,
-                cancellationToken)
-                .ConfigureAwait(false);
-
-            return new ResponsePayload(requestPayload, header, message);
+                return new ResponsePayload(requestPayload, header, message);
+            }
         }
     }
 }

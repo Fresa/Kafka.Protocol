@@ -1,11 +1,12 @@
 ﻿using System.Diagnostics;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Kafka.Protocol;
+using Log.It;
+using Log.It.With.NLog;
+using Microsoft.Extensions.Configuration;
+using NLog.Extensions.Logging;
 using Test.It.With.XUnit;
 using Xunit;
 using Xunit.Abstractions;
@@ -14,15 +15,14 @@ namespace Kafka.TestServer.Tests
 {
     public partial class Given_a_client_and_a_server
     {
-        public class When_connecting_to_the_server : XUnit2SpecificationAsync
+        public class When_connecting_to_the_server : TestSpecificationAsync
         {
-            private readonly ITestOutputHelper _testOutputHelper;
             private readonly SocketBasedKafkaTestFramework _testServer =
                 KafkaTestFramework.WithSocket();
 
-            public When_connecting_to_the_server(ITestOutputHelper testOutputHelper)
+            public When_connecting_to_the_server(ITestOutputHelper testOutputHelper) 
+                : base(testOutputHelper)
             {
-                _testOutputHelper = testOutputHelper;
             }
 
             protected override Task GivenAsync()
@@ -46,7 +46,7 @@ namespace Kafka.TestServer.Tests
                 }
             }
 
-            [Fact(Skip = "Something is wrong with the produce version")]
+            [Fact]
             public void It_should_connect()
             {
             }
@@ -71,6 +71,31 @@ namespace Kafka.TestServer.Tests
                     .ConfigureAwait(false);
                 producer.Flush();
             }
+        }
+    }
+
+    public class TestSpecificationAsync : XUnit2SpecificationAsync
+    {
+        static TestSpecificationAsync()
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+
+            NLog.LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
+            LogFactory.Initialize(new NLogFactory(new LogicalThreadContext()));
+        }
+
+        public TestSpecificationAsync(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        {
+            NLogCapturingTarget.Subscribe += TestOutputHelper.WriteLine;
+        }
+
+        protected override Task DisposeAsync(bool disposing)
+        {
+            NLogCapturingTarget.Subscribe -= TestOutputHelper.WriteLine;
+            return base.DisposeAsync(disposing);
         }
     }
 }
