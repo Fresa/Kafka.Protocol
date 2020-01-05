@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
+using Log.It;
 
 namespace Kafka.TestServer
 {
@@ -10,6 +11,9 @@ namespace Kafka.TestServer
     {
         private readonly INetworkClient _networkClient;
         private const int MinimumBufferSize = 512;
+
+        private static readonly ILogger Logger =
+            LogFactory.Create<DataReceiver>();
 
         internal DataReceiver(INetworkClient networkClient)
         {
@@ -34,7 +38,7 @@ namespace Kafka.TestServer
                         return;
                     }
 
-                    Debug.WriteLine($"Wrote {bytesRead} bytes");
+                    Logger.Debug("Received {bytesRead} bytes", bytesRead);
                     writer.Advance(bytesRead);
 
                     result = await writer
