@@ -394,8 +394,6 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 
 void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field, string className)
 {
-	GenerateDocumentation(field.About);
-
 	var fieldTypeName = field.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
 	var privateFieldName = field.GetName().FirstCharacterToLowerCase();
@@ -425,6 +423,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#> = <#= fieldTypeName #>.Default;<# 
 	} _();
 
+	GenerateDocumentation(field.About);
 	#>public <#= fieldTypeName #><#= nullableSign #> <#= fieldName #> <# Block(() => 
 	{
 		#>get => _<#= privateFieldName #>;<# _();
