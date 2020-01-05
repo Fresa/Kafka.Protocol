@@ -76,7 +76,7 @@ namespace Kafka.Protocol
                             cancellationToken)).Value + " ";
                 }
                 Logger.Warning("Detected {length} unknown bytes {unknownBytes}, ignoring",
-                    bytesUnRead.Length,
+                    size.Value - report.BytesRead,
                     bytesUnRead);
             }
 
