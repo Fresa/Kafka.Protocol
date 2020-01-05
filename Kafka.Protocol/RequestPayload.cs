@@ -69,14 +69,15 @@ namespace Kafka.Protocol
             if (report.BytesRead < size.Value)
             {
                 var bytesUnRead = "";
-                for (var i = report.BytesRead; i < size.Value; i++)
+                var unreadLength = size.Value - report.BytesRead;
+                for (var i = 0; i < unreadLength; i++)
                 {
                     bytesUnRead +=
                         (byte)(await kafkaReader.ReadInt8Async(
                             cancellationToken)).Value + " ";
                 }
                 Logger.Warning("Detected {length} unknown bytes {unknownBytes}, ignoring",
-                    size.Value - report.BytesRead,
+                    unreadLength,
                     bytesUnRead);
             }
 
