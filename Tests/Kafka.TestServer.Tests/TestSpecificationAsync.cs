@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Log.It;
 using Log.It.With.NLog;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +27,16 @@ namespace Kafka.TestServer.Tests
             NLogCapturingTarget.Subscribe += TestOutputHelper.WriteLine;
         }
 
-        protected override Task DisposeAsync(bool disposing)
+        protected virtual Task TearDownAsync()
+        {
+            return Task.CompletedTask;
+        }
+
+        protected sealed override async Task DisposeAsync(bool disposing)
         {
             NLogCapturingTarget.Subscribe -= TestOutputHelper.WriteLine;
-            return base.DisposeAsync(disposing);
+            await TearDownAsync();
+            await base.DisposeAsync(disposing);
         }
     }
 }

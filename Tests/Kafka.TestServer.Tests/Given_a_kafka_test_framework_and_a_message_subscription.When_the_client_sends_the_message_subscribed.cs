@@ -130,7 +130,7 @@ namespace Kafka.TestServer.Tests
                     .Be(FetchRequest.MaxVersion);
             }
 
-            protected override async Task DisposeAsync(bool disposing)
+            protected override async Task TearDownAsync()
             {
                 await _testServer
                     .DisposeAsync()
