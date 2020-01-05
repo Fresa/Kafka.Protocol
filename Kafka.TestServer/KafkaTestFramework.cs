@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -89,19 +90,25 @@ namespace Kafka.TestServer
                             var requestPayload = await client
                                 .ReadAsync(_cancellationTokenSource.Token)
                                 .ConfigureAwait(false);
-                            if (_subscriptions.TryGetValue(requestPayload.Message.GetType(), out var subscription))
+                            
+                            if (!_subscriptions.TryGetValue(
+                                requestPayload.Message.GetType(),
+                                out var subscription))
                             {
-                                var response = subscription(requestPayload.Message);
-                                await client
-                                    .SendAsync(
-                                        new ResponsePayload(
-                                            requestPayload,
-                                            new ResponseHeader(requestPayload.Header.Version)
-                                                .WithCorrelationId(requestPayload.Header.CorrelationId),
-                                            response),
-                                        _cancellationTokenSource.Token)
-                                    .ConfigureAwait(false);
+                                throw new InvalidOperationException(
+                                   $"Missing subscription for {requestPayload.Message.GetType()}");
                             }
+
+                            var response = subscription(requestPayload.Message);
+                            await client
+                                .SendAsync(
+                                    new ResponsePayload(
+                                        requestPayload,
+                                        new ResponseHeader(requestPayload.Header.Version)
+                                            .WithCorrelationId(requestPayload.Header.CorrelationId),
+                                        response),
+                                    _cancellationTokenSource.Token)
+                                .ConfigureAwait(false);
                         }
                         catch when (_cancellationTokenSource.IsCancellationRequested)
                         {
