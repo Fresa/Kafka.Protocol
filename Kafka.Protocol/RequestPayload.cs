@@ -46,43 +46,41 @@ namespace Kafka.Protocol
                 .ReadInt32Async(cancellationToken)
                 .ConfigureAwait(false);
 
-            using (var report = kafkaReader.EnsureExpectedSize(size))
+            using var report = kafkaReader.EnsureExpectedSize(size);
+            var header = await RequestHeader
+                .FromReaderAsync(
+                    headerVersion,
+                    kafkaReader,
+                    cancellationToken)
+                .ConfigureAwait(false);
+            Logger.Debug("Read header {@header}", header);
+
+            var message = await Messages
+                .CreateRequestMessageFromReaderAsync(
+                    header.RequestApiKey,
+                    header.RequestApiVersion,
+                    kafkaReader,
+                    cancellationToken)
+                .ConfigureAwait(false);
+            Logger.Debug("Read message {messageType} {@message}",
+                message.GetType(), message);
+
+            // todo: Why is Confluent.Kafka client sending 4 extra bytes containing zeros in the ApiVersionsRequest?
+            if (report.BytesRead < size.Value)
             {
-                var header = await RequestHeader
-                    .FromReaderAsync(
-                        headerVersion,
-                        kafkaReader,
-                        cancellationToken)
-                    .ConfigureAwait(false);
-                Logger.Debug("Read header {@header}", header);
-
-                var message = await Messages
-                    .CreateRequestMessageFromReaderAsync(
-                        header.RequestApiKey,
-                        header.RequestApiVersion,
-                        kafkaReader,
-                        cancellationToken)
-                    .ConfigureAwait(false);
-                Logger.Debug("Read message {messageType} {@message}",
-                    message.GetType(), message);
-
-                // todo: Why is Confluent.Kafka client sending 4 extra bytes containing zeros in the ApiVersionsRequest?
-                if (report.BytesRead < size.Value)
+                var bytesUnRead = "";
+                for (var i = report.BytesRead; i < size.Value; i++)
                 {
-                    var bytesUnRead = "";
-                    for (var i = report.BytesRead; i < size.Value; i++)
-                    {
-                        bytesUnRead +=
-                            (byte)(await kafkaReader.ReadInt8Async(
-                                cancellationToken)).Value + " ";
-                    }
-                    Logger.Warning("Detected {length} unknown bytes {unknownBytes}, ignoring",
-                        bytesUnRead.Length,
-                        bytesUnRead);
+                    bytesUnRead +=
+                        (byte)(await kafkaReader.ReadInt8Async(
+                            cancellationToken)).Value + " ";
                 }
-
-                return new RequestPayload(header, message);
+                Logger.Warning("Detected {length} unknown bytes {unknownBytes}, ignoring",
+                    bytesUnRead.Length,
+                    bytesUnRead);
             }
+
+            return new RequestPayload(header, message);
         }
     }
 }
