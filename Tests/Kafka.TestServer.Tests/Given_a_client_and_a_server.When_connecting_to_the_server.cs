@@ -1,10 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Kafka.Protocol;
 using Xunit;
 using Xunit.Abstractions;
+using Int32 = Kafka.Protocol.Int32;
 
 namespace Kafka.TestServer.Tests
 {
@@ -26,6 +29,18 @@ namespace Kafka.TestServer.Tests
                     request => request.Respond()
                         .WithThrottleTimeMs(Int32.From(100))
                         .WithAllApiKeys());
+
+                _testServer.On<MetadataRequest, MetadataResponse>(
+                    request => request.Respond().WithTopicsCollection(
+                            request.TopicsCollection.Select(
+                                    topic =>
+                                        new Func<
+                                            MetadataResponse.MetadataResponseTopic,
+                                            MetadataResponse.MetadataResponseTopic>(
+                                            responseTopic =>
+                                                responseTopic.WithName(
+                                                    topic.Name)))
+                                .ToArray()));
 
                 return Task.CompletedTask;
             }
