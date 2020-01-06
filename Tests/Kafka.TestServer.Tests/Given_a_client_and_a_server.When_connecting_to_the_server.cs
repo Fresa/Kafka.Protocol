@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -65,14 +66,19 @@ namespace Kafka.TestServer.Tests
             private static async Task ProduceMessageFromClientAsync(string host,
                 int port)
             {
-                var producerConfig = new ProducerConfig
+                var producerConfig = new ProducerConfig(new Dictionary<string, string>
+                {
+                    { "log_level", "7"}
+                })
                 {
                     BootstrapServers = $"{host}:{port}",
                     ApiVersionRequestTimeoutMs = 10000,
                     MessageTimeoutMs = 45000,
                     MetadataRequestTimeoutMs = 25000,
                     RequestTimeoutMs = 5000,
-                    SocketTimeoutMs = 30000
+                    SocketTimeoutMs = 30000,
+                    Debug = "broker,topic,msg",
+                    LogConnectionClose = true
                 };
 
                 using var producer =
