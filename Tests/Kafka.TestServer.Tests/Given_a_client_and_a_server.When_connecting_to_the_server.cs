@@ -18,7 +18,8 @@ namespace Kafka.TestServer.Tests
             private readonly SocketBasedKafkaTestFramework _testServer =
                 KafkaTestFramework.WithSocket();
 
-            public When_connecting_to_the_server(ITestOutputHelper testOutputHelper) 
+            public When_connecting_to_the_server(
+                ITestOutputHelper testOutputHelper)
                 : base(testOutputHelper)
             {
             }
@@ -32,15 +33,15 @@ namespace Kafka.TestServer.Tests
 
                 _testServer.On<MetadataRequest, MetadataResponse>(
                     request => request.Respond().WithTopicsCollection(
-                            request.TopicsCollection.Select(
-                                    topic =>
-                                        new Func<
-                                            MetadataResponse.MetadataResponseTopic,
-                                            MetadataResponse.MetadataResponseTopic>(
-                                            responseTopic =>
-                                                responseTopic.WithName(
-                                                    topic.Name)))
-                                .ToArray()));
+                        request.TopicsCollection.Select(
+                                topic =>
+                                    new Func<
+                                        MetadataResponse.MetadataResponseTopic,
+                                        MetadataResponse.MetadataResponseTopic>(
+                                        responseTopic =>
+                                            responseTopic.WithName(
+                                                topic.Name)))
+                            .ToArray()));
 
                 return Task.CompletedTask;
             }
@@ -61,7 +62,8 @@ namespace Kafka.TestServer.Tests
             {
             }
 
-            private static async Task ProduceMessageFromClientAsync(string host, int port)
+            private static async Task ProduceMessageFromClientAsync(string host,
+                int port)
             {
                 var producerConfig = new ProducerConfig
                 {
@@ -73,11 +75,13 @@ namespace Kafka.TestServer.Tests
                     SocketTimeoutMs = 30000
                 };
 
-                using var producer = new ProducerBuilder<Null, string>(producerConfig)
-                    .SetLogHandler((_, message) => Debug.WriteLine(message.Message))
-                    .Build();
+                using var producer =
+                    new ProducerBuilder<Null, string>(producerConfig)
+                        .SetLogHandler(LogExtensions.UseLogIt)
+                        .Build();
                 await producer
-                    .ProduceAsync("my-topic", new Message<Null, string> {Value = "test"})
+                    .ProduceAsync("my-topic",
+                        new Message<Null, string> {Value = "test"})
                     .ConfigureAwait(false);
                 producer.Flush();
             }

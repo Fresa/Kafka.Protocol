@@ -78,7 +78,7 @@ namespace Kafka.Protocol
                 }
                 Logger.Warning("Detected {length} unknown bytes {unknownBytes}, ignoring",
                     unreadLength,
-                    bytesUnRead);
+                    bytesUnRead.Trim());
             }
 
             return new RequestPayload(header, message);
