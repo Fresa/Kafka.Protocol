@@ -452,6 +452,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		});
 	}); _(2); 
 	
+	GenerateDocumentation(field.About);
 	if (field.Fields == null) 
 	{
 		var argumentName = field.GetName().FirstCharacterToLowerCase();
