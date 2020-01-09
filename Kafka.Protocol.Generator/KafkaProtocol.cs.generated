@@ -2493,6 +2493,7 @@ namespace Kafka.Protocol
 		private String _transactionalId = String.Default;
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
+		/// Versions: 0+
 		/// </summary>
 		public String TransactionalId 
 		{
@@ -2510,6 +2511,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
+		/// Versions: 0+
 		/// </summary>
 		public AddOffsetsToTxnRequest WithTransactionalId(String transactionalId)
 		{
@@ -2520,6 +2522,7 @@ namespace Kafka.Protocol
 		private Int64 _producerId = Int64.Default;
 		/// <summary>
 		/// Current producer id in use by the transactional id.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 ProducerId 
 		{
@@ -2537,6 +2540,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Current producer id in use by the transactional id.
+		/// Versions: 0+
 		/// </summary>
 		public AddOffsetsToTxnRequest WithProducerId(Int64 producerId)
 		{
@@ -2547,6 +2551,7 @@ namespace Kafka.Protocol
 		private Int16 _producerEpoch = Int16.Default;
 		/// <summary>
 		/// Current epoch associated with the producer id.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ProducerEpoch 
 		{
@@ -2564,6 +2569,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Current epoch associated with the producer id.
+		/// Versions: 0+
 		/// </summary>
 		public AddOffsetsToTxnRequest WithProducerEpoch(Int16 producerEpoch)
 		{
@@ -2574,6 +2580,7 @@ namespace Kafka.Protocol
 		private String _groupId = String.Default;
 		/// <summary>
 		/// The unique group identifier.
+		/// Versions: 0+
 		/// </summary>
 		public String GroupId 
 		{
@@ -2591,6 +2598,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The unique group identifier.
+		/// Versions: 0+
 		/// </summary>
 		public AddOffsetsToTxnRequest WithGroupId(String groupId)
 		{
@@ -2650,6 +2658,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -2667,6 +2676,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public AddOffsetsToTxnResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -2677,6 +2687,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The response error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -2694,6 +2705,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The response error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public AddOffsetsToTxnResponse WithErrorCode(Int16 errorCode)
 		{
@@ -2766,6 +2778,7 @@ namespace Kafka.Protocol
 		private String _transactionalId = String.Default;
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
+		/// Versions: 0+
 		/// </summary>
 		public String TransactionalId 
 		{
@@ -2783,6 +2796,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The transactional id corresponding to the transaction.
+		/// Versions: 0+
 		/// </summary>
 		public AddPartitionsToTxnRequest WithTransactionalId(String transactionalId)
 		{
@@ -2793,6 +2807,7 @@ namespace Kafka.Protocol
 		private Int64 _producerId = Int64.Default;
 		/// <summary>
 		/// Current producer id in use by the transactional id.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 ProducerId 
 		{
@@ -2810,6 +2825,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Current producer id in use by the transactional id.
+		/// Versions: 0+
 		/// </summary>
 		public AddPartitionsToTxnRequest WithProducerId(Int64 producerId)
 		{
@@ -2820,6 +2836,7 @@ namespace Kafka.Protocol
 		private Int16 _producerEpoch = Int16.Default;
 		/// <summary>
 		/// Current epoch associated with the producer id.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ProducerEpoch 
 		{
@@ -2837,6 +2854,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Current epoch associated with the producer id.
+		/// Versions: 0+
 		/// </summary>
 		public AddPartitionsToTxnRequest WithProducerEpoch(Int16 producerEpoch)
 		{
@@ -2847,6 +2865,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, AddPartitionsToTxnTopic> _topicsCollection = new Dictionary<String, AddPartitionsToTxnTopic>();
 		/// <summary>
 		/// The partitions to add to the transation.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, AddPartitionsToTxnTopic> TopicsCollection 
 		{
@@ -2864,6 +2883,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The partitions to add to the transation.
+		/// Versions: 0+
 		/// </summary>
 		public AddPartitionsToTxnRequest WithTopicsCollection(params Func<AddPartitionsToTxnTopic, AddPartitionsToTxnTopic>[] createFields)
 		{
@@ -2916,6 +2936,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The name of the topic.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -2933,6 +2954,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The name of the topic.
+			/// Versions: 0+
 			/// </summary>
 			public AddPartitionsToTxnTopic WithName(String name)
 			{
@@ -2943,6 +2965,7 @@ namespace Kafka.Protocol
 			private Int32[] _partitionsCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The partition indexes to add to the transaction
+			/// Versions: 0+
 			/// </summary>
 			public Int32[] PartitionsCollection 
 			{
@@ -2960,6 +2983,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition indexes to add to the transaction
+			/// Versions: 0+
 			/// </summary>
 			public AddPartitionsToTxnTopic WithPartitionsCollection(Int32[] partitionsCollection)
 			{
@@ -3020,6 +3044,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -3037,6 +3062,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public AddPartitionsToTxnResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -3047,6 +3073,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, AddPartitionsToTxnTopicResult> _resultsCollection = new Dictionary<String, AddPartitionsToTxnTopicResult>();
 		/// <summary>
 		/// The results for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, AddPartitionsToTxnTopicResult> ResultsCollection 
 		{
@@ -3064,6 +3091,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The results for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public AddPartitionsToTxnResponse WithResultsCollection(params Func<AddPartitionsToTxnTopicResult, AddPartitionsToTxnTopicResult>[] createFields)
 		{
@@ -3116,6 +3144,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -3133,6 +3162,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public AddPartitionsToTxnTopicResult WithName(String name)
 			{
@@ -3143,6 +3173,7 @@ namespace Kafka.Protocol
 			private Dictionary<Int32, AddPartitionsToTxnPartitionResult> _resultsCollection = new Dictionary<Int32, AddPartitionsToTxnPartitionResult>();
 			/// <summary>
 			/// The results for each partition
+			/// Versions: 0+
 			/// </summary>
 			public Dictionary<Int32, AddPartitionsToTxnPartitionResult> ResultsCollection 
 			{
@@ -3160,6 +3191,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The results for each partition
+			/// Versions: 0+
 			/// </summary>
 			public AddPartitionsToTxnTopicResult WithResultsCollection(params Func<AddPartitionsToTxnPartitionResult, AddPartitionsToTxnPartitionResult>[] createFields)
 			{
@@ -3212,6 +3244,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition indexes.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -3229,6 +3262,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition indexes.
+				/// Versions: 0+
 				/// </summary>
 				public AddPartitionsToTxnPartitionResult WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -3239,6 +3273,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The response error code.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -3256,6 +3291,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The response error code.
+				/// Versions: 0+
 				/// </summary>
 				public AddPartitionsToTxnPartitionResult WithErrorCode(Int16 errorCode)
 				{
@@ -3314,6 +3350,7 @@ namespace Kafka.Protocol
 		private Dictionary<Int8, AlterConfigsResource> _resourcesCollection = new Dictionary<Int8, AlterConfigsResource>();
 		/// <summary>
 		/// The updates for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection 
 		{
@@ -3331,6 +3368,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The updates for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public AlterConfigsRequest WithResourcesCollection(params Func<AlterConfigsResource, AlterConfigsResource>[] createFields)
 		{
@@ -3391,6 +3429,7 @@ namespace Kafka.Protocol
 			private Int8 _resourceType = Int8.Default;
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 ResourceType 
 			{
@@ -3408,6 +3447,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResource WithResourceType(Int8 resourceType)
 			{
@@ -3418,6 +3458,7 @@ namespace Kafka.Protocol
 			private String _resourceName = String.Default;
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public String ResourceName 
 			{
@@ -3435,6 +3476,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResource WithResourceName(String resourceName)
 			{
@@ -3445,6 +3487,7 @@ namespace Kafka.Protocol
 			private Dictionary<String, AlterableConfig> _configsCollection = new Dictionary<String, AlterableConfig>();
 			/// <summary>
 			/// The configurations.
+			/// Versions: 0+
 			/// </summary>
 			public Dictionary<String, AlterableConfig> ConfigsCollection 
 			{
@@ -3462,6 +3505,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The configurations.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResource WithConfigsCollection(params Func<AlterableConfig, AlterableConfig>[] createFields)
 			{
@@ -3514,6 +3558,7 @@ namespace Kafka.Protocol
 				private String _name = String.Default;
 				/// <summary>
 				/// The configuration key name.
+				/// Versions: 0+
 				/// </summary>
 				public String Name 
 				{
@@ -3531,6 +3576,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The configuration key name.
+				/// Versions: 0+
 				/// </summary>
 				public AlterableConfig WithName(String name)
 				{
@@ -3541,6 +3587,7 @@ namespace Kafka.Protocol
 				private String? _value = String.Default;
 				/// <summary>
 				/// The value to set for the configuration key.
+				/// Versions: 0+
 				/// </summary>
 				public String? Value 
 				{
@@ -3564,6 +3611,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The value to set for the configuration key.
+				/// Versions: 0+
 				/// </summary>
 				public AlterableConfig WithValue(String value)
 				{
@@ -3576,6 +3624,7 @@ namespace Kafka.Protocol
 		private Boolean _validateOnly = Boolean.Default;
 		/// <summary>
 		/// True if we should validate the request, but not change the configurations.
+		/// Versions: 0+
 		/// </summary>
 		public Boolean ValidateOnly 
 		{
@@ -3593,6 +3642,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// True if we should validate the request, but not change the configurations.
+		/// Versions: 0+
 		/// </summary>
 		public AlterConfigsRequest WithValidateOnly(Boolean validateOnly)
 		{
@@ -3652,6 +3702,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -3669,6 +3720,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public AlterConfigsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -3679,6 +3731,7 @@ namespace Kafka.Protocol
 		private AlterConfigsResourceResponse[] _responsesCollection = Array.Empty<AlterConfigsResourceResponse>();
 		/// <summary>
 		/// The responses for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public AlterConfigsResourceResponse[] ResponsesCollection 
 		{
@@ -3696,6 +3749,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The responses for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public AlterConfigsResponse WithResponsesCollection(params Func<AlterConfigsResourceResponse, AlterConfigsResourceResponse>[] createFields)
 		{
@@ -3764,6 +3818,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The resource error code.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -3781,6 +3836,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource error code.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResourceResponse WithErrorCode(Int16 errorCode)
 			{
@@ -3791,6 +3847,7 @@ namespace Kafka.Protocol
 			private String? _errorMessage = String.Default;
 			/// <summary>
 			/// The resource error message, or null if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public String? ErrorMessage 
 			{
@@ -3814,6 +3871,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource error message, or null if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResourceResponse WithErrorMessage(String errorMessage)
 			{
@@ -3824,6 +3882,7 @@ namespace Kafka.Protocol
 			private Int8 _resourceType = Int8.Default;
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 ResourceType 
 			{
@@ -3841,6 +3900,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResourceResponse WithResourceType(Int8 resourceType)
 			{
@@ -3851,6 +3911,7 @@ namespace Kafka.Protocol
 			private String _resourceName = String.Default;
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public String ResourceName 
 			{
@@ -3868,6 +3929,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResourceResponse WithResourceName(String resourceName)
 			{
@@ -3917,6 +3979,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, AlterReplicaLogDir> _dirsCollection = new Dictionary<String, AlterReplicaLogDir>();
 		/// <summary>
 		/// The alterations to make for each directory.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, AlterReplicaLogDir> DirsCollection 
 		{
@@ -3934,6 +3997,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The alterations to make for each directory.
+		/// Versions: 0+
 		/// </summary>
 		public AlterReplicaLogDirsRequest WithDirsCollection(params Func<AlterReplicaLogDir, AlterReplicaLogDir>[] createFields)
 		{
@@ -3986,6 +4050,7 @@ namespace Kafka.Protocol
 			private String _path = String.Default;
 			/// <summary>
 			/// The absolute directory path.
+			/// Versions: 0+
 			/// </summary>
 			public String Path 
 			{
@@ -4003,6 +4068,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The absolute directory path.
+			/// Versions: 0+
 			/// </summary>
 			public AlterReplicaLogDir WithPath(String path)
 			{
@@ -4013,6 +4079,7 @@ namespace Kafka.Protocol
 			private Dictionary<String, AlterReplicaLogDirTopic> _topicsCollection = new Dictionary<String, AlterReplicaLogDirTopic>();
 			/// <summary>
 			/// The topics to add to the directory.
+			/// Versions: 0+
 			/// </summary>
 			public Dictionary<String, AlterReplicaLogDirTopic> TopicsCollection 
 			{
@@ -4030,6 +4097,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topics to add to the directory.
+			/// Versions: 0+
 			/// </summary>
 			public AlterReplicaLogDir WithTopicsCollection(params Func<AlterReplicaLogDirTopic, AlterReplicaLogDirTopic>[] createFields)
 			{
@@ -4082,6 +4150,7 @@ namespace Kafka.Protocol
 				private String _name = String.Default;
 				/// <summary>
 				/// The topic name.
+				/// Versions: 0+
 				/// </summary>
 				public String Name 
 				{
@@ -4099,6 +4168,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The topic name.
+				/// Versions: 0+
 				/// </summary>
 				public AlterReplicaLogDirTopic WithName(String name)
 				{
@@ -4109,6 +4179,7 @@ namespace Kafka.Protocol
 				private Int32[] _partitionsCollection = Array.Empty<Int32>();
 				/// <summary>
 				/// The partition indexes.
+				/// Versions: 0+
 				/// </summary>
 				public Int32[] PartitionsCollection 
 				{
@@ -4126,6 +4197,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition indexes.
+				/// Versions: 0+
 				/// </summary>
 				public AlterReplicaLogDirTopic WithPartitionsCollection(Int32[] partitionsCollection)
 				{
@@ -4187,6 +4259,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -4204,6 +4277,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public AlterReplicaLogDirsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -4214,6 +4288,7 @@ namespace Kafka.Protocol
 		private AlterReplicaLogDirTopicResult[] _resultsCollection = Array.Empty<AlterReplicaLogDirTopicResult>();
 		/// <summary>
 		/// The results for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public AlterReplicaLogDirTopicResult[] ResultsCollection 
 		{
@@ -4231,6 +4306,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The results for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public AlterReplicaLogDirsResponse WithResultsCollection(params Func<AlterReplicaLogDirTopicResult, AlterReplicaLogDirTopicResult>[] createFields)
 		{
@@ -4283,6 +4359,7 @@ namespace Kafka.Protocol
 			private String _topicName = String.Default;
 			/// <summary>
 			/// The name of the topic.
+			/// Versions: 0+
 			/// </summary>
 			public String TopicName 
 			{
@@ -4300,6 +4377,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The name of the topic.
+			/// Versions: 0+
 			/// </summary>
 			public AlterReplicaLogDirTopicResult WithTopicName(String topicName)
 			{
@@ -4310,6 +4388,7 @@ namespace Kafka.Protocol
 			private AlterReplicaLogDirPartitionResult[] _partitionsCollection = Array.Empty<AlterReplicaLogDirPartitionResult>();
 			/// <summary>
 			/// The results for each partition.
+			/// Versions: 0+
 			/// </summary>
 			public AlterReplicaLogDirPartitionResult[] PartitionsCollection 
 			{
@@ -4327,6 +4406,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The results for each partition.
+			/// Versions: 0+
 			/// </summary>
 			public AlterReplicaLogDirTopicResult WithPartitionsCollection(params Func<AlterReplicaLogDirPartitionResult, AlterReplicaLogDirPartitionResult>[] createFields)
 			{
@@ -4379,6 +4459,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -4396,6 +4477,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public AlterReplicaLogDirPartitionResult WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -4406,6 +4488,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -4423,6 +4506,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public AlterReplicaLogDirPartitionResult WithErrorCode(Int16 errorCode)
 				{
@@ -4524,6 +4608,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The top-level error code.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -4541,6 +4626,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The top-level error code.
+		/// Versions: 0+
 		/// </summary>
 		public ApiVersionsResponse WithErrorCode(Int16 errorCode)
 		{
@@ -4551,6 +4637,7 @@ namespace Kafka.Protocol
 		private Dictionary<Int16, ApiVersionsResponseKey> _apiKeysCollection = new Dictionary<Int16, ApiVersionsResponseKey>();
 		/// <summary>
 		/// The APIs supported by the broker.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<Int16, ApiVersionsResponseKey> ApiKeysCollection 
 		{
@@ -4568,6 +4655,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The APIs supported by the broker.
+		/// Versions: 0+
 		/// </summary>
 		public ApiVersionsResponse WithApiKeysCollection(params Func<ApiVersionsResponseKey, ApiVersionsResponseKey>[] createFields)
 		{
@@ -4628,6 +4716,7 @@ namespace Kafka.Protocol
 			private Int16 _index = Int16.Default;
 			/// <summary>
 			/// The API index.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 Index 
 			{
@@ -4645,6 +4734,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The API index.
+			/// Versions: 0+
 			/// </summary>
 			public ApiVersionsResponseKey WithIndex(Int16 index)
 			{
@@ -4655,6 +4745,7 @@ namespace Kafka.Protocol
 			private Int16 _minVersion = Int16.Default;
 			/// <summary>
 			/// The minimum supported version, inclusive.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 MinVersion 
 			{
@@ -4672,6 +4763,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The minimum supported version, inclusive.
+			/// Versions: 0+
 			/// </summary>
 			public ApiVersionsResponseKey WithMinVersion(Int16 minVersion)
 			{
@@ -4682,6 +4774,7 @@ namespace Kafka.Protocol
 			private Int16 _maxVersion = Int16.Default;
 			/// <summary>
 			/// The maximum supported version, inclusive.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 MaxVersion 
 			{
@@ -4699,6 +4792,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The maximum supported version, inclusive.
+			/// Versions: 0+
 			/// </summary>
 			public ApiVersionsResponseKey WithMaxVersion(Int16 maxVersion)
 			{
@@ -4710,6 +4804,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -4722,6 +4817,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public ApiVersionsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -4778,6 +4874,7 @@ namespace Kafka.Protocol
 		private Int32 _brokerId = Int32.Default;
 		/// <summary>
 		/// The id of the broker for which controlled shutdown has been requested.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 BrokerId 
 		{
@@ -4795,6 +4892,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The id of the broker for which controlled shutdown has been requested.
+		/// Versions: 0+
 		/// </summary>
 		public ControlledShutdownRequest WithBrokerId(Int32 brokerId)
 		{
@@ -4805,6 +4903,8 @@ namespace Kafka.Protocol
 		private Int64 _brokerEpoch = new Int64(-1);
 		/// <summary>
 		/// The broker epoch.
+		/// Versions: 2+
+		/// Default: -1
 		/// </summary>
 		public Int64 BrokerEpoch 
 		{
@@ -4817,6 +4917,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The broker epoch.
+		/// Versions: 2+
+		/// Default: -1
 		/// </summary>
 		public ControlledShutdownRequest WithBrokerEpoch(Int64 brokerEpoch)
 		{
@@ -4876,6 +4978,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The top-level error code.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -4893,6 +4996,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The top-level error code.
+		/// Versions: 0+
 		/// </summary>
 		public ControlledShutdownResponse WithErrorCode(Int16 errorCode)
 		{
@@ -4903,6 +5007,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, RemainingPartition> _remainingPartitionsCollection = new Dictionary<String, RemainingPartition>();
 		/// <summary>
 		/// The partitions that the broker still leads.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, RemainingPartition> RemainingPartitionsCollection 
 		{
@@ -4920,6 +5025,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The partitions that the broker still leads.
+		/// Versions: 0+
 		/// </summary>
 		public ControlledShutdownResponse WithRemainingPartitionsCollection(params Func<RemainingPartition, RemainingPartition>[] createFields)
 		{
@@ -4972,6 +5078,7 @@ namespace Kafka.Protocol
 			private String _topicName = String.Default;
 			/// <summary>
 			/// The name of the topic.
+			/// Versions: 0+
 			/// </summary>
 			public String TopicName 
 			{
@@ -4989,6 +5096,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The name of the topic.
+			/// Versions: 0+
 			/// </summary>
 			public RemainingPartition WithTopicName(String topicName)
 			{
@@ -4999,6 +5107,7 @@ namespace Kafka.Protocol
 			private Int32 _partitionIndex = Int32.Default;
 			/// <summary>
 			/// The index of the partition.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 PartitionIndex 
 			{
@@ -5016,6 +5125,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The index of the partition.
+			/// Versions: 0+
 			/// </summary>
 			public RemainingPartition WithPartitionIndex(Int32 partitionIndex)
 			{
@@ -5065,6 +5175,7 @@ namespace Kafka.Protocol
 		private CreatableAcl[] _creationsCollection = Array.Empty<CreatableAcl>();
 		/// <summary>
 		/// The ACLs that we want to create.
+		/// Versions: 0+
 		/// </summary>
 		public CreatableAcl[] CreationsCollection 
 		{
@@ -5082,6 +5193,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The ACLs that we want to create.
+		/// Versions: 0+
 		/// </summary>
 		public CreateAclsRequest WithCreationsCollection(params Func<CreatableAcl, CreatableAcl>[] createFields)
 		{
@@ -5174,6 +5286,7 @@ namespace Kafka.Protocol
 			private Int8 _resourceType = Int8.Default;
 			/// <summary>
 			/// The type of the resource.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 ResourceType 
 			{
@@ -5191,6 +5304,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The type of the resource.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableAcl WithResourceType(Int8 resourceType)
 			{
@@ -5201,6 +5315,7 @@ namespace Kafka.Protocol
 			private String _resourceName = String.Default;
 			/// <summary>
 			/// The resource name for the ACL.
+			/// Versions: 0+
 			/// </summary>
 			public String ResourceName 
 			{
@@ -5218,6 +5333,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name for the ACL.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableAcl WithResourceName(String resourceName)
 			{
@@ -5228,6 +5344,8 @@ namespace Kafka.Protocol
 			private Int8 _resourcePatternType = new Int8(3);
 			/// <summary>
 			/// The pattern type for the ACL.
+			/// Versions: 1+
+			/// Default: 3
 			/// </summary>
 			public Int8 ResourcePatternType 
 			{
@@ -5245,6 +5363,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The pattern type for the ACL.
+			/// Versions: 1+
+			/// Default: 3
 			/// </summary>
 			public CreatableAcl WithResourcePatternType(Int8 resourcePatternType)
 			{
@@ -5255,6 +5375,7 @@ namespace Kafka.Protocol
 			private String _principal = String.Default;
 			/// <summary>
 			/// The principal for the ACL.
+			/// Versions: 0+
 			/// </summary>
 			public String Principal 
 			{
@@ -5272,6 +5393,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The principal for the ACL.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableAcl WithPrincipal(String principal)
 			{
@@ -5282,6 +5404,7 @@ namespace Kafka.Protocol
 			private String _host = String.Default;
 			/// <summary>
 			/// The host for the ACL.
+			/// Versions: 0+
 			/// </summary>
 			public String Host 
 			{
@@ -5299,6 +5422,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The host for the ACL.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableAcl WithHost(String host)
 			{
@@ -5309,6 +5433,7 @@ namespace Kafka.Protocol
 			private Int8 _operation = Int8.Default;
 			/// <summary>
 			/// The operation type for the ACL (read, write, etc.).
+			/// Versions: 0+
 			/// </summary>
 			public Int8 Operation 
 			{
@@ -5326,6 +5451,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The operation type for the ACL (read, write, etc.).
+			/// Versions: 0+
 			/// </summary>
 			public CreatableAcl WithOperation(Int8 operation)
 			{
@@ -5336,6 +5462,7 @@ namespace Kafka.Protocol
 			private Int8 _permissionType = Int8.Default;
 			/// <summary>
 			/// The permission type for the ACL (allow, deny, etc.).
+			/// Versions: 0+
 			/// </summary>
 			public Int8 PermissionType 
 			{
@@ -5353,6 +5480,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The permission type for the ACL (allow, deny, etc.).
+			/// Versions: 0+
 			/// </summary>
 			public CreatableAcl WithPermissionType(Int8 permissionType)
 			{
@@ -5413,6 +5541,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -5430,6 +5559,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public CreateAclsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -5440,6 +5570,7 @@ namespace Kafka.Protocol
 		private CreatableAclResult[] _resultsCollection = Array.Empty<CreatableAclResult>();
 		/// <summary>
 		/// The results for each ACL creation.
+		/// Versions: 0+
 		/// </summary>
 		public CreatableAclResult[] ResultsCollection 
 		{
@@ -5457,6 +5588,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The results for each ACL creation.
+		/// Versions: 0+
 		/// </summary>
 		public CreateAclsResponse WithResultsCollection(params Func<CreatableAclResult, CreatableAclResult>[] createFields)
 		{
@@ -5509,6 +5641,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The result error, or zero if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -5526,6 +5659,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The result error, or zero if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableAclResult WithErrorCode(Int16 errorCode)
 			{
@@ -5536,6 +5670,7 @@ namespace Kafka.Protocol
 			private String? _errorMessage = String.Default;
 			/// <summary>
 			/// The result message, or null if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public String? ErrorMessage 
 			{
@@ -5559,6 +5694,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The result message, or null if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableAclResult WithErrorMessage(String errorMessage)
 			{
@@ -5616,6 +5752,7 @@ namespace Kafka.Protocol
 		private CreatableRenewers[] _renewersCollection = Array.Empty<CreatableRenewers>();
 		/// <summary>
 		/// A list of those who are allowed to renew this token before it expires.
+		/// Versions: 0+
 		/// </summary>
 		public CreatableRenewers[] RenewersCollection 
 		{
@@ -5633,6 +5770,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// A list of those who are allowed to renew this token before it expires.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenRequest WithRenewersCollection(params Func<CreatableRenewers, CreatableRenewers>[] createFields)
 		{
@@ -5685,6 +5823,7 @@ namespace Kafka.Protocol
 			private String _principalType = String.Default;
 			/// <summary>
 			/// The type of the Kafka principal.
+			/// Versions: 0+
 			/// </summary>
 			public String PrincipalType 
 			{
@@ -5702,6 +5841,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The type of the Kafka principal.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableRenewers WithPrincipalType(String principalType)
 			{
@@ -5712,6 +5852,7 @@ namespace Kafka.Protocol
 			private String _principalName = String.Default;
 			/// <summary>
 			/// The name of the Kafka principal.
+			/// Versions: 0+
 			/// </summary>
 			public String PrincipalName 
 			{
@@ -5729,6 +5870,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The name of the Kafka principal.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableRenewers WithPrincipalName(String principalName)
 			{
@@ -5740,6 +5882,7 @@ namespace Kafka.Protocol
 		private Int64 _maxLifetimeMs = Int64.Default;
 		/// <summary>
 		/// The maximum lifetime of the token in milliseconds, or -1 to use the server side default.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 MaxLifetimeMs 
 		{
@@ -5757,6 +5900,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The maximum lifetime of the token in milliseconds, or -1 to use the server side default.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenRequest WithMaxLifetimeMs(Int64 maxLifetimeMs)
 		{
@@ -5872,6 +6016,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The top-level error, or zero if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -5889,6 +6034,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The top-level error, or zero if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithErrorCode(Int16 errorCode)
 		{
@@ -5899,6 +6045,7 @@ namespace Kafka.Protocol
 		private String _principalType = String.Default;
 		/// <summary>
 		/// The principal type of the token owner.
+		/// Versions: 0+
 		/// </summary>
 		public String PrincipalType 
 		{
@@ -5916,6 +6063,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The principal type of the token owner.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithPrincipalType(String principalType)
 		{
@@ -5926,6 +6074,7 @@ namespace Kafka.Protocol
 		private String _principalName = String.Default;
 		/// <summary>
 		/// The name of the token owner.
+		/// Versions: 0+
 		/// </summary>
 		public String PrincipalName 
 		{
@@ -5943,6 +6092,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The name of the token owner.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithPrincipalName(String principalName)
 		{
@@ -5953,6 +6103,7 @@ namespace Kafka.Protocol
 		private Int64 _issueTimestampMs = Int64.Default;
 		/// <summary>
 		/// When this token was generated.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 IssueTimestampMs 
 		{
@@ -5970,6 +6121,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// When this token was generated.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithIssueTimestampMs(Int64 issueTimestampMs)
 		{
@@ -5980,6 +6132,7 @@ namespace Kafka.Protocol
 		private Int64 _expiryTimestampMs = Int64.Default;
 		/// <summary>
 		/// When this token expires.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 ExpiryTimestampMs 
 		{
@@ -5997,6 +6150,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// When this token expires.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithExpiryTimestampMs(Int64 expiryTimestampMs)
 		{
@@ -6007,6 +6161,7 @@ namespace Kafka.Protocol
 		private Int64 _maxTimestampMs = Int64.Default;
 		/// <summary>
 		/// The maximum lifetime of this token.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 MaxTimestampMs 
 		{
@@ -6024,6 +6179,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The maximum lifetime of this token.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithMaxTimestampMs(Int64 maxTimestampMs)
 		{
@@ -6034,6 +6190,7 @@ namespace Kafka.Protocol
 		private String _tokenId = String.Default;
 		/// <summary>
 		/// The token UUID.
+		/// Versions: 0+
 		/// </summary>
 		public String TokenId 
 		{
@@ -6051,6 +6208,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The token UUID.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithTokenId(String tokenId)
 		{
@@ -6061,6 +6219,7 @@ namespace Kafka.Protocol
 		private Bytes _hmac = Bytes.Default;
 		/// <summary>
 		/// HMAC of the delegation token.
+		/// Versions: 0+
 		/// </summary>
 		public Bytes Hmac 
 		{
@@ -6078,6 +6237,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// HMAC of the delegation token.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithHmac(Bytes hmac)
 		{
@@ -6088,6 +6248,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -6105,6 +6266,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public CreateDelegationTokenResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -6169,6 +6331,7 @@ namespace Kafka.Protocol
 		private CreatePartitionsTopic[] _topicsCollection = Array.Empty<CreatePartitionsTopic>();
 		/// <summary>
 		/// Each topic that we want to create new partitions inside.
+		/// Versions: 0+
 		/// </summary>
 		public CreatePartitionsTopic[] TopicsCollection 
 		{
@@ -6186,6 +6349,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic that we want to create new partitions inside.
+		/// Versions: 0+
 		/// </summary>
 		public CreatePartitionsRequest WithTopicsCollection(params Func<CreatePartitionsTopic, CreatePartitionsTopic>[] createFields)
 		{
@@ -6246,6 +6410,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -6263,6 +6428,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public CreatePartitionsTopic WithName(String name)
 			{
@@ -6273,6 +6439,7 @@ namespace Kafka.Protocol
 			private Int32 _count = Int32.Default;
 			/// <summary>
 			/// The new partition count.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 Count 
 			{
@@ -6290,6 +6457,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The new partition count.
+			/// Versions: 0+
 			/// </summary>
 			public CreatePartitionsTopic WithCount(Int32 count)
 			{
@@ -6300,6 +6468,7 @@ namespace Kafka.Protocol
 			private CreatePartitionsAssignment[]? _assignmentsCollection = Array.Empty<CreatePartitionsAssignment>();
 			/// <summary>
 			/// The new partition assignments.
+			/// Versions: 0+
 			/// </summary>
 			public CreatePartitionsAssignment[]? AssignmentsCollection 
 			{
@@ -6323,6 +6492,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The new partition assignments.
+			/// Versions: 0+
 			/// </summary>
 			public CreatePartitionsTopic WithAssignmentsCollection(params Func<CreatePartitionsAssignment, CreatePartitionsAssignment>[] createFields)
 			{
@@ -6367,6 +6537,7 @@ namespace Kafka.Protocol
 				private Int32[] _brokerIdsCollection = Array.Empty<Int32>();
 				/// <summary>
 				/// The assigned broker IDs.
+				/// Versions: 0+
 				/// </summary>
 				public Int32[] BrokerIdsCollection 
 				{
@@ -6384,6 +6555,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The assigned broker IDs.
+				/// Versions: 0+
 				/// </summary>
 				public CreatePartitionsAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
 				{
@@ -6396,6 +6568,7 @@ namespace Kafka.Protocol
 		private Int32 _timeoutMs = Int32.Default;
 		/// <summary>
 		/// The time in ms to wait for the partitions to be created.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 TimeoutMs 
 		{
@@ -6413,6 +6586,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The time in ms to wait for the partitions to be created.
+		/// Versions: 0+
 		/// </summary>
 		public CreatePartitionsRequest WithTimeoutMs(Int32 timeoutMs)
 		{
@@ -6423,6 +6597,7 @@ namespace Kafka.Protocol
 		private Boolean _validateOnly = Boolean.Default;
 		/// <summary>
 		/// If true, then validate the request, but don't actually increase the number of partitions.
+		/// Versions: 0+
 		/// </summary>
 		public Boolean ValidateOnly 
 		{
@@ -6440,6 +6615,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// If true, then validate the request, but don't actually increase the number of partitions.
+		/// Versions: 0+
 		/// </summary>
 		public CreatePartitionsRequest WithValidateOnly(Boolean validateOnly)
 		{
@@ -6499,6 +6675,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -6516,6 +6693,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public CreatePartitionsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -6526,6 +6704,7 @@ namespace Kafka.Protocol
 		private CreatePartitionsTopicResult[] _resultsCollection = Array.Empty<CreatePartitionsTopicResult>();
 		/// <summary>
 		/// The partition creation results for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public CreatePartitionsTopicResult[] ResultsCollection 
 		{
@@ -6543,6 +6722,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The partition creation results for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public CreatePartitionsResponse WithResultsCollection(params Func<CreatePartitionsTopicResult, CreatePartitionsTopicResult>[] createFields)
 		{
@@ -6603,6 +6783,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -6620,6 +6801,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public CreatePartitionsTopicResult WithName(String name)
 			{
@@ -6630,6 +6812,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The result error, or zero if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -6647,6 +6830,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The result error, or zero if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public CreatePartitionsTopicResult WithErrorCode(Int16 errorCode)
 			{
@@ -6657,6 +6841,7 @@ namespace Kafka.Protocol
 			private String? _errorMessage = String.Default;
 			/// <summary>
 			/// The result message, or null if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public String? ErrorMessage 
 			{
@@ -6680,6 +6865,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The result message, or null if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public CreatePartitionsTopicResult WithErrorMessage(String errorMessage)
 			{
@@ -6745,6 +6931,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, CreatableTopic> _topicsCollection = new Dictionary<String, CreatableTopic>();
 		/// <summary>
 		/// The topics to create.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, CreatableTopic> TopicsCollection 
 		{
@@ -6762,6 +6949,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The topics to create.
+		/// Versions: 0+
 		/// </summary>
 		public CreateTopicsRequest WithTopicsCollection(params Func<CreatableTopic, CreatableTopic>[] createFields)
 		{
@@ -6838,6 +7026,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -6855,6 +7044,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableTopic WithName(String name)
 			{
@@ -6865,6 +7055,7 @@ namespace Kafka.Protocol
 			private Int32 _numPartitions = Int32.Default;
 			/// <summary>
 			/// The number of partitions to create in the topic, or -1 if we are either specifying a manual partition assignment or using the default partitions.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 NumPartitions 
 			{
@@ -6882,6 +7073,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The number of partitions to create in the topic, or -1 if we are either specifying a manual partition assignment or using the default partitions.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableTopic WithNumPartitions(Int32 numPartitions)
 			{
@@ -6892,6 +7084,7 @@ namespace Kafka.Protocol
 			private Int16 _replicationFactor = Int16.Default;
 			/// <summary>
 			/// The number of replicas to create for each partition in the topic, or -1 if we are either specifying a manual partition assignment or using the default replication factor.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ReplicationFactor 
 			{
@@ -6909,6 +7102,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The number of replicas to create for each partition in the topic, or -1 if we are either specifying a manual partition assignment or using the default replication factor.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableTopic WithReplicationFactor(Int16 replicationFactor)
 			{
@@ -6919,6 +7113,7 @@ namespace Kafka.Protocol
 			private Dictionary<Int32, CreatableReplicaAssignment> _assignmentsCollection = new Dictionary<Int32, CreatableReplicaAssignment>();
 			/// <summary>
 			/// The manual partition assignment, or the empty array if we are using automatic assignment.
+			/// Versions: 0+
 			/// </summary>
 			public Dictionary<Int32, CreatableReplicaAssignment> AssignmentsCollection 
 			{
@@ -6936,6 +7131,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The manual partition assignment, or the empty array if we are using automatic assignment.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableTopic WithAssignmentsCollection(params Func<CreatableReplicaAssignment, CreatableReplicaAssignment>[] createFields)
 			{
@@ -6988,6 +7184,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -7005,6 +7202,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public CreatableReplicaAssignment WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -7015,6 +7213,7 @@ namespace Kafka.Protocol
 				private Int32[] _brokerIdsCollection = Array.Empty<Int32>();
 				/// <summary>
 				/// The brokers to place the partition on.
+				/// Versions: 0+
 				/// </summary>
 				public Int32[] BrokerIdsCollection 
 				{
@@ -7032,6 +7231,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The brokers to place the partition on.
+				/// Versions: 0+
 				/// </summary>
 				public CreatableReplicaAssignment WithBrokerIdsCollection(Int32[] brokerIdsCollection)
 				{
@@ -7043,6 +7243,7 @@ namespace Kafka.Protocol
 			private Dictionary<String, CreateableTopicConfig> _configsCollection = new Dictionary<String, CreateableTopicConfig>();
 			/// <summary>
 			/// The custom topic configurations to set.
+			/// Versions: 0+
 			/// </summary>
 			public Dictionary<String, CreateableTopicConfig> ConfigsCollection 
 			{
@@ -7060,6 +7261,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The custom topic configurations to set.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableTopic WithConfigsCollection(params Func<CreateableTopicConfig, CreateableTopicConfig>[] createFields)
 			{
@@ -7112,6 +7314,7 @@ namespace Kafka.Protocol
 				private String _name = String.Default;
 				/// <summary>
 				/// The configuration name.
+				/// Versions: 0+
 				/// </summary>
 				public String Name 
 				{
@@ -7129,6 +7332,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The configuration name.
+				/// Versions: 0+
 				/// </summary>
 				public CreateableTopicConfig WithName(String name)
 				{
@@ -7139,6 +7343,7 @@ namespace Kafka.Protocol
 				private String? _value = String.Default;
 				/// <summary>
 				/// The configuration value.
+				/// Versions: 0+
 				/// </summary>
 				public String? Value 
 				{
@@ -7162,6 +7367,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The configuration value.
+				/// Versions: 0+
 				/// </summary>
 				public CreateableTopicConfig WithValue(String value)
 				{
@@ -7174,6 +7380,8 @@ namespace Kafka.Protocol
 		private Int32 _timeoutMs = new Int32(60000);
 		/// <summary>
 		/// How long to wait in milliseconds before timing out the request.
+		/// Versions: 0+
+		/// Default: 60000
 		/// </summary>
 		public Int32 TimeoutMs 
 		{
@@ -7191,6 +7399,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// How long to wait in milliseconds before timing out the request.
+		/// Versions: 0+
+		/// Default: 60000
 		/// </summary>
 		public CreateTopicsRequest WithTimeoutMs(Int32 timeoutMs)
 		{
@@ -7201,6 +7411,8 @@ namespace Kafka.Protocol
 		private Boolean _validateOnly = new Boolean(false);
 		/// <summary>
 		/// If true, check that the topics can be created as specified, but don't create anything.
+		/// Versions: 1+
+		/// Default: false
 		/// </summary>
 		public Boolean ValidateOnly 
 		{
@@ -7218,6 +7430,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// If true, check that the topics can be created as specified, but don't create anything.
+		/// Versions: 1+
+		/// Default: false
 		/// </summary>
 		public CreateTopicsRequest WithValidateOnly(Boolean validateOnly)
 		{
@@ -7277,6 +7491,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 2+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -7289,6 +7504,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 2+
 		/// </summary>
 		public CreateTopicsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -7299,6 +7515,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, CreatableTopicResult> _topicsCollection = new Dictionary<String, CreatableTopicResult>();
 		/// <summary>
 		/// Results for each topic we tried to create.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, CreatableTopicResult> TopicsCollection 
 		{
@@ -7316,6 +7533,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Results for each topic we tried to create.
+		/// Versions: 0+
 		/// </summary>
 		public CreateTopicsResponse WithTopicsCollection(params Func<CreatableTopicResult, CreatableTopicResult>[] createFields)
 		{
@@ -7376,6 +7594,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -7393,6 +7612,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableTopicResult WithName(String name)
 			{
@@ -7403,6 +7623,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The error code, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -7420,6 +7641,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The error code, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public CreatableTopicResult WithErrorCode(Int16 errorCode)
 			{
@@ -7430,6 +7652,7 @@ namespace Kafka.Protocol
 			private String? _errorMessage = String.Default;
 			/// <summary>
 			/// The error message, or null if there was no error.
+			/// Versions: 1+
 			/// </summary>
 			public String? ErrorMessage 
 			{
@@ -7448,6 +7671,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The error message, or null if there was no error.
+			/// Versions: 1+
 			/// </summary>
 			public CreatableTopicResult WithErrorMessage(String errorMessage)
 			{
@@ -7497,6 +7721,7 @@ namespace Kafka.Protocol
 		private DeleteAclsFilter[] _filtersCollection = Array.Empty<DeleteAclsFilter>();
 		/// <summary>
 		/// The filters to use when deleting ACLs.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteAclsFilter[] FiltersCollection 
 		{
@@ -7514,6 +7739,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The filters to use when deleting ACLs.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteAclsRequest WithFiltersCollection(params Func<DeleteAclsFilter, DeleteAclsFilter>[] createFields)
 		{
@@ -7606,6 +7832,7 @@ namespace Kafka.Protocol
 			private Int8 _resourceTypeFilter = Int8.Default;
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 ResourceTypeFilter 
 			{
@@ -7623,6 +7850,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilter WithResourceTypeFilter(Int8 resourceTypeFilter)
 			{
@@ -7633,6 +7861,7 @@ namespace Kafka.Protocol
 			private String? _resourceNameFilter = String.Default;
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public String? ResourceNameFilter 
 			{
@@ -7656,6 +7885,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilter WithResourceNameFilter(String resourceNameFilter)
 			{
@@ -7666,6 +7896,8 @@ namespace Kafka.Protocol
 			private Int8 _patternTypeFilter = new Int8(3);
 			/// <summary>
 			/// The pattern type.
+			/// Versions: 1+
+			/// Default: 3
 			/// </summary>
 			public Int8 PatternTypeFilter 
 			{
@@ -7683,6 +7915,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The pattern type.
+			/// Versions: 1+
+			/// Default: 3
 			/// </summary>
 			public DeleteAclsFilter WithPatternTypeFilter(Int8 patternTypeFilter)
 			{
@@ -7693,6 +7927,7 @@ namespace Kafka.Protocol
 			private String? _principalFilter = String.Default;
 			/// <summary>
 			/// The principal filter, or null to accept all principals.
+			/// Versions: 0+
 			/// </summary>
 			public String? PrincipalFilter 
 			{
@@ -7716,6 +7951,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The principal filter, or null to accept all principals.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilter WithPrincipalFilter(String principalFilter)
 			{
@@ -7726,6 +7962,7 @@ namespace Kafka.Protocol
 			private String? _hostFilter = String.Default;
 			/// <summary>
 			/// The host filter, or null to accept all hosts.
+			/// Versions: 0+
 			/// </summary>
 			public String? HostFilter 
 			{
@@ -7749,6 +7986,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The host filter, or null to accept all hosts.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilter WithHostFilter(String hostFilter)
 			{
@@ -7759,6 +7997,7 @@ namespace Kafka.Protocol
 			private Int8 _operation = Int8.Default;
 			/// <summary>
 			/// The ACL operation.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 Operation 
 			{
@@ -7776,6 +8015,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The ACL operation.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilter WithOperation(Int8 operation)
 			{
@@ -7786,6 +8026,7 @@ namespace Kafka.Protocol
 			private Int8 _permissionType = Int8.Default;
 			/// <summary>
 			/// The permission type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 PermissionType 
 			{
@@ -7803,6 +8044,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The permission type.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilter WithPermissionType(Int8 permissionType)
 			{
@@ -7863,6 +8105,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -7880,6 +8123,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteAclsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -7890,6 +8134,7 @@ namespace Kafka.Protocol
 		private DeleteAclsFilterResult[] _filterResultsCollection = Array.Empty<DeleteAclsFilterResult>();
 		/// <summary>
 		/// The results for each filter.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteAclsFilterResult[] FilterResultsCollection 
 		{
@@ -7907,6 +8152,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The results for each filter.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteAclsResponse WithFilterResultsCollection(params Func<DeleteAclsFilterResult, DeleteAclsFilterResult>[] createFields)
 		{
@@ -7967,6 +8213,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The error code, or 0 if the filter succeeded.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -7984,6 +8231,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The error code, or 0 if the filter succeeded.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilterResult WithErrorCode(Int16 errorCode)
 			{
@@ -7994,6 +8242,7 @@ namespace Kafka.Protocol
 			private String? _errorMessage = String.Default;
 			/// <summary>
 			/// The error message, or null if the filter succeeded.
+			/// Versions: 0+
 			/// </summary>
 			public String? ErrorMessage 
 			{
@@ -8017,6 +8266,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The error message, or null if the filter succeeded.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilterResult WithErrorMessage(String errorMessage)
 			{
@@ -8027,6 +8277,7 @@ namespace Kafka.Protocol
 			private DeleteAclsMatchingAcl[] _matchingAclsCollection = Array.Empty<DeleteAclsMatchingAcl>();
 			/// <summary>
 			/// The ACLs which matched this filter.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsMatchingAcl[] MatchingAclsCollection 
 			{
@@ -8044,6 +8295,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The ACLs which matched this filter.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteAclsFilterResult WithMatchingAclsCollection(params Func<DeleteAclsMatchingAcl, DeleteAclsMatchingAcl>[] createFields)
 			{
@@ -8152,6 +8404,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -8169,6 +8422,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteAclsMatchingAcl WithErrorCode(Int16 errorCode)
 				{
@@ -8179,6 +8433,7 @@ namespace Kafka.Protocol
 				private String? _errorMessage = String.Default;
 				/// <summary>
 				/// The deletion error message, or null if the deletion succeeded.
+				/// Versions: 0+
 				/// </summary>
 				public String? ErrorMessage 
 				{
@@ -8202,6 +8457,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The deletion error message, or null if the deletion succeeded.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteAclsMatchingAcl WithErrorMessage(String errorMessage)
 				{
@@ -8212,6 +8468,7 @@ namespace Kafka.Protocol
 				private Int8 _resourceType = Int8.Default;
 				/// <summary>
 				/// The ACL resource type.
+				/// Versions: 0+
 				/// </summary>
 				public Int8 ResourceType 
 				{
@@ -8229,6 +8486,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL resource type.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteAclsMatchingAcl WithResourceType(Int8 resourceType)
 				{
@@ -8239,6 +8497,7 @@ namespace Kafka.Protocol
 				private String _resourceName = String.Default;
 				/// <summary>
 				/// The ACL resource name.
+				/// Versions: 0+
 				/// </summary>
 				public String ResourceName 
 				{
@@ -8256,6 +8515,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL resource name.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteAclsMatchingAcl WithResourceName(String resourceName)
 				{
@@ -8266,6 +8526,8 @@ namespace Kafka.Protocol
 				private Int8 _patternType = new Int8(3);
 				/// <summary>
 				/// The ACL resource pattern type.
+				/// Versions: 1+
+				/// Default: 3
 				/// </summary>
 				public Int8 PatternType 
 				{
@@ -8283,6 +8545,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL resource pattern type.
+				/// Versions: 1+
+				/// Default: 3
 				/// </summary>
 				public DeleteAclsMatchingAcl WithPatternType(Int8 patternType)
 				{
@@ -8293,6 +8557,7 @@ namespace Kafka.Protocol
 				private String _principal = String.Default;
 				/// <summary>
 				/// The ACL principal.
+				/// Versions: 0+
 				/// </summary>
 				public String Principal 
 				{
@@ -8310,6 +8575,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL principal.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteAclsMatchingAcl WithPrincipal(String principal)
 				{
@@ -8320,6 +8586,7 @@ namespace Kafka.Protocol
 				private String _host = String.Default;
 				/// <summary>
 				/// The ACL host.
+				/// Versions: 0+
 				/// </summary>
 				public String Host 
 				{
@@ -8337,6 +8604,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL host.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteAclsMatchingAcl WithHost(String host)
 				{
@@ -8347,6 +8615,7 @@ namespace Kafka.Protocol
 				private Int8 _operation = Int8.Default;
 				/// <summary>
 				/// The ACL operation.
+				/// Versions: 0+
 				/// </summary>
 				public Int8 Operation 
 				{
@@ -8364,6 +8633,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL operation.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteAclsMatchingAcl WithOperation(Int8 operation)
 				{
@@ -8374,6 +8644,7 @@ namespace Kafka.Protocol
 				private Int8 _permissionType = Int8.Default;
 				/// <summary>
 				/// The ACL permission type.
+				/// Versions: 0+
 				/// </summary>
 				public Int8 PermissionType 
 				{
@@ -8391,6 +8662,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL permission type.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteAclsMatchingAcl WithPermissionType(Int8 permissionType)
 				{
@@ -8441,6 +8713,7 @@ namespace Kafka.Protocol
 		private String[] _groupsNamesCollection = Array.Empty<String>();
 		/// <summary>
 		/// The group names to delete.
+		/// Versions: 0+
 		/// </summary>
 		public String[] GroupsNamesCollection 
 		{
@@ -8458,6 +8731,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The group names to delete.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteGroupsRequest WithGroupsNamesCollection(String[] groupsNamesCollection)
 		{
@@ -8517,6 +8791,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -8534,6 +8809,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteGroupsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -8544,6 +8820,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, DeletableGroupResult> _resultsCollection = new Dictionary<String, DeletableGroupResult>();
 		/// <summary>
 		/// The deletion results
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, DeletableGroupResult> ResultsCollection 
 		{
@@ -8561,6 +8838,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The deletion results
+		/// Versions: 0+
 		/// </summary>
 		public DeleteGroupsResponse WithResultsCollection(params Func<DeletableGroupResult, DeletableGroupResult>[] createFields)
 		{
@@ -8613,6 +8891,7 @@ namespace Kafka.Protocol
 			private String _groupId = String.Default;
 			/// <summary>
 			/// The group id
+			/// Versions: 0+
 			/// </summary>
 			public String GroupId 
 			{
@@ -8630,6 +8909,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group id
+			/// Versions: 0+
 			/// </summary>
 			public DeletableGroupResult WithGroupId(String groupId)
 			{
@@ -8640,6 +8920,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -8657,6 +8938,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
+			/// Versions: 0+
 			/// </summary>
 			public DeletableGroupResult WithErrorCode(Int16 errorCode)
 			{
@@ -8714,6 +8996,7 @@ namespace Kafka.Protocol
 		private DeleteRecordsTopic[] _topicsCollection = Array.Empty<DeleteRecordsTopic>();
 		/// <summary>
 		/// Each topic that we want to delete records from.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteRecordsTopic[] TopicsCollection 
 		{
@@ -8731,6 +9014,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic that we want to delete records from.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteRecordsRequest WithTopicsCollection(params Func<DeleteRecordsTopic, DeleteRecordsTopic>[] createFields)
 		{
@@ -8783,6 +9067,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -8800,6 +9085,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteRecordsTopic WithName(String name)
 			{
@@ -8810,6 +9096,7 @@ namespace Kafka.Protocol
 			private DeleteRecordsPartition[] _partitionsCollection = Array.Empty<DeleteRecordsPartition>();
 			/// <summary>
 			/// Each partition that we want to delete records from.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteRecordsPartition[] PartitionsCollection 
 			{
@@ -8827,6 +9114,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition that we want to delete records from.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteRecordsTopic WithPartitionsCollection(params Func<DeleteRecordsPartition, DeleteRecordsPartition>[] createFields)
 			{
@@ -8879,6 +9167,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -8896,6 +9185,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteRecordsPartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -8906,6 +9196,7 @@ namespace Kafka.Protocol
 				private Int64 _offset = Int64.Default;
 				/// <summary>
 				/// The deletion offset.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 Offset 
 				{
@@ -8923,6 +9214,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The deletion offset.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteRecordsPartition WithOffset(Int64 offset)
 				{
@@ -8935,6 +9227,7 @@ namespace Kafka.Protocol
 		private Int32 _timeoutMs = Int32.Default;
 		/// <summary>
 		/// How long to wait for the deletion to complete, in milliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 TimeoutMs 
 		{
@@ -8952,6 +9245,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// How long to wait for the deletion to complete, in milliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteRecordsRequest WithTimeoutMs(Int32 timeoutMs)
 		{
@@ -9011,6 +9305,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -9028,6 +9323,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteRecordsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -9038,6 +9334,7 @@ namespace Kafka.Protocol
 		private DeleteRecordsTopicResult[] _topicsCollection = Array.Empty<DeleteRecordsTopicResult>();
 		/// <summary>
 		/// Each topic that we wanted to delete records from.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteRecordsTopicResult[] TopicsCollection 
 		{
@@ -9055,6 +9352,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic that we wanted to delete records from.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteRecordsResponse WithTopicsCollection(params Func<DeleteRecordsTopicResult, DeleteRecordsTopicResult>[] createFields)
 		{
@@ -9107,6 +9405,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -9124,6 +9423,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteRecordsTopicResult WithName(String name)
 			{
@@ -9134,6 +9434,7 @@ namespace Kafka.Protocol
 			private DeleteRecordsPartitionResult[] _partitionsCollection = Array.Empty<DeleteRecordsPartitionResult>();
 			/// <summary>
 			/// Each partition that we wanted to delete records from.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteRecordsPartitionResult[] PartitionsCollection 
 			{
@@ -9151,6 +9452,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition that we wanted to delete records from.
+			/// Versions: 0+
 			/// </summary>
 			public DeleteRecordsTopicResult WithPartitionsCollection(params Func<DeleteRecordsPartitionResult, DeleteRecordsPartitionResult>[] createFields)
 			{
@@ -9211,6 +9513,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -9228,6 +9531,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteRecordsPartitionResult WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -9238,6 +9542,7 @@ namespace Kafka.Protocol
 				private Int64 _lowWatermark = Int64.Default;
 				/// <summary>
 				/// The partition low water mark.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 LowWatermark 
 				{
@@ -9255,6 +9560,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition low water mark.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteRecordsPartitionResult WithLowWatermark(Int64 lowWatermark)
 				{
@@ -9265,6 +9571,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -9282,6 +9589,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The deletion error code, or 0 if the deletion succeeded.
+				/// Versions: 0+
 				/// </summary>
 				public DeleteRecordsPartitionResult WithErrorCode(Int16 errorCode)
 				{
@@ -9340,6 +9648,7 @@ namespace Kafka.Protocol
 		private String[] _topicNamesCollection = Array.Empty<String>();
 		/// <summary>
 		/// The names of the topics to delete
+		/// Versions: 0+
 		/// </summary>
 		public String[] TopicNamesCollection 
 		{
@@ -9357,6 +9666,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The names of the topics to delete
+		/// Versions: 0+
 		/// </summary>
 		public DeleteTopicsRequest WithTopicNamesCollection(String[] topicNamesCollection)
 		{
@@ -9367,6 +9677,7 @@ namespace Kafka.Protocol
 		private Int32 _timeoutMs = Int32.Default;
 		/// <summary>
 		/// The length of time in milliseconds to wait for the deletions to complete.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 TimeoutMs 
 		{
@@ -9384,6 +9695,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The length of time in milliseconds to wait for the deletions to complete.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteTopicsRequest WithTimeoutMs(Int32 timeoutMs)
 		{
@@ -9443,6 +9755,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -9460,6 +9773,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public DeleteTopicsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -9470,6 +9784,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, DeletableTopicResult> _responsesCollection = new Dictionary<String, DeletableTopicResult>();
 		/// <summary>
 		/// The results for each topic we tried to delete.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, DeletableTopicResult> ResponsesCollection 
 		{
@@ -9487,6 +9802,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The results for each topic we tried to delete.
+		/// Versions: 0+
 		/// </summary>
 		public DeleteTopicsResponse WithResponsesCollection(params Func<DeletableTopicResult, DeletableTopicResult>[] createFields)
 		{
@@ -9539,6 +9855,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -9556,6 +9873,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public DeletableTopicResult WithName(String name)
 			{
@@ -9566,6 +9884,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -9583,6 +9902,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The deletion error, or 0 if the deletion succeeded.
+			/// Versions: 0+
 			/// </summary>
 			public DeletableTopicResult WithErrorCode(Int16 errorCode)
 			{
@@ -9680,6 +10000,7 @@ namespace Kafka.Protocol
 		private Int8 _resourceType = Int8.Default;
 		/// <summary>
 		/// The resource type.
+		/// Versions: 0+
 		/// </summary>
 		public Int8 ResourceType 
 		{
@@ -9697,6 +10018,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The resource type.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsRequest WithResourceType(Int8 resourceType)
 		{
@@ -9707,6 +10029,7 @@ namespace Kafka.Protocol
 		private String? _resourceNameFilter = String.Default;
 		/// <summary>
 		/// The resource name, or null to match any resource name.
+		/// Versions: 0+
 		/// </summary>
 		public String? ResourceNameFilter 
 		{
@@ -9730,6 +10053,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The resource name, or null to match any resource name.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsRequest WithResourceNameFilter(String resourceNameFilter)
 		{
@@ -9740,6 +10064,8 @@ namespace Kafka.Protocol
 		private Int8 _resourcePatternType = new Int8(3);
 		/// <summary>
 		/// The resource pattern to match.
+		/// Versions: 1+
+		/// Default: 3
 		/// </summary>
 		public Int8 ResourcePatternType 
 		{
@@ -9757,6 +10083,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The resource pattern to match.
+		/// Versions: 1+
+		/// Default: 3
 		/// </summary>
 		public DescribeAclsRequest WithResourcePatternType(Int8 resourcePatternType)
 		{
@@ -9767,6 +10095,7 @@ namespace Kafka.Protocol
 		private String? _principalFilter = String.Default;
 		/// <summary>
 		/// The principal to match, or null to match any principal.
+		/// Versions: 0+
 		/// </summary>
 		public String? PrincipalFilter 
 		{
@@ -9790,6 +10119,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The principal to match, or null to match any principal.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsRequest WithPrincipalFilter(String principalFilter)
 		{
@@ -9800,6 +10130,7 @@ namespace Kafka.Protocol
 		private String? _hostFilter = String.Default;
 		/// <summary>
 		/// The host to match, or null to match any host.
+		/// Versions: 0+
 		/// </summary>
 		public String? HostFilter 
 		{
@@ -9823,6 +10154,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The host to match, or null to match any host.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsRequest WithHostFilter(String hostFilter)
 		{
@@ -9833,6 +10165,7 @@ namespace Kafka.Protocol
 		private Int8 _operation = Int8.Default;
 		/// <summary>
 		/// The operation to match.
+		/// Versions: 0+
 		/// </summary>
 		public Int8 Operation 
 		{
@@ -9850,6 +10183,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The operation to match.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsRequest WithOperation(Int8 operation)
 		{
@@ -9860,6 +10194,7 @@ namespace Kafka.Protocol
 		private Int8 _permissionType = Int8.Default;
 		/// <summary>
 		/// The permission type to match.
+		/// Versions: 0+
 		/// </summary>
 		public Int8 PermissionType 
 		{
@@ -9877,6 +10212,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The permission type to match.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsRequest WithPermissionType(Int8 permissionType)
 		{
@@ -9952,6 +10288,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -9969,6 +10306,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -9979,6 +10317,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -9996,6 +10335,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsResponse WithErrorCode(Int16 errorCode)
 		{
@@ -10006,6 +10346,7 @@ namespace Kafka.Protocol
 		private String? _errorMessage = String.Default;
 		/// <summary>
 		/// The error message, or null if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public String? ErrorMessage 
 		{
@@ -10029,6 +10370,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error message, or null if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsResponse WithErrorMessage(String errorMessage)
 		{
@@ -10039,6 +10381,7 @@ namespace Kafka.Protocol
 		private DescribeAclsResource[] _resourcesCollection = Array.Empty<DescribeAclsResource>();
 		/// <summary>
 		/// Each Resource that is referenced in an ACL.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsResource[] ResourcesCollection 
 		{
@@ -10056,6 +10399,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each Resource that is referenced in an ACL.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeAclsResponse WithResourcesCollection(params Func<DescribeAclsResource, DescribeAclsResource>[] createFields)
 		{
@@ -10124,6 +10468,7 @@ namespace Kafka.Protocol
 			private Int8 _type = Int8.Default;
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 Type 
 			{
@@ -10141,6 +10486,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeAclsResource WithType(Int8 type)
 			{
@@ -10151,6 +10497,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -10168,6 +10515,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeAclsResource WithName(String name)
 			{
@@ -10178,6 +10526,8 @@ namespace Kafka.Protocol
 			private Int8 _patternType = new Int8(3);
 			/// <summary>
 			/// The resource pattern type.
+			/// Versions: 1+
+			/// Default: 3
 			/// </summary>
 			public Int8 PatternType 
 			{
@@ -10195,6 +10545,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource pattern type.
+			/// Versions: 1+
+			/// Default: 3
 			/// </summary>
 			public DescribeAclsResource WithPatternType(Int8 patternType)
 			{
@@ -10205,6 +10557,7 @@ namespace Kafka.Protocol
 			private AclDescription[] _aclsCollection = Array.Empty<AclDescription>();
 			/// <summary>
 			/// The ACLs.
+			/// Versions: 0+
 			/// </summary>
 			public AclDescription[] AclsCollection 
 			{
@@ -10222,6 +10575,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The ACLs.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeAclsResource WithAclsCollection(params Func<AclDescription, AclDescription>[] createFields)
 			{
@@ -10290,6 +10644,7 @@ namespace Kafka.Protocol
 				private String _principal = String.Default;
 				/// <summary>
 				/// The ACL principal.
+				/// Versions: 0+
 				/// </summary>
 				public String Principal 
 				{
@@ -10307,6 +10662,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL principal.
+				/// Versions: 0+
 				/// </summary>
 				public AclDescription WithPrincipal(String principal)
 				{
@@ -10317,6 +10673,7 @@ namespace Kafka.Protocol
 				private String _host = String.Default;
 				/// <summary>
 				/// The ACL host.
+				/// Versions: 0+
 				/// </summary>
 				public String Host 
 				{
@@ -10334,6 +10691,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL host.
+				/// Versions: 0+
 				/// </summary>
 				public AclDescription WithHost(String host)
 				{
@@ -10344,6 +10702,7 @@ namespace Kafka.Protocol
 				private Int8 _operation = Int8.Default;
 				/// <summary>
 				/// The ACL operation.
+				/// Versions: 0+
 				/// </summary>
 				public Int8 Operation 
 				{
@@ -10361,6 +10720,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL operation.
+				/// Versions: 0+
 				/// </summary>
 				public AclDescription WithOperation(Int8 operation)
 				{
@@ -10371,6 +10731,7 @@ namespace Kafka.Protocol
 				private Int8 _permissionType = Int8.Default;
 				/// <summary>
 				/// The ACL permission type.
+				/// Versions: 0+
 				/// </summary>
 				public Int8 PermissionType 
 				{
@@ -10388,6 +10749,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ACL permission type.
+				/// Versions: 0+
 				/// </summary>
 				public AclDescription WithPermissionType(Int8 permissionType)
 				{
@@ -10446,6 +10808,7 @@ namespace Kafka.Protocol
 		private DescribeConfigsResource[] _resourcesCollection = Array.Empty<DescribeConfigsResource>();
 		/// <summary>
 		/// The resources whose configurations we want to describe.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeConfigsResource[] ResourcesCollection 
 		{
@@ -10463,6 +10826,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The resources whose configurations we want to describe.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeConfigsRequest WithResourcesCollection(params Func<DescribeConfigsResource, DescribeConfigsResource>[] createFields)
 		{
@@ -10523,6 +10887,7 @@ namespace Kafka.Protocol
 			private Int8 _resourceType = Int8.Default;
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 ResourceType 
 			{
@@ -10540,6 +10905,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResource WithResourceType(Int8 resourceType)
 			{
@@ -10550,6 +10916,7 @@ namespace Kafka.Protocol
 			private String _resourceName = String.Default;
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public String ResourceName 
 			{
@@ -10567,6 +10934,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResource WithResourceName(String resourceName)
 			{
@@ -10577,6 +10945,7 @@ namespace Kafka.Protocol
 			private String[]? _configurationKeysCollection = Array.Empty<String>();
 			/// <summary>
 			/// The configuration keys to list, or null to list all configuration keys.
+			/// Versions: 0+
 			/// </summary>
 			public String[]? ConfigurationKeysCollection 
 			{
@@ -10600,6 +10969,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The configuration keys to list, or null to list all configuration keys.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResource WithConfigurationKeysCollection(String[] configurationKeysCollection)
 			{
@@ -10611,6 +10981,8 @@ namespace Kafka.Protocol
 		private Boolean _includeSynoyms = new Boolean(false);
 		/// <summary>
 		/// True if we should include all synonyms.
+		/// Versions: 1+
+		/// Default: false
 		/// </summary>
 		public Boolean IncludeSynoyms 
 		{
@@ -10628,6 +11000,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// True if we should include all synonyms.
+		/// Versions: 1+
+		/// Default: false
 		/// </summary>
 		public DescribeConfigsRequest WithIncludeSynoyms(Boolean includeSynoyms)
 		{
@@ -10687,6 +11061,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -10704,6 +11079,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeConfigsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -10714,6 +11090,7 @@ namespace Kafka.Protocol
 		private DescribeConfigsResult[] _resultsCollection = Array.Empty<DescribeConfigsResult>();
 		/// <summary>
 		/// The results for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeConfigsResult[] ResultsCollection 
 		{
@@ -10731,6 +11108,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The results for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeConfigsResponse WithResultsCollection(params Func<DescribeConfigsResult, DescribeConfigsResult>[] createFields)
 		{
@@ -10807,6 +11185,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The error code, or 0 if we were able to successfully describe the configurations.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -10824,6 +11203,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The error code, or 0 if we were able to successfully describe the configurations.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResult WithErrorCode(Int16 errorCode)
 			{
@@ -10834,6 +11214,7 @@ namespace Kafka.Protocol
 			private String? _errorMessage = String.Default;
 			/// <summary>
 			/// The error message, or null if we were able to successfully describe the configurations.
+			/// Versions: 0+
 			/// </summary>
 			public String? ErrorMessage 
 			{
@@ -10857,6 +11238,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The error message, or null if we were able to successfully describe the configurations.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResult WithErrorMessage(String errorMessage)
 			{
@@ -10867,6 +11249,7 @@ namespace Kafka.Protocol
 			private Int8 _resourceType = Int8.Default;
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 ResourceType 
 			{
@@ -10884,6 +11267,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResult WithResourceType(Int8 resourceType)
 			{
@@ -10894,6 +11278,7 @@ namespace Kafka.Protocol
 			private String _resourceName = String.Default;
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public String ResourceName 
 			{
@@ -10911,6 +11296,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResult WithResourceName(String resourceName)
 			{
@@ -10921,6 +11307,7 @@ namespace Kafka.Protocol
 			private DescribeConfigsResourceResult[] _configsCollection = Array.Empty<DescribeConfigsResourceResult>();
 			/// <summary>
 			/// Each listed configuration.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResourceResult[] ConfigsCollection 
 			{
@@ -10938,6 +11325,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each listed configuration.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeConfigsResult WithConfigsCollection(params Func<DescribeConfigsResourceResult, DescribeConfigsResourceResult>[] createFields)
 			{
@@ -11030,6 +11418,7 @@ namespace Kafka.Protocol
 				private String _name = String.Default;
 				/// <summary>
 				/// The configuration name.
+				/// Versions: 0+
 				/// </summary>
 				public String Name 
 				{
@@ -11047,6 +11436,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The configuration name.
+				/// Versions: 0+
 				/// </summary>
 				public DescribeConfigsResourceResult WithName(String name)
 				{
@@ -11057,6 +11447,7 @@ namespace Kafka.Protocol
 				private String? _value = String.Default;
 				/// <summary>
 				/// The configuration value.
+				/// Versions: 0+
 				/// </summary>
 				public String? Value 
 				{
@@ -11080,6 +11471,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The configuration value.
+				/// Versions: 0+
 				/// </summary>
 				public DescribeConfigsResourceResult WithValue(String value)
 				{
@@ -11090,6 +11482,7 @@ namespace Kafka.Protocol
 				private Boolean _readOnly = Boolean.Default;
 				/// <summary>
 				/// True if the configuration is read-only.
+				/// Versions: 0+
 				/// </summary>
 				public Boolean ReadOnly 
 				{
@@ -11107,6 +11500,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// True if the configuration is read-only.
+				/// Versions: 0+
 				/// </summary>
 				public DescribeConfigsResourceResult WithReadOnly(Boolean readOnly)
 				{
@@ -11117,6 +11511,7 @@ namespace Kafka.Protocol
 				private Boolean _isDefault = Boolean.Default;
 				/// <summary>
 				/// True if the configuration is not set.
+				/// Versions: 0
 				/// </summary>
 				public Boolean IsDefault 
 				{
@@ -11134,6 +11529,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// True if the configuration is not set.
+				/// Versions: 0
 				/// </summary>
 				public DescribeConfigsResourceResult WithIsDefault(Boolean isDefault)
 				{
@@ -11144,6 +11540,8 @@ namespace Kafka.Protocol
 				private Int8 _configSource = new Int8(-1);
 				/// <summary>
 				/// The configuration source.
+				/// Versions: 1+
+				/// Default: -1
 				/// </summary>
 				public Int8 ConfigSource 
 				{
@@ -11156,6 +11554,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The configuration source.
+				/// Versions: 1+
+				/// Default: -1
 				/// </summary>
 				public DescribeConfigsResourceResult WithConfigSource(Int8 configSource)
 				{
@@ -11166,6 +11566,7 @@ namespace Kafka.Protocol
 				private Boolean _isSensitive = Boolean.Default;
 				/// <summary>
 				/// True if this configuration is sensitive.
+				/// Versions: 0+
 				/// </summary>
 				public Boolean IsSensitive 
 				{
@@ -11183,6 +11584,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// True if this configuration is sensitive.
+				/// Versions: 0+
 				/// </summary>
 				public DescribeConfigsResourceResult WithIsSensitive(Boolean isSensitive)
 				{
@@ -11193,6 +11595,7 @@ namespace Kafka.Protocol
 				private DescribeConfigsSynonym[] _synonymsCollection = Array.Empty<DescribeConfigsSynonym>();
 				/// <summary>
 				/// The synonyms for this configuration key.
+				/// Versions: 1+
 				/// </summary>
 				public DescribeConfigsSynonym[] SynonymsCollection 
 				{
@@ -11205,6 +11608,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The synonyms for this configuration key.
+				/// Versions: 1+
 				/// </summary>
 				public DescribeConfigsResourceResult WithSynonymsCollection(params Func<DescribeConfigsSynonym, DescribeConfigsSynonym>[] createFields)
 				{
@@ -11265,6 +11669,7 @@ namespace Kafka.Protocol
 					private String _name = String.Default;
 					/// <summary>
 					/// The synonym name.
+					/// Versions: 1+
 					/// </summary>
 					public String Name 
 					{
@@ -11282,6 +11687,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The synonym name.
+					/// Versions: 1+
 					/// </summary>
 					public DescribeConfigsSynonym WithName(String name)
 					{
@@ -11292,6 +11698,7 @@ namespace Kafka.Protocol
 					private String? _value = String.Default;
 					/// <summary>
 					/// The synonym value.
+					/// Versions: 1+
 					/// </summary>
 					public String? Value 
 					{
@@ -11315,6 +11722,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The synonym value.
+					/// Versions: 1+
 					/// </summary>
 					public DescribeConfigsSynonym WithValue(String value)
 					{
@@ -11325,6 +11733,7 @@ namespace Kafka.Protocol
 					private Int8 _source = Int8.Default;
 					/// <summary>
 					/// The synonym source.
+					/// Versions: 1+
 					/// </summary>
 					public Int8 Source 
 					{
@@ -11342,6 +11751,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The synonym source.
+					/// Versions: 1+
 					/// </summary>
 					public DescribeConfigsSynonym WithSource(Int8 source)
 					{
@@ -11393,6 +11803,7 @@ namespace Kafka.Protocol
 		private DescribeDelegationTokenOwner[]? _ownersCollection = Array.Empty<DescribeDelegationTokenOwner>();
 		/// <summary>
 		/// Each owner that we want to describe delegation tokens for, or null to describe all tokens.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeDelegationTokenOwner[]? OwnersCollection 
 		{
@@ -11416,6 +11827,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each owner that we want to describe delegation tokens for, or null to describe all tokens.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeDelegationTokenRequest WithOwnersCollection(params Func<DescribeDelegationTokenOwner, DescribeDelegationTokenOwner>[] createFields)
 		{
@@ -11468,6 +11880,7 @@ namespace Kafka.Protocol
 			private String _principalType = String.Default;
 			/// <summary>
 			/// The owner principal type.
+			/// Versions: 0+
 			/// </summary>
 			public String PrincipalType 
 			{
@@ -11485,6 +11898,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The owner principal type.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeDelegationTokenOwner WithPrincipalType(String principalType)
 			{
@@ -11495,6 +11909,7 @@ namespace Kafka.Protocol
 			private String _principalName = String.Default;
 			/// <summary>
 			/// The owner principal name.
+			/// Versions: 0+
 			/// </summary>
 			public String PrincipalName 
 			{
@@ -11512,6 +11927,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The owner principal name.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeDelegationTokenOwner WithPrincipalName(String principalName)
 			{
@@ -11580,6 +11996,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -11597,6 +12014,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeDelegationTokenResponse WithErrorCode(Int16 errorCode)
 		{
@@ -11607,6 +12025,7 @@ namespace Kafka.Protocol
 		private DescribedDelegationToken[] _tokensCollection = Array.Empty<DescribedDelegationToken>();
 		/// <summary>
 		/// The tokens.
+		/// Versions: 0+
 		/// </summary>
 		public DescribedDelegationToken[] TokensCollection 
 		{
@@ -11624,6 +12043,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The tokens.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeDelegationTokenResponse WithTokensCollection(params Func<DescribedDelegationToken, DescribedDelegationToken>[] createFields)
 		{
@@ -11724,6 +12144,7 @@ namespace Kafka.Protocol
 			private String _principalType = String.Default;
 			/// <summary>
 			/// The token principal type.
+			/// Versions: 0+
 			/// </summary>
 			public String PrincipalType 
 			{
@@ -11741,6 +12162,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The token principal type.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationToken WithPrincipalType(String principalType)
 			{
@@ -11751,6 +12173,7 @@ namespace Kafka.Protocol
 			private String _principalName = String.Default;
 			/// <summary>
 			/// The token principal name.
+			/// Versions: 0+
 			/// </summary>
 			public String PrincipalName 
 			{
@@ -11768,6 +12191,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The token principal name.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationToken WithPrincipalName(String principalName)
 			{
@@ -11778,6 +12202,7 @@ namespace Kafka.Protocol
 			private Int64 _issueTimestamp = Int64.Default;
 			/// <summary>
 			/// The token issue timestamp in milliseconds.
+			/// Versions: 0+
 			/// </summary>
 			public Int64 IssueTimestamp 
 			{
@@ -11795,6 +12220,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The token issue timestamp in milliseconds.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationToken WithIssueTimestamp(Int64 issueTimestamp)
 			{
@@ -11805,6 +12231,7 @@ namespace Kafka.Protocol
 			private Int64 _expiryTimestamp = Int64.Default;
 			/// <summary>
 			/// The token expiry timestamp in milliseconds.
+			/// Versions: 0+
 			/// </summary>
 			public Int64 ExpiryTimestamp 
 			{
@@ -11822,6 +12249,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The token expiry timestamp in milliseconds.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationToken WithExpiryTimestamp(Int64 expiryTimestamp)
 			{
@@ -11832,6 +12260,7 @@ namespace Kafka.Protocol
 			private Int64 _maxTimestamp = Int64.Default;
 			/// <summary>
 			/// The token maximum timestamp length in milliseconds.
+			/// Versions: 0+
 			/// </summary>
 			public Int64 MaxTimestamp 
 			{
@@ -11849,6 +12278,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The token maximum timestamp length in milliseconds.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationToken WithMaxTimestamp(Int64 maxTimestamp)
 			{
@@ -11859,6 +12289,7 @@ namespace Kafka.Protocol
 			private String _tokenId = String.Default;
 			/// <summary>
 			/// The token ID.
+			/// Versions: 0+
 			/// </summary>
 			public String TokenId 
 			{
@@ -11876,6 +12307,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The token ID.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationToken WithTokenId(String tokenId)
 			{
@@ -11886,6 +12318,7 @@ namespace Kafka.Protocol
 			private Bytes _hmac = Bytes.Default;
 			/// <summary>
 			/// The token HMAC.
+			/// Versions: 0+
 			/// </summary>
 			public Bytes Hmac 
 			{
@@ -11903,6 +12336,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The token HMAC.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationToken WithHmac(Bytes hmac)
 			{
@@ -11913,6 +12347,7 @@ namespace Kafka.Protocol
 			private DescribedDelegationTokenRenewer[] _renewersCollection = Array.Empty<DescribedDelegationTokenRenewer>();
 			/// <summary>
 			/// Those who are able to renew this token before it expires.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationTokenRenewer[] RenewersCollection 
 			{
@@ -11930,6 +12365,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Those who are able to renew this token before it expires.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedDelegationToken WithRenewersCollection(params Func<DescribedDelegationTokenRenewer, DescribedDelegationTokenRenewer>[] createFields)
 			{
@@ -11982,6 +12418,7 @@ namespace Kafka.Protocol
 				private String _principalType = String.Default;
 				/// <summary>
 				/// The renewer principal type
+				/// Versions: 0+
 				/// </summary>
 				public String PrincipalType 
 				{
@@ -11999,6 +12436,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The renewer principal type
+				/// Versions: 0+
 				/// </summary>
 				public DescribedDelegationTokenRenewer WithPrincipalType(String principalType)
 				{
@@ -12009,6 +12447,7 @@ namespace Kafka.Protocol
 				private String _principalName = String.Default;
 				/// <summary>
 				/// The renewer principal name
+				/// Versions: 0+
 				/// </summary>
 				public String PrincipalName 
 				{
@@ -12026,6 +12465,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The renewer principal name
+				/// Versions: 0+
 				/// </summary>
 				public DescribedDelegationTokenRenewer WithPrincipalName(String principalName)
 				{
@@ -12038,6 +12478,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -12055,6 +12496,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeDelegationTokenResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -12111,6 +12553,7 @@ namespace Kafka.Protocol
 		private String[] _groupsCollection = Array.Empty<String>();
 		/// <summary>
 		/// The names of the groups to describe
+		/// Versions: 0+
 		/// </summary>
 		public String[] GroupsCollection 
 		{
@@ -12128,6 +12571,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The names of the groups to describe
+		/// Versions: 0+
 		/// </summary>
 		public DescribeGroupsRequest WithGroupsCollection(String[] groupsCollection)
 		{
@@ -12138,6 +12582,7 @@ namespace Kafka.Protocol
 		private Boolean _includeAuthorizedOperations = Boolean.Default;
 		/// <summary>
 		/// Whether to include authorized operations.
+		/// Versions: 3+
 		/// </summary>
 		public Boolean IncludeAuthorizedOperations 
 		{
@@ -12155,6 +12600,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Whether to include authorized operations.
+		/// Versions: 3+
 		/// </summary>
 		public DescribeGroupsRequest WithIncludeAuthorizedOperations(Boolean includeAuthorizedOperations)
 		{
@@ -12214,6 +12660,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -12226,6 +12673,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public DescribeGroupsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -12236,6 +12684,7 @@ namespace Kafka.Protocol
 		private DescribedGroup[] _groupsCollection = Array.Empty<DescribedGroup>();
 		/// <summary>
 		/// Each described group.
+		/// Versions: 0+
 		/// </summary>
 		public DescribedGroup[] GroupsCollection 
 		{
@@ -12253,6 +12702,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each described group.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeGroupsResponse WithGroupsCollection(params Func<DescribedGroup, DescribedGroup>[] createFields)
 		{
@@ -12345,6 +12795,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The describe error, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -12362,6 +12813,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The describe error, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedGroup WithErrorCode(Int16 errorCode)
 			{
@@ -12372,6 +12824,7 @@ namespace Kafka.Protocol
 			private String _groupId = String.Default;
 			/// <summary>
 			/// The group ID string.
+			/// Versions: 0+
 			/// </summary>
 			public String GroupId 
 			{
@@ -12389,6 +12842,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group ID string.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedGroup WithGroupId(String groupId)
 			{
@@ -12399,6 +12853,7 @@ namespace Kafka.Protocol
 			private String _groupState = String.Default;
 			/// <summary>
 			/// The group state string, or the empty string.
+			/// Versions: 0+
 			/// </summary>
 			public String GroupState 
 			{
@@ -12416,6 +12871,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group state string, or the empty string.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedGroup WithGroupState(String groupState)
 			{
@@ -12426,6 +12882,7 @@ namespace Kafka.Protocol
 			private String _protocolType = String.Default;
 			/// <summary>
 			/// The group protocol type, or the empty string.
+			/// Versions: 0+
 			/// </summary>
 			public String ProtocolType 
 			{
@@ -12443,6 +12900,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group protocol type, or the empty string.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedGroup WithProtocolType(String protocolType)
 			{
@@ -12453,6 +12911,7 @@ namespace Kafka.Protocol
 			private String _protocolData = String.Default;
 			/// <summary>
 			/// The group protocol data, or the empty string.
+			/// Versions: 0+
 			/// </summary>
 			public String ProtocolData 
 			{
@@ -12470,6 +12929,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group protocol data, or the empty string.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedGroup WithProtocolData(String protocolData)
 			{
@@ -12480,6 +12940,7 @@ namespace Kafka.Protocol
 			private DescribedGroupMember[] _membersCollection = Array.Empty<DescribedGroupMember>();
 			/// <summary>
 			/// The group members.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedGroupMember[] MembersCollection 
 			{
@@ -12497,6 +12958,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group members.
+			/// Versions: 0+
 			/// </summary>
 			public DescribedGroup WithMembersCollection(params Func<DescribedGroupMember, DescribedGroupMember>[] createFields)
 			{
@@ -12581,6 +13043,7 @@ namespace Kafka.Protocol
 				private String _memberId = String.Default;
 				/// <summary>
 				/// The member ID assigned by the group coordinator.
+				/// Versions: 0+
 				/// </summary>
 				public String MemberId 
 				{
@@ -12598,6 +13061,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The member ID assigned by the group coordinator.
+				/// Versions: 0+
 				/// </summary>
 				public DescribedGroupMember WithMemberId(String memberId)
 				{
@@ -12608,6 +13072,8 @@ namespace Kafka.Protocol
 				private String? _groupInstanceId;
 				/// <summary>
 				/// The unique identifier of the consumer instance provided by end user.
+				/// Versions: 4+
+				/// Default: null
 				/// </summary>
 				public String? GroupInstanceId 
 				{
@@ -12631,6 +13097,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The unique identifier of the consumer instance provided by end user.
+				/// Versions: 4+
+				/// Default: null
 				/// </summary>
 				public DescribedGroupMember WithGroupInstanceId(String groupInstanceId)
 				{
@@ -12641,6 +13109,7 @@ namespace Kafka.Protocol
 				private String _clientId = String.Default;
 				/// <summary>
 				/// The client ID used in the member's latest join group request.
+				/// Versions: 0+
 				/// </summary>
 				public String ClientId 
 				{
@@ -12658,6 +13127,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The client ID used in the member's latest join group request.
+				/// Versions: 0+
 				/// </summary>
 				public DescribedGroupMember WithClientId(String clientId)
 				{
@@ -12668,6 +13138,7 @@ namespace Kafka.Protocol
 				private String _clientHost = String.Default;
 				/// <summary>
 				/// The client host.
+				/// Versions: 0+
 				/// </summary>
 				public String ClientHost 
 				{
@@ -12685,6 +13156,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The client host.
+				/// Versions: 0+
 				/// </summary>
 				public DescribedGroupMember WithClientHost(String clientHost)
 				{
@@ -12695,6 +13167,7 @@ namespace Kafka.Protocol
 				private Bytes _memberMetadata = Bytes.Default;
 				/// <summary>
 				/// The metadata corresponding to the current group protocol in use.
+				/// Versions: 0+
 				/// </summary>
 				public Bytes MemberMetadata 
 				{
@@ -12712,6 +13185,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The metadata corresponding to the current group protocol in use.
+				/// Versions: 0+
 				/// </summary>
 				public DescribedGroupMember WithMemberMetadata(Bytes memberMetadata)
 				{
@@ -12722,6 +13196,7 @@ namespace Kafka.Protocol
 				private Bytes _memberAssignment = Bytes.Default;
 				/// <summary>
 				/// The current assignment provided by the group leader.
+				/// Versions: 0+
 				/// </summary>
 				public Bytes MemberAssignment 
 				{
@@ -12739,6 +13214,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The current assignment provided by the group leader.
+				/// Versions: 0+
 				/// </summary>
 				public DescribedGroupMember WithMemberAssignment(Bytes memberAssignment)
 				{
@@ -12750,6 +13226,8 @@ namespace Kafka.Protocol
 			private Int32 _authorizedOperations = new Int32(-2147483648);
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this group.
+			/// Versions: 3+
+			/// Default: -2147483648
 			/// </summary>
 			public Int32 AuthorizedOperations 
 			{
@@ -12767,6 +13245,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this group.
+			/// Versions: 3+
+			/// Default: -2147483648
 			/// </summary>
 			public DescribedGroup WithAuthorizedOperations(Int32 authorizedOperations)
 			{
@@ -12816,6 +13296,7 @@ namespace Kafka.Protocol
 		private DescribableLogDirTopic[]? _topicsCollection = Array.Empty<DescribableLogDirTopic>();
 		/// <summary>
 		/// Each topic that we want to describe log directories for, or null for all topics.
+		/// Versions: 0+
 		/// </summary>
 		public DescribableLogDirTopic[]? TopicsCollection 
 		{
@@ -12839,6 +13320,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic that we want to describe log directories for, or null for all topics.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeLogDirsRequest WithTopicsCollection(params Func<DescribableLogDirTopic, DescribableLogDirTopic>[] createFields)
 		{
@@ -12891,6 +13373,7 @@ namespace Kafka.Protocol
 			private String _topic = String.Default;
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public String Topic 
 			{
@@ -12908,6 +13391,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public DescribableLogDirTopic WithTopic(String topic)
 			{
@@ -12918,6 +13402,7 @@ namespace Kafka.Protocol
 			private Int32[] _partitionIndexCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The partition indxes.
+			/// Versions: 0+
 			/// </summary>
 			public Int32[] PartitionIndexCollection 
 			{
@@ -12935,6 +13420,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition indxes.
+			/// Versions: 0+
 			/// </summary>
 			public DescribableLogDirTopic WithPartitionIndexCollection(Int32[] partitionIndexCollection)
 			{
@@ -12995,6 +13481,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -13012,6 +13499,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeLogDirsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -13022,6 +13510,7 @@ namespace Kafka.Protocol
 		private DescribeLogDirsResult[] _resultsCollection = Array.Empty<DescribeLogDirsResult>();
 		/// <summary>
 		/// The log directories.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeLogDirsResult[] ResultsCollection 
 		{
@@ -13039,6 +13528,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The log directories.
+		/// Versions: 0+
 		/// </summary>
 		public DescribeLogDirsResponse WithResultsCollection(params Func<DescribeLogDirsResult, DescribeLogDirsResult>[] createFields)
 		{
@@ -13099,6 +13589,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The error code, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -13116,6 +13607,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The error code, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeLogDirsResult WithErrorCode(Int16 errorCode)
 			{
@@ -13126,6 +13618,7 @@ namespace Kafka.Protocol
 			private String _logDir = String.Default;
 			/// <summary>
 			/// The absolute log directory path.
+			/// Versions: 0+
 			/// </summary>
 			public String LogDir 
 			{
@@ -13143,6 +13636,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The absolute log directory path.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeLogDirsResult WithLogDir(String logDir)
 			{
@@ -13153,6 +13647,7 @@ namespace Kafka.Protocol
 			private DescribeLogDirsTopic[] _topicsCollection = Array.Empty<DescribeLogDirsTopic>();
 			/// <summary>
 			/// Each topic.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeLogDirsTopic[] TopicsCollection 
 			{
@@ -13170,6 +13665,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each topic.
+			/// Versions: 0+
 			/// </summary>
 			public DescribeLogDirsResult WithTopicsCollection(params Func<DescribeLogDirsTopic, DescribeLogDirsTopic>[] createFields)
 			{
@@ -13222,6 +13718,7 @@ namespace Kafka.Protocol
 				private String _name = String.Default;
 				/// <summary>
 				/// The topic name.
+				/// Versions: 0+
 				/// </summary>
 				public String Name 
 				{
@@ -13239,6 +13736,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The topic name.
+				/// Versions: 0+
 				/// </summary>
 				public DescribeLogDirsTopic WithName(String name)
 				{
@@ -13247,6 +13745,9 @@ namespace Kafka.Protocol
 				}
 
 				private DescribeLogDirsPartition[] _partitionsCollection = Array.Empty<DescribeLogDirsPartition>();
+				/// <summary>
+				/// Versions: 0+
+				/// </summary>
 				public DescribeLogDirsPartition[] PartitionsCollection 
 				{
 					get => _partitionsCollection;
@@ -13261,6 +13762,9 @@ namespace Kafka.Protocol
 					}
 				}
 
+				/// <summary>
+				/// Versions: 0+
+				/// </summary>
 				public DescribeLogDirsTopic WithPartitionsCollection(params Func<DescribeLogDirsPartition, DescribeLogDirsPartition>[] createFields)
 				{
 					PartitionsCollection = createFields
@@ -13328,6 +13832,7 @@ namespace Kafka.Protocol
 					private Int32 _partitionIndex = Int32.Default;
 					/// <summary>
 					/// The partition index.
+					/// Versions: 0+
 					/// </summary>
 					public Int32 PartitionIndex 
 					{
@@ -13345,6 +13850,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The partition index.
+					/// Versions: 0+
 					/// </summary>
 					public DescribeLogDirsPartition WithPartitionIndex(Int32 partitionIndex)
 					{
@@ -13355,6 +13861,7 @@ namespace Kafka.Protocol
 					private Int64 _partitionSize = Int64.Default;
 					/// <summary>
 					/// The size of the log segments in this partition in bytes.
+					/// Versions: 0+
 					/// </summary>
 					public Int64 PartitionSize 
 					{
@@ -13372,6 +13879,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The size of the log segments in this partition in bytes.
+					/// Versions: 0+
 					/// </summary>
 					public DescribeLogDirsPartition WithPartitionSize(Int64 partitionSize)
 					{
@@ -13382,6 +13890,7 @@ namespace Kafka.Protocol
 					private Int64 _offsetLag = Int64.Default;
 					/// <summary>
 					/// The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition)
+					/// Versions: 0+
 					/// </summary>
 					public Int64 OffsetLag 
 					{
@@ -13399,6 +13908,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition)
+					/// Versions: 0+
 					/// </summary>
 					public DescribeLogDirsPartition WithOffsetLag(Int64 offsetLag)
 					{
@@ -13409,6 +13919,7 @@ namespace Kafka.Protocol
 					private Boolean _isFutureKey = Boolean.Default;
 					/// <summary>
 					/// True if this log is created by AlterReplicaLogDirsRequest and will replace the current log of the replica in the future.
+					/// Versions: 0+
 					/// </summary>
 					public Boolean IsFutureKey 
 					{
@@ -13426,6 +13937,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// True if this log is created by AlterReplicaLogDirsRequest and will replace the current log of the replica in the future.
+					/// Versions: 0+
 					/// </summary>
 					public DescribeLogDirsPartition WithIsFutureKey(Boolean isFutureKey)
 					{
@@ -13493,6 +14005,7 @@ namespace Kafka.Protocol
 		private Int8 _electionType = Int8.Default;
 		/// <summary>
 		/// Type of elections to conduct for the partition. A value of '0' elects the preferred replica. A value of '1' elects the first live replica if there are no in-sync replica.
+		/// Versions: 1+
 		/// </summary>
 		public Int8 ElectionType 
 		{
@@ -13510,6 +14023,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Type of elections to conduct for the partition. A value of '0' elects the preferred replica. A value of '1' elects the first live replica if there are no in-sync replica.
+		/// Versions: 1+
 		/// </summary>
 		public ElectLeadersRequest WithElectionType(Int8 electionType)
 		{
@@ -13520,6 +14034,7 @@ namespace Kafka.Protocol
 		private TopicPartitions[]? _topicPartitionsCollection = Array.Empty<TopicPartitions>();
 		/// <summary>
 		/// The topic partitions to elect leaders.
+		/// Versions: 0+
 		/// </summary>
 		public TopicPartitions[]? TopicPartitionsCollection 
 		{
@@ -13543,6 +14058,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The topic partitions to elect leaders.
+		/// Versions: 0+
 		/// </summary>
 		public ElectLeadersRequest WithTopicPartitionsCollection(params Func<TopicPartitions, TopicPartitions>[] createFields)
 		{
@@ -13595,6 +14111,7 @@ namespace Kafka.Protocol
 			private String _topic = String.Default;
 			/// <summary>
 			/// The name of a topic.
+			/// Versions: 0+
 			/// </summary>
 			public String Topic 
 			{
@@ -13612,6 +14129,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The name of a topic.
+			/// Versions: 0+
 			/// </summary>
 			public TopicPartitions WithTopic(String topic)
 			{
@@ -13622,6 +14140,7 @@ namespace Kafka.Protocol
 			private Int32[] _partitionIdCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The partitions of this topic whose leader should be elected.
+			/// Versions: 0+
 			/// </summary>
 			public Int32[] PartitionIdCollection 
 			{
@@ -13639,6 +14158,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partitions of this topic whose leader should be elected.
+			/// Versions: 0+
 			/// </summary>
 			public TopicPartitions WithPartitionIdCollection(Int32[] partitionIdCollection)
 			{
@@ -13650,6 +14170,8 @@ namespace Kafka.Protocol
 		private Int32 _timeoutMs = new Int32(60000);
 		/// <summary>
 		/// The time in ms to wait for the election to complete.
+		/// Versions: 0+
+		/// Default: 60000
 		/// </summary>
 		public Int32 TimeoutMs 
 		{
@@ -13667,6 +14189,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The time in ms to wait for the election to complete.
+		/// Versions: 0+
+		/// Default: 60000
 		/// </summary>
 		public ElectLeadersRequest WithTimeoutMs(Int32 timeoutMs)
 		{
@@ -13734,6 +14258,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -13751,6 +14276,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public ElectLeadersResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -13761,6 +14287,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The top level response error code.
+		/// Versions: 1+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -13778,6 +14305,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The top level response error code.
+		/// Versions: 1+
 		/// </summary>
 		public ElectLeadersResponse WithErrorCode(Int16 errorCode)
 		{
@@ -13788,6 +14316,7 @@ namespace Kafka.Protocol
 		private ReplicaElectionResult[] _replicaElectionResultsCollection = Array.Empty<ReplicaElectionResult>();
 		/// <summary>
 		/// The election results, or an empty array if the requester did not have permission and the request asks for all partitions.
+		/// Versions: 0+
 		/// </summary>
 		public ReplicaElectionResult[] ReplicaElectionResultsCollection 
 		{
@@ -13805,6 +14334,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The election results, or an empty array if the requester did not have permission and the request asks for all partitions.
+		/// Versions: 0+
 		/// </summary>
 		public ElectLeadersResponse WithReplicaElectionResultsCollection(params Func<ReplicaElectionResult, ReplicaElectionResult>[] createFields)
 		{
@@ -13857,6 +14387,7 @@ namespace Kafka.Protocol
 			private String _topic = String.Default;
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public String Topic 
 			{
@@ -13874,6 +14405,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public ReplicaElectionResult WithTopic(String topic)
 			{
@@ -13884,6 +14416,7 @@ namespace Kafka.Protocol
 			private PartitionResult[] _partitionResultCollection = Array.Empty<PartitionResult>();
 			/// <summary>
 			/// The results for each partition
+			/// Versions: 0+
 			/// </summary>
 			public PartitionResult[] PartitionResultCollection 
 			{
@@ -13901,6 +14434,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The results for each partition
+			/// Versions: 0+
 			/// </summary>
 			public ReplicaElectionResult WithPartitionResultCollection(params Func<PartitionResult, PartitionResult>[] createFields)
 			{
@@ -13961,6 +14495,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionId = Int32.Default;
 				/// <summary>
 				/// The partition id
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionId 
 				{
@@ -13978,6 +14513,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition id
+				/// Versions: 0+
 				/// </summary>
 				public PartitionResult WithPartitionId(Int32 partitionId)
 				{
@@ -13988,6 +14524,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The result error, or zero if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -14005,6 +14542,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The result error, or zero if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public PartitionResult WithErrorCode(Int16 errorCode)
 				{
@@ -14015,6 +14553,7 @@ namespace Kafka.Protocol
 				private String? _errorMessage = String.Default;
 				/// <summary>
 				/// The result message, or null if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public String? ErrorMessage 
 				{
@@ -14038,6 +14577,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The result message, or null if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public PartitionResult WithErrorMessage(String errorMessage)
 				{
@@ -14112,6 +14652,7 @@ namespace Kafka.Protocol
 		private String _transactionalId = String.Default;
 		/// <summary>
 		/// The ID of the transaction to end.
+		/// Versions: 0+
 		/// </summary>
 		public String TransactionalId 
 		{
@@ -14129,6 +14670,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The ID of the transaction to end.
+		/// Versions: 0+
 		/// </summary>
 		public EndTxnRequest WithTransactionalId(String transactionalId)
 		{
@@ -14139,6 +14681,7 @@ namespace Kafka.Protocol
 		private Int64 _producerId = Int64.Default;
 		/// <summary>
 		/// The producer ID.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 ProducerId 
 		{
@@ -14156,6 +14699,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The producer ID.
+		/// Versions: 0+
 		/// </summary>
 		public EndTxnRequest WithProducerId(Int64 producerId)
 		{
@@ -14166,6 +14710,7 @@ namespace Kafka.Protocol
 		private Int16 _producerEpoch = Int16.Default;
 		/// <summary>
 		/// The current epoch associated with the producer.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ProducerEpoch 
 		{
@@ -14183,6 +14728,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current epoch associated with the producer.
+		/// Versions: 0+
 		/// </summary>
 		public EndTxnRequest WithProducerEpoch(Int16 producerEpoch)
 		{
@@ -14193,6 +14739,7 @@ namespace Kafka.Protocol
 		private Boolean _committed = Boolean.Default;
 		/// <summary>
 		/// True if the transaction was committed, false if it was aborted.
+		/// Versions: 0+
 		/// </summary>
 		public Boolean Committed 
 		{
@@ -14210,6 +14757,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// True if the transaction was committed, false if it was aborted.
+		/// Versions: 0+
 		/// </summary>
 		public EndTxnRequest WithCommitted(Boolean committed)
 		{
@@ -14269,6 +14817,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -14286,6 +14835,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public EndTxnResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -14296,6 +14846,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -14313,6 +14864,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public EndTxnResponse WithErrorCode(Int16 errorCode)
 		{
@@ -14369,6 +14921,7 @@ namespace Kafka.Protocol
 		private Bytes _hmac = Bytes.Default;
 		/// <summary>
 		/// The HMAC of the delegation token to be expired.
+		/// Versions: 0+
 		/// </summary>
 		public Bytes Hmac 
 		{
@@ -14386,6 +14939,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The HMAC of the delegation token to be expired.
+		/// Versions: 0+
 		/// </summary>
 		public ExpireDelegationTokenRequest WithHmac(Bytes hmac)
 		{
@@ -14396,6 +14950,7 @@ namespace Kafka.Protocol
 		private Int64 _expiryTimePeriodMs = Int64.Default;
 		/// <summary>
 		/// The expiry time period in milliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 ExpiryTimePeriodMs 
 		{
@@ -14413,6 +14968,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The expiry time period in milliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public ExpireDelegationTokenRequest WithExpiryTimePeriodMs(Int64 expiryTimePeriodMs)
 		{
@@ -14480,6 +15036,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -14497,6 +15054,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public ExpireDelegationTokenResponse WithErrorCode(Int16 errorCode)
 		{
@@ -14507,6 +15065,7 @@ namespace Kafka.Protocol
 		private Int64 _expiryTimestampMs = Int64.Default;
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 ExpiryTimestampMs 
 		{
@@ -14524,6 +15083,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
+		/// Versions: 0+
 		/// </summary>
 		public ExpireDelegationTokenResponse WithExpiryTimestampMs(Int64 expiryTimestampMs)
 		{
@@ -14534,6 +15094,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -14551,6 +15112,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public ExpireDelegationTokenResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -14671,6 +15233,7 @@ namespace Kafka.Protocol
 		private Int32 _replicaId = Int32.Default;
 		/// <summary>
 		/// The broker ID of the follower, of -1 if this request is from a consumer.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ReplicaId 
 		{
@@ -14688,6 +15251,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The broker ID of the follower, of -1 if this request is from a consumer.
+		/// Versions: 0+
 		/// </summary>
 		public FetchRequest WithReplicaId(Int32 replicaId)
 		{
@@ -14698,6 +15262,7 @@ namespace Kafka.Protocol
 		private Int32 _maxWait = Int32.Default;
 		/// <summary>
 		/// The maximum time in milliseconds to wait for the response.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 MaxWait 
 		{
@@ -14715,6 +15280,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The maximum time in milliseconds to wait for the response.
+		/// Versions: 0+
 		/// </summary>
 		public FetchRequest WithMaxWait(Int32 maxWait)
 		{
@@ -14725,6 +15291,7 @@ namespace Kafka.Protocol
 		private Int32 _minBytes = Int32.Default;
 		/// <summary>
 		/// The minimum bytes to accumulate in the response.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 MinBytes 
 		{
@@ -14742,6 +15309,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The minimum bytes to accumulate in the response.
+		/// Versions: 0+
 		/// </summary>
 		public FetchRequest WithMinBytes(Int32 minBytes)
 		{
@@ -14752,6 +15320,8 @@ namespace Kafka.Protocol
 		private Int32 _maxBytes = new Int32(0x7fffffff);
 		/// <summary>
 		/// The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.
+		/// Versions: 3+
+		/// Default: 0x7fffffff
 		/// </summary>
 		public Int32 MaxBytes 
 		{
@@ -14764,6 +15334,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.
+		/// Versions: 3+
+		/// Default: 0x7fffffff
 		/// </summary>
 		public FetchRequest WithMaxBytes(Int32 maxBytes)
 		{
@@ -14774,6 +15346,8 @@ namespace Kafka.Protocol
 		private Int8 _isolationLevel = new Int8(0);
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
+		/// Versions: 4+
+		/// Default: 0
 		/// </summary>
 		public Int8 IsolationLevel 
 		{
@@ -14791,6 +15365,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
+		/// Versions: 4+
+		/// Default: 0
 		/// </summary>
 		public FetchRequest WithIsolationLevel(Int8 isolationLevel)
 		{
@@ -14801,6 +15377,8 @@ namespace Kafka.Protocol
 		private Int32 _sessionId = new Int32(0);
 		/// <summary>
 		/// The fetch session ID.
+		/// Versions: 7+
+		/// Default: 0
 		/// </summary>
 		public Int32 SessionId 
 		{
@@ -14818,6 +15396,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The fetch session ID.
+		/// Versions: 7+
+		/// Default: 0
 		/// </summary>
 		public FetchRequest WithSessionId(Int32 sessionId)
 		{
@@ -14828,6 +15408,8 @@ namespace Kafka.Protocol
 		private Int32 _epoch = new Int32(-1);
 		/// <summary>
 		/// The fetch session ID.
+		/// Versions: 7+
+		/// Default: -1
 		/// </summary>
 		public Int32 Epoch 
 		{
@@ -14845,6 +15427,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The fetch session ID.
+		/// Versions: 7+
+		/// Default: -1
 		/// </summary>
 		public FetchRequest WithEpoch(Int32 epoch)
 		{
@@ -14855,6 +15439,7 @@ namespace Kafka.Protocol
 		private FetchableTopic[] _topicsCollection = Array.Empty<FetchableTopic>();
 		/// <summary>
 		/// The topics to fetch.
+		/// Versions: 0+
 		/// </summary>
 		public FetchableTopic[] TopicsCollection 
 		{
@@ -14872,6 +15457,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The topics to fetch.
+		/// Versions: 0+
 		/// </summary>
 		public FetchRequest WithTopicsCollection(params Func<FetchableTopic, FetchableTopic>[] createFields)
 		{
@@ -14924,6 +15510,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The name of the topic to fetch.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -14941,6 +15528,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The name of the topic to fetch.
+			/// Versions: 0+
 			/// </summary>
 			public FetchableTopic WithName(String name)
 			{
@@ -14951,6 +15539,7 @@ namespace Kafka.Protocol
 			private FetchPartition[] _fetchPartitionsCollection = Array.Empty<FetchPartition>();
 			/// <summary>
 			/// The partitions to fetch.
+			/// Versions: 0+
 			/// </summary>
 			public FetchPartition[] FetchPartitionsCollection 
 			{
@@ -14968,6 +15557,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partitions to fetch.
+			/// Versions: 0+
 			/// </summary>
 			public FetchableTopic WithFetchPartitionsCollection(params Func<FetchPartition, FetchPartition>[] createFields)
 			{
@@ -15044,6 +15634,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -15061,6 +15652,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public FetchPartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -15071,6 +15663,8 @@ namespace Kafka.Protocol
 				private Int32 _currentLeaderEpoch = new Int32(-1);
 				/// <summary>
 				/// The current leader epoch of the partition.
+				/// Versions: 9+
+				/// Default: -1
 				/// </summary>
 				public Int32 CurrentLeaderEpoch 
 				{
@@ -15083,6 +15677,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The current leader epoch of the partition.
+				/// Versions: 9+
+				/// Default: -1
 				/// </summary>
 				public FetchPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
 				{
@@ -15093,6 +15689,7 @@ namespace Kafka.Protocol
 				private Int64 _fetchOffset = Int64.Default;
 				/// <summary>
 				/// The message offset.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 FetchOffset 
 				{
@@ -15110,6 +15707,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The message offset.
+				/// Versions: 0+
 				/// </summary>
 				public FetchPartition WithFetchOffset(Int64 fetchOffset)
 				{
@@ -15120,6 +15718,8 @@ namespace Kafka.Protocol
 				private Int64 _logStartOffset = new Int64(-1);
 				/// <summary>
 				/// The earliest available offset of the follower replica.  The field is only used when the request is sent by the follower.
+				/// Versions: 5+
+				/// Default: -1
 				/// </summary>
 				public Int64 LogStartOffset 
 				{
@@ -15137,6 +15737,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The earliest available offset of the follower replica.  The field is only used when the request is sent by the follower.
+				/// Versions: 5+
+				/// Default: -1
 				/// </summary>
 				public FetchPartition WithLogStartOffset(Int64 logStartOffset)
 				{
@@ -15147,6 +15749,7 @@ namespace Kafka.Protocol
 				private Int32 _maxBytes = Int32.Default;
 				/// <summary>
 				/// The maximum bytes to fetch from this partition.  See KIP-74 for cases where this limit may not be honored.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 MaxBytes 
 				{
@@ -15164,6 +15767,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The maximum bytes to fetch from this partition.  See KIP-74 for cases where this limit may not be honored.
+				/// Versions: 0+
 				/// </summary>
 				public FetchPartition WithMaxBytes(Int32 maxBytes)
 				{
@@ -15176,6 +15780,7 @@ namespace Kafka.Protocol
 		private ForgottenTopic[] _forgottenCollection = Array.Empty<ForgottenTopic>();
 		/// <summary>
 		/// In an incremental fetch request, the partitions to remove.
+		/// Versions: 7+
 		/// </summary>
 		public ForgottenTopic[] ForgottenCollection 
 		{
@@ -15193,6 +15798,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// In an incremental fetch request, the partitions to remove.
+		/// Versions: 7+
 		/// </summary>
 		public FetchRequest WithForgottenCollection(params Func<ForgottenTopic, ForgottenTopic>[] createFields)
 		{
@@ -15245,6 +15851,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The partition name.
+			/// Versions: 7+
 			/// </summary>
 			public String Name 
 			{
@@ -15262,6 +15869,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition name.
+			/// Versions: 7+
 			/// </summary>
 			public ForgottenTopic WithName(String name)
 			{
@@ -15272,6 +15880,7 @@ namespace Kafka.Protocol
 			private Int32[] _forgottenPartitionIndexesCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The partitions indexes to forget.
+			/// Versions: 7+
 			/// </summary>
 			public Int32[] ForgottenPartitionIndexesCollection 
 			{
@@ -15289,6 +15898,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partitions indexes to forget.
+			/// Versions: 7+
 			/// </summary>
 			public ForgottenTopic WithForgottenPartitionIndexesCollection(Int32[] forgottenPartitionIndexesCollection)
 			{
@@ -15300,6 +15910,8 @@ namespace Kafka.Protocol
 		private String _rackId = new String();
 		/// <summary>
 		/// Rack ID of the consumer making this request
+		/// Versions: 11+
+		/// Default: Empty string
 		/// </summary>
 		public String RackId 
 		{
@@ -15312,6 +15924,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Rack ID of the consumer making this request
+		/// Versions: 11+
+		/// Default: Empty string
 		/// </summary>
 		public FetchRequest WithRackId(String rackId)
 		{
@@ -15387,6 +16001,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -15399,6 +16014,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public FetchResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -15409,6 +16025,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The top level response error code.
+		/// Versions: 7+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -15426,6 +16043,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The top level response error code.
+		/// Versions: 7+
 		/// </summary>
 		public FetchResponse WithErrorCode(Int16 errorCode)
 		{
@@ -15436,6 +16054,8 @@ namespace Kafka.Protocol
 		private Int32 _sessionId = new Int32(0);
 		/// <summary>
 		/// The fetch session ID, or 0 if this is not part of a fetch session.
+		/// Versions: 7+
+		/// Default: 0
 		/// </summary>
 		public Int32 SessionId 
 		{
@@ -15453,6 +16073,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The fetch session ID, or 0 if this is not part of a fetch session.
+		/// Versions: 7+
+		/// Default: 0
 		/// </summary>
 		public FetchResponse WithSessionId(Int32 sessionId)
 		{
@@ -15463,6 +16085,7 @@ namespace Kafka.Protocol
 		private FetchableTopicResponse[] _topicsCollection = Array.Empty<FetchableTopicResponse>();
 		/// <summary>
 		/// The response topics.
+		/// Versions: 0+
 		/// </summary>
 		public FetchableTopicResponse[] TopicsCollection 
 		{
@@ -15480,6 +16103,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The response topics.
+		/// Versions: 0+
 		/// </summary>
 		public FetchResponse WithTopicsCollection(params Func<FetchableTopicResponse, FetchableTopicResponse>[] createFields)
 		{
@@ -15532,6 +16156,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -15549,6 +16174,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public FetchableTopicResponse WithName(String name)
 			{
@@ -15559,6 +16185,7 @@ namespace Kafka.Protocol
 			private FetchablePartitionResponse[] _partitionsCollection = Array.Empty<FetchablePartitionResponse>();
 			/// <summary>
 			/// The topic partitions.
+			/// Versions: 0+
 			/// </summary>
 			public FetchablePartitionResponse[] PartitionsCollection 
 			{
@@ -15576,6 +16203,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic partitions.
+			/// Versions: 0+
 			/// </summary>
 			public FetchableTopicResponse WithPartitionsCollection(params Func<FetchablePartitionResponse, FetchablePartitionResponse>[] createFields)
 			{
@@ -15676,6 +16304,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partiiton index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -15693,6 +16322,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partiiton index.
+				/// Versions: 0+
 				/// </summary>
 				public FetchablePartitionResponse WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -15703,6 +16333,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The error code, or 0 if there was no fetch error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -15720,6 +16351,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The error code, or 0 if there was no fetch error.
+				/// Versions: 0+
 				/// </summary>
 				public FetchablePartitionResponse WithErrorCode(Int16 errorCode)
 				{
@@ -15730,6 +16362,7 @@ namespace Kafka.Protocol
 				private Int64 _highWatermark = Int64.Default;
 				/// <summary>
 				/// The current high water mark.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 HighWatermark 
 				{
@@ -15747,6 +16380,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The current high water mark.
+				/// Versions: 0+
 				/// </summary>
 				public FetchablePartitionResponse WithHighWatermark(Int64 highWatermark)
 				{
@@ -15757,6 +16391,8 @@ namespace Kafka.Protocol
 				private Int64 _lastStableOffset = new Int64(-1);
 				/// <summary>
 				/// The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)
+				/// Versions: 4+
+				/// Default: -1
 				/// </summary>
 				public Int64 LastStableOffset 
 				{
@@ -15769,6 +16405,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)
+				/// Versions: 4+
+				/// Default: -1
 				/// </summary>
 				public FetchablePartitionResponse WithLastStableOffset(Int64 lastStableOffset)
 				{
@@ -15779,6 +16417,8 @@ namespace Kafka.Protocol
 				private Int64 _logStartOffset = new Int64(-1);
 				/// <summary>
 				/// The current log start offset.
+				/// Versions: 5+
+				/// Default: -1
 				/// </summary>
 				public Int64 LogStartOffset 
 				{
@@ -15791,6 +16431,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The current log start offset.
+				/// Versions: 5+
+				/// Default: -1
 				/// </summary>
 				public FetchablePartitionResponse WithLogStartOffset(Int64 logStartOffset)
 				{
@@ -15801,6 +16443,7 @@ namespace Kafka.Protocol
 				private AbortedTransaction[]? _abortedCollection = Array.Empty<AbortedTransaction>();
 				/// <summary>
 				/// The aborted transactions.
+				/// Versions: 4+
 				/// </summary>
 				public AbortedTransaction[]? AbortedCollection 
 				{
@@ -15824,6 +16467,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The aborted transactions.
+				/// Versions: 4+
 				/// </summary>
 				public FetchablePartitionResponse WithAbortedCollection(params Func<AbortedTransaction, AbortedTransaction>[] createFields)
 				{
@@ -15876,6 +16520,7 @@ namespace Kafka.Protocol
 					private Int64 _producerId = Int64.Default;
 					/// <summary>
 					/// The producer id associated with the aborted transaction.
+					/// Versions: 4+
 					/// </summary>
 					public Int64 ProducerId 
 					{
@@ -15893,6 +16538,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The producer id associated with the aborted transaction.
+					/// Versions: 4+
 					/// </summary>
 					public AbortedTransaction WithProducerId(Int64 producerId)
 					{
@@ -15903,6 +16549,7 @@ namespace Kafka.Protocol
 					private Int64 _firstOffset = Int64.Default;
 					/// <summary>
 					/// The first offset in the aborted transaction.
+					/// Versions: 4+
 					/// </summary>
 					public Int64 FirstOffset 
 					{
@@ -15920,6 +16567,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The first offset in the aborted transaction.
+					/// Versions: 4+
 					/// </summary>
 					public AbortedTransaction WithFirstOffset(Int64 firstOffset)
 					{
@@ -15931,6 +16579,7 @@ namespace Kafka.Protocol
 				private Int32 _preferredReadReplica = Int32.Default;
 				/// <summary>
 				/// The preferred read replica for the consumer to use on its next fetch request
+				/// Versions: 11+
 				/// </summary>
 				public Int32 PreferredReadReplica 
 				{
@@ -15943,6 +16592,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The preferred read replica for the consumer to use on its next fetch request
+				/// Versions: 11+
 				/// </summary>
 				public FetchablePartitionResponse WithPreferredReadReplica(Int32 preferredReadReplica)
 				{
@@ -15953,6 +16603,7 @@ namespace Kafka.Protocol
 				private Bytes? _records = Bytes.Default;
 				/// <summary>
 				/// The record data.
+				/// Versions: 0+
 				/// </summary>
 				public Bytes? Records 
 				{
@@ -15976,6 +16627,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The record data.
+				/// Versions: 0+
 				/// </summary>
 				public FetchablePartitionResponse WithRecords(Bytes records)
 				{
@@ -16034,6 +16686,7 @@ namespace Kafka.Protocol
 		private String _key = String.Default;
 		/// <summary>
 		/// The coordinator key.
+		/// Versions: 0+
 		/// </summary>
 		public String Key 
 		{
@@ -16051,6 +16704,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The coordinator key.
+		/// Versions: 0+
 		/// </summary>
 		public FindCoordinatorRequest WithKey(String key)
 		{
@@ -16061,6 +16715,8 @@ namespace Kafka.Protocol
 		private Int8 _keyType = new Int8(0);
 		/// <summary>
 		/// The coordinator key type.  (Group, transaction, etc.)
+		/// Versions: 1+
+		/// Default: 0
 		/// </summary>
 		public Int8 KeyType 
 		{
@@ -16078,6 +16734,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The coordinator key type.  (Group, transaction, etc.)
+		/// Versions: 1+
+		/// Default: 0
 		/// </summary>
 		public FindCoordinatorRequest WithKeyType(Int8 keyType)
 		{
@@ -16169,6 +16827,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -16181,6 +16840,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public FindCoordinatorResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -16191,6 +16851,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -16208,6 +16869,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public FindCoordinatorResponse WithErrorCode(Int16 errorCode)
 		{
@@ -16218,6 +16880,7 @@ namespace Kafka.Protocol
 		private String? _errorMessage = String.Default;
 		/// <summary>
 		/// The error message, or null if there was no error.
+		/// Versions: 1+
 		/// </summary>
 		public String? ErrorMessage 
 		{
@@ -16236,6 +16899,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error message, or null if there was no error.
+		/// Versions: 1+
 		/// </summary>
 		public FindCoordinatorResponse WithErrorMessage(String errorMessage)
 		{
@@ -16246,6 +16910,7 @@ namespace Kafka.Protocol
 		private Int32 _nodeId = Int32.Default;
 		/// <summary>
 		/// The node id.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 NodeId 
 		{
@@ -16263,6 +16928,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The node id.
+		/// Versions: 0+
 		/// </summary>
 		public FindCoordinatorResponse WithNodeId(Int32 nodeId)
 		{
@@ -16273,6 +16939,7 @@ namespace Kafka.Protocol
 		private String _host = String.Default;
 		/// <summary>
 		/// The host name.
+		/// Versions: 0+
 		/// </summary>
 		public String Host 
 		{
@@ -16290,6 +16957,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The host name.
+		/// Versions: 0+
 		/// </summary>
 		public FindCoordinatorResponse WithHost(String host)
 		{
@@ -16300,6 +16968,7 @@ namespace Kafka.Protocol
 		private Int32 _port = Int32.Default;
 		/// <summary>
 		/// The port.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 Port 
 		{
@@ -16317,6 +16986,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The port.
+		/// Versions: 0+
 		/// </summary>
 		public FindCoordinatorResponse WithPort(Int32 port)
 		{
@@ -16389,6 +17059,7 @@ namespace Kafka.Protocol
 		private String _groupId = String.Default;
 		/// <summary>
 		/// The group id.
+		/// Versions: 0+
 		/// </summary>
 		public String GroupId 
 		{
@@ -16406,6 +17077,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The group id.
+		/// Versions: 0+
 		/// </summary>
 		public HeartbeatRequest WithGroupId(String groupId)
 		{
@@ -16416,6 +17088,7 @@ namespace Kafka.Protocol
 		private Int32 _generationId = Int32.Default;
 		/// <summary>
 		/// The generation of the group.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 GenerationId 
 		{
@@ -16433,6 +17106,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The generation of the group.
+		/// Versions: 0+
 		/// </summary>
 		public HeartbeatRequest WithGenerationId(Int32 generationId)
 		{
@@ -16443,6 +17117,7 @@ namespace Kafka.Protocol
 		private String _memberId = String.Default;
 		/// <summary>
 		/// The member ID.
+		/// Versions: 0+
 		/// </summary>
 		public String MemberId 
 		{
@@ -16460,6 +17135,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The member ID.
+		/// Versions: 0+
 		/// </summary>
 		public HeartbeatRequest WithMemberId(String memberId)
 		{
@@ -16470,6 +17146,8 @@ namespace Kafka.Protocol
 		private String? _groupInstanceId;
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
+		/// Versions: 3+
+		/// Default: null
 		/// </summary>
 		public String? GroupInstanceId 
 		{
@@ -16493,6 +17171,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
+		/// Versions: 3+
+		/// Default: null
 		/// </summary>
 		public HeartbeatRequest WithGroupInstanceId(String groupInstanceId)
 		{
@@ -16552,6 +17232,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -16564,6 +17245,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public HeartbeatResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -16574,6 +17256,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -16591,6 +17274,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public HeartbeatResponse WithErrorCode(Int16 errorCode)
 		{
@@ -16647,6 +17331,7 @@ namespace Kafka.Protocol
 		private Dictionary<Int8, AlterConfigsResource> _resourcesCollection = new Dictionary<Int8, AlterConfigsResource>();
 		/// <summary>
 		/// The incremental updates for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<Int8, AlterConfigsResource> ResourcesCollection 
 		{
@@ -16664,6 +17349,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The incremental updates for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public IncrementalAlterConfigsRequest WithResourcesCollection(params Func<AlterConfigsResource, AlterConfigsResource>[] createFields)
 		{
@@ -16724,6 +17410,7 @@ namespace Kafka.Protocol
 			private Int8 _resourceType = Int8.Default;
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 ResourceType 
 			{
@@ -16741,6 +17428,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResource WithResourceType(Int8 resourceType)
 			{
@@ -16751,6 +17439,7 @@ namespace Kafka.Protocol
 			private String _resourceName = String.Default;
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public String ResourceName 
 			{
@@ -16768,6 +17457,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResource WithResourceName(String resourceName)
 			{
@@ -16778,6 +17468,7 @@ namespace Kafka.Protocol
 			private Dictionary<String, AlterableConfig> _configsCollection = new Dictionary<String, AlterableConfig>();
 			/// <summary>
 			/// The configurations.
+			/// Versions: 0+
 			/// </summary>
 			public Dictionary<String, AlterableConfig> ConfigsCollection 
 			{
@@ -16795,6 +17486,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The configurations.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResource WithConfigsCollection(params Func<AlterableConfig, AlterableConfig>[] createFields)
 			{
@@ -16855,6 +17547,7 @@ namespace Kafka.Protocol
 				private String _name = String.Default;
 				/// <summary>
 				/// The configuration key name.
+				/// Versions: 0+
 				/// </summary>
 				public String Name 
 				{
@@ -16872,6 +17565,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The configuration key name.
+				/// Versions: 0+
 				/// </summary>
 				public AlterableConfig WithName(String name)
 				{
@@ -16882,6 +17576,7 @@ namespace Kafka.Protocol
 				private Int8 _configOperation = Int8.Default;
 				/// <summary>
 				/// The type (Set, Delete, Append, Subtract) of operation.
+				/// Versions: 0+
 				/// </summary>
 				public Int8 ConfigOperation 
 				{
@@ -16899,6 +17594,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The type (Set, Delete, Append, Subtract) of operation.
+				/// Versions: 0+
 				/// </summary>
 				public AlterableConfig WithConfigOperation(Int8 configOperation)
 				{
@@ -16909,6 +17605,7 @@ namespace Kafka.Protocol
 				private String? _value = String.Default;
 				/// <summary>
 				/// The value to set for the configuration key.
+				/// Versions: 0+
 				/// </summary>
 				public String? Value 
 				{
@@ -16932,6 +17629,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The value to set for the configuration key.
+				/// Versions: 0+
 				/// </summary>
 				public AlterableConfig WithValue(String value)
 				{
@@ -16944,6 +17642,7 @@ namespace Kafka.Protocol
 		private Boolean _validateOnly = Boolean.Default;
 		/// <summary>
 		/// True if we should validate the request, but not change the configurations.
+		/// Versions: 0+
 		/// </summary>
 		public Boolean ValidateOnly 
 		{
@@ -16961,6 +17660,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// True if we should validate the request, but not change the configurations.
+		/// Versions: 0+
 		/// </summary>
 		public IncrementalAlterConfigsRequest WithValidateOnly(Boolean validateOnly)
 		{
@@ -17020,6 +17720,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -17037,6 +17738,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public IncrementalAlterConfigsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -17047,6 +17749,7 @@ namespace Kafka.Protocol
 		private AlterConfigsResourceResponse[] _responsesCollection = Array.Empty<AlterConfigsResourceResponse>();
 		/// <summary>
 		/// The responses for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public AlterConfigsResourceResponse[] ResponsesCollection 
 		{
@@ -17064,6 +17767,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The responses for each resource.
+		/// Versions: 0+
 		/// </summary>
 		public IncrementalAlterConfigsResponse WithResponsesCollection(params Func<AlterConfigsResourceResponse, AlterConfigsResourceResponse>[] createFields)
 		{
@@ -17132,6 +17836,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The resource error code.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -17149,6 +17854,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource error code.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResourceResponse WithErrorCode(Int16 errorCode)
 			{
@@ -17159,6 +17865,7 @@ namespace Kafka.Protocol
 			private String? _errorMessage = String.Default;
 			/// <summary>
 			/// The resource error message, or null if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public String? ErrorMessage 
 			{
@@ -17182,6 +17889,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource error message, or null if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResourceResponse WithErrorMessage(String errorMessage)
 			{
@@ -17192,6 +17900,7 @@ namespace Kafka.Protocol
 			private Int8 _resourceType = Int8.Default;
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public Int8 ResourceType 
 			{
@@ -17209,6 +17918,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource type.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResourceResponse WithResourceType(Int8 resourceType)
 			{
@@ -17219,6 +17929,7 @@ namespace Kafka.Protocol
 			private String _resourceName = String.Default;
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public String ResourceName 
 			{
@@ -17236,6 +17947,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The resource name.
+			/// Versions: 0+
 			/// </summary>
 			public AlterConfigsResourceResponse WithResourceName(String resourceName)
 			{
@@ -17293,6 +18005,7 @@ namespace Kafka.Protocol
 		private String? _transactionalId = String.Default;
 		/// <summary>
 		/// The transactional id, or null if the producer is not transactional.
+		/// Versions: 0+
 		/// </summary>
 		public String? TransactionalId 
 		{
@@ -17316,6 +18029,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The transactional id, or null if the producer is not transactional.
+		/// Versions: 0+
 		/// </summary>
 		public InitProducerIdRequest WithTransactionalId(String transactionalId)
 		{
@@ -17326,6 +18040,7 @@ namespace Kafka.Protocol
 		private Int32 _transactionTimeoutMs = Int32.Default;
 		/// <summary>
 		/// The time in ms to wait for before aborting idle transactions sent by this producer. This is only relevant if a TransactionalId has been defined.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 TransactionTimeoutMs 
 		{
@@ -17343,6 +18058,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The time in ms to wait for before aborting idle transactions sent by this producer. This is only relevant if a TransactionalId has been defined.
+		/// Versions: 0+
 		/// </summary>
 		public InitProducerIdRequest WithTransactionTimeoutMs(Int32 transactionTimeoutMs)
 		{
@@ -17418,6 +18134,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -17430,6 +18147,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public InitProducerIdResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -17440,6 +18158,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -17457,6 +18176,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public InitProducerIdResponse WithErrorCode(Int16 errorCode)
 		{
@@ -17467,6 +18187,8 @@ namespace Kafka.Protocol
 		private Int64 _producerId = new Int64(-1);
 		/// <summary>
 		/// The current producer id.
+		/// Versions: 0+
+		/// Default: -1
 		/// </summary>
 		public Int64 ProducerId 
 		{
@@ -17484,6 +18206,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current producer id.
+		/// Versions: 0+
+		/// Default: -1
 		/// </summary>
 		public InitProducerIdResponse WithProducerId(Int64 producerId)
 		{
@@ -17494,6 +18218,7 @@ namespace Kafka.Protocol
 		private Int16 _producerEpoch = Int16.Default;
 		/// <summary>
 		/// The current epoch associated with the producer id.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ProducerEpoch 
 		{
@@ -17511,6 +18236,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current epoch associated with the producer id.
+		/// Versions: 0+
 		/// </summary>
 		public InitProducerIdResponse WithProducerEpoch(Int16 producerEpoch)
 		{
@@ -17607,6 +18333,7 @@ namespace Kafka.Protocol
 		private String _groupId = String.Default;
 		/// <summary>
 		/// The group identifier.
+		/// Versions: 0+
 		/// </summary>
 		public String GroupId 
 		{
@@ -17624,6 +18351,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The group identifier.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupRequest WithGroupId(String groupId)
 		{
@@ -17634,6 +18362,7 @@ namespace Kafka.Protocol
 		private Int32 _sessionTimeoutMs = Int32.Default;
 		/// <summary>
 		/// The coordinator considers the consumer dead if it receives no heartbeat after this timeout in milliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 SessionTimeoutMs 
 		{
@@ -17651,6 +18380,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The coordinator considers the consumer dead if it receives no heartbeat after this timeout in milliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupRequest WithSessionTimeoutMs(Int32 sessionTimeoutMs)
 		{
@@ -17661,6 +18391,8 @@ namespace Kafka.Protocol
 		private Int32 _rebalanceTimeoutMs = new Int32(-1);
 		/// <summary>
 		/// The maximum time in milliseconds that the coordinator will wait for each member to rejoin when rebalancing the group.
+		/// Versions: 1+
+		/// Default: -1
 		/// </summary>
 		public Int32 RebalanceTimeoutMs 
 		{
@@ -17673,6 +18405,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The maximum time in milliseconds that the coordinator will wait for each member to rejoin when rebalancing the group.
+		/// Versions: 1+
+		/// Default: -1
 		/// </summary>
 		public JoinGroupRequest WithRebalanceTimeoutMs(Int32 rebalanceTimeoutMs)
 		{
@@ -17683,6 +18417,7 @@ namespace Kafka.Protocol
 		private String _memberId = String.Default;
 		/// <summary>
 		/// The member id assigned by the group coordinator.
+		/// Versions: 0+
 		/// </summary>
 		public String MemberId 
 		{
@@ -17700,6 +18435,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The member id assigned by the group coordinator.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupRequest WithMemberId(String memberId)
 		{
@@ -17710,6 +18446,8 @@ namespace Kafka.Protocol
 		private String? _groupInstanceId;
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
+		/// Versions: 5+
+		/// Default: null
 		/// </summary>
 		public String? GroupInstanceId 
 		{
@@ -17733,6 +18471,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
+		/// Versions: 5+
+		/// Default: null
 		/// </summary>
 		public JoinGroupRequest WithGroupInstanceId(String groupInstanceId)
 		{
@@ -17743,6 +18483,7 @@ namespace Kafka.Protocol
 		private String _protocolType = String.Default;
 		/// <summary>
 		/// The unique name the for class of protocols implemented by the group we want to join.
+		/// Versions: 0+
 		/// </summary>
 		public String ProtocolType 
 		{
@@ -17760,6 +18501,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The unique name the for class of protocols implemented by the group we want to join.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupRequest WithProtocolType(String protocolType)
 		{
@@ -17770,6 +18512,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, JoinGroupRequestProtocol> _protocolsCollection = new Dictionary<String, JoinGroupRequestProtocol>();
 		/// <summary>
 		/// The list of protocols that the member supports.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, JoinGroupRequestProtocol> ProtocolsCollection 
 		{
@@ -17787,6 +18530,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The list of protocols that the member supports.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupRequest WithProtocolsCollection(params Func<JoinGroupRequestProtocol, JoinGroupRequestProtocol>[] createFields)
 		{
@@ -17839,6 +18583,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The protocol name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -17856,6 +18601,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The protocol name.
+			/// Versions: 0+
 			/// </summary>
 			public JoinGroupRequestProtocol WithName(String name)
 			{
@@ -17866,6 +18612,7 @@ namespace Kafka.Protocol
 			private Bytes _metadata = Bytes.Default;
 			/// <summary>
 			/// The protocol metadata.
+			/// Versions: 0+
 			/// </summary>
 			public Bytes Metadata 
 			{
@@ -17883,6 +18630,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The protocol metadata.
+			/// Versions: 0+
 			/// </summary>
 			public JoinGroupRequestProtocol WithMetadata(Bytes metadata)
 			{
@@ -17983,6 +18731,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 2+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -17995,6 +18744,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 2+
 		/// </summary>
 		public JoinGroupResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -18005,6 +18755,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -18022,6 +18773,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupResponse WithErrorCode(Int16 errorCode)
 		{
@@ -18032,6 +18784,8 @@ namespace Kafka.Protocol
 		private Int32 _generationId = new Int32(-1);
 		/// <summary>
 		/// The generation ID of the group.
+		/// Versions: 0+
+		/// Default: -1
 		/// </summary>
 		public Int32 GenerationId 
 		{
@@ -18049,6 +18803,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The generation ID of the group.
+		/// Versions: 0+
+		/// Default: -1
 		/// </summary>
 		public JoinGroupResponse WithGenerationId(Int32 generationId)
 		{
@@ -18059,6 +18815,7 @@ namespace Kafka.Protocol
 		private String _protocolName = String.Default;
 		/// <summary>
 		/// The group protocol selected by the coordinator.
+		/// Versions: 0+
 		/// </summary>
 		public String ProtocolName 
 		{
@@ -18076,6 +18833,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The group protocol selected by the coordinator.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupResponse WithProtocolName(String protocolName)
 		{
@@ -18086,6 +18844,7 @@ namespace Kafka.Protocol
 		private String _leader = String.Default;
 		/// <summary>
 		/// The leader of the group.
+		/// Versions: 0+
 		/// </summary>
 		public String Leader 
 		{
@@ -18103,6 +18862,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The leader of the group.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupResponse WithLeader(String leader)
 		{
@@ -18113,6 +18873,7 @@ namespace Kafka.Protocol
 		private String _memberId = String.Default;
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
+		/// Versions: 0+
 		/// </summary>
 		public String MemberId 
 		{
@@ -18130,6 +18891,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
+		/// Versions: 0+
 		/// </summary>
 		public JoinGroupResponse WithMemberId(String memberId)
 		{
@@ -18138,6 +18900,9 @@ namespace Kafka.Protocol
 		}
 
 		private JoinGroupResponseMember[] _membersCollection = Array.Empty<JoinGroupResponseMember>();
+		/// <summary>
+		/// Versions: 0+
+		/// </summary>
 		public JoinGroupResponseMember[] MembersCollection 
 		{
 			get => _membersCollection;
@@ -18152,6 +18917,9 @@ namespace Kafka.Protocol
 			}
 		}
 
+		/// <summary>
+		/// Versions: 0+
+		/// </summary>
 		public JoinGroupResponse WithMembersCollection(params Func<JoinGroupResponseMember, JoinGroupResponseMember>[] createFields)
 		{
 			MembersCollection = createFields
@@ -18211,6 +18979,7 @@ namespace Kafka.Protocol
 			private String _memberId = String.Default;
 			/// <summary>
 			/// The group member ID.
+			/// Versions: 0+
 			/// </summary>
 			public String MemberId 
 			{
@@ -18228,6 +18997,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group member ID.
+			/// Versions: 0+
 			/// </summary>
 			public JoinGroupResponseMember WithMemberId(String memberId)
 			{
@@ -18238,6 +19008,8 @@ namespace Kafka.Protocol
 			private String? _groupInstanceId;
 			/// <summary>
 			/// The unique identifier of the consumer instance provided by end user.
+			/// Versions: 5+
+			/// Default: null
 			/// </summary>
 			public String? GroupInstanceId 
 			{
@@ -18261,6 +19033,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The unique identifier of the consumer instance provided by end user.
+			/// Versions: 5+
+			/// Default: null
 			/// </summary>
 			public JoinGroupResponseMember WithGroupInstanceId(String groupInstanceId)
 			{
@@ -18271,6 +19045,7 @@ namespace Kafka.Protocol
 			private Bytes _metadata = Bytes.Default;
 			/// <summary>
 			/// The group member metadata.
+			/// Versions: 0+
 			/// </summary>
 			public Bytes Metadata 
 			{
@@ -18288,6 +19063,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group member metadata.
+			/// Versions: 0+
 			/// </summary>
 			public JoinGroupResponseMember WithMetadata(Bytes metadata)
 			{
@@ -18377,6 +19153,7 @@ namespace Kafka.Protocol
 		private Int32 _controllerId = Int32.Default;
 		/// <summary>
 		/// The current controller ID.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ControllerId 
 		{
@@ -18394,6 +19171,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current controller ID.
+		/// Versions: 0+
 		/// </summary>
 		public LeaderAndIsrRequest WithControllerId(Int32 controllerId)
 		{
@@ -18404,6 +19182,7 @@ namespace Kafka.Protocol
 		private Int32 _controllerEpoch = Int32.Default;
 		/// <summary>
 		/// The current controller epoch.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ControllerEpoch 
 		{
@@ -18421,6 +19200,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current controller epoch.
+		/// Versions: 0+
 		/// </summary>
 		public LeaderAndIsrRequest WithControllerEpoch(Int32 controllerEpoch)
 		{
@@ -18431,6 +19211,8 @@ namespace Kafka.Protocol
 		private Int64 _brokerEpoch = new Int64(-1);
 		/// <summary>
 		/// The current broker epoch.
+		/// Versions: 2+
+		/// Default: -1
 		/// </summary>
 		public Int64 BrokerEpoch 
 		{
@@ -18443,6 +19225,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current broker epoch.
+		/// Versions: 2+
+		/// Default: -1
 		/// </summary>
 		public LeaderAndIsrRequest WithBrokerEpoch(Int64 brokerEpoch)
 		{
@@ -18453,6 +19237,7 @@ namespace Kafka.Protocol
 		private LeaderAndIsrRequestPartition[] _partitionStatesV0Collection = Array.Empty<LeaderAndIsrRequestPartition>();
 		/// <summary>
 		/// The state of each partition, in a v0 or v1 message.
+		/// Versions: 0-1
 		/// </summary>
 		public LeaderAndIsrRequestPartition[] PartitionStatesV0Collection 
 		{
@@ -18470,6 +19255,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The state of each partition, in a v0 or v1 message.
+		/// Versions: 0-1
 		/// </summary>
 		public LeaderAndIsrRequest WithPartitionStatesV0Collection(LeaderAndIsrRequestPartition[] partitionStatesV0Collection)
 		{
@@ -18480,6 +19266,7 @@ namespace Kafka.Protocol
 		private LeaderAndIsrRequestTopicState[] _topicStatesCollection = Array.Empty<LeaderAndIsrRequestTopicState>();
 		/// <summary>
 		/// Each topic.
+		/// Versions: 2+
 		/// </summary>
 		public LeaderAndIsrRequestTopicState[] TopicStatesCollection 
 		{
@@ -18497,6 +19284,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic.
+		/// Versions: 2+
 		/// </summary>
 		public LeaderAndIsrRequest WithTopicStatesCollection(params Func<LeaderAndIsrRequestTopicState, LeaderAndIsrRequestTopicState>[] createFields)
 		{
@@ -18549,6 +19337,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 2+
 			/// </summary>
 			public String Name 
 			{
@@ -18566,6 +19355,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 2+
 			/// </summary>
 			public LeaderAndIsrRequestTopicState WithName(String name)
 			{
@@ -18576,6 +19366,7 @@ namespace Kafka.Protocol
 			private LeaderAndIsrRequestPartition[] _partitionStatesV0Collection = Array.Empty<LeaderAndIsrRequestPartition>();
 			/// <summary>
 			/// The state of each partition
+			/// Versions: 2+
 			/// </summary>
 			public LeaderAndIsrRequestPartition[] PartitionStatesV0Collection 
 			{
@@ -18593,6 +19384,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The state of each partition
+			/// Versions: 2+
 			/// </summary>
 			public LeaderAndIsrRequestTopicState WithPartitionStatesV0Collection(LeaderAndIsrRequestPartition[] partitionStatesV0Collection)
 			{
@@ -18604,6 +19396,7 @@ namespace Kafka.Protocol
 		private LeaderAndIsrLiveLeader[] _liveLeadersCollection = Array.Empty<LeaderAndIsrLiveLeader>();
 		/// <summary>
 		/// The current live leaders.
+		/// Versions: 0+
 		/// </summary>
 		public LeaderAndIsrLiveLeader[] LiveLeadersCollection 
 		{
@@ -18621,6 +19414,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current live leaders.
+		/// Versions: 0+
 		/// </summary>
 		public LeaderAndIsrRequest WithLiveLeadersCollection(params Func<LeaderAndIsrLiveLeader, LeaderAndIsrLiveLeader>[] createFields)
 		{
@@ -18681,6 +19475,7 @@ namespace Kafka.Protocol
 			private Int32 _brokerId = Int32.Default;
 			/// <summary>
 			/// The leader's broker ID.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 BrokerId 
 			{
@@ -18698,6 +19493,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The leader's broker ID.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrLiveLeader WithBrokerId(Int32 brokerId)
 			{
@@ -18708,6 +19504,7 @@ namespace Kafka.Protocol
 			private String _hostName = String.Default;
 			/// <summary>
 			/// The leader's hostname.
+			/// Versions: 0+
 			/// </summary>
 			public String HostName 
 			{
@@ -18725,6 +19522,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The leader's hostname.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrLiveLeader WithHostName(String hostName)
 			{
@@ -18735,6 +19533,7 @@ namespace Kafka.Protocol
 			private Int32 _port = Int32.Default;
 			/// <summary>
 			/// The leader's port.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 Port 
 			{
@@ -18752,6 +19551,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The leader's port.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrLiveLeader WithPort(Int32 port)
 			{
@@ -18859,6 +19659,7 @@ namespace Kafka.Protocol
 			private String _topicName = String.Default;
 			/// <summary>
 			/// The topic name.  This is only present in v0 or v1.
+			/// Versions: 0-1
 			/// </summary>
 			public String TopicName 
 			{
@@ -18876,6 +19677,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.  This is only present in v0 or v1.
+			/// Versions: 0-1
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithTopicName(String topicName)
 			{
@@ -18886,6 +19688,7 @@ namespace Kafka.Protocol
 			private Int32 _partitionIndex = Int32.Default;
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 PartitionIndex 
 			{
@@ -18903,6 +19706,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithPartitionIndex(Int32 partitionIndex)
 			{
@@ -18913,6 +19717,7 @@ namespace Kafka.Protocol
 			private Int32 _controllerEpoch = Int32.Default;
 			/// <summary>
 			/// The controller epoch.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 ControllerEpoch 
 			{
@@ -18930,6 +19735,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The controller epoch.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithControllerEpoch(Int32 controllerEpoch)
 			{
@@ -18940,6 +19746,7 @@ namespace Kafka.Protocol
 			private Int32 _leaderKey = Int32.Default;
 			/// <summary>
 			/// The broker ID of the leader.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 LeaderKey 
 			{
@@ -18957,6 +19764,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The broker ID of the leader.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithLeaderKey(Int32 leaderKey)
 			{
@@ -18967,6 +19775,7 @@ namespace Kafka.Protocol
 			private Int32 _leaderEpoch = Int32.Default;
 			/// <summary>
 			/// The leader epoch.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 LeaderEpoch 
 			{
@@ -18984,6 +19793,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The leader epoch.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithLeaderEpoch(Int32 leaderEpoch)
 			{
@@ -18994,6 +19804,7 @@ namespace Kafka.Protocol
 			private Int32[] _isrReplicasCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The in-sync replica IDs.
+			/// Versions: 0+
 			/// </summary>
 			public Int32[] IsrReplicasCollection 
 			{
@@ -19011,6 +19822,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The in-sync replica IDs.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithIsrReplicasCollection(Int32[] isrReplicasCollection)
 			{
@@ -19021,6 +19833,7 @@ namespace Kafka.Protocol
 			private Int32 _zkVersion = Int32.Default;
 			/// <summary>
 			/// The ZooKeeper version.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 ZkVersion 
 			{
@@ -19038,6 +19851,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The ZooKeeper version.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithZkVersion(Int32 zkVersion)
 			{
@@ -19048,6 +19862,7 @@ namespace Kafka.Protocol
 			private Int32[] _replicasCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The replica IDs.
+			/// Versions: 0+
 			/// </summary>
 			public Int32[] ReplicasCollection 
 			{
@@ -19065,6 +19880,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The replica IDs.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithReplicasCollection(Int32[] replicasCollection)
 			{
@@ -19075,6 +19891,8 @@ namespace Kafka.Protocol
 			private Boolean _isNew = new Boolean(false);
 			/// <summary>
 			/// Whether the replica should have existed on the broker or not.
+			/// Versions: 1+
+			/// Default: false
 			/// </summary>
 			public Boolean IsNew 
 			{
@@ -19087,6 +19905,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Whether the replica should have existed on the broker or not.
+			/// Versions: 1+
+			/// Default: false
 			/// </summary>
 			public LeaderAndIsrRequestPartition WithIsNew(Boolean isNew)
 			{
@@ -19147,6 +19967,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -19164,6 +19985,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public LeaderAndIsrResponse WithErrorCode(Int16 errorCode)
 		{
@@ -19174,6 +19996,7 @@ namespace Kafka.Protocol
 		private LeaderAndIsrResponsePartition[] _partitionsCollection = Array.Empty<LeaderAndIsrResponsePartition>();
 		/// <summary>
 		/// Each partition.
+		/// Versions: 0+
 		/// </summary>
 		public LeaderAndIsrResponsePartition[] PartitionsCollection 
 		{
@@ -19191,6 +20014,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each partition.
+		/// Versions: 0+
 		/// </summary>
 		public LeaderAndIsrResponse WithPartitionsCollection(params Func<LeaderAndIsrResponsePartition, LeaderAndIsrResponsePartition>[] createFields)
 		{
@@ -19251,6 +20075,7 @@ namespace Kafka.Protocol
 			private String _topicName = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String TopicName 
 			{
@@ -19268,6 +20093,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrResponsePartition WithTopicName(String topicName)
 			{
@@ -19278,6 +20104,7 @@ namespace Kafka.Protocol
 			private Int32 _partitionIndex = Int32.Default;
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 PartitionIndex 
 			{
@@ -19295,6 +20122,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrResponsePartition WithPartitionIndex(Int32 partitionIndex)
 			{
@@ -19305,6 +20133,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The partition error code, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -19322,6 +20151,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition error code, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public LeaderAndIsrResponsePartition WithErrorCode(Int16 errorCode)
 			{
@@ -19379,6 +20209,7 @@ namespace Kafka.Protocol
 		private String _groupId = String.Default;
 		/// <summary>
 		/// The ID of the group to leave.
+		/// Versions: 0+
 		/// </summary>
 		public String GroupId 
 		{
@@ -19396,6 +20227,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The ID of the group to leave.
+		/// Versions: 0+
 		/// </summary>
 		public LeaveGroupRequest WithGroupId(String groupId)
 		{
@@ -19406,6 +20238,7 @@ namespace Kafka.Protocol
 		private String _memberId = String.Default;
 		/// <summary>
 		/// The member ID to remove from the group.
+		/// Versions: 0+
 		/// </summary>
 		public String MemberId 
 		{
@@ -19423,6 +20256,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The member ID to remove from the group.
+		/// Versions: 0+
 		/// </summary>
 		public LeaveGroupRequest WithMemberId(String memberId)
 		{
@@ -19482,6 +20316,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -19494,6 +20329,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public LeaveGroupResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -19504,6 +20340,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -19521,6 +20358,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public LeaveGroupResponse WithErrorCode(Int16 errorCode)
 		{
@@ -19620,6 +20458,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -19632,6 +20471,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public ListGroupsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -19642,6 +20482,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -19659,6 +20500,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public ListGroupsResponse WithErrorCode(Int16 errorCode)
 		{
@@ -19669,6 +20511,7 @@ namespace Kafka.Protocol
 		private ListedGroup[] _groupsCollection = Array.Empty<ListedGroup>();
 		/// <summary>
 		/// Each group in the response.
+		/// Versions: 0+
 		/// </summary>
 		public ListedGroup[] GroupsCollection 
 		{
@@ -19686,6 +20529,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each group in the response.
+		/// Versions: 0+
 		/// </summary>
 		public ListGroupsResponse WithGroupsCollection(params Func<ListedGroup, ListedGroup>[] createFields)
 		{
@@ -19738,6 +20582,7 @@ namespace Kafka.Protocol
 			private String _groupId = String.Default;
 			/// <summary>
 			/// The group ID.
+			/// Versions: 0+
 			/// </summary>
 			public String GroupId 
 			{
@@ -19755,6 +20600,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group ID.
+			/// Versions: 0+
 			/// </summary>
 			public ListedGroup WithGroupId(String groupId)
 			{
@@ -19765,6 +20611,7 @@ namespace Kafka.Protocol
 			private String _protocolType = String.Default;
 			/// <summary>
 			/// The group protocol type.
+			/// Versions: 0+
 			/// </summary>
 			public String ProtocolType 
 			{
@@ -19782,6 +20629,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The group protocol type.
+			/// Versions: 0+
 			/// </summary>
 			public ListedGroup WithProtocolType(String protocolType)
 			{
@@ -19847,6 +20695,7 @@ namespace Kafka.Protocol
 		private Int32 _replicaId = Int32.Default;
 		/// <summary>
 		/// The broker ID of the requestor, or -1 if this request is being made by a normal consumer.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ReplicaId 
 		{
@@ -19864,6 +20713,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The broker ID of the requestor, or -1 if this request is being made by a normal consumer.
+		/// Versions: 0+
 		/// </summary>
 		public ListOffsetRequest WithReplicaId(Int32 replicaId)
 		{
@@ -19874,6 +20724,7 @@ namespace Kafka.Protocol
 		private Int8 _isolationLevel = Int8.Default;
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
+		/// Versions: 2+
 		/// </summary>
 		public Int8 IsolationLevel 
 		{
@@ -19891,6 +20742,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records
+		/// Versions: 2+
 		/// </summary>
 		public ListOffsetRequest WithIsolationLevel(Int8 isolationLevel)
 		{
@@ -19901,6 +20753,7 @@ namespace Kafka.Protocol
 		private ListOffsetTopic[] _topicsCollection = Array.Empty<ListOffsetTopic>();
 		/// <summary>
 		/// Each topic in the request.
+		/// Versions: 0+
 		/// </summary>
 		public ListOffsetTopic[] TopicsCollection 
 		{
@@ -19918,6 +20771,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic in the request.
+		/// Versions: 0+
 		/// </summary>
 		public ListOffsetRequest WithTopicsCollection(params Func<ListOffsetTopic, ListOffsetTopic>[] createFields)
 		{
@@ -19970,6 +20824,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -19987,6 +20842,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public ListOffsetTopic WithName(String name)
 			{
@@ -19997,6 +20853,7 @@ namespace Kafka.Protocol
 			private ListOffsetPartition[] _partitionsCollection = Array.Empty<ListOffsetPartition>();
 			/// <summary>
 			/// Each partition in the request.
+			/// Versions: 0+
 			/// </summary>
 			public ListOffsetPartition[] PartitionsCollection 
 			{
@@ -20014,6 +20871,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition in the request.
+			/// Versions: 0+
 			/// </summary>
 			public ListOffsetTopic WithPartitionsCollection(params Func<ListOffsetPartition, ListOffsetPartition>[] createFields)
 			{
@@ -20082,6 +20940,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -20099,6 +20958,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public ListOffsetPartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -20109,6 +20969,7 @@ namespace Kafka.Protocol
 				private Int32 _currentLeaderEpoch = Int32.Default;
 				/// <summary>
 				/// The current leader epoch.
+				/// Versions: 4+
 				/// </summary>
 				public Int32 CurrentLeaderEpoch 
 				{
@@ -20126,6 +20987,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The current leader epoch.
+				/// Versions: 4+
 				/// </summary>
 				public ListOffsetPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
 				{
@@ -20136,6 +20998,7 @@ namespace Kafka.Protocol
 				private Int64 _timestamp = Int64.Default;
 				/// <summary>
 				/// The current timestamp.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 Timestamp 
 				{
@@ -20153,6 +21016,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The current timestamp.
+				/// Versions: 0+
 				/// </summary>
 				public ListOffsetPartition WithTimestamp(Int64 timestamp)
 				{
@@ -20163,6 +21027,7 @@ namespace Kafka.Protocol
 				private Int32 _maxNumOffsets = Int32.Default;
 				/// <summary>
 				/// The maximum number of offsets to report.
+				/// Versions: 0
 				/// </summary>
 				public Int32 MaxNumOffsets 
 				{
@@ -20180,6 +21045,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The maximum number of offsets to report.
+				/// Versions: 0
 				/// </summary>
 				public ListOffsetPartition WithMaxNumOffsets(Int32 maxNumOffsets)
 				{
@@ -20241,6 +21107,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 2+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -20253,6 +21120,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 2+
 		/// </summary>
 		public ListOffsetResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -20263,6 +21131,7 @@ namespace Kafka.Protocol
 		private ListOffsetTopicResponse[] _topicsCollection = Array.Empty<ListOffsetTopicResponse>();
 		/// <summary>
 		/// Each topic in the response.
+		/// Versions: 0+
 		/// </summary>
 		public ListOffsetTopicResponse[] TopicsCollection 
 		{
@@ -20280,6 +21149,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic in the response.
+		/// Versions: 0+
 		/// </summary>
 		public ListOffsetResponse WithTopicsCollection(params Func<ListOffsetTopicResponse, ListOffsetTopicResponse>[] createFields)
 		{
@@ -20332,6 +21202,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -20349,6 +21220,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public ListOffsetTopicResponse WithName(String name)
 			{
@@ -20359,6 +21231,7 @@ namespace Kafka.Protocol
 			private ListOffsetPartitionResponse[] _partitionsCollection = Array.Empty<ListOffsetPartitionResponse>();
 			/// <summary>
 			/// Each partition in the response.
+			/// Versions: 0+
 			/// </summary>
 			public ListOffsetPartitionResponse[] PartitionsCollection 
 			{
@@ -20376,6 +21249,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition in the response.
+			/// Versions: 0+
 			/// </summary>
 			public ListOffsetTopicResponse WithPartitionsCollection(params Func<ListOffsetPartitionResponse, ListOffsetPartitionResponse>[] createFields)
 			{
@@ -20460,6 +21334,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -20477,6 +21352,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public ListOffsetPartitionResponse WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -20487,6 +21363,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The partition error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -20504,6 +21381,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public ListOffsetPartitionResponse WithErrorCode(Int16 errorCode)
 				{
@@ -20514,6 +21392,7 @@ namespace Kafka.Protocol
 				private Int64[] _oldStyleOffsetsCollection = Array.Empty<Int64>();
 				/// <summary>
 				/// The result offsets.
+				/// Versions: 0
 				/// </summary>
 				public Int64[] OldStyleOffsetsCollection 
 				{
@@ -20531,6 +21410,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The result offsets.
+				/// Versions: 0
 				/// </summary>
 				public ListOffsetPartitionResponse WithOldStyleOffsetsCollection(Int64[] oldStyleOffsetsCollection)
 				{
@@ -20541,6 +21421,8 @@ namespace Kafka.Protocol
 				private Int64 _timestamp = new Int64(-1);
 				/// <summary>
 				/// The timestamp associated with the returned offset.
+				/// Versions: 1+
+				/// Default: -1
 				/// </summary>
 				public Int64 Timestamp 
 				{
@@ -20558,6 +21440,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The timestamp associated with the returned offset.
+				/// Versions: 1+
+				/// Default: -1
 				/// </summary>
 				public ListOffsetPartitionResponse WithTimestamp(Int64 timestamp)
 				{
@@ -20568,6 +21452,8 @@ namespace Kafka.Protocol
 				private Int64 _offset = new Int64(-1);
 				/// <summary>
 				/// The returned offset.
+				/// Versions: 1+
+				/// Default: -1
 				/// </summary>
 				public Int64 Offset 
 				{
@@ -20585,6 +21471,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The returned offset.
+				/// Versions: 1+
+				/// Default: -1
 				/// </summary>
 				public ListOffsetPartitionResponse WithOffset(Int64 offset)
 				{
@@ -20593,6 +21481,9 @@ namespace Kafka.Protocol
 				}
 
 				private Int32 _leaderEpoch = Int32.Default;
+				/// <summary>
+				/// Versions: 4+
+				/// </summary>
 				public Int32 LeaderEpoch 
 				{
 					get => _leaderEpoch;
@@ -20607,6 +21498,9 @@ namespace Kafka.Protocol
 					}
 				}
 
+				/// <summary>
+				/// Versions: 4+
+				/// </summary>
 				public ListOffsetPartitionResponse WithLeaderEpoch(Int32 leaderEpoch)
 				{
 					LeaderEpoch = leaderEpoch;
@@ -20680,6 +21574,7 @@ namespace Kafka.Protocol
 		private MetadataRequestTopic[]? _topicsCollection = Array.Empty<MetadataRequestTopic>();
 		/// <summary>
 		/// The topics to fetch metadata for.
+		/// Versions: 0+
 		/// </summary>
 		public MetadataRequestTopic[]? TopicsCollection 
 		{
@@ -20703,6 +21598,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The topics to fetch metadata for.
+		/// Versions: 0+
 		/// </summary>
 		public MetadataRequest WithTopicsCollection(params Func<MetadataRequestTopic, MetadataRequestTopic>[] createFields)
 		{
@@ -20747,6 +21643,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -20764,6 +21661,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public MetadataRequestTopic WithName(String name)
 			{
@@ -20775,6 +21673,8 @@ namespace Kafka.Protocol
 		private Boolean _allowAutoTopicCreation = new Boolean(true);
 		/// <summary>
 		/// If this is true, the broker may auto-create topics that we requested which do not already exist, if it is configured to do so.
+		/// Versions: 4+
+		/// Default: true
 		/// </summary>
 		public Boolean AllowAutoTopicCreation 
 		{
@@ -20792,6 +21692,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// If this is true, the broker may auto-create topics that we requested which do not already exist, if it is configured to do so.
+		/// Versions: 4+
+		/// Default: true
 		/// </summary>
 		public MetadataRequest WithAllowAutoTopicCreation(Boolean allowAutoTopicCreation)
 		{
@@ -20802,6 +21704,7 @@ namespace Kafka.Protocol
 		private Boolean _includeClusterAuthorizedOperations = Boolean.Default;
 		/// <summary>
 		/// Whether to include cluster authorized operations.
+		/// Versions: 8+
 		/// </summary>
 		public Boolean IncludeClusterAuthorizedOperations 
 		{
@@ -20819,6 +21722,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Whether to include cluster authorized operations.
+		/// Versions: 8+
 		/// </summary>
 		public MetadataRequest WithIncludeClusterAuthorizedOperations(Boolean includeClusterAuthorizedOperations)
 		{
@@ -20829,6 +21733,7 @@ namespace Kafka.Protocol
 		private Boolean _includeTopicAuthorizedOperations = Boolean.Default;
 		/// <summary>
 		/// Whether to include topic authorized operations.
+		/// Versions: 8+
 		/// </summary>
 		public Boolean IncludeTopicAuthorizedOperations 
 		{
@@ -20846,6 +21751,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Whether to include topic authorized operations.
+		/// Versions: 8+
 		/// </summary>
 		public MetadataRequest WithIncludeTopicAuthorizedOperations(Boolean includeTopicAuthorizedOperations)
 		{
@@ -20937,6 +21843,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 3+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -20954,6 +21861,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 3+
 		/// </summary>
 		public MetadataResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -20964,6 +21872,7 @@ namespace Kafka.Protocol
 		private Dictionary<Int32, MetadataResponseBroker> _brokersCollection = new Dictionary<Int32, MetadataResponseBroker>();
 		/// <summary>
 		/// Each broker in the response.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<Int32, MetadataResponseBroker> BrokersCollection 
 		{
@@ -20981,6 +21890,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each broker in the response.
+		/// Versions: 0+
 		/// </summary>
 		public MetadataResponse WithBrokersCollection(params Func<MetadataResponseBroker, MetadataResponseBroker>[] createFields)
 		{
@@ -21049,6 +21959,7 @@ namespace Kafka.Protocol
 			private Int32 _nodeId = Int32.Default;
 			/// <summary>
 			/// The broker ID.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 NodeId 
 			{
@@ -21066,6 +21977,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The broker ID.
+			/// Versions: 0+
 			/// </summary>
 			public MetadataResponseBroker WithNodeId(Int32 nodeId)
 			{
@@ -21076,6 +21988,7 @@ namespace Kafka.Protocol
 			private String _host = String.Default;
 			/// <summary>
 			/// The broker hostname.
+			/// Versions: 0+
 			/// </summary>
 			public String Host 
 			{
@@ -21093,6 +22006,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The broker hostname.
+			/// Versions: 0+
 			/// </summary>
 			public MetadataResponseBroker WithHost(String host)
 			{
@@ -21103,6 +22017,7 @@ namespace Kafka.Protocol
 			private Int32 _port = Int32.Default;
 			/// <summary>
 			/// The broker port.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 Port 
 			{
@@ -21120,6 +22035,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The broker port.
+			/// Versions: 0+
 			/// </summary>
 			public MetadataResponseBroker WithPort(Int32 port)
 			{
@@ -21130,6 +22046,8 @@ namespace Kafka.Protocol
 			private String? _rack;
 			/// <summary>
 			/// The rack of the broker, or null if it has not been assigned to a rack.
+			/// Versions: 1+
+			/// Default: null
 			/// </summary>
 			public String? Rack 
 			{
@@ -21148,6 +22066,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The rack of the broker, or null if it has not been assigned to a rack.
+			/// Versions: 1+
+			/// Default: null
 			/// </summary>
 			public MetadataResponseBroker WithRack(String rack)
 			{
@@ -21159,6 +22079,8 @@ namespace Kafka.Protocol
 		private String? _clusterId;
 		/// <summary>
 		/// The cluster ID that responding broker belongs to.
+		/// Versions: 2+
+		/// Default: null
 		/// </summary>
 		public String? ClusterId 
 		{
@@ -21177,6 +22099,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The cluster ID that responding broker belongs to.
+		/// Versions: 2+
+		/// Default: null
 		/// </summary>
 		public MetadataResponse WithClusterId(String clusterId)
 		{
@@ -21187,6 +22111,8 @@ namespace Kafka.Protocol
 		private Int32 _controllerId = new Int32(-1);
 		/// <summary>
 		/// The ID of the controller broker.
+		/// Versions: 1+
+		/// Default: -1
 		/// </summary>
 		public Int32 ControllerId 
 		{
@@ -21199,6 +22125,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The ID of the controller broker.
+		/// Versions: 1+
+		/// Default: -1
 		/// </summary>
 		public MetadataResponse WithControllerId(Int32 controllerId)
 		{
@@ -21209,6 +22137,7 @@ namespace Kafka.Protocol
 		private Dictionary<String, MetadataResponseTopic> _topicsCollection = new Dictionary<String, MetadataResponseTopic>();
 		/// <summary>
 		/// Each topic in the response.
+		/// Versions: 0+
 		/// </summary>
 		public Dictionary<String, MetadataResponseTopic> TopicsCollection 
 		{
@@ -21226,6 +22155,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic in the response.
+		/// Versions: 0+
 		/// </summary>
 		public MetadataResponse WithTopicsCollection(params Func<MetadataResponseTopic, MetadataResponseTopic>[] createFields)
 		{
@@ -21302,6 +22232,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The topic error, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -21319,6 +22250,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic error, or 0 if there was no error.
+			/// Versions: 0+
 			/// </summary>
 			public MetadataResponseTopic WithErrorCode(Int16 errorCode)
 			{
@@ -21329,6 +22261,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -21346,6 +22279,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public MetadataResponseTopic WithName(String name)
 			{
@@ -21356,6 +22290,8 @@ namespace Kafka.Protocol
 			private Boolean _isInternal = new Boolean(false);
 			/// <summary>
 			/// True if the topic is internal.
+			/// Versions: 1+
+			/// Default: false
 			/// </summary>
 			public Boolean IsInternal 
 			{
@@ -21368,6 +22304,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// True if the topic is internal.
+			/// Versions: 1+
+			/// Default: false
 			/// </summary>
 			public MetadataResponseTopic WithIsInternal(Boolean isInternal)
 			{
@@ -21378,6 +22316,7 @@ namespace Kafka.Protocol
 			private MetadataResponsePartition[] _partitionsCollection = Array.Empty<MetadataResponsePartition>();
 			/// <summary>
 			/// Each partition in the topic.
+			/// Versions: 0+
 			/// </summary>
 			public MetadataResponsePartition[] PartitionsCollection 
 			{
@@ -21395,6 +22334,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition in the topic.
+			/// Versions: 0+
 			/// </summary>
 			public MetadataResponseTopic WithPartitionsCollection(params Func<MetadataResponsePartition, MetadataResponsePartition>[] createFields)
 			{
@@ -21487,6 +22427,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The partition error, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -21504,6 +22445,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition error, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public MetadataResponsePartition WithErrorCode(Int16 errorCode)
 				{
@@ -21514,6 +22456,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -21531,6 +22474,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public MetadataResponsePartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -21541,6 +22485,7 @@ namespace Kafka.Protocol
 				private Int32 _leaderId = Int32.Default;
 				/// <summary>
 				/// The ID of the leader broker.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 LeaderId 
 				{
@@ -21558,6 +22503,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The ID of the leader broker.
+				/// Versions: 0+
 				/// </summary>
 				public MetadataResponsePartition WithLeaderId(Int32 leaderId)
 				{
@@ -21568,6 +22514,8 @@ namespace Kafka.Protocol
 				private Int32 _leaderEpoch = new Int32(-1);
 				/// <summary>
 				/// The leader epoch of this partition.
+				/// Versions: 7+
+				/// Default: -1
 				/// </summary>
 				public Int32 LeaderEpoch 
 				{
@@ -21580,6 +22528,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The leader epoch of this partition.
+				/// Versions: 7+
+				/// Default: -1
 				/// </summary>
 				public MetadataResponsePartition WithLeaderEpoch(Int32 leaderEpoch)
 				{
@@ -21590,6 +22540,7 @@ namespace Kafka.Protocol
 				private Int32[] _replicaNodesCollection = Array.Empty<Int32>();
 				/// <summary>
 				/// The set of all nodes that host this partition.
+				/// Versions: 0+
 				/// </summary>
 				public Int32[] ReplicaNodesCollection 
 				{
@@ -21607,6 +22558,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The set of all nodes that host this partition.
+				/// Versions: 0+
 				/// </summary>
 				public MetadataResponsePartition WithReplicaNodesCollection(Int32[] replicaNodesCollection)
 				{
@@ -21617,6 +22569,7 @@ namespace Kafka.Protocol
 				private Int32[] _isrNodesCollection = Array.Empty<Int32>();
 				/// <summary>
 				/// The set of nodes that are in sync with the leader for this partition.
+				/// Versions: 0+
 				/// </summary>
 				public Int32[] IsrNodesCollection 
 				{
@@ -21634,6 +22587,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The set of nodes that are in sync with the leader for this partition.
+				/// Versions: 0+
 				/// </summary>
 				public MetadataResponsePartition WithIsrNodesCollection(Int32[] isrNodesCollection)
 				{
@@ -21644,6 +22598,7 @@ namespace Kafka.Protocol
 				private Int32[] _offlineReplicasCollection = Array.Empty<Int32>();
 				/// <summary>
 				/// The set of offline replicas of this partition.
+				/// Versions: 5+
 				/// </summary>
 				public Int32[] OfflineReplicasCollection 
 				{
@@ -21656,6 +22611,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The set of offline replicas of this partition.
+				/// Versions: 5+
 				/// </summary>
 				public MetadataResponsePartition WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
 				{
@@ -21667,6 +22623,8 @@ namespace Kafka.Protocol
 			private Int32 _topicAuthorizedOperations = new Int32(-2147483648);
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this topic.
+			/// Versions: 8+
+			/// Default: -2147483648
 			/// </summary>
 			public Int32 TopicAuthorizedOperations 
 			{
@@ -21684,6 +22642,8 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// 32-bit bitfield to represent authorized operations for this topic.
+			/// Versions: 8+
+			/// Default: -2147483648
 			/// </summary>
 			public MetadataResponseTopic WithTopicAuthorizedOperations(Int32 topicAuthorizedOperations)
 			{
@@ -21695,6 +22655,8 @@ namespace Kafka.Protocol
 		private Int32 _clusterAuthorizedOperations = new Int32(-2147483648);
 		/// <summary>
 		/// 32-bit bitfield to represent authorized operations for this cluster.
+		/// Versions: 8+
+		/// Default: -2147483648
 		/// </summary>
 		public Int32 ClusterAuthorizedOperations 
 		{
@@ -21712,6 +22674,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// 32-bit bitfield to represent authorized operations for this cluster.
+		/// Versions: 8+
+		/// Default: -2147483648
 		/// </summary>
 		public MetadataResponse WithClusterAuthorizedOperations(Int32 clusterAuthorizedOperations)
 		{
@@ -21800,6 +22764,7 @@ namespace Kafka.Protocol
 		private String _groupId = String.Default;
 		/// <summary>
 		/// The unique group identifier.
+		/// Versions: 0+
 		/// </summary>
 		public String GroupId 
 		{
@@ -21817,6 +22782,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The unique group identifier.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetCommitRequest WithGroupId(String groupId)
 		{
@@ -21827,6 +22793,8 @@ namespace Kafka.Protocol
 		private Int32 _generationId = new Int32(-1);
 		/// <summary>
 		/// The generation of the group.
+		/// Versions: 1+
+		/// Default: -1
 		/// </summary>
 		public Int32 GenerationId 
 		{
@@ -21839,6 +22807,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The generation of the group.
+		/// Versions: 1+
+		/// Default: -1
 		/// </summary>
 		public OffsetCommitRequest WithGenerationId(Int32 generationId)
 		{
@@ -21849,6 +22819,7 @@ namespace Kafka.Protocol
 		private String _memberId = String.Default;
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
+		/// Versions: 1+
 		/// </summary>
 		public String MemberId 
 		{
@@ -21861,6 +22832,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The member ID assigned by the group coordinator.
+		/// Versions: 1+
 		/// </summary>
 		public OffsetCommitRequest WithMemberId(String memberId)
 		{
@@ -21871,6 +22843,8 @@ namespace Kafka.Protocol
 		private String? _groupInstanceId;
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
+		/// Versions: 7+
+		/// Default: null
 		/// </summary>
 		public String? GroupInstanceId 
 		{
@@ -21894,6 +22868,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
+		/// Versions: 7+
+		/// Default: null
 		/// </summary>
 		public OffsetCommitRequest WithGroupInstanceId(String groupInstanceId)
 		{
@@ -21904,6 +22880,8 @@ namespace Kafka.Protocol
 		private Int64 _retentionTimeMs = new Int64(-1);
 		/// <summary>
 		/// The time period in ms to retain the offset.
+		/// Versions: 2-4
+		/// Default: -1
 		/// </summary>
 		public Int64 RetentionTimeMs 
 		{
@@ -21916,6 +22894,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The time period in ms to retain the offset.
+		/// Versions: 2-4
+		/// Default: -1
 		/// </summary>
 		public OffsetCommitRequest WithRetentionTimeMs(Int64 retentionTimeMs)
 		{
@@ -21926,6 +22906,7 @@ namespace Kafka.Protocol
 		private OffsetCommitRequestTopic[] _topicsCollection = Array.Empty<OffsetCommitRequestTopic>();
 		/// <summary>
 		/// The topics to commit offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetCommitRequestTopic[] TopicsCollection 
 		{
@@ -21943,6 +22924,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The topics to commit offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetCommitRequest WithTopicsCollection(params Func<OffsetCommitRequestTopic, OffsetCommitRequestTopic>[] createFields)
 		{
@@ -21995,6 +22977,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -22012,6 +22995,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetCommitRequestTopic WithName(String name)
 			{
@@ -22022,6 +23006,7 @@ namespace Kafka.Protocol
 			private OffsetCommitRequestPartition[] _partitionsCollection = Array.Empty<OffsetCommitRequestPartition>();
 			/// <summary>
 			/// Each partition to commit offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetCommitRequestPartition[] PartitionsCollection 
 			{
@@ -22039,6 +23024,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition to commit offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetCommitRequestTopic WithPartitionsCollection(params Func<OffsetCommitRequestPartition, OffsetCommitRequestPartition>[] createFields)
 			{
@@ -22115,6 +23101,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -22132,6 +23119,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetCommitRequestPartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -22142,6 +23130,7 @@ namespace Kafka.Protocol
 				private Int64 _committedOffset = Int64.Default;
 				/// <summary>
 				/// The message offset to be committed.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 CommittedOffset 
 				{
@@ -22159,6 +23148,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The message offset to be committed.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetCommitRequestPartition WithCommittedOffset(Int64 committedOffset)
 				{
@@ -22169,6 +23159,8 @@ namespace Kafka.Protocol
 				private Int32 _committedLeaderEpoch = new Int32(-1);
 				/// <summary>
 				/// The leader epoch of this partition.
+				/// Versions: 6+
+				/// Default: -1
 				/// </summary>
 				public Int32 CommittedLeaderEpoch 
 				{
@@ -22181,6 +23173,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The leader epoch of this partition.
+				/// Versions: 6+
+				/// Default: -1
 				/// </summary>
 				public OffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
 				{
@@ -22191,6 +23185,8 @@ namespace Kafka.Protocol
 				private Int64 _commitTimestamp = new Int64(-1);
 				/// <summary>
 				/// The timestamp of the commit.
+				/// Versions: 1
+				/// Default: -1
 				/// </summary>
 				public Int64 CommitTimestamp 
 				{
@@ -22208,6 +23204,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The timestamp of the commit.
+				/// Versions: 1
+				/// Default: -1
 				/// </summary>
 				public OffsetCommitRequestPartition WithCommitTimestamp(Int64 commitTimestamp)
 				{
@@ -22218,6 +23216,7 @@ namespace Kafka.Protocol
 				private String? _committedMetadata = String.Default;
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
+				/// Versions: 0+
 				/// </summary>
 				public String? CommittedMetadata 
 				{
@@ -22241,6 +23240,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
 				{
@@ -22302,6 +23302,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 3+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -22314,6 +23315,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 3+
 		/// </summary>
 		public OffsetCommitResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -22324,6 +23326,7 @@ namespace Kafka.Protocol
 		private OffsetCommitResponseTopic[] _topicsCollection = Array.Empty<OffsetCommitResponseTopic>();
 		/// <summary>
 		/// The responses for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetCommitResponseTopic[] TopicsCollection 
 		{
@@ -22341,6 +23344,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The responses for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetCommitResponse WithTopicsCollection(params Func<OffsetCommitResponseTopic, OffsetCommitResponseTopic>[] createFields)
 		{
@@ -22393,6 +23397,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -22410,6 +23415,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetCommitResponseTopic WithName(String name)
 			{
@@ -22420,6 +23426,7 @@ namespace Kafka.Protocol
 			private OffsetCommitResponsePartition[] _partitionsCollection = Array.Empty<OffsetCommitResponsePartition>();
 			/// <summary>
 			/// The responses for each partition in the topic.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetCommitResponsePartition[] PartitionsCollection 
 			{
@@ -22437,6 +23444,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The responses for each partition in the topic.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetCommitResponseTopic WithPartitionsCollection(params Func<OffsetCommitResponsePartition, OffsetCommitResponsePartition>[] createFields)
 			{
@@ -22489,6 +23497,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -22506,6 +23515,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetCommitResponsePartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -22516,6 +23526,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -22533,6 +23544,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetCommitResponsePartition WithErrorCode(Int16 errorCode)
 				{
@@ -22591,6 +23603,7 @@ namespace Kafka.Protocol
 		private String _groupId = String.Default;
 		/// <summary>
 		/// The group to fetch offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public String GroupId 
 		{
@@ -22608,6 +23621,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The group to fetch offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetFetchRequest WithGroupId(String groupId)
 		{
@@ -22618,6 +23632,7 @@ namespace Kafka.Protocol
 		private OffsetFetchRequestTopic[]? _topicsCollection = Array.Empty<OffsetFetchRequestTopic>();
 		/// <summary>
 		/// Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetFetchRequestTopic[]? TopicsCollection 
 		{
@@ -22641,6 +23656,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetFetchRequest WithTopicsCollection(params Func<OffsetFetchRequestTopic, OffsetFetchRequestTopic>[] createFields)
 		{
@@ -22693,6 +23709,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -22710,6 +23727,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetFetchRequestTopic WithName(String name)
 			{
@@ -22720,6 +23738,7 @@ namespace Kafka.Protocol
 			private Int32[] _partitionIndexesCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The partition indexes we would like to fetch offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public Int32[] PartitionIndexesCollection 
 			{
@@ -22737,6 +23756,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition indexes we would like to fetch offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetFetchRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
 			{
@@ -22805,6 +23825,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 3+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -22817,6 +23838,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 3+
 		/// </summary>
 		public OffsetFetchResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -22827,6 +23849,7 @@ namespace Kafka.Protocol
 		private OffsetFetchResponseTopic[] _topicsCollection = Array.Empty<OffsetFetchResponseTopic>();
 		/// <summary>
 		/// The responses per topic.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetFetchResponseTopic[] TopicsCollection 
 		{
@@ -22844,6 +23867,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The responses per topic.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetFetchResponse WithTopicsCollection(params Func<OffsetFetchResponseTopic, OffsetFetchResponseTopic>[] createFields)
 		{
@@ -22896,6 +23920,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -22913,6 +23938,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetFetchResponseTopic WithName(String name)
 			{
@@ -22923,6 +23949,7 @@ namespace Kafka.Protocol
 			private OffsetFetchResponsePartition[] _partitionsCollection = Array.Empty<OffsetFetchResponsePartition>();
 			/// <summary>
 			/// The responses per partition
+			/// Versions: 0+
 			/// </summary>
 			public OffsetFetchResponsePartition[] PartitionsCollection 
 			{
@@ -22940,6 +23967,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The responses per partition
+			/// Versions: 0+
 			/// </summary>
 			public OffsetFetchResponseTopic WithPartitionsCollection(params Func<OffsetFetchResponsePartition, OffsetFetchResponsePartition>[] createFields)
 			{
@@ -23016,6 +24044,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -23033,6 +24062,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetFetchResponsePartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -23043,6 +24073,7 @@ namespace Kafka.Protocol
 				private Int64 _committedOffset = Int64.Default;
 				/// <summary>
 				/// The committed message offset.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 CommittedOffset 
 				{
@@ -23060,6 +24091,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The committed message offset.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetFetchResponsePartition WithCommittedOffset(Int64 committedOffset)
 				{
@@ -23070,6 +24102,7 @@ namespace Kafka.Protocol
 				private Int32 _committedLeaderEpoch = Int32.Default;
 				/// <summary>
 				/// The leader epoch.
+				/// Versions: 5+
 				/// </summary>
 				public Int32 CommittedLeaderEpoch 
 				{
@@ -23087,6 +24120,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The leader epoch.
+				/// Versions: 5+
 				/// </summary>
 				public OffsetFetchResponsePartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
 				{
@@ -23097,6 +24131,7 @@ namespace Kafka.Protocol
 				private String? _metadata = String.Default;
 				/// <summary>
 				/// The partition metadata.
+				/// Versions: 0+
 				/// </summary>
 				public String? Metadata 
 				{
@@ -23120,6 +24155,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition metadata.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetFetchResponsePartition WithMetadata(String metadata)
 				{
@@ -23130,6 +24166,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -23147,6 +24184,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetFetchResponsePartition WithErrorCode(Int16 errorCode)
 				{
@@ -23159,6 +24197,8 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = new Int16(0);
 		/// <summary>
 		/// The top-level error code, or 0 if there was no error.
+		/// Versions: 2+
+		/// Default: 0
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -23176,6 +24216,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The top-level error code, or 0 if there was no error.
+		/// Versions: 2+
+		/// Default: 0
 		/// </summary>
 		public OffsetFetchResponse WithErrorCode(Int16 errorCode)
 		{
@@ -23232,6 +24274,8 @@ namespace Kafka.Protocol
 		private Int32 _replicaId = new Int32(-2);
 		/// <summary>
 		/// The broker ID of the follower, of -1 if this request is from a consumer.
+		/// Versions: 3+
+		/// Default: -2
 		/// </summary>
 		public Int32 ReplicaId 
 		{
@@ -23244,6 +24288,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The broker ID of the follower, of -1 if this request is from a consumer.
+		/// Versions: 3+
+		/// Default: -2
 		/// </summary>
 		public OffsetForLeaderEpochRequest WithReplicaId(Int32 replicaId)
 		{
@@ -23254,6 +24300,7 @@ namespace Kafka.Protocol
 		private OffsetForLeaderTopic[] _topicsCollection = Array.Empty<OffsetForLeaderTopic>();
 		/// <summary>
 		/// Each topic to get offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetForLeaderTopic[] TopicsCollection 
 		{
@@ -23271,6 +24318,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic to get offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetForLeaderEpochRequest WithTopicsCollection(params Func<OffsetForLeaderTopic, OffsetForLeaderTopic>[] createFields)
 		{
@@ -23323,6 +24371,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -23340,6 +24389,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetForLeaderTopic WithName(String name)
 			{
@@ -23350,6 +24400,7 @@ namespace Kafka.Protocol
 			private OffsetForLeaderPartition[] _partitionsCollection = Array.Empty<OffsetForLeaderPartition>();
 			/// <summary>
 			/// Each partition to get offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetForLeaderPartition[] PartitionsCollection 
 			{
@@ -23367,6 +24418,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition to get offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetForLeaderTopic WithPartitionsCollection(params Func<OffsetForLeaderPartition, OffsetForLeaderPartition>[] createFields)
 			{
@@ -23427,6 +24479,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -23444,6 +24497,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetForLeaderPartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -23454,6 +24508,8 @@ namespace Kafka.Protocol
 				private Int32 _currentLeaderEpoch = new Int32(-1);
 				/// <summary>
 				/// An epoch used to fence consumers/replicas with old metadata.  If the epoch provided by the client is larger than the current epoch known to the broker, then the UNKNOWN_LEADER_EPOCH error code will be returned. If the provided epoch is smaller, then the FENCED_LEADER_EPOCH error code will be returned.
+				/// Versions: 2+
+				/// Default: -1
 				/// </summary>
 				public Int32 CurrentLeaderEpoch 
 				{
@@ -23466,6 +24522,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// An epoch used to fence consumers/replicas with old metadata.  If the epoch provided by the client is larger than the current epoch known to the broker, then the UNKNOWN_LEADER_EPOCH error code will be returned. If the provided epoch is smaller, then the FENCED_LEADER_EPOCH error code will be returned.
+				/// Versions: 2+
+				/// Default: -1
 				/// </summary>
 				public OffsetForLeaderPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
 				{
@@ -23476,6 +24534,7 @@ namespace Kafka.Protocol
 				private Int32 _leaderEpoch = Int32.Default;
 				/// <summary>
 				/// The epoch to look up an offset for.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 LeaderEpoch 
 				{
@@ -23493,6 +24552,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The epoch to look up an offset for.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetForLeaderPartition WithLeaderEpoch(Int32 leaderEpoch)
 				{
@@ -23554,6 +24614,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 2+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -23566,6 +24627,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 2+
 		/// </summary>
 		public OffsetForLeaderEpochResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -23576,6 +24638,7 @@ namespace Kafka.Protocol
 		private OffsetForLeaderTopicResult[] _topicsCollection = Array.Empty<OffsetForLeaderTopicResult>();
 		/// <summary>
 		/// Each topic we fetched offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetForLeaderTopicResult[] TopicsCollection 
 		{
@@ -23593,6 +24656,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic we fetched offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public OffsetForLeaderEpochResponse WithTopicsCollection(params Func<OffsetForLeaderTopicResult, OffsetForLeaderTopicResult>[] createFields)
 		{
@@ -23645,6 +24709,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -23662,6 +24727,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetForLeaderTopicResult WithName(String name)
 			{
@@ -23672,6 +24738,7 @@ namespace Kafka.Protocol
 			private OffsetForLeaderPartitionResult[] _partitionsCollection = Array.Empty<OffsetForLeaderPartitionResult>();
 			/// <summary>
 			/// Each partition in the topic we fetched offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetForLeaderPartitionResult[] PartitionsCollection 
 			{
@@ -23689,6 +24756,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition in the topic we fetched offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public OffsetForLeaderTopicResult WithPartitionsCollection(params Func<OffsetForLeaderPartitionResult, OffsetForLeaderPartitionResult>[] createFields)
 			{
@@ -23757,6 +24825,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The error code 0, or if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -23774,6 +24843,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The error code 0, or if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetForLeaderPartitionResult WithErrorCode(Int16 errorCode)
 				{
@@ -23784,6 +24854,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -23801,6 +24872,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetForLeaderPartitionResult WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -23811,6 +24883,8 @@ namespace Kafka.Protocol
 				private Int32 _leaderEpoch = new Int32(-1);
 				/// <summary>
 				/// The leader epoch of the partition.
+				/// Versions: 1+
+				/// Default: -1
 				/// </summary>
 				public Int32 LeaderEpoch 
 				{
@@ -23823,6 +24897,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The leader epoch of the partition.
+				/// Versions: 1+
+				/// Default: -1
 				/// </summary>
 				public OffsetForLeaderPartitionResult WithLeaderEpoch(Int32 leaderEpoch)
 				{
@@ -23833,6 +24909,7 @@ namespace Kafka.Protocol
 				private Int64 _endOffset = Int64.Default;
 				/// <summary>
 				/// The end offset of the epoch.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 EndOffset 
 				{
@@ -23850,6 +24927,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The end offset of the epoch.
+				/// Versions: 0+
 				/// </summary>
 				public OffsetForLeaderPartitionResult WithEndOffset(Int64 endOffset)
 				{
@@ -23924,6 +25002,7 @@ namespace Kafka.Protocol
 		private String? _transactionalId = String.Default;
 		/// <summary>
 		/// The transactional ID, or null if the producer is not transactional.
+		/// Versions: 3+
 		/// </summary>
 		public String? TransactionalId 
 		{
@@ -23947,6 +25026,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The transactional ID, or null if the producer is not transactional.
+		/// Versions: 3+
 		/// </summary>
 		public ProduceRequest WithTransactionalId(String transactionalId)
 		{
@@ -23957,6 +25037,7 @@ namespace Kafka.Protocol
 		private Int16 _acks = Int16.Default;
 		/// <summary>
 		/// The number of acknowledgments the producer requires the leader to have received before considering a request complete. Allowed values: 0 for no acknowledgments, 1 for only the leader and -1 for the full ISR.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 Acks 
 		{
@@ -23974,6 +25055,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The number of acknowledgments the producer requires the leader to have received before considering a request complete. Allowed values: 0 for no acknowledgments, 1 for only the leader and -1 for the full ISR.
+		/// Versions: 0+
 		/// </summary>
 		public ProduceRequest WithAcks(Int16 acks)
 		{
@@ -23984,6 +25066,7 @@ namespace Kafka.Protocol
 		private Int32 _timeoutMs = Int32.Default;
 		/// <summary>
 		/// The timeout to await a response in miliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 TimeoutMs 
 		{
@@ -24001,6 +25084,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The timeout to await a response in miliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public ProduceRequest WithTimeoutMs(Int32 timeoutMs)
 		{
@@ -24011,6 +25095,7 @@ namespace Kafka.Protocol
 		private TopicProduceData[] _topicsCollection = Array.Empty<TopicProduceData>();
 		/// <summary>
 		/// Each topic to produce to.
+		/// Versions: 0+
 		/// </summary>
 		public TopicProduceData[] TopicsCollection 
 		{
@@ -24028,6 +25113,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic to produce to.
+		/// Versions: 0+
 		/// </summary>
 		public ProduceRequest WithTopicsCollection(params Func<TopicProduceData, TopicProduceData>[] createFields)
 		{
@@ -24080,6 +25166,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -24097,6 +25184,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public TopicProduceData WithName(String name)
 			{
@@ -24107,6 +25195,7 @@ namespace Kafka.Protocol
 			private PartitionProduceData[] _partitionsCollection = Array.Empty<PartitionProduceData>();
 			/// <summary>
 			/// Each partition to produce to.
+			/// Versions: 0+
 			/// </summary>
 			public PartitionProduceData[] PartitionsCollection 
 			{
@@ -24124,6 +25213,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition to produce to.
+			/// Versions: 0+
 			/// </summary>
 			public TopicProduceData WithPartitionsCollection(params Func<PartitionProduceData, PartitionProduceData>[] createFields)
 			{
@@ -24176,6 +25266,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -24193,6 +25284,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public PartitionProduceData WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -24203,6 +25295,7 @@ namespace Kafka.Protocol
 				private Bytes? _records = Bytes.Default;
 				/// <summary>
 				/// The record data to be produced.
+				/// Versions: 0+
 				/// </summary>
 				public Bytes? Records 
 				{
@@ -24226,6 +25319,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The record data to be produced.
+				/// Versions: 0+
 				/// </summary>
 				public PartitionProduceData WithRecords(Bytes records)
 				{
@@ -24287,6 +25381,7 @@ namespace Kafka.Protocol
 		private TopicProduceResponse[] _responsesCollection = Array.Empty<TopicProduceResponse>();
 		/// <summary>
 		/// Each produce response
+		/// Versions: 0+
 		/// </summary>
 		public TopicProduceResponse[] ResponsesCollection 
 		{
@@ -24304,6 +25399,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each produce response
+		/// Versions: 0+
 		/// </summary>
 		public ProduceResponse WithResponsesCollection(params Func<TopicProduceResponse, TopicProduceResponse>[] createFields)
 		{
@@ -24356,6 +25452,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -24373,6 +25470,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name
+			/// Versions: 0+
 			/// </summary>
 			public TopicProduceResponse WithName(String name)
 			{
@@ -24383,6 +25481,7 @@ namespace Kafka.Protocol
 			private PartitionProduceResponse[] _partitionsCollection = Array.Empty<PartitionProduceResponse>();
 			/// <summary>
 			/// Each partition that we produced to within the topic.
+			/// Versions: 0+
 			/// </summary>
 			public PartitionProduceResponse[] PartitionsCollection 
 			{
@@ -24400,6 +25499,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each partition that we produced to within the topic.
+			/// Versions: 0+
 			/// </summary>
 			public TopicProduceResponse WithPartitionsCollection(params Func<PartitionProduceResponse, PartitionProduceResponse>[] createFields)
 			{
@@ -24476,6 +25576,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -24493,6 +25594,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partition index.
+				/// Versions: 0+
 				/// </summary>
 				public PartitionProduceResponse WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -24503,6 +25605,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -24520,6 +25623,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public PartitionProduceResponse WithErrorCode(Int16 errorCode)
 				{
@@ -24530,6 +25634,7 @@ namespace Kafka.Protocol
 				private Int64 _baseOffset = Int64.Default;
 				/// <summary>
 				/// The base offset.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 BaseOffset 
 				{
@@ -24547,6 +25652,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The base offset.
+				/// Versions: 0+
 				/// </summary>
 				public PartitionProduceResponse WithBaseOffset(Int64 baseOffset)
 				{
@@ -24557,6 +25663,8 @@ namespace Kafka.Protocol
 				private Int64 _logAppendTimeMs = new Int64(-1);
 				/// <summary>
 				/// The timestamp returned by broker after appending the messages. If CreateTime is used for the topic, the timestamp will be -1.  If LogAppendTime is used for the topic, the timestamp will be the broker local time when the messages are appended.
+				/// Versions: 2+
+				/// Default: -1
 				/// </summary>
 				public Int64 LogAppendTimeMs 
 				{
@@ -24569,6 +25677,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The timestamp returned by broker after appending the messages. If CreateTime is used for the topic, the timestamp will be -1.  If LogAppendTime is used for the topic, the timestamp will be the broker local time when the messages are appended.
+				/// Versions: 2+
+				/// Default: -1
 				/// </summary>
 				public PartitionProduceResponse WithLogAppendTimeMs(Int64 logAppendTimeMs)
 				{
@@ -24579,6 +25689,8 @@ namespace Kafka.Protocol
 				private Int64 _logStartOffset = new Int64(-1);
 				/// <summary>
 				/// The log start offset.
+				/// Versions: 5+
+				/// Default: -1
 				/// </summary>
 				public Int64 LogStartOffset 
 				{
@@ -24591,6 +25703,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The log start offset.
+				/// Versions: 5+
+				/// Default: -1
 				/// </summary>
 				public PartitionProduceResponse WithLogStartOffset(Int64 logStartOffset)
 				{
@@ -24603,6 +25717,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -24615,6 +25730,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public ProduceResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -24671,6 +25787,7 @@ namespace Kafka.Protocol
 		private Bytes _hmac = Bytes.Default;
 		/// <summary>
 		/// The HMAC of the delegation token to be renewed.
+		/// Versions: 0+
 		/// </summary>
 		public Bytes Hmac 
 		{
@@ -24688,6 +25805,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The HMAC of the delegation token to be renewed.
+		/// Versions: 0+
 		/// </summary>
 		public RenewDelegationTokenRequest WithHmac(Bytes hmac)
 		{
@@ -24698,6 +25816,7 @@ namespace Kafka.Protocol
 		private Int64 _renewPeriodMs = Int64.Default;
 		/// <summary>
 		/// The renewal time period in milliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 RenewPeriodMs 
 		{
@@ -24715,6 +25834,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The renewal time period in milliseconds.
+		/// Versions: 0+
 		/// </summary>
 		public RenewDelegationTokenRequest WithRenewPeriodMs(Int64 renewPeriodMs)
 		{
@@ -24782,6 +25902,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -24799,6 +25920,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public RenewDelegationTokenResponse WithErrorCode(Int16 errorCode)
 		{
@@ -24809,6 +25931,7 @@ namespace Kafka.Protocol
 		private Int64 _expiryTimestampMs = Int64.Default;
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 ExpiryTimestampMs 
 		{
@@ -24826,6 +25949,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The timestamp in milliseconds at which this token expires.
+		/// Versions: 0+
 		/// </summary>
 		public RenewDelegationTokenResponse WithExpiryTimestampMs(Int64 expiryTimestampMs)
 		{
@@ -24836,6 +25960,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -24853,6 +25978,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public RenewDelegationTokenResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -24925,6 +26051,7 @@ namespace Kafka.Protocol
 		private Int16 _requestApiKey = Int16.Default;
 		/// <summary>
 		/// The API key of this request.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 RequestApiKey 
 		{
@@ -24942,6 +26069,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The API key of this request.
+		/// Versions: 0+
 		/// </summary>
 		public RequestHeader WithRequestApiKey(Int16 requestApiKey)
 		{
@@ -24952,6 +26080,7 @@ namespace Kafka.Protocol
 		private Int16 _requestApiVersion = Int16.Default;
 		/// <summary>
 		/// The API version of this request.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 RequestApiVersion 
 		{
@@ -24969,6 +26098,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The API version of this request.
+		/// Versions: 0+
 		/// </summary>
 		public RequestHeader WithRequestApiVersion(Int16 requestApiVersion)
 		{
@@ -24979,6 +26109,7 @@ namespace Kafka.Protocol
 		private Int32 _correlationId = Int32.Default;
 		/// <summary>
 		/// The correlation ID of this request.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 CorrelationId 
 		{
@@ -24996,6 +26127,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The correlation ID of this request.
+		/// Versions: 0+
 		/// </summary>
 		public RequestHeader WithCorrelationId(Int32 correlationId)
 		{
@@ -25006,6 +26138,7 @@ namespace Kafka.Protocol
 		private String _clientId = String.Default;
 		/// <summary>
 		/// The client ID string.
+		/// Versions: 0+
 		/// </summary>
 		public String ClientId 
 		{
@@ -25023,6 +26156,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The client ID string.
+		/// Versions: 0+
 		/// </summary>
 		public RequestHeader WithClientId(String clientId)
 		{
@@ -25074,6 +26208,7 @@ namespace Kafka.Protocol
 		private Int32 _correlationId = Int32.Default;
 		/// <summary>
 		/// The correlation ID of this response.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 CorrelationId 
 		{
@@ -25091,6 +26226,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The correlation ID of this response.
+		/// Versions: 0+
 		/// </summary>
 		public ResponseHeader WithCorrelationId(Int32 correlationId)
 		{
@@ -25142,6 +26278,7 @@ namespace Kafka.Protocol
 		private Bytes _authBytes = Bytes.Default;
 		/// <summary>
 		/// The SASL authentication bytes from the client, as defined by the SASL mechanism.
+		/// Versions: 0+
 		/// </summary>
 		public Bytes AuthBytes 
 		{
@@ -25159,6 +26296,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The SASL authentication bytes from the client, as defined by the SASL mechanism.
+		/// Versions: 0+
 		/// </summary>
 		public SaslAuthenticateRequest WithAuthBytes(Bytes authBytes)
 		{
@@ -25234,6 +26372,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -25251,6 +26390,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public SaslAuthenticateResponse WithErrorCode(Int16 errorCode)
 		{
@@ -25261,6 +26401,7 @@ namespace Kafka.Protocol
 		private String? _errorMessage = String.Default;
 		/// <summary>
 		/// The error message, or null if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public String? ErrorMessage 
 		{
@@ -25284,6 +26425,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error message, or null if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public SaslAuthenticateResponse WithErrorMessage(String errorMessage)
 		{
@@ -25294,6 +26436,7 @@ namespace Kafka.Protocol
 		private Bytes _authBytes = Bytes.Default;
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
+		/// Versions: 0+
 		/// </summary>
 		public Bytes AuthBytes 
 		{
@@ -25311,6 +26454,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
+		/// Versions: 0+
 		/// </summary>
 		public SaslAuthenticateResponse WithAuthBytes(Bytes authBytes)
 		{
@@ -25321,6 +26465,8 @@ namespace Kafka.Protocol
 		private Int64 _sessionLifetimeMs = new Int64(0);
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
+		/// Versions: 1+
+		/// Default: 0
 		/// </summary>
 		public Int64 SessionLifetimeMs 
 		{
@@ -25338,6 +26484,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The SASL authentication bytes from the server, as defined by the SASL mechanism.
+		/// Versions: 1+
+		/// Default: 0
 		/// </summary>
 		public SaslAuthenticateResponse WithSessionLifetimeMs(Int64 sessionLifetimeMs)
 		{
@@ -25386,6 +26534,7 @@ namespace Kafka.Protocol
 		private String _mechanism = String.Default;
 		/// <summary>
 		/// The SASL mechanism chosen by the client.
+		/// Versions: 0+
 		/// </summary>
 		public String Mechanism 
 		{
@@ -25403,6 +26552,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The SASL mechanism chosen by the client.
+		/// Versions: 0+
 		/// </summary>
 		public SaslHandshakeRequest WithMechanism(String mechanism)
 		{
@@ -25462,6 +26612,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -25479,6 +26630,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public SaslHandshakeResponse WithErrorCode(Int16 errorCode)
 		{
@@ -25489,6 +26641,7 @@ namespace Kafka.Protocol
 		private String[] _mechanismsCollection = Array.Empty<String>();
 		/// <summary>
 		/// The mechanisms enabled in the server.
+		/// Versions: 0+
 		/// </summary>
 		public String[] MechanismsCollection 
 		{
@@ -25506,6 +26659,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The mechanisms enabled in the server.
+		/// Versions: 0+
 		/// </summary>
 		public SaslHandshakeResponse WithMechanismsCollection(String[] mechanismsCollection)
 		{
@@ -25594,6 +26748,7 @@ namespace Kafka.Protocol
 		private Int32 _controllerId = Int32.Default;
 		/// <summary>
 		/// The controller id.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ControllerId 
 		{
@@ -25611,6 +26766,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The controller id.
+		/// Versions: 0+
 		/// </summary>
 		public StopReplicaRequest WithControllerId(Int32 controllerId)
 		{
@@ -25621,6 +26777,7 @@ namespace Kafka.Protocol
 		private Int32 _controllerEpoch = Int32.Default;
 		/// <summary>
 		/// The controller epoch.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ControllerEpoch 
 		{
@@ -25638,6 +26795,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The controller epoch.
+		/// Versions: 0+
 		/// </summary>
 		public StopReplicaRequest WithControllerEpoch(Int32 controllerEpoch)
 		{
@@ -25648,6 +26806,8 @@ namespace Kafka.Protocol
 		private Int64 _brokerEpoch = new Int64(-1);
 		/// <summary>
 		/// The broker epoch.
+		/// Versions: 1+
+		/// Default: -1
 		/// </summary>
 		public Int64 BrokerEpoch 
 		{
@@ -25660,6 +26820,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The broker epoch.
+		/// Versions: 1+
+		/// Default: -1
 		/// </summary>
 		public StopReplicaRequest WithBrokerEpoch(Int64 brokerEpoch)
 		{
@@ -25670,6 +26832,7 @@ namespace Kafka.Protocol
 		private Boolean _deletePartitions = Boolean.Default;
 		/// <summary>
 		/// Whether these partitions should be deleted.
+		/// Versions: 0+
 		/// </summary>
 		public Boolean DeletePartitions 
 		{
@@ -25687,6 +26850,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Whether these partitions should be deleted.
+		/// Versions: 0+
 		/// </summary>
 		public StopReplicaRequest WithDeletePartitions(Boolean deletePartitions)
 		{
@@ -25697,6 +26861,7 @@ namespace Kafka.Protocol
 		private StopReplicaRequestPartitionV0[] _partitionsV0Collection = Array.Empty<StopReplicaRequestPartitionV0>();
 		/// <summary>
 		/// The partitions to stop.
+		/// Versions: 0
 		/// </summary>
 		public StopReplicaRequestPartitionV0[] PartitionsV0Collection 
 		{
@@ -25714,6 +26879,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The partitions to stop.
+		/// Versions: 0
 		/// </summary>
 		public StopReplicaRequest WithPartitionsV0Collection(params Func<StopReplicaRequestPartitionV0, StopReplicaRequestPartitionV0>[] createFields)
 		{
@@ -25766,6 +26932,7 @@ namespace Kafka.Protocol
 			private String _topicName = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0
 			/// </summary>
 			public String TopicName 
 			{
@@ -25783,6 +26950,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0
 			/// </summary>
 			public StopReplicaRequestPartitionV0 WithTopicName(String topicName)
 			{
@@ -25793,6 +26961,7 @@ namespace Kafka.Protocol
 			private Int32 _partitionIndex = Int32.Default;
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0
 			/// </summary>
 			public Int32 PartitionIndex 
 			{
@@ -25810,6 +26979,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0
 			/// </summary>
 			public StopReplicaRequestPartitionV0 WithPartitionIndex(Int32 partitionIndex)
 			{
@@ -25821,6 +26991,7 @@ namespace Kafka.Protocol
 		private StopReplicaRequestTopic[] _topicsCollection = Array.Empty<StopReplicaRequestTopic>();
 		/// <summary>
 		/// The topics to stop.
+		/// Versions: 1+
 		/// </summary>
 		public StopReplicaRequestTopic[] TopicsCollection 
 		{
@@ -25838,6 +27009,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The topics to stop.
+		/// Versions: 1+
 		/// </summary>
 		public StopReplicaRequest WithTopicsCollection(params Func<StopReplicaRequestTopic, StopReplicaRequestTopic>[] createFields)
 		{
@@ -25890,6 +27062,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 1+
 			/// </summary>
 			public String Name 
 			{
@@ -25907,6 +27080,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 1+
 			/// </summary>
 			public StopReplicaRequestTopic WithName(String name)
 			{
@@ -25917,6 +27091,7 @@ namespace Kafka.Protocol
 			private Int32[] _partitionIndexesCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The partition indexes.
+			/// Versions: 1+
 			/// </summary>
 			public Int32[] PartitionIndexesCollection 
 			{
@@ -25934,6 +27109,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition indexes.
+			/// Versions: 1+
 			/// </summary>
 			public StopReplicaRequestTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
 			{
@@ -25994,6 +27170,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The top-level error code, or 0 if there was no top-level error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -26011,6 +27188,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The top-level error code, or 0 if there was no top-level error.
+		/// Versions: 0+
 		/// </summary>
 		public StopReplicaResponse WithErrorCode(Int16 errorCode)
 		{
@@ -26021,6 +27199,7 @@ namespace Kafka.Protocol
 		private StopReplicaResponsePartition[] _partitionsCollection = Array.Empty<StopReplicaResponsePartition>();
 		/// <summary>
 		/// The responses for each partition.
+		/// Versions: 0+
 		/// </summary>
 		public StopReplicaResponsePartition[] PartitionsCollection 
 		{
@@ -26038,6 +27217,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The responses for each partition.
+		/// Versions: 0+
 		/// </summary>
 		public StopReplicaResponse WithPartitionsCollection(params Func<StopReplicaResponsePartition, StopReplicaResponsePartition>[] createFields)
 		{
@@ -26098,6 +27278,7 @@ namespace Kafka.Protocol
 			private String _topicName = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String TopicName 
 			{
@@ -26115,6 +27296,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public StopReplicaResponsePartition WithTopicName(String topicName)
 			{
@@ -26125,6 +27307,7 @@ namespace Kafka.Protocol
 			private Int32 _partitionIndex = Int32.Default;
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 PartitionIndex 
 			{
@@ -26142,6 +27325,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0+
 			/// </summary>
 			public StopReplicaResponsePartition WithPartitionIndex(Int32 partitionIndex)
 			{
@@ -26152,6 +27336,7 @@ namespace Kafka.Protocol
 			private Int16 _errorCode = Int16.Default;
 			/// <summary>
 			/// The partition error code, or 0 if there was no partition error.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ErrorCode 
 			{
@@ -26169,6 +27354,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition error code, or 0 if there was no partition error.
+			/// Versions: 0+
 			/// </summary>
 			public StopReplicaResponsePartition WithErrorCode(Int16 errorCode)
 			{
@@ -26250,6 +27436,7 @@ namespace Kafka.Protocol
 		private String _groupId = String.Default;
 		/// <summary>
 		/// The unique group identifier.
+		/// Versions: 0+
 		/// </summary>
 		public String GroupId 
 		{
@@ -26267,6 +27454,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The unique group identifier.
+		/// Versions: 0+
 		/// </summary>
 		public SyncGroupRequest WithGroupId(String groupId)
 		{
@@ -26277,6 +27465,7 @@ namespace Kafka.Protocol
 		private Int32 _generationId = Int32.Default;
 		/// <summary>
 		/// The generation of the group.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 GenerationId 
 		{
@@ -26294,6 +27483,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The generation of the group.
+		/// Versions: 0+
 		/// </summary>
 		public SyncGroupRequest WithGenerationId(Int32 generationId)
 		{
@@ -26304,6 +27494,7 @@ namespace Kafka.Protocol
 		private String _memberId = String.Default;
 		/// <summary>
 		/// The member ID assigned by the group.
+		/// Versions: 0+
 		/// </summary>
 		public String MemberId 
 		{
@@ -26321,6 +27512,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The member ID assigned by the group.
+		/// Versions: 0+
 		/// </summary>
 		public SyncGroupRequest WithMemberId(String memberId)
 		{
@@ -26331,6 +27523,8 @@ namespace Kafka.Protocol
 		private String? _groupInstanceId;
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
+		/// Versions: 3+
+		/// Default: null
 		/// </summary>
 		public String? GroupInstanceId 
 		{
@@ -26354,6 +27548,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The unique identifier of the consumer instance provided by end user.
+		/// Versions: 3+
+		/// Default: null
 		/// </summary>
 		public SyncGroupRequest WithGroupInstanceId(String groupInstanceId)
 		{
@@ -26364,6 +27560,7 @@ namespace Kafka.Protocol
 		private SyncGroupRequestAssignment[] _assignmentsCollection = Array.Empty<SyncGroupRequestAssignment>();
 		/// <summary>
 		/// Each assignment.
+		/// Versions: 0+
 		/// </summary>
 		public SyncGroupRequestAssignment[] AssignmentsCollection 
 		{
@@ -26381,6 +27578,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each assignment.
+		/// Versions: 0+
 		/// </summary>
 		public SyncGroupRequest WithAssignmentsCollection(params Func<SyncGroupRequestAssignment, SyncGroupRequestAssignment>[] createFields)
 		{
@@ -26433,6 +27631,7 @@ namespace Kafka.Protocol
 			private String _memberId = String.Default;
 			/// <summary>
 			/// The ID of the member to assign.
+			/// Versions: 0+
 			/// </summary>
 			public String MemberId 
 			{
@@ -26450,6 +27649,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The ID of the member to assign.
+			/// Versions: 0+
 			/// </summary>
 			public SyncGroupRequestAssignment WithMemberId(String memberId)
 			{
@@ -26460,6 +27660,7 @@ namespace Kafka.Protocol
 			private Bytes _assignment = Bytes.Default;
 			/// <summary>
 			/// The member assignment.
+			/// Versions: 0+
 			/// </summary>
 			public Bytes Assignment 
 			{
@@ -26477,6 +27678,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The member assignment.
+			/// Versions: 0+
 			/// </summary>
 			public SyncGroupRequestAssignment WithAssignment(Bytes assignment)
 			{
@@ -26545,6 +27747,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -26557,6 +27760,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 1+
 		/// </summary>
 		public SyncGroupResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -26567,6 +27771,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -26584,6 +27789,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public SyncGroupResponse WithErrorCode(Int16 errorCode)
 		{
@@ -26594,6 +27800,7 @@ namespace Kafka.Protocol
 		private Bytes _assignment = Bytes.Default;
 		/// <summary>
 		/// The member assignment.
+		/// Versions: 0+
 		/// </summary>
 		public Bytes Assignment 
 		{
@@ -26611,6 +27818,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The member assignment.
+		/// Versions: 0+
 		/// </summary>
 		public SyncGroupResponse WithAssignment(Bytes assignment)
 		{
@@ -26691,6 +27899,7 @@ namespace Kafka.Protocol
 		private String _transactionalId = String.Default;
 		/// <summary>
 		/// The ID of the transaction.
+		/// Versions: 0+
 		/// </summary>
 		public String TransactionalId 
 		{
@@ -26708,6 +27917,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The ID of the transaction.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitRequest WithTransactionalId(String transactionalId)
 		{
@@ -26718,6 +27928,7 @@ namespace Kafka.Protocol
 		private String _groupId = String.Default;
 		/// <summary>
 		/// The ID of the group.
+		/// Versions: 0+
 		/// </summary>
 		public String GroupId 
 		{
@@ -26735,6 +27946,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The ID of the group.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitRequest WithGroupId(String groupId)
 		{
@@ -26745,6 +27957,7 @@ namespace Kafka.Protocol
 		private Int64 _producerId = Int64.Default;
 		/// <summary>
 		/// The current producer ID in use by the transactional ID.
+		/// Versions: 0+
 		/// </summary>
 		public Int64 ProducerId 
 		{
@@ -26762,6 +27975,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current producer ID in use by the transactional ID.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitRequest WithProducerId(Int64 producerId)
 		{
@@ -26772,6 +27986,7 @@ namespace Kafka.Protocol
 		private Int16 _producerEpoch = Int16.Default;
 		/// <summary>
 		/// The current epoch associated with the producer ID.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ProducerEpoch 
 		{
@@ -26789,6 +28004,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The current epoch associated with the producer ID.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitRequest WithProducerEpoch(Int16 producerEpoch)
 		{
@@ -26799,6 +28015,7 @@ namespace Kafka.Protocol
 		private TxnOffsetCommitRequestTopic[] _topicsCollection = Array.Empty<TxnOffsetCommitRequestTopic>();
 		/// <summary>
 		/// Each topic that we want to committ offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitRequestTopic[] TopicsCollection 
 		{
@@ -26816,6 +28033,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// Each topic that we want to committ offsets for.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitRequest WithTopicsCollection(params Func<TxnOffsetCommitRequestTopic, TxnOffsetCommitRequestTopic>[] createFields)
 		{
@@ -26868,6 +28086,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -26885,6 +28104,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public TxnOffsetCommitRequestTopic WithName(String name)
 			{
@@ -26895,6 +28115,7 @@ namespace Kafka.Protocol
 			private TxnOffsetCommitRequestPartition[] _partitionsCollection = Array.Empty<TxnOffsetCommitRequestPartition>();
 			/// <summary>
 			/// The partitions inside the topic that we want to committ offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public TxnOffsetCommitRequestPartition[] PartitionsCollection 
 			{
@@ -26912,6 +28133,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partitions inside the topic that we want to committ offsets for.
+			/// Versions: 0+
 			/// </summary>
 			public TxnOffsetCommitRequestTopic WithPartitionsCollection(params Func<TxnOffsetCommitRequestPartition, TxnOffsetCommitRequestPartition>[] createFields)
 			{
@@ -26980,6 +28202,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The index of the partition within the topic.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -26997,6 +28220,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The index of the partition within the topic.
+				/// Versions: 0+
 				/// </summary>
 				public TxnOffsetCommitRequestPartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -27007,6 +28231,7 @@ namespace Kafka.Protocol
 				private Int64 _committedOffset = Int64.Default;
 				/// <summary>
 				/// The message offset to be committed.
+				/// Versions: 0+
 				/// </summary>
 				public Int64 CommittedOffset 
 				{
@@ -27024,6 +28249,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The message offset to be committed.
+				/// Versions: 0+
 				/// </summary>
 				public TxnOffsetCommitRequestPartition WithCommittedOffset(Int64 committedOffset)
 				{
@@ -27034,6 +28260,8 @@ namespace Kafka.Protocol
 				private Int32 _committedLeaderEpoch = new Int32(-1);
 				/// <summary>
 				/// The leader epoch of the last consumed record.
+				/// Versions: 2+
+				/// Default: -1
 				/// </summary>
 				public Int32 CommittedLeaderEpoch 
 				{
@@ -27046,6 +28274,8 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The leader epoch of the last consumed record.
+				/// Versions: 2+
+				/// Default: -1
 				/// </summary>
 				public TxnOffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
 				{
@@ -27056,6 +28286,7 @@ namespace Kafka.Protocol
 				private String? _committedMetadata = String.Default;
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
+				/// Versions: 0+
 				/// </summary>
 				public String? CommittedMetadata 
 				{
@@ -27079,6 +28310,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// Any associated metadata the client wants to keep.
+				/// Versions: 0+
 				/// </summary>
 				public TxnOffsetCommitRequestPartition WithCommittedMetadata(String committedMetadata)
 				{
@@ -27140,6 +28372,7 @@ namespace Kafka.Protocol
 		private Int32 _throttleTimeMs = Int32.Default;
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ThrottleTimeMs 
 		{
@@ -27157,6 +28390,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
@@ -27167,6 +28401,7 @@ namespace Kafka.Protocol
 		private TxnOffsetCommitResponseTopic[] _topicsCollection = Array.Empty<TxnOffsetCommitResponseTopic>();
 		/// <summary>
 		/// The responses for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitResponseTopic[] TopicsCollection 
 		{
@@ -27184,6 +28419,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The responses for each topic.
+		/// Versions: 0+
 		/// </summary>
 		public TxnOffsetCommitResponse WithTopicsCollection(params Func<TxnOffsetCommitResponseTopic, TxnOffsetCommitResponseTopic>[] createFields)
 		{
@@ -27236,6 +28472,7 @@ namespace Kafka.Protocol
 			private String _name = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public String Name 
 			{
@@ -27253,6 +28490,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 0+
 			/// </summary>
 			public TxnOffsetCommitResponseTopic WithName(String name)
 			{
@@ -27263,6 +28501,7 @@ namespace Kafka.Protocol
 			private TxnOffsetCommitResponsePartition[] _partitionsCollection = Array.Empty<TxnOffsetCommitResponsePartition>();
 			/// <summary>
 			/// The responses for each partition in the topic.
+			/// Versions: 0+
 			/// </summary>
 			public TxnOffsetCommitResponsePartition[] PartitionsCollection 
 			{
@@ -27280,6 +28519,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The responses for each partition in the topic.
+			/// Versions: 0+
 			/// </summary>
 			public TxnOffsetCommitResponseTopic WithPartitionsCollection(params Func<TxnOffsetCommitResponsePartition, TxnOffsetCommitResponsePartition>[] createFields)
 			{
@@ -27332,6 +28572,7 @@ namespace Kafka.Protocol
 				private Int32 _partitionIndex = Int32.Default;
 				/// <summary>
 				/// The partitition index.
+				/// Versions: 0+
 				/// </summary>
 				public Int32 PartitionIndex 
 				{
@@ -27349,6 +28590,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The partitition index.
+				/// Versions: 0+
 				/// </summary>
 				public TxnOffsetCommitResponsePartition WithPartitionIndex(Int32 partitionIndex)
 				{
@@ -27359,6 +28601,7 @@ namespace Kafka.Protocol
 				private Int16 _errorCode = Int16.Default;
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public Int16 ErrorCode 
 				{
@@ -27376,6 +28619,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The error code, or 0 if there was no error.
+				/// Versions: 0+
 				/// </summary>
 				public TxnOffsetCommitResponsePartition WithErrorCode(Int16 errorCode)
 				{
@@ -27466,6 +28710,7 @@ namespace Kafka.Protocol
 		private Int32 _controllerId = Int32.Default;
 		/// <summary>
 		/// The controller id.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ControllerId 
 		{
@@ -27483,6 +28728,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The controller id.
+		/// Versions: 0+
 		/// </summary>
 		public UpdateMetadataRequest WithControllerId(Int32 controllerId)
 		{
@@ -27493,6 +28739,7 @@ namespace Kafka.Protocol
 		private Int32 _controllerEpoch = Int32.Default;
 		/// <summary>
 		/// The controller epoch.
+		/// Versions: 0+
 		/// </summary>
 		public Int32 ControllerEpoch 
 		{
@@ -27510,6 +28757,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The controller epoch.
+		/// Versions: 0+
 		/// </summary>
 		public UpdateMetadataRequest WithControllerEpoch(Int32 controllerEpoch)
 		{
@@ -27520,6 +28768,8 @@ namespace Kafka.Protocol
 		private Int64 _brokerEpoch = new Int64(-1);
 		/// <summary>
 		/// The broker epoch.
+		/// Versions: 5+
+		/// Default: -1
 		/// </summary>
 		public Int64 BrokerEpoch 
 		{
@@ -27532,6 +28782,8 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The broker epoch.
+		/// Versions: 5+
+		/// Default: -1
 		/// </summary>
 		public UpdateMetadataRequest WithBrokerEpoch(Int64 brokerEpoch)
 		{
@@ -27542,6 +28794,7 @@ namespace Kafka.Protocol
 		private UpdateMetadataPartitionState[] _legacyPartitionStatesCollection = Array.Empty<UpdateMetadataPartitionState>();
 		/// <summary>
 		/// In older versions of this RPC, each partition that we would like to update.
+		/// Versions: 0-4
 		/// </summary>
 		public UpdateMetadataPartitionState[] LegacyPartitionStatesCollection 
 		{
@@ -27559,6 +28812,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// In older versions of this RPC, each partition that we would like to update.
+		/// Versions: 0-4
 		/// </summary>
 		public UpdateMetadataRequest WithLegacyPartitionStatesCollection(UpdateMetadataPartitionState[] legacyPartitionStatesCollection)
 		{
@@ -27569,6 +28823,7 @@ namespace Kafka.Protocol
 		private UpdateMetadataRequestTopicState[] _topicStatesCollection = Array.Empty<UpdateMetadataRequestTopicState>();
 		/// <summary>
 		/// In newer versions of this RPC, each topic that we would like to update.
+		/// Versions: 5+
 		/// </summary>
 		public UpdateMetadataRequestTopicState[] TopicStatesCollection 
 		{
@@ -27586,6 +28841,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// In newer versions of this RPC, each topic that we would like to update.
+		/// Versions: 5+
 		/// </summary>
 		public UpdateMetadataRequest WithTopicStatesCollection(params Func<UpdateMetadataRequestTopicState, UpdateMetadataRequestTopicState>[] createFields)
 		{
@@ -27638,6 +28894,7 @@ namespace Kafka.Protocol
 			private String _topicName = String.Default;
 			/// <summary>
 			/// The topic name.
+			/// Versions: 5+
 			/// </summary>
 			public String TopicName 
 			{
@@ -27655,6 +28912,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The topic name.
+			/// Versions: 5+
 			/// </summary>
 			public UpdateMetadataRequestTopicState WithTopicName(String topicName)
 			{
@@ -27665,6 +28923,7 @@ namespace Kafka.Protocol
 			private UpdateMetadataPartitionState[] _partitionStatesCollection = Array.Empty<UpdateMetadataPartitionState>();
 			/// <summary>
 			/// The partition that we would like to update.
+			/// Versions: 5+
 			/// </summary>
 			public UpdateMetadataPartitionState[] PartitionStatesCollection 
 			{
@@ -27682,6 +28941,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition that we would like to update.
+			/// Versions: 5+
 			/// </summary>
 			public UpdateMetadataRequestTopicState WithPartitionStatesCollection(UpdateMetadataPartitionState[] partitionStatesCollection)
 			{
@@ -27691,6 +28951,9 @@ namespace Kafka.Protocol
 		}
 
 		private UpdateMetadataRequestBroker[] _brokersCollection = Array.Empty<UpdateMetadataRequestBroker>();
+		/// <summary>
+		/// Versions: 0+
+		/// </summary>
 		public UpdateMetadataRequestBroker[] BrokersCollection 
 		{
 			get => _brokersCollection;
@@ -27705,6 +28968,9 @@ namespace Kafka.Protocol
 			}
 		}
 
+		/// <summary>
+		/// Versions: 0+
+		/// </summary>
 		public UpdateMetadataRequest WithBrokersCollection(params Func<UpdateMetadataRequestBroker, UpdateMetadataRequestBroker>[] createFields)
 		{
 			BrokersCollection = createFields
@@ -27780,6 +29046,7 @@ namespace Kafka.Protocol
 			private Int32 _id = Int32.Default;
 			/// <summary>
 			/// The broker id.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 Id 
 			{
@@ -27797,6 +29064,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The broker id.
+			/// Versions: 0+
 			/// </summary>
 			public UpdateMetadataRequestBroker WithId(Int32 id)
 			{
@@ -27807,6 +29075,7 @@ namespace Kafka.Protocol
 			private String _v0Host = String.Default;
 			/// <summary>
 			/// The broker hostname.
+			/// Versions: 0
 			/// </summary>
 			public String V0Host 
 			{
@@ -27819,6 +29088,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The broker hostname.
+			/// Versions: 0
 			/// </summary>
 			public UpdateMetadataRequestBroker WithV0Host(String v0Host)
 			{
@@ -27829,6 +29099,7 @@ namespace Kafka.Protocol
 			private Int32 _v0Port = Int32.Default;
 			/// <summary>
 			/// The broker port.
+			/// Versions: 0
 			/// </summary>
 			public Int32 V0Port 
 			{
@@ -27841,6 +29112,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The broker port.
+			/// Versions: 0
 			/// </summary>
 			public UpdateMetadataRequestBroker WithV0Port(Int32 v0Port)
 			{
@@ -27851,6 +29123,7 @@ namespace Kafka.Protocol
 			private UpdateMetadataRequestEndpoint[] _endpointsCollection = Array.Empty<UpdateMetadataRequestEndpoint>();
 			/// <summary>
 			/// The broker endpoints.
+			/// Versions: 1+
 			/// </summary>
 			public UpdateMetadataRequestEndpoint[] EndpointsCollection 
 			{
@@ -27868,6 +29141,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The broker endpoints.
+			/// Versions: 1+
 			/// </summary>
 			public UpdateMetadataRequestBroker WithEndpointsCollection(params Func<UpdateMetadataRequestEndpoint, UpdateMetadataRequestEndpoint>[] createFields)
 			{
@@ -27936,6 +29210,7 @@ namespace Kafka.Protocol
 				private Int32 _port = Int32.Default;
 				/// <summary>
 				/// The port of this endpoint
+				/// Versions: 1+
 				/// </summary>
 				public Int32 Port 
 				{
@@ -27953,6 +29228,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The port of this endpoint
+				/// Versions: 1+
 				/// </summary>
 				public UpdateMetadataRequestEndpoint WithPort(Int32 port)
 				{
@@ -27963,6 +29239,7 @@ namespace Kafka.Protocol
 				private String _host = String.Default;
 				/// <summary>
 				/// The hostname of this endpoint
+				/// Versions: 1+
 				/// </summary>
 				public String Host 
 				{
@@ -27980,6 +29257,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The hostname of this endpoint
+				/// Versions: 1+
 				/// </summary>
 				public UpdateMetadataRequestEndpoint WithHost(String host)
 				{
@@ -27990,6 +29268,7 @@ namespace Kafka.Protocol
 				private String _listener = String.Default;
 				/// <summary>
 				/// The listener name.
+				/// Versions: 3+
 				/// </summary>
 				public String Listener 
 				{
@@ -28007,6 +29286,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The listener name.
+				/// Versions: 3+
 				/// </summary>
 				public UpdateMetadataRequestEndpoint WithListener(String listener)
 				{
@@ -28017,6 +29297,7 @@ namespace Kafka.Protocol
 				private Int16 _securityProtocol = Int16.Default;
 				/// <summary>
 				/// The security protocol type.
+				/// Versions: 1+
 				/// </summary>
 				public Int16 SecurityProtocol 
 				{
@@ -28034,6 +29315,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The security protocol type.
+				/// Versions: 1+
 				/// </summary>
 				public UpdateMetadataRequestEndpoint WithSecurityProtocol(Int16 securityProtocol)
 				{
@@ -28045,6 +29327,7 @@ namespace Kafka.Protocol
 			private String? _rack = String.Default;
 			/// <summary>
 			/// The rack which this broker belongs to.
+			/// Versions: 2+
 			/// </summary>
 			public String? Rack 
 			{
@@ -28063,6 +29346,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The rack which this broker belongs to.
+			/// Versions: 2+
 			/// </summary>
 			public UpdateMetadataRequestBroker WithRack(String rack)
 			{
@@ -28170,6 +29454,7 @@ namespace Kafka.Protocol
 			private String _topicName = String.Default;
 			/// <summary>
 			/// In older versions of this RPC, the topic name.
+			/// Versions: 0-4
 			/// </summary>
 			public String TopicName 
 			{
@@ -28187,6 +29472,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// In older versions of this RPC, the topic name.
+			/// Versions: 0-4
 			/// </summary>
 			public UpdateMetadataPartitionState WithTopicName(String topicName)
 			{
@@ -28197,6 +29483,7 @@ namespace Kafka.Protocol
 			private Int32 _partitionIndex = Int32.Default;
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 PartitionIndex 
 			{
@@ -28214,6 +29501,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The partition index.
+			/// Versions: 0+
 			/// </summary>
 			public UpdateMetadataPartitionState WithPartitionIndex(Int32 partitionIndex)
 			{
@@ -28224,6 +29512,7 @@ namespace Kafka.Protocol
 			private Int32 _controllerEpoch = Int32.Default;
 			/// <summary>
 			/// The controller epoch.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 ControllerEpoch 
 			{
@@ -28241,6 +29530,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The controller epoch.
+			/// Versions: 0+
 			/// </summary>
 			public UpdateMetadataPartitionState WithControllerEpoch(Int32 controllerEpoch)
 			{
@@ -28251,6 +29541,7 @@ namespace Kafka.Protocol
 			private Int32 _leader = Int32.Default;
 			/// <summary>
 			/// The ID of the broker which is the current partition leader.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 Leader 
 			{
@@ -28268,6 +29559,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The ID of the broker which is the current partition leader.
+			/// Versions: 0+
 			/// </summary>
 			public UpdateMetadataPartitionState WithLeader(Int32 leader)
 			{
@@ -28278,6 +29570,7 @@ namespace Kafka.Protocol
 			private Int32 _leaderEpoch = Int32.Default;
 			/// <summary>
 			/// The leader epoch of this partition.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 LeaderEpoch 
 			{
@@ -28295,6 +29588,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The leader epoch of this partition.
+			/// Versions: 0+
 			/// </summary>
 			public UpdateMetadataPartitionState WithLeaderEpoch(Int32 leaderEpoch)
 			{
@@ -28305,6 +29599,7 @@ namespace Kafka.Protocol
 			private Int32[] _isrCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The brokers which are in the ISR for this partition.
+			/// Versions: 0+
 			/// </summary>
 			public Int32[] IsrCollection 
 			{
@@ -28322,6 +29617,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The brokers which are in the ISR for this partition.
+			/// Versions: 0+
 			/// </summary>
 			public UpdateMetadataPartitionState WithIsrCollection(Int32[] isrCollection)
 			{
@@ -28332,6 +29628,7 @@ namespace Kafka.Protocol
 			private Int32 _zkVersion = Int32.Default;
 			/// <summary>
 			/// The Zookeeper version.
+			/// Versions: 0+
 			/// </summary>
 			public Int32 ZkVersion 
 			{
@@ -28349,6 +29646,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The Zookeeper version.
+			/// Versions: 0+
 			/// </summary>
 			public UpdateMetadataPartitionState WithZkVersion(Int32 zkVersion)
 			{
@@ -28359,6 +29657,7 @@ namespace Kafka.Protocol
 			private Int32[] _replicasCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// All the replicas of this partition.
+			/// Versions: 0+
 			/// </summary>
 			public Int32[] ReplicasCollection 
 			{
@@ -28376,6 +29675,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// All the replicas of this partition.
+			/// Versions: 0+
 			/// </summary>
 			public UpdateMetadataPartitionState WithReplicasCollection(Int32[] replicasCollection)
 			{
@@ -28386,6 +29686,7 @@ namespace Kafka.Protocol
 			private Int32[] _offlineReplicasCollection = Array.Empty<Int32>();
 			/// <summary>
 			/// The replicas of this partition which are offline.
+			/// Versions: 4+
 			/// </summary>
 			public Int32[] OfflineReplicasCollection 
 			{
@@ -28403,6 +29704,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The replicas of this partition which are offline.
+			/// Versions: 4+
 			/// </summary>
 			public UpdateMetadataPartitionState WithOfflineReplicasCollection(Int32[] offlineReplicasCollection)
 			{
@@ -28455,6 +29757,7 @@ namespace Kafka.Protocol
 		private Int16 _errorCode = Int16.Default;
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public Int16 ErrorCode 
 		{
@@ -28472,6 +29775,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The error code, or 0 if there was no error.
+		/// Versions: 0+
 		/// </summary>
 		public UpdateMetadataResponse WithErrorCode(Int16 errorCode)
 		{
@@ -28520,6 +29824,7 @@ namespace Kafka.Protocol
 		private WritableTxnMarker[] _markersCollection = Array.Empty<WritableTxnMarker>();
 		/// <summary>
 		/// The transaction markers to be written.
+		/// Versions: 0+
 		/// </summary>
 		public WritableTxnMarker[] MarkersCollection 
 		{
@@ -28537,6 +29842,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The transaction markers to be written.
+		/// Versions: 0+
 		/// </summary>
 		public WriteTxnMarkersRequest WithMarkersCollection(params Func<WritableTxnMarker, WritableTxnMarker>[] createFields)
 		{
@@ -28613,6 +29919,7 @@ namespace Kafka.Protocol
 			private Int64 _producerId = Int64.Default;
 			/// <summary>
 			/// The current producer ID.
+			/// Versions: 0+
 			/// </summary>
 			public Int64 ProducerId 
 			{
@@ -28630,6 +29937,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The current producer ID.
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarker WithProducerId(Int64 producerId)
 			{
@@ -28640,6 +29948,7 @@ namespace Kafka.Protocol
 			private Int16 _producerEpoch = Int16.Default;
 			/// <summary>
 			/// The current epoch associated with the producer ID.
+			/// Versions: 0+
 			/// </summary>
 			public Int16 ProducerEpoch 
 			{
@@ -28657,6 +29966,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The current epoch associated with the producer ID.
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarker WithProducerEpoch(Int16 producerEpoch)
 			{
@@ -28667,6 +29977,7 @@ namespace Kafka.Protocol
 			private Boolean _transactionResult = Boolean.Default;
 			/// <summary>
 			/// The result of the transaction to write to the partitions (false = ABORT, true = COMMIT).
+			/// Versions: 0+
 			/// </summary>
 			public Boolean TransactionResult 
 			{
@@ -28684,6 +29995,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The result of the transaction to write to the partitions (false = ABORT, true = COMMIT).
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarker WithTransactionResult(Boolean transactionResult)
 			{
@@ -28694,6 +30006,7 @@ namespace Kafka.Protocol
 			private WritableTxnMarkerTopic[] _topicsCollection = Array.Empty<WritableTxnMarkerTopic>();
 			/// <summary>
 			/// Each topic that we want to write transaction marker(s) for.
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarkerTopic[] TopicsCollection 
 			{
@@ -28711,6 +30024,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Each topic that we want to write transaction marker(s) for.
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarker WithTopicsCollection(params Func<WritableTxnMarkerTopic, WritableTxnMarkerTopic>[] createFields)
 			{
@@ -28763,6 +30077,7 @@ namespace Kafka.Protocol
 				private String _name = String.Default;
 				/// <summary>
 				/// The topic name.
+				/// Versions: 0+
 				/// </summary>
 				public String Name 
 				{
@@ -28780,6 +30095,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The topic name.
+				/// Versions: 0+
 				/// </summary>
 				public WritableTxnMarkerTopic WithName(String name)
 				{
@@ -28790,6 +30106,7 @@ namespace Kafka.Protocol
 				private Int32[] _partitionIndexesCollection = Array.Empty<Int32>();
 				/// <summary>
 				/// The indexes of the partitions to write transaction markers for.
+				/// Versions: 0+
 				/// </summary>
 				public Int32[] PartitionIndexesCollection 
 				{
@@ -28807,6 +30124,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The indexes of the partitions to write transaction markers for.
+				/// Versions: 0+
 				/// </summary>
 				public WritableTxnMarkerTopic WithPartitionIndexesCollection(Int32[] partitionIndexesCollection)
 				{
@@ -28818,6 +30136,7 @@ namespace Kafka.Protocol
 			private Int32 _coordinatorEpoch = Int32.Default;
 			/// <summary>
 			/// Epoch associated with the transaction state partition hosted by this transaction coordinator
+			/// Versions: 0+
 			/// </summary>
 			public Int32 CoordinatorEpoch 
 			{
@@ -28835,6 +30154,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// Epoch associated with the transaction state partition hosted by this transaction coordinator
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarker WithCoordinatorEpoch(Int32 coordinatorEpoch)
 			{
@@ -28887,6 +30207,7 @@ namespace Kafka.Protocol
 		private WritableTxnMarkerResult[] _markersCollection = Array.Empty<WritableTxnMarkerResult>();
 		/// <summary>
 		/// The results for writing makers.
+		/// Versions: 0+
 		/// </summary>
 		public WritableTxnMarkerResult[] MarkersCollection 
 		{
@@ -28904,6 +30225,7 @@ namespace Kafka.Protocol
 
 		/// <summary>
 		/// The results for writing makers.
+		/// Versions: 0+
 		/// </summary>
 		public WriteTxnMarkersResponse WithMarkersCollection(params Func<WritableTxnMarkerResult, WritableTxnMarkerResult>[] createFields)
 		{
@@ -28956,6 +30278,7 @@ namespace Kafka.Protocol
 			private Int64 _producerId = Int64.Default;
 			/// <summary>
 			/// The current producer ID in use by the transactional ID.
+			/// Versions: 0+
 			/// </summary>
 			public Int64 ProducerId 
 			{
@@ -28973,6 +30296,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The current producer ID in use by the transactional ID.
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarkerResult WithProducerId(Int64 producerId)
 			{
@@ -28983,6 +30307,7 @@ namespace Kafka.Protocol
 			private WritableTxnMarkerTopicResult[] _topicsCollection = Array.Empty<WritableTxnMarkerTopicResult>();
 			/// <summary>
 			/// The results by topic.
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarkerTopicResult[] TopicsCollection 
 			{
@@ -29000,6 +30325,7 @@ namespace Kafka.Protocol
 
 			/// <summary>
 			/// The results by topic.
+			/// Versions: 0+
 			/// </summary>
 			public WritableTxnMarkerResult WithTopicsCollection(params Func<WritableTxnMarkerTopicResult, WritableTxnMarkerTopicResult>[] createFields)
 			{
@@ -29052,6 +30378,7 @@ namespace Kafka.Protocol
 				private String _name = String.Default;
 				/// <summary>
 				/// The topic name.
+				/// Versions: 0+
 				/// </summary>
 				public String Name 
 				{
@@ -29069,6 +30396,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The topic name.
+				/// Versions: 0+
 				/// </summary>
 				public WritableTxnMarkerTopicResult WithName(String name)
 				{
@@ -29079,6 +30407,7 @@ namespace Kafka.Protocol
 				private WritableTxnMarkerPartitionResult[] _partitionsCollection = Array.Empty<WritableTxnMarkerPartitionResult>();
 				/// <summary>
 				/// The results by partition.
+				/// Versions: 0+
 				/// </summary>
 				public WritableTxnMarkerPartitionResult[] PartitionsCollection 
 				{
@@ -29096,6 +30425,7 @@ namespace Kafka.Protocol
 
 				/// <summary>
 				/// The results by partition.
+				/// Versions: 0+
 				/// </summary>
 				public WritableTxnMarkerTopicResult WithPartitionsCollection(params Func<WritableTxnMarkerPartitionResult, WritableTxnMarkerPartitionResult>[] createFields)
 				{
@@ -29148,6 +30478,7 @@ namespace Kafka.Protocol
 					private Int32 _partitionIndex = Int32.Default;
 					/// <summary>
 					/// The partition index.
+					/// Versions: 0+
 					/// </summary>
 					public Int32 PartitionIndex 
 					{
@@ -29165,6 +30496,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The partition index.
+					/// Versions: 0+
 					/// </summary>
 					public WritableTxnMarkerPartitionResult WithPartitionIndex(Int32 partitionIndex)
 					{
@@ -29175,6 +30507,7 @@ namespace Kafka.Protocol
 					private Int16 _errorCode = Int16.Default;
 					/// <summary>
 					/// The error code, or 0 if there was no error.
+					/// Versions: 0+
 					/// </summary>
 					public Int16 ErrorCode 
 					{
@@ -29192,6 +30525,7 @@ namespace Kafka.Protocol
 
 					/// <summary>
 					/// The error code, or 0 if there was no error.
+					/// Versions: 0+
 					/// </summary>
 					public WritableTxnMarkerPartitionResult WithErrorCode(Int16 errorCode)
 					{

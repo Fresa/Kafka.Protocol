@@ -30,16 +30,31 @@
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void _(int count = 1) { this.WriteNewLine(count); }
+	const char NewLine = '\n';
 
-	void GenerateDocumentation(string documentation)
+	void GenerateDocumentation(params string[] documentations)
     {
+		if (documentations.Any() == false)
+		{
+			return;
+		}
+
+		var documentation = documentations.Aggregate("", (aggregatedDocumentation, doc) =>
+		{
+			if (string.IsNullOrEmpty(doc))
+			{
+				return aggregatedDocumentation;
+			}
+			return aggregatedDocumentation + NewLine + doc;
+		});
+
         if (string.IsNullOrEmpty(documentation))
         {
             return;
         }
 
         #>/// <summary><# _();
-        foreach (var documentationRow in documentation.Trim().Split('\n'))
+        foreach (var documentationRow in documentation.Trim().Split(NewLine))
         {
             #>/// <#= documentationRow.Trim() #><# _();
         }
@@ -423,7 +438,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#> = <#= fieldTypeName #>.Default;<# 
 	} _();
 
-	GenerateDocumentation(field.About);
+	GenerateFieldDocumentation();
 	#>public <#= fieldTypeName #><#= nullableSign #> <#= fieldName #> <# Block(() => 
 	{
 		#>get => _<#= privateFieldName #>;<# _();
@@ -452,7 +467,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		});
 	}); _(2); 
 	
-	GenerateDocumentation(field.About);
+	GenerateFieldDocumentation();
 	if (field.Fields == null) 
 	{
 		var argumentName = field.GetName().FirstCharacterToLowerCase();
@@ -532,6 +547,17 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			if (index + 1 != count) _();
 		});					
 	});
+
+	void GenerateFieldDocumentation()
+	{
+		GenerateDocumentation(
+			field.About,
+			$"Versions: {field.Versions}",
+			(field.Default == null ? 
+				"" : 
+				$"Default: {(field.Default == String.Empty ? "Empty string" : field.Default)}"
+		));
+	}
 }
 
 void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.CommonStruct commonStruct)
