@@ -30,36 +30,7 @@
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void _(int count = 1) { this.WriteNewLine(count); }
-	const char NewLine = '\n';
-
-	void GenerateDocumentation(params string[] documentations)
-    {
-		if (documentations.Any() == false)
-		{
-			return;
-		}
-
-		var documentation = documentations.Aggregate("", (aggregatedDocumentation, doc) =>
-		{
-			if (string.IsNullOrEmpty(doc))
-			{
-				return aggregatedDocumentation;
-			}
-			return aggregatedDocumentation + NewLine + doc;
-		});
-
-        if (string.IsNullOrEmpty(documentation))
-        {
-            return;
-        }
-
-        #>/// <summary><# _();
-        foreach (var documentationRow in documentation.Trim().Split(NewLine))
-        {
-            #>/// <#= documentationRow.Trim() #><# _();
-        }
-		#>/// </summary><# _();
-    }
+	void GenerateDocumentation(params string[] documentations) { this.GenerateDocumentation(documentations); }
 
 	var primitiveTypeNames = protocol.PrimitiveTypes.Values
         .Where(type => 

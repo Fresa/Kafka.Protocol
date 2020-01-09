@@ -62,6 +62,35 @@ namespace Kafka.Protocol.Generator.Transformation
         {
             PrintOnNewRowForEach(textTransformation, iterator, (value, index, length) => action(value));
         }
+
+        public static void GenerateDocumentation(this TextTransformation textTransformation, params string[] documentations)
+        {
+            if (documentations.Any() == false)
+            {
+                return;
+            }
+
+            var documentation = documentations.Aggregate("", (aggregatedDocumentation, doc) =>
+            {
+                if (string.IsNullOrEmpty(doc))
+                {
+                    return aggregatedDocumentation;
+                }
+                return aggregatedDocumentation + Environment.NewLine + doc;
+            });
+
+            if (string.IsNullOrEmpty(documentation))
+            {
+                return;
+            }
+
+            textTransformation.WriteLine("/// <summary>");
+            foreach (var documentationRow in documentation.Trim().Split(new []{ Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries))
+            {
+                textTransformation.WriteLine($"/// {documentationRow.Trim()}");
+            }
+            textTransformation.WriteLine("/// </summary>");
+        }
     }
 
     public delegate void ActionDelegateWithIndexAndLength<in T>(T value, int index, int length);
