@@ -16,8 +16,7 @@ namespace Kafka.TestServer.Tests
     {
         public class When_connecting_to_the_server : TestSpecificationAsync
         {
-            private readonly SocketBasedKafkaTestFramework _testServer =
-                KafkaTestFramework.WithSocket();
+            private SocketBasedKafkaTestFramework _testServer;
 
             public When_connecting_to_the_server(
                 ITestOutputHelper testOutputHelper)
@@ -27,6 +26,8 @@ namespace Kafka.TestServer.Tests
 
             protected override Task GivenAsync()
             {
+                _testServer = KafkaTestFramework.WithSocket();
+
                 _testServer.On<ApiVersionsRequest, ApiVersionsResponse>(
                     request => request.Respond()
                         .WithThrottleTimeMs(Int32.From(100))
