@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
+using Log.It;
 
 namespace Kafka.TestServer
 {
@@ -15,6 +16,7 @@ namespace Kafka.TestServer
         private readonly CancellationTokenSource _cancellationSource = new CancellationTokenSource();
         private Task _acceptingClientsBackgroundTask = default!;
         private Socket _clientAcceptingSocket = default!;
+        private static readonly ILogger Logger = LogFactory.Create<SocketServer>();
 
         internal int Port { get; private set; }
         internal IPAddress Address { get; private set; } = IPAddress.Any;
@@ -24,6 +26,7 @@ namespace Kafka.TestServer
             var client = await _waitingClients
                 .ReceiveAsync(cancellationToken)
                 .ConfigureAwait(false);
+            Logger.Debug("Client accepted {@client}", client);
             _clients.Enqueue(client);
             return client;
         }
@@ -54,6 +57,8 @@ namespace Kafka.TestServer
                             var clientSocket = await _clientAcceptingSocket
                                 .AcceptAsync()
                                 .ConfigureAwait(false);
+                            Logger.Debug("Client connected {@clientSocket}", clientSocket);
+
                             await _waitingClients
                                 .SendAsync(
                                     new SocketNetworkClient(clientSocket), 
