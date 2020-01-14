@@ -10,6 +10,7 @@ using Log.It;
 using Xunit;
 using Xunit.Abstractions;
 using Int32 = Kafka.Protocol.Int32;
+using Int64 = Kafka.Protocol.Int64;
 using String = Kafka.Protocol.String;
 
 namespace Kafka.TestServer.Tests
@@ -58,6 +59,23 @@ namespace Kafka.TestServer.Tests
                             .WithPort(Int32.From(_testServer.Port)))
                         );
 
+                _testServer.On<ProduceRequest, ProduceResponse>(request => request.Respond()
+                    .WithResponsesCollection(request.TopicsCollection.Select(topicProduceData =>
+                        new Func<ProduceResponse.TopicProduceResponse,
+                            ProduceResponse.TopicProduceResponse>(
+                            topicProduceResponse =>
+                                topicProduceResponse
+                                    .WithName(topicProduceData.Name)
+                                    .WithPartitionsCollection(topicProduceData.PartitionsCollection.Select(partitionProduceData =>
+                                        new Func<ProduceResponse.TopicProduceResponse.PartitionProduceResponse,
+                                            ProduceResponse.TopicProduceResponse.PartitionProduceResponse>(
+                                            partitionProduceResponse =>
+                                                partitionProduceResponse
+                                                    .WithPartitionIndex(partitionProduceData.PartitionIndex)
+                                                    .WithLogAppendTimeMs(Int64.From(-1))))
+                                        .ToArray())))
+                        .ToArray()));
+
                 return Task.CompletedTask;
             }
 
@@ -95,7 +113,7 @@ namespace Kafka.TestServer.Tests
                     new ProducerBuilder<Null, string>(producerConfig)
                         .SetLogHandler(LogExtensions.UseLogIt)
                         .Build();
-                
+
                 var report = await producer
                     .ProduceAsync("my-topic",
                         new Message<Null, string> { Value = "test" })
