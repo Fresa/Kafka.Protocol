@@ -6,9 +6,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Kafka.Protocol;
+using Log.It;
 using Xunit;
 using Xunit.Abstractions;
 using Int32 = Kafka.Protocol.Int32;
+using String = Kafka.Protocol.String;
 
 namespace Kafka.TestServer.Tests
 {
@@ -30,20 +32,31 @@ namespace Kafka.TestServer.Tests
 
                 _testServer.On<ApiVersionsRequest, ApiVersionsResponse>(
                     request => request.Respond()
-                        .WithThrottleTimeMs(Int32.From(100))
                         .WithAllApiKeys());
 
                 _testServer.On<MetadataRequest, MetadataResponse>(
-                    request => request.Respond().WithTopicsCollection(
-                        request.TopicsCollection.Select(
-                                topic =>
-                                    new Func<
-                                        MetadataResponse.MetadataResponseTopic,
-                                        MetadataResponse.MetadataResponseTopic>(
-                                        responseTopic =>
-                                            responseTopic.WithName(
-                                                topic.Name)))
-                            .ToArray()));
+                    request => request.Respond()
+                        .WithTopicsCollection(
+                            request.TopicsCollection?.Select(topic =>
+                                new Func<MetadataResponse.MetadataResponseTopic,
+                                    MetadataResponse.MetadataResponseTopic>(
+                                    responseTopic =>
+                                        responseTopic
+                                            .WithName(topic.Name)
+                                            .WithPartitionsCollection(partition =>
+                                                partition
+                                                    .WithLeaderId(Int32.From(0))
+                                                    .WithPartitionIndex(Int32.From(0))
+                                                    .WithReplicaNodesCollection(new[] { Int32.From(0) }))))
+                                .ToArray())
+                        .WithControllerId(Int32.From(0))
+                        .WithClusterId(String.From("test"))
+                        .WithBrokersCollection(broker => broker
+                            .WithRack(String.From("testrack"))
+                            .WithNodeId(Int32.From(0))
+                            .WithHost(String.From("localhost"))
+                            .WithPort(Int32.From(_testServer.Port)))
+                        );
 
                 return Task.CompletedTask;
             }
@@ -53,8 +66,8 @@ namespace Kafka.TestServer.Tests
                 await using (_testServer.Start()
                     .ConfigureAwait(false))
                 {
-                    ProduceMessageFromClientAsync("localhost",
-                        _testServer.Port);
+                    ProduceMessageFromClientAsync("localhost", _testServer.Port)
+                        .ConfigureAwait(false);
                     Thread.Sleep(5000);
                 }
             }
@@ -73,23 +86,28 @@ namespace Kafka.TestServer.Tests
                 })
                 {
                     BootstrapServers = $"{host}:{port}",
-                    ApiVersionRequestTimeoutMs = 10000,
-                    MessageTimeoutMs = 45000,
-                    MetadataRequestTimeoutMs = 25000,
-                    RequestTimeoutMs = 5000,
+                    MessageTimeoutMs = 5000,
+                    MetadataRequestTimeoutMs = 5000,
                     SocketTimeoutMs = 30000,
-                    Debug = "broker,topic,msg",
-                    LogConnectionClose = true
+                    Debug = "all"
                 };
 
                 using var producer =
                     new ProducerBuilder<Null, string>(producerConfig)
                         .SetLogHandler(LogExtensions.UseLogIt)
                         .Build();
-                await producer
-                    .ProduceAsync("my-topic",
-                        new Message<Null, string> {Value = "test"})
-                    .ConfigureAwait(false);
+                producer
+                    .Produce("my-topic",
+                        new Message<Null, string> { Value = "test" },
+                        report =>
+                        {
+                            LogFactory.Create("producer").Info("Produce report {@report}", report);
+                        });
+
+                //await producer
+                //    .ProduceAsync("my-topic",
+                //        new Message<Null, string> { Value = "test" })
+                //    .ConfigureAwait(false);
                 producer.Flush();
             }
         }
