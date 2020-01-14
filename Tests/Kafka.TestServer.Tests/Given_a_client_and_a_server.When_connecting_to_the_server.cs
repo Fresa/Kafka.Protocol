@@ -66,9 +66,8 @@ namespace Kafka.TestServer.Tests
                 await using (_testServer.Start()
                     .ConfigureAwait(false))
                 {
-                    ProduceMessageFromClientAsync("localhost", _testServer.Port)
+                    await ProduceMessageFromClientAsync("localhost", _testServer.Port)
                         .ConfigureAwait(false);
-                    Thread.Sleep(5000);
                 }
             }
 
@@ -96,18 +95,13 @@ namespace Kafka.TestServer.Tests
                     new ProducerBuilder<Null, string>(producerConfig)
                         .SetLogHandler(LogExtensions.UseLogIt)
                         .Build();
-                producer
-                    .Produce("my-topic",
-                        new Message<Null, string> { Value = "test" },
-                        report =>
-                        {
-                            LogFactory.Create("producer").Info("Produce report {@report}", report);
-                        });
+                
+                var report = await producer
+                    .ProduceAsync("my-topic",
+                        new Message<Null, string> { Value = "test" })
+                    .ConfigureAwait(false);
+                LogFactory.Create("producer").Info("Produce report {@report}", report);
 
-                //await producer
-                //    .ProduceAsync("my-topic",
-                //        new Message<Null, string> { Value = "test" })
-                //    .ConfigureAwait(false);
                 producer.Flush();
             }
         }
