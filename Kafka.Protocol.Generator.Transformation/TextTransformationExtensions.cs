@@ -85,9 +85,9 @@ namespace Kafka.Protocol.Generator.Transformation
             }
 
             textTransformation.WriteLine("/// <summary>");
-            foreach (var documentationRow in documentation.Trim().Split(new []{ Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var documentationRow in documentation.Trim().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
-                textTransformation.WriteLine($"/// {documentationRow.Trim()}");
+                textTransformation.WriteLine($"/// <para>{documentationRow.Trim()}</para>");
             }
             textTransformation.WriteLine("/// </summary>");
         }

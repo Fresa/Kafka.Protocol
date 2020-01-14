@@ -42,7 +42,7 @@
 	{
 		return primitiveTypeNames
 			.Any(primitiveTypeName => 
-			field.GetTypeNameWithoutArrayCharacters() == primitiveTypeName);
+				field.GetTypeNameWithoutArrayCharacters() == primitiveTypeName);
 	}
 #>
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
