@@ -5,6 +5,13 @@ namespace Kafka.Protocol.Records
 {
     public class RecordBatch : ISerialize
     {
+        public Int16 Version { get; }
+
+        internal RecordBatch(Int16 version)
+        {
+            Version = version;
+        }
+
         public Int64 BaseOffset { get; set; } = Int64.Default;
         public Int32 BatchLength { get; set; } = Int32.Default;
         public Int32 PartitionLeaderEpoch { get; set; } = Int32.Default;
@@ -137,42 +144,50 @@ namespace Kafka.Protocol.Records
             set => Attributes = Attributes.SetBit(5, value);
         }
 
-        public async ValueTask ReadFromAsync(
+        public static async ValueTask<RecordBatch> ReadFromAsync(
+            Int16 version,
             IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            BaseOffset = await reader.ReadInt64Async(cancellationToken)
-                .ConfigureAwait(false);
-            BatchLength = await reader.ReadInt32Async(cancellationToken)
-                .ConfigureAwait(false);
-            PartitionLeaderEpoch = await reader
-                .ReadInt32Async(cancellationToken)
-                .ConfigureAwait(false);
-            Magic = await reader.ReadInt8Async(cancellationToken)
-                .ConfigureAwait(false);
-            Crc = await reader.ReadInt32Async(cancellationToken)
-                .ConfigureAwait(false);
-            Attributes = await reader.ReadInt16Async(cancellationToken)
-                .ConfigureAwait(false);
-            LastOffsetDelta = await reader.ReadInt32Async(cancellationToken)
-                .ConfigureAwait(false);
-            FirstTimestamp = await reader.ReadInt64Async(cancellationToken)
-                .ConfigureAwait(false);
-            MaxTimestamp = await reader.ReadInt64Async(cancellationToken)
-                .ConfigureAwait(false);
-            ProducerId = await reader.ReadInt64Async(cancellationToken)
-                .ConfigureAwait(false);
-            ProducerEpoch = await reader.ReadInt16Async(cancellationToken)
-                .ConfigureAwait(false);
-            BaseSequence = await reader.ReadInt32Async(cancellationToken)
-                .ConfigureAwait(false);
-            Records = await reader
-                .ReadArrayAsync(
-                    async () =>
-                        await Record
-                            .FromReaderAsync(reader, cancellationToken)
-                            .ConfigureAwait(false), cancellationToken)
-                .ConfigureAwait(false);
+            var batch = new RecordBatch(version)
+            {
+                BaseOffset = await reader.ReadInt64Async(cancellationToken)
+                    .ConfigureAwait(false),
+                BatchLength = await reader.ReadInt32Async(cancellationToken)
+                    .ConfigureAwait(false),
+                PartitionLeaderEpoch = await reader
+                    .ReadInt32Async(cancellationToken)
+                    .ConfigureAwait(false),
+                Magic = await reader.ReadInt8Async(cancellationToken)
+                    .ConfigureAwait(false),
+                Crc = await reader.ReadInt32Async(cancellationToken)
+                    .ConfigureAwait(false),
+                Attributes = await reader.ReadInt16Async(cancellationToken)
+                    .ConfigureAwait(false),
+                LastOffsetDelta = await reader
+                    .ReadInt32Async(cancellationToken)
+                    .ConfigureAwait(false),
+                FirstTimestamp = await reader
+                    .ReadInt64Async(cancellationToken)
+                    .ConfigureAwait(false),
+                MaxTimestamp = await reader.ReadInt64Async(cancellationToken)
+                    .ConfigureAwait(false),
+                ProducerId = await reader.ReadInt64Async(cancellationToken)
+                    .ConfigureAwait(false),
+                ProducerEpoch = await reader.ReadInt16Async(cancellationToken)
+                    .ConfigureAwait(false),
+                BaseSequence = await reader.ReadInt32Async(cancellationToken)
+                    .ConfigureAwait(false),
+                Records = await reader.ReadArrayAsync(
+                        async () =>
+                            await Record
+                                .FromReaderAsync(version, reader,
+                                    cancellationToken)
+                                .ConfigureAwait(false), cancellationToken)
+                    .ConfigureAwait(false)
+            };
+            return batch;
+
         }
 
         public async ValueTask WriteToAsync(

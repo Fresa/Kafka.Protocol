@@ -14,19 +14,24 @@ namespace Kafka.Protocol.Records
             IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            return new Header
+            var header = new Header
             {
                 HeaderKeyLength = await reader
                     .ReadVarIntAsync(cancellationToken)
-                    .ConfigureAwait(false),
-                HeaderKey = await reader.ReadStringAsync(cancellationToken)
-                    .ConfigureAwait(false),
-                HeaderValueLength = await reader
-                    .ReadVarIntAsync(cancellationToken)
-                    .ConfigureAwait(false),
-                Value = await reader.ReadBytesAsync(cancellationToken)
                     .ConfigureAwait(false)
             };
+            header.HeaderKey = await reader.ReadStringAsync(
+                    header.HeaderKeyLength,
+                    cancellationToken)
+                .ConfigureAwait(false);
+            header.HeaderValueLength = await reader
+                .ReadVarIntAsync(cancellationToken)
+                .ConfigureAwait(false);
+            header.Value = await reader.ReadBytesAsync(
+                    header.HeaderValueLength,
+                    cancellationToken)
+                .ConfigureAwait(false);
+            return header;
         }
 
         public async ValueTask WriteToAsync(

@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.Pipelines;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
+using FluentAssertions;
 using Kafka.Protocol;
+using Kafka.Protocol.Records;
 using Log.It;
 using Xunit;
 using Xunit.Abstractions;
+using Int16 = Kafka.Protocol.Int16;
 using Int32 = Kafka.Protocol.Int32;
 using Int64 = Kafka.Protocol.Int64;
+using Record = Kafka.Protocol.Records.Record;
 using String = Kafka.Protocol.String;
 
 namespace Kafka.TestServer.Tests
 {
-    public partial class Given_a_client_and_a_server
+    public partial class Given_a_socket_based_test_server
     {
-        public class When_connecting_to_the_server : TestSpecificationAsync
+        public class When_connecting_to_the_server_and_producing_a_message : TestSpecificationAsync
         {
             private SocketBasedKafkaTestFramework _testServer;
+            private ProduceRequest _produceRequest;
+            private void SetProduceRequest(ProduceRequest request) =>
+                _produceRequest = request;
 
-            public When_connecting_to_the_server(
+            public When_connecting_to_the_server_and_producing_a_message(
                 ITestOutputHelper testOutputHelper)
                 : base(testOutputHelper)
             {
@@ -59,7 +68,9 @@ namespace Kafka.TestServer.Tests
                             .WithPort(Int32.From(_testServer.Port)))
                         );
 
-                _testServer.On<ProduceRequest, ProduceResponse>(request => request.Respond()
+                _testServer.On<ProduceRequest, ProduceResponse>(request => request
+                    .WithAction(SetProduceRequest)
+                    .Respond()
                     .WithResponsesCollection(request.TopicsCollection.Select(topicProduceData =>
                         new Func<ProduceResponse.TopicProduceResponse,
                             ProduceResponse.TopicProduceResponse>(
@@ -90,8 +101,20 @@ namespace Kafka.TestServer.Tests
             }
 
             [Fact]
-            public void It_should_connect()
+            public async Task It_should_connect()
             {
+                var records = new List<Record>();
+                await foreach (var batch in _produceRequest
+                    .ExtractRecordBatchesAsync(CancellationToken.None)
+                    .ConfigureAwait(false))
+                {
+                    if (batch.Records == null)
+                        continue;
+                    
+                    records.AddRange(batch.Records);
+                }
+
+                records.Should().HaveCount(1);
             }
 
             private static async Task ProduceMessageFromClientAsync(string host,
@@ -121,6 +144,31 @@ namespace Kafka.TestServer.Tests
                 LogFactory.Create("producer").Info("Produce report {@report}", report);
 
                 producer.Flush();
+            }
+        }
+    }
+
+    internal static class ProduceRequestExtensions
+    {
+        internal static async IAsyncEnumerable<RecordBatch> ExtractRecordBatchesAsync(
+            this ProduceRequest produceRequest,
+            CancellationToken cancellationToken = default)
+        {
+            var records = produceRequest.TopicsCollection.SelectMany(data =>
+                data.PartitionsCollection.Select(produceData =>
+                    produceData.Records))
+                .Where(record => record.HasValue);
+
+            var pipe = new Pipe();
+            var reader = new KafkaReader(pipe.Reader);
+            foreach (var record in records)
+            {
+                await pipe.Writer.WriteAsync(
+                    record.Value.Value.AsMemory(),
+                    cancellationToken);
+
+                yield return await RecordBatch.ReadFromAsync(Int16.Default, reader,
+                    cancellationToken);
             }
         }
     }

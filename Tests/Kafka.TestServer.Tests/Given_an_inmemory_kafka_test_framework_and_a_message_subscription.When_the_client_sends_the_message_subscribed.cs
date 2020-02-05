@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace Kafka.TestServer.Tests
 {
-    public partial class Given_a_kafka_test_framework_and_a_message_subscription
+    public partial class Given_an_inmemory_kafka_test_framework_and_a_message_subscription
     {
         public partial class
             When_the_client_sends_the_message_subscribed :

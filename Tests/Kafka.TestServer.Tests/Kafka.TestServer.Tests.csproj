@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Confluent.Kafka" Version="1.1.0" />
     <PackageReference Include="FluentAssertions" Version="5.9.0" />
     <PackageReference Include="Log.It.With.NLog" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
@@ -21,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\External\confluent-kafka-dotnet\src\Confluent.Kafka\Confluent.Kafka.csproj" />
     <ProjectReference Include="..\..\Kafka.TestServer\Kafka.TestServer.csproj" />
   </ItemGroup>
 
