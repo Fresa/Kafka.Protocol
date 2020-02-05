@@ -35,8 +35,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.TestServer.Tests", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.MessageDefinitionsDownloader.Tests", "Tests\Kafka.Protocol.MessageDefinitionsDownloader.Tests\Kafka.Protocol.MessageDefinitionsDownloader.Tests.csproj", "{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Confluent.Kafka", "..\External\confluent-kafka-dotnet\src\Confluent.Kafka\Confluent.Kafka.csproj", "{DC43AFB0-669C-4448-B0BE-68AFB85812F7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,10 +81,6 @@ Global
 		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC43AFB0-669C-4448-B0BE-68AFB85812F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC43AFB0-669C-4448-B0BE-68AFB85812F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC43AFB0-669C-4448-B0BE-68AFB85812F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC43AFB0-669C-4448-B0BE-68AFB85812F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,7 +90,6 @@ Global
 		{B6F3A296-464C-4B91-8412-066B78D6E3C8} = {D896A914-149B-4AB4-8C8B-405753509786}
 		{DE1F2D80-E242-4849-AB14-618F6133D71D} = {D896A914-149B-4AB4-8C8B-405753509786}
 		{F80C20EE-E50E-4247-BB4C-519A6CFBEE7E} = {D896A914-149B-4AB4-8C8B-405753509786}
-		{DC43AFB0-669C-4448-B0BE-68AFB85812F7} = {D896A914-149B-4AB4-8C8B-405753509786}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75056C89-9C3C-4F96-A5B4-502CFFBEEC21}
