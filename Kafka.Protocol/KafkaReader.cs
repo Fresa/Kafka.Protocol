@@ -13,7 +13,7 @@ namespace Kafka.Protocol
     public class KafkaReader : IKafkaReader
     {
         private readonly PipeReader _reader;
-        private Dictionary<Guid, StreamLengthSupervisor> _streamLengthSupervisors = new Dictionary<Guid, StreamLengthSupervisor>();
+        private readonly Dictionary<Guid, StreamLengthSupervisor> _streamLengthSupervisors = new Dictionary<Guid, StreamLengthSupervisor>();
 
         public KafkaReader(PipeReader reader)
         {
@@ -107,14 +107,22 @@ namespace Kafka.Protocol
         }
 
         public async ValueTask<String> ReadStringAsync(
+            VarInt length,
             CancellationToken cancellationToken = default)
         {
-            var length = await ReadInt16Async(cancellationToken)
-                .ConfigureAwait(false);
             var bytes = await ReadAsLittleEndianAsync(length.Value, cancellationToken)
                 .ConfigureAwait(false);
             return String.From(
                 Encoding.UTF8.GetString(bytes));
+        }
+
+        public async ValueTask<String> ReadStringAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var length = await ReadInt16Async(cancellationToken)
+                .ConfigureAwait(false);
+
+            return await ReadStringAsync(length.ToVarInt(), cancellationToken);
         }
 
         public async ValueTask<String?> ReadNullableStringAsync(
@@ -134,13 +142,21 @@ namespace Kafka.Protocol
         }
 
         public async ValueTask<Bytes> ReadBytesAsync(
+            VarInt length,
+            CancellationToken cancellationToken = default)
+        {
+            return Bytes.From(
+                await ReadAsLittleEndianAsync(length.Value, cancellationToken)
+                    .ConfigureAwait(false));
+        }
+
+        public async ValueTask<Bytes> ReadBytesAsync(
             CancellationToken cancellationToken = default)
         {
             var length = await ReadInt32Async(cancellationToken)
                 .ConfigureAwait(false);
-            return Bytes.From(
-                await ReadAsLittleEndianAsync(length.Value, cancellationToken)
-                    .ConfigureAwait(false));
+
+            return await ReadBytesAsync(length.ToVarInt(), cancellationToken);
         }
 
         public async ValueTask<Bytes?> ReadNullableBytesAsync(
@@ -163,15 +179,34 @@ namespace Kafka.Protocol
             where T : ISerialize
         {
             return await ReadNullableArrayAsync(createItem, cancellationToken)
-                       .ConfigureAwait(false) ?? 
+                       .ConfigureAwait(false) ??
                 throw new NotSupportedException($"The array cannot be null. Consider changing to {nameof(ReadNullableArrayAsync)}");
         }
 
-        public async ValueTask<T[]?> ReadNullableArrayAsync<T>(Func<ValueTask<T>> createItem, 
+        public async ValueTask<T[]> ReadArrayAsync<T>(
+            VarInt numberOfItems,
+            Func<ValueTask<T>> createItem,
+            CancellationToken cancellationToken = default)
+            where T : ISerialize
+        {
+            return await ReadNullableArrayAsync(numberOfItems, createItem, cancellationToken)
+                       .ConfigureAwait(false) ??
+                   throw new NotSupportedException($"The array cannot be null. Consider changing to {nameof(ReadNullableArrayAsync)}");
+        }
+
+        public async ValueTask<T[]?> ReadNullableArrayAsync<T>(Func<ValueTask<T>> createItem,
             CancellationToken cancellationToken = default) where T : ISerialize
         {
             var length = await ReadInt32Async(cancellationToken)
                 .ConfigureAwait(false);
+            return await ReadNullableArrayAsync(length.ToVarInt(), createItem, cancellationToken);
+        }
+
+        public async ValueTask<T[]?> ReadNullableArrayAsync<T>(
+            VarInt length,
+            Func<ValueTask<T>> createItem,
+            CancellationToken cancellationToken = default) where T : ISerialize
+        {
             if (length.Value == -1)
             {
                 return null;
@@ -225,7 +260,7 @@ namespace Kafka.Protocol
             int length,
             CancellationToken cancellationToken = default)
         {
-            if (length == 0)
+            if (length <= 0)
             {
                 return Array.Empty<byte>();
             }
@@ -244,7 +279,7 @@ namespace Kafka.Protocol
                 throw new InvalidOperationException(
                     $"Expected {length} bytes, got {result.Buffer.Length}");
             }
-            
+
             var bytes = result.Buffer.Slice(0, length).ToArray();
             _reader.AdvanceTo(result.Buffer.GetPosition(length));
 

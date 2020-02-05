@@ -98,5 +98,10 @@ namespace Kafka.Protocol
             return value.Value >= start &&
                    value.Value <= end;
         }
+
+        internal static VarInt ToVarInt(this Int16 value)
+        {
+            return VarInt.From(value.Value);
+        }
     }
 }
