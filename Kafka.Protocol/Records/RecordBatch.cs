@@ -149,7 +149,7 @@ namespace Kafka.Protocol.Records
             IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            var batch = new RecordBatch(version)
+            return new RecordBatch(version)
             {
                 BaseOffset = await reader.ReadInt64Async(cancellationToken)
                     .ConfigureAwait(false),
@@ -186,8 +186,6 @@ namespace Kafka.Protocol.Records
                                 .ConfigureAwait(false), cancellationToken)
                     .ConfigureAwait(false)
             };
-            return batch;
-
         }
 
         public async ValueTask WriteToAsync(

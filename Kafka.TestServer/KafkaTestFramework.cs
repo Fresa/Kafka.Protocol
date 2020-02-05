@@ -90,7 +90,7 @@ namespace Kafka.TestServer
                             var requestPayload = await client
                                 .ReadAsync(_cancellationTokenSource.Token)
                                 .ConfigureAwait(false);
-                            
+
                             if (!_subscriptions.TryGetValue(
                                 requestPayload.Message.GetType(),
                                 out var subscription))
@@ -99,7 +99,10 @@ namespace Kafka.TestServer
                                    $"Missing subscription for {requestPayload.Message.GetType()}");
                             }
 
-                            var response = subscription(requestPayload.Message);
+                            var response = await subscription(
+                                requestPayload.Message, 
+                                _cancellationTokenSource.Token);
+
                             await client
                                 .SendAsync(
                                     new ResponsePayload(
@@ -120,8 +123,12 @@ namespace Kafka.TestServer
             _backgroundTasks.Add(task);
         }
 
-        private readonly Dictionary<Type, Func<Message, Message>> _subscriptions =
-            new Dictionary<Type, Func<Message, Message>>();
+        private readonly Dictionary<Type, MessageSubscription> _subscriptions =
+            new Dictionary<Type, MessageSubscription>();
+
+        private delegate Task<Message> MessageSubscription(
+            Message message,
+            CancellationToken cancellationToken = default);
 
         public KafkaTestFramework On<TRequestMessage, TResponseMessage>(
             Func<TRequestMessage, TResponseMessage> subscription)
@@ -130,7 +137,31 @@ namespace Kafka.TestServer
         {
             _subscriptions.Add(
                 typeof(TRequestMessage),
-                message => subscription.Invoke((TRequestMessage)message));
+                (message, cancellationToken) => Task.Run<Message>(
+                    () => subscription.Invoke((TRequestMessage)message), cancellationToken));
+            return this;
+        }
+
+        public KafkaTestFramework On<TRequestMessage, TResponseMessage>(
+            Func<TRequestMessage, Task<TResponseMessage>> subscription)
+            where TRequestMessage : Message, IRespond<TResponseMessage>
+            where TResponseMessage : Message
+        {
+            _subscriptions.Add(
+                typeof(TRequestMessage),
+                async (message, _) => await subscription.Invoke((TRequestMessage)message));
+            return this;
+        }
+
+        public KafkaTestFramework On<TRequestMessage, TResponseMessage>(
+            Func<TRequestMessage, CancellationToken, Task<TResponseMessage>> subscription)
+            where TRequestMessage : Message, IRespond<TResponseMessage>
+            where TResponseMessage : Message
+        {
+            _subscriptions.Add(
+                typeof(TRequestMessage),
+                async (message, cancellationToken) =>
+                    await subscription.Invoke((TRequestMessage)message, cancellationToken));
             return this;
         }
 

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
@@ -11,6 +12,7 @@ using FluentAssertions;
 using Kafka.Protocol;
 using Kafka.Protocol.Records;
 using Log.It;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 using Int16 = Kafka.Protocol.Int16;
@@ -26,9 +28,24 @@ namespace Kafka.TestServer.Tests
         public class When_connecting_to_the_server_and_producing_a_message : TestSpecificationAsync
         {
             private SocketBasedKafkaTestFramework _testServer;
-            private ProduceRequest _produceRequest;
-            private void SetProduceRequest(ProduceRequest request) =>
-                _produceRequest = request;
+            private List<Record> _records;
+
+            private async Task SetProduceRequest(ProduceRequest request,
+                CancellationToken cancellationToken)
+            {
+                var records = new List<Record>();
+                await foreach (var batch in request
+                    .ExtractRecordBatchesAsync(cancellationToken)
+                    .ConfigureAwait(false))
+                {
+                    if (batch.Records == null)
+                        continue;
+
+                    records.AddRange(batch.Records);
+                }
+
+                _records = records;
+            }
 
             public When_connecting_to_the_server_and_producing_a_message(
                 ITestOutputHelper testOutputHelper)
@@ -68,8 +85,9 @@ namespace Kafka.TestServer.Tests
                             .WithPort(Int32.From(_testServer.Port)))
                         );
 
-                _testServer.On<ProduceRequest, ProduceResponse>(request => request
-                    .WithAction(SetProduceRequest)
+                 _testServer.On<ProduceRequest, ProduceResponse>(async request => (await request
+                    .WithActionAsync(produceRequest =>  SetProduceRequest(produceRequest, CancellationToken.None))
+                    .ConfigureAwait(false))
                     .Respond()
                     .WithResponsesCollection(request.TopicsCollection.Select(topicProduceData =>
                         new Func<ProduceResponse.TopicProduceResponse,
@@ -101,20 +119,15 @@ namespace Kafka.TestServer.Tests
             }
 
             [Fact]
-            public async Task It_should_connect()
+            public void It_should_have_read_one_record()
             {
-                var records = new List<Record>();
-                await foreach (var batch in _produceRequest
-                    .ExtractRecordBatchesAsync(CancellationToken.None)
-                    .ConfigureAwait(false))
-                {
-                    if (batch.Records == null)
-                        continue;
-                    
-                    records.AddRange(batch.Records);
-                }
+                _records.Should().HaveCount(1);
+            }
 
-                records.Should().HaveCount(1);
+            [Fact]
+            public void It_should_have_read_the_message_sent()
+            {
+                _records.First().Value.EncodeToString(Encoding.UTF8).Should().Be("test");
             }
 
             private static async Task ProduceMessageFromClientAsync(string host,

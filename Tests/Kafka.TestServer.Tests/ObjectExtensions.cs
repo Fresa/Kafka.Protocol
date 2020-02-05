@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Kafka.TestServer.Tests
 {
     internal static class ObjectExtensions
     {
-        internal static T WithAction<T>(this T @object, Action<T> invoke)
+        internal static async Task<T> WithActionAsync<T>(this T @object, Func<T, Task> invoke)
         {
-            invoke(@object);
+            await invoke(@object);
             return @object;
         }
     }
