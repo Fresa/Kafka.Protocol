@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.6.1" />
+    <PackageReference Include="System.Linq.Async" Version="4.1.1" />
     <PackageReference Include="Test.It" Version="2.2.0" />
     <PackageReference Include="Test.It.With.XUnit" Version="2.2.4" />
     <PackageReference Include="xunit" Version="2.4.0" />
