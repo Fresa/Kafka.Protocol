@@ -8,7 +8,15 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
- </PropertyGroup>
+    <Authors>Fredrik Arvidsson</Authors>
+    <Company>FKAN Consulting AB</Company>
+    <PackageTags>kafka protocol</PackageTags>
+    <Description>Kafka protocol definitions</Description>
+    <RepositoryUrl>https://github.com/Fresa/Kafka.Protocol</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/Fresa/Kafka.Protocol/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright © 2019 Fredrik Arvidsson</Copyright>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Log.It" Version="3.0.3" />
@@ -30,5 +38,9 @@
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
+
+  <PropertyGroup Condition="'$(NCrunch)' == '1'">
+    <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
+  </PropertyGroup>
 
 </Project>
