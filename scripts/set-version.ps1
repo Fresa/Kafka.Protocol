@@ -59,7 +59,9 @@ if ($history.builds.Count -eq 2)
     }
     Write-Warning "Updating build version format to $versionFormat. Please ensure that it is not set in YAML"
     
-    $s = Invoke-RestMethod -Uri "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/settings" -Headers $headers  -Method Get
+    $url = "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/settings"
+    Write-Host "Getting settings from $url"
+    $s = Invoke-RestMethod -Uri "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/settings" -Headers $headers -Method Get
     $s.settings.versionFormat = $versionFormat
     
     if ($resetBuild)
@@ -70,5 +72,6 @@ if ($history.builds.Count -eq 2)
         Update-AppveyorBuild -Version "$version.$env:APPVEYOR_BUILD_NUMBER"
     }
 
-    Invoke-RestMethod -Uri 'https://ci.appveyor.com/api/projects' -Headers $headers  -Body ($s.settings | ConvertTo-Json -Depth 10) -Method Put    
+    Write-Host "Writing settings to https://ci.appveyor.com/api/projects"
+    Invoke-RestMethod -Uri 'https://ci.appveyor.com/api/projects' -Headers $headers  -Body ($s.settings | ConvertTo-Json -Depth 10) -Method Put
 }
