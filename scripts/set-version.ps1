@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 $token = $env:appveyor_api_token #should be defined as a secure variable
 $branch = $env:APPVEYOR_REPO_BRANCH
 
@@ -8,7 +9,7 @@ $headers = @{
 $apiURL = "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG"
 $history = Invoke-RestMethod -Uri "$apiURL/history?recordsNumber=2&branch=$branch" -Headers $headers  -Method Get
 
-[int]$version = (Get-Content .\version)
+$version = (Get-Content .\version)
 [int]$major = $version.Substring(0, $version.IndexOf("."))
 [int]$minor = $version.Substring($version.IndexOf(".") + 1)
 

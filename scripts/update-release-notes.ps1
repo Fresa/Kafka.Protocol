@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 git fetch --tags
 $tags = git tag -l v*
 if ($tags)

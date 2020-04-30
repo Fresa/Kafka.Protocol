@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 git config --global credential.helper store
 Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:git_access_token):x-oauth-basic@github.com`n"
 git config --global user.email "fresa@fresa.se"
