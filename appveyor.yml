@@ -14,8 +14,6 @@ dotnet_csproj:
 environment:
   git_access_token:
     secure: V8i7UZRY6IQFpngUi2sgnunCFZKvE4al96flaBKyWqXyRLmTabX0/1Z0Tpl8BWKr
-  nuget_api_key:
-    secure: CKc1otCe7SBBZMtNw0PWreC0fHtdY6jhRTosT8o2CLbg1mFKeCDaH6RHgWFYs+i4
   appveyor_api_token:
     secure: eMpCyScSyam7rRtm3bSRAzt29qATXHWxk8mfgdTpyh0=
 install:
@@ -30,6 +28,7 @@ before_package:
 - ps: scripts/update-release-notes.ps1
 deploy:
 - provider: NuGet
-  api_key: $($env:nuget_api_key)
+  api_key: 
+    secure: CKc1otCe7SBBZMtNw0PWreC0fHtdY6jhRTosT8o2CLbg1mFKeCDaH6RHgWFYs+i4
 after_deploy:
 - ps: scripts/set-version-tag-in-git.ps1
