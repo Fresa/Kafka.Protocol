@@ -34,6 +34,6 @@ before_package:
 deploy:
 - provider: NuGet
   api_key: 
-    secure: CKc1otCe7SBBZMtNw0PWreC0fHtdY6jhRTosT8o2CLbg1mFKeCDaH6RHgWFYs+i4
+    secure: W6SXqw8kP6Ivhxzi3UHzUHJPC4Cc0AOcdwfplsbs0Gg=
 after_deploy:
 - ps: scripts/set-version-tag-in-git.ps1
