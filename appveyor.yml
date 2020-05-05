@@ -16,6 +16,9 @@ environment:
     secure: V8i7UZRY6IQFpngUi2sgnunCFZKvE4al96flaBKyWqXyRLmTabX0/1Z0Tpl8BWKr
   appveyor_api_token:
     secure: eMpCyScSyam7rRtm3bSRAzt29qATXHWxk8mfgdTpyh0=
+nuget:
+  account_feed: true
+  disable_publish_on_pr: true
 install:
 - ps: scripts/set-version.ps1
 before_build:
