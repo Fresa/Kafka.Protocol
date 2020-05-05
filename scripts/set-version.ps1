@@ -23,9 +23,9 @@ if ($history.builds.Count -eq 2)
     [int]$previousMinor = $previousVersion.Substring($previousVersion.IndexOf(".") + 1, $previousVersion.LastIndexOf(".") - ($previousVersion.IndexOf(".") + 1))
     # handle suffix, eg. 1.2.3-alpha
     if ([int]$previousVersion.IndexOf("-") -eq -1){
-        [int]$previousPatch = $previousVersion.Substring($previousVersion.LastIndexOf(".") + 1, $previousVersion.IndexOf("-")-($previousVersion.LastIndexOf(".") + 1))
-    } else {
         [int]$previousPatch = $previousVersion.Substring($previousVersion.LastIndexOf(".") + 1)
+    } else {
+        [int]$previousPatch = $previousVersion.Substring($previousVersion.LastIndexOf(".") + 1, $previousVersion.IndexOf("-")-($previousVersion.LastIndexOf(".") + 1))
     }
     
     Write-Host "Previous version: $previousVersion"
