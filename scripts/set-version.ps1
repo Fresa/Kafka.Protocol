@@ -53,25 +53,26 @@ if ($history.builds.Count -eq 2)
         $resetBuild = $true
     }
     
-    $versionFormat="$version.{build}"
-    if ($branch -ne "master"){
-        $versionFormat+="-rc"
-    }
-    Write-Warning "Updating build version format to $versionFormat. Please ensure that it is not set in YAML"
-    
-    $url = "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/settings"
-    Write-Host "Getting settings from $url"
-    $s = Invoke-RestMethod -Uri "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/settings" -Headers $headers -Method Get
-    $s.settings.versionFormat = $versionFormat
-    
     if ($resetBuild)
     {
+        $versionFormat="$version.{build}"
+        Write-Warning "Updating build version format to $versionFormat. Please ensure that it is not set in YAML"
+    
+        $s = Invoke-RestMethod -Uri "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/settings" -Headers $headers -Method Get
+        $s.settings.versionFormat = $versionFormat
+        
         #reset current build number to 0 and next one to 1
         $s.settings.nextBuildNumber = "1"
         $env:APPVEYOR_BUILD_NUMBER = "0"
-        Update-AppveyorBuild -Version "$version.$env:APPVEYOR_BUILD_NUMBER"
+        
+        Invoke-RestMethod -Uri "https://ci.appveyor.com/api/account/$env:APPVEYOR_ACCOUNT_NAME/projects" -Headers $headers  -Body ($s.settings | ConvertTo-Json -Depth 10) -Method Put
     }
 
-    Write-Host "Writing settings to https://ci.appveyor.com/api/projects"
-    Invoke-RestMethod -Uri 'https://ci.appveyor.com/api/projects' -Headers $headers  -Body ($s.settings | ConvertTo-Json -Depth 10) -Method Put
+    $versionSuffix = ""
+    if ($branch -ne "master")
+    {
+        $versionSuffix="-alpha"
+    }
+    
+    Update-AppveyorBuild -Version "$version.$env:APPVEYOR_BUILD_NUMBER$versionSuffix"
 }
