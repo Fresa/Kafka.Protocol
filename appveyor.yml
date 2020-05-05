@@ -20,6 +20,8 @@ install:
 - ps: scripts/set-version.ps1
 before_build:
 - cmd: dotnet restore
+build:
+  publish_nuget: true
 build_script:
 - dotnet build -c %CONFIGURATION%
 test_script:
