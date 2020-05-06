@@ -19,7 +19,7 @@ build_script:
 - dotnet build -c %CONFIGURATION%
 test_script:
 - dotnet test -c %CONFIGURATION%
-before_package:
+after_test:
 - ps: >-
     scripts/update-release-notes.ps1
 
