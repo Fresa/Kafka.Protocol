@@ -15,14 +15,14 @@ install:
 - ps: scripts/set-version.ps1
 before_build:
 - cmd: dotnet restore
-build:
-  publish_nuget: true
 build_script:
 - dotnet build -c %CONFIGURATION%
 test_script:
 - dotnet test -c %CONFIGURATION%
 before_package:
 - ps: scripts/update-release-notes.ps1
+before_deploy:
+- dotnet pack Kafka.Protocol/Kafka.Protocol.csproj -c %CONFIGURATION%
 deploy:
 - provider: NuGet
   api_key: 
