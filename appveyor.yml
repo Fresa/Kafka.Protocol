@@ -4,13 +4,8 @@ image: Visual Studio 2019
 configuration: Release
 dotnet_csproj:
   patch: true
-  file: '**\*.csproj'
-  version: '{version}'
-  version_prefix: '{version}'
+  file: '**\Kafka.Protocol.csproj'
   package_version: '{version}'
-  assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
 environment:
   git_access_token:
     secure: V8i7UZRY6IQFpngUi2sgnunCFZKvE4al96flaBKyWqXyRLmTabX0/1Z0Tpl8BWKr
