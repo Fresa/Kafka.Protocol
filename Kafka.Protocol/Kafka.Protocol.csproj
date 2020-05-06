@@ -8,6 +8,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageVersion></PackageVersion>
     <Authors>Fredrik Arvidsson</Authors>
     <Company>FKAN Consulting AB</Company>
     <PackageTags>kafka protocol</PackageTags>
