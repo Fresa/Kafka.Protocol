@@ -22,7 +22,9 @@ test_script:
 before_package:
 - ps: scripts/update-release-notes.ps1
 before_deploy:
-- dotnet pack Kafka.Protocol/Kafka.Protocol.csproj -c %CONFIGURATION%
+- dotnet pack Kafka.Protocol/Kafka.Protocol.csproj -c %CONFIGURATION% -o nupkgs
+artifacts:
+- path: nupkgs\*.nupkg
 deploy:
 - provider: NuGet
   api_key: 
