@@ -20,9 +20,8 @@ build_script:
 test_script:
 - dotnet test -c %CONFIGURATION%
 before_package:
-- ps: |
-    scripts/update-release-notes.ps1
-    dotnet pack Kafka.Protocol/Kafka.Protocol.csproj -c %CONFIGURATION% -o nupkgs
+- ps: scripts/update-release-notes.ps1
+- ps: dotnet pack Kafka.Protocol/Kafka.Protocol.csproj -c %CONFIGURATION% -o nupkgs
 artifacts:
 - path: nupkgs\*.nupkg
 deploy:
