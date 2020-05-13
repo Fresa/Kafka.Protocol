@@ -63,7 +63,6 @@ if ($history.builds.Count -eq 2)
     $resetBuild = $true
 }
 
-$updateBuildVersion = $false
 if ($resetBuild)
 {
     $versionFormat="$version.{build}"
@@ -77,17 +76,12 @@ if ($resetBuild)
     $env:APPVEYOR_BUILD_NUMBER = "0"
     
     Invoke-RestMethod -Uri "https://ci.appveyor.com/api/account/$env:APPVEYOR_ACCOUNT_NAME/projects" -Headers $headers  -Body ($s.settings | ConvertTo-Json -Depth 10) -Method Put
-    $updateBuildVersion = $true
 }
 
 $versionSuffix = ""
 if ($branch -ne "master")
 {
     $versionSuffix="-alpha"
-    $updateBuildVersion = $true
 }
 
-if ($updateBuildVersion)
-{
-    Update-AppveyorBuild -Version "$version.$env:APPVEYOR_BUILD_NUMBER$versionSuffix"
-}
+Update-AppveyorBuild -Version "$version.$env:APPVEYOR_BUILD_NUMBER$versionSuffix"
