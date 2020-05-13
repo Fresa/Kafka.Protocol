@@ -7,17 +7,17 @@ $headers = @{
     "Content-type" = "application/json"
 }
 $apiURL = "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG"
-$history = Invoke-RestMethod -Uri "$apiURL/history?recordsNumber=2&branch=$branch" -Headers $headers  -Method Get
+$history = Invoke-RestMethod -Uri "$apiURL/history?recordsNumber=2" -Headers $headers  -Method Get
 
 $version = (Get-Content .\version)
 [int]$major = $version.Substring(0, $version.IndexOf("."))
 [int]$minor = $version.Substring($version.IndexOf(".") + 1)
 
-# skip scheduled build with same commit id as previous build
+$resetBuild = $false
+
+# apply versioning strategy if this is not the first build
 if ($history.builds.Count -eq 2)
 {
-    $resetBuild = $false
-    
     $previousVersion = $history.builds[1].version
     [int]$previousMajor = $previousVersion.Substring(0, $previousVersion.IndexOf("."))
     [int]$previousMinor = $previousVersion.Substring($previousVersion.IndexOf(".") + 1, $previousVersion.LastIndexOf(".") - ($previousVersion.IndexOf(".") + 1))
@@ -57,27 +57,31 @@ if ($history.builds.Count -eq 2)
         Write-Warning "Minor version has been changed, resetting build number and version format"
         $resetBuild = $true
     }
-    
-    if ($resetBuild)
-    {
-        $versionFormat="$version.{build}"
-        Write-Warning "Updating build version format to $versionFormat. Please ensure that it is not set in YAML"
-    
-        $s = Invoke-RestMethod -Uri "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/settings" -Headers $headers -Method Get
-        $s.settings.versionFormat = $versionFormat
-        
-        #reset current build number to 0 and next one to 1
-        $s.settings.nextBuildNumber = "1"
-        $env:APPVEYOR_BUILD_NUMBER = "0"
-        
-        Invoke-RestMethod -Uri "https://ci.appveyor.com/api/account/$env:APPVEYOR_ACCOUNT_NAME/projects" -Headers $headers  -Body ($s.settings | ConvertTo-Json -Depth 10) -Method Put
-    }
-
-    $versionSuffix = ""
-    if ($branch -ne "master")
-    {
-        $versionSuffix="-alpha"
-    }
-    
-    Update-AppveyorBuild -Version "$version.$env:APPVEYOR_BUILD_NUMBER$versionSuffix"
+} else
+{
+    # first build, apply the committed version
+    $resetBuild = $true
 }
+
+if ($resetBuild)
+{
+    $versionFormat="$version.{build}"
+    Write-Warning "Updating build version format to $versionFormat. Please ensure that it is not set in YAML"
+
+    $s = Invoke-RestMethod -Uri "https://ci.appveyor.com/api/projects/$env:APPVEYOR_ACCOUNT_NAME/$env:APPVEYOR_PROJECT_SLUG/settings" -Headers $headers -Method Get
+    $s.settings.versionFormat = $versionFormat
+    
+    #reset current build number to 0 and next one to 1
+    $s.settings.nextBuildNumber = "1"
+    $env:APPVEYOR_BUILD_NUMBER = "0"
+    
+    Invoke-RestMethod -Uri "https://ci.appveyor.com/api/account/$env:APPVEYOR_ACCOUNT_NAME/projects" -Headers $headers  -Body ($s.settings | ConvertTo-Json -Depth 10) -Method Put
+}
+
+$versionSuffix = ""
+if ($branch -ne "master")
+{
+    $versionSuffix="-alpha"
+}
+
+Update-AppveyorBuild -Version "$version.$env:APPVEYOR_BUILD_NUMBER$versionSuffix"
