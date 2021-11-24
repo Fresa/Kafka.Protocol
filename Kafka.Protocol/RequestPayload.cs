@@ -46,7 +46,7 @@ namespace Kafka.Protocol
                 .ReadInt32Async(cancellationToken)
                 .ConfigureAwait(false);
 
-            using var report = kafkaReader.EnsureExpectedSize(size);
+            var report = kafkaReader.EnsureExpectedSize(size);
             var header = await RequestHeader
                 .FromReaderAsync(
                     headerVersion,
@@ -81,6 +81,7 @@ namespace Kafka.Protocol
                     bytesUnRead.Trim());
             }
 
+            report.Dispose();
             return new RequestPayload(header, message);
         }
     }
