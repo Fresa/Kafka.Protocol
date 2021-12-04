@@ -442,7 +442,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	if (field.Fields == null) 
 	{
 		var argumentName = field.GetName().FirstCharacterToLowerCase();
-		#>public <#= className #> With<#= fieldName #>(<#= fieldTypeName #> <#= argumentName #>)<# Block(() => 
+		#>public <#= className #> With<#= fieldName #>(<#= nullabelFieldTypeName #> <#= argumentName #>)<# Block(() => 
 		{
 			#><#= fieldName #> = <#= argumentName #>;<# _();
 			#>return this;<#
