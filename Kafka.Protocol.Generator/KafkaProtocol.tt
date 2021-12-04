@@ -286,7 +286,7 @@ namespace Kafka.Protocol<# Block(() =>
 				PrintOnNewRowForEachWithIndex(messageDefinitions.Where(MessageExtensions.IsRequest), (messageDefinition, index, count) =>
 				{
 					#>	key => key<# _();
-					#>		.WithIndex(<#= messageDefinition.Name #>.ApiKey)<# _();
+					#>		.WithApiKey(<#= messageDefinition.Name #>.ApiKey)<# _();
 					#>		.WithMinVersion(<#= messageDefinition.Name #>.MinVersion)<# _();
 					#>		.WithMaxVersion(<#= messageDefinition.Name #>.MaxVersion)<#
 
