@@ -406,7 +406,11 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	}
 	else 
 	{
-		#> = <#= fieldTypeName #>.Default;<# 
+		if (!field.IsNullable())
+		{
+			#> = <#= fieldTypeName #>.Default<# 
+		}
+		#>;<#
 	} _();
 
 	GenerateFieldDocumentation();
