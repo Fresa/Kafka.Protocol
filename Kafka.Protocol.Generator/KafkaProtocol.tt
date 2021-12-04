@@ -382,11 +382,11 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 {
 	var fieldTypeName = field.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
-	var privateFieldName = field.GetName().FirstCharacterToLowerCase();
-	var fieldName = field.GetName().FirstCharacterToUpperCase();
-	var nullableSign = field.IsNullable() ? "?" : "";
+	var privateFieldName = field.GetPrivateFieldName();
+	var fieldName = field.GetFieldName();
+	var nullabelFieldTypeName = fieldTypeName + field.GetNullableSign();
 
-	#>private <#= fieldTypeName #><#= nullableSign #> _<#= privateFieldName #><#
+	#>private <#= nullabelFieldTypeName #> _<#= privateFieldName #><#
 	
 	if(field.Default != null) 
 	{ 
@@ -410,7 +410,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	} _();
 
 	GenerateFieldDocumentation();
-	#>public <#= fieldTypeName #><#= nullableSign #> <#= fieldName #> <# Block(() => 
+	#>public <#= nullabelFieldTypeName #> <#= fieldName #> <# Block(() => 
 	{
 		#>get => _<#= privateFieldName #>;<# _();
 		#>set <# Block(() => 

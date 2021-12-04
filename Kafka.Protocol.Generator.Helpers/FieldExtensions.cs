@@ -43,10 +43,15 @@ namespace Kafka.Protocol.Generator.Helpers
 
             if (field.TryGetMapKeyField(out var mapKeyField))
             {
-                return $"Dictionary<{mapKeyField.GetTypeName()}, {name}>";
+                return $"Dictionary<{mapKeyField.GetTypeName()}{mapKeyField.GetNullableSign()}, {name}>";
             }
 
             return name + ArrayTypeCharacter;
+        }
+
+        public static string GetNullableSign(this Field field)
+        {
+            return field.IsNullable() ? "?" : "";
         }
 
         public static string GetTypeNameWithoutArrayCharacters(this Field field)
@@ -71,5 +76,11 @@ namespace Kafka.Protocol.Generator.Helpers
         {
             return !string.IsNullOrEmpty(field.NullableVersions);
         }
+
+        public static string GetFieldName(this Field field) =>
+            field.GetName().FirstCharacterToUpperCase();
+
+        public static string GetPrivateFieldName(this Field field) => 
+            field.GetName().FirstCharacterToLowerCase();
     }
 }
