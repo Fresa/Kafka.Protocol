@@ -82,13 +82,23 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 case "varlong":
                     return Type<long>()
                         .ToArrayType(isArray);
-                case "nullablestring":
+                case "nullablestring" or
+                    "compactstring" or
+                    "compactnullablestring":
                     return Type<string>()
                         .ToArrayType(isArray);
-                case "nullablebytes":
+                case "bytes" or 
+                    "nullablebytes" or 
+                    "compactbytes" or 
+                    "compactnullablebytes":
                     return Type<byte[]>();
-                case "bytes":
-                    return Type<byte[]>();
+                case "float64":
+                    return Type<double>()
+                        .ToArrayType(isArray);
+                case "uuid":
+                    return Type<Guid>()
+                        .ToArrayType(isArray);
+
             }
 
             var resolvedType = typeof(int)

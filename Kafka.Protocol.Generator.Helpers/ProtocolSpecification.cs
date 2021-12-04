@@ -27,6 +27,7 @@ namespace Kafka.Protocol.Generator.Helpers
             PrimitiveTypes = ParsePrimitiveTypes();
             // Incorrect protocol definition: Array is never referenced as a primitive type within messages. [] is used.
             PrimitiveTypes.Remove("ARRAY");
+            PrimitiveTypes.Remove("COMPACT_ARRAY");
             // Incorrect protocol definition: Records is never referenced as a primitive type within messages. Bytes is used.
             PrimitiveTypes.Remove("RECORDS");
 
