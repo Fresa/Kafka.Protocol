@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Kafka.Protocol.Generator.Helpers.Extensions;
 
@@ -7,6 +8,11 @@ namespace Kafka.Protocol.Generator.Helpers
     public static class FieldExtensions
     {
         private const string ArrayTypeCharacter = "[]";
+
+        private static readonly string[] ReservedFieldNames =
+        {
+            "Version"
+        };
 
         public static bool IsArray(this Field field)
         {
@@ -28,10 +34,8 @@ namespace Kafka.Protocol.Generator.Helpers
             return mapKeyField != default;
         }
 
-        public static string GetName(this Field field)
-        {
-            return field.Name + (field.IsArray() ? "Collection" : "");
-        }
+        public static string GetName(this Field field) => 
+            field.Name + (field.IsArray() ? "Collection" : "");
 
         public static string GetTypeName(this Field field)
         {
@@ -77,10 +81,15 @@ namespace Kafka.Protocol.Generator.Helpers
             return !string.IsNullOrEmpty(field.NullableVersions);
         }
 
-        public static string GetFieldName(this Field field) =>
-            field.GetName().FirstCharacterToUpperCase();
+        public static string GetFieldName(this Field field)
+        {
+            var name = field.GetName().FirstCharacterToUpperCase();
+            return ReservedFieldNames.Contains(name)
+                ? name + "_"
+                : name;
+        }
 
-        public static string GetPrivateFieldName(this Field field) => 
-            field.GetName().FirstCharacterToLowerCase();
+        public static string GetPropertyName(this Field field) => 
+            $"_{field.GetName().FirstCharacterToLowerCase()}";
     }
 }

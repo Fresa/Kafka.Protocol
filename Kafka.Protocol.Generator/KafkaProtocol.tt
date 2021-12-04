@@ -308,7 +308,7 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
-		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
+		var fieldName = messageField.GetFieldName();
 		var readArrayMethodName = messageField.IsNullable() ? "ReadNullableArrayAsync" : "ReadArrayAsync";
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		if (messageField.Fields == null)
@@ -349,7 +349,7 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
-		var fieldName = messageField.GetName().FirstCharacterToUpperCase();
+		var fieldName = messageField.GetFieldName();
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		if (messageField.Fields == null)
 		{
@@ -382,11 +382,11 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 {
 	var fieldTypeName = field.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
-	var privateFieldName = field.GetPrivateFieldName();
+	var propertyName = field.GetPropertyName();
 	var fieldName = field.GetFieldName();
 	var nullabelFieldTypeName = fieldTypeName + field.GetNullableSign();
 
-	#>private <#= nullabelFieldTypeName #> _<#= privateFieldName #><#
+	#>private <#= nullabelFieldTypeName #> <#= propertyName #><#
 	
 	if(field.Default != null) 
 	{ 
@@ -412,7 +412,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	GenerateFieldDocumentation();
 	#>public <#= nullabelFieldTypeName #> <#= fieldName #> <# Block(() => 
 	{
-		#>get => _<#= privateFieldName #>;<# _();
+		#>get => <#= propertyName #>;<# _();
 		#>set <# Block(() => 
 		{
 			if (field.Ignorable == false)
@@ -434,7 +434,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				}); _(2);
 			} 
 			
-			#>_<#= privateFieldName #> = value;<# 
+			#><#= propertyName #> = value;<# 
 		});
 	}); _(2); 
 	
