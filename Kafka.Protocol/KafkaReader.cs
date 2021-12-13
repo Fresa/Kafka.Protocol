@@ -70,9 +70,13 @@ namespace Kafka.Protocol
                 0));
         }
 
-        public ValueTask<UInt16> ReadUInt16Async(CancellationToken cancellationToken = default)
+        public async ValueTask<UInt16> ReadUInt16Async(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return UInt16.From(
+                BitConverter.ToUInt16(
+                    await ReadAsBigEndianAsync(2, cancellationToken)
+                        .ConfigureAwait(false),
+                    0));
         }
 
         public async ValueTask<UInt32> ReadUInt32Async(

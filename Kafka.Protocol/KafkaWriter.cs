@@ -49,10 +49,8 @@ namespace Kafka.Protocol
         }
 
         public ValueTask WriteUInt16Async(UInt16 value,
-            CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
+            CancellationToken cancellationToken = default) =>
+            WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
 
         public async ValueTask WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default)
         {
