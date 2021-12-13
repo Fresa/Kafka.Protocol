@@ -331,14 +331,21 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 		}
 		else 
 		{
-			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
-			if (mapKeyField == null)
+			if (messageField.IsArray())
 			{
-				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 
-			}
+				var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
+				if (mapKeyField == null)
+				{
+					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 
+				}
+				else 
+				{
+					#><#= prependBeforeField #><#= fieldName #> = (await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+				}
+			} 
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = (await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+				#><#= prependBeforeField #><#= fieldName #> = await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 	});		
@@ -365,14 +372,21 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 		}
 		else 
 		{
-			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
-			if (mapKeyField == null)
+			if (messageField.IsArray())
 			{
-				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 
+				var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
+				if (mapKeyField == null)
+				{
+					#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 
+				} 
+				else 
+				{
+					#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>.Values.ToArray()).ConfigureAwait(false);<#
+				}
 			} 
 			else 
 			{
-				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>.Values.ToArray()).ConfigureAwait(false);<#
+				#>await <#= fieldName #>.WriteToAsync(writer, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 	});		
