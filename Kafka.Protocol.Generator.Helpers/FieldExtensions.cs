@@ -37,9 +37,9 @@ namespace Kafka.Protocol.Generator.Helpers
         public static string GetName(this Field field) => 
             field.Name + (field.IsArray() ? "Collection" : "");
 
-        public static string GetTypeName(this Field field)
+        public static string GetFullTypeName(this Field field)
         {
-            var name = field.GetTypeNameWithoutArrayCharacters();
+            var name = field.GetFullTypeNameWithoutArrayCharacters();
             if (field.IsArray() == false)
             {
                 return name;
@@ -52,13 +52,17 @@ namespace Kafka.Protocol.Generator.Helpers
 
             return name + ArrayTypeCharacter;
         }
+        public static string GetTypeName(this Field field)
+        {
+            return GetFullTypeName(field).Split('.').Last();
+        }
 
         public static string GetNullableSign(this Field field)
         {
             return field.IsNullable() ? "?" : "";
         }
 
-        public static string GetTypeNameWithoutArrayCharacters(this Field field)
+        public static string GetFullTypeNameWithoutArrayCharacters(this Field field)
         {
             var typeName = field.Type;
             if (field.IsArray())

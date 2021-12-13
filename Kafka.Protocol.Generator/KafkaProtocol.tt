@@ -42,7 +42,7 @@
 	{
 		return primitiveTypeNames
 			.Any(primitiveTypeName => 
-				field.GetTypeNameWithoutArrayCharacters() == primitiveTypeName);
+				field.GetFullTypeNameWithoutArrayCharacters() == primitiveTypeName);
 	}
 #>
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
@@ -307,7 +307,7 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 	#>if (<#= prependBeforeField #>Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
-		var fieldTypeNameWithoutArrayCharacters = messageField.GetTypeNameWithoutArrayCharacters();
+		var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
 		var fieldName = messageField.GetFieldName();
 		var readArrayMethodName = messageField.IsNullable() ? "ReadNullableArrayAsync" : "ReadArrayAsync";
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
@@ -380,8 +380,8 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 
 void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field, string className)
 {
-	var fieldTypeName = field.GetTypeName();
-	var fieldTypeNameWithoutArrayCharacters = field.GetTypeNameWithoutArrayCharacters();
+	var fieldTypeName = field.GetFullTypeName();
+	var fieldTypeNameWithoutArrayCharacters = field.GetFullTypeNameWithoutArrayCharacters();
 	var propertyName = field.GetPropertyName();
 	var fieldName = field.GetFieldName();
 	var nullabelFieldTypeName = fieldTypeName + field.GetNullableSign();
