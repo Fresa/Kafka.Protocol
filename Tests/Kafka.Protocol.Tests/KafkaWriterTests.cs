@@ -168,6 +168,32 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_writing_an_unsigned_int16 : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[2];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteUInt16Async(UInt16.From(2))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(0, 2);
+            }
+        }
+
         public class When_writing_an_unsigned_int32 : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;

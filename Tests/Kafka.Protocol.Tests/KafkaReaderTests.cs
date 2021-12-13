@@ -152,6 +152,30 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_reading_an_unsigned_int16 : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private UInt16 _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 0, 2 }.ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader.ReadUInt16Async()
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Value.Should().Be(2);
+            }
+        }
+
         public class When_reading_an_unsigned_int32 : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
