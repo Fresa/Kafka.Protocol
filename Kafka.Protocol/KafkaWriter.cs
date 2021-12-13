@@ -55,10 +55,9 @@ namespace Kafka.Protocol
                     .EncodeAsVarInt(), cancellationToken);
 
         public ValueTask WriteFloat64Async(Float64 value,
-            CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
+            CancellationToken cancellationToken = default) =>
+            WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value),
+                cancellationToken);
 
         public async ValueTask WriteStringAsync(String value, CancellationToken cancellationToken = default)
         {

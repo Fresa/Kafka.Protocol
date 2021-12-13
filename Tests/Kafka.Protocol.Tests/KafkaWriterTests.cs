@@ -487,5 +487,31 @@ namespace Kafka.Protocol.Tests
                     .Equal(255, 255, 255, 255);
             }
         }
+
+        public class When_writing_a_float64 : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[8];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteFloat64Async(Float64.From(0.01171875))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(63, 136, 0, 0, 0, 0, 0, 0);
+            }
+        }
     }
 }

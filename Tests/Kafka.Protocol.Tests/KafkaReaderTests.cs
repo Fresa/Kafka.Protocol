@@ -451,5 +451,29 @@ namespace Kafka.Protocol.Tests
                 _value.Should().BeNull();
             }
         }
+
+        public class When_reading_a_float64 : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private Float64 _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 63, 136, 0, 0, 0, 0, 0, 0 }.ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader.ReadFloat64Async()
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Value.Should().Be(0.01171875);
+            }
+        }
     }
 }

@@ -116,9 +116,13 @@ namespace Kafka.Protocol
                 value.DecodeFromZigZag());
         }
 
-        public ValueTask<Float64> ReadFloat64Async(CancellationToken cancellationToken = default)
+        public async ValueTask<Float64> ReadFloat64Async(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return Float64.From(
+                BitConverter.ToDouble(
+                    await ReadAsBigEndianAsync(8, cancellationToken)
+                        .ConfigureAwait(false), 
+                    0));
         }
 
         public async ValueTask<String> ReadStringAsync(
