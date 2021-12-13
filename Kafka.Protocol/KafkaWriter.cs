@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Kafka.Protocol.Records;
 
 namespace Kafka.Protocol
 {
@@ -47,6 +48,12 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
+        public ValueTask WriteUInt16Async(UInt16 value,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default)
         {
             await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken)
@@ -71,6 +78,12 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
+        public ValueTask WriteFloat64Async(Float64 value,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask WriteStringAsync(String value, CancellationToken cancellationToken = default)
         {
             if (value == null)
@@ -89,6 +102,12 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
             await WriteAsLittleEndianAsync(bytes, cancellationToken)
                 .ConfigureAwait(false);
+        }
+
+        public ValueTask WriteCompactStringAsync(CompactString value,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
 
         public async ValueTask WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default)
@@ -127,11 +146,35 @@ namespace Kafka.Protocol
             }
         }
 
+        public ValueTask WriteCompactBytesAsync(CompactBytes value,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)
             where T : ISerialize
         {
             await WriteNullableArrayAsync(cancellationToken, items)
                 .ConfigureAwait(false);
+        }
+
+        public ValueTask WriteRecordBatchAsync(RecordBatch value,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask WriteNullableRecordBatchAsync(RecordBatch? value,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask WriteUuidAsync(Uuid value,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
 
         public async ValueTask WriteNullableArrayAsync<T>(CancellationToken cancellationToken, params T[]? items)

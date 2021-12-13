@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Kafka.Protocol.Records;
 using Log.It;
 
 namespace Kafka.Protocol
@@ -69,6 +70,11 @@ namespace Kafka.Protocol
                 0));
         }
 
+        public ValueTask<UInt16> ReadUInt16Async(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask<UInt32> ReadUInt32Async(
             CancellationToken cancellationToken = default)
         {
@@ -106,6 +112,11 @@ namespace Kafka.Protocol
                 value.DecodeFromZigZag());
         }
 
+        public ValueTask<Float64> ReadFloat64Async(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask<String> ReadStringAsync(
             VarInt length,
             CancellationToken cancellationToken = default)
@@ -141,6 +152,11 @@ namespace Kafka.Protocol
                 Encoding.UTF8.GetString(bytes));
         }
 
+        public ValueTask<CompactString> ReadCompactStringAsync(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask<Bytes> ReadBytesAsync(
             VarInt length,
             CancellationToken cancellationToken = default)
@@ -174,6 +190,11 @@ namespace Kafka.Protocol
                     .ConfigureAwait(false));
         }
 
+        public ValueTask<CompactBytes> ReadCompactBytesAsync(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask<T[]> ReadArrayAsync<T>(Func<ValueTask<T>> createItem,
             CancellationToken cancellationToken = default)
             where T : ISerialize
@@ -200,6 +221,22 @@ namespace Kafka.Protocol
             var length = await ReadInt32Async(cancellationToken)
                 .ConfigureAwait(false);
             return await ReadNullableArrayAsync(length.ToVarInt(), createItem, cancellationToken);
+        }
+
+        public ValueTask<RecordBatch> ReadRecordBatchAsync(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask<RecordBatch?> ReadNullableRecordBatchAsync(
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask<Uuid> ReadUuidAsync(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
         }
 
         public async ValueTask<T[]?> ReadNullableArrayAsync<T>(
