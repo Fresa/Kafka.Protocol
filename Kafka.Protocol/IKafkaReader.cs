@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Kafka.Protocol.Records;
 
 namespace Kafka.Protocol
 {
@@ -20,6 +21,9 @@ namespace Kafka.Protocol
 
         ValueTask<Int64> ReadInt64Async(
             CancellationToken cancellationToken = default);
+        
+        ValueTask<UInt16> ReadUInt16Async(
+            CancellationToken cancellationToken = default);
 
         ValueTask<UInt32> ReadUInt32Async(
             CancellationToken cancellationToken = default);
@@ -29,7 +33,10 @@ namespace Kafka.Protocol
 
         ValueTask<VarLong> ReadVarLongAsync(
             CancellationToken cancellationToken = default);
-
+        
+        ValueTask<Float64> ReadFloat64Async(
+            CancellationToken cancellationToken = default);
+        
         ValueTask<String> ReadStringAsync(
             VarInt length,
             CancellationToken cancellationToken = default);
@@ -39,7 +46,10 @@ namespace Kafka.Protocol
 
         ValueTask<String?> ReadNullableStringAsync(
             CancellationToken cancellationToken = default);
-
+        
+        ValueTask<CompactString> ReadCompactStringAsync(
+            CancellationToken cancellationToken = default);
+        
         ValueTask<Bytes> ReadBytesAsync(
             VarInt length,
             CancellationToken cancellationToken = default);
@@ -48,6 +58,9 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default);
 
         ValueTask<Bytes?> ReadNullableBytesAsync(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<CompactBytes> ReadCompactBytesAsync(
             CancellationToken cancellationToken = default);
 
         ValueTask<T[]> ReadArrayAsync<T>(
@@ -66,6 +79,12 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default)
             where T : ISerialize;
 
+        ValueTask<RecordBatch> ReadRecordBatchAsync(
+            CancellationToken cancellationToken = default);
+
+        ValueTask<Uuid> ReadUuidAsync(
+            CancellationToken cancellationToken = default);
+        
         IStreamLengthReport EnsureExpectedSize(in Int32 length);
     }
 }

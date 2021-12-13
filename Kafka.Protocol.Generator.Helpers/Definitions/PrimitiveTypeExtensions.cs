@@ -36,6 +36,9 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 case "bytes":
                     typeName = "Bytes";
                     break;
+                case "uint16":
+                    typeName = "UInt16";
+                    break;
                 case "uint32":
                     typeName = "UInt32";
                     break;

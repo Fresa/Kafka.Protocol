@@ -25,10 +25,16 @@ namespace Kafka.Protocol.Generator.Helpers
 
             ErrorCodes = ParseErrorCodes();
             PrimitiveTypes = ParsePrimitiveTypes();
+            // UINT16 is missing from the documentation but found in the message specifications
+            PrimitiveTypes.Add("UINT16", new PrimitiveType
+            {
+                Type = "UINT16", 
+                Description = "Represents an integer between 0 and 2^16-1 inclusive. The values are encoded using four bytes in network byte order (big-endian)."
+            });
             // Incorrect protocol definition: Array is never referenced as a primitive type within messages. [] is used.
             PrimitiveTypes.Remove("ARRAY");
             PrimitiveTypes.Remove("COMPACT_ARRAY");
-            // Incorrect protocol definition: Records is never referenced as a primitive type within messages. Bytes is used.
+            // Records is a complex type and is hand-rolled
             PrimitiveTypes.Remove("RECORDS");
 
             RequestHeader = ParseRequestHeader();

@@ -74,6 +74,12 @@ namespace Kafka.Protocol.Generator.Helpers
                 case "records":
                     typeName = "Records.RecordBatch";
                     break;
+                case "uint16":
+                    typeName = "UInt16";
+                    break;
+                case "uint32":
+                    typeName = "UInt32";
+                    break;
             }
 
             return typeName.FirstCharacterToUpperCase();
