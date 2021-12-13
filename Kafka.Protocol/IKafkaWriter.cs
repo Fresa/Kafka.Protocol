@@ -33,6 +33,8 @@ namespace Kafka.Protocol
 
         ValueTask WriteRecordBatchAsync(RecordBatch value,
             CancellationToken cancellationToken = default);
+        ValueTask WriteNullableRecordBatchAsync(RecordBatch? value,
+            CancellationToken cancellationToken = default);
 
         ValueTask WriteUuidAsync(Uuid value,
             CancellationToken cancellationToken = default);

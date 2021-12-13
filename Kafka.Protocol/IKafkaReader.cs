@@ -82,6 +82,9 @@ namespace Kafka.Protocol
         ValueTask<RecordBatch> ReadRecordBatchAsync(
             CancellationToken cancellationToken = default);
 
+        ValueTask<RecordBatch?> ReadNullableRecordBatchAsync(
+            CancellationToken cancellationToken = default);
+
         ValueTask<Uuid> ReadUuidAsync(
             CancellationToken cancellationToken = default);
         
