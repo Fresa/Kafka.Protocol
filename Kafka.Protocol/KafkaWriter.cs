@@ -18,63 +18,41 @@ namespace Kafka.Protocol
             _buffer = buffer;
         }
 
-        public async ValueTask WriteBooleanAsync(Boolean value, CancellationToken cancellationToken = default)
-        {
-            await WriteAsLittleEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken)
-                .ConfigureAwait(false);
-        }
+        public ValueTask WriteBooleanAsync(Boolean value, CancellationToken cancellationToken = default) => 
+            WriteAsLittleEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
 
-        public async ValueTask WriteInt8Async(Int8 value, CancellationToken cancellationToken = default)
-        {
-            await WriteByteAsync((byte)value.Value, cancellationToken)
-                .ConfigureAwait(false);
-        }
+        public ValueTask WriteInt8Async(Int8 value, CancellationToken cancellationToken = default) => 
+            WriteByteAsync((byte)value.Value, cancellationToken);
 
-        public async ValueTask WriteInt16Async(Int16 value, CancellationToken cancellationToken = default)
-        {
-            await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken)
-                .ConfigureAwait(false);
-        }
+        public ValueTask WriteInt16Async(Int16 value,
+            CancellationToken cancellationToken = default) =>
+            WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value),
+                cancellationToken);
 
-        public async ValueTask WriteInt32Async(Int32 value, CancellationToken cancellationToken = default)
-        {
-            await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken)
-                .ConfigureAwait(false);
-        }
+        public ValueTask WriteInt32Async(Int32 value, CancellationToken cancellationToken = default) => 
+            WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
 
-        public async ValueTask WriteInt64Async(Int64 value, CancellationToken cancellationToken = default)
-        {
-            await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken)
-                .ConfigureAwait(false);
-        }
+        public ValueTask WriteInt64Async(Int64 value, CancellationToken cancellationToken = default) => 
+            WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
 
         public ValueTask WriteUInt16Async(UInt16 value,
             CancellationToken cancellationToken = default) =>
             WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
 
-        public async ValueTask WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default)
-        {
-            await WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken)
-                .ConfigureAwait(false);
-        }
+        public ValueTask WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default) => 
+            WriteAsBigEndianAsync(BitConverter.GetBytes(value.Value), cancellationToken);
 
-        public async ValueTask WriteVarIntAsync(VarInt value, CancellationToken cancellationToken = default)
-        {
-            await WriteAsLittleEndianAsync(
+        public ValueTask WriteVarIntAsync(VarInt value, CancellationToken cancellationToken = default) =>
+            WriteAsLittleEndianAsync(
                 value.Value
                     .EncodeAsZigZag()
-                    .EncodeAsVarInt(), cancellationToken)
-                .ConfigureAwait(false);
-        }
+                    .EncodeAsVarInt(), cancellationToken);
 
-        public async ValueTask WriteVarLongAsync(VarLong value, CancellationToken cancellationToken = default)
-        {
-            await WriteAsLittleEndianAsync(
+        public ValueTask WriteVarLongAsync(VarLong value, CancellationToken cancellationToken = default) =>
+            WriteAsLittleEndianAsync(
                 value.Value
                     .EncodeAsZigZag()
-                    .EncodeAsVarInt(), cancellationToken)
-                .ConfigureAwait(false);
-        }
+                    .EncodeAsVarInt(), cancellationToken);
 
         public ValueTask WriteFloat64Async(Float64 value,
             CancellationToken cancellationToken = default)
@@ -150,12 +128,9 @@ namespace Kafka.Protocol
             throw new NotImplementedException();
         }
 
-        public async ValueTask WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)
-            where T : ISerialize
-        {
-            await WriteNullableArrayAsync(cancellationToken, items)
-                .ConfigureAwait(false);
-        }
+        public ValueTask WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)
+            where T : ISerialize =>
+            WriteNullableArrayAsync(cancellationToken, items);
 
         public ValueTask WriteRecordBatchAsync(RecordBatch value,
             CancellationToken cancellationToken = default)
@@ -194,49 +169,40 @@ namespace Kafka.Protocol
             }
         }
 
-        private async ValueTask WriteByteAsync(byte value, CancellationToken cancellationToken = default)
-        {
-            await WriteAsLittleEndianAsync(new[] { value }, cancellationToken)
-                .ConfigureAwait(false);
-        }
+        private ValueTask WriteByteAsync(byte value, CancellationToken cancellationToken = default) => 
+            WriteAsLittleEndianAsync(new[] { value }, cancellationToken);
 
-        private async ValueTask WriteAsLittleEndianAsync(byte[] value, CancellationToken cancellationToken = default)
+        private ValueTask WriteAsLittleEndianAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             if (BitConverter.IsLittleEndian == false)
             {
                 Array.Reverse(value);
             }
 
-            await WriteAsync(value, cancellationToken)
-                .ConfigureAwait(false);
+            return WriteAsync(value, cancellationToken);
         }
 
-        private async ValueTask WriteAsBigEndianAsync(byte[] value, CancellationToken cancellationToken = default)
+        private ValueTask WriteAsBigEndianAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(value);
             }
 
-            await WriteAsync(value, cancellationToken)
-                .ConfigureAwait(false);
+            return WriteAsync(value, cancellationToken);
         }
 
-        private async ValueTask WriteAsync(byte[] value, CancellationToken cancellationToken = default)
+        private ValueTask WriteAsync(byte[] value, CancellationToken cancellationToken = default)
         {
             if (value.Any() == false)
             {
-                return;
+                return default;
             }
 
-            await _buffer.WriteAsync(value.AsMemory(), cancellationToken)
-                .ConfigureAwait(false);
+            return _buffer.WriteAsync(value.AsMemory(), cancellationToken);
         }
 
-        public async ValueTask DisposeAsync()
-        {
-            await _buffer.FlushAsync()
-                .ConfigureAwait(false);
-        }
+        public ValueTask DisposeAsync() =>
+            new ValueTask(_buffer.FlushAsync());
     }
 }
