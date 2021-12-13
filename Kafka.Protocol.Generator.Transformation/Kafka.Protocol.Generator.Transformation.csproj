@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.TextTemplating">
-      <HintPath>C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.TextTemplating.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Microsoft.VisualStudio.TextTemplating" Version="17.0.31902.203" />
   </ItemGroup>
 
 </Project>
