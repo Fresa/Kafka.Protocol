@@ -5,12 +5,7 @@ namespace Kafka.Protocol.Records
 {
     public class RecordBatch : ISerialize
     {
-        public Int16 Version { get; }
-
-        internal RecordBatch(Int16 version)
-        {
-            Version = version;
-        }
+        internal static RecordBatch Default => new RecordBatch();
 
         public Int64 BaseOffset { get; set; } = Int64.Default;
         public Int32 BatchLength { get; set; } = Int32.Default;
@@ -149,7 +144,7 @@ namespace Kafka.Protocol.Records
             IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            return new RecordBatch(version)
+            return new RecordBatch
             {
                 BaseOffset = await reader.ReadInt64Async(cancellationToken)
                     .ConfigureAwait(false),

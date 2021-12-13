@@ -71,6 +71,9 @@ namespace Kafka.Protocol.Generator.Helpers
                 case "bool":
                     typeName = "Boolean";
                     break;
+                case "records":
+                    typeName = "Records.RecordBatch";
+                    break;
             }
 
             return typeName.FirstCharacterToUpperCase();
