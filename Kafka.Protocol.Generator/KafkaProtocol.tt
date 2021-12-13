@@ -225,7 +225,7 @@ namespace Kafka.Protocol<# Block(() =>
 				
 				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
 				{
-					PrintReadFrom(messageField, "instance.");
+					PrintReadFrom(messageField, "", "instance.");
 				}); _();
 
 				if (messageDefinition.Fields.Any())
@@ -301,14 +301,14 @@ namespace Kafka.Protocol<# Block(() =>
 	});
 });
 
-void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, string prependBeforeField = "")
+void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, string parentFieldTypeName = "", string prependBeforeField = "")
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	#>if (<#= prependBeforeField #>Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
-		var fieldName = messageField.GetFieldName();
+		var fieldName = messageField.GetFieldName(parentFieldTypeName);
 		var readArrayMethodName = messageField.IsNullable() ? "ReadNullableArrayAsync" : "ReadArrayAsync";
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		if (messageField.Fields == null)
@@ -351,12 +351,12 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 	});		
 }
 
-void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, string parentFieldTypeName = "")
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
-		var fieldName = messageField.GetFieldName();
+		var fieldName = messageField.GetFieldName(parentFieldTypeName);
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		if (messageField.Fields == null)
 		{
@@ -397,10 +397,10 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	var fieldTypeName = field.GetFullTypeName();
 	var fieldTypeNameWithoutArrayCharacters = field.GetFullTypeNameWithoutArrayCharacters();
 	var propertyName = field.GetPropertyName();
-	var fieldName = field.GetFieldName();
-	var nullabelFieldTypeName = fieldTypeName + field.GetNullableSign();
+	var fieldName = field.GetFieldName(className);
+	var nullableFieldTypeName = fieldTypeName + field.GetNullableSign();
 
-	#>private <#= nullabelFieldTypeName #> <#= propertyName #><#
+	#>private <#= nullableFieldTypeName #> <#= propertyName #><#
 	
 	if(field.Default != null) 
 	{ 
@@ -422,13 +422,20 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	{
 		if (!field.IsNullable())
 		{
-			#> = <#= fieldTypeName #>.Default<# 
+			if (IsPrimitiveType(field))
+			{
+				#> = <#= fieldTypeName #>.Default<# 
+			}
+			else 
+			{
+				#> = default!<# 
+			}
 		}
 		#>;<#
 	} _();
 
 	GenerateFieldDocumentation();
-	#>public <#= nullabelFieldTypeName #> <#= fieldName #> <# Block(() => 
+	#>public <#= nullableFieldTypeName #> <#= fieldName #> <# Block(() => 
 	{
 		#>get => <#= propertyName #>;<# _();
 		#>set <# Block(() => 
@@ -460,7 +467,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	if (field.Fields == null) 
 	{
 		var argumentName = field.GetName().FirstCharacterToLowerCase();
-		#>public <#= className #> With<#= fieldName #>(<#= nullabelFieldTypeName #> <#= argumentName #>)<# Block(() => 
+		#>public <#= className #> With<#= fieldName #>(<#= nullableFieldTypeName #> <#= argumentName #>)<# Block(() => 
 		{
 			#><#= fieldName #> = <#= argumentName #>;<# _();
 			#>return this;<#
@@ -517,7 +524,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();
 			PrintOnNewRowForEach(field.Fields, messageField => 
 			{
-				PrintReadFrom(messageField, "instance.");
+				PrintReadFrom(messageField, fieldTypeNameWithoutArrayCharacters, "instance.");
 			}); _();
 			#>return instance;<#
 		}); _(2);
@@ -526,7 +533,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		{
 			PrintOnNewRowForEach(field.Fields, messageField => 
 			{
-				PrintWriteTo(messageField);
+				PrintWriteTo(messageField, fieldTypeNameWithoutArrayCharacters);
 			});
 		}); _(2);
 
@@ -571,7 +578,7 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			#>var instance = new <#= commonStruct.Name #>(version);<# _();
 			PrintOnNewRowForEach(commonStruct.Fields, messageField => 
 			{
-				PrintReadFrom(messageField, "instance.");
+				PrintReadFrom(messageField, "", "instance.");
 			}); _();
 			#>return instance;<#
 		}); _(2);

@@ -94,10 +94,13 @@ namespace Kafka.Protocol.Generator.Helpers
             return !string.IsNullOrEmpty(field.NullableVersions);
         }
 
-        public static string GetFieldName(this Field field)
+        public static string GetFieldName(this Field field, string parentFieldTypeName = "")
         {
+            var fullTypeName = field.GetFullTypeNameWithoutArrayCharacters();
             var name = field.GetName().FirstCharacterToUpperCase();
-            return ReservedFieldNames.Contains(name)
+            return ReservedFieldNames.Contains(name) || 
+                   fullTypeName.Equals(name, StringComparison.CurrentCultureIgnoreCase) ||
+                   name.Equals(parentFieldTypeName, StringComparison.CurrentCultureIgnoreCase)
                 ? name + "_"
                 : name;
         }
