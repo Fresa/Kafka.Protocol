@@ -18,23 +18,11 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
             switch (typeName.ToLower())
             {
-                case "int8":
-                    typeName = "Int8";
-                    break;
                 case "varint":
                     typeName = "VarInt";
                     break;
                 case "varlong":
                     typeName = "VarLong";
-                    break;
-                case "nullablestring":
-                    typeName = "NullableString";
-                    break;
-                case "nullablebytes":
-                    typeName = "NullableBytes";
-                    break;
-                case "bytes":
-                    typeName = "Bytes";
                     break;
                 case "uint16":
                     typeName = "UInt16";
@@ -42,6 +30,11 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 case "uint32":
                     typeName = "UInt32";
                     break;
+                case "compactnullablestring":
+                    typeName = "CompactString";
+                    break;
+                case "compactnullablebytes":
+
             }
 
             return typeName + (isArray ? "[]" : "");
@@ -85,14 +78,14 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 case "varlong":
                     return Type<long>()
                         .ToArrayType(isArray);
-                case "nullablestring" or
-                    "compactstring" or
+                case "compactstring" or 
+                    "nullablestring" or
                     "compactnullablestring":
                     return Type<string>()
                         .ToArrayType(isArray);
                 case "bytes" or 
-                    "nullablebytes" or 
-                    "compactbytes" or 
+                    "compactbytes" or
+                    "nullablebytes" or
                     "compactnullablebytes":
                     return Type<byte[]>();
                 case "float64":
