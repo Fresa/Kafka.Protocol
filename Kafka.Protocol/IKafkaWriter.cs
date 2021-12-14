@@ -19,12 +19,14 @@ namespace Kafka.Protocol
         ValueTask WriteFloat64Async(Float64 value, CancellationToken cancellationToken = default);
 
         ValueTask WriteStringAsync(String value, CancellationToken cancellationToken = default);
-        ValueTask WriteCompactStringAsync(CompactString value, CancellationToken cancellationToken = default);
         ValueTask WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default);
+        ValueTask WriteCompactStringAsync(CompactString value, CancellationToken cancellationToken = default);
+        ValueTask WriteCompactNullableStringAsync(CompactString? value, CancellationToken cancellationToken);
 
         ValueTask WriteBytesAsync(Bytes value, CancellationToken cancellationToken = default);
         ValueTask WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default);
         ValueTask WriteCompactBytesAsync(CompactBytes value, CancellationToken cancellationToken = default);
+        ValueTask WriteNullableCompactBytesAsync(CompactBytes? value, CancellationToken cancellationToken = default);
 
         ValueTask WriteNullableArrayAsync<T>(CancellationToken cancellationToken = default, params T[]? items)
             where T : ISerialize;

@@ -79,8 +79,19 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
-        public ValueTask WriteCompactStringAsync(CompactString value,
+        public async ValueTask WriteCompactStringAsync(CompactString value,
             CancellationToken cancellationToken = default)
+        {
+            await WriteAsLittleEndianAsync(((ulong)value.Value.Length + 1)
+                    .EncodeAsVarInt(), cancellationToken)
+                .ConfigureAwait(false);
+            await WriteAsLittleEndianAsync(Encoding.UTF8.GetBytes(value.Value),
+                    cancellationToken)
+                .ConfigureAwait(false);
+        }
+
+        public ValueTask WriteCompactNullableStringAsync(CompactString? value,
+            CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
@@ -122,6 +133,12 @@ namespace Kafka.Protocol
         }
 
         public ValueTask WriteCompactBytesAsync(CompactBytes value,
+            CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask WriteNullableCompactBytesAsync(CompactBytes? value,
             CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();

@@ -97,7 +97,7 @@ namespace Kafka.Protocol
                     .ConfigureAwait(false)).Value);
         }
 
-        public async ValueTask<VarLong> ReadVarLongAsync(
+        private async ValueTask<ulong> ReadUnsignedVarLongAsync(
             CancellationToken cancellationToken = default)
         {
             var more = true;
@@ -112,6 +112,15 @@ namespace Kafka.Protocol
                 shift += 7;
             }
 
+            return value;
+        }
+
+        public async ValueTask<VarLong> ReadVarLongAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var value = await ReadUnsignedVarLongAsync(cancellationToken)
+                .ConfigureAwait(false);
+
             return VarLong.From(
                 value.DecodeFromZigZag());
         }
@@ -121,7 +130,7 @@ namespace Kafka.Protocol
             return Float64.From(
                 BitConverter.ToDouble(
                     await ReadAsBigEndianAsync(8, cancellationToken)
-                        .ConfigureAwait(false), 
+                        .ConfigureAwait(false),
                     0));
         }
 
@@ -160,9 +169,16 @@ namespace Kafka.Protocol
                 Encoding.UTF8.GetString(bytes));
         }
 
-        public ValueTask<CompactString> ReadCompactStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<CompactString> ReadCompactStringAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var length = (uint)await ReadUnsignedVarLongAsync(cancellationToken)
+                .ConfigureAwait(false) - 1;
+
+            var bytes =
+                await ReadAsLittleEndianAsync((int)length,
+                        cancellationToken)
+                    .ConfigureAwait(false);
+            return CompactString.From(Encoding.UTF8.GetString(bytes));
         }
 
         public async ValueTask<Bytes> ReadBytesAsync(
@@ -388,4 +404,4 @@ namespace Kafka.Protocol
             public int BytesRead { get; private set; }
         }
     }
-} 
+}
