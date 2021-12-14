@@ -300,6 +300,57 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_reading_a_compact_nullable_string : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private CompactString? _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 6, 65, 66, 67, 68, 69 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader.ReadCompactNullableStringAsync()
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().NotBeNull();
+                _value?.Value.Should().Be("ABCDE");
+            }
+        }
+
+        public class When_reading_null_from_compact_nullable_string : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private CompactString? _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 0 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader.ReadCompactNullableStringAsync()
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().BeNull();
+            }
+        }
+
         public class When_reading_bytes : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;

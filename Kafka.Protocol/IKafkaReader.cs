@@ -49,7 +49,10 @@ namespace Kafka.Protocol
         
         ValueTask<CompactString> ReadCompactStringAsync(
             CancellationToken cancellationToken = default);
-        
+
+        ValueTask<CompactString?> ReadCompactNullableStringAsync(
+            CancellationToken cancellationToken = default);
+
         ValueTask<Bytes> ReadBytesAsync(
             VarInt length,
             CancellationToken cancellationToken = default);

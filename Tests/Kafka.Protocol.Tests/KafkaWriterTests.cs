@@ -326,6 +326,58 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_writing_a_nullable_compact_string : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[6];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteCompactNullableStringAsync(CompactString.From("ABCDE"))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(6, 65, 66, 67, 68, 69);
+            }
+        }
+
+        public class When_writing_null_as_nullable_compact_string : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[1];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteCompactNullableStringAsync(null)
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(0);
+            }
+        }
+
         public class When_writing_bytes : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;

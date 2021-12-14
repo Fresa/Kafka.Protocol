@@ -91,9 +91,15 @@ namespace Kafka.Protocol
         }
 
         public ValueTask WriteCompactNullableStringAsync(CompactString? value,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (value.HasValue)
+            {
+                return WriteCompactStringAsync((CompactString)value, cancellationToken);
+            }
+
+            return WriteAsLittleEndianAsync(0u.EncodeAsVarInt(),
+                cancellationToken);
         }
 
         public async ValueTask WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default)

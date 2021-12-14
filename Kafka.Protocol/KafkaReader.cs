@@ -169,13 +169,25 @@ namespace Kafka.Protocol
                 Encoding.UTF8.GetString(bytes));
         }
 
-        public async ValueTask<CompactString> ReadCompactStringAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<CompactString> ReadCompactStringAsync(
+            CancellationToken cancellationToken = default) =>
+            await ReadCompactNullableStringAsync(cancellationToken)
+                .ConfigureAwait(false) ?? throw new NotSupportedException(
+                $"The string cannot be null. Consider changing to {nameof(ReadCompactNullableStringAsync)}");
+
+        public async ValueTask<CompactString?> ReadCompactNullableStringAsync(
+            CancellationToken cancellationToken = default)
         {
-            var length = (uint)await ReadUnsignedVarLongAsync(cancellationToken)
-                .ConfigureAwait(false) - 1;
+            var length = await ReadUnsignedVarLongAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            if (length == 0)
+            {
+                return null;
+            }
 
             var bytes =
-                await ReadAsLittleEndianAsync((int)length,
+                await ReadAsLittleEndianAsync((int)length-1,
                         cancellationToken)
                     .ConfigureAwait(false);
             return CompactString.From(Encoding.UTF8.GetString(bytes));
