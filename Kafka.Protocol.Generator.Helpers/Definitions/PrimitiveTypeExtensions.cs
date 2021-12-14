@@ -30,11 +30,6 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 case "uint32":
                     typeName = "UInt32";
                     break;
-                case "compactnullablestring":
-                    typeName = "CompactString";
-                    break;
-                case "compactnullablebytes":
-
             }
 
             return typeName + (isArray ? "[]" : "");
