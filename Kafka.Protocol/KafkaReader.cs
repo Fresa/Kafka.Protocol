@@ -310,23 +310,26 @@ namespace Kafka.Protocol
                 return Array.Empty<byte>();
             }
 
-            ReadResult result;
+            var bufferWriter = new ArrayBufferWriter<byte>(length);
+
+            System.IO.Pipelines.ReadResult result;
             do
             {
                 result = await _reader.ReadAsync(cancellationToken)
                     .ConfigureAwait(false);
-            } while (result.Buffer.Length < length &&
-                     result.IsCanceled == false &&
-                     result.IsCompleted == false);
+                var buffer = result.Buffer.Slice(
+                    0, Math.Min(bufferWriter.FreeCapacity, result.Buffer.Length));
+                buffer.CopyTo(bufferWriter.GetSpan());
+                bufferWriter.Advance((int)buffer.Length);
 
-            if (result.Buffer.Length < length)
+                _reader.AdvanceTo(buffer.End);
+            } while (result.HasMoreData() && bufferWriter.WrittenCount < length);
+
+            if (bufferWriter.WrittenCount < length)
             {
                 throw new InvalidOperationException(
-                    $"Expected {length} bytes, got {result.Buffer.Length}");
+                    $"Expected {length} bytes, got {bufferWriter.WrittenCount}");
             }
-
-            var bytes = result.Buffer.Slice(0, length).ToArray();
-            _reader.AdvanceTo(result.Buffer.GetPosition(length));
 
             foreach (var streamLengthSupervisor in _streamLengthSupervisors.Values)
             {
@@ -334,7 +337,7 @@ namespace Kafka.Protocol
                 streamLengthSupervisor.SetUnReadBytes((int)result.Buffer.Length - length);
             }
 
-            return bytes;
+            return bufferWriter.WrittenMemory.ToArray();
         }
 
         public IStreamLengthReport EnsureExpectedSize(in Int32 length)
@@ -385,4 +388,4 @@ namespace Kafka.Protocol
             public int BytesRead { get; private set; }
         }
     }
-}
+} 
