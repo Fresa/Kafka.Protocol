@@ -672,5 +672,31 @@ namespace Kafka.Protocol.Tests
                     .Equal(63, 136, 0, 0, 0, 0, 0, 0);
             }
         }
+
+        public class When_writing_an_uuid : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[16];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteUuidAsync(Uuid.From(Guid.Parse("00010203-0405-0607-0809-0a0b0c0d0e0f")))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+            }
+        }
     }
 }

@@ -155,7 +155,14 @@ namespace Kafka.Protocol
         public ValueTask WriteUuidAsync(Uuid value,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            Span<byte> buffer = stackalloc byte[16];
+            value.Value.TryWriteBytes(buffer);
+            // The three first sections in a GUID is stored as little endian while the rest is big endian
+            buffer[..4].Reverse();
+            buffer[4..6].Reverse();
+            buffer[6..8].Reverse();
+
+            return WriteAsync(buffer.ToArray(), cancellationToken);
         }
 
         public async ValueTask WriteNullableArrayAsync<T>(CancellationToken cancellationToken, params T[]? items)

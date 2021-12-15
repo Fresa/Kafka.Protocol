@@ -290,9 +290,22 @@ namespace Kafka.Protocol
             throw new NotImplementedException();
         }
 
-        public ValueTask<Uuid> ReadUuidAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Uuid> ReadUuidAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var bytes = await ReadAsync(16, cancellationToken)
+                .ConfigureAwait(false);
+            
+            return Uuid.From(new Guid(FromBigEndianToGuid()));
+
+            Span<byte> FromBigEndianToGuid()
+            {
+                var buffer = new Span<byte>(bytes);
+                // The three first sections in a GUID is stored as little endian while the rest is big endian
+                buffer[..4].Reverse();
+                buffer[4..6].Reverse();
+                buffer[6..8].Reverse();
+                return buffer;
+            }
         }
 
         public async ValueTask<T[]?> ReadNullableArrayAsync<T>(
