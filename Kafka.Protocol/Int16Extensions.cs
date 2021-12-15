@@ -88,11 +88,6 @@ namespace Kafka.Protocol
                 .SetBitRangeValue(fromBit, toBit, rangeValue));
         }
 
-        internal static bool InRange(this Int16 value, Int16 start, Int16 end)
-        {
-            return value.InRange(start.Value, end.Value);
-        }
-
         internal static bool InRange(this Int16 value, int start, int end)
         {
             return value.Value >= start &&

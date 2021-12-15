@@ -61,11 +61,6 @@ namespace Kafka.Protocol
 
         public async ValueTask WriteStringAsync(String value, CancellationToken cancellationToken = default)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
             var bytes = Encoding.UTF8.GetBytes(value.Value);
 
             if (bytes.Length > short.MaxValue)

@@ -117,6 +117,10 @@ namespace Kafka.Protocol<# Block(() =>
                 #>return !(x == y);<#
             }); _(2);
 
+			#>public static implicit operator <#= type #>(<#= className #> value) => value.Value;<# _(2);
+
+			#>public static implicit operator <#= className #>(<#= type #> value) => From(value);<# _(2);
+
 			#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				#>await writer.Write<#= className #>Async(this, cancellationToken).ConfigureAwait(false);<#

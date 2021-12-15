@@ -45,6 +45,10 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
+		public static implicit operator bool(Boolean value) => value.Value;
+
+		public static implicit operator Boolean(bool value) => From(value);
+
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteBooleanAsync(this, cancellationToken).ConfigureAwait(false);
@@ -99,6 +103,10 @@ namespace Kafka.Protocol
 		{
 			return !(x == y);
 		}
+
+		public static implicit operator sbyte(Int8 value) => value.Value;
+
+		public static implicit operator Int8(sbyte value) => From(value);
 
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
@@ -155,6 +163,10 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
+		public static implicit operator short(Int16 value) => value.Value;
+
+		public static implicit operator Int16(short value) => From(value);
+
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt16Async(this, cancellationToken).ConfigureAwait(false);
@@ -209,6 +221,10 @@ namespace Kafka.Protocol
 		{
 			return !(x == y);
 		}
+
+		public static implicit operator int(Int32 value) => value.Value;
+
+		public static implicit operator Int32(int value) => From(value);
 
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
@@ -265,6 +281,10 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
+		public static implicit operator long(Int64 value) => value.Value;
+
+		public static implicit operator Int64(long value) => From(value);
+
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteInt64Async(this, cancellationToken).ConfigureAwait(false);
@@ -319,6 +339,10 @@ namespace Kafka.Protocol
 		{
 			return !(x == y);
 		}
+
+		public static implicit operator uint(UInt32 value) => value.Value;
+
+		public static implicit operator UInt32(uint value) => From(value);
 
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
@@ -375,6 +399,10 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
+		public static implicit operator int(VarInt value) => value.Value;
+
+		public static implicit operator VarInt(int value) => From(value);
+
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteVarIntAsync(this, cancellationToken).ConfigureAwait(false);
@@ -429,6 +457,10 @@ namespace Kafka.Protocol
 		{
 			return !(x == y);
 		}
+
+		public static implicit operator long(VarLong value) => value.Value;
+
+		public static implicit operator VarLong(long value) => From(value);
 
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
@@ -485,6 +517,10 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
+		public static implicit operator System.Guid(Uuid value) => value.Value;
+
+		public static implicit operator Uuid(System.Guid value) => From(value);
+
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteUuidAsync(this, cancellationToken).ConfigureAwait(false);
@@ -539,6 +575,10 @@ namespace Kafka.Protocol
 		{
 			return !(x == y);
 		}
+
+		public static implicit operator double(Float64 value) => value.Value;
+
+		public static implicit operator Float64(double value) => From(value);
 
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
@@ -595,6 +635,10 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
+		public static implicit operator string(String value) => value.Value;
+
+		public static implicit operator String(string value) => From(value);
+
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteStringAsync(this, cancellationToken).ConfigureAwait(false);
@@ -649,6 +693,10 @@ namespace Kafka.Protocol
 		{
 			return !(x == y);
 		}
+
+		public static implicit operator string(CompactString value) => value.Value;
+
+		public static implicit operator CompactString(string value) => From(value);
 
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
@@ -705,6 +753,10 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
+		public static implicit operator byte[](Bytes value) => value.Value;
+
+		public static implicit operator Bytes(byte[] value) => From(value);
+
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteBytesAsync(this, cancellationToken).ConfigureAwait(false);
@@ -760,6 +812,10 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
+		public static implicit operator byte[](CompactBytes value) => value.Value;
+
+		public static implicit operator CompactBytes(byte[] value) => From(value);
+
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
 			await writer.WriteCompactBytesAsync(this, cancellationToken).ConfigureAwait(false);
@@ -814,6 +870,10 @@ namespace Kafka.Protocol
 		{
 			return !(x == y);
 		}
+
+		public static implicit operator System.UInt16(UInt16 value) => value.Value;
+
+		public static implicit operator UInt16(System.UInt16 value) => From(value);
 
 		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
 		{
@@ -45941,7 +46001,7 @@ namespace Kafka.Protocol
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
-				throw new UnsupportedVersionException($"RequestHeader does not support version {version}. Valid versions are: 0-2");
+				throw new UnsupportedVersionException($"RequestHeader does not support version {version.Value}. Valid versions are: 0-2");
 			}
 
 			Version = version;
