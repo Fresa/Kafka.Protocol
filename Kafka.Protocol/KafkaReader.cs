@@ -279,15 +279,30 @@ namespace Kafka.Protocol
             return await ReadNullableArrayAsync(length.ToVarInt(), createItem, cancellationToken);
         }
 
-        public ValueTask<RecordBatch> ReadRecordBatchAsync(CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
+        public async ValueTask<RecordBatch> ReadRecordBatchAsync(CancellationToken cancellationToken = default) =>
+            await ReadNullableRecordBatchAsync(cancellationToken)
+                .ConfigureAwait(false) ?? throw new InvalidOperationException(
+                $"The record batch cannot be null. Consider changing to {nameof(ReadNullableRecordBatchAsync)}");
 
-        public ValueTask<RecordBatch?> ReadNullableRecordBatchAsync(
+        public async ValueTask<RecordBatch?> ReadNullableRecordBatchAsync(
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var bytes = await ReadNullableBytesAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            if (!bytes.HasValue)
+            {
+                return null;
+            }
+
+            var pipe = new Pipe();
+            await pipe.Writer.WriteAsync(new ReadOnlyMemory<byte>(bytes.Value.Value),
+                    cancellationToken)
+                .ConfigureAwait(false);
+            var reader = new KafkaReader(pipe.Reader);
+            return await RecordBatch
+                .ReadFromAsync(Int16.Default, reader, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public async ValueTask<Uuid> ReadUuidAsync(CancellationToken cancellationToken = default)

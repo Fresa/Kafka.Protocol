@@ -140,17 +140,29 @@ namespace Kafka.Protocol
             where T : ISerialize =>
             WriteNullableArrayAsync(cancellationToken, items);
 
-        public ValueTask WriteRecordBatchAsync(RecordBatch value,
+        public async ValueTask WriteRecordBatchAsync(RecordBatch value,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var stream = new MemoryStream();
+            await using (stream.ConfigureAwait(false))
+            {
+                var writer = new KafkaWriter(stream);
+                await using (writer.ConfigureAwait(false))
+                {
+                    await value.WriteToAsync(new KafkaWriter(stream), cancellationToken);
+                }
+            }
+
+            await WriteNullableBytesAsync(Bytes.From(stream.ToArray()),
+                    cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public ValueTask WriteNullableRecordBatchAsync(RecordBatch? value,
-            CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
+            CancellationToken cancellationToken = default) =>
+            value == null
+                ? WriteNullableBytesAsync(null, cancellationToken)
+                : WriteRecordBatchAsync(value, cancellationToken);
 
         public ValueTask WriteUuidAsync(Uuid value,
             CancellationToken cancellationToken = default)
