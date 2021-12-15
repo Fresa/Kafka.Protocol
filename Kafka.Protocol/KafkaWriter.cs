@@ -79,42 +79,23 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
-        public async ValueTask WriteCompactStringAsync(CompactString value,
-            CancellationToken cancellationToken = default)
-        {
-            await WriteAsLittleEndianAsync(((ulong)value.Value.Length + 1)
-                    .EncodeAsVarInt(), cancellationToken)
-                .ConfigureAwait(false);
-            await WriteAsLittleEndianAsync(Encoding.UTF8.GetBytes(value.Value),
-                    cancellationToken)
-                .ConfigureAwait(false);
-        }
+        public ValueTask WriteCompactStringAsync(CompactString value,
+            CancellationToken cancellationToken = default) =>
+            WriteCompactNullableBytesAsync(Encoding.UTF8.GetBytes(value.Value),
+                cancellationToken);
 
         public ValueTask WriteCompactNullableStringAsync(CompactString? value,
-            CancellationToken cancellationToken = default)
-        {
-            if (value.HasValue)
-            {
-                return WriteCompactStringAsync((CompactString)value, cancellationToken);
-            }
-
-            return WriteAsLittleEndianAsync(0u.EncodeAsVarInt(),
+            CancellationToken cancellationToken = default) =>
+            WriteCompactNullableBytesAsync(
+                value == null
+                    ? null
+                    : Encoding.UTF8.GetBytes(value.Value.Value),
                 cancellationToken);
-        }
 
-        public async ValueTask WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default)
-        {
-            if (value == null)
-            {
-                await WriteInt16Async(Int16.From(-1), cancellationToken)
-                    .ConfigureAwait(false);
-            }
-            else
-            {
-                await WriteStringAsync(value.Value, cancellationToken)
-                    .ConfigureAwait(false);
-            }
-        }
+        public ValueTask WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default) =>
+            value.HasValue
+                ? WriteStringAsync(value.Value, cancellationToken)
+                : WriteInt16Async(Int16.From(-1), cancellationToken);
 
         public async ValueTask WriteBytesAsync(Bytes value, CancellationToken cancellationToken = default)
         {
@@ -124,30 +105,35 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
-        public async ValueTask WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default)
-        {
-            if (value == null)
-            {
-                await WriteInt32Async( Int32.From(-1), cancellationToken)
-                    .ConfigureAwait(false);
-            }
-            else
-            {
-                await WriteBytesAsync(value.Value, cancellationToken)
-                    .ConfigureAwait(false);
-            }
-        }
+        public ValueTask WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default) =>
+            value.HasValue
+                ? WriteBytesAsync(value.Value, cancellationToken)
+                : WriteInt32Async(Int32.From(-1), cancellationToken);
 
         public ValueTask WriteCompactBytesAsync(CompactBytes value,
-            CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
+            CancellationToken cancellationToken = default) =>
+            WriteCompactNullableBytesAsync(value.Value, cancellationToken);
 
-        public ValueTask WriteNullableCompactBytesAsync(CompactBytes? value,
+        public ValueTask WriteCompactNullableBytesAsync(CompactBytes? value,
+            CancellationToken cancellationToken = default) =>
+            WriteCompactNullableBytesAsync(value?.Value, cancellationToken);
+
+        private async ValueTask WriteCompactNullableBytesAsync(byte[]? value,
             CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var length = value == null ? 0 : (ulong)value.Length + 1;
+            await WriteAsLittleEndianAsync(length
+                    .EncodeAsVarInt(), cancellationToken)
+                .ConfigureAwait(false);
+            
+            if (value == null)
+            {
+                return;
+            }
+
+            await WriteAsLittleEndianAsync(value,
+                    cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public ValueTask WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)

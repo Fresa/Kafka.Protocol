@@ -66,6 +66,9 @@ namespace Kafka.Protocol
         ValueTask<CompactBytes> ReadCompactBytesAsync(
             CancellationToken cancellationToken = default);
 
+        ValueTask<CompactBytes?> ReadCompactNullableBytesAsync(
+            CancellationToken cancellationToken = default);
+
         ValueTask<T[]> ReadArrayAsync<T>(
             VarInt numberOfItems,
             Func<ValueTask<T>> factory,

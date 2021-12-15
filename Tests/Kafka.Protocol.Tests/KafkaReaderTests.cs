@@ -427,6 +427,82 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_reading_compact_bytes : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private CompactBytes _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 4, 1, 0, 6 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader.ReadCompactBytesAsync()
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Value.Should().BeEquivalentTo(1, 0, 6);
+            }
+        }
+
+        public class When_reading_compact_nullable_bytes : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private CompactBytes? _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 4, 1, 0, 6 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader.ReadCompactNullableBytesAsync()
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().NotBeNull();
+                _value?.Value.Should().BeEquivalentTo(1, 0, 6);
+            }
+        }
+
+        public class When_reading_null_compact_nullable_bytes : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private CompactBytes? _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 0 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader.ReadCompactNullableBytesAsync()
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().BeNull();
+            }
+        }
+
         public class When_reading_var_int : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;

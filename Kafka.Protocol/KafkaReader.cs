@@ -178,19 +178,12 @@ namespace Kafka.Protocol
         public async ValueTask<CompactString?> ReadCompactNullableStringAsync(
             CancellationToken cancellationToken = default)
         {
-            var length = await ReadUnsignedVarLongAsync(cancellationToken)
+            var bytes = await ReadCompactNullableBytesPrivateAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            if (length == 0)
-            {
-                return null;
-            }
-
-            var bytes =
-                await ReadAsLittleEndianAsync((int)length-1,
-                        cancellationToken)
-                    .ConfigureAwait(false);
-            return CompactString.From(Encoding.UTF8.GetString(bytes));
+            return bytes == null
+                ? (CompactString?)null
+                : CompactString.From(Encoding.UTF8.GetString(bytes));
         }
 
         public async ValueTask<Bytes> ReadBytesAsync(
@@ -226,9 +219,36 @@ namespace Kafka.Protocol
                     .ConfigureAwait(false));
         }
 
-        public ValueTask<CompactBytes> ReadCompactBytesAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<CompactBytes> ReadCompactBytesAsync(CancellationToken cancellationToken = default) =>
+            await ReadCompactNullableBytesAsync(cancellationToken)
+                .ConfigureAwait(false) ?? throw new NotSupportedException(
+                $"The byte array cannot be null. Consider changing to {nameof(ReadCompactNullableBytesAsync)}");
+
+        public async ValueTask<CompactBytes?> ReadCompactNullableBytesAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var bytes = await ReadCompactNullableBytesPrivateAsync(cancellationToken)
+                .ConfigureAwait(false);
+            
+            return bytes == null
+                ? (CompactBytes?)null
+                : CompactBytes.From(bytes);
+        }
+
+        private async ValueTask<byte[]?> ReadCompactNullableBytesPrivateAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var length = await ReadUnsignedVarLongAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            if (length == 0)
+            {
+                return null;
+            }
+
+            return
+                await ReadAsLittleEndianAsync((int)length - 1,
+                        cancellationToken)
+                    .ConfigureAwait(false);
         }
 
         public async ValueTask<T[]> ReadArrayAsync<T>(Func<ValueTask<T>> createItem,

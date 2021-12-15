@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         ValueTask WriteBytesAsync(Bytes value, CancellationToken cancellationToken = default);
         ValueTask WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default);
         ValueTask WriteCompactBytesAsync(CompactBytes value, CancellationToken cancellationToken = default);
-        ValueTask WriteNullableCompactBytesAsync(CompactBytes? value, CancellationToken cancellationToken = default);
+        ValueTask WriteCompactNullableBytesAsync(CompactBytes? value, CancellationToken cancellationToken = default);
 
         ValueTask WriteNullableArrayAsync<T>(CancellationToken cancellationToken = default, params T[]? items)
             where T : ISerialize;

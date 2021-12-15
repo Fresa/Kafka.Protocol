@@ -459,6 +459,87 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_writing_compact_bytes : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[4];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteCompactBytesAsync(CompactBytes.From(new byte[] { 1, 0, 6 }))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(4, 1, 0, 6);
+            }
+        }
+
+        public class
+            When_writing_bytes_as_compact_nullable_bytes : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[4];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteCompactNullableBytesAsync(
+                        CompactBytes.From(new byte[] { 1, 0, 6 }))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(4, 1, 0, 6);
+            }
+        }
+
+        public class
+            When_writing_null_as_compact_nullable_bytes : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[1];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteCompactNullableBytesAsync(null)
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(0);
+            }
+        }
+
         public class When_writing_var_int : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;
