@@ -315,6 +315,7 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 		var fieldName = messageField.GetFieldName(parentFieldTypeName);
 		var readArrayMethodName = messageField.IsNullable() ? "ReadNullableArrayAsync" : "ReadArrayAsync";
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
+		var nullableSign = messageField.IsNullable() ? "?" : "";
 		if (messageField.Fields == null)
 		{
 			if (messageField.IsArray())
@@ -344,7 +345,7 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 				}
 				else 
 				{
-					#><#= prependBeforeField #><#= fieldName #> = (await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+					#><#= prependBeforeField #><#= fieldName #> = (await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
 				}
 			} 
 			else 
@@ -362,6 +363,7 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	{
 		var fieldName = messageField.GetFieldName(parentFieldTypeName);
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
+		var nullableSign = messageField.IsNullable() ? "?" : "";
 		if (messageField.Fields == null)
 		{
 			var fieldTypeName = messageField.GetTypeName();
@@ -385,7 +387,7 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 				} 
 				else 
 				{
-					#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>.Values.ToArray()).ConfigureAwait(false);<#
+					#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #><#= nullableSign #>.Values.ToArray()).ConfigureAwait(false);<#
 				}
 			} 
 			else 

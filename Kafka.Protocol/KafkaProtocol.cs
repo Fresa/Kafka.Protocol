@@ -22708,7 +22708,7 @@ namespace Kafka.Protocol
 			var instance = new DescribeLogDirsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadNullableArrayAsync(async () => await DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+				instance.TopicsCollection = (await reader.ReadNullableArrayAsync(async () => await DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
 			}
 			return instance;
 		}
@@ -22717,7 +22717,7 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection?.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -26194,7 +26194,7 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicPartitionsCollection = (await reader.ReadNullableArrayAsync(async () => await TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+				instance.TopicPartitionsCollection = (await reader.ReadNullableArrayAsync(async () => await TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -26211,7 +26211,7 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, TopicPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+				await writer.WriteNullableArrayAsync(cancellationToken, TopicPartitionsCollection?.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -46001,7 +46001,7 @@ namespace Kafka.Protocol
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
 			{
-				throw new UnsupportedVersionException($"RequestHeader does not support version {version.Value}. Valid versions are: 0-2");
+				throw new UnsupportedVersionException($"RequestHeader does not support version {version}. Valid versions are: 0-2");
 			}
 
 			Version = version;
