@@ -566,6 +566,32 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_writing_uvarint : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[2];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteUVarIntAsync(UVarInt.From(300))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(172, 2);
+            }
+        }
+
         public class When_writing_var_long : XUnit2SpecificationAsync
         {
             private KafkaWriter _writer;

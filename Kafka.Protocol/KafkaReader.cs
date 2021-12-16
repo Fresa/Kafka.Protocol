@@ -97,6 +97,11 @@ namespace Kafka.Protocol
                     .ConfigureAwait(false)).Value);
         }
 
+        public async ValueTask<UVarInt> ReadUVarIntAsync(CancellationToken cancellationToken = default) =>
+            UVarInt.From(
+                (uint)await ReadUnsignedVarLongAsync(cancellationToken)
+                    .ConfigureAwait(false));
+
         private async ValueTask<ulong> ReadUnsignedVarLongAsync(
             CancellationToken cancellationToken = default)
         {

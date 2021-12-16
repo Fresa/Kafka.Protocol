@@ -31,6 +31,9 @@ namespace Kafka.Protocol
         ValueTask<VarInt> ReadVarIntAsync(
             CancellationToken cancellationToken = default);
 
+        ValueTask<UVarInt> ReadUVarIntAsync(
+            CancellationToken cancellationToken = default);
+
         ValueTask<VarLong> ReadVarLongAsync(
             CancellationToken cancellationToken = default);
         

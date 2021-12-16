@@ -30,6 +30,9 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 case "uint32":
                     typeName = "UInt32";
                     break;
+                case "uvarint":
+                    typeName = "UVarInt";
+                    break;
             }
 
             return typeName + (isArray ? "[]" : "");
@@ -89,7 +92,9 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 case "uuid":
                     return Type<Guid>()
                         .ToArrayType(isArray);
-
+                case "uvarint":
+                    return Type<uint>()
+                        .ToArrayType(isArray);
             }
 
             var resolvedType = typeof(int)

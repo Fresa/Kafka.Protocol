@@ -527,6 +527,30 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_reading_uvarint : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private UVarInt _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 172, 2 }.ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader.ReadUVarIntAsync()
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Value.Should().Be(300);
+            }
+        }
+
         public class When_reading_var_long : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;

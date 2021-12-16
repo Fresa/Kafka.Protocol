@@ -15,6 +15,7 @@ namespace Kafka.Protocol
         ValueTask WriteUInt16Async(UInt16 value, CancellationToken cancellationToken = default);
         ValueTask WriteUInt32Async(UInt32 value, CancellationToken cancellationToken = default);
         ValueTask WriteVarIntAsync(VarInt value, CancellationToken cancellationToken = default);
+        ValueTask WriteUVarIntAsync(UVarInt value, CancellationToken cancellationToken = default);
         ValueTask WriteVarLongAsync(VarLong value, CancellationToken cancellationToken = default);
         ValueTask WriteFloat64Async(Float64 value, CancellationToken cancellationToken = default);
 

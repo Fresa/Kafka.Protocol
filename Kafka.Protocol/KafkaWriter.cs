@@ -48,6 +48,11 @@ namespace Kafka.Protocol
                     .EncodeAsZigZag()
                     .EncodeAsVarInt(), cancellationToken);
 
+        public ValueTask WriteUVarIntAsync(UVarInt value, CancellationToken cancellationToken = default) =>
+            WriteAsLittleEndianAsync(
+                value.Value
+                    .EncodeAsVarInt(), cancellationToken);
+
         public ValueTask WriteVarLongAsync(VarLong value, CancellationToken cancellationToken = default) =>
             WriteAsLittleEndianAsync(
                 value.Value
@@ -116,9 +121,8 @@ namespace Kafka.Protocol
         private async ValueTask WriteCompactNullableBytesAsync(byte[]? value,
             CancellationToken cancellationToken = default)
         {
-            var length = value == null ? 0 : (ulong)value.Length + 1;
-            await WriteAsLittleEndianAsync(length
-                    .EncodeAsVarInt(), cancellationToken)
+            var length = value == null ? 0 : (uint)value.Length + 1;
+            await WriteUVarIntAsync(length, cancellationToken)
                 .ConfigureAwait(false);
             
             if (value == null)

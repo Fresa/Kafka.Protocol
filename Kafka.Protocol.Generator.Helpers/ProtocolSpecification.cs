@@ -31,6 +31,13 @@ namespace Kafka.Protocol.Generator.Helpers
                 Type = "UINT16", 
                 Description = "Represents an integer between 0 and 2^16-1 inclusive. The values are encoded using four bytes in network byte order (big-endian)."
             });
+            // UVARINT is missing from the documentation but found in the message specifications
+            PrimitiveTypes.Add("UVARINT", new PrimitiveType
+            {
+                Type = "UVARINT",
+                Description = "The UNSIGNED_VARINT type describes an unsigned variable length integer."
+            });
+
             // Incorrect protocol definition: Array is never referenced as a primitive type within messages. [] is used.
             PrimitiveTypes.Remove("ARRAY");
             PrimitiveTypes.Remove("COMPACT_ARRAY");

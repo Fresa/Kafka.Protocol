@@ -45,7 +45,7 @@ namespace Kafka.Protocol.Generator.Helpers.Tests
             {
                 ProtocolSpecification.PrimitiveTypes
                     .Should()
-                    .HaveCount(13)
+                    .HaveCount(14)
                     .And.Subject
                     .Values
                     .Select(type => 

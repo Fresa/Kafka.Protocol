@@ -892,6 +892,65 @@ namespace Kafka.Protocol
 
 		public static UInt16 Default => From(default);
 	}
+
+	/// <summary>
+	/// <para>The UNSIGNED_VARINT type describes an unsigned variable length integer.</para>
+	/// </summary>
+	public readonly struct UVarInt : ISerialize 
+	{
+		public uint Value { get; }
+
+		public UVarInt(uint value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is UVarInt comparingUVarInt && this == comparingUVarInt;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (UVarInt x, UVarInt y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (UVarInt x, UVarInt y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator uint(UVarInt value) => value.Value;
+
+		public static implicit operator UVarInt(uint value) => From(value);
+
+		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
+		{
+			await writer.WriteUVarIntAsync(this, cancellationToken).ConfigureAwait(false);
+		}
+
+		public static UVarInt From(uint value)
+		{
+			return new UVarInt(value);
+		}
+
+		public static async ValueTask<UVarInt> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		{
+			return await reader.ReadUVarIntAsync(cancellationToken).ConfigureAwait(false);
+		}
+
+		public static UVarInt Default => From(default);
+	}
 	/// <summary>
 	/// <para>The server experienced an unexpected error when processing the request.</para>
 	/// </summary>
