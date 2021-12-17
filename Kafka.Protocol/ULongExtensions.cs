@@ -29,15 +29,20 @@ namespace Kafka.Protocol
                 buffer[position++] = (byte)byteValue;
             } while (value > 0);
 
-            var result = new byte[position];
-            Buffer.BlockCopy(
-                buffer,
-                0,
-                result,
-                0,
-                position);
+            return buffer[..position];
+        }
 
-            return result;
+        internal static int GetVarIntLength(this ulong value)
+        {
+            var length = 0;
+            do
+            {
+                // Remove 7 bits
+                value >>= 7;
+                length++;
+            } while (value > 0);
+
+            return length;
         }
 
         internal static long DecodeFromZigZag(this ulong value)

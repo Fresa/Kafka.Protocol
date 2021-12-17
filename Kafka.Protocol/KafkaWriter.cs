@@ -105,6 +105,10 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
+        public ValueTask WriteBytesAsync(byte[] value,
+            CancellationToken cancellationToken = default) =>
+            WriteAsync(value, cancellationToken);
+
         public ValueTask WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default) =>
             value.HasValue
                 ? WriteBytesAsync(value.Value, cancellationToken)
@@ -142,19 +146,9 @@ namespace Kafka.Protocol
         public async ValueTask WriteRecordBatchAsync(RecordBatch value,
             CancellationToken cancellationToken = default)
         {
-            var stream = new MemoryStream();
-            await using (stream.ConfigureAwait(false))
-            {
-                var writer = new KafkaWriter(stream);
-                await using (writer.ConfigureAwait(false))
-                {
-                    await value.WriteToAsync(new KafkaWriter(stream), cancellationToken);
-                }
-            }
-
-            await WriteNullableBytesAsync(Bytes.From(stream.ToArray()),
-                    cancellationToken)
+            await WriteInt32Async(value.Length, cancellationToken)
                 .ConfigureAwait(false);
+            await value.WriteToAsync(this, cancellationToken);
         }
 
         public ValueTask WriteNullableRecordBatchAsync(RecordBatch? value,
@@ -181,7 +175,7 @@ namespace Kafka.Protocol
         {
             if (items == null)
             {
-                await WriteInt32Async( Int32.From(-1), cancellationToken)
+                await WriteInt32Async(Int32.From(-1), cancellationToken)
                     .ConfigureAwait(false);
                 return;
             }

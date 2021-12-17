@@ -1,5 +1,9 @@
-﻿using System.Threading;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Kafka.Protocol.Cryptography;
 
 namespace Kafka.Protocol.Records
 {
@@ -11,7 +15,7 @@ namespace Kafka.Protocol.Records
         public Int32 BatchLength { get; set; } = Int32.Default;
         public Int32 PartitionLeaderEpoch { get; set; } = Int32.Default;
         public Int8 Magic { get; set; } = Int8.Default;
-        public Int32 Crc { get; set; } = Int32.Default;
+        public Int32 Crc { get; private set; } = Int32.Default;
         public Int16 Attributes { get; set; } = Int16.Default;
         public Int32 LastOffsetDelta { get; set; } = Int32.Default;
         public Int64 FirstTimestamp { get; set; } = Int64.Default;
@@ -19,7 +23,7 @@ namespace Kafka.Protocol.Records
         public Int64 ProducerId { get; set; } = Int64.Default;
         public Int16 ProducerEpoch { get; set; } = Int16.Default;
         public Int32 BaseSequence { get; set; } = Int32.Default;
-        public Record[]? Records { get; set; } = new Record[0];
+        public Record[] Records { get; set; } = Array.Empty<Record>();
 
         public Compressions Compression => new Compressions(this);
 
@@ -144,7 +148,7 @@ namespace Kafka.Protocol.Records
             IKafkaReader reader,
             CancellationToken cancellationToken = default)
         {
-            return new RecordBatch
+            var recordBatch = new RecordBatch
             {
                 BaseOffset = await reader.ReadInt64Async(cancellationToken)
                     .ConfigureAwait(false),
@@ -176,12 +180,34 @@ namespace Kafka.Protocol.Records
                 Records = await reader.ReadArrayAsync(
                         async () =>
                             await Record
-                                .FromReaderAsync(version, reader,
+                                .FromReaderAsync(reader,
                                     cancellationToken)
                                 .ConfigureAwait(false), cancellationToken)
                     .ConfigureAwait(false)
             };
+
+            await recordBatch.CheckForDataCorruption(cancellationToken)
+                .ConfigureAwait(false);
+
+            return recordBatch;
         }
+
+        private async ValueTask CheckForDataCorruption(
+            CancellationToken cancellationToken = default)
+        {
+            var bytes = await SerializeCrcData(cancellationToken)
+                .ConfigureAwait(false);
+            var crc = Crc32C.Compute(bytes);
+            if (crc != Crc)
+            {
+                throw new CorruptMessageException(
+                    $"Record batch is corrupt. The read data has crc {crc} but the record batch states that crc should be {Crc}");
+            }
+        }
+
+        internal int Length =>
+            61 +
+            Records.Sum(record => record.Length);
 
         public async ValueTask WriteToAsync(
             IKafkaWriter writer,
@@ -196,24 +222,50 @@ namespace Kafka.Protocol.Records
                 .ConfigureAwait(false);
             await writer.WriteInt8Async(Magic, cancellationToken)
                 .ConfigureAwait(false);
+            
+            var bytes = await SerializeCrcData(cancellationToken)
+                .ConfigureAwait(false);
+            Crc = Int32.From((int) Crc32C.Compute(bytes));
+
             await writer.WriteInt32Async(Crc, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteInt16Async(Attributes, cancellationToken)
+            await writer.WriteBytesAsync(bytes, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteInt32Async(LastOffsetDelta, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteInt64Async(FirstTimestamp, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteInt64Async(MaxTimestamp, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteInt64Async(ProducerId, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteInt16Async(ProducerEpoch, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteInt32Async(BaseSequence, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteNullableArrayAsync(cancellationToken, Records)
-                .ConfigureAwait(false);
+        }
+
+        private async ValueTask<byte[]> SerializeCrcData(
+            CancellationToken cancellationToken = default)
+        {
+            var buffer = new MemoryStream();
+            await using (buffer.ConfigureAwait(false))
+            {
+                var bufferWriter = new KafkaWriter(buffer);
+                await using (bufferWriter.ConfigureAwait(false))
+                {
+                    await bufferWriter.WriteInt16Async(Attributes, cancellationToken)
+                        .ConfigureAwait(false);
+                    await bufferWriter.WriteInt32Async(LastOffsetDelta, cancellationToken)
+                        .ConfigureAwait(false);
+                    await bufferWriter.WriteInt64Async(FirstTimestamp, cancellationToken)
+                        .ConfigureAwait(false);
+                    await bufferWriter.WriteInt64Async(MaxTimestamp, cancellationToken)
+                        .ConfigureAwait(false);
+                    await bufferWriter.WriteInt64Async(ProducerId, cancellationToken)
+                        .ConfigureAwait(false);
+                    await bufferWriter.WriteInt16Async(ProducerEpoch, cancellationToken)
+                        .ConfigureAwait(false);
+                    await bufferWriter.WriteInt32Async(BaseSequence, cancellationToken)
+                        .ConfigureAwait(false);
+
+                    await bufferWriter.WriteInt32Async(Records.Length, cancellationToken)
+                        .ConfigureAwait(false);
+                    // todo: support compression
+                    await bufferWriter.WriteArrayAsync(cancellationToken, Records)
+                        .ConfigureAwait(false);
+                }
+            }
+
+            return buffer.ToArray();
         }
     }
 }
