@@ -53,15 +53,21 @@ namespace Kafka.Protocol.Records
             return record;
         }
 
-        internal int Length =>
-            1 +
-            ((ulong)TimestampDelta.Value).GetVarIntLength() +
-            OffsetDelta.Value.GetVarIntLength() +
-            Key.Length.GetVarIntLength() +
-            Key.Length +
-            Value.Length.GetVarIntLength() +
-            Value.Length +
-            4 + Headers.Sum(header => header.Length);
+        internal int Length
+        {
+            get
+            {
+                var length = 1 +
+                       ((ulong)TimestampDelta.Value).GetVarIntLength() +
+                       OffsetDelta.Value.GetVarIntLength() +
+                       Key.Length.GetVarIntLength() +
+                       Key.Length +
+                       Value.Length.GetVarIntLength() +
+                       Value.Length +
+                       4 + Headers.Sum(header => header.Length);
+                return length + length.GetVarIntLength();
+            }
+        }
 
         public async ValueTask WriteToAsync(
             IKafkaWriter writer,

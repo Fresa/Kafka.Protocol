@@ -341,7 +341,8 @@ namespace Kafka.Protocol
             var result = new T[length.Value];
             for (var i = 0; i < length.Value; i++)
             {
-                result[i] = await createItem();
+                result[i] = await createItem()
+                    .ConfigureAwait(false);
             }
 
             return result;

@@ -24,113 +24,38 @@ namespace Kafka.Protocol.Records
         public Int16 ProducerEpoch { get; set; } = Int16.Default;
         public Int32 BaseSequence { get; set; } = Int32.Default;
         public Record[] Records { get; set; } = Array.Empty<Record>();
-
-        public Compressions Compression => new Compressions(this);
-
-        public class Compressions
+        
+        [Flags]
+        public enum CompressionType : ushort
         {
-            private readonly RecordBatch _recordBatch;
-
-            internal Compressions(
-                RecordBatch recordBatch)
-            {
-                _recordBatch = recordBatch;
-            }
-
-            private ushort Value
-            {
-                get => _recordBatch.Attributes.GetValueOfBitRange(0, 2);
-                set => _recordBatch.Attributes =
-                    _recordBatch.Attributes.SetBitRangeValue(0, 2, value);
-            }
-
-            public bool None
-            {
-                get => Value == 0;
-                set
-                {
-                    if (value)
-                    {
-                        Value = 0;
-                    }
-                }
-            }
-
-            public bool Gzip
-            {
-                get => Value == 1;
-                set
-                {
-                    if (value)
-                    {
-                        Value = 1;
-                    }
-                }
-            }
-
-            public bool Snappy
-            {
-                get => Value == 2;
-                set
-                {
-                    if (value)
-                    {
-                        Value = 2;
-                    }
-                }
-            }
-
-            public bool Lz4
-            {
-                get => Value == 3;
-                set
-                {
-                    if (value)
-                    {
-                        Value = 3;
-                    }
-                }
-            }
-
-            public bool Zstd
-            {
-                get => Value == 4;
-                set
-                {
-                    if (value)
-                    {
-                        Value = 4;
-                    }
-                }
-            }
+            None = 0,
+            Gzip = 1,
+            Snappy = 2,
+            Lz4 = 4,
+            Zstd = 8
         }
 
-        public TimestampTypes TimestampType => new TimestampTypes(this);
-
-        public class TimestampTypes
+        public CompressionType Compression
         {
-            private readonly RecordBatch _recordBatch;
-
-            internal TimestampTypes(
-                RecordBatch recordBatch)
-            {
-                _recordBatch = recordBatch;
-            }
-
-            public bool CreateTime
-            {
-                get => !LogAppendTime;
-                set => LogAppendTime = !value;
-            }
-
-            public bool LogAppendTime
-            {
-                get => _recordBatch.Attributes.IsBitSet(3);
-                set => _recordBatch.Attributes =
-                    _recordBatch.Attributes.SetBit(3, value);
-            }
+            get => (CompressionType)Attributes.GetValueOfBitRange(0, 2);
+            set => Attributes =
+                Attributes.SetBitRangeValue(0, 2, (ushort)value);
         }
 
+        [Flags]
+        public enum Timestamp : byte
+        {
+            CreateTime = 0,
+            LogAppendTime = 1
+        }
+        
+        public Timestamp TimestampType
+        {
+            get => (Timestamp)Convert.ToByte(
+                Attributes.IsBitSet(3));
+            set => Attributes.SetBit(3, Convert.ToBoolean((byte)value));
+        }
+        
         public bool IsTransactional
         {
             get => Attributes.IsBitSet(4);
@@ -257,8 +182,6 @@ namespace Kafka.Protocol.Records
                     await bufferWriter.WriteInt32Async(BaseSequence, cancellationToken)
                         .ConfigureAwait(false);
 
-                    await bufferWriter.WriteInt32Async(Records.Length, cancellationToken)
-                        .ConfigureAwait(false);
                     // todo: support compression
                     await bufferWriter.WriteArrayAsync(cancellationToken, Records)
                         .ConfigureAwait(false);
