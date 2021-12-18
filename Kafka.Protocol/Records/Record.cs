@@ -61,7 +61,7 @@ namespace Kafka.Protocol.Records
             Key.Length +
             Value.Length.GetVarIntLength() +
             Value.Length +
-            Headers.Sum(header => header.Length);
+            4 + Headers.Sum(header => header.Length);
 
         public async ValueTask WriteToAsync(
             IKafkaWriter writer,
