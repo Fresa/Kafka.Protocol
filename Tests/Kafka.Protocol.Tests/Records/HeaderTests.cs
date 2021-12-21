@@ -11,20 +11,13 @@ namespace Kafka.Protocol.Tests.Records
 {
     namespace RecordBatchTests
     {
-        public partial class Given_a_record
+        public partial class Given_a_record_header
         {
             public class When_calculating_length : XUnit2SpecificationAsync
             {
-                private readonly Record _record = new()
+                private readonly Header _header = new()
                 {
-                    Attributes = 1,
-                    Headers = new []
-                    {
-                        new Header()
-                    },
-                    Key = Encoding.UTF8.GetBytes("key1"),
-                    OffsetDelta = 2,
-                    TimestampDelta = 3,
+                    Key = "key1",
                     Value = Encoding.UTF8.GetBytes("value1")
                 };
 
@@ -38,7 +31,7 @@ namespace Kafka.Protocol.Tests.Records
                         var writer = new KafkaWriter(stream);
                         await using (writer.ConfigureAwait(false))
                         {
-                            await _record.WriteToAsync(writer)
+                            await _header.WriteToAsync(writer)
                                 .ConfigureAwait(false);
                         }
                     }
@@ -47,9 +40,9 @@ namespace Kafka.Protocol.Tests.Records
                 }
 
                 [Fact]
-                public void It_should_return_the_length_of_the_record_being_serialized()
+                public void It_should_return_the_length_of_the_header_being_serialized()
                 {
-                    _record.Length.Should()
+                    _header.Length.Should()
                         .BeGreaterThan(0)
                         .And.Be(_actualLength);
                 }
