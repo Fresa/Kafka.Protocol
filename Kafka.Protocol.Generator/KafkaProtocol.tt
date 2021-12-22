@@ -25,6 +25,7 @@
 
 	var messageDefinitionPath = Path.Combine(Host.ResolvePath(@"..\Kafka.Protocol.MessageDefinitionsDownloader\MessageDefinitions\"));
 	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath);
+	messageDefinitions.AddReferencesToFields();
 
     void Block(Action action) { this.Block(action); }
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
@@ -229,7 +230,7 @@ namespace Kafka.Protocol<# Block(() =>
 				
 				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
 				{
-					PrintReadFrom(messageField, "", "instance.");
+					PrintReadFrom(messageField);
 				}); _();
 
 				if (messageDefinition.Fields.Any())
@@ -305,15 +306,16 @@ namespace Kafka.Protocol<# Block(() =>
 	});
 });
 
-void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, string parentFieldTypeName = "", string prependBeforeField = "")
+void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
+	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
+	var prependBeforeField = "instance.";
 	#>if (<#= prependBeforeField #>Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
 		var fieldName = messageField.GetFieldName(parentFieldTypeName);
-		var readArrayMethodName = messageField.IsNullable() ? "ReadNullableArrayAsync" : "ReadArrayAsync";
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		var nullableSign = messageField.IsNullable() ? "?" : "";
 		if (messageField.Fields == null)
@@ -530,7 +532,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();
 			PrintOnNewRowForEach(field.Fields, messageField => 
 			{
-				PrintReadFrom(messageField, fieldTypeNameWithoutArrayCharacters, "instance.");
+				PrintReadFrom(messageField);
 			}); _();
 			#>return instance;<#
 		}); _(2);
@@ -584,7 +586,7 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			#>var instance = new <#= commonStruct.Name #>(version);<# _();
 			PrintOnNewRowForEach(commonStruct.Fields, messageField => 
 			{
-				PrintReadFrom(messageField, "", "instance.");
+				PrintReadFrom(messageField);
 			}); _();
 			#>return instance;<#
 		}); _(2);
