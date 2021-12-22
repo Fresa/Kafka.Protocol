@@ -16,13 +16,18 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
         public static VersionRange Parse(string versionRangeExpression)
         {
-            const string expectedFormatMessage = "Expected version range expression. Example: 0+, 1-2";
+            const string expectedFormatMessage = "Expected version range expression. Example: none, 0+, 1-2";
 
             if (string.IsNullOrEmpty(versionRangeExpression))
             {
                 throw new ArgumentNullException(
                     nameof(versionRangeExpression),
                     expectedFormatMessage);
+            }
+
+            if (versionRangeExpression.Equals("none"))
+            {
+                return new VersionRange(0, -1);
             }
 
             var versions = versionRangeExpression.Split(

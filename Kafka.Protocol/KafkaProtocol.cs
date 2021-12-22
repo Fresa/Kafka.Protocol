@@ -3122,11 +3122,6 @@ namespace Kafka.Protocol
 				return await ListGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (ListOffsetRequest.ApiKey == apiKey)
-			{
-				return await ListOffsetRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (ListOffsetsRequest.ApiKey == apiKey)
 			{
 				return await ListOffsetsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
@@ -3476,11 +3471,6 @@ namespace Kafka.Protocol
 				return await ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			}
 
-			if (ListOffsetResponse.ApiKey == apiKey)
-			{
-				return await ListOffsetResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
-
 			if (ListOffsetsResponse.ApiKey == apiKey)
 			{
 				return await ListOffsetsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
@@ -3595,6 +3585,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(25);
@@ -3603,13 +3594,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AddOffsetsToTxnRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AddOffsetsToTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.TransactionalId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -3621,7 +3615,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -3776,6 +3772,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(25);
@@ -3784,6 +3781,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AddOffsetsToTxnResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -3880,6 +3878,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(24);
@@ -3888,13 +3887,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AddPartitionsToTxnRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AddPartitionsToTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.TransactionalId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -3906,7 +3908,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await AddPartitionsToTxnTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await AddPartitionsToTxnTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await AddPartitionsToTxnTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -4059,20 +4063,26 @@ namespace Kafka.Protocol
 			internal AddPartitionsToTxnTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AddPartitionsToTxnTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AddPartitionsToTxnTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -4162,6 +4172,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(24);
@@ -4170,6 +4181,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AddPartitionsToTxnResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -4180,7 +4192,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = (await reader.ReadArrayAsync(async () => await AddPartitionsToTxnTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await AddPartitionsToTxnTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await AddPartitionsToTxnTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -4267,20 +4281,26 @@ namespace Kafka.Protocol
 			internal AddPartitionsToTxnTopicResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AddPartitionsToTxnTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AddPartitionsToTxnTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResultsCollection = (await reader.ReadArrayAsync(async () => await AddPartitionsToTxnPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
+					instance.ResultsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await AddPartitionsToTxnPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
+						(await reader.ReadArrayAsync(async () => await AddPartitionsToTxnPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
 				}
 				return instance;
 			}
@@ -4367,9 +4387,11 @@ namespace Kafka.Protocol
 				internal AddPartitionsToTxnPartitionResult(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(3, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<AddPartitionsToTxnPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -4468,6 +4490,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(67);
@@ -4476,6 +4499,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AllocateProducerIdsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -4577,6 +4601,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(67);
@@ -4585,6 +4610,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AllocateProducerIdsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -4755,6 +4781,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(49);
@@ -4763,13 +4790,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterClientQuotasRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AlterClientQuotasRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.EntriesCollection = await reader.ReadArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.EntriesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -4831,20 +4861,26 @@ namespace Kafka.Protocol
 			internal EntryData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(1, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new EntryData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.EntityCollection = await reader.ReadArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.EntityCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.OpsCollection = await reader.ReadArrayAsync(async () => await OpData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.OpsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await OpData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await OpData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -4902,20 +4938,26 @@ namespace Kafka.Protocol
 				internal EntityData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(1, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new EntityData(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.EntityType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.EntityType = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.EntityName = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.EntityName = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -5038,16 +5080,20 @@ namespace Kafka.Protocol
 				internal OpData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(1, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OpData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OpData(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Key = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Key = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -5208,6 +5254,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(49);
@@ -5216,6 +5263,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterClientQuotasResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -5226,7 +5274,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.EntriesCollection = await reader.ReadArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.EntriesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -5313,9 +5363,11 @@ namespace Kafka.Protocol
 			internal EntryData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(1, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -5326,11 +5378,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.EntityCollection = await reader.ReadArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.EntityCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -5456,20 +5512,26 @@ namespace Kafka.Protocol
 				internal EntityData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(1, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new EntityData(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.EntityType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.EntityType = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.EntityName = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.EntityName = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -5563,6 +5625,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(33);
@@ -5571,13 +5634,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterConfigsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AlterConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourcesCollection = (await reader.ReadArrayAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ResourceType);
+				instance.ResourcesCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ResourceType);
+					(await reader.ReadArrayAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ResourceType);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -5639,9 +5705,11 @@ namespace Kafka.Protocol
 			internal AlterConfigsResource(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -5652,11 +5720,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigsCollection = (await reader.ReadArrayAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+						(await reader.ReadArrayAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 				}
 				return instance;
 			}
@@ -5776,20 +5848,26 @@ namespace Kafka.Protocol
 				internal AlterableConfig(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AlterableConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Value = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -5915,6 +5993,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(33);
@@ -5923,6 +6002,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -5933,7 +6013,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = await reader.ReadArrayAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResponsesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -6020,9 +6102,11 @@ namespace Kafka.Protocol
 			internal AlterConfigsResourceResponse(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -6033,7 +6117,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -6041,7 +6127,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -6200,6 +6288,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(56);
@@ -6208,6 +6297,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterIsrRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -6222,7 +6312,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -6342,20 +6434,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -6440,9 +6538,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -6457,7 +6557,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.NewIsrCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.NewIsrCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -6618,6 +6720,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(56);
@@ -6626,6 +6729,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterIsrResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -6640,7 +6744,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -6758,20 +6864,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -6856,9 +6968,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -6881,7 +6995,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.IsrCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.IsrCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -7105,6 +7221,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(45);
@@ -7113,6 +7230,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterPartitionReassignmentsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -7123,7 +7241,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await ReassignableTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ReassignableTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ReassignableTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -7212,20 +7332,26 @@ namespace Kafka.Protocol
 			internal ReassignableTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ReassignableTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ReassignableTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await ReassignablePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await ReassignablePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await ReassignablePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -7312,9 +7438,11 @@ namespace Kafka.Protocol
 				internal ReassignablePartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<ReassignablePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -7325,7 +7453,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ReplicasCollection = await reader.ReadNullableArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.ReplicasCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadNullableArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -7424,6 +7554,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(45);
@@ -7432,6 +7563,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterPartitionReassignmentsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -7446,11 +7578,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = await reader.ReadArrayAsync(async () => await ReassignableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResponsesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ReassignableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ReassignableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -7609,20 +7745,26 @@ namespace Kafka.Protocol
 			internal ReassignableTopicResponse(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ReassignableTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ReassignableTopicResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await ReassignablePartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await ReassignablePartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await ReassignablePartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -7709,9 +7851,11 @@ namespace Kafka.Protocol
 				internal ReassignablePartitionResponse(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<ReassignablePartitionResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -7726,7 +7870,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.ErrorMessage = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -7853,6 +7999,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(34);
@@ -7861,13 +8008,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterReplicaLogDirsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AlterReplicaLogDirsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.DirsCollection = (await reader.ReadArrayAsync(async () => await AlterReplicaLogDir.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Path);
+				instance.DirsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await AlterReplicaLogDir.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Path);
+					(await reader.ReadArrayAsync(async () => await AlterReplicaLogDir.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Path);
 			}
 			return instance;
 		}
@@ -7921,20 +8071,26 @@ namespace Kafka.Protocol
 			internal AlterReplicaLogDir(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AlterReplicaLogDir> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterReplicaLogDir(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Path = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Path = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await AlterReplicaLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					instance.TopicsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await AlterReplicaLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+						(await reader.ReadArrayAsync(async () => await AlterReplicaLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 				}
 				return instance;
 			}
@@ -8021,20 +8177,26 @@ namespace Kafka.Protocol
 				internal AlterReplicaLogDirTopic(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<AlterReplicaLogDirTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AlterReplicaLogDirTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -8125,6 +8287,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(34);
@@ -8133,6 +8296,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterReplicaLogDirsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -8143,7 +8307,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await AlterReplicaLogDirTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await AlterReplicaLogDirTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await AlterReplicaLogDirTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -8230,20 +8396,26 @@ namespace Kafka.Protocol
 			internal AlterReplicaLogDirTopicResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AlterReplicaLogDirTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterReplicaLogDirTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await AlterReplicaLogDirPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await AlterReplicaLogDirPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await AlterReplicaLogDirPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -8330,9 +8502,11 @@ namespace Kafka.Protocol
 				internal AlterReplicaLogDirPartitionResult(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<AlterReplicaLogDirPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -8431,6 +8605,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(51);
@@ -8439,17 +8614,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterUserScramCredentialsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new AlterUserScramCredentialsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.DeletionsCollection = await reader.ReadArrayAsync(async () => await ScramCredentialDeletion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.DeletionsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ScramCredentialDeletion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ScramCredentialDeletion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.UpsertionsCollection = await reader.ReadArrayAsync(async () => await ScramCredentialUpsertion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.UpsertionsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ScramCredentialUpsertion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ScramCredentialUpsertion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -8507,16 +8687,20 @@ namespace Kafka.Protocol
 			internal ScramCredentialDeletion(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ScramCredentialDeletion> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ScramCredentialDeletion(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -8637,16 +8821,20 @@ namespace Kafka.Protocol
 			internal ScramCredentialUpsertion(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ScramCredentialUpsertion> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ScramCredentialUpsertion(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -8851,6 +9039,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(51);
@@ -8859,6 +9048,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<AlterUserScramCredentialsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -8869,7 +9059,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await AlterUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await AlterUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await AlterUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -8956,16 +9148,20 @@ namespace Kafka.Protocol
 			internal AlterUserScramCredentialsResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AlterUserScramCredentialsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new AlterUserScramCredentialsResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.User = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.User = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -8973,7 +9169,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -9099,6 +9297,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(18);
@@ -9107,17 +9306,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ApiVersionsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ApiVersionsRequest(version);
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.ClientSoftwareName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClientSoftwareName = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.ClientSoftwareVersion = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClientSoftwareVersion = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -9196,6 +9400,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(18);
@@ -9204,6 +9409,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ApiVersionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -9214,7 +9420,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ApiKeysCollection = (await reader.ReadArrayAsync(async () => await ApiVersion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ApiKey);
+				instance.ApiKeysCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await ApiVersion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ApiKey);
+					(await reader.ReadArrayAsync(async () => await ApiVersion.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ApiKey);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -9222,7 +9430,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.SupportedFeaturesCollection = (await reader.ReadArrayAsync(async () => await SupportedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.SupportedFeaturesCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await SupportedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await SupportedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
@@ -9230,7 +9440,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.FinalizedFeaturesCollection = (await reader.ReadArrayAsync(async () => await FinalizedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.FinalizedFeaturesCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await FinalizedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await FinalizedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -9333,9 +9545,11 @@ namespace Kafka.Protocol
 			internal ApiVersion(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ApiVersion> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -9519,16 +9733,20 @@ namespace Kafka.Protocol
 			internal SupportedFeatureKey(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<SupportedFeatureKey> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new SupportedFeatureKey(version);
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
@@ -9707,16 +9925,20 @@ namespace Kafka.Protocol
 			internal FinalizedFeatureKey(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<FinalizedFeatureKey> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new FinalizedFeatureKey(version);
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
@@ -9844,6 +10066,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(53);
@@ -9852,17 +10075,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<BeginQuorumEpochRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new BeginQuorumEpochRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClusterId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -9953,20 +10181,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, -1);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -10051,9 +10285,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, -1);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -10192,6 +10428,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(53);
@@ -10200,6 +10437,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<BeginQuorumEpochResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -10210,7 +10448,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -10295,20 +10535,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, -1);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -10393,9 +10639,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, -1);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -10566,6 +10814,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(63);
@@ -10574,6 +10823,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<BrokerHeartbeatRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -10786,6 +11036,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(63);
@@ -10794,6 +11045,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<BrokerHeartbeatResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -11005,6 +11257,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(62);
@@ -11013,6 +11266,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<BrokerRegistrationRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -11023,7 +11277,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClusterId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -11031,15 +11287,21 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ListenersCollection = (await reader.ReadArrayAsync(async () => await Listener.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.ListenersCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await Listener.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await Listener.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.FeaturesCollection = (await reader.ReadArrayAsync(async () => await Feature.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.FeaturesCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await Feature.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await Feature.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Rack = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.Rack = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -11200,20 +11462,26 @@ namespace Kafka.Protocol
 			internal Listener(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<Listener> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new Listener(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Host = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -11404,16 +11672,20 @@ namespace Kafka.Protocol
 			internal Feature(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<Feature> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new Feature(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -11579,6 +11851,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(62);
@@ -11587,6 +11860,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<BrokerRegistrationResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -11722,6 +11996,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -11730,13 +12005,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ConsumerProtocolAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ConsumerProtocolAssignment(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.AssignedPartitionsCollection = (await reader.ReadArrayAsync(async () => await TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+				instance.AssignedPartitionsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+					(await reader.ReadArrayAsync(async () => await TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -11796,20 +12074,26 @@ namespace Kafka.Protocol
 			internal TopicPartition(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, -1);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicPartition(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -11930,6 +12214,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -11938,13 +12223,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ConsumerProtocolSubscription> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ConsumerProtocolSubscription(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -11952,7 +12240,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.OwnedPartitionsCollection = (await reader.ReadArrayAsync(async () => await TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+				instance.OwnedPartitionsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+					(await reader.ReadArrayAsync(async () => await TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
 			}
 			return instance;
 		}
@@ -12069,20 +12359,26 @@ namespace Kafka.Protocol
 			internal TopicPartition(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, -1);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicPartition(version);
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -12168,6 +12464,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(7);
@@ -12176,6 +12473,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ControlledShutdownRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -12272,6 +12570,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(7);
@@ -12280,6 +12579,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ControlledShutdownResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -12290,7 +12590,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.RemainingPartitionsCollection = (await reader.ReadArrayAsync(async () => await RemainingPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicName);
+				instance.RemainingPartitionsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await RemainingPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicName);
+					(await reader.ReadArrayAsync(async () => await RemainingPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicName);
 			}
 			return instance;
 		}
@@ -12377,16 +12679,20 @@ namespace Kafka.Protocol
 			internal RemainingPartition(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<RemainingPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new RemainingPartition(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -12477,6 +12783,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(30);
@@ -12485,13 +12792,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<CreateAclsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateAclsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.CreationsCollection = await reader.ReadArrayAsync(async () => await AclCreation.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.CreationsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await AclCreation.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await AclCreation.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -12545,9 +12855,11 @@ namespace Kafka.Protocol
 			internal AclCreation(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AclCreation> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -12558,7 +12870,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
@@ -12566,11 +12880,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Principal = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Principal = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Host = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -12835,6 +13153,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(30);
@@ -12843,6 +13162,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<CreateAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -12853,7 +13173,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await AclCreationResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await AclCreationResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await AclCreationResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -12940,9 +13262,11 @@ namespace Kafka.Protocol
 			internal AclCreationResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AclCreationResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -12953,7 +13277,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -13046,6 +13372,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(38);
@@ -13054,13 +13381,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<CreateDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.RenewersCollection = await reader.ReadArrayAsync(async () => await CreatableRenewers.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.RenewersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await CreatableRenewers.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await CreatableRenewers.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -13122,20 +13452,26 @@ namespace Kafka.Protocol
 			internal CreatableRenewers(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<CreatableRenewers> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatableRenewers(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.PrincipalType = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.PrincipalName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -13254,6 +13590,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(38);
@@ -13262,6 +13599,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<CreateDelegationTokenResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -13272,11 +13610,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PrincipalType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.PrincipalType = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PrincipalName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.PrincipalName = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -13292,7 +13634,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TokenId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.TokenId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -13617,6 +13961,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(37);
@@ -13625,13 +13970,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<CreatePartitionsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreatePartitionsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await CreatePartitionsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await CreatePartitionsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await CreatePartitionsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -13701,16 +14049,20 @@ namespace Kafka.Protocol
 			internal CreatePartitionsTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<CreatePartitionsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatePartitionsTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -13718,7 +14070,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.AssignmentsCollection = await reader.ReadNullableArrayAsync(async () => await CreatePartitionsAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.AssignmentsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableArrayAsync(async () => await CreatePartitionsAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableArrayAsync(async () => await CreatePartitionsAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -13844,16 +14198,20 @@ namespace Kafka.Protocol
 				internal CreatePartitionsAssignment(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<CreatePartitionsAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new CreatePartitionsAssignment(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.BrokerIdsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.BrokerIdsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -13969,6 +14327,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(37);
@@ -13977,6 +14336,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<CreatePartitionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -13987,7 +14347,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await CreatePartitionsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await CreatePartitionsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await CreatePartitionsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -14074,16 +14436,20 @@ namespace Kafka.Protocol
 			internal CreatePartitionsTopicResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<CreatePartitionsTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatePartitionsTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -14091,7 +14457,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -14219,6 +14587,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(5, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(19);
@@ -14227,13 +14596,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(7);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<CreateTopicsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new CreateTopicsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await CreatableTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await CreatableTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await CreatableTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -14303,16 +14675,20 @@ namespace Kafka.Protocol
 			internal CreatableTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(5, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<CreatableTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatableTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -14324,11 +14700,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.AssignmentsCollection = (await reader.ReadArrayAsync(async () => await CreatableReplicaAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
+					instance.AssignmentsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await CreatableReplicaAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
+						(await reader.ReadArrayAsync(async () => await CreatableReplicaAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigsCollection = (await reader.ReadArrayAsync(async () => await CreateableTopicConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await CreateableTopicConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+						(await reader.ReadArrayAsync(async () => await CreateableTopicConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 				}
 				return instance;
 			}
@@ -14485,9 +14865,11 @@ namespace Kafka.Protocol
 				internal CreatableReplicaAssignment(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(5, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<CreatableReplicaAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -14498,7 +14880,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.BrokerIdsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.BrokerIdsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -14615,20 +14999,26 @@ namespace Kafka.Protocol
 				internal CreateableTopicConfig(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(5, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<CreateableTopicConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new CreateableTopicConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Value = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -14787,6 +15177,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(5, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(19);
@@ -14795,6 +15186,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(7);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<CreateTopicsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -14805,7 +15197,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await CreatableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await CreatableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await CreatableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -14887,16 +15281,20 @@ namespace Kafka.Protocol
 			internal CreatableTopicResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(5, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<CreatableTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new CreatableTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(7, 2147483647)) 
 				{
@@ -14908,7 +15306,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
@@ -14924,7 +15324,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.ConfigsCollection = await reader.ReadNullableArrayAsync(async () => await CreatableTopicConfigs.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.ConfigsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableArrayAsync(async () => await CreatableTopicConfigs.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableArrayAsync(async () => await CreatableTopicConfigs.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -15195,20 +15597,26 @@ namespace Kafka.Protocol
 				internal CreatableTopicConfigs(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(5, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<CreatableTopicConfigs> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new CreatableTopicConfigs(version);
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						instance.Value = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Value = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
@@ -15410,6 +15818,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -15418,17 +15827,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DefaultPrincipalData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DefaultPrincipalData(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Type = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.Type = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.Name = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -15554,6 +15968,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(31);
@@ -15562,13 +15977,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DeleteAclsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteAclsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.FiltersCollection = await reader.ReadArrayAsync(async () => await DeleteAclsFilter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.FiltersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DeleteAclsFilter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DeleteAclsFilter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -15622,9 +16040,11 @@ namespace Kafka.Protocol
 			internal DeleteAclsFilter(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DeleteAclsFilter> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -15635,7 +16055,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceNameFilter = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceNameFilter = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
@@ -15643,11 +16065,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalFilter = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.PrincipalFilter = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.HostFilter = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.HostFilter = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -15930,6 +16356,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(31);
@@ -15938,6 +16365,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DeleteAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -15948,7 +16376,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.FilterResultsCollection = await reader.ReadArrayAsync(async () => await DeleteAclsFilterResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.FilterResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DeleteAclsFilterResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DeleteAclsFilterResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -16035,9 +16465,11 @@ namespace Kafka.Protocol
 			internal DeleteAclsFilterResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DeleteAclsFilterResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -16048,11 +16480,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MatchingAclsCollection = await reader.ReadArrayAsync(async () => await DeleteAclsMatchingAcl.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.MatchingAclsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await DeleteAclsMatchingAcl.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await DeleteAclsMatchingAcl.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -16178,9 +16614,11 @@ namespace Kafka.Protocol
 				internal DeleteAclsMatchingAcl(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<DeleteAclsMatchingAcl> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -16191,7 +16629,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.ErrorMessage = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -16199,7 +16639,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.ResourceName = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
@@ -16207,11 +16649,15 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Principal = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Principal = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Host = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -16546,6 +16992,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(42);
@@ -16554,13 +17001,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DeleteGroupsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteGroupsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupsNamesCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.GroupsNamesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -16616,6 +17066,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(42);
@@ -16624,6 +17075,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DeleteGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -16634,7 +17086,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = (await reader.ReadArrayAsync(async () => await DeletableGroupResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.GroupId);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await DeletableGroupResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.GroupId);
+					(await reader.ReadArrayAsync(async () => await DeletableGroupResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.GroupId);
 			}
 			return instance;
 		}
@@ -16721,16 +17175,20 @@ namespace Kafka.Protocol
 			internal DeletableGroupResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DeletableGroupResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeletableGroupResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -16821,6 +17279,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(21);
@@ -16829,13 +17288,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DeleteRecordsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteRecordsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await DeleteRecordsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DeleteRecordsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DeleteRecordsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -16897,20 +17359,26 @@ namespace Kafka.Protocol
 			internal DeleteRecordsTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DeleteRecordsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeleteRecordsTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await DeleteRecordsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await DeleteRecordsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await DeleteRecordsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -16997,9 +17465,11 @@ namespace Kafka.Protocol
 				internal DeleteRecordsPartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<DeleteRecordsPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -17130,6 +17600,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(21);
@@ -17138,6 +17609,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DeleteRecordsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -17148,7 +17620,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await DeleteRecordsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await DeleteRecordsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await DeleteRecordsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -17235,20 +17709,26 @@ namespace Kafka.Protocol
 			internal DeleteRecordsTopicResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DeleteRecordsTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeleteRecordsTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = (await reader.ReadArrayAsync(async () => await DeleteRecordsPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await DeleteRecordsPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
+						(await reader.ReadArrayAsync(async () => await DeleteRecordsPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
 				}
 				return instance;
 			}
@@ -17335,9 +17815,11 @@ namespace Kafka.Protocol
 				internal DeleteRecordsPartitionResult(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<DeleteRecordsPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -17473,6 +17955,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(20);
@@ -17481,17 +17964,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(6);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DeleteTopicsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DeleteTopicsRequest(version);
 			if (instance.Version.InRange(6, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await DeleteTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DeleteTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DeleteTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 5)) 
 			{
-				instance.TopicNamesCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicNamesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -17557,16 +18045,20 @@ namespace Kafka.Protocol
 			internal DeleteTopicState(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DeleteTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeleteTopicState(version);
 				if (instance.Version.InRange(6, 2147483647)) 
 				{
-					instance.Name = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(6, 2147483647)) 
 				{
@@ -17721,6 +18213,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(20);
@@ -17729,6 +18222,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(6);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DeleteTopicsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -17739,7 +18233,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = (await reader.ReadArrayAsync(async () => await DeletableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.ResponsesCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await DeletableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await DeletableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -17821,16 +18317,20 @@ namespace Kafka.Protocol
 			internal DeletableTopicResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DeletableTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DeletableTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(6, 2147483647)) 
 				{
@@ -17842,7 +18342,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -17999,6 +18501,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(29);
@@ -18007,6 +18510,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeAclsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -18017,7 +18521,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourceNameFilter = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ResourceNameFilter = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -18025,11 +18531,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PrincipalFilter = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.PrincipalFilter = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.HostFilter = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.HostFilter = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -18311,6 +18821,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(29);
@@ -18319,6 +18830,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -18333,11 +18845,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourcesCollection = await reader.ReadArrayAsync(async () => await DescribeAclsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResourcesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DescribeAclsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DescribeAclsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -18496,9 +19012,11 @@ namespace Kafka.Protocol
 			internal DescribeAclsResource(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribeAclsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -18509,7 +19027,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
@@ -18517,7 +19037,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.AclsCollection = await reader.ReadArrayAsync(async () => await AclDescription.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.AclsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await AclDescription.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await AclDescription.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -18672,20 +19194,26 @@ namespace Kafka.Protocol
 				internal AclDescription(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<AclDescription> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AclDescription(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Principal = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Principal = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Host = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -18847,6 +19375,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(48);
@@ -18855,13 +19384,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeClientQuotasRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeClientQuotasRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ComponentsCollection = await reader.ReadArrayAsync(async () => await ComponentData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ComponentsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ComponentData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ComponentData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -18923,16 +19455,20 @@ namespace Kafka.Protocol
 			internal ComponentData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(1, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ComponentData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ComponentData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.EntityType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.EntityType = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -18940,7 +19476,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Match = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Match = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -19098,6 +19636,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(48);
@@ -19106,6 +19645,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeClientQuotasResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -19120,11 +19660,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.EntriesCollection = await reader.ReadNullableArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.EntriesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableArrayAsync(async () => await EntryData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -19289,20 +19833,26 @@ namespace Kafka.Protocol
 			internal EntryData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(1, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new EntryData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.EntityCollection = await reader.ReadArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.EntityCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await EntityData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ValuesCollection = await reader.ReadArrayAsync(async () => await ValueData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.ValuesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await ValueData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await ValueData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -19360,20 +19910,26 @@ namespace Kafka.Protocol
 				internal EntityData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(1, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new EntityData(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.EntityType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.EntityType = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.EntityName = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.EntityName = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -19496,16 +20052,20 @@ namespace Kafka.Protocol
 				internal ValueData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(1, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<ValueData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new ValueData(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Key = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Key = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -19597,6 +20157,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(60);
@@ -19605,6 +20166,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeClusterRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -19667,6 +20229,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(60);
@@ -19675,6 +20238,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeClusterResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -19689,11 +20253,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClusterId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -19701,7 +20269,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.BrokersCollection = (await reader.ReadArrayAsync(async () => await DescribeClusterBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.BrokerId);
+				instance.BrokersCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await DescribeClusterBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.BrokerId);
+					(await reader.ReadArrayAsync(async () => await DescribeClusterBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.BrokerId);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -19938,9 +20508,11 @@ namespace Kafka.Protocol
 			internal DescribeClusterBroker(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribeClusterBroker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -19951,7 +20523,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Host = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -19959,7 +20533,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Rack = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Rack = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -20151,6 +20727,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(32);
@@ -20159,13 +20736,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeConfigsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourcesCollection = await reader.ReadArrayAsync(async () => await DescribeConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResourcesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DescribeConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DescribeConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -20235,9 +20815,11 @@ namespace Kafka.Protocol
 			internal DescribeConfigsResource(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribeConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -20248,11 +20830,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigurationKeysCollection = await reader.ReadNullableArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.ConfigurationKeysCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadNullableArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -20443,6 +21029,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(32);
@@ -20451,6 +21038,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -20461,7 +21049,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await DescribeConfigsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DescribeConfigsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DescribeConfigsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -20548,9 +21138,11 @@ namespace Kafka.Protocol
 			internal DescribeConfigsResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribeConfigsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -20561,7 +21153,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -20569,11 +21163,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigsCollection = await reader.ReadArrayAsync(async () => await DescribeConfigsResourceResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.ConfigsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await DescribeConfigsResourceResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await DescribeConfigsResourceResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -20765,20 +21363,26 @@ namespace Kafka.Protocol
 				internal DescribeConfigsResourceResult(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(4, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<DescribeConfigsResourceResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DescribeConfigsResourceResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Value = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -20798,7 +21402,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.SynonymsCollection = await reader.ReadArrayAsync(async () => await DescribeConfigsSynonym.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.SynonymsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await DescribeConfigsSynonym.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadArrayAsync(async () => await DescribeConfigsSynonym.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(3, 2147483647)) 
 					{
@@ -20806,7 +21412,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(3, 2147483647)) 
 					{
-						instance.Documentation = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Documentation = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -21064,20 +21672,26 @@ namespace Kafka.Protocol
 					internal DescribeConfigsSynonym(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(4, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<DescribeConfigsSynonym> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
 						var instance = new DescribeConfigsSynonym(version);
 						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+							instance.Name = instance.IsFlexibleVersion ? 
+								await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+								await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 						}
 						if (instance.Version.InRange(1, 2147483647)) 
 						{
-							instance.Value = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							instance.Value = instance.IsFlexibleVersion ? 
+								await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+								await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 						}
 						if (instance.Version.InRange(1, 2147483647)) 
 						{
@@ -21265,6 +21879,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(41);
@@ -21273,13 +21888,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeDelegationTokenRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.OwnersCollection = await reader.ReadNullableArrayAsync(async () => await DescribeDelegationTokenOwner.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.OwnersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableArrayAsync(async () => await DescribeDelegationTokenOwner.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableArrayAsync(async () => await DescribeDelegationTokenOwner.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -21339,20 +21957,26 @@ namespace Kafka.Protocol
 			internal DescribeDelegationTokenOwner(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribeDelegationTokenOwner> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribeDelegationTokenOwner(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.PrincipalType = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.PrincipalName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -21442,6 +22066,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(41);
@@ -21450,6 +22075,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeDelegationTokenResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -21460,7 +22086,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TokensCollection = await reader.ReadArrayAsync(async () => await DescribedDelegationToken.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TokensCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DescribedDelegationToken.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DescribedDelegationToken.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -21555,20 +22183,26 @@ namespace Kafka.Protocol
 			internal DescribedDelegationToken(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribedDelegationToken> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribedDelegationToken(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.PrincipalType = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PrincipalName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.PrincipalName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -21584,7 +22218,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TokenId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TokenId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -21592,7 +22228,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.RenewersCollection = await reader.ReadArrayAsync(async () => await DescribedDelegationTokenRenewer.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.RenewersCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await DescribedDelegationTokenRenewer.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await DescribedDelegationTokenRenewer.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -21877,20 +22515,26 @@ namespace Kafka.Protocol
 				internal DescribedDelegationTokenRenewer(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<DescribedDelegationTokenRenewer> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DescribedDelegationTokenRenewer(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PrincipalType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.PrincipalType = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PrincipalName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.PrincipalName = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -22007,6 +22651,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(5, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(15);
@@ -22015,13 +22660,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeGroupsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeGroupsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupsCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.GroupsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
@@ -22114,6 +22762,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(5, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(15);
@@ -22122,6 +22771,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -22132,7 +22782,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupsCollection = await reader.ReadArrayAsync(async () => await DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.GroupsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -22214,9 +22866,11 @@ namespace Kafka.Protocol
 			internal DescribedGroup(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(5, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribedGroup> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -22227,23 +22881,33 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.GroupState = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupState = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProtocolType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ProtocolType = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProtocolData = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ProtocolData = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MembersCollection = await reader.ReadArrayAsync(async () => await DescribedGroupMember.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.MembersCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await DescribedGroupMember.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await DescribedGroupMember.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
@@ -22470,28 +23134,38 @@ namespace Kafka.Protocol
 				internal DescribedGroupMember(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(5, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<DescribedGroupMember> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DescribedGroupMember(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.MemberId = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ClientId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.ClientId = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ClientHost = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.ClientHost = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -22753,6 +23427,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(35);
@@ -22761,13 +23436,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeLogDirsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeLogDirsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadNullableArrayAsync(async () => await DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactNullableArrayAsync(async () => await DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
+					(await reader.ReadNullableArrayAsync(async () => await DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
 			}
 			return instance;
 		}
@@ -22827,20 +23505,26 @@ namespace Kafka.Protocol
 			internal DescribableLogDirTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribableLogDirTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribableLogDirTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -22930,6 +23614,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(35);
@@ -22938,6 +23623,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeLogDirsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -22948,7 +23634,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await DescribeLogDirsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DescribeLogDirsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DescribeLogDirsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -23035,9 +23723,11 @@ namespace Kafka.Protocol
 			internal DescribeLogDirsResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribeLogDirsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -23048,11 +23738,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.LogDir = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.LogDir = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = await reader.ReadArrayAsync(async () => await DescribeLogDirsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.TopicsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await DescribeLogDirsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await DescribeLogDirsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -23172,20 +23866,26 @@ namespace Kafka.Protocol
 				internal DescribeLogDirsTopic(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<DescribeLogDirsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new DescribeLogDirsTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await DescribeLogDirsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await DescribeLogDirsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadArrayAsync(async () => await DescribeLogDirsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -23270,9 +23970,11 @@ namespace Kafka.Protocol
 					internal DescribeLogDirsPartition(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(2, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<DescribeLogDirsPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -23446,6 +24148,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(61);
@@ -23454,13 +24157,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeProducersRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeProducersRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicRequest.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicRequest.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicRequest.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -23512,20 +24218,26 @@ namespace Kafka.Protocol
 			internal TopicRequest(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicRequest(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionIndexesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -23615,6 +24327,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(61);
@@ -23623,6 +24336,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeProducersResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -23633,7 +24347,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -23720,20 +24436,26 @@ namespace Kafka.Protocol
 			internal TopicResponse(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -23820,9 +24542,11 @@ namespace Kafka.Protocol
 				internal PartitionResponse(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -23837,11 +24561,15 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.ErrorMessage = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ActiveProducersCollection = await reader.ReadArrayAsync(async () => await ProducerState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.ActiveProducersCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await ProducerState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadArrayAsync(async () => await ProducerState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -24000,9 +24728,11 @@ namespace Kafka.Protocol
 					internal ProducerState(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(0, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<ProducerState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -24244,6 +24974,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(55);
@@ -24252,13 +24983,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeQuorumRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeQuorumRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -24310,20 +25044,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -24408,9 +25148,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -24475,6 +25217,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(55);
@@ -24483,6 +25226,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeQuorumResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -24493,7 +25237,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -24578,20 +25324,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -24676,9 +25428,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -24705,11 +25459,15 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CurrentVotersCollection = await reader.ReadArrayAsync(async () => await ReplicaState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.CurrentVotersCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await ReplicaState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadArrayAsync(async () => await ReplicaState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ObserversCollection = await reader.ReadArrayAsync(async () => await ReplicaState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.ObserversCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await ReplicaState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadArrayAsync(async () => await ReplicaState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -24953,9 +25711,11 @@ namespace Kafka.Protocol
 				}
 
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ReplicaState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -25051,6 +25811,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(65);
@@ -25059,13 +25820,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeTransactionsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeTransactionsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalIdsCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TransactionalIdsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -25121,6 +25885,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(65);
@@ -25129,6 +25894,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeTransactionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -25139,7 +25905,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionStatesCollection = await reader.ReadArrayAsync(async () => await TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TransactionStatesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -25224,9 +25992,11 @@ namespace Kafka.Protocol
 			internal TransactionState(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TransactionState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -25237,11 +26007,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TransactionalId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TransactionalId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TransactionState_ = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TransactionState_ = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -25261,7 +26035,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+					instance.TopicsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+						(await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
 				}
 				return instance;
 			}
@@ -25532,20 +26308,26 @@ namespace Kafka.Protocol
 				internal TopicData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new TopicData(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Topic = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -25629,6 +26411,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(50);
@@ -25637,13 +26420,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeUserScramCredentialsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new DescribeUserScramCredentialsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.UsersCollection = await reader.ReadNullableArrayAsync(async () => await UserName.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.UsersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableArrayAsync(async () => await UserName.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableArrayAsync(async () => await UserName.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -25703,16 +26489,20 @@ namespace Kafka.Protocol
 			internal UserName(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<UserName> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new UserName(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -25769,6 +26559,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(50);
@@ -25777,6 +26568,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<DescribeUserScramCredentialsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -25791,11 +26583,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = await reader.ReadArrayAsync(async () => await DescribeUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await DescribeUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await DescribeUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -25954,16 +26750,20 @@ namespace Kafka.Protocol
 			internal DescribeUserScramCredentialsResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<DescribeUserScramCredentialsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new DescribeUserScramCredentialsResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.User = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.User = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -25971,11 +26771,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.CredentialInfosCollection = await reader.ReadArrayAsync(async () => await CredentialInfo.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.CredentialInfosCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await CredentialInfo.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await CredentialInfo.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -26134,9 +26938,11 @@ namespace Kafka.Protocol
 				internal CredentialInfo(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<CredentialInfo> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -26235,6 +27041,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(43);
@@ -26243,6 +27050,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ElectLeadersRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -26253,7 +27061,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicPartitionsCollection = (await reader.ReadNullableArrayAsync(async () => await TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
+				instance.TopicPartitionsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactNullableArrayAsync(async () => await TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
+					(await reader.ReadNullableArrayAsync(async () => await TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -26354,20 +27164,26 @@ namespace Kafka.Protocol
 			internal TopicPartitions(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicPartitions> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicPartitions(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -26488,6 +27304,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(43);
@@ -26496,6 +27313,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ElectLeadersResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -26510,7 +27328,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ReplicaElectionResultsCollection = await reader.ReadArrayAsync(async () => await ReplicaElectionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ReplicaElectionResultsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ReplicaElectionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ReplicaElectionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -26630,20 +27450,26 @@ namespace Kafka.Protocol
 			internal ReplicaElectionResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ReplicaElectionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ReplicaElectionResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionResultCollection = await reader.ReadArrayAsync(async () => await PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionResultCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -26730,9 +27556,11 @@ namespace Kafka.Protocol
 				internal PartitionResult(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -26747,7 +27575,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.ErrorMessage = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -26874,6 +27704,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(54);
@@ -26882,17 +27713,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<EndQuorumEpochRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new EndQuorumEpochRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClusterId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -26983,20 +27819,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, -1);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -27081,9 +27923,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, -1);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -27102,7 +27946,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PreferredSuccessorsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.PreferredSuccessorsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -27259,6 +28105,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(54);
@@ -27267,6 +28114,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<EndQuorumEpochResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -27277,7 +28125,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -27362,20 +28212,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, -1);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -27460,9 +28316,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, -1);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -27633,6 +28491,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(26);
@@ -27641,13 +28500,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<EndTxnRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new EndTxnRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.TransactionalId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -27814,6 +28676,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(26);
@@ -27822,6 +28685,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<EndTxnResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -27918,6 +28782,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(58);
@@ -27926,6 +28791,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<EnvelopeRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -28068,6 +28934,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(58);
@@ -28076,6 +28943,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<EnvelopeResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -28180,6 +29048,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(40);
@@ -28188,6 +29057,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ExpireDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -28287,6 +29157,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(40);
@@ -28295,6 +29166,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ExpireDelegationTokenResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -28428,6 +29300,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(12, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(1);
@@ -28436,13 +29309,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(13);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<FetchRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FetchRequest(version);
 			if (instance.Version.InRange(12, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClusterId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -28474,15 +29350,21 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await FetchTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await FetchTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await FetchTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.ForgottenTopicsDataCollection = await reader.ReadArrayAsync(async () => await ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ForgottenTopicsDataCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(11, 2147483647)) 
 			{
-				instance.RackId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.RackId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -28799,16 +29681,20 @@ namespace Kafka.Protocol
 			internal FetchTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(12, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<FetchTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new FetchTopic(version);
 				if (instance.Version.InRange(0, 12)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(13, 2147483647)) 
 				{
@@ -28816,7 +29702,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -28926,9 +29814,11 @@ namespace Kafka.Protocol
 				internal FetchPartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(12, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<FetchPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -29201,16 +30091,20 @@ namespace Kafka.Protocol
 			internal ForgottenTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(12, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ForgottenTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ForgottenTopic(version);
 				if (instance.Version.InRange(7, 12)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(13, 2147483647)) 
 				{
@@ -29218,7 +30112,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(7, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -29357,6 +30253,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(12, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(1);
@@ -29365,6 +30262,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(13);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<FetchResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -29383,7 +30281,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = await reader.ReadArrayAsync(async () => await FetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResponsesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await FetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await FetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -29528,16 +30428,20 @@ namespace Kafka.Protocol
 			internal FetchableTopicResponse(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(12, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<FetchableTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new FetchableTopicResponse(version);
 				if (instance.Version.InRange(0, 12)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(13, 2147483647)) 
 				{
@@ -29545,7 +30449,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -29655,9 +30561,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(12, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -29696,7 +30604,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(4, 2147483647)) 
 					{
-						instance.AbortedTransactionsCollection = await reader.ReadNullableArrayAsync(async () => await AbortedTransaction.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.AbortedTransactionsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableArrayAsync(async () => await AbortedTransaction.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableArrayAsync(async () => await AbortedTransaction.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(11, 2147483647)) 
 					{
@@ -29935,9 +30845,11 @@ namespace Kafka.Protocol
 					internal EpochEndOffset(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(12, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<EpochEndOffset> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -30061,9 +30973,11 @@ namespace Kafka.Protocol
 					internal LeaderIdAndEpoch(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(12, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -30193,9 +31107,11 @@ namespace Kafka.Protocol
 					internal SnapshotId(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(12, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -30324,9 +31240,11 @@ namespace Kafka.Protocol
 					internal AbortedTransaction(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(12, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<AbortedTransaction> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -30492,6 +31410,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(59);
@@ -30500,13 +31419,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<FetchSnapshotRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FetchSnapshotRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClusterId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -30518,7 +31440,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -30683,20 +31607,26 @@ namespace Kafka.Protocol
 			internal TopicSnapshot(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicSnapshot> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicSnapshot(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -30783,9 +31713,11 @@ namespace Kafka.Protocol
 				internal PartitionSnapshot(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionSnapshot> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -30926,9 +31858,11 @@ namespace Kafka.Protocol
 					internal SnapshotId(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(0, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -31056,6 +31990,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(59);
@@ -31064,6 +31999,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<FetchSnapshotResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -31078,7 +32014,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -31193,20 +32131,26 @@ namespace Kafka.Protocol
 			internal TopicSnapshot(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicSnapshot> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicSnapshot(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -31293,9 +32237,11 @@ namespace Kafka.Protocol
 				internal PartitionSnapshot(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionSnapshot> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -31460,9 +32406,11 @@ namespace Kafka.Protocol
 					internal SnapshotId(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(0, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -31582,9 +32530,11 @@ namespace Kafka.Protocol
 					internal LeaderIdAndEpoch(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(0, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -31771,6 +32721,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(10);
@@ -31779,13 +32730,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<FindCoordinatorRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FindCoordinatorRequest(version);
 			if (instance.Version.InRange(0, 3)) 
 			{
-				instance.Key = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.Key = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -31793,7 +32747,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(4, 2147483647)) 
 			{
-				instance.CoordinatorKeysCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.CoordinatorKeysCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -31917,6 +32873,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(10);
@@ -31925,6 +32882,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<FindCoordinatorResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -31939,7 +32897,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(1, 3)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 3)) 
 			{
@@ -31947,7 +32907,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 3)) 
 			{
-				instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.Host = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 3)) 
 			{
@@ -31955,7 +32917,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(4, 2147483647)) 
 			{
-				instance.CoordinatorsCollection = await reader.ReadArrayAsync(async () => await Coordinator.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.CoordinatorsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await Coordinator.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await Coordinator.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -32203,16 +33167,20 @@ namespace Kafka.Protocol
 			internal Coordinator(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<Coordinator> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new Coordinator(version);
 				if (instance.Version.InRange(4, 2147483647)) 
 				{
-					instance.Key = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Key = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(4, 2147483647)) 
 				{
@@ -32220,7 +33188,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(4, 2147483647)) 
 				{
-					instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Host = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(4, 2147483647)) 
 				{
@@ -32232,7 +33202,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(4, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -32452,6 +33424,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(12);
@@ -32460,13 +33433,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<HeartbeatRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new HeartbeatRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -32474,11 +33450,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.MemberId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -32641,6 +33621,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(12);
@@ -32649,6 +33630,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<HeartbeatResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -32740,6 +33722,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(44);
@@ -32748,13 +33731,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<IncrementalAlterConfigsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new IncrementalAlterConfigsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResourcesCollection = (await reader.ReadArrayAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ResourceType);
+				instance.ResourcesCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ResourceType);
+					(await reader.ReadArrayAsync(async () => await AlterConfigsResource.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.ResourceType);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -32816,9 +33802,11 @@ namespace Kafka.Protocol
 			internal AlterConfigsResource(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(1, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -32829,11 +33817,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ConfigsCollection = (await reader.ReadArrayAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					instance.ConfigsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+						(await reader.ReadArrayAsync(async () => await AlterableConfig.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 				}
 				return instance;
 			}
@@ -32953,16 +33945,20 @@ namespace Kafka.Protocol
 				internal AlterableConfig(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(1, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new AlterableConfig(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
@@ -32970,7 +33966,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Value = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Value = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -33129,6 +34127,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(44);
@@ -33137,6 +34136,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<IncrementalAlterConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -33147,7 +34147,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = await reader.ReadArrayAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ResponsesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -33234,9 +34236,11 @@ namespace Kafka.Protocol
 			internal AlterConfigsResourceResponse(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(1, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -33247,7 +34251,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -33255,7 +34261,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ResourceName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ResourceName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -33414,6 +34422,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(22);
@@ -33422,13 +34431,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<InitProducerIdRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new InitProducerIdRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.TransactionalId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -33605,6 +34617,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(22);
@@ -33613,6 +34626,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<InitProducerIdResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -33780,6 +34794,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(6, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(11);
@@ -33788,13 +34803,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(7);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<JoinGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new JoinGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -33806,19 +34824,27 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.MemberId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProtocolType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ProtocolType = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProtocolsCollection = (await reader.ReadArrayAsync(async () => await JoinGroupRequestProtocol.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.ProtocolsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await JoinGroupRequestProtocol.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await JoinGroupRequestProtocol.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -34075,16 +35101,20 @@ namespace Kafka.Protocol
 			internal JoinGroupRequestProtocol(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<JoinGroupRequestProtocol> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new JoinGroupRequestProtocol(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -34178,6 +35208,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(6, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(11);
@@ -34186,6 +35217,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(7);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<JoinGroupResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -34204,23 +35236,33 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.ProtocolType = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ProtocolType = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProtocolName = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ProtocolName = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Leader = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.Leader = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.MemberId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MembersCollection = await reader.ReadArrayAsync(async () => await JoinGroupResponseMember.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.MembersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await JoinGroupResponseMember.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await JoinGroupResponseMember.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -34509,20 +35551,26 @@ namespace Kafka.Protocol
 			internal JoinGroupResponseMember(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<JoinGroupResponseMember> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new JoinGroupResponseMember(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.MemberId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -34654,6 +35702,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(4);
@@ -34662,6 +35711,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<LeaderAndIsrRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -34684,15 +35734,21 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 1)) 
 			{
-				instance.UngroupedPartitionStatesCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.UngroupedPartitionStatesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await LeaderAndIsrPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await LeaderAndIsrPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.TopicStatesCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicStatesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await LeaderAndIsrTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await LeaderAndIsrTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.LiveLeadersCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrLiveLeader.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.LiveLeadersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await LeaderAndIsrLiveLeader.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await LeaderAndIsrLiveLeader.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -34912,16 +35968,20 @@ namespace Kafka.Protocol
 			internal LeaderAndIsrTopicState(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<LeaderAndIsrTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrTopicState(version);
 				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
@@ -34929,7 +35989,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					instance.PartitionStatesCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionStatesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await LeaderAndIsrPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await LeaderAndIsrPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -35074,9 +36136,11 @@ namespace Kafka.Protocol
 			internal LeaderAndIsrLiveLeader(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<LeaderAndIsrLiveLeader> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -35087,7 +36151,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.HostName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.HostName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -35210,16 +36276,20 @@ namespace Kafka.Protocol
 				}
 
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<LeaderAndIsrPartitionState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrPartitionState(version);
 				if (instance.Version.InRange(0, 1)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -35239,7 +36309,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.IsrCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.IsrCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -35247,15 +36319,21 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.ReplicasCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.AddingReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.AddingReplicasCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.RemovingReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.RemovingReplicasCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
@@ -35628,6 +36706,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(4);
@@ -35636,6 +36715,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<LeaderAndIsrResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -35646,11 +36726,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 4)) 
 			{
-				instance.PartitionErrorsCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.PartitionErrorsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await LeaderAndIsrPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await LeaderAndIsrPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await LeaderAndIsrTopicError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicId);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await LeaderAndIsrTopicError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicId);
+					(await reader.ReadArrayAsync(async () => await LeaderAndIsrTopicError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicId);
 			}
 			return instance;
 		}
@@ -35770,9 +36854,11 @@ namespace Kafka.Protocol
 			internal LeaderAndIsrTopicError(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<LeaderAndIsrTopicError> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -35783,7 +36869,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.PartitionErrorsCollection = await reader.ReadArrayAsync(async () => await LeaderAndIsrPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionErrorsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await LeaderAndIsrPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await LeaderAndIsrPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -35869,16 +36957,20 @@ namespace Kafka.Protocol
 				}
 
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<LeaderAndIsrPartitionError> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrPartitionError(version);
 				if (instance.Version.InRange(0, 4)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -36001,6 +37093,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -36009,6 +37102,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<LeaderChangeMessage> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -36023,11 +37117,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.VotersCollection = await reader.ReadArrayAsync(async () => await Voter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.VotersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await Voter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await Voter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GrantingVotersCollection = await reader.ReadArrayAsync(async () => await Voter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.GrantingVotersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await Voter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await Voter.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -36178,9 +37276,11 @@ namespace Kafka.Protocol
 				}
 
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<Voter> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -36242,6 +37342,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(13);
@@ -36250,21 +37351,28 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<LeaveGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new LeaveGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2)) 
 			{
-				instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.MemberId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.MembersCollection = await reader.ReadArrayAsync(async () => await MemberIdentity.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.MembersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await MemberIdentity.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await MemberIdentity.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -36384,20 +37492,26 @@ namespace Kafka.Protocol
 			internal MemberIdentity(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<MemberIdentity> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new MemberIdentity(version);
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.MemberId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -36495,6 +37609,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(13);
@@ -36503,6 +37618,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<LeaveGroupResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -36517,7 +37633,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.MembersCollection = await reader.ReadArrayAsync(async () => await MemberResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.MembersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await MemberResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await MemberResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -36632,20 +37750,26 @@ namespace Kafka.Protocol
 			internal MemberResponse(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<MemberResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new MemberResponse(version);
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.MemberId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
@@ -36775,6 +37899,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(16);
@@ -36783,13 +37908,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ListGroupsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ListGroupsRequest(version);
 			if (instance.Version.InRange(4, 2147483647)) 
 			{
-				instance.StatesFilterCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.StatesFilterCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -36845,6 +37973,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(16);
@@ -36853,6 +37982,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ListGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -36867,7 +37997,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupsCollection = await reader.ReadArrayAsync(async () => await ListedGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.GroupsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ListedGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ListedGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -36982,24 +38114,32 @@ namespace Kafka.Protocol
 			internal ListedGroup(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ListedGroup> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ListedGroup(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ProtocolType = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ProtocolType = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(4, 2147483647)) 
 				{
-					instance.GroupState = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupState = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -37104,878 +38244,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ListOffsetRequest : Message, IRespond<ListOffsetResponse>
-	{
-		public ListOffsetRequest(Int16 version)
-		{
-			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
-				throw new UnsupportedVersionException($"ListOffsetRequest does not support version {version}. Valid versions are: 0-5");
-			}
-
-			Version = version;
-		}
-
-		public static readonly Int16 ApiKey = Int16.From(2);
-
-		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(5);
-
-		public override Int16 Version { get; }
-
-		public static async ValueTask<ListOffsetRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			var instance = new ListOffsetRequest(version);
-			if (instance.Version.InRange(0, 2147483647)) 
-			{
-				instance.ReplicaId = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-			}
-			if (instance.Version.InRange(2, 2147483647)) 
-			{
-				instance.IsolationLevel = await reader.ReadInt8Async(cancellationToken).ConfigureAwait(false);
-			}
-			if (instance.Version.InRange(0, 2147483647)) 
-			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await ListOffsetTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
-			}
-			return instance;
-		}
-
-		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			if (Version.InRange(0, 2147483647)) 
-			{
-				await writer.WriteInt32Async(ReplicaId, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(2, 2147483647)) 
-			{
-				await writer.WriteInt8Async(IsolationLevel, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
-			}
-		}
-
-		private Int32 _replicaId = Int32.Default;
-		/// <summary>
-		/// <para>The broker ID of the requestor, or -1 if this request is being made by a normal consumer.</para>
-		/// <para>Versions: 0+</para>
-		/// </summary>
-		public Int32 ReplicaId 
-		{
-			get => _replicaId;
-			set 
-			{
-				if (Version.InRange(0, 2147483647) == false) 
-				{
-					throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				_replicaId = value;
-			}
-		}
-
-		/// <summary>
-		/// <para>The broker ID of the requestor, or -1 if this request is being made by a normal consumer.</para>
-		/// <para>Versions: 0+</para>
-		/// </summary>
-		public ListOffsetRequest WithReplicaId(Int32 replicaId)
-		{
-			ReplicaId = replicaId;
-			return this;
-		}
-
-		private Int8 _isolationLevel = Int8.Default;
-		/// <summary>
-		/// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records</para>
-		/// <para>Versions: 2+</para>
-		/// </summary>
-		public Int8 IsolationLevel 
-		{
-			get => _isolationLevel;
-			set 
-			{
-				if (Version.InRange(2, 2147483647) == false) 
-				{
-					throw new UnsupportedVersionException($"IsolationLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
-				}
-
-				_isolationLevel = value;
-			}
-		}
-
-		/// <summary>
-		/// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records</para>
-		/// <para>Versions: 2+</para>
-		/// </summary>
-		public ListOffsetRequest WithIsolationLevel(Int8 isolationLevel)
-		{
-			IsolationLevel = isolationLevel;
-			return this;
-		}
-
-		private ListOffsetTopic[] _topicsCollection = Array.Empty<ListOffsetTopic>();
-		/// <summary>
-		/// <para>Each topic in the request.</para>
-		/// <para>Versions: 0+</para>
-		/// </summary>
-		public ListOffsetTopic[] TopicsCollection 
-		{
-			get => _topicsCollection;
-			set 
-			{
-				if (Version.InRange(0, 2147483647) == false) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				_topicsCollection = value;
-			}
-		}
-
-		/// <summary>
-		/// <para>Each topic in the request.</para>
-		/// <para>Versions: 0+</para>
-		/// </summary>
-		public ListOffsetRequest WithTopicsCollection(params Func<ListOffsetTopic, ListOffsetTopic>[] createFields)
-		{
-			TopicsCollection = createFields
-				.Select(createField => createField(CreateListOffsetTopic()))
-				.ToArray();
-			return this;
-		}
-
-		internal ListOffsetTopic CreateListOffsetTopic()
-		{
-			return new ListOffsetTopic(Version);
-		}
-
-		public class ListOffsetTopic : ISerialize
-		{
-			internal ListOffsetTopic(Int16 version)
-			{
-				Version = version;
-			}
-
-			internal Int16 Version { get; }
-
-			public static async ValueTask<ListOffsetTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
-			{
-				var instance = new ListOffsetTopic(version);
-				if (instance.Version.InRange(0, 2147483647)) 
-				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-				}
-				if (instance.Version.InRange(0, 2147483647)) 
-				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await ListOffsetPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
-				}
-				return instance;
-			}
-
-			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-			{
-				if (Version.InRange(0, 2147483647)) 
-				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
-				}
-			}
-
-			private String _name = String.Default;
-			/// <summary>
-			/// <para>The topic name.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public String Name 
-			{
-				get => _name;
-				set 
-				{
-					if (Version.InRange(0, 2147483647) == false) 
-					{
-						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					_name = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The topic name.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public ListOffsetTopic WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
-			private ListOffsetPartition[] _partitionsCollection = Array.Empty<ListOffsetPartition>();
-			/// <summary>
-			/// <para>Each partition in the request.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public ListOffsetPartition[] PartitionsCollection 
-			{
-				get => _partitionsCollection;
-				set 
-				{
-					if (Version.InRange(0, 2147483647) == false) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					_partitionsCollection = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>Each partition in the request.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public ListOffsetTopic WithPartitionsCollection(params Func<ListOffsetPartition, ListOffsetPartition>[] createFields)
-			{
-				PartitionsCollection = createFields
-					.Select(createField => createField(CreateListOffsetPartition()))
-					.ToArray();
-				return this;
-			}
-
-			internal ListOffsetPartition CreateListOffsetPartition()
-			{
-				return new ListOffsetPartition(Version);
-			}
-
-			public class ListOffsetPartition : ISerialize
-			{
-				internal ListOffsetPartition(Int16 version)
-				{
-					Version = version;
-				}
-
-				internal Int16 Version { get; }
-
-				public static async ValueTask<ListOffsetPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
-				{
-					var instance = new ListOffsetPartition(version);
-					if (instance.Version.InRange(0, 2147483647)) 
-					{
-						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(4, 2147483647)) 
-					{
-						instance.CurrentLeaderEpoch = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(0, 2147483647)) 
-					{
-						instance.Timestamp = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(0, 0)) 
-					{
-						instance.MaxNumOffsets = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-					}
-					return instance;
-				}
-
-				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-				{
-					if (Version.InRange(0, 2147483647)) 
-					{
-						await writer.WriteInt32Async(PartitionIndex, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(4, 2147483647)) 
-					{
-						await writer.WriteInt32Async(CurrentLeaderEpoch, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
-						await writer.WriteInt64Async(Timestamp, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 0)) 
-					{
-						await writer.WriteInt32Async(MaxNumOffsets, cancellationToken).ConfigureAwait(false);
-					}
-				}
-
-				private Int32 _partitionIndex = Int32.Default;
-				/// <summary>
-				/// <para>The partition index.</para>
-				/// <para>Versions: 0+</para>
-				/// </summary>
-				public Int32 PartitionIndex 
-				{
-					get => _partitionIndex;
-					set 
-					{
-						if (Version.InRange(0, 2147483647) == false) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						_partitionIndex = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The partition index.</para>
-				/// <para>Versions: 0+</para>
-				/// </summary>
-				public ListOffsetPartition WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
-				private Int32 _currentLeaderEpoch = Int32.Default;
-				/// <summary>
-				/// <para>The current leader epoch.</para>
-				/// <para>Versions: 4+</para>
-				/// </summary>
-				public Int32 CurrentLeaderEpoch 
-				{
-					get => _currentLeaderEpoch;
-					set 
-					{
-						if (Version.InRange(4, 2147483647) == false) 
-						{
-							throw new UnsupportedVersionException($"CurrentLeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-						}
-
-						_currentLeaderEpoch = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The current leader epoch.</para>
-				/// <para>Versions: 4+</para>
-				/// </summary>
-				public ListOffsetPartition WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
-				{
-					CurrentLeaderEpoch = currentLeaderEpoch;
-					return this;
-				}
-
-				private Int64 _timestamp = Int64.Default;
-				/// <summary>
-				/// <para>The current timestamp.</para>
-				/// <para>Versions: 0+</para>
-				/// </summary>
-				public Int64 Timestamp 
-				{
-					get => _timestamp;
-					set 
-					{
-						if (Version.InRange(0, 2147483647) == false) 
-						{
-							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						_timestamp = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The current timestamp.</para>
-				/// <para>Versions: 0+</para>
-				/// </summary>
-				public ListOffsetPartition WithTimestamp(Int64 timestamp)
-				{
-					Timestamp = timestamp;
-					return this;
-				}
-
-				private Int32 _maxNumOffsets = Int32.Default;
-				/// <summary>
-				/// <para>The maximum number of offsets to report.</para>
-				/// <para>Versions: 0</para>
-				/// </summary>
-				public Int32 MaxNumOffsets 
-				{
-					get => _maxNumOffsets;
-					set 
-					{
-						if (Version.InRange(0, 0) == false) 
-						{
-							throw new UnsupportedVersionException($"MaxNumOffsets does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-						}
-
-						_maxNumOffsets = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The maximum number of offsets to report.</para>
-				/// <para>Versions: 0</para>
-				/// </summary>
-				public ListOffsetPartition WithMaxNumOffsets(Int32 maxNumOffsets)
-				{
-					MaxNumOffsets = maxNumOffsets;
-					return this;
-				}
-			}
-		}
-
-		public ListOffsetResponse Respond()
-			=> new ListOffsetResponse(Version);
-	}
-
-	public class ListOffsetResponse : Message
-	{
-		public ListOffsetResponse(Int16 version)
-		{
-			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
-				throw new UnsupportedVersionException($"ListOffsetResponse does not support version {version}. Valid versions are: 0-5");
-			}
-
-			Version = version;
-		}
-
-		public static readonly Int16 ApiKey = Int16.From(2);
-
-		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(5);
-
-		public override Int16 Version { get; }
-
-		public static async ValueTask<ListOffsetResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			var instance = new ListOffsetResponse(version);
-			if (instance.Version.InRange(2, 2147483647)) 
-			{
-				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-			}
-			if (instance.Version.InRange(0, 2147483647)) 
-			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await ListOffsetTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
-			}
-			return instance;
-		}
-
-		public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			if (Version.InRange(2, 2147483647)) 
-			{
-				await writer.WriteInt32Async(ThrottleTimeMs, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
-			}
-		}
-
-		private Int32 _throttleTimeMs = Int32.Default;
-		/// <summary>
-		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
-		/// <para>Versions: 2+</para>
-		/// </summary>
-		public Int32 ThrottleTimeMs 
-		{
-			get => _throttleTimeMs;
-			set 
-			{
-				_throttleTimeMs = value;
-			}
-		}
-
-		/// <summary>
-		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
-		/// <para>Versions: 2+</para>
-		/// </summary>
-		public ListOffsetResponse WithThrottleTimeMs(Int32 throttleTimeMs)
-		{
-			ThrottleTimeMs = throttleTimeMs;
-			return this;
-		}
-
-		private ListOffsetTopicResponse[] _topicsCollection = Array.Empty<ListOffsetTopicResponse>();
-		/// <summary>
-		/// <para>Each topic in the response.</para>
-		/// <para>Versions: 0+</para>
-		/// </summary>
-		public ListOffsetTopicResponse[] TopicsCollection 
-		{
-			get => _topicsCollection;
-			set 
-			{
-				if (Version.InRange(0, 2147483647) == false) 
-				{
-					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
-
-				_topicsCollection = value;
-			}
-		}
-
-		/// <summary>
-		/// <para>Each topic in the response.</para>
-		/// <para>Versions: 0+</para>
-		/// </summary>
-		public ListOffsetResponse WithTopicsCollection(params Func<ListOffsetTopicResponse, ListOffsetTopicResponse>[] createFields)
-		{
-			TopicsCollection = createFields
-				.Select(createField => createField(CreateListOffsetTopicResponse()))
-				.ToArray();
-			return this;
-		}
-
-		internal ListOffsetTopicResponse CreateListOffsetTopicResponse()
-		{
-			return new ListOffsetTopicResponse(Version);
-		}
-
-		public class ListOffsetTopicResponse : ISerialize
-		{
-			internal ListOffsetTopicResponse(Int16 version)
-			{
-				Version = version;
-			}
-
-			internal Int16 Version { get; }
-
-			public static async ValueTask<ListOffsetTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
-			{
-				var instance = new ListOffsetTopicResponse(version);
-				if (instance.Version.InRange(0, 2147483647)) 
-				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
-				}
-				if (instance.Version.InRange(0, 2147483647)) 
-				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await ListOffsetPartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
-				}
-				return instance;
-			}
-
-			public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-			{
-				if (Version.InRange(0, 2147483647)) 
-				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
-				}
-			}
-
-			private String _name = String.Default;
-			/// <summary>
-			/// <para>The topic name</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public String Name 
-			{
-				get => _name;
-				set 
-				{
-					if (Version.InRange(0, 2147483647) == false) 
-					{
-						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					_name = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The topic name</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public ListOffsetTopicResponse WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
-			private ListOffsetPartitionResponse[] _partitionsCollection = Array.Empty<ListOffsetPartitionResponse>();
-			/// <summary>
-			/// <para>Each partition in the response.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public ListOffsetPartitionResponse[] PartitionsCollection 
-			{
-				get => _partitionsCollection;
-				set 
-				{
-					if (Version.InRange(0, 2147483647) == false) 
-					{
-						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
-
-					_partitionsCollection = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>Each partition in the response.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public ListOffsetTopicResponse WithPartitionsCollection(params Func<ListOffsetPartitionResponse, ListOffsetPartitionResponse>[] createFields)
-			{
-				PartitionsCollection = createFields
-					.Select(createField => createField(CreateListOffsetPartitionResponse()))
-					.ToArray();
-				return this;
-			}
-
-			internal ListOffsetPartitionResponse CreateListOffsetPartitionResponse()
-			{
-				return new ListOffsetPartitionResponse(Version);
-			}
-
-			public class ListOffsetPartitionResponse : ISerialize
-			{
-				internal ListOffsetPartitionResponse(Int16 version)
-				{
-					Version = version;
-				}
-
-				internal Int16 Version { get; }
-
-				public static async ValueTask<ListOffsetPartitionResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
-				{
-					var instance = new ListOffsetPartitionResponse(version);
-					if (instance.Version.InRange(0, 2147483647)) 
-					{
-						instance.PartitionIndex = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(0, 2147483647)) 
-					{
-						instance.ErrorCode = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(0, 0)) 
-					{
-						instance.OldStyleOffsetsCollection = await reader.ReadArrayAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(1, 2147483647)) 
-					{
-						instance.Timestamp = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(1, 2147483647)) 
-					{
-						instance.Offset = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(4, 2147483647)) 
-					{
-						instance.LeaderEpoch = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
-					}
-					return instance;
-				}
-
-				public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-				{
-					if (Version.InRange(0, 2147483647)) 
-					{
-						await writer.WriteInt32Async(PartitionIndex, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
-						await writer.WriteInt16Async(ErrorCode, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 0)) 
-					{
-						await writer.WriteArrayAsync(cancellationToken, OldStyleOffsetsCollection).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
-						await writer.WriteInt64Async(Timestamp, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
-						await writer.WriteInt64Async(Offset, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(4, 2147483647)) 
-					{
-						await writer.WriteInt32Async(LeaderEpoch, cancellationToken).ConfigureAwait(false);
-					}
-				}
-
-				private Int32 _partitionIndex = Int32.Default;
-				/// <summary>
-				/// <para>The partition index.</para>
-				/// <para>Versions: 0+</para>
-				/// </summary>
-				public Int32 PartitionIndex 
-				{
-					get => _partitionIndex;
-					set 
-					{
-						if (Version.InRange(0, 2147483647) == false) 
-						{
-							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						_partitionIndex = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The partition index.</para>
-				/// <para>Versions: 0+</para>
-				/// </summary>
-				public ListOffsetPartitionResponse WithPartitionIndex(Int32 partitionIndex)
-				{
-					PartitionIndex = partitionIndex;
-					return this;
-				}
-
-				private Int16 _errorCode = Int16.Default;
-				/// <summary>
-				/// <para>The partition error code, or 0 if there was no error.</para>
-				/// <para>Versions: 0+</para>
-				/// </summary>
-				public Int16 ErrorCode 
-				{
-					get => _errorCode;
-					set 
-					{
-						if (Version.InRange(0, 2147483647) == false) 
-						{
-							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
-
-						_errorCode = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The partition error code, or 0 if there was no error.</para>
-				/// <para>Versions: 0+</para>
-				/// </summary>
-				public ListOffsetPartitionResponse WithErrorCode(Int16 errorCode)
-				{
-					ErrorCode = errorCode;
-					return this;
-				}
-
-				private Int64[] _oldStyleOffsetsCollection = Array.Empty<Int64>();
-				/// <summary>
-				/// <para>The result offsets.</para>
-				/// <para>Versions: 0</para>
-				/// </summary>
-				public Int64[] OldStyleOffsetsCollection 
-				{
-					get => _oldStyleOffsetsCollection;
-					set 
-					{
-						if (Version.InRange(0, 0) == false) 
-						{
-							throw new UnsupportedVersionException($"OldStyleOffsetsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-						}
-
-						_oldStyleOffsetsCollection = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The result offsets.</para>
-				/// <para>Versions: 0</para>
-				/// </summary>
-				public ListOffsetPartitionResponse WithOldStyleOffsetsCollection(Int64[] oldStyleOffsetsCollection)
-				{
-					OldStyleOffsetsCollection = oldStyleOffsetsCollection;
-					return this;
-				}
-
-				private Int64 _timestamp = new Int64(-1);
-				/// <summary>
-				/// <para>The timestamp associated with the returned offset.</para>
-				/// <para>Versions: 1+</para>
-				/// <para>Default: -1</para>
-				/// </summary>
-				public Int64 Timestamp 
-				{
-					get => _timestamp;
-					set 
-					{
-						if (Version.InRange(1, 2147483647) == false) 
-						{
-							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
-
-						_timestamp = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The timestamp associated with the returned offset.</para>
-				/// <para>Versions: 1+</para>
-				/// <para>Default: -1</para>
-				/// </summary>
-				public ListOffsetPartitionResponse WithTimestamp(Int64 timestamp)
-				{
-					Timestamp = timestamp;
-					return this;
-				}
-
-				private Int64 _offset = new Int64(-1);
-				/// <summary>
-				/// <para>The returned offset.</para>
-				/// <para>Versions: 1+</para>
-				/// <para>Default: -1</para>
-				/// </summary>
-				public Int64 Offset 
-				{
-					get => _offset;
-					set 
-					{
-						if (Version.InRange(1, 2147483647) == false) 
-						{
-							throw new UnsupportedVersionException($"Offset does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
-
-						_offset = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>The returned offset.</para>
-				/// <para>Versions: 1+</para>
-				/// <para>Default: -1</para>
-				/// </summary>
-				public ListOffsetPartitionResponse WithOffset(Int64 offset)
-				{
-					Offset = offset;
-					return this;
-				}
-
-				private Int32 _leaderEpoch = Int32.Default;
-				/// <summary>
-				/// <para>Versions: 4+</para>
-				/// </summary>
-				public Int32 LeaderEpoch 
-				{
-					get => _leaderEpoch;
-					set 
-					{
-						if (Version.InRange(4, 2147483647) == false) 
-						{
-							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-						}
-
-						_leaderEpoch = value;
-					}
-				}
-
-				/// <summary>
-				/// <para>Versions: 4+</para>
-				/// </summary>
-				public ListOffsetPartitionResponse WithLeaderEpoch(Int32 leaderEpoch)
-				{
-					LeaderEpoch = leaderEpoch;
-					return this;
-				}
-			}
-		}
-	}
-
-	public class ListOffsetsRequest : Message, IRespond<ListOffsetResponse>
+	public class ListOffsetsRequest : Message, IRespond<ListOffsetsResponse>
 	{
 		public ListOffsetsRequest(Int16 version)
 		{
@@ -37985,6 +38254,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(6, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(2);
@@ -37993,6 +38263,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(7);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ListOffsetsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -38007,7 +38278,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await ListOffsetsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ListOffsetsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ListOffsetsTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -38127,20 +38400,26 @@ namespace Kafka.Protocol
 			internal ListOffsetsTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ListOffsetsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ListOffsetsTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await ListOffsetsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await ListOffsetsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await ListOffsetsPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -38227,9 +38506,11 @@ namespace Kafka.Protocol
 				internal ListOffsetsPartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(6, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<ListOffsetsPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -38390,8 +38671,8 @@ namespace Kafka.Protocol
 			}
 		}
 
-		public ListOffsetResponse Respond()
-			=> new ListOffsetResponse(Version);
+		public ListOffsetsResponse Respond()
+			=> new ListOffsetsResponse(Version);
 	}
 
 	public class ListOffsetsResponse : Message
@@ -38404,6 +38685,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(6, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(2);
@@ -38412,6 +38694,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(7);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ListOffsetsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -38422,7 +38705,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await ListOffsetsTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await ListOffsetsTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await ListOffsetsTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -38504,20 +38789,26 @@ namespace Kafka.Protocol
 			internal ListOffsetsTopicResponse(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ListOffsetsTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ListOffsetsTopicResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await ListOffsetsPartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await ListOffsetsPartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await ListOffsetsPartitionResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -38604,9 +38895,11 @@ namespace Kafka.Protocol
 				internal ListOffsetsPartitionResponse(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(6, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<ListOffsetsPartitionResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -38621,7 +38914,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 0)) 
 					{
-						instance.OldStyleOffsetsCollection = await reader.ReadArrayAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.OldStyleOffsetsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
@@ -38857,6 +39152,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(46);
@@ -38865,6 +39161,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ListPartitionReassignmentsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -38875,7 +39172,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadNullableArrayAsync(async () => await ListPartitionReassignmentsTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableArrayAsync(async () => await ListPartitionReassignmentsTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableArrayAsync(async () => await ListPartitionReassignmentsTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -38972,20 +39271,26 @@ namespace Kafka.Protocol
 			internal ListPartitionReassignmentsTopics(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<ListPartitionReassignmentsTopics> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ListPartitionReassignmentsTopics(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionIndexesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -39075,6 +39380,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(46);
@@ -39083,6 +39389,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ListPartitionReassignmentsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -39097,11 +39404,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OngoingTopicReassignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await OngoingTopicReassignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await OngoingTopicReassignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -39260,20 +39571,26 @@ namespace Kafka.Protocol
 			internal OngoingTopicReassignment(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OngoingTopicReassignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OngoingTopicReassignment(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OngoingPartitionReassignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await OngoingPartitionReassignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await OngoingPartitionReassignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -39360,9 +39677,11 @@ namespace Kafka.Protocol
 				internal OngoingPartitionReassignment(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OngoingPartitionReassignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -39373,15 +39692,21 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.ReplicasCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.AddingReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.AddingReplicasCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.RemovingReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.RemovingReplicasCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -39535,6 +39860,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(66);
@@ -39543,17 +39869,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ListTransactionsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ListTransactionsRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.StateFiltersCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.StateFiltersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ProducerIdFiltersCollection = await reader.ReadArrayAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.ProducerIdFiltersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await Int64.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -39642,6 +39973,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(66);
@@ -39650,6 +39982,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ListTransactionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -39664,11 +39997,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.UnknownStateFiltersCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.UnknownStateFiltersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionStatesCollection = await reader.ReadArrayAsync(async () => await TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TransactionStatesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -39817,16 +40154,20 @@ namespace Kafka.Protocol
 			internal TransactionState(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TransactionState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TransactionState(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TransactionalId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TransactionalId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -39834,7 +40175,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TransactionState_ = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TransactionState_ = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -39950,6 +40293,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(9, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(3);
@@ -39958,13 +40302,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(12);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<MetadataRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new MetadataRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadNullableArrayAsync(async () => await MetadataRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableArrayAsync(async () => await MetadataRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableArrayAsync(async () => await MetadataRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(4, 2147483647)) 
 			{
@@ -40048,9 +40395,11 @@ namespace Kafka.Protocol
 			internal MetadataRequestTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(9, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<MetadataRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -40061,7 +40410,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -40241,6 +40592,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(9, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(3);
@@ -40249,6 +40601,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(12);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<MetadataResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -40259,11 +40612,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.BrokersCollection = (await reader.ReadArrayAsync(async () => await MetadataResponseBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.NodeId);
+				instance.BrokersCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await MetadataResponseBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.NodeId);
+					(await reader.ReadArrayAsync(async () => await MetadataResponseBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.NodeId);
 			}
 			if (instance.Version.InRange(2, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClusterId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -40271,7 +40628,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await MetadataResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await MetadataResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await MetadataResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(8, 10)) 
 			{
@@ -40373,9 +40732,11 @@ namespace Kafka.Protocol
 			internal MetadataResponseBroker(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(9, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<MetadataResponseBroker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -40386,7 +40747,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Host = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -40394,7 +40757,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.Rack = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Rack = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -40638,9 +41003,11 @@ namespace Kafka.Protocol
 			internal MetadataResponseTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(9, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<MetadataResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -40651,7 +41018,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(10, 2147483647)) 
 				{
@@ -40663,7 +41032,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await MetadataResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await MetadataResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await MetadataResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(8, 2147483647)) 
 				{
@@ -40855,9 +41226,11 @@ namespace Kafka.Protocol
 				internal MetadataResponsePartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(9, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<MetadataResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -40880,15 +41253,21 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.ReplicaNodesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.ReplicaNodesCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.IsrNodesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.IsrNodesCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(5, 2147483647)) 
 					{
-						instance.OfflineReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.OfflineReplicasCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -41195,6 +41574,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(8, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(8);
@@ -41203,13 +41583,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(8);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<OffsetCommitRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetCommitRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -41217,11 +41600,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.MemberId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(2, 4)) 
 			{
@@ -41229,7 +41616,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -41445,20 +41834,26 @@ namespace Kafka.Protocol
 			internal OffsetCommitRequestTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(8, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetCommitRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetCommitRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await OffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await OffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -41545,9 +41940,11 @@ namespace Kafka.Protocol
 				internal OffsetCommitRequestPartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(8, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OffsetCommitRequestPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -41570,7 +41967,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedMetadata = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.CommittedMetadata = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -41765,6 +42164,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(8, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(8);
@@ -41773,6 +42173,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(8);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<OffsetCommitResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -41783,7 +42184,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await OffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await OffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -41865,20 +42268,26 @@ namespace Kafka.Protocol
 			internal OffsetCommitResponseTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(8, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetCommitResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetCommitResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await OffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await OffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -41965,9 +42374,11 @@ namespace Kafka.Protocol
 				internal OffsetCommitResponsePartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(8, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OffsetCommitResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -42066,6 +42477,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(47);
@@ -42074,17 +42486,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<OffsetDeleteRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetDeleteRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await OffsetDeleteRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await OffsetDeleteRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await OffsetDeleteRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -42171,20 +42588,26 @@ namespace Kafka.Protocol
 			internal OffsetDeleteRequestTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, -1);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetDeleteRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetDeleteRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetDeleteRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await OffsetDeleteRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await OffsetDeleteRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -42271,9 +42694,11 @@ namespace Kafka.Protocol
 				internal OffsetDeleteRequestPartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, -1);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OffsetDeleteRequestPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -42338,6 +42763,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(47);
@@ -42346,6 +42772,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<OffsetDeleteResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -42360,7 +42787,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await OffsetDeleteResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await OffsetDeleteResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await OffsetDeleteResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -42475,20 +42904,26 @@ namespace Kafka.Protocol
 			internal OffsetDeleteResponseTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, -1);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetDeleteResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetDeleteResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = (await reader.ReadArrayAsync(async () => await OffsetDeleteResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						(await reader.ReadCompactArrayAsync(async () => await OffsetDeleteResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
+						(await reader.ReadArrayAsync(async () => await OffsetDeleteResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.PartitionIndex);
 				}
 				return instance;
 			}
@@ -42575,9 +43010,11 @@ namespace Kafka.Protocol
 				internal OffsetDeleteResponsePartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, -1);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OffsetDeleteResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -42676,6 +43113,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(6, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(9);
@@ -42684,21 +43122,28 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(8);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<OffsetFetchRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetFetchRequest(version);
 			if (instance.Version.InRange(0, 7)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 7)) 
 			{
-				instance.TopicsCollection = await reader.ReadNullableArrayAsync(async () => await OffsetFetchRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableArrayAsync(async () => await OffsetFetchRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableArrayAsync(async () => await OffsetFetchRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(8, 2147483647)) 
 			{
-				instance.GroupsCollection = await reader.ReadArrayAsync(async () => await OffsetFetchRequestGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.GroupsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await OffsetFetchRequestGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await OffsetFetchRequestGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(7, 2147483647)) 
 			{
@@ -42803,20 +43248,26 @@ namespace Kafka.Protocol
 			internal OffsetFetchRequestTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetFetchRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetFetchRequestTopic(version);
 				if (instance.Version.InRange(0, 7)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 7)) 
 				{
-					instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionIndexesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -42933,20 +43384,26 @@ namespace Kafka.Protocol
 			internal OffsetFetchRequestGroup(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetFetchRequestGroup> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetFetchRequestGroup(version);
 				if (instance.Version.InRange(8, 2147483647)) 
 				{
-					instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(8, 2147483647)) 
 				{
-					instance.TopicsCollection = await reader.ReadNullableArrayAsync(async () => await OffsetFetchRequestTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.TopicsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableArrayAsync(async () => await OffsetFetchRequestTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableArrayAsync(async () => await OffsetFetchRequestTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -43039,20 +43496,26 @@ namespace Kafka.Protocol
 				internal OffsetFetchRequestTopics(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(6, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OffsetFetchRequestTopics> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OffsetFetchRequestTopics(version);
 					if (instance.Version.InRange(8, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(8, 2147483647)) 
 					{
-						instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.PartitionIndexesCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -43174,6 +43637,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(6, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(9);
@@ -43182,6 +43646,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(8);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<OffsetFetchResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -43192,7 +43657,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 7)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetFetchResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await OffsetFetchResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await OffsetFetchResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(2, 7)) 
 			{
@@ -43200,7 +43667,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(8, 2147483647)) 
 			{
-				instance.GroupsCollection = await reader.ReadArrayAsync(async () => await OffsetFetchResponseGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.GroupsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await OffsetFetchResponseGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await OffsetFetchResponseGroup.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -43290,20 +43759,26 @@ namespace Kafka.Protocol
 			internal OffsetFetchResponseTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetFetchResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetFetchResponseTopic(version);
 				if (instance.Version.InRange(0, 7)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 7)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetFetchResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await OffsetFetchResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await OffsetFetchResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -43390,9 +43865,11 @@ namespace Kafka.Protocol
 				internal OffsetFetchResponsePartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(6, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OffsetFetchResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -43411,7 +43888,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 7)) 
 					{
-						instance.Metadata = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Metadata = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 7)) 
 					{
@@ -43661,20 +44140,26 @@ namespace Kafka.Protocol
 			internal OffsetFetchResponseGroup(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetFetchResponseGroup> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetFetchResponseGroup(version);
 				if (instance.Version.InRange(8, 2147483647)) 
 				{
-					instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.GroupId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(8, 2147483647)) 
 				{
-					instance.TopicsCollection = await reader.ReadArrayAsync(async () => await OffsetFetchResponseTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.TopicsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await OffsetFetchResponseTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await OffsetFetchResponseTopics.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(8, 2147483647)) 
 				{
@@ -43769,20 +44254,26 @@ namespace Kafka.Protocol
 				internal OffsetFetchResponseTopics(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(6, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OffsetFetchResponseTopics> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OffsetFetchResponseTopics(version);
 					if (instance.Version.InRange(8, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(8, 2147483647)) 
 					{
-						instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetFetchResponsePartitions.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await OffsetFetchResponsePartitions.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadArrayAsync(async () => await OffsetFetchResponsePartitions.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -43869,9 +44360,11 @@ namespace Kafka.Protocol
 					internal OffsetFetchResponsePartitions(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(6, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<OffsetFetchResponsePartitions> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -43890,7 +44383,9 @@ namespace Kafka.Protocol
 						}
 						if (instance.Version.InRange(8, 2147483647)) 
 						{
-							instance.Metadata = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							instance.Metadata = instance.IsFlexibleVersion ? 
+								await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+								await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 						}
 						if (instance.Version.InRange(8, 2147483647)) 
 						{
@@ -44116,6 +44611,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(23);
@@ -44124,6 +44620,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<OffsetForLeaderEpochRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -44134,7 +44631,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await OffsetForLeaderTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await OffsetForLeaderTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+					(await reader.ReadArrayAsync(async () => await OffsetForLeaderTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
 			}
 			return instance;
 		}
@@ -44218,20 +44717,26 @@ namespace Kafka.Protocol
 			internal OffsetForLeaderTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetForLeaderTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetForLeaderTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await OffsetForLeaderPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await OffsetForLeaderPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await OffsetForLeaderPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -44318,9 +44823,11 @@ namespace Kafka.Protocol
 				internal OffsetForLeaderPartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(4, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<OffsetForLeaderPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -44456,6 +44963,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(23);
@@ -44464,6 +44972,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<OffsetForLeaderEpochResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -44474,7 +44983,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = (await reader.ReadArrayAsync(async () => await OffsetForLeaderTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await OffsetForLeaderTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
+					(await reader.ReadArrayAsync(async () => await OffsetForLeaderTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
 			}
 			return instance;
 		}
@@ -44556,20 +45067,26 @@ namespace Kafka.Protocol
 			internal OffsetForLeaderTopicResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<OffsetForLeaderTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetForLeaderTopicResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Topic = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Topic = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await EpochEndOffset.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await EpochEndOffset.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await EpochEndOffset.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -44656,9 +45173,11 @@ namespace Kafka.Protocol
 				internal EpochEndOffset(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(4, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<EpochEndOffset> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -44830,6 +45349,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(9, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -44838,13 +45358,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(9);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ProduceRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ProduceRequest(version);
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.TransactionalId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.TransactionalId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -44856,7 +45379,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicDataCollection = (await reader.ReadArrayAsync(async () => await TopicProduceData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.TopicDataCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await TopicProduceData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await TopicProduceData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			return instance;
 		}
@@ -45017,20 +45542,26 @@ namespace Kafka.Protocol
 			internal TopicProduceData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(9, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicProduceData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicProduceData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionDataCollection = await reader.ReadArrayAsync(async () => await PartitionProduceData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionDataCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionProduceData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionProduceData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -45117,9 +45648,11 @@ namespace Kafka.Protocol
 				internal PartitionProduceData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(9, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionProduceData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -45227,6 +45760,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(9, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -45235,13 +45769,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(9);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ProduceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new ProduceResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResponsesCollection = (await reader.ReadArrayAsync(async () => await TopicProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				instance.ResponsesCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await TopicProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+					(await reader.ReadArrayAsync(async () => await TopicProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
@@ -45303,20 +45840,26 @@ namespace Kafka.Protocol
 			internal TopicProduceResponse(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(9, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicProduceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicProduceResponse(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionResponsesCollection = await reader.ReadArrayAsync(async () => await PartitionProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionResponsesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionProduceResponse.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -45403,9 +45946,11 @@ namespace Kafka.Protocol
 				internal PartitionProduceResponse(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(9, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionProduceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -45432,11 +45977,15 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(8, 2147483647)) 
 					{
-						instance.RecordErrorsCollection = await reader.ReadArrayAsync(async () => await BatchIndexAndErrorMessage.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.RecordErrorsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await BatchIndexAndErrorMessage.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadArrayAsync(async () => await BatchIndexAndErrorMessage.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(8, 2147483647)) 
 					{
-						instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.ErrorMessage = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -45648,9 +46197,11 @@ namespace Kafka.Protocol
 					internal BatchIndexAndErrorMessage(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(9, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<BatchIndexAndErrorMessage> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -45661,7 +46212,9 @@ namespace Kafka.Protocol
 						}
 						if (instance.Version.InRange(8, 2147483647)) 
 						{
-							instance.BatchIndexErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							instance.BatchIndexErrorMessage = instance.IsFlexibleVersion ? 
+								await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+								await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 						}
 						return instance;
 					}
@@ -45816,6 +46369,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(39);
@@ -45824,6 +46378,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<RenewDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -45923,6 +46478,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(39);
@@ -45931,6 +46487,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<RenewDelegationTokenResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46064,6 +46621,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -46072,6 +46630,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<RequestHeader> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46090,7 +46649,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(1, 2147483647)) 
 			{
-				instance.ClientId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClientId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -46246,6 +46807,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -46254,6 +46816,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<ResponseHeader> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46316,6 +46879,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(36);
@@ -46324,6 +46888,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<SaslAuthenticateRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46386,6 +46951,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(36);
@@ -46394,6 +46960,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<SaslAuthenticateResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46404,7 +46971,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -46567,6 +47136,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(17);
@@ -46575,13 +47145,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<SaslHandshakeRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new SaslHandshakeRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.Mechanism = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.Mechanism = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -46637,6 +47210,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, -1);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(17);
@@ -46645,6 +47219,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<SaslHandshakeResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46655,7 +47230,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MechanismsCollection = await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.MechanismsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+					await reader.ReadArrayAsync(async () => await String.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -46741,6 +47318,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -46749,6 +47327,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<SnapshotFooterRecord> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46811,6 +47390,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(0);
@@ -46819,6 +47399,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<SnapshotHeaderRecord> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46918,6 +47499,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(5);
@@ -46926,6 +47508,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<StopReplicaRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -46948,15 +47531,21 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 0)) 
 			{
-				instance.UngroupedPartitionsCollection = await reader.ReadArrayAsync(async () => await StopReplicaPartitionV0.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.UngroupedPartitionsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await StopReplicaPartitionV0.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await StopReplicaPartitionV0.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(1, 2)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await StopReplicaTopicV1.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await StopReplicaTopicV1.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await StopReplicaTopicV1.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.TopicStatesCollection = await reader.ReadArrayAsync(async () => await StopReplicaTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicStatesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await StopReplicaTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await StopReplicaTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -47147,16 +47736,20 @@ namespace Kafka.Protocol
 			internal StopReplicaPartitionV0(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<StopReplicaPartitionV0> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new StopReplicaPartitionV0(version);
 				if (instance.Version.InRange(0, 0)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 0)) 
 				{
@@ -47277,20 +47870,26 @@ namespace Kafka.Protocol
 			internal StopReplicaTopicV1(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<StopReplicaTopicV1> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new StopReplicaTopicV1(version);
 				if (instance.Version.InRange(1, 2)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(1, 2)) 
 				{
-					instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionIndexesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -47407,20 +48006,26 @@ namespace Kafka.Protocol
 			internal StopReplicaTopicState(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<StopReplicaTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new StopReplicaTopicState(version);
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(3, 2147483647)) 
 				{
-					instance.PartitionStatesCollection = await reader.ReadArrayAsync(async () => await StopReplicaPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionStatesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await StopReplicaPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await StopReplicaPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -47507,9 +48112,11 @@ namespace Kafka.Protocol
 				internal StopReplicaPartitionState(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(2, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<StopReplicaPartitionState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -47650,6 +48257,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(2, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(5);
@@ -47658,6 +48266,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<StopReplicaResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -47668,7 +48277,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.PartitionErrorsCollection = await reader.ReadArrayAsync(async () => await StopReplicaPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.PartitionErrorsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await StopReplicaPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await StopReplicaPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -47755,16 +48366,20 @@ namespace Kafka.Protocol
 			internal StopReplicaPartitionError(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(2, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<StopReplicaPartitionError> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new StopReplicaPartitionError(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -47892,6 +48507,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(14);
@@ -47900,13 +48516,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<SyncGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new SyncGroupRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -47914,23 +48533,33 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.MemberId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.ProtocolType = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ProtocolType = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.ProtocolName = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ProtocolName = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.AssignmentsCollection = await reader.ReadArrayAsync(async () => await SyncGroupRequestAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.AssignmentsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await SyncGroupRequestAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await SyncGroupRequestAssignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -48196,16 +48825,20 @@ namespace Kafka.Protocol
 			internal SyncGroupRequestAssignment(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(4, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<SyncGroupRequestAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new SyncGroupRequestAssignment(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.MemberId = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -48299,6 +48932,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(4, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(14);
@@ -48307,6 +48941,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<SyncGroupResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -48321,11 +48956,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.ProtocolType = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ProtocolType = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.ProtocolName = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ProtocolName = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -48515,6 +49154,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(28);
@@ -48523,17 +49163,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<TxnOffsetCommitRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new TxnOffsetCommitRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TransactionalId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.TransactionalId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.GroupId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
@@ -48549,15 +49194,21 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.MemberId = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.MemberId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(3, 2147483647)) 
 			{
-				instance.GroupInstanceId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.GroupInstanceId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TxnOffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TxnOffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TxnOffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -48854,20 +49505,26 @@ namespace Kafka.Protocol
 			internal TxnOffsetCommitRequestTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TxnOffsetCommitRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TxnOffsetCommitRequestTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await TxnOffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await TxnOffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await TxnOffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -48954,9 +49611,11 @@ namespace Kafka.Protocol
 				internal TxnOffsetCommitRequestPartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(3, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<TxnOffsetCommitRequestPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -48975,7 +49634,9 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.CommittedMetadata = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.CommittedMetadata = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -49135,6 +49796,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(3, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(28);
@@ -49143,6 +49805,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<TxnOffsetCommitResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -49153,7 +49816,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TxnOffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TxnOffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TxnOffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -49240,20 +49905,26 @@ namespace Kafka.Protocol
 			internal TxnOffsetCommitResponseTopic(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(3, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TxnOffsetCommitResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TxnOffsetCommitResponseTopic(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Name = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await TxnOffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await TxnOffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await TxnOffsetCommitResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -49340,9 +50011,11 @@ namespace Kafka.Protocol
 				internal TxnOffsetCommitResponsePartition(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(3, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<TxnOffsetCommitResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -49441,6 +50114,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(64);
@@ -49449,6 +50123,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<UnregisterBrokerRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -49511,6 +50186,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(64);
@@ -49519,6 +50195,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<UnregisterBrokerResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -49533,7 +50210,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -49658,6 +50337,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(57);
@@ -49666,6 +50346,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<UpdateFeaturesRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -49676,7 +50357,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.FeatureUpdatesCollection = (await reader.ReadArrayAsync(async () => await FeatureUpdateKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature);
+				instance.FeatureUpdatesCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await FeatureUpdateKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature);
+					(await reader.ReadArrayAsync(async () => await FeatureUpdateKey.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature);
 			}
 			return instance;
 		}
@@ -49765,16 +50448,20 @@ namespace Kafka.Protocol
 			internal FeatureUpdateKey(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<FeatureUpdateKey> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new FeatureUpdateKey(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Feature = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Feature = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -49905,6 +50592,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(57);
@@ -49913,6 +50601,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<UpdateFeaturesResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -49927,11 +50616,15 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ResultsCollection = (await reader.ReadArrayAsync(async () => await UpdatableFeatureResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature);
+				instance.ResultsCollection = instance.IsFlexibleVersion ? 
+					(await reader.ReadCompactArrayAsync(async () => await UpdatableFeatureResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature);
+					(await reader.ReadArrayAsync(async () => await UpdatableFeatureResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature);
 			}
 			return instance;
 		}
@@ -50090,16 +50783,20 @@ namespace Kafka.Protocol
 			internal UpdatableFeatureResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<UpdatableFeatureResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new UpdatableFeatureResult(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.Feature = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Feature = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -50107,7 +50804,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ErrorMessage = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -50233,6 +50932,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(6, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(6);
@@ -50241,6 +50941,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(7);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<UpdateMetadataRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -50259,15 +50960,21 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 4)) 
 			{
-				instance.UngroupedPartitionStatesCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.UngroupedPartitionStatesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(5, 2147483647)) 
 			{
-				instance.TopicStatesCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicStatesCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await UpdateMetadataTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await UpdateMetadataTopicState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.LiveBrokersCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.LiveBrokersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await UpdateMetadataBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await UpdateMetadataBroker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -50454,16 +51161,20 @@ namespace Kafka.Protocol
 			internal UpdateMetadataTopicState(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<UpdateMetadataTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new UpdateMetadataTopicState(version);
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(7, 2147483647)) 
 				{
@@ -50471,7 +51182,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(5, 2147483647)) 
 				{
-					instance.PartitionStatesCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionStatesCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -50614,9 +51327,11 @@ namespace Kafka.Protocol
 			internal UpdateMetadataBroker(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<UpdateMetadataBroker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -50627,7 +51342,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 0)) 
 				{
-					instance.V0Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.V0Host = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 0)) 
 				{
@@ -50635,11 +51352,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(1, 2147483647)) 
 				{
-					instance.EndpointsCollection = await reader.ReadArrayAsync(async () => await UpdateMetadataEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.EndpointsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await UpdateMetadataEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await UpdateMetadataEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(2, 2147483647)) 
 				{
-					instance.Rack = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.Rack = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -50781,9 +51502,11 @@ namespace Kafka.Protocol
 				internal UpdateMetadataEndpoint(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(6, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<UpdateMetadataEndpoint> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -50794,11 +51517,15 @@ namespace Kafka.Protocol
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
-						instance.Host = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Host = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(3, 2147483647)) 
 					{
-						instance.Listener = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Listener = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(1, 2147483647)) 
 					{
@@ -50980,16 +51707,20 @@ namespace Kafka.Protocol
 				}
 
 				Version = version;
+				IsFlexibleVersion = version.InRange(6, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<UpdateMetadataPartitionState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new UpdateMetadataPartitionState(version);
 				if (instance.Version.InRange(0, 4)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -51009,7 +51740,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.IsrCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.IsrCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -51017,11 +51750,15 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.ReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.ReplicasCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(4, 2147483647)) 
 				{
-					instance.OfflineReplicasCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.OfflineReplicasCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+						await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -51332,6 +52069,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(6, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(6);
@@ -51340,6 +52078,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(7);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<UpdateMetadataResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -51399,6 +52138,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(52);
@@ -51407,17 +52147,22 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<VoteRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new VoteRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ClusterId = await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+				instance.ClusterId = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false);
+					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -51508,20 +52253,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -51606,9 +52357,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -51821,6 +52574,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(0, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(52);
@@ -51829,6 +52583,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(0);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<VoteResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
@@ -51839,7 +52594,9 @@ namespace Kafka.Protocol
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.TopicsCollection = await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await TopicData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -51924,20 +52681,26 @@ namespace Kafka.Protocol
 			internal TopicData(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(0, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new TopicData(version);
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicName = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+					instance.TopicName = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+						await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -52022,9 +52785,11 @@ namespace Kafka.Protocol
 				internal PartitionData(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(0, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
@@ -52232,6 +52997,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(27);
@@ -52240,13 +53006,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<WriteTxnMarkersRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new WriteTxnMarkersRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MarkersCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.MarkersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await WritableTxnMarker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await WritableTxnMarker.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -52300,9 +53069,11 @@ namespace Kafka.Protocol
 			internal WritableTxnMarker(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(1, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<WritableTxnMarker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -52321,7 +53092,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarkerTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.TopicsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await WritableTxnMarkerTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await WritableTxnMarkerTopic.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
@@ -52482,20 +53255,26 @@ namespace Kafka.Protocol
 				internal WritableTxnMarkerTopic(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(1, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<WritableTxnMarkerTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new WritableTxnMarkerTopic(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionIndexesCollection = await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.PartitionIndexesCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : 
+							await reader.ReadArrayAsync(async () => await Int32.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -52615,6 +53394,7 @@ namespace Kafka.Protocol
 			}
 
 			Version = version;
+			IsFlexibleVersion = version.InRange(1, 2147483647);
 		}
 
 		public static readonly Int16 ApiKey = Int16.From(27);
@@ -52623,13 +53403,16 @@ namespace Kafka.Protocol
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
 
 		public static async ValueTask<WriteTxnMarkersResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new WriteTxnMarkersResponse(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.MarkersCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarkerResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+				instance.MarkersCollection = instance.IsFlexibleVersion ? 
+					await reader.ReadCompactArrayAsync(async () => await WritableTxnMarkerResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					await reader.ReadArrayAsync(async () => await WritableTxnMarkerResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 			}
 			return instance;
 		}
@@ -52683,9 +53466,11 @@ namespace Kafka.Protocol
 			internal WritableTxnMarkerResult(Int16 version)
 			{
 				Version = version;
+				IsFlexibleVersion = version.InRange(1, 2147483647);
 			}
 
 			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
 
 			public static async ValueTask<WritableTxnMarkerResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 			{
@@ -52696,7 +53481,9 @@ namespace Kafka.Protocol
 				}
 				if (instance.Version.InRange(0, 2147483647)) 
 				{
-					instance.TopicsCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarkerTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+					instance.TopicsCollection = instance.IsFlexibleVersion ? 
+						await reader.ReadCompactArrayAsync(async () => await WritableTxnMarkerTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						await reader.ReadArrayAsync(async () => await WritableTxnMarkerTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 				}
 				return instance;
 			}
@@ -52783,20 +53570,26 @@ namespace Kafka.Protocol
 				internal WritableTxnMarkerTopicResult(Int16 version)
 				{
 					Version = version;
+					IsFlexibleVersion = version.InRange(1, 2147483647);
 				}
 
 				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
 
 				public static async ValueTask<WritableTxnMarkerTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new WritableTxnMarkerTopicResult(version);
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.Name = await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
+						instance.Name = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
+							await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 					}
 					if (instance.Version.InRange(0, 2147483647)) 
 					{
-						instance.PartitionsCollection = await reader.ReadArrayAsync(async () => await WritableTxnMarkerPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+						instance.PartitionsCollection = instance.IsFlexibleVersion ? 
+							await reader.ReadCompactArrayAsync(async () => await WritableTxnMarkerPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+							await reader.ReadArrayAsync(async () => await WritableTxnMarkerPartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
 					}
 					return instance;
 				}
@@ -52883,9 +53676,11 @@ namespace Kafka.Protocol
 					internal WritableTxnMarkerPartitionResult(Int16 version)
 					{
 						Version = version;
+						IsFlexibleVersion = version.InRange(1, 2147483647);
 					}
 
 					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
 
 					public static async ValueTask<WritableTxnMarkerPartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 					{
@@ -53172,10 +53967,6 @@ namespace Kafka.Protocol
 					.WithApiKey(ListGroupsRequest.ApiKey)
 					.WithMinVersion(ListGroupsRequest.MinVersion)
 					.WithMaxVersion(ListGroupsRequest.MaxVersion),
-				key => key
-					.WithApiKey(ListOffsetRequest.ApiKey)
-					.WithMinVersion(ListOffsetRequest.MinVersion)
-					.WithMaxVersion(ListOffsetRequest.MaxVersion),
 				key => key
 					.WithApiKey(ListOffsetsRequest.ApiKey)
 					.WithMinVersion(ListOffsetsRequest.MinVersion)

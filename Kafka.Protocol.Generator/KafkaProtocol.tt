@@ -24,8 +24,7 @@
     var protocol = ProtocolSpecification.Load(apacheKafkaDefinitionPage);
 
 	var messageDefinitionPath = Path.Combine(Host.ResolvePath(@"..\Kafka.Protocol.MessageDefinitionsDownloader\MessageDefinitions\"));
-	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath);
-	messageDefinitions.AddReferencesToFields();
+	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath).AddReferencesToFields();
 
     void Block(Action action) { this.Block(action); }
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
@@ -204,9 +203,11 @@ namespace Kafka.Protocol<# Block(() =>
 	PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
 	{
 		var hasResponse = messageDefinitions.TryGetResponseMessageDefinitionFrom(messageDefinition, out var responseMessageDefinition);
+		var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
+		var flexibleVersionRange = VersionRange.Parse(messageDefinition.FlexibleVersions);
+
 		#>public class <#= messageDefinition.Name #> : Message<#= hasResponse ? $", IRespond<{responseMessageDefinition.Name}>" : "" #><# Block(() => 
 		{
-			var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);			
 			#>public <#= messageDefinition.Name #>(Int16 version)<# Block(() => 
 			{
 				#>if (version.InRange(MinVersion, MaxVersion) == false) <# Block(() => 
@@ -214,7 +215,8 @@ namespace Kafka.Protocol<# Block(() =>
 					#>throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<#
 				}); _(2);
 
-				 #>Version = version;<#
+				 #>Version = version;<# _();
+				 #>IsFlexibleVersion = version.InRange(<#= flexibleVersionRange.From #>, <#= flexibleVersionRange.To #>);<#
 			}); _(2);
 
 			#>public static readonly Int16 ApiKey = Int16.From(<#= messageDefinition.ApiKey #>);<# _(2);
@@ -222,7 +224,8 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From #>);<# _();
 			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To #>);<# _(2);
 
-			#>public override Int16 Version { get; }<# _(2);
+			#>public override Int16 Version { get; }<# _(1);
+			#>internal bool IsFlexibleVersion { get; }<# _(2);
 
 			#>public static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
@@ -310,30 +313,50 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
-	var prependBeforeField = "instance.";
-	#>if (<#= prependBeforeField #>Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
+	#>if (instance.Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
 		var fieldName = messageField.GetFieldName(parentFieldTypeName);
+		var isCompactable = messageField.IsCompactable();
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		var nullableSign = messageField.IsNullable() ? "?" : "";
+
+		#>instance.<#= fieldName #> = <# 
 		if (messageField.Fields == null)
 		{
 			if (messageField.IsArray())
 			{
 				if (IsPrimitiveType(messageField))
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 	
+					if (isCompactable) 
+					{
+						#>instance.IsFlexibleVersion ? <# _();
+						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) : <# _();
+						#>	<#
+					}	
+					#>await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 	
 				} 
 				else 
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 	
+					if (isCompactable) 
+					{
+						#>instance.IsFlexibleVersion ? <# _();
+						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# _();
+						#>	<#
+					}	
+					#>await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 	
 				}
 			} 
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false);<# 
+				if (isCompactable) 
+				{
+					#>instance.IsFlexibleVersion ? <# _();
+					#>	await reader.ReadCompact<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false);<#  _();
+					#>	<#
+				}	
+				#>await reader.Read<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 		else 
@@ -343,16 +366,28 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 				var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 				if (mapKeyField == null)
 				{
-					#><#= prependBeforeField #><#= fieldName #> = await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 
+					if (isCompactable) 
+					{
+						#>instance.IsFlexibleVersion ? <# _();
+						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# _();
+						#>	<#
+					}	
+					#>await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 
 				}
 				else 
 				{
-					#><#= prependBeforeField #><#= fieldName #> = (await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+					if (isCompactable) 
+					{
+						#>instance.IsFlexibleVersion ? <# _();
+						#>	(await reader.ReadCompact<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<#  _();
+						#>	<#
+					}	
+					#>(await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
 				}
 			} 
 			else 
 			{
-				#><#= prependBeforeField #><#= fieldName #> = await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(<#= prependBeforeField #>Version, reader, cancellationToken).ConfigureAwait(false);<# 
+				#>await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 	});		
@@ -364,8 +399,10 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldName = messageField.GetFieldName(parentFieldTypeName);
+		var compact = messageField.IsCompactable() ? "Compact" : "";
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		var nullableSign = messageField.IsNullable() ? "?" : "";
+
 		if (messageField.Fields == null)
 		{
 			var fieldTypeName = messageField.GetTypeName();
@@ -407,6 +444,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	var propertyName = field.GetPropertyName();
 	var fieldName = field.GetFieldName(className);
 	var nullableFieldTypeName = fieldTypeName + field.GetNullableSign();
+	var flexibleVersionRange = VersionRange.Parse(field.Message.FlexibleVersions);
 
 	#>private <#= nullableFieldTypeName #> <#= propertyName #><#
 	
@@ -522,10 +560,12 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	{
 		#>internal <#= fieldTypeNameWithoutArrayCharacters #>(Int16 version)<# Block(() => 
 		{
-			#>Version = version;<#
+			#>Version = version;<# _();
+			#>IsFlexibleVersion = version.InRange(<#= flexibleVersionRange.From #>, <#= flexibleVersionRange.To #>);<#
 		}); _(2);
 
-		#>internal Int16 Version { get; }<# _(2);
+		#>internal Int16 Version { get; }<# _();
+		#>internal bool IsFlexibleVersion { get; }<# _(2);
 
 		#>public static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
@@ -534,7 +574,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			{
 				PrintReadFrom(messageField);
 			}); _();
-			#>return instance;<#
+			#>return instance;<# 
 		}); _(2);
 
 		#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
@@ -566,20 +606,24 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 
 void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.CommonStruct commonStruct)
 {
+	var versionRange = VersionRange.Parse(commonStruct.Versions);
+	var flexibleVersionRange = VersionRange.Parse(commonStruct.Message.FlexibleVersions);
+
 	#>public class <#= commonStruct.Name #> : ISerialize<# Block(() => 
 	{
 		#>internal <#= commonStruct.Name #>(Int16 version)<# Block(() => 
 		{
-			var versionRange = VersionRange.Parse(commonStruct.Versions);
 			#>if (version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
 			{
 				#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<#
 			}); _(2);
 
-			#>Version = version;<#
+			#>Version = version;<# _();
+			#>IsFlexibleVersion = version.InRange(<#= flexibleVersionRange.From #>, <#= flexibleVersionRange.To #>);<#
 		}); _(2);
 
-		#>internal Int16 Version { get; }<# _(2);
+		#>internal Int16 Version { get; }<# _();
+		#>internal bool IsFlexibleVersion { get; }<# _(2);
 
 		#>public static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{

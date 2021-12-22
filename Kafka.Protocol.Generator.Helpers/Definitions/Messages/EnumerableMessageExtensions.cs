@@ -24,25 +24,30 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
             return true;
         }
 
-        public static void AddReferencesToFields(
+        public static IEnumerable<Message> AddReferencesToFields(
             this IEnumerable<Message> messageDefinitions)
         {
             foreach (var messageDefinition in messageDefinitions)
             {
                 foreach (var field in messageDefinition.Fields)
                 {
-                    AddReferenceToField(field, null);
+                    field.Message = messageDefinition;
+                    AddReferenceToField(field);
                 }
 
                 if (messageDefinition.CommonStructs != null)
                 {
-                    foreach (var field in messageDefinition.CommonStructs.SelectMany(@struct => @struct.Fields))
+                    foreach (var commonStruct in messageDefinition.CommonStructs)
                     {
-                        AddReferenceToField(field, null);
+                        commonStruct.Message = messageDefinition;
+                        foreach (var field in commonStruct.Fields)
+                        {
+                            AddReferenceToField(field);
+                        }
                     }
                 }
 
-                void AddReferenceToField(Field field, Field? parent)
+                void AddReferenceToField(Field field, Field? parent = null)
                 {
                     field.Message = messageDefinition;
                     field.Parent = parent;
@@ -56,6 +61,8 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
                         AddReferenceToField(child, field);
                     }
                 }
+
+                yield return messageDefinition;
             }
         }
     }

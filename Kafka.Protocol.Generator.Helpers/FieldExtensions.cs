@@ -107,5 +107,9 @@ namespace Kafka.Protocol.Generator.Helpers
 
         public static string GetPropertyName(this Field field) => 
             $"_{field.GetName().FirstCharacterToLowerCase()}";
+
+        public static bool IsCompactable(this Field field) =>
+            field.IsArray() || field.GetTypeName().Equals("string",
+                StringComparison.CurrentCultureIgnoreCase);
     }
 }
