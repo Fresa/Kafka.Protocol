@@ -50,10 +50,10 @@ namespace Kafka.Protocol
         ValueTask<String?> ReadNullableStringAsync(
             CancellationToken cancellationToken = default);
         
-        ValueTask<CompactString> ReadCompactStringAsync(
+        ValueTask<String> ReadCompactStringAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<CompactString?> ReadCompactNullableStringAsync(
+        ValueTask<String?> ReadCompactNullableStringAsync(
             CancellationToken cancellationToken = default);
 
         ValueTask<Bytes> ReadBytesAsync(
@@ -66,10 +66,10 @@ namespace Kafka.Protocol
         ValueTask<Bytes?> ReadNullableBytesAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<CompactBytes> ReadCompactBytesAsync(
+        ValueTask<Bytes> ReadCompactBytesAsync(
             CancellationToken cancellationToken = default);
 
-        ValueTask<CompactBytes?> ReadCompactNullableBytesAsync(
+        ValueTask<Bytes?> ReadCompactNullableBytesAsync(
             CancellationToken cancellationToken = default);
 
         ValueTask<T[]> ReadArrayAsync<T>(
@@ -83,7 +83,17 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default)
             where T : ISerialize;
 
+        ValueTask<T[]> ReadCompactArrayAsync<T>(
+            Func<ValueTask<T>> factory,
+            CancellationToken cancellationToken = default)
+            where T : ISerialize;
+
         ValueTask<T[]?> ReadNullableArrayAsync<T>(
+            Func<ValueTask<T>> factory,
+            CancellationToken cancellationToken = default)
+            where T : ISerialize;
+
+        ValueTask<T[]?> ReadCompactNullableArrayAsync<T>(
             Func<ValueTask<T>> factory,
             CancellationToken cancellationToken = default)
             where T : ISerialize;

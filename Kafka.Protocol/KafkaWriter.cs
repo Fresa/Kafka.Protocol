@@ -79,12 +79,12 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
-        public ValueTask WriteCompactStringAsync(CompactString value,
+        public ValueTask WriteCompactStringAsync(String value,
             CancellationToken cancellationToken = default) =>
             WriteCompactNullableBytesAsync(Encoding.UTF8.GetBytes(value.Value),
                 cancellationToken);
 
-        public ValueTask WriteCompactNullableStringAsync(CompactString? value,
+        public ValueTask WriteCompactNullableStringAsync(String? value,
             CancellationToken cancellationToken = default) =>
             WriteCompactNullableBytesAsync(
                 value == null
@@ -114,11 +114,11 @@ namespace Kafka.Protocol
                 ? WriteBytesAsync(value.Value, cancellationToken)
                 : WriteInt32Async(Int32.From(-1), cancellationToken);
 
-        public ValueTask WriteCompactBytesAsync(CompactBytes value,
+        public ValueTask WriteCompactBytesAsync(Bytes value,
             CancellationToken cancellationToken = default) =>
             WriteCompactNullableBytesAsync(value.Value, cancellationToken);
 
-        public ValueTask WriteCompactNullableBytesAsync(CompactBytes? value,
+        public ValueTask WriteCompactNullableBytesAsync(Bytes? value,
             CancellationToken cancellationToken = default) =>
             WriteCompactNullableBytesAsync(value?.Value, cancellationToken);
 

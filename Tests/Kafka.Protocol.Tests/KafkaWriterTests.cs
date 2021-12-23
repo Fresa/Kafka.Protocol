@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -314,7 +312,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteCompactStringAsync(CompactString.From("ABCDE"))
+                await _writer.WriteCompactStringAsync(String.From("ABCDE"))
                     .ConfigureAwait(false);
             }
 
@@ -340,7 +338,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteCompactNullableStringAsync(CompactString.From("ABCDE"))
+                await _writer.WriteCompactNullableStringAsync(String.From("ABCDE"))
                     .ConfigureAwait(false);
             }
 
@@ -473,7 +471,7 @@ namespace Kafka.Protocol.Tests
 
             protected override async Task WhenAsync()
             {
-                await _writer.WriteCompactBytesAsync(CompactBytes.From(new byte[] { 1, 0, 6 }))
+                await _writer.WriteCompactBytesAsync(Bytes.From(new byte[] { 1, 0, 6 }))
                     .ConfigureAwait(false);
             }
 
@@ -501,7 +499,7 @@ namespace Kafka.Protocol.Tests
             protected override async Task WhenAsync()
             {
                 await _writer.WriteCompactNullableBytesAsync(
-                        CompactBytes.From(new byte[] { 1, 0, 6 }))
+                        Bytes.From(new byte[] { 1, 0, 6 }))
                     .ConfigureAwait(false);
             }
 

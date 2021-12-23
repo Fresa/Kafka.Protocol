@@ -174,21 +174,21 @@ namespace Kafka.Protocol
                 Encoding.UTF8.GetString(bytes));
         }
 
-        public async ValueTask<CompactString> ReadCompactStringAsync(
+        public async ValueTask<String> ReadCompactStringAsync(
             CancellationToken cancellationToken = default) =>
             await ReadCompactNullableStringAsync(cancellationToken)
                 .ConfigureAwait(false) ?? throw new NotSupportedException(
                 $"The string cannot be null. Consider changing to {nameof(ReadCompactNullableStringAsync)}");
 
-        public async ValueTask<CompactString?> ReadCompactNullableStringAsync(
+        public async ValueTask<String?> ReadCompactNullableStringAsync(
             CancellationToken cancellationToken = default)
         {
             var bytes = await ReadCompactNullableBytesPrivateAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             return bytes == null
-                ? (CompactString?)null
-                : CompactString.From(Encoding.UTF8.GetString(bytes));
+                ? (String?)null
+                : String.From(Encoding.UTF8.GetString(bytes));
         }
 
         public async ValueTask<Bytes> ReadBytesAsync(
@@ -224,19 +224,19 @@ namespace Kafka.Protocol
                     .ConfigureAwait(false));
         }
 
-        public async ValueTask<CompactBytes> ReadCompactBytesAsync(CancellationToken cancellationToken = default) =>
+        public async ValueTask<Bytes> ReadCompactBytesAsync(CancellationToken cancellationToken = default) =>
             await ReadCompactNullableBytesAsync(cancellationToken)
                 .ConfigureAwait(false) ?? throw new NotSupportedException(
                 $"The byte array cannot be null. Consider changing to {nameof(ReadCompactNullableBytesAsync)}");
 
-        public async ValueTask<CompactBytes?> ReadCompactNullableBytesAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<Bytes?> ReadCompactNullableBytesAsync(CancellationToken cancellationToken = default)
         {
             var bytes = await ReadCompactNullableBytesPrivateAsync(cancellationToken)
                 .ConfigureAwait(false);
             
             return bytes == null
-                ? (CompactBytes?)null
-                : CompactBytes.From(bytes);
+                ? (Bytes?)null
+                : Bytes.From(bytes);
         }
 
         private async ValueTask<byte[]?> ReadCompactNullableBytesPrivateAsync(
@@ -265,6 +265,12 @@ namespace Kafka.Protocol
                 throw new NotSupportedException($"The array cannot be null. Consider changing to {nameof(ReadNullableArrayAsync)}");
         }
 
+        public ValueTask<T[]> ReadCompactArrayAsync<T>(Func<ValueTask<T>> factory,
+            CancellationToken cancellationToken = default) where T : ISerialize
+        {
+            throw new NotImplementedException();
+        }
+
         public async ValueTask<T[]> ReadArrayAsync<T>(
             VarInt numberOfItems,
             Func<ValueTask<T>> createItem,
@@ -282,6 +288,12 @@ namespace Kafka.Protocol
             var length = await ReadInt32Async(cancellationToken)
                 .ConfigureAwait(false);
             return await ReadNullableArrayAsync(length.ToVarInt(), createItem, cancellationToken);
+        }
+
+        public ValueTask<T[]?> ReadCompactNullableArrayAsync<T>(Func<ValueTask<T>> factory,
+            CancellationToken cancellationToken = default) where T : ISerialize
+        {
+            throw new NotImplementedException();
         }
 
         public async ValueTask<RecordBatch> ReadRecordBatchAsync(CancellationToken cancellationToken = default) =>

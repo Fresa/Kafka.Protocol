@@ -278,7 +278,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_a_compact_string : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private CompactString _value;
+            private String _value;
 
             protected override async Task GivenAsync()
             {
@@ -303,7 +303,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_a_compact_nullable_string : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private CompactString? _value;
+            private String? _value;
 
             protected override async Task GivenAsync()
             {
@@ -329,7 +329,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_null_from_compact_nullable_string : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private CompactString? _value;
+            private String? _value;
 
             protected override async Task GivenAsync()
             {
@@ -430,7 +430,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_compact_bytes : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private CompactBytes _value;
+            private Bytes _value;
 
             protected override async Task GivenAsync()
             {
@@ -455,7 +455,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_compact_nullable_bytes : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private CompactBytes? _value;
+            private Bytes? _value;
 
             protected override async Task GivenAsync()
             {
@@ -481,7 +481,7 @@ namespace Kafka.Protocol.Tests
         public class When_reading_null_compact_nullable_bytes : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
-            private CompactBytes? _value;
+            private Bytes? _value;
 
             protected override async Task GivenAsync()
             {

@@ -658,65 +658,6 @@ namespace Kafka.Protocol
 	}
 
 	/// <summary>
-	/// <para>Represents a sequence of characters. First the length N + 1 is given as an UNSIGNED_VARINT . Then N bytes follow which are the UTF-8 encoding of the character sequence.</para>
-	/// </summary>
-	public readonly struct CompactString : ISerialize 
-	{
-		public string Value { get; }
-
-		public CompactString(string value)
-		{
-			Value = value;
-		}
-
-		public override bool Equals(object obj) 
-		{
-			return obj is CompactString comparingCompactString && this == comparingCompactString;
-		}
-
-		public override int GetHashCode() 
-		{
-			return Value.GetHashCode();
-		}
-
-		public override string ToString() 
-		{
-			return Value.ToString();
-		}
-
-		public static bool operator == (CompactString x, CompactString y)
-		{
-			return x.Value == y.Value;
-		}
-
-		public static bool operator != (CompactString x, CompactString y)
-		{
-			return !(x == y);
-		}
-
-		public static implicit operator string(CompactString value) => value.Value;
-
-		public static implicit operator CompactString(string value) => From(value);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteCompactStringAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
-		public static CompactString From(string value)
-		{
-			return new CompactString(value);
-		}
-
-		public static async ValueTask<CompactString> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false);
-		}
-
-		public static CompactString Default => From(string.Empty);
-	}
-
-	/// <summary>
 	/// <para>Represents a raw sequence of bytes. First the length N is given as an INT32. Then N bytes follow.</para>
 	/// </summary>
 	public readonly struct Bytes : ISerialize 
@@ -773,65 +714,6 @@ namespace Kafka.Protocol
 		}
 
 		public static Bytes Default => From(Array.Empty<byte>());
-	}
-
-	/// <summary>
-	/// <para>Represents a raw sequence of bytes. First the length N+1 is given as an UNSIGNED_VARINT.Then N bytes follow.</para>
-	/// </summary>
-	public readonly struct CompactBytes : ISerialize 
-	{
-		public byte[] Value { get; }
-
-		public CompactBytes(byte[] value)
-		{
-			Value = value;
-		}
-
-		public override bool Equals(object obj) 
-		{
-			return obj is CompactBytes comparingCompactBytes && this == comparingCompactBytes;
-		}
-
-		public override int GetHashCode() 
-		{
-			return Value.GetHashCode();
-		}
-
-		public override string ToString() 
-		{
-			return Value.ToString();
-		}
-
-		public static bool operator == (CompactBytes x, CompactBytes y)
-		{
-			return x.Value == y.Value;
-		}
-
-		public static bool operator != (CompactBytes x, CompactBytes y)
-		{
-			return !(x == y);
-		}
-
-		public static implicit operator byte[](CompactBytes value) => value.Value;
-
-		public static implicit operator CompactBytes(byte[] value) => From(value);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteCompactBytesAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
-		public static CompactBytes From(byte[] value)
-		{
-			return new CompactBytes(value);
-		}
-
-		public static async ValueTask<CompactBytes> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadCompactBytesAsync(cancellationToken).ConfigureAwait(false);
-		}
-
-		public static CompactBytes Default => From(Array.Empty<byte>());
 	}
 
 	/// <summary>
