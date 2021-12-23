@@ -353,7 +353,7 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 				if (isCompactable) 
 				{
 					#>instance.IsFlexibleVersion ? <# _();
-					#>	await reader.ReadCompact<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false) :<#  _();
+					#>	await reader.ReadCompact<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false) :<# _();
 					#>	<#
 				}	
 				#>await reader.Read<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false);<# 
@@ -399,7 +399,7 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldName = messageField.GetFieldName(parentFieldTypeName);
-		var compact = messageField.IsCompactable() ? "Compact" : "";
+		var isCompactable = messageField.IsCompactable();
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		var nullableSign = messageField.IsNullable() ? "?" : "";
 
@@ -408,11 +408,25 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 			var fieldTypeName = messageField.GetTypeName();
 			if (messageField.IsArray())
 			{
-			#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 	
+				if (isCompactable) 
+				{
+					#>if (IsFlexibleVersion)<# _();
+					#>	await writer.WriteCompact<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# _();
+					#>else<# _();
+					#>	<#
+				}	
+				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 	
 			} 
 			else 
 			{
-			#>await writer.Write<#= nullable + fieldTypeName #>Async(<#= fieldName #>, cancellationToken).ConfigureAwait(false);<# 
+				if (isCompactable) 
+				{
+					#>if (IsFlexibleVersion)<# _();
+					#>	await writer.WriteCompact<#= nullable + fieldTypeName #>Async(<#= fieldName #>, cancellationToken).ConfigureAwait(false);<# _();
+					#>else<# _();
+					#>	<#
+				}	
+				#>await writer.Write<#= nullable + fieldTypeName #>Async(<#= fieldName #>, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 		else 
@@ -422,10 +436,24 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 				var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 				if (mapKeyField == null)
 				{
+					if (isCompactable) 
+					{
+						#>if (IsFlexibleVersion)<# _();
+						#>	await writer.WriteCompact<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# _();
+						#>else<# _();
+						#>	<#
+					}	
 					#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 
 				} 
 				else 
 				{
+					if (isCompactable) 
+					{
+						#>if (IsFlexibleVersion)<# _();
+						#>	await writer.WriteCompact<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #><#= nullableSign #>.Values.ToArray()).ConfigureAwait(false);<# _();
+						#>else<# _();
+						#>	<#
+					}	
 					#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #><#= nullableSign #>.Values.ToArray()).ConfigureAwait(false);<#
 				}
 			} 

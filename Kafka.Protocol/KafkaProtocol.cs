@@ -3508,7 +3508,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -3520,7 +3523,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -3801,7 +3807,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -3813,7 +3822,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -3973,11 +3985,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -4089,7 +4107,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -4191,11 +4212,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 			}
 
@@ -4694,7 +4721,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -4771,11 +4801,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, OpsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, OpsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, OpsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -4848,11 +4884,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -4992,7 +5034,10 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Key, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Key, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Key, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -5171,7 +5216,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -5281,11 +5329,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -5422,11 +5476,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -5538,7 +5598,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResourcesCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResourcesCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResourcesCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -5623,11 +5686,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 			}
 
@@ -5758,11 +5827,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -5910,7 +5985,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -6024,7 +6102,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -6032,7 +6113,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -6213,7 +6297,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -6344,11 +6431,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -6462,7 +6555,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, NewIsrCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, NewIsrCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, NewIsrCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -6645,7 +6741,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -6774,11 +6873,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -6908,7 +7013,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -7138,7 +7246,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -7242,11 +7353,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -7350,7 +7467,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
+						else
+							await writer.WriteNullableArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -7485,11 +7605,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -7655,11 +7781,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -7771,7 +7903,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -7908,7 +8043,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, DirsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, DirsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, DirsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -7981,11 +8119,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Path, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Path, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Path, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 			}
 
@@ -8087,11 +8231,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -8204,7 +8354,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -8306,11 +8459,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -8520,11 +8679,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, DeletionsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, DeletionsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, DeletionsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, UpsertionsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, UpsertionsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, UpsertionsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -8595,7 +8760,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -8741,7 +8909,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -8956,7 +9127,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -9062,7 +9236,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(User, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(User, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(User, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -9070,7 +9247,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -9212,11 +9392,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteStringAsync(ClientSoftwareName, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(ClientSoftwareName, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(ClientSoftwareName, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteStringAsync(ClientSoftwareVersion, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(ClientSoftwareVersion, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(ClientSoftwareVersion, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -9337,7 +9523,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ApiKeysCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ApiKeysCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ApiKeysCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -9345,7 +9534,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, SupportedFeaturesCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, SupportedFeaturesCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, SupportedFeaturesCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
@@ -9353,7 +9545,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, FinalizedFeaturesCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, FinalizedFeaturesCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, FinalizedFeaturesCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -9645,7 +9840,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
@@ -9837,7 +10035,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
@@ -9981,11 +10182,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -10091,11 +10298,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -10345,7 +10558,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -10445,11 +10661,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -11196,7 +11418,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -11204,15 +11429,24 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ListenersCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ListenersCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ListenersCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, FeaturesCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, FeaturesCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, FeaturesCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -11380,11 +11614,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -11584,7 +11824,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -11909,7 +12152,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, AssignedPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, AssignedPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, AssignedPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -11984,11 +12230,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -12133,7 +12385,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -12141,7 +12396,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, OwnedPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, OwnedPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, OwnedPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -12269,11 +12527,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -12487,7 +12751,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, RemainingPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, RemainingPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, RemainingPartitionsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -12587,7 +12854,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -12692,7 +12962,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, CreationsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, CreationsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, CreationsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -12791,7 +13064,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
@@ -12799,11 +13075,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Principal, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Principal, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Principal, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -13070,7 +13352,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -13174,7 +13459,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -13285,7 +13573,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, RenewersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, RenewersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, RenewersCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13362,11 +13653,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -13539,11 +13836,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13559,7 +13862,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TokenId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(TokenId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(TokenId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13878,7 +14184,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -13963,7 +14272,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -13971,7 +14283,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableArrayAsync(cancellationToken, AssignmentsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableArrayAsync(cancellationToken, AssignmentsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteNullableArrayAsync(cancellationToken, AssignmentsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -14102,7 +14417,10 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, BrokerIdsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, BrokerIdsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, BrokerIdsCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -14244,7 +14562,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -14350,7 +14671,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -14358,7 +14682,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -14504,7 +14831,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -14599,7 +14929,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -14611,11 +14944,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, AssignmentsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, AssignmentsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, AssignmentsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 			}
 
@@ -14777,7 +15116,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, BrokerIdsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, BrokerIdsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, BrokerIdsCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -14909,11 +15251,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -15094,7 +15442,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -15217,7 +15568,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(7, 2147483647)) 
 				{
@@ -15229,7 +15583,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
@@ -15245,7 +15602,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteNullableArrayAsync(cancellationToken, ConfigsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableArrayAsync(cancellationToken, ConfigsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteNullableArrayAsync(cancellationToken, ConfigsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -15519,11 +15879,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(5, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(5, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(5, 2147483647)) 
 					{
@@ -15737,11 +16103,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(Type, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(Type, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(Type, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -15877,7 +16249,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, FiltersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, FiltersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, FiltersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -15976,7 +16351,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ResourceNameFilter, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ResourceNameFilter, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ResourceNameFilter, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
@@ -15984,11 +16362,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(PrincipalFilter, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(PrincipalFilter, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(PrincipalFilter, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(HostFilter, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(HostFilter, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(HostFilter, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -16273,7 +16657,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, FilterResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, FilterResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, FilterResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -16383,11 +16770,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, MatchingAclsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, MatchingAclsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, MatchingAclsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -16560,7 +16953,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -16568,7 +16964,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
@@ -16576,11 +16975,17 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Principal, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Principal, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Principal, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -16901,7 +17306,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, GroupsNamesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, GroupsNamesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, GroupsNamesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -16983,7 +17391,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -17083,7 +17494,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -17192,7 +17606,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -17269,11 +17686,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -17517,7 +17940,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -17619,11 +18045,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 			}
 
@@ -17874,11 +18306,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(6, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 5)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicNamesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicNamesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicNamesCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -17953,7 +18391,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(6, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(6, 2147483647)) 
 				{
@@ -18130,7 +18571,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResponsesCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResponsesCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -18235,7 +18679,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(6, 2147483647)) 
 				{
@@ -18247,7 +18694,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -18442,7 +18892,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ResourceNameFilter, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ResourceNameFilter, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ResourceNameFilter, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -18450,11 +18903,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(PrincipalFilter, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(PrincipalFilter, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(PrincipalFilter, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(HostFilter, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(HostFilter, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(HostFilter, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -18752,11 +19211,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResourcesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResourcesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResourcesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -18934,7 +19399,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
@@ -18942,7 +19410,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, AclsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, AclsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, AclsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -19112,11 +19583,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Principal, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Principal, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Principal, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -19288,7 +19765,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ComponentsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ComponentsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ComponentsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -19369,7 +19849,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -19377,7 +19860,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Match, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(Match, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(Match, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -19567,11 +20053,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteNullableArrayAsync(cancellationToken, EntriesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -19743,11 +20235,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, EntityCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ValuesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, ValuesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, ValuesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -19820,11 +20318,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(EntityType, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(EntityName, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -19960,7 +20464,10 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Key, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Key, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Key, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -20174,11 +20681,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -20186,7 +20699,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, BrokersCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, BrokersCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, BrokersCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -20430,7 +20946,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -20438,7 +20957,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -20644,7 +21166,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResourcesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResourcesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResourcesCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -20733,11 +21258,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableArrayAsync(cancellationToken, ConfigurationKeysCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableArrayAsync(cancellationToken, ConfigurationKeysCollection).ConfigureAwait(false);
+					else
+						await writer.WriteNullableArrayAsync(cancellationToken, ConfigurationKeysCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -20946,7 +21477,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -21066,7 +21600,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -21074,11 +21611,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ConfigsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, ConfigsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, ConfigsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -21305,11 +21848,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -21329,7 +21878,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, SynonymsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, SynonymsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, SynonymsCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(3, 2147483647)) 
 					{
@@ -21337,7 +21889,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(3, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Documentation, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(Documentation, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(Documentation, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -21586,11 +22141,17 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(1, 2147483647)) 
 						{
-							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+							if (IsFlexibleVersion)
+								await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+							else
+								await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 						}
 						if (Version.InRange(1, 2147483647)) 
 						{
-							await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+							if (IsFlexibleVersion)
+								await writer.WriteCompactNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+							else
+								await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
 						}
 						if (Version.InRange(1, 2147483647)) 
 						{
@@ -21788,7 +22349,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, OwnersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableArrayAsync(cancellationToken, OwnersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteNullableArrayAsync(cancellationToken, OwnersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -21867,11 +22431,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -21987,7 +22557,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TokensCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TokensCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TokensCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -22121,11 +22694,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -22141,7 +22720,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TokenId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TokenId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TokenId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -22149,7 +22731,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, RenewersCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, RenewersCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, RenewersCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -22425,11 +23010,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(PrincipalType, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(PrincipalName, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -22564,7 +23155,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
@@ -22679,7 +23273,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -22806,23 +23403,38 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupState, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(GroupState, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(GroupState, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ProtocolData, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ProtocolData, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ProtocolData, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
@@ -23064,19 +23676,31 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(4, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(ClientId, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(ClientId, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(ClientId, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(ClientHost, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(ClientHost, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(ClientHost, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -23336,7 +23960,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection?.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableArrayAsync(cancellationToken, TopicsCollection?.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection?.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -23415,11 +24042,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -23531,7 +24164,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -23641,11 +24277,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(LogDir, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(LogDir, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(LogDir, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -23776,11 +24418,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -24057,7 +24705,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -24128,11 +24779,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -24244,7 +24901,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -24346,11 +25006,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -24468,11 +25134,17 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, ActiveProducersCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, ActiveProducersCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, ActiveProducersCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -24883,7 +25555,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -24954,11 +25629,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -25134,7 +25815,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -25234,11 +25918,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -25378,11 +26068,17 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, CurrentVotersCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, CurrentVotersCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, CurrentVotersCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, ObserversCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, ObserversCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, ObserversCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -25720,7 +26416,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TransactionalIdsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TransactionalIdsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TransactionalIdsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -25802,7 +26501,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TransactionStatesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TransactionStatesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TransactionStatesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -25932,11 +26634,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TransactionState_, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TransactionState_, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TransactionState_, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -25956,7 +26664,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 			}
 
@@ -26218,11 +26929,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -26320,7 +27037,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, UsersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableArrayAsync(cancellationToken, UsersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteNullableArrayAsync(cancellationToken, UsersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -26393,7 +27113,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -26490,11 +27213,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -26670,7 +27399,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(User, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(User, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(User, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -26678,11 +27410,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, CredentialInfosCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, CredentialInfosCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, CredentialInfosCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -26962,7 +27700,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, TopicPartitionsCollection?.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableArrayAsync(cancellationToken, TopicPartitionsCollection?.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteNullableArrayAsync(cancellationToken, TopicPartitionsCollection?.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -27074,11 +27815,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -27229,7 +27976,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ReplicaElectionResultsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ReplicaElectionResultsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ReplicaElectionResultsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -27360,11 +28110,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionResultCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionResultCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionResultCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -27476,7 +28232,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -27619,11 +28378,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -27729,11 +28494,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -27851,7 +28622,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, PreferredSuccessorsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, PreferredSuccessorsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, PreferredSuccessorsCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -28022,7 +28796,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -28122,11 +28899,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -28412,7 +29195,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -29255,7 +30041,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(12, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -29287,15 +30076,24 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ForgottenTopicsDataCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ForgottenTopicsDataCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ForgottenTopicsDataCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(11, 2147483647)) 
 			{
-				await writer.WriteStringAsync(RackId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(RackId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(RackId, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -29595,7 +30393,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 12)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(13, 2147483647)) 
 				{
@@ -29603,7 +30404,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -30005,7 +30809,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(7, 12)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(13, 2147483647)) 
 				{
@@ -30013,7 +30820,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(7, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -30186,7 +30996,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -30342,7 +31155,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 12)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(13, 2147483647)) 
 				{
@@ -30350,7 +31166,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -30537,7 +31356,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(4, 2147483647)) 
 					{
-						await writer.WriteNullableArrayAsync(cancellationToken, AbortedTransactionsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableArrayAsync(cancellationToken, AbortedTransactionsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteNullableArrayAsync(cancellationToken, AbortedTransactionsCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(11, 2147483647)) 
 					{
@@ -31333,7 +32155,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -31345,7 +32170,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -31517,11 +32345,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -31915,7 +32749,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -32041,11 +32878,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -32640,7 +33483,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 3)) 
 			{
-				await writer.WriteStringAsync(Key, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(Key, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(Key, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -32648,7 +33494,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(4, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, CoordinatorKeysCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, CoordinatorKeysCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, CoordinatorKeysCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -32818,7 +33667,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(1, 3)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 3)) 
 			{
@@ -32826,7 +33678,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 3)) 
 			{
-				await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 3)) 
 			{
@@ -32834,7 +33689,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(4, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, CoordinatorsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, CoordinatorsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, CoordinatorsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -33095,7 +33953,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(4, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Key, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Key, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Key, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(4, 2147483647)) 
 				{
@@ -33103,7 +33964,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(4, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(4, 2147483647)) 
 				{
@@ -33115,7 +33979,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(4, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -33349,7 +34216,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -33357,11 +34227,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -33635,7 +34511,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResourcesCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResourcesCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResourcesCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -33720,11 +34599,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, ConfigsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 			}
 
@@ -33859,7 +34744,10 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
@@ -33867,7 +34755,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(Value, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -34044,7 +34935,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResponsesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -34158,7 +35052,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -34166,7 +35063,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ResourceName, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -34343,7 +35243,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -34735,7 +35638,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -34747,19 +35653,31 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ProtocolsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ProtocolsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ProtocolsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -35009,7 +35927,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -35165,23 +36086,38 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(Leader, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(Leader, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(Leader, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -35465,11 +36401,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -35655,15 +36597,24 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 1)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, UngroupedPartitionStatesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, UngroupedPartitionStatesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, UngroupedPartitionStatesCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, LiveLeadersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, LiveLeadersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, LiveLeadersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -35882,7 +36833,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(2, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
@@ -35890,7 +36844,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(2, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -36052,7 +37009,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(HostName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(HostName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(HostName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -36228,7 +37188,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 1)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -36248,7 +37211,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -36256,15 +37222,24 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, AddingReplicasCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, AddingReplicasCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, AddingReplicasCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, RemovingReplicasCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, RemovingReplicasCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, RemovingReplicasCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
@@ -36629,11 +37604,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 4)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -36766,7 +37747,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -36869,7 +37853,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 4)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -37024,11 +38011,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, VotersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, VotersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, VotersCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, GrantingVotersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, GrantingVotersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, GrantingVotersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -37263,15 +38256,24 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2)) 
 			{
-				await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -37402,11 +38404,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -37534,7 +38542,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, MembersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -37664,11 +38675,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
@@ -37808,7 +38825,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(4, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, StatesFilterCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, StatesFilterCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, StatesFilterCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -37898,7 +38918,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -38030,15 +39053,24 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(4, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupState, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(GroupState, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(GroupState, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -38179,7 +39211,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -38310,11 +39345,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -38602,7 +39643,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -38699,11 +39743,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -38827,7 +39877,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 0)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, OldStyleOffsetsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, OldStyleOffsetsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, OldStyleOffsetsCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
@@ -39069,7 +40122,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -39181,11 +40237,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -39311,11 +40373,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -39481,11 +40549,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -39601,15 +40675,24 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, AddingReplicasCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, AddingReplicasCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, AddingReplicasCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, RemovingReplicasCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, RemovingReplicasCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, RemovingReplicasCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -39775,11 +40858,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, StateFiltersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, StateFiltersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, StateFiltersCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ProducerIdFiltersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ProducerIdFiltersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ProducerIdFiltersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -39904,11 +40993,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, UnknownStateFiltersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, UnknownStateFiltersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, UnknownStateFiltersCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TransactionStatesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TransactionStatesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TransactionStatesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -40068,7 +41163,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -40076,7 +41174,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TransactionState_, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TransactionState_, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TransactionState_, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -40214,7 +41315,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(4, 2147483647)) 
 			{
@@ -40307,7 +41411,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -40529,11 +41636,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, BrokersCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, BrokersCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, BrokersCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(2, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -40541,7 +41654,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(8, 10)) 
 			{
@@ -40654,7 +41770,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -40662,7 +41781,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -40933,7 +42055,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(10, 2147483647)) 
 				{
@@ -40945,7 +42070,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(8, 2147483647)) 
 				{
@@ -41174,15 +42302,24 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, ReplicaNodesCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, ReplicaNodesCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, ReplicaNodesCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, IsrNodesCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, IsrNodesCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, IsrNodesCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(5, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, OfflineReplicasCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, OfflineReplicasCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, OfflineReplicasCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -41509,7 +42646,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -41517,11 +42657,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(2, 4)) 
 			{
@@ -41529,7 +42675,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -41744,11 +42893,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -41876,7 +43031,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(CommittedMetadata, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(CommittedMetadata, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(CommittedMetadata, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -42081,7 +43239,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -42178,11 +43339,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -42392,11 +43559,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -42498,11 +43671,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -42688,7 +43867,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -42814,11 +43996,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection.Values.ToArray()).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection.Values.ToArray()).ConfigureAwait(false);
 				}
 			}
 
@@ -43038,15 +44226,24 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 7)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 7)) 
 			{
-				await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(8, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(7, 2147483647)) 
 			{
@@ -43158,11 +44355,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 7)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 7)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -43294,11 +44497,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(8, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(8, 2147483647)) 
 				{
-					await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteNullableArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -43406,11 +44615,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(8, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(8, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -43564,7 +44779,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 7)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(2, 7)) 
 			{
@@ -43572,7 +44790,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(8, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, GroupsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -43669,11 +44890,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 7)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 7)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -43797,7 +45024,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 7)) 
 					{
-						await writer.WriteNullableStringAsync(Metadata, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(Metadata, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(Metadata, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 7)) 
 					{
@@ -44054,11 +45284,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(8, 2147483647)) 
 				{
-					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(8, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(8, 2147483647)) 
 				{
@@ -44164,11 +45400,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(8, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(8, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -44292,7 +45534,10 @@ namespace Kafka.Protocol
 						}
 						if (Version.InRange(8, 2147483647)) 
 						{
-							await writer.WriteNullableStringAsync(Metadata, cancellationToken).ConfigureAwait(false);
+							if (IsFlexibleVersion)
+								await writer.WriteCompactNullableStringAsync(Metadata, cancellationToken).ConfigureAwait(false);
+							else
+								await writer.WriteNullableStringAsync(Metadata, cancellationToken).ConfigureAwait(false);
 						}
 						if (Version.InRange(8, 2147483647)) 
 						{
@@ -44528,7 +45773,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -44627,11 +45875,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -44880,7 +46134,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -44977,11 +46234,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Topic, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Topic, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -45272,7 +46535,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -45284,7 +46550,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicDataCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicDataCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicDataCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -45452,11 +46721,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionDataCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionDataCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionDataCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -45673,7 +46948,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResponsesCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResponsesCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResponsesCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
@@ -45750,11 +47028,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionResponsesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionResponsesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionResponsesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -45896,11 +47180,17 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(8, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, RecordErrorsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, RecordErrorsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, RecordErrorsCollection).ConfigureAwait(false);
 					}
 					if (Version.InRange(8, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -46109,7 +47399,10 @@ namespace Kafka.Protocol
 						}
 						if (Version.InRange(8, 2147483647)) 
 						{
-							await writer.WriteNullableStringAsync(BatchIndexErrorMessage, cancellationToken).ConfigureAwait(false);
+							if (IsFlexibleVersion)
+								await writer.WriteCompactNullableStringAsync(BatchIndexErrorMessage, cancellationToken).ConfigureAwait(false);
+							else
+								await writer.WriteNullableStringAsync(BatchIndexErrorMessage, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -46554,7 +47847,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(1, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ClientId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ClientId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ClientId, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -46876,7 +48172,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -47045,7 +48344,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(Mechanism, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(Mechanism, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(Mechanism, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -47127,7 +48429,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, MechanismsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, MechanismsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, MechanismsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -47452,15 +48757,24 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 0)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, UngroupedPartitionsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, UngroupedPartitionsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, UngroupedPartitionsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(1, 2)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -47644,7 +48958,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 0)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 0)) 
 				{
@@ -47780,11 +49097,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(1, 2)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(1, 2)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -47916,11 +49239,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(3, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -48174,7 +49503,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, PartitionErrorsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -48278,7 +49610,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -48450,7 +49785,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -48458,23 +49796,38 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, AssignmentsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, AssignmentsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, AssignmentsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -48733,7 +50086,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -48867,11 +50223,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ProtocolType, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ProtocolName, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -49099,11 +50461,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(TransactionalId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(GroupId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
@@ -49119,15 +50487,24 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteStringAsync(MemberId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(3, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(GroupInstanceId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -49415,11 +50792,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -49539,7 +50922,10 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteNullableStringAsync(CommittedMetadata, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactNullableStringAsync(CommittedMetadata, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteNullableStringAsync(CommittedMetadata, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -49713,7 +51099,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -49815,11 +51204,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -50111,7 +51506,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -50254,7 +51652,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, FeatureUpdatesCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, FeatureUpdatesCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, FeatureUpdatesCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -50360,7 +51761,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Feature, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Feature, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Feature, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -50523,11 +51927,17 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, ResultsCollection.Values.ToArray()).ConfigureAwait(false);
 			}
 		}
 
@@ -50697,7 +52107,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(Feature, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(Feature, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(Feature, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -50705,7 +52118,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(ErrorMessage, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -50877,15 +52293,24 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 4)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, UngroupedPartitionStatesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, UngroupedPartitionStatesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, UngroupedPartitionStatesCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(5, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicStatesCollection).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, LiveBrokersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, LiveBrokersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, LiveBrokersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -51075,7 +52500,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(7, 2147483647)) 
 				{
@@ -51083,7 +52511,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionStatesCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -51255,7 +52686,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 0)) 
 				{
-					await writer.WriteStringAsync(V0Host, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(V0Host, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(V0Host, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 0)) 
 				{
@@ -51263,11 +52697,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(1, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, EndpointsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, EndpointsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, EndpointsCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(2, 2147483647)) 
 				{
-					await writer.WriteNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteNullableStringAsync(Rack, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -51424,11 +52864,17 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Host, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Host, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(3, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Listener, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Listener, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Listener, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(1, 2147483647)) 
 					{
@@ -51649,7 +53095,10 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 4)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -51669,7 +53118,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, IsrCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -51677,11 +53129,17 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, ReplicasCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(4, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, OfflineReplicasCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, OfflineReplicasCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, OfflineReplicasCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -52053,11 +53511,17 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
+				else
+					await writer.WriteNullableStringAsync(ClusterId, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -52163,11 +53627,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -52491,7 +53961,10 @@ namespace Kafka.Protocol
 			}
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -52591,11 +54064,17 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
+					else
+						await writer.WriteStringAsync(TopicName, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -52906,7 +54385,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, MarkersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, MarkersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, MarkersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -53001,7 +54483,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
@@ -53165,11 +54650,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, PartitionIndexesCollection).ConfigureAwait(false);
 					}
 				}
 
@@ -53303,7 +54794,10 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await writer.WriteArrayAsync(cancellationToken, MarkersCollection).ConfigureAwait(false);
+				if (IsFlexibleVersion)
+					await writer.WriteCompactArrayAsync(cancellationToken, MarkersCollection).ConfigureAwait(false);
+				else
+					await writer.WriteArrayAsync(cancellationToken, MarkersCollection).ConfigureAwait(false);
 			}
 		}
 
@@ -53378,7 +54872,10 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(0, 2147483647)) 
 				{
-					await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					if (IsFlexibleVersion)
+						await writer.WriteCompactArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
+					else
+						await writer.WriteArrayAsync(cancellationToken, TopicsCollection).ConfigureAwait(false);
 				}
 			}
 
@@ -53480,11 +54977,17 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactStringAsync(Name, cancellationToken).ConfigureAwait(false);
+						else
+							await writer.WriteStringAsync(Name, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						if (IsFlexibleVersion)
+							await writer.WriteCompactArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
+						else
+							await writer.WriteArrayAsync(cancellationToken, PartitionsCollection).ConfigureAwait(false);
 					}
 				}
 
