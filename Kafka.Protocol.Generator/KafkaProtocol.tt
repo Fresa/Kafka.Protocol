@@ -332,20 +332,20 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 					if (isCompactable) 
 					{
 						#>instance.IsFlexibleVersion ? <# _();
-						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) :<# _();
+						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false) :<# _();
 						#>	<#
 					}	
-					#>await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 	
+					#>await reader.Read<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 				} 
 				else 
 				{
 					if (isCompactable) 
 					{
 						#>instance.IsFlexibleVersion ? <# _();
-						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) :<# _();
+						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :<# _();
 						#>	<#
 					}	
-					#>await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 	
+					#>await reader.Read<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 				}
 			} 
 			else 
@@ -369,20 +369,20 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 					if (isCompactable) 
 					{
 						#>instance.IsFlexibleVersion ? <# _();
-						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false) :<# _();
+						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :<# _();
 						#>	<#
 					}	
-					#>await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);<# 
+					#>await reader.Read<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 
 				}
 				else 
 				{
 					if (isCompactable) 
 					{
 						#>instance.IsFlexibleVersion ? <# _();
-						#>	(await reader.ReadCompact<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>) :<#  _();
+						#>	(await reader.ReadCompact<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>) :<#  _();
 						#>	<#
 					}	
-					#>(await reader.Read<#= nullable #>ArrayAsync(async () => await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+					#>(await reader.Read<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
 				}
 			} 
 			else 
