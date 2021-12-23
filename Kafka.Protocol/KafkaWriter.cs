@@ -144,15 +144,26 @@ namespace Kafka.Protocol
             WriteNullableArrayAsync(cancellationToken, items);
 
         public ValueTask WriteCompactArrayAsync<T>(
-            CancellationToken cancellationToken = default, params T[] items) where T : ISerialize
-        {
-            throw new NotImplementedException();
-        }
+            CancellationToken cancellationToken = default, params T[] items) where T : ISerialize =>
+            WriteCompactNullableArrayAsync(cancellationToken, items);
 
-        public ValueTask WriteCompactNullableArrayAsync<T>(
-            CancellationToken cancellationToken = default, params T[] items) where T : ISerialize
+        public async ValueTask WriteCompactNullableArrayAsync<T>(
+            CancellationToken cancellationToken = default, params T[]? items) where T : ISerialize
         {
-            throw new NotImplementedException();
+            if (items == null)
+            {
+                await WriteUVarIntAsync(0, cancellationToken)
+                    .ConfigureAwait(false);
+                return;
+            }
+
+            await WriteUVarIntAsync((uint)items.Length + 1, cancellationToken)
+                .ConfigureAwait(false);
+            foreach (var item in items)
+            {
+                await item.WriteToAsync(this, cancellationToken)
+                    .ConfigureAwait(false);
+            }
         }
 
         public async ValueTask WriteRecordBatchAsync(RecordBatch value,

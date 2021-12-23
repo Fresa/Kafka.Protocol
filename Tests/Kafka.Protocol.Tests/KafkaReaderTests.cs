@@ -600,6 +600,62 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_reading_a_compact_array_of_int32 : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private Int32[] _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 3, 0, 0, 1, 1, 0, 0, 0, 1 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader
+                    .ReadCompactArrayAsync(
+                        async () => await Int32.FromReaderAsync(_reader)
+                            .ConfigureAwait(false))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().BeEquivalentTo(new Int32(257), new Int32(1));
+            }
+        }
+        
+        public class When_reading_an_empty_compact_array : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private Int32[] _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 1 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader
+                    .ReadCompactArrayAsync(
+                        async () => await Int32.FromReaderAsync(_reader)
+                            .ConfigureAwait(false))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().BeEmpty();
+            }
+        }
+
         public class When_reading_a_null_array_of_int32 : XUnit2SpecificationAsync
         {
             private KafkaReader _reader;
@@ -625,6 +681,90 @@ namespace Kafka.Protocol.Tests
             public void It_should_parse_correctly()
             {
                 _value.Should().BeNull();
+            }
+        }
+
+        public class When_reading_a_compact_nullable_array_of_int32 : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private Int32[] _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 3, 0, 0, 1, 1, 0, 0, 0, 1 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader
+                    .ReadCompactNullableArrayAsync(
+                        async () => await Int32.FromReaderAsync(_reader)
+                            .ConfigureAwait(false))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().BeEquivalentTo(new Int32(257), new Int32(1));
+            }
+        }
+
+        public class When_reading_null_from_a_compact_array : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private Int32[] _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 0 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader
+                    .ReadCompactNullableArrayAsync(
+                        async () => await Int32.FromReaderAsync(_reader)
+                            .ConfigureAwait(false))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().BeNull();
+            }
+        }
+
+        public class When_reading_an_empty_nullable_compact_array : XUnit2SpecificationAsync
+        {
+            private KafkaReader _reader;
+            private Int32[] _value;
+
+            protected override async Task GivenAsync()
+            {
+                _reader = await new byte[] { 1 }
+                    .ToReaderAsync()
+                    .ConfigureAwait(false);
+            }
+
+            protected override async Task WhenAsync()
+            {
+                _value = await _reader
+                    .ReadCompactNullableArrayAsync(
+                        async () => await Int32.FromReaderAsync(_reader)
+                            .ConfigureAwait(false))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _value.Should().BeEmpty();
             }
         }
 

@@ -643,6 +643,33 @@ namespace Kafka.Protocol.Tests
             }
         }
 
+        public class When_writing_a_compact_array_of_int32 : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[9];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteCompactArrayAsync(
+                        CancellationToken.None, new Int32(257), new Int32(1))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(3, 0, 0, 1, 1, 0, 0, 0, 1);
+            }
+        }
+
         public class
             When_writing_null_to_array_of_int32 : XUnit2SpecificationAsync
         {
@@ -668,6 +695,60 @@ namespace Kafka.Protocol.Tests
             {
                 _buffer.Should()
                     .Equal(255, 255, 255, 255);
+            }
+        }
+
+        public class When_writing_a_nullable_compact_array_of_int32 : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[9];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteCompactNullableArrayAsync(
+                        CancellationToken.None, new Int32(257), new Int32(1))
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(3, 0, 0, 1, 1, 0, 0, 0, 1);
+            }
+        }
+
+        public class When_writing_null_as_a_nullable_compact_array_of_int32 : XUnit2SpecificationAsync
+        {
+            private KafkaWriter _writer;
+            private readonly byte[] _buffer = new byte[1];
+
+            protected override Task GivenAsync()
+            {
+                var stream = new MemoryStream(_buffer);
+                _writer = new KafkaWriter(stream);
+                return base.GivenAsync();
+            }
+
+            protected override async Task WhenAsync()
+            {
+                await _writer.WriteCompactNullableArrayAsync<Int32>(
+                        CancellationToken.None, null)
+                    .ConfigureAwait(false);
+            }
+
+            [Fact]
+            public void It_should_parse_correctly()
+            {
+                _buffer.Should()
+                    .Equal(0);
             }
         }
 

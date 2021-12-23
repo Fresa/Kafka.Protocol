@@ -265,12 +265,6 @@ namespace Kafka.Protocol
                 throw new NotSupportedException($"The array cannot be null. Consider changing to {nameof(ReadNullableArrayAsync)}");
         }
 
-        public ValueTask<T[]> ReadCompactArrayAsync<T>(Func<ValueTask<T>> factory,
-            CancellationToken cancellationToken = default) where T : ISerialize
-        {
-            throw new NotImplementedException();
-        }
-
         public async ValueTask<T[]> ReadArrayAsync<T>(
             VarInt numberOfItems,
             Func<ValueTask<T>> createItem,
@@ -282,6 +276,14 @@ namespace Kafka.Protocol
                    throw new NotSupportedException($"The array cannot be null. Consider changing to {nameof(ReadNullableArrayAsync)}");
         }
 
+        public async ValueTask<T[]> ReadCompactArrayAsync<T>(Func<ValueTask<T>> createItem,
+            CancellationToken cancellationToken = default) where T : ISerialize
+        {
+            return await ReadCompactNullableArrayAsync(createItem, cancellationToken)
+                       .ConfigureAwait(false) ??
+                   throw new NotSupportedException($"The array cannot be null. Consider changing to {nameof(ReadCompactNullableArrayAsync)}");
+        }
+
         public async ValueTask<T[]?> ReadNullableArrayAsync<T>(Func<ValueTask<T>> createItem,
             CancellationToken cancellationToken = default) where T : ISerialize
         {
@@ -290,10 +292,13 @@ namespace Kafka.Protocol
             return await ReadNullableArrayAsync(length.ToVarInt(), createItem, cancellationToken);
         }
 
-        public ValueTask<T[]?> ReadCompactNullableArrayAsync<T>(Func<ValueTask<T>> factory,
+        public async ValueTask<T[]?> ReadCompactNullableArrayAsync<T>(Func<ValueTask<T>> createItem,
             CancellationToken cancellationToken = default) where T : ISerialize
         {
-            throw new NotImplementedException();
+            var length = await ReadUVarIntAsync(cancellationToken)
+                .ConfigureAwait(false);
+            
+            return await ReadNullableArrayAsync((int)length.Value - 1, createItem, cancellationToken);
         }
 
         public async ValueTask<RecordBatch> ReadRecordBatchAsync(CancellationToken cancellationToken = default) =>

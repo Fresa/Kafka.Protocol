@@ -36,7 +36,7 @@ namespace Kafka.Protocol
             where T : ISerialize;
         ValueTask WriteCompactArrayAsync<T>(CancellationToken cancellationToken = default, params T[] items)
             where T : ISerialize;
-        ValueTask WriteCompactNullableArrayAsync<T>(CancellationToken cancellationToken = default, params T[] items)
+        ValueTask WriteCompactNullableArrayAsync<T>(CancellationToken cancellationToken = default, params T[]? items)
             where T : ISerialize;
 
         ValueTask WriteRecordBatchAsync(RecordBatch value,
