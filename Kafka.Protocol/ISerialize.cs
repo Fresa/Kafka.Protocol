@@ -7,5 +7,7 @@ namespace Kafka.Protocol
     {
         ValueTask WriteToAsync(IKafkaWriter writer, 
             CancellationToken cancellationToken = default);
+
+        int GetSize(IKafkaWriter writer);
     }
 }

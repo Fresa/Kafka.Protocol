@@ -130,9 +130,7 @@ namespace Kafka.Protocol.Records
             }
         }
 
-        internal int Length =>
-            61 +
-            Records.Sum(record => record.Length);
+        internal int Length => SizeOf;
 
         public async ValueTask WriteToAsync(
             IKafkaWriter writer,
@@ -157,6 +155,10 @@ namespace Kafka.Protocol.Records
             await writer.WriteBytesAsync(bytes, cancellationToken)
                 .ConfigureAwait(false);
         }
+
+        public int SizeOf =>
+            61 +
+            Records.Sum(record => record.Length);
 
         private async ValueTask<byte[]> SerializeCrcData(
             CancellationToken cancellationToken = default)
