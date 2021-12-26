@@ -93,7 +93,7 @@ namespace Kafka.Protocol
         }
 
         public int SizeOfNullableString(String? value) =>
-            2 + value?.Value.Length ?? 0;
+            2 + (value?.Value.Length ?? 0);
         public ValueTask WriteNullableStringAsync(String? value, CancellationToken cancellationToken = default) =>
             value.HasValue
                 ? WriteStringAsync(value.Value, cancellationToken)
@@ -131,7 +131,7 @@ namespace Kafka.Protocol
             WriteAsync(value, cancellationToken);
 
         public int SizeOfNullableBytes(Bytes? value) =>
-            4 + value?.Value.Length ?? 0;
+            4 + (value?.Value.Length ?? 0);
         public ValueTask WriteNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default) =>
             value.HasValue
                 ? WriteBytesAsync(value.Value, cancellationToken)
@@ -169,13 +169,13 @@ namespace Kafka.Protocol
 
         public int SizeOfArray<T>(T[] items) where T : ISerialize =>
             4 + items.Sum(item => item.GetSize(this));
-        public ValueTask WriteArrayAsync<T>(CancellationToken cancellationToken, params T[] items)
+        public ValueTask WriteArrayAsync<T>(CancellationToken cancellationToken = default, params T[] items)
             where T : ISerialize =>
             WriteNullableArrayAsync(cancellationToken, items);
 
-        public int SizeOfNullableArray<T>(T[]? items) where T : ISerialize =>
-            4 + items?.Sum(item => item.GetSize(this)) ?? 0;
-        public async ValueTask WriteNullableArrayAsync<T>(CancellationToken cancellationToken, params T[]? items)
+        public int SizeOfNullableArray<T>(params T[]? items) where T : ISerialize =>
+            4 + (items?.Sum(item => item.GetSize(this)) ?? 0);
+        public async ValueTask WriteNullableArrayAsync<T>(CancellationToken cancellationToken = default, params T[]? items)
             where T : ISerialize
         {
             if (items == null)
@@ -194,14 +194,14 @@ namespace Kafka.Protocol
             }
         }
 
-        public int SizeOfCompactArray<T>(T[] items) where T : ISerialize =>
+        public int SizeOfCompactArray<T>(params T[] items) where T : ISerialize =>
             (items.Length + 1).GetVarIntLength() +
             items.Sum(item => item.GetSize(this));
         public ValueTask WriteCompactArrayAsync<T>(
             CancellationToken cancellationToken = default, params T[] items) where T : ISerialize =>
             WriteCompactNullableArrayAsync(cancellationToken, items);
 
-        public int SizeOfCompactNullableArray<T>(T[]? items)
+        public int SizeOfCompactNullableArray<T>(params T[]? items)
             where T : ISerialize =>
             items == null
                 ? 1

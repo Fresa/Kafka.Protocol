@@ -318,7 +318,7 @@ namespace Kafka.Protocol
             }
 
             var pipe = new Pipe();
-            await pipe.Writer.WriteAsync(new ReadOnlyMemory<byte>(bytes.Value.Value),
+            await pipe.Writer.WriteAsync(new ReadOnlyMemory<byte>(bytes.Value),
                     cancellationToken)
                 .ConfigureAwait(false);
             var reader = new KafkaReader(pipe.Reader);

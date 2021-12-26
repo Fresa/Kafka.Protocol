@@ -56,19 +56,19 @@ namespace Kafka.Protocol
         int SizeOfCompactNullableBytes(Bytes? value);
         ValueTask WriteCompactNullableBytesAsync(Bytes? value, CancellationToken cancellationToken = default);
 
-        int SizeOfArray<T>(T[] items)
+        int SizeOfArray<T>(params T[] items)
             where T : ISerialize;
         ValueTask WriteArrayAsync<T>(CancellationToken cancellationToken = default, params T[] items)
             where T : ISerialize;
-        int SizeOfNullableArray<T>(T[]? items)
+        int SizeOfNullableArray<T>(params T[]? items)
             where T : ISerialize;
         ValueTask WriteNullableArrayAsync<T>(CancellationToken cancellationToken = default, params T[]? items)
             where T : ISerialize;
-        int SizeOfCompactArray<T>(T[] items)
+        int SizeOfCompactArray<T>(params T[] items)
             where T : ISerialize;
         ValueTask WriteCompactArrayAsync<T>(CancellationToken cancellationToken = default, params T[] items)
             where T : ISerialize;
-        int SizeOfCompactNullableArray<T>(T[]? items)
+        int SizeOfCompactNullableArray<T>(params T[]? items)
             where T : ISerialize;
         ValueTask WriteCompactNullableArrayAsync<T>(CancellationToken cancellationToken = default, params T[]? items)
             where T : ISerialize;
