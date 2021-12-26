@@ -3520,7 +3520,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TransactionalId) :
 				0) +
@@ -3727,7 +3727,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -3841,7 +3841,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TransactionalId) :
 				0) +
@@ -4178,7 +4178,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -4541,7 +4541,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(BrokerId) :
 				0) +
@@ -4660,7 +4660,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -4854,7 +4854,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(EntriesCollection) : 
@@ -5401,7 +5401,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -5832,7 +5832,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResourcesCollection.Values.ToArray()) : 
@@ -6257,7 +6257,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -6592,7 +6592,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(BrokerId) :
 				0) +
@@ -7084,7 +7084,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -7651,7 +7651,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TimeoutMs) :
 				0) +
@@ -8035,7 +8035,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -8546,7 +8546,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(DirsCollection.Values.ToArray()) : 
@@ -8885,7 +8885,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -9248,7 +9248,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(DeletionsCollection) : 
@@ -9739,7 +9739,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -10034,7 +10034,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(3, 2147483647) ? 
 				writer.SizeOf(ClientSoftwareName) :
 				0) +
@@ -10151,7 +10151,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -10903,7 +10903,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
@@ -11319,7 +11319,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -11756,7 +11756,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(BrokerId) :
 				0) +
@@ -11995,7 +11995,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -12233,7 +12233,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(BrokerId) :
 				0) +
@@ -12908,7 +12908,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -13064,7 +13064,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(AssignedPartitionsCollection.Values.ToArray()) : 
@@ -13316,7 +13316,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
@@ -13609,7 +13609,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(BrokerId) :
 				0) +
@@ -13723,7 +13723,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -13964,7 +13964,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(CreationsCollection) : 
@@ -14380,7 +14380,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -14630,7 +14630,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(RenewersCollection) : 
@@ -14879,7 +14879,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -15288,7 +15288,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
@@ -15708,7 +15708,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -16005,7 +16005,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
@@ -16684,7 +16684,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(2, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -17411,7 +17411,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Type) :
 				0) +
@@ -17578,7 +17578,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(FiltersCollection) : 
@@ -18021,7 +18021,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -18744,7 +18744,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GroupsNamesCollection) : 
@@ -18829,7 +18829,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -19070,7 +19070,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
@@ -19436,7 +19436,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -19839,7 +19839,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(6, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
@@ -20137,7 +20137,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -20468,7 +20468,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ResourceTypeFilter) :
 				0) +
@@ -20829,7 +20829,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -21458,7 +21458,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ComponentsCollection) : 
@@ -21756,7 +21756,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -22360,7 +22360,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(IncludeClusterAuthorizedOperations) :
 				0);
@@ -22437,7 +22437,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -22999,7 +22999,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResourcesCollection) : 
@@ -23341,7 +23341,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -24316,7 +24316,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(OwnersCollection) : 
@@ -24531,7 +24531,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -25194,7 +25194,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GroupsCollection) : 
@@ -25319,7 +25319,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -26080,7 +26080,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(TopicsCollection.Values.ToArray()) : 
@@ -26298,7 +26298,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -26906,7 +26906,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
@@ -27116,7 +27116,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -27849,7 +27849,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
@@ -28131,7 +28131,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -28805,7 +28805,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TransactionalIdsCollection) : 
@@ -28890,7 +28890,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -29491,7 +29491,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(UsersCollection) : 
@@ -29661,7 +29661,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -30212,7 +30212,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ElectionType) :
 				0) +
@@ -30512,7 +30512,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -30969,7 +30969,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
@@ -31433,7 +31433,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -31870,7 +31870,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TransactionalId) :
 				0) +
@@ -32072,7 +32072,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -32186,7 +32186,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(RequestData) :
 				0) +
@@ -32349,7 +32349,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOfNullableBytes(ResponseData) :
 				0) +
@@ -32471,7 +32471,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Hmac) :
 				0) +
@@ -32588,7 +32588,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -32742,7 +32742,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(12, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
@@ -33820,7 +33820,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -35107,7 +35107,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
@@ -35761,7 +35761,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -36576,7 +36576,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 3) ? 
 				writer.SizeOf(Key) :
 				0) +
@@ -36748,7 +36748,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -37372,7 +37372,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(GroupId) :
 				0) +
@@ -37595,7 +37595,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -37704,7 +37704,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResourcesCollection.Values.ToArray()) : 
@@ -38169,7 +38169,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -38504,7 +38504,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(TransactionalId) :
@@ -38719,7 +38719,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -38910,7 +38910,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(GroupId) :
 				0) +
@@ -39382,7 +39382,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(2, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -39949,7 +39949,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ControllerId) :
 				0) +
@@ -41096,7 +41096,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -41537,7 +41537,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Version_) :
 				0) +
@@ -41817,7 +41817,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(GroupId) :
 				0) +
@@ -42127,7 +42127,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -42457,7 +42457,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(4, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(StatesFilterCollection) : 
@@ -42542,7 +42542,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -42863,7 +42863,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ReplicaId) :
 				0) +
@@ -43348,7 +43348,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(2, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -43878,7 +43878,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TimeoutMs) :
 				0) +
@@ -44140,7 +44140,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -44701,7 +44701,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(StateFiltersCollection) : 
@@ -44834,7 +44834,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -45200,7 +45200,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(TopicsCollection) : 
@@ -45536,7 +45536,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(3, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -46661,7 +46661,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(GroupId) :
 				0) +
@@ -47335,7 +47335,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(3, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -47693,7 +47693,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(GroupId) :
 				0) +
@@ -48024,7 +48024,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -48422,7 +48422,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 7) ? 
 				writer.SizeOf(GroupId) :
 				0) +
@@ -49035,7 +49035,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(3, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -50150,7 +50150,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(3, 2147483647) ? 
 				writer.SizeOf(ReplicaId) :
 				0) +
@@ -50550,7 +50550,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(2, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -50987,7 +50987,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(TransactionalId) :
@@ -51455,7 +51455,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResponsesCollection.Values.ToArray()) : 
@@ -52153,7 +52153,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Hmac) :
 				0) +
@@ -52270,7 +52270,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -52424,7 +52424,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(RequestApiKey) :
 				0) +
@@ -52630,7 +52630,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(CorrelationId) :
 				0);
@@ -52707,7 +52707,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(AuthBytes) :
 				0);
@@ -52784,7 +52784,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -52989,7 +52989,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Mechanism) :
 				0);
@@ -53071,7 +53071,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -53193,7 +53193,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Version_) :
 				0);
@@ -53270,7 +53270,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Version_) :
 				0) +
@@ -53387,7 +53387,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ControllerId) :
 				0) +
@@ -54254,7 +54254,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -54535,7 +54535,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(GroupId) :
 				0) +
@@ -55027,7 +55027,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -55278,7 +55278,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TransactionalId) :
 				0) +
@@ -56010,7 +56010,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -56373,7 +56373,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(BrokerId) :
 				0);
@@ -56450,7 +56450,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -56618,7 +56618,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TimeoutMs) :
 				0) +
@@ -56904,7 +56904,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
 				0) +
@@ -57293,7 +57293,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ControllerId) :
 				0) +
@@ -58599,7 +58599,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0);
@@ -58673,7 +58673,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
@@ -59169,7 +59169,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ErrorCode) :
 				0) +
@@ -59646,7 +59646,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(MarkersCollection) : 
@@ -60100,7 +60100,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		public int GetSize(IKafkaWriter writer) =>
+		public override int GetSize(IKafkaWriter writer) =>
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(MarkersCollection) : 

@@ -92,5 +92,8 @@ namespace Kafka.Protocol.Records
             await writer.WriteArrayAsync(cancellationToken, Headers)
                 .ConfigureAwait(false);
         }
+
+        public int GetSize(IKafkaWriter writer) =>
+            Length;
     }
 }

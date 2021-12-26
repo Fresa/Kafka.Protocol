@@ -53,5 +53,8 @@ namespace Kafka.Protocol.Records
             await writer.WriteBytesAsync(Value, cancellationToken)
                 .ConfigureAwait(false);
         }
+
+        public int GetSize(IKafkaWriter writer) => Length;
+
     }
 }

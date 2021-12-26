@@ -156,6 +156,9 @@ namespace Kafka.Protocol.Records
                 .ConfigureAwait(false);
         }
 
+        public int GetSize(IKafkaWriter writer) => SizeOf;
+        
+
         public int SizeOf =>
             61 +
             Records.Sum(record => record.Length);

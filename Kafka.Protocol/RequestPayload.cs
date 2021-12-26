@@ -36,6 +36,10 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
+        public int GetSize(IKafkaWriter writer) =>
+            Header.GetSize(writer) +
+            Message.GetSize(writer);
+        
         public static async ValueTask<RequestPayload> ReadFromAsync(
             Int16 headerVersion,
             IKafkaReader kafkaReader,

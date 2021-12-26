@@ -55,5 +55,9 @@ namespace Kafka.Protocol.Records
             await writer.WriteInt16Async(_type, cancellationToken)
                 .ConfigureAwait(false);
         }
+
+        public int GetSize(IKafkaWriter writer) =>
+            Version.GetSize(writer) +
+            _type.GetSize(writer);
     }
 }

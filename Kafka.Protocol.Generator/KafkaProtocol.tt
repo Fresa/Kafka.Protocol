@@ -229,7 +229,7 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public override Int16 Version { get; }<# _(1);
 			#>internal bool IsFlexibleVersion { get; }<# _(2);
 
-			#>public int GetSize(IKafkaWriter writer) =><# _();
+			#>public override int GetSize(IKafkaWriter writer) =><# _();
 			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
 			{
 				PrintSizeOf(messageField);
