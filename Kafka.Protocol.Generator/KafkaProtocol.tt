@@ -139,7 +139,7 @@ namespace Kafka.Protocol<# Block(() =>
 				#>return await reader.Read<#= className #>Async(cancellationToken).ConfigureAwait(false);<#
 			}); _(2);
 
-			#>public static <#= className #> Default => From(<#= defaultValue #>);<#
+			#>public static <#= className #> Default { get; } = From(<#= defaultValue #>);<#
         }); _(2);
     });
 

@@ -118,7 +118,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
             var type = primitiveType.ResolveType();
             if (type.IsArray)
             {
-                return string.Empty;
+                return $"Array.Empty<{type.GetPrettyName().Replace("[]", "")}>()";
             }
 
             switch (type)

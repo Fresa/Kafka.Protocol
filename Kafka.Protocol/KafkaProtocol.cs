@@ -66,7 +66,7 @@ namespace Kafka.Protocol
 			return await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static Boolean Default => From(default);
+		public static Boolean Default { get; } = From(default);
 	}
 
 
@@ -128,7 +128,7 @@ namespace Kafka.Protocol
 			return await reader.ReadInt8Async(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static Int8 Default => From(default);
+		public static Int8 Default { get; } = From(default);
 	}
 
 
@@ -190,7 +190,7 @@ namespace Kafka.Protocol
 			return await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static Int16 Default => From(default);
+		public static Int16 Default { get; } = From(default);
 	}
 
 
@@ -252,7 +252,7 @@ namespace Kafka.Protocol
 			return await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static Int32 Default => From(default);
+		public static Int32 Default { get; } = From(default);
 	}
 
 
@@ -314,7 +314,7 @@ namespace Kafka.Protocol
 			return await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static Int64 Default => From(default);
+		public static Int64 Default { get; } = From(default);
 	}
 
 
@@ -376,7 +376,7 @@ namespace Kafka.Protocol
 			return await reader.ReadUInt32Async(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static UInt32 Default => From(default);
+		public static UInt32 Default { get; } = From(default);
 	}
 
 
@@ -438,7 +438,7 @@ namespace Kafka.Protocol
 			return await reader.ReadVarIntAsync(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static VarInt Default => From(default);
+		public static VarInt Default { get; } = From(default);
 	}
 
 
@@ -500,7 +500,7 @@ namespace Kafka.Protocol
 			return await reader.ReadVarLongAsync(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static VarLong Default => From(default);
+		public static VarLong Default { get; } = From(default);
 	}
 
 
@@ -562,7 +562,7 @@ namespace Kafka.Protocol
 			return await reader.ReadUuidAsync(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static Uuid Default => From(default);
+		public static Uuid Default { get; } = From(default);
 	}
 
 
@@ -624,7 +624,7 @@ namespace Kafka.Protocol
 			return await reader.ReadFloat64Async(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static Float64 Default => From(default);
+		public static Float64 Default { get; } = From(default);
 	}
 
 
@@ -686,7 +686,7 @@ namespace Kafka.Protocol
 			return await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static String Default => From(string.Empty);
+		public static String Default { get; } = From(string.Empty);
 	}
 
 
@@ -748,7 +748,7 @@ namespace Kafka.Protocol
 			return await reader.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static Bytes Default => From();
+		public static Bytes Default { get; } = From(Array.Empty<byte>());
 	}
 
 
@@ -810,7 +810,7 @@ namespace Kafka.Protocol
 			return await reader.ReadUInt16Async(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static UInt16 Default => From(default);
+		public static UInt16 Default { get; } = From(default);
 	}
 
 
@@ -872,7 +872,7 @@ namespace Kafka.Protocol
 			return await reader.ReadUVarIntAsync(cancellationToken).ConfigureAwait(false);
 		}
 
-		public static UVarInt Default => From(default);
+		public static UVarInt Default { get; } = From(default);
 	}
 
 	/// <summary>
