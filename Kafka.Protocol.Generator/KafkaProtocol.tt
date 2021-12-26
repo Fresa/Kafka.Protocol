@@ -67,13 +67,14 @@ namespace Kafka.Protocol<# Block(() =>
         var type = primitiveType.GetTypeName();
 		var defaultValue = primitiveType.GetDefaultValue();
 		var isNullable = primitiveType.IsNullable();
+		var @params = primitiveType.IsArray() ? "params " : "";
 
         GenerateDocumentation(primitiveType.Description);
         #>public readonly struct <#= className #> : ISerialize <# Block(() =>
         {
             #>public <#= type #> Value { get; }<# _(2);
 
-            #>public <#= className #>(<#= type #> value)<# Block(() =>
+            #>public <#= className #>(<#= @params #><#= type #> value)<# Block(() =>
             {
                 #>Value = value;<#
             }); _(2);
@@ -128,7 +129,7 @@ namespace Kafka.Protocol<# Block(() =>
 				#>await writer.Write<#= className #>Async(this, cancellationToken).ConfigureAwait(false);<#
 			}); _(2);
 
-			#>public static <#= className #> From(<#= type #> value)<# Block(() =>
+			#>public static <#= className #> From(<#= @params #><#= type #> value)<# Block(() =>
             {
                 #>return new <#= className #>(value);<#
             }); _(2);
