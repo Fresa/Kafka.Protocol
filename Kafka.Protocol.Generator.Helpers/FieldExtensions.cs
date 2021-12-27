@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Kafka.Protocol.Generator.Helpers.Extensions;
@@ -98,6 +99,7 @@ namespace Kafka.Protocol.Generator.Helpers
         {
             var fullTypeName = field.GetFullTypeNameWithoutArrayCharacters();
             var name = field.GetName().FirstCharacterToUpperCase();
+
             return ReservedFieldNames.Contains(name) || 
                    fullTypeName.Equals(name, StringComparison.CurrentCultureIgnoreCase) ||
                    name.Equals(parentFieldTypeName, StringComparison.CurrentCultureIgnoreCase)
@@ -111,5 +113,16 @@ namespace Kafka.Protocol.Generator.Helpers
         public static bool IsCompactable(this Field field) =>
             field.IsArray() || field.GetTypeName().Equals("string",
                 StringComparison.CurrentCultureIgnoreCase);
+
+        public static IEnumerable<Field> GetTaggedFields(this Field field) =>
+            field.Fields?
+                .Where(childField => childField.Tag.HasValue)
+                .OrderBy(childField => childField.Tag) ??
+            Enumerable.Empty<Field>();
+
+        public static IEnumerable<Field> GetNonTaggedFields(this Field field) =>
+            field.Fields?
+                .Where(childField => !childField.Tag.HasValue) ??
+            Enumerable.Empty<Field>();
     }
 }

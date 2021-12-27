@@ -26,6 +26,7 @@
 	var messageDefinitionPath = Path.Combine(Host.ResolvePath(@"..\Kafka.Protocol.MessageDefinitionsDownloader\MessageDefinitions\"));
 	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath).AddReferencesToFields();
 
+	void Tab(Action action) { this.Tab(action); }
     void Block(Action action) { this.Block(action); }
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
@@ -336,7 +337,7 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 		{
 	#>		IsFlexibleVersion ?<# _();
 	#>			writer.SizeOfCompact<#= nullable #>Array(<#= fieldName #><#= toArray #>) : <# _();
-	#>		<# _();
+	#>	<# 
 		}
 	#>		writer.SizeOf<#= nullable #>Array(<#= fieldName #><#= toArray #>) :<# _();
 	}
@@ -346,7 +347,7 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 		{
 	#>		IsFlexibleVersion ?<# _();
 	#>			writer.SizeOfCompact<#= nullable #><#= fieldTypeName #>(<#= fieldName #>) :<# _();
-	#>		<# _();
+	#>	<# 
 		}
 	#>		writer.SizeOf<#= nullable #><#= fieldTypeName #>(<#= fieldName #>) :<# _();
 	}
@@ -357,15 +358,15 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 	#>		0)<#
 }
 
-void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, bool throwOnWrongVersion = false)
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
+	var fieldName = messageField.GetFieldName(parentFieldTypeName);
 	#>if (instance.Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
-		var fieldName = messageField.GetFieldName(parentFieldTypeName);
 		var isCompactable = messageField.IsCompactable();
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		var nullableSign = messageField.IsNullable() ? "?" : "";
@@ -438,7 +439,13 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 				#>await <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
-	});		
+	});	
+	if (throwOnWrongVersion)
+	{
+	_();
+	#>else<# _();
+	#>	throw new InvalidOperationException($"Field <#= fieldName #> is not supported for version {instance.Version}");<#
+	}
 }
 
 void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, string parentFieldTypeName = "")
@@ -653,10 +660,29 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>public static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();
-			PrintOnNewRowForEach(field.Fields, messageField => 
+			PrintOnNewRowForEach(field.GetNonTaggedFields(), messageField => 
 			{
 				PrintReadFrom(messageField);
-			}); _();
+			}); _(2);
+
+			#>var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);<# _();
+			#>await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))<# Block(() => 
+			{
+				#>switch (tag.Tag)<# Block(() => 
+				{
+					PrintOnNewRowForEach(field.GetTaggedFields(), messageField => 
+					{
+					#>case <#= messageField.Tag #>:<# _();
+					Tab(() =>
+					{
+						PrintReadFrom(messageField, true); _();
+					});
+					#>	break;<# _();
+					}); _();
+					#>default:<# _();
+					#>	throw new InvalidOperationException($"Tag '{tag.Tag}' for <#= fieldTypeNameWithoutArrayCharacters #> is unknown");<# 
+				});
+			}); _(2);
 			#>return instance;<# 
 		}); _(2);
 

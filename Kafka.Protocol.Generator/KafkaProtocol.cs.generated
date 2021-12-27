@@ -3854,8 +3854,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<AddPartitionsToTxnRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -4051,8 +4050,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<AddPartitionsToTxnTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -4072,6 +4070,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AddPartitionsToTxnTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -4185,8 +4192,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ResultsCollection.Values.ToArray()) :
+					writer.SizeOfArray(ResultsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<AddPartitionsToTxnResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -4303,8 +4309,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(ResultsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(ResultsCollection.Values.ToArray()) :
+						writer.SizeOfArray(ResultsCollection.Values.ToArray()) :
 					0);
 
 			public static async ValueTask<AddPartitionsToTxnTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -4324,6 +4329,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AddPartitionsToTxnTopicResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -4443,6 +4457,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for AddPartitionsToTxnPartitionResult is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -4858,8 +4881,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(EntriesCollection) : 
-				
-				writer.SizeOfArray(EntriesCollection) :
+					writer.SizeOfArray(EntriesCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ValidateOnly) :
@@ -4947,14 +4969,12 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(EntityCollection) : 
-					
-					writer.SizeOfArray(EntityCollection) :
+						writer.SizeOfArray(EntityCollection) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(OpsCollection) : 
-					
-					writer.SizeOfArray(OpsCollection) :
+						writer.SizeOfArray(OpsCollection) :
 					0);
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -4974,6 +4994,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for EntryData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -5050,8 +5079,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(EntityName) :
-						
-						writer.SizeOfNullableString(EntityName) :
+							writer.SizeOfNullableString(EntityName) :
 						0);
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -5071,6 +5099,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for EntityData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -5235,6 +5272,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OpData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -5408,8 +5454,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(EntriesCollection) : 
-				
-				writer.SizeOfArray(EntriesCollection) :
+					writer.SizeOfArray(EntriesCollection) :
 				0);
 
 		public static async ValueTask<AlterClientQuotasResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -5526,14 +5571,12 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(EntityCollection) : 
-					
-					writer.SizeOfArray(EntityCollection) :
+						writer.SizeOfArray(EntityCollection) :
 					0);
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -5557,6 +5600,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for EntryData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -5701,8 +5753,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(EntityName) :
-						
-						writer.SizeOfNullableString(EntityName) :
+							writer.SizeOfNullableString(EntityName) :
 						0);
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -5722,6 +5773,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for EntityData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -5836,8 +5896,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResourcesCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ResourcesCollection.Values.ToArray()) :
+					writer.SizeOfArray(ResourcesCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ValidateOnly) :
@@ -5931,8 +5990,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(ConfigsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(ConfigsCollection.Values.ToArray()) :
+						writer.SizeOfArray(ConfigsCollection.Values.ToArray()) :
 					0);
 
 			public static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -5956,6 +6014,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResource is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -6094,8 +6161,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(Value) :
-						
-						writer.SizeOfNullableString(Value) :
+							writer.SizeOfNullableString(Value) :
 						0);
 
 				public static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -6115,6 +6181,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterableConfig is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -6264,8 +6339,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResponsesCollection) : 
-				
-				writer.SizeOfArray(ResponsesCollection) :
+					writer.SizeOfArray(ResponsesCollection) :
 				0);
 
 		public static async ValueTask<AlterConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -6382,8 +6456,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					writer.SizeOf(ResourceType) :
@@ -6417,6 +6490,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResourceResponse is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -6602,8 +6684,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<AlterIsrRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -6757,8 +6838,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -6778,6 +6858,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -6884,8 +6973,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(NewIsrCollection) : 
-						
-						writer.SizeOfArray(NewIsrCollection) :
+							writer.SizeOfArray(NewIsrCollection) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						writer.SizeOf(CurrentIsrVersion) :
@@ -6914,6 +7002,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -7094,8 +7191,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<AlterIsrResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -7247,8 +7343,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -7268,6 +7363,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -7380,8 +7484,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(IsrCollection) : 
-						
-						writer.SizeOfArray(IsrCollection) :
+							writer.SizeOfArray(IsrCollection) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						writer.SizeOf(CurrentIsrVersion) :
@@ -7418,6 +7521,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -7658,8 +7770,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<AlterPartitionReassignmentsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -7778,8 +7889,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<ReassignableTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -7799,6 +7909,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReassignableTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -7904,8 +8023,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableArray(ReplicasCollection) : 
-						
-						writer.SizeOfNullableArray(ReplicasCollection) :
+							writer.SizeOfNullableArray(ReplicasCollection) :
 						0);
 
 				public static async ValueTask<ReassignablePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -7923,6 +8041,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ReassignablePartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -8045,14 +8172,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResponsesCollection) : 
-				
-				writer.SizeOfArray(ResponsesCollection) :
+					writer.SizeOfArray(ResponsesCollection) :
 				0);
 
 		public static async ValueTask<AlterPartitionReassignmentsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -8254,8 +8379,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<ReassignableTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -8275,6 +8399,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReassignableTopicResponse is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -8383,8 +8516,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(ErrorMessage) :
-						
-						writer.SizeOfNullableString(ErrorMessage) :
+							writer.SizeOfNullableString(ErrorMessage) :
 						0);
 
 				public static async ValueTask<ReassignablePartitionResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -8406,6 +8538,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ReassignablePartitionResponse is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -8550,8 +8691,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(DirsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(DirsCollection.Values.ToArray()) :
+					writer.SizeOfArray(DirsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<AlterReplicaLogDirsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -8631,8 +8771,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+						writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 					0);
 
 			public static async ValueTask<AlterReplicaLogDir> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -8652,6 +8791,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDir is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -8757,8 +8905,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(PartitionsCollection) : 
-						
-						writer.SizeOfArray(PartitionsCollection) :
+							writer.SizeOfArray(PartitionsCollection) :
 						0);
 
 				public static async ValueTask<AlterReplicaLogDirTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -8778,6 +8925,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDirTopic is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -8892,8 +9048,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection) : 
-				
-				writer.SizeOfArray(ResultsCollection) :
+					writer.SizeOfArray(ResultsCollection) :
 				0);
 
 		public static async ValueTask<AlterReplicaLogDirsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -9010,8 +9165,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<AlterReplicaLogDirTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -9031,6 +9185,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDirTopicResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -9150,6 +9313,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDirPartitionResult is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -9252,14 +9424,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(DeletionsCollection) : 
-				
-				writer.SizeOfArray(DeletionsCollection) :
+					writer.SizeOfArray(DeletionsCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(UpsertionsCollection) : 
-				
-				writer.SizeOfArray(UpsertionsCollection) :
+					writer.SizeOfArray(UpsertionsCollection) :
 				0);
 
 		public static async ValueTask<AlterUserScramCredentialsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -9368,6 +9538,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ScramCredentialDeletion is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -9537,6 +9716,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ScramCredentialUpsertion is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -9746,8 +9934,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection) : 
-				
-				writer.SizeOfArray(ResultsCollection) :
+					writer.SizeOfArray(ResultsCollection) :
 				0);
 
 		public static async ValueTask<AlterUserScramCredentialsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -9867,8 +10054,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0);
 
 			public static async ValueTask<AlterUserScramCredentialsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -9892,6 +10078,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterUserScramCredentialsResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -10158,8 +10353,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ApiKeysCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ApiKeysCollection.Values.ToArray()) :
+					writer.SizeOfArray(ApiKeysCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
@@ -10167,8 +10361,7 @@ namespace Kafka.Protocol
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(SupportedFeaturesCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(SupportedFeaturesCollection.Values.ToArray()) :
+					writer.SizeOfArray(SupportedFeaturesCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				writer.SizeOf(FinalizedFeaturesEpoch) :
@@ -10176,8 +10369,7 @@ namespace Kafka.Protocol
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(FinalizedFeaturesCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(FinalizedFeaturesCollection.Values.ToArray()) :
+					writer.SizeOfArray(FinalizedFeaturesCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<ApiVersionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -10357,6 +10549,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ApiVersion is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -10561,6 +10762,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for SupportedFeatureKey is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -10770,6 +10980,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for FinalizedFeatureKey is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -10907,14 +11126,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
-				
-				writer.SizeOfNullableString(ClusterId) :
+					writer.SizeOfNullableString(ClusterId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<BeginQuorumEpochRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -11040,8 +11257,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -11061,6 +11277,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -11185,6 +11410,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -11326,8 +11560,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<BeginQuorumEpochResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -11442,8 +11675,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -11463,6 +11695,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -11594,6 +11835,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -12246,20 +12496,17 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ListenersCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ListenersCollection.Values.ToArray()) :
+					writer.SizeOfArray(ListenersCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(FeaturesCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(FeaturesCollection.Values.ToArray()) :
+					writer.SizeOfArray(FeaturesCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(Rack) :
-				
-				writer.SizeOfNullableString(Rack) :
+					writer.SizeOfNullableString(Rack) :
 				0);
 
 		public static async ValueTask<BrokerRegistrationRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -12513,6 +12760,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for Listener is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -12737,6 +12993,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for Feature is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -13068,8 +13333,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(AssignedPartitionsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(AssignedPartitionsCollection.Values.ToArray()) :
+					writer.SizeOfArray(AssignedPartitionsCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOfNullableBytes(UserData) :
@@ -13158,8 +13422,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -13179,6 +13442,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartition is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -13320,8 +13592,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOfNullableBytes(UserData) :
@@ -13329,8 +13600,7 @@ namespace Kafka.Protocol
 			(Version.InRange(1, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(OwnedPartitionsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(OwnedPartitionsCollection.Values.ToArray()) :
+					writer.SizeOfArray(OwnedPartitionsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<ConsumerProtocolSubscription> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -13486,8 +13756,7 @@ namespace Kafka.Protocol
 				(Version.InRange(1, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -13507,6 +13776,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartition is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -13730,8 +14008,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(RemainingPartitionsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(RemainingPartitionsCollection.Values.ToArray()) :
+					writer.SizeOfArray(RemainingPartitionsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<ControlledShutdownResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -13864,6 +14141,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for RemainingPartition is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -13968,8 +14254,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(CreationsCollection) : 
-				
-				writer.SizeOfArray(CreationsCollection) :
+					writer.SizeOfArray(CreationsCollection) :
 				0);
 
 		public static async ValueTask<CreateAclsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -14104,6 +14389,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AclCreation is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -14387,8 +14681,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection) : 
-				
-				writer.SizeOfArray(ResultsCollection) :
+					writer.SizeOfArray(ResultsCollection) :
 				0);
 
 		public static async ValueTask<CreateAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -14505,8 +14798,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0);
 
 			public static async ValueTask<AclCreationResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -14524,6 +14816,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AclCreationResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -14634,8 +14935,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(RenewersCollection) : 
-				
-				writer.SizeOfArray(RenewersCollection) :
+					writer.SizeOfArray(RenewersCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(MaxLifetimeMs) :
@@ -14744,6 +15044,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableRenewers is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -15292,8 +15601,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TimeoutMs) :
@@ -15398,8 +15706,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableArray(AssignmentsCollection) : 
-					
-					writer.SizeOfNullableArray(AssignmentsCollection) :
+						writer.SizeOfNullableArray(AssignmentsCollection) :
 					0);
 
 			public static async ValueTask<CreatePartitionsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -15423,6 +15730,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatePartitionsTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -15564,8 +15880,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(BrokerIdsCollection) : 
-						
-						writer.SizeOfArray(BrokerIdsCollection) :
+							writer.SizeOfArray(BrokerIdsCollection) :
 						0);
 
 				public static async ValueTask<CreatePartitionsAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -15579,6 +15894,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatePartitionsAssignment is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -15715,8 +16039,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection) : 
-				
-				writer.SizeOfArray(ResultsCollection) :
+					writer.SizeOfArray(ResultsCollection) :
 				0);
 
 		public static async ValueTask<CreatePartitionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -15836,8 +16159,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0);
 
 			public static async ValueTask<CreatePartitionsTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -15861,6 +16183,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatePartitionsTopicResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -16009,8 +16340,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TimeoutMs) :
@@ -16118,14 +16448,12 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(AssignmentsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(AssignmentsCollection.Values.ToArray()) :
+						writer.SizeOfArray(AssignmentsCollection.Values.ToArray()) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(ConfigsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(ConfigsCollection.Values.ToArray()) :
+						writer.SizeOfArray(ConfigsCollection.Values.ToArray()) :
 					0);
 
 			public static async ValueTask<CreatableTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -16159,6 +16487,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -16337,8 +16674,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(BrokerIdsCollection) : 
-						
-						writer.SizeOfArray(BrokerIdsCollection) :
+							writer.SizeOfArray(BrokerIdsCollection) :
 						0);
 
 				public static async ValueTask<CreatableReplicaAssignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -16356,6 +16692,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableReplicaAssignment is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -16488,8 +16833,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(Value) :
-						
-						writer.SizeOfNullableString(Value) :
+							writer.SizeOfNullableString(Value) :
 						0);
 
 				public static async ValueTask<CreateableTopicConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -16509,6 +16853,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateableTopicConfig is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -16691,8 +17044,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<CreateTopicsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -16810,8 +17162,7 @@ namespace Kafka.Protocol
 				(Version.InRange(1, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					writer.SizeOf(TopicConfigErrorCode) :
@@ -16825,8 +17176,7 @@ namespace Kafka.Protocol
 				(Version.InRange(5, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableArray(ConfigsCollection) : 
-					
-					writer.SizeOfNullableArray(ConfigsCollection) :
+						writer.SizeOfNullableArray(ConfigsCollection) :
 					0);
 
 			public static async ValueTask<CreatableTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -16868,10 +17218,24 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
-				if (instance.Version.InRange(5, 2147483647)) 
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
 				{
-					instance.TopicConfigErrorCode = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
+					switch (tag.Tag)
+					{
+						case 0:
+							if (instance.Version.InRange(5, 2147483647)) 
+							{
+								instance.TopicConfigErrorCode = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
+							}
+							else
+								throw new InvalidOperationException($"Field TopicConfigErrorCode is not supported for version {instance.Version}");
+							break;
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableTopicResult is unknown");
+					}
 				}
+
 				return instance;
 			}
 
@@ -17163,8 +17527,7 @@ namespace Kafka.Protocol
 					(Version.InRange(5, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(Value) :
-						
-						writer.SizeOfNullableString(Value) :
+							writer.SizeOfNullableString(Value) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
 						writer.SizeOf(ReadOnly) :
@@ -17205,6 +17568,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableTopicConfigs is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -17582,8 +17954,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(FiltersCollection) : 
-				
-				writer.SizeOfArray(FiltersCollection) :
+					writer.SizeOfArray(FiltersCollection) :
 				0);
 
 		public static async ValueTask<DeleteAclsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -17663,8 +18034,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ResourceNameFilter) :
-					
-					writer.SizeOfNullableString(ResourceNameFilter) :
+						writer.SizeOfNullableString(ResourceNameFilter) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
 					writer.SizeOf(PatternTypeFilter) :
@@ -17672,14 +18042,12 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(PrincipalFilter) :
-					
-					writer.SizeOfNullableString(PrincipalFilter) :
+						writer.SizeOfNullableString(PrincipalFilter) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(HostFilter) :
-					
-					writer.SizeOfNullableString(HostFilter) :
+						writer.SizeOfNullableString(HostFilter) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					writer.SizeOf(Operation) :
@@ -17727,6 +18095,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteAclsFilter is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -18028,8 +18405,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(FilterResultsCollection) : 
-				
-				writer.SizeOfArray(FilterResultsCollection) :
+					writer.SizeOfArray(FilterResultsCollection) :
 				0);
 
 		public static async ValueTask<DeleteAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -18146,14 +18522,12 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(MatchingAclsCollection) : 
-					
-					writer.SizeOfArray(MatchingAclsCollection) :
+						writer.SizeOfArray(MatchingAclsCollection) :
 					0);
 
 			public static async ValueTask<DeleteAclsFilterResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -18177,6 +18551,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteAclsFilterResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -18321,8 +18704,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(ErrorMessage) :
-						
-						writer.SizeOfNullableString(ErrorMessage) :
+							writer.SizeOfNullableString(ErrorMessage) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						writer.SizeOf(ResourceType) :
@@ -18395,6 +18777,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteAclsMatchingAcl is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -18748,8 +19139,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GroupsNamesCollection) : 
-				
-				writer.SizeOfArray(GroupsNamesCollection) :
+					writer.SizeOfArray(GroupsNamesCollection) :
 				0);
 
 		public static async ValueTask<DeleteGroupsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -18836,8 +19226,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ResultsCollection.Values.ToArray()) :
+					writer.SizeOfArray(ResultsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<DeleteGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -18970,6 +19359,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeletableGroupResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -19074,8 +19472,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TimeoutMs) :
@@ -19166,8 +19563,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<DeleteRecordsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -19187,6 +19583,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -19306,6 +19711,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsPartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -19443,8 +19857,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<DeleteRecordsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -19561,8 +19974,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(PartitionsCollection.Values.ToArray()) :
+						writer.SizeOfArray(PartitionsCollection.Values.ToArray()) :
 					0);
 
 			public static async ValueTask<DeleteRecordsTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -19582,6 +19994,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsTopicResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -19708,6 +20129,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsPartitionResult is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -19843,14 +20273,12 @@ namespace Kafka.Protocol
 			(Version.InRange(6, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0) +
 			(Version.InRange(0, 5) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicNamesCollection) : 
-				
-				writer.SizeOfArray(TopicNamesCollection) :
+					writer.SizeOfArray(TopicNamesCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TimeoutMs) :
@@ -19951,8 +20379,7 @@ namespace Kafka.Protocol
 				(Version.InRange(6, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(Name) :
-					
-					writer.SizeOfNullableString(Name) :
+						writer.SizeOfNullableString(Name) :
 					0) +
 				(Version.InRange(6, 2147483647) ? 
 					writer.SizeOf(TopicId) :
@@ -19973,6 +20400,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteTopicState is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -20144,8 +20580,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResponsesCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ResponsesCollection.Values.ToArray()) :
+					writer.SizeOfArray(ResponsesCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<DeleteTopicsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -20254,8 +20689,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(Name) :
-					
-					writer.SizeOfNullableString(Name) :
+						writer.SizeOfNullableString(Name) :
 					0) +
 				(Version.InRange(6, 2147483647) ? 
 					writer.SizeOf(TopicId) :
@@ -20266,8 +20700,7 @@ namespace Kafka.Protocol
 				(Version.InRange(5, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0);
 
 			public static async ValueTask<DeletableTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -20295,6 +20728,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeletableTopicResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -20475,8 +20917,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ResourceNameFilter) :
-				
-				writer.SizeOfNullableString(ResourceNameFilter) :
+					writer.SizeOfNullableString(ResourceNameFilter) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(PatternTypeFilter) :
@@ -20484,14 +20925,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(PrincipalFilter) :
-				
-				writer.SizeOfNullableString(PrincipalFilter) :
+					writer.SizeOfNullableString(PrincipalFilter) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(HostFilter) :
-				
-				writer.SizeOfNullableString(HostFilter) :
+					writer.SizeOfNullableString(HostFilter) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Operation) :
@@ -20839,14 +21278,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResourcesCollection) : 
-				
-				writer.SizeOfArray(ResourcesCollection) :
+					writer.SizeOfArray(ResourcesCollection) :
 				0);
 
 		public static async ValueTask<DescribeAclsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -21054,8 +21491,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(AclsCollection) : 
-					
-					writer.SizeOfArray(AclsCollection) :
+						writer.SizeOfArray(AclsCollection) :
 					0);
 
 			public static async ValueTask<DescribeAclsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -21083,6 +21519,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeAclsResource is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -21288,6 +21733,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for AclDescription is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -21462,8 +21916,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ComponentsCollection) : 
-				
-				writer.SizeOfArray(ComponentsCollection) :
+					writer.SizeOfArray(ComponentsCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Strict) :
@@ -21557,8 +22010,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(Match) :
-					
-					writer.SizeOfNullableString(Match) :
+						writer.SizeOfNullableString(Match) :
 					0);
 
 			public static async ValueTask<ComponentData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -21582,6 +22034,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ComponentData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -21766,14 +22227,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(EntriesCollection) : 
-				
-				writer.SizeOfNullableArray(EntriesCollection) :
+					writer.SizeOfNullableArray(EntriesCollection) :
 				0);
 
 		public static async ValueTask<DescribeClientQuotasResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -21978,14 +22437,12 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(EntityCollection) : 
-					
-					writer.SizeOfArray(EntityCollection) :
+						writer.SizeOfArray(EntityCollection) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(ValuesCollection) : 
-					
-					writer.SizeOfArray(ValuesCollection) :
+						writer.SizeOfArray(ValuesCollection) :
 					0);
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -22005,6 +22462,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for EntryData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -22081,8 +22547,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(EntityName) :
-						
-						writer.SizeOfNullableString(EntityName) :
+							writer.SizeOfNullableString(EntityName) :
 						0);
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -22102,6 +22567,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for EntityData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -22259,6 +22733,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ValueData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -22447,8 +22930,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ClusterId) :
@@ -22459,8 +22941,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(BrokersCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(BrokersCollection.Values.ToArray()) :
+					writer.SizeOfArray(BrokersCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ClusterAuthorizedOperations) :
@@ -22762,8 +23243,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(Rack) :
-					
-					writer.SizeOfNullableString(Rack) :
+						writer.SizeOfNullableString(Rack) :
 					0);
 
 			public static async ValueTask<DescribeClusterBroker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -22791,6 +23271,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeClusterBroker is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -23003,8 +23492,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResourcesCollection) : 
-				
-				writer.SizeOfArray(ResourcesCollection) :
+					writer.SizeOfArray(ResourcesCollection) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(IncludeSynonyms) :
@@ -23109,8 +23597,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableArray(ConfigurationKeysCollection) : 
-					
-					writer.SizeOfNullableArray(ConfigurationKeysCollection) :
+						writer.SizeOfNullableArray(ConfigurationKeysCollection) :
 					0);
 
 			public static async ValueTask<DescribeConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -23134,6 +23621,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsResource is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -23348,8 +23844,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection) : 
-				
-				writer.SizeOfArray(ResultsCollection) :
+					writer.SizeOfArray(ResultsCollection) :
 				0);
 
 		public static async ValueTask<DescribeConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -23466,8 +23961,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					writer.SizeOf(ResourceType) :
@@ -23478,8 +23972,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(ConfigsCollection) : 
-					
-					writer.SizeOfArray(ConfigsCollection) :
+						writer.SizeOfArray(ConfigsCollection) :
 					0);
 
 			public static async ValueTask<DescribeConfigsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -23513,6 +24006,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -23726,8 +24228,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(Value) :
-						
-						writer.SizeOfNullableString(Value) :
+							writer.SizeOfNullableString(Value) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						writer.SizeOf(ReadOnly) :
@@ -23744,8 +24245,7 @@ namespace Kafka.Protocol
 					(Version.InRange(1, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(SynonymsCollection) : 
-						
-						writer.SizeOfArray(SynonymsCollection) :
+							writer.SizeOfArray(SynonymsCollection) :
 						0) +
 					(Version.InRange(3, 2147483647) ? 
 						writer.SizeOf(ConfigType) :
@@ -23753,8 +24253,7 @@ namespace Kafka.Protocol
 					(Version.InRange(3, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(Documentation) :
-						
-						writer.SizeOfNullableString(Documentation) :
+							writer.SizeOfNullableString(Documentation) :
 						0);
 
 				public static async ValueTask<DescribeConfigsResourceResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -23806,6 +24305,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsResourceResult is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -24088,8 +24596,7 @@ namespace Kafka.Protocol
 						(Version.InRange(1, 2147483647) ? 
 							IsFlexibleVersion ?
 								writer.SizeOfCompactNullableString(Value) :
-							
-							writer.SizeOfNullableString(Value) :
+								writer.SizeOfNullableString(Value) :
 							0) +
 						(Version.InRange(1, 2147483647) ? 
 							writer.SizeOf(Source) :
@@ -24116,6 +24623,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsSynonym is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -24320,8 +24836,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(OwnersCollection) : 
-				
-				writer.SizeOfNullableArray(OwnersCollection) :
+					writer.SizeOfNullableArray(OwnersCollection) :
 				0);
 
 		public static async ValueTask<DescribeDelegationTokenRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -24425,6 +24940,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeDelegationTokenOwner is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -24538,8 +25062,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TokensCollection) : 
-				
-				writer.SizeOfArray(TokensCollection) :
+					writer.SizeOfArray(TokensCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
@@ -24685,8 +25208,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(RenewersCollection) : 
-					
-					writer.SizeOfArray(RenewersCollection) :
+						writer.SizeOfArray(RenewersCollection) :
 					0);
 
 			public static async ValueTask<DescribedDelegationToken> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -24734,6 +25256,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedDelegationToken is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -25061,6 +25592,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedDelegationTokenRenewer is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -25198,8 +25738,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GroupsCollection) : 
-				
-				writer.SizeOfArray(GroupsCollection) :
+					writer.SizeOfArray(GroupsCollection) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				writer.SizeOf(IncludeAuthorizedOperations) :
@@ -25326,8 +25865,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GroupsCollection) : 
-				
-				writer.SizeOfArray(GroupsCollection) :
+					writer.SizeOfArray(GroupsCollection) :
 				0);
 
 		public static async ValueTask<DescribeGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -25451,8 +25989,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(MembersCollection) : 
-					
-					writer.SizeOfArray(MembersCollection) :
+						writer.SizeOfArray(MembersCollection) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					writer.SizeOf(AuthorizedOperations) :
@@ -25501,6 +26038,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedGroup is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -25751,8 +26297,7 @@ namespace Kafka.Protocol
 					(Version.InRange(4, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(GroupInstanceId) :
-						
-						writer.SizeOfNullableString(GroupInstanceId) :
+							writer.SizeOfNullableString(GroupInstanceId) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						writer.SizeOf(ClientId) :
@@ -25804,6 +26349,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedGroupMember is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -26084,8 +26638,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfNullableArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfNullableArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<DescribeLogDirsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -26171,8 +26724,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<DescribableLogDirTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -26192,6 +26744,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribableLogDirTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -26305,8 +26866,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection) : 
-				
-				writer.SizeOfArray(ResultsCollection) :
+					writer.SizeOfArray(ResultsCollection) :
 				0);
 
 		public static async ValueTask<DescribeLogDirsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -26426,8 +26986,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(TopicsCollection) : 
-					
-					writer.SizeOfArray(TopicsCollection) :
+						writer.SizeOfArray(TopicsCollection) :
 					0);
 
 			public static async ValueTask<DescribeLogDirsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -26451,6 +27010,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeLogDirsResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -26589,8 +27157,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(PartitionsCollection) : 
-						
-						writer.SizeOfArray(PartitionsCollection) :
+							writer.SizeOfArray(PartitionsCollection) :
 						0);
 
 				public static async ValueTask<DescribeLogDirsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -26610,6 +27177,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeLogDirsTopic is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -26741,6 +27317,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeLogDirsPartition is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -26910,8 +27495,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<DescribeProducersRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -26989,8 +27573,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionIndexesCollection) : 
-					
-					writer.SizeOfArray(PartitionIndexesCollection) :
+						writer.SizeOfArray(PartitionIndexesCollection) :
 					0);
 
 			public static async ValueTask<TopicRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -27010,6 +27593,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicRequest is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -27123,8 +27715,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<DescribeProducersResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -27241,8 +27832,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -27262,6 +27852,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicResponse is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -27370,14 +27969,12 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(ErrorMessage) :
-						
-						writer.SizeOfNullableString(ErrorMessage) :
+							writer.SizeOfNullableString(ErrorMessage) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(ActiveProducersCollection) : 
-						
-						writer.SizeOfArray(ActiveProducersCollection) :
+							writer.SizeOfArray(ActiveProducersCollection) :
 						0);
 
 				public static async ValueTask<PartitionResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -27405,6 +28002,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResponse is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -27624,6 +28230,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for ProducerState is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -27853,8 +28468,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<DescribeQuorumRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -27932,8 +28546,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -27953,6 +28566,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -28063,6 +28685,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -28138,8 +28769,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<DescribeQuorumResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -28254,8 +28884,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -28275,6 +28904,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -28390,14 +29028,12 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(CurrentVotersCollection) : 
-						
-						writer.SizeOfArray(CurrentVotersCollection) :
+							writer.SizeOfArray(CurrentVotersCollection) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(ObserversCollection) : 
-						
-						writer.SizeOfArray(ObserversCollection) :
+							writer.SizeOfArray(ObserversCollection) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -28437,6 +29073,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -28809,8 +29454,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TransactionalIdsCollection) : 
-				
-				writer.SizeOfArray(TransactionalIdsCollection) :
+					writer.SizeOfArray(TransactionalIdsCollection) :
 				0);
 
 		public static async ValueTask<DescribeTransactionsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -28897,8 +29541,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TransactionStatesCollection) : 
-				
-				writer.SizeOfArray(TransactionStatesCollection) :
+					writer.SizeOfArray(TransactionStatesCollection) :
 				0);
 
 		public static async ValueTask<DescribeTransactionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -29031,8 +29674,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+						writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 					0);
 
 			public static async ValueTask<TransactionState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -29078,6 +29720,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TransactionState is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -29370,8 +30021,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(PartitionsCollection) : 
-						
-						writer.SizeOfArray(PartitionsCollection) :
+							writer.SizeOfArray(PartitionsCollection) :
 						0);
 
 				public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -29391,6 +30041,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -29495,8 +30154,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(UsersCollection) : 
-				
-				writer.SizeOfNullableArray(UsersCollection) :
+					writer.SizeOfNullableArray(UsersCollection) :
 				0);
 
 		public static async ValueTask<DescribeUserScramCredentialsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -29591,6 +30249,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for UserName is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -29671,14 +30338,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection) : 
-				
-				writer.SizeOfArray(ResultsCollection) :
+					writer.SizeOfArray(ResultsCollection) :
 				0);
 
 		public static async ValueTask<DescribeUserScramCredentialsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -29883,14 +30548,12 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(CredentialInfosCollection) : 
-					
-					writer.SizeOfArray(CredentialInfosCollection) :
+						writer.SizeOfArray(CredentialInfosCollection) :
 					0);
 
 			public static async ValueTask<DescribeUserScramCredentialsResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -29920,6 +30583,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeUserScramCredentialsResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -30114,6 +30786,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for CredentialInfo is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -30219,8 +30900,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(TopicPartitionsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfNullableArray(TopicPartitionsCollection.Values.ToArray()) :
+					writer.SizeOfNullableArray(TopicPartitionsCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TimeoutMs) :
@@ -30354,8 +31034,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicPartitions> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -30375,6 +31054,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartitions is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -30522,8 +31210,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ReplicaElectionResultsCollection) : 
-				
-				writer.SizeOfArray(ReplicaElectionResultsCollection) :
+					writer.SizeOfArray(ReplicaElectionResultsCollection) :
 				0);
 
 		public static async ValueTask<ElectLeadersResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -30677,8 +31364,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionResultCollection) : 
-					
-					writer.SizeOfArray(PartitionResultCollection) :
+						writer.SizeOfArray(PartitionResultCollection) :
 					0);
 
 			public static async ValueTask<ReplicaElectionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -30698,6 +31384,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReplicaElectionResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -30806,8 +31501,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(ErrorMessage) :
-						
-						writer.SizeOfNullableString(ErrorMessage) :
+							writer.SizeOfNullableString(ErrorMessage) :
 						0);
 
 				public static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -30829,6 +31523,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResult is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -30973,14 +31676,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
-				
-				writer.SizeOfNullableString(ClusterId) :
+					writer.SizeOfNullableString(ClusterId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<EndQuorumEpochRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -31106,8 +31807,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -31127,6 +31827,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -31236,8 +31945,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(PreferredSuccessorsCollection) : 
-						
-						writer.SizeOfArray(PreferredSuccessorsCollection) :
+							writer.SizeOfArray(PreferredSuccessorsCollection) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -31263,6 +31971,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -31440,8 +32157,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<EndQuorumEpochResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -31556,8 +32272,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -31577,6 +32292,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -31708,6 +32432,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -32746,8 +33479,7 @@ namespace Kafka.Protocol
 			(Version.InRange(12, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
-				
-				writer.SizeOfNullableString(ClusterId) :
+					writer.SizeOfNullableString(ClusterId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ReplicaId) :
@@ -32773,14 +33505,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ForgottenTopicsDataCollection) : 
-				
-				writer.SizeOfArray(ForgottenTopicsDataCollection) :
+					writer.SizeOfArray(ForgottenTopicsDataCollection) :
 				0) +
 			(Version.InRange(11, 2147483647) ? 
 				writer.SizeOf(RackId) :
@@ -33184,8 +33914,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<FetchTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -33209,6 +33938,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -33379,6 +34117,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchPartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -33640,8 +34387,7 @@ namespace Kafka.Protocol
 				(Version.InRange(7, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<ForgottenTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -33665,6 +34411,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ForgottenTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -33833,8 +34588,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResponsesCollection) : 
-				
-				writer.SizeOfArray(ResponsesCollection) :
+					writer.SizeOfArray(ResponsesCollection) :
 				0);
 
 		public static async ValueTask<FetchResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -34020,8 +34774,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<FetchableTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -34045,6 +34798,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchableTopicResponse is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -34194,8 +34956,7 @@ namespace Kafka.Protocol
 					(Version.InRange(4, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableArray(AbortedTransactionsCollection) : 
-						
-						writer.SizeOfNullableArray(AbortedTransactionsCollection) :
+							writer.SizeOfNullableArray(AbortedTransactionsCollection) :
 						0) +
 					(Version.InRange(11, 2147483647) ? 
 						writer.SizeOf(PreferredReadReplica) :
@@ -34243,18 +35004,42 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
-					if (instance.Version.InRange(12, 2147483647)) 
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
 					{
-						instance.DivergingEpoch = await EpochEndOffset.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+						switch (tag.Tag)
+						{
+							case 0:
+								if (instance.Version.InRange(12, 2147483647)) 
+								{
+									instance.DivergingEpoch = await EpochEndOffset.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+								}
+								else
+									throw new InvalidOperationException($"Field DivergingEpoch is not supported for version {instance.Version}");
+								break;
+
+							case 1:
+								if (instance.Version.InRange(12, 2147483647)) 
+								{
+									instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+								}
+								else
+									throw new InvalidOperationException($"Field CurrentLeader is not supported for version {instance.Version}");
+								break;
+
+							case 2:
+								if (instance.Version.InRange(12, 2147483647)) 
+								{
+									instance.SnapshotId_ = await SnapshotId.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+								}
+								else
+									throw new InvalidOperationException($"Field SnapshotId_ is not supported for version {instance.Version}");
+								break;
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
 					}
-					if (instance.Version.InRange(12, 2147483647)) 
-					{
-						instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
-					}
-					if (instance.Version.InRange(12, 2147483647)) 
-					{
-						instance.SnapshotId_ = await SnapshotId.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
-					}
+
 					return instance;
 				}
 
@@ -34514,6 +35299,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for EpochEndOffset is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -34653,6 +35447,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderIdAndEpoch is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -34798,6 +35601,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for SnapshotId is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -34942,6 +35754,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for AbortedTransaction is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -35111,8 +35932,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
-				
-				writer.SizeOfNullableString(ClusterId) :
+					writer.SizeOfNullableString(ClusterId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ReplicaId) :
@@ -35123,8 +35943,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<FetchSnapshotRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -35332,8 +36151,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicSnapshot> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -35353,6 +36171,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicSnapshot is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -35486,6 +36313,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionSnapshot is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -35634,6 +36470,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for SnapshotId is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -35771,8 +36616,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<FetchSnapshotResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -35921,8 +36765,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicSnapshot> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -35942,6 +36785,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicSnapshot is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -36092,10 +36944,24 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
-					if (instance.Version.InRange(0, 2147483647)) 
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
 					{
-						instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+						switch (tag.Tag)
+						{
+							case 0:
+								if (instance.Version.InRange(0, 2147483647)) 
+								{
+									instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+								}
+								else
+									throw new InvalidOperationException($"Field CurrentLeader is not supported for version {instance.Version}");
+								break;
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionSnapshot is unknown");
+						}
 					}
+
 					return instance;
 				}
 
@@ -36255,6 +37121,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for SnapshotId is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -36390,6 +37265,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderIdAndEpoch is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -36586,8 +37470,7 @@ namespace Kafka.Protocol
 			(Version.InRange(4, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(CoordinatorKeysCollection) : 
-				
-				writer.SizeOfArray(CoordinatorKeysCollection) :
+					writer.SizeOfArray(CoordinatorKeysCollection) :
 				0);
 
 		public static async ValueTask<FindCoordinatorRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -36758,8 +37641,7 @@ namespace Kafka.Protocol
 			(Version.InRange(1, 3) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 3) ? 
 				writer.SizeOf(NodeId) :
@@ -36773,8 +37655,7 @@ namespace Kafka.Protocol
 			(Version.InRange(4, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(CoordinatorsCollection) : 
-				
-				writer.SizeOfArray(CoordinatorsCollection) :
+					writer.SizeOfArray(CoordinatorsCollection) :
 				0);
 
 		public static async ValueTask<FindCoordinatorResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -37094,8 +37975,7 @@ namespace Kafka.Protocol
 				(Version.InRange(4, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0);
 
 			public static async ValueTask<Coordinator> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -37133,6 +38013,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for Coordinator is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -37385,8 +38274,7 @@ namespace Kafka.Protocol
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(GroupInstanceId) :
-				
-				writer.SizeOfNullableString(GroupInstanceId) :
+					writer.SizeOfNullableString(GroupInstanceId) :
 				0);
 
 		public static async ValueTask<HeartbeatRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -37708,8 +38596,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResourcesCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ResourcesCollection.Values.ToArray()) :
+					writer.SizeOfArray(ResourcesCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ValidateOnly) :
@@ -37803,8 +38690,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(ConfigsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(ConfigsCollection.Values.ToArray()) :
+						writer.SizeOfArray(ConfigsCollection.Values.ToArray()) :
 					0);
 
 			public static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -37828,6 +38714,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResource is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -37969,8 +38864,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(Value) :
-						
-						writer.SizeOfNullableString(Value) :
+							writer.SizeOfNullableString(Value) :
 						0);
 
 				public static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -37994,6 +38888,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterableConfig is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -38176,8 +39079,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResponsesCollection) : 
-				
-				writer.SizeOfArray(ResponsesCollection) :
+					writer.SizeOfArray(ResponsesCollection) :
 				0);
 
 		public static async ValueTask<IncrementalAlterConfigsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -38294,8 +39196,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					writer.SizeOf(ResourceType) :
@@ -38329,6 +39230,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResourceResponse is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -38508,8 +39418,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(TransactionalId) :
-				
-				writer.SizeOfNullableString(TransactionalId) :
+					writer.SizeOfNullableString(TransactionalId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(TransactionTimeoutMs) :
@@ -38926,8 +39835,7 @@ namespace Kafka.Protocol
 			(Version.InRange(5, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(GroupInstanceId) :
-				
-				writer.SizeOfNullableString(GroupInstanceId) :
+					writer.SizeOfNullableString(GroupInstanceId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(ProtocolType) :
@@ -38935,8 +39843,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ProtocolsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ProtocolsCollection.Values.ToArray()) :
+					writer.SizeOfArray(ProtocolsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<JoinGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -39279,6 +40186,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for JoinGroupRequestProtocol is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -39395,14 +40311,12 @@ namespace Kafka.Protocol
 			(Version.InRange(7, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ProtocolType) :
-				
-				writer.SizeOfNullableString(ProtocolType) :
+					writer.SizeOfNullableString(ProtocolType) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ProtocolName) :
-				
-				writer.SizeOfNullableString(ProtocolName) :
+					writer.SizeOfNullableString(ProtocolName) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Leader) :
@@ -39413,8 +40327,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(MembersCollection) : 
-				
-				writer.SizeOfArray(MembersCollection) :
+					writer.SizeOfArray(MembersCollection) :
 				0);
 
 		public static async ValueTask<JoinGroupResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -39777,8 +40690,7 @@ namespace Kafka.Protocol
 				(Version.InRange(5, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(GroupInstanceId) :
-					
-					writer.SizeOfNullableString(GroupInstanceId) :
+						writer.SizeOfNullableString(GroupInstanceId) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					writer.SizeOf(Metadata) :
@@ -39805,6 +40717,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for JoinGroupResponseMember is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -39965,20 +40886,17 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 1) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(UngroupedPartitionStatesCollection) : 
-				
-				writer.SizeOfArray(UngroupedPartitionStatesCollection) :
+					writer.SizeOfArray(UngroupedPartitionStatesCollection) :
 				0) +
 			(Version.InRange(2, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicStatesCollection) : 
-				
-				writer.SizeOfArray(TopicStatesCollection) :
+					writer.SizeOfArray(TopicStatesCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(LiveLeadersCollection) : 
-				
-				writer.SizeOfArray(LiveLeadersCollection) :
+					writer.SizeOfArray(LiveLeadersCollection) :
 				0);
 
 		public static async ValueTask<LeaderAndIsrRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -40261,8 +41179,7 @@ namespace Kafka.Protocol
 				(Version.InRange(2, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionStatesCollection) : 
-					
-					writer.SizeOfArray(PartitionStatesCollection) :
+						writer.SizeOfArray(PartitionStatesCollection) :
 					0);
 
 			public static async ValueTask<LeaderAndIsrTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -40286,6 +41203,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderAndIsrTopicState is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -40472,6 +41398,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderAndIsrLiveLeader is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -40618,8 +41553,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(IsrCollection) : 
-					
-					writer.SizeOfArray(IsrCollection) :
+						writer.SizeOfArray(IsrCollection) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					writer.SizeOf(ZkVersion) :
@@ -40627,20 +41561,17 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(ReplicasCollection) : 
-					
-					writer.SizeOfArray(ReplicasCollection) :
+						writer.SizeOfArray(ReplicasCollection) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(AddingReplicasCollection) : 
-					
-					writer.SizeOfArray(AddingReplicasCollection) :
+						writer.SizeOfArray(AddingReplicasCollection) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(RemovingReplicasCollection) : 
-					
-					writer.SizeOfArray(RemovingReplicasCollection) :
+						writer.SizeOfArray(RemovingReplicasCollection) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
 					writer.SizeOf(IsNew) :
@@ -41103,14 +42034,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 4) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(PartitionErrorsCollection) : 
-				
-				writer.SizeOfArray(PartitionErrorsCollection) :
+					writer.SizeOfArray(PartitionErrorsCollection) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<LeaderAndIsrResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -41269,8 +42198,7 @@ namespace Kafka.Protocol
 				(Version.InRange(5, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionErrorsCollection) : 
-					
-					writer.SizeOfArray(PartitionErrorsCollection) :
+						writer.SizeOfArray(PartitionErrorsCollection) :
 					0);
 
 			public static async ValueTask<LeaderAndIsrTopicError> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -41288,6 +42216,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderAndIsrTopicError is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -41547,14 +42484,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(VotersCollection) : 
-				
-				writer.SizeOfArray(VotersCollection) :
+					writer.SizeOfArray(VotersCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GrantingVotersCollection) : 
-				
-				writer.SizeOfArray(GrantingVotersCollection) :
+					writer.SizeOfArray(GrantingVotersCollection) :
 				0);
 
 		public static async ValueTask<LeaderChangeMessage> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -41827,8 +42762,7 @@ namespace Kafka.Protocol
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(MembersCollection) : 
-				
-				writer.SizeOfArray(MembersCollection) :
+					writer.SizeOfArray(MembersCollection) :
 				0);
 
 		public static async ValueTask<LeaveGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -41992,8 +42926,7 @@ namespace Kafka.Protocol
 				(Version.InRange(3, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(GroupInstanceId) :
-					
-					writer.SizeOfNullableString(GroupInstanceId) :
+						writer.SizeOfNullableString(GroupInstanceId) :
 					0);
 
 			public static async ValueTask<MemberIdentity> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -42013,6 +42946,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for MemberIdentity is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -42137,8 +43079,7 @@ namespace Kafka.Protocol
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(MembersCollection) : 
-				
-				writer.SizeOfArray(MembersCollection) :
+					writer.SizeOfArray(MembersCollection) :
 				0);
 
 		public static async ValueTask<LeaveGroupResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -42287,8 +43228,7 @@ namespace Kafka.Protocol
 				(Version.InRange(3, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(GroupInstanceId) :
-					
-					writer.SizeOfNullableString(GroupInstanceId) :
+						writer.SizeOfNullableString(GroupInstanceId) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					writer.SizeOf(ErrorCode) :
@@ -42315,6 +43255,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for MemberResponse is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -42461,8 +43410,7 @@ namespace Kafka.Protocol
 			(Version.InRange(4, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(StatesFilterCollection) : 
-				
-				writer.SizeOfArray(StatesFilterCollection) :
+					writer.SizeOfArray(StatesFilterCollection) :
 				0);
 
 		public static async ValueTask<ListGroupsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -42552,8 +43500,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GroupsCollection) : 
-				
-				writer.SizeOfArray(GroupsCollection) :
+					writer.SizeOfArray(GroupsCollection) :
 				0);
 
 		public static async ValueTask<ListGroupsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -42729,6 +43676,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListedGroup is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -42873,8 +43829,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<ListOffsetsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -43028,8 +43983,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<ListOffsetsTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -43049,6 +44003,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -43182,6 +44145,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsPartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -43355,8 +44327,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<ListOffsetsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -43468,8 +44439,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<ListOffsetsTopicResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -43489,6 +44459,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsTopicResponse is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -43597,8 +44576,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 0) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(OldStyleOffsetsCollection) : 
-						
-						writer.SizeOfArray(OldStyleOffsetsCollection) :
+							writer.SizeOfArray(OldStyleOffsetsCollection) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
 						writer.SizeOf(Timestamp) :
@@ -43641,6 +44619,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsPartitionResponse is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -43885,8 +44872,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(TopicsCollection) : 
-				
-				writer.SizeOfNullableArray(TopicsCollection) :
+					writer.SizeOfNullableArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<ListPartitionReassignmentsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -44013,8 +44999,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionIndexesCollection) : 
-					
-					writer.SizeOfArray(PartitionIndexesCollection) :
+						writer.SizeOfArray(PartitionIndexesCollection) :
 					0);
 
 			public static async ValueTask<ListPartitionReassignmentsTopics> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -44034,6 +45019,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListPartitionReassignmentsTopics is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -44150,14 +45144,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<ListPartitionReassignmentsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -44359,8 +45351,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<OngoingTopicReassignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -44380,6 +45371,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OngoingTopicReassignment is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -44485,20 +45485,17 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(ReplicasCollection) : 
-						
-						writer.SizeOfArray(ReplicasCollection) :
+							writer.SizeOfArray(ReplicasCollection) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(AddingReplicasCollection) : 
-						
-						writer.SizeOfArray(AddingReplicasCollection) :
+							writer.SizeOfArray(AddingReplicasCollection) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(RemovingReplicasCollection) : 
-						
-						writer.SizeOfArray(RemovingReplicasCollection) :
+							writer.SizeOfArray(RemovingReplicasCollection) :
 						0);
 
 				public static async ValueTask<OngoingPartitionReassignment> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -44528,6 +45525,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OngoingPartitionReassignment is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -44705,14 +45711,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(StateFiltersCollection) : 
-				
-				writer.SizeOfArray(StateFiltersCollection) :
+					writer.SizeOfArray(StateFiltersCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ProducerIdFiltersCollection) : 
-				
-				writer.SizeOfArray(ProducerIdFiltersCollection) :
+					writer.SizeOfArray(ProducerIdFiltersCollection) :
 				0);
 
 		public static async ValueTask<ListTransactionsRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -44844,14 +45848,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(UnknownStateFiltersCollection) : 
-				
-				writer.SizeOfArray(UnknownStateFiltersCollection) :
+					writer.SizeOfArray(UnknownStateFiltersCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TransactionStatesCollection) : 
-				
-				writer.SizeOfArray(TransactionStatesCollection) :
+					writer.SizeOfArray(TransactionStatesCollection) :
 				0);
 
 		public static async ValueTask<ListTransactionsResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -45068,6 +46070,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TransactionState is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -45204,8 +46215,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(TopicsCollection) : 
-				
-				writer.SizeOfNullableArray(TopicsCollection) :
+					writer.SizeOfNullableArray(TopicsCollection) :
 				0) +
 			(Version.InRange(4, 2147483647) ? 
 				writer.SizeOf(AllowAutoTopicCreation) :
@@ -45324,8 +46334,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(Name) :
-					
-					writer.SizeOfNullableString(Name) :
+						writer.SizeOfNullableString(Name) :
 					0);
 
 			public static async ValueTask<MetadataRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -45343,6 +46352,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataRequestTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -45543,14 +46561,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(BrokersCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(BrokersCollection.Values.ToArray()) :
+					writer.SizeOfArray(BrokersCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(2, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
-				
-				writer.SizeOfNullableString(ClusterId) :
+					writer.SizeOfNullableString(ClusterId) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ControllerId) :
@@ -45558,8 +46574,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(8, 10) ? 
 				writer.SizeOf(ClusterAuthorizedOperations) :
@@ -45722,8 +46737,7 @@ namespace Kafka.Protocol
 				(Version.InRange(1, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(Rack) :
-					
-					writer.SizeOfNullableString(Rack) :
+						writer.SizeOfNullableString(Rack) :
 					0);
 
 			public static async ValueTask<MetadataResponseBroker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -45751,6 +46765,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataResponseBroker is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -46013,8 +47036,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(Name) :
-					
-					writer.SizeOfNullableString(Name) :
+						writer.SizeOfNullableString(Name) :
 					0) +
 				(Version.InRange(10, 2147483647) ? 
 					writer.SizeOf(TopicId) :
@@ -46025,8 +47047,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0) +
 				(Version.InRange(8, 2147483647) ? 
 					writer.SizeOf(TopicAuthorizedOperations) :
@@ -46065,6 +47086,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataResponseTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -46280,20 +47310,17 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(ReplicaNodesCollection) : 
-						
-						writer.SizeOfArray(ReplicaNodesCollection) :
+							writer.SizeOfArray(ReplicaNodesCollection) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(IsrNodesCollection) : 
-						
-						writer.SizeOfArray(IsrNodesCollection) :
+							writer.SizeOfArray(IsrNodesCollection) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(OfflineReplicasCollection) : 
-						
-						writer.SizeOfArray(OfflineReplicasCollection) :
+							writer.SizeOfArray(OfflineReplicasCollection) :
 						0);
 
 				public static async ValueTask<MetadataResponsePartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -46335,6 +47362,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataResponsePartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -46674,8 +47710,7 @@ namespace Kafka.Protocol
 			(Version.InRange(7, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(GroupInstanceId) :
-				
-				writer.SizeOfNullableString(GroupInstanceId) :
+					writer.SizeOfNullableString(GroupInstanceId) :
 				0) +
 			(Version.InRange(2, 4) ? 
 				writer.SizeOf(RetentionTimeMs) :
@@ -46683,8 +47718,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<OffsetCommitRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -46961,8 +47995,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<OffsetCommitRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -46982,6 +48015,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitRequestTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -47096,8 +48138,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(CommittedMetadata) :
-						
-						writer.SizeOfNullableString(CommittedMetadata) :
+							writer.SizeOfNullableString(CommittedMetadata) :
 						0);
 
 				public static async ValueTask<OffsetCommitRequestPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -47127,6 +48168,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitRequestPartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -47342,8 +48392,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<OffsetCommitResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -47455,8 +48504,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<OffsetCommitResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -47476,6 +48524,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitResponseTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -47595,6 +48652,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitResponsePartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -47700,8 +48766,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<OffsetDeleteRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -47823,8 +48888,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<OffsetDeleteRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -47844,6 +48908,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteRequestTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -47956,6 +49029,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteRequestPartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -48034,8 +49116,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<OffsetDeleteResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -48184,8 +49265,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection.Values.ToArray()) : 
-					
-					writer.SizeOfArray(PartitionsCollection.Values.ToArray()) :
+						writer.SizeOfArray(PartitionsCollection.Values.ToArray()) :
 					0);
 
 			public static async ValueTask<OffsetDeleteResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -48205,6 +49285,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteResponseTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -48324,6 +49413,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteResponsePartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -48429,14 +49527,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 7) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableArray(TopicsCollection) : 
-				
-				writer.SizeOfNullableArray(TopicsCollection) :
+					writer.SizeOfNullableArray(TopicsCollection) :
 				0) +
 			(Version.InRange(8, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GroupsCollection) : 
-				
-				writer.SizeOfArray(GroupsCollection) :
+					writer.SizeOfArray(GroupsCollection) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
 				writer.SizeOf(RequireStable) :
@@ -48588,8 +49684,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 7) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionIndexesCollection) : 
-					
-					writer.SizeOfArray(PartitionIndexesCollection) :
+						writer.SizeOfArray(PartitionIndexesCollection) :
 					0);
 
 			public static async ValueTask<OffsetFetchRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -48609,6 +49704,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchRequestTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -48744,8 +49848,7 @@ namespace Kafka.Protocol
 				(Version.InRange(8, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableArray(TopicsCollection) : 
-					
-					writer.SizeOfNullableArray(TopicsCollection) :
+						writer.SizeOfNullableArray(TopicsCollection) :
 					0);
 
 			public static async ValueTask<OffsetFetchRequestGroup> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -48765,6 +49868,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchRequestGroup is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -48876,8 +49988,7 @@ namespace Kafka.Protocol
 					(Version.InRange(8, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(PartitionIndexesCollection) : 
-						
-						writer.SizeOfArray(PartitionIndexesCollection) :
+							writer.SizeOfArray(PartitionIndexesCollection) :
 						0);
 
 				public static async ValueTask<OffsetFetchRequestTopics> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -48897,6 +50008,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchRequestTopics is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -49042,8 +50162,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 7) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0) +
 			(Version.InRange(2, 7) ? 
 				writer.SizeOf(ErrorCode) :
@@ -49051,8 +50170,7 @@ namespace Kafka.Protocol
 			(Version.InRange(8, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(GroupsCollection) : 
-				
-				writer.SizeOfArray(GroupsCollection) :
+					writer.SizeOfArray(GroupsCollection) :
 				0);
 
 		public static async ValueTask<OffsetFetchResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -49185,8 +50303,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 7) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<OffsetFetchResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -49206,6 +50323,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponseTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -49317,8 +50443,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 7) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(Metadata) :
-						
-						writer.SizeOfNullableString(Metadata) :
+							writer.SizeOfNullableString(Metadata) :
 						0) +
 					(Version.InRange(0, 7) ? 
 						writer.SizeOf(ErrorCode) :
@@ -49351,6 +50476,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponsePartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -49612,8 +50746,7 @@ namespace Kafka.Protocol
 				(Version.InRange(8, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(TopicsCollection) : 
-					
-					writer.SizeOfArray(TopicsCollection) :
+						writer.SizeOfArray(TopicsCollection) :
 					0) +
 				(Version.InRange(8, 2147483647) ? 
 					writer.SizeOf(ErrorCode) :
@@ -49640,6 +50773,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponseGroup is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -49749,8 +50891,7 @@ namespace Kafka.Protocol
 					(Version.InRange(8, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(PartitionsCollection) : 
-						
-						writer.SizeOfArray(PartitionsCollection) :
+							writer.SizeOfArray(PartitionsCollection) :
 						0);
 
 				public static async ValueTask<OffsetFetchResponseTopics> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -49770,6 +50911,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponseTopics is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -49881,8 +51031,7 @@ namespace Kafka.Protocol
 						(Version.InRange(8, 2147483647) ? 
 							IsFlexibleVersion ?
 								writer.SizeOfCompactNullableString(Metadata) :
-							
-							writer.SizeOfNullableString(Metadata) :
+								writer.SizeOfNullableString(Metadata) :
 							0) +
 						(Version.InRange(8, 2147483647) ? 
 							writer.SizeOf(ErrorCode) :
@@ -49915,6 +51064,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponsePartitions is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -50157,8 +51315,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<OffsetForLeaderEpochRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -50272,8 +51429,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<OffsetForLeaderTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -50293,6 +51449,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetForLeaderTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -50419,6 +51584,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetForLeaderPartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -50557,8 +51731,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<OffsetForLeaderEpochResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -50670,8 +51843,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<OffsetForLeaderTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -50691,6 +51863,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetForLeaderTopicResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -50824,6 +52005,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for EpochEndOffset is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -50991,8 +52181,7 @@ namespace Kafka.Protocol
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(TransactionalId) :
-				
-				writer.SizeOfNullableString(TransactionalId) :
+					writer.SizeOfNullableString(TransactionalId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Acks) :
@@ -51003,8 +52192,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicDataCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(TopicDataCollection.Values.ToArray()) :
+					writer.SizeOfArray(TopicDataCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<ProduceRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -51208,8 +52396,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionDataCollection) : 
-					
-					writer.SizeOfArray(PartitionDataCollection) :
+						writer.SizeOfArray(PartitionDataCollection) :
 					0);
 
 			public static async ValueTask<TopicProduceData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -51229,6 +52416,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicProduceData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -51348,6 +52544,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionProduceData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -51459,8 +52664,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResponsesCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ResponsesCollection.Values.ToArray()) :
+					writer.SizeOfArray(ResponsesCollection.Values.ToArray()) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				writer.SizeOf(ThrottleTimeMs) :
@@ -51551,8 +52755,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionResponsesCollection) : 
-					
-					writer.SizeOfArray(PartitionResponsesCollection) :
+						writer.SizeOfArray(PartitionResponsesCollection) :
 					0);
 
 			public static async ValueTask<TopicProduceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -51572,6 +52775,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicProduceResponse is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -51689,14 +52901,12 @@ namespace Kafka.Protocol
 					(Version.InRange(8, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(RecordErrorsCollection) : 
-						
-						writer.SizeOfArray(RecordErrorsCollection) :
+							writer.SizeOfArray(RecordErrorsCollection) :
 						0) +
 					(Version.InRange(8, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(ErrorMessage) :
-						
-						writer.SizeOfNullableString(ErrorMessage) :
+							writer.SizeOfNullableString(ErrorMessage) :
 						0);
 
 				public static async ValueTask<PartitionProduceResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -51736,6 +52946,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionProduceResponse is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -51966,8 +53185,7 @@ namespace Kafka.Protocol
 						(Version.InRange(8, 2147483647) ? 
 							IsFlexibleVersion ?
 								writer.SizeOfCompactNullableString(BatchIndexErrorMessage) :
-							
-							writer.SizeOfNullableString(BatchIndexErrorMessage) :
+								writer.SizeOfNullableString(BatchIndexErrorMessage) :
 							0);
 
 					public static async ValueTask<BatchIndexAndErrorMessage> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -51985,6 +53203,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for BatchIndexAndErrorMessage is unknown");
+							}
+						}
 
 						return instance;
 					}
@@ -52437,8 +53664,7 @@ namespace Kafka.Protocol
 			(Version.InRange(1, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClientId) :
-				
-				writer.SizeOfNullableString(ClientId) :
+					writer.SizeOfNullableString(ClientId) :
 				0);
 
 		public static async ValueTask<RequestHeader> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -52791,8 +54017,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(AuthBytes) :
@@ -53078,8 +54303,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(MechanismsCollection) : 
-				
-				writer.SizeOfArray(MechanismsCollection) :
+					writer.SizeOfArray(MechanismsCollection) :
 				0);
 
 		public static async ValueTask<SaslHandshakeResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -53403,20 +54627,17 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 0) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(UngroupedPartitionsCollection) : 
-				
-				writer.SizeOfArray(UngroupedPartitionsCollection) :
+					writer.SizeOfArray(UngroupedPartitionsCollection) :
 				0) +
 			(Version.InRange(1, 2) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicStatesCollection) : 
-				
-				writer.SizeOfArray(TopicStatesCollection) :
+					writer.SizeOfArray(TopicStatesCollection) :
 				0);
 
 		public static async ValueTask<StopReplicaRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -53683,6 +54904,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaPartitionV0 is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -53815,8 +55045,7 @@ namespace Kafka.Protocol
 				(Version.InRange(1, 2) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionIndexesCollection) : 
-					
-					writer.SizeOfArray(PartitionIndexesCollection) :
+						writer.SizeOfArray(PartitionIndexesCollection) :
 					0);
 
 			public static async ValueTask<StopReplicaTopicV1> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -53836,6 +55065,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaTopicV1 is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -53971,8 +55209,7 @@ namespace Kafka.Protocol
 				(Version.InRange(3, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionStatesCollection) : 
-					
-					writer.SizeOfArray(PartitionStatesCollection) :
+						writer.SizeOfArray(PartitionStatesCollection) :
 					0);
 
 			public static async ValueTask<StopReplicaTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -53992,6 +55229,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaTopicState is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -54118,6 +55364,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaPartitionState is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -54261,8 +55516,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(PartitionErrorsCollection) : 
-				
-				writer.SizeOfArray(PartitionErrorsCollection) :
+					writer.SizeOfArray(PartitionErrorsCollection) :
 				0);
 
 		public static async ValueTask<StopReplicaResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -54402,6 +55656,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaPartitionError is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -54548,26 +55811,22 @@ namespace Kafka.Protocol
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(GroupInstanceId) :
-				
-				writer.SizeOfNullableString(GroupInstanceId) :
+					writer.SizeOfNullableString(GroupInstanceId) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ProtocolType) :
-				
-				writer.SizeOfNullableString(ProtocolType) :
+					writer.SizeOfNullableString(ProtocolType) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ProtocolName) :
-				
-				writer.SizeOfNullableString(ProtocolName) :
+					writer.SizeOfNullableString(ProtocolName) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(AssignmentsCollection) : 
-				
-				writer.SizeOfArray(AssignmentsCollection) :
+					writer.SizeOfArray(AssignmentsCollection) :
 				0);
 
 		public static async ValueTask<SyncGroupRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -54924,6 +56183,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for SyncGroupRequestAssignment is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -55037,14 +56305,12 @@ namespace Kafka.Protocol
 			(Version.InRange(5, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ProtocolType) :
-				
-				writer.SizeOfNullableString(ProtocolType) :
+					writer.SizeOfNullableString(ProtocolType) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ProtocolName) :
-				
-				writer.SizeOfNullableString(ProtocolName) :
+					writer.SizeOfNullableString(ProtocolName) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				writer.SizeOf(Assignment) :
@@ -55300,14 +56566,12 @@ namespace Kafka.Protocol
 			(Version.InRange(3, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(GroupInstanceId) :
-				
-				writer.SizeOfNullableString(GroupInstanceId) :
+					writer.SizeOfNullableString(GroupInstanceId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<TxnOffsetCommitRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -55678,8 +56942,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TxnOffsetCommitRequestTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -55699,6 +56962,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitRequestTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -55810,8 +57082,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactNullableString(CommittedMetadata) :
-						
-						writer.SizeOfNullableString(CommittedMetadata) :
+							writer.SizeOfNullableString(CommittedMetadata) :
 						0);
 
 				public static async ValueTask<TxnOffsetCommitRequestPartition> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -55837,6 +57108,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitRequestPartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -56017,8 +57297,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<TxnOffsetCommitResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -56135,8 +57414,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TxnOffsetCommitResponseTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -56156,6 +57434,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitResponseTopic is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -56275,6 +57562,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitResponsePartition is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -56460,8 +57756,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0);
 
 		public static async ValueTask<UnregisterBrokerResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -56625,8 +57920,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(FeatureUpdatesCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(FeatureUpdatesCollection.Values.ToArray()) :
+					writer.SizeOfArray(FeatureUpdatesCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<UpdateFeaturesRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -56768,6 +58062,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for FeatureUpdateKey is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -56914,14 +58217,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ErrorMessage) :
-				
-				writer.SizeOfNullableString(ErrorMessage) :
+					writer.SizeOfNullableString(ErrorMessage) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(ResultsCollection.Values.ToArray()) : 
-				
-				writer.SizeOfArray(ResultsCollection.Values.ToArray()) :
+					writer.SizeOfArray(ResultsCollection.Values.ToArray()) :
 				0);
 
 		public static async ValueTask<UpdateFeaturesResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -57126,8 +58427,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(ErrorMessage) :
-					
-					writer.SizeOfNullableString(ErrorMessage) :
+						writer.SizeOfNullableString(ErrorMessage) :
 					0);
 
 			public static async ValueTask<UpdatableFeatureResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -57151,6 +58451,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdatableFeatureResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -57306,20 +58615,17 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 4) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(UngroupedPartitionStatesCollection) : 
-				
-				writer.SizeOfArray(UngroupedPartitionStatesCollection) :
+					writer.SizeOfArray(UngroupedPartitionStatesCollection) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicStatesCollection) : 
-				
-				writer.SizeOfArray(TopicStatesCollection) :
+					writer.SizeOfArray(TopicStatesCollection) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(LiveBrokersCollection) : 
-				
-				writer.SizeOfArray(LiveBrokersCollection) :
+					writer.SizeOfArray(LiveBrokersCollection) :
 				0);
 
 		public static async ValueTask<UpdateMetadataRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -57565,8 +58871,7 @@ namespace Kafka.Protocol
 				(Version.InRange(5, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionStatesCollection) : 
-					
-					writer.SizeOfArray(PartitionStatesCollection) :
+						writer.SizeOfArray(PartitionStatesCollection) :
 					0);
 
 			public static async ValueTask<UpdateMetadataTopicState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -57590,6 +58895,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataTopicState is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -57757,14 +59071,12 @@ namespace Kafka.Protocol
 				(Version.InRange(1, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(EndpointsCollection) : 
-					
-					writer.SizeOfArray(EndpointsCollection) :
+						writer.SizeOfArray(EndpointsCollection) :
 					0) +
 				(Version.InRange(2, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactNullableString(Rack) :
-					
-					writer.SizeOfNullableString(Rack) :
+						writer.SizeOfNullableString(Rack) :
 					0);
 
 			public static async ValueTask<UpdateMetadataBroker> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -57798,6 +59110,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataBroker is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -57993,6 +59314,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataEndpoint is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -58201,8 +59531,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(IsrCollection) : 
-					
-					writer.SizeOfArray(IsrCollection) :
+						writer.SizeOfArray(IsrCollection) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					writer.SizeOf(ZkVersion) :
@@ -58210,14 +59539,12 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(ReplicasCollection) : 
-					
-					writer.SizeOfArray(ReplicasCollection) :
+						writer.SizeOfArray(ReplicasCollection) :
 					0) +
 				(Version.InRange(4, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(OfflineReplicasCollection) : 
-					
-					writer.SizeOfArray(OfflineReplicasCollection) :
+						writer.SizeOfArray(OfflineReplicasCollection) :
 					0);
 
 			public static async ValueTask<UpdateMetadataPartitionState> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -58677,14 +60004,12 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactNullableString(ClusterId) :
-				
-				writer.SizeOfNullableString(ClusterId) :
+					writer.SizeOfNullableString(ClusterId) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<VoteRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -58810,8 +60135,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -58831,6 +60155,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -58969,6 +60302,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -59176,8 +60518,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(TopicsCollection) : 
-				
-				writer.SizeOfArray(TopicsCollection) :
+					writer.SizeOfArray(TopicsCollection) :
 				0);
 
 		public static async ValueTask<VoteResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -59292,8 +60633,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(PartitionsCollection) : 
-					
-					writer.SizeOfArray(PartitionsCollection) :
+						writer.SizeOfArray(PartitionsCollection) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -59313,6 +60653,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -59451,6 +60800,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -59650,8 +61008,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(MarkersCollection) : 
-				
-				writer.SizeOfArray(MarkersCollection) :
+					writer.SizeOfArray(MarkersCollection) :
 				0);
 
 		public static async ValueTask<WriteTxnMarkersRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -59737,8 +61094,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(TopicsCollection) : 
-					
-					writer.SizeOfArray(TopicsCollection) :
+						writer.SizeOfArray(TopicsCollection) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					writer.SizeOf(CoordinatorEpoch) :
@@ -59771,6 +61127,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarker is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -59943,8 +61308,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(PartitionIndexesCollection) : 
-						
-						writer.SizeOfArray(PartitionIndexesCollection) :
+							writer.SizeOfArray(PartitionIndexesCollection) :
 						0);
 
 				public static async ValueTask<WritableTxnMarkerTopic> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -59964,6 +61328,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarkerTopic is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -60104,8 +61477,7 @@ namespace Kafka.Protocol
 			(Version.InRange(0, 2147483647) ? 
 				IsFlexibleVersion ?
 					writer.SizeOfCompactArray(MarkersCollection) : 
-				
-				writer.SizeOfArray(MarkersCollection) :
+					writer.SizeOfArray(MarkersCollection) :
 				0);
 
 		public static async ValueTask<WriteTxnMarkersResponse> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -60185,8 +61557,7 @@ namespace Kafka.Protocol
 				(Version.InRange(0, 2147483647) ? 
 					IsFlexibleVersion ?
 						writer.SizeOfCompactArray(TopicsCollection) : 
-					
-					writer.SizeOfArray(TopicsCollection) :
+						writer.SizeOfArray(TopicsCollection) :
 					0);
 
 			public static async ValueTask<WritableTxnMarkerResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -60204,6 +61575,15 @@ namespace Kafka.Protocol
 				}
 
 				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarkerResult is unknown");
+					}
+				}
 
 				return instance;
 			}
@@ -60306,8 +61686,7 @@ namespace Kafka.Protocol
 					(Version.InRange(0, 2147483647) ? 
 						IsFlexibleVersion ?
 							writer.SizeOfCompactArray(PartitionsCollection) : 
-						
-						writer.SizeOfArray(PartitionsCollection) :
+							writer.SizeOfArray(PartitionsCollection) :
 						0);
 
 				public static async ValueTask<WritableTxnMarkerTopicResult> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
@@ -60327,6 +61706,15 @@ namespace Kafka.Protocol
 					}
 
 					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarkerTopicResult is unknown");
+						}
+					}
 
 					return instance;
 				}
@@ -60446,6 +61834,15 @@ namespace Kafka.Protocol
 						}
 
 						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarkerPartitionResult is unknown");
+							}
+						}
 
 						return instance;
 					}

@@ -12,9 +12,9 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
 
         public string NullableVersions { get; set; } = default!;
 
-        public int Tag { get; set; }
+        public int? Tag { get; set; }
 
-        public string TaggedVersions { get; set; } = default!;
+        public string? TaggedVersions { get; set; }
 
         public bool Ignorable { get; set; }
 
