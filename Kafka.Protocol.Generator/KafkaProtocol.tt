@@ -242,10 +242,12 @@ namespace Kafka.Protocol<# Block(() =>
 			{
 				#>var instance = new <#= messageDefinition.Name #>(version);<# _();
 				
-				PrintOnNewRowForEach(messageDefinition.Fields, messageField => 
+				PrintOnNewRowForEach(messageDefinition.GetNonTaggedFields(), messageField => 
 				{
 					PrintReadFrom(messageField);
-				}); _();
+				}); _(2);
+
+				PrintReadFromTags(messageDefinition.GetTaggedFields(), messageDefinition.Name);
 
 				if (messageDefinition.Fields.Any())
 				{
@@ -446,6 +448,28 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 	#>else<# _();
 	#>	throw new InvalidOperationException($"Field <#= fieldName #> is not supported for version {instance.Version}");<#
 	}
+}
+
+void PrintReadFromTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field> taggedFields, string parentType)
+{
+	#>var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);<# _();
+	#>await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))<# Block(() => 
+	{
+		#>switch (tag.Tag)<# Block(() => 
+		{
+			PrintOnNewRowForEach(taggedFields, taggedField => 
+			{
+			#>case <#= taggedField.Tag #>:<# _();
+				Tab(() =>
+				{
+					PrintReadFrom(taggedField, true); _();
+				});
+			#>	break;<# _();
+			}); 
+			#>default:<# _();
+			#>	throw new InvalidOperationException($"Tag '{tag.Tag}' for <#= parentType #> is unknown");<# 
+		});
+	}); _(2);
 }
 
 void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, string parentFieldTypeName = "")
@@ -665,24 +689,8 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				PrintReadFrom(messageField);
 			}); _(2);
 
-			#>var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);<# _();
-			#>await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))<# Block(() => 
-			{
-				#>switch (tag.Tag)<# Block(() => 
-				{
-					PrintOnNewRowForEach(field.GetTaggedFields(), messageField => 
-					{
-					#>case <#= messageField.Tag #>:<# _();
-					Tab(() =>
-					{
-						PrintReadFrom(messageField, true); _();
-					});
-					#>	break;<# _();
-					}); _();
-					#>default:<# _();
-					#>	throw new InvalidOperationException($"Tag '{tag.Tag}' for <#= fieldTypeNameWithoutArrayCharacters #> is unknown");<# 
-				});
-			}); _(2);
+			PrintReadFromTags(field.GetTaggedFields(), fieldTypeNameWithoutArrayCharacters);
+
 			#>return instance;<# 
 		}); _(2);
 
@@ -744,10 +752,13 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 		#>public static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= commonStruct.Name #>(version);<# _();
-			PrintOnNewRowForEach(commonStruct.Fields, messageField => 
+			PrintOnNewRowForEach(commonStruct.GetNonTaggedFields(), messageField => 
 			{
 				PrintReadFrom(messageField);
-			}); _();
+			}); _(2);
+			
+			PrintReadFromTags(commonStruct.GetTaggedFields(), commonStruct.Name);
+
 			#>return instance;<#
 		}); _(2);
 

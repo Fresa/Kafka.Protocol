@@ -3557,6 +3557,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false) :
 					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AddOffsetsToTxnRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -3746,6 +3757,17 @@ namespace Kafka.Protocol
 			{
 				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AddOffsetsToTxnResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -3880,6 +3902,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => AddPartitionsToTxnTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => AddPartitionsToTxnTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AddPartitionsToTxnRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -4074,7 +4107,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AddPartitionsToTxnTopic is unknown");
 					}
@@ -4208,6 +4240,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => AddPartitionsToTxnTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => AddPartitionsToTxnTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AddPartitionsToTxnResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -4333,7 +4376,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AddPartitionsToTxnTopicResult is unknown");
 					}
@@ -4461,7 +4503,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for AddPartitionsToTxnPartitionResult is unknown");
 						}
@@ -4583,6 +4624,17 @@ namespace Kafka.Protocol
 			{
 				instance.BrokerEpoch = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AllocateProducerIdsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -4716,6 +4768,17 @@ namespace Kafka.Protocol
 			{
 				instance.ProducerIdLen = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AllocateProducerIdsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -4900,6 +4963,17 @@ namespace Kafka.Protocol
 			{
 				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterClientQuotasRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -4998,7 +5072,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for EntryData is unknown");
 					}
@@ -5103,7 +5176,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for EntityData is unknown");
 						}
@@ -5276,7 +5348,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OpData is unknown");
 						}
@@ -5470,6 +5541,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => EntryData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => EntryData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterClientQuotasResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -5604,7 +5686,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for EntryData is unknown");
 					}
@@ -5777,7 +5858,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for EntityData is unknown");
 						}
@@ -5915,6 +5995,17 @@ namespace Kafka.Protocol
 			{
 				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -6018,7 +6109,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResource is unknown");
 					}
@@ -6185,7 +6275,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterableConfig is unknown");
 						}
@@ -6355,6 +6444,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -6494,7 +6594,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResourceResponse is unknown");
 					}
@@ -6704,6 +6803,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterIsrRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -6862,7 +6972,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -7006,7 +7115,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -7211,6 +7319,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterIsrResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -7367,7 +7486,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -7525,7 +7643,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -7786,6 +7903,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => ReassignableTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => ReassignableTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterPartitionReassignmentsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -7913,7 +8041,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReassignableTopic is unknown");
 					}
@@ -8045,7 +8172,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for ReassignablePartition is unknown");
 						}
@@ -8203,6 +8329,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => ReassignableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => ReassignableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterPartitionReassignmentsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -8403,7 +8540,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReassignableTopicResponse is unknown");
 					}
@@ -8542,7 +8678,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for ReassignablePartitionResponse is unknown");
 						}
@@ -8703,6 +8838,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => AlterReplicaLogDir.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Path) :
 					(await reader.ReadArrayAsync(() => AlterReplicaLogDir.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Path);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDirsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -8795,7 +8941,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDir is unknown");
 					}
@@ -8929,7 +9074,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDirTopic is unknown");
 						}
@@ -9064,6 +9208,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => AlterReplicaLogDirTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => AlterReplicaLogDirTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDirsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -9189,7 +9344,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDirTopicResult is unknown");
 					}
@@ -9317,7 +9471,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterReplicaLogDirPartitionResult is unknown");
 						}
@@ -9447,6 +9600,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => ScramCredentialUpsertion.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => ScramCredentialUpsertion.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterUserScramCredentialsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -9542,7 +9706,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ScramCredentialDeletion is unknown");
 					}
@@ -9720,7 +9883,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ScramCredentialUpsertion is unknown");
 					}
@@ -9950,6 +10112,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => AlterUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => AlterUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterUserScramCredentialsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -10082,7 +10255,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterUserScramCredentialsResult is unknown");
 					}
@@ -10252,6 +10424,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false) :
 					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ApiVersionsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -10389,22 +10572,47 @@ namespace Kafka.Protocol
 			{
 				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
-			if (instance.Version.InRange(3, 2147483647)) 
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
 			{
-				instance.SupportedFeaturesCollection = instance.IsFlexibleVersion ? 
-					(await reader.ReadCompactArrayAsync(() => SupportedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
-					(await reader.ReadArrayAsync(() => SupportedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+				switch (tag.Tag)
+				{
+					case 0:
+						if (instance.Version.InRange(3, 2147483647)) 
+						{
+							instance.SupportedFeaturesCollection = instance.IsFlexibleVersion ? 
+								(await reader.ReadCompactArrayAsync(() => SupportedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
+								(await reader.ReadArrayAsync(() => SupportedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+						}
+						else
+							throw new InvalidOperationException($"Field SupportedFeaturesCollection is not supported for version {instance.Version}");
+						break;
+
+					case 1:
+						if (instance.Version.InRange(3, 2147483647)) 
+						{
+							instance.FinalizedFeaturesEpoch = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
+						}
+						else
+							throw new InvalidOperationException($"Field FinalizedFeaturesEpoch is not supported for version {instance.Version}");
+						break;
+
+					case 2:
+						if (instance.Version.InRange(3, 2147483647)) 
+						{
+							instance.FinalizedFeaturesCollection = instance.IsFlexibleVersion ? 
+								(await reader.ReadCompactArrayAsync(() => FinalizedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
+								(await reader.ReadArrayAsync(() => FinalizedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
+						}
+						else
+							throw new InvalidOperationException($"Field FinalizedFeaturesCollection is not supported for version {instance.Version}");
+						break;
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ApiVersionsResponse is unknown");
+				}
 			}
-			if (instance.Version.InRange(3, 2147483647)) 
-			{
-				instance.FinalizedFeaturesEpoch = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
-			}
-			if (instance.Version.InRange(3, 2147483647)) 
-			{
-				instance.FinalizedFeaturesCollection = instance.IsFlexibleVersion ? 
-					(await reader.ReadCompactArrayAsync(() => FinalizedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
-					(await reader.ReadArrayAsync(() => FinalizedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
-			}
+
 			return instance;
 		}
 
@@ -10553,7 +10761,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ApiVersion is unknown");
 					}
@@ -10766,7 +10973,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for SupportedFeatureKey is unknown");
 					}
@@ -10984,7 +11190,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for FinalizedFeatureKey is unknown");
 					}
@@ -11149,6 +11354,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for BeginQuorumEpochRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -11281,7 +11497,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -11414,7 +11629,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -11576,6 +11790,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for BeginQuorumEpochResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -11699,7 +11924,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -11839,7 +12063,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -12046,6 +12269,17 @@ namespace Kafka.Protocol
 			{
 				instance.WantShutDown = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for BrokerHeartbeatRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -12285,6 +12519,17 @@ namespace Kafka.Protocol
 			{
 				instance.ShouldShutDown = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for BrokerHeartbeatResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -12544,6 +12789,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false) :
 					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for BrokerRegistrationRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -12764,7 +13020,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for Listener is unknown");
 					}
@@ -12997,7 +13252,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for Feature is unknown");
 					}
@@ -13199,6 +13453,17 @@ namespace Kafka.Protocol
 			{
 				instance.BrokerEpoch = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for BrokerRegistrationResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -13352,6 +13617,17 @@ namespace Kafka.Protocol
 			{
 				instance.UserData = await reader.ReadNullableBytesAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ConsumerProtocolAssignment is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -13446,7 +13722,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartition is unknown");
 					}
@@ -13622,6 +13897,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic) :
 					(await reader.ReadArrayAsync(() => TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ConsumerProtocolSubscription is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -13780,7 +14066,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartition is unknown");
 					}
@@ -13906,6 +14191,17 @@ namespace Kafka.Protocol
 			{
 				instance.BrokerEpoch = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ControlledShutdownRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -14024,6 +14320,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => RemainingPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicName) :
 					(await reader.ReadArrayAsync(() => RemainingPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicName);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ControlledShutdownResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -14145,7 +14452,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for RemainingPartition is unknown");
 					}
@@ -14266,6 +14572,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => AclCreation.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => AclCreation.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateAclsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -14393,7 +14710,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AclCreation is unknown");
 					}
@@ -14697,6 +15013,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => AclCreationResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => AclCreationResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateAclsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -14820,7 +15147,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AclCreationResult is unknown");
 					}
@@ -14954,6 +15280,17 @@ namespace Kafka.Protocol
 			{
 				instance.MaxLifetimeMs = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateDelegationTokenRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -15048,7 +15385,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableRenewers is unknown");
 					}
@@ -15262,6 +15598,17 @@ namespace Kafka.Protocol
 			{
 				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateDelegationTokenResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -15627,6 +15974,17 @@ namespace Kafka.Protocol
 			{
 				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatePartitionsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -15734,7 +16092,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatePartitionsTopic is unknown");
 					}
@@ -15898,7 +16255,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatePartitionsAssignment is unknown");
 						}
@@ -16055,6 +16411,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => CreatePartitionsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => CreatePartitionsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatePartitionsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -16187,7 +16554,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatePartitionsTopicResult is unknown");
 					}
@@ -16366,6 +16732,17 @@ namespace Kafka.Protocol
 			{
 				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateTopicsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -16491,7 +16868,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableTopic is unknown");
 					}
@@ -16696,7 +17072,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableReplicaAssignment is unknown");
 						}
@@ -16857,7 +17232,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateableTopicConfig is unknown");
 						}
@@ -17060,6 +17434,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => CreatableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => CreatableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateTopicsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -17230,7 +17615,6 @@ namespace Kafka.Protocol
 							else
 								throw new InvalidOperationException($"Field TopicConfigErrorCode is not supported for version {instance.Version}");
 							break;
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableTopicResult is unknown");
 					}
@@ -17572,7 +17956,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableTopicConfigs is unknown");
 						}
@@ -17813,6 +18196,17 @@ namespace Kafka.Protocol
 			{
 				instance.TokenAuthenticated = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DefaultPrincipalData is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -17966,6 +18360,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => DeleteAclsFilter.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => DeleteAclsFilter.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteAclsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -18099,7 +18504,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteAclsFilter is unknown");
 					}
@@ -18421,6 +18825,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => DeleteAclsFilterResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => DeleteAclsFilterResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteAclsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -18555,7 +18970,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteAclsFilterResult is unknown");
 					}
@@ -18781,7 +19195,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteAclsMatchingAcl is unknown");
 						}
@@ -19151,6 +19564,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteGroupsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -19242,6 +19666,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => DeletableGroupResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.GroupId) :
 					(await reader.ReadArrayAsync(() => DeletableGroupResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.GroupId);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteGroupsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -19363,7 +19798,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeletableGroupResult is unknown");
 					}
@@ -19491,6 +19925,17 @@ namespace Kafka.Protocol
 			{
 				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -19587,7 +20032,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsTopic is unknown");
 					}
@@ -19715,7 +20159,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsPartition is unknown");
 						}
@@ -19873,6 +20316,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => DeleteRecordsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => DeleteRecordsTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -19998,7 +20452,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsTopicResult is unknown");
 					}
@@ -20133,7 +20586,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteRecordsPartitionResult is unknown");
 						}
@@ -20303,6 +20755,17 @@ namespace Kafka.Protocol
 			{
 				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteTopicsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -20404,7 +20867,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteTopicState is unknown");
 					}
@@ -20596,6 +21058,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => DeletableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => DeletableTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteTopicsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -20732,7 +21205,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeletableTopicResult is unknown");
 					}
@@ -20976,6 +21448,17 @@ namespace Kafka.Protocol
 			{
 				instance.PermissionType = await reader.ReadInt8Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeAclsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -21309,6 +21792,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => DescribeAclsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => DescribeAclsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeAclsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -21523,7 +22017,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeAclsResource is unknown");
 					}
@@ -21737,7 +22230,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for AclDescription is unknown");
 						}
@@ -21935,6 +22427,17 @@ namespace Kafka.Protocol
 			{
 				instance.Strict = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeClientQuotasRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -22038,7 +22541,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ComponentData is unknown");
 					}
@@ -22258,6 +22760,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactNullableArrayAsync(() => EntryData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadNullableArrayAsync(() => EntryData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeClientQuotasResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -22466,7 +22979,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for EntryData is unknown");
 					}
@@ -22571,7 +23083,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for EntityData is unknown");
 						}
@@ -22737,7 +23248,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for ValueData is unknown");
 						}
@@ -22855,6 +23365,17 @@ namespace Kafka.Protocol
 			{
 				instance.IncludeClusterAuthorizedOperations = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeClusterRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -22984,6 +23505,17 @@ namespace Kafka.Protocol
 			{
 				instance.ClusterAuthorizedOperations = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeClusterResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -23275,7 +23807,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeClusterBroker is unknown");
 					}
@@ -23518,6 +24049,17 @@ namespace Kafka.Protocol
 			{
 				instance.IncludeDocumentation = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -23625,7 +24167,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsResource is unknown");
 					}
@@ -23860,6 +24401,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => DescribeConfigsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => DescribeConfigsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -24010,7 +24562,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsResult is unknown");
 					}
@@ -24309,7 +24860,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsResourceResult is unknown");
 						}
@@ -24627,7 +25177,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeConfigsSynonym is unknown");
 							}
@@ -24848,6 +25397,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactNullableArrayAsync(() => DescribeDelegationTokenOwner.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadNullableArrayAsync(() => DescribeDelegationTokenOwner.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeDelegationTokenRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -24944,7 +25504,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeDelegationTokenOwner is unknown");
 					}
@@ -25085,6 +25644,17 @@ namespace Kafka.Protocol
 			{
 				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeDelegationTokenResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -25260,7 +25830,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedDelegationToken is unknown");
 					}
@@ -25596,7 +26165,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedDelegationTokenRenewer is unknown");
 						}
@@ -25757,6 +26325,17 @@ namespace Kafka.Protocol
 			{
 				instance.IncludeAuthorizedOperations = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeGroupsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -25881,6 +26460,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeGroupsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -26042,7 +26632,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedGroup is unknown");
 					}
@@ -26353,7 +26942,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedGroupMember is unknown");
 						}
@@ -26650,6 +27238,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactNullableArrayAsync(() => DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic) :
 					(await reader.ReadNullableArrayAsync(() => DescribableLogDirTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false))?.ToDictionary(field => field.Topic);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeLogDirsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -26748,7 +27347,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribableLogDirTopic is unknown");
 					}
@@ -26882,6 +27480,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => DescribeLogDirsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => DescribeLogDirsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeLogDirsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -27014,7 +27623,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeLogDirsResult is unknown");
 					}
@@ -27181,7 +27789,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeLogDirsTopic is unknown");
 						}
@@ -27321,7 +27928,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeLogDirsPartition is unknown");
 							}
@@ -27507,6 +28113,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicRequest.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicRequest.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeProducersRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -27597,7 +28214,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicRequest is unknown");
 					}
@@ -27731,6 +28347,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeProducersResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -27856,7 +28483,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicResponse is unknown");
 					}
@@ -28006,7 +28632,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResponse is unknown");
 						}
@@ -28234,7 +28859,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for ProducerState is unknown");
 							}
@@ -28480,6 +29104,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeQuorumRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -28570,7 +29205,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -28689,7 +29323,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -28785,6 +29418,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeQuorumResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -28908,7 +29552,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -29077,7 +29720,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -29466,6 +30108,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeTransactionsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -29557,6 +30210,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeTransactionsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -29724,7 +30388,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TransactionState is unknown");
 					}
@@ -30045,7 +30708,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 						}
@@ -30166,6 +30828,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactNullableArrayAsync(() => UserName.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadNullableArrayAsync(() => UserName.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeUserScramCredentialsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -30253,7 +30926,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for UserName is unknown");
 					}
@@ -30369,6 +31041,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => DescribeUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => DescribeUserScramCredentialsResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeUserScramCredentialsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -30587,7 +31270,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeUserScramCredentialsResult is unknown");
 					}
@@ -30790,7 +31472,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for CredentialInfo is unknown");
 						}
@@ -30923,6 +31604,17 @@ namespace Kafka.Protocol
 			{
 				instance.TimeoutMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ElectLeadersRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -31058,7 +31750,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartitions is unknown");
 					}
@@ -31230,6 +31921,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => ReplicaElectionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => ReplicaElectionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ElectLeadersResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -31388,7 +32090,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReplicaElectionResult is unknown");
 					}
@@ -31527,7 +32228,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResult is unknown");
 						}
@@ -31699,6 +32399,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for EndQuorumEpochRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -31831,7 +32542,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -31975,7 +32685,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -32173,6 +32882,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for EndQuorumEpochResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -32296,7 +33016,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -32436,7 +33155,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -32638,6 +33356,17 @@ namespace Kafka.Protocol
 			{
 				instance.Committed = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for EndTxnRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -32824,6 +33553,17 @@ namespace Kafka.Protocol
 			{
 				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for EndTxnResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -32945,6 +33685,17 @@ namespace Kafka.Protocol
 			{
 				instance.ClientHostAddress = await reader.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for EnvelopeRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -33101,6 +33852,17 @@ namespace Kafka.Protocol
 			{
 				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for EnvelopeResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -33223,6 +33985,17 @@ namespace Kafka.Protocol
 			{
 				instance.ExpiryTimePeriodMs = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ExpireDelegationTokenRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -33347,6 +34120,17 @@ namespace Kafka.Protocol
 			{
 				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ExpireDelegationTokenResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -33519,12 +34303,6 @@ namespace Kafka.Protocol
 		public static async ValueTask<FetchRequest> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FetchRequest(version);
-			if (instance.Version.InRange(12, 2147483647)) 
-			{
-				instance.ClusterId = instance.IsFlexibleVersion ? 
-					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false) :
-					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
-			}
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
 				instance.ReplicaId = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
@@ -33571,6 +34349,27 @@ namespace Kafka.Protocol
 					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false) :
 					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					case 0:
+						if (instance.Version.InRange(12, 2147483647)) 
+						{
+							instance.ClusterId = instance.IsFlexibleVersion ? 
+								await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false) :
+								await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						}
+						else
+							throw new InvalidOperationException($"Field ClusterId is not supported for version {instance.Version}");
+						break;
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -33942,7 +34741,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchTopic is unknown");
 					}
@@ -34121,7 +34919,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchPartition is unknown");
 						}
@@ -34415,7 +35212,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ForgottenTopic is unknown");
 					}
@@ -34612,6 +35408,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => FetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => FetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -34802,7 +35609,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchableTopicResponse is unknown");
 					}
@@ -35034,7 +35840,6 @@ namespace Kafka.Protocol
 								else
 									throw new InvalidOperationException($"Field SnapshotId_ is not supported for version {instance.Version}");
 								break;
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -35303,7 +36108,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for EpochEndOffset is unknown");
 							}
@@ -35451,7 +36255,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderIdAndEpoch is unknown");
 							}
@@ -35605,7 +36408,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for SnapshotId is unknown");
 							}
@@ -35758,7 +36560,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for AbortedTransaction is unknown");
 							}
@@ -35951,12 +36752,6 @@ namespace Kafka.Protocol
 			var instance = new FetchSnapshotRequest(version);
 			if (instance.Version.InRange(0, 2147483647)) 
 			{
-				instance.ClusterId = instance.IsFlexibleVersion ? 
-					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false) :
-					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
-			}
-			if (instance.Version.InRange(0, 2147483647)) 
-			{
 				instance.ReplicaId = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
 			if (instance.Version.InRange(0, 2147483647)) 
@@ -35969,6 +36764,27 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					case 0:
+						if (instance.Version.InRange(0, 2147483647)) 
+						{
+							instance.ClusterId = instance.IsFlexibleVersion ? 
+								await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false) :
+								await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
+						}
+						else
+							throw new InvalidOperationException($"Field ClusterId is not supported for version {instance.Version}");
+						break;
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchSnapshotRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -36175,7 +36991,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicSnapshot is unknown");
 					}
@@ -36317,7 +37132,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionSnapshot is unknown");
 						}
@@ -36474,7 +37288,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for SnapshotId is unknown");
 							}
@@ -36636,6 +37449,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchSnapshotResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -36789,7 +37613,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicSnapshot is unknown");
 					}
@@ -36956,7 +37779,6 @@ namespace Kafka.Protocol
 								else
 									throw new InvalidOperationException($"Field CurrentLeader is not supported for version {instance.Version}");
 								break;
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionSnapshot is unknown");
 						}
@@ -37125,7 +37947,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for SnapshotId is unknown");
 							}
@@ -37269,7 +38090,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderIdAndEpoch is unknown");
 							}
@@ -37492,6 +38312,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for FindCoordinatorRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -37695,6 +38526,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => Coordinator.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => Coordinator.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for FindCoordinatorResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -38017,7 +38859,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for Coordinator is unknown");
 					}
@@ -38302,6 +39143,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false) :
 					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for HeartbeatRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -38502,6 +39354,17 @@ namespace Kafka.Protocol
 			{
 				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for HeartbeatResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -38615,6 +39478,17 @@ namespace Kafka.Protocol
 			{
 				instance.ValidateOnly = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for IncrementalAlterConfigsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -38718,7 +39592,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResource is unknown");
 					}
@@ -38892,7 +39765,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterableConfig is unknown");
 						}
@@ -39095,6 +39967,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => AlterConfigsResourceResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for IncrementalAlterConfigsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -39234,7 +40117,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for AlterConfigsResourceResponse is unknown");
 					}
@@ -39451,6 +40333,17 @@ namespace Kafka.Protocol
 			{
 				instance.ProducerEpoch = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for InitProducerIdRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -39661,6 +40554,17 @@ namespace Kafka.Protocol
 			{
 				instance.ProducerEpoch = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for InitProducerIdResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -39887,6 +40791,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => JoinGroupRequestProtocol.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => JoinGroupRequestProtocol.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for JoinGroupRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -40190,7 +41105,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for JoinGroupRequestProtocol is unknown");
 					}
@@ -40375,6 +41289,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => JoinGroupResponseMember.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => JoinGroupResponseMember.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for JoinGroupResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -40721,7 +41646,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for JoinGroupResponseMember is unknown");
 					}
@@ -40936,6 +41860,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => LeaderAndIsrLiveLeader.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => LeaderAndIsrLiveLeader.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderAndIsrRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -41207,7 +42142,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderAndIsrTopicState is unknown");
 					}
@@ -41402,7 +42336,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderAndIsrLiveLeader is unknown");
 					}
@@ -42061,6 +42994,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => LeaderAndIsrTopicError.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicId) :
 					(await reader.ReadArrayAsync(() => LeaderAndIsrTopicError.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.TopicId);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderAndIsrResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -42220,7 +43164,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderAndIsrTopicError is unknown");
 					}
@@ -42515,6 +43458,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => Voter.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => Voter.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderChangeMessage is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -42786,6 +43740,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => MemberIdentity.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => MemberIdentity.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaveGroupRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -42950,7 +43915,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for MemberIdentity is unknown");
 					}
@@ -43099,6 +44063,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => MemberResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => MemberResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaveGroupResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -43259,7 +44234,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for MemberResponse is unknown");
 					}
@@ -43422,6 +44396,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ListGroupsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -43520,6 +44505,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => ListedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => ListedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ListGroupsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -43680,7 +44676,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListedGroup is unknown");
 					}
@@ -43849,6 +44844,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => ListOffsetsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => ListOffsetsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -44007,7 +45013,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsTopic is unknown");
 					}
@@ -44149,7 +45154,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsPartition is unknown");
 						}
@@ -44343,6 +45347,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => ListOffsetsTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => ListOffsetsTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -44463,7 +45478,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsTopicResponse is unknown");
 					}
@@ -44623,7 +45637,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for ListOffsetsPartitionResponse is unknown");
 						}
@@ -44888,6 +45901,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactNullableArrayAsync(() => ListPartitionReassignmentsTopics.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadNullableArrayAsync(() => ListPartitionReassignmentsTopics.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ListPartitionReassignmentsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -45023,7 +46047,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListPartitionReassignmentsTopics is unknown");
 					}
@@ -45175,6 +46198,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => OngoingTopicReassignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => OngoingTopicReassignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ListPartitionReassignmentsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -45375,7 +46409,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OngoingTopicReassignment is unknown");
 					}
@@ -45529,7 +46562,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OngoingPartitionReassignment is unknown");
 						}
@@ -45734,6 +46766,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => Int64.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => Int64.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ListTransactionsRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -45879,6 +46922,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TransactionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ListTransactionsResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -46074,7 +47128,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TransactionState is unknown");
 					}
@@ -46248,6 +47301,17 @@ namespace Kafka.Protocol
 			{
 				instance.IncludeTopicAuthorizedOperations = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -46356,7 +47420,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataRequestTopic is unknown");
 					}
@@ -46613,6 +47676,17 @@ namespace Kafka.Protocol
 			{
 				instance.ClusterAuthorizedOperations = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -46769,7 +47843,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataResponseBroker is unknown");
 					}
@@ -47090,7 +48163,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataResponseTopic is unknown");
 					}
@@ -47366,7 +48438,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for MetadataResponsePartition is unknown");
 						}
@@ -47756,6 +48827,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -48019,7 +49101,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitRequestTopic is unknown");
 					}
@@ -48172,7 +49253,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitRequestPartition is unknown");
 						}
@@ -48408,6 +49488,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => OffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => OffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -48528,7 +49619,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitResponseTopic is unknown");
 					}
@@ -48656,7 +49746,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetCommitResponsePartition is unknown");
 						}
@@ -48784,6 +49873,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => OffsetDeleteRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => OffsetDeleteRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -48912,7 +50012,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteRequestTopic is unknown");
 					}
@@ -49033,7 +50132,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteRequestPartition is unknown");
 						}
@@ -49136,6 +50234,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => OffsetDeleteResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => OffsetDeleteResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -49289,7 +50398,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteResponseTopic is unknown");
 					}
@@ -49417,7 +50525,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetDeleteResponsePartition is unknown");
 						}
@@ -49563,6 +50670,17 @@ namespace Kafka.Protocol
 			{
 				instance.RequireStable = await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -49708,7 +50826,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchRequestTopic is unknown");
 					}
@@ -49872,7 +50989,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchRequestGroup is unknown");
 					}
@@ -50012,7 +51128,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchRequestTopics is unknown");
 						}
@@ -50196,6 +51311,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => OffsetFetchResponseGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => OffsetFetchResponseGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -50327,7 +51453,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponseTopic is unknown");
 					}
@@ -50480,7 +51605,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponsePartition is unknown");
 						}
@@ -50777,7 +51901,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponseGroup is unknown");
 					}
@@ -50915,7 +52038,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponseTopics is unknown");
 						}
@@ -51068,7 +52190,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetFetchResponsePartitions is unknown");
 							}
@@ -51331,6 +52452,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => OffsetForLeaderTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic) :
 					(await reader.ReadArrayAsync(() => OffsetForLeaderTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetForLeaderEpochRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -51453,7 +52585,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetForLeaderTopic is unknown");
 					}
@@ -51588,7 +52719,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetForLeaderPartition is unknown");
 						}
@@ -51747,6 +52877,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => OffsetForLeaderTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic) :
 					(await reader.ReadArrayAsync(() => OffsetForLeaderTopicResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Topic);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetForLeaderEpochResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -51867,7 +53008,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for OffsetForLeaderTopicResult is unknown");
 					}
@@ -52009,7 +53149,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for EpochEndOffset is unknown");
 						}
@@ -52218,6 +53357,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => TopicProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name) :
 					(await reader.ReadArrayAsync(() => TopicProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Name);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ProduceRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -52420,7 +53570,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicProduceData is unknown");
 					}
@@ -52548,7 +53697,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionProduceData is unknown");
 						}
@@ -52683,6 +53831,17 @@ namespace Kafka.Protocol
 			{
 				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ProduceResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -52779,7 +53938,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicProduceResponse is unknown");
 					}
@@ -52950,7 +54108,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionProduceResponse is unknown");
 						}
@@ -53207,7 +54364,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for BatchIndexAndErrorMessage is unknown");
 							}
@@ -53399,6 +54555,17 @@ namespace Kafka.Protocol
 			{
 				instance.RenewPeriodMs = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for RenewDelegationTokenRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -53523,6 +54690,17 @@ namespace Kafka.Protocol
 			{
 				instance.ThrottleTimeMs = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for RenewDelegationTokenResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -53688,6 +54866,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false) :
 					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for RequestHeader is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -53868,6 +55057,17 @@ namespace Kafka.Protocol
 			{
 				instance.CorrelationId = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for ResponseHeader is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -53945,6 +55145,17 @@ namespace Kafka.Protocol
 			{
 				instance.AuthBytes = await reader.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for SaslAuthenticateRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -54047,6 +55258,17 @@ namespace Kafka.Protocol
 			{
 				instance.SessionLifetimeMs = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for SaslAuthenticateResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -54228,6 +55450,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactStringAsync(cancellationToken).ConfigureAwait(false) :
 					await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for SaslHandshakeRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -54319,6 +55552,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => String.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for SaslHandshakeResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -54429,6 +55673,17 @@ namespace Kafka.Protocol
 			{
 				instance.Version_ = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for SnapshotFooterRecord is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -54513,6 +55768,17 @@ namespace Kafka.Protocol
 			{
 				instance.LastContainedLogTimestamp = await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for SnapshotHeaderRecord is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -54677,6 +55943,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => StopReplicaTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => StopReplicaTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -54908,7 +56185,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaPartitionV0 is unknown");
 					}
@@ -55069,7 +56345,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaTopicV1 is unknown");
 					}
@@ -55233,7 +56508,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaTopicState is unknown");
 					}
@@ -55368,7 +56642,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaPartitionState is unknown");
 						}
@@ -55532,6 +56805,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => StopReplicaPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => StopReplicaPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -55660,7 +56944,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for StopReplicaPartitionError is unknown");
 					}
@@ -55872,6 +57155,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => SyncGroupRequestAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => SyncGroupRequestAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for SyncGroupRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -56187,7 +57481,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for SyncGroupRequestAssignment is unknown");
 					}
@@ -56343,6 +57636,17 @@ namespace Kafka.Protocol
 			{
 				instance.Assignment = await reader.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for SyncGroupResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -56619,6 +57923,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TxnOffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TxnOffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -56966,7 +58281,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitRequestTopic is unknown");
 					}
@@ -57112,7 +58426,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitRequestPartition is unknown");
 						}
@@ -57313,6 +58626,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TxnOffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TxnOffsetCommitResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -57438,7 +58762,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitResponseTopic is unknown");
 					}
@@ -57566,7 +58889,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for TxnOffsetCommitResponsePartition is unknown");
 						}
@@ -57681,6 +59003,17 @@ namespace Kafka.Protocol
 			{
 				instance.BrokerId = await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for UnregisterBrokerRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -57776,6 +59109,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactNullableStringAsync(cancellationToken).ConfigureAwait(false) :
 					await reader.ReadNullableStringAsync(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for UnregisterBrokerResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -57936,6 +59280,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => FeatureUpdateKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature) :
 					(await reader.ReadArrayAsync(() => FeatureUpdateKey.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateFeaturesRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -58066,7 +59421,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for FeatureUpdateKey is unknown");
 					}
@@ -58248,6 +59602,17 @@ namespace Kafka.Protocol
 					(await reader.ReadCompactArrayAsync(() => UpdatableFeatureResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature) :
 					(await reader.ReadArrayAsync(() => UpdatableFeatureResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).ToDictionary(field => field.Feature);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateFeaturesResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -58455,7 +59820,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdatableFeatureResult is unknown");
 					}
@@ -58661,6 +60025,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => UpdateMetadataBroker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => UpdateMetadataBroker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -58899,7 +60274,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataTopicState is unknown");
 					}
@@ -59114,7 +60488,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataBroker is unknown");
 					}
@@ -59318,7 +60691,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataEndpoint is unknown");
 						}
@@ -59938,6 +61310,17 @@ namespace Kafka.Protocol
 			{
 				instance.ErrorCode = await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -60027,6 +61410,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for VoteRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -60159,7 +61553,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -60306,7 +61699,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -60534,6 +61926,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for VoteResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -60657,7 +62060,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
 					}
@@ -60804,7 +62206,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
 						}
@@ -61020,6 +62421,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => WritableTxnMarker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => WritableTxnMarker.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for WriteTxnMarkersRequest is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -61131,7 +62543,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarker is unknown");
 					}
@@ -61332,7 +62743,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarkerTopic is unknown");
 						}
@@ -61489,6 +62899,17 @@ namespace Kafka.Protocol
 					await reader.ReadCompactArrayAsync(() => WritableTxnMarkerResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :
 					await reader.ReadArrayAsync(() => WritableTxnMarkerResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			}
+
+			var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+			await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+			{
+				switch (tag.Tag)
+				{
+					default:
+						throw new InvalidOperationException($"Tag '{tag.Tag}' for WriteTxnMarkersResponse is unknown");
+				}
+			}
+
 			return instance;
 		}
 
@@ -61579,7 +63000,6 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
-
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarkerResult is unknown");
 					}
@@ -61710,7 +63130,6 @@ namespace Kafka.Protocol
 					{
 						switch (tag.Tag)
 						{
-
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarkerTopicResult is unknown");
 						}
@@ -61838,7 +63257,6 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
-
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for WritableTxnMarkerPartitionResult is unknown");
 							}
