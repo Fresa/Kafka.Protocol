@@ -452,23 +452,26 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 
 void PrintReadFromTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field> taggedFields, string parentType)
 {
-	#>var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);<# _();
-	#>await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))<# Block(() => 
+	#>if (instance.IsFlexibleVersion)<# Block(() =>
 	{
-		#>switch (tag.Tag)<# Block(() => 
+		#>var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);<# _();
+		#>await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))<# Block(() => 
 		{
-			PrintOnNewRowForEach(taggedFields, taggedField => 
+			#>switch (tag.Tag)<# Block(() => 
 			{
-			#>case <#= taggedField.Tag #>:<# _();
-				Tab(() =>
+				PrintOnNewRowForEach(taggedFields, taggedField => 
 				{
-					PrintReadFrom(taggedField, true); _();
-				});
-			#>	break;<# _();
-			}); 
-			#>default:<# _();
-			#>	throw new InvalidOperationException($"Tag '{tag.Tag}' for <#= parentType #> is unknown");<# 
-		});
+				#>case <#= taggedField.Tag #>:<# _();
+					Tab(() =>
+					{
+						PrintReadFrom(taggedField, true); _();
+					});
+				#>	break;<# _();
+				}); 
+				#>default:<# _();
+				#>	throw new InvalidOperationException($"Tag '{tag.Tag}' for <#= parentType #> is unknown");<# 
+			});
+		}); 
 	}); _(2);
 }
 
