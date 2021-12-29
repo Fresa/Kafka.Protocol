@@ -38,9 +38,12 @@ namespace Kafka.Protocol.Generator.Helpers
             // Incorrect protocol definition: Array is never referenced as a primitive type within messages. [] is used.
             PrimitiveTypes.Remove("ARRAY");
             // Compact types are still the same base types but with more efficient length compaction. They are used interchangeable when the message is a variable version
-            PrimitiveTypes.Remove("COMPACT_ARRAY");
-            PrimitiveTypes.Remove("COMPACT_BYTES");
-            PrimitiveTypes.Remove("COMPACT_STRING");
+            // Nullable types are handled as native nullable types
+            PrimitiveTypes.Keys
+                .Where(name => name.StartsWith("COMPACT_") ||
+                               name.StartsWith("NULLABLE_"))
+                .ToList()
+                .ForEach(name => PrimitiveTypes.Remove(name));
             // Records is a complex type and is hand-rolled
             PrimitiveTypes.Remove("RECORDS");
         }

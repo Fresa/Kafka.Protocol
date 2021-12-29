@@ -34,9 +34,6 @@
 	void GenerateDocumentation(params string[] documentations) { this.GenerateDocumentation(documentations); }
 
 	var primitiveTypeNames = protocol.PrimitiveTypes.Values
-        .Where(type => 
-            type.Type!="RequestMessage" && 
-            type.Type!="ResponseMessage")
 		.Select(type => type.GetClassName());
 
 	bool IsPrimitiveType(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field)
@@ -57,17 +54,11 @@ using System.Threading.Tasks;
 namespace Kafka.Protocol<# Block(() =>
 {
 	// Primitive types
-	// todo: Ignore request and response messages until we have a proper way to deal with them
-    PrintOnNewRowForEach(protocol.PrimitiveTypes.Values
-        .Where(type => 
-            type.Type!="RequestMessage" && 
-            type.Type!="ResponseMessage" &&
-			type.IsNullable() == false), primitiveType =>
+    PrintOnNewRowForEach(protocol.PrimitiveTypes.Values, primitiveType =>
     {
         var className = primitiveType.GetClassName();
         var type = primitiveType.GetTypeName();
 		var defaultValue = primitiveType.GetDefaultValue();
-		var isNullable = primitiveType.IsNullable();
 		var @params = primitiveType.IsArray() ? "params " : "";
 
         GenerateDocumentation(primitiveType.Description);
@@ -87,26 +78,12 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public override int GetHashCode() <# Block(() => 
 			{
-				if (isNullable)
-				{
-					#>return Value?.GetHashCode() ?? 0;<#
-				} 
-				else 
-				{
-					#>return Value.GetHashCode();<#
-				}
+				#>return Value.GetHashCode();<#
 			}); _(2);
 
 			#>public override string ToString() <# Block(() => 
 			{
-				if (isNullable)
-				{
-					#>return Value?.ToString() ?? string.Empty;<#
-				} 
-				else 
-				{
-					#>return Value.ToString();<#
-				}				
+				#>return Value.ToString();<#
 			}); _(2);
 
 			#>public static bool operator == (<#= className #> x, <#= className #> y)<# Block(() => 

@@ -16,7 +16,7 @@ namespace Kafka.Protocol.Generator.Helpers.Tests
             {
                 _type = new PrimitiveType
                 {
-                    Type = "nullablestring"
+                    Type = "string"
                 };
             }
 
@@ -28,32 +28,7 @@ namespace Kafka.Protocol.Generator.Helpers.Tests
             [Fact]
             public void It_should_returned_a_type()
             {
-                _typeName.Should().Be("string?");
-            }
-        }
-
-        public class When_getting_nullabillity : XUnit2Specification
-        {
-            private PrimitiveType _type;
-            private bool _isNullable;
-
-            protected override void Given()
-            {
-                _type = new PrimitiveType
-                {
-                    Type = "nullablestring"
-                };
-            }
-
-            protected override void When()
-            {
-                _isNullable = _type.IsNullable();
-            }
-
-            [Fact]
-            public void It_should_have_returned_nullable()
-            {
-                _isNullable.Should().BeTrue();
+                _typeName.Should().Be("string");
             }
         }
     }

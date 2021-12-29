@@ -38,23 +38,12 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
             return typeName + (isArray ? "[]" : "");
         }
 
-        public static bool IsNullable(this PrimitiveType primitiveType)
-        {
-            return primitiveType
-                .Type
-                .ToUpper()
-                .Contains("NULLABLE");
-        }
-
-        public static string GetTypeName(this PrimitiveType primitiveType)
-        {
-            return primitiveType
+        public static string GetTypeName(this PrimitiveType primitiveType) =>
+            primitiveType
                 .ResolveType()
-                .GetPrettyName() + 
-                   (primitiveType.IsNullable() ? "?" : "");
-        }
+                .GetPrettyName();
 
-        private static System.Type ResolveType(this PrimitiveType primitiveType)
+        private static Type ResolveType(this PrimitiveType primitiveType)
         {
             var typeName = primitiveType.GetClassName();
 
@@ -76,15 +65,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 case "varlong":
                     return Type<long>()
                         .ToArrayType(isArray);
-                case "compactstring" or 
-                    "nullablestring" or
-                    "compactnullablestring":
-                    return Type<string>()
-                        .ToArrayType(isArray);
-                case "bytes" or 
-                    "compactbytes" or
-                    "nullablebytes" or
-                    "compactnullablebytes":
+                case "bytes":
                     return Type<byte[]>();
                 case "float64":
                     return Type<double>()
@@ -123,7 +104,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
             switch (type)
             {
-                case System.Type t when t == typeof(string):
+                case Type t when t == typeof(string):
                     return "string.Empty";
                 default:
                     return "default";
@@ -133,7 +114,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
         public static bool IsArray(this PrimitiveType primitiveType) => 
             primitiveType.ResolveType().IsArray;
 
-        private static System.Type Type<T>()
+        private static Type Type<T>()
         {
             return typeof(T);
         }
