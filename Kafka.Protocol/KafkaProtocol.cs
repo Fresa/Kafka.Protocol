@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 // ReSharper disable MemberHidesStaticFromOuterClass FromReaderAsync will cause a lot of these warnings
-
 namespace Kafka.Protocol
 {
 	/// <summary>
