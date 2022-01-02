@@ -603,7 +603,7 @@ namespace Kafka.Protocol
 			return new NullableString(value);
 		}
 
-		public static NullableString Default { get; } = From(string.Empty);
+		public static NullableString Default { get; } = From(default);
 	}
 
 
@@ -703,7 +703,7 @@ namespace Kafka.Protocol
 			return new NullableBytes(value);
 		}
 
-		public static NullableBytes Default { get; } = From(System.Array.Empty<byte?>());
+		public static NullableBytes Default { get; } = From(default);
 	}
 
 
@@ -905,7 +905,7 @@ namespace Kafka.Protocol
 			return new NullableArray<T>(value);
 		}
 
-		public static NullableArray<T> Default { get; } = From(System.Array.Empty<T?>());
+		public static NullableArray<T> Default { get; } = From(default);
 	}
 
 	/// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Kafka.Protocol.Generator.Helpers.Extensions;
 
 namespace Kafka.Protocol.Generator.Helpers.Definitions
@@ -67,6 +66,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
             return type switch
             {
+                { } when primitiveType.IsNullable() => "default",
                 { IsArray: true } =>
                     $"System.Array.Empty<{primitiveType.GetTypeName().Replace("[]", "")}>()",
                 { } t when t == typeof(string) => "string.Empty",
