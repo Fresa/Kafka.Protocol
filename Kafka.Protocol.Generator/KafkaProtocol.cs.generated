@@ -763,9 +763,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public readonly partial struct UInt16 : ISerialize 
 	{
-		public UInt16 Value { get; }
+		public ushort Value { get; }
 
-		public UInt16(UInt16 value)
+		public UInt16(ushort value)
 		{
 			Value = value;
 		}
@@ -795,11 +795,11 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public static implicit operator UInt16(UInt16 value) => value.Value;
+		public static implicit operator ushort(UInt16 value) => value.Value;
 
-		public static implicit operator UInt16(UInt16 value) => From(value);
+		public static implicit operator UInt16(ushort value) => From(value);
 
-		public static UInt16 From(UInt16 value)
+		public static UInt16 From(ushort value)
 		{
 			return new UInt16(value);
 		}

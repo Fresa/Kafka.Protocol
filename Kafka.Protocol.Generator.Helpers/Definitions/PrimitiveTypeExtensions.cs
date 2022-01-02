@@ -92,12 +92,4 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
             return new Dictionary<string, string>();
         }
     }
-
-    public class Test<T, S>
-    where T : class
-    where S : class
-
-    {
-
-    }
 }

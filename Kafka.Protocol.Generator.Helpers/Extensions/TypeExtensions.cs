@@ -10,6 +10,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
         {
             { typeof(bool), "bool" },
             { typeof(short), "short" },
+            { typeof(ushort), "ushort" },
             { typeof(int), "int" },
             { typeof(uint), "uint" },
             { typeof(long), "long" },
