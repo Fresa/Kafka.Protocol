@@ -19,6 +19,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 "uint32" => "UInt32",
                 "uvarint" => "UVarInt",
                 "array" => "Array<T>",
+                "nullablearray" => "NullableArray<T>",
                 _ => typeName
             };
         }
@@ -79,7 +80,8 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
         public static IReadOnlyDictionary<string, string> GetGenericArgumentConstraints(
             this PrimitiveType primitive)
         {
-            if (primitive.GetClassName().ToUpper() == "ARRAY<T>")
+            if (primitive.GetClassName().Replace("Nullable", "").ToUpper() ==
+                "ARRAY<T>")
             {
                 return new Dictionary<string, string>
                 {

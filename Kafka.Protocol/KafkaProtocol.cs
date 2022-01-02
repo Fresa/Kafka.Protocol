@@ -861,18 +861,19 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T].</para>
 	/// </summary>
-	public readonly partial struct NullableArray : ISerialize 
+	public readonly partial struct NullableArray<T> : ISerialize 
+		where T : ISerialize
 	{
-		public Array? Value { get; }
+		public T[]? Value { get; }
 
-		public NullableArray(Array? value)
+		public NullableArray(params T[]? value)
 		{
 			Value = value;
 		}
 
 		public override bool Equals(object obj) 
 		{
-			return obj is NullableArray comparingNullableArray && this == comparingNullableArray;
+			return obj is NullableArray<T> comparingNullableArray && this == comparingNullableArray;
 		}
 
 		public override int GetHashCode() 
@@ -885,26 +886,26 @@ namespace Kafka.Protocol
 			return Value?.ToString() ?? string.Empty;
 		}
 
-		public static bool operator == (NullableArray x, NullableArray y)
+		public static bool operator == (NullableArray<T> x, NullableArray<T> y)
 		{
 			return x.Value == y.Value;
 		}
 
-		public static bool operator != (NullableArray x, NullableArray y)
+		public static bool operator != (NullableArray<T> x, NullableArray<T> y)
 		{
 			return !(x == y);
 		}
 
-		public static implicit operator Array?(NullableArray value) => value.Value;
+		public static implicit operator T[]?(NullableArray<T> value) => value.Value;
 
-		public static implicit operator NullableArray(Array? value) => From(value);
+		public static implicit operator NullableArray<T>(T[]? value) => From(value);
 
-		public static NullableArray From(Array? value)
+		public static NullableArray<T> From(params T[]? value)
 		{
-			return new NullableArray(value);
+			return new NullableArray<T>(value);
 		}
 
-		public static NullableArray Default { get; } = From(default);
+		public static NullableArray<T> Default { get; } = From(System.Array.Empty<T?>());
 	}
 
 	/// <summary>
