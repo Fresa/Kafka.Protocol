@@ -39,7 +39,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
 
             if (TypeAliasMapping.TryGetValue(elementType, out var prettyName) == false)
             {
-                prettyName = elementType.FullName;
+                prettyName = elementType.Name;
             }
             
             prettyName += type.IsArray ? "[]" : "";

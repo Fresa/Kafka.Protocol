@@ -10,7 +10,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents a boolean value in a byte. Values 0 and 1 are used to represent false and true respectively. When reading a boolean value, any non-zero value is considered true.</para>
 	/// </summary>
-	public readonly struct Boolean : ISerialize 
+	public readonly partial struct Boolean : ISerialize 
 	{
 		public bool Value { get; }
 
@@ -48,21 +48,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator Boolean(bool value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfBoolean(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteBooleanAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static Boolean From(bool value)
 		{
 			return new Boolean(value);
-		}
-
-		public static async ValueTask<Boolean> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadBooleanAsync(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static Boolean Default { get; } = From(default);
@@ -72,7 +60,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents an integer between -2^7 and 2^7-1 inclusive.</para>
 	/// </summary>
-	public readonly struct Int8 : ISerialize 
+	public readonly partial struct Int8 : ISerialize 
 	{
 		public sbyte Value { get; }
 
@@ -110,21 +98,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator Int8(sbyte value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfInt8(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteInt8Async(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static Int8 From(sbyte value)
 		{
 			return new Int8(value);
-		}
-
-		public static async ValueTask<Int8> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadInt8Async(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static Int8 Default { get; } = From(default);
@@ -134,7 +110,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents an integer between -2^15 and 2^15-1 inclusive. The values are encoded using two bytes in network byte order (big-endian).</para>
 	/// </summary>
-	public readonly struct Int16 : ISerialize 
+	public readonly partial struct Int16 : ISerialize 
 	{
 		public short Value { get; }
 
@@ -172,21 +148,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator Int16(short value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfInt16(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteInt16Async(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static Int16 From(short value)
 		{
 			return new Int16(value);
-		}
-
-		public static async ValueTask<Int16> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadInt16Async(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static Int16 Default { get; } = From(default);
@@ -196,7 +160,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents an integer between -2^31 and 2^31-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).</para>
 	/// </summary>
-	public readonly struct Int32 : ISerialize 
+	public readonly partial struct Int32 : ISerialize 
 	{
 		public int Value { get; }
 
@@ -234,21 +198,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator Int32(int value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfInt32(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteInt32Async(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static Int32 From(int value)
 		{
 			return new Int32(value);
-		}
-
-		public static async ValueTask<Int32> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadInt32Async(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static Int32 Default { get; } = From(default);
@@ -258,7 +210,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents an integer between -2^63 and 2^63-1 inclusive. The values are encoded using eight bytes in network byte order (big-endian).</para>
 	/// </summary>
-	public readonly struct Int64 : ISerialize 
+	public readonly partial struct Int64 : ISerialize 
 	{
 		public long Value { get; }
 
@@ -296,21 +248,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator Int64(long value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfInt64(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteInt64Async(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static Int64 From(long value)
 		{
 			return new Int64(value);
-		}
-
-		public static async ValueTask<Int64> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadInt64Async(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static Int64 Default { get; } = From(default);
@@ -320,7 +260,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents an integer between 0 and 2^32-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).</para>
 	/// </summary>
-	public readonly struct UInt32 : ISerialize 
+	public readonly partial struct UInt32 : ISerialize 
 	{
 		public uint Value { get; }
 
@@ -358,21 +298,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator UInt32(uint value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfUInt32(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteUInt32Async(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static UInt32 From(uint value)
 		{
 			return new UInt32(value);
-		}
-
-		public static async ValueTask<UInt32> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadUInt32Async(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static UInt32 Default { get; } = From(default);
@@ -382,7 +310,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents an integer between -2^31 and 2^31-1 inclusive. Encoding follows the variable-length zig-zag encoding from  <a href="http://code.google.com/apis/protocolbuffers/docs/encoding.html"> Google Protocol Buffers</a>.</para>
 	/// </summary>
-	public readonly struct VarInt : ISerialize 
+	public readonly partial struct VarInt : ISerialize 
 	{
 		public int Value { get; }
 
@@ -420,21 +348,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator VarInt(int value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfVarInt(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteVarIntAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static VarInt From(int value)
 		{
 			return new VarInt(value);
-		}
-
-		public static async ValueTask<VarInt> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadVarIntAsync(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static VarInt Default { get; } = From(default);
@@ -444,7 +360,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents an integer between -2^63 and 2^63-1 inclusive. Encoding follows the variable-length zig-zag encoding from  <a href="http://code.google.com/apis/protocolbuffers/docs/encoding.html"> Google Protocol Buffers</a>.</para>
 	/// </summary>
-	public readonly struct VarLong : ISerialize 
+	public readonly partial struct VarLong : ISerialize 
 	{
 		public long Value { get; }
 
@@ -482,21 +398,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator VarLong(long value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfVarLong(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteVarLongAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static VarLong From(long value)
 		{
 			return new VarLong(value);
-		}
-
-		public static async ValueTask<VarLong> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadVarLongAsync(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static VarLong Default { get; } = From(default);
@@ -506,11 +410,11 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents a type 4 immutable universally unique identifier (Uuid). The values are encoded using sixteen bytes in network byte order (big-endian).</para>
 	/// </summary>
-	public readonly struct Uuid : ISerialize 
+	public readonly partial struct Uuid : ISerialize 
 	{
-		public System.Guid Value { get; }
+		public Guid Value { get; }
 
-		public Uuid(System.Guid value)
+		public Uuid(Guid value)
 		{
 			Value = value;
 		}
@@ -540,25 +444,13 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public static implicit operator System.Guid(Uuid value) => value.Value;
+		public static implicit operator Guid(Uuid value) => value.Value;
 
-		public static implicit operator Uuid(System.Guid value) => From(value);
+		public static implicit operator Uuid(Guid value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfUuid(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteUuidAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
-		public static Uuid From(System.Guid value)
+		public static Uuid From(Guid value)
 		{
 			return new Uuid(value);
-		}
-
-		public static async ValueTask<Uuid> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadUuidAsync(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static Uuid Default { get; } = From(default);
@@ -568,7 +460,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents a double-precision 64-bit format IEEE 754 value. The values are encoded using eight bytes in network byte order (big-endian).</para>
 	/// </summary>
-	public readonly struct Float64 : ISerialize 
+	public readonly partial struct Float64 : ISerialize 
 	{
 		public double Value { get; }
 
@@ -606,21 +498,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator Float64(double value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfFloat64(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteFloat64Async(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static Float64 From(double value)
 		{
 			return new Float64(value);
-		}
-
-		public static async ValueTask<Float64> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadFloat64Async(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static Float64 Default { get; } = From(default);
@@ -630,7 +510,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>Represents a sequence of characters. First the length N is given as an INT16. Then N bytes follow which are the UTF-8 encoding of the character sequence. Length must not be negative.</para>
 	/// </summary>
-	public readonly struct String : ISerialize 
+	public readonly partial struct String : ISerialize 
 	{
 		public string Value { get; }
 
@@ -668,21 +548,9 @@ namespace Kafka.Protocol
 
 		public static implicit operator String(string value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfString(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteStringAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static String From(string value)
 		{
 			return new String(value);
-		}
-
-		public static async ValueTask<String> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadStringAsync(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static String Default { get; } = From(string.Empty);
@@ -690,9 +558,59 @@ namespace Kafka.Protocol
 
 
 	/// <summary>
+	/// <para>Represents a sequence of characters or null. For non-null strings, first the length N is given as an INT16. Then N bytes follow which are the UTF-8 encoding of the character sequence. A null value is encoded with length of -1 and there are no following bytes.</para>
+	/// </summary>
+	public readonly partial struct NullableString : ISerialize 
+	{
+		public string? Value { get; }
+
+		public NullableString(string? value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is NullableString comparingNullableString && this == comparingNullableString;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value?.GetHashCode() ?? 0;
+		}
+
+		public override string ToString() 
+		{
+			return Value?.ToString() ?? string.Empty;
+		}
+
+		public static bool operator == (NullableString x, NullableString y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (NullableString x, NullableString y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator string?(NullableString value) => value.Value;
+
+		public static implicit operator NullableString(string? value) => From(value);
+
+		public static NullableString From(string? value)
+		{
+			return new NullableString(value);
+		}
+
+		public static NullableString Default { get; } = From(string.Empty);
+	}
+
+
+	/// <summary>
 	/// <para>Represents a raw sequence of bytes. First the length N is given as an INT32. Then N bytes follow.</para>
 	/// </summary>
-	public readonly struct Bytes : ISerialize 
+	public readonly partial struct Bytes : ISerialize 
 	{
 		public byte[] Value { get; }
 
@@ -730,35 +648,124 @@ namespace Kafka.Protocol
 
 		public static implicit operator Bytes(byte[] value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfBytes(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteBytesAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static Bytes From(params byte[] value)
 		{
 			return new Bytes(value);
 		}
 
-		public static async ValueTask<Bytes> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static Bytes Default { get; } = From(System.Array.Empty<byte>());
+	}
+
+
+	/// <summary>
+	/// <para>Represents a raw sequence of bytes or null. For non-null values, first the length N is given as an INT32. Then N bytes follow. A null value is encoded with length of -1 and there are no following bytes.</para>
+	/// </summary>
+	public readonly partial struct NullableBytes : ISerialize 
+	{
+		public byte[]? Value { get; }
+
+		public NullableBytes(params byte[]? value)
 		{
-			return await reader.ReadBytesAsync(cancellationToken).ConfigureAwait(false);
+			Value = value;
 		}
 
-		public static Bytes Default { get; } = From(Array.Empty<byte>());
+		public override bool Equals(object obj) 
+		{
+			return obj is NullableBytes comparingNullableBytes && this == comparingNullableBytes;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value?.GetHashCode() ?? 0;
+		}
+
+		public override string ToString() 
+		{
+			return Value?.ToString() ?? string.Empty;
+		}
+
+		public static bool operator == (NullableBytes x, NullableBytes y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (NullableBytes x, NullableBytes y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator byte[]?(NullableBytes value) => value.Value;
+
+		public static implicit operator NullableBytes(byte[]? value) => From(value);
+
+		public static NullableBytes From(params byte[]? value)
+		{
+			return new NullableBytes(value);
+		}
+
+		public static NullableBytes Default { get; } = From(System.Array.Empty<byte?>());
+	}
+
+
+	/// <summary>
+	/// <para>Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N is given as an INT32. Then N instances of type T follow. A null array is represented with a length of -1. In protocol documentation an array of T instances is referred to as [T].</para>
+	/// </summary>
+	public readonly partial struct Array<T> : ISerialize 
+		where T : ISerialize
+	{
+		public T[] Value { get; }
+
+		public Array(params T[] value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is Array<T> comparingArray && this == comparingArray;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (Array<T> x, Array<T> y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (Array<T> x, Array<T> y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator T[](Array<T> value) => value.Value;
+
+		public static implicit operator Array<T>(T[] value) => From(value);
+
+		public static Array<T> From(params T[] value)
+		{
+			return new Array<T>(value);
+		}
+
+		public static Array<T> Default { get; } = From(System.Array.Empty<T>());
 	}
 
 
 	/// <summary>
 	/// <para>Represents an integer between 0 and 2^16-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).</para>
 	/// </summary>
-	public readonly struct UInt16 : ISerialize 
+	public readonly partial struct UInt16 : ISerialize 
 	{
-		public System.UInt16 Value { get; }
+		public UInt16 Value { get; }
 
-		public UInt16(System.UInt16 value)
+		public UInt16(UInt16 value)
 		{
 			Value = value;
 		}
@@ -788,25 +795,13 @@ namespace Kafka.Protocol
 			return !(x == y);
 		}
 
-		public static implicit operator System.UInt16(UInt16 value) => value.Value;
+		public static implicit operator UInt16(UInt16 value) => value.Value;
 
-		public static implicit operator UInt16(System.UInt16 value) => From(value);
+		public static implicit operator UInt16(UInt16 value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfUInt16(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteUInt16Async(this, cancellationToken).ConfigureAwait(false);
-		}
-
-		public static UInt16 From(System.UInt16 value)
+		public static UInt16 From(UInt16 value)
 		{
 			return new UInt16(value);
-		}
-
-		public static async ValueTask<UInt16> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
-		{
-			return await reader.ReadUInt16Async(cancellationToken).ConfigureAwait(false);
 		}
 
 		public static UInt16 Default { get; } = From(default);
@@ -816,7 +811,7 @@ namespace Kafka.Protocol
 	/// <summary>
 	/// <para>The UNSIGNED_VARINT type describes an unsigned variable length integer.</para>
 	/// </summary>
-	public readonly struct UVarInt : ISerialize 
+	public readonly partial struct UVarInt : ISerialize 
 	{
 		public uint Value { get; }
 
@@ -854,24 +849,62 @@ namespace Kafka.Protocol
 
 		public static implicit operator UVarInt(uint value) => From(value);
 
-		public int GetSize(IKafkaWriter writer) => writer.SizeOfUVarInt(this);
-
-		public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)
-		{
-			await writer.WriteUVarIntAsync(this, cancellationToken).ConfigureAwait(false);
-		}
-
 		public static UVarInt From(uint value)
 		{
 			return new UVarInt(value);
 		}
 
-		public static async ValueTask<UVarInt> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)
+		public static UVarInt Default { get; } = From(default);
+	}
+
+
+	/// <summary>
+	/// <para>Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T].</para>
+	/// </summary>
+	public readonly partial struct NullableArray : ISerialize 
+	{
+		public Array? Value { get; }
+
+		public NullableArray(Array? value)
 		{
-			return await reader.ReadUVarIntAsync(cancellationToken).ConfigureAwait(false);
+			Value = value;
 		}
 
-		public static UVarInt Default { get; } = From(default);
+		public override bool Equals(object obj) 
+		{
+			return obj is NullableArray comparingNullableArray && this == comparingNullableArray;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value?.GetHashCode() ?? 0;
+		}
+
+		public override string ToString() 
+		{
+			return Value?.ToString() ?? string.Empty;
+		}
+
+		public static bool operator == (NullableArray x, NullableArray y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (NullableArray x, NullableArray y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator Array?(NullableArray value) => value.Value;
+
+		public static implicit operator NullableArray(Array? value) => From(value);
+
+		public static NullableArray From(Array? value)
+		{
+			return new NullableArray(value);
+		}
+
+		public static NullableArray Default { get; } = From(default);
 	}
 
 	/// <summary>

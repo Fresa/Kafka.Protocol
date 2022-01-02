@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Kafka.Protocol.Generator.Helpers.Extensions;
 
 namespace Kafka.Protocol.Generator.Helpers.Definitions
@@ -16,18 +18,30 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 "uint16" => "UInt16",
                 "uint32" => "UInt32",
                 "uvarint" => "UVarInt",
+                "array" => "Array<T>",
                 _ => typeName
             };
+        }
+
+        public static bool IsNullable(this PrimitiveType primitiveType)
+        {
+            return primitiveType
+                .Type
+                .ToUpper()
+                .Contains("NULLABLE");
         }
 
         public static string GetTypeName(this PrimitiveType primitiveType) =>
             primitiveType
                 .ResolveType()
-                .GetPrettyName();
+                .GetPrettyName() +
+            (primitiveType.IsNullable() ? "?" : "");
 
         private static Type ResolveType(this PrimitiveType primitiveType)
         {
-            var typeName = primitiveType.GetClassName();
+            var typeName = primitiveType
+                .GetClassName()
+                .Replace("Nullable", "");
 
             return typeName.ToLower() switch
             {
@@ -38,6 +52,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 "float64" => typeof(double),
                 "uuid" => typeof(Guid),
                 "uvarint" => typeof(uint),
+                "array<t>" => typeof(IEnumerable<>).GetGenericArguments()[0].MakeArrayType(),
                 _ => typeof(int).Assembly
                          .GetType($"System.{typeName}", false, true) ??
                      throw new InvalidOperationException(
@@ -52,7 +67,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
             return type switch
             {
                 { IsArray: true } =>
-                    $"Array.Empty<{type.GetPrettyName().Replace("[]", "")}>()",
+                    $"System.Array.Empty<{primitiveType.GetTypeName().Replace("[]", "")}>()",
                 { } t when t == typeof(string) => "string.Empty",
                 _ => "default"
             };
@@ -60,5 +75,27 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
         public static bool IsArray(this PrimitiveType primitiveType) => 
             primitiveType.ResolveType().IsArray;
+
+        public static IReadOnlyDictionary<string, string> GetGenericArgumentConstraints(
+            this PrimitiveType primitive)
+        {
+            if (primitive.GetClassName().ToUpper() == "ARRAY<T>")
+            {
+                return new Dictionary<string, string>
+                {
+                    ["T"] = "ISerialize"
+                };
+            }
+
+            return new Dictionary<string, string>();
+        }
+    }
+
+    public class Test<T, S>
+    where T : class
+    where S : class
+
+    {
+
     }
 }

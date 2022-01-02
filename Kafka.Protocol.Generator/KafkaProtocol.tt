@@ -56,33 +56,56 @@ namespace Kafka.Protocol<# Block(() =>
     PrintOnNewRowForEach(protocol.PrimitiveTypes.Values, primitiveType =>
     {
         var className = primitiveType.GetClassName();
+		var classNameWithoutGenerics = className.Split('<').First();
         var type = primitiveType.GetTypeName();
 		var defaultValue = primitiveType.GetDefaultValue();
+		var isNullable = primitiveType.IsNullable();
 		var @params = primitiveType.IsArray() ? "params " : "";
+		var genericConstraints = primitiveType.GetGenericArgumentConstraints();
 
         GenerateDocumentation(primitiveType.Description);
-        #>public readonly struct <#= className #> : ISerialize <# Block(() =>
+        #>public readonly partial struct <#= className #> : ISerialize <# 
+		PrintOnNewRowForEachWithIndex(genericConstraints, (constraint, index, count) =>
+		{
+			if (index == 0) _();
+		#>	where <#= constraint.Key #> : <#= constraint.Value #><#
+		});
+		Block(() =>
         {
             #>public <#= type #> Value { get; }<# _(2);
 
-            #>public <#= className #>(<#= @params #><#= type #> value)<# Block(() =>
+            #>public <#= classNameWithoutGenerics #>(<#= @params #><#= type #> value)<# Block(() =>
             {
                 #>Value = value;<#
             }); _(2);
 
 			#>public override bool Equals(object obj) <# Block(() =>
             {
-                #>return obj is <#= className #> comparing<#= className #> && this == comparing<#= className #>;<#
+                #>return obj is <#= className #> comparing<#= classNameWithoutGenerics #> && this == comparing<#= classNameWithoutGenerics #>;<#
             }); _(2);
 
 			#>public override int GetHashCode() <# Block(() => 
 			{
-				#>return Value.GetHashCode();<#
+                if (isNullable)
+                {
+                    #>return Value?.GetHashCode() ?? 0;<#
+                } 
+                else 
+                {
+                    #>return Value.GetHashCode();<#
+                }
 			}); _(2);
 
 			#>public override string ToString() <# Block(() => 
 			{
-				#>return Value.ToString();<#
+				if (isNullable)
+                {
+                    #>return Value?.ToString() ?? string.Empty;<#
+                } 
+                else 
+                {
+                    #>return Value.ToString();<#
+                }                
 			}); _(2);
 
 			#>public static bool operator == (<#= className #> x, <#= className #> y)<# Block(() => 
@@ -99,22 +122,10 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public static implicit operator <#= className #>(<#= type #> value) => From(value);<# _(2);
 
-			#>public int GetSize(IKafkaWriter writer) => writer.SizeOf<#= className #>(this);<# _(2);
-
-			#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
-			{
-				#>await writer.Write<#= className #>Async(this, cancellationToken).ConfigureAwait(false);<#
-			}); _(2);
-
 			#>public static <#= className #> From(<#= @params #><#= type #> value)<# Block(() =>
             {
                 #>return new <#= className #>(value);<#
             }); _(2);
-
-			#>public static async ValueTask<<#= className #>> FromReaderAsync(IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
-			{
-				#>return await reader.Read<#= className #>Async(cancellationToken).ConfigureAwait(false);<#
-			}); _(2);
 
 			#>public static <#= className #> Default { get; } = From(<#= defaultValue #>);<#
         }); _(2);
