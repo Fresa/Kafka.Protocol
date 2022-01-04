@@ -46,6 +46,8 @@
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -157,7 +159,7 @@ namespace Kafka.Protocol<# Block(() =>
 		#>public static async ValueTask<Message> CreateRequestMessageFromReaderAsync(<# _();
 		#>	Int16 apiKey, <# _();
 		#>	Int16 version, <# _();
-		#>	IKafkaReader reader, <# _();
+		#>	PipeReader reader, <# _();
 		#>	CancellationToken cancellationToken = default)<# Block(() =>
 		{
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsRequest), messageDefinition =>
@@ -174,7 +176,7 @@ namespace Kafka.Protocol<# Block(() =>
 		#>public static async ValueTask<Message> CreateResponseMessageFromReaderAsync(<# _();
 		#>	Int16 apiKey, <# _();
 		#>	Int16 version, <# _();
-		#>	IKafkaReader reader, <# _();
+		#>	PipeReader reader, <# _();
 		#>	CancellationToken cancellationToken = default)<# Block(() =>
 		{
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsResponse), messageDefinition =>
@@ -218,14 +220,7 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public override Int16 Version { get; }<# _(1);
 			#>internal bool IsFlexibleVersion { get; }<# _(2);
 
-			#>public override int GetSize(IKafkaWriter writer) =><# _();
-			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
-			{
-				PrintSizeOf(messageField);
-				if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
-			}); _(2);
-
-			#>public static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+			#>public static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				#>var instance = new <#= messageDefinition.Name #>(version);<# _();
 				
@@ -246,7 +241,7 @@ namespace Kafka.Protocol<# Block(() =>
 				}
 			}); _(2);
 
-			#>public override async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+			#>public override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				if (messageDefinition.Fields.Any() == false)
 				{
@@ -314,35 +309,20 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
 	var fieldName = messageField.GetFieldName(parentFieldTypeName);
-	var fieldTypeName = messageField.GetTypeName();
+	var fieldTypeName = messageField.GetFullTypeNameWithoutArrayCharacters();
 	var isCompactable = messageField.IsCompactable();
 	var nullable = messageField.IsNullable() ? "Nullable" : "";
+	var nullableSign = messageField.IsNullable() ? "?" : "";
 
 	#>	(Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) ? <# _();
 	if (messageField.IsArray())
 	{
-		var toArray = messageField.Fields?.Any(field => field.MapKey) ?? false ? ".Values.ToArray()" : "";
-		if (isCompactable)
-		{
-	#>		IsFlexibleVersion ?<# _();
-	#>			writer.SizeOfCompact<#= nullable #>Array(<#= fieldName #><#= toArray #>) : <# _();
-	#>	<# 
-		}
-	#>		writer.SizeOf<#= nullable #>Array(<#= fieldName #><#= toArray #>) :<# _();
-	}
-	else if (messageField.IsNullable())
-	{
-		if (isCompactable)
-		{
-	#>		IsFlexibleVersion ?<# _();
-	#>			writer.SizeOfCompact<#= nullable #><#= fieldTypeName #>(<#= fieldName #>) :<# _();
-	#>	<# 
-		}
-	#>		writer.SizeOf<#= nullable #><#= fieldTypeName #>(<#= fieldName #>) :<# _();
+		var toArray = messageField.Fields?.Any(field => field.MapKey) ?? false ? $"{nullableSign}.Values.ToArray()" : "";
+	#>		<#= nullable #>Array<<#= fieldTypeName #>>.From(<#= fieldName + toArray #>).GetSize(IsFlexibleVersion) :<# _();
 	}
 	else 
 	{
-	#>		writer.SizeOf(<#= fieldName #>) :<# _();
+	#>		<#= fieldName #>.GetSize(IsFlexibleVersion) :<# _();
 	}
 	#>		0)<#
 }
@@ -356,7 +336,6 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
-		var isCompactable = messageField.IsCompactable();
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		var nullableSign = messageField.IsNullable() ? "?" : "";
 
@@ -367,34 +346,16 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 			{
 				if (IsPrimitiveType(messageField))
 				{
-					if (isCompactable) 
-					{
-						#>instance.IsFlexibleVersion ? <# _();
-						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false) :<# _();
-						#>	<#
-					}	
-					#>await reader.Read<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
+					#>await <#= nullable #>Array<<#= fieldTypeNameWithoutArrayCharacters #>>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 				} 
 				else 
 				{
-					if (isCompactable) 
-					{
-						#>instance.IsFlexibleVersion ? <# _();
-						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :<# _();
-						#>	<#
-					}	
-					#>await reader.Read<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
+					#>await <#= nullable #>Array<<#= fieldTypeNameWithoutArrayCharacters #>>.FromReaderAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 				}
 			} 
 			else 
 			{
-				if (isCompactable) 
-				{
-					#>instance.IsFlexibleVersion ? <# _();
-					#>	await reader.ReadCompact<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false) :<# _();
-					#>	<#
-				}	
-				#>await reader.Read<#= nullable + fieldTypeName #>Async(cancellationToken).ConfigureAwait(false);<# 
+				#>await <#= nullable + fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 		else 
@@ -404,23 +365,11 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 				var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 				if (mapKeyField == null)
 				{
-					if (isCompactable) 
-					{
-						#>instance.IsFlexibleVersion ? <# _();
-						#>	await reader.ReadCompact<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false) :<# _();
-						#>	<#
-					}	
-					#>await reader.Read<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 
+					#>await <#= nullable #>Array<<#= fieldTypeNameWithoutArrayCharacters #>>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 
 				}
 				else 
 				{
-					if (isCompactable) 
-					{
-						#>instance.IsFlexibleVersion ? <# _();
-						#>	(await reader.ReadCompact<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>) :<#  _();
-						#>	<#
-					}	
-					#>(await reader.Read<#= nullable #>ArrayAsync(() => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false))<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
+					#>(await <#= nullable #>Array<<#= fieldTypeNameWithoutArrayCharacters #>>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false)).Value<#= nullableSign #>.ToDictionary(field => field.<#= mapKeyField.GetName() #>);<# 
 				}
 			} 
 			else 
@@ -471,31 +420,17 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 		var isCompactable = messageField.IsCompactable();
 		var nullable = messageField.IsNullable() ? "Nullable" : "";
 		var nullableSign = messageField.IsNullable() ? "?" : "";
+		var fieldTypeName = messageField.GetFullTypeNameWithoutArrayCharacters();
 
 		if (messageField.Fields == null)
 		{
-			var fieldTypeName = messageField.GetTypeName();
 			if (messageField.IsArray())
 			{
-				if (isCompactable) 
-				{
-					#>if (IsFlexibleVersion)<# _();
-					#>	await writer.WriteCompact<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# _();
-					#>else<# _();
-					#>	<#
-				}	
-				#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 	
+				#>await <#= nullable #>Array<<#= fieldTypeName #>>.From(<#= fieldName #>).WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 	
 			} 
 			else 
 			{
-				if (isCompactable) 
-				{
-					#>if (IsFlexibleVersion)<# _();
-					#>	await writer.WriteCompact<#= nullable + fieldTypeName #>Async(<#= fieldName #>, cancellationToken).ConfigureAwait(false);<# _();
-					#>else<# _();
-					#>	<#
-				}	
-				#>await writer.Write<#= nullable + fieldTypeName #>Async(<#= fieldName #>, cancellationToken).ConfigureAwait(false);<# 
+				#>await <#= fieldName #>.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
 		else 
@@ -505,25 +440,11 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 				var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 				if (mapKeyField == null)
 				{
-					if (isCompactable) 
-					{
-						#>if (IsFlexibleVersion)<# _();
-						#>	await writer.WriteCompact<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# _();
-						#>else<# _();
-						#>	<#
-					}	
-					#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #>).ConfigureAwait(false);<# 
+					#>await <#= nullable #>Array<<#= fieldTypeName #>>.From(<#= fieldName #>).WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 	
 				} 
 				else 
 				{
-					if (isCompactable) 
-					{
-						#>if (IsFlexibleVersion)<# _();
-						#>	await writer.WriteCompact<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #><#= nullableSign #>.Values.ToArray()).ConfigureAwait(false);<# _();
-						#>else<# _();
-						#>	<#
-					}	
-					#>await writer.Write<#= nullable #>ArrayAsync(cancellationToken, <#= fieldName #><#= nullableSign #>.Values.ToArray()).ConfigureAwait(false);<#
+					#>await <#= nullable #>Array<<#= fieldTypeName #>>.From(<#= fieldName #><#= nullableSign #>.Values.ToArray()).WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 	
 				}
 			} 
 			else 
@@ -542,7 +463,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	var fieldName = field.GetFieldName(className);
 	var nullableFieldTypeName = fieldTypeName + field.GetNullableSign();
 	var flexibleVersionRange = VersionRange.Parse(field.Message.FlexibleVersions);
-
+	
 	#>private <#= nullableFieldTypeName #> <#= propertyName #><#
 	
 	if(field.Default != null) 
@@ -664,14 +585,14 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>internal Int16 Version { get; }<# _();
 		#>internal bool IsFlexibleVersion { get; }<# _(2);
 
-		#>public int GetSize(IKafkaWriter writer) =><# _();
+		#>public int GetSize(bool _) =><# _();
 		PrintOnNewRowForEachWithIndex(field.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
 		{
 			PrintSizeOf(messageField);
 			if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
 		}); _(2);
 
-		#>public static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();
 			PrintOnNewRowForEach(field.GetNonTaggedFields(), messageField => 
@@ -684,7 +605,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			#>return instance;<# 
 		}); _(2);
 
-		#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			PrintOnNewRowForEach(field.Fields, messageField => 
 			{
@@ -732,14 +653,14 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 		#>internal Int16 Version { get; }<# _();
 		#>internal bool IsFlexibleVersion { get; }<# _(2);
 
-		#>public int GetSize(IKafkaWriter writer) =><# _();
+		#>public int GetSize(bool _) =><# _();
 		PrintOnNewRowForEachWithIndex(commonStruct.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
 		{
 			PrintSizeOf(messageField);
 			if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
 		}); _(2);
 
-		#>public static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, IKafkaReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= commonStruct.Name #>(version);<# _();
 			PrintOnNewRowForEach(commonStruct.GetNonTaggedFields(), messageField => 
@@ -752,7 +673,7 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			#>return instance;<#
 		}); _(2);
 
-		#>public async ValueTask WriteToAsync(IKafkaWriter writer, CancellationToken cancellationToken = default)<# Block(() => 
+		#>public async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			PrintOnNewRowForEach(commonStruct.Fields, field => 
 			{

@@ -22,6 +22,7 @@ namespace Kafka.Protocol
 
         public static async ValueTask<Uuid> FromReaderAsync(
             PipeReader reader,
+            bool _ = false,
             CancellationToken cancellationToken = default)
         {
             var bytes = await reader.ReadAsync(16, cancellationToken)

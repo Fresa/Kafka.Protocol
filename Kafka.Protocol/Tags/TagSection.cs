@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,30 +12,31 @@ namespace Kafka.Protocol.Tags
     {
         public TaggedField[] TaggedFields { get; set; } =
             Array.Empty<TaggedField>();
-
-        public async ValueTask WriteToAsync(IKafkaWriter writer,
+        
+        public async ValueTask WriteToAsync(Stream writer, bool asCompact = false,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteUVarIntAsync((uint)TaggedFields.Length,
-                    cancellationToken)
+            await ((VarInt)TaggedFields.Length)
+                .WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
 
             foreach (var taggedField in TaggedFields.OrderBy(field => field.Tag))
             {
-                await taggedField.WriteToAsync(writer, cancellationToken)
+                await taggedField
+                    .WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
 
-        public int GetSize(IKafkaWriter writer) =>
-            writer.SizeOfUVarInt((uint)TaggedFields.Length) +
-            TaggedFields.Sum(field => field.GetSize(writer));
+        public int GetSize(bool asCompact = false) => 
+            ((VarInt) TaggedFields.Length).GetSize(asCompact) +
+            TaggedFields.Sum(field => field.GetSize(asCompact));
         
         public static async Task<IAsyncEnumerable<TaggedField>> FromReaderAsync(
-            IKafkaReader reader,
+            PipeReader reader,
             CancellationToken cancellationToken = default)
         {
-            var length = await reader.ReadVarIntAsync(cancellationToken)
+            var length = await VarInt.FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
 
             return new TaggedFieldAsyncEnumerable(new TaggedFieldAsyncEnumerator(reader, length,
@@ -57,11 +60,11 @@ namespace Kafka.Protocol.Tags
 
         private class TaggedFieldAsyncEnumerator : IAsyncEnumerator<TaggedField>
         {
-            private readonly IKafkaReader _reader;
+            private readonly PipeReader _reader;
             private int _length;
             private readonly CancellationToken _cancellation;
 
-            public TaggedFieldAsyncEnumerator(IKafkaReader reader, VarInt length, CancellationToken cancellation)
+            public TaggedFieldAsyncEnumerator(PipeReader reader, VarInt length, CancellationToken cancellation)
             {
                 _reader = reader;
                 _length = length;

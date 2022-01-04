@@ -15,7 +15,9 @@ namespace Kafka.Protocol
         public ValueTask WriteToAsync(Stream writer, bool _ = false, CancellationToken cancellationToken = default) =>
             writer.WriteAsLittleEndianAsync(new[] { (byte)Value }, cancellationToken);
 
-        public static async ValueTask<Int8> FromReaderAsync(PipeReader reader,
+        public static async ValueTask<Int8> FromReaderAsync(
+            PipeReader reader,
+            bool _ = false,
             CancellationToken cancellationToken = default) =>
             Convert.ToSByte(
                 (await reader.ReadAsLittleEndianAsync(1, cancellationToken)

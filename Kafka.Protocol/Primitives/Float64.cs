@@ -18,6 +18,7 @@ namespace Kafka.Protocol
 
         public static async ValueTask<Float64> FromReaderAsync(
             PipeReader reader,
+            bool _ = false,
             CancellationToken cancellationToken = default) =>
             BitConverter.ToDouble(
                 await reader.ReadAsBigEndianAsync(8, cancellationToken)

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,7 +9,7 @@ using Log.It;
 
 namespace Kafka.Protocol
 {
-    public sealed class RequestPayload : IPayload
+    public sealed class RequestPayload : ISerialize
     {
         public RequestHeader Header { get; }
         public Message Message { get; }
@@ -27,34 +29,34 @@ namespace Kafka.Protocol
         }
 
         public async ValueTask WriteToAsync(
-            IKafkaWriter kafkaWriter,
+            Stream writer,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            await Header.WriteToAsync(kafkaWriter, cancellationToken)
+            await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
-            await Message.WriteToAsync(kafkaWriter, cancellationToken)
+            await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public int GetSize(IKafkaWriter writer) =>
-            Header.GetSize(writer) +
-            Message.GetSize(writer);
+        public int GetSize(bool asCompact) =>
+            Header.GetSize(asCompact) +
+            Message.GetSize(asCompact);
         
         public static async ValueTask<RequestPayload> ReadFromAsync(
             Int16 headerVersion,
-            IKafkaReader kafkaReader,
+            PipeReader reader,
             CancellationToken cancellationToken = default)
         {
             // Read payload size
-            var size = await kafkaReader
-                .ReadInt32Async(cancellationToken)
+            var size = Int32.FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
 
-            var report = kafkaReader.EnsureExpectedSize(size);
+            var report = reader.EnsureExpectedSize(size);
             var header = await RequestHeader
                 .FromReaderAsync(
                     headerVersion,
-                    kafkaReader,
+                    reader,
                     cancellationToken)
                 .ConfigureAwait(false);
             Logger.Debug("Read header {@header}", header);
@@ -63,7 +65,7 @@ namespace Kafka.Protocol
                 .CreateRequestMessageFromReaderAsync(
                     header.RequestApiKey,
                     header.RequestApiVersion,
-                    kafkaReader,
+                    reader,
                     cancellationToken)
                 .ConfigureAwait(false);
             Logger.Debug("Read message {messageType} {@message}",
@@ -77,7 +79,7 @@ namespace Kafka.Protocol
                 for (var i = 0; i < unreadLength; i++)
                 {
                     bytesUnRead +=
-                        (byte)(await kafkaReader.ReadInt8Async(
+                        (byte)(await reader.ReadInt8Async(
                             cancellationToken)).Value + " ";
                 }
                 Logger.Warning("Detected {length} unknown bytes {unknownBytes}, ignoring",

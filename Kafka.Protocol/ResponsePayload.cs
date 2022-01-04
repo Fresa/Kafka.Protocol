@@ -1,9 +1,11 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.IO.Pipelines;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
-    public sealed class ResponsePayload : IPayload
+    public sealed class ResponsePayload : ISerialize
     {
         public RequestPayload RequestPayload { get; }
         public ResponseHeader Header { get; }
@@ -20,7 +22,8 @@ namespace Kafka.Protocol
         }
 
         public async ValueTask WriteToAsync(
-            IKafkaWriter writer,
+            Stream writer,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
             await Header.WriteToAsync(writer, cancellationToken)
@@ -29,17 +32,17 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
-        public int GetSize(IKafkaWriter writer) =>
+        public int GetSize(bool asCompact) =>
             Header.GetSize(writer) +
             Message.GetSize(writer);
 
         public static async ValueTask<ResponsePayload> ReadFromAsync(
             RequestPayload requestPayload, 
-            IKafkaReader reader,
+            PipeReader reader,
             CancellationToken cancellationToken = default)
         {
             // Read payload size
-            var payloadSize = await reader.ReadInt32Async(cancellationToken)
+            var payloadSize = Int32.FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
             using (reader.EnsureExpectedSize(payloadSize))
             {

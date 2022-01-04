@@ -33,7 +33,9 @@ namespace Kafka.Protocol
                     .EncodeAsZigZag()
                     .EncodeAsVarInt(), cancellationToken);
 
-        public static async ValueTask<VarLong> FromReaderAsync(PipeReader reader,
+        public static async ValueTask<VarLong> FromReaderAsync(
+            PipeReader reader,
+            bool _ = false,
             CancellationToken cancellationToken = default)
         {
             var more = true;

@@ -29,7 +29,9 @@ namespace Kafka.Protocol
                 Value
                     .EncodeAsVarInt(), cancellationToken);
 
-        public static async ValueTask<UVarInt> FromReaderAsync(PipeReader reader,
+        public static async ValueTask<UVarInt> FromReaderAsync(
+            PipeReader reader,
+            bool _ = false,
             CancellationToken cancellationToken = default)
         {
             var more = true;

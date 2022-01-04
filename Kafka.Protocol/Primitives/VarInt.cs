@@ -14,7 +14,9 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default) =>
             ((VarLong)Value).WriteToAsync(writer, cancellationToken: cancellationToken);
 
-        public static async ValueTask<VarInt> FromReaderAsync(PipeReader reader,
+        public static async ValueTask<VarInt> FromReaderAsync(
+            PipeReader reader,
+            bool _ = false,
             CancellationToken cancellationToken = default) =>
             (int)await VarLong.FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);

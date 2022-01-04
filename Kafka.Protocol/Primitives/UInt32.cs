@@ -16,7 +16,9 @@ namespace Kafka.Protocol
             writer.WriteAsBigEndianAsync(BitConverter.GetBytes(Value),
                 cancellationToken);
 
-        public static async ValueTask<UInt32> FromReaderAsync(PipeReader reader,
+        public static async ValueTask<UInt32> FromReaderAsync(
+            PipeReader reader,
+            bool _ = false,
             CancellationToken cancellationToken = default) =>
             BitConverter.ToUInt32(
                 await reader.ReadAsBigEndianAsync(4, cancellationToken)
