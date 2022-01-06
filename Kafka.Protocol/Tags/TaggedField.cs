@@ -5,31 +5,31 @@ using System.Threading.Tasks;
 
 namespace Kafka.Protocol.Tags
 {
-    public class TaggedField : ISerialize
+    public class TaggedField
     {
         public UVarInt Tag { get; set; } = UVarInt.Default;
         public UVarInt Length { get; set; } = UVarInt.Default;
         public ISerialize Field { get; set; } = default!;
 
-        public async ValueTask WriteToAsync(Stream writer, bool asCompact = false,
+        public async ValueTask WriteToAsync(Stream writer, 
             CancellationToken cancellationToken = default)
         {
-            await Tag.WriteToAsync(writer, asCompact, cancellationToken)
+            await Tag.WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
 
-            UVarInt size = (uint) Field.GetSize(asCompact);
-            await size.WriteToAsync(writer, asCompact, cancellationToken)
+            UVarInt size = (uint) Field.GetSize(false);
+            await size.WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
             
-            await Field.WriteToAsync(writer, asCompact, cancellationToken)
+            await Field.WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public int GetSize(bool asCompact = false)
+        public int GetSize()
         {
-            var fieldSize = Field.GetSize(asCompact);
-            return Tag.GetSize(asCompact) +
-                   UVarInt.From((uint)fieldSize).GetSize(asCompact) +
+            var fieldSize = Field.GetSize(false);
+            return Tag.GetSize(false) +
+                   UVarInt.From((uint)fieldSize).GetSize(false) +
                    fieldSize;
         }
 
@@ -37,9 +37,9 @@ namespace Kafka.Protocol.Tags
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {
-            var tag = await UVarInt.FromReaderAsync(reader, cancellationToken)
+            var tag = await UVarInt.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
-            var length = await UVarInt.FromReaderAsync(reader, cancellationToken)
+            var length = await UVarInt.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
 
             return new TaggedField

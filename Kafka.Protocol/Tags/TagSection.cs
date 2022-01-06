@@ -8,35 +8,35 @@ using System.Threading.Tasks;
 
 namespace Kafka.Protocol.Tags
 {
-    public class TagSection : ISerialize
+    public class TagSection
     {
         public TaggedField[] TaggedFields { get; set; } =
             Array.Empty<TaggedField>();
         
-        public async ValueTask WriteToAsync(Stream writer, bool asCompact = false,
+        public async ValueTask WriteToAsync(Stream writer, 
             CancellationToken cancellationToken = default)
         {
             await ((VarInt)TaggedFields.Length)
-                .WriteToAsync(writer, asCompact, cancellationToken)
+                .WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
 
             foreach (var taggedField in TaggedFields.OrderBy(field => field.Tag))
             {
                 await taggedField
-                    .WriteToAsync(writer, asCompact, cancellationToken)
+                    .WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
 
         public int GetSize(bool asCompact = false) => 
             ((VarInt) TaggedFields.Length).GetSize(asCompact) +
-            TaggedFields.Sum(field => field.GetSize(asCompact));
+            TaggedFields.Sum(field => field.GetSize());
         
         public static async Task<IAsyncEnumerable<TaggedField>> FromReaderAsync(
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {
-            var length = await VarInt.FromReaderAsync(reader, cancellationToken)
+            var length = await VarInt.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
 
             return new TaggedFieldAsyncEnumerable(new TaggedFieldAsyncEnumerator(reader, length,
