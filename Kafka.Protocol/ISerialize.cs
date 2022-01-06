@@ -7,9 +7,9 @@ namespace Kafka.Protocol
     public interface ISerialize
     {
         ValueTask WriteToAsync(Stream writer, 
-            bool asCompact = false,
+            bool asCompact,
             CancellationToken cancellationToken = default);
 
-        int GetSize(bool asCompact = false);
+        int GetSize(bool asCompact);
     }
 }

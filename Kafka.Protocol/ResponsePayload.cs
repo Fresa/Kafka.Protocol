@@ -12,8 +12,8 @@ namespace Kafka.Protocol
         public Message Message { get; }
 
         public ResponsePayload(
-            RequestPayload requestPayload, 
-            ResponseHeader header, 
+            RequestPayload requestPayload,
+            ResponseHeader header,
             Message message)
         {
             RequestPayload = requestPayload;
@@ -33,35 +33,38 @@ namespace Kafka.Protocol
         }
 
         public int GetSize(bool asCompact) =>
-            Header.GetSize(writer) +
-            Message.GetSize(writer);
+            Header.GetSize() +
+            Message.GetSize();
 
         public static async ValueTask<ResponsePayload> ReadFromAsync(
-            RequestPayload requestPayload, 
+            RequestPayload requestPayload,
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {
-            // Read payload size
-            var payloadSize = Int32.FromReaderAsync(reader, cancellationToken)
+            var payloadSize = await Int32.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
-            using (reader.EnsureExpectedSize(payloadSize))
+
+            var header = await ResponseHeader.FromReaderAsync(
+                    requestPayload.Header.Version,
+                    reader,
+                    cancellationToken)
+                .ConfigureAwait(false);
+
+            var message = await Messages
+                .CreateResponseMessageFromReaderAsync(
+                    requestPayload.Header.RequestApiKey,
+                    requestPayload.Header.RequestApiVersion,
+                    reader,
+                    cancellationToken)
+                .ConfigureAwait(false);
+            
+            var actualPayloadSize = header.GetSize() + message.GetSize();
+            if (payloadSize.Value != actualPayloadSize)
             {
-                var header = await ResponseHeader.FromReaderAsync(
-                        requestPayload.Header.Version,
-                        reader,
-                        cancellationToken)
-                    .ConfigureAwait(false);
-
-                var message = await Messages
-                    .CreateResponseMessageFromReaderAsync(
-                        requestPayload.Header.RequestApiKey,
-                        requestPayload.Header.RequestApiVersion,
-                        reader,
-                        cancellationToken)
-                    .ConfigureAwait(false);
-
-                return new ResponsePayload(requestPayload, header, message);
+                throw new CorruptMessageException($"Expected size {payloadSize} got {actualPayloadSize}");
             }
+
+            return new ResponsePayload(requestPayload, header, message);
         }
     }
 }

@@ -9,7 +9,7 @@ using Log.It;
 
 namespace Kafka.Protocol
 {
-    public sealed class RequestPayload : ISerialize
+    public sealed class RequestPayload 
     {
         public RequestHeader Header { get; }
         public Message Message { get; }
@@ -38,10 +38,6 @@ namespace Kafka.Protocol
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
-
-        public int GetSize(bool asCompact) =>
-            Header.GetSize(asCompact) +
-            Message.GetSize(asCompact);
         
         public static async ValueTask<RequestPayload> ReadFromAsync(
             Int16 headerVersion,
@@ -49,10 +45,9 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default)
         {
             // Read payload size
-            var size = Int32.FromReaderAsync(reader, cancellationToken)
+            var size = await Int32.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
 
-            var report = reader.EnsureExpectedSize(size);
             var header = await RequestHeader
                 .FromReaderAsync(
                     headerVersion,
@@ -71,23 +66,23 @@ namespace Kafka.Protocol
             Logger.Debug("Read message {messageType} {@message}",
                 message.GetType(), message);
 
+            var actualPayloadSize = header.GetSize() + message.GetSize();
             // todo: Why is Confluent.Kafka client sending 4 extra bytes containing zeros in the ApiVersionsRequest?
-            if (report.BytesRead < size.Value)
+            if (actualPayloadSize < size.Value)
             {
-                var bytesUnRead = "";
-                var unreadLength = size.Value - report.BytesRead;
-                for (var i = 0; i < unreadLength; i++)
-                {
-                    bytesUnRead +=
-                        (byte)(await reader.ReadInt8Async(
-                            cancellationToken)).Value + " ";
-                }
+                var unreadLength = size.Value - actualPayloadSize;
+                var unreadBytes = await reader.ReadAsLittleEndianAsync(unreadLength, cancellationToken)
+                    .ConfigureAwait(false);
                 Logger.Warning("Detected {length} unknown bytes {unknownBytes}, ignoring",
                     unreadLength,
-                    bytesUnRead.Trim());
+                    string.Join(" ", unreadBytes.Take(1000)) + (unreadBytes.Length > 1000 ? " ..." : ""));
             }
 
-            report.Dispose();
+            if (size.Value > actualPayloadSize)
+            {
+                throw new CorruptMessageException($"Expected size {size} got {actualPayloadSize}");
+            }
+
             return new RequestPayload(header, message);
         }
     }

@@ -11,5 +11,7 @@ namespace Kafka.Protocol
         public abstract ValueTask WriteToAsync(
             Stream writer,
             CancellationToken cancellationToken = default);
+
+        public abstract int GetSize();
     }
 }
