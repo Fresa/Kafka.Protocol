@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
+using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
 using Kafka.Protocol.Cryptography;
@@ -24,7 +24,7 @@ namespace Kafka.Protocol.Records
         public Int16 ProducerEpoch { get; set; } = Int16.Default;
         public Int32 BaseSequence { get; set; } = Int32.Default;
         public Record[] Records { get; set; } = Array.Empty<Record>();
-        
+
         [Flags]
         public enum CompressionType : ushort
         {
@@ -48,14 +48,14 @@ namespace Kafka.Protocol.Records
             CreateTime = 0,
             LogAppendTime = 1
         }
-        
+
         public Timestamp TimestampType
         {
             get => (Timestamp)Convert.ToByte(
                 Attributes.IsBitSet(3));
             set => Attributes.SetBit(3, Convert.ToBoolean((byte)value));
         }
-        
+
         public bool IsTransactional
         {
             get => Attributes.IsBitSet(4);
@@ -68,59 +68,66 @@ namespace Kafka.Protocol.Records
             set => Attributes = Attributes.SetBit(5, value);
         }
 
-        public static async ValueTask<RecordBatch> ReadFromAsync(
-            Int16 version,
-            IKafkaReader reader,
+        public static async ValueTask<RecordBatch> FromReaderAsync(
+            PipeReader reader,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
             var recordBatch = new RecordBatch
             {
-                BaseOffset = await reader.ReadInt64Async(cancellationToken)
+                BaseOffset = await Int64.FromReaderAsync(reader, asCompact,
+                        cancellationToken)
                     .ConfigureAwait(false),
-                BatchLength = await reader.ReadInt32Async(cancellationToken)
+                BatchLength = await Int32.FromReaderAsync(reader, asCompact,
+                        cancellationToken)
                     .ConfigureAwait(false),
-                PartitionLeaderEpoch = await reader
-                    .ReadInt32Async(cancellationToken)
+                PartitionLeaderEpoch = await Int32
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                Magic = await reader.ReadInt8Async(cancellationToken)
+                Magic = await Int8
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                Crc = await reader.ReadInt32Async(cancellationToken)
+                Crc = await Int32
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                Attributes = await reader.ReadInt16Async(cancellationToken)
+                Attributes = await Int16.FromReaderAsync(reader, asCompact,
+                        cancellationToken)
                     .ConfigureAwait(false),
-                LastOffsetDelta = await reader
-                    .ReadInt32Async(cancellationToken)
+                LastOffsetDelta = await Int32
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                FirstTimestamp = await reader
-                    .ReadInt64Async(cancellationToken)
+                FirstTimestamp = await Int64
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                MaxTimestamp = await reader.ReadInt64Async(cancellationToken)
+                MaxTimestamp = await Int64
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                ProducerId = await reader.ReadInt64Async(cancellationToken)
+                ProducerId = await Int64.FromReaderAsync(reader, asCompact,
+                        cancellationToken)
                     .ConfigureAwait(false),
-                ProducerEpoch = await reader.ReadInt16Async(cancellationToken)
+                ProducerEpoch = await Int16
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                BaseSequence = await reader.ReadInt32Async(cancellationToken)
+                BaseSequence = await Int32
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                Records = await reader.ReadArrayAsync(
-                        async () =>
-                            await Record
-                                .FromReaderAsync(reader,
-                                    cancellationToken)
-                                .ConfigureAwait(false), cancellationToken)
+                Records = await Array<Record>.FromReaderAsync(reader, asCompact,
+                        () => Record.FromReaderAsync(reader, asCompact,
+                            cancellationToken), cancellationToken)
                     .ConfigureAwait(false)
             };
 
-            await recordBatch.CheckForDataCorruption(cancellationToken)
+            await recordBatch.CheckForDataCorruption(asCompact, cancellationToken)
                 .ConfigureAwait(false);
 
             return recordBatch;
         }
 
         private async ValueTask CheckForDataCorruption(
-            CancellationToken cancellationToken = default)
+            bool asCompact,
+            CancellationToken cancellationToken)
         {
-            var bytes = await SerializeCrcData(cancellationToken)
+            var bytes = await SerializeCrcData(asCompact, cancellationToken)
                 .ConfigureAwait(false);
             var crc = Crc32C.Compute(bytes);
             if (crc != Crc)
@@ -130,70 +137,73 @@ namespace Kafka.Protocol.Records
             }
         }
 
-        internal int Length => SizeOf;
-
         public async ValueTask WriteToAsync(
-            IKafkaWriter writer,
+            Stream writer,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteInt64Async(BaseOffset, cancellationToken)
+            await BaseOffset.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteInt32Async(BatchLength, cancellationToken)
+            await BatchLength.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteInt32Async(
-                    PartitionLeaderEpoch, cancellationToken)
+            await PartitionLeaderEpoch.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteInt8Async(Magic, cancellationToken)
+            await Magic.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            
-            var bytes = await SerializeCrcData(cancellationToken)
-                .ConfigureAwait(false);
-            Crc = Int32.From((int) Crc32C.Compute(bytes));
 
-            await writer.WriteInt32Async(Crc, cancellationToken)
+            var bytes = await SerializeCrcData(asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteBytesAsync(bytes, cancellationToken)
+            Crc = (int)Crc32C.Compute(bytes);
+
+            await Crc.WriteToAsync(writer, asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            await Bytes.From(bytes).WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public int GetSize(IKafkaWriter writer) => SizeOf;
-        
-
-        public int SizeOf =>
-            61 +
-            Records.Sum(record => record.Length);
+        public int GetSize(bool asCompact) =>
+            BaseOffset.GetSize(asCompact) +
+            BatchLength.GetSize(asCompact) +
+            PartitionLeaderEpoch.GetSize(asCompact) +
+            Magic.GetSize(asCompact) +
+            Crc.GetSize(asCompact) +
+            Attributes.GetSize(asCompact) +
+            LastOffsetDelta.GetSize(asCompact) +
+            FirstTimestamp.GetSize(asCompact) +
+            MaxTimestamp.GetSize(asCompact) +
+            ProducerId.GetSize(asCompact) +
+            ProducerEpoch.GetSize(asCompact) +
+            BaseSequence.GetSize(asCompact) +
+            Array<Record>.From(Records).GetSize(asCompact);
 
         private async ValueTask<byte[]> SerializeCrcData(
-            CancellationToken cancellationToken = default)
+            bool asCompact,
+            CancellationToken cancellationToken)
         {
-            var buffer = new MemoryStream();
-            await using (buffer.ConfigureAwait(false))
+            var writer = new MemoryStream();
+            await using (writer.ConfigureAwait(false))
             {
-                var bufferWriter = new KafkaWriter(buffer);
-                await using (bufferWriter.ConfigureAwait(false))
-                {
-                    await bufferWriter.WriteInt16Async(Attributes, cancellationToken)
-                        .ConfigureAwait(false);
-                    await bufferWriter.WriteInt32Async(LastOffsetDelta, cancellationToken)
-                        .ConfigureAwait(false);
-                    await bufferWriter.WriteInt64Async(FirstTimestamp, cancellationToken)
-                        .ConfigureAwait(false);
-                    await bufferWriter.WriteInt64Async(MaxTimestamp, cancellationToken)
-                        .ConfigureAwait(false);
-                    await bufferWriter.WriteInt64Async(ProducerId, cancellationToken)
-                        .ConfigureAwait(false);
-                    await bufferWriter.WriteInt16Async(ProducerEpoch, cancellationToken)
-                        .ConfigureAwait(false);
-                    await bufferWriter.WriteInt32Async(BaseSequence, cancellationToken)
-                        .ConfigureAwait(false);
-
-                    // todo: support compression
-                    await bufferWriter.WriteArrayAsync(cancellationToken, Records)
-                        .ConfigureAwait(false);
-                }
+                await Attributes.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+                await LastOffsetDelta.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+                await FirstTimestamp.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+                await MaxTimestamp.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+                await ProducerId.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+                await ProducerEpoch.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+                await BaseSequence.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+                
+                // todo: support compression
+                await Array<Record>.From(Records).WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            return buffer.ToArray();
+            return writer.ToArray();
         }
     }
 }

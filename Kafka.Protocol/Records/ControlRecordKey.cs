@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.IO.Pipelines;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Kafka.Protocol.Records
@@ -37,27 +39,29 @@ namespace Kafka.Protocol.Records
         }
 
         public async ValueTask ReadFromAsync(
-            IKafkaReader reader,
+            PipeReader reader,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            Version = await reader.ReadInt16Async(cancellationToken)
+            Version = await Int16.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            _type = await reader.ReadInt16Async(cancellationToken)
+            _type = await Int16.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async ValueTask WriteToAsync(
-            IKafkaWriter writer,
+            Stream writer,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteInt16Async(Version, cancellationToken)
+            await Version.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteInt16Async(_type, cancellationToken)
+            await _type.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public int GetSize(IKafkaWriter writer) =>
-            Version.GetSize(writer) +
-            _type.GetSize(writer);
+        public int GetSize(bool asCompact) =>
+            Version.GetSize(asCompact) +
+            _type.GetSize(asCompact);
     }
 }

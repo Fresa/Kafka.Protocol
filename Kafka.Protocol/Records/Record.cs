@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,85 +18,85 @@ namespace Kafka.Protocol.Records
         public Header[] Headers { get; set; } = Array.Empty<Header>();
 
         public static async ValueTask<Record> FromReaderAsync(
-            IKafkaReader reader,
+            PipeReader reader,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
             var record = new Record
             {
-                Attributes = await reader.ReadInt8Async(cancellationToken)
+                Attributes = await Int8.FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                TimestampDelta = await reader
-                    .ReadVarLongAsync(cancellationToken)
+                TimestampDelta = await VarLong.FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
-                OffsetDelta = await reader.ReadVarIntAsync(cancellationToken)
+                OffsetDelta = await VarInt.FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false),
             };
 
-            var keyLength = await reader.ReadVarIntAsync(cancellationToken)
+            var keyLength = await VarInt.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            record.Key = await reader.ReadBytesAsync(
-                    keyLength, 
-                    cancellationToken)
+            record.Key = await reader.ReadAsync(keyLength, cancellationToken)
                 .ConfigureAwait(false);
-            var valueLen = await reader.ReadVarIntAsync(cancellationToken)
+            var valueLen = await VarInt.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            record.Value = await reader.ReadBytesAsync(
+            record.Value = await reader.ReadAsync(
                     valueLen,
                     cancellationToken)
                 .ConfigureAwait(false);
-            var headerCount = await reader.ReadVarIntAsync(cancellationToken);
-            record.Headers = await reader.ReadArrayAsync(
-                    headerCount,
-                    async ()
-                        => await Header
-                            .FromReaderAsync(reader, cancellationToken)
-                            .ConfigureAwait(false),
-                    cancellationToken)
+            var headerCount = await VarInt
+                .FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
+
+            var headers = new List<Header>();
+            for (var i = 0; i < headerCount; i++)
+            {
+                headers.Add(await Header.FromReaderAsync(reader, asCompact, cancellationToken)
+                    .ConfigureAwait(false));
+            }
+            record.Headers = headers.ToArray();
             return record;
         }
-
-        internal int Length
+        
+        public async ValueTask WriteToAsync(
+            Stream writer,
+            bool asCompact,
+            CancellationToken cancellationToken = default)
         {
-            get
+            await VarInt.From(GetSize(asCompact)).WriteToAsync(writer, asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            await Attributes.WriteToAsync(writer, asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            await TimestampDelta.WriteToAsync(writer, asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            await OffsetDelta.WriteToAsync(writer, asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            await VarInt.From(Key.Length).WriteToAsync(writer, asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteAsLittleEndianAsync(Key, cancellationToken)
+                .ConfigureAwait(false);
+            await VarInt.From(Value.Length).WriteToAsync(writer, asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            await writer.WriteAsLittleEndianAsync(Value, cancellationToken)
+                .ConfigureAwait(false);
+
+            await VarInt.From(Headers.Length)
+                .WriteToAsync(writer, asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            foreach (var header in Headers)
             {
-                var length = 1 +
-                       ((ulong)TimestampDelta.Value).GetVarIntLength() +
-                       OffsetDelta.Value.GetVarIntLength() +
-                       Key.Length.GetVarIntLength() +
-                       Key.Length +
-                       Value.Length.GetVarIntLength() +
-                       Value.Length +
-                       4 + Headers.Sum(header => header.Length);
-                return length + length.GetVarIntLength();
+                await header.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        public async ValueTask WriteToAsync(
-            IKafkaWriter writer,
-            CancellationToken cancellationToken = default)
-        {
-            await writer.WriteVarIntAsync(Length, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteInt8Async(Attributes, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteVarLongAsync(TimestampDelta, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteVarIntAsync(OffsetDelta, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteVarIntAsync(Key.Length, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteBytesAsync(Key, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteVarIntAsync(Value.Length, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteBytesAsync(Value, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteArrayAsync(cancellationToken, Headers)
-                .ConfigureAwait(false);
-        }
-
-        public int GetSize(IKafkaWriter writer) =>
-            Length;
+        public int GetSize(bool asCompact) =>
+            Attributes.GetSize(asCompact) +
+            TimestampDelta.GetSize(asCompact) +
+        OffsetDelta.GetSize(asCompact) +
+        VarInt.From(Key.Length).GetSize(asCompact) +
+        Key.Length +
+        VarInt.From(Value.Length).GetSize(asCompact) +
+        Value.Length +
+        VarInt.From(Headers.Length).GetSize(asCompact) +
+        Headers.Sum(header => header.GetSize(asCompact));
     }
 }

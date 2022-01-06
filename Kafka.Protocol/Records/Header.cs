@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.IO.Pipelines;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,50 +13,49 @@ namespace Kafka.Protocol.Records
         public byte[] Value { get; set; } = Array.Empty<byte>();
 
         public static async ValueTask<Header> FromReaderAsync(
-            IKafkaReader reader,
+            PipeReader reader,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            var keyLength = await reader
-                .ReadVarIntAsync(cancellationToken)
+            var keyLength = await VarInt.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            var header = new Header
-            {
-                Key = await reader.ReadStringAsync(
-                        keyLength,
-                        cancellationToken)
-                    .ConfigureAwait(false)
-            };
-            var valueLength = await reader
-                .ReadVarIntAsync(cancellationToken)
+            var key = Encoding.UTF8.GetString(await reader
+                .ReadAsync(keyLength, cancellationToken)
+                .ConfigureAwait(false));
+            
+            var valueLength = await VarInt.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            header.Value = await reader.ReadBytesAsync(
+            var value = await reader.ReadAsync(
                     valueLength,
                     cancellationToken)
                 .ConfigureAwait(false);
-            return header;
+            
+            return new Header
+            {
+                Key = key,
+                Value = value
+            };
         }
-
-        internal int Length =>
-            Key.Value.Length.GetVarIntLength() + 
-            Key.Value.Length + 
-            Value.Length.GetVarIntLength() +
-            Value.Length;
-
+        
         public async ValueTask WriteToAsync(
-            IKafkaWriter writer,
+            Stream writer,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            await writer.WriteVarIntAsync(Key.Value.Length, cancellationToken)
+            await VarInt.From(Key.Value.Length).WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteBytesAsync(Encoding.UTF8.GetBytes(Key), cancellationToken)
+            await writer.WriteAsLittleEndianAsync(Encoding.UTF8.GetBytes(Key), cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteVarIntAsync(Value.Length, cancellationToken)
+            await VarInt.From(Value.Length).WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteBytesAsync(Value, cancellationToken)
+            await writer.WriteAsLittleEndianAsync(Value, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public int GetSize(IKafkaWriter writer) => Length;
-
+        public int GetSize(bool asCompact) =>
+            VarInt.From(Key.Value.Length).GetSize(asCompact) +
+            Key.Value.Length +
+            VarInt.From(Value.Length).GetSize(asCompact) +
+            Value.Length;
     }
 }
