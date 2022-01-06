@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipelines;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 // ReSharper disable once CheckNamespace
 namespace Kafka.Protocol
 {
-    public partial struct NullableArray<T>
+    public partial struct NullableArray<T> : IEnumerable<T>
     {
         public int GetSize(bool asCompact) =>
             asCompact
@@ -53,9 +55,9 @@ namespace Kafka.Protocol
         {
             var length = asCompact
                 ? (int)(await UVarInt
-                    .FromReaderAsync(reader, cancellationToken)
+                    .FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false)).Value - 1
-                : (int)await Int32.FromReaderAsync(reader, cancellationToken)
+                : (int)await Int32.FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false);
             
             if (length == -1)
@@ -72,5 +74,79 @@ namespace Kafka.Protocol
 
             return result;
         }
+
+        public IEnumerator<T> GetEnumerator() =>
+            Value?.AsEnumerable()?.GetEnumerator() ??
+            Enumerable.Empty<T>().GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => 
+            GetEnumerator();
+    }
+
+    public partial struct NullableMap<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
+    {
+        private NullableArray<TValue> AsArray() =>
+            NullableArray<TValue>.From(Value?.Values.ToArray());
+
+        public int GetSize(bool asCompact) =>
+            AsArray()
+                .GetSize(asCompact);
+        
+        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+            CancellationToken cancellationToken = default) =>
+            AsArray()
+                .WriteToAsync(writer, asCompact, cancellationToken);
+
+        public static async ValueTask<NullableMap<TKey, TValue>> FromReaderAsync(
+            PipeReader reader,
+            bool asCompact,
+            Func<ValueTask<TValue>> createValue,
+            Func<TValue, TKey> selectKey,
+            CancellationToken cancellationToken = default) =>
+            From((await NullableArray<TValue>
+                    .FromReaderAsync(reader, asCompact, createValue,
+                        cancellationToken)
+                    .ConfigureAwait(false)).Value?
+                .ToDictionary(selectKey) ?? Default);
+
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() =>
+            Value?.AsEnumerable()?.GetEnumerator() ??
+            Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => 
+            GetEnumerator();
+    }
+
+    public partial struct Map<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
+    {
+        private Array<TValue> AsArray() =>
+            Array<TValue>.From(Value.Values.ToArray());
+
+        public int GetSize(bool asCompact) =>
+            AsArray()
+                .GetSize(asCompact);
+
+        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+            CancellationToken cancellationToken = default) =>
+            AsArray()
+                .WriteToAsync(writer, asCompact, cancellationToken);
+
+        public static async ValueTask<Map<TKey, TValue>> FromReaderAsync(
+            PipeReader reader,
+            bool asCompact,
+            Func<ValueTask<TValue>> createValue,
+            Func<TValue, TKey> selectKey,
+            CancellationToken cancellationToken = default) =>
+            From((await Array<TValue>
+                    .FromReaderAsync(reader, asCompact, createValue,
+                        cancellationToken)
+                    .ConfigureAwait(false))
+                .ToDictionary(selectKey));
+
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => 
+            Value.AsEnumerable().GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => 
+            GetEnumerator();
     }
 }

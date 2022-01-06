@@ -9,7 +9,7 @@ namespace Kafka.Protocol
 {
     public partial struct UVarInt
     {
-        public int GetSize(bool _ = false)
+        public int GetSize(bool asCompact)
         {
             var value = Value;
             var length = 0;
@@ -23,7 +23,7 @@ namespace Kafka.Protocol
             return length;
         }
 
-        public ValueTask WriteToAsync(Stream writer, bool _ = false,
+        public ValueTask WriteToAsync(Stream writer, bool asCompact,
             CancellationToken cancellationToken = default) =>
             writer.WriteAsLittleEndianAsync(
                 Value
@@ -31,7 +31,7 @@ namespace Kafka.Protocol
 
         public static async ValueTask<UVarInt> FromReaderAsync(
             PipeReader reader,
-            bool _ = false,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
             var more = true;

@@ -24,7 +24,7 @@ namespace Kafka.Protocol.Tests.Primitives
 
             protected override async Task WhenAsync()
             {
-                await _value.WriteToAsync(_stream)
+                await _value.WriteToAsync(_stream, false)
                     .ConfigureAwait(false);
             }
 
@@ -38,7 +38,7 @@ namespace Kafka.Protocol.Tests.Primitives
             [Fact]
             public void It_should_report_correct_size()
             {
-                _value.GetSize().Should().Be(16);
+                _value.GetSize(false).Should().Be(16);
             }
         }
 
@@ -55,7 +55,7 @@ namespace Kafka.Protocol.Tests.Primitives
 
             protected override async Task WhenAsync()
             {
-                _value = await Uuid.FromReaderAsync(_reader)
+                _value = await Uuid.FromReaderAsync(_reader, false)
                     .ConfigureAwait(false);
             }
 
