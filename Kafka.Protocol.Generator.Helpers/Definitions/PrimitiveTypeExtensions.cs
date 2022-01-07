@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Kafka.Protocol.Generator.Helpers.Extensions;
 
 namespace Kafka.Protocol.Generator.Helpers.Definitions
@@ -19,6 +20,8 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 "uvarint" => "UVarInt",
                 "array" => "Array<T>",
                 "nullablearray" => "NullableArray<T>",
+                "map" => "Map<TKey, TValue>",
+                "nullablemap" => "NullableMap<TKey, TValue>",
                 _ => typeName
             };
         }
@@ -53,6 +56,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 "uuid" => typeof(Guid),
                 "uvarint" => typeof(uint),
                 "array<t>" => typeof(IEnumerable<>).GetGenericArguments()[0].MakeArrayType(),
+                "map<tkey, tvalue>" => typeof(Dictionary<,>),
                 _ => typeof(int).Assembly
                          .GetType($"System.{typeName}", false, true) ??
                      throw new InvalidOperationException(
@@ -63,10 +67,11 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
         public static string GetDefaultValue(this PrimitiveType primitiveType)
         {
             var type = primitiveType.ResolveType();
-
+            
             return type switch
             {
                 { } when primitiveType.IsNullable() => "default",
+                { } t when t == typeof(Dictionary<,>) => "new Dictionary<TKey, TValue>()",
                 { IsArray: true } =>
                     $"System.Array.Empty<{primitiveType.GetTypeName().Replace("[]", "")}>()",
                 { } t when t == typeof(string) => "string.Empty",
@@ -78,18 +83,21 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
             primitiveType.ResolveType().IsArray;
 
         public static IReadOnlyDictionary<string, string> GetGenericArgumentConstraints(
-            this PrimitiveType primitive)
-        {
-            if (primitive.GetClassName().Replace("Nullable", "").ToUpper() ==
-                "ARRAY<T>")
-            {
-                return new Dictionary<string, string>
+            this PrimitiveType primitive) =>
+            primitive.GetClassName()
+                    .Replace("Nullable", "")
+                    .ToUpper() switch
                 {
-                    ["T"] = "ISerialize"
+                    "ARRAY<T>" => new Dictionary<string, string>
+                    {
+                        ["T"] = "ISerialize"
+                    },
+                    "MAP<TKEY, TVALUE>" => new Dictionary<string, string>
+                    {
+                        ["TKey"] = "ISerialize", 
+                        ["TValue"] = "ISerialize"
+                    },
+                    _ => new Dictionary<string, string>()
                 };
-            }
-
-            return new Dictionary<string, string>();
-        }
     }
 }

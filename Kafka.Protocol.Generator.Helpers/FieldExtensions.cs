@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Kafka.Protocol.Generator.Helpers.Extensions;
@@ -38,21 +39,24 @@ namespace Kafka.Protocol.Generator.Helpers
         public static string GetName(this Field field) => 
             field.Name + (field.IsArray() ? "Collection" : "");
 
-        public static string GetFullTypeName(this Field field)
+        public static string GetFullTypeName(this Field field) => 
+            (field.IsNullable() ? "Nullable" : "") + field.GetNonNullableFullTypeName();
+
+        private static string GetNonNullableFullTypeName(this Field field)
         {
             var name = field.GetFullTypeNameWithoutArrayCharacters();
-            if (field.IsArray() == false)
-            {
-                return name;
-            }
 
             if (field.TryGetMapKeyField(out var mapKeyField))
             {
-                return $"Dictionary<{mapKeyField.GetTypeName()}{mapKeyField.GetNullableSign()}, {name}>";
+                return $"Map<{mapKeyField.GetTypeName()}, {name}>";
             }
 
-            return name + ArrayTypeCharacter;
+            return field.IsArray() ? $"Array<{name}>" : name;
         }
+
+        public static string GetNullableFullTypeName(this Field field) =>
+            field.GetNonNullableFullTypeName() + (field.IsNullable() ? "?" : "");
+
         public static string GetTypeName(this Field field)
         {
             return GetFullTypeName(field).Split('.').Last();
@@ -77,7 +81,7 @@ namespace Kafka.Protocol.Generator.Helpers
                     typeName = "Boolean";
                     break;
                 case "records":
-                    typeName = "Records.RecordBatch";
+                    typeName = "RecordBatch";
                     break;
                 case "uint16":
                     typeName = "UInt16";

@@ -34,13 +34,23 @@ namespace Kafka.Protocol.Generator.Helpers
                 Type = "UVARINT",
                 Description = "The UNSIGNED_VARINT type describes an unsigned variable length integer."
             });
-            // NULLABLE_ARRAY is not explicitly defined in the specification but is used within the protocol
+            // The following types are not explicitly defined in the specification but is used within the protocol
             PrimitiveTypes.Add("NULLABLE_ARRAY", new PrimitiveType
             {
                 Type = "NULLABLE_ARRAY",
                 Description = "Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T]."
             });
-
+            PrimitiveTypes.Add("MAP", new PrimitiveType
+            {
+                Type = "MAP",
+                Description = "Represents a sequence of objects with a map key."
+            });
+            PrimitiveTypes.Add("NULLABLE_MAP", new PrimitiveType
+            {
+                Type = "NULLABLE_MAP",
+                Description = "Represents a nullable sequence of objects with a map key."
+            });
+            
             // Compact types are still the same base types but with more efficient length compaction. They are used interchangeable when the message is a variable version
             PrimitiveTypes.Keys
                 .Where(name => name.StartsWith("COMPACT_"))
