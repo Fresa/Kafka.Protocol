@@ -502,7 +502,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	#>public <#= nullableFieldTypeName #> <#= fieldName #> <# Block(() => 
 	{
 		#>get => <#= propertyName #>;<# _();
-		#>set <# Block(() => 
+		#>private set <# Block(() => 
 		{
 			if (field.Ignorable == false)
 			{
