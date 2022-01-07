@@ -88,15 +88,18 @@ namespace Kafka.Protocol.Records
             }
         }
 
-        public int GetSize(bool asCompact) =>
-            Attributes.GetSize(asCompact) +
-            TimestampDelta.GetSize(asCompact) +
-        OffsetDelta.GetSize(asCompact) +
-        VarInt.From(Key.Length).GetSize(asCompact) +
-        Key.Length +
-        VarInt.From(Value.Length).GetSize(asCompact) +
-        Value.Length +
-        VarInt.From(Headers.Length).GetSize(asCompact) +
-        Headers.Sum(header => header.GetSize(asCompact));
+        public int GetSize(bool asCompact)
+        {
+            var size = Attributes.GetSize(asCompact) +
+                   TimestampDelta.GetSize(asCompact) +
+                   OffsetDelta.GetSize(asCompact) +
+                   VarInt.From(Key.Length).GetSize(asCompact) +
+                   Key.Length +
+                   VarInt.From(Value.Length).GetSize(asCompact) +
+                   Value.Length +
+                   VarInt.From(Headers.Length).GetSize(asCompact) +
+                   Headers.Sum(header => header.GetSize(asCompact));
+            return VarInt.From(size).GetSize(asCompact) + size;
+        }
     }
 }
