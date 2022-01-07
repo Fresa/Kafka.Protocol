@@ -46,9 +46,9 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default)
         {
             var length = asCompact
-                ? (int)(await UVarInt.FromReaderAsync(reader, cancellationToken)
+                ? (int)(await UVarInt.FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false)).Value - 1
-                : (int)await Int32.FromReaderAsync(reader, cancellationToken)
+                : (int)await Int32.FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false);
 
             if (length == -1)

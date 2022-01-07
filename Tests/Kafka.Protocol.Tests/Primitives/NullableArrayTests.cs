@@ -13,7 +13,7 @@ namespace Kafka.Protocol.Tests.Primitives
             When_writing_null : XUnit2SpecificationAsync
         {
             private readonly byte[] _buffer = new byte[4];
-            private readonly NullableArray<Int32> _value = null;
+            private readonly NullableArray<Int32> _value = default;
             private MemoryStream _stream = default!;
 
             protected override Task GivenAsync()
@@ -77,7 +77,7 @@ namespace Kafka.Protocol.Tests.Primitives
         public class When_writing_null_as_compact : XUnit2SpecificationAsync
         {
             private readonly byte[] _buffer = new byte[1];
-            private readonly NullableArray<Int32> _value = null;
+            private readonly NullableArray<Int32> _value = default;
             private MemoryStream _stream = default!;
 
             protected override Task GivenAsync()

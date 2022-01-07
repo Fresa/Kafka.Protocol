@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Kafka.Protocol.Records;
 using Test.It.With.XUnit;
 using Xunit;
-using Record = Kafka.Protocol.Records.Record;
 
 namespace Kafka.Protocol.Tests.Records
 {
@@ -25,24 +25,20 @@ namespace Kafka.Protocol.Tests.Records
 
                 protected override async Task WhenAsync()
                 {
-                    var stream = new MemoryStream();
-                    await using (stream.ConfigureAwait(false))
+                    var writer = new MemoryStream();
+                    await using (writer.ConfigureAwait(false))
                     {
-                        var writer = new KafkaWriter(stream);
-                        await using (writer.ConfigureAwait(false))
-                        {
-                            await _header.WriteToAsync(writer)
-                                .ConfigureAwait(false);
-                        }
+                        await _header.WriteToAsync(writer, false, CancellationToken.None)
+                            .ConfigureAwait(false);
                     }
 
-                    _actualLength = stream.ToArray().Length;
+                    _actualLength = writer.ToArray().Length;
                 }
 
                 [Fact]
                 public void It_should_return_the_length_of_the_header_being_serialized()
                 {
-                    _header.Length.Should()
+                    _header.GetSize(false).Should()
                         .BeGreaterThan(0)
                         .And.Be(_actualLength);
                 }

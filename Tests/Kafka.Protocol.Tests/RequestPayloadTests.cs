@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -7,7 +8,6 @@ using Log.It;
 using Log.It.With.NLog;
 using Test.It.With.XUnit;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Kafka.Protocol.Tests
 {
@@ -15,7 +15,7 @@ namespace Kafka.Protocol.Tests
     {
         public class When_reading_the_payload : XUnit2SpecificationAsync
         {
-            private KafkaReader _reader;
+            private PipeReader _reader;
             private Exception _exceptionCaught;
 
             static When_reading_the_payload()
@@ -29,8 +29,7 @@ namespace Kafka.Protocol.Tests
                     {
                         0, 0, 0, 10, // Length
                         0, 18, 0, 100, 0, 0, 0, 0, 0, 0 // Header with ApiRequestVersion api key and unsupported version (100)
-                    }
-                    .ToReaderAsync()
+                    }.ToReaderAsync()
                     .ConfigureAwait(false);
             }
 
