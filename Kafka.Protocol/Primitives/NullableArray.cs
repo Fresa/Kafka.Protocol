@@ -13,10 +13,10 @@ namespace Kafka.Protocol
     public partial struct NullableArray<T> : IEnumerable<T>
     {
         public int GetSize(bool asCompact) =>
-            asCompact
-                ? Value == null ? 1 : (Value.Length + 1).GetVarIntLength() +
-                                      Value.Length
-                : 4 + (Value?.Sum(item => item.GetSize(asCompact)) ?? 0);
+            (asCompact
+                ? VarInt.From(Value == null ? 0 : Value.Length + 1).GetSize(asCompact)
+                : 4) + 
+            (Value?.Sum(item => item.GetSize(asCompact)) ?? 0);
 
         public async ValueTask WriteToAsync(Stream writer, bool asCompact,
             CancellationToken cancellationToken = default)

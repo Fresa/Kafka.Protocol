@@ -185,7 +185,7 @@ namespace Kafka.Protocol.Tests.Primitives
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().BeNull();
+                _value.Value.Should().BeNull();
             }
         }
 
@@ -236,7 +236,7 @@ namespace Kafka.Protocol.Tests.Primitives
             [Fact]
             public void It_should_parse_correctly()
             {
-                _value.Should().BeNull();
+                _value.Value.Should().BeNull();
             }
         }
     }
