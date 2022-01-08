@@ -64,7 +64,6 @@ namespace Kafka.Protocol<# Block(() =>
         var type = primitiveType.GetTypeName();
 		var defaultValue = primitiveType.GetDefaultValue();
 		var isNullable = primitiveType.IsNullable();
-		var isCompact = primitiveType.IsCompact();
 		var @params = primitiveType.IsArray() ? "params " : "";
 		var genericConstraints = primitiveType.GetGenericArgumentConstraints();
 
@@ -127,29 +126,9 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>public static implicit operator <#= className #>(<#= type #> value) => From(value);<# _(2);
 
-			if (isCompact)
-			{
-				var baseType = className
-					.Replace("Compact", "")
-					.Replace("Nullable", "");
-				if (isNullable)
-				{
-					var nullableBaseType = $"{baseType}?";
-					#>public static implicit operator <#= nullableBaseType #>(<#= className #> value) =><# _();
-					#>	value.Value == null ? null as <#= nullableBaseType #> : <#= baseType #>.From(value.Value);<# _(2);
-
-					#>public static implicit operator <#= className #>(<#= nullableBaseType #> value) =><# _();
-					#>	From(value?.Value);<# _(2);
-				} 
-				else 
-				{
-					#>public static implicit operator <#= baseType #>(<#= className #> value) => value.Value;<# _(2);
-					#>public static implicit operator <#= className #>(<#= baseType #> value) => From(value);<# _(2);
-				}
-			}
 			if (isNullable)
 			{
-				var nonNullableType = className.Replace("Nullable", "");
+				var nonNullableType = className.TrimStart("Nullable".ToCharArray());
 				var nullableType = nonNullableType + "?";
 				#>public static implicit operator <#= nullableType #>(<#= className #> value) =><# _();
 				#>	value.Value == null ? null as <#= nullableType #> : <#= nonNullableType #>.From(value.Value);<# _(2);
