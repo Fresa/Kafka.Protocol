@@ -36,7 +36,7 @@ namespace Kafka.Protocol.Tests.Records
                     var writer = new MemoryStream();
                     await using (writer.ConfigureAwait(false))
                     {
-                        await _record.WriteToAsync(writer, false, CancellationToken.None)
+                        await _record.WriteToAsync(writer, CancellationToken.None)
                             .ConfigureAwait(false);
                     }
 
@@ -46,7 +46,7 @@ namespace Kafka.Protocol.Tests.Records
                 [Fact]
                 public void It_should_return_the_length_of_the_record_being_serialized()
                 {
-                    _record.GetSize(false).Should()
+                    _record.GetSize().Should()
                         .BeGreaterThan(0)
                         .And.Be(_actualLength);
                 }

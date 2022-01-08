@@ -28,7 +28,7 @@ namespace Kafka.Protocol.Tests.Records
                     var writer = new MemoryStream();
                     await using (writer.ConfigureAwait(false))
                     {
-                        await _header.WriteToAsync(writer, false, CancellationToken.None)
+                        await _header.WriteToAsync(writer, CancellationToken.None)
                             .ConfigureAwait(false);
                     }
 
@@ -38,7 +38,7 @@ namespace Kafka.Protocol.Tests.Records
                 [Fact]
                 public void It_should_return_the_length_of_the_header_being_serialized()
                 {
-                    _header.GetSize(false).Should()
+                    _header.GetSize().Should()
                         .BeGreaterThan(0)
                         .And.Be(_actualLength);
                 }

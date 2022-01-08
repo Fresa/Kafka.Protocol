@@ -12,20 +12,20 @@ namespace Kafka.Protocol
 {
     public partial struct Bytes : IEnumerable<byte>
     {
-        public int GetSize(bool asCompact) =>
-            ((NullableBytes)Value).GetSize(asCompact);
+        public int GetSize() =>
+            ((NullableBytes)Value).GetSize();
 
-        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+        public ValueTask WriteToAsync(Stream writer,
             CancellationToken cancellationToken = default) =>
-            ((NullableBytes)Value).WriteToAsync(writer, asCompact,
+            ((NullableBytes)Value).WriteToAsync(writer,
                 cancellationToken);
 
         public static async ValueTask<Bytes> FromReaderAsync(
             PipeReader reader,
-            bool asCompact,
+            
             CancellationToken cancellationToken = default) =>
             (await NullableBytes
-                .FromReaderAsync(reader, asCompact,
+                .FromReaderAsync(reader,
                     cancellationToken)
                 .ConfigureAwait(false)).Value ??
             throw new NotSupportedException(

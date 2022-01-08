@@ -9,16 +9,16 @@ namespace Kafka.Protocol
 {
     public partial struct UInt32
     {
-        public int GetSize(bool asCompact) => 4;
+        public int GetSize() => 4;
 
-        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+        public ValueTask WriteToAsync(Stream writer,
             CancellationToken cancellationToken = default) =>
             writer.WriteAsBigEndianAsync(BitConverter.GetBytes(Value),
                 cancellationToken);
 
         public static async ValueTask<UInt32> FromReaderAsync(
             PipeReader reader,
-            bool asCompact,
+            
             CancellationToken cancellationToken = default) =>
             BitConverter.ToUInt32(
                 await reader.ReadAsBigEndianAsync(4, cancellationToken)

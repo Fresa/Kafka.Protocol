@@ -8,19 +8,19 @@ namespace Kafka.Protocol
 {
     public partial struct String
     {
-        public int GetSize(bool asCompact) =>
-            NullableString.From(Value).GetSize(asCompact);
+        public int GetSize() =>
+            NullableString.From(Value).GetSize();
 
-        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+        public ValueTask WriteToAsync(Stream writer,
             CancellationToken cancellationToken = default) =>
             NullableString.From(Value)
-                .WriteToAsync(writer, asCompact, cancellationToken);
+                .WriteToAsync(writer, cancellationToken);
 
         public static async ValueTask<String> FromReaderAsync(
             PipeReader reader,
-            bool asCompact,
+            
             CancellationToken cancellationToken = default) =>
-            (await NullableString.FromReaderAsync(reader, asCompact, cancellationToken)
+            (await NullableString.FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false)).Value ??
             $"The string cannot be null. Consider changing to {nameof(NullableString)}";
 

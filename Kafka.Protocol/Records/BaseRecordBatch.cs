@@ -58,75 +58,80 @@ namespace Kafka.Protocol.Records
         {
             var size = asCompact
                 ? (int)(await UVarInt
-                    .FromReaderAsync(reader, asCompact, cancellationToken)
+                    .FromReaderAsync(reader, cancellationToken)
                     .ConfigureAwait(false)).Value - 1
-                : (int)await Int32.FromReaderAsync(reader, asCompact, cancellationToken)
+                : (int)await Int32.FromReaderAsync(reader, cancellationToken)
                     .ConfigureAwait(false);
             if (size < 0)
             {
                 return recordBatch;
             }
 
-            recordBatch.BaseOffset = await Int64.FromReaderAsync(reader, asCompact,
+            recordBatch.BaseOffset = await Int64.FromReaderAsync(reader,
                     cancellationToken)
                 .ConfigureAwait(false);
-            recordBatch.BatchLength = await Int32.FromReaderAsync(reader, asCompact,
+            recordBatch.BatchLength = await Int32.FromReaderAsync(reader,
                     cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.PartitionLeaderEpoch = await Int32
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.Magic = await Int8
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.Crc = await Int32
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
-            recordBatch.Attributes = await Int16.FromReaderAsync(reader, asCompact,
+            recordBatch.Attributes = await Int16.FromReaderAsync(reader,
                     cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.LastOffsetDelta = await Int32
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.FirstTimestamp = await Int64
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.MaxTimestamp = await Int64
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
-            recordBatch.ProducerId = await Int64.FromReaderAsync(reader, asCompact,
+            recordBatch.ProducerId = await Int64.FromReaderAsync(reader,
                     cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.ProducerEpoch = await Int16
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.BaseSequence = await Int32
-                .FromReaderAsync(reader, asCompact, cancellationToken)
-                .ConfigureAwait(false);
-            recordBatch.Records = await NullableArray<Record>.FromReaderAsync(
-                    reader, asCompact,
-                    () => Record.FromReaderAsync(reader, asCompact,
-                        cancellationToken), cancellationToken)
+                .FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
 
+            recordBatch.Records = asCompact
+                ? await CompactNullableArray<Record>.FromReaderAsync(reader,
+                    ReadRecordAsync, cancellationToken)
+                : await NullableArray<Record>.FromReaderAsync(
+                        reader, ReadRecordAsync, cancellationToken)
+                    .ConfigureAwait(false);
 
-            await recordBatch.CheckForDataCorruption(asCompact, cancellationToken)
+            await recordBatch.CheckForDataCorruption(cancellationToken)
                 .ConfigureAwait(false);
 
-            var actualSize = recordBatch.GetSize(asCompact);
+            var actualSize = recordBatch.GetSize();
             if (size != actualSize)
             {
                 throw new CorruptMessageException($"Expected size {size} got {actualSize}");
             }
 
             return recordBatch;
+
+            ValueTask<Record> ReadRecordAsync() =>
+                Record.FromReaderAsync(reader,
+                    cancellationToken);
         }
 
         private async ValueTask CheckForDataCorruption(
-            bool asCompact,
+            
             CancellationToken cancellationToken)
         {
-            var bytes = await SerializeCrcData(asCompact, cancellationToken)
+            var bytes = await SerializeCrcData(cancellationToken)
                 .ConfigureAwait(false);
             var crc = Crc32C.Compute(bytes);
             if (crc != Crc)
@@ -136,103 +141,112 @@ namespace Kafka.Protocol.Records
             }
         }
 
+        protected abstract bool IsCompact { get; }
+
         public async ValueTask WriteToAsync(
             Stream writer,
-            bool asCompact,
+            
             CancellationToken cancellationToken = default)
         {
-            var size = GetSize(asCompact);
-            if (asCompact)
+            var size = GetSize();
+            if (IsCompact)
             {
                 UVarInt length = Records.Value == null ? 0 : (uint)size + 1;
-                await length.WriteToAsync(writer, asCompact, cancellationToken)
+                await length.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
             }
             else
             {
                 Int32 length = Records.Value?.Length ?? -1;
                 await length
-                    .WriteToAsync(writer, asCompact, cancellationToken)
+                    .WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
             }
 
             if (Records.Value != null)
             {
                 await BaseOffset
-                    .WriteToAsync(writer, asCompact, cancellationToken)
+                    .WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
                 await BatchLength
-                    .WriteToAsync(writer, asCompact, cancellationToken)
+                    .WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
                 await PartitionLeaderEpoch
-                    .WriteToAsync(writer, asCompact, cancellationToken)
+                    .WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await Magic.WriteToAsync(writer, asCompact, cancellationToken)
+                await Magic.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
 
-                var bytes = await SerializeCrcData(asCompact, cancellationToken)
+                var bytes = await SerializeCrcData(cancellationToken)
                     .ConfigureAwait(false);
                 Crc = (int)Crc32C.Compute(bytes);
 
-                await Crc.WriteToAsync(writer, asCompact, cancellationToken)
+                await Crc.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await Bytes.From(bytes)
-                    .WriteToAsync(writer, asCompact, cancellationToken)
+                await (IsCompact
+                        ? CompactBytes.From(bytes)
+                            .WriteToAsync(writer, cancellationToken)
+                        : Bytes.From(bytes)
+                            .WriteToAsync(writer, cancellationToken))
                     .ConfigureAwait(false);
             }
         }
 
-        public int GetSize(bool asCompact)
+        public int GetSize()
         {
             var size = 0;
             if (Records.Value != null)
             {
-                size = BaseOffset.GetSize(asCompact) +
-                       BatchLength.GetSize(asCompact) +
-                       PartitionLeaderEpoch.GetSize(asCompact) +
-                       Magic.GetSize(asCompact) +
-                       Crc.GetSize(asCompact) +
-                       Attributes.GetSize(asCompact) +
-                       LastOffsetDelta.GetSize(asCompact) +
-                       FirstTimestamp.GetSize(asCompact) +
-                       MaxTimestamp.GetSize(asCompact) +
-                       ProducerId.GetSize(asCompact) +
-                       ProducerEpoch.GetSize(asCompact) +
-                       BaseSequence.GetSize(asCompact) +
-                       NullableArray<Record>.From(Records)
-                           .GetSize(asCompact);
+                size = BaseOffset.GetSize() +
+                       BatchLength.GetSize() +
+                       PartitionLeaderEpoch.GetSize() +
+                       Magic.GetSize() +
+                       Crc.GetSize() +
+                       Attributes.GetSize() +
+                       LastOffsetDelta.GetSize() +
+                       FirstTimestamp.GetSize() +
+                       MaxTimestamp.GetSize() +
+                       ProducerId.GetSize() +
+                       ProducerEpoch.GetSize() +
+                       BaseSequence.GetSize() +
+                       (IsCompact
+                           ? CompactNullableArray<Record>.From(Records)
+                               .GetSize()
+                           : NullableArray<Record>.From(Records).GetSize());
             }
 
-            return (asCompact
-                       ? UVarInt.From((uint)size + 1).GetSize(asCompact)
-                       : Int32.From(size).GetSize(asCompact)) +
+            return (IsCompact
+                       ? UVarInt.From((uint)size + 1).GetSize()
+                       : Int32.From(size).GetSize()) +
                    size;
         }
 
         private async ValueTask<byte[]> SerializeCrcData(
-            bool asCompact,
             CancellationToken cancellationToken)
         {
             var writer = new MemoryStream();
             await using (writer.ConfigureAwait(false))
             {
-                await Attributes.WriteToAsync(writer, asCompact, cancellationToken)
+                await Attributes.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await LastOffsetDelta.WriteToAsync(writer, asCompact, cancellationToken)
+                await LastOffsetDelta.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await FirstTimestamp.WriteToAsync(writer, asCompact, cancellationToken)
+                await FirstTimestamp.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await MaxTimestamp.WriteToAsync(writer, asCompact, cancellationToken)
+                await MaxTimestamp.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await ProducerId.WriteToAsync(writer, asCompact, cancellationToken)
+                await ProducerId.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await ProducerEpoch.WriteToAsync(writer, asCompact, cancellationToken)
+                await ProducerEpoch.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
-                await BaseSequence.WriteToAsync(writer, asCompact, cancellationToken)
+                await BaseSequence.WriteToAsync(writer, cancellationToken)
                     .ConfigureAwait(false);
 
                 // todo: support compression
-                await Records.WriteToAsync(writer, asCompact, cancellationToken)
+                await (IsCompact
+                        ? CompactNullableArray<Record>.From(Records)
+                            .WriteToAsync(writer, cancellationToken)
+                        : Records.WriteToAsync(writer, cancellationToken))
                     .ConfigureAwait(false);
             }
 

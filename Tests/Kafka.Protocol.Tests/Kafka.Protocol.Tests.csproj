@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\Kafka.Protocol\Kafka.Protocol.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BreakingChangesDetection\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
@@ -30,7 +28,7 @@ namespace Kafka.Protocol
 
         public async ValueTask WriteToAsync(
             Stream writer,
-            bool asCompact,
+            
             CancellationToken cancellationToken = default)
         {
             await Header.WriteToAsync(writer, cancellationToken)
@@ -45,7 +43,7 @@ namespace Kafka.Protocol
             CancellationToken cancellationToken = default)
         {
             // Read payload size
-            var size = await Int32.FromReaderAsync(reader, false, cancellationToken)
+            var size = await Int32.FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false);
 
             var header = await RequestHeader

@@ -561,6 +561,56 @@ namespace Kafka.Protocol
 
 
 	/// <summary>
+	/// <para>Represents a sequence of characters. First the length N + 1 is given as an UNSIGNED_VARINT . Then N bytes follow which are the UTF-8 encoding of the character sequence.</para>
+	/// </summary>
+	public readonly partial struct CompactString : ISerialize 
+	{
+		public string Value { get; }
+
+		public CompactString(string value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is CompactString comparingCompactString && this == comparingCompactString;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (CompactString x, CompactString y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (CompactString x, CompactString y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator string(CompactString value) => value.Value;
+
+		public static implicit operator CompactString(string value) => From(value);
+
+		public static CompactString From(string value)
+		{
+			return new CompactString(value);
+		}
+
+		public static CompactString Default { get; } = From(string.Empty);
+	}
+
+
+	/// <summary>
 	/// <para>Represents a sequence of characters or null. For non-null strings, first the length N is given as an INT16. Then N bytes follow which are the UTF-8 encoding of the character sequence. A null value is encoded with length of -1 and there are no following bytes.</para>
 	/// </summary>
 	public readonly partial struct NullableString : ISerialize 
@@ -617,6 +667,62 @@ namespace Kafka.Protocol
 
 
 	/// <summary>
+	/// <para>Represents a sequence of characters. First the length N + 1 is given as an UNSIGNED_VARINT . Then N bytes follow which are the UTF-8 encoding of the character sequence. A null string is represented with a length of 0.</para>
+	/// </summary>
+	public readonly partial struct CompactNullableString : ISerialize 
+	{
+		public string? Value { get; }
+
+		public CompactNullableString(string? value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is CompactNullableString comparingCompactNullableString && this == comparingCompactNullableString;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value?.GetHashCode() ?? 0;
+		}
+
+		public override string ToString() 
+		{
+			return Value?.ToString() ?? string.Empty;
+		}
+
+		public static bool operator == (CompactNullableString x, CompactNullableString y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (CompactNullableString x, CompactNullableString y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator string?(CompactNullableString value) => value.Value;
+
+		public static implicit operator CompactNullableString(string? value) => From(value);
+
+		public static implicit operator CompactNullableString?(CompactNullableString value) =>
+			value.Value == null ? null as CompactNullableString? : CompactNullableString.From(value.Value);
+
+		public static implicit operator CompactNullableString(CompactNullableString? value) =>
+			From(value?.Value);
+
+		public static CompactNullableString From(string? value)
+		{
+			return new CompactNullableString(value);
+		}
+
+		public static CompactNullableString Default { get; } = From(default);
+	}
+
+
+	/// <summary>
 	/// <para>Represents a raw sequence of bytes. First the length N is given as an INT32. Then N bytes follow.</para>
 	/// </summary>
 	public readonly partial struct Bytes : ISerialize 
@@ -663,6 +769,56 @@ namespace Kafka.Protocol
 		}
 
 		public static Bytes Default { get; } = From(System.Array.Empty<byte>());
+	}
+
+
+	/// <summary>
+	/// <para>Represents a raw sequence of bytes. First the length N+1 is given as an UNSIGNED_VARINT.Then N bytes follow.</para>
+	/// </summary>
+	public readonly partial struct CompactBytes : ISerialize 
+	{
+		public byte[] Value { get; }
+
+		public CompactBytes(params byte[] value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is CompactBytes comparingCompactBytes && this == comparingCompactBytes;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (CompactBytes x, CompactBytes y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (CompactBytes x, CompactBytes y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator byte[](CompactBytes value) => value.Value;
+
+		public static implicit operator CompactBytes(byte[] value) => From(value);
+
+		public static CompactBytes From(params byte[] value)
+		{
+			return new CompactBytes(value);
+		}
+
+		public static CompactBytes Default { get; } = From(System.Array.Empty<byte>());
 	}
 
 
@@ -723,6 +879,62 @@ namespace Kafka.Protocol
 
 
 	/// <summary>
+	/// <para>Represents a raw sequence of bytes. First the length N+1 is given as an UNSIGNED_VARINT.Then N bytes follow. A null object is represented with a length of 0.</para>
+	/// </summary>
+	public readonly partial struct CompactNullableBytes : ISerialize 
+	{
+		public byte[]? Value { get; }
+
+		public CompactNullableBytes(params byte[]? value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is CompactNullableBytes comparingCompactNullableBytes && this == comparingCompactNullableBytes;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value?.GetHashCode() ?? 0;
+		}
+
+		public override string ToString() 
+		{
+			return Value?.ToString() ?? string.Empty;
+		}
+
+		public static bool operator == (CompactNullableBytes x, CompactNullableBytes y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (CompactNullableBytes x, CompactNullableBytes y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator byte[]?(CompactNullableBytes value) => value.Value;
+
+		public static implicit operator CompactNullableBytes(byte[]? value) => From(value);
+
+		public static implicit operator CompactNullableBytes?(CompactNullableBytes value) =>
+			value.Value == null ? null as CompactNullableBytes? : CompactNullableBytes.From(value.Value);
+
+		public static implicit operator CompactNullableBytes(CompactNullableBytes? value) =>
+			From(value?.Value);
+
+		public static CompactNullableBytes From(params byte[]? value)
+		{
+			return new CompactNullableBytes(value);
+		}
+
+		public static CompactNullableBytes Default { get; } = From(default);
+	}
+
+
+	/// <summary>
 	/// <para>Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N is given as an INT32. Then N instances of type T follow. A null array is represented with a length of -1. In protocol documentation an array of T instances is referred to as [T].</para>
 	/// </summary>
 	public readonly partial struct Array<T> : ISerialize 
@@ -770,6 +982,57 @@ namespace Kafka.Protocol
 		}
 
 		public static Array<T> Default { get; } = From(System.Array.Empty<T>());
+	}
+
+
+	/// <summary>
+	/// <para>Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T].</para>
+	/// </summary>
+	public readonly partial struct CompactArray<T> : ISerialize 
+		where T : ISerialize
+	{
+		public T[] Value { get; }
+
+		public CompactArray(params T[] value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is CompactArray<T> comparingCompactArray && this == comparingCompactArray;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (CompactArray<T> x, CompactArray<T> y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (CompactArray<T> x, CompactArray<T> y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator T[](CompactArray<T> value) => value.Value;
+
+		public static implicit operator CompactArray<T>(T[] value) => From(value);
+
+		public static CompactArray<T> From(params T[] value)
+		{
+			return new CompactArray<T>(value);
+		}
+
+		public static CompactArray<T> Default { get; } = From(System.Array.Empty<T>());
 	}
 
 
@@ -931,6 +1194,63 @@ namespace Kafka.Protocol
 
 
 	/// <summary>
+	/// <para>Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T].</para>
+	/// </summary>
+	public readonly partial struct CompactNullableArray<T> : ISerialize 
+		where T : ISerialize
+	{
+		public T[]? Value { get; }
+
+		public CompactNullableArray(params T[]? value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is CompactNullableArray<T> comparingCompactNullableArray && this == comparingCompactNullableArray;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value?.GetHashCode() ?? 0;
+		}
+
+		public override string ToString() 
+		{
+			return Value?.ToString() ?? string.Empty;
+		}
+
+		public static bool operator == (CompactNullableArray<T> x, CompactNullableArray<T> y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (CompactNullableArray<T> x, CompactNullableArray<T> y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator T[]?(CompactNullableArray<T> value) => value.Value;
+
+		public static implicit operator CompactNullableArray<T>(T[]? value) => From(value);
+
+		public static implicit operator CompactNullableArray<T>?(CompactNullableArray<T> value) =>
+			value.Value == null ? null as CompactNullableArray<T>? : CompactNullableArray<T>.From(value.Value);
+
+		public static implicit operator CompactNullableArray<T>(CompactNullableArray<T>? value) =>
+			From(value?.Value);
+
+		public static CompactNullableArray<T> From(params T[]? value)
+		{
+			return new CompactNullableArray<T>(value);
+		}
+
+		public static CompactNullableArray<T> Default { get; } = From(default);
+	}
+
+
+	/// <summary>
 	/// <para>Represents a sequence of objects with a map key.</para>
 	/// </summary>
 	public readonly partial struct Map<TKey, TValue> : ISerialize 
@@ -979,6 +1299,58 @@ namespace Kafka.Protocol
 		}
 
 		public static Map<TKey, TValue> Default { get; } = From(new Dictionary<TKey, TValue>());
+	}
+
+
+	/// <summary>
+	/// <para>Represents a sequence of objects with a map key.</para>
+	/// </summary>
+	public readonly partial struct CompactMap<TKey, TValue> : ISerialize 
+		where TKey : ISerialize
+		where TValue : ISerialize
+	{
+		public Dictionary<TKey, TValue> Value { get; }
+
+		public CompactMap(Dictionary<TKey, TValue> value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is CompactMap<TKey, TValue> comparingCompactMap && this == comparingCompactMap;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value.GetHashCode();
+		}
+
+		public override string ToString() 
+		{
+			return Value.ToString();
+		}
+
+		public static bool operator == (CompactMap<TKey, TValue> x, CompactMap<TKey, TValue> y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (CompactMap<TKey, TValue> x, CompactMap<TKey, TValue> y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator Dictionary<TKey, TValue>(CompactMap<TKey, TValue> value) => value.Value;
+
+		public static implicit operator CompactMap<TKey, TValue>(Dictionary<TKey, TValue> value) => From(value);
+
+		public static CompactMap<TKey, TValue> From(Dictionary<TKey, TValue> value)
+		{
+			return new CompactMap<TKey, TValue>(value);
+		}
+
+		public static CompactMap<TKey, TValue> Default { get; } = From(new Dictionary<TKey, TValue>());
 	}
 
 
@@ -1037,6 +1409,64 @@ namespace Kafka.Protocol
 		}
 
 		public static NullableMap<TKey, TValue> Default { get; } = From(default);
+	}
+
+
+	/// <summary>
+	/// <para>Represents a nullable sequence of objects with a map key.</para>
+	/// </summary>
+	public readonly partial struct CompactNullableMap<TKey, TValue> : ISerialize 
+		where TKey : ISerialize
+		where TValue : ISerialize
+	{
+		public Dictionary<TKey, TValue>? Value { get; }
+
+		public CompactNullableMap(Dictionary<TKey, TValue>? value)
+		{
+			Value = value;
+		}
+
+		public override bool Equals(object obj) 
+		{
+			return obj is CompactNullableMap<TKey, TValue> comparingCompactNullableMap && this == comparingCompactNullableMap;
+		}
+
+		public override int GetHashCode() 
+		{
+			return Value?.GetHashCode() ?? 0;
+		}
+
+		public override string ToString() 
+		{
+			return Value?.ToString() ?? string.Empty;
+		}
+
+		public static bool operator == (CompactNullableMap<TKey, TValue> x, CompactNullableMap<TKey, TValue> y)
+		{
+			return x.Value == y.Value;
+		}
+
+		public static bool operator != (CompactNullableMap<TKey, TValue> x, CompactNullableMap<TKey, TValue> y)
+		{
+			return !(x == y);
+		}
+
+		public static implicit operator Dictionary<TKey, TValue>?(CompactNullableMap<TKey, TValue> value) => value.Value;
+
+		public static implicit operator CompactNullableMap<TKey, TValue>(Dictionary<TKey, TValue>? value) => From(value);
+
+		public static implicit operator CompactNullableMap<TKey, TValue>?(CompactNullableMap<TKey, TValue> value) =>
+			value.Value == null ? null as CompactNullableMap<TKey, TValue>? : CompactNullableMap<TKey, TValue>.From(value.Value);
+
+		public static implicit operator CompactNullableMap<TKey, TValue>(CompactNullableMap<TKey, TValue>? value) =>
+			From(value?.Value);
+
+		public static CompactNullableMap<TKey, TValue> From(Dictionary<TKey, TValue>? value)
+		{
+			return new CompactNullableMap<TKey, TValue>(value);
+		}
+
+		public static CompactNullableMap<TKey, TValue> Default { get; } = From(default);
 	}
 
 	/// <summary>

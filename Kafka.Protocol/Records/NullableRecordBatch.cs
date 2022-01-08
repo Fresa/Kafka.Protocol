@@ -10,16 +10,17 @@ namespace Kafka.Protocol.Records
 
         public static ValueTask<NullableRecordBatch> FromReaderAsync(
             PipeReader reader,
-            bool asCompact,
             CancellationToken cancellationToken = default) =>
             FromReaderAsync(new NullableRecordBatch(), reader,
-                asCompact, cancellationToken);
+                false, cancellationToken);
 
         public new NullableArray<Record> Records
         {
             get => base.Records;
             set => base.Records = value;
         }
+
+        protected override bool IsCompact => false;
 
         public static implicit operator RecordBatch?(NullableRecordBatch recordBatch) =>
             recordBatch.Records.Value == null

@@ -9,9 +9,9 @@ namespace Kafka.Protocol
 {
     public partial struct Uuid
     {
-        public int GetSize(bool asCompact) => 16;
+        public int GetSize() => 16;
 
-        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+        public ValueTask WriteToAsync(Stream writer,
             CancellationToken cancellationToken = default)
         {
             Span<byte> buffer = stackalloc byte[16];
@@ -22,7 +22,7 @@ namespace Kafka.Protocol
 
         public static async ValueTask<Uuid> FromReaderAsync(
             PipeReader reader,
-            bool asCompact,
+            
             CancellationToken cancellationToken = default)
         {
             var bytes = await reader.ReadAsync(16, cancellationToken)

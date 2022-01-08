@@ -12,21 +12,21 @@ namespace Kafka.Protocol
 {
     public partial struct Array<T> : IEnumerable<T>
     {
-        public int GetSize(bool asCompact) =>
-            ((NullableArray<T>)Value).GetSize(asCompact);
+        public int GetSize() =>
+            ((NullableArray<T>)Value).GetSize();
 
-        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+        public ValueTask WriteToAsync(Stream writer,
             CancellationToken cancellationToken = default) =>
-            ((NullableArray<T>)Value).WriteToAsync(writer, asCompact,
+            ((NullableArray<T>)Value).WriteToAsync(writer,
                 cancellationToken);
 
         public static async ValueTask<Array<T>> FromReaderAsync(
             PipeReader reader,
-            bool asCompact,
+            
             Func<ValueTask<T>> createItem,
             CancellationToken cancellationToken = default) =>
             (await NullableArray<T>
-                .FromReaderAsync(reader, asCompact, createItem,
+                .FromReaderAsync(reader, createItem,
                     cancellationToken)
                 .ConfigureAwait(false)).Value ??
             throw new NotSupportedException(
