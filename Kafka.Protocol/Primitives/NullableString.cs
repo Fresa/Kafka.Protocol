@@ -10,16 +10,36 @@ namespace Kafka.Protocol
 {
     public partial struct NullableString
     {
-        public int GetSize() =>
-            2 + (Value?.Length ?? 0);
+        public int GetSize(bool asCompact) =>
+            (asCompact
+                ? VarInt.From(Value == null ? 1 : (Value.Length + 1)).GetSize(asCompact)
+                : 2) + 
+            (Value?.Length ?? 0);
 
-        public async ValueTask WriteToAsync(Stream writer,
+        public async ValueTask WriteToAsync(Stream writer, bool asCompact,
             CancellationToken cancellationToken = default)
         {
+            if (asCompact)
+            {
+                UVarInt length = Value == null ? 0 : (uint)Value.Length + 1;
+                await length.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+
+                if (Value == null)
+                {
+                    return;
+                }
+
+                await writer.WriteAsLittleEndianAsync(Encoding.UTF8.GetBytes(Value),
+                        cancellationToken)
+                    .ConfigureAwait(false);
+                return;
+            }
+
             if (Value == null)
             {
                 await Int16.From(-1)
-                    .WriteToAsync(writer, cancellationToken)
+                    .WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
                 return;
             }
@@ -31,7 +51,7 @@ namespace Kafka.Protocol
                 throw new SyntaxErrorException($"value is to long. Max length: {short.MaxValue}. Current value length: {bytes.Length}");
             }
 
-            await ((Int16)bytes.Length).WriteToAsync(writer, cancellationToken)
+            await ((Int16)bytes.Length).WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
             await writer.WriteAsLittleEndianAsync(bytes, cancellationToken)
                 .ConfigureAwait(false);
@@ -39,12 +59,15 @@ namespace Kafka.Protocol
 
         public static async ValueTask<NullableString> FromReaderAsync(
             PipeReader reader,
-
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            var length = await Int16.FromReaderAsync(reader, cancellationToken)
+            var length = asCompact
+                ? (int)(await UVarInt.FromReaderAsync(reader, asCompact, cancellationToken)
+                    .ConfigureAwait(false)).Value - 1
+                : await Int16.FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false);
-
+            
             if (length == -1)
             {
                 return Default;

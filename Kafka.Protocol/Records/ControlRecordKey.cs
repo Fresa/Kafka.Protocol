@@ -40,28 +40,28 @@ namespace Kafka.Protocol.Records
 
         public async ValueTask ReadFromAsync(
             PipeReader reader,
-            
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            Version = await Int16.FromReaderAsync(reader, cancellationToken)
+            Version = await Int16.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            _type = await Int16.FromReaderAsync(reader, cancellationToken)
+            _type = await Int16.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public async ValueTask WriteToAsync(
             Stream writer,
-            
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            await Version.WriteToAsync(writer, cancellationToken)
+            await Version.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await _type.WriteToAsync(writer, cancellationToken)
+            await _type.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public int GetSize() =>
-            Version.GetSize() +
-            _type.GetSize();
+        public int GetSize(bool asCompact) =>
+            Version.GetSize(asCompact) +
+            _type.GetSize(asCompact);
     }
 }

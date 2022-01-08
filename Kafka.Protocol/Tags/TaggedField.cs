@@ -14,22 +14,22 @@ namespace Kafka.Protocol.Tags
         public async ValueTask WriteToAsync(Stream writer, 
             CancellationToken cancellationToken = default)
         {
-            await Tag.WriteToAsync(writer, cancellationToken)
+            await Tag.WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
 
-            UVarInt size = (uint) Field.GetSize();
-            await size.WriteToAsync(writer, cancellationToken)
+            UVarInt size = (uint) Field.GetSize(false);
+            await size.WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
             
-            await Field.WriteToAsync(writer, cancellationToken)
+            await Field.WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public int GetSize()
         {
-            var fieldSize = Field.GetSize();
-            return Tag.GetSize() +
-                   UVarInt.From((uint)fieldSize).GetSize() +
+            var fieldSize = Field.GetSize(false);
+            return Tag.GetSize(false) +
+                   UVarInt.From((uint)fieldSize).GetSize(false) +
                    fieldSize;
         }
 
@@ -37,9 +37,9 @@ namespace Kafka.Protocol.Tags
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {
-            var tag = await UVarInt.FromReaderAsync(reader, cancellationToken)
+            var tag = await UVarInt.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
-            var length = await UVarInt.FromReaderAsync(reader, cancellationToken)
+            var length = await UVarInt.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
 
             return new TaggedField

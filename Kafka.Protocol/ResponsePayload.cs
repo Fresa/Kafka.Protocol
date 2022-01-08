@@ -23,32 +23,25 @@ namespace Kafka.Protocol
 
         public async ValueTask WriteToAsync(
             Stream writer,
-            
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            await Int32.From(Header.GetSize() + Message.GetSize())
-                .WriteToAsync(writer, cancellationToken)
-                .ConfigureAwait(false);
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public int GetSize()
-        {
-            var size = Header.GetSize() +
-                       Message.GetSize();
-            return Int32.From(size).GetSize() +
-                   size;
-        }
+        public int GetSize(bool asCompact) =>
+            Header.GetSize() +
+            Message.GetSize();
 
         public static async ValueTask<ResponsePayload> ReadFromAsync(
             RequestPayload requestPayload,
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {
-            var payloadSize = await Int32.FromReaderAsync(reader, cancellationToken)
+            var payloadSize = await Int32.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
 
             var header = await ResponseHeader.FromReaderAsync(

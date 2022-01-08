@@ -40,19 +40,9 @@ namespace Kafka.Protocol.Generator.Helpers
                 Type = "NULLABLE_ARRAY",
                 Description = "Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T]."
             });
-            PrimitiveTypes.Add("COMPACT_NULLABLE_ARRAY", new PrimitiveType
-            {
-                Type = "COMPACT_NULLABLE_ARRAY",
-                Description = "Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T]."
-            });
             PrimitiveTypes.Add("MAP", new PrimitiveType
             {
                 Type = "MAP",
-                Description = "Represents a sequence of objects with a map key."
-            });
-            PrimitiveTypes.Add("COMPACT_MAP", new PrimitiveType
-            {
-                Type = "COMPACT_MAP",
                 Description = "Represents a sequence of objects with a map key."
             });
             PrimitiveTypes.Add("NULLABLE_MAP", new PrimitiveType
@@ -60,12 +50,12 @@ namespace Kafka.Protocol.Generator.Helpers
                 Type = "NULLABLE_MAP",
                 Description = "Represents a nullable sequence of objects with a map key."
             });
-            PrimitiveTypes.Add("COMPACT_NULLABLE_MAP", new PrimitiveType
-            {
-                Type = "COMPACT_NULLABLE_MAP",
-                Description = "Represents a nullable sequence of objects with a map key."
-            });
-
+            
+            // Compact types are still the same base types but with more efficient length compaction. They are used interchangeable when the message is a variable version
+            PrimitiveTypes.Keys
+                .Where(name => name.StartsWith("COMPACT_"))
+                .ToList()
+                .ForEach(name => PrimitiveTypes.Remove(name));
             // Records is a complex type and is hand-rolled
             PrimitiveTypes.Remove("RECORDS");
         }

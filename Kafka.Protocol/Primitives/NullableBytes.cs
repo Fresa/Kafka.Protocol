@@ -8,15 +8,27 @@ namespace Kafka.Protocol
 {
     public partial struct NullableBytes
     {
-        public int GetSize() =>
-            4 + (Value?.Length ?? 0);
+        public int GetSize(bool asCompact) =>
+            (asCompact
+                ? VarInt.From(Value == null ? 1 : Value.Length + 1).GetSize(asCompact)
+                : 4) + 
+            (Value?.Length ?? 0);
 
-        public async ValueTask WriteToAsync(Stream writer,
+        public async ValueTask WriteToAsync(Stream writer, bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            Int32 length = Value?.Length ?? -1;
-            await length.WriteToAsync(writer, cancellationToken)
-                .ConfigureAwait(false);
+            if (asCompact)
+            {
+                UVarInt length = Value == null ? 0 : (uint)Value.Length + 1;
+                await length.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            else
+            {
+                Int32 length = Value?.Length ?? -1;
+                await length.WriteToAsync(writer, asCompact, cancellationToken)
+                    .ConfigureAwait(false);
+            }
 
             if (Value == null)
             {
@@ -30,9 +42,13 @@ namespace Kafka.Protocol
 
         public static async ValueTask<NullableBytes> FromReaderAsync(
             PipeReader reader,
+            bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            var length = (int)await Int32.FromReaderAsync(reader, cancellationToken)
+            var length = asCompact
+                ? (int)(await UVarInt.FromReaderAsync(reader, asCompact, cancellationToken)
+                    .ConfigureAwait(false)).Value - 1
+                : (int)await Int32.FromReaderAsync(reader, asCompact, cancellationToken)
                     .ConfigureAwait(false);
 
             if (length == -1)

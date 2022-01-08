@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Kafka.Protocol.Generator.Helpers.Extensions;
 
 namespace Kafka.Protocol.Generator.Helpers.Definitions
@@ -17,8 +18,10 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 "uint16" => "UInt16",
                 "uint32" => "UInt32",
                 "uvarint" => "UVarInt",
-                { } name when name.Contains("array") => $"{typeName}<T>",
-                { } name when name.Contains("map") => $"{typeName}<TKey, TValue>",
+                "array" => "Array<T>",
+                "nullablearray" => "NullableArray<T>",
+                "map" => "Map<TKey, TValue>",
+                "nullablemap" => "NullableMap<TKey, TValue>",
                 _ => typeName
             };
         }
@@ -40,24 +43,24 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
         private static Type ResolveType(this PrimitiveType primitiveType)
         {
             var typeName = primitiveType
-                .GetClassName();
+                .GetClassName()
+                .Replace("Nullable", "");
 
             return typeName.ToLower() switch
             {
                 "int8" => typeof(sbyte),
                 "varint" => typeof(int),
                 "varlong" => typeof(long),
+                "bytes" => typeof(byte[]),
                 "float64" => typeof(double),
                 "uuid" => typeof(Guid),
                 "uvarint" => typeof(uint),
-                { } name when name.Contains("bytes") => typeof(byte[]),
-                { } name when name.Contains("string") => typeof(string),
-                { } name when name.Contains("array") => typeof(IEnumerable<>).GetGenericArguments()[0].MakeArrayType(),
-                { } name when name.Contains("map") => typeof(Dictionary<,>),
+                "array<t>" => typeof(IEnumerable<>).GetGenericArguments()[0].MakeArrayType(),
+                "map<tkey, tvalue>" => typeof(Dictionary<,>),
                 _ => typeof(int).Assembly
                          .GetType($"System.{typeName}", false, true) ??
                      throw new InvalidOperationException(
-                         $"Could not resolve '{primitiveType.Type}/{typeName}' to a primitive type")
+                         $"Could not resolve '{primitiveType.Type}' to a primitive type")
             };
         }
 
@@ -80,24 +83,21 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
             primitiveType.ResolveType().IsArray;
 
         public static IReadOnlyDictionary<string, string> GetGenericArgumentConstraints(
-            this PrimitiveType primitive)
-        {
-            var typeName = primitive.GetClassName();
-            return typeName.ToUpper() switch
-            {
-                { } name when name.Contains("ARRAY") => new
-                    Dictionary<string, string>
+            this PrimitiveType primitive) =>
+            primitive.GetClassName()
+                    .Replace("Nullable", "")
+                    .ToUpper() switch
+                {
+                    "ARRAY<T>" => new Dictionary<string, string>
                     {
                         ["T"] = "ISerialize"
                     },
-                { } name when name.Contains("MAP") => new
-                    Dictionary<string, string>
+                    "MAP<TKEY, TVALUE>" => new Dictionary<string, string>
                     {
-                        ["TKey"] = "ISerialize",
+                        ["TKey"] = "ISerialize", 
                         ["TValue"] = "ISerialize"
                     },
-                _ => new Dictionary<string, string>()
-            };
-        }
+                    _ => new Dictionary<string, string>()
+                };
     }
 }

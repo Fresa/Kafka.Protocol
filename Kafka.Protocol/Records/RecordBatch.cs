@@ -16,17 +16,16 @@ namespace Kafka.Protocol.Records
 
         public static ValueTask<RecordBatch> FromReaderAsync(
             PipeReader reader,
+            bool asCompact,
             CancellationToken cancellationToken = default) =>
             FromReaderAsync(new RecordBatch(), reader,
-                false, cancellationToken);
+                asCompact, cancellationToken);
 
         public new Array<Record> Records
         {
             get => base.Records.Value!;
             set => base.Records = value;
         }
-
-        protected override bool IsCompact => false;
 
         [Flags]
         public enum CompressionType : ushort
