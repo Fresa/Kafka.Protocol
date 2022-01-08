@@ -32,19 +32,6 @@ namespace Kafka.Protocol
             return buffer[..position];
         }
 
-        internal static int GetVarIntLength(this ulong value)
-        {
-            var length = 0;
-            do
-            {
-                // Remove 7 bits
-                value >>= 7;
-                length++;
-            } while (value > 0);
-
-            return length;
-        }
-
         internal static long DecodeFromZigZag(this ulong value)
         {
             return (long)((value >> 1) - (value & 1) * value);
