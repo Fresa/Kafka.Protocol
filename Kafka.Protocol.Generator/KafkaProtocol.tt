@@ -349,17 +349,9 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	var propertyName = messageField.GetPropertyName();
-	var isCompactable = messageField.IsCompactable();
-	var compactType = $"Compact{messageField.GetFullTypeName()}";
 
 	#>	(Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) ? <# _();
-	if (isCompactable)
-	{
-	#>		IsFlexibleVersion ?<# _();
-	#>			((<#= compactType #>)<#= propertyName #>).GetSize() :<# _();
-	#>		<#
-	}
-	#>		<#= propertyName #>.GetSize() :<# _();
+	#>		<#= propertyName #>.GetSize(IsFlexibleVersion) :<# _();
 	#>		0)<#
 }
 

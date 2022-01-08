@@ -4156,20 +4156,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_transactionalId).GetSize() :
-						_transactionalId.GetSize() :
+				_transactionalId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerId.GetSize() :
+				_producerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerEpoch.GetSize() :
+				_producerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AddOffsetsToTxnRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4371,10 +4367,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AddOffsetsToTxnResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4499,20 +4495,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_transactionalId).GetSize() :
-						_transactionalId.GetSize() :
+				_transactionalId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerId.GetSize() :
+				_producerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerEpoch.GetSize() :
+				_producerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, AddPartitionsToTxnTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AddPartitionsToTxnRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4707,14 +4699,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AddPartitionsToTxnTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4843,12 +4831,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, AddPartitionsToTxnTopicResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AddPartitionsToTxnResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4969,14 +4955,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<Int32, AddPartitionsToTxnPartitionResult>)_resultsCollection).GetSize() :
-							_resultsCollection.GetSize() :
+					_resultsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AddPartitionsToTxnTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5097,10 +5079,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<AddPartitionsToTxnPartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5227,10 +5209,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_brokerId.GetSize() :
+				_brokerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_brokerEpoch.GetSize() :
+				_brokerEpoch.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AllocateProducerIdsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5360,16 +5342,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerIdStart.GetSize() :
+				_producerIdStart.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerIdLen.GetSize() :
+				_producerIdLen.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AllocateProducerIdsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5568,12 +5550,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<EntryData>)_entriesCollection).GetSize() :
-						_entriesCollection.GetSize() :
+				_entriesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_validateOnly.GetSize() :
+				_validateOnly.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterClientQuotasRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5665,14 +5645,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<EntityData>)_entityCollection).GetSize() :
-							_entityCollection.GetSize() :
+					_entityCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<OpData>)_opsCollection).GetSize() :
-							_opsCollection.GetSize() :
+					_opsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5764,12 +5740,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_entityType).GetSize() :
-								_entityType.GetSize() :
+						_entityType.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_entityName.GetSize() :
+						_entityName.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5926,15 +5900,13 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_key).GetSize() :
-								_key.GetSize() :
+						_key.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_value.GetSize() :
+						_value.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_remove.GetSize() :
+						_remove.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OpData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6130,12 +6102,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<EntryData>)_entriesCollection).GetSize() :
-						_entriesCollection.GetSize() :
+				_entriesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterClientQuotasResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6256,15 +6226,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<EntityData>)_entityCollection).GetSize() :
-							_entityCollection.GetSize() :
+					_entityCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6428,12 +6396,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_entityType).GetSize() :
-								_entityType.GetSize() :
+						_entityType.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_entityName.GetSize() :
+						_entityName.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6566,12 +6532,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<Int8, AlterConfigsResource>)_resourcesCollection).GetSize() :
-						_resourcesCollection.GetSize() :
+				_resourcesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_validateOnly.GetSize() :
+				_validateOnly.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterConfigsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6663,17 +6627,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_resourceType.GetSize() :
+					_resourceType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_resourceName).GetSize() :
-							_resourceName.GetSize() :
+					_resourceName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<String, AlterableConfig>)_configsCollection).GetSize() :
-							_configsCollection.GetSize() :
+					_configsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6831,12 +6791,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_value.GetSize() :
+						_value.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7001,12 +6959,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<AlterConfigsResourceResponse>)_responsesCollection).GetSize() :
-						_responsesCollection.GetSize() :
+				_responsesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterConfigsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7127,18 +7083,16 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_resourceType.GetSize() :
+					_resourceType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_resourceName).GetSize() :
-							_resourceName.GetSize() :
+					_resourceName.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7344,15 +7298,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_brokerId.GetSize() :
+				_brokerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_brokerEpoch.GetSize() :
+				_brokerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterIsrRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7510,14 +7462,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7636,18 +7584,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_newIsrCollection).GetSize() :
-								_newIsrCollection.GetSize() :
+						_newIsrCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_currentIsrVersion.GetSize() :
+						_currentIsrVersion.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7851,15 +7797,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterIsrResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8015,14 +7959,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8141,24 +8081,22 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderId.GetSize() :
+						_leaderId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_isrCollection).GetSize() :
-								_isrCollection.GetSize() :
+						_isrCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_currentIsrVersion.GetSize() :
+						_currentIsrVersion.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8433,12 +8371,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ReassignableTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterPartitionReassignmentsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8561,14 +8497,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<ReassignablePartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ReassignableTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8689,12 +8621,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactNullableArray<Int32>)_replicasCollection).GetSize() :
-								_replicasCollection.GetSize() :
+						_replicasCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<ReassignablePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8832,18 +8762,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ReassignableTopicResponse>)_responsesCollection).GetSize() :
-						_responsesCollection.GetSize() :
+				_responsesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterPartitionReassignmentsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9044,14 +8972,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<ReassignablePartitionResponse>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ReassignableTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9172,13 +9096,13 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorMessage.GetSize() :
+						_errorMessage.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<ReassignablePartitionResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9348,9 +9272,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, AlterReplicaLogDir>)_dirsCollection).GetSize() :
-						_dirsCollection.GetSize() :
+				_dirsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterReplicaLogDirsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9434,14 +9356,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_path).GetSize() :
-							_path.GetSize() :
+					_path.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<String, AlterReplicaLogDirTopic>)_topicsCollection).GetSize() :
-							_topicsCollection.GetSize() :
+					_topicsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AlterReplicaLogDir> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9562,14 +9480,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_partitionsCollection).GetSize() :
-								_partitionsCollection.GetSize() :
+						_partitionsCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<AlterReplicaLogDirTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9699,12 +9613,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<AlterReplicaLogDirTopicResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterReplicaLogDirsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9825,14 +9737,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<AlterReplicaLogDirPartitionResult>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AlterReplicaLogDirTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9953,10 +9861,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<AlterReplicaLogDirPartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10083,14 +9991,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ScramCredentialDeletion>)_deletionsCollection).GetSize() :
-						_deletionsCollection.GetSize() :
+				_deletionsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ScramCredentialUpsertion>)_upsertionsCollection).GetSize() :
-						_upsertionsCollection.GetSize() :
+				_upsertionsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterUserScramCredentialsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10182,12 +10086,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_mechanism.GetSize() :
+					_mechanism.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ScramCredentialDeletion> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10338,21 +10240,19 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_mechanism.GetSize() :
+					_mechanism.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_iterations.GetSize() :
+					_iterations.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_salt.GetSize() :
+					_salt.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_saltedPassword.GetSize() :
+					_saltedPassword.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ScramCredentialUpsertion> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10592,12 +10492,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<AlterUserScramCredentialsResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<AlterUserScramCredentialsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10718,15 +10616,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_user).GetSize() :
-							_user.GetSize() :
+					_user.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AlterUserScramCredentialsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10895,14 +10791,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_clientSoftwareName).GetSize() :
-						_clientSoftwareName.GetSize() :
+				_clientSoftwareName.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_clientSoftwareVersion).GetSize() :
-						_clientSoftwareVersion.GetSize() :
+				_clientSoftwareVersion.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ApiVersionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11020,28 +10912,22 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<Int16, ApiVersion>)_apiKeysCollection).GetSize() :
-						_apiKeysCollection.GetSize() :
+				_apiKeysCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, SupportedFeatureKey>)_supportedFeaturesCollection).GetSize() :
-						_supportedFeaturesCollection.GetSize() :
+				_supportedFeaturesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_finalizedFeaturesEpoch.GetSize() :
+				_finalizedFeaturesEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, FinalizedFeatureKey>)_finalizedFeaturesCollection).GetSize() :
-						_finalizedFeaturesCollection.GetSize() :
+				_finalizedFeaturesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ApiVersionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11208,13 +11094,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_apiKey.GetSize() :
+					_apiKey.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_minVersion.GetSize() :
+					_minVersion.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_maxVersion.GetSize() :
+					_maxVersion.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ApiVersion> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11421,15 +11307,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					_minVersion.GetSize() :
+					_minVersion.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					_maxVersion.GetSize() :
+					_maxVersion.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<SupportedFeatureKey> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11638,15 +11522,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					_maxVersionLevel.GetSize() :
+					_maxVersionLevel.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					_minVersionLevel.GetSize() :
+					_minVersionLevel.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<FinalizedFeatureKey> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11809,12 +11691,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_clusterId.GetSize() :
+				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<BeginQuorumEpochRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11939,14 +11819,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12065,13 +11941,13 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderId.GetSize() :
+						_leaderId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12238,12 +12114,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<BeginQuorumEpochResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12362,14 +12236,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12488,16 +12358,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderId.GetSize() :
+						_leaderId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12696,19 +12566,19 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_brokerId.GetSize() :
+				_brokerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_brokerEpoch.GetSize() :
+				_brokerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_currentMetadataOffset.GetSize() :
+				_currentMetadataOffset.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_wantFence.GetSize() :
+				_wantFence.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_wantShutDown.GetSize() :
+				_wantShutDown.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<BrokerHeartbeatRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12949,19 +12819,19 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_isCaughtUp.GetSize() :
+				_isCaughtUp.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_isFenced.GetSize() :
+				_isFenced.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_shouldShutDown.GetSize() :
+				_shouldShutDown.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<BrokerHeartbeatResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13201,28 +13071,22 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_brokerId.GetSize() :
+				_brokerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_clusterId).GetSize() :
-						_clusterId.GetSize() :
+				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_incarnationId.GetSize() :
+				_incarnationId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, Listener>)_listenersCollection).GetSize() :
-						_listenersCollection.GetSize() :
+				_listenersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, Feature>)_featuresCollection).GetSize() :
-						_featuresCollection.GetSize() :
+				_featuresCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_rack.GetSize() :
+				_rack.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<BrokerRegistrationRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13433,20 +13297,16 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_host).GetSize() :
-							_host.GetSize() :
+					_host.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_port.GetSize() :
+					_port.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_securityProtocol.GetSize() :
+					_securityProtocol.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<Listener> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13671,15 +13531,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_minSupportedVersion.GetSize() :
+					_minSupportedVersion.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_maxSupportedVersion.GetSize() :
+					_maxSupportedVersion.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<Feature> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13880,13 +13738,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_brokerEpoch.GetSize() :
+				_brokerEpoch.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<BrokerRegistrationResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14050,12 +13908,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, TopicPartition>)_assignedPartitionsCollection).GetSize() :
-						_assignedPartitionsCollection.GetSize() :
+				_assignedPartitionsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_userData.GetSize() :
+				_userData.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ConsumerProtocolAssignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14145,14 +14001,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14312,17 +14164,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_userData.GetSize() :
+				_userData.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, TopicPartition>)_ownedPartitionsCollection).GetSize() :
-						_ownedPartitionsCollection.GetSize() :
+				_ownedPartitionsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ConsumerProtocolSubscription> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14477,14 +14325,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(1, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14609,10 +14453,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_brokerId.GetSize() :
+				_brokerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(2, 2147483647) ? 
-				_brokerEpoch.GetSize() :
+				_brokerEpoch.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ControlledShutdownRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14737,12 +14581,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, RemainingPartition>)_remainingPartitionsCollection).GetSize() :
-						_remainingPartitionsCollection.GetSize() :
+				_remainingPartitionsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ControlledShutdownResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14863,12 +14705,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_partitionIndex.GetSize() :
+					_partitionIndex.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<RemainingPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14994,9 +14834,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<AclCreation>)_creationsCollection).GetSize() :
-						_creationsCollection.GetSize() :
+				_creationsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<CreateAclsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15080,31 +14918,25 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_resourceType.GetSize() :
+					_resourceType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_resourceName).GetSize() :
-							_resourceName.GetSize() :
+					_resourceName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					_resourcePatternType.GetSize() :
+					_resourcePatternType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_principal).GetSize() :
-							_principal.GetSize() :
+					_principal.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_host).GetSize() :
-							_host.GetSize() :
+					_host.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_operation.GetSize() :
+					_operation.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_permissionType.GetSize() :
+					_permissionType.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AclCreation> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15420,12 +15252,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<AclCreationResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<CreateAclsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15546,10 +15376,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AclCreationResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15681,12 +15511,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<CreatableRenewers>)_renewersCollection).GetSize() :
-						_renewersCollection.GetSize() :
+				_renewersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_maxLifetimeMs.GetSize() :
+				_maxLifetimeMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<CreateDelegationTokenRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15778,14 +15606,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_principalType).GetSize() :
-							_principalType.GetSize() :
+					_principalType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_principalName).GetSize() :
-							_principalName.GetSize() :
+					_principalName.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<CreatableRenewers> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15943,37 +15767,31 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_principalType).GetSize() :
-						_principalType.GetSize() :
+				_principalType.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_principalName).GetSize() :
-						_principalName.GetSize() :
+				_principalName.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_issueTimestampMs.GetSize() :
+				_issueTimestampMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_expiryTimestampMs.GetSize() :
+				_expiryTimestampMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_maxTimestampMs.GetSize() :
+				_maxTimestampMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_tokenId).GetSize() :
-						_tokenId.GetSize() :
+				_tokenId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_hmac.GetSize() :
+				_hmac.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<CreateDelegationTokenResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16357,15 +16175,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, CreatePartitionsTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_validateOnly.GetSize() :
+				_validateOnly.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<CreatePartitionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16465,17 +16281,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_count.GetSize() :
+					_count.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactNullableArray<CreatePartitionsAssignment>)_assignmentsCollection).GetSize() :
-							_assignmentsCollection.GetSize() :
+					_assignmentsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<CreatePartitionsTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16639,9 +16451,7 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_brokerIdsCollection).GetSize() :
-								_brokerIdsCollection.GetSize() :
+						_brokerIdsCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<CreatePartitionsAssignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16792,12 +16602,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<CreatePartitionsTopicResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<CreatePartitionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16918,15 +16726,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<CreatePartitionsTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17097,15 +16903,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, CreatableTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_validateOnly.GetSize() :
+				_validateOnly.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<CreateTopicsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17205,25 +17009,19 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_numPartitions.GetSize() :
+					_numPartitions.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_replicationFactor.GetSize() :
+					_replicationFactor.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<Int32, CreatableReplicaAssignment>)_assignmentsCollection).GetSize() :
-							_assignmentsCollection.GetSize() :
+					_assignmentsCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<String, CreateableTopicConfig>)_configsCollection).GetSize() :
-							_configsCollection.GetSize() :
+					_configsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<CreatableTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17426,12 +17224,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_brokerIdsCollection).GetSize() :
-								_brokerIdsCollection.GetSize() :
+						_brokerIdsCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<CreatableReplicaAssignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17582,12 +17378,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_value.GetSize() :
+						_value.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<CreateableTopicConfig> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17785,12 +17579,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(2, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, CreatableTopicResult>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<CreateTopicsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17906,32 +17698,28 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(7, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					_topicConfigErrorCode.GetSize() :
+					_topicConfigErrorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					_numPartitions.GetSize() :
+					_numPartitions.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					_replicationFactor.GetSize() :
+					_replicationFactor.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactNullableArray<CreatableTopicConfigs>)_configsCollection).GetSize() :
-							_configsCollection.GetSize() :
+					_configsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<CreatableTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18264,21 +18052,19 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(5, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
-						_value.GetSize() :
+						_value.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
-						_readOnly.GetSize() :
+						_readOnly.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
-						_configSource.GetSize() :
+						_configSource.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
-						_isSensitive.GetSize() :
+						_isSensitive.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<CreatableTopicConfigs> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18519,17 +18305,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_type).GetSize() :
-						_type.GetSize() :
+				_type.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_name).GetSize() :
-						_name.GetSize() :
+				_name.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_tokenAuthenticated.GetSize() :
+				_tokenAuthenticated.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DefaultPrincipalData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18694,9 +18476,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DeleteAclsFilter>)_filtersCollection).GetSize() :
-						_filtersCollection.GetSize() :
+				_filtersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DeleteAclsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18780,25 +18560,25 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_resourceTypeFilter.GetSize() :
+					_resourceTypeFilter.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_resourceNameFilter.GetSize() :
+					_resourceNameFilter.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					_patternTypeFilter.GetSize() :
+					_patternTypeFilter.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_principalFilter.GetSize() :
+					_principalFilter.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_hostFilter.GetSize() :
+					_hostFilter.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_operation.GetSize() :
+					_operation.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_permissionType.GetSize() :
+					_permissionType.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DeleteAclsFilter> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19132,12 +18912,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DeleteAclsFilterResult>)_filterResultsCollection).GetSize() :
-						_filterResultsCollection.GetSize() :
+				_filterResultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DeleteAclsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19258,15 +19036,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<DeleteAclsMatchingAcl>)_matchingAclsCollection).GetSize() :
-							_matchingAclsCollection.GetSize() :
+					_matchingAclsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DeleteAclsFilterResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19430,37 +19206,31 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorMessage.GetSize() :
+						_errorMessage.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_resourceType.GetSize() :
+						_resourceType.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_resourceName).GetSize() :
-								_resourceName.GetSize() :
+						_resourceName.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
-						_patternType.GetSize() :
+						_patternType.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_principal).GetSize() :
-								_principal.GetSize() :
+						_principal.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_host).GetSize() :
-								_host.GetSize() :
+						_host.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_operation.GetSize() :
+						_operation.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_permissionType.GetSize() :
+						_permissionType.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<DeleteAclsMatchingAcl> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19854,9 +19624,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_groupsNamesCollection).GetSize() :
-						_groupsNamesCollection.GetSize() :
+				_groupsNamesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DeleteGroupsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19947,12 +19715,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, DeletableGroupResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DeleteGroupsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20073,12 +19839,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_groupId).GetSize() :
-							_groupId.GetSize() :
+					_groupId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DeletableGroupResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20204,12 +19968,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DeleteRecordsTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DeleteRecordsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20301,14 +20063,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<DeleteRecordsPartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DeleteRecordsTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20429,10 +20187,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_offset.GetSize() :
+						_offset.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<DeleteRecordsPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20591,12 +20349,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, DeleteRecordsTopicResult>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DeleteRecordsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20717,14 +20473,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<Int32, DeleteRecordsPartitionResult>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DeleteRecordsTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20845,13 +20597,13 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_lowWatermark.GetSize() :
+						_lowWatermark.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<DeleteRecordsPartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21015,17 +20767,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(6, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DeleteTopicState>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 5) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_topicNamesCollection).GetSize() :
-						_topicNamesCollection.GetSize() :
+				_topicNamesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DeleteTopicsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21125,10 +20873,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(6, 2147483647) ? 
-					_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(6, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DeleteTopicState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21318,12 +21066,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<NullableString, DeletableTopicResult>)_responsesCollection).GetSize() :
-						_responsesCollection.GetSize() :
+				_responsesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DeleteTopicsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21439,16 +21185,16 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(6, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DeletableTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21652,25 +21398,25 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_resourceTypeFilter.GetSize() :
+				_resourceTypeFilter.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_resourceNameFilter.GetSize() :
+				_resourceNameFilter.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_patternTypeFilter.GetSize() :
+				_patternTypeFilter.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_principalFilter.GetSize() :
+				_principalFilter.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_hostFilter.GetSize() :
+				_hostFilter.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_operation.GetSize() :
+				_operation.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_permissionType.GetSize() :
+				_permissionType.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeAclsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22003,18 +21749,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DescribeAclsResource>)_resourcesCollection).GetSize() :
-						_resourcesCollection.GetSize() :
+				_resourcesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeAclsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22215,20 +21959,16 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_resourceType.GetSize() :
+					_resourceType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_resourceName).GetSize() :
-							_resourceName.GetSize() :
+					_resourceName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					_patternType.GetSize() :
+					_patternType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<AclDescription>)_aclsCollection).GetSize() :
-							_aclsCollection.GetSize() :
+					_aclsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribeAclsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22425,20 +22165,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_principal).GetSize() :
-								_principal.GetSize() :
+						_principal.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_host).GetSize() :
-								_host.GetSize() :
+						_host.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_operation.GetSize() :
+						_operation.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_permissionType.GetSize() :
+						_permissionType.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<AclDescription> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22639,12 +22375,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ComponentData>)_componentsCollection).GetSize() :
-						_componentsCollection.GetSize() :
+				_componentsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_strict.GetSize() :
+				_strict.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeClientQuotasRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22736,15 +22470,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_entityType).GetSize() :
-							_entityType.GetSize() :
+					_entityType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_matchType.GetSize() :
+					_matchType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_match.GetSize() :
+					_match.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ComponentData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22945,18 +22677,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactNullableArray<EntryData>)_entriesCollection).GetSize() :
-						_entriesCollection.GetSize() :
+				_entriesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeClientQuotasResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23163,14 +22893,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<EntityData>)_entityCollection).GetSize() :
-							_entityCollection.GetSize() :
+					_entityCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<ValueData>)_valuesCollection).GetSize() :
-							_valuesCollection.GetSize() :
+					_valuesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<EntryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23262,12 +22988,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_entityType).GetSize() :
-								_entityType.GetSize() :
+						_entityType.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_entityName.GetSize() :
+						_entityName.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<EntityData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23424,12 +23148,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_key).GetSize() :
-								_key.GetSize() :
+						_key.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_value.GetSize() :
+						_value.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<ValueData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23556,7 +23278,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_includeClusterAuthorizedOperations.GetSize() :
+				_includeClusterAuthorizedOperations.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeClusterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23647,29 +23369,25 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_clusterId).GetSize() :
-						_clusterId.GetSize() :
+				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_controllerId.GetSize() :
+				_controllerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<Int32, DescribeClusterBroker>)_brokersCollection).GetSize() :
-						_brokersCollection.GetSize() :
+				_brokersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_clusterAuthorizedOperations.GetSize() :
+				_clusterAuthorizedOperations.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeClusterResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23956,18 +23674,16 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_brokerId.GetSize() :
+					_brokerId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_host).GetSize() :
-							_host.GetSize() :
+					_host.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_port.GetSize() :
+					_port.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_rack.GetSize() :
+					_rack.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribeClusterBroker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24206,15 +23922,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DescribeConfigsResource>)_resourcesCollection).GetSize() :
-						_resourcesCollection.GetSize() :
+				_resourcesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_includeSynonyms.GetSize() :
+				_includeSynonyms.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_includeDocumentation.GetSize() :
+				_includeDocumentation.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeConfigsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24314,17 +24028,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_resourceType.GetSize() :
+					_resourceType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_resourceName).GetSize() :
-							_resourceName.GetSize() :
+					_resourceName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactNullableArray<String>)_configurationKeysCollection).GetSize() :
-							_configurationKeysCollection.GetSize() :
+					_configurationKeysCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribeConfigsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24558,12 +24268,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DescribeConfigsResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeConfigsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24684,23 +24392,19 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_resourceType.GetSize() :
+					_resourceType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_resourceName).GetSize() :
-							_resourceName.GetSize() :
+					_resourceName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<DescribeConfigsResourceResult>)_configsCollection).GetSize() :
-							_configsCollection.GetSize() :
+					_configsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribeConfigsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24938,35 +24642,31 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_value.GetSize() :
+						_value.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_readOnly.GetSize() :
+						_readOnly.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 0) ? 
-						_isDefault.GetSize() :
+						_isDefault.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
-						_configSource.GetSize() :
+						_configSource.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_isSensitive.GetSize() :
+						_isSensitive.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<DescribeConfigsSynonym>)_synonymsCollection).GetSize() :
-								_synonymsCollection.GetSize() :
+						_synonymsCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(3, 2147483647) ? 
-						_configType.GetSize() :
+						_configType.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(3, 2147483647) ? 
-						_documentation.GetSize() :
+						_documentation.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<DescribeConfigsResourceResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25286,15 +24986,13 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(1, 2147483647) ? 
-							IsFlexibleVersion ?
-								((CompactString)_name).GetSize() :
-									_name.GetSize() :
+							_name.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(1, 2147483647) ? 
-							_value.GetSize() :
+							_value.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(1, 2147483647) ? 
-							_source.GetSize() :
+							_source.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<DescribeConfigsSynonym> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25521,9 +25219,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactNullableArray<DescribeDelegationTokenOwner>)_ownersCollection).GetSize() :
-						_ownersCollection.GetSize() :
+				_ownersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeDelegationTokenRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25613,14 +25309,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_principalType).GetSize() :
-							_principalType.GetSize() :
+					_principalType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_principalName).GetSize() :
-							_principalName.GetSize() :
+					_principalName.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribeDelegationTokenOwner> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25749,15 +25441,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DescribedDelegationToken>)_tokensCollection).GetSize() :
-						_tokensCollection.GetSize() :
+				_tokensCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeDelegationTokenResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25886,36 +25576,28 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_principalType).GetSize() :
-							_principalType.GetSize() :
+					_principalType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_principalName).GetSize() :
-							_principalName.GetSize() :
+					_principalName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_issueTimestamp.GetSize() :
+					_issueTimestamp.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_expiryTimestamp.GetSize() :
+					_expiryTimestamp.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_maxTimestamp.GetSize() :
+					_maxTimestamp.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_tokenId).GetSize() :
-							_tokenId.GetSize() :
+					_tokenId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_hmac.GetSize() :
+					_hmac.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<DescribedDelegationTokenRenewer>)_renewersCollection).GetSize() :
-							_renewersCollection.GetSize() :
+					_renewersCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribedDelegationToken> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26258,14 +25940,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_principalType).GetSize() :
-								_principalType.GetSize() :
+						_principalType.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_principalName).GetSize() :
-								_principalName.GetSize() :
+						_principalName.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<DescribedDelegationTokenRenewer> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26421,12 +26099,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_groupsCollection).GetSize() :
-						_groupsCollection.GetSize() :
+				_groupsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_includeAuthorizedOperations.GetSize() :
+				_includeAuthorizedOperations.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeGroupsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26554,12 +26230,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DescribedGroup>)_groupsCollection).GetSize() :
-						_groupsCollection.GetSize() :
+				_groupsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeGroupsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26675,35 +26349,25 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_groupId).GetSize() :
-							_groupId.GetSize() :
+					_groupId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_groupState).GetSize() :
-							_groupState.GetSize() :
+					_groupState.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_protocolType).GetSize() :
-							_protocolType.GetSize() :
+					_protocolType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_protocolData).GetSize() :
-							_protocolData.GetSize() :
+					_protocolData.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<DescribedGroupMember>)_membersCollection).GetSize() :
-							_membersCollection.GetSize() :
+					_membersCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					_authorizedOperations.GetSize() :
+					_authorizedOperations.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribedGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26980,28 +26644,22 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_memberId).GetSize() :
-								_memberId.GetSize() :
+						_memberId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(4, 2147483647) ? 
-						_groupInstanceId.GetSize() :
+						_groupInstanceId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_clientId).GetSize() :
-								_clientId.GetSize() :
+						_clientId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_clientHost).GetSize() :
-								_clientHost.GetSize() :
+						_clientHost.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_memberMetadata.GetSize() :
+						_memberMetadata.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_memberAssignment.GetSize() :
+						_memberAssignment.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<DescribedGroupMember> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27310,9 +26968,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactNullableMap<String, DescribableLogDirTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeLogDirsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27402,14 +27058,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribableLogDirTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27538,12 +27190,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DescribeLogDirsResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeLogDirsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27664,17 +27314,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_logDir).GetSize() :
-							_logDir.GetSize() :
+					_logDir.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<DescribeLogDirsTopic>)_topicsCollection).GetSize() :
-							_topicsCollection.GetSize() :
+					_topicsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribeLogDirsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27832,14 +27478,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<DescribeLogDirsPartition>)_partitionsCollection).GetSize() :
-								_partitionsCollection.GetSize() :
+						_partitionsCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<DescribeLogDirsTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27958,16 +27600,16 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
-							_partitionIndex.GetSize() :
+							_partitionIndex.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_partitionSize.GetSize() :
+							_partitionSize.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_offsetLag.GetSize() :
+							_offsetLag.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_isFutureKey.GetSize() :
+							_isFutureKey.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<DescribeLogDirsPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28169,9 +27811,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicRequest>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeProducersRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28253,14 +27893,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionIndexesCollection).GetSize() :
-							_partitionIndexesCollection.GetSize() :
+					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28389,12 +28025,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicResponse>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeProducersResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28515,14 +28149,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionResponse>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28643,18 +28273,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorMessage.GetSize() :
+						_errorMessage.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<ProducerState>)_activeProducersCollection).GetSize() :
-								_activeProducersCollection.GetSize() :
+						_activeProducersCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28855,22 +28483,22 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
-							_producerId.GetSize() :
+							_producerId.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_producerEpoch.GetSize() :
+							_producerEpoch.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_lastSequence.GetSize() :
+							_lastSequence.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_lastTimestamp.GetSize() :
+							_lastTimestamp.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_coordinatorEpoch.GetSize() :
+							_coordinatorEpoch.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_currentTxnStartOffset.GetSize() :
+							_currentTxnStartOffset.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<ProducerState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29140,9 +28768,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeQuorumRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29224,14 +28850,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29350,7 +28972,7 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29443,12 +29065,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeQuorumResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29567,14 +29187,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29693,29 +29309,25 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderId.GetSize() :
+						_leaderId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_highWatermark.GetSize() :
+						_highWatermark.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<ReplicaState>)_currentVotersCollection).GetSize() :
-								_currentVotersCollection.GetSize() :
+						_currentVotersCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<ReplicaState>)_observersCollection).GetSize() :
-								_observersCollection.GetSize() :
+						_observersCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30013,10 +29625,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_replicaId.GetSize() :
+					_replicaId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_logEndOffset.GetSize() :
+					_logEndOffset.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ReplicaState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30140,9 +29752,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_transactionalIdsCollection).GetSize() :
-						_transactionalIdsCollection.GetSize() :
+				_transactionalIdsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeTransactionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30233,12 +29843,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TransactionState>)_transactionStatesCollection).GetSize() :
-						_transactionStatesCollection.GetSize() :
+				_transactionStatesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeTransactionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30357,34 +29965,28 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_transactionalId).GetSize() :
-							_transactionalId.GetSize() :
+					_transactionalId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_transactionState).GetSize() :
-							_transactionState.GetSize() :
+					_transactionState.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_transactionTimeoutMs.GetSize() :
+					_transactionTimeoutMs.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_transactionStartTimeMs.GetSize() :
+					_transactionStartTimeMs.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_producerId.GetSize() :
+					_producerId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_producerEpoch.GetSize() :
+					_producerEpoch.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<String, TopicData>)_topicsCollection).GetSize() :
-							_topicsCollection.GetSize() :
+					_topicsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TransactionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30713,14 +30315,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_topic).GetSize() :
-								_topic.GetSize() :
+						_topic.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_partitionsCollection).GetSize() :
-								_partitionsCollection.GetSize() :
+						_partitionsCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30843,9 +30441,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactNullableArray<UserName>)_usersCollection).GetSize() :
-						_usersCollection.GetSize() :
+				_usersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeUserScramCredentialsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30935,9 +30531,7 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<UserName> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31029,18 +30623,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<DescribeUserScramCredentialsResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<DescribeUserScramCredentialsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31241,20 +30833,16 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_user).GetSize() :
-							_user.GetSize() :
+					_user.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<CredentialInfo>)_credentialInfosCollection).GetSize() :
-							_credentialInfosCollection.GetSize() :
+					_credentialInfosCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<DescribeUserScramCredentialsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31455,10 +31043,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_mechanism.GetSize() :
+						_mechanism.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_iterations.GetSize() :
+						_iterations.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<CredentialInfo> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31585,15 +31173,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_electionType.GetSize() :
+				_electionType.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactNullableMap<String, TopicPartitions>)_topicPartitionsCollection).GetSize() :
-						_topicPartitionsCollection.GetSize() :
+				_topicPartitionsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ElectLeadersRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31728,14 +31314,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicPartitions> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31895,15 +31477,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ReplicaElectionResult>)_replicaElectionResultsCollection).GetSize() :
-						_replicaElectionResultsCollection.GetSize() :
+				_replicaElectionResultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ElectLeadersResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32061,14 +31641,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionResult>)_partitionResultCollection).GetSize() :
-							_partitionResultCollection.GetSize() :
+					_partitionResultCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ReplicaElectionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32189,13 +31765,13 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionId.GetSize() :
+						_partitionId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorMessage.GetSize() :
+						_errorMessage.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32365,12 +31941,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_clusterId.GetSize() :
+				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<EndQuorumEpochRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32495,14 +32069,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32621,18 +32191,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderId.GetSize() :
+						_leaderId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_preferredSuccessorsCollection).GetSize() :
-								_preferredSuccessorsCollection.GetSize() :
+						_preferredSuccessorsCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32836,12 +32404,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<EndQuorumEpochResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32960,14 +32526,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33086,16 +32648,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderId.GetSize() :
+						_leaderId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33294,18 +32856,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_transactionalId).GetSize() :
-						_transactionalId.GetSize() :
+				_transactionalId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerId.GetSize() :
+				_producerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerEpoch.GetSize() :
+				_producerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_committed.GetSize() :
+				_committed.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<EndTxnRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33507,10 +33067,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<EndTxnResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33635,13 +33195,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_requestData.GetSize() :
+				_requestData.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_requestPrincipal.GetSize() :
+				_requestPrincipal.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_clientHostAddress.GetSize() :
+				_clientHostAddress.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<EnvelopeRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33812,10 +33372,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_responseData.GetSize() :
+				_responseData.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<EnvelopeResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33948,10 +33508,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_hmac.GetSize() :
+				_hmac.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_expiryTimePeriodMs.GetSize() :
+				_expiryTimePeriodMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ExpireDelegationTokenRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34079,13 +33639,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_expiryTimestampMs.GetSize() :
+				_expiryTimestampMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ExpireDelegationTokenResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34247,43 +33807,37 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(12, 2147483647) ? 
-				_clusterId.GetSize() :
+				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_replicaId.GetSize() :
+				_replicaId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_maxWaitMs.GetSize() :
+				_maxWaitMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_minBytes.GetSize() :
+				_minBytes.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_maxBytes.GetSize() :
+				_maxBytes.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(4, 2147483647) ? 
-				_isolationLevel.GetSize() :
+				_isolationLevel.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
-				_sessionId.GetSize() :
+				_sessionId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
-				_sessionEpoch.GetSize() :
+				_sessionEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<FetchTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ForgottenTopic>)_forgottenTopicsDataCollection).GetSize() :
-						_forgottenTopicsDataCollection.GetSize() :
+				_forgottenTopicsDataCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(11, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_rackId).GetSize() :
-						_rackId.GetSize() :
+				_rackId.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<FetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34674,17 +34228,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 12) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(13, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<FetchPartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<FetchTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34832,22 +34382,22 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partition.GetSize() :
+						_partition.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(9, 2147483647) ? 
-						_currentLeaderEpoch.GetSize() :
+						_currentLeaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_fetchOffset.GetSize() :
+						_fetchOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(12, 2147483647) ? 
-						_lastFetchedEpoch.GetSize() :
+						_lastFetchedEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
-						_logStartOffset.GetSize() :
+						_logStartOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_partitionMaxBytes.GetSize() :
+						_partitionMaxBytes.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<FetchPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35143,17 +34693,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(7, 12) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(13, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(7, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ForgottenTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35335,18 +34881,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
-				_sessionId.GetSize() :
+				_sessionId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<FetchableTopicResponse>)_responsesCollection).GetSize() :
-						_responsesCollection.GetSize() :
+				_responsesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<FetchResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35533,17 +35077,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 12) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(13, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<FetchableTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35691,39 +35231,37 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_highWatermark.GetSize() :
+						_highWatermark.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(4, 2147483647) ? 
-						_lastStableOffset.GetSize() :
+						_lastStableOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
-						_logStartOffset.GetSize() :
+						_logStartOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(12, 2147483647) ? 
-						_divergingEpoch.GetSize() :
+						_divergingEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(12, 2147483647) ? 
-						_currentLeader.GetSize() :
+						_currentLeader.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(12, 2147483647) ? 
-						_snapshotId.GetSize() :
+						_snapshotId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(4, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactNullableArray<AbortedTransaction>)_abortedTransactionsCollection).GetSize() :
-								_abortedTransactionsCollection.GetSize() :
+						_abortedTransactionsCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(11, 2147483647) ? 
-						_preferredReadReplica.GetSize() :
+						_preferredReadReplica.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_records.GetSize() :
+						_records.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36038,10 +35576,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(12, 2147483647) ? 
-							_epoch.GetSize() :
+							_epoch.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(12, 2147483647) ? 
-							_endOffset.GetSize() :
+							_endOffset.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<EpochEndOffset> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36188,10 +35726,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(12, 2147483647) ? 
-							_leaderId.GetSize() :
+							_leaderId.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(12, 2147483647) ? 
-							_leaderEpoch.GetSize() :
+							_leaderEpoch.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36344,10 +35882,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
-							_endOffset.GetSize() :
+							_endOffset.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_epoch.GetSize() :
+							_epoch.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36499,10 +36037,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(4, 2147483647) ? 
-							_producerId.GetSize() :
+							_producerId.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(4, 2147483647) ? 
-							_firstOffset.GetSize() :
+							_firstOffset.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<AbortedTransaction> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36696,18 +36234,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_clusterId.GetSize() :
+				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_replicaId.GetSize() :
+				_replicaId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_maxBytes.GetSize() :
+				_maxBytes.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicSnapshot>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<FetchSnapshotRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36918,14 +36454,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionSnapshot>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37046,16 +36578,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partition.GetSize() :
+						_partition.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_currentLeaderEpoch.GetSize() :
+						_currentLeaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_snapshotId.GetSize() :
+						_snapshotId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_position.GetSize() :
+						_position.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37219,10 +36751,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
-							_endOffset.GetSize() :
+							_endOffset.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_epoch.GetSize() :
+							_epoch.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37378,15 +36910,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicSnapshot>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<FetchSnapshotResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37539,14 +37069,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionSnapshot>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37667,25 +37193,25 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_index.GetSize() :
+						_index.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_snapshotId.GetSize() :
+						_snapshotId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_currentLeader.GetSize() :
+						_currentLeader.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_size.GetSize() :
+						_size.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_position.GetSize() :
+						_position.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_unalignedRecords.GetSize() :
+						_unalignedRecords.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37877,10 +37403,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
-							_endOffset.GetSize() :
+							_endOffset.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_epoch.GetSize() :
+							_epoch.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -38023,10 +37549,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
-							_leaderId.GetSize() :
+							_leaderId.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_leaderEpoch.GetSize() :
+							_leaderEpoch.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -38241,17 +37767,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 3) ? 
-				IsFlexibleVersion ?
-					((CompactString)_key).GetSize() :
-						_key.GetSize() :
+				_key.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_keyType.GetSize() :
+				_keyType.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(4, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_coordinatorKeysCollection).GetSize() :
-						_coordinatorKeysCollection.GetSize() :
+				_coordinatorKeysCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<FindCoordinatorRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -38418,29 +37940,25 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 3) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 3) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 3) ? 
-				_nodeId.GetSize() :
+				_nodeId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 3) ? 
-				IsFlexibleVersion ?
-					((CompactString)_host).GetSize() :
-						_host.GetSize() :
+				_host.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 3) ? 
-				_port.GetSize() :
+				_port.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(4, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<Coordinator>)_coordinatorsCollection).GetSize() :
-						_coordinatorsCollection.GetSize() :
+				_coordinatorsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<FindCoordinatorResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -38742,26 +38260,22 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(4, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_key).GetSize() :
-							_key.GetSize() :
+					_key.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(4, 2147483647) ? 
-					_nodeId.GetSize() :
+					_nodeId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(4, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_host).GetSize() :
-							_host.GetSize() :
+					_host.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(4, 2147483647) ? 
-					_port.GetSize() :
+					_port.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(4, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(4, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<Coordinator> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39036,20 +38550,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_generationId.GetSize() :
+				_generationId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_memberId).GetSize() :
-						_memberId.GetSize() :
+				_memberId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_groupInstanceId.GetSize() :
+				_groupInstanceId.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<HeartbeatRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39259,10 +38769,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<HeartbeatResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39382,12 +38892,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<Int8, AlterConfigsResource>)_resourcesCollection).GetSize() :
-						_resourcesCollection.GetSize() :
+				_resourcesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_validateOnly.GetSize() :
+				_validateOnly.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<IncrementalAlterConfigsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39479,17 +38987,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_resourceType.GetSize() :
+					_resourceType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_resourceName).GetSize() :
-							_resourceName.GetSize() :
+					_resourceName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<String, AlterableConfig>)_configsCollection).GetSize() :
-							_configsCollection.GetSize() :
+					_configsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39647,15 +39151,13 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_configOperation.GetSize() :
+						_configOperation.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_value.GetSize() :
+						_value.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39857,12 +39359,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<AlterConfigsResourceResponse>)_responsesCollection).GetSize() :
-						_responsesCollection.GetSize() :
+				_responsesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<IncrementalAlterConfigsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39983,18 +39483,16 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_resourceType.GetSize() :
+					_resourceType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_resourceName).GetSize() :
-							_resourceName.GetSize() :
+					_resourceName.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40200,16 +39698,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_transactionalId.GetSize() :
+				_transactionalId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_transactionTimeoutMs.GetSize() :
+				_transactionTimeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_producerId.GetSize() :
+				_producerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_producerEpoch.GetSize() :
+				_producerEpoch.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<InitProducerIdRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40421,16 +39919,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerId.GetSize() :
+				_producerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerEpoch.GetSize() :
+				_producerEpoch.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<InitProducerIdResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40626,33 +40124,25 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_sessionTimeoutMs.GetSize() :
+				_sessionTimeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_rebalanceTimeoutMs.GetSize() :
+				_rebalanceTimeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_memberId).GetSize() :
-						_memberId.GetSize() :
+				_memberId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				_groupInstanceId.GetSize() :
+				_groupInstanceId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_protocolType).GetSize() :
-						_protocolType.GetSize() :
+				_protocolType.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, JoinGroupRequestProtocol>)_protocolsCollection).GetSize() :
-						_protocolsCollection.GetSize() :
+				_protocolsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<JoinGroupRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40963,12 +40453,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_metadata.GetSize() :
+					_metadata.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<JoinGroupRequestProtocol> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41097,34 +40585,28 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(2, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_generationId.GetSize() :
+				_generationId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
-				_protocolType.GetSize() :
+				_protocolType.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_protocolName.GetSize() :
+				_protocolName.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_leader).GetSize() :
-						_leader.GetSize() :
+				_leader.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_memberId).GetSize() :
-						_memberId.GetSize() :
+				_memberId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<JoinGroupResponseMember>)_membersCollection).GetSize() :
-						_membersCollection.GetSize() :
+				_membersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<JoinGroupResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41471,15 +40953,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_memberId).GetSize() :
-							_memberId.GetSize() :
+					_memberId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					_groupInstanceId.GetSize() :
+					_groupInstanceId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_metadata.GetSize() :
+					_metadata.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<JoinGroupResponseMember> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41650,31 +41130,25 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_controllerId.GetSize() :
+				_controllerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_controllerEpoch.GetSize() :
+				_controllerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(2, 2147483647) ? 
-				_brokerEpoch.GetSize() :
+				_brokerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				_type.GetSize() :
+				_type.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 1) ? 
-				IsFlexibleVersion ?
-					((CompactArray<LeaderAndIsrPartitionState>)_ungroupedPartitionStatesCollection).GetSize() :
-						_ungroupedPartitionStatesCollection.GetSize() :
+				_ungroupedPartitionStatesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(2, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<LeaderAndIsrTopicState>)_topicStatesCollection).GetSize() :
-						_topicStatesCollection.GetSize() :
+				_topicStatesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<LeaderAndIsrLiveLeader>)_liveLeadersCollection).GetSize() :
-						_liveLeadersCollection.GetSize() :
+				_liveLeadersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<LeaderAndIsrRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41948,17 +41422,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(2, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(2, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<LeaderAndIsrPartitionState>)_partitionStatesCollection).GetSize() :
-							_partitionStatesCollection.GetSize() :
+					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<LeaderAndIsrTopicState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42141,15 +41611,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_brokerId.GetSize() :
+					_brokerId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_hostName).GetSize() :
-							_hostName.GetSize() :
+					_hostName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_port.GetSize() :
+					_port.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<LeaderAndIsrLiveLeader> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42306,47 +41774,37 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 1) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_partitionIndex.GetSize() :
+					_partitionIndex.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_controllerEpoch.GetSize() :
+					_controllerEpoch.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_leader.GetSize() :
+					_leader.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_leaderEpoch.GetSize() :
+					_leaderEpoch.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_isrCollection).GetSize() :
-							_isrCollection.GetSize() :
+					_isrCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_zkVersion.GetSize() :
+					_zkVersion.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_replicasCollection).GetSize() :
-							_replicasCollection.GetSize() :
+					_replicasCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_addingReplicasCollection).GetSize() :
-							_addingReplicasCollection.GetSize() :
+					_addingReplicasCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_removingReplicasCollection).GetSize() :
-							_removingReplicasCollection.GetSize() :
+					_removingReplicasCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					_isNew.GetSize() :
+					_isNew.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<LeaderAndIsrPartitionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42790,17 +42248,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 4) ? 
-				IsFlexibleVersion ?
-					((CompactArray<LeaderAndIsrPartitionError>)_partitionErrorsCollection).GetSize() :
-						_partitionErrorsCollection.GetSize() :
+				_partitionErrorsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<Uuid, LeaderAndIsrTopicError>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<LeaderAndIsrResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42958,12 +42412,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(5, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<LeaderAndIsrPartitionError>)_partitionErrorsCollection).GetSize() :
-							_partitionErrorsCollection.GetSize() :
+					_partitionErrorsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<LeaderAndIsrTopicError> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43083,15 +42535,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 4) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_partitionIndex.GetSize() :
+					_partitionIndex.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<LeaderAndIsrPartitionError> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43249,20 +42699,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_version.GetSize() :
+				_version.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_leaderId.GetSize() :
+				_leaderId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<Voter>)_votersCollection).GetSize() :
-						_votersCollection.GetSize() :
+				_votersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<Voter>)_grantingVotersCollection).GetSize() :
-						_grantingVotersCollection.GetSize() :
+				_grantingVotersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<LeaderChangeMessage> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43455,7 +42901,7 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_voterId.GetSize() :
+					_voterId.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<Voter> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43545,19 +42991,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2) ? 
-				IsFlexibleVersion ?
-					((CompactString)_memberId).GetSize() :
-						_memberId.GetSize() :
+				_memberId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<MemberIdentity>)_membersCollection).GetSize() :
-						_membersCollection.GetSize() :
+				_membersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<LeaveGroupRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43715,12 +43155,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_memberId).GetSize() :
-							_memberId.GetSize() :
+					_memberId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					_groupInstanceId.GetSize() :
+					_groupInstanceId.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<MemberIdentity> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43857,15 +43295,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<MemberResponse>)_membersCollection).GetSize() :
-						_membersCollection.GetSize() :
+				_membersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<LeaveGroupResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44018,15 +43454,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_memberId).GetSize() :
-							_memberId.GetSize() :
+					_memberId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					_groupInstanceId.GetSize() :
+					_groupInstanceId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<MemberResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44195,9 +43629,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(4, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_statesFilterCollection).GetSize() :
-						_statesFilterCollection.GetSize() :
+				_statesFilterCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ListGroupsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44288,15 +43720,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ListedGroup>)_groupsCollection).GetSize() :
-						_groupsCollection.GetSize() :
+				_groupsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ListGroupsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44449,19 +43879,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_groupId).GetSize() :
-							_groupId.GetSize() :
+					_groupId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_protocolType).GetSize() :
-							_protocolType.GetSize() :
+					_protocolType.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(4, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_groupState).GetSize() :
-							_groupState.GetSize() :
+					_groupState.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ListedGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44619,15 +44043,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_replicaId.GetSize() :
+				_replicaId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(2, 2147483647) ? 
-				_isolationLevel.GetSize() :
+				_isolationLevel.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ListOffsetsTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ListOffsetsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44785,14 +44207,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<ListOffsetsPartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ListOffsetsTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44913,16 +44331,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(4, 2147483647) ? 
-						_currentLeaderEpoch.GetSize() :
+						_currentLeaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_timestamp.GetSize() :
+						_timestamp.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 0) ? 
-						_maxNumOffsets.GetSize() :
+						_maxNumOffsets.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<ListOffsetsPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45125,12 +44543,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(2, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<ListOffsetsTopicResponse>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ListOffsetsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45246,14 +44662,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<ListOffsetsPartitionResponse>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ListOffsetsTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45374,24 +44786,22 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 0) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int64>)_oldStyleOffsetsCollection).GetSize() :
-								_oldStyleOffsetsCollection.GetSize() :
+						_oldStyleOffsetsCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
-						_timestamp.GetSize() :
+						_timestamp.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
-						_offset.GetSize() :
+						_offset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(4, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<ListOffsetsPartitionResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45670,12 +45080,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactNullableArray<ListPartitionReassignmentsTopics>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ListPartitionReassignmentsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45806,14 +45214,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionIndexesCollection).GetSize() :
-							_partitionIndexesCollection.GetSize() :
+					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<ListPartitionReassignmentsTopics> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45942,18 +45346,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<OngoingTopicReassignment>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ListPartitionReassignmentsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46154,14 +45556,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<OngoingPartitionReassignment>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OngoingTopicReassignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46282,22 +45680,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_replicasCollection).GetSize() :
-								_replicasCollection.GetSize() :
+						_replicasCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_addingReplicasCollection).GetSize() :
-								_addingReplicasCollection.GetSize() :
+						_addingReplicasCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_removingReplicasCollection).GetSize() :
-								_removingReplicasCollection.GetSize() :
+						_removingReplicasCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OngoingPartitionReassignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46498,14 +45890,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_stateFiltersCollection).GetSize() :
-						_stateFiltersCollection.GetSize() :
+				_stateFiltersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<Int64>)_producerIdFiltersCollection).GetSize() :
-						_producerIdFiltersCollection.GetSize() :
+				_producerIdFiltersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ListTransactionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46633,20 +46021,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_unknownStateFiltersCollection).GetSize() :
-						_unknownStateFiltersCollection.GetSize() :
+				_unknownStateFiltersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TransactionState>)_transactionStatesCollection).GetSize() :
-						_transactionStatesCollection.GetSize() :
+				_transactionStatesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ListTransactionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46837,17 +46221,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_transactionalId).GetSize() :
-							_transactionalId.GetSize() :
+					_transactionalId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_producerId.GetSize() :
+					_producerId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_transactionState).GetSize() :
-							_transactionState.GetSize() :
+					_transactionState.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TransactionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47006,18 +46386,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactNullableArray<MetadataRequestTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(4, 2147483647) ? 
-				_allowAutoTopicCreation.GetSize() :
+				_allowAutoTopicCreation.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(8, 10) ? 
-				_includeClusterAuthorizedOperations.GetSize() :
+				_includeClusterAuthorizedOperations.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(8, 2147483647) ? 
-				_includeTopicAuthorizedOperations.GetSize() :
+				_includeTopicAuthorizedOperations.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<MetadataRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47131,10 +46509,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(10, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<MetadataRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47353,26 +46731,22 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<Int32, MetadataResponseBroker>)_brokersCollection).GetSize() :
-						_brokersCollection.GetSize() :
+				_brokersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(2, 2147483647) ? 
-				_clusterId.GetSize() :
+				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_controllerId.GetSize() :
+				_controllerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<NullableString, MetadataResponseTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(8, 10) ? 
-				_clusterAuthorizedOperations.GetSize() :
+				_clusterAuthorizedOperations.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<MetadataResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47520,18 +46894,16 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_nodeId.GetSize() :
+					_nodeId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_host).GetSize() :
-							_host.GetSize() :
+					_host.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_port.GetSize() :
+					_port.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					_rack.GetSize() :
+					_rack.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<MetadataResponseBroker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47817,24 +47189,22 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(10, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					_isInternal.GetSize() :
+					_isInternal.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<MetadataResponsePartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(8, 2147483647) ? 
-					_topicAuthorizedOperations.GetSize() :
+					_topicAuthorizedOperations.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<MetadataResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48072,31 +47442,25 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderId.GetSize() :
+						_leaderId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(7, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_replicaNodesCollection).GetSize() :
-								_replicaNodesCollection.GetSize() :
+						_replicaNodesCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_isrNodesCollection).GetSize() :
-								_isrNodesCollection.GetSize() :
+						_isrNodesCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_offlineReplicasCollection).GetSize() :
-								_offlineReplicasCollection.GetSize() :
+						_offlineReplicasCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<MetadataResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48462,28 +47826,22 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_generationId.GetSize() :
+				_generationId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_memberId).GetSize() :
-						_memberId.GetSize() :
+				_memberId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
-				_groupInstanceId.GetSize() :
+				_groupInstanceId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(2, 4) ? 
-				_retentionTimeMs.GetSize() :
+				_retentionTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<OffsetCommitRequestTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<OffsetCommitRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48749,14 +48107,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<OffsetCommitRequestPartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetCommitRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48877,19 +48231,19 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_committedOffset.GetSize() :
+						_committedOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(6, 2147483647) ? 
-						_committedLeaderEpoch.GetSize() :
+						_committedLeaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 1) ? 
-						_commitTimestamp.GetSize() :
+						_commitTimestamp.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_committedMetadata.GetSize() :
+						_committedMetadata.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OffsetCommitRequestPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49135,12 +48489,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<OffsetCommitResponseTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<OffsetCommitResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49256,14 +48608,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<OffsetCommitResponsePartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetCommitResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49384,10 +48732,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OffsetCommitResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49514,14 +48862,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, OffsetDeleteRequestTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<OffsetDeleteRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49642,14 +48986,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<OffsetDeleteRequestPartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetDeleteRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49770,7 +49110,7 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OffsetDeleteRequestPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49863,15 +49203,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, OffsetDeleteResponseTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<OffsetDeleteResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50024,14 +49362,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactMap<Int32, OffsetDeleteResponsePartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetDeleteResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50152,10 +49486,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OffsetDeleteResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50282,22 +49616,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 7) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 7) ? 
-				IsFlexibleVersion ?
-					((CompactNullableArray<OffsetFetchRequestTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(8, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<OffsetFetchRequestGroup>)_groupsCollection).GetSize() :
-						_groupsCollection.GetSize() :
+				_groupsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(7, 2147483647) ? 
-				_requireStable.GetSize() :
+				_requireStable.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<OffsetFetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50440,14 +49768,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 7) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 7) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionIndexesCollection).GetSize() :
-							_partitionIndexesCollection.GetSize() :
+					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetFetchRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50598,14 +49922,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(8, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_groupId).GetSize() :
-							_groupId.GetSize() :
+					_groupId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(8, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactNullableArray<OffsetFetchRequestTopics>)_topicsCollection).GetSize() :
-							_topicsCollection.GetSize() :
+					_topicsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetFetchRequestGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50732,14 +50052,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(8, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(8, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_partitionIndexesCollection).GetSize() :
-								_partitionIndexesCollection.GetSize() :
+						_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OffsetFetchRequestTopics> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50900,20 +50216,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 7) ? 
-				IsFlexibleVersion ?
-					((CompactArray<OffsetFetchResponseTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(2, 7) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(8, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<OffsetFetchResponseGroup>)_groupsCollection).GetSize() :
-						_groupsCollection.GetSize() :
+				_groupsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<OffsetFetchResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51045,14 +50357,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 7) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 7) ? 
-					IsFlexibleVersion ?
-						((CompactArray<OffsetFetchResponsePartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetFetchResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51173,19 +50481,19 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 7) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 7) ? 
-						_committedOffset.GetSize() :
+						_committedOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 7) ? 
-						_committedLeaderEpoch.GetSize() :
+						_committedLeaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 7) ? 
-						_metadata.GetSize() :
+						_metadata.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 7) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OffsetFetchResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51477,17 +50785,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(8, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_groupId).GetSize() :
-							_groupId.GetSize() :
+					_groupId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(8, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<OffsetFetchResponseTopics>)_topicsCollection).GetSize() :
-							_topicsCollection.GetSize() :
+					_topicsCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(8, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetFetchResponseGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51616,14 +50920,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(8, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(8, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<OffsetFetchResponsePartitions>)_partitionsCollection).GetSize() :
-								_partitionsCollection.GetSize() :
+						_partitionsCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OffsetFetchResponseTopics> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51744,19 +51044,19 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(8, 2147483647) ? 
-							_partitionIndex.GetSize() :
+							_partitionIndex.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(8, 2147483647) ? 
-							_committedOffset.GetSize() :
+							_committedOffset.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(8, 2147483647) ? 
-							_committedLeaderEpoch.GetSize() :
+							_committedLeaderEpoch.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(8, 2147483647) ? 
-							_metadata.GetSize() :
+							_metadata.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(8, 2147483647) ? 
-							_errorCode.GetSize() :
+							_errorCode.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<OffsetFetchResponsePartitions> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52029,12 +51329,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
-				_replicaId.GetSize() :
+				_replicaId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, OffsetForLeaderTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<OffsetForLeaderEpochRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52152,14 +51450,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<OffsetForLeaderPartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetForLeaderTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52280,13 +51574,13 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partition.GetSize() :
+						_partition.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(2, 2147483647) ? 
-						_currentLeaderEpoch.GetSize() :
+						_currentLeaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<OffsetForLeaderPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52450,12 +51744,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(2, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, OffsetForLeaderTopicResult>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<OffsetForLeaderEpochResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52571,14 +51863,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topic).GetSize() :
-							_topic.GetSize() :
+					_topic.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<EpochEndOffset>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<OffsetForLeaderTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52699,16 +51987,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_partition.GetSize() :
+						_partition.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_endOffset.GetSize() :
+						_endOffset.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<EpochEndOffset> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52908,18 +52196,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
-				_transactionalId.GetSize() :
+				_transactionalId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_acks.GetSize() :
+				_acks.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, TopicProduceData>)_topicDataCollection).GetSize() :
-						_topicDataCollection.GetSize() :
+				_topicDataCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ProduceRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53122,14 +52408,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionProduceData>)_partitionDataCollection).GetSize() :
-							_partitionDataCollection.GetSize() :
+					_partitionDataCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicProduceData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53250,10 +52532,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_index.GetSize() :
+						_index.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_records.GetSize() :
+						_records.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionProduceData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53389,12 +52671,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, TopicProduceResponse>)_responsesCollection).GetSize() :
-						_responsesCollection.GetSize() :
+				_responsesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ProduceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53486,14 +52766,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionProduceResponse>)_partitionResponsesCollection).GetSize() :
-							_partitionResponsesCollection.GetSize() :
+					_partitionResponsesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicProduceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53614,27 +52890,25 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_index.GetSize() :
+						_index.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_baseOffset.GetSize() :
+						_baseOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(2, 2147483647) ? 
-						_logAppendTimeMs.GetSize() :
+						_logAppendTimeMs.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(5, 2147483647) ? 
-						_logStartOffset.GetSize() :
+						_logStartOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(8, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<BatchIndexAndErrorMessage>)_recordErrorsCollection).GetSize() :
-								_recordErrorsCollection.GetSize() :
+						_recordErrorsCollection.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(8, 2147483647) ? 
-						_errorMessage.GetSize() :
+						_errorMessage.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionProduceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53900,10 +53174,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(8, 2147483647) ? 
-							_batchIndex.GetSize() :
+							_batchIndex.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(8, 2147483647) ? 
-							_batchIndexErrorMessage.GetSize() :
+							_batchIndexErrorMessage.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<BatchIndexAndErrorMessage> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54097,10 +53371,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_hmac.GetSize() :
+				_hmac.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_renewPeriodMs.GetSize() :
+				_renewPeriodMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<RenewDelegationTokenRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54228,13 +53502,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_expiryTimestampMs.GetSize() :
+				_expiryTimestampMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<RenewDelegationTokenResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54396,16 +53670,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_requestApiKey.GetSize() :
+				_requestApiKey.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_requestApiVersion.GetSize() :
+				_requestApiVersion.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_correlationId.GetSize() :
+				_correlationId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_clientId.GetSize() :
+				_clientId.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<RequestHeader> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54608,7 +53882,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_correlationId.GetSize() :
+				_correlationId.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<ResponseHeader> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54699,7 +53973,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_authBytes.GetSize() :
+				_authBytes.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<SaslAuthenticateRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54790,16 +54064,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_authBytes.GetSize() :
+				_authBytes.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_sessionLifetimeMs.GetSize() :
+				_sessionLifetimeMs.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<SaslAuthenticateResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55001,9 +54275,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_mechanism).GetSize() :
-						_mechanism.GetSize() :
+				_mechanism.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<SaslHandshakeRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55094,12 +54366,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<String>)_mechanismsCollection).GetSize() :
-						_mechanismsCollection.GetSize() :
+				_mechanismsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<SaslHandshakeResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55224,7 +54494,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_version.GetSize() :
+				_version.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<SnapshotFooterRecord> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55315,10 +54585,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_version.GetSize() :
+				_version.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_lastContainedLogTimestamp.GetSize() :
+				_lastContainedLogTimestamp.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<SnapshotHeaderRecord> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55446,31 +54716,25 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_controllerId.GetSize() :
+				_controllerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_controllerEpoch.GetSize() :
+				_controllerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
-				_brokerEpoch.GetSize() :
+				_brokerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2) ? 
-				_deletePartitions.GetSize() :
+				_deletePartitions.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 0) ? 
-				IsFlexibleVersion ?
-					((CompactArray<StopReplicaPartitionV0>)_ungroupedPartitionsCollection).GetSize() :
-						_ungroupedPartitionsCollection.GetSize() :
+				_ungroupedPartitionsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2) ? 
-				IsFlexibleVersion ?
-					((CompactArray<StopReplicaTopicV1>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<StopReplicaTopicState>)_topicStatesCollection).GetSize() :
-						_topicStatesCollection.GetSize() :
+				_topicStatesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<StopReplicaRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55715,12 +54979,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 0) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 0) ? 
-					_partitionIndex.GetSize() :
+					_partitionIndex.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<StopReplicaPartitionV0> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55871,14 +55133,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(1, 2) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_partitionIndexesCollection).GetSize() :
-							_partitionIndexesCollection.GetSize() :
+					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<StopReplicaTopicV1> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56029,14 +55287,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(3, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<StopReplicaPartitionState>)_partitionStatesCollection).GetSize() :
-							_partitionStatesCollection.GetSize() :
+					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<StopReplicaTopicState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56157,13 +55411,13 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(3, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(3, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(3, 2147483647) ? 
-						_deletePartition.GetSize() :
+						_deletePartition.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<StopReplicaPartitionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56332,12 +55586,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<StopReplicaPartitionError>)_partitionErrorsCollection).GetSize() :
-						_partitionErrorsCollection.GetSize() :
+				_partitionErrorsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<StopReplicaResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56458,15 +55710,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_partitionIndex.GetSize() :
+					_partitionIndex.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<StopReplicaPartitionError> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56629,31 +55879,25 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_generationId.GetSize() :
+				_generationId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_memberId).GetSize() :
-						_memberId.GetSize() :
+				_memberId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_groupInstanceId.GetSize() :
+				_groupInstanceId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				_protocolType.GetSize() :
+				_protocolType.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				_protocolName.GetSize() :
+				_protocolName.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<SyncGroupRequestAssignment>)_assignmentsCollection).GetSize() :
-						_assignmentsCollection.GetSize() :
+				_assignmentsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<SyncGroupRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56973,12 +56217,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_memberId).GetSize() :
-							_memberId.GetSize() :
+					_memberId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_assignment.GetSize() :
+					_assignment.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<SyncGroupRequestAssignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -57107,19 +56349,19 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				_protocolType.GetSize() :
+				_protocolType.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				_protocolName.GetSize() :
+				_protocolName.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_assignment.GetSize() :
+				_assignment.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<SyncGroupResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -57356,36 +56598,28 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_transactionalId).GetSize() :
-						_transactionalId.GetSize() :
+				_transactionalId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_groupId).GetSize() :
-						_groupId.GetSize() :
+				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerId.GetSize() :
+				_producerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_producerEpoch.GetSize() :
+				_producerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_generationId.GetSize() :
+				_generationId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactString)_memberId).GetSize() :
-						_memberId.GetSize() :
+				_memberId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
-				_groupInstanceId.GetSize() :
+				_groupInstanceId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TxnOffsetCommitRequestTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<TxnOffsetCommitRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -57740,14 +56974,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<TxnOffsetCommitRequestPartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TxnOffsetCommitRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -57868,16 +57098,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_committedOffset.GetSize() :
+						_committedOffset.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(2, 2147483647) ? 
-						_committedLeaderEpoch.GetSize() :
+						_committedLeaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_committedMetadata.GetSize() :
+						_committedMetadata.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<TxnOffsetCommitRequestPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -58084,12 +57314,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TxnOffsetCommitResponseTopic>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<TxnOffsetCommitResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -58210,14 +57438,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_name).GetSize() :
-							_name.GetSize() :
+					_name.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<TxnOffsetCommitResponsePartition>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TxnOffsetCommitResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -58338,10 +57562,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<TxnOffsetCommitResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -58468,7 +57692,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_brokerId.GetSize() :
+				_brokerId.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<UnregisterBrokerRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -58559,13 +57783,13 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<UnregisterBrokerResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -58733,12 +57957,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_timeoutMs.GetSize() :
+				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, FeatureUpdateKey>)_featureUpdatesCollection).GetSize() :
-						_featureUpdatesCollection.GetSize() :
+				_featureUpdatesCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<UpdateFeaturesRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -58861,15 +58083,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_feature).GetSize() :
-							_feature.GetSize() :
+					_feature.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_maxVersionLevel.GetSize() :
+					_maxVersionLevel.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_allowDowngrade.GetSize() :
+					_allowDowngrade.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<FeatureUpdateKey> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -59035,18 +58255,16 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_throttleTimeMs.GetSize() :
+				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_errorMessage.GetSize() :
+				_errorMessage.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactMap<String, UpdatableFeatureResult>)_resultsCollection).GetSize() :
-						_resultsCollection.GetSize() :
+				_resultsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<UpdateFeaturesResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -59247,15 +58465,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_feature).GetSize() :
-							_feature.GetSize() :
+					_feature.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorCode.GetSize() :
+					_errorCode.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_errorMessage.GetSize() :
+					_errorMessage.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<UpdatableFeatureResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -59424,28 +58640,22 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_controllerId.GetSize() :
+				_controllerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				_controllerEpoch.GetSize() :
+				_controllerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				_brokerEpoch.GetSize() :
+				_brokerEpoch.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 4) ? 
-				IsFlexibleVersion ?
-					((CompactArray<UpdateMetadataPartitionState>)_ungroupedPartitionStatesCollection).GetSize() :
-						_ungroupedPartitionStatesCollection.GetSize() :
+				_ungroupedPartitionStatesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(5, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<UpdateMetadataTopicState>)_topicStatesCollection).GetSize() :
-						_topicStatesCollection.GetSize() :
+				_topicStatesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<UpdateMetadataBroker>)_liveBrokersCollection).GetSize() :
-						_liveBrokersCollection.GetSize() :
+				_liveBrokersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<UpdateMetadataRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -59682,17 +58892,13 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(5, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(7, 2147483647) ? 
-					_topicId.GetSize() :
+					_topicId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<UpdateMetadataPartitionState>)_partitionStatesCollection).GetSize() :
-							_partitionStatesCollection.GetSize() :
+					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<UpdateMetadataTopicState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -59873,23 +59079,19 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_id.GetSize() :
+					_id.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 0) ? 
-					IsFlexibleVersion ?
-						((CompactString)_v0Host).GetSize() :
-							_v0Host.GetSize() :
+					_v0Host.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 0) ? 
-					_v0Port.GetSize() :
+					_v0Port.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(1, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<UpdateMetadataEndpoint>)_endpointsCollection).GetSize() :
-							_endpointsCollection.GetSize() :
+					_endpointsCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(2, 2147483647) ? 
-					_rack.GetSize() :
+					_rack.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<UpdateMetadataBroker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -60077,20 +59279,16 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(1, 2147483647) ? 
-						_port.GetSize() :
+						_port.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_host).GetSize() :
-								_host.GetSize() :
+						_host.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(3, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_listener).GetSize() :
-								_listener.GetSize() :
+						_listener.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(1, 2147483647) ? 
-						_securityProtocol.GetSize() :
+						_securityProtocol.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<UpdateMetadataEndpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -60310,39 +59508,31 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 4) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_partitionIndex.GetSize() :
+					_partitionIndex.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_controllerEpoch.GetSize() :
+					_controllerEpoch.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_leader.GetSize() :
+					_leader.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_leaderEpoch.GetSize() :
+					_leaderEpoch.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_isrCollection).GetSize() :
-							_isrCollection.GetSize() :
+					_isrCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_zkVersion.GetSize() :
+					_zkVersion.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_replicasCollection).GetSize() :
-							_replicasCollection.GetSize() :
+					_replicasCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(4, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<Int32>)_offlineReplicasCollection).GetSize() :
-							_offlineReplicasCollection.GetSize() :
+					_offlineReplicasCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<UpdateMetadataPartitionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -60720,7 +59910,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<UpdateMetadataResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -60808,12 +59998,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_clusterId.GetSize() :
+				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<VoteRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -60938,14 +60126,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -61064,19 +60248,19 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_candidateEpoch.GetSize() :
+						_candidateEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_candidateId.GetSize() :
+						_candidateId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_lastOffsetEpoch.GetSize() :
+						_lastOffsetEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_lastOffset.GetSize() :
+						_lastOffset.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -61317,12 +60501,10 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				_errorCode.GetSize() :
+				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<TopicData>)_topicsCollection).GetSize() :
-						_topicsCollection.GetSize() :
+				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<VoteResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -61441,14 +60623,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactString)_topicName).GetSize() :
-							_topicName.GetSize() :
+					_topicName.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<PartitionData>)_partitionsCollection).GetSize() :
-							_partitionsCollection.GetSize() :
+					_partitionsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -61567,19 +60745,19 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						_partitionIndex.GetSize() :
+						_partitionIndex.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_errorCode.GetSize() :
+						_errorCode.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderId.GetSize() :
+						_leaderId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_leaderEpoch.GetSize() :
+						_leaderEpoch.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_voteGranted.GetSize() :
+						_voteGranted.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -61815,9 +60993,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<WritableTxnMarker>)_markersCollection).GetSize() :
-						_markersCollection.GetSize() :
+				_markersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<WriteTxnMarkersRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -61901,21 +61077,19 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_producerId.GetSize() :
+					_producerId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_producerEpoch.GetSize() :
+					_producerEpoch.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_transactionResult.GetSize() :
+					_transactionResult.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<WritableTxnMarkerTopic>)_topicsCollection).GetSize() :
-							_topicsCollection.GetSize() :
+					_topicsCollection.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					_coordinatorEpoch.GetSize() :
+					_coordinatorEpoch.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<WritableTxnMarker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -62118,14 +61292,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<Int32>)_partitionIndexesCollection).GetSize() :
-								_partitionIndexesCollection.GetSize() :
+						_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<WritableTxnMarkerTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -62284,9 +61454,7 @@ namespace Kafka.Protocol
 
 		public override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
-				IsFlexibleVersion ?
-					((CompactArray<WritableTxnMarkerResult>)_markersCollection).GetSize() :
-						_markersCollection.GetSize() :
+				_markersCollection.GetSize(IsFlexibleVersion) :
 				0);
 
 		public static async ValueTask<WriteTxnMarkersResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -62370,12 +61538,10 @@ namespace Kafka.Protocol
 
 			public int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
-					_producerId.GetSize() :
+					_producerId.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(0, 2147483647) ? 
-					IsFlexibleVersion ?
-						((CompactArray<WritableTxnMarkerTopicResult>)_topicsCollection).GetSize() :
-							_topicsCollection.GetSize() :
+					_topicsCollection.GetSize(IsFlexibleVersion) :
 					0);
 
 			public static async ValueTask<WritableTxnMarkerResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -62496,14 +61662,10 @@ namespace Kafka.Protocol
 
 				public int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactString)_name).GetSize() :
-								_name.GetSize() :
+						_name.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						IsFlexibleVersion ?
-							((CompactArray<WritableTxnMarkerPartitionResult>)_partitionsCollection).GetSize() :
-								_partitionsCollection.GetSize() :
+						_partitionsCollection.GetSize(IsFlexibleVersion) :
 						0);
 
 				public static async ValueTask<WritableTxnMarkerTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -62624,10 +61786,10 @@ namespace Kafka.Protocol
 
 					public int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
-							_partitionIndex.GetSize() :
+							_partitionIndex.GetSize(IsFlexibleVersion) :
 							0) +
 						(Version.InRange(0, 2147483647) ? 
-							_errorCode.GetSize() :
+							_errorCode.GetSize(IsFlexibleVersion) :
 							0);
 
 					public static async ValueTask<WritableTxnMarkerPartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
