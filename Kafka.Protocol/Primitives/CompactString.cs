@@ -23,7 +23,5 @@ namespace Kafka.Protocol
             (await CompactNullableString.FromReaderAsync(reader, cancellationToken)
                 .ConfigureAwait(false)).Value ??
             $"The string cannot be null. Consider changing to {nameof(CompactNullableString)}";
-
-        public static implicit operator CompactString(String value) => value.Value;
     }
 }

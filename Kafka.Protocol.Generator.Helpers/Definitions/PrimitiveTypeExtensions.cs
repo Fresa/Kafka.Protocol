@@ -31,6 +31,14 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 .Contains("NULLABLE");
         }
 
+        public static bool IsCompact(this PrimitiveType primitiveType)
+        {
+            return primitiveType
+                .Type
+                .ToUpper()
+                .Contains("COMPACT");
+        }
+
         public static string GetTypeName(this PrimitiveType primitiveType) =>
             primitiveType
                 .ResolveType()

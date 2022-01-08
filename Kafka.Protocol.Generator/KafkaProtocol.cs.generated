@@ -601,6 +601,10 @@ namespace Kafka.Protocol
 
 		public static implicit operator CompactString(string value) => From(value);
 
+		public static implicit operator String(CompactString value) => value.Value;
+
+		public static implicit operator CompactString(String value) => From(value);
+
 		public static CompactString From(string value)
 		{
 			return new CompactString(value);
@@ -707,10 +711,16 @@ namespace Kafka.Protocol
 
 		public static implicit operator CompactNullableString(string? value) => From(value);
 
-		public static implicit operator CompactNullableString?(CompactNullableString value) =>
-			value.Value == null ? null as CompactNullableString? : CompactNullableString.From(value.Value);
+		public static implicit operator String?(CompactNullableString value) =>
+			value.Value == null ? null as String? : String.From(value.Value);
 
-		public static implicit operator CompactNullableString(CompactNullableString? value) =>
+		public static implicit operator CompactNullableString(String? value) =>
+			From(value?.Value);
+
+		public static implicit operator CompactString?(CompactNullableString value) =>
+			value.Value == null ? null as CompactString? : CompactString.From(value.Value);
+
+		public static implicit operator CompactNullableString(CompactString? value) =>
 			From(value?.Value);
 
 		public static CompactNullableString From(string? value)
@@ -812,6 +822,10 @@ namespace Kafka.Protocol
 		public static implicit operator byte[](CompactBytes value) => value.Value;
 
 		public static implicit operator CompactBytes(byte[] value) => From(value);
+
+		public static implicit operator Bytes(CompactBytes value) => value.Value;
+
+		public static implicit operator CompactBytes(Bytes value) => From(value);
 
 		public static CompactBytes From(params byte[] value)
 		{
@@ -919,10 +933,16 @@ namespace Kafka.Protocol
 
 		public static implicit operator CompactNullableBytes(byte[]? value) => From(value);
 
-		public static implicit operator CompactNullableBytes?(CompactNullableBytes value) =>
-			value.Value == null ? null as CompactNullableBytes? : CompactNullableBytes.From(value.Value);
+		public static implicit operator Bytes?(CompactNullableBytes value) =>
+			value.Value == null ? null as Bytes? : Bytes.From(value.Value);
 
-		public static implicit operator CompactNullableBytes(CompactNullableBytes? value) =>
+		public static implicit operator CompactNullableBytes(Bytes? value) =>
+			From(value?.Value);
+
+		public static implicit operator CompactBytes?(CompactNullableBytes value) =>
+			value.Value == null ? null as CompactBytes? : CompactBytes.From(value.Value);
+
+		public static implicit operator CompactNullableBytes(CompactBytes? value) =>
 			From(value?.Value);
 
 		public static CompactNullableBytes From(params byte[]? value)
@@ -1026,6 +1046,10 @@ namespace Kafka.Protocol
 		public static implicit operator T[](CompactArray<T> value) => value.Value;
 
 		public static implicit operator CompactArray<T>(T[] value) => From(value);
+
+		public static implicit operator Array<T>(CompactArray<T> value) => value.Value;
+
+		public static implicit operator CompactArray<T>(Array<T> value) => From(value);
 
 		public static CompactArray<T> From(params T[] value)
 		{
@@ -1235,10 +1259,16 @@ namespace Kafka.Protocol
 
 		public static implicit operator CompactNullableArray<T>(T[]? value) => From(value);
 
-		public static implicit operator CompactNullableArray<T>?(CompactNullableArray<T> value) =>
-			value.Value == null ? null as CompactNullableArray<T>? : CompactNullableArray<T>.From(value.Value);
+		public static implicit operator Array<T>?(CompactNullableArray<T> value) =>
+			value.Value == null ? null as Array<T>? : Array<T>.From(value.Value);
 
-		public static implicit operator CompactNullableArray<T>(CompactNullableArray<T>? value) =>
+		public static implicit operator CompactNullableArray<T>(Array<T>? value) =>
+			From(value?.Value);
+
+		public static implicit operator CompactArray<T>?(CompactNullableArray<T> value) =>
+			value.Value == null ? null as CompactArray<T>? : CompactArray<T>.From(value.Value);
+
+		public static implicit operator CompactNullableArray<T>(CompactArray<T>? value) =>
 			From(value?.Value);
 
 		public static CompactNullableArray<T> From(params T[]? value)
@@ -1344,6 +1374,10 @@ namespace Kafka.Protocol
 		public static implicit operator Dictionary<TKey, TValue>(CompactMap<TKey, TValue> value) => value.Value;
 
 		public static implicit operator CompactMap<TKey, TValue>(Dictionary<TKey, TValue> value) => From(value);
+
+		public static implicit operator Map<TKey, TValue>(CompactMap<TKey, TValue> value) => value.Value;
+
+		public static implicit operator CompactMap<TKey, TValue>(Map<TKey, TValue> value) => From(value);
 
 		public static CompactMap<TKey, TValue> From(Dictionary<TKey, TValue> value)
 		{
@@ -1455,10 +1489,16 @@ namespace Kafka.Protocol
 
 		public static implicit operator CompactNullableMap<TKey, TValue>(Dictionary<TKey, TValue>? value) => From(value);
 
-		public static implicit operator CompactNullableMap<TKey, TValue>?(CompactNullableMap<TKey, TValue> value) =>
-			value.Value == null ? null as CompactNullableMap<TKey, TValue>? : CompactNullableMap<TKey, TValue>.From(value.Value);
+		public static implicit operator Map<TKey, TValue>?(CompactNullableMap<TKey, TValue> value) =>
+			value.Value == null ? null as Map<TKey, TValue>? : Map<TKey, TValue>.From(value.Value);
 
-		public static implicit operator CompactNullableMap<TKey, TValue>(CompactNullableMap<TKey, TValue>? value) =>
+		public static implicit operator CompactNullableMap<TKey, TValue>(Map<TKey, TValue>? value) =>
+			From(value?.Value);
+
+		public static implicit operator CompactMap<TKey, TValue>?(CompactNullableMap<TKey, TValue> value) =>
+			value.Value == null ? null as CompactMap<TKey, TValue>? : CompactMap<TKey, TValue>.From(value.Value);
+
+		public static implicit operator CompactNullableMap<TKey, TValue>(CompactMap<TKey, TValue>? value) =>
 			From(value?.Value);
 
 		public static CompactNullableMap<TKey, TValue> From(Dictionary<TKey, TValue>? value)
