@@ -33,14 +33,6 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
-        public int GetSize()
-        {
-            var size = Header.GetSize() +
-                       Message.GetSize();
-            return Int32.From(size).GetSize(false) +
-                   size;
-        }
-
         public static async ValueTask<ResponsePayload> ReadFromAsync(
             RequestPayload requestPayload,
             PipeReader reader,

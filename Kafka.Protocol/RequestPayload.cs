@@ -32,18 +32,15 @@ namespace Kafka.Protocol
             Stream writer,
             CancellationToken cancellationToken = default)
         {
+            var size = Header.GetSize() +
+                       Message.GetSize();
+            await Int32.From(size)
+                .WriteToAsync(writer, false, cancellationToken)
+                .ConfigureAwait(false);
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
-        }
-
-        public int GetSize()
-        {
-            var size = Header.GetSize() +
-                       Message.GetSize();
-            return Int32.From(size).GetSize(false) +
-                   size;
         }
 
         public static async ValueTask<RequestPayload> ReadFromAsync(
