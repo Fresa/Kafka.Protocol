@@ -9,12 +9,12 @@ namespace Kafka.Protocol
 {
     public partial struct Boolean
     {
-        public int GetSize(bool asCompact) => 1;
+        internal int GetSize(bool asCompact) => 1;
 
-        public ValueTask WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken = default) =>
+        internal ValueTask WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken = default) =>
             writer.WriteAsLittleEndianAsync(BitConverter.GetBytes(Value), cancellationToken);
 
-        public static async ValueTask<Boolean> FromReaderAsync(
+        internal static async ValueTask<Boolean> FromReaderAsync(
             PipeReader reader,
             bool _,
             CancellationToken cancellationToken = default) =>

@@ -17,7 +17,7 @@ namespace Kafka.Protocol.Records
         public byte[] Value { get; set; } = Array.Empty<byte>();
         public Header[] Headers { get; set; } = Array.Empty<Header>();
 
-        public static async ValueTask<Record> FromReaderAsync(
+        internal static async ValueTask<Record> FromReaderAsync(
             PipeReader reader,
             bool asCompact,
             CancellationToken cancellationToken = default)
@@ -55,8 +55,9 @@ namespace Kafka.Protocol.Records
             record.Headers = headers.ToArray();
             return record;
         }
-        
-        public async ValueTask WriteToAsync(
+
+        ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+        internal async ValueTask WriteToAsync(
             Stream writer,
             bool asCompact,
             CancellationToken cancellationToken = default)
@@ -88,7 +89,8 @@ namespace Kafka.Protocol.Records
             }
         }
 
-        public int GetSize(bool asCompact)
+        int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+        internal int GetSize(bool asCompact)
         {
             var size = Attributes.GetSize(asCompact) +
                    TimestampDelta.GetSize(asCompact) +

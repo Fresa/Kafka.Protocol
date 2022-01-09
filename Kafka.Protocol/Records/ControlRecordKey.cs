@@ -49,7 +49,8 @@ namespace Kafka.Protocol.Records
                 .ConfigureAwait(false);
         }
 
-        public async ValueTask WriteToAsync(
+        ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken = default) => WriteToAsync(writer, asCompact, cancellationToken);
+        internal async ValueTask WriteToAsync(
             Stream writer,
             bool asCompact,
             CancellationToken cancellationToken = default)
@@ -60,7 +61,8 @@ namespace Kafka.Protocol.Records
                 .ConfigureAwait(false);
         }
 
-        public int GetSize(bool asCompact) =>
+        int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+        internal int GetSize(bool asCompact) =>
             Version.GetSize(asCompact) +
             _type.GetSize(asCompact);
     }

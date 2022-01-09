@@ -137,6 +137,10 @@ namespace Kafka.Protocol<# Block(() =>
 				#>	From(value?.Value);<# _(2);
 			}
 
+			#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# _(2);
+
+			#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# _(2);
+
 			#>public static <#= className #> From(<#= @params #><#= type #> value)<# Block(() =>
             {
                 #>return new <#= className #>(value);<#
@@ -233,14 +237,14 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public override Int16 Version { get; }<# _(1);
 			#>internal bool IsFlexibleVersion { get; }<# _(2);
 
-			#>public override int GetSize() =><# _();
+			#>internal override int GetSize() =><# _();
 			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
 			{
 				PrintSizeOf(messageField);
 				if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
 			}); _(2);
 
-			#>public static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+			#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				#>var instance = new <#= messageDefinition.Name #>(version);<# _();
 				
@@ -261,7 +265,7 @@ namespace Kafka.Protocol<# Block(() =>
 				}
 			}); _(2);
 
-			#>public override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
+			#>internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				if (messageDefinition.Fields.Any() == false)
 				{
@@ -553,14 +557,15 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>internal Int16 Version { get; }<# _();
 		#>internal bool IsFlexibleVersion { get; }<# _(2);
 
-		#>public int GetSize(bool _) =><# _();
+		#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# _();
+		#>internal int GetSize(bool _) =><# _();
 		PrintOnNewRowForEachWithIndex(field.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
 		{
 			PrintSizeOf(messageField);
 			if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
 		}); _(2);
 
-		#>public static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+		#>internal static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();
 			PrintOnNewRowForEach(field.GetNonTaggedFields(), messageField => 
@@ -573,7 +578,8 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			#>return instance;<# 
 		}); _(2);
 
-		#>public async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
+		#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# _();
+		#>internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			PrintOnNewRowForEach(field.Fields, messageField => 
 			{
@@ -621,14 +627,15 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 		#>internal Int16 Version { get; }<# _();
 		#>internal bool IsFlexibleVersion { get; }<# _(2);
 
-		#>public int GetSize(bool _) =><# _();
+		#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# _();
+		#>internal int GetSize(bool _) =><# _();
 		PrintOnNewRowForEachWithIndex(commonStruct.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
 		{
 			PrintSizeOf(messageField);
 			if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
 		}); _(2);
 
-		#>public static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+		#>internal static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= commonStruct.Name #>(version);<# _();
 			PrintOnNewRowForEach(commonStruct.GetNonTaggedFields(), messageField => 
@@ -641,7 +648,8 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			#>return instance;<#
 		}); _(2);
 
-		#>public async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
+		#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# _();
+		#>internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			PrintOnNewRowForEach(commonStruct.Fields, field => 
 			{

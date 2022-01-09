@@ -6,10 +6,10 @@ namespace Kafka.Protocol
 {
     public interface ISerialize
     {
-        ValueTask WriteToAsync(Stream writer, 
+        internal ValueTask WriteToAsync(Stream writer, 
             bool asCompact,
             CancellationToken cancellationToken = default);
 
-        int GetSize(bool asCompact);
+        internal int GetSize(bool asCompact);
     }
 }

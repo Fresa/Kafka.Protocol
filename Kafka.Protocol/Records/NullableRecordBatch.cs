@@ -8,7 +8,7 @@ namespace Kafka.Protocol.Records
     {
         internal static NullableRecordBatch Default => new NullableRecordBatch();
 
-        public static ValueTask<NullableRecordBatch> FromReaderAsync(
+        internal static ValueTask<NullableRecordBatch> FromReaderAsync(
             PipeReader reader,
             bool asCompact,
             CancellationToken cancellationToken = default) =>

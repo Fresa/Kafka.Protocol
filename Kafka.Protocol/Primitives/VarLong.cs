@@ -12,7 +12,7 @@ namespace Kafka.Protocol
         private ulong EncodeAsZigZag() =>
             (ulong)((Value << 1) ^ (Value >> 63));
 
-        public int GetSize(bool asCompact)
+        internal int GetSize(bool asCompact)
         {
             var value = EncodeAsZigZag();
             var length = 0;
@@ -26,14 +26,14 @@ namespace Kafka.Protocol
             return length;
         }
 
-        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+        internal ValueTask WriteToAsync(Stream writer, bool asCompact,
             CancellationToken cancellationToken = default) =>
             writer.WriteAsLittleEndianAsync(
                 Value
                     .EncodeAsZigZag()
                     .EncodeAsVarInt(), cancellationToken);
 
-        public static async ValueTask<VarLong> FromReaderAsync(
+        internal static async ValueTask<VarLong> FromReaderAsync(
             PipeReader reader,
             bool asCompact,
             CancellationToken cancellationToken = default)

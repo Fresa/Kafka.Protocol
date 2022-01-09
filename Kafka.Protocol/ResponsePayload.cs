@@ -5,36 +5,41 @@ using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
-    public sealed class ResponsePayload : ISerialize
+    public sealed class ResponsePayload
     {
-        public RequestPayload RequestPayload { get; }
         public ResponseHeader Header { get; }
         public Message Message { get; }
 
         public ResponsePayload(
-            RequestPayload requestPayload,
             ResponseHeader header,
             Message message)
         {
-            RequestPayload = requestPayload;
             Header = header;
             Message = message;
         }
 
         public async ValueTask WriteToAsync(
             Stream writer,
-            bool asCompact,
             CancellationToken cancellationToken = default)
         {
+            var size = Header.GetSize() +
+                       Message.GetSize();
+            await Int32.From(size)
+                .WriteToAsync(writer, false, cancellationToken)
+                .ConfigureAwait(false);
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
 
-        public int GetSize(bool asCompact) =>
-            Header.GetSize() +
-            Message.GetSize();
+        public int GetSize()
+        {
+            var size = Header.GetSize() +
+                       Message.GetSize();
+            return Int32.From(size).GetSize(false) +
+                   size;
+        }
 
         public static async ValueTask<ResponsePayload> ReadFromAsync(
             RequestPayload requestPayload,
@@ -64,7 +69,7 @@ namespace Kafka.Protocol
                 throw new CorruptMessageException($"Expected size {payloadSize} got {actualPayloadSize}");
             }
 
-            return new ResponsePayload(requestPayload, header, message);
+            return new ResponsePayload(header, message);
         }
     }
 }

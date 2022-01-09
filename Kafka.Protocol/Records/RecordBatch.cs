@@ -14,7 +14,7 @@ namespace Kafka.Protocol.Records
             Records = Array<Record>.Default;
         }
 
-        public static ValueTask<RecordBatch> FromReaderAsync(
+        internal static ValueTask<RecordBatch> FromReaderAsync(
             PipeReader reader,
             bool asCompact,
             CancellationToken cancellationToken = default) =>

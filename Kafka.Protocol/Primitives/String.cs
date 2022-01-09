@@ -8,15 +8,15 @@ namespace Kafka.Protocol
 {
     public partial struct String
     {
-        public int GetSize(bool asCompact) =>
+        internal int GetSize(bool asCompact) =>
             NullableString.From(Value).GetSize(asCompact);
 
-        public ValueTask WriteToAsync(Stream writer, bool asCompact,
+        internal ValueTask WriteToAsync(Stream writer, bool asCompact,
             CancellationToken cancellationToken = default) =>
             NullableString.From(Value)
                 .WriteToAsync(writer, asCompact, cancellationToken);
 
-        public static async ValueTask<String> FromReaderAsync(
+        internal static async ValueTask<String> FromReaderAsync(
             PipeReader reader,
             bool asCompact,
             CancellationToken cancellationToken = default) =>

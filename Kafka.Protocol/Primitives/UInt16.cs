@@ -9,15 +9,15 @@ namespace Kafka.Protocol
 {
     public partial struct UInt16
     {
-        public int GetSize(bool asCompact) => 2;
+        internal int GetSize(bool asCompact) => 2;
 
-        public ValueTask WriteToAsync(Stream writer,
+        internal ValueTask WriteToAsync(Stream writer,
             bool asCompact,
             CancellationToken cancellationToken = default) =>
             writer.WriteAsBigEndianAsync(BitConverter.GetBytes(Value),
                 cancellationToken);
 
-        public static async ValueTask<UInt16> FromReaderAsync(
+        internal static async ValueTask<UInt16> FromReaderAsync(
             PipeReader reader,
             bool asCompact,
             CancellationToken cancellationToken = default) =>

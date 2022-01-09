@@ -49,7 +49,7 @@ namespace Kafka.Protocol.Records
             set => Attributes = Attributes.SetBit(5, value);
         }
 
-        protected static async ValueTask<T> FromReaderAsync<T>(
+        protected internal static async ValueTask<T> FromReaderAsync<T>(
             T recordBatch,
             PipeReader reader,
             bool asCompact,
@@ -136,7 +136,8 @@ namespace Kafka.Protocol.Records
             }
         }
 
-        public async ValueTask WriteToAsync(
+        ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken = default) => WriteToAsync(writer, asCompact, cancellationToken);
+        internal async ValueTask WriteToAsync(
             Stream writer,
             bool asCompact,
             CancellationToken cancellationToken = default)
@@ -182,7 +183,8 @@ namespace Kafka.Protocol.Records
             }
         }
 
-        public int GetSize(bool asCompact)
+        int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+        internal int GetSize(bool asCompact)
         {
             var size = 0;
             if (Records.Value != null)
@@ -218,7 +220,7 @@ namespace Kafka.Protocol.Records
             {
                 await Attributes.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
-                await LastOffsetDelta.WriteToAsync(writer, asCompact, cancellationToken)
+                await ((ISerialize)LastOffsetDelta).WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
                 await FirstTimestamp.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);

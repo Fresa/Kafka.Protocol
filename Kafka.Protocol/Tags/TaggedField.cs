@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Kafka.Protocol.Tags
 {
-    public class TaggedField
+    internal class TaggedField
     {
         public UVarInt Tag { get; set; } = UVarInt.Default;
         public UVarInt Length { get; set; } = UVarInt.Default;
         public ISerialize Field { get; set; } = default!;
 
-        public async ValueTask WriteToAsync(Stream writer, 
+        internal async ValueTask WriteToAsync(Stream writer, 
             CancellationToken cancellationToken = default)
         {
             await Tag.WriteToAsync(writer, false, cancellationToken)
@@ -25,7 +25,7 @@ namespace Kafka.Protocol.Tags
                 .ConfigureAwait(false);
         }
 
-        public int GetSize()
+        internal int GetSize()
         {
             var fieldSize = Field.GetSize(false);
             return Tag.GetSize(false) +
@@ -33,7 +33,7 @@ namespace Kafka.Protocol.Tags
                    fieldSize;
         }
 
-        public static async ValueTask<TaggedField> FromReaderAsync(
+        internal static async ValueTask<TaggedField> FromReaderAsync(
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {

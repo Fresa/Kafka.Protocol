@@ -10,13 +10,13 @@ namespace Kafka.Protocol
 {
     public partial struct NullableString
     {
-        public int GetSize(bool asCompact) =>
+        internal int GetSize(bool asCompact) =>
             (asCompact
                 ? VarInt.From(Value == null ? 1 : (Value.Length + 1)).GetSize(asCompact)
                 : 2) + 
             (Value?.Length ?? 0);
 
-        public async ValueTask WriteToAsync(Stream writer, bool asCompact,
+        internal async ValueTask WriteToAsync(Stream writer, bool asCompact,
             CancellationToken cancellationToken = default)
         {
             if (asCompact)
@@ -57,7 +57,7 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
         }
 
-        public static async ValueTask<NullableString> FromReaderAsync(
+        internal static async ValueTask<NullableString> FromReaderAsync(
             PipeReader reader,
             bool asCompact,
             CancellationToken cancellationToken = default)

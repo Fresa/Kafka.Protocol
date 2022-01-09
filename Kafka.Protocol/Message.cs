@@ -8,10 +8,10 @@ namespace Kafka.Protocol
     {
         public abstract Int16 Version { get; }
 
-        public abstract ValueTask WriteToAsync(
+        internal abstract ValueTask WriteToAsync(
             Stream writer,
             CancellationToken cancellationToken = default);
 
-        public abstract int GetSize();
+        internal abstract int GetSize();
     }
 }

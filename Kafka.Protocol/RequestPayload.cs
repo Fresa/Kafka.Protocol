@@ -30,7 +30,6 @@ namespace Kafka.Protocol
 
         public async ValueTask WriteToAsync(
             Stream writer,
-            bool asCompact,
             CancellationToken cancellationToken = default)
         {
             await Header.WriteToAsync(writer, cancellationToken)
@@ -38,7 +37,15 @@ namespace Kafka.Protocol
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
-        
+
+        public int GetSize()
+        {
+            var size = Header.GetSize() +
+                       Message.GetSize();
+            return Int32.From(size).GetSize(false) +
+                   size;
+        }
+
         public static async ValueTask<RequestPayload> ReadFromAsync(
             Int16 headerVersion,
             PipeReader reader,

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Kafka.Protocol.Tags
 {
-    public class TagSection
+    internal class TagSection
     {
         public TaggedField[] TaggedFields { get; set; } =
             Array.Empty<TaggedField>();
         
-        public async ValueTask WriteToAsync(Stream writer, 
+        internal async ValueTask WriteToAsync(Stream writer, 
             CancellationToken cancellationToken = default)
         {
             await ((VarInt)TaggedFields.Length)
@@ -28,11 +28,11 @@ namespace Kafka.Protocol.Tags
             }
         }
 
-        public int GetSize(bool asCompact = false) => 
+        internal int GetSize(bool asCompact = false) => 
             ((VarInt) TaggedFields.Length).GetSize(asCompact) +
             TaggedFields.Sum(field => field.GetSize());
         
-        public static async Task<IAsyncEnumerable<TaggedField>> FromReaderAsync(
+        internal static async Task<IAsyncEnumerable<TaggedField>> FromReaderAsync(
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {
