@@ -3832,6 +3832,11 @@ namespace Kafka.Protocol
 			{
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _transactionalId = String.Default;
@@ -4021,6 +4026,11 @@ namespace Kafka.Protocol
 			{
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -4170,6 +4180,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -4355,6 +4370,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -4487,6 +4507,11 @@ namespace Kafka.Protocol
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -4613,6 +4638,11 @@ namespace Kafka.Protocol
 				{
 					await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -4738,6 +4768,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -4868,6 +4903,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -5023,6 +5063,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _producerIdLen.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -5210,6 +5255,11 @@ namespace Kafka.Protocol
 			{
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<EntryData> _entriesCollection = Array.Empty<EntryData>();
@@ -5307,6 +5357,11 @@ namespace Kafka.Protocol
 				{
 					await _opsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Array<EntityData> _entityCollection = Array.Empty<EntityData>();
@@ -5403,6 +5458,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -5576,6 +5636,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _remove.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -5768,6 +5833,11 @@ namespace Kafka.Protocol
 			{
 				await _entriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -5904,6 +5974,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _entityCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -6066,6 +6141,11 @@ namespace Kafka.Protocol
 					{
 						await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _entityType = String.Default;
@@ -6202,6 +6282,11 @@ namespace Kafka.Protocol
 			{
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Map<Int8, AlterConfigsResource> _resourcesCollection = new Map<Int8, AlterConfigsResource>();
@@ -6309,6 +6394,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -6464,6 +6554,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -6633,6 +6728,11 @@ namespace Kafka.Protocol
 			{
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -6780,6 +6880,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -6985,6 +7090,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -7140,6 +7250,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -7285,6 +7400,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _currentIsrVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -7488,6 +7608,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -7640,6 +7765,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -7808,6 +7938,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _currentIsrVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -8055,6 +8190,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _timeoutMs = new Int32(60000);
@@ -8183,6 +8323,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -8308,6 +8453,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _replicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -8471,6 +8621,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -8662,6 +8817,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -8798,6 +8958,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -8953,6 +9118,11 @@ namespace Kafka.Protocol
 			{
 				await _dirsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Map<String, AlterReplicaLogDir> _dirsCollection = new Map<String, AlterReplicaLogDir>();
@@ -9049,6 +9219,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -9175,6 +9350,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -9309,6 +9489,11 @@ namespace Kafka.Protocol
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -9435,6 +9620,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topicName = String.Default;
@@ -9560,6 +9750,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -9691,6 +9886,11 @@ namespace Kafka.Protocol
 			{
 				await _upsertionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<ScramCredentialDeletion> _deletionsCollection = Array.Empty<ScramCredentialDeletion>();
@@ -9787,6 +9987,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _mechanism.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -9976,6 +10181,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _saltedPassword.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -10196,6 +10406,11 @@ namespace Kafka.Protocol
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -10332,6 +10547,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -10496,6 +10716,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(3, 2147483647)) 
 			{
 				await _clientSoftwareVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -10664,17 +10889,25 @@ namespace Kafka.Protocol
 			{
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
-			if (Version.InRange(3, 2147483647)) 
+
+			if (IsFlexibleVersion)
 			{
-				await _supportedFeaturesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
-				await _finalizedFeaturesEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
-				await _finalizedFeaturesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await new Tags.TagSection(
+					new Tags.TaggedField
+					{
+						Tag = 0,
+						Field = _supportedFeaturesCollection
+					},
+					new Tags.TaggedField
+					{
+						Tag = 1,
+						Field = _finalizedFeaturesEpoch
+					},
+					new Tags.TaggedField
+					{
+						Tag = 2,
+						Field = _finalizedFeaturesCollection
+					}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -10812,6 +11045,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _maxVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -11027,6 +11265,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(3, 2147483647)) 
 				{
 					await _maxVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -11245,6 +11488,11 @@ namespace Kafka.Protocol
 				{
 					await _minVersionLevel.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -11403,6 +11651,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private NullableString _clusterId = new NullableString(null);
@@ -11532,6 +11785,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -11667,6 +11925,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -11830,6 +12093,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -11953,6 +12221,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -12099,6 +12372,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -12318,6 +12596,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _wantShutDown.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -12571,6 +12854,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _shouldShutDown.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -12835,6 +13123,11 @@ namespace Kafka.Protocol
 			{
 				await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -13040,6 +13333,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _securityProtocol.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -13266,6 +13564,11 @@ namespace Kafka.Protocol
 				{
 					await _maxSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -13473,6 +13776,11 @@ namespace Kafka.Protocol
 			{
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -13632,6 +13940,11 @@ namespace Kafka.Protocol
 			{
 				await _userData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Map<String, TopicPartition> _assignedPartitionsCollection = new Map<String, TopicPartition>();
@@ -13726,6 +14039,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -13901,6 +14219,11 @@ namespace Kafka.Protocol
 			{
 				await _ownedPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<String> _topicsCollection = Array.Empty<String>();
@@ -14053,6 +14376,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topic = String.Default;
@@ -14180,6 +14508,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(2, 2147483647)) 
 			{
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -14309,6 +14642,11 @@ namespace Kafka.Protocol
 			{
 				await _remainingPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -14435,6 +14773,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topicName = String.Default;
@@ -14552,6 +14895,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _creationsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -14704,6 +15052,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -14984,6 +15337,11 @@ namespace Kafka.Protocol
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -15109,6 +15467,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -15245,6 +15608,11 @@ namespace Kafka.Protocol
 			{
 				await _maxLifetimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<CreatableRenewers> _renewersCollection = Array.Empty<CreatableRenewers>();
@@ -15341,6 +15709,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -15579,6 +15952,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -15922,6 +16300,11 @@ namespace Kafka.Protocol
 			{
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Map<String, CreatePartitionsTopic> _topicsCollection = new Map<String, CreatePartitionsTopic>();
@@ -16029,6 +16412,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _assignmentsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -16179,6 +16567,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _brokerIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -16342,6 +16735,11 @@ namespace Kafka.Protocol
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -16478,6 +16876,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -16656,6 +17059,11 @@ namespace Kafka.Protocol
 			{
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Map<String, CreatableTopic> _topicsCollection = new Map<String, CreatableTopic>();
@@ -16785,6 +17193,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -16970,6 +17383,11 @@ namespace Kafka.Protocol
 					{
 						await _brokerIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -17125,6 +17543,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -17327,6 +17750,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -17504,10 +17932,6 @@ namespace Kafka.Protocol
 				}
 				if (Version.InRange(5, 2147483647)) 
 				{
-					await _topicConfigErrorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
 					await _numPartitions.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
 				if (Version.InRange(5, 2147483647)) 
@@ -17517,6 +17941,16 @@ namespace Kafka.Protocol
 				if (Version.InRange(5, 2147483647)) 
 				{
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection(
+						new Tags.TaggedField
+						{
+							Tag = 0,
+							Field = _topicConfigErrorCode
+						}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -17837,6 +18271,11 @@ namespace Kafka.Protocol
 					{
 						await _isSensitive.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _name = String.Default;
@@ -18068,6 +18507,11 @@ namespace Kafka.Protocol
 			{
 				await _tokenAuthenticated.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _type = String.Default;
@@ -18216,6 +18660,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _filtersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -18368,6 +18817,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -18666,6 +19120,11 @@ namespace Kafka.Protocol
 			{
 				await _filterResultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -18802,6 +19261,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _matchingAclsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -19040,6 +19504,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -19371,6 +19840,11 @@ namespace Kafka.Protocol
 			{
 				await _groupsNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<String> _groupsNamesCollection = Array.Empty<String>();
@@ -19472,6 +19946,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -19598,6 +20077,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -19728,6 +20212,11 @@ namespace Kafka.Protocol
 			{
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<DeleteRecordsTopic> _topicsCollection = Array.Empty<DeleteRecordsTopic>();
@@ -19824,6 +20313,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -19950,6 +20444,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _offset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -20113,6 +20612,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -20238,6 +20742,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -20375,6 +20884,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -20546,6 +21060,11 @@ namespace Kafka.Protocol
 			{
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<DeleteTopicState> _topicsCollection = Array.Empty<DeleteTopicState>();
@@ -20642,6 +21161,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(6, 2147483647)) 
 				{
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -20836,6 +21360,11 @@ namespace Kafka.Protocol
 			{
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -20978,6 +21507,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(5, 2147483647)) 
 				{
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -21224,6 +21758,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -21543,6 +22082,11 @@ namespace Kafka.Protocol
 			{
 				await _resourcesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -21755,6 +22299,11 @@ namespace Kafka.Protocol
 				{
 					await _aclsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Int8 _resourceType = Int8.Default;
@@ -21963,6 +22512,11 @@ namespace Kafka.Protocol
 					{
 						await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _principal = String.Default;
@@ -22151,6 +22705,11 @@ namespace Kafka.Protocol
 			{
 				await _strict.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<ComponentData> _componentsCollection = Array.Empty<ComponentData>();
@@ -22258,6 +22817,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _match.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -22477,6 +23041,11 @@ namespace Kafka.Protocol
 			{
 				await _entriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -22673,6 +23242,11 @@ namespace Kafka.Protocol
 				{
 					await _valuesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Array<EntityData> _entityCollection = Array.Empty<EntityData>();
@@ -22769,6 +23343,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -22932,6 +23511,11 @@ namespace Kafka.Protocol
 					{
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _key = String.Default;
@@ -23050,6 +23634,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _includeClusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -23207,6 +23796,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _clusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -23482,6 +24076,11 @@ namespace Kafka.Protocol
 				{
 					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Int32 _brokerId = Int32.Default;
@@ -23719,6 +24318,11 @@ namespace Kafka.Protocol
 			{
 				await _includeDocumentation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<DescribeConfigsResource> _resourcesCollection = Array.Empty<DescribeConfigsResource>();
@@ -23826,6 +24430,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _configurationKeysCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -24056,6 +24665,11 @@ namespace Kafka.Protocol
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -24214,6 +24828,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -24511,6 +25130,11 @@ namespace Kafka.Protocol
 					{
 						await _documentation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _name = String.Default;
@@ -24791,6 +25415,11 @@ namespace Kafka.Protocol
 						{
 							await _source.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						}
 					}
 
 					private String _name = String.Default;
@@ -25002,6 +25631,11 @@ namespace Kafka.Protocol
 			{
 				await _ownersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private NullableArray<DescribeDelegationTokenOwner> _ownersCollection = Array.Empty<DescribeDelegationTokenOwner>();
@@ -25104,6 +25738,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -25247,6 +25886,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -25439,6 +26083,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _renewersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -25740,6 +26389,11 @@ namespace Kafka.Protocol
 					{
 						await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _principalType = String.Default;
@@ -25899,6 +26553,11 @@ namespace Kafka.Protocol
 			{
 				await _includeAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<String> _groupsCollection = Array.Empty<String>();
@@ -26029,6 +26688,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -26205,6 +26869,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(3, 2147483647)) 
 				{
 					await _authorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -26492,6 +27161,11 @@ namespace Kafka.Protocol
 					{
 						await _memberAssignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _memberId = String.Default;
@@ -26761,6 +27435,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private NullableMap<String, DescribableLogDirTopic> _topicsCollection = new NullableMap<String, DescribableLogDirTopic>();
@@ -26863,6 +27542,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -26995,6 +27679,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -27132,6 +27821,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -27288,6 +27982,11 @@ namespace Kafka.Protocol
 					{
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _name = String.Default;
@@ -27433,6 +28132,11 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647)) 
 						{
 							await _isFutureKey.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -27612,6 +28316,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<TopicRequest> _topicsCollection = Array.Empty<TopicRequest>();
@@ -27706,6 +28415,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -27839,6 +28553,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -27964,6 +28683,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -28112,6 +28836,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _activeProducersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -28347,6 +29076,11 @@ namespace Kafka.Protocol
 						{
 							await _currentTxnStartOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						}
 					}
 
 					private Int64 _producerId = Int64.Default;
@@ -28577,6 +29311,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
@@ -28671,6 +29410,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -28785,6 +29529,11 @@ namespace Kafka.Protocol
 					{
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -28888,6 +29637,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -29012,6 +29766,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -29191,6 +29950,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _observersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -29455,6 +30219,11 @@ namespace Kafka.Protocol
 				{
 					await _logEndOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Int32 _replicaId = Int32.Default;
@@ -29571,6 +30340,11 @@ namespace Kafka.Protocol
 			{
 				await _transactionalIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<String> _transactionalIdsCollection = Array.Empty<String>();
@@ -29672,6 +30446,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _transactionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -29862,6 +30641,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -30149,6 +30933,11 @@ namespace Kafka.Protocol
 					{
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _topic = String.Default;
@@ -30264,6 +31053,11 @@ namespace Kafka.Protocol
 			{
 				await _usersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private NullableArray<UserName> _usersCollection = Array.Empty<UserName>();
@@ -30355,6 +31149,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -30480,6 +31279,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -30693,6 +31497,11 @@ namespace Kafka.Protocol
 				{
 					await _credentialInfosCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _user = String.Default;
@@ -30883,6 +31692,11 @@ namespace Kafka.Protocol
 					{
 						await _iterations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private Int8 _mechanism = Int8.Default;
@@ -31024,6 +31838,11 @@ namespace Kafka.Protocol
 			{
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int8 _electionType = Int8.Default;
@@ -31155,6 +31974,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -31330,6 +32154,11 @@ namespace Kafka.Protocol
 			{
 				await _replicaElectionResultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -31485,6 +32314,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionResultCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topic = String.Default;
@@ -31621,6 +32455,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -31787,6 +32626,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private NullableString _clusterId = new NullableString(null);
@@ -31916,6 +32760,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -32062,6 +32911,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _preferredSuccessorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -32254,6 +33108,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -32377,6 +33236,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -32523,6 +33387,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -32732,6 +33601,11 @@ namespace Kafka.Protocol
 			{
 				await _committed.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _transactionalId = String.Default;
@@ -32921,6 +33795,11 @@ namespace Kafka.Protocol
 			{
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -33059,6 +33938,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _clientHostAddress.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -33226,6 +34110,11 @@ namespace Kafka.Protocol
 			{
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private NullableBytes _responseData = new NullableBytes(null);
@@ -33361,6 +34250,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _expiryTimePeriodMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -33503,6 +34397,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -33720,10 +34619,6 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(12, 2147483647)) 
-			{
-				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -33763,6 +34658,16 @@ namespace Kafka.Protocol
 			if (Version.InRange(11, 2147483647)) 
 			{
 				await _rackId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection(
+					new Tags.TaggedField
+					{
+						Tag = 0,
+						Field = _clusterId
+					}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -34095,6 +35000,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topic = String.Default;
@@ -34283,6 +35193,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _partitionMaxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -34564,6 +35479,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topic = String.Default;
@@ -34763,6 +35683,11 @@ namespace Kafka.Protocol
 			{
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -34949,6 +35874,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -35184,18 +36114,6 @@ namespace Kafka.Protocol
 					{
 						await _logStartOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
-					if (Version.InRange(12, 2147483647)) 
-					{
-						await _divergingEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(12, 2147483647)) 
-					{
-						await _currentLeader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(12, 2147483647)) 
-					{
-						await _snapshotId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 					if (Version.InRange(4, 2147483647)) 
 					{
 						await _abortedTransactionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -35207,6 +36125,26 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _records.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection(
+							new Tags.TaggedField
+							{
+								Tag = 0,
+								Field = _divergingEpoch
+							},
+							new Tags.TaggedField
+							{
+								Tag = 1,
+								Field = _currentLeader
+							},
+							new Tags.TaggedField
+							{
+								Tag = 2,
+								Field = _snapshotId
+							}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -35442,6 +36380,11 @@ namespace Kafka.Protocol
 						{
 							await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						}
 					}
 
 					private Int32 _epoch = new Int32(-1);
@@ -35593,6 +36536,11 @@ namespace Kafka.Protocol
 						if (Version.InRange(12, 2147483647)) 
 						{
 							await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -35752,6 +36700,11 @@ namespace Kafka.Protocol
 						{
 							await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						}
 					}
 
 					private Int64 _endOffset = new Int64(-1);
@@ -35908,6 +36861,11 @@ namespace Kafka.Protocol
 						if (Version.InRange(4, 2147483647)) 
 						{
 							await _firstOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -36118,10 +37076,6 @@ namespace Kafka.Protocol
 		{
 			if (Version.InRange(0, 2147483647)) 
 			{
-				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
 				await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
 			if (Version.InRange(0, 2147483647)) 
@@ -36131,6 +37085,16 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection(
+					new Tags.TaggedField
+					{
+						Tag = 0,
+						Field = _clusterId
+					}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -36328,6 +37292,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -36475,6 +37444,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _position.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -36628,6 +37602,11 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647)) 
 						{
 							await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -36799,6 +37778,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -36948,6 +37932,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -37120,10 +38109,6 @@ namespace Kafka.Protocol
 					}
 					if (Version.InRange(0, 2147483647)) 
 					{
-						await _currentLeader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
 						await _size.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
 					if (Version.InRange(0, 2147483647)) 
@@ -37133,6 +38118,16 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _unalignedRecords.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection(
+							new Tags.TaggedField
+							{
+								Tag = 0,
+								Field = _currentLeader
+							}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -37287,6 +38282,11 @@ namespace Kafka.Protocol
 						{
 							await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						}
 					}
 
 					private Int64 _endOffset = Int64.Default;
@@ -37434,6 +38434,11 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647)) 
 						{
 							await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -37664,6 +38669,11 @@ namespace Kafka.Protocol
 			{
 				await _coordinatorKeysCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _key = String.Default;
@@ -37880,6 +38890,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(4, 2147483647)) 
 			{
 				await _coordinatorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -38192,6 +39207,11 @@ namespace Kafka.Protocol
 				{
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _key = String.Default;
@@ -38460,6 +39480,11 @@ namespace Kafka.Protocol
 			{
 				await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _groupId = String.Default;
@@ -38657,6 +39682,11 @@ namespace Kafka.Protocol
 			{
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -38780,6 +39810,11 @@ namespace Kafka.Protocol
 			{
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Map<Int8, AlterConfigsResource> _resourcesCollection = new Map<Int8, AlterConfigsResource>();
@@ -38887,6 +39922,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -39053,6 +40093,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -39251,6 +40296,11 @@ namespace Kafka.Protocol
 			{
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -39398,6 +40448,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -39613,6 +40668,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(3, 2147483647)) 
 			{
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -39834,6 +40894,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -40072,6 +41137,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _protocolsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -40349,6 +41419,11 @@ namespace Kafka.Protocol
 				{
 					await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -40546,6 +41621,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -40862,6 +41942,11 @@ namespace Kafka.Protocol
 				{
 					await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _memberId = String.Default;
@@ -41082,6 +42167,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _liveLeadersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -41333,6 +42423,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topicName = String.Default;
@@ -41523,6 +42618,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -41776,6 +42876,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2147483647)) 
 				{
 					await _isNew.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -42163,6 +43268,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -42318,6 +43428,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Uuid _topicId = Uuid.Default;
@@ -42453,6 +43568,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -42629,6 +43749,11 @@ namespace Kafka.Protocol
 			{
 				await _grantingVotersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _version = Int16.Default;
@@ -42800,6 +43925,11 @@ namespace Kafka.Protocol
 				{
 					await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Int32 _voterId = Int32.Default;
@@ -42911,6 +44041,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(3, 2147483647)) 
 			{
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -43067,6 +44202,11 @@ namespace Kafka.Protocol
 				{
 					await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _memberId = String.Default;
@@ -43217,6 +44357,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(3, 2147483647)) 
 			{
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -43379,6 +44524,11 @@ namespace Kafka.Protocol
 				{
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _memberId = String.Default;
@@ -43532,6 +44682,11 @@ namespace Kafka.Protocol
 			{
 				await _statesFilterCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<String> _statesFilterCollection = Array.Empty<String>();
@@ -43644,6 +44799,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -43805,6 +44965,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(4, 2147483647)) 
 				{
 					await _groupState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -43970,6 +45135,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _replicaId = Int32.Default;
@@ -44125,6 +45295,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -44272,6 +45447,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 0)) 
 					{
 						await _maxNumOffsets.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -44463,6 +45643,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -44583,6 +45768,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -44753,6 +45943,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(4, 2147483647)) 
 					{
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -45004,6 +46199,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _timeoutMs = new Int32(60000);
@@ -45139,6 +46339,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -45293,6 +46498,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -45484,6 +46694,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -45631,6 +46846,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _removingReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -45820,6 +47040,11 @@ namespace Kafka.Protocol
 			{
 				await _producerIdFiltersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<String> _stateFiltersCollection = Array.Empty<String>();
@@ -45972,6 +47197,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _transactionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -46164,6 +47394,11 @@ namespace Kafka.Protocol
 				{
 					await _transactionState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _transactionalId = String.Default;
@@ -46340,6 +47575,11 @@ namespace Kafka.Protocol
 			{
 				await _includeTopicAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private NullableArray<MetadataRequestTopic> _topicsCollection = Array.Empty<MetadataRequestTopic>();
@@ -46442,6 +47682,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -46709,6 +47954,11 @@ namespace Kafka.Protocol
 			{
 				await _clusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -46851,6 +48101,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2147483647)) 
 				{
 					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -47171,6 +48426,11 @@ namespace Kafka.Protocol
 				{
 					await _topicAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -47436,6 +48696,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(5, 2147483647)) 
 					{
 						await _offlineReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -47810,6 +49075,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _groupId = String.Default;
@@ -48049,6 +49319,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -48207,6 +49482,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _committedMetadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -48433,6 +49713,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -48553,6 +49838,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -48679,6 +49969,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -48810,6 +50105,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _groupId = String.Default;
@@ -48936,6 +50236,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -49051,6 +50356,11 @@ namespace Kafka.Protocol
 					{
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -49165,6 +50475,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -49316,6 +50631,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -49441,6 +50761,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -49594,6 +50919,11 @@ namespace Kafka.Protocol
 			{
 				await _requireStable.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _groupId = String.Default;
@@ -49725,6 +51055,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 7)) 
 				{
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -49882,6 +51217,11 @@ namespace Kafka.Protocol
 				{
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _groupId = String.Default;
@@ -50013,6 +51353,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(8, 2147483647)) 
 					{
 						await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -50200,6 +51545,11 @@ namespace Kafka.Protocol
 			{
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -50320,6 +51670,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 7)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -50479,6 +51834,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 7)) 
 					{
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -50764,6 +52124,11 @@ namespace Kafka.Protocol
 				{
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _groupId = String.Default;
@@ -50889,6 +52254,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(8, 2147483647)) 
 					{
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -51048,6 +52418,11 @@ namespace Kafka.Protocol
 						if (Version.InRange(8, 2147483647)) 
 						{
 							await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -51301,6 +52676,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _replicaId = new Int32(-2);
@@ -51423,6 +52803,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -51560,6 +52945,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -51720,6 +53110,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -51840,6 +53235,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -51988,6 +53388,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -52198,6 +53603,11 @@ namespace Kafka.Protocol
 			{
 				await _topicDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private NullableString _transactionalId = new NullableString(null);
@@ -52390,6 +53800,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -52515,6 +53930,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _records.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -52655,6 +54075,11 @@ namespace Kafka.Protocol
 			{
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Map<String, TopicProduceResponse> _responsesCollection = new Map<String, TopicProduceResponse>();
@@ -52751,6 +54176,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionResponsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -52932,6 +54362,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(8, 2147483647)) 
 					{
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -53164,6 +54599,11 @@ namespace Kafka.Protocol
 						{
 							await _batchIndexErrorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						}
 					}
 
 					private Int32 _batchIndex = Int32.Default;
@@ -53361,6 +54801,11 @@ namespace Kafka.Protocol
 			{
 				await _renewPeriodMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Bytes _hmac = Bytes.Default;
@@ -53502,6 +54947,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -53682,6 +55132,11 @@ namespace Kafka.Protocol
 			{
 				await _clientId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _requestApiKey = Int16.Default;
@@ -53861,6 +55316,11 @@ namespace Kafka.Protocol
 			{
 				await _correlationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _correlationId = Int32.Default;
@@ -53951,6 +55411,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _authBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -54075,6 +55540,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(1, 2147483647)) 
 			{
 				await _sessionLifetimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -54254,6 +55724,11 @@ namespace Kafka.Protocol
 			{
 				await _mechanism.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private String _mechanism = String.Default;
@@ -54355,6 +55830,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _mechanismsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -54473,6 +55953,11 @@ namespace Kafka.Protocol
 			{
 				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _version = Int16.Default;
@@ -54574,6 +56059,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _lastContainedLogTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -54760,6 +56250,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(3, 2147483647)) 
 			{
 				await _topicStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -54971,6 +56466,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topicName = String.Default;
@@ -55126,6 +56626,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(1, 2)) 
 				{
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -55283,6 +56788,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topicName = String.Default;
@@ -55419,6 +56929,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(3, 2147483647)) 
 					{
 						await _deletePartition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -55584,6 +57099,11 @@ namespace Kafka.Protocol
 			{
 				await _partitionErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -55720,6 +57240,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -55933,6 +57458,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _assignmentsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -56219,6 +57749,11 @@ namespace Kafka.Protocol
 				{
 					await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _memberId = String.Default;
@@ -56383,6 +57918,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -56665,6 +58205,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -56978,6 +58523,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _name = String.Default;
@@ -57125,6 +58675,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _committedMetadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -57320,6 +58875,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -57445,6 +59005,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -57572,6 +59137,11 @@ namespace Kafka.Protocol
 					{
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -57691,6 +59261,11 @@ namespace Kafka.Protocol
 			{
 				await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -57803,6 +59378,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -57967,6 +59547,11 @@ namespace Kafka.Protocol
 			{
 				await _featureUpdatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int32 _timeoutMs = new Int32(60000);
@@ -58105,6 +59690,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _allowDowngrade.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -58288,6 +59878,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -58489,6 +60084,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -58697,6 +60297,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _liveBrokersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -58919,6 +60524,11 @@ namespace Kafka.Protocol
 				{
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private String _topicName = String.Default;
@@ -59130,6 +60740,11 @@ namespace Kafka.Protocol
 				{
 					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
 			}
 
 			private Int32 _id = Int32.Default;
@@ -59320,6 +60935,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(1, 2147483647)) 
 					{
 						await _securityProtocol.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -59606,6 +61226,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(4, 2147483647)) 
 				{
 					await _offlineReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -59921,6 +61546,11 @@ namespace Kafka.Protocol
 			{
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -60019,6 +61649,11 @@ namespace Kafka.Protocol
 			if (Version.InRange(0, 2147483647)) 
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -60149,6 +61784,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -60306,6 +61946,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _lastOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -60527,6 +62172,11 @@ namespace Kafka.Protocol
 			{
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -60650,6 +62300,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -60807,6 +62462,11 @@ namespace Kafka.Protocol
 					if (Version.InRange(0, 2147483647)) 
 					{
 						await _voteGranted.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -61012,6 +62672,11 @@ namespace Kafka.Protocol
 			{
 				await _markersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<WritableTxnMarker> _markersCollection = Array.Empty<WritableTxnMarker>();
@@ -61141,6 +62806,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _coordinatorEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -61326,6 +62996,11 @@ namespace Kafka.Protocol
 					{
 						await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _name = String.Default;
@@ -61477,6 +63152,11 @@ namespace Kafka.Protocol
 			{
 				await _markersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			}
+
+			if (IsFlexibleVersion)
+			{
+				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
 		}
 
 		private Array<WritableTxnMarkerResult> _markersCollection = Array.Empty<WritableTxnMarkerResult>();
@@ -61573,6 +63253,11 @@ namespace Kafka.Protocol
 				if (Version.InRange(0, 2147483647)) 
 				{
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				}
+
+				if (IsFlexibleVersion)
+				{
+					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -61700,6 +63385,11 @@ namespace Kafka.Protocol
 					{
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					}
+
+					if (IsFlexibleVersion)
+					{
+						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
 				}
 
 				private String _name = String.Default;
@@ -61825,6 +63515,11 @@ namespace Kafka.Protocol
 						if (Version.InRange(0, 2147483647)) 
 						{
 							await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						}
+
+						if (IsFlexibleVersion)
+						{
+							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
