@@ -413,7 +413,17 @@ void PrintReadFromTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.
 				#>case <#= taggedField.Tag #>:<# _();
 					Tab(() =>
 					{
-						PrintReadFrom(taggedField, true); _();
+						PrintReadFrom(taggedField, true); 
+						var propertyName = taggedField.GetPropertyName();
+						var parentFieldTypeName = taggedField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
+						var fieldName = taggedField.GetFieldName(parentFieldTypeName);
+
+						Block(() => 
+						{
+							#>var size = instance.<#= propertyName #>.GetSize(true);<# _();
+							#>if (size != tag.Length)<# _();
+							#>	throw new CorruptMessageException($"Tagged field <#= fieldName #> read length {tag.Length} but had actual length of {size}");<# 
+						}); _();
 					});
 				#>	break;<# _();
 				}); 

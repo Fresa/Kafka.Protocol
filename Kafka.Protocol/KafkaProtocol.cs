@@ -10847,6 +10847,11 @@ namespace Kafka.Protocol
 							}
 							else
 								throw new InvalidOperationException($"Field SupportedFeaturesCollection is not supported for version {instance.Version}");
+							{
+								var size = instance._supportedFeaturesCollection.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field SupportedFeaturesCollection read length {tag.Length} but had actual length of {size}");
+							}
 							break;
 
 						case 1:
@@ -10856,6 +10861,11 @@ namespace Kafka.Protocol
 							}
 							else
 								throw new InvalidOperationException($"Field FinalizedFeaturesEpoch is not supported for version {instance.Version}");
+							{
+								var size = instance._finalizedFeaturesEpoch.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field FinalizedFeaturesEpoch read length {tag.Length} but had actual length of {size}");
+							}
 							break;
 
 						case 2:
@@ -10865,6 +10875,11 @@ namespace Kafka.Protocol
 							}
 							else
 								throw new InvalidOperationException($"Field FinalizedFeaturesCollection is not supported for version {instance.Version}");
+							{
+								var size = instance._finalizedFeaturesCollection.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field FinalizedFeaturesCollection read length {tag.Length} but had actual length of {size}");
+							}
 							break;
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ApiVersionsResponse is unknown");
@@ -17901,6 +17916,11 @@ namespace Kafka.Protocol
 								}
 								else
 									throw new InvalidOperationException($"Field TopicConfigErrorCode is not supported for version {instance.Version}");
+								{
+									var size = instance._topicConfigErrorCode.GetSize(true);
+									if (size != tag.Length)
+										throw new CorruptMessageException($"Tagged field TopicConfigErrorCode read length {tag.Length} but had actual length of {size}");
+								}
 								break;
 							default:
 								throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableTopicResult is unknown");
@@ -34607,6 +34627,11 @@ namespace Kafka.Protocol
 							}
 							else
 								throw new InvalidOperationException($"Field ClusterId is not supported for version {instance.Version}");
+							{
+								var size = instance._clusterId.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field ClusterId read length {tag.Length} but had actual length of {size}");
+							}
 							break;
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchRequest is unknown");
@@ -36063,6 +36088,11 @@ namespace Kafka.Protocol
 									}
 									else
 										throw new InvalidOperationException($"Field DivergingEpoch is not supported for version {instance.Version}");
+									{
+										var size = instance._divergingEpoch.GetSize(true);
+										if (size != tag.Length)
+											throw new CorruptMessageException($"Tagged field DivergingEpoch read length {tag.Length} but had actual length of {size}");
+									}
 									break;
 
 								case 1:
@@ -36072,6 +36102,11 @@ namespace Kafka.Protocol
 									}
 									else
 										throw new InvalidOperationException($"Field CurrentLeader is not supported for version {instance.Version}");
+									{
+										var size = instance._currentLeader.GetSize(true);
+										if (size != tag.Length)
+											throw new CorruptMessageException($"Tagged field CurrentLeader read length {tag.Length} but had actual length of {size}");
+									}
 									break;
 
 								case 2:
@@ -36081,6 +36116,11 @@ namespace Kafka.Protocol
 									}
 									else
 										throw new InvalidOperationException($"Field SnapshotId_ is not supported for version {instance.Version}");
+									{
+										var size = instance._snapshotId.GetSize(true);
+										if (size != tag.Length)
+											throw new CorruptMessageException($"Tagged field SnapshotId_ read length {tag.Length} but had actual length of {size}");
+									}
 									break;
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
@@ -37062,6 +37102,11 @@ namespace Kafka.Protocol
 							}
 							else
 								throw new InvalidOperationException($"Field ClusterId is not supported for version {instance.Version}");
+							{
+								var size = instance._clusterId.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field ClusterId read length {tag.Length} but had actual length of {size}");
+							}
 							break;
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchSnapshotRequest is unknown");
@@ -38082,6 +38127,11 @@ namespace Kafka.Protocol
 									}
 									else
 										throw new InvalidOperationException($"Field CurrentLeader is not supported for version {instance.Version}");
+									{
+										var size = instance._currentLeader.GetSize(true);
+										if (size != tag.Length)
+											throw new CorruptMessageException($"Tagged field CurrentLeader read length {tag.Length} but had actual length of {size}");
+									}
 									break;
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionSnapshot is unknown");
