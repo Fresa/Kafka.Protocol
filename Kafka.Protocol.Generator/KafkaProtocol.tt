@@ -248,10 +248,10 @@ namespace Kafka.Protocol<# Block(() =>
 			{
 				#>var instance = new <#= messageDefinition.Name #>(version);<# _();
 				
-				PrintOnNewRowForEach(messageDefinition.GetNonTaggedFields(), messageField => 
+				messageDefinition.Fields.ForEach(messageField => 
 				{
 					PrintReadFrom(messageField);
-				}); _(2);
+				}); _();
 
 				PrintReadFromTags(messageDefinition.GetTaggedFields(), messageDefinition.Name);
 
@@ -340,12 +340,41 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 	#>		0)<#
 }
 
-void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, bool throwOnWrongVersion = false)
+void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
+	if (messageField.TaggedVersions != null)
+	{
+		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
+		if (taggedVersionRange.From == versionRange.From)
+		{
+			return;
+		}
+		versionRange = new VersionRange(versionRange.From, taggedVersionRange.From - 1);
+	}
+
+	PrintReadFromField(messageField, versionRange); _();
+}
+
+void PrintReadFromTag(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+{
 	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
 	var fieldName = messageField.GetFieldName(parentFieldTypeName);
-	#>if (instance.Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
+
+	var versionRange = messageField.TaggedVersions == null ? 
+		VersionRange.Parse(messageField.Versions) : 
+		VersionRange.Parse(messageField.TaggedVersions);
+	
+	PrintReadFromField(messageField, versionRange); _();
+	#>else<# _();
+	#>	throw new InvalidOperationException($"Field <#= fieldName #> is not supported for version {instance.Version}");<#
+}
+
+void PrintReadFromField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, VersionRange versionRange)
+{
+	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
+	var fieldName = messageField.GetFieldName(parentFieldTypeName);
+	#>if (instance.Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# _(); Tab(() => 
 	{
 		var fieldTypeName = messageField.GetTypeName();
 		var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
@@ -390,13 +419,7 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 				#>await <#= fieldTypeName #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);<# 
 			}
 		}
-	});	
-	if (throwOnWrongVersion)
-	{
-	_();
-	#>else<# _();
-	#>	throw new InvalidOperationException($"Field <#= fieldName #> is not supported for version {instance.Version}");<#
-	}
+	});
 }
 
 void PrintReadFromTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field> taggedFields, string parentType)
@@ -413,7 +436,7 @@ void PrintReadFromTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.
 				#>case <#= taggedField.Tag #>:<# _();
 					Tab(() =>
 					{
-						PrintReadFrom(taggedField, true); 
+						PrintReadFromTag(taggedField); 
 						var propertyName = taggedField.GetPropertyName();
 						var parentFieldTypeName = taggedField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
 						var fieldName = taggedField.GetFieldName(parentFieldTypeName);
@@ -602,11 +625,11 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 
 		#>internal static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
-			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();
-			PrintOnNewRowForEach(field.GetNonTaggedFields(), messageField => 
+			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();			
+			field.Fields.ForEach(messageField => 
 			{
 				PrintReadFrom(messageField);
-			}); _(2);
+			}); _();
 
 			PrintReadFromTags(field.GetTaggedFields(), fieldTypeNameWithoutArrayCharacters);
 
@@ -675,10 +698,10 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 		#>internal static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			#>var instance = new <#= commonStruct.Name #>(version);<# _();
-			PrintOnNewRowForEach(commonStruct.GetNonTaggedFields(), messageField => 
+			commonStruct.Fields.ForEach(messageField => 
 			{
 				PrintReadFrom(messageField);
-			}); _(2);
+			}); _();
 			
 			PrintReadFromTags(commonStruct.GetTaggedFields(), commonStruct.Name);
 

@@ -8,7 +8,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
         public int From { get; }
         public int To { get; }
 
-        internal VersionRange(int from, int to)
+        public VersionRange(int from, int to)
         {
             From = from;
             To = to;
