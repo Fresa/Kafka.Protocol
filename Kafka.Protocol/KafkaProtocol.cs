@@ -4298,7 +4298,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -4557,7 +4558,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_resultsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -4683,7 +4685,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -5244,7 +5247,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_opsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -5343,7 +5347,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_entityName.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -5504,7 +5509,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_remove.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -5825,7 +5831,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_entityCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -5986,7 +5993,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_entityName.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -6223,7 +6231,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -6380,7 +6389,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_value.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -6677,7 +6687,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_resourceName.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -7033,7 +7044,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -7163,7 +7175,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_currentIsrVersion.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -7517,7 +7530,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -7653,7 +7667,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_currentIsrVersion.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -8036,7 +8051,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -8162,7 +8178,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_replicasCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -8500,7 +8517,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -8629,7 +8647,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorMessage.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -8887,7 +8906,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -9013,7 +9033,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -9273,7 +9294,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -9399,7 +9421,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -9629,7 +9652,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_mechanism.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -9792,7 +9816,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_saltedPassword.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -10147,7 +10172,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -10628,7 +10654,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_maxVersion.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -10837,7 +10864,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_maxVersion.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -11048,7 +11076,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_minVersionLevel.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -11337,7 +11366,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -11464,7 +11494,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -11753,7 +11784,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -11883,7 +11915,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -12759,7 +12792,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_securityProtocol.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -12978,7 +13012,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_maxSupportedVersion.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -13435,7 +13470,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -13752,7 +13788,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(1, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -14138,7 +14175,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionIndex.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -14375,7 +14413,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_permissionType.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -14791,7 +14830,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -15024,7 +15064,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_principalName.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -15660,7 +15701,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_assignmentsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -15818,7 +15860,8 @@ namespace Kafka.Protocol
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
 						_brokerIdsCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -16104,7 +16147,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -16386,7 +16430,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -16578,7 +16623,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_brokerIdsCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -16732,7 +16778,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_value.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -17073,7 +17120,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -17395,7 +17443,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(5, 2147483647) ? 
 						_isSensitive.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -17895,7 +17944,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_permissionType.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -18326,7 +18376,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_matchingAclsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -18508,7 +18559,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_permissionType.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -19086,7 +19138,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -19315,7 +19368,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -19441,7 +19495,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_offset.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -19728,7 +19783,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -19857,7 +19913,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -20125,7 +20182,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(6, 2147483647) ? 
 					_topicId.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -20444,7 +20502,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -21160,7 +21219,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_aclsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -21356,7 +21416,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_permissionType.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -21651,7 +21712,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_match.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -22048,7 +22110,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_valuesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -22147,7 +22210,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_entityName.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -22305,7 +22369,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_value.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -22817,7 +22882,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_rack.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -23153,7 +23219,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configurationKeysCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -23514,7 +23581,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -23758,7 +23826,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(3, 2147483647) ? 
 						_documentation.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -24050,7 +24119,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(1, 2147483647) ? 
 							_source.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -24367,7 +24437,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_principalName.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -24651,7 +24722,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_renewersCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -24963,7 +25035,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_principalName.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -25391,7 +25464,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_authorizedOperations.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -25657,7 +25731,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_memberAssignment.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -26040,7 +26115,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -26302,7 +26378,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -26459,7 +26536,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -26589,7 +26667,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_isFutureKey.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -26873,7 +26952,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -27132,7 +27212,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -27264,7 +27345,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_activeProducersCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -27468,7 +27550,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_currentTxnStartOffset.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -27808,7 +27891,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -27929,7 +28013,8 @@ namespace Kafka.Protocol
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
 						_partitionIndex.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -28156,7 +28241,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -28295,7 +28381,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_observersCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -28568,6 +28655,9 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_logEndOffset.GetSize(IsFlexibleVersion) :
+					0) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ReplicaState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28934,7 +29024,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -29232,7 +29323,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -29452,7 +29544,8 @@ namespace Kafka.Protocol
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
 					_name.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -29758,7 +29851,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_credentialInfosCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -29950,7 +30044,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_iterations.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -30218,7 +30313,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -30540,7 +30636,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionResultCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -30669,7 +30766,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorMessage.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -30963,7 +31061,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -31093,7 +31192,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_preferredSuccessorsCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -31413,7 +31513,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -31543,7 +31644,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -33055,7 +33157,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -33218,7 +33321,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionMaxBytes.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -33500,7 +33604,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(7, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -33877,7 +33982,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -34065,7 +34171,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_records.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -34354,7 +34461,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(12, 2147483647) ? 
 							_endOffset.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -34504,7 +34612,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(12, 2147483647) ? 
 							_leaderEpoch.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -34660,7 +34769,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_epoch.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -34815,7 +34925,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(4, 2147483647) ? 
 							_firstOffset.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -35223,7 +35334,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -35355,7 +35467,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_position.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -35514,7 +35627,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_epoch.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -35829,7 +35943,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -35974,7 +36089,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_unalignedRecords.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -36152,7 +36268,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_epoch.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -36298,7 +36415,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_leaderEpoch.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -36985,7 +37103,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(4, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -37674,7 +37793,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -37834,7 +37954,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_value.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -38162,7 +38283,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_resourceName.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -39063,7 +39185,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_metadata.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -39533,7 +39656,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_metadata.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -39971,7 +40095,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(2, 2147483647) ? 
 					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -40156,7 +40281,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_port.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -40339,6 +40465,9 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(1, 2147483647) ? 
 					_isNew.GetSize(IsFlexibleVersion) :
+					0) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<LeaderAndIsrPartitionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40899,7 +41028,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					_partitionErrorsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -41027,6 +41157,9 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
+					0) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<LeaderAndIsrPartitionError> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41372,6 +41505,9 @@ namespace Kafka.Protocol
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
 					_voterId.GetSize(IsFlexibleVersion) :
+					0) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<Voter> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41630,7 +41766,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_groupInstanceId.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -41929,7 +42066,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -42352,7 +42490,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(4, 2147483647) ? 
 					_groupState.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -42670,7 +42809,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -42802,7 +42942,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 0) ? 
 						_maxNumOffsets.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -43122,7 +43263,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -43260,7 +43402,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(4, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -43653,7 +43796,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -43984,7 +44128,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -44116,7 +44261,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_removingReplicasCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -44634,7 +44780,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_transactionState.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -44908,7 +45055,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_name.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -45282,7 +45430,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(1, 2147483647) ? 
 					_rack.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -45569,7 +45718,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(8, 2147483647) ? 
 					_topicAuthorizedOperations.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -45807,7 +45957,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(5, 2147483647) ? 
 						_offlineReplicasCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -46410,7 +46561,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -46545,7 +46697,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_committedMetadata.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -46900,7 +47053,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -47026,7 +47180,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -47283,7 +47438,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -47406,7 +47562,8 @@ namespace Kafka.Protocol
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
 						_partitionIndex.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -47666,7 +47823,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -47792,7 +47950,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -48067,7 +48226,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 7) ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -48221,7 +48381,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(8, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -48351,7 +48512,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(8, 2147483647) ? 
 						_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -48651,7 +48813,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 7) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -48786,7 +48949,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 7) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -49066,7 +49230,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(8, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -49196,7 +49361,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(8, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -49331,7 +49497,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(8, 2147483647) ? 
 							_errorCode.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -49713,7 +49880,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -49842,7 +50010,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -50129,7 +50298,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -50261,7 +50431,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_endOffset.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -50655,7 +50826,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionDataCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -50781,7 +50953,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_records.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -51018,7 +51191,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionResponsesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -51159,7 +51333,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(8, 2147483647) ? 
 						_errorMessage.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -51408,7 +51583,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(8, 2147483647) ? 
 							_batchIndexErrorMessage.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
@@ -53192,7 +53368,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 0) ? 
 					_partitionIndex.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -53346,7 +53523,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(1, 2) ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -53500,7 +53678,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -53629,7 +53808,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(3, 2147483647) ? 
 						_deletePartition.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -53925,7 +54105,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -54394,7 +54575,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_assignment.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -55101,7 +55283,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -55233,7 +55416,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_committedMetadata.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -55558,7 +55742,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -55684,7 +55869,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -56211,7 +56397,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_allowDowngrade.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -56576,7 +56763,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -56978,7 +57166,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -57167,7 +57356,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(2, 2147483647) ? 
 					_rack.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -57356,7 +57546,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(1, 2147483647) ? 
 						_securityProtocol.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -57590,6 +57781,9 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(4, 2147483647) ? 
 					_offlineReplicasCollection.GetSize(IsFlexibleVersion) :
+					0) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<UpdateMetadataPartitionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -58155,7 +58349,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -58288,7 +58483,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_lastOffset.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -58639,7 +58835,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -58772,7 +58969,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_voteGranted.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -59095,7 +59293,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_coordinatorEpoch.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -59287,7 +59486,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -59540,7 +59740,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
-					0) +	(IsFlexibleVersion ? 
+					0) +
+				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
 
@@ -59666,7 +59867,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
-						0) +	(IsFlexibleVersion ? 
+						0) +
+					(IsFlexibleVersion ? 
 						CreateTagSection().GetSize() :
 						0);
 
@@ -59792,7 +59994,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_errorCode.GetSize(IsFlexibleVersion) :
-							0) +	(IsFlexibleVersion ? 
+							0) +
+						(IsFlexibleVersion ? 
 							CreateTagSection().GetSize() :
 							0);
 
