@@ -250,10 +250,10 @@ namespace Kafka.Protocol<# Block(() =>
 				
 				messageDefinition.Fields.ForEach(messageField => 
 				{
-					PrintReadFrom(messageField);
+					PrintReadField(messageField);
 				}); _();
 
-				PrintReadFromTags(messageDefinition.GetTaggedFields(), messageDefinition.Name);
+				PrintReadTags(messageDefinition.GetTaggedFields(), messageDefinition.Name);
 
 				if (messageDefinition.Fields.Any())
 				{
@@ -340,7 +340,7 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 	#>		0)<#
 }
 
-void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+void PrintReadField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
 	if (messageField.TaggedVersions != null)
@@ -353,10 +353,10 @@ void PrintReadFrom(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field m
 		versionRange = new VersionRange(versionRange.From, taggedVersionRange.From - 1);
 	}
 
-	PrintReadFromField(messageField, versionRange); _();
+	PrintRead(messageField, versionRange); _();
 }
 
-void PrintReadFromTag(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+void PrintReadTag(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
 {
 	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
 	var fieldName = messageField.GetFieldName(parentFieldTypeName);
@@ -365,12 +365,12 @@ void PrintReadFromTag(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Fiel
 		VersionRange.Parse(messageField.Versions) : 
 		VersionRange.Parse(messageField.TaggedVersions);
 	
-	PrintReadFromField(messageField, versionRange); _();
+	PrintRead(messageField, versionRange); _();
 	#>else<# _();
 	#>	throw new InvalidOperationException($"Field <#= fieldName #> is not supported for version {instance.Version}");<#
 }
 
-void PrintReadFromField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, VersionRange versionRange)
+void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, VersionRange versionRange)
 {
 	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
 	var fieldName = messageField.GetFieldName(parentFieldTypeName);
@@ -422,7 +422,7 @@ void PrintReadFromField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Fi
 	});
 }
 
-void PrintReadFromTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field> taggedFields, string parentType)
+void PrintReadTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field> taggedFields, string parentType)
 {
 	#>if (instance.IsFlexibleVersion)<# Block(() =>
 	{
@@ -436,7 +436,7 @@ void PrintReadFromTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.
 				#>case <#= taggedField.Tag #>:<# _();
 					Tab(() =>
 					{
-						PrintReadFromTag(taggedField); 
+						PrintReadTag(taggedField); 
 						var propertyName = taggedField.GetPropertyName();
 						var parentFieldTypeName = taggedField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
 						var fieldName = taggedField.GetFieldName(parentFieldTypeName);
@@ -628,10 +628,10 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();			
 			field.Fields.ForEach(messageField => 
 			{
-				PrintReadFrom(messageField);
+				PrintReadField(messageField);
 			}); _();
 
-			PrintReadFromTags(field.GetTaggedFields(), fieldTypeNameWithoutArrayCharacters);
+			PrintReadTags(field.GetTaggedFields(), fieldTypeNameWithoutArrayCharacters);
 
 			#>return instance;<# 
 		}); _(2);
@@ -700,10 +700,10 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			#>var instance = new <#= commonStruct.Name #>(version);<# _();
 			commonStruct.Fields.ForEach(messageField => 
 			{
-				PrintReadFrom(messageField);
+				PrintReadField(messageField);
 			}); _();
 			
-			PrintReadFromTags(commonStruct.GetTaggedFields(), commonStruct.Name);
+			PrintReadTags(commonStruct.GetTaggedFields(), commonStruct.Name);
 
 			#>return instance;<#
 		}); _(2);
