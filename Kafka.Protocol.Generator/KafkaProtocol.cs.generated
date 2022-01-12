@@ -1124,30 +1124,18 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnknownServerErrorException : Exception
 	{
-		public UnknownServerErrorException()
-		{
+		public UnknownServerErrorException() { }
 
-		}
-
-		public UnknownServerErrorException(string message) : base(message)
-		{
-
-		}
+		public UnknownServerErrorException(string message) : base(message) { }
 
 		public int Code => -1;
 	}
 
 	public class NoneException : Exception
 	{
-		public NoneException()
-		{
+		public NoneException() { }
 
-		}
-
-		public NoneException(string message) : base(message)
-		{
-
-		}
+		public NoneException(string message) : base(message) { }
 
 		public int Code => 0;
 	}
@@ -1157,15 +1145,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class OffsetOutOfRangeException : Exception
 	{
-		public OffsetOutOfRangeException()
-		{
+		public OffsetOutOfRangeException() { }
 
-		}
-
-		public OffsetOutOfRangeException(string message) : base(message)
-		{
-
-		}
+		public OffsetOutOfRangeException(string message) : base(message) { }
 
 		public int Code => 1;
 	}
@@ -1175,15 +1157,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class CorruptMessageException : Exception
 	{
-		public CorruptMessageException()
-		{
+		public CorruptMessageException() { }
 
-		}
-
-		public CorruptMessageException(string message) : base(message)
-		{
-
-		}
+		public CorruptMessageException(string message) : base(message) { }
 
 		public int Code => 2;
 	}
@@ -1193,15 +1169,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnknownTopicOrPartitionException : Exception
 	{
-		public UnknownTopicOrPartitionException()
-		{
+		public UnknownTopicOrPartitionException() { }
 
-		}
-
-		public UnknownTopicOrPartitionException(string message) : base(message)
-		{
-
-		}
+		public UnknownTopicOrPartitionException(string message) : base(message) { }
 
 		public int Code => 3;
 	}
@@ -1211,15 +1181,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidFetchSizeException : Exception
 	{
-		public InvalidFetchSizeException()
-		{
+		public InvalidFetchSizeException() { }
 
-		}
-
-		public InvalidFetchSizeException(string message) : base(message)
-		{
-
-		}
+		public InvalidFetchSizeException(string message) : base(message) { }
 
 		public int Code => 4;
 	}
@@ -1229,15 +1193,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class LeaderNotAvailableException : Exception
 	{
-		public LeaderNotAvailableException()
-		{
+		public LeaderNotAvailableException() { }
 
-		}
-
-		public LeaderNotAvailableException(string message) : base(message)
-		{
-
-		}
+		public LeaderNotAvailableException(string message) : base(message) { }
 
 		public int Code => 5;
 	}
@@ -1247,15 +1205,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class NotLeaderOrFollowerException : Exception
 	{
-		public NotLeaderOrFollowerException()
-		{
+		public NotLeaderOrFollowerException() { }
 
-		}
-
-		public NotLeaderOrFollowerException(string message) : base(message)
-		{
-
-		}
+		public NotLeaderOrFollowerException(string message) : base(message) { }
 
 		public int Code => 6;
 	}
@@ -1265,15 +1217,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class RequestTimedOutException : Exception
 	{
-		public RequestTimedOutException()
-		{
+		public RequestTimedOutException() { }
 
-		}
-
-		public RequestTimedOutException(string message) : base(message)
-		{
-
-		}
+		public RequestTimedOutException(string message) : base(message) { }
 
 		public int Code => 7;
 	}
@@ -1283,15 +1229,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class BrokerNotAvailableException : Exception
 	{
-		public BrokerNotAvailableException()
-		{
+		public BrokerNotAvailableException() { }
 
-		}
-
-		public BrokerNotAvailableException(string message) : base(message)
-		{
-
-		}
+		public BrokerNotAvailableException(string message) : base(message) { }
 
 		public int Code => 8;
 	}
@@ -1301,15 +1241,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ReplicaNotAvailableException : Exception
 	{
-		public ReplicaNotAvailableException()
-		{
+		public ReplicaNotAvailableException() { }
 
-		}
-
-		public ReplicaNotAvailableException(string message) : base(message)
-		{
-
-		}
+		public ReplicaNotAvailableException(string message) : base(message) { }
 
 		public int Code => 9;
 	}
@@ -1319,15 +1253,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class MessageTooLargeException : Exception
 	{
-		public MessageTooLargeException()
-		{
+		public MessageTooLargeException() { }
 
-		}
-
-		public MessageTooLargeException(string message) : base(message)
-		{
-
-		}
+		public MessageTooLargeException(string message) : base(message) { }
 
 		public int Code => 10;
 	}
@@ -1337,15 +1265,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class StaleControllerEpochException : Exception
 	{
-		public StaleControllerEpochException()
-		{
+		public StaleControllerEpochException() { }
 
-		}
-
-		public StaleControllerEpochException(string message) : base(message)
-		{
-
-		}
+		public StaleControllerEpochException(string message) : base(message) { }
 
 		public int Code => 11;
 	}
@@ -1355,15 +1277,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class OffsetMetadataTooLargeException : Exception
 	{
-		public OffsetMetadataTooLargeException()
-		{
+		public OffsetMetadataTooLargeException() { }
 
-		}
-
-		public OffsetMetadataTooLargeException(string message) : base(message)
-		{
-
-		}
+		public OffsetMetadataTooLargeException(string message) : base(message) { }
 
 		public int Code => 12;
 	}
@@ -1373,15 +1289,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class NetworkExceptionException : Exception
 	{
-		public NetworkExceptionException()
-		{
+		public NetworkExceptionException() { }
 
-		}
-
-		public NetworkExceptionException(string message) : base(message)
-		{
-
-		}
+		public NetworkExceptionException(string message) : base(message) { }
 
 		public int Code => 13;
 	}
@@ -1391,15 +1301,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class CoordinatorLoadInProgressException : Exception
 	{
-		public CoordinatorLoadInProgressException()
-		{
+		public CoordinatorLoadInProgressException() { }
 
-		}
-
-		public CoordinatorLoadInProgressException(string message) : base(message)
-		{
-
-		}
+		public CoordinatorLoadInProgressException(string message) : base(message) { }
 
 		public int Code => 14;
 	}
@@ -1409,15 +1313,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class CoordinatorNotAvailableException : Exception
 	{
-		public CoordinatorNotAvailableException()
-		{
+		public CoordinatorNotAvailableException() { }
 
-		}
-
-		public CoordinatorNotAvailableException(string message) : base(message)
-		{
-
-		}
+		public CoordinatorNotAvailableException(string message) : base(message) { }
 
 		public int Code => 15;
 	}
@@ -1427,15 +1325,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class NotCoordinatorException : Exception
 	{
-		public NotCoordinatorException()
-		{
+		public NotCoordinatorException() { }
 
-		}
-
-		public NotCoordinatorException(string message) : base(message)
-		{
-
-		}
+		public NotCoordinatorException(string message) : base(message) { }
 
 		public int Code => 16;
 	}
@@ -1445,15 +1337,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidTopicExceptionException : Exception
 	{
-		public InvalidTopicExceptionException()
-		{
+		public InvalidTopicExceptionException() { }
 
-		}
-
-		public InvalidTopicExceptionException(string message) : base(message)
-		{
-
-		}
+		public InvalidTopicExceptionException(string message) : base(message) { }
 
 		public int Code => 17;
 	}
@@ -1463,15 +1349,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class RecordListTooLargeException : Exception
 	{
-		public RecordListTooLargeException()
-		{
+		public RecordListTooLargeException() { }
 
-		}
-
-		public RecordListTooLargeException(string message) : base(message)
-		{
-
-		}
+		public RecordListTooLargeException(string message) : base(message) { }
 
 		public int Code => 18;
 	}
@@ -1481,15 +1361,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class NotEnoughReplicasException : Exception
 	{
-		public NotEnoughReplicasException()
-		{
+		public NotEnoughReplicasException() { }
 
-		}
-
-		public NotEnoughReplicasException(string message) : base(message)
-		{
-
-		}
+		public NotEnoughReplicasException(string message) : base(message) { }
 
 		public int Code => 19;
 	}
@@ -1499,15 +1373,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class NotEnoughReplicasAfterAppendException : Exception
 	{
-		public NotEnoughReplicasAfterAppendException()
-		{
+		public NotEnoughReplicasAfterAppendException() { }
 
-		}
-
-		public NotEnoughReplicasAfterAppendException(string message) : base(message)
-		{
-
-		}
+		public NotEnoughReplicasAfterAppendException(string message) : base(message) { }
 
 		public int Code => 20;
 	}
@@ -1517,15 +1385,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidRequiredAcksException : Exception
 	{
-		public InvalidRequiredAcksException()
-		{
+		public InvalidRequiredAcksException() { }
 
-		}
-
-		public InvalidRequiredAcksException(string message) : base(message)
-		{
-
-		}
+		public InvalidRequiredAcksException(string message) : base(message) { }
 
 		public int Code => 21;
 	}
@@ -1535,15 +1397,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class IllegalGenerationException : Exception
 	{
-		public IllegalGenerationException()
-		{
+		public IllegalGenerationException() { }
 
-		}
-
-		public IllegalGenerationException(string message) : base(message)
-		{
-
-		}
+		public IllegalGenerationException(string message) : base(message) { }
 
 		public int Code => 22;
 	}
@@ -1553,15 +1409,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InconsistentGroupProtocolException : Exception
 	{
-		public InconsistentGroupProtocolException()
-		{
+		public InconsistentGroupProtocolException() { }
 
-		}
-
-		public InconsistentGroupProtocolException(string message) : base(message)
-		{
-
-		}
+		public InconsistentGroupProtocolException(string message) : base(message) { }
 
 		public int Code => 23;
 	}
@@ -1571,15 +1421,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidGroupIdException : Exception
 	{
-		public InvalidGroupIdException()
-		{
+		public InvalidGroupIdException() { }
 
-		}
-
-		public InvalidGroupIdException(string message) : base(message)
-		{
-
-		}
+		public InvalidGroupIdException(string message) : base(message) { }
 
 		public int Code => 24;
 	}
@@ -1589,15 +1433,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnknownMemberIdException : Exception
 	{
-		public UnknownMemberIdException()
-		{
+		public UnknownMemberIdException() { }
 
-		}
-
-		public UnknownMemberIdException(string message) : base(message)
-		{
-
-		}
+		public UnknownMemberIdException(string message) : base(message) { }
 
 		public int Code => 25;
 	}
@@ -1607,15 +1445,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidSessionTimeoutException : Exception
 	{
-		public InvalidSessionTimeoutException()
-		{
+		public InvalidSessionTimeoutException() { }
 
-		}
-
-		public InvalidSessionTimeoutException(string message) : base(message)
-		{
-
-		}
+		public InvalidSessionTimeoutException(string message) : base(message) { }
 
 		public int Code => 26;
 	}
@@ -1625,15 +1457,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class RebalanceInProgressException : Exception
 	{
-		public RebalanceInProgressException()
-		{
+		public RebalanceInProgressException() { }
 
-		}
-
-		public RebalanceInProgressException(string message) : base(message)
-		{
-
-		}
+		public RebalanceInProgressException(string message) : base(message) { }
 
 		public int Code => 27;
 	}
@@ -1643,15 +1469,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidCommitOffsetSizeException : Exception
 	{
-		public InvalidCommitOffsetSizeException()
-		{
+		public InvalidCommitOffsetSizeException() { }
 
-		}
-
-		public InvalidCommitOffsetSizeException(string message) : base(message)
-		{
-
-		}
+		public InvalidCommitOffsetSizeException(string message) : base(message) { }
 
 		public int Code => 28;
 	}
@@ -1661,15 +1481,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class TopicAuthorizationFailedException : Exception
 	{
-		public TopicAuthorizationFailedException()
-		{
+		public TopicAuthorizationFailedException() { }
 
-		}
-
-		public TopicAuthorizationFailedException(string message) : base(message)
-		{
-
-		}
+		public TopicAuthorizationFailedException(string message) : base(message) { }
 
 		public int Code => 29;
 	}
@@ -1679,15 +1493,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class GroupAuthorizationFailedException : Exception
 	{
-		public GroupAuthorizationFailedException()
-		{
+		public GroupAuthorizationFailedException() { }
 
-		}
-
-		public GroupAuthorizationFailedException(string message) : base(message)
-		{
-
-		}
+		public GroupAuthorizationFailedException(string message) : base(message) { }
 
 		public int Code => 30;
 	}
@@ -1697,15 +1505,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ClusterAuthorizationFailedException : Exception
 	{
-		public ClusterAuthorizationFailedException()
-		{
+		public ClusterAuthorizationFailedException() { }
 
-		}
-
-		public ClusterAuthorizationFailedException(string message) : base(message)
-		{
-
-		}
+		public ClusterAuthorizationFailedException(string message) : base(message) { }
 
 		public int Code => 31;
 	}
@@ -1715,15 +1517,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidTimestampException : Exception
 	{
-		public InvalidTimestampException()
-		{
+		public InvalidTimestampException() { }
 
-		}
-
-		public InvalidTimestampException(string message) : base(message)
-		{
-
-		}
+		public InvalidTimestampException(string message) : base(message) { }
 
 		public int Code => 32;
 	}
@@ -1733,15 +1529,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnsupportedSaslMechanismException : Exception
 	{
-		public UnsupportedSaslMechanismException()
-		{
+		public UnsupportedSaslMechanismException() { }
 
-		}
-
-		public UnsupportedSaslMechanismException(string message) : base(message)
-		{
-
-		}
+		public UnsupportedSaslMechanismException(string message) : base(message) { }
 
 		public int Code => 33;
 	}
@@ -1751,15 +1541,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class IllegalSaslStateException : Exception
 	{
-		public IllegalSaslStateException()
-		{
+		public IllegalSaslStateException() { }
 
-		}
-
-		public IllegalSaslStateException(string message) : base(message)
-		{
-
-		}
+		public IllegalSaslStateException(string message) : base(message) { }
 
 		public int Code => 34;
 	}
@@ -1769,15 +1553,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnsupportedVersionException : Exception
 	{
-		public UnsupportedVersionException()
-		{
+		public UnsupportedVersionException() { }
 
-		}
-
-		public UnsupportedVersionException(string message) : base(message)
-		{
-
-		}
+		public UnsupportedVersionException(string message) : base(message) { }
 
 		public int Code => 35;
 	}
@@ -1787,15 +1565,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class TopicAlreadyExistsException : Exception
 	{
-		public TopicAlreadyExistsException()
-		{
+		public TopicAlreadyExistsException() { }
 
-		}
-
-		public TopicAlreadyExistsException(string message) : base(message)
-		{
-
-		}
+		public TopicAlreadyExistsException(string message) : base(message) { }
 
 		public int Code => 36;
 	}
@@ -1805,15 +1577,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidPartitionsException : Exception
 	{
-		public InvalidPartitionsException()
-		{
+		public InvalidPartitionsException() { }
 
-		}
-
-		public InvalidPartitionsException(string message) : base(message)
-		{
-
-		}
+		public InvalidPartitionsException(string message) : base(message) { }
 
 		public int Code => 37;
 	}
@@ -1823,15 +1589,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidReplicationFactorException : Exception
 	{
-		public InvalidReplicationFactorException()
-		{
+		public InvalidReplicationFactorException() { }
 
-		}
-
-		public InvalidReplicationFactorException(string message) : base(message)
-		{
-
-		}
+		public InvalidReplicationFactorException(string message) : base(message) { }
 
 		public int Code => 38;
 	}
@@ -1841,15 +1601,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidReplicaAssignmentException : Exception
 	{
-		public InvalidReplicaAssignmentException()
-		{
+		public InvalidReplicaAssignmentException() { }
 
-		}
-
-		public InvalidReplicaAssignmentException(string message) : base(message)
-		{
-
-		}
+		public InvalidReplicaAssignmentException(string message) : base(message) { }
 
 		public int Code => 39;
 	}
@@ -1859,15 +1613,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidConfigException : Exception
 	{
-		public InvalidConfigException()
-		{
+		public InvalidConfigException() { }
 
-		}
-
-		public InvalidConfigException(string message) : base(message)
-		{
-
-		}
+		public InvalidConfigException(string message) : base(message) { }
 
 		public int Code => 40;
 	}
@@ -1877,15 +1625,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class NotControllerException : Exception
 	{
-		public NotControllerException()
-		{
+		public NotControllerException() { }
 
-		}
-
-		public NotControllerException(string message) : base(message)
-		{
-
-		}
+		public NotControllerException(string message) : base(message) { }
 
 		public int Code => 41;
 	}
@@ -1895,15 +1637,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidRequestException : Exception
 	{
-		public InvalidRequestException()
-		{
+		public InvalidRequestException() { }
 
-		}
-
-		public InvalidRequestException(string message) : base(message)
-		{
-
-		}
+		public InvalidRequestException(string message) : base(message) { }
 
 		public int Code => 42;
 	}
@@ -1913,15 +1649,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnsupportedForMessageFormatException : Exception
 	{
-		public UnsupportedForMessageFormatException()
-		{
+		public UnsupportedForMessageFormatException() { }
 
-		}
-
-		public UnsupportedForMessageFormatException(string message) : base(message)
-		{
-
-		}
+		public UnsupportedForMessageFormatException(string message) : base(message) { }
 
 		public int Code => 43;
 	}
@@ -1931,15 +1661,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class PolicyViolationException : Exception
 	{
-		public PolicyViolationException()
-		{
+		public PolicyViolationException() { }
 
-		}
-
-		public PolicyViolationException(string message) : base(message)
-		{
-
-		}
+		public PolicyViolationException(string message) : base(message) { }
 
 		public int Code => 44;
 	}
@@ -1949,15 +1673,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class OutOfOrderSequenceNumberException : Exception
 	{
-		public OutOfOrderSequenceNumberException()
-		{
+		public OutOfOrderSequenceNumberException() { }
 
-		}
-
-		public OutOfOrderSequenceNumberException(string message) : base(message)
-		{
-
-		}
+		public OutOfOrderSequenceNumberException(string message) : base(message) { }
 
 		public int Code => 45;
 	}
@@ -1967,15 +1685,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DuplicateSequenceNumberException : Exception
 	{
-		public DuplicateSequenceNumberException()
-		{
+		public DuplicateSequenceNumberException() { }
 
-		}
-
-		public DuplicateSequenceNumberException(string message) : base(message)
-		{
-
-		}
+		public DuplicateSequenceNumberException(string message) : base(message) { }
 
 		public int Code => 46;
 	}
@@ -1985,15 +1697,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidProducerEpochException : Exception
 	{
-		public InvalidProducerEpochException()
-		{
+		public InvalidProducerEpochException() { }
 
-		}
-
-		public InvalidProducerEpochException(string message) : base(message)
-		{
-
-		}
+		public InvalidProducerEpochException(string message) : base(message) { }
 
 		public int Code => 47;
 	}
@@ -2003,15 +1709,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidTxnStateException : Exception
 	{
-		public InvalidTxnStateException()
-		{
+		public InvalidTxnStateException() { }
 
-		}
-
-		public InvalidTxnStateException(string message) : base(message)
-		{
-
-		}
+		public InvalidTxnStateException(string message) : base(message) { }
 
 		public int Code => 48;
 	}
@@ -2021,15 +1721,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidProducerIdMappingException : Exception
 	{
-		public InvalidProducerIdMappingException()
-		{
+		public InvalidProducerIdMappingException() { }
 
-		}
-
-		public InvalidProducerIdMappingException(string message) : base(message)
-		{
-
-		}
+		public InvalidProducerIdMappingException(string message) : base(message) { }
 
 		public int Code => 49;
 	}
@@ -2039,15 +1733,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidTransactionTimeoutException : Exception
 	{
-		public InvalidTransactionTimeoutException()
-		{
+		public InvalidTransactionTimeoutException() { }
 
-		}
-
-		public InvalidTransactionTimeoutException(string message) : base(message)
-		{
-
-		}
+		public InvalidTransactionTimeoutException(string message) : base(message) { }
 
 		public int Code => 50;
 	}
@@ -2057,15 +1745,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ConcurrentTransactionsException : Exception
 	{
-		public ConcurrentTransactionsException()
-		{
+		public ConcurrentTransactionsException() { }
 
-		}
-
-		public ConcurrentTransactionsException(string message) : base(message)
-		{
-
-		}
+		public ConcurrentTransactionsException(string message) : base(message) { }
 
 		public int Code => 51;
 	}
@@ -2075,15 +1757,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class TransactionCoordinatorFencedException : Exception
 	{
-		public TransactionCoordinatorFencedException()
-		{
+		public TransactionCoordinatorFencedException() { }
 
-		}
-
-		public TransactionCoordinatorFencedException(string message) : base(message)
-		{
-
-		}
+		public TransactionCoordinatorFencedException(string message) : base(message) { }
 
 		public int Code => 52;
 	}
@@ -2093,15 +1769,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class TransactionalIdAuthorizationFailedException : Exception
 	{
-		public TransactionalIdAuthorizationFailedException()
-		{
+		public TransactionalIdAuthorizationFailedException() { }
 
-		}
-
-		public TransactionalIdAuthorizationFailedException(string message) : base(message)
-		{
-
-		}
+		public TransactionalIdAuthorizationFailedException(string message) : base(message) { }
 
 		public int Code => 53;
 	}
@@ -2111,15 +1781,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class SecurityDisabledException : Exception
 	{
-		public SecurityDisabledException()
-		{
+		public SecurityDisabledException() { }
 
-		}
-
-		public SecurityDisabledException(string message) : base(message)
-		{
-
-		}
+		public SecurityDisabledException(string message) : base(message) { }
 
 		public int Code => 54;
 	}
@@ -2129,15 +1793,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class OperationNotAttemptedException : Exception
 	{
-		public OperationNotAttemptedException()
-		{
+		public OperationNotAttemptedException() { }
 
-		}
-
-		public OperationNotAttemptedException(string message) : base(message)
-		{
-
-		}
+		public OperationNotAttemptedException(string message) : base(message) { }
 
 		public int Code => 55;
 	}
@@ -2147,15 +1805,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class KafkaStorageErrorException : Exception
 	{
-		public KafkaStorageErrorException()
-		{
+		public KafkaStorageErrorException() { }
 
-		}
-
-		public KafkaStorageErrorException(string message) : base(message)
-		{
-
-		}
+		public KafkaStorageErrorException(string message) : base(message) { }
 
 		public int Code => 56;
 	}
@@ -2165,15 +1817,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class LogDirNotFoundException : Exception
 	{
-		public LogDirNotFoundException()
-		{
+		public LogDirNotFoundException() { }
 
-		}
-
-		public LogDirNotFoundException(string message) : base(message)
-		{
-
-		}
+		public LogDirNotFoundException(string message) : base(message) { }
 
 		public int Code => 57;
 	}
@@ -2183,15 +1829,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class SaslAuthenticationFailedException : Exception
 	{
-		public SaslAuthenticationFailedException()
-		{
+		public SaslAuthenticationFailedException() { }
 
-		}
-
-		public SaslAuthenticationFailedException(string message) : base(message)
-		{
-
-		}
+		public SaslAuthenticationFailedException(string message) : base(message) { }
 
 		public int Code => 58;
 	}
@@ -2201,15 +1841,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnknownProducerIdException : Exception
 	{
-		public UnknownProducerIdException()
-		{
+		public UnknownProducerIdException() { }
 
-		}
-
-		public UnknownProducerIdException(string message) : base(message)
-		{
-
-		}
+		public UnknownProducerIdException(string message) : base(message) { }
 
 		public int Code => 59;
 	}
@@ -2219,15 +1853,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ReassignmentInProgressException : Exception
 	{
-		public ReassignmentInProgressException()
-		{
+		public ReassignmentInProgressException() { }
 
-		}
-
-		public ReassignmentInProgressException(string message) : base(message)
-		{
-
-		}
+		public ReassignmentInProgressException(string message) : base(message) { }
 
 		public int Code => 60;
 	}
@@ -2237,15 +1865,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DelegationTokenAuthDisabledException : Exception
 	{
-		public DelegationTokenAuthDisabledException()
-		{
+		public DelegationTokenAuthDisabledException() { }
 
-		}
-
-		public DelegationTokenAuthDisabledException(string message) : base(message)
-		{
-
-		}
+		public DelegationTokenAuthDisabledException(string message) : base(message) { }
 
 		public int Code => 61;
 	}
@@ -2255,15 +1877,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DelegationTokenNotFoundException : Exception
 	{
-		public DelegationTokenNotFoundException()
-		{
+		public DelegationTokenNotFoundException() { }
 
-		}
-
-		public DelegationTokenNotFoundException(string message) : base(message)
-		{
-
-		}
+		public DelegationTokenNotFoundException(string message) : base(message) { }
 
 		public int Code => 62;
 	}
@@ -2273,15 +1889,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DelegationTokenOwnerMismatchException : Exception
 	{
-		public DelegationTokenOwnerMismatchException()
-		{
+		public DelegationTokenOwnerMismatchException() { }
 
-		}
-
-		public DelegationTokenOwnerMismatchException(string message) : base(message)
-		{
-
-		}
+		public DelegationTokenOwnerMismatchException(string message) : base(message) { }
 
 		public int Code => 63;
 	}
@@ -2291,15 +1901,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DelegationTokenRequestNotAllowedException : Exception
 	{
-		public DelegationTokenRequestNotAllowedException()
-		{
+		public DelegationTokenRequestNotAllowedException() { }
 
-		}
-
-		public DelegationTokenRequestNotAllowedException(string message) : base(message)
-		{
-
-		}
+		public DelegationTokenRequestNotAllowedException(string message) : base(message) { }
 
 		public int Code => 64;
 	}
@@ -2309,15 +1913,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DelegationTokenAuthorizationFailedException : Exception
 	{
-		public DelegationTokenAuthorizationFailedException()
-		{
+		public DelegationTokenAuthorizationFailedException() { }
 
-		}
-
-		public DelegationTokenAuthorizationFailedException(string message) : base(message)
-		{
-
-		}
+		public DelegationTokenAuthorizationFailedException(string message) : base(message) { }
 
 		public int Code => 65;
 	}
@@ -2327,15 +1925,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DelegationTokenExpiredException : Exception
 	{
-		public DelegationTokenExpiredException()
-		{
+		public DelegationTokenExpiredException() { }
 
-		}
-
-		public DelegationTokenExpiredException(string message) : base(message)
-		{
-
-		}
+		public DelegationTokenExpiredException(string message) : base(message) { }
 
 		public int Code => 66;
 	}
@@ -2345,15 +1937,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidPrincipalTypeException : Exception
 	{
-		public InvalidPrincipalTypeException()
-		{
+		public InvalidPrincipalTypeException() { }
 
-		}
-
-		public InvalidPrincipalTypeException(string message) : base(message)
-		{
-
-		}
+		public InvalidPrincipalTypeException(string message) : base(message) { }
 
 		public int Code => 67;
 	}
@@ -2363,15 +1949,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class NonEmptyGroupException : Exception
 	{
-		public NonEmptyGroupException()
-		{
+		public NonEmptyGroupException() { }
 
-		}
-
-		public NonEmptyGroupException(string message) : base(message)
-		{
-
-		}
+		public NonEmptyGroupException(string message) : base(message) { }
 
 		public int Code => 68;
 	}
@@ -2381,15 +1961,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class GroupIdNotFoundException : Exception
 	{
-		public GroupIdNotFoundException()
-		{
+		public GroupIdNotFoundException() { }
 
-		}
-
-		public GroupIdNotFoundException(string message) : base(message)
-		{
-
-		}
+		public GroupIdNotFoundException(string message) : base(message) { }
 
 		public int Code => 69;
 	}
@@ -2399,15 +1973,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class FetchSessionIdNotFoundException : Exception
 	{
-		public FetchSessionIdNotFoundException()
-		{
+		public FetchSessionIdNotFoundException() { }
 
-		}
-
-		public FetchSessionIdNotFoundException(string message) : base(message)
-		{
-
-		}
+		public FetchSessionIdNotFoundException(string message) : base(message) { }
 
 		public int Code => 70;
 	}
@@ -2417,15 +1985,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidFetchSessionEpochException : Exception
 	{
-		public InvalidFetchSessionEpochException()
-		{
+		public InvalidFetchSessionEpochException() { }
 
-		}
-
-		public InvalidFetchSessionEpochException(string message) : base(message)
-		{
-
-		}
+		public InvalidFetchSessionEpochException(string message) : base(message) { }
 
 		public int Code => 71;
 	}
@@ -2435,15 +1997,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ListenerNotFoundException : Exception
 	{
-		public ListenerNotFoundException()
-		{
+		public ListenerNotFoundException() { }
 
-		}
-
-		public ListenerNotFoundException(string message) : base(message)
-		{
-
-		}
+		public ListenerNotFoundException(string message) : base(message) { }
 
 		public int Code => 72;
 	}
@@ -2453,15 +2009,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class TopicDeletionDisabledException : Exception
 	{
-		public TopicDeletionDisabledException()
-		{
+		public TopicDeletionDisabledException() { }
 
-		}
-
-		public TopicDeletionDisabledException(string message) : base(message)
-		{
-
-		}
+		public TopicDeletionDisabledException(string message) : base(message) { }
 
 		public int Code => 73;
 	}
@@ -2471,15 +2021,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class FencedLeaderEpochException : Exception
 	{
-		public FencedLeaderEpochException()
-		{
+		public FencedLeaderEpochException() { }
 
-		}
-
-		public FencedLeaderEpochException(string message) : base(message)
-		{
-
-		}
+		public FencedLeaderEpochException(string message) : base(message) { }
 
 		public int Code => 74;
 	}
@@ -2489,15 +2033,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnknownLeaderEpochException : Exception
 	{
-		public UnknownLeaderEpochException()
-		{
+		public UnknownLeaderEpochException() { }
 
-		}
-
-		public UnknownLeaderEpochException(string message) : base(message)
-		{
-
-		}
+		public UnknownLeaderEpochException(string message) : base(message) { }
 
 		public int Code => 75;
 	}
@@ -2507,15 +2045,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnsupportedCompressionTypeException : Exception
 	{
-		public UnsupportedCompressionTypeException()
-		{
+		public UnsupportedCompressionTypeException() { }
 
-		}
-
-		public UnsupportedCompressionTypeException(string message) : base(message)
-		{
-
-		}
+		public UnsupportedCompressionTypeException(string message) : base(message) { }
 
 		public int Code => 76;
 	}
@@ -2525,15 +2057,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class StaleBrokerEpochException : Exception
 	{
-		public StaleBrokerEpochException()
-		{
+		public StaleBrokerEpochException() { }
 
-		}
-
-		public StaleBrokerEpochException(string message) : base(message)
-		{
-
-		}
+		public StaleBrokerEpochException(string message) : base(message) { }
 
 		public int Code => 77;
 	}
@@ -2543,15 +2069,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class OffsetNotAvailableException : Exception
 	{
-		public OffsetNotAvailableException()
-		{
+		public OffsetNotAvailableException() { }
 
-		}
-
-		public OffsetNotAvailableException(string message) : base(message)
-		{
-
-		}
+		public OffsetNotAvailableException(string message) : base(message) { }
 
 		public int Code => 78;
 	}
@@ -2561,15 +2081,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class MemberIdRequiredException : Exception
 	{
-		public MemberIdRequiredException()
-		{
+		public MemberIdRequiredException() { }
 
-		}
-
-		public MemberIdRequiredException(string message) : base(message)
-		{
-
-		}
+		public MemberIdRequiredException(string message) : base(message) { }
 
 		public int Code => 79;
 	}
@@ -2579,15 +2093,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class PreferredLeaderNotAvailableException : Exception
 	{
-		public PreferredLeaderNotAvailableException()
-		{
+		public PreferredLeaderNotAvailableException() { }
 
-		}
-
-		public PreferredLeaderNotAvailableException(string message) : base(message)
-		{
-
-		}
+		public PreferredLeaderNotAvailableException(string message) : base(message) { }
 
 		public int Code => 80;
 	}
@@ -2597,15 +2105,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class GroupMaxSizeReachedException : Exception
 	{
-		public GroupMaxSizeReachedException()
-		{
+		public GroupMaxSizeReachedException() { }
 
-		}
-
-		public GroupMaxSizeReachedException(string message) : base(message)
-		{
-
-		}
+		public GroupMaxSizeReachedException(string message) : base(message) { }
 
 		public int Code => 81;
 	}
@@ -2615,15 +2117,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class FencedInstanceIdException : Exception
 	{
-		public FencedInstanceIdException()
-		{
+		public FencedInstanceIdException() { }
 
-		}
-
-		public FencedInstanceIdException(string message) : base(message)
-		{
-
-		}
+		public FencedInstanceIdException(string message) : base(message) { }
 
 		public int Code => 82;
 	}
@@ -2633,15 +2129,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class EligibleLeadersNotAvailableException : Exception
 	{
-		public EligibleLeadersNotAvailableException()
-		{
+		public EligibleLeadersNotAvailableException() { }
 
-		}
-
-		public EligibleLeadersNotAvailableException(string message) : base(message)
-		{
-
-		}
+		public EligibleLeadersNotAvailableException(string message) : base(message) { }
 
 		public int Code => 83;
 	}
@@ -2651,15 +2141,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ElectionNotNeededException : Exception
 	{
-		public ElectionNotNeededException()
-		{
+		public ElectionNotNeededException() { }
 
-		}
-
-		public ElectionNotNeededException(string message) : base(message)
-		{
-
-		}
+		public ElectionNotNeededException(string message) : base(message) { }
 
 		public int Code => 84;
 	}
@@ -2669,15 +2153,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class NoReassignmentInProgressException : Exception
 	{
-		public NoReassignmentInProgressException()
-		{
+		public NoReassignmentInProgressException() { }
 
-		}
-
-		public NoReassignmentInProgressException(string message) : base(message)
-		{
-
-		}
+		public NoReassignmentInProgressException(string message) : base(message) { }
 
 		public int Code => 85;
 	}
@@ -2687,15 +2165,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class GroupSubscribedToTopicException : Exception
 	{
-		public GroupSubscribedToTopicException()
-		{
+		public GroupSubscribedToTopicException() { }
 
-		}
-
-		public GroupSubscribedToTopicException(string message) : base(message)
-		{
-
-		}
+		public GroupSubscribedToTopicException(string message) : base(message) { }
 
 		public int Code => 86;
 	}
@@ -2705,15 +2177,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidRecordException : Exception
 	{
-		public InvalidRecordException()
-		{
+		public InvalidRecordException() { }
 
-		}
-
-		public InvalidRecordException(string message) : base(message)
-		{
-
-		}
+		public InvalidRecordException(string message) : base(message) { }
 
 		public int Code => 87;
 	}
@@ -2723,15 +2189,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnstableOffsetCommitException : Exception
 	{
-		public UnstableOffsetCommitException()
-		{
+		public UnstableOffsetCommitException() { }
 
-		}
-
-		public UnstableOffsetCommitException(string message) : base(message)
-		{
-
-		}
+		public UnstableOffsetCommitException(string message) : base(message) { }
 
 		public int Code => 88;
 	}
@@ -2741,15 +2201,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ThrottlingQuotaExceededException : Exception
 	{
-		public ThrottlingQuotaExceededException()
-		{
+		public ThrottlingQuotaExceededException() { }
 
-		}
-
-		public ThrottlingQuotaExceededException(string message) : base(message)
-		{
-
-		}
+		public ThrottlingQuotaExceededException(string message) : base(message) { }
 
 		public int Code => 89;
 	}
@@ -2759,15 +2213,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ProducerFencedException : Exception
 	{
-		public ProducerFencedException()
-		{
+		public ProducerFencedException() { }
 
-		}
-
-		public ProducerFencedException(string message) : base(message)
-		{
-
-		}
+		public ProducerFencedException(string message) : base(message) { }
 
 		public int Code => 90;
 	}
@@ -2777,15 +2225,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class ResourceNotFoundException : Exception
 	{
-		public ResourceNotFoundException()
-		{
+		public ResourceNotFoundException() { }
 
-		}
-
-		public ResourceNotFoundException(string message) : base(message)
-		{
-
-		}
+		public ResourceNotFoundException(string message) : base(message) { }
 
 		public int Code => 91;
 	}
@@ -2795,15 +2237,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DuplicateResourceException : Exception
 	{
-		public DuplicateResourceException()
-		{
+		public DuplicateResourceException() { }
 
-		}
-
-		public DuplicateResourceException(string message) : base(message)
-		{
-
-		}
+		public DuplicateResourceException(string message) : base(message) { }
 
 		public int Code => 92;
 	}
@@ -2813,15 +2249,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnacceptableCredentialException : Exception
 	{
-		public UnacceptableCredentialException()
-		{
+		public UnacceptableCredentialException() { }
 
-		}
-
-		public UnacceptableCredentialException(string message) : base(message)
-		{
-
-		}
+		public UnacceptableCredentialException(string message) : base(message) { }
 
 		public int Code => 93;
 	}
@@ -2831,15 +2261,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InconsistentVoterSetException : Exception
 	{
-		public InconsistentVoterSetException()
-		{
+		public InconsistentVoterSetException() { }
 
-		}
-
-		public InconsistentVoterSetException(string message) : base(message)
-		{
-
-		}
+		public InconsistentVoterSetException(string message) : base(message) { }
 
 		public int Code => 94;
 	}
@@ -2849,15 +2273,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InvalidUpdateVersionException : Exception
 	{
-		public InvalidUpdateVersionException()
-		{
+		public InvalidUpdateVersionException() { }
 
-		}
-
-		public InvalidUpdateVersionException(string message) : base(message)
-		{
-
-		}
+		public InvalidUpdateVersionException(string message) : base(message) { }
 
 		public int Code => 95;
 	}
@@ -2867,15 +2285,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class FeatureUpdateFailedException : Exception
 	{
-		public FeatureUpdateFailedException()
-		{
+		public FeatureUpdateFailedException() { }
 
-		}
-
-		public FeatureUpdateFailedException(string message) : base(message)
-		{
-
-		}
+		public FeatureUpdateFailedException(string message) : base(message) { }
 
 		public int Code => 96;
 	}
@@ -2885,15 +2297,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class PrincipalDeserializationFailureException : Exception
 	{
-		public PrincipalDeserializationFailureException()
-		{
+		public PrincipalDeserializationFailureException() { }
 
-		}
-
-		public PrincipalDeserializationFailureException(string message) : base(message)
-		{
-
-		}
+		public PrincipalDeserializationFailureException(string message) : base(message) { }
 
 		public int Code => 97;
 	}
@@ -2903,15 +2309,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class SnapshotNotFoundException : Exception
 	{
-		public SnapshotNotFoundException()
-		{
+		public SnapshotNotFoundException() { }
 
-		}
-
-		public SnapshotNotFoundException(string message) : base(message)
-		{
-
-		}
+		public SnapshotNotFoundException(string message) : base(message) { }
 
 		public int Code => 98;
 	}
@@ -2921,15 +2321,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class PositionOutOfRangeException : Exception
 	{
-		public PositionOutOfRangeException()
-		{
+		public PositionOutOfRangeException() { }
 
-		}
-
-		public PositionOutOfRangeException(string message) : base(message)
-		{
-
-		}
+		public PositionOutOfRangeException(string message) : base(message) { }
 
 		public int Code => 99;
 	}
@@ -2939,15 +2333,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class UnknownTopicIdException : Exception
 	{
-		public UnknownTopicIdException()
-		{
+		public UnknownTopicIdException() { }
 
-		}
-
-		public UnknownTopicIdException(string message) : base(message)
-		{
-
-		}
+		public UnknownTopicIdException(string message) : base(message) { }
 
 		public int Code => 100;
 	}
@@ -2957,15 +2345,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class DuplicateBrokerRegistrationException : Exception
 	{
-		public DuplicateBrokerRegistrationException()
-		{
+		public DuplicateBrokerRegistrationException() { }
 
-		}
-
-		public DuplicateBrokerRegistrationException(string message) : base(message)
-		{
-
-		}
+		public DuplicateBrokerRegistrationException(string message) : base(message) { }
 
 		public int Code => 101;
 	}
@@ -2975,15 +2357,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class BrokerIdNotRegisteredException : Exception
 	{
-		public BrokerIdNotRegisteredException()
-		{
+		public BrokerIdNotRegisteredException() { }
 
-		}
-
-		public BrokerIdNotRegisteredException(string message) : base(message)
-		{
-
-		}
+		public BrokerIdNotRegisteredException(string message) : base(message) { }
 
 		public int Code => 102;
 	}
@@ -2993,15 +2369,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InconsistentTopicIdException : Exception
 	{
-		public InconsistentTopicIdException()
-		{
+		public InconsistentTopicIdException() { }
 
-		}
-
-		public InconsistentTopicIdException(string message) : base(message)
-		{
-
-		}
+		public InconsistentTopicIdException(string message) : base(message) { }
 
 		public int Code => 103;
 	}
@@ -3011,15 +2381,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class InconsistentClusterIdException : Exception
 	{
-		public InconsistentClusterIdException()
-		{
+		public InconsistentClusterIdException() { }
 
-		}
-
-		public InconsistentClusterIdException(string message) : base(message)
-		{
-
-		}
+		public InconsistentClusterIdException(string message) : base(message) { }
 
 		public int Code => 104;
 	}
@@ -3029,15 +2393,9 @@ namespace Kafka.Protocol
 	/// </summary>
 	public class TransactionalIdNotFoundException : Exception
 	{
-		public TransactionalIdNotFoundException()
-		{
+		public TransactionalIdNotFoundException() { }
 
-		}
-
-		public TransactionalIdNotFoundException(string message) : base(message)
-		{
-
-		}
+		public TransactionalIdNotFoundException(string message) : base(message) { }
 
 		public int Code => 105;
 	}
@@ -3051,344 +2409,208 @@ namespace Kafka.Protocol
 			CancellationToken cancellationToken = default)
 		{
 			if (AddOffsetsToTxnRequest.ApiKey == apiKey)
-			{
 				return await AddOffsetsToTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AddPartitionsToTxnRequest.ApiKey == apiKey)
-			{
 				return await AddPartitionsToTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AllocateProducerIdsRequest.ApiKey == apiKey)
-			{
 				return await AllocateProducerIdsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterClientQuotasRequest.ApiKey == apiKey)
-			{
 				return await AlterClientQuotasRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterConfigsRequest.ApiKey == apiKey)
-			{
 				return await AlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterIsrRequest.ApiKey == apiKey)
-			{
 				return await AlterIsrRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterPartitionReassignmentsRequest.ApiKey == apiKey)
-			{
 				return await AlterPartitionReassignmentsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterReplicaLogDirsRequest.ApiKey == apiKey)
-			{
 				return await AlterReplicaLogDirsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterUserScramCredentialsRequest.ApiKey == apiKey)
-			{
 				return await AlterUserScramCredentialsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ApiVersionsRequest.ApiKey == apiKey)
-			{
 				return await ApiVersionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (BeginQuorumEpochRequest.ApiKey == apiKey)
-			{
 				return await BeginQuorumEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (BrokerHeartbeatRequest.ApiKey == apiKey)
-			{
 				return await BrokerHeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (BrokerRegistrationRequest.ApiKey == apiKey)
-			{
 				return await BrokerRegistrationRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ControlledShutdownRequest.ApiKey == apiKey)
-			{
 				return await ControlledShutdownRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (CreateAclsRequest.ApiKey == apiKey)
-			{
 				return await CreateAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (CreateDelegationTokenRequest.ApiKey == apiKey)
-			{
 				return await CreateDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (CreatePartitionsRequest.ApiKey == apiKey)
-			{
 				return await CreatePartitionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (CreateTopicsRequest.ApiKey == apiKey)
-			{
 				return await CreateTopicsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DeleteAclsRequest.ApiKey == apiKey)
-			{
 				return await DeleteAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DeleteGroupsRequest.ApiKey == apiKey)
-			{
 				return await DeleteGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DeleteRecordsRequest.ApiKey == apiKey)
-			{
 				return await DeleteRecordsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DeleteTopicsRequest.ApiKey == apiKey)
-			{
 				return await DeleteTopicsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeAclsRequest.ApiKey == apiKey)
-			{
 				return await DescribeAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeClientQuotasRequest.ApiKey == apiKey)
-			{
 				return await DescribeClientQuotasRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeClusterRequest.ApiKey == apiKey)
-			{
 				return await DescribeClusterRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeConfigsRequest.ApiKey == apiKey)
-			{
 				return await DescribeConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeDelegationTokenRequest.ApiKey == apiKey)
-			{
 				return await DescribeDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeGroupsRequest.ApiKey == apiKey)
-			{
 				return await DescribeGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeLogDirsRequest.ApiKey == apiKey)
-			{
 				return await DescribeLogDirsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeProducersRequest.ApiKey == apiKey)
-			{
 				return await DescribeProducersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeQuorumRequest.ApiKey == apiKey)
-			{
 				return await DescribeQuorumRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeTransactionsRequest.ApiKey == apiKey)
-			{
 				return await DescribeTransactionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeUserScramCredentialsRequest.ApiKey == apiKey)
-			{
 				return await DescribeUserScramCredentialsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ElectLeadersRequest.ApiKey == apiKey)
-			{
 				return await ElectLeadersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (EndQuorumEpochRequest.ApiKey == apiKey)
-			{
 				return await EndQuorumEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (EndTxnRequest.ApiKey == apiKey)
-			{
 				return await EndTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (EnvelopeRequest.ApiKey == apiKey)
-			{
 				return await EnvelopeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ExpireDelegationTokenRequest.ApiKey == apiKey)
-			{
 				return await ExpireDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (FetchRequest.ApiKey == apiKey)
-			{
 				return await FetchRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (FetchSnapshotRequest.ApiKey == apiKey)
-			{
 				return await FetchSnapshotRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (FindCoordinatorRequest.ApiKey == apiKey)
-			{
 				return await FindCoordinatorRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (HeartbeatRequest.ApiKey == apiKey)
-			{
 				return await HeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IncrementalAlterConfigsRequest.ApiKey == apiKey)
-			{
 				return await IncrementalAlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (InitProducerIdRequest.ApiKey == apiKey)
-			{
 				return await InitProducerIdRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (JoinGroupRequest.ApiKey == apiKey)
-			{
 				return await JoinGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (LeaderAndIsrRequest.ApiKey == apiKey)
-			{
 				return await LeaderAndIsrRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (LeaveGroupRequest.ApiKey == apiKey)
-			{
 				return await LeaveGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ListGroupsRequest.ApiKey == apiKey)
-			{
 				return await ListGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ListOffsetsRequest.ApiKey == apiKey)
-			{
 				return await ListOffsetsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ListPartitionReassignmentsRequest.ApiKey == apiKey)
-			{
 				return await ListPartitionReassignmentsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ListTransactionsRequest.ApiKey == apiKey)
-			{
 				return await ListTransactionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (MetadataRequest.ApiKey == apiKey)
-			{
 				return await MetadataRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (OffsetCommitRequest.ApiKey == apiKey)
-			{
 				return await OffsetCommitRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (OffsetDeleteRequest.ApiKey == apiKey)
-			{
 				return await OffsetDeleteRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (OffsetFetchRequest.ApiKey == apiKey)
-			{
 				return await OffsetFetchRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (OffsetForLeaderEpochRequest.ApiKey == apiKey)
-			{
 				return await OffsetForLeaderEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ProduceRequest.ApiKey == apiKey)
-			{
 				return await ProduceRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (RenewDelegationTokenRequest.ApiKey == apiKey)
-			{
 				return await RenewDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (SaslAuthenticateRequest.ApiKey == apiKey)
-			{
 				return await SaslAuthenticateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (SaslHandshakeRequest.ApiKey == apiKey)
-			{
 				return await SaslHandshakeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (StopReplicaRequest.ApiKey == apiKey)
-			{
 				return await StopReplicaRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (SyncGroupRequest.ApiKey == apiKey)
-			{
 				return await SyncGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (TxnOffsetCommitRequest.ApiKey == apiKey)
-			{
 				return await TxnOffsetCommitRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (UnregisterBrokerRequest.ApiKey == apiKey)
-			{
 				return await UnregisterBrokerRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (UpdateFeaturesRequest.ApiKey == apiKey)
-			{
 				return await UpdateFeaturesRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (UpdateMetadataRequest.ApiKey == apiKey)
-			{
 				return await UpdateMetadataRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (VoteRequest.ApiKey == apiKey)
-			{
 				return await VoteRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (WriteTxnMarkersRequest.ApiKey == apiKey)
-			{
 				return await WriteTxnMarkersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			throw new ArgumentException($"{apiKey} is not supported");
 		}
@@ -3400,344 +2622,208 @@ namespace Kafka.Protocol
 			CancellationToken cancellationToken = default)
 		{
 			if (AddOffsetsToTxnResponse.ApiKey == apiKey)
-			{
 				return await AddOffsetsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
-			{
 				return await AddPartitionsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AllocateProducerIdsResponse.ApiKey == apiKey)
-			{
 				return await AllocateProducerIdsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterClientQuotasResponse.ApiKey == apiKey)
-			{
 				return await AlterClientQuotasResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterConfigsResponse.ApiKey == apiKey)
-			{
 				return await AlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterIsrResponse.ApiKey == apiKey)
-			{
 				return await AlterIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterPartitionReassignmentsResponse.ApiKey == apiKey)
-			{
 				return await AlterPartitionReassignmentsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterReplicaLogDirsResponse.ApiKey == apiKey)
-			{
 				return await AlterReplicaLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (AlterUserScramCredentialsResponse.ApiKey == apiKey)
-			{
 				return await AlterUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ApiVersionsResponse.ApiKey == apiKey)
-			{
 				return await ApiVersionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (BeginQuorumEpochResponse.ApiKey == apiKey)
-			{
 				return await BeginQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (BrokerHeartbeatResponse.ApiKey == apiKey)
-			{
 				return await BrokerHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (BrokerRegistrationResponse.ApiKey == apiKey)
-			{
 				return await BrokerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ControlledShutdownResponse.ApiKey == apiKey)
-			{
 				return await ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (CreateAclsResponse.ApiKey == apiKey)
-			{
 				return await CreateAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (CreateDelegationTokenResponse.ApiKey == apiKey)
-			{
 				return await CreateDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (CreatePartitionsResponse.ApiKey == apiKey)
-			{
 				return await CreatePartitionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (CreateTopicsResponse.ApiKey == apiKey)
-			{
 				return await CreateTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DeleteAclsResponse.ApiKey == apiKey)
-			{
 				return await DeleteAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DeleteGroupsResponse.ApiKey == apiKey)
-			{
 				return await DeleteGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DeleteRecordsResponse.ApiKey == apiKey)
-			{
 				return await DeleteRecordsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DeleteTopicsResponse.ApiKey == apiKey)
-			{
 				return await DeleteTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeAclsResponse.ApiKey == apiKey)
-			{
 				return await DescribeAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeClientQuotasResponse.ApiKey == apiKey)
-			{
 				return await DescribeClientQuotasResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeClusterResponse.ApiKey == apiKey)
-			{
 				return await DescribeClusterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeConfigsResponse.ApiKey == apiKey)
-			{
 				return await DescribeConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeDelegationTokenResponse.ApiKey == apiKey)
-			{
 				return await DescribeDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeGroupsResponse.ApiKey == apiKey)
-			{
 				return await DescribeGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeLogDirsResponse.ApiKey == apiKey)
-			{
 				return await DescribeLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeProducersResponse.ApiKey == apiKey)
-			{
 				return await DescribeProducersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeQuorumResponse.ApiKey == apiKey)
-			{
 				return await DescribeQuorumResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeTransactionsResponse.ApiKey == apiKey)
-			{
 				return await DescribeTransactionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (DescribeUserScramCredentialsResponse.ApiKey == apiKey)
-			{
 				return await DescribeUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ElectLeadersResponse.ApiKey == apiKey)
-			{
 				return await ElectLeadersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (EndQuorumEpochResponse.ApiKey == apiKey)
-			{
 				return await EndQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (EndTxnResponse.ApiKey == apiKey)
-			{
 				return await EndTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (EnvelopeResponse.ApiKey == apiKey)
-			{
 				return await EnvelopeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ExpireDelegationTokenResponse.ApiKey == apiKey)
-			{
 				return await ExpireDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (FetchResponse.ApiKey == apiKey)
-			{
 				return await FetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (FetchSnapshotResponse.ApiKey == apiKey)
-			{
 				return await FetchSnapshotResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (FindCoordinatorResponse.ApiKey == apiKey)
-			{
 				return await FindCoordinatorResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (HeartbeatResponse.ApiKey == apiKey)
-			{
 				return await HeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
-			{
 				return await IncrementalAlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (InitProducerIdResponse.ApiKey == apiKey)
-			{
 				return await InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (JoinGroupResponse.ApiKey == apiKey)
-			{
 				return await JoinGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (LeaderAndIsrResponse.ApiKey == apiKey)
-			{
 				return await LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (LeaveGroupResponse.ApiKey == apiKey)
-			{
 				return await LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ListGroupsResponse.ApiKey == apiKey)
-			{
 				return await ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ListOffsetsResponse.ApiKey == apiKey)
-			{
 				return await ListOffsetsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ListPartitionReassignmentsResponse.ApiKey == apiKey)
-			{
 				return await ListPartitionReassignmentsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ListTransactionsResponse.ApiKey == apiKey)
-			{
 				return await ListTransactionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (MetadataResponse.ApiKey == apiKey)
-			{
 				return await MetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (OffsetCommitResponse.ApiKey == apiKey)
-			{
 				return await OffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (OffsetDeleteResponse.ApiKey == apiKey)
-			{
 				return await OffsetDeleteResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (OffsetFetchResponse.ApiKey == apiKey)
-			{
 				return await OffsetFetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (OffsetForLeaderEpochResponse.ApiKey == apiKey)
-			{
 				return await OffsetForLeaderEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (ProduceResponse.ApiKey == apiKey)
-			{
 				return await ProduceResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (RenewDelegationTokenResponse.ApiKey == apiKey)
-			{
 				return await RenewDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (SaslAuthenticateResponse.ApiKey == apiKey)
-			{
 				return await SaslAuthenticateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (SaslHandshakeResponse.ApiKey == apiKey)
-			{
 				return await SaslHandshakeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (StopReplicaResponse.ApiKey == apiKey)
-			{
 				return await StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (SyncGroupResponse.ApiKey == apiKey)
-			{
 				return await SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (TxnOffsetCommitResponse.ApiKey == apiKey)
-			{
 				return await TxnOffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (UnregisterBrokerResponse.ApiKey == apiKey)
-			{
 				return await UnregisterBrokerResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (UpdateFeaturesResponse.ApiKey == apiKey)
-			{
 				return await UpdateFeaturesResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (UpdateMetadataResponse.ApiKey == apiKey)
-			{
 				return await UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (VoteResponse.ApiKey == apiKey)
-			{
 				return await VoteResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (WriteTxnMarkersResponse.ApiKey == apiKey)
-			{
 				return await WriteTxnMarkersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-			}
 
 			throw new ArgumentException($"{apiKey} is not supported");
 		}
@@ -3748,9 +2834,7 @@ namespace Kafka.Protocol
 		public AddOffsetsToTxnRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AddOffsetsToTxnRequest does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -3948,9 +3032,7 @@ namespace Kafka.Protocol
 		public AddOffsetsToTxnResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AddOffsetsToTxnResponse does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -4077,9 +3159,7 @@ namespace Kafka.Protocol
 		public AddPartitionsToTxnRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AddPartitionsToTxnRequest does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -4405,9 +3485,7 @@ namespace Kafka.Protocol
 		public AddPartitionsToTxnResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AddPartitionsToTxnResponse does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -4790,9 +3868,7 @@ namespace Kafka.Protocol
 		public AllocateProducerIdsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AllocateProducerIdsRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -4924,9 +4000,7 @@ namespace Kafka.Protocol
 		public AllocateProducerIdsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AllocateProducerIdsResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -5121,9 +4195,7 @@ namespace Kafka.Protocol
 		public AlterClientQuotasRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterClientQuotasRequest does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);
@@ -5675,9 +4747,7 @@ namespace Kafka.Protocol
 		public AlterClientQuotasResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterClientQuotasResponse does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);
@@ -6102,9 +5172,7 @@ namespace Kafka.Protocol
 		public AlterConfigsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterConfigsRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -6528,9 +5596,7 @@ namespace Kafka.Protocol
 		public AlterConfigsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterConfigsResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -6857,9 +5923,7 @@ namespace Kafka.Protocol
 		public AlterIsrRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterIsrRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -7345,9 +6409,7 @@ namespace Kafka.Protocol
 		public AlterIsrResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterIsrResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -7896,9 +6958,7 @@ namespace Kafka.Protocol
 		public AlterPartitionReassignmentsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterPartitionReassignmentsRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -8292,9 +7352,7 @@ namespace Kafka.Protocol
 		public AlterPartitionReassignmentsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterPartitionReassignmentsResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -8787,9 +7845,7 @@ namespace Kafka.Protocol
 		public AlterReplicaLogDirsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterReplicaLogDirsRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -9141,9 +8197,7 @@ namespace Kafka.Protocol
 		public AlterReplicaLogDirsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterReplicaLogDirsResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -9526,9 +8580,7 @@ namespace Kafka.Protocol
 		public AlterUserScramCredentialsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterUserScramCredentialsRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -10016,9 +9068,7 @@ namespace Kafka.Protocol
 		public AlterUserScramCredentialsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"AlterUserScramCredentialsResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -10311,9 +9361,7 @@ namespace Kafka.Protocol
 		public ApiVersionsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ApiVersionsRequest does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -10437,9 +9485,7 @@ namespace Kafka.Protocol
 		public ApiVersionsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ApiVersionsResponse does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -11211,9 +10257,7 @@ namespace Kafka.Protocol
 		public BeginQuorumEpochRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"BeginQuorumEpochRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -11633,9 +10677,7 @@ namespace Kafka.Protocol
 		public BeginQuorumEpochResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"BeginQuorumEpochResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -12080,9 +11122,7 @@ namespace Kafka.Protocol
 		public BrokerHeartbeatRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"BrokerHeartbeatRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -12316,9 +11356,7 @@ namespace Kafka.Protocol
 		public BrokerHeartbeatResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"BrokerHeartbeatResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -12551,9 +11589,7 @@ namespace Kafka.Protocol
 		public BrokerRegistrationRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"BrokerRegistrationRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -13181,9 +12217,7 @@ namespace Kafka.Protocol
 		public BrokerRegistrationResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"BrokerRegistrationResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -13346,9 +12380,7 @@ namespace Kafka.Protocol
 		public ConsumerProtocolAssignment(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ConsumerProtocolAssignment does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -13604,9 +12636,7 @@ namespace Kafka.Protocol
 		public ConsumerProtocolSubscription(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ConsumerProtocolSubscription does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -13891,9 +12921,7 @@ namespace Kafka.Protocol
 		public ControlledShutdownRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ControlledShutdownRequest does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -14022,9 +13050,7 @@ namespace Kafka.Protocol
 		public ControlledShutdownResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ControlledShutdownResponse does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -14279,9 +13305,7 @@ namespace Kafka.Protocol
 		public CreateAclsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"CreateAclsRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -14677,9 +13701,7 @@ namespace Kafka.Protocol
 		public CreateAclsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"CreateAclsResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -14938,9 +13960,7 @@ namespace Kafka.Protocol
 		public CreateDelegationTokenRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"CreateDelegationTokenRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -15198,9 +14218,7 @@ namespace Kafka.Protocol
 		public CreateDelegationTokenResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"CreateDelegationTokenResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -15565,9 +14583,7 @@ namespace Kafka.Protocol
 		public CreatePartitionsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"CreatePartitionsRequest does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -15991,9 +15007,7 @@ namespace Kafka.Protocol
 		public CreatePartitionsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"CreatePartitionsResponse does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -16288,9 +15302,7 @@ namespace Kafka.Protocol
 		public CreateTopicsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"CreateTopicsRequest does not support version {version}. Valid versions are: 0-7");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(5, 2147483647);
@@ -16948,9 +15960,7 @@ namespace Kafka.Protocol
 		public CreateTopicsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"CreateTopicsResponse does not support version {version}. Valid versions are: 0-7");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(5, 2147483647);
@@ -17644,9 +16654,7 @@ namespace Kafka.Protocol
 		public DefaultPrincipalData(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DefaultPrincipalData does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -17810,9 +16818,7 @@ namespace Kafka.Protocol
 		public DeleteAclsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DeleteAclsRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -18220,9 +17226,7 @@ namespace Kafka.Protocol
 		public DeleteAclsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DeleteAclsResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -18887,9 +17891,7 @@ namespace Kafka.Protocol
 		public DeleteGroupsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DeleteGroupsRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -18985,9 +17987,7 @@ namespace Kafka.Protocol
 		public DeleteGroupsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DeleteGroupsResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -19242,9 +18242,7 @@ namespace Kafka.Protocol
 		public DeleteRecordsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DeleteRecordsRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -19630,9 +18628,7 @@ namespace Kafka.Protocol
 		public DeleteRecordsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DeleteRecordsResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -20049,9 +19045,7 @@ namespace Kafka.Protocol
 		public DeleteTopicsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DeleteTopicsRequest does not support version {version}. Valid versions are: 0-6");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -20346,9 +19340,7 @@ namespace Kafka.Protocol
 		public DeleteTopicsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DeleteTopicsResponse does not support version {version}. Valid versions are: 0-6");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -20672,9 +19664,7 @@ namespace Kafka.Protocol
 		public DescribeAclsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeAclsRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -20988,9 +19978,7 @@ namespace Kafka.Protocol
 		public DescribeAclsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeAclsResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -21583,9 +20571,7 @@ namespace Kafka.Protocol
 		public DescribeClientQuotasRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeClientQuotasRequest does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);
@@ -21881,9 +20867,7 @@ namespace Kafka.Protocol
 		public DescribeClientQuotasResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeClientQuotasResponse does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);
@@ -22474,9 +21458,7 @@ namespace Kafka.Protocol
 		public DescribeClusterRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeClusterRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -22572,9 +21554,7 @@ namespace Kafka.Protocol
 		public DescribeClusterResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeClusterResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -23083,9 +22063,7 @@ namespace Kafka.Protocol
 		public DescribeConfigsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeConfigsRequest does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -23419,9 +22397,7 @@ namespace Kafka.Protocol
 		public DescribeConfigsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeConfigsResponse does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -24314,9 +23290,7 @@ namespace Kafka.Protocol
 		public DescribeDelegationTokenRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeDelegationTokenRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -24544,9 +23518,7 @@ namespace Kafka.Protocol
 		public DescribeDelegationTokenResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeDelegationTokenResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -25167,9 +24139,7 @@ namespace Kafka.Protocol
 		public DescribeGroupsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeGroupsRequest does not support version {version}. Valid versions are: 0-5");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(5, 2147483647);
@@ -25299,9 +24269,7 @@ namespace Kafka.Protocol
 		public DescribeGroupsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeGroupsResponse does not support version {version}. Valid versions are: 0-5");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(5, 2147483647);
@@ -25992,9 +24960,7 @@ namespace Kafka.Protocol
 		public DescribeLogDirsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeLogDirsRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -26222,9 +25188,7 @@ namespace Kafka.Protocol
 		public DescribeLogDirsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeLogDirsResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -26835,9 +25799,7 @@ namespace Kafka.Protocol
 		public DescribeProducersRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeProducersRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -27059,9 +26021,7 @@ namespace Kafka.Protocol
 		public DescribeProducersResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeProducersResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -27774,9 +26734,7 @@ namespace Kafka.Protocol
 		public DescribeQuorumRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeQuorumRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -28090,9 +27048,7 @@ namespace Kafka.Protocol
 		public DescribeQuorumResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeQuorumResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -28757,9 +27713,7 @@ namespace Kafka.Protocol
 		public DescribeTransactionsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeTransactionsRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -28855,9 +27809,7 @@ namespace Kafka.Protocol
 		public DescribeTransactionsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeTransactionsResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -29424,9 +28376,7 @@ namespace Kafka.Protocol
 		public DescribeUserScramCredentialsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeUserScramCredentialsRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -29620,9 +28570,7 @@ namespace Kafka.Protocol
 		public DescribeUserScramCredentialsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"DescribeUserScramCredentialsResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -30149,9 +29097,7 @@ namespace Kafka.Protocol
 		public ElectLeadersRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ElectLeadersRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -30449,9 +29395,7 @@ namespace Kafka.Protocol
 		public ElectLeadersResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ElectLeadersResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -30906,9 +29850,7 @@ namespace Kafka.Protocol
 		public EndQuorumEpochRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"EndQuorumEpochRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -31362,9 +30304,7 @@ namespace Kafka.Protocol
 		public EndQuorumEpochResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"EndQuorumEpochResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -31809,9 +30749,7 @@ namespace Kafka.Protocol
 		public EndTxnRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"EndTxnRequest does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -32009,9 +30947,7 @@ namespace Kafka.Protocol
 		public EndTxnResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"EndTxnResponse does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -32138,9 +31074,7 @@ namespace Kafka.Protocol
 		public EnvelopeRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"EnvelopeRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -32308,9 +31242,7 @@ namespace Kafka.Protocol
 		public EnvelopeResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"EnvelopeResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -32443,9 +31375,7 @@ namespace Kafka.Protocol
 		public ExpireDelegationTokenRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ExpireDelegationTokenRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -32575,9 +31505,7 @@ namespace Kafka.Protocol
 		public ExpireDelegationTokenResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ExpireDelegationTokenResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -32738,9 +31666,7 @@ namespace Kafka.Protocol
 		public FetchRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 0-13");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(12, 2147483647);
@@ -33762,9 +32688,7 @@ namespace Kafka.Protocol
 		public FetchResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 0-13");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(12, 2147483647);
@@ -35091,9 +34015,7 @@ namespace Kafka.Protocol
 		public FetchSnapshotRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"FetchSnapshotRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -35759,9 +34681,7 @@ namespace Kafka.Protocol
 		public FetchSnapshotResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"FetchSnapshotResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -36602,9 +35522,7 @@ namespace Kafka.Protocol
 		public FindCoordinatorRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"FindCoordinatorRequest does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -36770,9 +35688,7 @@ namespace Kafka.Protocol
 		public FindCoordinatorResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"FindCoordinatorResponse does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -37332,9 +36248,7 @@ namespace Kafka.Protocol
 		public HeartbeatRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"HeartbeatRequest does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -37538,9 +36452,7 @@ namespace Kafka.Protocol
 		public HeartbeatResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"HeartbeatResponse does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -37664,9 +36576,7 @@ namespace Kafka.Protocol
 		public IncrementalAlterConfigsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"IncrementalAlterConfigsRequest does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);
@@ -38124,9 +37034,7 @@ namespace Kafka.Protocol
 		public IncrementalAlterConfigsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"IncrementalAlterConfigsResponse does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);
@@ -38453,9 +37361,7 @@ namespace Kafka.Protocol
 		public InitProducerIdRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"InitProducerIdRequest does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -38661,9 +37567,7 @@ namespace Kafka.Protocol
 		public InitProducerIdResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"InitProducerIdResponse does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -38857,9 +37761,7 @@ namespace Kafka.Protocol
 		public JoinGroupRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"JoinGroupRequest does not support version {version}. Valid versions are: 0-7");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(6, 2147483647);
@@ -39292,9 +38194,7 @@ namespace Kafka.Protocol
 		public JoinGroupResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"JoinGroupResponse does not support version {version}. Valid versions are: 0-7");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(6, 2147483647);
@@ -39797,9 +38697,7 @@ namespace Kafka.Protocol
 		public LeaderAndIsrRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"LeaderAndIsrRequest does not support version {version}. Valid versions are: 0-5");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -40841,9 +39739,7 @@ namespace Kafka.Protocol
 		public LeaderAndIsrResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"LeaderAndIsrResponse does not support version {version}. Valid versions are: 0-5");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -41289,9 +40185,7 @@ namespace Kafka.Protocol
 		public LeaderChangeMessage(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"LeaderChangeMessage does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -41579,9 +40473,7 @@ namespace Kafka.Protocol
 		public LeaveGroupRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"LeaveGroupRequest does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -41879,9 +40771,7 @@ namespace Kafka.Protocol
 		public LeaveGroupResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"LeaveGroupResponse does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -42205,9 +41095,7 @@ namespace Kafka.Protocol
 		public ListGroupsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ListGroupsRequest does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -42303,9 +41191,7 @@ namespace Kafka.Protocol
 		public ListGroupsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ListGroupsResponse does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -42622,9 +41508,7 @@ namespace Kafka.Protocol
 		public ListOffsetsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ListOffsetsRequest does not support version {version}. Valid versions are: 0-7");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(6, 2147483647);
@@ -43113,9 +41997,7 @@ namespace Kafka.Protocol
 		public ListOffsetsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ListOffsetsResponse does not support version {version}. Valid versions are: 0-7");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(6, 2147483647);
@@ -43635,9 +42517,7 @@ namespace Kafka.Protocol
 		public ListPartitionReassignmentsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ListPartitionReassignmentsRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -43903,9 +42783,7 @@ namespace Kafka.Protocol
 		public ListPartitionReassignmentsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ListPartitionReassignmentsResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -44428,9 +43306,7 @@ namespace Kafka.Protocol
 		public ListTransactionsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ListTransactionsRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -44560,9 +43436,7 @@ namespace Kafka.Protocol
 		public ListTransactionsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ListTransactionsResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -44911,9 +43785,7 @@ namespace Kafka.Protocol
 		public MetadataRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"MetadataRequest does not support version {version}. Valid versions are: 0-12");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(9, 2147483647);
@@ -45246,9 +44118,7 @@ namespace Kafka.Protocol
 		public MetadataResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"MetadataResponse does not support version {version}. Valid versions are: 0-12");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(9, 2147483647);
@@ -46271,9 +45141,7 @@ namespace Kafka.Protocol
 		public OffsetCommitRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 0-8");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(8, 2147483647);
@@ -46903,9 +45771,7 @@ namespace Kafka.Protocol
 		public OffsetCommitResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"OffsetCommitResponse does not support version {version}. Valid versions are: 0-8");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(8, 2147483647);
@@ -47285,9 +46151,7 @@ namespace Kafka.Protocol
 		public OffsetDeleteRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"OffsetDeleteRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -47639,9 +46503,7 @@ namespace Kafka.Protocol
 		public OffsetDeleteResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"OffsetDeleteResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -48055,9 +46917,7 @@ namespace Kafka.Protocol
 		public OffsetFetchRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 0-8");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(6, 2147483647);
@@ -48649,9 +47509,7 @@ namespace Kafka.Protocol
 		public OffsetFetchResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"OffsetFetchResponse does not support version {version}. Valid versions are: 0-8");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(6, 2147483647);
@@ -49728,9 +48586,7 @@ namespace Kafka.Protocol
 		public OffsetForLeaderEpochRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"OffsetForLeaderEpochRequest does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -50148,9 +49004,7 @@ namespace Kafka.Protocol
 		public OffsetForLeaderEpochResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"OffsetForLeaderEpochResponse does not support version {version}. Valid versions are: 0-4");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -50599,9 +49453,7 @@ namespace Kafka.Protocol
 		public ProduceRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ProduceRequest does not support version {version}. Valid versions are: 0-9");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(9, 2147483647);
@@ -51065,9 +49917,7 @@ namespace Kafka.Protocol
 		public ProduceResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ProduceResponse does not support version {version}. Valid versions are: 0-9");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(9, 2147483647);
@@ -51751,9 +50601,7 @@ namespace Kafka.Protocol
 		public RenewDelegationTokenRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"RenewDelegationTokenRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -51883,9 +50731,7 @@ namespace Kafka.Protocol
 		public RenewDelegationTokenResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"RenewDelegationTokenResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -52046,9 +50892,7 @@ namespace Kafka.Protocol
 		public RequestHeader(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"RequestHeader does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -52247,9 +51091,7 @@ namespace Kafka.Protocol
 		public ResponseHeader(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"ResponseHeader does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);
@@ -52345,9 +51187,7 @@ namespace Kafka.Protocol
 		public SaslAuthenticateRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"SaslAuthenticateRequest does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -52443,9 +51283,7 @@ namespace Kafka.Protocol
 		public SaslAuthenticateResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"SaslAuthenticateResponse does not support version {version}. Valid versions are: 0-2");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -52643,9 +51481,7 @@ namespace Kafka.Protocol
 		public SaslHandshakeRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"SaslHandshakeRequest does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -52741,9 +51577,7 @@ namespace Kafka.Protocol
 		public SaslHandshakeResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"SaslHandshakeResponse does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, -1);
@@ -52870,9 +51704,7 @@ namespace Kafka.Protocol
 		public SnapshotFooterRecord(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"SnapshotFooterRecord does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -52968,9 +51800,7 @@ namespace Kafka.Protocol
 		public SnapshotHeaderRecord(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"SnapshotHeaderRecord does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -53100,9 +51930,7 @@ namespace Kafka.Protocol
 		public StopReplicaRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"StopReplicaRequest does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -53949,9 +52777,7 @@ namespace Kafka.Protocol
 		public StopReplicaResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"StopReplicaResponse does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(2, 2147483647);
@@ -54240,9 +53066,7 @@ namespace Kafka.Protocol
 		public SyncGroupRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"SyncGroupRequest does not support version {version}. Valid versions are: 0-5");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -54682,9 +53506,7 @@ namespace Kafka.Protocol
 		public SyncGroupResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"SyncGroupResponse does not support version {version}. Valid versions are: 0-5");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(4, 2147483647);
@@ -54916,9 +53738,7 @@ namespace Kafka.Protocol
 		public TxnOffsetCommitRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"TxnOffsetCommitRequest does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -55589,9 +54409,7 @@ namespace Kafka.Protocol
 		public TxnOffsetCommitResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"TxnOffsetCommitResponse does not support version {version}. Valid versions are: 0-3");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(3, 2147483647);
@@ -55974,9 +54792,7 @@ namespace Kafka.Protocol
 		public UnregisterBrokerRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"UnregisterBrokerRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -56072,9 +54888,7 @@ namespace Kafka.Protocol
 		public UnregisterBrokerResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"UnregisterBrokerResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -56239,9 +55053,7 @@ namespace Kafka.Protocol
 		public UpdateFeaturesRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"UpdateFeaturesRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -56535,9 +55347,7 @@ namespace Kafka.Protocol
 		public UpdateFeaturesResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"UpdateFeaturesResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -56902,9 +55712,7 @@ namespace Kafka.Protocol
 		public UpdateMetadataRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"UpdateMetadataRequest does not support version {version}. Valid versions are: 0-7");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(6, 2147483647);
@@ -58099,9 +56907,7 @@ namespace Kafka.Protocol
 		public UpdateMetadataResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"UpdateMetadataResponse does not support version {version}. Valid versions are: 0-7");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(6, 2147483647);
@@ -58194,9 +57000,7 @@ namespace Kafka.Protocol
 		public VoteRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"VoteRequest does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -58684,9 +57488,7 @@ namespace Kafka.Protocol
 		public VoteResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"VoteResponse does not support version {version}. Valid versions are: 0");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(0, 2147483647);
@@ -59165,9 +57967,7 @@ namespace Kafka.Protocol
 		public WriteTxnMarkersRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"WriteTxnMarkersRequest does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);
@@ -59621,9 +58421,7 @@ namespace Kafka.Protocol
 		public WriteTxnMarkersResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-			{
 				throw new UnsupportedVersionException($"WriteTxnMarkersResponse does not support version {version}. Valid versions are: 0-1");
-			}
 
 			Version = version;
 			IsFlexibleVersion = version.InRange(1, 2147483647);

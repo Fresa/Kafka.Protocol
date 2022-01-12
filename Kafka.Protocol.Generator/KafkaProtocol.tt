@@ -157,13 +157,9 @@ namespace Kafka.Protocol<# Block(() =>
         GenerateDocumentation(errorCode.Description);
         #>public class <#= exceptionName #>Exception : Exception<# Block(() =>
         {
-			#>public <#= exceptionName #>Exception()<# Block(() =>
-			{
-			}); _(2);
+			#>public <#= exceptionName #>Exception() { }<# _(2);
 
-            #>public <#= exceptionName #>Exception(string message) : base(message)<# Block(() =>
-			{
-			}); _(2);
+            #>public <#= exceptionName #>Exception(string message) : base(message) { }<# _(2);
 
 			#>public int Code => <#= errorCode.Code #>;<# 
         });
@@ -181,10 +177,8 @@ namespace Kafka.Protocol<# Block(() =>
 		{
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsRequest), messageDefinition =>
 			{
-				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# Block(() =>
-				{
-					#>return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<#
-				}); _();
+				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# _();
+				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<# _();
 			}); _();
 
 			#>throw new ArgumentException($"{apiKey} is not supported");<#
@@ -198,10 +192,8 @@ namespace Kafka.Protocol<# Block(() =>
 		{
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsResponse), messageDefinition =>
 			{
-				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# Block(() =>
-				{
-					#>return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<#
-				}); _();
+				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# _();
+				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<# _();
 			}); _();
 
 			#>throw new ArgumentException($"{apiKey} is not supported");<#
@@ -220,10 +212,8 @@ namespace Kafka.Protocol<# Block(() =>
 		{
 			#>public <#= messageDefinition.Name #>(Int16 version)<# Block(() => 
 			{
-				#>if (version.InRange(MinVersion, MaxVersion) == false) <# Block(() => 
-				{
-					#>throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<#
-				}); _(2);
+				#>if (version.InRange(MinVersion, MaxVersion) == false) <# _();
+				#>	throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<# _(2);
 
 				 #>Version = version;<# _();
 				 #>IsFlexibleVersion = version.InRange(<#= flexibleVersionRange.From #>, <#= flexibleVersionRange.To #>);<#
