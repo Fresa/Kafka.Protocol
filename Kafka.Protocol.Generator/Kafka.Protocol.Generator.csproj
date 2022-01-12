@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="KafkaProtocol.cs.generated">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>KafkaProtocol.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="KafkaProtocol.cs.generated">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -23,6 +31,14 @@
   
   <ItemGroup>
     <Folder Include="ProtocolSpecifications\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="KafkaProtocol.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>KafkaProtocol.tt</DependentUpon>
+    </None>
   </ItemGroup>
 
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />

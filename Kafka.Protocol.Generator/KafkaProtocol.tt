@@ -237,12 +237,14 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public override Int16 Version { get; }<# _(1);
 			#>internal bool IsFlexibleVersion { get; }<# _(2);
 
+			PrintCreateTagSection(messageDefinition.GetTaggedFields()); _(2);
+
 			#>internal override int GetSize() =><# _();
-			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
+			messageDefinition.Fields.ForEach((messageField, messageFieldIndex) => 
 			{
-				PrintSizeOf(messageField);
-				if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
-			}); _(2);
+				PrintSizeOf(messageField, messageFieldIndex == 0);
+			}); #> +<# _();
+			PrintSizeOfTags(); #>;<# _(2);
 
 			#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
@@ -277,7 +279,7 @@ namespace Kafka.Protocol<# Block(() =>
 					PrintWriteTo(messageField);
 				}); _();
 
-				PrintWriteTags(messageDefinition.GetTaggedFields());
+				PrintWriteTags();
 			}); if (messageDefinition.Fields.Any()) _(2);
 
 			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
@@ -330,13 +332,62 @@ namespace Kafka.Protocol<# Block(() =>
 	});
 });
 
-void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
+void PrintCreateTagSection(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field> taggedFields)
+{
+	#>private Tags.TagSection CreateTagSection()<# Block(() =>
+	{
+		var tagsExpression = "";
+		if (taggedFields.Any())
+		{	
+			tagsExpression = "tags.ToArray()";
+			#>var tags = new List<Tags.TaggedField>();<# _();
+			PrintOnNewRowForEachWithIndex(taggedFields, (taggedField, index, count) =>
+			{			
+				var propertyName = taggedField.GetPropertyName();
+				var versionRange = taggedField.TaggedVersions == null ? 
+					VersionRange.Parse(taggedField.Versions) : 
+					VersionRange.Parse(taggedField.TaggedVersions);
+				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# _(); Tab(() => 
+				{
+					#>tags.Add(new Tags.TaggedField<# Block(() => 
+					{
+						#>Tag = <#= taggedField.Tag #>,<# _();
+						#>Field = <#= propertyName #><# 
+					});#>);<# 
+				});						
+			}); _();
+		}
+		#>return new Tags.TagSection(<#= tagsExpression #>);<#		
+	});	
+}
+
+void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, bool first)
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
+	if (messageField.TaggedVersions != null)
+	{
+		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
+		if (taggedVersionRange.From == versionRange.From)
+		{
+			return;
+		}
+		versionRange = new VersionRange(versionRange.From, taggedVersionRange.From - 1);
+	}
 	var propertyName = messageField.GetPropertyName();
-
+	
+	if (!first)
+	{
+		#> +<# _();
+	}
 	#>	(Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) ? <# _();
 	#>		<#= propertyName #>.GetSize(IsFlexibleVersion) :<# _();
+	#>		0)<#
+}
+
+void PrintSizeOfTags()
+{
+	#>	(IsFlexibleVersion ? <# _();
+	#>		CreateTagSection().GetSize() :<# _();
 	#>		0)<#
 }
 
@@ -457,32 +508,11 @@ void PrintReadTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Mess
 	}); _(2);
 }
 
-void PrintWriteTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field> taggedFields)
+void PrintWriteTags()
 {
 	#>if (IsFlexibleVersion)<# Block(() =>
 	{
-		var tagsExpression = "";
-		if (taggedFields.Any())
-		{	
-			tagsExpression = "tags.ToArray()";
-			#>var tags = new List<Tags.TaggedField>();<# _();
-			PrintOnNewRowForEachWithIndex(taggedFields, (taggedField, index, count) =>
-			{			
-				var propertyName = taggedField.GetPropertyName();
-				var versionRange = taggedField.TaggedVersions == null ? 
-					VersionRange.Parse(taggedField.Versions) : 
-					VersionRange.Parse(taggedField.TaggedVersions);
-				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# _(); Tab(() => 
-				{
-					#>tags.Add(new Tags.TaggedField<# Block(() => 
-					{
-						#>Tag = <#= taggedField.Tag #>,<# _();
-						#>Field = <#= propertyName #><# 
-					});#>);<# 
-				});						
-			}); _();
-		}
-		#>await new Tags.TagSection(<#= tagsExpression #>).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);<#		
+		#>await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);<#		
 	}); 
 }
 
@@ -630,13 +660,15 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>internal Int16 Version { get; }<# _();
 		#>internal bool IsFlexibleVersion { get; }<# _(2);
 
+		PrintCreateTagSection(field.GetTaggedFields()); _(2);
+
 		#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# _();
 		#>internal int GetSize(bool _) =><# _();
-		PrintOnNewRowForEachWithIndex(field.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
+		field.Fields.ForEach((messageField, messageFieldIndex) => 
 		{
-			PrintSizeOf(messageField);
-			if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
-		}); _(2);
+			PrintSizeOf(messageField, messageFieldIndex == 0);
+		}); #> +<# _();
+		PrintSizeOfTags(); #>;<# _(2);
 
 		#>internal static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
@@ -659,7 +691,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				PrintWriteTo(messageField);
 			}); _();
 
-			PrintWriteTags(field.GetTaggedFields());
+			PrintWriteTags();
 		}); _(2);
 
 		PrintOnNewRowForEachWithIndex(field.Fields, (nestedField, index, count) =>
@@ -702,13 +734,15 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 		#>internal Int16 Version { get; }<# _();
 		#>internal bool IsFlexibleVersion { get; }<# _(2);
 
+		PrintCreateTagSection(commonStruct.GetTaggedFields()); _(2);
+
 		#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# _();
 		#>internal int GetSize(bool _) =><# _();
-		PrintOnNewRowForEachWithIndex(commonStruct.Fields, (messageField, messageFieldIndex, messageFieldCount) => 
+		commonStruct.Fields.ForEach((messageField, messageFieldIndex) => 
 		{
-			PrintSizeOf(messageField);
-			if (messageFieldIndex + 1 != messageFieldCount)	#> +<# else #>;<#
-		}); _(2);
+			PrintSizeOf(messageField, messageFieldIndex == 0);
+		}); #> +<# _();
+		PrintSizeOfTags(); #>;<# _(2);
 
 		#>internal static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
@@ -731,7 +765,7 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 				PrintWriteTo(field);
 			}); _();
 
-			PrintWriteTags(commonStruct.GetTaggedFields());
+			PrintWriteTags();
 		}); _(2);
 
 		PrintOnNewRowForEachWithIndex(commonStruct.Fields, (field, index, count) =>

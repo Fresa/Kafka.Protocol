@@ -21,7 +21,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
             { typeof(decimal), "decimal" },
             { typeof(double), "double" }
         };
-
+        
         public static string GetPrettyName(this Type type)
         {
             if (type == null)

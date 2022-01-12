@@ -3764,6 +3764,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_transactionalId.GetSize(IsFlexibleVersion) :
@@ -3776,6 +3781,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_groupId.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AddOffsetsToTxnRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -3819,7 +3827,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -3956,12 +3964,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AddOffsetsToTxnResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -3997,7 +4013,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -4077,6 +4093,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_transactionalId.GetSize(IsFlexibleVersion) :
@@ -4089,6 +4110,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AddPartitionsToTxnRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4132,7 +4156,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -4262,6 +4286,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -4269,6 +4298,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AddPartitionsToTxnTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4305,7 +4336,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -4389,12 +4420,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AddPartitionsToTxnResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4430,7 +4469,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -4506,6 +4545,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -4513,6 +4557,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_resultsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AddPartitionsToTxnTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4549,7 +4595,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -4625,6 +4671,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -4632,6 +4683,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<AddPartitionsToTxnPartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4668,7 +4721,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -4750,12 +4803,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_brokerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_brokerEpoch.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AllocateProducerIdsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4791,7 +4852,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -4876,6 +4937,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -4888,6 +4954,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_producerIdLen.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AllocateProducerIdsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -4931,7 +5000,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -5065,12 +5134,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_entriesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_validateOnly.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterClientQuotasRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5106,7 +5183,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -5155,6 +5232,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -5162,6 +5244,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_opsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<EntryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5198,7 +5282,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -5247,6 +5331,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -5254,6 +5343,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_entityName.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<EntityData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5290,7 +5381,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -5398,6 +5489,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -5408,6 +5504,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_remove.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OpData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5448,7 +5546,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -5587,12 +5685,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_entriesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterClientQuotasResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5628,7 +5734,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -5704,6 +5810,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -5714,6 +5825,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_entityCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<EntryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5754,7 +5867,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -5861,6 +5974,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -5868,6 +5986,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_entityName.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<EntityData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -5904,7 +6024,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -5990,12 +6110,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_resourcesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_validateOnly.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterConfigsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6031,7 +6159,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -6080,6 +6208,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -6090,6 +6223,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6130,7 +6265,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -6233,6 +6368,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -6240,6 +6380,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_value.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6276,7 +6418,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -6392,12 +6534,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_responsesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterConfigsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6433,7 +6583,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -6509,6 +6659,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -6522,6 +6677,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_resourceName.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6566,7 +6723,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -6705,6 +6862,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_brokerId.GetSize(IsFlexibleVersion) :
@@ -6714,6 +6876,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterIsrRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6753,7 +6918,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -6856,6 +7021,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -6863,6 +7033,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -6899,7 +7071,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -6973,6 +7145,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -6986,6 +7163,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_currentIsrVersion.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7030,7 +7209,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -7169,6 +7348,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -7178,6 +7362,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterIsrResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7217,7 +7404,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -7318,6 +7505,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -7325,6 +7517,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7361,7 +7555,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -7435,6 +7629,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -7454,6 +7653,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_currentIsrVersion.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7506,7 +7707,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -7696,12 +7897,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterPartitionReassignmentsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7737,7 +7946,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -7815,6 +8024,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -7822,6 +8036,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ReassignableTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7858,7 +8074,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -7934,6 +8150,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -7941,6 +8162,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_replicasCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<ReassignablePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -7977,7 +8200,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -8068,6 +8291,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -8080,6 +8308,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_responsesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterPartitionReassignmentsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8123,7 +8354,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -8257,6 +8488,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -8264,6 +8500,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ReassignableTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8300,7 +8538,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -8376,6 +8614,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -8386,6 +8629,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorMessage.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<ReassignablePartitionResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8426,7 +8671,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -8539,9 +8784,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_dirsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterReplicaLogDirsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8573,7 +8826,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -8622,6 +8875,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -8629,6 +8887,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AlterReplicaLogDir> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8665,7 +8925,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -8741,6 +9001,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -8748,6 +9013,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<AlterReplicaLogDirTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8784,7 +9051,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -8869,12 +9136,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterReplicaLogDirsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -8910,7 +9185,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -8986,6 +9261,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -8993,6 +9273,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AlterReplicaLogDirTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9029,7 +9311,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -9105,6 +9387,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -9112,6 +9399,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<AlterReplicaLogDirPartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9148,7 +9437,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -9230,12 +9519,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_deletionsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_upsertionsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterUserScramCredentialsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9271,7 +9568,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -9320,6 +9617,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -9327,6 +9629,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_mechanism.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ScramCredentialDeletion> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9363,7 +9667,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -9467,6 +9771,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -9483,6 +9792,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_saltedPassword.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ScramCredentialUpsertion> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9531,7 +9842,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -9696,12 +10007,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<AlterUserScramCredentialsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9737,7 +10056,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -9813,6 +10132,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -9823,6 +10147,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AlterUserScramCredentialsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -9863,7 +10189,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -9975,12 +10301,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
 				_clientSoftwareName.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				_clientSoftwareVersion.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ApiVersionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10016,7 +10350,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -10093,6 +10427,30 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			var tags = new List<Tags.TaggedField>();
+			if (Version.InRange(3, 2147483647)) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 0,
+					Field = _supportedFeaturesCollection
+				});
+			if (Version.InRange(3, 2147483647)) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 1,
+					Field = _finalizedFeaturesEpoch
+				});
+			if (Version.InRange(3, 2147483647)) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 2,
+					Field = _finalizedFeaturesCollection
+				});
+			return new Tags.TagSection(tags.ToArray());
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
@@ -10103,14 +10461,8 @@ namespace Kafka.Protocol
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
-			(Version.InRange(3, 2147483647) ? 
-				_supportedFeaturesCollection.GetSize(IsFlexibleVersion) :
-				0) +
-			(Version.InRange(3, 2147483647) ? 
-				_finalizedFeaturesEpoch.GetSize(IsFlexibleVersion) :
-				0) +
-			(Version.InRange(3, 2147483647) ? 
-				_finalizedFeaturesCollection.GetSize(IsFlexibleVersion) :
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ApiVersionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10185,26 +10537,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				var tags = new List<Tags.TaggedField>();
-				if (Version.InRange(3, 2147483647)) 
-					tags.Add(new Tags.TaggedField
-					{
-						Tag = 0,
-						Field = _supportedFeaturesCollection
-					});
-				if (Version.InRange(3, 2147483647)) 
-					tags.Add(new Tags.TaggedField
-					{
-						Tag = 1,
-						Field = _finalizedFeaturesEpoch
-					});
-				if (Version.InRange(3, 2147483647)) 
-					tags.Add(new Tags.TaggedField
-					{
-						Tag = 2,
-						Field = _finalizedFeaturesCollection
-					});
-				await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -10280,6 +10613,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -10290,6 +10628,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_maxVersion.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ApiVersion> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10330,7 +10670,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -10482,6 +10822,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
@@ -10492,6 +10837,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_maxVersion.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<SupportedFeatureKey> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10532,7 +10879,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -10686,6 +11033,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
@@ -10696,6 +11048,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_minVersionLevel.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<FinalizedFeatureKey> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10736,7 +11090,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -10844,12 +11198,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<BeginQuorumEpochRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -10885,7 +11247,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -10963,6 +11325,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -10970,6 +11337,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11006,7 +11375,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -11080,6 +11449,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -11090,6 +11464,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11130,7 +11506,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -11242,12 +11618,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<BeginQuorumEpochResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11283,7 +11667,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -11357,6 +11741,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -11364,6 +11753,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11400,7 +11791,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -11474,6 +11865,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -11487,6 +11883,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11531,7 +11929,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -11665,6 +12063,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_brokerId.GetSize(IsFlexibleVersion) :
@@ -11680,6 +12083,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_wantShutDown.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<BrokerHeartbeatRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11727,7 +12133,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -11893,6 +12299,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -11908,6 +12319,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_shouldShutDown.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<BrokerHeartbeatResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -11955,7 +12369,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -12120,6 +12534,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_brokerId.GetSize(IsFlexibleVersion) :
@@ -12138,6 +12557,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_rack.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<BrokerRegistrationRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12189,7 +12611,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -12319,6 +12741,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -12332,6 +12759,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_securityProtocol.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<Listener> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12376,7 +12805,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -12534,6 +12963,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -12544,6 +12978,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_maxSupportedVersion.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<Feature> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12584,7 +13020,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -12726,6 +13162,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -12735,6 +13176,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_brokerEpoch.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<BrokerRegistrationResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12774,7 +13218,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -12883,12 +13327,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_assignedPartitionsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_userData.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ConsumerProtocolAssignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -12924,7 +13376,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -12971,6 +13423,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -12978,6 +13435,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13014,7 +13473,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -13125,6 +13584,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
@@ -13134,6 +13598,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				_ownedPartitionsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ConsumerProtocolSubscription> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13173,7 +13640,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -13273,6 +13740,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(1, 2147483647) ? 
@@ -13280,6 +13752,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(1, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13316,7 +13790,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -13396,12 +13870,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_brokerId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(2, 2147483647) ? 
 				_brokerEpoch.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ControlledShutdownRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13437,7 +13919,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -13519,12 +14001,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_remainingPartitionsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ControlledShutdownResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13560,7 +14050,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -13636,6 +14126,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -13643,6 +14138,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionIndex.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<RemainingPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13679,7 +14176,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -13760,9 +14257,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_creationsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<CreateAclsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13794,7 +14299,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -13843,6 +14348,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -13865,6 +14375,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_permissionType.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AclCreation> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -13921,7 +14433,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -14142,12 +14654,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<CreateAclsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14183,7 +14703,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -14259,6 +14779,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -14266,6 +14791,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AclCreationResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14302,7 +14829,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -14387,12 +14914,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_renewersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_maxLifetimeMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<CreateDelegationTokenRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14428,7 +14963,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -14477,6 +15012,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -14484,6 +15024,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_principalName.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<CreatableRenewers> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14520,7 +15062,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -14631,6 +15173,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
@@ -14658,6 +15205,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<CreateDelegationTokenResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -14721,7 +15271,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -14990,6 +15540,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
@@ -14999,6 +15554,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_validateOnly.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<CreatePartitionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15038,7 +15596,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -15087,6 +15645,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -15097,6 +15660,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_assignmentsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<CreatePartitionsTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15137,7 +15702,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -15244,10 +15809,17 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
 						_brokerIdsCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<CreatePartitionsAssignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15280,7 +15852,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -15392,12 +15964,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<CreatePartitionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15433,7 +16013,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -15509,6 +16089,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -15519,6 +16104,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<CreatePartitionsTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15559,7 +16146,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -15673,6 +16260,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
@@ -15682,6 +16274,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				_validateOnly.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<CreateTopicsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15721,7 +16316,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -15770,6 +16365,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -15786,6 +16386,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<CreatableTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -15834,7 +16436,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -15964,6 +16566,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -15971,6 +16578,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_brokerIdsCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<CreatableReplicaAssignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16007,7 +16616,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -16111,6 +16720,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -16118,6 +16732,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_value.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<CreateableTopicConfig> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16154,7 +16770,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -16301,12 +16917,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(2, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<CreateTopicsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16342,7 +16966,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -16415,6 +17039,18 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				var tags = new List<Tags.TaggedField>();
+				if (Version.InRange(5, 2147483647)) 
+					tags.Add(new Tags.TaggedField
+					{
+						Tag = 0,
+						Field = _topicConfigErrorCode
+					});
+				return new Tags.TagSection(tags.ToArray());
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -16430,9 +17066,6 @@ namespace Kafka.Protocol
 					_errorMessage.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
-					_topicConfigErrorCode.GetSize(IsFlexibleVersion) :
-					0) +
-				(Version.InRange(5, 2147483647) ? 
 					_numPartitions.GetSize(IsFlexibleVersion) :
 					0) +
 				(Version.InRange(5, 2147483647) ? 
@@ -16440,6 +17073,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<CreatableTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16507,14 +17142,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					var tags = new List<Tags.TaggedField>();
-					if (Version.InRange(5, 2147483647)) 
-						tags.Add(new Tags.TaggedField
-						{
-							Tag = 0,
-							Field = _topicConfigErrorCode
-						});
-					await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -16746,6 +17374,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(5, 2147483647) ? 
@@ -16762,6 +17395,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(5, 2147483647) ? 
 						_isSensitive.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<CreatableTopicConfigs> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -16810,7 +17445,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -16976,6 +17611,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_type.GetSize(IsFlexibleVersion) :
@@ -16985,6 +17625,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_tokenAuthenticated.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DefaultPrincipalData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17024,7 +17667,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -17134,9 +17777,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_filtersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DeleteAclsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17168,7 +17819,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -17217,6 +17868,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -17239,6 +17895,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_permissionType.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DeleteAclsFilter> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17295,7 +17953,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -17528,12 +18186,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_filterResultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DeleteAclsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17569,7 +18235,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -17645,6 +18311,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -17655,6 +18326,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_matchingAclsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DeleteAclsFilterResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17695,7 +18368,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -17802,6 +18475,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -17830,6 +18508,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_permissionType.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<DeleteAclsMatchingAcl> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -17894,7 +18574,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -18171,9 +18851,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_groupsNamesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DeleteGroupsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18205,7 +18893,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -18261,12 +18949,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DeleteGroupsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18302,7 +18998,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -18378,6 +19074,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -18385,6 +19086,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DeletableGroupResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18421,7 +19124,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -18502,12 +19205,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_timeoutMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DeleteRecordsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18543,7 +19254,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -18592,6 +19303,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -18599,6 +19315,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DeleteRecordsTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18635,7 +19353,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -18711,6 +19429,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -18718,6 +19441,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_offset.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<DeleteRecordsPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18754,7 +19479,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -18866,12 +19591,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DeleteRecordsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -18907,7 +19640,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -18983,6 +19716,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -18990,6 +19728,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DeleteRecordsTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19026,7 +19766,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -19102,6 +19842,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -19112,6 +19857,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<DeleteRecordsPartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19152,7 +19899,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -19261,6 +20008,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(6, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
@@ -19270,6 +20022,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_timeoutMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DeleteTopicsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19309,7 +20064,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -19358,6 +20113,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(6, 2147483647) ? 
@@ -19365,6 +20125,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(6, 2147483647) ? 
 					_topicId.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DeleteTopicState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19401,7 +20163,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -19542,12 +20304,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_responsesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DeleteTopicsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19583,7 +20353,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -19656,6 +20426,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -19669,6 +20444,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DeletableTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19713,7 +20490,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -19852,6 +20629,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_resourceTypeFilter.GetSize(IsFlexibleVersion) :
@@ -19873,6 +20655,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_permissionType.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeAclsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -19928,7 +20713,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -20160,6 +20945,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -20172,6 +20962,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resourcesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeAclsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20215,7 +21008,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -20349,6 +21142,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -20362,6 +21160,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_aclsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribeAclsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20406,7 +21206,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -20538,6 +21338,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -20551,6 +21356,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_permissionType.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<AclDescription> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20595,7 +21402,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -20731,12 +21538,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_componentsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_strict.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeClientQuotasRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20772,7 +21587,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -20821,6 +21636,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -20831,6 +21651,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_match.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ComponentData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -20871,7 +21693,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -21013,6 +21835,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -21025,6 +21852,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_entriesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeClientQuotasResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21068,7 +21898,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -21206,6 +22036,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -21213,6 +22048,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_valuesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<EntryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21249,7 +22086,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -21298,6 +22135,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -21305,6 +22147,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_entityName.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<EntityData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21341,7 +22185,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -21449,6 +22293,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -21456,6 +22305,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_value.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<ValueData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21492,7 +22343,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -21574,9 +22425,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_includeClusterAuthorizedOperations.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeClusterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21608,7 +22467,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -21664,6 +22523,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -21685,6 +22549,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_clusterAuthorizedOperations.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeClusterResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21740,7 +22607,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -21932,6 +22799,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -21945,6 +22817,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_rack.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribeClusterBroker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -21989,7 +22863,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -22159,6 +23033,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_resourcesCollection.GetSize(IsFlexibleVersion) :
@@ -22168,6 +23047,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				_includeDocumentation.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeConfigsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22207,7 +23089,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -22256,6 +23138,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -22266,6 +23153,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configurationKeysCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribeConfigsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22306,7 +23195,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -22479,12 +23368,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeConfigsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22520,7 +23417,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -22596,6 +23493,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -22612,6 +23514,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribeConfigsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22660,7 +23564,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -22821,6 +23725,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -22849,6 +23758,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(3, 2147483647) ? 
 						_documentation.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<DescribeConfigsResourceResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -22913,7 +23824,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -23124,6 +24035,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(1, 2147483647) ? 
@@ -23134,6 +24050,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(1, 2147483647) ? 
 							_source.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<DescribeConfigsSynonym> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23174,7 +24092,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -23342,9 +24260,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_ownersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeDelegationTokenRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23376,7 +24302,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -23429,6 +24355,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -23436,6 +24367,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_principalName.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribeDelegationTokenOwner> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23472,7 +24405,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -23556,6 +24489,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
@@ -23565,6 +24503,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeDelegationTokenResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23604,7 +24545,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -23680,6 +24621,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -23705,6 +24651,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_renewersCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribedDelegationToken> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -23765,7 +24713,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -24003,6 +24951,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -24010,6 +24963,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_principalName.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<DescribedDelegationTokenRenewer> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24046,7 +25001,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -24155,12 +25110,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_groupsCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				_includeAuthorizedOperations.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeGroupsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24196,7 +25159,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -24279,12 +25242,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_groupsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeGroupsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24320,7 +25291,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -24393,6 +25364,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -24415,6 +25391,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_authorizedOperations.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribedGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24471,7 +25449,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -24655,6 +25633,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -24674,6 +25657,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_memberAssignment.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<DescribedGroupMember> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24726,7 +25711,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -24948,9 +25933,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeLogDirsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -24982,7 +25975,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -25035,6 +26028,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -25042,6 +26040,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribableLogDirTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25078,7 +26078,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -25162,12 +26162,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeLogDirsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25203,7 +26211,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -25279,6 +26287,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -25289,6 +26302,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribeLogDirsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25329,7 +26344,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -25432,6 +26447,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -25439,6 +26459,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<DescribeLogDirsTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25475,7 +26497,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -25549,6 +26571,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
@@ -25562,6 +26589,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_isFutureKey.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<DescribeLogDirsPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25606,7 +26635,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -25743,9 +26772,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeProducersRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25777,7 +26814,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -25824,6 +26861,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -25831,6 +26873,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25867,7 +26911,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -25951,12 +26995,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeProducersResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -25992,7 +27044,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -26068,6 +27120,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -26075,6 +27132,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26111,7 +27170,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -26187,6 +27246,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -26200,6 +27264,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_activeProducersCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26244,7 +27310,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -26378,6 +27444,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
@@ -26397,6 +27468,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_currentTxnStartOffset.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<ProducerState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26449,7 +27522,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -26634,9 +27707,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeQuorumRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26668,7 +27749,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -26715,6 +27796,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -26722,6 +27808,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26758,7 +27846,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -26832,10 +27920,17 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
 						_partitionIndex.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26868,7 +27963,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -26926,12 +28021,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeQuorumResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -26967,7 +28070,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -27041,6 +28144,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -27048,6 +28156,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27084,7 +28194,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -27158,6 +28268,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -27180,6 +28295,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_observersCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27236,7 +28353,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -27439,6 +28556,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -27482,7 +28604,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -27561,9 +28683,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_transactionalIdsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeTransactionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27595,7 +28725,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -27651,12 +28781,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_transactionStatesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeTransactionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27692,7 +28830,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -27766,6 +28904,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -27791,6 +28934,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TransactionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -27851,7 +28996,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -28075,6 +29220,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -28082,6 +29232,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28118,7 +29270,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -28196,9 +29348,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_usersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeUserScramCredentialsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28230,7 +29390,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -28283,10 +29443,17 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
 					_name.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<UserName> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28319,7 +29486,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -28376,6 +29543,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -28388,6 +29560,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<DescribeUserScramCredentialsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28431,7 +29606,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -28565,6 +29740,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -28578,6 +29758,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_credentialInfosCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<DescribeUserScramCredentialsResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28622,7 +29804,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -28756,6 +29938,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -28763,6 +29950,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_iterations.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<CredentialInfo> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28799,7 +29988,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -28881,6 +30070,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_electionType.GetSize(IsFlexibleVersion) :
@@ -28890,6 +30084,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_timeoutMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ElectLeadersRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -28929,7 +30126,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -29009,6 +30206,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -29016,6 +30218,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicPartitions> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29052,7 +30256,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -29165,6 +30369,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -29174,6 +30383,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_replicaElectionResultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ElectLeadersResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29213,7 +30425,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -29316,6 +30528,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -29323,6 +30540,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionResultCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ReplicaElectionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29359,7 +30578,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -29435,6 +30654,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -29445,6 +30669,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorMessage.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29485,7 +30711,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -29598,12 +30824,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<EndQuorumEpochRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29639,7 +30873,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -29717,6 +30951,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -29724,6 +30963,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29760,7 +31001,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -29834,6 +31075,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -29847,6 +31093,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_preferredSuccessorsCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -29891,7 +31139,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -30030,12 +31278,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<EndQuorumEpochResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30071,7 +31327,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -30145,6 +31401,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -30152,6 +31413,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30188,7 +31451,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -30262,6 +31525,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -30275,6 +31543,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30319,7 +31589,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -30453,6 +31723,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_transactionalId.GetSize(IsFlexibleVersion) :
@@ -30465,6 +31740,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_committed.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<EndTxnRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30508,7 +31786,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -30645,12 +31923,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<EndTxnResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30686,7 +31972,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -30766,6 +32052,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_requestData.GetSize(IsFlexibleVersion) :
@@ -30775,6 +32066,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_clientHostAddress.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<EnvelopeRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30814,7 +32108,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -30928,12 +32222,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_responseData.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<EnvelopeResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -30969,7 +32271,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -31055,12 +32357,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_hmac.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_expiryTimePeriodMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ExpireDelegationTokenRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31096,7 +32406,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -31179,6 +32489,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
@@ -31188,6 +32503,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ExpireDelegationTokenResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31227,7 +32545,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -31334,10 +32652,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			var tags = new List<Tags.TaggedField>();
+			if (Version.InRange(12, 2147483647)) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 0,
+					Field = _clusterId
+				});
+			return new Tags.TagSection(tags.ToArray());
+		}
+
 		internal override int GetSize() =>
-			(Version.InRange(12, 2147483647) ? 
-				_clusterId.GetSize(IsFlexibleVersion) :
-				0) +
+		 +
 			(Version.InRange(0, 2147483647) ? 
 				_replicaId.GetSize(IsFlexibleVersion) :
 				0) +
@@ -31367,6 +32695,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(11, 2147483647) ? 
 				_rackId.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<FetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31445,14 +32776,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				var tags = new List<Tags.TaggedField>();
-				if (Version.InRange(12, 2147483647)) 
-					tags.Add(new Tags.TaggedField
-					{
-						Tag = 0,
-						Field = _clusterId
-					});
-				await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -31716,6 +33040,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 12) ? 
@@ -31726,6 +33055,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<FetchTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31766,7 +33097,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -31863,6 +33194,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -31882,6 +33218,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionMaxBytes.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<FetchPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -31934,7 +33272,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -32147,6 +33485,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(7, 12) ? 
@@ -32157,6 +33500,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(7, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ForgottenTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32197,7 +33542,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -32328,6 +33673,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -32340,6 +33690,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_responsesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<FetchResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32383,7 +33736,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -32509,6 +33862,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 12) ? 
@@ -32519,6 +33877,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<FetchableTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32559,7 +33919,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -32656,6 +34016,30 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					var tags = new List<Tags.TaggedField>();
+					if (Version.InRange(12, 2147483647)) 
+						tags.Add(new Tags.TaggedField
+						{
+							Tag = 0,
+							Field = _divergingEpoch
+						});
+					if (Version.InRange(12, 2147483647)) 
+						tags.Add(new Tags.TaggedField
+						{
+							Tag = 1,
+							Field = _currentLeader
+						});
+					if (Version.InRange(12, 2147483647)) 
+						tags.Add(new Tags.TaggedField
+						{
+							Tag = 2,
+							Field = _snapshotId
+						});
+					return new Tags.TagSection(tags.ToArray());
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -32673,15 +34057,6 @@ namespace Kafka.Protocol
 					(Version.InRange(5, 2147483647) ? 
 						_logStartOffset.GetSize(IsFlexibleVersion) :
 						0) +
-					(Version.InRange(12, 2147483647) ? 
-						_divergingEpoch.GetSize(IsFlexibleVersion) :
-						0) +
-					(Version.InRange(12, 2147483647) ? 
-						_currentLeader.GetSize(IsFlexibleVersion) :
-						0) +
-					(Version.InRange(12, 2147483647) ? 
-						_snapshotId.GetSize(IsFlexibleVersion) :
-						0) +
 					(Version.InRange(4, 2147483647) ? 
 						_abortedTransactionsCollection.GetSize(IsFlexibleVersion) :
 						0) +
@@ -32690,6 +34065,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_records.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -32785,26 +34162,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						var tags = new List<Tags.TaggedField>();
-						if (Version.InRange(12, 2147483647)) 
-							tags.Add(new Tags.TaggedField
-							{
-								Tag = 0,
-								Field = _divergingEpoch
-							});
-						if (Version.InRange(12, 2147483647)) 
-							tags.Add(new Tags.TaggedField
-							{
-								Tag = 1,
-								Field = _currentLeader
-							});
-						if (Version.InRange(12, 2147483647)) 
-							tags.Add(new Tags.TaggedField
-							{
-								Tag = 2,
-								Field = _snapshotId
-							});
-						await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -32984,6 +34342,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(12, 2147483647) ? 
@@ -32991,6 +34354,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(12, 2147483647) ? 
 							_endOffset.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<EpochEndOffset> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33027,7 +34392,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -33127,6 +34492,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(12, 2147483647) ? 
@@ -33134,6 +34504,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(12, 2147483647) ? 
 							_leaderEpoch.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33170,7 +34542,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -33276,6 +34648,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
@@ -33283,6 +34660,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_epoch.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33319,7 +34698,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -33424,6 +34803,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(4, 2147483647) ? 
@@ -33431,6 +34815,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(4, 2147483647) ? 
 							_firstOffset.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<AbortedTransaction> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33467,7 +34853,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -33610,10 +34996,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			var tags = new List<Tags.TaggedField>();
+			if (Version.InRange(0, 2147483647)) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 0,
+					Field = _clusterId
+				});
+			return new Tags.TagSection(tags.ToArray());
+		}
+
 		internal override int GetSize() =>
-			(Version.InRange(0, 2147483647) ? 
-				_clusterId.GetSize(IsFlexibleVersion) :
-				0) +
+		 +
 			(Version.InRange(0, 2147483647) ? 
 				_replicaId.GetSize(IsFlexibleVersion) :
 				0) +
@@ -33622,6 +35018,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<FetchSnapshotRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33672,14 +35071,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				var tags = new List<Tags.TaggedField>();
-				if (Version.InRange(0, 2147483647)) 
-					tags.Add(new Tags.TaggedField
-					{
-						Tag = 0,
-						Field = _clusterId
-					});
-				await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -33819,6 +35211,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -33826,6 +35223,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33862,7 +35261,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -33938,6 +35337,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -33951,6 +35355,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_position.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -33995,7 +35401,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -34096,6 +35502,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
@@ -34103,6 +35514,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_epoch.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34139,7 +35552,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -34248,6 +35661,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -34257,6 +35675,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<FetchSnapshotResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34296,7 +35717,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -34396,6 +35817,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -34403,6 +35829,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34439,7 +35867,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -34515,6 +35943,18 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					var tags = new List<Tags.TaggedField>();
+					if (Version.InRange(0, 2147483647)) 
+						tags.Add(new Tags.TaggedField
+						{
+							Tag = 0,
+							Field = _currentLeader
+						});
+					return new Tags.TagSection(tags.ToArray());
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -34527,9 +35967,6 @@ namespace Kafka.Protocol
 						_snapshotId.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
-						_currentLeader.GetSize(IsFlexibleVersion) :
-						0) +
-					(Version.InRange(0, 2147483647) ? 
 						_size.GetSize(IsFlexibleVersion) :
 						0) +
 					(Version.InRange(0, 2147483647) ? 
@@ -34537,6 +35974,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_unalignedRecords.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34600,14 +36039,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						var tags = new List<Tags.TaggedField>();
-						if (Version.InRange(0, 2147483647)) 
-							tags.Add(new Tags.TaggedField
-							{
-								Tag = 0,
-								Field = _currentLeader
-							});
-						await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -34708,6 +36140,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
@@ -34715,6 +36152,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_epoch.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<SnapshotId> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34751,7 +36190,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -34847,6 +36286,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
@@ -34854,6 +36298,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_leaderEpoch.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -34890,7 +36336,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -35054,6 +36500,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 3) ? 
 				_key.GetSize(IsFlexibleVersion) :
@@ -35063,6 +36514,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(4, 2147483647) ? 
 				_coordinatorKeysCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<FindCoordinatorRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35102,7 +36556,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -35214,6 +36668,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -35235,6 +36694,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(4, 2147483647) ? 
 				_coordinatorsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<FindCoordinatorResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35290,7 +36752,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -35499,6 +36961,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(4, 2147483647) ? 
@@ -35518,6 +36985,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(4, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<Coordinator> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35570,7 +37039,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -35760,6 +37229,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_groupId.GetSize(IsFlexibleVersion) :
@@ -35772,6 +37246,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				_groupInstanceId.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<HeartbeatRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35815,7 +37292,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -35958,12 +37435,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<HeartbeatResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -35999,7 +37484,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -36076,12 +37561,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_resourcesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_validateOnly.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<IncrementalAlterConfigsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36117,7 +37610,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -36166,6 +37659,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -36176,6 +37674,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_configsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AlterConfigsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36216,7 +37716,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -36319,6 +37819,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -36329,6 +37834,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_value.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<AlterableConfig> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36369,7 +37876,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -36512,12 +38019,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_responsesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<IncrementalAlterConfigsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36553,7 +38068,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -36629,6 +38144,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -36642,6 +38162,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_resourceName.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<AlterConfigsResourceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36686,7 +38208,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -36825,6 +38347,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_transactionalId.GetSize(IsFlexibleVersion) :
@@ -36837,6 +38364,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				_producerEpoch.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<InitProducerIdRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -36880,7 +38410,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -37025,6 +38555,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -37037,6 +38572,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_producerEpoch.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<InitProducerIdResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37080,7 +38618,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -37213,6 +38751,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_groupId.GetSize(IsFlexibleVersion) :
@@ -37234,6 +38777,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_protocolsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<JoinGroupRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37289,7 +38835,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -37505,6 +39051,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -37512,6 +39063,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_metadata.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<JoinGroupRequestProtocol> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37548,7 +39101,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -37632,6 +39185,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(2, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -37656,6 +39214,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_membersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<JoinGroupResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -37715,7 +39276,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -37957,6 +39518,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -37967,6 +39533,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_metadata.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<JoinGroupResponseMember> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -38007,7 +39575,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -38121,6 +39689,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_controllerId.GetSize(IsFlexibleVersion) :
@@ -38142,6 +39715,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_liveLeadersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<LeaderAndIsrRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -38197,7 +39773,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -38380,6 +39956,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(2, 2147483647) ? 
@@ -38390,6 +39971,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(2, 2147483647) ? 
 					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<LeaderAndIsrTopicState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -38430,7 +40013,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -38558,6 +40141,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -38568,6 +40156,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_port.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<LeaderAndIsrLiveLeader> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -38608,7 +40198,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -38709,6 +40299,11 @@ namespace Kafka.Protocol
 
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
@@ -38816,7 +40411,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -39133,6 +40728,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
@@ -39142,6 +40742,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(5, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<LeaderAndIsrResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39181,7 +40784,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -39284,6 +40887,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(5, 2147483647) ? 
@@ -39291,6 +40899,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					_partitionErrorsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<LeaderAndIsrTopicError> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39327,7 +40937,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -39402,6 +41012,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 4) ? 
@@ -39452,7 +41067,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -39557,6 +41172,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_version.GetSize(IsFlexibleVersion) :
@@ -39569,6 +41189,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_grantingVotersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<LeaderChangeMessage> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39612,7 +41235,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -39740,6 +41363,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -39776,7 +41404,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -39831,6 +41459,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_groupId.GetSize(IsFlexibleVersion) :
@@ -39840,6 +41473,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				_membersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<LeaveGroupRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -39879,7 +41515,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -39982,6 +41618,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
@@ -39989,6 +41630,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_groupInstanceId.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<MemberIdentity> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40025,7 +41668,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -40115,6 +41758,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -40124,6 +41772,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				_membersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<LeaveGroupResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40163,7 +41814,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -40263,6 +41914,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
@@ -40273,6 +41929,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<MemberResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40313,7 +41971,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -40425,9 +42083,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(4, 2147483647) ? 
 				_statesFilterCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ListGroupsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40459,7 +42125,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -40515,6 +42181,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -40524,6 +42195,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_groupsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ListGroupsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40563,7 +42237,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -40663,6 +42337,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -40673,6 +42352,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(4, 2147483647) ? 
 					_groupState.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ListedGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40713,7 +42394,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -40818,6 +42499,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_replicaId.GetSize(IsFlexibleVersion) :
@@ -40827,6 +42513,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ListOffsetsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -40866,7 +42555,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -40969,6 +42658,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -40976,6 +42670,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ListOffsetsTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41012,7 +42708,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -41088,6 +42784,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -41101,6 +42802,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 0) ? 
 						_maxNumOffsets.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<ListOffsetsPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41145,7 +42848,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -41285,12 +42988,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(2, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ListOffsetsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41326,7 +43037,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -41399,6 +43110,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -41406,6 +43122,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ListOffsetsTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41442,7 +43160,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -41518,6 +43236,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -41537,6 +43260,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(4, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<ListOffsetsPartitionResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41589,7 +43314,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -41783,12 +43508,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ListPartitionReassignmentsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41824,7 +43557,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -41908,6 +43641,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -41915,6 +43653,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<ListPartitionReassignmentsTopics> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -41951,7 +43691,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -42035,6 +43775,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -42047,6 +43792,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ListPartitionReassignmentsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42090,7 +43838,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -42224,6 +43972,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -42231,6 +43984,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OngoingTopicReassignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42267,7 +44022,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -42343,6 +44098,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -42356,6 +44116,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_removingReplicasCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OngoingPartitionReassignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42400,7 +44162,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -42536,12 +44298,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_stateFiltersCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_producerIdFiltersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ListTransactionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42577,7 +44347,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -42660,6 +44430,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -42672,6 +44447,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_transactionStatesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ListTransactionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42715,7 +44493,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -42841,6 +44619,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -42851,6 +44634,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_transactionState.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TransactionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -42891,7 +44676,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -42995,6 +44780,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
@@ -43007,6 +44797,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(8, 2147483647) ? 
 				_includeTopicAuthorizedOperations.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<MetadataRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43050,7 +44843,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -43103,6 +44896,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(10, 2147483647) ? 
@@ -43110,6 +44908,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_name.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<MetadataRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43146,7 +44946,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -43314,6 +45114,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -43332,6 +45137,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(8, 10) ? 
 				_clusterAuthorizedOperations.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<MetadataResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43383,7 +45191,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -43456,6 +45264,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -43469,6 +45282,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(1, 2147483647) ? 
 					_rack.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<MetadataResponseBroker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43513,7 +45328,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -43730,6 +45545,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -43749,6 +45569,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(8, 2147483647) ? 
 					_topicAuthorizedOperations.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<MetadataResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -43801,7 +45623,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -43958,6 +45780,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -43980,6 +45807,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(5, 2147483647) ? 
 						_offlineReplicasCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<MetadataResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44036,7 +45865,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -44307,6 +46136,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_groupId.GetSize(IsFlexibleVersion) :
@@ -44325,6 +46159,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<OffsetCommitRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44376,7 +46213,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -44561,6 +46398,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -44568,6 +46410,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetCommitRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44604,7 +46448,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -44680,6 +46524,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -44696,6 +46545,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_committedMetadata.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OffsetCommitRequestPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44744,7 +46595,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -44915,12 +46766,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<OffsetCommitResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -44956,7 +46815,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -45029,6 +46888,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -45036,6 +46900,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetCommitResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45072,7 +46938,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -45148,6 +47014,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -45155,6 +47026,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OffsetCommitResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45191,7 +47064,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -45273,12 +47146,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_groupId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<OffsetDeleteRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45314,7 +47195,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -45390,6 +47271,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -45397,6 +47283,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetDeleteRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45433,7 +47321,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -45509,10 +47397,17 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
 						_partitionIndex.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OffsetDeleteRequestPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45545,7 +47440,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -45603,6 +47498,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
@@ -45612,6 +47512,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<OffsetDeleteResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45651,7 +47554,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -45751,6 +47654,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -45758,6 +47666,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetDeleteResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45794,7 +47704,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -45870,6 +47780,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -45877,6 +47792,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OffsetDeleteResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -45913,7 +47830,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -45995,6 +47912,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 7) ? 
 				_groupId.GetSize(IsFlexibleVersion) :
@@ -46007,6 +47929,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(7, 2147483647) ? 
 				_requireStable.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<OffsetFetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46050,7 +47975,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -46130,6 +48055,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 7) ? 
@@ -46137,6 +48067,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 7) ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetFetchRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46173,7 +48105,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -46277,6 +48209,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(8, 2147483647) ? 
@@ -46284,6 +48221,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(8, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetFetchRequestGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46320,7 +48259,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -46400,6 +48339,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(8, 2147483647) ? 
@@ -46407,6 +48351,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(8, 2147483647) ? 
 						_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OffsetFetchRequestTopics> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46443,7 +48389,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -46557,6 +48503,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -46569,6 +48520,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(8, 2147483647) ? 
 				_groupsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<OffsetFetchResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46612,7 +48566,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -46685,6 +48639,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 7) ? 
@@ -46692,6 +48651,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 7) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetFetchResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46728,7 +48689,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -46804,6 +48765,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 7) ? 
@@ -46820,6 +48786,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 7) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OffsetFetchResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -46868,7 +48836,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -47083,6 +49051,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(8, 2147483647) ? 
@@ -47093,6 +49066,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(8, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetFetchResponseGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47133,7 +49108,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -47209,6 +49184,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(8, 2147483647) ? 
@@ -47216,6 +49196,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(8, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OffsetFetchResponseTopics> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47252,7 +49234,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -47328,6 +49310,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(8, 2147483647) ? 
@@ -47344,6 +49331,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(8, 2147483647) ? 
 							_errorCode.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<OffsetFetchResponsePartitions> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47392,7 +49381,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -47588,12 +49577,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
 				_replicaId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<OffsetForLeaderEpochRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47629,7 +49626,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -47704,6 +49701,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -47711,6 +49713,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetForLeaderTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47747,7 +49751,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -47823,6 +49827,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -47833,6 +49842,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_leaderEpoch.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<OffsetForLeaderPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -47873,7 +49884,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -47984,12 +49995,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(2, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<OffsetForLeaderEpochResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48025,7 +50044,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -48098,6 +50117,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -48105,6 +50129,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<OffsetForLeaderTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48141,7 +50167,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -48217,6 +50243,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -48230,6 +50261,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_endOffset.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<EpochEndOffset> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48274,7 +50307,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -48411,6 +50444,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(3, 2147483647) ? 
 				_transactionalId.GetSize(IsFlexibleVersion) :
@@ -48423,6 +50461,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicDataCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ProduceRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48466,7 +50507,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -48602,6 +50643,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -48609,6 +50655,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionDataCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicProduceData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48645,7 +50693,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -48721,6 +50769,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -48728,6 +50781,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_records.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionProduceData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48764,7 +50819,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -48853,12 +50908,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_responsesCollection.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ProduceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48894,7 +50957,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -48943,6 +51006,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -48950,6 +51018,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionResponsesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicProduceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -48986,7 +51056,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -49062,6 +51132,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -49084,6 +51159,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(8, 2147483647) ? 
 						_errorMessage.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionProduceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49140,7 +51217,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -49319,6 +51396,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(8, 2147483647) ? 
@@ -49326,6 +51408,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(8, 2147483647) ? 
 							_batchIndexErrorMessage.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<BatchIndexAndErrorMessage> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49362,7 +51446,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
@@ -49507,12 +51591,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_hmac.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_renewPeriodMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<RenewDelegationTokenRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49548,7 +51640,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -49631,6 +51723,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
@@ -49640,6 +51737,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<RenewDelegationTokenResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49679,7 +51779,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -49786,6 +51886,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_requestApiKey.GetSize(IsFlexibleVersion) :
@@ -49798,6 +51903,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				_clientId.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<RequestHeader> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -49841,7 +51949,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -49979,9 +52087,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_correlationId.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<ResponseHeader> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50013,7 +52129,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -50069,9 +52185,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_authBytes.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<SaslAuthenticateRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50103,7 +52227,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -50159,6 +52283,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
@@ -50171,6 +52300,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(1, 2147483647) ? 
 				_sessionLifetimeMs.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<SaslAuthenticateResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50214,7 +52346,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -50351,9 +52483,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_mechanism.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<SaslHandshakeRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50385,7 +52525,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -50441,12 +52581,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_mechanismsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<SaslHandshakeResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50482,7 +52630,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -50562,9 +52710,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_version.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<SnapshotFooterRecord> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50596,7 +52752,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -50652,12 +52808,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_version.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_lastContainedLogTimestamp.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<SnapshotHeaderRecord> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50693,7 +52857,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -50776,6 +52940,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_controllerId.GetSize(IsFlexibleVersion) :
@@ -50797,6 +52966,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(3, 2147483647) ? 
 				_topicStatesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<StopReplicaRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -50852,7 +53024,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -51008,6 +53180,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 0) ? 
@@ -51015,6 +53192,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 0) ? 
 					_partitionIndex.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<StopReplicaPartitionV0> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51051,7 +53230,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -51155,6 +53334,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(1, 2) ? 
@@ -51162,6 +53346,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(1, 2) ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<StopReplicaTopicV1> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51198,7 +53384,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -51302,6 +53488,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(3, 2147483647) ? 
@@ -51309,6 +53500,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(3, 2147483647) ? 
 					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<StopReplicaTopicState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51345,7 +53538,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -51421,6 +53614,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(3, 2147483647) ? 
@@ -51431,6 +53629,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(3, 2147483647) ? 
 						_deletePartition.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<StopReplicaPartitionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51471,7 +53671,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -51585,12 +53785,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_partitionErrorsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<StopReplicaResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51626,7 +53834,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -51702,6 +53910,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -51712,6 +53925,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorCode.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<StopReplicaPartitionError> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51752,7 +53967,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -51860,6 +54075,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_groupId.GetSize(IsFlexibleVersion) :
@@ -51881,6 +54101,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_assignmentsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<SyncGroupRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -51936,7 +54159,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -52159,6 +54382,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -52166,6 +54394,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_assignment.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<SyncGroupRequestAssignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52202,7 +54432,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -52286,6 +54516,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(1, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -52301,6 +54536,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_assignment.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<SyncGroupResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52348,7 +54586,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -52512,6 +54750,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_transactionalId.GetSize(IsFlexibleVersion) :
@@ -52536,6 +54779,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<TxnOffsetCommitRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52595,7 +54841,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -52843,6 +55089,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -52850,6 +55101,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TxnOffsetCommitRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -52886,7 +55139,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -52962,6 +55215,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -52975,6 +55233,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_committedMetadata.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<TxnOffsetCommitRequestPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53019,7 +55279,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -53161,12 +55421,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<TxnOffsetCommitResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53202,7 +55470,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -53278,6 +55546,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -53285,6 +55558,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TxnOffsetCommitResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53321,7 +55596,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -53397,6 +55672,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -53404,6 +55684,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_errorCode.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<TxnOffsetCommitResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53440,7 +55722,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -53522,9 +55804,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_brokerId.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<UnregisterBrokerRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53556,7 +55846,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -53612,6 +55902,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -53621,6 +55916,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_errorMessage.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<UnregisterBrokerResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53660,7 +55958,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -53771,12 +56069,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_timeoutMs.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_featureUpdatesCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<UpdateFeaturesRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53812,7 +56118,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -53890,6 +56196,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -53900,6 +56211,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_allowDowngrade.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<FeatureUpdateKey> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -53940,7 +56253,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -54051,6 +56364,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion) :
@@ -54063,6 +56381,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_resultsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<UpdateFeaturesResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54106,7 +56427,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -54240,6 +56561,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -54250,6 +56576,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_errorMessage.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<UpdatableFeatureResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54290,7 +56618,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -54402,6 +56730,11 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_controllerId.GetSize(IsFlexibleVersion) :
@@ -54420,6 +56753,9 @@ namespace Kafka.Protocol
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_liveBrokersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<UpdateMetadataRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54471,7 +56807,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -54627,6 +56963,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(5, 2147483647) ? 
@@ -54637,6 +56978,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(5, 2147483647) ? 
 					_partitionStatesCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<UpdateMetadataTopicState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54677,7 +57020,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -54803,6 +57146,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -54819,6 +57167,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(2, 2147483647) ? 
 					_rack.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<UpdateMetadataBroker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -54867,7 +57217,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -54988,6 +57338,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(1, 2147483647) ? 
@@ -55001,6 +57356,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(1, 2147483647) ? 
 						_securityProtocol.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<UpdateMetadataEndpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55045,7 +57402,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -55200,6 +57557,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 4) ? 
@@ -55292,7 +57654,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -55559,9 +57921,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<UpdateMetadataResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55593,7 +57963,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -55646,12 +58016,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_clusterId.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<VoteRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55687,7 +58065,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -55765,6 +58143,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -55772,6 +58155,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55808,7 +58193,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -55882,6 +58267,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -55898,6 +58288,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_lastOffset.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -55946,7 +58338,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -56112,12 +58504,20 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_errorCode.GetSize(IsFlexibleVersion) :
 				0) +
 			(Version.InRange(0, 2147483647) ? 
 				_topicsCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<VoteResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56153,7 +58553,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -56227,6 +58627,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -56234,6 +58639,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56270,7 +58677,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -56344,6 +58751,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -56360,6 +58772,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_voteGranted.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56408,7 +58822,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -56569,9 +58983,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_markersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<WriteTxnMarkersRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56603,7 +59025,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -56652,6 +59074,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -56668,6 +59095,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_coordinatorEpoch.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<WritableTxnMarker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56716,7 +59145,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -56846,6 +59275,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -56853,6 +59287,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionIndexesCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<WritableTxnMarkerTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -56889,7 +59325,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -57001,9 +59437,17 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
 		internal override int GetSize() =>
 			(Version.InRange(0, 2147483647) ? 
 				_markersCollection.GetSize(IsFlexibleVersion) :
+				0) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
 				0);
 
 		internal static async ValueTask<WriteTxnMarkersResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -57035,7 +59479,7 @@ namespace Kafka.Protocol
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -57084,6 +59528,11 @@ namespace Kafka.Protocol
 			internal Int16 Version { get; }
 			internal bool IsFlexibleVersion { get; }
 
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				(Version.InRange(0, 2147483647) ? 
@@ -57091,6 +59540,8 @@ namespace Kafka.Protocol
 					0) +
 				(Version.InRange(0, 2147483647) ? 
 					_topicsCollection.GetSize(IsFlexibleVersion) :
+					0) +	(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
 					0);
 
 			internal static async ValueTask<WritableTxnMarkerResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -57127,7 +59578,7 @@ namespace Kafka.Protocol
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -57203,6 +59654,11 @@ namespace Kafka.Protocol
 				internal Int16 Version { get; }
 				internal bool IsFlexibleVersion { get; }
 
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
 					(Version.InRange(0, 2147483647) ? 
@@ -57210,6 +59666,8 @@ namespace Kafka.Protocol
 						0) +
 					(Version.InRange(0, 2147483647) ? 
 						_partitionsCollection.GetSize(IsFlexibleVersion) :
+						0) +	(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
 						0);
 
 				internal static async ValueTask<WritableTxnMarkerTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -57246,7 +59704,7 @@ namespace Kafka.Protocol
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -57322,6 +59780,11 @@ namespace Kafka.Protocol
 					internal Int16 Version { get; }
 					internal bool IsFlexibleVersion { get; }
 
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
 					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 					internal int GetSize(bool _) =>
 						(Version.InRange(0, 2147483647) ? 
@@ -57329,6 +59792,8 @@ namespace Kafka.Protocol
 							0) +
 						(Version.InRange(0, 2147483647) ? 
 							_errorCode.GetSize(IsFlexibleVersion) :
+							0) +	(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
 							0);
 
 					internal static async ValueTask<WritableTxnMarkerPartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
@@ -57365,7 +59830,7 @@ namespace Kafka.Protocol
 
 						if (IsFlexibleVersion)
 						{
-							await new Tags.TagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 						}
 					}
 
