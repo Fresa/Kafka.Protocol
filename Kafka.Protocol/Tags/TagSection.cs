@@ -22,7 +22,7 @@ namespace Kafka.Protocol.Tags
             CancellationToken cancellationToken = default)
         {
             await ((VarInt)_taggedFields.Length)
-                .WriteToAsync(writer, false, cancellationToken)
+                .WriteToAsync(writer, true, cancellationToken)
                 .ConfigureAwait(false);
 
             foreach (var taggedField in _taggedFields.OrderBy(field => field.Tag))
@@ -33,15 +33,15 @@ namespace Kafka.Protocol.Tags
             }
         }
 
-        internal int GetSize(bool asCompact = false) => 
-            ((VarInt) _taggedFields.Length).GetSize(asCompact) +
+        internal int GetSize() => 
+            ((VarInt) _taggedFields.Length).GetSize(true) +
             _taggedFields.Sum(field => field.GetSize());
         
         internal static async Task<IAsyncEnumerable<TaggedField>> FromReaderAsync(
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {
-            var length = await VarInt.FromReaderAsync(reader, false, cancellationToken)
+            var length = await VarInt.FromReaderAsync(reader, true, cancellationToken)
                 .ConfigureAwait(false);
 
             return new TaggedFieldAsyncEnumerable(new TaggedFieldAsyncEnumerator(reader, length,
