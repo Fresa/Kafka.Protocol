@@ -272,10 +272,10 @@ namespace Kafka.Protocol<# Block(() =>
 					#>await Task.CompletedTask;<#
 				}
 
-				PrintOnNewRowForEach(messageDefinition.GetNonTaggedFields(), messageField => 
+				messageDefinition.Fields.ForEach(messageField => 
 				{
 					PrintWriteTo(messageField);
-				}); _(2);
+				}); _();
 
 				PrintWriteTags(messageDefinition.GetTaggedFields());
 			}); if (messageDefinition.Fields.Any()) _(2);
@@ -461,34 +461,49 @@ void PrintWriteTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Mes
 {
 	#>if (IsFlexibleVersion)<# Block(() =>
 	{
-		#>await new Tags.TagSection(<# PrintOnNewRowForEachWithIndex(taggedFields, (taggedField, index, count) =>
-		{			
-			if (index == 0) _();
-			Tab(() => 
-			{
+		var tagsExpression = "";
+		if (taggedFields.Any())
+		{	
+			tagsExpression = "tags.ToArray()";
+			#>var tags = new List<Tags.TaggedField>();<# _();
+			PrintOnNewRowForEachWithIndex(taggedFields, (taggedField, index, count) =>
+			{			
 				var propertyName = taggedField.GetPropertyName();
-				#>new Tags.TaggedField<# Block(() => 
+				var versionRange = taggedField.TaggedVersions == null ? 
+					VersionRange.Parse(taggedField.Versions) : 
+					VersionRange.Parse(taggedField.TaggedVersions);
+				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# _(); Tab(() => 
 				{
-					#>Tag = <#= taggedField.Tag #>,<# _();
-					#>Field = <#= propertyName #><# 
-				});
-				if (index + 1 != count)
-				{
-					#>,<#
-				}
-			});
-		}); #>).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);<#		
+					#>tags.Add(new Tags.TaggedField<# Block(() => 
+					{
+						#>Tag = <#= taggedField.Tag #>,<# _();
+						#>Field = <#= propertyName #><# 
+					});#>);<# 
+				});						
+			}); _();
+		}
+		#>await new Tags.TagSection(<#= tagsExpression #>).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);<#		
 	}); 
 }
 
 void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
 {
 	var versionRange = VersionRange.Parse(messageField.Versions);
+	if (messageField.TaggedVersions != null)
+	{
+		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
+		if (taggedVersionRange.From == versionRange.From)
+		{
+			return;
+		}
+		versionRange = new VersionRange(versionRange.From, taggedVersionRange.From - 1);
+	}
+
 	var propertyName = messageField.GetPropertyName();
-	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# Block(() => 
+	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>))<# _(); Tab(() => 
 	{
 		#>await <#= propertyName #>.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 	
-	});		
+	});	_();
 }
 
 void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field, string className)
@@ -639,10 +654,10 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# _();
 		#>internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
 		{
-			PrintOnNewRowForEach(field.GetNonTaggedFields(), messageField => 
+			field.Fields.ForEach(messageField => 
 			{
 				PrintWriteTo(messageField);
-			}); _(2);
+			}); _();
 
 			PrintWriteTags(field.GetTaggedFields());
 		}); _(2);
@@ -711,10 +726,10 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 		#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# _();
 		#>internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
 		{
-			PrintOnNewRowForEach(commonStruct.GetNonTaggedFields(), field => 
+			commonStruct.Fields.ForEach(field => 
 			{
 				PrintWriteTo(field);
-			}); _(2);
+			}); _();
 
 			PrintWriteTags(commonStruct.GetTaggedFields());
 		}); _(2);

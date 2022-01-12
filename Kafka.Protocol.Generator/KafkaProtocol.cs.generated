@@ -3808,22 +3808,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionalId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -4006,14 +3998,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -4145,22 +4133,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionalId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -4338,14 +4318,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -4471,14 +4447,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -4598,14 +4570,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -4725,14 +4693,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -4856,14 +4820,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -5000,22 +4960,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerIdStart.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerIdLen.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -5195,14 +5147,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _entriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -5293,14 +5241,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _entityCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _opsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -5391,14 +5335,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _entityType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -5559,18 +5499,12 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _key.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _remove.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -5755,14 +5689,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _entriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -5887,18 +5817,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _entityCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -6053,14 +5977,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _entityType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -6190,14 +6110,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resourcesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -6293,18 +6209,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -6453,14 +6363,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -6622,14 +6528,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -6759,22 +6661,14 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -6966,18 +6860,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -7126,14 +7014,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -7261,22 +7145,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _newIsrCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _currentIsrVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -7466,18 +7342,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -7624,14 +7494,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -7769,30 +7635,18 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _isrCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _currentIsrVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -8032,14 +7886,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -8161,14 +8011,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -8288,14 +8134,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _replicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -8440,22 +8282,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -8639,14 +8473,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -8771,18 +8601,12 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -8936,10 +8760,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _dirsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -9030,14 +8852,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _path.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -9157,14 +8975,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -9291,14 +9105,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -9418,14 +9228,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -9545,14 +9351,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -9676,14 +9478,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _deletionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _upsertionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -9774,14 +9572,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _mechanism.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -9946,26 +9740,16 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _mechanism.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _iterations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _salt.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _saltedPassword.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -10178,14 +9962,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -10310,18 +10090,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _user.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -10479,14 +10253,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _clientSoftwareName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _clientSoftwareVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -10650,37 +10420,35 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _apiKeysCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection(
-					new Tags.TaggedField
+				var tags = new List<Tags.TaggedField>();
+				if (Version.InRange(3, 2147483647)) 
+					tags.Add(new Tags.TaggedField
 					{
 						Tag = 0,
 						Field = _supportedFeaturesCollection
-					},
-					new Tags.TaggedField
+					});
+				if (Version.InRange(3, 2147483647)) 
+					tags.Add(new Tags.TaggedField
 					{
 						Tag = 1,
 						Field = _finalizedFeaturesEpoch
-					},
-					new Tags.TaggedField
+					});
+				if (Version.InRange(3, 2147483647)) 
+					tags.Add(new Tags.TaggedField
 					{
 						Tag = 2,
 						Field = _finalizedFeaturesCollection
-					}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					});
+				await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -10801,18 +10569,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _apiKey.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _minVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _maxVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -11015,18 +10777,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _minVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _maxVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -11231,18 +10987,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _maxVersionLevel.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _minVersionLevel.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -11394,14 +11144,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -11525,14 +11271,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -11655,18 +11397,12 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -11822,14 +11558,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -11947,14 +11679,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -12082,22 +11810,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -12292,26 +12012,16 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _currentMetadataOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _wantFence.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _wantShutDown.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -12540,26 +12250,16 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _isCaughtUp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _isFenced.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _shouldShutDown.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -12792,30 +12492,18 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _incarnationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _listenersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _featuresCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -13003,22 +12691,14 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _securityProtocol.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -13231,18 +12911,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _minSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _maxSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -13437,18 +13111,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -13601,14 +13269,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _assignedPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _userData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -13697,14 +13361,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -13866,18 +13526,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _userData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _ownedPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -14023,14 +13677,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -14152,14 +13802,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -14281,14 +13927,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _remainingPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -14408,14 +14050,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -14533,10 +14171,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _creationsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -14652,34 +14288,20 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _resourcePatternType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _principal.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _operation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -14952,14 +14574,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -15079,14 +14697,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -15215,14 +14829,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _renewersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _maxLifetimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -15313,14 +14923,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _principalType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -15510,42 +15116,24 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _principalType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _issueTimestampMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _expiryTimestampMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _maxTimestampMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _tokenId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _hmac.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -15875,18 +15463,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -15982,18 +15564,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _count.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _assignmentsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -16143,10 +15719,8 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _brokerIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -16302,14 +15876,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -16434,18 +16004,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -16610,18 +16174,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -16727,26 +16285,16 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _numPartitions.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _replicationFactor.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _assignmentsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -16924,14 +16472,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _brokerIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -17081,14 +16625,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -17283,14 +16823,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -17444,43 +16980,31 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(7, 2147483647)) 
-				{
+				if (Version.InRange(7, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _numPartitions.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _replicationFactor.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
-					await new Tags.TagSection(
-						new Tags.TaggedField
+					var tags = new List<Tags.TaggedField>();
+					if (Version.InRange(5, 2147483647)) 
+						tags.Add(new Tags.TaggedField
 						{
 							Tag = 0,
 							Field = _topicConfigErrorCode
-						}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+						});
+					await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 				}
 			}
 
@@ -17771,26 +17295,16 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _readOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _configSource.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _isSensitive.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -18009,18 +17523,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _type.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _tokenAuthenticated.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -18169,10 +17677,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _filtersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -18288,34 +17794,20 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceTypeFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceNameFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _patternTypeFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _principalFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _hostFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _operation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -18606,14 +18098,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _filterResultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -18738,18 +18226,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _matchingAclsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -18939,42 +18421,24 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _patternType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _principal.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _operation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -19304,10 +18768,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupsNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -19403,14 +18865,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -19530,14 +18988,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -19660,14 +19114,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -19758,14 +19208,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -19885,14 +19331,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _offset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -20048,14 +19490,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -20175,14 +19613,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -20307,18 +19741,12 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _lowWatermark.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -20476,18 +19904,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(6, 2147483647)) 
-			{
+			if (Version.InRange(6, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 5)) 
-			{
+			if (Version.InRange(0, 5))
 				await _topicNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -20578,14 +20000,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(6, 2147483647)) 
-				{
+				if (Version.InRange(6, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(6, 2147483647)) 
-				{
+				if (Version.InRange(6, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -20772,14 +20190,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -20904,22 +20318,14 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(6, 2147483647)) 
-				{
+				if (Version.InRange(6, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -21129,34 +20535,20 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resourceTypeFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resourceNameFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _patternTypeFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _principalFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _hostFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _operation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -21456,22 +20848,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resourcesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -21665,22 +21049,14 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _patternType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _aclsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -21870,22 +21246,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _principal.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _operation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -22067,14 +21435,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _componentsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _strict.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -22170,18 +21534,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _entityType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _matchType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _match.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -22381,22 +21739,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _entriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -22586,14 +21936,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _entityCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _valuesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -22684,14 +22030,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _entityType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -22847,14 +22189,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _key.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -22973,10 +22311,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _includeClusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -23097,34 +22433,20 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _controllerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _clusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -23380,22 +22702,14 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -23620,18 +22934,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resourcesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _includeSynonyms.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _includeDocumentation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -23727,18 +23035,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _configurationKeysCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -23961,14 +23263,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -24103,26 +23401,16 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -24370,42 +23658,24 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _readOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 0)) 
-					{
+					if (Version.InRange(0, 0))
 						await _isDefault.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _configSource.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _isSensitive.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _synonymsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(3, 2147483647)) 
-					{
+					if (Version.InRange(3, 2147483647))
 						await _configType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(3, 2147483647)) 
-					{
+					if (Version.InRange(3, 2147483647))
 						await _documentation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -24673,18 +23943,12 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(1, 2147483647)) 
-						{
+						if (Version.InRange(1, 2147483647))
 							await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(1, 2147483647)) 
-						{
+						if (Version.InRange(1, 2147483647))
 							await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(1, 2147483647)) 
-						{
+						if (Version.InRange(1, 2147483647))
 							await _source.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -24895,10 +24159,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _ownersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -24995,14 +24257,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _principalType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -25133,18 +24391,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _tokensCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -25294,38 +24546,22 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _principalType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _issueTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _expiryTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _maxTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _tokenId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _hmac.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _renewersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -25619,14 +24855,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _principalType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -25779,14 +25011,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _includeAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -25911,14 +25139,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -26058,34 +25282,20 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _groupState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _protocolType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _protocolData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _authorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -26341,30 +25551,18 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(4, 2147483647)) 
-					{
+					if (Version.InRange(4, 2147483647))
 						await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _clientId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _clientHost.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _memberMetadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _memberAssignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -26633,10 +25831,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -26733,14 +25929,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -26866,14 +26058,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -26998,18 +26186,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _logDir.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -27158,14 +26340,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -27293,22 +26471,14 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _partitionSize.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _offsetLag.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _isFutureKey.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -27486,10 +26656,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -27578,14 +26746,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -27711,14 +26875,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -27838,14 +26998,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -27975,22 +27131,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _activeProducersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -28194,30 +27342,18 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _lastSequence.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _lastTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _coordinatorEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _currentTxnStartOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -28447,10 +27583,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -28539,14 +27673,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -28659,10 +27789,8 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -28760,14 +27888,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -28885,14 +28009,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -29035,34 +28155,20 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _highWatermark.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _currentVotersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _observersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -29319,14 +28425,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _logEndOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -29442,10 +28544,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionalIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -29541,14 +28641,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -29696,38 +28792,22 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _transactionalId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _transactionState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _transactionTimeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _transactionStartTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -30007,14 +29087,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -30129,10 +29205,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _usersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -30224,10 +29298,8 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -30334,22 +29406,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -30543,22 +29607,14 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _user.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _credentialInfosCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -30742,14 +29798,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _mechanism.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _iterations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -30878,18 +29930,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _electionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -31015,14 +30061,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -31184,18 +30226,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _replicaElectionResultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -31344,14 +30380,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionResultCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -31476,18 +30508,12 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -31646,14 +30672,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -31777,14 +30799,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -31912,22 +30930,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _preferredSuccessorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -32112,14 +31122,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -32237,14 +31243,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -32372,22 +31374,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -32577,22 +31571,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionalId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _committed.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -32775,14 +31761,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -32909,18 +31891,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _requestData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _requestPrincipal.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _clientHostAddress.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -33080,14 +32056,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _responseData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -33217,14 +32189,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _hmac.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _expiryTimePeriodMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -33354,18 +32322,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _expiryTimestampMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -33570,55 +32532,37 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _maxWaitMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _minBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _maxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(4, 2147483647)) 
-			{
+			if (Version.InRange(4, 2147483647))
 				await _isolationLevel.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(7, 2147483647)) 
-			{
+			if (Version.InRange(7, 2147483647))
 				await _sessionId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(7, 2147483647)) 
-			{
+			if (Version.InRange(7, 2147483647))
 				await _sessionEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(7, 2147483647)) 
-			{
+			if (Version.InRange(7, 2147483647))
 				await _forgottenTopicsDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(11, 2147483647)) 
-			{
+			if (Version.InRange(11, 2147483647))
 				await _rackId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection(
-					new Tags.TaggedField
+				var tags = new List<Tags.TaggedField>();
+				if (Version.InRange(12, 2147483647)) 
+					tags.Add(new Tags.TaggedField
 					{
 						Tag = 0,
 						Field = _clusterId
-					}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					});
+				await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -33933,18 +32877,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 12)) 
-				{
+				if (Version.InRange(0, 12))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(13, 2147483647)) 
-				{
+				if (Version.InRange(13, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -34103,30 +33041,18 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(9, 2147483647)) 
-					{
+					if (Version.InRange(9, 2147483647))
 						await _currentLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _fetchOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(12, 2147483647)) 
-					{
+					if (Version.InRange(12, 2147483647))
 						await _lastFetchedEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _logStartOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionMaxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -34394,18 +33320,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(7, 12)) 
-				{
+				if (Version.InRange(7, 12))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(13, 2147483647)) 
-				{
+				if (Version.InRange(13, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(7, 2147483647)) 
-				{
+				if (Version.InRange(7, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -34586,22 +33506,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(7, 2147483647)) 
-			{
+			if (Version.InRange(7, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(7, 2147483647)) 
-			{
+			if (Version.InRange(7, 2147483647))
 				await _sessionId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -34776,18 +33688,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 12)) 
-				{
+				if (Version.InRange(0, 12))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(13, 2147483647)) 
-				{
+				if (Version.InRange(13, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -35000,57 +33906,45 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _highWatermark.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(4, 2147483647)) 
-					{
+					if (Version.InRange(4, 2147483647))
 						await _lastStableOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _logStartOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(4, 2147483647)) 
-					{
+					if (Version.InRange(4, 2147483647))
 						await _abortedTransactionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(11, 2147483647)) 
-					{
+					if (Version.InRange(11, 2147483647))
 						await _preferredReadReplica.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _records.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection(
-							new Tags.TaggedField
+						var tags = new List<Tags.TaggedField>();
+						if (Version.InRange(12, 2147483647)) 
+							tags.Add(new Tags.TaggedField
 							{
 								Tag = 0,
 								Field = _divergingEpoch
-							},
-							new Tags.TaggedField
+							});
+						if (Version.InRange(12, 2147483647)) 
+							tags.Add(new Tags.TaggedField
 							{
 								Tag = 1,
 								Field = _currentLeader
-							},
-							new Tags.TaggedField
+							});
+						if (Version.InRange(12, 2147483647)) 
+							tags.Add(new Tags.TaggedField
 							{
 								Tag = 2,
 								Field = _snapshotId
-							}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							});
+						await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -35274,14 +34168,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(12, 2147483647)) 
-						{
+						if (Version.InRange(12, 2147483647))
 							await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(12, 2147483647)) 
-						{
+						if (Version.InRange(12, 2147483647))
 							await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -35427,14 +34317,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(12, 2147483647)) 
-						{
+						if (Version.InRange(12, 2147483647))
 							await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(12, 2147483647)) 
-						{
+						if (Version.InRange(12, 2147483647))
 							await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -35586,14 +34472,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -35744,14 +34626,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(4, 2147483647)) 
-						{
+						if (Version.InRange(4, 2147483647))
 							await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(4, 2147483647)) 
-						{
+						if (Version.InRange(4, 2147483647))
 							await _firstOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -35961,27 +34839,23 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _maxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
-				await new Tags.TagSection(
-					new Tags.TaggedField
+				var tags = new List<Tags.TaggedField>();
+				if (Version.InRange(0, 2147483647)) 
+					tags.Add(new Tags.TaggedField
 					{
 						Tag = 0,
 						Field = _clusterId
-					}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					});
+				await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 		}
 
@@ -36167,14 +35041,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -36304,22 +35174,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _currentLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _snapshotId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _position.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -36466,14 +35328,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -36631,18 +35489,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -36786,14 +35638,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -36947,39 +35795,29 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _index.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _snapshotId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _size.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _position.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _unalignedRecords.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
-						await new Tags.TagSection(
-							new Tags.TaggedField
+						var tags = new List<Tags.TaggedField>();
+						if (Version.InRange(0, 2147483647)) 
+							tags.Add(new Tags.TaggedField
 							{
 								Tag = 0,
 								Field = _currentLeader
-							}).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+							});
+						await new Tags.TagSection(tags.ToArray()).WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
@@ -37122,14 +35960,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -37271,14 +36105,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -37495,18 +36325,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 3)) 
-			{
+			if (Version.InRange(0, 3))
 				await _key.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _keyType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(4, 2147483647)) 
-			{
+			if (Version.InRange(4, 2147483647))
 				await _coordinatorKeysCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -37687,34 +36511,20 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 3)) 
-			{
+			if (Version.InRange(0, 3))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 3)) 
-			{
+			if (Version.InRange(1, 3))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 3)) 
-			{
+			if (Version.InRange(0, 3))
 				await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 3)) 
-			{
+			if (Version.InRange(0, 3))
 				await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 3)) 
-			{
+			if (Version.InRange(0, 3))
 				await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(4, 2147483647)) 
-			{
+			if (Version.InRange(4, 2147483647))
 				await _coordinatorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -37995,30 +36805,18 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(4, 2147483647)) 
-				{
+				if (Version.InRange(4, 2147483647))
 					await _key.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(4, 2147483647)) 
-				{
+				if (Version.InRange(4, 2147483647))
 					await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(4, 2147483647)) 
-				{
+				if (Version.InRange(4, 2147483647))
 					await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(4, 2147483647)) 
-				{
+				if (Version.InRange(4, 2147483647))
 					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(4, 2147483647)) 
-				{
+				if (Version.InRange(4, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(4, 2147483647)) 
-				{
+				if (Version.InRange(4, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -38268,22 +37066,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _generationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -38474,14 +37264,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -38598,14 +37384,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resourcesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -38701,18 +37483,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -38866,18 +37642,12 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _configOperation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -39068,14 +37838,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -39205,22 +37971,14 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -39417,22 +38175,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionalId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionTimeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -39635,22 +38385,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -39852,34 +38594,20 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _sessionTimeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _rebalanceTimeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _protocolType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _protocolsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -40149,14 +38877,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -40312,38 +39036,22 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _generationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(7, 2147483647)) 
-			{
+			if (Version.InRange(7, 2147483647))
 				await _protocolType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _protocolName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _leader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -40646,18 +39354,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -40842,34 +39544,20 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _controllerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _type.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 1)) 
-			{
+			if (Version.InRange(0, 1))
 				await _ungroupedPartitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _topicStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _liveLeadersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -41107,18 +39795,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(2, 2147483647)) 
-				{
+				if (Version.InRange(2, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(2, 2147483647)) 
-				{
+				if (Version.InRange(2, 2147483647))
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -41297,18 +39979,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _hostName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -41501,50 +40177,28 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 1)) 
-				{
+				if (Version.InRange(0, 1))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _leader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _isrCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _zkVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _replicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _addingReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _removingReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _isNew.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -41918,18 +40572,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 4)) 
-			{
+			if (Version.InRange(0, 4))
 				await _partitionErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -42078,14 +40726,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _partitionErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -42209,18 +40853,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 4)) 
-				{
+				if (Version.InRange(0, 4))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -42377,22 +41015,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _votersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _grantingVotersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -42563,10 +41193,8 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -42666,18 +41294,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2)) 
-			{
+			if (Version.InRange(0, 2))
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -42826,14 +41448,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -42972,18 +41590,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -43132,18 +41744,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -43296,10 +41902,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(4, 2147483647)) 
-			{
+			if (Version.InRange(4, 2147483647))
 				await _statesFilterCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -43400,18 +42004,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -43560,18 +42158,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _protocolType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(4, 2147483647)) 
-				{
+				if (Version.InRange(4, 2147483647))
 					await _groupState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -43723,18 +42315,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _isolationLevel.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -43883,14 +42469,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -44020,22 +42602,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(4, 2147483647)) 
-					{
+					if (Version.InRange(4, 2147483647))
 						await _currentLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _timestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 0)) 
-					{
+					if (Version.InRange(0, 0))
 						await _maxNumOffsets.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -44219,14 +42793,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -44341,14 +42911,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -44488,30 +43054,18 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 0)) 
-					{
+					if (Version.InRange(0, 0))
 						await _oldStyleOffsetsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _timestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _offset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(4, 2147483647)) 
-					{
+					if (Version.InRange(4, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -44755,14 +43309,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -44892,14 +43442,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -45035,22 +43581,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -45234,14 +43772,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -45371,22 +43905,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _replicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _addingReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _removingReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -45568,14 +44094,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _stateFiltersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerIdFiltersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -45710,22 +44232,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _unknownStateFiltersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -45904,18 +44418,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _transactionalId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _transactionState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -46073,22 +44581,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(4, 2147483647)) 
-			{
+			if (Version.InRange(4, 2147483647))
 				await _allowAutoTopicCreation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(8, 10)) 
-			{
+			if (Version.InRange(8, 10))
 				await _includeClusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(8, 2147483647)) 
-			{
+			if (Version.InRange(8, 2147483647))
 				await _includeTopicAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -46185,14 +44685,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(10, 2147483647)) 
-				{
+				if (Version.InRange(10, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -46428,30 +44924,18 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _controllerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(8, 10)) 
-			{
+			if (Version.InRange(8, 10))
 				await _clusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -46576,22 +45060,14 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -46880,30 +45356,18 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(10, 2147483647)) 
-				{
+				if (Version.InRange(10, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _isInternal.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(8, 2147483647)) 
-				{
+				if (Version.InRange(8, 2147483647))
 					await _topicAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -47133,34 +45597,20 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(7, 2147483647)) 
-					{
+					if (Version.InRange(7, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _replicaNodesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _isrNodesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _offlineReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -47503,30 +45953,18 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _generationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(7, 2147483647)) 
-			{
+			if (Version.InRange(7, 2147483647))
 				await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(2, 4)) 
-			{
+			if (Version.InRange(2, 4))
 				await _retentionTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -47759,14 +46197,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -47901,26 +46335,16 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _committedOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(6, 2147483647)) 
-					{
+					if (Version.InRange(6, 2147483647))
 						await _committedLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 1)) 
-					{
+					if (Version.InRange(1, 1))
 						await _commitTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _committedMetadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -48139,14 +46563,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -48261,14 +46681,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -48388,14 +46804,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -48519,14 +46931,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -48646,14 +47054,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -48768,10 +47172,8 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -48874,18 +47276,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -49029,14 +47425,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -49156,14 +47548,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -49297,22 +47685,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 7)) 
-			{
+			if (Version.InRange(0, 7))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 7)) 
-			{
+			if (Version.InRange(0, 7))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(8, 2147483647)) 
-			{
+			if (Version.InRange(8, 2147483647))
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(7, 2147483647)) 
-			{
+			if (Version.InRange(7, 2147483647))
 				await _requireStable.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -49438,14 +47818,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 7)) 
-				{
+				if (Version.InRange(0, 7))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 7)) 
-				{
+				if (Version.InRange(0, 7))
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -49595,14 +47971,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(8, 2147483647)) 
-				{
+				if (Version.InRange(8, 2147483647))
 					await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(8, 2147483647)) 
-				{
+				if (Version.InRange(8, 2147483647))
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -49728,14 +48100,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(8, 2147483647)) 
-					{
+					if (Version.InRange(8, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(8, 2147483647)) 
-					{
+					if (Version.InRange(8, 2147483647))
 						await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -49903,22 +48271,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 7)) 
-			{
+			if (Version.InRange(0, 7))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(2, 7)) 
-			{
+			if (Version.InRange(2, 7))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(8, 2147483647)) 
-			{
+			if (Version.InRange(8, 2147483647))
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -50033,14 +48393,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 7)) 
-				{
+				if (Version.InRange(0, 7))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 7)) 
-				{
+				if (Version.InRange(0, 7))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -50175,26 +48531,16 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 7)) 
-					{
+					if (Version.InRange(0, 7))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 7)) 
-					{
+					if (Version.InRange(0, 7))
 						await _committedOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 7)) 
-					{
+					if (Version.InRange(5, 7))
 						await _committedLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 7)) 
-					{
+					if (Version.InRange(0, 7))
 						await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 7)) 
-					{
+					if (Version.InRange(0, 7))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -50466,18 +48812,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(8, 2147483647)) 
-				{
+				if (Version.InRange(8, 2147483647))
 					await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(8, 2147483647)) 
-				{
+				if (Version.InRange(8, 2147483647))
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(8, 2147483647)) 
-				{
+				if (Version.InRange(8, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -50597,14 +48937,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(8, 2147483647)) 
-					{
+					if (Version.InRange(8, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(8, 2147483647)) 
-					{
+					if (Version.InRange(8, 2147483647))
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -50739,26 +49075,16 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(8, 2147483647)) 
-						{
+						if (Version.InRange(8, 2147483647))
 							await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(8, 2147483647)) 
-						{
+						if (Version.InRange(8, 2147483647))
 							await _committedOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(8, 2147483647)) 
-						{
+						if (Version.InRange(8, 2147483647))
 							await _committedLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(8, 2147483647)) 
-						{
+						if (Version.InRange(8, 2147483647))
 							await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(8, 2147483647)) 
-						{
+						if (Version.InRange(8, 2147483647))
 							await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -51004,14 +49330,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -51128,14 +49450,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -51260,18 +49578,12 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(2, 2147483647)) 
-					{
+					if (Version.InRange(2, 2147483647))
 						await _currentLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -51424,14 +49736,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(2, 2147483647)) 
-			{
+			if (Version.InRange(2, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -51546,14 +49854,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -51683,22 +49987,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -51889,22 +50185,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _transactionalId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _acks.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -52090,14 +50378,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -52217,14 +50501,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _index.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _records.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -52357,14 +50637,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -52455,14 +50731,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionResponsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -52607,34 +50879,20 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _index.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _baseOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(2, 2147483647)) 
-					{
+					if (Version.InRange(2, 2147483647))
 						await _logAppendTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(5, 2147483647)) 
-					{
+					if (Version.InRange(5, 2147483647))
 						await _logStartOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(8, 2147483647)) 
-					{
+					if (Version.InRange(8, 2147483647))
 						await _recordErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(8, 2147483647)) 
-					{
+					if (Version.InRange(8, 2147483647))
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -52859,14 +51117,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(8, 2147483647)) 
-						{
+						if (Version.InRange(8, 2147483647))
 							await _batchIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(8, 2147483647)) 
-						{
+						if (Version.InRange(8, 2147483647))
 							await _batchIndexErrorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{
@@ -53057,14 +51311,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _hmac.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _renewPeriodMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -53194,18 +51444,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _expiryTimestampMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -53366,22 +51610,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _requestApiKey.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _requestApiVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _correlationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _clientId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -53560,10 +51796,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _correlationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -53654,10 +51888,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _authBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -53763,22 +51995,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _authBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _sessionLifetimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -53956,10 +52180,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _mechanism.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -54055,14 +52277,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _mechanismsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -54179,10 +52397,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -54278,14 +52494,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _lastContainedLogTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -54435,34 +52647,20 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _controllerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2)) 
-			{
+			if (Version.InRange(0, 2))
 				await _deletePartitions.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 0)) 
-			{
+			if (Version.InRange(0, 0))
 				await _ungroupedPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(1, 2)) 
-			{
+			if (Version.InRange(1, 2))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _topicStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -54666,14 +52864,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 0)) 
-				{
+				if (Version.InRange(0, 0))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 0)) 
-				{
+				if (Version.InRange(0, 0))
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -54823,14 +53017,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(1, 2)) 
-				{
+				if (Version.InRange(1, 2))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2)) 
-				{
+				if (Version.InRange(1, 2))
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -54980,14 +53170,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(3, 2147483647)) 
-				{
+				if (Version.InRange(3, 2147483647))
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -55112,18 +53298,12 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(3, 2147483647)) 
-					{
+					if (Version.InRange(3, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(3, 2147483647)) 
-					{
+					if (Version.InRange(3, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(3, 2147483647)) 
-					{
+					if (Version.InRange(3, 2147483647))
 						await _deletePartition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -55281,14 +53461,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _partitionErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -55413,18 +53589,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -55601,34 +53771,20 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _generationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _protocolType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _protocolName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _assignmentsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -55907,14 +54063,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -56055,26 +54207,16 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(1, 2147483647)) 
-			{
+			if (Version.InRange(1, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _protocolType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _protocolName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -56314,38 +54456,22 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _transactionalId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _generationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(3, 2147483647)) 
-			{
+			if (Version.InRange(3, 2147483647))
 				await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -56651,14 +54777,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -56788,22 +54910,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _committedOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(2, 2147483647)) 
-					{
+					if (Version.InRange(2, 2147483647))
 						await _committedLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _committedMetadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -56991,14 +55105,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -57118,14 +55228,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -57245,14 +55351,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -57371,10 +55473,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -57475,18 +55575,12 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -57643,14 +55737,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _featureUpdatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -57777,18 +55867,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _feature.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _maxVersionLevel.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _allowDowngrade.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -57953,22 +56037,14 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -58157,18 +56233,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _feature.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -58346,30 +56416,18 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _controllerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 4)) 
-			{
+			if (Version.InRange(0, 4))
 				await _ungroupedPartitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(5, 2147483647)) 
-			{
+			if (Version.InRange(5, 2147483647))
 				await _topicStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _liveBrokersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -58578,18 +56636,12 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(7, 2147483647)) 
-				{
+				if (Version.InRange(7, 2147483647))
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(5, 2147483647)) 
-				{
+				if (Version.InRange(5, 2147483647))
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -58776,26 +56828,16 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _id.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 0)) 
-				{
+				if (Version.InRange(0, 0))
 					await _v0Host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 0)) 
-				{
+				if (Version.InRange(0, 0))
 					await _v0Port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(1, 2147483647)) 
-				{
+				if (Version.InRange(1, 2147483647))
 					await _endpointsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(2, 2147483647)) 
-				{
+				if (Version.InRange(2, 2147483647))
 					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -58968,22 +57010,14 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(3, 2147483647)) 
-					{
+					if (Version.InRange(3, 2147483647))
 						await _listener.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(1, 2147483647)) 
-					{
+					if (Version.InRange(1, 2147483647))
 						await _securityProtocol.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -59221,42 +57255,24 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 4)) 
-				{
+				if (Version.InRange(0, 4))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _leader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _isrCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _zkVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _replicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(4, 2147483647)) 
-				{
+				if (Version.InRange(4, 2147483647))
 					await _offlineReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -59570,10 +57586,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -59666,14 +57680,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -59797,14 +57807,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -59937,26 +57943,16 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _candidateEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _candidateId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _lastOffsetEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _lastOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -60170,14 +58166,10 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -60295,14 +58287,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -60435,26 +58423,16 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _voteGranted.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -60658,10 +58636,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _markersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -60767,26 +58743,16 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _transactionResult.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _coordinatorEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -60964,14 +58930,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -61122,10 +59084,8 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version.InRange(0, 2147483647)) 
-			{
+			if (Version.InRange(0, 2147483647))
 				await _markersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			}
 
 			if (IsFlexibleVersion)
 			{
@@ -61216,14 +59176,10 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
-				if (Version.InRange(0, 2147483647)) 
-				{
+				if (Version.InRange(0, 2147483647))
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				}
 
 				if (IsFlexibleVersion)
 				{
@@ -61343,14 +59299,10 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
-					if (Version.InRange(0, 2147483647)) 
-					{
+					if (Version.InRange(0, 2147483647))
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					}
 
 					if (IsFlexibleVersion)
 					{
@@ -61470,14 +59422,10 @@ namespace Kafka.Protocol
 					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 					{
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
-						if (Version.InRange(0, 2147483647)) 
-						{
+						if (Version.InRange(0, 2147483647))
 							await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-						}
 
 						if (IsFlexibleVersion)
 						{

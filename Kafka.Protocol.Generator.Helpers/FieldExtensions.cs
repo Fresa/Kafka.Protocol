@@ -123,10 +123,5 @@ namespace Kafka.Protocol.Generator.Helpers
                 .Where(childField => childField.Tag.HasValue)
                 .OrderBy(childField => childField.Tag) ??
             Enumerable.Empty<Field>();
-
-        public static IEnumerable<Field> GetNonTaggedFields(this Field field) =>
-            field.Fields?
-                .Where(childField => !childField.Tag.HasValue) ??
-            Enumerable.Empty<Field>();
     }
 }

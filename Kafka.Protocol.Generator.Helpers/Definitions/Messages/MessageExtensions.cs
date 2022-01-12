@@ -19,9 +19,5 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
             message.Fields
                 .Where(childField => childField.Tag.HasValue)
                 .OrderBy(childField => childField.Tag);
-
-        public static IEnumerable<Field> GetNonTaggedFields(this Message message) =>
-            message.Fields
-                .Where(childField => !childField.Tag.HasValue);
     }
 }
