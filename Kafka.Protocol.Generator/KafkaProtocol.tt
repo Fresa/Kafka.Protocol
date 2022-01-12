@@ -551,7 +551,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			if (field.Ignorable == false)
 			{
 				var versionRange = VersionRange.Parse(field.Versions);
-				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
+				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# _(); Tab(() => 
 				{
 					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<#
 				}); _(2);
@@ -561,7 +561,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			{
 				var nullableVersionRange = VersionRange.Parse(field.NullableVersions);
 				#>if (Version.InRange(<#= nullableVersionRange.From #>, <#= nullableVersionRange.To #>) == false &&<# _();
-				#>	value == null) <# Block(() => 
+				#>	value == null) <# _(); Tab(() => 
 				{					
 					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<#
 				}); _(2);

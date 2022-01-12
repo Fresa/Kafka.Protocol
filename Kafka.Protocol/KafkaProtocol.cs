@@ -3834,9 +3834,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_transactionalId = value;
 			}
@@ -3863,9 +3861,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerId = value;
 			}
@@ -3892,9 +3888,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerEpoch = value;
 			}
@@ -3921,9 +3915,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupId = value;
 			}
@@ -4020,9 +4012,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -4049,9 +4039,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -4159,9 +4147,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_transactionalId = value;
 			}
@@ -4188,9 +4174,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerId = value;
 			}
@@ -4217,9 +4201,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerEpoch = value;
 			}
@@ -4246,9 +4228,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -4340,9 +4320,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -4369,9 +4347,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -4469,9 +4445,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -4498,9 +4472,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -4592,9 +4564,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -4621,9 +4591,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resultsCollection = value;
 				}
@@ -4715,9 +4683,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -4744,9 +4710,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -4842,9 +4806,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerId = value;
 			}
@@ -4872,9 +4834,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerEpoch = value;
 			}
@@ -4986,9 +4946,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -5015,9 +4973,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -5044,9 +5000,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerIdStart does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerIdStart = value;
 			}
@@ -5073,9 +5027,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerIdLen does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerIdLen = value;
 			}
@@ -5169,9 +5121,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"EntriesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_entriesCollection = value;
 			}
@@ -5263,9 +5213,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"EntityCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_entityCollection = value;
 				}
@@ -5357,9 +5305,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"EntityType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_entityType = value;
 					}
@@ -5386,15 +5332,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"EntityName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"EntityName does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_entityName = value;
 					}
@@ -5422,9 +5364,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"OpsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_opsCollection = value;
 				}
@@ -5523,9 +5463,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_key = value;
 					}
@@ -5552,9 +5490,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_value = value;
 					}
@@ -5581,9 +5517,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Remove does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_remove = value;
 					}
@@ -5612,9 +5546,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_validateOnly = value;
 			}
@@ -5711,9 +5643,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -5740,9 +5670,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"EntriesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_entriesCollection = value;
 			}
@@ -5841,9 +5769,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -5870,15 +5796,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -5905,9 +5827,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"EntityCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_entityCollection = value;
 				}
@@ -5999,9 +5919,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"EntityType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_entityType = value;
 					}
@@ -6028,15 +5946,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"EntityName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"EntityName does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_entityName = value;
 					}
@@ -6132,9 +6046,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resourcesCollection = value;
 			}
@@ -6233,9 +6145,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceType = value;
 				}
@@ -6262,9 +6172,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceName = value;
 				}
@@ -6291,9 +6199,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_configsCollection = value;
 				}
@@ -6385,9 +6291,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_name = value;
 					}
@@ -6414,15 +6318,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_value = value;
 					}
@@ -6451,9 +6351,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_validateOnly = value;
 			}
@@ -6550,9 +6448,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -6579,9 +6475,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_responsesCollection = value;
 			}
@@ -6687,9 +6581,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -6716,15 +6608,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -6751,9 +6639,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceType = value;
 				}
@@ -6780,9 +6666,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceName = value;
 				}
@@ -6884,9 +6768,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerId = value;
 			}
@@ -6914,9 +6796,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerEpoch = value;
 			}
@@ -6943,9 +6823,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -7036,9 +6914,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -7064,9 +6940,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -7171,9 +7045,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -7200,9 +7072,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -7229,9 +7099,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"NewIsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_newIsrCollection = value;
 					}
@@ -7258,9 +7126,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CurrentIsrVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_currentIsrVersion = value;
 					}
@@ -7366,9 +7232,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -7395,9 +7259,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -7423,9 +7285,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -7516,9 +7376,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -7544,9 +7402,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -7665,9 +7521,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -7694,9 +7548,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -7723,9 +7575,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderId = value;
 					}
@@ -7752,9 +7602,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -7781,9 +7629,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_isrCollection = value;
 					}
@@ -7810,9 +7656,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CurrentIsrVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_currentIsrVersion = value;
 					}
@@ -7909,9 +7753,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -7939,9 +7781,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -8033,9 +7873,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -8062,9 +7900,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -8156,9 +7992,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -8186,15 +8020,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"ReplicasCollection does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_replicasCollection = value;
 					}
@@ -8308,9 +8138,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -8337,9 +8165,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -8366,15 +8192,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -8401,9 +8223,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_responsesCollection = value;
 			}
@@ -8495,9 +8315,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -8524,9 +8342,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -8625,9 +8441,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -8654,9 +8468,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -8683,15 +8495,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_errorMessage = value;
 					}
@@ -8780,9 +8588,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"DirsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_dirsCollection = value;
 			}
@@ -8874,9 +8680,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Path does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_path = value;
 				}
@@ -8903,9 +8707,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicsCollection = value;
 				}
@@ -8997,9 +8799,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_name = value;
 					}
@@ -9026,9 +8826,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionsCollection = value;
 					}
@@ -9127,9 +8925,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -9156,9 +8952,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -9250,9 +9044,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -9279,9 +9071,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -9373,9 +9163,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -9402,9 +9190,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -9500,9 +9286,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"DeletionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_deletionsCollection = value;
 			}
@@ -9594,9 +9378,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -9623,9 +9405,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Mechanism does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_mechanism = value;
 				}
@@ -9653,9 +9433,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"UpsertionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_upsertionsCollection = value;
 			}
@@ -9768,9 +9546,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -9797,9 +9573,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Mechanism does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_mechanism = value;
 				}
@@ -9826,9 +9600,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Iterations does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_iterations = value;
 				}
@@ -9855,9 +9627,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Salt does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_salt = value;
 				}
@@ -9884,9 +9654,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"SaltedPassword does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_saltedPassword = value;
 				}
@@ -9984,9 +9752,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -10013,9 +9779,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -10114,9 +9878,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"User does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_user = value;
 				}
@@ -10143,9 +9905,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -10172,15 +9932,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -10463,9 +10219,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -10492,9 +10246,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ApiKeysCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_apiKeysCollection = value;
 			}
@@ -10593,9 +10345,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ApiKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_apiKey = value;
 				}
@@ -10622,9 +10372,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MinVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_minVersion = value;
 				}
@@ -10651,9 +10399,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MaxVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_maxVersion = value;
 				}
@@ -10801,9 +10547,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_name = value;
 				}
@@ -10830,9 +10574,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MinVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_minVersion = value;
 				}
@@ -10859,9 +10601,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MaxVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_maxVersion = value;
 				}
@@ -11011,9 +10751,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_name = value;
 				}
@@ -11040,9 +10778,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MaxVersionLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_maxVersionLevel = value;
 				}
@@ -11069,9 +10805,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MinVersionLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_minVersionLevel = value;
 				}
@@ -11166,15 +10900,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_clusterId = value;
 			}
@@ -11200,9 +10930,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -11293,9 +11021,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -11321,9 +11047,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -11421,9 +11145,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -11450,9 +11172,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderId = value;
 					}
@@ -11479,9 +11199,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -11580,9 +11298,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -11608,9 +11324,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -11701,9 +11415,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -11729,9 +11441,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -11836,9 +11546,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -11864,9 +11572,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -11892,9 +11598,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderId = value;
 					}
@@ -11921,9 +11625,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -12040,9 +11742,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerId = value;
 			}
@@ -12070,9 +11770,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerEpoch = value;
 			}
@@ -12100,9 +11798,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"CurrentMetadataOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_currentMetadataOffset = value;
 			}
@@ -12129,9 +11825,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"WantFence does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_wantFence = value;
 			}
@@ -12158,9 +11852,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"WantShutDown does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_wantShutDown = value;
 			}
@@ -12278,9 +11970,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -12307,9 +11997,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -12337,9 +12025,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IsCaughtUp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_isCaughtUp = value;
 			}
@@ -12368,9 +12054,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IsFenced does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_isFenced = value;
 			}
@@ -12398,9 +12082,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ShouldShutDown does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_shouldShutDown = value;
 			}
@@ -12522,9 +12204,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerId = value;
 			}
@@ -12551,9 +12231,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_clusterId = value;
 			}
@@ -12580,9 +12258,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IncarnationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_incarnationId = value;
 			}
@@ -12609,9 +12285,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ListenersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_listenersCollection = value;
 			}
@@ -12717,9 +12391,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -12746,9 +12418,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_host = value;
 				}
@@ -12775,9 +12445,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_port = value;
 				}
@@ -12804,9 +12472,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"SecurityProtocol does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_securityProtocol = value;
 				}
@@ -12834,9 +12500,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"FeaturesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_featuresCollection = value;
 			}
@@ -12935,9 +12599,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -12964,9 +12626,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MinSupportedVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_minSupportedVersion = value;
 				}
@@ -12993,9 +12653,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MaxSupportedVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_maxSupportedVersion = value;
 				}
@@ -13023,15 +12681,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Rack does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_rack = value;
 			}
@@ -13135,9 +12789,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -13164,9 +12816,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -13194,9 +12844,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerEpoch = value;
 			}
@@ -13290,9 +12938,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"AssignedPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_assignedPartitionsCollection = value;
 			}
@@ -13382,9 +13028,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topic = value;
 				}
@@ -13409,9 +13053,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -13438,15 +13080,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"UserData does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"UserData does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_userData = value;
 			}
@@ -13549,9 +13187,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -13577,15 +13213,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"UserData does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"UserData does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_userData = value;
 			}
@@ -13698,9 +13330,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(1, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-					}
 
 					_topic = value;
 				}
@@ -13725,9 +13355,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(1, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -13824,9 +13452,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerId = value;
 			}
@@ -13949,9 +13575,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -13978,9 +13602,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"RemainingPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_remainingPartitionsCollection = value;
 			}
@@ -14072,9 +13694,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -14101,9 +13721,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionIndex = value;
 				}
@@ -14191,9 +13809,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"CreationsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_creationsCollection = value;
 			}
@@ -14320,9 +13936,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceType = value;
 				}
@@ -14349,9 +13963,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceName = value;
 				}
@@ -14379,9 +13991,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(1, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourcePatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-					}
 
 					_resourcePatternType = value;
 				}
@@ -14409,9 +14019,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_principal = value;
 				}
@@ -14438,9 +14046,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_host = value;
 				}
@@ -14467,9 +14073,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_operation = value;
 				}
@@ -14496,9 +14100,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_permissionType = value;
 				}
@@ -14596,9 +14198,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -14625,9 +14225,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -14719,9 +14317,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -14748,15 +14344,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -14851,9 +14443,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"RenewersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_renewersCollection = value;
 			}
@@ -14945,9 +14535,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_principalType = value;
 				}
@@ -14974,9 +14562,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_principalName = value;
 				}
@@ -15004,9 +14590,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MaxLifetimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_maxLifetimeMs = value;
 			}
@@ -15152,9 +14736,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -15181,9 +14763,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_principalType = value;
 			}
@@ -15210,9 +14790,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_principalName = value;
 			}
@@ -15239,9 +14817,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IssueTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_issueTimestampMs = value;
 			}
@@ -15268,9 +14844,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_expiryTimestampMs = value;
 			}
@@ -15297,9 +14871,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MaxTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_maxTimestampMs = value;
 			}
@@ -15326,9 +14898,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TokenId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_tokenId = value;
 			}
@@ -15355,9 +14925,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_hmac = value;
 			}
@@ -15384,9 +14952,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -15487,9 +15053,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -15588,9 +15152,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -15617,9 +15179,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Count does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_count = value;
 				}
@@ -15646,15 +15206,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"AssignmentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"AssignmentsCollection does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_assignmentsCollection = value;
 				}
@@ -15739,9 +15295,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"BrokerIdsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_brokerIdsCollection = value;
 					}
@@ -15770,9 +15324,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -15799,9 +15351,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_validateOnly = value;
 			}
@@ -15898,9 +15448,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -15927,9 +15475,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -16028,9 +15574,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -16057,9 +15601,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -16087,15 +15629,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -16198,9 +15736,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -16313,9 +15849,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -16342,9 +15876,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"NumPartitions does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_numPartitions = value;
 				}
@@ -16371,9 +15903,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ReplicationFactor does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_replicationFactor = value;
 				}
@@ -16400,9 +15930,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"AssignmentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_assignmentsCollection = value;
 				}
@@ -16494,9 +16022,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -16523,9 +16049,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"BrokerIdsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_brokerIdsCollection = value;
 					}
@@ -16553,9 +16077,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_configsCollection = value;
 				}
@@ -16647,9 +16169,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_name = value;
 					}
@@ -16676,15 +16196,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_value = value;
 					}
@@ -16714,9 +16230,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -16745,9 +16259,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(1, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
 
 				_validateOnly = value;
 			}
@@ -16869,9 +16381,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -17019,9 +16529,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -17072,9 +16580,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -17102,9 +16608,7 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -17208,9 +16712,7 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(5, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support null for version {Version}. Supported versions for null value: 5+");
-					}
 
 					_configsCollection = value;
 				}
@@ -17323,9 +16825,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(5, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
 
 						_name = value;
 					}
@@ -17352,15 +16852,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(5, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
 
 						if (Version.InRange(5, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 5+");
-						}
 
 						_value = value;
 					}
@@ -17387,9 +16883,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(5, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ReadOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
 
 						_readOnly = value;
 					}
@@ -17442,9 +16936,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(5, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"IsSensitive does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-						}
 
 						_isSensitive = value;
 					}
@@ -17547,9 +17039,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Type does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_type = value;
 			}
@@ -17576,9 +17066,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_name = value;
 			}
@@ -17605,9 +17093,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TokenAuthenticated does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_tokenAuthenticated = value;
 			}
@@ -17697,9 +17183,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"FiltersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_filtersCollection = value;
 			}
@@ -17826,9 +17310,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceTypeFilter = value;
 				}
@@ -17855,15 +17337,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceNameFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ResourceNameFilter does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_resourceNameFilter = value;
 				}
@@ -17891,9 +17369,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(1, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PatternTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-					}
 
 					_patternTypeFilter = value;
 				}
@@ -17921,15 +17397,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PrincipalFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"PrincipalFilter does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_principalFilter = value;
 				}
@@ -17956,15 +17428,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"HostFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"HostFilter does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_hostFilter = value;
 				}
@@ -17991,9 +17459,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_operation = value;
 				}
@@ -18020,9 +17486,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_permissionType = value;
 				}
@@ -18120,9 +17584,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -18149,9 +17611,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"FilterResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_filterResultsCollection = value;
 			}
@@ -18250,9 +17710,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -18279,15 +17737,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -18314,9 +17768,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MatchingAclsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_matchingAclsCollection = value;
 				}
@@ -18457,9 +17909,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -18486,15 +17936,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_errorMessage = value;
 					}
@@ -18521,9 +17967,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_resourceType = value;
 					}
@@ -18550,9 +17994,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_resourceName = value;
 					}
@@ -18580,9 +18022,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(1, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
 
 						_patternType = value;
 					}
@@ -18610,9 +18050,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_principal = value;
 					}
@@ -18639,9 +18077,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_host = value;
 					}
@@ -18668,9 +18104,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_operation = value;
 					}
@@ -18697,9 +18131,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_permissionType = value;
 					}
@@ -18788,9 +18220,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupsNamesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupsNamesCollection = value;
 			}
@@ -18887,9 +18317,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -18916,9 +18344,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -19010,9 +18436,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_groupId = value;
 				}
@@ -19039,9 +18463,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -19136,9 +18558,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -19230,9 +18650,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -19259,9 +18677,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -19353,9 +18769,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -19382,9 +18796,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Offset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_offset = value;
 					}
@@ -19413,9 +18825,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -19512,9 +18922,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -19541,9 +18949,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -19635,9 +19041,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -19664,9 +19068,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -19765,9 +19167,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -19794,9 +19194,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LowWatermark does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_lowWatermark = value;
 					}
@@ -19823,9 +19221,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -19928,9 +19324,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(6, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -20023,15 +19417,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(6, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
-					}
 
 					if (Version.InRange(6, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"Name does not support null for version {Version}. Supported versions for null value: 6+");
-					}
 
 					_name = value;
 				}
@@ -20059,9 +19449,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(6, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicId does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
-					}
 
 					_topicId = value;
 				}
@@ -20113,9 +19501,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -20236,9 +19622,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_responsesCollection = value;
 			}
@@ -20344,15 +19728,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(6, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"Name does not support null for version {Version}. Supported versions for null value: 6+");
-					}
 
 					_name = value;
 				}
@@ -20403,9 +19783,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -20434,9 +19812,7 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(5, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 5+");
-					}
 
 					_errorMessage = value;
 				}
@@ -20567,9 +19943,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResourceTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resourceTypeFilter = value;
 			}
@@ -20596,15 +19970,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResourceNameFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ResourceNameFilter does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_resourceNameFilter = value;
 			}
@@ -20632,9 +20002,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(1, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"PatternTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
 
 				_patternTypeFilter = value;
 			}
@@ -20662,15 +20030,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"PrincipalFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"PrincipalFilter does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_principalFilter = value;
 			}
@@ -20697,15 +20061,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"HostFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"HostFilter does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_hostFilter = value;
 			}
@@ -20732,9 +20092,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_operation = value;
 			}
@@ -20761,9 +20119,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_permissionType = value;
 			}
@@ -20874,9 +20230,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -20903,9 +20257,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -20932,15 +20284,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -20967,9 +20315,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resourcesCollection = value;
 			}
@@ -21075,9 +20421,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceType = value;
 				}
@@ -21104,9 +20448,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceName = value;
 				}
@@ -21134,9 +20476,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(1, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-					}
 
 					_patternType = value;
 				}
@@ -21164,9 +20504,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"AclsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_aclsCollection = value;
 				}
@@ -21272,9 +20610,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Principal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_principal = value;
 					}
@@ -21301,9 +20637,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_host = value;
 					}
@@ -21330,9 +20664,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Operation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_operation = value;
 					}
@@ -21359,9 +20691,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PermissionType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_permissionType = value;
 					}
@@ -21457,9 +20787,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ComponentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_componentsCollection = value;
 			}
@@ -21558,9 +20886,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"EntityType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_entityType = value;
 				}
@@ -21587,9 +20913,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MatchType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_matchType = value;
 				}
@@ -21616,15 +20940,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Match does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"Match does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_match = value;
 				}
@@ -21652,9 +20972,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Strict does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_strict = value;
 			}
@@ -21765,9 +21083,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -21794,9 +21110,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -21823,15 +21137,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -21858,15 +21168,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"EntriesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"EntriesCollection does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_entriesCollection = value;
 			}
@@ -21958,9 +21264,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"EntityCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_entityCollection = value;
 				}
@@ -22052,9 +21356,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"EntityType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_entityType = value;
 					}
@@ -22081,15 +21383,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"EntityName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"EntityName does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_entityName = value;
 					}
@@ -22117,9 +21415,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ValuesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_valuesCollection = value;
 				}
@@ -22211,9 +21507,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_key = value;
 					}
@@ -22240,9 +21534,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_value = value;
 					}
@@ -22331,9 +21623,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IncludeClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_includeClusterAuthorizedOperations = value;
 			}
@@ -22465,9 +21755,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -22494,9 +21782,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -22524,15 +21810,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -22560,9 +21842,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_clusterId = value;
 			}
@@ -22590,9 +21870,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_controllerId = value;
 			}
@@ -22620,9 +21898,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokersCollection = value;
 			}
@@ -22728,9 +22004,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_brokerId = value;
 				}
@@ -22757,9 +22031,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_host = value;
 				}
@@ -22786,9 +22058,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_port = value;
 				}
@@ -22816,15 +22086,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Rack does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_rack = value;
 				}
@@ -22854,9 +22120,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_clusterAuthorizedOperations = value;
 			}
@@ -22958,9 +22222,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resourcesCollection = value;
 			}
@@ -23059,9 +22321,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceType = value;
 				}
@@ -23088,9 +22348,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceName = value;
 				}
@@ -23117,15 +22375,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ConfigurationKeysCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ConfigurationKeysCollection does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_configurationKeysCollection = value;
 				}
@@ -23154,9 +22408,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(1, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IncludeSynonyms does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
 
 				_includeSynonyms = value;
 			}
@@ -23185,9 +22437,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IncludeDocumentation does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_includeDocumentation = value;
 			}
@@ -23285,9 +22535,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -23314,9 +22562,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -23429,9 +22675,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -23458,15 +22702,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -23493,9 +22733,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceType = value;
 				}
@@ -23522,9 +22760,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceName = value;
 				}
@@ -23551,9 +22787,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_configsCollection = value;
 				}
@@ -23694,9 +22928,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_name = value;
 					}
@@ -23723,15 +22955,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_value = value;
 					}
@@ -23758,9 +22986,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ReadOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_readOnly = value;
 					}
@@ -23787,9 +23013,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 0) == false) 
-						{
 							throw new UnsupportedVersionException($"IsDefault does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-						}
 
 						_isDefault = value;
 					}
@@ -23842,9 +23066,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"IsSensitive does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_isSensitive = value;
 					}
@@ -23967,9 +23189,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(1, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-							}
 
 							_name = value;
 						}
@@ -23996,15 +23216,11 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(1, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-							}
 
 							if (Version.InRange(0, 2147483647) == false &&
 								value == null) 
-							{
 								throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
-							}
 
 							_value = value;
 						}
@@ -24031,9 +23247,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(1, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"Source does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-							}
 
 							_source = value;
 						}
@@ -24088,9 +23302,7 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Documentation does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_documentation = value;
 					}
@@ -24179,15 +23391,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"OwnersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"OwnersCollection does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_ownersCollection = value;
 			}
@@ -24279,9 +23487,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_principalType = value;
 				}
@@ -24308,9 +23514,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_principalName = value;
 				}
@@ -24415,9 +23619,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -24444,9 +23646,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TokensCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_tokensCollection = value;
 			}
@@ -24580,9 +23780,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_principalType = value;
 				}
@@ -24609,9 +23807,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_principalName = value;
 				}
@@ -24638,9 +23834,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"IssueTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_issueTimestamp = value;
 				}
@@ -24667,9 +23861,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ExpiryTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_expiryTimestamp = value;
 				}
@@ -24696,9 +23888,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MaxTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_maxTimestamp = value;
 				}
@@ -24725,9 +23915,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TokenId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_tokenId = value;
 				}
@@ -24754,9 +23942,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_hmac = value;
 				}
@@ -24783,9 +23969,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"RenewersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_renewersCollection = value;
 				}
@@ -24877,9 +24061,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PrincipalType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_principalType = value;
 					}
@@ -24906,9 +24088,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PrincipalName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_principalName = value;
 					}
@@ -24937,9 +24117,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -25033,9 +24211,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupsCollection = value;
 			}
@@ -25062,9 +24238,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IncludeAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_includeAuthorizedOperations = value;
 			}
@@ -25185,9 +24359,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupsCollection = value;
 			}
@@ -25314,9 +24486,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -25343,9 +24513,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_groupId = value;
 				}
@@ -25372,9 +24540,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupState does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_groupState = value;
 				}
@@ -25401,9 +24567,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_protocolType = value;
 				}
@@ -25430,9 +24594,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProtocolData does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_protocolData = value;
 				}
@@ -25459,9 +24621,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_membersCollection = value;
 				}
@@ -25581,9 +24741,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_memberId = value;
 					}
@@ -25612,9 +24770,7 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(4, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 4+");
-						}
 
 						_groupInstanceId = value;
 					}
@@ -25642,9 +24798,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ClientId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_clientId = value;
 					}
@@ -25671,9 +24825,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ClientHost does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_clientHost = value;
 					}
@@ -25700,9 +24852,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"MemberMetadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_memberMetadata = value;
 					}
@@ -25729,9 +24879,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"MemberAssignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_memberAssignment = value;
 					}
@@ -25760,9 +24908,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"AuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_authorizedOperations = value;
 				}
@@ -25851,15 +24997,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -25951,9 +25093,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topic = value;
 				}
@@ -25980,9 +25120,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -26080,9 +25218,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -26109,9 +25245,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -26210,9 +25344,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -26239,9 +25371,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"LogDir does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_logDir = value;
 				}
@@ -26268,9 +25398,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicsCollection = value;
 				}
@@ -26362,9 +25490,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_name = value;
 					}
@@ -26390,9 +25516,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionsCollection = value;
 					}
@@ -26497,9 +25621,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_partitionIndex = value;
 						}
@@ -26526,9 +25648,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"PartitionSize does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_partitionSize = value;
 						}
@@ -26555,9 +25675,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"OffsetLag does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_offsetLag = value;
 						}
@@ -26584,9 +25702,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"IsFutureKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_isFutureKey = value;
 						}
@@ -26675,9 +25791,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -26768,9 +25882,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -26797,9 +25909,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionIndexesCollection = value;
 				}
@@ -26897,9 +26007,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -26926,9 +26034,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -27020,9 +26126,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -27049,9 +26153,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -27157,9 +26259,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -27186,9 +26286,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -27216,15 +26314,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_errorMessage = value;
 					}
@@ -27251,9 +26345,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ActiveProducersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_activeProducersCollection = value;
 					}
@@ -27371,9 +26463,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_producerId = value;
 						}
@@ -27398,9 +26488,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_producerEpoch = value;
 						}
@@ -27426,9 +26514,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"LastSequence does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_lastSequence = value;
 						}
@@ -27455,9 +26541,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"LastTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_lastTimestamp = value;
 						}
@@ -27483,9 +26567,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"CoordinatorEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_coordinatorEpoch = value;
 						}
@@ -27511,9 +26593,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"CurrentTxnStartOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_currentTxnStartOffset = value;
 						}
@@ -27602,9 +26682,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -27695,9 +26773,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -27723,9 +26799,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -27809,9 +26883,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -27910,9 +26982,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -27938,9 +27008,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -28031,9 +27099,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -28059,9 +27125,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -28187,9 +27251,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -28215,9 +27277,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -28243,9 +27303,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderId = value;
 					}
@@ -28272,9 +27330,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -28300,9 +27356,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"HighWatermark does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_highWatermark = value;
 					}
@@ -28327,9 +27381,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CurrentVotersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_currentVotersCollection = value;
 					}
@@ -28354,9 +27406,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ObserversCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_observersCollection = value;
 					}
@@ -28446,9 +27496,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_replicaId = value;
 				}
@@ -28474,9 +27522,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"LogEndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_logEndOffset = value;
 				}
@@ -28564,9 +27610,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionalIdsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_transactionalIdsCollection = value;
 			}
@@ -28663,9 +27707,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -28691,9 +27733,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_transactionStatesCollection = value;
 			}
@@ -28825,9 +27865,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -28852,9 +27890,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_transactionalId = value;
 				}
@@ -28879,9 +27915,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TransactionState_ does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_transactionState = value;
 				}
@@ -28906,9 +27940,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TransactionTimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_transactionTimeoutMs = value;
 				}
@@ -28933,9 +27965,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TransactionStartTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_transactionStartTimeMs = value;
 				}
@@ -28960,9 +27990,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_producerId = value;
 				}
@@ -28987,9 +28015,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_producerEpoch = value;
 				}
@@ -29015,9 +28041,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicsCollection = value;
 				}
@@ -29108,9 +28132,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_topic = value;
 					}
@@ -29135,9 +28157,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionsCollection = value;
 					}
@@ -29225,15 +28245,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"UsersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"UsersCollection does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_usersCollection = value;
 			}
@@ -29318,9 +28334,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -29432,9 +28446,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -29461,9 +28473,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -29490,15 +28500,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -29525,9 +28531,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -29633,9 +28637,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"User does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_user = value;
 				}
@@ -29662,9 +28664,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -29691,15 +28691,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -29726,9 +28722,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"CredentialInfosCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_credentialInfosCollection = value;
 				}
@@ -29820,9 +28814,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Mechanism does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_mechanism = value;
 					}
@@ -29849,9 +28841,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Iterations does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_iterations = value;
 					}
@@ -29954,9 +28944,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(1, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ElectionType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
 
 				_electionType = value;
 			}
@@ -29983,15 +28971,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"TopicPartitionsCollection does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_topicPartitionsCollection = value;
 			}
@@ -30083,9 +29067,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topic = value;
 				}
@@ -30112,9 +29094,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -30143,9 +29123,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -30250,9 +29228,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -30279,9 +29255,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(1, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
 
 				_errorCode = value;
 			}
@@ -30308,9 +29282,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ReplicaElectionResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_replicaElectionResultsCollection = value;
 			}
@@ -30402,9 +29374,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topic = value;
 				}
@@ -30431,9 +29401,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionResultCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionResultCollection = value;
 				}
@@ -30532,9 +29500,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionId = value;
 					}
@@ -30561,9 +29527,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -30590,15 +29554,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_errorMessage = value;
 					}
@@ -30694,15 +29654,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_clusterId = value;
 			}
@@ -30728,9 +29684,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -30821,9 +29775,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -30849,9 +29801,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -30956,9 +29906,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -30985,9 +29933,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderId = value;
 					}
@@ -31014,9 +29960,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -31043,9 +29987,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PreferredSuccessorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_preferredSuccessorsCollection = value;
 					}
@@ -31144,9 +30086,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -31172,9 +30112,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -31265,9 +30203,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -31293,9 +30229,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -31400,9 +30334,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -31428,9 +30360,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -31456,9 +30386,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderId = value;
 					}
@@ -31485,9 +30413,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -31597,9 +30523,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_transactionalId = value;
 			}
@@ -31626,9 +30550,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerId = value;
 			}
@@ -31655,9 +30577,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerEpoch = value;
 			}
@@ -31684,9 +30604,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Committed does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_committed = value;
 			}
@@ -31783,9 +30701,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -31812,9 +30728,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -31915,9 +30829,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"RequestData does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_requestData = value;
 			}
@@ -31944,15 +30856,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"RequestPrincipal does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"RequestPrincipal does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_requestPrincipal = value;
 			}
@@ -31979,9 +30887,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ClientHostAddress does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_clientHostAddress = value;
 			}
@@ -32079,15 +30985,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResponseData does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ResponseData does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_responseData = value;
 			}
@@ -32115,9 +31017,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -32211,9 +31111,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_hmac = value;
 			}
@@ -32240,9 +31138,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ExpiryTimePeriodMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_expiryTimePeriodMs = value;
 			}
@@ -32346,9 +31242,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -32375,9 +31269,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_expiryTimestampMs = value;
 			}
@@ -32404,9 +31296,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -32579,9 +31469,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(12, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 12+");
-				}
 
 				_clusterId = value;
 			}
@@ -32609,9 +31497,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_replicaId = value;
 			}
@@ -32638,9 +31524,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MaxWaitMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_maxWaitMs = value;
 			}
@@ -32667,9 +31551,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MinBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_minBytes = value;
 			}
@@ -32800,9 +31682,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -32949,9 +31829,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -33071,9 +31949,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Partition does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partition = value;
 					}
@@ -33126,9 +32002,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"FetchOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_fetchOffset = value;
 					}
@@ -33156,9 +32030,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(12, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LastFetchedEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
-						}
 
 						_lastFetchedEpoch = value;
 					}
@@ -33212,9 +32084,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionMaxBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionMaxBytes = value;
 					}
@@ -33243,9 +32113,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(7, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ForgottenTopicsDataCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
-				}
 
 				_forgottenTopicsDataCollection = value;
 			}
@@ -33392,9 +32260,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(7, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -33581,9 +32447,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(7, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"SessionId does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
-				}
 
 				_sessionId = value;
 			}
@@ -33611,9 +32475,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_responsesCollection = value;
 			}
@@ -33760,9 +32622,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -33959,9 +32819,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -33988,9 +32846,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -34017,9 +32873,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"HighWatermark does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_highWatermark = value;
 					}
@@ -34098,9 +32952,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(12, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"DivergingEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
-						}
 
 						_divergingEpoch = value;
 					}
@@ -34190,9 +33042,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(12, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"Epoch does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
-							}
 
 							_epoch = value;
 						}
@@ -34219,9 +33069,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(12, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"EndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
-							}
 
 							_endOffset = value;
 						}
@@ -34248,9 +33096,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(12, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CurrentLeader does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
-						}
 
 						_currentLeader = value;
 					}
@@ -34340,9 +33186,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(12, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
-							}
 
 							_leaderId = value;
 						}
@@ -34371,9 +33215,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(12, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
-							}
 
 							_leaderEpoch = value;
 						}
@@ -34402,9 +33244,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(12, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"SnapshotId_ does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
-						}
 
 						_snapshotId = value;
 					}
@@ -34494,9 +33334,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"EndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_endOffset = value;
 						}
@@ -34523,9 +33361,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"Epoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_epoch = value;
 						}
@@ -34554,9 +33390,7 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(4, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"AbortedTransactionsCollection does not support null for version {Version}. Supported versions for null value: 4+");
-						}
 
 						_abortedTransactionsCollection = value;
 					}
@@ -34648,9 +33482,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(4, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-							}
 
 							_producerId = value;
 						}
@@ -34677,9 +33509,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(4, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"FirstOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-							}
 
 							_firstOffset = value;
 						}
@@ -34708,9 +33538,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(11, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PreferredReadReplica does not support version {Version} and has been defined as not ignorable. Supported versions: 11+");
-						}
 
 						_preferredReadReplica = value;
 					}
@@ -34738,15 +33566,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Records does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Records does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_records = value;
 					}
@@ -34871,15 +33695,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_clusterId = value;
 			}
@@ -34908,9 +33728,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_replicaId = value;
 			}
@@ -34939,9 +33757,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MaxBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_maxBytes = value;
 			}
@@ -34969,9 +33785,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -35063,9 +33877,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -35092,9 +33904,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -35200,9 +34010,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Partition does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partition = value;
 					}
@@ -35229,9 +34037,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CurrentLeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_currentLeaderEpoch = value;
 					}
@@ -35258,9 +34064,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"SnapshotId_ does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_snapshotId = value;
 					}
@@ -35349,9 +34153,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"EndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_endOffset = value;
 						}
@@ -35376,9 +34178,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"Epoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_epoch = value;
 						}
@@ -35405,9 +34205,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Position does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_position = value;
 					}
@@ -35537,9 +34335,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -35566,9 +34362,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -35660,9 +34454,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -35689,9 +34481,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -35832,9 +34622,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Index does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_index = value;
 					}
@@ -35861,9 +34649,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -35890,9 +34676,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"SnapshotId_ does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_snapshotId = value;
 					}
@@ -35981,9 +34765,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"EndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_endOffset = value;
 						}
@@ -36008,9 +34790,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"Epoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_epoch = value;
 						}
@@ -36036,9 +34816,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CurrentLeader does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_currentLeader = value;
 					}
@@ -36127,9 +34905,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_leaderId = value;
 						}
@@ -36156,9 +34932,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_leaderEpoch = value;
 						}
@@ -36186,9 +34960,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Size does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_size = value;
 					}
@@ -36215,9 +34987,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Position does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_position = value;
 					}
@@ -36244,9 +35014,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"UnalignedRecords does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_unalignedRecords = value;
 					}
@@ -36349,9 +35117,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 3) == false) 
-				{
 					throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
-				}
 
 				_key = value;
 			}
@@ -36379,9 +35145,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(1, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"KeyType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-				}
 
 				_keyType = value;
 			}
@@ -36409,9 +35173,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(4, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"CoordinatorKeysCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-				}
 
 				_coordinatorKeysCollection = value;
 			}
@@ -36567,9 +35329,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 3) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
-				}
 
 				_errorCode = value;
 			}
@@ -36597,9 +35357,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(1, 3) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 1-3");
-				}
 
 				_errorMessage = value;
 			}
@@ -36626,9 +35384,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 3) == false) 
-				{
 					throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
-				}
 
 				_nodeId = value;
 			}
@@ -36655,9 +35411,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 3) == false) 
-				{
 					throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
-				}
 
 				_host = value;
 			}
@@ -36684,9 +35438,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 3) == false) 
-				{
 					throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
-				}
 
 				_port = value;
 			}
@@ -36713,9 +35465,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(4, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"CoordinatorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-				}
 
 				_coordinatorsCollection = value;
 			}
@@ -36835,9 +35585,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(4, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-					}
 
 					_key = value;
 				}
@@ -36864,9 +35612,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(4, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-					}
 
 					_nodeId = value;
 				}
@@ -36893,9 +35639,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(4, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-					}
 
 					_host = value;
 				}
@@ -36922,9 +35666,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(4, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-					}
 
 					_port = value;
 				}
@@ -36951,9 +35693,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(4, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-					}
 
 					_errorCode = value;
 				}
@@ -36981,9 +35721,7 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(4, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 4+");
-					}
 
 					_errorMessage = value;
 				}
@@ -37092,9 +35830,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupId = value;
 			}
@@ -37121,9 +35857,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_generationId = value;
 			}
@@ -37150,9 +35884,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_memberId = value;
 			}
@@ -37180,15 +35912,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				if (Version.InRange(3, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
-				}
 
 				_groupInstanceId = value;
 			}
@@ -37310,9 +36038,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -37406,9 +36132,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResourcesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resourcesCollection = value;
 			}
@@ -37507,9 +36231,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceType = value;
 				}
@@ -37536,9 +36258,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceName = value;
 				}
@@ -37565,9 +36285,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ConfigsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_configsCollection = value;
 				}
@@ -37666,9 +36384,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_name = value;
 					}
@@ -37695,9 +36411,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ConfigOperation does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_configOperation = value;
 					}
@@ -37724,15 +36438,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_value = value;
 					}
@@ -37761,9 +36471,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_validateOnly = value;
 			}
@@ -37860,9 +36568,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -37889,9 +36595,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_responsesCollection = value;
 			}
@@ -37997,9 +36701,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -38026,15 +36728,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -38061,9 +36759,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceType = value;
 				}
@@ -38090,9 +36786,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ResourceName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_resourceName = value;
 				}
@@ -38201,15 +36895,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"TransactionalId does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_transactionalId = value;
 			}
@@ -38236,9 +36926,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionTimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_transactionTimeoutMs = value;
 			}
@@ -38266,9 +36954,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_producerId = value;
 			}
@@ -38297,9 +36983,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_producerEpoch = value;
 			}
@@ -38435,9 +37119,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -38465,9 +37147,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerId = value;
 			}
@@ -38495,9 +37175,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerEpoch = value;
 			}
@@ -38626,9 +37304,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupId = value;
 			}
@@ -38655,9 +37331,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"SessionTimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_sessionTimeoutMs = value;
 			}
@@ -38710,9 +37384,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_memberId = value;
 			}
@@ -38740,15 +37412,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(5, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-				}
 
 				if (Version.InRange(5, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 5+");
-				}
 
 				_groupInstanceId = value;
 			}
@@ -38776,9 +37444,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_protocolType = value;
 			}
@@ -38805,9 +37471,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProtocolsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_protocolsCollection = value;
 			}
@@ -38899,9 +37563,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -38928,9 +37590,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_metadata = value;
 				}
@@ -39094,9 +37754,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -39124,9 +37782,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_generationId = value;
 			}
@@ -39156,9 +37812,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(7, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ProtocolType does not support null for version {Version}. Supported versions for null value: 7+");
-				}
 
 				_protocolType = value;
 			}
@@ -39186,15 +37840,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProtocolName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(7, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ProtocolName does not support null for version {Version}. Supported versions for null value: 7+");
-				}
 
 				_protocolName = value;
 			}
@@ -39221,9 +37871,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_leader = value;
 			}
@@ -39250,9 +37898,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_memberId = value;
 			}
@@ -39278,9 +37924,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_membersCollection = value;
 			}
@@ -39378,9 +38022,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_memberId = value;
 				}
@@ -39408,15 +38050,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(5, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-					}
 
 					if (Version.InRange(5, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 5+");
-					}
 
 					_groupInstanceId = value;
 				}
@@ -39444,9 +38082,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_metadata = value;
 				}
@@ -39576,9 +38212,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_controllerId = value;
 			}
@@ -39605,9 +38239,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_controllerEpoch = value;
 			}
@@ -39660,9 +38292,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(5, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Type does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-				}
 
 				_type = value;
 			}
@@ -39689,9 +38319,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 1) == false) 
-				{
 					throw new UnsupportedVersionException($"UngroupedPartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
-				}
 
 				_ungroupedPartitionStatesCollection = value;
 			}
@@ -39718,9 +38346,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(2, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
-				}
 
 				_topicStatesCollection = value;
 			}
@@ -39819,9 +38445,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(2, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
-					}
 
 					_topicName = value;
 				}
@@ -39872,9 +38496,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(2, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
-					}
 
 					_partitionStatesCollection = value;
 				}
@@ -39902,9 +38524,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"LiveLeadersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_liveLeadersCollection = value;
 			}
@@ -40003,9 +38623,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_brokerId = value;
 				}
@@ -40032,9 +38650,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"HostName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_hostName = value;
 				}
@@ -40061,9 +38677,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_port = value;
 				}
@@ -40241,9 +38855,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionIndex = value;
 				}
@@ -40270,9 +38882,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_controllerEpoch = value;
 				}
@@ -40299,9 +38909,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_leader = value;
 				}
@@ -40328,9 +38936,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_leaderEpoch = value;
 				}
@@ -40357,9 +38963,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_isrCollection = value;
 				}
@@ -40386,9 +38990,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_zkVersion = value;
 				}
@@ -40415,9 +39017,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_replicasCollection = value;
 				}
@@ -40596,9 +39196,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -40625,9 +39223,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 4) == false) 
-				{
 					throw new UnsupportedVersionException($"PartitionErrorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-				}
 
 				_partitionErrorsCollection = value;
 			}
@@ -40654,9 +39250,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(5, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -40748,9 +39342,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(5, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicId does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-					}
 
 					_topicId = value;
 				}
@@ -40777,9 +39369,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(5, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionErrorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-					}
 
 					_partitionErrorsCollection = value;
 				}
@@ -40901,9 +39491,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionIndex = value;
 				}
@@ -40930,9 +39518,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -41041,9 +39627,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Version_ does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_version = value;
 			}
@@ -41070,9 +39654,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_leaderId = value;
 			}
@@ -41099,9 +39681,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"VotersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_votersCollection = value;
 			}
@@ -41128,9 +39708,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GrantingVotersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_grantingVotersCollection = value;
 			}
@@ -41212,9 +39790,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"VoterId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_voterId = value;
 				}
@@ -41318,9 +39894,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupId = value;
 			}
@@ -41347,9 +39921,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2) == false) 
-				{
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-2");
-				}
 
 				_memberId = value;
 			}
@@ -41376,9 +39948,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_membersCollection = value;
 			}
@@ -41470,9 +40040,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_memberId = value;
 				}
@@ -41500,15 +40068,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					if (Version.InRange(3, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
-					}
 
 					_groupInstanceId = value;
 				}
@@ -41638,9 +40202,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -41667,9 +40229,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_membersCollection = value;
 			}
@@ -41768,9 +40328,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_memberId = value;
 				}
@@ -41797,15 +40355,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					if (Version.InRange(3, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
-					}
 
 					_groupInstanceId = value;
 				}
@@ -41832,9 +40386,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_errorCode = value;
 				}
@@ -41922,9 +40474,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(4, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"StatesFilterCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-				}
 
 				_statesFilterCollection = value;
 			}
@@ -42052,9 +40602,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -42081,9 +40629,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupsCollection = value;
 			}
@@ -42182,9 +40728,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_groupId = value;
 				}
@@ -42211,9 +40755,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProtocolType does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_protocolType = value;
 				}
@@ -42339,9 +40881,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ReplicaId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_replicaId = value;
 			}
@@ -42368,9 +40908,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(2, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IsolationLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
-				}
 
 				_isolationLevel = value;
 			}
@@ -42397,9 +40935,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -42491,9 +41027,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -42520,9 +41054,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -42628,9 +41160,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -42683,9 +41213,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_timestamp = value;
 					}
@@ -42713,9 +41241,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 0) == false) 
-						{
 							throw new UnsupportedVersionException($"MaxNumOffsets does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-						}
 
 						_maxNumOffsets = value;
 					}
@@ -42839,9 +41365,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -42933,9 +41457,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -42962,9 +41484,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -43084,9 +41604,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -43113,9 +41631,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -43142,9 +41658,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 0) == false) 
-						{
 							throw new UnsupportedVersionException($"OldStyleOffsetsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-						}
 
 						_oldStyleOffsetsCollection = value;
 					}
@@ -43172,9 +41686,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(1, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
 
 						_timestamp = value;
 					}
@@ -43203,9 +41715,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(1, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Offset does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
 
 						_offset = value;
 					}
@@ -43233,9 +41743,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(4, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -43332,9 +41840,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -43363,15 +41869,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -43464,9 +41966,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -43493,9 +41993,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionIndexesCollection = value;
 				}
@@ -43607,9 +42105,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -43636,9 +42132,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -43665,15 +42159,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -43700,9 +42190,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -43794,9 +42282,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -43823,9 +42309,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -43931,9 +42415,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -43960,9 +42442,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_replicasCollection = value;
 					}
@@ -43989,9 +42469,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"AddingReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_addingReplicasCollection = value;
 					}
@@ -44018,9 +42496,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"RemovingReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_removingReplicasCollection = value;
 					}
@@ -44116,9 +42592,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"StateFiltersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_stateFiltersCollection = value;
 			}
@@ -44145,9 +42619,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerIdFiltersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerIdFiltersCollection = value;
 			}
@@ -44258,9 +42730,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -44286,9 +42756,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -44314,9 +42782,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"UnknownStateFiltersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_unknownStateFiltersCollection = value;
 			}
@@ -44342,9 +42808,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_transactionStatesCollection = value;
 			}
@@ -44441,9 +42905,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_transactionalId = value;
 				}
@@ -44468,9 +42930,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_producerId = value;
 				}
@@ -44496,9 +42956,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TransactionState_ does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_transactionState = value;
 				}
@@ -44607,15 +43065,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(1, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 1+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -44731,15 +43185,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(10, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"Name does not support null for version {Version}. Supported versions for null value: 10+");
-					}
 
 					_name = value;
 				}
@@ -44768,9 +43218,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(4, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"AllowAutoTopicCreation does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
-				}
 
 				_allowAutoTopicCreation = value;
 			}
@@ -44798,9 +43246,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(8, 10) == false) 
-				{
 					throw new UnsupportedVersionException($"IncludeClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8-10");
-				}
 
 				_includeClusterAuthorizedOperations = value;
 			}
@@ -44827,9 +43273,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(8, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"IncludeTopicAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-				}
 
 				_includeTopicAuthorizedOperations = value;
 			}
@@ -44978,9 +43422,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokersCollection = value;
 			}
@@ -45086,9 +43528,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_nodeId = value;
 				}
@@ -45115,9 +43555,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_host = value;
 				}
@@ -45144,9 +43582,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_port = value;
 				}
@@ -45175,9 +43611,7 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(1, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 1+");
-					}
 
 					_rack = value;
 				}
@@ -45208,9 +43642,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(2, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 2+");
-				}
 
 				_clusterId = value;
 			}
@@ -45264,9 +43696,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -45386,9 +43816,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -45415,15 +43843,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(12, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"Name does not support null for version {Version}. Supported versions for null value: 12+");
-					}
 
 					_name = value;
 				}
@@ -45500,9 +43924,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -45629,9 +44051,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -45658,9 +44078,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -45687,9 +44105,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderId = value;
 					}
@@ -45742,9 +44158,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ReplicaNodesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_replicaNodesCollection = value;
 					}
@@ -45771,9 +44185,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"IsrNodesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_isrNodesCollection = value;
 					}
@@ -45826,9 +44238,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(8, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-					}
 
 					_topicAuthorizedOperations = value;
 				}
@@ -45858,9 +44268,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(8, 10) == false) 
-				{
 					throw new UnsupportedVersionException($"ClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8-10");
-				}
 
 				_clusterAuthorizedOperations = value;
 			}
@@ -45983,9 +44391,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupId = value;
 			}
@@ -46063,15 +44469,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(7, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
-				}
 
 				if (Version.InRange(7, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 7+");
-				}
 
 				_groupInstanceId = value;
 			}
@@ -46125,9 +44527,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -46219,9 +44619,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -46248,9 +44646,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -46363,9 +44759,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -46392,9 +44786,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_committedOffset = value;
 					}
@@ -46448,9 +44840,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(1, 1) == false) 
-						{
 							throw new UnsupportedVersionException($"CommitTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1");
-						}
 
 						_commitTimestamp = value;
 					}
@@ -46478,15 +44868,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CommittedMetadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"CommittedMetadata does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_committedMetadata = value;
 					}
@@ -46609,9 +44995,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -46703,9 +45087,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -46732,9 +45114,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -46826,9 +45206,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -46855,9 +45233,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -46953,9 +45329,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupId = value;
 			}
@@ -46982,9 +45356,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -47076,9 +45448,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -47105,9 +45475,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -47192,9 +45560,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -47300,9 +45666,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -47353,9 +45717,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -47447,9 +45809,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -47476,9 +45836,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -47570,9 +45928,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -47599,9 +45955,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -47711,9 +46065,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 7) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-				}
 
 				_groupId = value;
 			}
@@ -47740,15 +46092,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 7) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-				}
 
 				if (Version.InRange(2, 7) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 2-7");
-				}
 
 				_topicsCollection = value;
 			}
@@ -47840,9 +46188,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 7) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-					}
 
 					_name = value;
 				}
@@ -47869,9 +46215,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 7) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-					}
 
 					_partitionIndexesCollection = value;
 				}
@@ -47899,9 +46243,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(8, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-				}
 
 				_groupsCollection = value;
 			}
@@ -47993,9 +46335,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(8, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-					}
 
 					_groupId = value;
 				}
@@ -48022,15 +46362,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(8, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-					}
 
 					if (Version.InRange(8, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 8+");
-					}
 
 					_topicsCollection = value;
 				}
@@ -48122,9 +46458,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(8, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-						}
 
 						_name = value;
 					}
@@ -48151,9 +46485,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(8, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-						}
 
 						_partitionIndexesCollection = value;
 					}
@@ -48183,9 +46515,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(7, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"RequireStable does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
-				}
 
 				_requireStable = value;
 			}
@@ -48321,9 +46651,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 7) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-				}
 
 				_topicsCollection = value;
 			}
@@ -48415,9 +46743,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 7) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-					}
 
 					_name = value;
 				}
@@ -48444,9 +46770,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 7) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -48559,9 +46883,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 7) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-						}
 
 						_partitionIndex = value;
 					}
@@ -48588,9 +46910,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 7) == false) 
-						{
 							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-						}
 
 						_committedOffset = value;
 					}
@@ -48643,15 +46963,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 7) == false) 
-						{
 							throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-						}
 
 						if (Version.InRange(0, 7) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Metadata does not support null for version {Version}. Supported versions for null value: 0-7");
-						}
 
 						_metadata = value;
 					}
@@ -48678,9 +46994,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 7) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
-						}
 
 						_errorCode = value;
 					}
@@ -48735,9 +47049,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(8, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-				}
 
 				_groupsCollection = value;
 			}
@@ -48836,9 +47148,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(8, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-					}
 
 					_groupId = value;
 				}
@@ -48865,9 +47175,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(8, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-					}
 
 					_topicsCollection = value;
 				}
@@ -48959,9 +47267,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(8, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-						}
 
 						_name = value;
 					}
@@ -48988,9 +47294,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(8, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-						}
 
 						_partitionsCollection = value;
 					}
@@ -49103,9 +47407,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(8, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-							}
 
 							_partitionIndex = value;
 						}
@@ -49132,9 +47434,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(8, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-							}
 
 							_committedOffset = value;
 						}
@@ -49187,15 +47487,11 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(8, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-							}
 
 							if (Version.InRange(8, 2147483647) == false &&
 								value == null) 
-							{
 								throw new UnsupportedVersionException($"Metadata does not support null for version {Version}. Supported versions for null value: 8+");
-							}
 
 							_metadata = value;
 						}
@@ -49222,9 +47518,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(8, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-							}
 
 							_errorCode = value;
 						}
@@ -49254,9 +47548,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(8, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-					}
 
 					_errorCode = value;
 				}
@@ -49378,9 +47670,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -49472,9 +47762,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topic = value;
 				}
@@ -49501,9 +47789,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -49602,9 +47888,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Partition does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partition = value;
 					}
@@ -49657,9 +47941,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -49782,9 +48064,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -49876,9 +48156,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topic = value;
 				}
@@ -49905,9 +48183,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -50013,9 +48289,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -50042,9 +48316,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Partition does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partition = value;
 					}
@@ -50098,9 +48370,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"EndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_endOffset = value;
 					}
@@ -50212,15 +48482,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				if (Version.InRange(3, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"TransactionalId does not support null for version {Version}. Supported versions for null value: 3+");
-				}
 
 				_transactionalId = value;
 			}
@@ -50248,9 +48514,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Acks does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_acks = value;
 			}
@@ -50277,9 +48541,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -50306,9 +48568,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicDataCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicDataCollection = value;
 			}
@@ -50400,9 +48660,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -50429,9 +48687,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionDataCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionDataCollection = value;
 				}
@@ -50523,9 +48779,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Index does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_index = value;
 					}
@@ -50552,15 +48806,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Records does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"Records does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_records = value;
 					}
@@ -50659,9 +48909,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_responsesCollection = value;
 			}
@@ -50753,9 +49001,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -50782,9 +49028,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionResponsesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionResponsesCollection = value;
 				}
@@ -50911,9 +49155,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Index does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_index = value;
 					}
@@ -50940,9 +49182,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -50969,9 +49209,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"BaseOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_baseOffset = value;
 					}
@@ -51139,9 +49377,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(8, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"BatchIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-							}
 
 							_batchIndex = value;
 						}
@@ -51169,15 +49405,11 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(8, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"BatchIndexErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
-							}
 
 							if (Version.InRange(8, 2147483647) == false &&
 								value == null) 
-							{
 								throw new UnsupportedVersionException($"BatchIndexErrorMessage does not support null for version {Version}. Supported versions for null value: 8+");
-							}
 
 							_batchIndexErrorMessage = value;
 						}
@@ -51208,9 +49440,7 @@ namespace Kafka.Protocol
 					{
 						if (Version.InRange(8, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 8+");
-						}
 
 						_errorMessage = value;
 					}
@@ -51333,9 +49563,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Hmac does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_hmac = value;
 			}
@@ -51362,9 +49590,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"RenewPeriodMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_renewPeriodMs = value;
 			}
@@ -51468,9 +49694,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -51497,9 +49721,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ExpiryTimestampMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_expiryTimestampMs = value;
 			}
@@ -51526,9 +49748,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -51636,9 +49856,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"RequestApiKey does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_requestApiKey = value;
 			}
@@ -51665,9 +49883,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"RequestApiVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_requestApiVersion = value;
 			}
@@ -51694,9 +49910,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"CorrelationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_correlationId = value;
 			}
@@ -51724,9 +49938,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(1, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ClientId does not support null for version {Version}. Supported versions for null value: 1+");
-				}
 
 				_clientId = value;
 			}
@@ -51816,9 +50028,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"CorrelationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_correlationId = value;
 			}
@@ -51908,9 +50118,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"AuthBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_authBytes = value;
 			}
@@ -52021,9 +50229,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -52050,15 +50256,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -52085,9 +50287,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"AuthBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_authBytes = value;
 			}
@@ -52200,9 +50400,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Mechanism does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_mechanism = value;
 			}
@@ -52299,9 +50497,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -52328,9 +50524,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MechanismsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_mechanismsCollection = value;
 			}
@@ -52417,9 +50611,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Version_ does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_version = value;
 			}
@@ -52516,9 +50708,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Version_ does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_version = value;
 			}
@@ -52545,9 +50735,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"LastContainedLogTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_lastContainedLogTimestamp = value;
 			}
@@ -52679,9 +50867,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_controllerId = value;
 			}
@@ -52708,9 +50894,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_controllerEpoch = value;
 			}
@@ -52763,9 +50947,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2) == false) 
-				{
 					throw new UnsupportedVersionException($"DeletePartitions does not support version {Version} and has been defined as not ignorable. Supported versions: 0-2");
-				}
 
 				_deletePartitions = value;
 			}
@@ -52792,9 +50974,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 0) == false) 
-				{
 					throw new UnsupportedVersionException($"UngroupedPartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-				}
 
 				_ungroupedPartitionsCollection = value;
 			}
@@ -52886,9 +51066,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 0) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-					}
 
 					_topicName = value;
 				}
@@ -52915,9 +51093,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 0) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-					}
 
 					_partitionIndex = value;
 				}
@@ -52945,9 +51121,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(1, 2) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
-				}
 
 				_topicsCollection = value;
 			}
@@ -53039,9 +51213,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(1, 2) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
-					}
 
 					_name = value;
 				}
@@ -53068,9 +51240,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(1, 2) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
-					}
 
 					_partitionIndexesCollection = value;
 				}
@@ -53098,9 +51268,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_topicStatesCollection = value;
 			}
@@ -53192,9 +51360,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_topicName = value;
 				}
@@ -53221,9 +51387,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(3, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-					}
 
 					_partitionStatesCollection = value;
 				}
@@ -53322,9 +51486,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(3, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -53352,9 +51514,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(3, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -53382,9 +51542,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(3, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"DeletePartition does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-						}
 
 						_deletePartition = value;
 					}
@@ -53483,9 +51641,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -53512,9 +51668,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"PartitionErrorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_partitionErrorsCollection = value;
 			}
@@ -53613,9 +51767,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -53642,9 +51794,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionIndex = value;
 				}
@@ -53671,9 +51821,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -53803,9 +51951,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupId = value;
 			}
@@ -53832,9 +51978,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_generationId = value;
 			}
@@ -53861,9 +52005,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_memberId = value;
 			}
@@ -53891,15 +52033,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				if (Version.InRange(3, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
-				}
 
 				_groupInstanceId = value;
 			}
@@ -53929,9 +52067,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(5, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ProtocolType does not support null for version {Version}. Supported versions for null value: 5+");
-				}
 
 				_protocolType = value;
 			}
@@ -53961,9 +52097,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(5, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ProtocolName does not support null for version {Version}. Supported versions for null value: 5+");
-				}
 
 				_protocolName = value;
 			}
@@ -53991,9 +52125,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"AssignmentsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_assignmentsCollection = value;
 			}
@@ -54085,9 +52217,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_memberId = value;
 				}
@@ -54114,9 +52244,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Assignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_assignment = value;
 				}
@@ -54259,9 +52387,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -54290,9 +52416,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(5, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ProtocolType does not support null for version {Version}. Supported versions for null value: 5+");
-				}
 
 				_protocolType = value;
 			}
@@ -54322,9 +52446,7 @@ namespace Kafka.Protocol
 			{
 				if (Version.InRange(5, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ProtocolName does not support null for version {Version}. Supported versions for null value: 5+");
-				}
 
 				_protocolName = value;
 			}
@@ -54352,9 +52474,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"Assignment does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_assignment = value;
 			}
@@ -54490,9 +52610,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TransactionalId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_transactionalId = value;
 			}
@@ -54519,9 +52637,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_groupId = value;
 			}
@@ -54548,9 +52664,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerId = value;
 			}
@@ -54577,9 +52691,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_producerEpoch = value;
 			}
@@ -54607,9 +52719,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_generationId = value;
 			}
@@ -54638,9 +52748,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				_memberId = value;
 			}
@@ -54669,15 +52777,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(3, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
-				}
 
 				if (Version.InRange(3, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
-				}
 
 				_groupInstanceId = value;
 			}
@@ -54705,9 +52809,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -54799,9 +52901,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -54828,9 +52928,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -54936,9 +53034,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -54965,9 +53061,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_committedOffset = value;
 					}
@@ -55020,15 +53114,11 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CommittedMetadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						if (Version.InRange(0, 2147483647) == false &&
 							value == null) 
-						{
 							throw new UnsupportedVersionException($"CommittedMetadata does not support null for version {Version}. Supported versions for null value: 0+");
-						}
 
 						_committedMetadata = value;
 					}
@@ -55127,9 +53217,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -55156,9 +53244,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -55250,9 +53336,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_name = value;
 				}
@@ -55279,9 +53363,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -55373,9 +53455,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -55402,9 +53482,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -55493,9 +53571,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"BrokerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_brokerId = value;
 			}
@@ -55599,9 +53675,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -55628,9 +53702,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -55657,15 +53729,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -55760,9 +53828,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_timeoutMs = value;
 			}
@@ -55790,9 +53856,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"FeatureUpdatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_featureUpdatesCollection = value;
 			}
@@ -55891,9 +53955,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Feature does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_feature = value;
 				}
@@ -55920,9 +53982,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"MaxVersionLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_maxVersionLevel = value;
 				}
@@ -55949,9 +54009,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"AllowDowngrade does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_allowDowngrade = value;
 				}
@@ -56063,9 +54121,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ThrottleTimeMs does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_throttleTimeMs = value;
 			}
@@ -56092,9 +54148,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -56121,15 +54175,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_errorMessage = value;
 			}
@@ -56156,9 +54206,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ResultsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_resultsCollection = value;
 			}
@@ -56257,9 +54305,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Feature does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_feature = value;
 				}
@@ -56286,9 +54332,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_errorCode = value;
 				}
@@ -56315,15 +54359,11 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_errorMessage = value;
 				}
@@ -56446,9 +54486,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ControllerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_controllerId = value;
 			}
@@ -56475,9 +54513,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_controllerEpoch = value;
 			}
@@ -56530,9 +54566,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 4) == false) 
-				{
 					throw new UnsupportedVersionException($"UngroupedPartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
-				}
 
 				_ungroupedPartitionStatesCollection = value;
 			}
@@ -56559,9 +54593,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(5, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-				}
 
 				_topicStatesCollection = value;
 			}
@@ -56660,9 +54692,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(5, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-					}
 
 					_topicName = value;
 				}
@@ -56713,9 +54743,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(5, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
-					}
 
 					_partitionStatesCollection = value;
 				}
@@ -56742,9 +54770,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"LiveBrokersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_liveBrokersCollection = value;
 			}
@@ -56856,9 +54882,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Id does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_id = value;
 				}
@@ -57036,9 +55060,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(1, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
 
 						_port = value;
 					}
@@ -57065,9 +55087,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(1, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
 
 						_host = value;
 					}
@@ -57118,9 +55138,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(1, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"SecurityProtocol does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
-						}
 
 						_securityProtocol = value;
 					}
@@ -57149,9 +55167,7 @@ namespace Kafka.Protocol
 				{
 					if (Version.InRange(0, 2147483647) == false &&
 						value == null) 
-					{
 						throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 0+");
-					}
 
 					_rack = value;
 				}
@@ -57315,9 +55331,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionIndex = value;
 				}
@@ -57344,9 +55358,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ControllerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_controllerEpoch = value;
 				}
@@ -57373,9 +55385,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"Leader does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_leader = value;
 				}
@@ -57402,9 +55412,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_leaderEpoch = value;
 				}
@@ -57431,9 +55439,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"IsrCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_isrCollection = value;
 				}
@@ -57460,9 +55466,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ZkVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_zkVersion = value;
 				}
@@ -57489,9 +55493,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ReplicasCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_replicasCollection = value;
 				}
@@ -57606,9 +55608,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -57702,15 +55702,11 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				if (Version.InRange(0, 2147483647) == false &&
 					value == null) 
-				{
 					throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 0+");
-				}
 
 				_clusterId = value;
 			}
@@ -57736,9 +55732,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -57829,9 +55823,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -57857,9 +55849,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -57971,9 +55961,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -58000,9 +55988,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CandidateEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_candidateEpoch = value;
 					}
@@ -58029,9 +56015,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"CandidateId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_candidateId = value;
 					}
@@ -58058,9 +56042,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LastOffsetEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_lastOffsetEpoch = value;
 					}
@@ -58087,9 +56069,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LastOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_lastOffset = value;
 					}
@@ -58188,9 +56168,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_errorCode = value;
 			}
@@ -58216,9 +56194,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_topicsCollection = value;
 			}
@@ -58309,9 +56285,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicName = value;
 				}
@@ -58337,9 +56311,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_partitionsCollection = value;
 				}
@@ -58451,9 +56423,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndex = value;
 					}
@@ -58479,9 +56449,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_errorCode = value;
 					}
@@ -58507,9 +56475,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderId = value;
 					}
@@ -58536,9 +56502,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_leaderEpoch = value;
 					}
@@ -58565,9 +56529,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"VoteGranted does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_voteGranted = value;
 					}
@@ -58656,9 +56618,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MarkersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_markersCollection = value;
 			}
@@ -58771,9 +56731,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_producerId = value;
 				}
@@ -58800,9 +56758,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_producerEpoch = value;
 				}
@@ -58829,9 +56785,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TransactionResult does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_transactionResult = value;
 				}
@@ -58858,9 +56812,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicsCollection = value;
 				}
@@ -58952,9 +56904,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_name = value;
 					}
@@ -58981,9 +56931,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionIndexesCollection = value;
 					}
@@ -59011,9 +56959,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"CoordinatorEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_coordinatorEpoch = value;
 				}
@@ -59104,9 +57050,7 @@ namespace Kafka.Protocol
 			private set 
 			{
 				if (Version.InRange(0, 2147483647) == false) 
-				{
 					throw new UnsupportedVersionException($"MarkersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-				}
 
 				_markersCollection = value;
 			}
@@ -59198,9 +57142,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_producerId = value;
 				}
@@ -59227,9 +57169,7 @@ namespace Kafka.Protocol
 				private set 
 				{
 					if (Version.InRange(0, 2147483647) == false) 
-					{
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-					}
 
 					_topicsCollection = value;
 				}
@@ -59321,9 +57261,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_name = value;
 					}
@@ -59350,9 +57288,7 @@ namespace Kafka.Protocol
 					private set 
 					{
 						if (Version.InRange(0, 2147483647) == false) 
-						{
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-						}
 
 						_partitionsCollection = value;
 					}
@@ -59444,9 +57380,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_partitionIndex = value;
 						}
@@ -59473,9 +57407,7 @@ namespace Kafka.Protocol
 						private set 
 						{
 							if (Version.InRange(0, 2147483647) == false) 
-							{
 								throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0+");
-							}
 
 							_errorCode = value;
 						}
