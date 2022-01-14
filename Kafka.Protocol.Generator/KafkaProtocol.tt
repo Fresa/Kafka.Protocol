@@ -27,8 +27,6 @@
 	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath).AddReferencesToFields();
 
 	void Tab(Action action) { this.Tab(action); }
-	void Indent() { this.Indent(); }
-	void Dedent() { this.Dedent(); }
     void Block(Action action) { this.Block(action); }
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
@@ -340,18 +338,16 @@ void PrintCreateTagSection(IEnumerable<Kafka.Protocol.Generator.Helpers.Definiti
 				var versionRange = taggedField.TaggedVersions == null ? 
 					VersionRange.Parse(taggedField.Versions) : 
 					VersionRange.Parse(taggedField.TaggedVersions);
-				if (!versionRange.Full)
+				
+				#>if (<#= (versionRange.Full ? "" : versionRange.GetExpression("Version") + " && ") #><#= propertyName #>IsSet) <# _(); 
+				Tab(() =>
 				{
-					#>if (<#= versionRange.GetExpression("Version") #>) <# _(); 
-					Indent();
-				}				
-				#>tags.Add(new Tags.TaggedField<# Block(() => 
-				{
-					#>Tag = <#= taggedField.Tag #>,<# _();
-					#>Field = <#= propertyName #><# 
-				});#>);<# 
-				if (!versionRange.Full)
-					Dedent();
+					#>tags.Add(new Tags.TaggedField<# Block(() => 
+					{
+						#>Tag = <#= taggedField.Tag #>,<# _();
+						#>Field = <#= propertyName #><# 
+					});#>);<# 
+				});			
 			}); _();
 		}
 		#>return new Tags.TagSection(<#= tagsExpression #>);<#		
@@ -564,6 +560,10 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	var fieldName = field.GetFieldName(className);
 	var flexibleVersionRange = VersionRange.Parse(field.Message.FlexibleVersions);
 	
+	if (field.Tag.HasValue)
+	{
+		#>private bool <#= propertyName #>IsSet;<# _();
+	}
 	#>private <#= propertyTypeName #> <#= propertyName #><#
 	
 	if(field.Default != null) 
@@ -618,7 +618,11 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				}		
 			} 
 			
-			#><#= propertyName #> = value;<# 
+			#><#= propertyName #> = value;<# _();
+			if (field.Tag.HasValue)	
+			{
+				#><#= propertyName #>IsSet = true;<# 
+			}
 		});
 	}); _(2); 
 	
