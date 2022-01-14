@@ -565,11 +565,11 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	
 	if(field.Default != null) 
 	{ 
-		#> = new <#= propertyTypeName #>(<#= field.Default #>);<# 
+		#> = new <#= propertyTypeName #>(<#= field.Default == "" ? "string.Empty" : field.Default #>);<# 
 	} 
 	else if (field.IsDictionary())
 	{
-		#> = new <#= propertyTypeName #>();<# 
+		#> = <#= propertyTypeName #>.Default;<# 
 	}
 	else if (field.IsArray())
 	{

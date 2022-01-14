@@ -3361,7 +3361,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, AddPartitionsToTxnTopic> _topicsCollection = new Map<String, AddPartitionsToTxnTopic>();
+		private Map<String, AddPartitionsToTxnTopic> _topicsCollection = Map<String, AddPartitionsToTxnTopic>.Default;
 		/// <summary>
 		/// <para>The partitions to add to the transaction.</para>
 		/// <para>Versions: 0+</para>
@@ -3591,7 +3591,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, AddPartitionsToTxnTopicResult> _resultsCollection = new Map<String, AddPartitionsToTxnTopicResult>();
+		private Map<String, AddPartitionsToTxnTopicResult> _resultsCollection = Map<String, AddPartitionsToTxnTopicResult>.Default;
 		/// <summary>
 		/// <para>The results for each topic.</para>
 		/// <para>Versions: 0+</para>
@@ -3704,7 +3704,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			private Map<Int32, AddPartitionsToTxnPartitionResult> _resultsCollection = new Map<Int32, AddPartitionsToTxnPartitionResult>();
+			private Map<Int32, AddPartitionsToTxnPartitionResult> _resultsCollection = Map<Int32, AddPartitionsToTxnPartitionResult>.Default;
 			/// <summary>
 			/// <para>The results for each partition</para>
 			/// <para>Versions: 0+</para>
@@ -5046,7 +5046,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private Map<Int8, AlterConfigsResource> _resourcesCollection = new Map<Int8, AlterConfigsResource>();
+		private Map<Int8, AlterConfigsResource> _resourcesCollection = Map<Int8, AlterConfigsResource>.Default;
 		/// <summary>
 		/// <para>The updates for each resource.</para>
 		/// <para>Versions: 0+</para>
@@ -5186,7 +5186,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			private Map<String, AlterableConfig> _configsCollection = new Map<String, AlterableConfig>();
+			private Map<String, AlterableConfig> _configsCollection = Map<String, AlterableConfig>.Default;
 			/// <summary>
 			/// <para>The configurations.</para>
 			/// <para>Versions: 0+</para>
@@ -7360,7 +7360,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private Map<String, AlterReplicaLogDir> _dirsCollection = new Map<String, AlterReplicaLogDir>();
+		private Map<String, AlterReplicaLogDir> _dirsCollection = Map<String, AlterReplicaLogDir>.Default;
 		/// <summary>
 		/// <para>The alterations to make for each directory.</para>
 		/// <para>Versions: 0+</para>
@@ -7473,7 +7473,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			private Map<String, AlterReplicaLogDirTopic> _topicsCollection = new Map<String, AlterReplicaLogDirTopic>();
+			private Map<String, AlterReplicaLogDirTopic> _topicsCollection = Map<String, AlterReplicaLogDirTopic>.Default;
 			/// <summary>
 			/// <para>The topics to add to the directory.</para>
 			/// <para>Versions: 0+</para>
@@ -8930,7 +8930,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<Int16, ApiVersion> _apiKeysCollection = new Map<Int16, ApiVersion>();
+		private Map<Int16, ApiVersion> _apiKeysCollection = Map<Int16, ApiVersion>.Default;
 		/// <summary>
 		/// <para>The APIs supported by the broker.</para>
 		/// <para>Versions: 0+</para>
@@ -9119,7 +9119,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, SupportedFeatureKey> _supportedFeaturesCollection = new Map<String, SupportedFeatureKey>();
+		private Map<String, SupportedFeatureKey> _supportedFeaturesCollection = Map<String, SupportedFeatureKey>.Default;
 		/// <summary>
 		/// <para>Features supported by the broker.</para>
 		/// <para>Versions: 3+</para>
@@ -9331,7 +9331,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, FinalizedFeatureKey> _finalizedFeaturesCollection = new Map<String, FinalizedFeatureKey>();
+		private Map<String, FinalizedFeatureKey> _finalizedFeaturesCollection = Map<String, FinalizedFeatureKey>.Default;
 		/// <summary>
 		/// <para>List of cluster-wide finalized features. The information is valid only if FinalizedFeaturesEpoch >= 0.</para>
 		/// <para>Versions: 3+</para>
@@ -10819,7 +10819,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, Listener> _listenersCollection = new Map<String, Listener>();
+		private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
 		/// <summary>
 		/// <para>The listeners of this broker</para>
 		/// <para>Versions: 0+</para>
@@ -11011,7 +11011,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private Map<String, Feature> _featuresCollection = new Map<String, Feature>();
+		private Map<String, Feature> _featuresCollection = Map<String, Feature>.Default;
 		/// <summary>
 		/// <para>The features on this broker</para>
 		/// <para>Versions: 0+</para>
@@ -11410,7 +11410,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private Map<String, TopicPartition> _assignedPartitionsCollection = new Map<String, TopicPartition>();
+		private Map<String, TopicPartition> _assignedPartitionsCollection = Map<String, TopicPartition>.Default;
 		/// <summary>
 		/// <para>Versions: 0+</para>
 		/// </summary>
@@ -11687,7 +11687,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, TopicPartition> _ownedPartitionsCollection = new Map<String, TopicPartition>();
+		private Map<String, TopicPartition> _ownedPartitionsCollection = Map<String, TopicPartition>.Default;
 		/// <summary>
 		/// <para>Versions: 1+</para>
 		/// </summary>
@@ -12047,7 +12047,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, RemainingPartition> _remainingPartitionsCollection = new Map<String, RemainingPartition>();
+		private Map<String, RemainingPartition> _remainingPartitionsCollection = Map<String, RemainingPartition>.Default;
 		/// <summary>
 		/// <para>The partitions that the broker still leads.</para>
 		/// <para>Versions: 0+</para>
@@ -13359,7 +13359,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private Map<String, CreatePartitionsTopic> _topicsCollection = new Map<String, CreatePartitionsTopic>();
+		private Map<String, CreatePartitionsTopic> _topicsCollection = Map<String, CreatePartitionsTopic>.Default;
 		/// <summary>
 		/// <para>Each topic that we want to create new partitions inside.</para>
 		/// <para>Versions: 0+</para>
@@ -13990,7 +13990,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private Map<String, CreatableTopic> _topicsCollection = new Map<String, CreatableTopic>();
+		private Map<String, CreatableTopic> _topicsCollection = Map<String, CreatableTopic>.Default;
 		/// <summary>
 		/// <para>The topics to create.</para>
 		/// <para>Versions: 0+</para>
@@ -14160,7 +14160,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			private Map<Int32, CreatableReplicaAssignment> _assignmentsCollection = new Map<Int32, CreatableReplicaAssignment>();
+			private Map<Int32, CreatableReplicaAssignment> _assignmentsCollection = Map<Int32, CreatableReplicaAssignment>.Default;
 			/// <summary>
 			/// <para>The manual partition assignment, or the empty array if we are using automatic assignment.</para>
 			/// <para>Versions: 0+</para>
@@ -14298,7 +14298,7 @@ namespace Kafka.Protocol
 				}
 			}
 
-			private Map<String, CreateableTopicConfig> _configsCollection = new Map<String, CreateableTopicConfig>();
+			private Map<String, CreateableTopicConfig> _configsCollection = Map<String, CreateableTopicConfig>.Default;
 			/// <summary>
 			/// <para>The custom topic configurations to set.</para>
 			/// <para>Versions: 0+</para>
@@ -14588,7 +14588,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, CreatableTopicResult> _topicsCollection = new Map<String, CreatableTopicResult>();
+		private Map<String, CreatableTopicResult> _topicsCollection = Map<String, CreatableTopicResult>.Default;
 		/// <summary>
 		/// <para>Results for each topic we tried to create.</para>
 		/// <para>Versions: 0+</para>
@@ -16405,7 +16405,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, DeletableGroupResult> _resultsCollection = new Map<String, DeletableGroupResult>();
+		private Map<String, DeletableGroupResult> _resultsCollection = Map<String, DeletableGroupResult>.Default;
 		/// <summary>
 		/// <para>The deletion results</para>
 		/// <para>Versions: 0+</para>
@@ -16976,7 +16976,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, DeleteRecordsTopicResult> _topicsCollection = new Map<String, DeleteRecordsTopicResult>();
+		private Map<String, DeleteRecordsTopicResult> _topicsCollection = Map<String, DeleteRecordsTopicResult>.Default;
 		/// <summary>
 		/// <para>Each topic that we wanted to delete records from.</para>
 		/// <para>Versions: 0+</para>
@@ -17089,7 +17089,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			private Map<Int32, DeleteRecordsPartitionResult> _partitionsCollection = new Map<Int32, DeleteRecordsPartitionResult>();
+			private Map<Int32, DeleteRecordsPartitionResult> _partitionsCollection = Map<Int32, DeleteRecordsPartitionResult>.Default;
 			/// <summary>
 			/// <para>Each partition that we wanted to delete records from.</para>
 			/// <para>Versions: 0+</para>
@@ -17636,7 +17636,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<NullableString, DeletableTopicResult> _responsesCollection = new Map<NullableString, DeletableTopicResult>();
+		private Map<NullableString, DeletableTopicResult> _responsesCollection = Map<NullableString, DeletableTopicResult>.Default;
 		/// <summary>
 		/// <para>The results for each topic we tried to delete.</para>
 		/// <para>Versions: 0+</para>
@@ -19677,7 +19677,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<Int32, DescribeClusterBroker> _brokersCollection = new Map<Int32, DescribeClusterBroker>();
+		private Map<Int32, DescribeClusterBroker> _brokersCollection = Map<Int32, DescribeClusterBroker>.Default;
 		/// <summary>
 		/// <para>Each broker in the response.</para>
 		/// <para>Versions: 0+</para>
@@ -22517,7 +22517,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private NullableMap<String, DescribableLogDirTopic> _topicsCollection = new NullableMap<String, DescribableLogDirTopic>();
+		private NullableMap<String, DescribableLogDirTopic> _topicsCollection = NullableMap<String, DescribableLogDirTopic>.Default;
 		/// <summary>
 		/// <para>Each topic that we want to describe log directories for, or null for all topics.</para>
 		/// <para>Versions: 0+</para>
@@ -25298,7 +25298,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			private Map<String, TopicData> _topicsCollection = new Map<String, TopicData>();
+			private Map<String, TopicData> _topicsCollection = Map<String, TopicData>.Default;
 			/// <summary>
 			/// <para>The set of partitions included in the current transaction (if active). When a transaction is preparing to commit or abort, this will include only partitions which do not have markers.</para>
 			/// <para>Versions: 0+</para>
@@ -26157,7 +26157,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private NullableMap<String, TopicPartitions> _topicPartitionsCollection = new NullableMap<String, TopicPartitions>();
+		private NullableMap<String, TopicPartitions> _topicPartitionsCollection = NullableMap<String, TopicPartitions>.Default;
 		/// <summary>
 		/// <para>The topic partitions to elect leaders.</para>
 		/// <para>Versions: 0+</para>
@@ -29249,7 +29249,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private String _rackId = new String();
+		private String _rackId = new String(string.Empty);
 		/// <summary>
 		/// <para>Rack ID of the consumer making this request</para>
 		/// <para>Versions: 11+</para>
@@ -32972,7 +32972,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private Map<Int8, AlterConfigsResource> _resourcesCollection = new Map<Int8, AlterConfigsResource>();
+		private Map<Int8, AlterConfigsResource> _resourcesCollection = Map<Int8, AlterConfigsResource>.Default;
 		/// <summary>
 		/// <para>The incremental updates for each resource.</para>
 		/// <para>Versions: 0+</para>
@@ -33112,7 +33112,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			private Map<String, AlterableConfig> _configsCollection = new Map<String, AlterableConfig>();
+			private Map<String, AlterableConfig> _configsCollection = Map<String, AlterableConfig>.Default;
 			/// <summary>
 			/// <para>The configurations.</para>
 			/// <para>Versions: 0+</para>
@@ -34186,7 +34186,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, JoinGroupRequestProtocol> _protocolsCollection = new Map<String, JoinGroupRequestProtocol>();
+		private Map<String, JoinGroupRequestProtocol> _protocolsCollection = Map<String, JoinGroupRequestProtocol>.Default;
 		/// <summary>
 		/// <para>The list of protocols that the member supports.</para>
 		/// <para>Versions: 0+</para>
@@ -35849,7 +35849,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<Uuid, LeaderAndIsrTopicError> _topicsCollection = new Map<Uuid, LeaderAndIsrTopicError>();
+		private Map<Uuid, LeaderAndIsrTopicError> _topicsCollection = Map<Uuid, LeaderAndIsrTopicError>.Default;
 		/// <summary>
 		/// <para>Each topic</para>
 		/// <para>Versions: 5+</para>
@@ -39840,7 +39840,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<Int32, MetadataResponseBroker> _brokersCollection = new Map<Int32, MetadataResponseBroker>();
+		private Map<Int32, MetadataResponseBroker> _brokersCollection = Map<Int32, MetadataResponseBroker>.Default;
 		/// <summary>
 		/// <para>Each broker in the response.</para>
 		/// <para>Versions: 0+</para>
@@ -40098,7 +40098,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<NullableString, MetadataResponseTopic> _topicsCollection = new Map<NullableString, MetadataResponseTopic>();
+		private Map<NullableString, MetadataResponseTopic> _topicsCollection = Map<NullableString, MetadataResponseTopic>.Default;
 		/// <summary>
 		/// <para>Each topic in the response.</para>
 		/// <para>Versions: 0+</para>
@@ -41666,7 +41666,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, OffsetDeleteRequestTopic> _topicsCollection = new Map<String, OffsetDeleteRequestTopic>();
+		private Map<String, OffsetDeleteRequestTopic> _topicsCollection = Map<String, OffsetDeleteRequestTopic>.Default;
 		/// <summary>
 		/// <para>The topics to delete offsets for</para>
 		/// <para>Versions: 0+</para>
@@ -42010,7 +42010,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, OffsetDeleteResponseTopic> _topicsCollection = new Map<String, OffsetDeleteResponseTopic>();
+		private Map<String, OffsetDeleteResponseTopic> _topicsCollection = Map<String, OffsetDeleteResponseTopic>.Default;
 		/// <summary>
 		/// <para>The responses for each topic.</para>
 		/// <para>Versions: 0+</para>
@@ -42123,7 +42123,7 @@ namespace Kafka.Protocol
 				return this;
 			}
 
-			private Map<Int32, OffsetDeleteResponsePartition> _partitionsCollection = new Map<Int32, OffsetDeleteResponsePartition>();
+			private Map<Int32, OffsetDeleteResponsePartition> _partitionsCollection = Map<Int32, OffsetDeleteResponsePartition>.Default;
 			/// <summary>
 			/// <para>The responses for each partition in the topic.</para>
 			/// <para>Versions: 0+</para>
@@ -44026,7 +44026,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, OffsetForLeaderTopic> _topicsCollection = new Map<String, OffsetForLeaderTopic>();
+		private Map<String, OffsetForLeaderTopic> _topicsCollection = Map<String, OffsetForLeaderTopic>.Default;
 		/// <summary>
 		/// <para>Each topic to get offsets for.</para>
 		/// <para>Versions: 0+</para>
@@ -44407,7 +44407,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, OffsetForLeaderTopicResult> _topicsCollection = new Map<String, OffsetForLeaderTopicResult>();
+		private Map<String, OffsetForLeaderTopicResult> _topicsCollection = Map<String, OffsetForLeaderTopicResult>.Default;
 		/// <summary>
 		/// <para>Each topic we fetched offsets for.</para>
 		/// <para>Versions: 0+</para>
@@ -44877,7 +44877,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, TopicProduceData> _topicDataCollection = new Map<String, TopicProduceData>();
+		private Map<String, TopicProduceData> _topicDataCollection = Map<String, TopicProduceData>.Default;
 		/// <summary>
 		/// <para>Each topic to produce to.</para>
 		/// <para>Versions: 0+</para>
@@ -45201,7 +45201,7 @@ namespace Kafka.Protocol
 			}
 		}
 
-		private Map<String, TopicProduceResponse> _responsesCollection = new Map<String, TopicProduceResponse>();
+		private Map<String, TopicProduceResponse> _responsesCollection = Map<String, TopicProduceResponse>.Default;
 		/// <summary>
 		/// <para>Each produce response</para>
 		/// <para>Versions: 0+</para>
@@ -48868,7 +48868,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private String _memberId = new String();
+		private String _memberId = new String(string.Empty);
 		/// <summary>
 		/// <para>The member ID assigned by the group coordinator.</para>
 		/// <para>Versions: 3+</para>
@@ -49906,7 +49906,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, FeatureUpdateKey> _featureUpdatesCollection = new Map<String, FeatureUpdateKey>();
+		private Map<String, FeatureUpdateKey> _featureUpdatesCollection = Map<String, FeatureUpdateKey>.Default;
 		/// <summary>
 		/// <para>The list of updates to finalized features.</para>
 		/// <para>Versions: 0+</para>
@@ -50217,7 +50217,7 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Map<String, UpdatableFeatureResult> _resultsCollection = new Map<String, UpdatableFeatureResult>();
+		private Map<String, UpdatableFeatureResult> _resultsCollection = Map<String, UpdatableFeatureResult>.Default;
 		/// <summary>
 		/// <para>Results for each feature update.</para>
 		/// <para>Versions: 0+</para>

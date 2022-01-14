@@ -20,7 +20,7 @@ namespace Kafka.Protocol.Tests.BreakingChangesDetection
                                                     .WithLeaderId(Int32.From(0))
                                                     .WithPartitionIndex(Int32.From(0))
                                                     .WithReplicaNodesCollection(new[] { Int32.From(0) }))))
-                                .ToArray() ?? new Func<MetadataResponse.MetadataResponseTopic, MetadataResponse.MetadataResponseTopic>[0])
+                                .ToArray() ?? Array.Empty<Func<MetadataResponse.MetadataResponseTopic, MetadataResponse.MetadataResponseTopic>>())
                         .WithControllerId(Int32.From(0))
                         .WithClusterId(String.From("test"))
                         .WithBrokersCollection(broker => broker
