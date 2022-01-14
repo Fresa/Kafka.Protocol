@@ -364,7 +364,7 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 	if (messageField.TaggedVersions != null)
 	{
 		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
-		versionRange = versionRange.Intersect(taggedVersionRange);
+		versionRange = versionRange.Except(taggedVersionRange);
 		if (versionRange.None)
 		{
 			return;
@@ -402,8 +402,11 @@ void PrintReadField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field 
 	if (messageField.TaggedVersions != null)
 	{
 		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
-		versionRange = versionRange.Intersect(taggedVersionRange);
+		versionRange = versionRange.Except(taggedVersionRange);
 	}
+
+	if (versionRange.None)
+		return;
 
 	PrintRead(messageField, versionRange); _();
 }
@@ -536,7 +539,7 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	if (messageField.TaggedVersions != null)
 	{
 		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
-		versionRange = versionRange.Intersect(taggedVersionRange);
+		versionRange = versionRange.Except(taggedVersionRange);
 		if (versionRange.None)
 		{
 			return;

@@ -17,8 +17,10 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
         public int? From { get; }
         public int? To { get; }
-        public bool None => 
-            !From.HasValue && !To.HasValue;
+
+        public bool None =>
+            !From.HasValue && !To.HasValue ||
+            From > To;
         public bool Full => 
             From == 0 && To is null or int.MaxValue;
 
@@ -37,26 +39,35 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
             return To switch
             {
                 null => $"{variable} >= {From}",
-                _ => $"{variable} >= {From} &&" + $"{variable} <= {To}"
+                _ => $"{variable} >= {From} && {variable} <= {To}"
             };
         }
 
-        public VersionRange Intersect(VersionRange versionRange)
+        public VersionRange Except(VersionRange versionRange)
         {
-            if (Full || versionRange.None)
+            if (versionRange.From < From ||
+                versionRange.To > To ||
+                versionRange.To is not null && To is null)
             {
-                return versionRange;
+                throw new InvalidOperationException(
+                    "The excepted version range must be a subset of the current range");
             }
 
-            if (None || versionRange.Full)
+            if (None || versionRange.Full ||
+                From == versionRange.From)
+            {
+                return new VersionRange();
+            }
+            
+            if (versionRange.None)
             {
                 return this;
             }
-
-            return new VersionRange(Math.Max(From ?? 0, versionRange.From ?? 0),
-                To is null && versionRange.To is null ? 
-                    null : 
-                    Math.Min((int)To!, (int)versionRange.To!));
+            
+            return new VersionRange((int)From!,
+                To is null
+                    ? versionRange.From
+                    : Math.Min((int)To, versionRange.From ?? int.MaxValue));
         }
 
         public static VersionRange Parse(string versionRangeExpression)

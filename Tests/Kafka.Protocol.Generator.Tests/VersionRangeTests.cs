@@ -2,6 +2,7 @@
 using Kafka.Protocol.Generator.Helpers.Definitions;
 using Test.It.With.XUnit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Kafka.Protocol.Generator.Helpers.Tests
 {
@@ -112,6 +113,27 @@ namespace Kafka.Protocol.Generator.Helpers.Tests
             public void It_should_not_be_a_range()
             {
                 _range.None.Should().BeTrue();
+            }
+        }
+    }
+
+    public partial class Given_two_ranges
+    {
+        public class When_getting_the_excepted_subset
+        {
+            [Theory]
+            [InlineData("none", "none", "none")]
+            [InlineData("none", "2+", "none")]
+            [InlineData("1+", "none", "1+")]
+            [InlineData("1-3", "2-3", "1-2")]
+            [InlineData("1-3", "1-3", "none")]
+            [InlineData("1+", "2+", "1-2")]
+            [InlineData("1+", "1+", "none")]
+            public void It_should_generate_the_correct_except(string range, string exceptRange, string result)
+            {
+                VersionRange.Parse(range)
+                    .Except(VersionRange.Parse(exceptRange)).Should()
+                    .BeEquivalentTo(VersionRange.Parse(result));
             }
         }
     }

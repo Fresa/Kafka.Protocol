@@ -8809,15 +8809,6 @@ namespace Kafka.Protocol
 			(Version >= 1 ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 3 ? 
-				_supportedFeaturesCollection.GetSize(IsFlexibleVersion):
-				0) +
-			(Version >= 3 ? 
-				_finalizedFeaturesEpoch.GetSize(IsFlexibleVersion):
-				0) +
-			(Version >= 3 ? 
-				_finalizedFeaturesCollection.GetSize(IsFlexibleVersion):
-				0) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
 				0);
@@ -8829,12 +8820,6 @@ namespace Kafka.Protocol
 			instance.ApiKeysCollection = await Map<Int16, ApiVersion>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ApiVersion.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.ApiKey, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 1) 
 				instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 3) 
-				instance.SupportedFeaturesCollection = await Map<String, SupportedFeatureKey>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => SupportedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 3) 
-				instance.FinalizedFeaturesEpoch = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 3) 
-				instance.FinalizedFeaturesCollection = await Map<String, FinalizedFeatureKey>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => FinalizedFeatureKey.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
 			{
@@ -8893,12 +8878,6 @@ namespace Kafka.Protocol
 			await _apiKeysCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 1)
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 3)
-				await _supportedFeaturesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 3)
-				await _finalizedFeaturesEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 3)
-				await _finalizedFeaturesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
 			{
@@ -14653,9 +14632,6 @@ namespace Kafka.Protocol
 					_errorMessage.GetSize(IsFlexibleVersion):
 					0) +
 				(Version >= 5 ? 
-					_topicConfigErrorCode.GetSize(IsFlexibleVersion):
-					0) +
-				(Version >= 5 ? 
 					_numPartitions.GetSize(IsFlexibleVersion):
 					0) +
 				(Version >= 5 ? 
@@ -14677,8 +14653,6 @@ namespace Kafka.Protocol
 				instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 1) 
 					instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				if (instance.Version >= 5) 
-					instance.TopicConfigErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 5) 
 					instance.NumPartitions = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 5) 
@@ -14722,8 +14696,6 @@ namespace Kafka.Protocol
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 1)
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				if (Version >= 5)
-					await _topicConfigErrorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 5)
 					await _numPartitions.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 5)
@@ -17284,7 +17256,7 @@ namespace Kafka.Protocol
 			(Version >= 6 ? 
 				_topicsCollection.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 5 ? 
+			(Version >= 0 && Version <= 5 ? 
 				_topicNamesCollection.GetSize(IsFlexibleVersion):
 				0) +
 			_timeoutMs.GetSize(IsFlexibleVersion) +
@@ -17297,7 +17269,7 @@ namespace Kafka.Protocol
 			var instance = new DeleteTopicsRequest(version);
 			if (instance.Version >= 6) 
 				instance.TopicsCollection = await Array<DeleteTopicState>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DeleteTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 5) 
+			if (instance.Version >= 0 && instance.Version <= 5) 
 				instance.TopicNamesCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
 			instance.TimeoutMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
@@ -17321,7 +17293,7 @@ namespace Kafka.Protocol
 		{
 			if (Version >= 6)
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 5)
+			if (Version >= 0 && Version <= 5)
 				await _topicNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
@@ -28339,9 +28311,7 @@ namespace Kafka.Protocol
 		}
 
 		internal override int GetSize() =>
-			(Version >= 12 ? 
-				_clusterId.GetSize(IsFlexibleVersion):
-				0) +
+		 +
 			_replicaId.GetSize(IsFlexibleVersion) +
 			_maxWaitMs.GetSize(IsFlexibleVersion) +
 			_minBytes.GetSize(IsFlexibleVersion) +
@@ -28371,8 +28341,6 @@ namespace Kafka.Protocol
 		internal static async ValueTask<FetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FetchRequest(version);
-			if (instance.Version >= 12) 
-				instance.ClusterId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.ReplicaId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.MaxWaitMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.MinBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -28419,8 +28387,6 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version >= 12)
-				await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _maxWaitMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _minBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -28699,7 +28665,7 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 0 &&Version <= 12 ? 
+				(Version >= 0 && Version <= 12 ? 
 					_topic.GetSize(IsFlexibleVersion):
 					0) +
 				(Version >= 13 ? 
@@ -28713,7 +28679,7 @@ namespace Kafka.Protocol
 			internal static async ValueTask<FetchTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new FetchTopic(version);
-				if (instance.Version >= 0 &&instance.Version <= 12) 
+				if (instance.Version >= 0 && instance.Version <= 12) 
 					instance.Topic = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 13) 
 					instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -28738,7 +28704,7 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 0 &&Version <= 12)
+				if (Version >= 0 && Version <= 12)
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 13)
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -29118,7 +29084,7 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 7 &&Version <= 12 ? 
+				(Version >= 7 && Version <= 12 ? 
 					_topic.GetSize(IsFlexibleVersion):
 					0) +
 				(Version >= 13 ? 
@@ -29134,7 +29100,7 @@ namespace Kafka.Protocol
 			internal static async ValueTask<ForgottenTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new ForgottenTopic(version);
-				if (instance.Version >= 7 &&instance.Version <= 12) 
+				if (instance.Version >= 7 && instance.Version <= 12) 
 					instance.Topic = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 13) 
 					instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -29160,7 +29126,7 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 7 &&Version <= 12)
+				if (Version >= 7 && Version <= 12)
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 13)
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -29487,7 +29453,7 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 0 &&Version <= 12 ? 
+				(Version >= 0 && Version <= 12 ? 
 					_topic.GetSize(IsFlexibleVersion):
 					0) +
 				(Version >= 13 ? 
@@ -29501,7 +29467,7 @@ namespace Kafka.Protocol
 			internal static async ValueTask<FetchableTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new FetchableTopicResponse(version);
-				if (instance.Version >= 0 &&instance.Version <= 12) 
+				if (instance.Version >= 0 && instance.Version <= 12) 
 					instance.Topic = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 13) 
 					instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -29526,7 +29492,7 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 0 &&Version <= 12)
+				if (Version >= 0 && Version <= 12)
 					await _topic.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 13)
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -29663,15 +29629,6 @@ namespace Kafka.Protocol
 					(Version >= 5 ? 
 						_logStartOffset.GetSize(IsFlexibleVersion):
 						0) +
-					(Version >= 12 ? 
-						_divergingEpoch.GetSize(IsFlexibleVersion):
-						0) +
-					(Version >= 12 ? 
-						_currentLeader.GetSize(IsFlexibleVersion):
-						0) +
-					(Version >= 12 ? 
-						_snapshotId.GetSize(IsFlexibleVersion):
-						0) +
 					(Version >= 4 ? 
 						_abortedTransactionsCollection.GetSize(IsFlexibleVersion):
 						0) +
@@ -29693,12 +29650,6 @@ namespace Kafka.Protocol
 						instance.LastStableOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					if (instance.Version >= 5) 
 						instance.LogStartOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (instance.Version >= 12) 
-						instance.DivergingEpoch = await EpochEndOffset.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
-					if (instance.Version >= 12) 
-						instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
-					if (instance.Version >= 12) 
-						instance.SnapshotId_ = await SnapshotId.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
 					if (instance.Version >= 4) 
 						instance.AbortedTransactionsCollection = await NullableArray<AbortedTransaction>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AbortedTransaction.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 					if (instance.Version >= 11) 
@@ -29766,12 +29717,6 @@ namespace Kafka.Protocol
 						await _lastStableOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					if (Version >= 5)
 						await _logStartOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (Version >= 12)
-						await _divergingEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (Version >= 12)
-						await _currentLeader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (Version >= 12)
-						await _snapshotId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					if (Version >= 4)
 						await _abortedTransactionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					if (Version >= 11)
@@ -30598,7 +30543,7 @@ namespace Kafka.Protocol
 		}
 
 		internal override int GetSize() =>
-			_clusterId.GetSize(IsFlexibleVersion) +
+		 +
 			_replicaId.GetSize(IsFlexibleVersion) +
 			_maxBytes.GetSize(IsFlexibleVersion) +
 			_topicsCollection.GetSize(IsFlexibleVersion) +
@@ -30609,7 +30554,6 @@ namespace Kafka.Protocol
 		internal static async ValueTask<FetchSnapshotRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FetchSnapshotRequest(version);
-			instance.ClusterId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.ReplicaId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.MaxBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.TopicsCollection = await Array<TopicSnapshot>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicSnapshot.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -30640,7 +30584,6 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _maxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -31433,7 +31376,6 @@ namespace Kafka.Protocol
 					_index.GetSize(IsFlexibleVersion) +
 					_errorCode.GetSize(IsFlexibleVersion) +
 					_snapshotId.GetSize(IsFlexibleVersion) +
-					_currentLeader.GetSize(IsFlexibleVersion) +
 					_size.GetSize(IsFlexibleVersion) +
 					_position.GetSize(IsFlexibleVersion) +
 					_unalignedRecords.GetSize(IsFlexibleVersion) +
@@ -31447,7 +31389,6 @@ namespace Kafka.Protocol
 					instance.Index = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					instance.SnapshotId_ = await SnapshotId.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
-					instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
 					instance.Size = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					instance.Position = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					instance.UnalignedRecords = await RecordBatch.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -31482,7 +31423,6 @@ namespace Kafka.Protocol
 					await _index.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _snapshotId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					await _currentLeader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _size.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _position.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _unalignedRecords.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -31907,7 +31847,7 @@ namespace Kafka.Protocol
 		}
 
 		internal override int GetSize() =>
-			(Version >= 0 &&Version <= 3 ? 
+			(Version >= 0 && Version <= 3 ? 
 				_key.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 1 ? 
@@ -31923,7 +31863,7 @@ namespace Kafka.Protocol
 		internal static async ValueTask<FindCoordinatorRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new FindCoordinatorRequest(version);
-			if (instance.Version >= 0 &&instance.Version <= 3) 
+			if (instance.Version >= 0 && instance.Version <= 3) 
 				instance.Key = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 1) 
 				instance.KeyType = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -31948,7 +31888,7 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version >= 0 &&Version <= 3)
+			if (Version >= 0 && Version <= 3)
 				await _key.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 1)
 				await _keyType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -31971,7 +31911,7 @@ namespace Kafka.Protocol
 			get => _key;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 3 == false)
+				if (Version >= 0 && Version <= 3 == false)
 					throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_key = value;
@@ -32076,19 +32016,19 @@ namespace Kafka.Protocol
 			(Version >= 1 ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 3 ? 
+			(Version >= 0 && Version <= 3 ? 
 				_errorCode.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 1 &&Version <= 3 ? 
+			(Version >= 1 && Version <= 3 ? 
 				_errorMessage.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 3 ? 
+			(Version >= 0 && Version <= 3 ? 
 				_nodeId.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 3 ? 
+			(Version >= 0 && Version <= 3 ? 
 				_host.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 3 ? 
+			(Version >= 0 && Version <= 3 ? 
 				_port.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 4 ? 
@@ -32103,15 +32043,15 @@ namespace Kafka.Protocol
 			var instance = new FindCoordinatorResponse(version);
 			if (instance.Version >= 1) 
 				instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 3) 
+			if (instance.Version >= 0 && instance.Version <= 3) 
 				instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 1 &&instance.Version <= 3) 
+			if (instance.Version >= 1 && instance.Version <= 3) 
 				instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 3) 
+			if (instance.Version >= 0 && instance.Version <= 3) 
 				instance.NodeId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 3) 
+			if (instance.Version >= 0 && instance.Version <= 3) 
 				instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 3) 
+			if (instance.Version >= 0 && instance.Version <= 3) 
 				instance.Port = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 4) 
 				instance.CoordinatorsCollection = await Array<Coordinator>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Coordinator.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -32136,15 +32076,15 @@ namespace Kafka.Protocol
 		{
 			if (Version >= 1)
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 3)
+			if (Version >= 0 && Version <= 3)
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 1 &&Version <= 3)
+			if (Version >= 1 && Version <= 3)
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 3)
+			if (Version >= 0 && Version <= 3)
 				await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 3)
+			if (Version >= 0 && Version <= 3)
 				await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 3)
+			if (Version >= 0 && Version <= 3)
 				await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 4)
 				await _coordinatorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -32189,7 +32129,7 @@ namespace Kafka.Protocol
 			get => _errorCode;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 3 == false)
+				if (Version >= 0 && Version <= 3 == false)
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_errorCode = value;
@@ -32216,7 +32156,7 @@ namespace Kafka.Protocol
 			get => _errorMessage;
 			private set 
 			{
-				if (Version >= 1 &&Version <= 3 == false &&
+				if (Version >= 1 && Version <= 3 == false &&
 					value == null) 
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 1-3");
 
@@ -32244,7 +32184,7 @@ namespace Kafka.Protocol
 			get => _nodeId;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 3 == false)
+				if (Version >= 0 && Version <= 3 == false)
 					throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_nodeId = value;
@@ -32271,7 +32211,7 @@ namespace Kafka.Protocol
 			get => _host;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 3 == false)
+				if (Version >= 0 && Version <= 3 == false)
 					throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_host = value;
@@ -32298,7 +32238,7 @@ namespace Kafka.Protocol
 			get => _port;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 3 == false)
+				if (Version >= 0 && Version <= 3 == false)
 					throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_port = value;
@@ -34808,7 +34748,7 @@ namespace Kafka.Protocol
 			(Version >= 5 ? 
 				_type.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 1 ? 
+			(Version >= 0 && Version <= 1 ? 
 				_ungroupedPartitionStatesCollection.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 2 ? 
@@ -34828,7 +34768,7 @@ namespace Kafka.Protocol
 				instance.BrokerEpoch = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 5) 
 				instance.Type = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 1) 
+			if (instance.Version >= 0 && instance.Version <= 1) 
 				instance.UngroupedPartitionStatesCollection = await Array<LeaderAndIsrPartitionState>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => LeaderAndIsrPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 2) 
 				instance.TopicStatesCollection = await Array<LeaderAndIsrTopicState>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => LeaderAndIsrTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -34858,7 +34798,7 @@ namespace Kafka.Protocol
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 5)
 				await _type.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 1)
+			if (Version >= 0 && Version <= 1)
 				await _ungroupedPartitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 2)
 				await _topicStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -34981,7 +34921,7 @@ namespace Kafka.Protocol
 			get => _ungroupedPartitionStatesCollection;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 1 == false)
+				if (Version >= 0 && Version <= 1 == false)
 					throw new UnsupportedVersionException($"UngroupedPartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
 
 				_ungroupedPartitionStatesCollection = value;
@@ -35369,7 +35309,7 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 0 &&Version <= 1 ? 
+				(Version >= 0 && Version <= 1 ? 
 					_topicName.GetSize(IsFlexibleVersion):
 					0) +
 				_partitionIndex.GetSize(IsFlexibleVersion) +
@@ -35395,7 +35335,7 @@ namespace Kafka.Protocol
 			internal static async ValueTask<LeaderAndIsrPartitionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrPartitionState(version);
-				if (instance.Version >= 0 &&instance.Version <= 1) 
+				if (instance.Version >= 0 && instance.Version <= 1) 
 					instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				instance.ControllerEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -35430,7 +35370,7 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 0 &&Version <= 1)
+				if (Version >= 0 && Version <= 1)
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -35749,7 +35689,7 @@ namespace Kafka.Protocol
 
 		internal override int GetSize() =>
 			_errorCode.GetSize(IsFlexibleVersion) +
-			(Version >= 0 &&Version <= 4 ? 
+			(Version >= 0 && Version <= 4 ? 
 				_partitionErrorsCollection.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 5 ? 
@@ -35763,7 +35703,7 @@ namespace Kafka.Protocol
 		{
 			var instance = new LeaderAndIsrResponse(version);
 			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 4) 
+			if (instance.Version >= 0 && instance.Version <= 4) 
 				instance.PartitionErrorsCollection = await Array<LeaderAndIsrPartitionError>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => LeaderAndIsrPartitionError.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 5) 
 				instance.TopicsCollection = await Map<Uuid, LeaderAndIsrTopicError>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => LeaderAndIsrTopicError.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.TopicId, cancellationToken).ConfigureAwait(false);
@@ -35787,7 +35727,7 @@ namespace Kafka.Protocol
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
 			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 4)
+			if (Version >= 0 && Version <= 4)
 				await _partitionErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 5)
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -35832,7 +35772,7 @@ namespace Kafka.Protocol
 			get => _partitionErrorsCollection;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 4 == false)
+				if (Version >= 0 && Version <= 4 == false)
 					throw new UnsupportedVersionException($"PartitionErrorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
 
 				_partitionErrorsCollection = value;
@@ -36024,7 +35964,7 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 0 &&Version <= 4 ? 
+				(Version >= 0 && Version <= 4 ? 
 					_topicName.GetSize(IsFlexibleVersion):
 					0) +
 				_partitionIndex.GetSize(IsFlexibleVersion) +
@@ -36036,7 +35976,7 @@ namespace Kafka.Protocol
 			internal static async ValueTask<LeaderAndIsrPartitionError> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new LeaderAndIsrPartitionError(version);
-				if (instance.Version >= 0 &&instance.Version <= 4) 
+				if (instance.Version >= 0 && instance.Version <= 4) 
 					instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -36060,7 +36000,7 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 0 &&Version <= 4)
+				if (Version >= 0 && Version <= 4)
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -36421,7 +36361,7 @@ namespace Kafka.Protocol
 
 		internal override int GetSize() =>
 			_groupId.GetSize(IsFlexibleVersion) +
-			(Version >= 0 &&Version <= 2 ? 
+			(Version >= 0 && Version <= 2 ? 
 				_memberId.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 3 ? 
@@ -36435,7 +36375,7 @@ namespace Kafka.Protocol
 		{
 			var instance = new LeaveGroupRequest(version);
 			instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 2) 
+			if (instance.Version >= 0 && instance.Version <= 2) 
 				instance.MemberId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 3) 
 				instance.MembersCollection = await Array<MemberIdentity>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => MemberIdentity.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -36459,7 +36399,7 @@ namespace Kafka.Protocol
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
 			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 2)
+			if (Version >= 0 && Version <= 2)
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 3)
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -36504,7 +36444,7 @@ namespace Kafka.Protocol
 			get => _memberId;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 2 == false)
+				if (Version >= 0 && Version <= 2 == false)
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-2");
 
 				_memberId = value;
@@ -39434,7 +39374,7 @@ namespace Kafka.Protocol
 			(Version >= 4 ? 
 				_allowAutoTopicCreation.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 8 &&Version <= 10 ? 
+			(Version >= 8 && Version <= 10 ? 
 				_includeClusterAuthorizedOperations.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 8 ? 
@@ -39450,7 +39390,7 @@ namespace Kafka.Protocol
 			instance.TopicsCollection = await NullableArray<MetadataRequestTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => MetadataRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 4) 
 				instance.AllowAutoTopicCreation = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 8 &&instance.Version <= 10) 
+			if (instance.Version >= 8 && instance.Version <= 10) 
 				instance.IncludeClusterAuthorizedOperations = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 8) 
 				instance.IncludeTopicAuthorizedOperations = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -39476,7 +39416,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 4)
 				await _allowAutoTopicCreation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 8 &&Version <= 10)
+			if (Version >= 8 && Version <= 10)
 				await _includeClusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 8)
 				await _includeTopicAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -39676,7 +39616,7 @@ namespace Kafka.Protocol
 			get => _includeClusterAuthorizedOperations;
 			private set 
 			{
-				if (Version >= 8 &&Version <= 10 == false)
+				if (Version >= 8 && Version <= 10 == false)
 					throw new UnsupportedVersionException($"IncludeClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8-10");
 
 				_includeClusterAuthorizedOperations = value;
@@ -39760,7 +39700,7 @@ namespace Kafka.Protocol
 				_controllerId.GetSize(IsFlexibleVersion):
 				0) +
 			_topicsCollection.GetSize(IsFlexibleVersion) +
-			(Version >= 8 &&Version <= 10 ? 
+			(Version >= 8 && Version <= 10 ? 
 				_clusterAuthorizedOperations.GetSize(IsFlexibleVersion):
 				0) +
 			(IsFlexibleVersion ? 
@@ -39778,7 +39718,7 @@ namespace Kafka.Protocol
 			if (instance.Version >= 1) 
 				instance.ControllerId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.TopicsCollection = await Map<NullableString, MetadataResponseTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => MetadataResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 8 &&instance.Version <= 10) 
+			if (instance.Version >= 8 && instance.Version <= 10) 
 				instance.ClusterAuthorizedOperations = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
@@ -39807,7 +39747,7 @@ namespace Kafka.Protocol
 			if (Version >= 1)
 				await _controllerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 8 &&Version <= 10)
+			if (Version >= 8 && Version <= 10)
 				await _clusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
@@ -40637,7 +40577,7 @@ namespace Kafka.Protocol
 			get => _clusterAuthorizedOperations;
 			private set 
 			{
-				if (Version >= 8 &&Version <= 10 == false)
+				if (Version >= 8 && Version <= 10 == false)
 					throw new UnsupportedVersionException($"ClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8-10");
 
 				_clusterAuthorizedOperations = value;
@@ -40691,7 +40631,7 @@ namespace Kafka.Protocol
 			(Version >= 7 ? 
 				_groupInstanceId.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 2 &&Version <= 4 ? 
+			(Version >= 2 && Version <= 4 ? 
 				_retentionTimeMs.GetSize(IsFlexibleVersion):
 				0) +
 			_topicsCollection.GetSize(IsFlexibleVersion) +
@@ -40709,7 +40649,7 @@ namespace Kafka.Protocol
 				instance.MemberId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 7) 
 				instance.GroupInstanceId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 2 &&instance.Version <= 4) 
+			if (instance.Version >= 2 && instance.Version <= 4) 
 				instance.RetentionTimeMs = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.TopicsCollection = await Array<OffsetCommitRequestTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => OffsetCommitRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 
@@ -40738,7 +40678,7 @@ namespace Kafka.Protocol
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 7)
 				await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 2 &&Version <= 4)
+			if (Version >= 2 && Version <= 4)
 				await _retentionTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
@@ -42288,10 +42228,10 @@ namespace Kafka.Protocol
 		}
 
 		internal override int GetSize() =>
-			(Version >= 0 &&Version <= 7 ? 
+			(Version >= 0 && Version <= 7 ? 
 				_groupId.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 7 ? 
+			(Version >= 0 && Version <= 7 ? 
 				_topicsCollection.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 8 ? 
@@ -42307,9 +42247,9 @@ namespace Kafka.Protocol
 		internal static async ValueTask<OffsetFetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 		{
 			var instance = new OffsetFetchRequest(version);
-			if (instance.Version >= 0 &&instance.Version <= 7) 
+			if (instance.Version >= 0 && instance.Version <= 7) 
 				instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 7) 
+			if (instance.Version >= 0 && instance.Version <= 7) 
 				instance.TopicsCollection = await NullableArray<OffsetFetchRequestTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => OffsetFetchRequestTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 8) 
 				instance.GroupsCollection = await Array<OffsetFetchRequestGroup>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => OffsetFetchRequestGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -42334,9 +42274,9 @@ namespace Kafka.Protocol
 
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
-			if (Version >= 0 &&Version <= 7)
+			if (Version >= 0 && Version <= 7)
 				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 7)
+			if (Version >= 0 && Version <= 7)
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 8)
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -42359,7 +42299,7 @@ namespace Kafka.Protocol
 			get => _groupId;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 7 == false)
+				if (Version >= 0 && Version <= 7 == false)
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 				_groupId = value;
@@ -42386,10 +42326,10 @@ namespace Kafka.Protocol
 			get => _topicsCollection;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 7 == false)
+				if (Version >= 0 && Version <= 7 == false)
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
-				if (Version >= 2 &&Version <= 7 == false &&
+				if (Version >= 2 && Version <= 7 == false &&
 					value == null) 
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 2-7");
 
@@ -42432,10 +42372,10 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 0 &&Version <= 7 ? 
+				(Version >= 0 && Version <= 7 ? 
 					_name.GetSize(IsFlexibleVersion):
 					0) +
-				(Version >= 0 &&Version <= 7 ? 
+				(Version >= 0 && Version <= 7 ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion):
 					0) +
 				(IsFlexibleVersion ? 
@@ -42445,9 +42385,9 @@ namespace Kafka.Protocol
 			internal static async ValueTask<OffsetFetchRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetFetchRequestTopic(version);
-				if (instance.Version >= 0 &&instance.Version <= 7) 
+				if (instance.Version >= 0 && instance.Version <= 7) 
 					instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				if (instance.Version >= 0 &&instance.Version <= 7) 
+				if (instance.Version >= 0 && instance.Version <= 7) 
 					instance.PartitionIndexesCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
 
 				if (instance.IsFlexibleVersion)
@@ -42469,9 +42409,9 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 0 &&Version <= 7)
+				if (Version >= 0 && Version <= 7)
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				if (Version >= 0 &&Version <= 7)
+				if (Version >= 0 && Version <= 7)
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
@@ -42490,7 +42430,7 @@ namespace Kafka.Protocol
 				get => _name;
 				private set 
 				{
-					if (Version >= 0 &&Version <= 7 == false)
+					if (Version >= 0 && Version <= 7 == false)
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 					_name = value;
@@ -42517,7 +42457,7 @@ namespace Kafka.Protocol
 				get => _partitionIndexesCollection;
 				private set 
 				{
-					if (Version >= 0 &&Version <= 7 == false)
+					if (Version >= 0 && Version <= 7 == false)
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 					_partitionIndexesCollection = value;
@@ -42883,10 +42823,10 @@ namespace Kafka.Protocol
 			(Version >= 3 ? 
 				_throttleTimeMs.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 7 ? 
+			(Version >= 0 && Version <= 7 ? 
 				_topicsCollection.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 2 &&Version <= 7 ? 
+			(Version >= 2 && Version <= 7 ? 
 				_errorCode.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 8 ? 
@@ -42901,9 +42841,9 @@ namespace Kafka.Protocol
 			var instance = new OffsetFetchResponse(version);
 			if (instance.Version >= 3) 
 				instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 7) 
+			if (instance.Version >= 0 && instance.Version <= 7) 
 				instance.TopicsCollection = await Array<OffsetFetchResponseTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => OffsetFetchResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 2 &&instance.Version <= 7) 
+			if (instance.Version >= 2 && instance.Version <= 7) 
 				instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 8) 
 				instance.GroupsCollection = await Array<OffsetFetchResponseGroup>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => OffsetFetchResponseGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -42928,9 +42868,9 @@ namespace Kafka.Protocol
 		{
 			if (Version >= 3)
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 7)
+			if (Version >= 0 && Version <= 7)
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 2 &&Version <= 7)
+			if (Version >= 2 && Version <= 7)
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 8)
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -42975,7 +42915,7 @@ namespace Kafka.Protocol
 			get => _topicsCollection;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 7 == false)
+				if (Version >= 0 && Version <= 7 == false)
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 				_topicsCollection = value;
@@ -43017,10 +42957,10 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 0 &&Version <= 7 ? 
+				(Version >= 0 && Version <= 7 ? 
 					_name.GetSize(IsFlexibleVersion):
 					0) +
-				(Version >= 0 &&Version <= 7 ? 
+				(Version >= 0 && Version <= 7 ? 
 					_partitionsCollection.GetSize(IsFlexibleVersion):
 					0) +
 				(IsFlexibleVersion ? 
@@ -43030,9 +42970,9 @@ namespace Kafka.Protocol
 			internal static async ValueTask<OffsetFetchResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new OffsetFetchResponseTopic(version);
-				if (instance.Version >= 0 &&instance.Version <= 7) 
+				if (instance.Version >= 0 && instance.Version <= 7) 
 					instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				if (instance.Version >= 0 &&instance.Version <= 7) 
+				if (instance.Version >= 0 && instance.Version <= 7) 
 					instance.PartitionsCollection = await Array<OffsetFetchResponsePartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => OffsetFetchResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 
 				if (instance.IsFlexibleVersion)
@@ -43054,9 +42994,9 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 0 &&Version <= 7)
+				if (Version >= 0 && Version <= 7)
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				if (Version >= 0 &&Version <= 7)
+				if (Version >= 0 && Version <= 7)
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
@@ -43075,7 +43015,7 @@ namespace Kafka.Protocol
 				get => _name;
 				private set 
 				{
-					if (Version >= 0 &&Version <= 7 == false)
+					if (Version >= 0 && Version <= 7 == false)
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 					_name = value;
@@ -43102,7 +43042,7 @@ namespace Kafka.Protocol
 				get => _partitionsCollection;
 				private set 
 				{
-					if (Version >= 0 &&Version <= 7 == false)
+					if (Version >= 0 && Version <= 7 == false)
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 					_partitionsCollection = value;
@@ -43144,19 +43084,19 @@ namespace Kafka.Protocol
 
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 				internal int GetSize(bool _) =>
-					(Version >= 0 &&Version <= 7 ? 
+					(Version >= 0 && Version <= 7 ? 
 						_partitionIndex.GetSize(IsFlexibleVersion):
 						0) +
-					(Version >= 0 &&Version <= 7 ? 
+					(Version >= 0 && Version <= 7 ? 
 						_committedOffset.GetSize(IsFlexibleVersion):
 						0) +
-					(Version >= 5 &&Version <= 7 ? 
+					(Version >= 5 && Version <= 7 ? 
 						_committedLeaderEpoch.GetSize(IsFlexibleVersion):
 						0) +
-					(Version >= 0 &&Version <= 7 ? 
+					(Version >= 0 && Version <= 7 ? 
 						_metadata.GetSize(IsFlexibleVersion):
 						0) +
-					(Version >= 0 &&Version <= 7 ? 
+					(Version >= 0 && Version <= 7 ? 
 						_errorCode.GetSize(IsFlexibleVersion):
 						0) +
 					(IsFlexibleVersion ? 
@@ -43166,15 +43106,15 @@ namespace Kafka.Protocol
 				internal static async ValueTask<OffsetFetchResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 				{
 					var instance = new OffsetFetchResponsePartition(version);
-					if (instance.Version >= 0 &&instance.Version <= 7) 
+					if (instance.Version >= 0 && instance.Version <= 7) 
 						instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (instance.Version >= 0 &&instance.Version <= 7) 
+					if (instance.Version >= 0 && instance.Version <= 7) 
 						instance.CommittedOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (instance.Version >= 5 &&instance.Version <= 7) 
+					if (instance.Version >= 5 && instance.Version <= 7) 
 						instance.CommittedLeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (instance.Version >= 0 &&instance.Version <= 7) 
+					if (instance.Version >= 0 && instance.Version <= 7) 
 						instance.Metadata = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (instance.Version >= 0 &&instance.Version <= 7) 
+					if (instance.Version >= 0 && instance.Version <= 7) 
 						instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (instance.IsFlexibleVersion)
@@ -43196,15 +43136,15 @@ namespace Kafka.Protocol
 				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 				{
-					if (Version >= 0 &&Version <= 7)
+					if (Version >= 0 && Version <= 7)
 						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (Version >= 0 &&Version <= 7)
+					if (Version >= 0 && Version <= 7)
 						await _committedOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (Version >= 5 &&Version <= 7)
+					if (Version >= 5 && Version <= 7)
 						await _committedLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (Version >= 0 &&Version <= 7)
+					if (Version >= 0 && Version <= 7)
 						await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-					if (Version >= 0 &&Version <= 7)
+					if (Version >= 0 && Version <= 7)
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
@@ -43223,7 +43163,7 @@ namespace Kafka.Protocol
 					get => _partitionIndex;
 					private set 
 					{
-						if (Version >= 0 &&Version <= 7 == false)
+						if (Version >= 0 && Version <= 7 == false)
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 						_partitionIndex = value;
@@ -43250,7 +43190,7 @@ namespace Kafka.Protocol
 					get => _committedOffset;
 					private set 
 					{
-						if (Version >= 0 &&Version <= 7 == false)
+						if (Version >= 0 && Version <= 7 == false)
 							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 						_committedOffset = value;
@@ -43303,10 +43243,10 @@ namespace Kafka.Protocol
 					get => _metadata;
 					private set 
 					{
-						if (Version >= 0 &&Version <= 7 == false)
+						if (Version >= 0 && Version <= 7 == false)
 							throw new UnsupportedVersionException($"Metadata does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
-						if (Version >= 0 &&Version <= 7 == false &&
+						if (Version >= 0 && Version <= 7 == false &&
 							value == null) 
 							throw new UnsupportedVersionException($"Metadata does not support null for version {Version}. Supported versions for null value: 0-7");
 
@@ -43334,7 +43274,7 @@ namespace Kafka.Protocol
 					get => _errorCode;
 					private set 
 					{
-						if (Version >= 0 &&Version <= 7 == false)
+						if (Version >= 0 && Version <= 7 == false)
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 						_errorCode = value;
@@ -46997,11 +46937,11 @@ namespace Kafka.Protocol
 			(Version >= 1 ? 
 				_brokerEpoch.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 2 ? 
+			(Version >= 0 && Version <= 2 ? 
 				_deletePartitions.GetSize(IsFlexibleVersion):
 				0) +
 			_ungroupedPartitionsCollection.GetSize(IsFlexibleVersion) +
-			(Version >= 1 &&Version <= 2 ? 
+			(Version >= 1 && Version <= 2 ? 
 				_topicsCollection.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 3 ? 
@@ -47018,10 +46958,10 @@ namespace Kafka.Protocol
 			instance.ControllerEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 1) 
 				instance.BrokerEpoch = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 2) 
+			if (instance.Version >= 0 && instance.Version <= 2) 
 				instance.DeletePartitions = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.UngroupedPartitionsCollection = await Array<StopReplicaPartitionV0>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => StopReplicaPartitionV0.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 1 &&instance.Version <= 2) 
+			if (instance.Version >= 1 && instance.Version <= 2) 
 				instance.TopicsCollection = await Array<StopReplicaTopicV1>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => StopReplicaTopicV1.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 3) 
 				instance.TopicStatesCollection = await Array<StopReplicaTopicState>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => StopReplicaTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -47048,10 +46988,10 @@ namespace Kafka.Protocol
 			await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 1)
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 2)
+			if (Version >= 0 && Version <= 2)
 				await _deletePartitions.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _ungroupedPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 1 &&Version <= 2)
+			if (Version >= 1 && Version <= 2)
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 3)
 				await _topicStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -47146,7 +47086,7 @@ namespace Kafka.Protocol
 			get => _deletePartitions;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 2 == false)
+				if (Version >= 0 && Version <= 2 == false)
 					throw new UnsupportedVersionException($"DeletePartitions does not support version {Version} and has been defined as not ignorable. Supported versions: 0-2");
 
 				_deletePartitions = value;
@@ -47311,7 +47251,7 @@ namespace Kafka.Protocol
 			get => _topicsCollection;
 			private set 
 			{
-				if (Version >= 1 &&Version <= 2 == false)
+				if (Version >= 1 && Version <= 2 == false)
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
 
 				_topicsCollection = value;
@@ -47353,10 +47293,10 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 1 &&Version <= 2 ? 
+				(Version >= 1 && Version <= 2 ? 
 					_name.GetSize(IsFlexibleVersion):
 					0) +
-				(Version >= 1 &&Version <= 2 ? 
+				(Version >= 1 && Version <= 2 ? 
 					_partitionIndexesCollection.GetSize(IsFlexibleVersion):
 					0) +
 				(IsFlexibleVersion ? 
@@ -47366,9 +47306,9 @@ namespace Kafka.Protocol
 			internal static async ValueTask<StopReplicaTopicV1> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new StopReplicaTopicV1(version);
-				if (instance.Version >= 1 &&instance.Version <= 2) 
+				if (instance.Version >= 1 && instance.Version <= 2) 
 					instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				if (instance.Version >= 1 &&instance.Version <= 2) 
+				if (instance.Version >= 1 && instance.Version <= 2) 
 					instance.PartitionIndexesCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
 
 				if (instance.IsFlexibleVersion)
@@ -47390,9 +47330,9 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 1 &&Version <= 2)
+				if (Version >= 1 && Version <= 2)
 					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				if (Version >= 1 &&Version <= 2)
+				if (Version >= 1 && Version <= 2)
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
@@ -47411,7 +47351,7 @@ namespace Kafka.Protocol
 				get => _name;
 				private set 
 				{
-					if (Version >= 1 &&Version <= 2 == false)
+					if (Version >= 1 && Version <= 2 == false)
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
 
 					_name = value;
@@ -47438,7 +47378,7 @@ namespace Kafka.Protocol
 				get => _partitionIndexesCollection;
 				private set 
 				{
-					if (Version >= 1 &&Version <= 2 == false)
+					if (Version >= 1 && Version <= 2 == false)
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
 
 					_partitionIndexesCollection = value;
@@ -50413,7 +50353,7 @@ namespace Kafka.Protocol
 			(Version >= 5 ? 
 				_brokerEpoch.GetSize(IsFlexibleVersion):
 				0) +
-			(Version >= 0 &&Version <= 4 ? 
+			(Version >= 0 && Version <= 4 ? 
 				_ungroupedPartitionStatesCollection.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 5 ? 
@@ -50431,7 +50371,7 @@ namespace Kafka.Protocol
 			instance.ControllerEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 5) 
 				instance.BrokerEpoch = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (instance.Version >= 0 &&instance.Version <= 4) 
+			if (instance.Version >= 0 && instance.Version <= 4) 
 				instance.UngroupedPartitionStatesCollection = await Array<UpdateMetadataPartitionState>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => UpdateMetadataPartitionState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 5) 
 				instance.TopicStatesCollection = await Array<UpdateMetadataTopicState>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => UpdateMetadataTopicState.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -50459,7 +50399,7 @@ namespace Kafka.Protocol
 			await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 5)
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			if (Version >= 0 &&Version <= 4)
+			if (Version >= 0 && Version <= 4)
 				await _ungroupedPartitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 5)
 				await _topicStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -50555,7 +50495,7 @@ namespace Kafka.Protocol
 			get => _ungroupedPartitionStatesCollection;
 			private set 
 			{
-				if (Version >= 0 &&Version <= 4 == false)
+				if (Version >= 0 && Version <= 4 == false)
 					throw new UnsupportedVersionException($"UngroupedPartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
 
 				_ungroupedPartitionStatesCollection = value;
@@ -51196,7 +51136,7 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				(Version >= 0 &&Version <= 4 ? 
+				(Version >= 0 && Version <= 4 ? 
 					_topicName.GetSize(IsFlexibleVersion):
 					0) +
 				_partitionIndex.GetSize(IsFlexibleVersion) +
@@ -51216,7 +51156,7 @@ namespace Kafka.Protocol
 			internal static async ValueTask<UpdateMetadataPartitionState> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new UpdateMetadataPartitionState(version);
-				if (instance.Version >= 0 &&instance.Version <= 4) 
+				if (instance.Version >= 0 && instance.Version <= 4) 
 					instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				instance.ControllerEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -51247,7 +51187,7 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				if (Version >= 0 &&Version <= 4)
+				if (Version >= 0 && Version <= 4)
 					await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _controllerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
