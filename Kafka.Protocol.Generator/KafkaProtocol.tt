@@ -27,6 +27,8 @@
 	var messageDefinitions = JsonFileLoader.LoadFrom<Message>(messageDefinitionPath).AddReferencesToFields();
 
 	void Tab(Action action) { this.Tab(action); }
+	void Indent() { this.Indent(); }
+	void Dedent() { this.Dedent(); }
     void Block(Action action) { this.Block(action); }
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
@@ -161,7 +163,8 @@ namespace Kafka.Protocol<# Block(() =>
 
             #>public <#= exceptionName #>Exception(string message) : base(message) { }<# _(2);
 
-			#>public int Code => <#= errorCode.Code #>;<# 
+			#>public const int ErrorCode = <#= errorCode.Code #>;<# _();
+			#>public int Code => ErrorCode;<# 
         });
 
 		if (index + 1 != count) _();
@@ -216,13 +219,13 @@ namespace Kafka.Protocol<# Block(() =>
 				#>	throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<# _(2);
 
 				 #>Version = version;<# _();
-				 #>IsFlexibleVersion = version.InRange(<#= flexibleVersionRange.From #>, <#= flexibleVersionRange.To #>);<#
+				 #>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
 			}); _(2);
 
 			#>public static readonly Int16 ApiKey = Int16.From(<#= messageDefinition.ApiKey #>);<# _(2);
 
 			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From #>);<# _();
-			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To #>);<# _(2);
+			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To ?? -10 #>);<# _(2);
 
 			#>public override Int16 Version { get; }<# _(1);
 			#>internal bool IsFlexibleVersion { get; }<# _(2);
@@ -337,14 +340,18 @@ void PrintCreateTagSection(IEnumerable<Kafka.Protocol.Generator.Helpers.Definiti
 				var versionRange = taggedField.TaggedVersions == null ? 
 					VersionRange.Parse(taggedField.Versions) : 
 					VersionRange.Parse(taggedField.TaggedVersions);
-				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# _(); Tab(() => 
+				if (!versionRange.Full)
 				{
-					#>tags.Add(new Tags.TaggedField<# Block(() => 
-					{
-						#>Tag = <#= taggedField.Tag #>,<# _();
-						#>Field = <#= propertyName #><# 
-					});#>);<# 
-				});						
+					#>if (<#= versionRange.GetExpression("Version") #>) <# _(); 
+					Indent();
+				}				
+				#>tags.Add(new Tags.TaggedField<# Block(() => 
+				{
+					#>Tag = <#= taggedField.Tag #>,<# _();
+					#>Field = <#= propertyName #><# 
+				});#>);<# 
+				if (!versionRange.Full)
+					Dedent();
 			}); _();
 		}
 		#>return new Tags.TagSection(<#= tagsExpression #>);<#		
@@ -357,11 +364,11 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 	if (messageField.TaggedVersions != null)
 	{
 		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
-		if (taggedVersionRange.From == versionRange.From)
+		versionRange = versionRange.Intersect(taggedVersionRange);
+		if (versionRange.None)
 		{
 			return;
 		}
-		versionRange = new VersionRange(versionRange.From, taggedVersionRange.From - 1);
 	}
 	var propertyName = messageField.GetPropertyName();
 	
@@ -369,9 +376,17 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 	{
 		#> +<# _();
 	}
-	#>	(Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) ? <# _();
-	#>		<#= propertyName #>.GetSize(IsFlexibleVersion) :<# _();
-	#>		0)<#
+	if (!versionRange.Full)
+	{
+		#>	(<#= versionRange.GetExpression("Version") #> ? <# _();
+		#>	<#
+	}
+	#>	<#= propertyName #>.GetSize(IsFlexibleVersion)<#
+	if (!versionRange.Full)
+	{
+		#>:<# _();
+		#>		0)<#
+	}
 }
 
 void PrintSizeOfTags()
@@ -387,11 +402,7 @@ void PrintReadField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field 
 	if (messageField.TaggedVersions != null)
 	{
 		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
-		if (taggedVersionRange.From == versionRange.From)
-		{
-			return;
-		}
-		versionRange = new VersionRange(versionRange.From, taggedVersionRange.From - 1);
+		versionRange = versionRange.Intersect(taggedVersionRange);
 	}
 
 	PrintRead(messageField, versionRange); _();
@@ -406,61 +417,74 @@ void PrintReadTag(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 		VersionRange.Parse(messageField.Versions) : 
 		VersionRange.Parse(messageField.TaggedVersions);
 	
-	PrintRead(messageField, versionRange); _();
-	#>else<# _();
-	#>	throw new InvalidOperationException($"Field <#= fieldName #> is not supported for version {instance.Version}");<#
+	if (versionRange.None)
+	{
+		return;
+	}
+	PrintRead(messageField, versionRange); 
+	if (!versionRange.Full)
+	{
+		_();
+		#>else<# _();
+		#>	throw new InvalidOperationException($"Field <#= fieldName #> is not supported for version {instance.Version}");<#
+	}
 }
 
 void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField, VersionRange versionRange)
 {
+	if (versionRange.None)
+		return;
 	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
 	var fieldName = messageField.GetFieldName(parentFieldTypeName);
-	#>if (instance.Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>)) <# _(); Tab(() => 
+	if (!versionRange.Full)
 	{
-		var fieldTypeName = messageField.GetTypeName();
-		var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
-		var nullable = messageField.IsNullable() ? "Nullable" : "";
-		var nullableSign = messageField.IsNullable() ? "?" : "";
+		#>if (<#= versionRange.GetExpression("instance.Version") #>) <# _(); 
+		#>	<#
+	}
 
-		#>instance.<#= fieldName #> = <# 
-		if (messageField.Fields == null)
+	var fieldTypeName = messageField.GetTypeName();
+	var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
+	var nullable = messageField.IsNullable() ? "Nullable" : "";
+	var nullableSign = messageField.IsNullable() ? "?" : "";
+
+	#>instance.<#= fieldName #> = <# 
+	if (messageField.Fields == null)
+	{
+		if (messageField.IsArray())
 		{
-			if (messageField.IsArray())
+			if (IsPrimitiveType(messageField))
 			{
-				if (IsPrimitiveType(messageField))
-				{
-					#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
-				} 
-				else 
-				{
-					#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
-				}
+				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 			} 
 			else 
 			{
-				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 
+				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 			}
-		}
+		} 
 		else 
 		{
-			if (messageField.IsArray())
+			#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 
+		}
+	}
+	else 
+	{
+		if (messageField.IsArray())
+		{
+			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
+			if (mapKeyField == null)
 			{
-				var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
-				if (mapKeyField == null)
-				{
-					#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 
-				}
-				else 
-				{
-					#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.<#= mapKeyField.GetName() #>, cancellationToken).ConfigureAwait(false);<# 
-				}
-			} 
+				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 
+			}
 			else 
 			{
-				#>await <#= fieldTypeName #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);<# 
+				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.<#= mapKeyField.GetName() #>, cancellationToken).ConfigureAwait(false);<# 
 			}
+		} 
+		else 
+		{
+			#>await <#= fieldTypeName #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);<# 
 		}
-	});
+	}
 }
 
 void PrintReadTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field> taggedFields, string parentType)
@@ -512,18 +536,20 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	if (messageField.TaggedVersions != null)
 	{
 		var taggedVersionRange = VersionRange.Parse(messageField.TaggedVersions);
-		if (taggedVersionRange.From == versionRange.From)
+		versionRange = versionRange.Intersect(taggedVersionRange);
+		if (versionRange.None)
 		{
 			return;
 		}
-		versionRange = new VersionRange(versionRange.From, taggedVersionRange.From - 1);
 	}
 
 	var propertyName = messageField.GetPropertyName();
-	#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>))<# _(); Tab(() => 
+	if (!versionRange.Full)
 	{
-		#>await <#= propertyName #>.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 	
-	});	_();
+		#>if (<#= versionRange.GetExpression("Version") #>)<# _(); 
+		#>	<#
+	}
+	#>await <#= propertyName #>.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# _();		
 }
 
 void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field, string className)
@@ -568,23 +594,25 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>get => <#= propertyName #>;<# _();
 		#>private set <# Block(() => 
 		{
-			if (field.Ignorable == false)
+			if (!field.Ignorable)
 			{
 				var versionRange = VersionRange.Parse(field.Versions);
-				#>if (Version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# _(); Tab(() => 
+				if (!versionRange.Full)
 				{
-					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<#
-				}); _(2);
+					#>if (<#= versionRange.GetExpression("Version") #> == false)<# _(); 
+					#>	throw new UnsupportedVersionException($"<#= fieldName #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<# _(2);
+				}
 			}
 
 			if (field.IsNullable())
 			{
 				var nullableVersionRange = VersionRange.Parse(field.NullableVersions);
-				#>if (Version.InRange(<#= nullableVersionRange.From #>, <#= nullableVersionRange.To #>) == false &&<# _();
-				#>	value == null) <# _(); Tab(() => 
-				{					
-					#>throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<#
-				}); _(2);
+				if (!nullableVersionRange.Full)
+				{
+					#>if (<#= nullableVersionRange.GetExpression("Version") #> == false &&<# _();
+					#>	value == null) <# _();
+					#>	throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<# _(2);
+				}		
 			} 
 			
 			#><#= propertyName #> = value;<# 
@@ -644,7 +672,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>internal <#= fieldTypeNameWithoutArrayCharacters #>(Int16 version)<# Block(() => 
 		{
 			#>Version = version;<# _();
-			#>IsFlexibleVersion = version.InRange(<#= flexibleVersionRange.From #>, <#= flexibleVersionRange.To #>);<#
+			#>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
 		}); _(2);
 
 		#>internal Int16 Version { get; }<# _();
@@ -712,13 +740,15 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 	{
 		#>internal <#= commonStruct.Name #>(Int16 version)<# Block(() => 
 		{
-			#>if (version.InRange(<#= versionRange.From #>, <#= versionRange.To #>) == false) <# Block(() => 
+			if (!versionRange.Full)
 			{
-				#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<#
-			}); _(2);
+				#>if (versionRange.GetExpression("version") == false)<# _(); 
+				#>	<#
+			}
+			#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<# _(2);
 
 			#>Version = version;<# _();
-			#>IsFlexibleVersion = version.InRange(<#= flexibleVersionRange.From #>, <#= flexibleVersionRange.To #>);<#
+			#>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
 		}); _(2);
 
 		#>internal Int16 Version { get; }<# _();

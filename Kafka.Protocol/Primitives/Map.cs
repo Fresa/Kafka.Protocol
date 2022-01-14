@@ -41,5 +41,7 @@ namespace Kafka.Protocol
 
         IEnumerator IEnumerable.GetEnumerator() => 
             GetEnumerator();
+
+        public TValue this[TKey key] => Value[key];
     }
 }

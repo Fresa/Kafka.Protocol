@@ -5,13 +5,58 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 {
     public class VersionRange
     {
-        public int From { get; }
-        public int To { get; }
+        public VersionRange()
+        {
+        }
 
-        public VersionRange(int from, int to)
+        public VersionRange(int from, int? to = null)
         {
             From = from;
             To = to;
+        }
+
+        public int? From { get; }
+        public int? To { get; }
+        public bool None => 
+            !From.HasValue && !To.HasValue;
+        public bool Full => 
+            From == 0 && To is null or int.MaxValue;
+
+        public string GetExpression(string variable) 
+        {
+            if (None)
+            {
+                return "false";
+            }
+
+            if (Full)
+            {
+                return "true";
+            }
+
+            return To switch
+            {
+                null => $"{variable} >= {From}",
+                _ => $"{variable} >= {From} &&" + $"{variable} <= {To}"
+            };
+        }
+
+        public VersionRange Intersect(VersionRange versionRange)
+        {
+            if (Full || versionRange.None)
+            {
+                return versionRange;
+            }
+
+            if (None || versionRange.Full)
+            {
+                return this;
+            }
+
+            return new VersionRange(Math.Max(From ?? 0, versionRange.From ?? 0),
+                To is null && versionRange.To is null ? 
+                    null : 
+                    Math.Min((int)To!, (int)versionRange.To!));
         }
 
         public static VersionRange Parse(string versionRangeExpression)
@@ -27,15 +72,12 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
             if (versionRangeExpression.Equals("none"))
             {
-                return new VersionRange(0, -1);
+                return new VersionRange();
             }
-
+            
             var versions = versionRangeExpression.Split(
                 new[] {'-', '+'},
                 StringSplitOptions.RemoveEmptyEntries);
-
-            var isRange = versionRangeExpression.Contains('-') || 
-                          versionRangeExpression.Contains('+');
 
             if (versions.Length > 2)
             {
@@ -51,13 +93,12 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                     nameof(versionRangeExpression));
             }
 
-            var to = isRange ? int.MaxValue : from;
             if (versions.Length == 1)
             {
-                return new VersionRange(from, to);
+                return new VersionRange(from);
             }
 
-            if (int.TryParse(versions.Last(), out to) == false)
+            if (int.TryParse(versions.Last(), out var to) == false)
             {
                 throw new ArgumentException(
                     $"{versions.Last()} is not a number. {expectedFormatMessage}",
