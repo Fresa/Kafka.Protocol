@@ -228,6 +228,42 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public override Int16 Version { get; }<# _(1);
 			#>internal bool IsFlexibleVersion { get; }<# _(2);
 
+			// https://github.com/apache/kafka/blob/99b9b3e84f4e98c3f07714e1de6a139a004cbc5b/generator/src/main/java/org/apache/kafka/message/ApiMessageTypeGenerator.java#L324
+			#>internal Int16 HeaderVersion <# Block(() => 
+			{
+				#>get<# Block(() => 
+				{
+					if (messageDefinition.IsRequest())
+					{
+						switch (messageDefinition.ApiKey)
+						{
+							// Version 0 of ControlledShutdownRequest has a non-standard request header
+							// which does not include clientId.  Version 1 of ControlledShutdownRequest
+							// and later use the standard request header.								
+							case 7:
+								#>if (Version == 0)<# _();
+								#>	return 0;<# _();
+								goto default;
+							default:
+								#>return (short)(IsFlexibleVersion ? 2 : 1);<#
+								return;
+						}
+					}
+
+					switch (messageDefinition.ApiKey)
+					{
+						// ApiVersionsResponse always includes a v0 header
+						// See KIP-511 for details
+						case 18:
+							#>return 0;<# 
+							break;
+						default:
+							#>return (short)(IsFlexibleVersion ? 1 : 0);<#
+							return;
+					}
+				});
+			}); _(2);
+
 			PrintCreateTagSection(messageDefinition.GetTaggedFields()); _(2);
 
 			#>internal override int GetSize() =><# _();

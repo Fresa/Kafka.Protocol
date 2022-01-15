@@ -2955,6 +2955,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -3123,6 +3131,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -3233,6 +3249,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -3513,6 +3537,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -3849,6 +3881,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -3964,6 +4004,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -4129,6 +4177,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -4607,6 +4663,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -4968,6 +5032,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -5334,6 +5406,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -5610,6 +5690,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -6027,6 +6115,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -6494,6 +6590,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -6835,6 +6939,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -7252,6 +7364,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -7562,6 +7682,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -7897,6 +8025,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -8317,6 +8453,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -8567,6 +8711,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -8688,6 +8840,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return 0;
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -9424,6 +9584,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -9784,6 +9952,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -10168,6 +10344,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -10365,6 +10549,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -10560,6 +10752,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -11088,6 +11288,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -11227,6 +11435,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -11447,6 +11663,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -11711,6 +11935,16 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				if (Version == 0)
+					return 0;
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -11830,6 +12064,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -12053,6 +12295,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -12397,6 +12647,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -12619,6 +12877,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -12845,6 +13111,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -13145,6 +13419,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -13511,6 +13793,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -13762,6 +14052,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -14331,6 +14629,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -14997,6 +15303,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -15137,6 +15451,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -15480,6 +15802,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -16041,6 +16371,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -16127,6 +16465,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -16350,6 +16696,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -16688,6 +17042,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -17051,6 +17413,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -17334,6 +17704,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -17634,6 +18012,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -17891,6 +18277,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -18398,6 +18792,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -18650,6 +19052,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -19152,6 +19562,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -19238,6 +19656,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -19659,6 +20085,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -19956,6 +20390,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -20742,6 +21184,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -20940,6 +21390,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -21465,6 +21923,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -21585,6 +22051,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -22187,6 +22661,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -22385,6 +22867,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -22912,6 +23402,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -23108,6 +23606,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -23712,6 +24218,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -23991,6 +24505,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -24555,6 +25077,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -24641,6 +25171,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -25119,6 +25657,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -25290,6 +25836,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -25734,6 +26288,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -25995,6 +26557,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -26392,6 +26962,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -26780,6 +27358,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -27163,6 +27749,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -27331,6 +27925,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -27441,6 +28043,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -27583,6 +28193,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -27695,6 +28313,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -27809,6 +28435,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -27947,6 +28581,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -28907,6 +29549,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -30167,6 +30817,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			var tags = new List<Tags.TaggedField>();
@@ -30739,6 +31397,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -31465,6 +32131,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -31628,6 +32302,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -32185,6 +32867,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -32366,6 +33056,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -32480,6 +33178,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -32873,6 +33579,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -33150,6 +33864,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -33336,6 +34058,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -33502,6 +34232,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -33882,6 +34620,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -34325,6 +35071,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -35266,6 +36020,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -35682,6 +36444,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -35927,6 +36697,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -36214,6 +36992,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -36528,6 +37314,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -36621,6 +37415,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -36906,6 +37708,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -37340,6 +38150,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -37813,6 +38631,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -38042,6 +38868,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -38486,6 +39320,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -38599,6 +39441,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -38895,6 +39745,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -39210,6 +40068,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -40135,6 +41001,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -40706,6 +41580,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -41045,6 +41927,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -41355,6 +42245,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -41717,6 +42615,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -42301,6 +43207,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -43367,6 +44281,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -43743,6 +44665,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -44144,6 +45074,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -44549,6 +45487,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -45184,6 +46130,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -45297,6 +46251,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -45435,6 +46397,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -45612,6 +46582,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -45699,6 +46677,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -45785,6 +46771,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -45957,6 +46951,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -46043,6 +47045,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -46155,6 +47165,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -46241,6 +47259,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -46355,6 +47381,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -47158,6 +48192,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -47407,6 +48449,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -47802,6 +48852,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -48017,6 +49075,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -48609,6 +49675,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -48944,6 +50018,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -49030,6 +50112,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -49168,6 +50258,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -49423,6 +50521,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -49727,6 +50833,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -50821,6 +51935,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -50904,6 +52026,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
@@ -51320,6 +52450,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -51730,6 +52868,14 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
 		private Tags.TagSection CreateTagSection()
 		{
 			return new Tags.TagSection();
@@ -52121,6 +53267,14 @@ namespace Kafka.Protocol
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
+
+		internal Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
 
 		private Tags.TagSection CreateTagSection()
 		{
