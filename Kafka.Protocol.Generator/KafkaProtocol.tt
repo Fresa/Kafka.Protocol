@@ -30,7 +30,7 @@
     void Block(Action action) { this.Block(action); }
 	void PrintOnNewRowForEach<TValue>(IEnumerable<TValue> iterator, Action<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
 	void PrintOnNewRowForEachWithIndex<TValue>(IEnumerable<TValue> iterator, ActionDelegateWithIndexAndLength<TValue> action) { this.PrintOnNewRowForEach(iterator, action); }
-	void _(int count = 1) { this.WriteNewLine(count); }
+	void LF(int count = 1) { this.WriteNewLine(count); }
 	void GenerateDocumentation(params string[] documentations) { this.GenerateDocumentation(documentations); }
 
 	var primitiveTypeNames = protocol.PrimitiveTypes.Values
@@ -71,22 +71,22 @@ namespace Kafka.Protocol<# Block(() =>
         #>public readonly partial struct <#= className #> : ISerialize <# 
 		PrintOnNewRowForEachWithIndex(genericConstraints, (constraint, index, count) =>
 		{
-			if (index == 0) _();
+			if (index == 0) LF();
 		#>	where <#= constraint.Key #> : <#= constraint.Value #><#
 		});
 		Block(() =>
         {
-            #>public <#= type #> Value { get; }<# _(2);
+            #>public <#= type #> Value { get; }<# LF(2);
 
             #>public <#= classNameWithoutGenerics #>(<#= @params #><#= type #> value)<# Block(() =>
             {
                 #>Value = value;<#
-            }); _(2);
+            }); LF(2);
 
 			#>public override bool Equals(object obj) <# Block(() =>
             {
                 #>return obj is <#= className #> comparing<#= classNameWithoutGenerics #> && this == comparing<#= classNameWithoutGenerics #>;<#
-            }); _(2);
+            }); LF(2);
 
 			#>public override int GetHashCode() <# Block(() => 
 			{
@@ -98,7 +98,7 @@ namespace Kafka.Protocol<# Block(() =>
                 {
                     #>return Value.GetHashCode();<#
                 }
-			}); _(2);
+			}); LF(2);
 
 			#>public override string ToString() <# Block(() => 
 			{
@@ -110,44 +110,44 @@ namespace Kafka.Protocol<# Block(() =>
                 {
                     #>return Value.ToString();<#
                 }                
-			}); _(2);
+			}); LF(2);
 
 			#>public static bool operator == (<#= className #> x, <#= className #> y)<# Block(() => 
 			{
 				#>return x.Value == y.Value;<#
-			}); _(2);
+			}); LF(2);
 
 			#>public static bool operator != (<#= className #> x, <#= className #> y)<# Block(() =>
             {
                 #>return !(x == y);<#
-            }); _(2);
+            }); LF(2);
 
-			#>public static implicit operator <#= type #>(<#= className #> value) => value.Value;<# _(2);
+			#>public static implicit operator <#= type #>(<#= className #> value) => value.Value;<# LF(2);
 
-			#>public static implicit operator <#= className #>(<#= type #> value) => From(value);<# _(2);
+			#>public static implicit operator <#= className #>(<#= type #> value) => From(value);<# LF(2);
 
 			if (isNullable)
 			{
 				var nonNullableType = className.TrimStart("Nullable".ToCharArray());
 				var nullableType = nonNullableType + "?";
-				#>public static implicit operator <#= nullableType #>(<#= className #> value) =><# _();
-				#>	value.Value == null ? null as <#= nullableType #> : <#= nonNullableType #>.From(value.Value);<# _(2);
+				#>public static implicit operator <#= nullableType #>(<#= className #> value) =><# LF();
+				#>	value.Value == null ? null as <#= nullableType #> : <#= nonNullableType #>.From(value.Value);<# LF(2);
 
-				#>public static implicit operator <#= className #>(<#= nullableType #> value) =><# _();
-				#>	From(value?.Value);<# _(2);
+				#>public static implicit operator <#= className #>(<#= nullableType #> value) =><# LF();
+				#>	From(value?.Value);<# LF(2);
 			}
 
-			#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# _(2);
+			#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# LF(2);
 
-			#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# _(2);
+			#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# LF(2);
 
 			#>public static <#= className #> From(<#= @params #><#= type #> value)<# Block(() =>
             {
                 #>return new <#= className #>(value);<#
-            }); _(2);
+            }); LF(2);
 
 			#>public static <#= className #> Default { get; } = From(<#= defaultValue #>);<#
-        }); _(2);
+        }); LF(2);
     });
 
 	// Exceptions
@@ -157,50 +157,50 @@ namespace Kafka.Protocol<# Block(() =>
         GenerateDocumentation(errorCode.Description);
         #>public class <#= exceptionName #>Exception : Exception<# Block(() =>
         {
-			#>public <#= exceptionName #>Exception() { }<# _(2);
+			#>public <#= exceptionName #>Exception() { }<# LF(2);
 
-            #>public <#= exceptionName #>Exception(string message) : base(message) { }<# _(2);
+            #>public <#= exceptionName #>Exception(string message) : base(message) { }<# LF(2);
 
-			#>public const int ErrorCode = <#= errorCode.Code #>;<# _();
+			#>public const int ErrorCode = <#= errorCode.Code #>;<# LF();
 			#>public int Code => ErrorCode;<# 
         });
 
-		if (index + 1 != count) _();
-    }); _(2);
+		if (index + 1 != count) LF();
+    }); LF(2);
 
 	#>public static class Messages <# Block(() =>
     {
-		#>public static async ValueTask<Message> CreateRequestMessageFromReaderAsync(<# _();
-		#>	Int16 apiKey, <# _();
-		#>	Int16 version, <# _();
-		#>	PipeReader reader, <# _();
+		#>public static async ValueTask<Message> CreateRequestMessageFromReaderAsync(<# LF();
+		#>	Int16 apiKey, <# LF();
+		#>	Int16 version, <# LF();
+		#>	PipeReader reader, <# LF();
 		#>	CancellationToken cancellationToken = default)<# Block(() =>
 		{
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsRequest), messageDefinition =>
 			{
-				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# _();
-				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<# _();
-			}); _();
+				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# LF();
+				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<# LF();
+			}); LF();
 
 			#>throw new ArgumentException($"{apiKey} is not supported");<#
-		}); _(2);
+		}); LF(2);
 
-		#>public static async ValueTask<Message> CreateResponseMessageFromReaderAsync(<# _();
-		#>	Int16 apiKey, <# _();
-		#>	Int16 version, <# _();
-		#>	PipeReader reader, <# _();
+		#>public static async ValueTask<Message> CreateResponseMessageFromReaderAsync(<# LF();
+		#>	Int16 apiKey, <# LF();
+		#>	Int16 version, <# LF();
+		#>	PipeReader reader, <# LF();
 		#>	CancellationToken cancellationToken = default)<# Block(() =>
 		{
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsResponse), messageDefinition =>
 			{
-				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# _();
-				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<# _();
-			}); _();
+				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# LF();
+				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<# LF();
+			}); LF();
 
 			#>throw new ArgumentException($"{apiKey} is not supported");<#
 		});
 
-	}); _(2);
+	}); LF(2);
 	
 	// Messages
 	PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
@@ -213,20 +213,20 @@ namespace Kafka.Protocol<# Block(() =>
 		{
 			#>public <#= messageDefinition.Name #>(Int16 version)<# Block(() => 
 			{
-				#>if (version.InRange(MinVersion, MaxVersion) == false) <# _();
-				#>	throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<# _(2);
+				#>if (version.InRange(MinVersion, MaxVersion) == false) <# LF();
+				#>	throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<# LF(2);
 
-				 #>Version = version;<# _();
+				 #>Version = version;<# LF();
 				 #>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
-			}); _(2);
+			}); LF(2);
 
-			#>public static readonly Int16 ApiKey = Int16.From(<#= messageDefinition.ApiKey #>);<# _(2);
+			#>public static readonly Int16 ApiKey = Int16.From(<#= messageDefinition.ApiKey #>);<# LF(2);
 
-			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From #>);<# _();
-			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To ?? -10 #>);<# _(2);
+			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From #>);<# LF();
+			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To ?? -10 #>);<# LF(2);
 
-			#>public override Int16 Version { get; }<# _(1);
-			#>internal bool IsFlexibleVersion { get; }<# _(2);
+			#>public override Int16 Version { get; }<# LF();
+			#>internal bool IsFlexibleVersion { get; }<# LF(2);
 
 			// https://github.com/apache/kafka/blob/99b9b3e84f4e98c3f07714e1de6a139a004cbc5b/generator/src/main/java/org/apache/kafka/message/ApiMessageTypeGenerator.java#L324
 			#>internal Int16 HeaderVersion <# Block(() => 
@@ -241,8 +241,8 @@ namespace Kafka.Protocol<# Block(() =>
 							// which does not include clientId.  Version 1 of ControlledShutdownRequest
 							// and later use the standard request header.								
 							case 7:
-								#>if (Version == 0)<# _();
-								#>	return 0;<# _();
+								#>if (Version == 0)<# LF();
+								#>	return 0;<# LF();
 								goto default;
 							default:
 								#>return (short)(IsFlexibleVersion ? 2 : 1);<#
@@ -262,25 +262,25 @@ namespace Kafka.Protocol<# Block(() =>
 							return;
 					}
 				});
-			}); _(2);
+			}); LF(2);
 
-			PrintCreateTagSection(messageDefinition.GetTaggedFields()); _(2);
+			PrintCreateTagSection(messageDefinition.GetTaggedFields()); LF(2);
 
-			#>internal override int GetSize() =><# _();
+			#>internal override int GetSize() =><# LF();
 			messageDefinition.Fields.ForEach((messageField, messageFieldIndex) => 
 			{
 				PrintSizeOf(messageField, messageFieldIndex == 0);
-			}); #> +<# _();
-			PrintSizeOfTags(); #>;<# _(2);
+			}); #> +<# LF();
+			PrintSizeOfTags(); #>;<# LF(2);
 
 			#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
-				#>var instance = new <#= messageDefinition.Name #>(version);<# _();
+				#>var instance = new <#= messageDefinition.Name #>(version);<# LF();
 				
 				messageDefinition.Fields.ForEach(messageField => 
 				{
 					PrintReadField(messageField);
-				}); _();
+				}); LF();
 
 				PrintReadTags(messageDefinition.GetTaggedFields(), messageDefinition.Name);
 
@@ -292,7 +292,7 @@ namespace Kafka.Protocol<# Block(() =>
 				{
 					#>return await new ValueTask<<#= messageDefinition.Name #>>(instance);<#
 				}
-			}); _(2);
+			}); LF(2);
 
 			#>internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
@@ -304,35 +304,35 @@ namespace Kafka.Protocol<# Block(() =>
 				messageDefinition.Fields.ForEach(messageField => 
 				{
 					PrintWriteTo(messageField);
-				}); _();
+				}); LF();
 
 				PrintWriteTags();
-			}); if (messageDefinition.Fields.Any()) _(2);
+			}); if (messageDefinition.Fields.Any()) LF(2);
 
 			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
 			{
 				PrintField(messageField, messageDefinition.Name);
-				if (messageFieldIndex + 1 != messageFieldCount) _();
+				if (messageFieldIndex + 1 != messageFieldCount) LF();
 			});
 
 			if (messageDefinition.CommonStructs != null)
 			{
-				_(2);
+				LF(2);
 				PrintOnNewRowForEachWithIndex(messageDefinition.CommonStructs, (commonStruct, commonStructIndex, commonStructCount) =>
 				{
 					PrintCommonStruct(commonStruct);
-					if (commonStructIndex + 1 != commonStructCount) _();
+					if (commonStructIndex + 1 != commonStructCount) LF();
 				});
 			}
 
 			if (hasResponse)
 			{
-				_(2);
-				#>public <#= responseMessageDefinition.Name #> Respond()<# _();
+				LF(2);
+				#>public <#= responseMessageDefinition.Name #> Respond()<# LF();
 				#>	=> new <#= responseMessageDefinition.Name #>(Version);<#
 			}
-		}); _();
-	}); _();
+		}); LF();
+	}); LF();
 	
 	#>public static class ResponseExtensions<# Block(() => 
 	{
@@ -340,12 +340,12 @@ namespace Kafka.Protocol<# Block(() =>
 		{
 			if (messageDefinitions.Any()) 
 			{
-				#>return response.WithApiKeysCollection(<# _();
+				#>return response.WithApiKeysCollection(<# LF();
 				PrintOnNewRowForEachWithIndex(messageDefinitions.Where(MessageExtensions.IsRequest), (messageDefinition, index, count) =>
 				{
-					#>	key => key<# _();
-					#>		.WithApiKey(<#= messageDefinition.Name #>.ApiKey)<# _();
-					#>		.WithMinVersion(<#= messageDefinition.Name #>.MinVersion)<# _();
+					#>	key => key<# LF();
+					#>		.WithApiKey(<#= messageDefinition.Name #>.ApiKey)<# LF();
+					#>		.WithMinVersion(<#= messageDefinition.Name #>.MinVersion)<# LF();
 					#>		.WithMaxVersion(<#= messageDefinition.Name #>.MaxVersion)<#
 
 					if (index + 1 < count) 
@@ -367,7 +367,7 @@ void PrintCreateTagSection(IEnumerable<Kafka.Protocol.Generator.Helpers.Definiti
 		if (taggedFields.Any())
 		{	
 			tagsExpression = "tags.ToArray()";
-			#>var tags = new List<Tags.TaggedField>();<# _();
+			#>var tags = new List<Tags.TaggedField>();<# LF();
 			PrintOnNewRowForEachWithIndex(taggedFields, (taggedField, index, count) =>
 			{			
 				var propertyName = taggedField.GetPropertyName();
@@ -375,16 +375,16 @@ void PrintCreateTagSection(IEnumerable<Kafka.Protocol.Generator.Helpers.Definiti
 					VersionRange.Parse(taggedField.Versions) : 
 					VersionRange.Parse(taggedField.TaggedVersions);
 				
-				#>if (<#= (versionRange.Full ? "" : versionRange.GetExpression("Version") + " && ") #><#= propertyName #>IsSet) <# _(); 
+				#>if (<#= (versionRange.Full ? "" : versionRange.GetExpression("Version") + " && ") #><#= propertyName #>IsSet) <# LF(); 
 				Tab(() =>
 				{
 					#>tags.Add(new Tags.TaggedField<# Block(() => 
 					{
-						#>Tag = <#= taggedField.Tag #>,<# _();
+						#>Tag = <#= taggedField.Tag #>,<# LF();
 						#>Field = <#= propertyName #><# 
 					});#>);<# 
 				});			
-			}); _();
+			}); LF();
 		}
 		#>return new Tags.TagSection(<#= tagsExpression #>);<#		
 	});	
@@ -410,25 +410,25 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 	
 	if (!first)
 	{
-		#> +<# _();
+		#> +<# LF();
 	}
 	if (!versionRange.Full)
 	{
-		#>	(<#= versionRange.GetExpression("Version") #> ? <# _();
+		#>	(<#= versionRange.GetExpression("Version") #> ? <# LF();
 		#>	<#
 	}
 	#>	<#= propertyName #>.GetSize(<#= isFlexibleVersionExpression #>)<#
 	if (!versionRange.Full)
 	{
-		#>:<# _();
+		#>:<# LF();
 		#>		0)<#
 	}
 }
 
 void PrintSizeOfTags()
 {
-	#>	(IsFlexibleVersion ? <# _();
-	#>		CreateTagSection().GetSize() :<# _();
+	#>	(IsFlexibleVersion ? <# LF();
+	#>		CreateTagSection().GetSize() :<# LF();
 	#>		0)<#
 }
 
@@ -444,7 +444,7 @@ void PrintReadField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field 
 	if (versionRange.None)
 		return;
 
-	PrintRead(messageField, versionRange); _();
+	PrintRead(messageField, versionRange); LF();
 }
 
 void PrintReadTag(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messageField)
@@ -463,8 +463,8 @@ void PrintReadTag(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	PrintRead(messageField, versionRange); 
 	if (!versionRange.Full)
 	{
-		_();
-		#>else<# _();
+		LF();
+		#>else<# LF();
 		#>	throw new InvalidOperationException($"Field <#= fieldName #> is not supported for version {instance.Version}");<#
 	}
 }
@@ -478,7 +478,7 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 
 	if (!versionRange.Full)
 	{
-		#>if (<#= versionRange.GetExpression("instance.Version") #>) <# _(); 
+		#>if (<#= versionRange.GetExpression("instance.Version") #>) <# LF(); 
 		#>	<#
 	}
 
@@ -534,14 +534,14 @@ void PrintReadTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Mess
 {
 	#>if (instance.IsFlexibleVersion)<# Block(() =>
 	{
-		#>var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);<# _();
+		#>var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);<# LF();
 		#>await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))<# Block(() => 
 		{
 			#>switch (tag.Tag)<# Block(() => 
 			{
 				PrintOnNewRowForEach(taggedFields, taggedField => 
 				{
-				#>case <#= taggedField.Tag #>:<# _();
+				#>case <#= taggedField.Tag #>:<# LF();
 					Tab(() =>
 					{
 						PrintReadTag(taggedField); 
@@ -551,23 +551,23 @@ void PrintReadTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Mess
 
 						Block(() => 
 						{
-							#>var size = instance.<#= propertyName #>.GetSize(true);<# _();
-							#>if (size != tag.Length)<# _();
+							#>var size = instance.<#= propertyName #>.GetSize(true);<# LF();
+							#>if (size != tag.Length)<# LF();
 							#>	throw new CorruptMessageException($"Tagged field <#= fieldName #> read length {tag.Length} but had actual length of {size}");<# 
-						}); _();
+						}); LF();
 					});
-				#>	break;<# _();
+				#>	break;<# LF();
 				}); 
-				#>default:<# _();
+				#>default:<# LF();
 				#>	throw new InvalidOperationException($"Tag '{tag.Tag}' for <#= parentType #> is unknown");<# 
 			});
 		}); 
-	}); _(2);
+	}); LF(2);
 }
 
 void PrintWriteTags()
 {
-	#>if (IsFlexibleVersion)<# _(); Tab(() =>
+	#>if (IsFlexibleVersion)<# LF(); Tab(() =>
 	{
 		#>await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);<#		
 	}); 
@@ -592,10 +592,10 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 	var propertyName = messageField.GetPropertyName();
 	if (!versionRange.Full)
 	{
-		#>if (<#= versionRange.GetExpression("Version") #>)<# _(); 
+		#>if (<#= versionRange.GetExpression("Version") #>)<# LF(); 
 		#>	<#
 	}
-	#>await <#= propertyName #>.WriteToAsync(writer, <#= isFlexibleVersionExpression #>, cancellationToken).ConfigureAwait(false);<# _();		
+	#>await <#= propertyName #>.WriteToAsync(writer, <#= isFlexibleVersionExpression #>, cancellationToken).ConfigureAwait(false);<# LF();		
 }
 
 void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field, string className)
@@ -611,7 +611,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	
 	if (field.Tag.HasValue)
 	{
-		#>private bool <#= propertyName #>IsSet;<# _();
+		#>private bool <#= propertyName #>IsSet;<# LF();
 	}
 	#>private <#= propertyTypeName #> <#= propertyName #><#
 	
@@ -638,12 +638,12 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 			#> = default!<# 
 		}
 		#>;<#
-	} _();
+	} LF();
 
 	GenerateFieldDocumentation();
 	#>public <#= fieldTypeName #> <#= fieldName #> <# Block(() => 
 	{
-		#>get => <#= propertyName #>;<# _();
+		#>get => <#= propertyName #>;<# LF();
 		#>private set <# Block(() => 
 		{
 			if (!field.Ignorable)
@@ -651,8 +651,8 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				var versionRange = VersionRange.Parse(field.Versions);
 				if (!versionRange.Full)
 				{
-					#>if (<#= versionRange.GetExpression("Version") #> == false)<# _(); 
-					#>	throw new UnsupportedVersionException($"<#= fieldName #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<# _(2);
+					#>if (<#= versionRange.GetExpression("Version") #> == false)<# LF(); 
+					#>	throw new UnsupportedVersionException($"<#= fieldName #> does not support version {Version} and has been defined as not ignorable. Supported versions: <#= field.Versions #>");<# LF(2);
 				}
 			}
 
@@ -661,20 +661,20 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				var nullableVersionRange = VersionRange.Parse(field.NullableVersions);
 				if (!nullableVersionRange.Full)
 				{
-					#>if (<#= nullableVersionRange.GetExpression("Version") #> == false &&<# _();
-					#>	value == null) <# _();
-					#>	throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<# _(2);
+					#>if (<#= nullableVersionRange.GetExpression("Version") #> == false &&<# LF();
+					#>	value == null) <# LF();
+					#>	throw new UnsupportedVersionException($"<#= fieldName #> does not support null for version {Version}. Supported versions for null value: <#= field.NullableVersions #>");<# LF(2);
 				}		
 			} 
 			
 			#><#= propertyName #> = value;<# 
 			if (field.Tag.HasValue)	
 			{
-				_();
+				LF();
 				#><#= propertyName #>IsSet = true;<# 
 			}
 		});
-	}); _(2); 
+	}); LF(2); 
 	
 	GenerateFieldDocumentation();
 	if (field.Fields == null) 
@@ -682,7 +682,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		var argumentName = field.GetName().FirstCharacterToLowerCase();
 		#>public <#= className #> With<#= fieldName #>(<#= fieldTypeName #> <#= argumentName #>)<# Block(() => 
 		{
-			#><#= fieldName #> = <#= argumentName #>;<# _();
+			#><#= fieldName #> = <#= argumentName #>;<# LF();
 			#>return this;<#
 		}); 
 
@@ -694,85 +694,85 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>public <#= className #> With<#= fieldName #>(params Func<<#= fieldTypeNameWithoutArrayCharacters #>, <#= fieldTypeNameWithoutArrayCharacters #>>[] createFields)<# Block(() => 
 		{
 			var mapKeyNullConversion = mapKeyField.IsNullable() ? $"({mapKeyField.GetFullTypeName()})" : "";
-			#><#= fieldName #> = createFields<# _();
-			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# _();
-			#>	.ToDictionary(field => <#= mapKeyNullConversion #>field.<#= mapKeyField.GetName() #>);<# _();
+			#><#= fieldName #> = createFields<# LF();
+			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# LF();
+			#>	.ToDictionary(field => <#= mapKeyNullConversion #>field.<#= mapKeyField.GetName() #>);<# LF();
 			#>return this;<#
-		}); _(2);
+		}); LF(2);
 	}
 	else if (field.IsArray())
 	{
 		#>public <#= className #> With<#= fieldName #>(params Func<<#= fieldTypeNameWithoutArrayCharacters #>, <#= fieldTypeNameWithoutArrayCharacters #>>[] createFields)<# Block(() => 
 		{
-			#><#= fieldName #> = createFields<# _();
-			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# _();
-			#>	.ToArray();<# _();
+			#><#= fieldName #> = createFields<# LF();
+			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# LF();
+			#>	.ToArray();<# LF();
 			#>return this;<#
-		}); _(2);
+		}); LF(2);
 	}
 	else 
 	{
 		#>public <#= className #> With<#= fieldName #>(Func<<#= fieldTypeName #>, <#= fieldTypeName #>> createField)<# Block(() => 
 		{
-			#><#= fieldName #> = createField(Create<#= fieldTypeName #>());<# _();
+			#><#= fieldName #> = createField(Create<#= fieldTypeName #>());<# LF();
 			#>return this;<#
-		}); _(2);
+		}); LF(2);
 	}
 	
 	#>internal <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>()<# Block(() => 
 	{
 		#>return new <#= fieldTypeNameWithoutArrayCharacters #>(Version);<#
-	}); _(2);
+	}); LF(2);
 
 	#>public class <#= fieldTypeNameWithoutArrayCharacters #> : ISerialize<# Block(() => 
 	{
 		#>internal <#= fieldTypeNameWithoutArrayCharacters #>(Int16 version)<# Block(() => 
 		{
-			#>Version = version;<# _();
+			#>Version = version;<# LF();
 			#>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
-		}); _(2);
+		}); LF(2);
 
-		#>internal Int16 Version { get; }<# _();
-		#>internal bool IsFlexibleVersion { get; }<# _(2);
+		#>internal Int16 Version { get; }<# LF();
+		#>internal bool IsFlexibleVersion { get; }<# LF(2);
 
-		PrintCreateTagSection(field.GetTaggedFields()); _(2);
+		PrintCreateTagSection(field.GetTaggedFields()); LF(2);
 
-		#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# _();
-		#>internal int GetSize(bool _) =><# _();
+		#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# LF();
+		#>internal int GetSize(bool _) =><# LF();
 		field.Fields.ForEach((messageField, messageFieldIndex) => 
 		{
 			PrintSizeOf(messageField, messageFieldIndex == 0);
-		}); #> +<# _();
-		PrintSizeOfTags(); #>;<# _(2);
+		}); #> +<# LF();
+		PrintSizeOfTags(); #>;<# LF(2);
 
 		#>internal static async ValueTask<<#= fieldTypeNameWithoutArrayCharacters #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
-			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# _();			
+			#>var instance = new <#= fieldTypeNameWithoutArrayCharacters #>(version);<# LF();			
 			field.Fields.ForEach(messageField => 
 			{
 				PrintReadField(messageField);
-			}); _();
+			}); LF();
 
 			PrintReadTags(field.GetTaggedFields(), fieldTypeNameWithoutArrayCharacters);
 
 			#>return instance;<# 
-		}); _(2);
+		}); LF(2);
 
-		#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# _();
+		#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# LF();
 		#>internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			field.Fields.ForEach(messageField => 
 			{
 				PrintWriteTo(messageField);
-			}); _();
+			}); LF();
 
 			PrintWriteTags();
-		}); _(2);
+		}); LF(2);
 
 		PrintOnNewRowForEachWithIndex(field.Fields, (nestedField, index, count) =>
 		{
 			PrintField(nestedField, fieldTypeNameWithoutArrayCharacters); 
-			if (index + 1 != count) _();
+			if (index + 1 != count) LF();
 		});					
 	});
 
@@ -799,56 +799,56 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 		{
 			if (!versionRange.Full)
 			{
-				#>if (versionRange.GetExpression("version") == false)<# _(); 
+				#>if (versionRange.GetExpression("version") == false)<# LF(); 
 				#>	<#
 			}
-			#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<# _(2);
+			#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<# LF(2);
 
-			#>Version = version;<# _();
+			#>Version = version;<# LF();
 			#>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
-		}); _(2);
+		}); LF(2);
 
-		#>internal Int16 Version { get; }<# _();
-		#>internal bool IsFlexibleVersion { get; }<# _(2);
+		#>internal Int16 Version { get; }<# LF();
+		#>internal bool IsFlexibleVersion { get; }<# LF(2);
 
-		PrintCreateTagSection(commonStruct.GetTaggedFields()); _(2);
+		PrintCreateTagSection(commonStruct.GetTaggedFields()); LF(2);
 
-		#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# _();
-		#>internal int GetSize(bool _) =><# _();
+		#>int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);<# LF();
+		#>internal int GetSize(bool _) =><# LF();
 		commonStruct.Fields.ForEach((messageField, messageFieldIndex) => 
 		{
 			PrintSizeOf(messageField, messageFieldIndex == 0);
-		}); #> +<# _();
-		PrintSizeOfTags(); #>;<# _(2);
+		}); #> +<# LF();
+		PrintSizeOfTags(); #>;<# LF(2);
 
 		#>internal static async ValueTask<<#= commonStruct.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 		{
-			#>var instance = new <#= commonStruct.Name #>(version);<# _();
+			#>var instance = new <#= commonStruct.Name #>(version);<# LF();
 			commonStruct.Fields.ForEach(messageField => 
 			{
 				PrintReadField(messageField);
-			}); _();
+			}); LF();
 			
 			PrintReadTags(commonStruct.GetTaggedFields(), commonStruct.Name);
 
 			#>return instance;<#
-		}); _(2);
+		}); LF(2);
 
-		#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# _();
+		#>ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);<# LF();
 		#>internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)<# Block(() => 
 		{
 			commonStruct.Fields.ForEach(field => 
 			{
 				PrintWriteTo(field);
-			}); _();
+			}); LF();
 
 			PrintWriteTags();
-		}); _(2);
+		}); LF(2);
 
 		PrintOnNewRowForEachWithIndex(commonStruct.Fields, (field, index, count) =>
 		{
 			PrintField(field, commonStruct.Name); 
-			if (index + 1 != count) _();
+			if (index + 1 != count) LF();
 		});					
 	});	
 }
