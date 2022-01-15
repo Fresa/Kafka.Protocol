@@ -3001,9 +3001,7 @@ namespace Kafka.Protocol
 			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _transactionalId = String.Default;
@@ -3017,7 +3015,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionalId = value;
-
 			}
 		}
 
@@ -3042,7 +3039,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerId = value;
-
 			}
 		}
 
@@ -3067,7 +3063,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerEpoch = value;
-
 			}
 		}
 
@@ -3092,7 +3087,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupId = value;
-
 			}
 		}
 
@@ -3169,9 +3163,7 @@ namespace Kafka.Protocol
 			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -3185,7 +3177,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -3210,7 +3201,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -3290,9 +3280,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _transactionalId = String.Default;
@@ -3306,7 +3294,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionalId = value;
-
 			}
 		}
 
@@ -3331,7 +3318,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerId = value;
-
 			}
 		}
 
@@ -3356,7 +3342,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerEpoch = value;
-
 			}
 		}
 
@@ -3381,7 +3366,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -3455,9 +3439,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -3471,7 +3453,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -3496,7 +3477,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -3574,9 +3554,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -3590,7 +3568,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -3615,7 +3592,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -3689,9 +3665,7 @@ namespace Kafka.Protocol
 				await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -3705,7 +3679,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -3730,7 +3703,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resultsCollection = value;
-
 				}
 			}
 
@@ -3804,9 +3776,7 @@ namespace Kafka.Protocol
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -3820,7 +3790,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -3845,7 +3814,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -3921,9 +3889,7 @@ namespace Kafka.Protocol
 			await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -3937,7 +3903,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerId = value;
-
 			}
 		}
 
@@ -3963,7 +3928,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerEpoch = value;
-
 			}
 		}
 
@@ -4047,9 +4011,7 @@ namespace Kafka.Protocol
 			await _producerIdLen.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -4063,7 +4025,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -4088,7 +4049,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -4113,7 +4073,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerIdStart = value;
-
 			}
 		}
 
@@ -4138,7 +4097,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerIdLen = value;
-
 			}
 		}
 
@@ -4212,9 +4170,7 @@ namespace Kafka.Protocol
 			await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<EntryData> _entriesCollection = Array.Empty<EntryData>();
@@ -4228,7 +4184,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_entriesCollection = value;
-
 			}
 		}
 
@@ -4302,9 +4257,7 @@ namespace Kafka.Protocol
 				await _opsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Array<EntityData> _entityCollection = Array.Empty<EntityData>();
@@ -4318,7 +4271,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_entityCollection = value;
-
 				}
 			}
 
@@ -4392,9 +4344,7 @@ namespace Kafka.Protocol
 					await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _entityType = String.Default;
@@ -4408,7 +4358,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_entityType = value;
-
 					}
 				}
 
@@ -4433,7 +4382,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_entityName = value;
-
 					}
 				}
 
@@ -4459,7 +4407,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_opsCollection = value;
-
 				}
 			}
 
@@ -4536,9 +4483,7 @@ namespace Kafka.Protocol
 					await _remove.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _key = String.Default;
@@ -4552,7 +4497,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_key = value;
-
 					}
 				}
 
@@ -4577,7 +4521,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_value = value;
-
 					}
 				}
 
@@ -4602,7 +4545,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_remove = value;
-
 					}
 				}
 
@@ -4629,7 +4571,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_validateOnly = value;
-
 			}
 		}
 
@@ -4706,9 +4647,7 @@ namespace Kafka.Protocol
 			await _entriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -4722,7 +4661,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -4747,7 +4685,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_entriesCollection = value;
-
 			}
 		}
 
@@ -4824,9 +4761,7 @@ namespace Kafka.Protocol
 				await _entityCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -4840,7 +4775,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -4865,7 +4799,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -4890,7 +4823,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_entityCollection = value;
-
 				}
 			}
 
@@ -4964,9 +4896,7 @@ namespace Kafka.Protocol
 					await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _entityType = String.Default;
@@ -4980,7 +4910,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_entityType = value;
-
 					}
 				}
 
@@ -5005,7 +4934,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_entityName = value;
-
 					}
 				}
 
@@ -5081,9 +5009,7 @@ namespace Kafka.Protocol
 			await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Map<Int8, AlterConfigsResource> _resourcesCollection = Map<Int8, AlterConfigsResource>.Default;
@@ -5097,7 +5023,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resourcesCollection = value;
-
 			}
 		}
 
@@ -5174,9 +5099,7 @@ namespace Kafka.Protocol
 				await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int8 _resourceType = Int8.Default;
@@ -5190,7 +5113,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceType = value;
-
 				}
 			}
 
@@ -5215,7 +5137,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceName = value;
-
 				}
 			}
 
@@ -5240,7 +5161,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_configsCollection = value;
-
 				}
 			}
 
@@ -5314,9 +5234,7 @@ namespace Kafka.Protocol
 					await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -5330,7 +5248,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_name = value;
-
 					}
 				}
 
@@ -5355,7 +5272,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_value = value;
-
 					}
 				}
 
@@ -5382,7 +5298,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_validateOnly = value;
-
 			}
 		}
 
@@ -5459,9 +5374,7 @@ namespace Kafka.Protocol
 			await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -5475,7 +5388,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -5500,7 +5412,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_responsesCollection = value;
-
 			}
 		}
 
@@ -5580,9 +5491,7 @@ namespace Kafka.Protocol
 				await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -5596,7 +5505,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -5621,7 +5529,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -5646,7 +5553,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceType = value;
-
 				}
 			}
 
@@ -5671,7 +5577,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceName = value;
-
 				}
 			}
 
@@ -5749,9 +5654,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -5765,7 +5668,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerId = value;
-
 			}
 		}
 
@@ -5791,7 +5693,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerEpoch = value;
-
 			}
 		}
 
@@ -5816,7 +5717,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -5889,9 +5789,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -5905,7 +5803,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -5929,7 +5826,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -6008,9 +5904,7 @@ namespace Kafka.Protocol
 					await _currentIsrVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -6024,7 +5918,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -6049,7 +5942,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -6074,7 +5966,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_newIsrCollection = value;
-
 					}
 				}
 
@@ -6099,7 +5990,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_currentIsrVersion = value;
-
 					}
 				}
 
@@ -6181,9 +6071,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -6197,7 +6085,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -6222,7 +6109,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -6246,7 +6132,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -6319,9 +6204,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -6335,7 +6218,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -6359,7 +6241,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -6444,9 +6325,7 @@ namespace Kafka.Protocol
 					await _currentIsrVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -6460,7 +6339,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -6485,7 +6363,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -6510,7 +6387,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderId = value;
-
 					}
 				}
 
@@ -6535,7 +6411,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -6560,7 +6435,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_isrCollection = value;
-
 					}
 				}
 
@@ -6585,7 +6459,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_currentIsrVersion = value;
-
 					}
 				}
 
@@ -6661,9 +6534,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _timeoutMs = new Int32(60000);
@@ -6678,7 +6549,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -6704,7 +6574,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -6778,9 +6647,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -6794,7 +6661,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -6819,7 +6685,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -6893,9 +6758,7 @@ namespace Kafka.Protocol
 					await _replicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -6909,7 +6772,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -6935,7 +6797,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_replicasCollection = value;
-
 					}
 				}
 
@@ -7021,9 +6882,7 @@ namespace Kafka.Protocol
 			await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -7037,7 +6896,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -7062,7 +6920,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -7087,7 +6944,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -7112,7 +6968,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_responsesCollection = value;
-
 			}
 		}
 
@@ -7186,9 +7041,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -7202,7 +7055,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -7227,7 +7079,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -7304,9 +7155,7 @@ namespace Kafka.Protocol
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -7320,7 +7169,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -7345,7 +7193,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -7370,7 +7217,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorMessage = value;
-
 					}
 				}
 
@@ -7443,9 +7289,7 @@ namespace Kafka.Protocol
 			await _dirsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Map<String, AlterReplicaLogDir> _dirsCollection = Map<String, AlterReplicaLogDir>.Default;
@@ -7459,7 +7303,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_dirsCollection = value;
-
 			}
 		}
 
@@ -7533,9 +7376,7 @@ namespace Kafka.Protocol
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _path = String.Default;
@@ -7549,7 +7390,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_path = value;
-
 				}
 			}
 
@@ -7574,7 +7414,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicsCollection = value;
-
 				}
 			}
 
@@ -7648,9 +7487,7 @@ namespace Kafka.Protocol
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -7664,7 +7501,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_name = value;
-
 					}
 				}
 
@@ -7689,7 +7525,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionsCollection = value;
-
 					}
 				}
 
@@ -7768,9 +7603,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -7784,7 +7617,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -7809,7 +7641,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -7883,9 +7714,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -7899,7 +7728,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -7924,7 +7752,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -7998,9 +7825,7 @@ namespace Kafka.Protocol
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -8014,7 +7839,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -8039,7 +7863,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -8115,9 +7938,7 @@ namespace Kafka.Protocol
 			await _upsertionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<ScramCredentialDeletion> _deletionsCollection = Array.Empty<ScramCredentialDeletion>();
@@ -8131,7 +7952,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_deletionsCollection = value;
-
 			}
 		}
 
@@ -8205,9 +8025,7 @@ namespace Kafka.Protocol
 				await _mechanism.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -8221,7 +8039,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -8246,7 +8063,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_mechanism = value;
-
 				}
 			}
 
@@ -8272,7 +8088,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_upsertionsCollection = value;
-
 			}
 		}
 
@@ -8355,9 +8170,7 @@ namespace Kafka.Protocol
 				await _saltedPassword.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -8371,7 +8184,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -8396,7 +8208,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_mechanism = value;
-
 				}
 			}
 
@@ -8421,7 +8232,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_iterations = value;
-
 				}
 			}
 
@@ -8446,7 +8256,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_salt = value;
-
 				}
 			}
 
@@ -8471,7 +8280,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_saltedPassword = value;
-
 				}
 			}
 
@@ -8549,9 +8357,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -8565,7 +8371,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -8590,7 +8395,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -8667,9 +8471,7 @@ namespace Kafka.Protocol
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _user = String.Default;
@@ -8683,7 +8485,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_user = value;
-
 				}
 			}
 
@@ -8708,7 +8509,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -8733,7 +8533,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -8816,9 +8615,7 @@ namespace Kafka.Protocol
 				await _clientSoftwareVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _clientSoftwareName = String.Default;
@@ -8832,7 +8629,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clientSoftwareName = value;
-
 			}
 		}
 
@@ -8857,7 +8653,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clientSoftwareVersion = value;
-
 			}
 		}
 
@@ -8995,9 +8790,7 @@ namespace Kafka.Protocol
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -9011,7 +8804,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -9036,7 +8828,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_apiKeysCollection = value;
-
 			}
 		}
 
@@ -9113,9 +8904,7 @@ namespace Kafka.Protocol
 				await _maxVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _apiKey = Int16.Default;
@@ -9129,7 +8918,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_apiKey = value;
-
 				}
 			}
 
@@ -9154,7 +8942,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_minVersion = value;
-
 				}
 			}
 
@@ -9179,7 +8966,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_maxVersion = value;
-
 				}
 			}
 
@@ -9205,7 +8991,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -9320,9 +9105,7 @@ namespace Kafka.Protocol
 					await _maxVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -9339,7 +9122,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_name = value;
-
 				}
 			}
 
@@ -9367,7 +9149,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MinVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_minVersion = value;
-
 				}
 			}
 
@@ -9395,7 +9176,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MaxVersion does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_maxVersion = value;
-
 				}
 			}
 
@@ -9539,9 +9319,7 @@ namespace Kafka.Protocol
 					await _minVersionLevel.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -9558,7 +9336,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_name = value;
-
 				}
 			}
 
@@ -9586,7 +9363,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MaxVersionLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_maxVersionLevel = value;
-
 				}
 			}
 
@@ -9614,7 +9390,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MinVersionLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_minVersionLevel = value;
-
 				}
 			}
 
@@ -9689,9 +9464,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableString _clusterId = new NullableString(null);
@@ -9705,7 +9478,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clusterId = value;
-
 			}
 		}
 
@@ -9729,7 +9501,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -9802,9 +9573,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -9818,7 +9587,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -9842,7 +9610,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -9918,9 +9685,7 @@ namespace Kafka.Protocol
 					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -9934,7 +9699,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -9959,7 +9723,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderId = value;
-
 					}
 				}
 
@@ -9984,7 +9747,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -10063,9 +9825,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -10079,7 +9839,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -10103,7 +9862,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -10176,9 +9934,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -10192,7 +9948,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -10216,7 +9971,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -10295,9 +10049,7 @@ namespace Kafka.Protocol
 					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -10311,7 +10063,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -10335,7 +10086,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -10359,7 +10109,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderId = value;
-
 					}
 				}
 
@@ -10384,7 +10133,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -10469,9 +10217,7 @@ namespace Kafka.Protocol
 			await _wantShutDown.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -10485,7 +10231,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerId = value;
-
 			}
 		}
 
@@ -10511,7 +10256,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerEpoch = value;
-
 			}
 		}
 
@@ -10537,7 +10281,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_currentMetadataOffset = value;
-
 			}
 		}
 
@@ -10562,7 +10305,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_wantFence = value;
-
 			}
 		}
 
@@ -10587,7 +10329,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_wantShutDown = value;
-
 			}
 		}
 
@@ -10673,9 +10414,7 @@ namespace Kafka.Protocol
 			await _shouldShutDown.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -10689,7 +10428,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -10714,7 +10452,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -10740,7 +10477,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_isCaughtUp = value;
-
 			}
 		}
 
@@ -10767,7 +10503,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_isFenced = value;
-
 			}
 		}
 
@@ -10793,7 +10528,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_shouldShutDown = value;
-
 			}
 		}
 
@@ -10879,9 +10613,7 @@ namespace Kafka.Protocol
 			await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -10895,7 +10627,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerId = value;
-
 			}
 		}
 
@@ -10920,7 +10651,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clusterId = value;
-
 			}
 		}
 
@@ -10945,7 +10675,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_incarnationId = value;
-
 			}
 		}
 
@@ -10970,7 +10699,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_listenersCollection = value;
-
 			}
 		}
 
@@ -11050,9 +10778,7 @@ namespace Kafka.Protocol
 				await _securityProtocol.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -11066,7 +10792,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -11091,7 +10816,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_host = value;
-
 				}
 			}
 
@@ -11116,7 +10840,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_port = value;
-
 				}
 			}
 
@@ -11141,7 +10864,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_securityProtocol = value;
-
 				}
 			}
 
@@ -11167,7 +10889,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_featuresCollection = value;
-
 			}
 		}
 
@@ -11244,9 +10965,7 @@ namespace Kafka.Protocol
 				await _maxSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -11260,7 +10979,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -11285,7 +11003,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_minSupportedVersion = value;
-
 				}
 			}
 
@@ -11310,7 +11027,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_maxSupportedVersion = value;
-
 				}
 			}
 
@@ -11336,7 +11052,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_rack = value;
-
 			}
 		}
 
@@ -11416,9 +11131,7 @@ namespace Kafka.Protocol
 			await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -11432,7 +11145,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -11457,7 +11169,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -11483,7 +11194,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerEpoch = value;
-
 			}
 		}
 
@@ -11558,9 +11268,7 @@ namespace Kafka.Protocol
 			await _userData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Map<String, TopicPartition> _assignedPartitionsCollection = Map<String, TopicPartition>.Default;
@@ -11573,7 +11281,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_assignedPartitionsCollection = value;
-
 			}
 		}
 
@@ -11646,9 +11353,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -11661,7 +11366,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -11684,7 +11388,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -11709,7 +11412,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_userData = value;
-
 			}
 		}
 
@@ -11793,9 +11495,7 @@ namespace Kafka.Protocol
 				await _ownedPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<String> _topicsCollection = Array.Empty<String>();
@@ -11808,7 +11508,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -11832,7 +11531,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_userData = value;
-
 			}
 		}
 
@@ -11856,7 +11554,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_ownedPartitionsCollection = value;
-
 			}
 		}
 
@@ -11937,9 +11634,7 @@ namespace Kafka.Protocol
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -11955,7 +11650,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Topic does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 					_topic = value;
-
 				}
 			}
 
@@ -11981,7 +11675,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -12062,9 +11755,7 @@ namespace Kafka.Protocol
 				await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -12078,7 +11769,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerId = value;
-
 			}
 		}
 
@@ -12104,7 +11794,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerEpoch = value;
-
 			}
 		}
 
@@ -12182,9 +11871,7 @@ namespace Kafka.Protocol
 			await _remainingPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -12198,7 +11885,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -12223,7 +11909,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_remainingPartitionsCollection = value;
-
 			}
 		}
 
@@ -12297,9 +11982,7 @@ namespace Kafka.Protocol
 				await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -12313,7 +11996,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -12338,7 +12020,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionIndex = value;
-
 				}
 			}
 
@@ -12410,9 +12091,7 @@ namespace Kafka.Protocol
 			await _creationsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<AclCreation> _creationsCollection = Array.Empty<AclCreation>();
@@ -12426,7 +12105,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_creationsCollection = value;
-
 			}
 		}
 
@@ -12519,9 +12197,7 @@ namespace Kafka.Protocol
 				await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int8 _resourceType = Int8.Default;
@@ -12535,7 +12211,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceType = value;
-
 				}
 			}
 
@@ -12560,7 +12235,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceName = value;
-
 				}
 			}
 
@@ -12589,7 +12263,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ResourcePatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 					_resourcePatternType = value;
-
 				}
 			}
 
@@ -12615,7 +12288,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_principal = value;
-
 				}
 			}
 
@@ -12640,7 +12312,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_host = value;
-
 				}
 			}
 
@@ -12665,7 +12336,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_operation = value;
-
 				}
 			}
 
@@ -12690,7 +12360,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_permissionType = value;
-
 				}
 			}
 
@@ -12768,9 +12437,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -12784,7 +12451,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -12809,7 +12475,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -12883,9 +12548,7 @@ namespace Kafka.Protocol
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -12899,7 +12562,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -12924,7 +12586,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -12999,9 +12660,7 @@ namespace Kafka.Protocol
 			await _maxLifetimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<CreatableRenewers> _renewersCollection = Array.Empty<CreatableRenewers>();
@@ -13015,7 +12674,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_renewersCollection = value;
-
 			}
 		}
 
@@ -13089,9 +12747,7 @@ namespace Kafka.Protocol
 				await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _principalType = String.Default;
@@ -13105,7 +12761,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_principalType = value;
-
 				}
 			}
 
@@ -13130,7 +12785,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_principalName = value;
-
 				}
 			}
 
@@ -13156,7 +12810,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_maxLifetimeMs = value;
-
 			}
 		}
 
@@ -13254,9 +12907,7 @@ namespace Kafka.Protocol
 			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -13270,7 +12921,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -13295,7 +12945,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_principalType = value;
-
 			}
 		}
 
@@ -13320,7 +12969,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_principalName = value;
-
 			}
 		}
 
@@ -13345,7 +12993,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_issueTimestampMs = value;
-
 			}
 		}
 
@@ -13370,7 +13017,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_expiryTimestampMs = value;
-
 			}
 		}
 
@@ -13395,7 +13041,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_maxTimestampMs = value;
-
 			}
 		}
 
@@ -13420,7 +13065,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_tokenId = value;
-
 			}
 		}
 
@@ -13445,7 +13089,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_hmac = value;
-
 			}
 		}
 
@@ -13470,7 +13113,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -13547,9 +13189,7 @@ namespace Kafka.Protocol
 			await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Map<String, CreatePartitionsTopic> _topicsCollection = Map<String, CreatePartitionsTopic>.Default;
@@ -13563,7 +13203,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -13640,9 +13279,7 @@ namespace Kafka.Protocol
 				await _assignmentsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -13656,7 +13293,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -13681,7 +13317,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_count = value;
-
 				}
 			}
 
@@ -13706,7 +13341,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_assignmentsCollection = value;
-
 				}
 			}
 
@@ -13777,9 +13411,7 @@ namespace Kafka.Protocol
 					await _brokerIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Array<Int32> _brokerIdsCollection = Array.Empty<Int32>();
@@ -13793,7 +13425,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_brokerIdsCollection = value;
-
 					}
 				}
 
@@ -13820,7 +13451,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -13845,7 +13475,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_validateOnly = value;
-
 			}
 		}
 
@@ -13922,9 +13551,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -13938,7 +13565,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -13963,7 +13589,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -14040,9 +13665,7 @@ namespace Kafka.Protocol
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -14056,7 +13679,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -14081,7 +13703,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -14107,7 +13728,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -14190,9 +13810,7 @@ namespace Kafka.Protocol
 				await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Map<String, CreatableTopic> _topicsCollection = Map<String, CreatableTopic>.Default;
@@ -14206,7 +13824,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -14289,9 +13906,7 @@ namespace Kafka.Protocol
 				await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -14305,7 +13920,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -14330,7 +13944,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_numPartitions = value;
-
 				}
 			}
 
@@ -14355,7 +13968,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_replicationFactor = value;
-
 				}
 			}
 
@@ -14380,7 +13992,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_assignmentsCollection = value;
-
 				}
 			}
 
@@ -14454,9 +14065,7 @@ namespace Kafka.Protocol
 					await _brokerIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -14470,7 +14079,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -14495,7 +14103,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_brokerIdsCollection = value;
-
 					}
 				}
 
@@ -14521,7 +14128,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_configsCollection = value;
-
 				}
 			}
 
@@ -14595,9 +14201,7 @@ namespace Kafka.Protocol
 					await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -14611,7 +14215,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_name = value;
-
 					}
 				}
 
@@ -14636,7 +14239,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_value = value;
-
 					}
 				}
 
@@ -14664,7 +14266,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -14694,7 +14295,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ValidateOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 				_validateOnly = value;
-
 			}
 		}
 
@@ -14776,9 +14376,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -14792,7 +14390,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -14817,7 +14414,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -14944,9 +14540,7 @@ namespace Kafka.Protocol
 					await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -14960,7 +14554,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -14985,7 +14578,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -15010,7 +14602,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -15035,7 +14626,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -15087,7 +14677,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_numPartitions = value;
-
 				}
 			}
 
@@ -15114,7 +14703,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_replicationFactor = value;
-
 				}
 			}
 
@@ -15144,7 +14732,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ConfigsCollection does not support null for version {Version}. Supported versions for null value: 5+");
 
 					_configsCollection = value;
-
 				}
 			}
 
@@ -15247,9 +14834,7 @@ namespace Kafka.Protocol
 						await _isSensitive.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -15266,7 +14851,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 						_name = value;
-
 					}
 				}
 
@@ -15298,7 +14882,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Value does not support null for version {Version}. Supported versions for null value: 5+");
 
 						_value = value;
-
 					}
 				}
 
@@ -15326,7 +14909,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ReadOnly does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 						_readOnly = value;
-
 					}
 				}
 
@@ -15352,7 +14934,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_configSource = value;
-
 					}
 				}
 
@@ -15381,7 +14962,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"IsSensitive does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 						_isSensitive = value;
-
 					}
 				}
 
@@ -15460,9 +15040,7 @@ namespace Kafka.Protocol
 			await _tokenAuthenticated.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _type = String.Default;
@@ -15476,7 +15054,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_type = value;
-
 			}
 		}
 
@@ -15501,7 +15078,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_name = value;
-
 			}
 		}
 
@@ -15526,7 +15102,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_tokenAuthenticated = value;
-
 			}
 		}
 
@@ -15600,9 +15175,7 @@ namespace Kafka.Protocol
 			await _filtersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<DeleteAclsFilter> _filtersCollection = Array.Empty<DeleteAclsFilter>();
@@ -15616,7 +15189,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_filtersCollection = value;
-
 			}
 		}
 
@@ -15709,9 +15281,7 @@ namespace Kafka.Protocol
 				await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int8 _resourceTypeFilter = Int8.Default;
@@ -15725,7 +15295,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceTypeFilter = value;
-
 				}
 			}
 
@@ -15750,7 +15319,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceNameFilter = value;
-
 				}
 			}
 
@@ -15779,7 +15347,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PatternTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 					_patternTypeFilter = value;
-
 				}
 			}
 
@@ -15805,7 +15372,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_principalFilter = value;
-
 				}
 			}
 
@@ -15830,7 +15396,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_hostFilter = value;
-
 				}
 			}
 
@@ -15855,7 +15420,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_operation = value;
-
 				}
 			}
 
@@ -15880,7 +15444,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_permissionType = value;
-
 				}
 			}
 
@@ -15958,9 +15521,7 @@ namespace Kafka.Protocol
 			await _filterResultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -15974,7 +15535,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -15999,7 +15559,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_filterResultsCollection = value;
-
 			}
 		}
 
@@ -16076,9 +15635,7 @@ namespace Kafka.Protocol
 				await _matchingAclsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -16092,7 +15649,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -16117,7 +15673,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -16142,7 +15697,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_matchingAclsCollection = value;
-
 				}
 			}
 
@@ -16241,9 +15795,7 @@ namespace Kafka.Protocol
 					await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int16 _errorCode = Int16.Default;
@@ -16257,7 +15809,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -16282,7 +15833,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorMessage = value;
-
 					}
 				}
 
@@ -16307,7 +15857,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_resourceType = value;
-
 					}
 				}
 
@@ -16332,7 +15881,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_resourceName = value;
-
 					}
 				}
 
@@ -16361,7 +15909,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 						_patternType = value;
-
 					}
 				}
 
@@ -16387,7 +15934,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_principal = value;
-
 					}
 				}
 
@@ -16412,7 +15958,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_host = value;
-
 					}
 				}
 
@@ -16437,7 +15982,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_operation = value;
-
 					}
 				}
 
@@ -16462,7 +16006,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_permissionType = value;
-
 					}
 				}
 
@@ -16535,9 +16078,7 @@ namespace Kafka.Protocol
 			await _groupsNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<String> _groupsNamesCollection = Array.Empty<String>();
@@ -16551,7 +16092,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupsNamesCollection = value;
-
 			}
 		}
 
@@ -16628,9 +16168,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -16644,7 +16182,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -16669,7 +16206,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -16743,9 +16279,7 @@ namespace Kafka.Protocol
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _groupId = String.Default;
@@ -16759,7 +16293,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_groupId = value;
-
 				}
 			}
 
@@ -16784,7 +16317,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -16859,9 +16391,7 @@ namespace Kafka.Protocol
 			await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<DeleteRecordsTopic> _topicsCollection = Array.Empty<DeleteRecordsTopic>();
@@ -16875,7 +16405,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -16949,9 +16478,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -16965,7 +16492,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -16990,7 +16516,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -17064,9 +16589,7 @@ namespace Kafka.Protocol
 					await _offset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -17080,7 +16603,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -17105,7 +16627,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_offset = value;
-
 					}
 				}
 
@@ -17132,7 +16653,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -17209,9 +16729,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -17225,7 +16743,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -17250,7 +16767,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -17324,9 +16840,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -17340,7 +16854,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -17365,7 +16878,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -17442,9 +16954,7 @@ namespace Kafka.Protocol
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -17458,7 +16968,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -17483,7 +16992,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_lowWatermark = value;
-
 					}
 				}
 
@@ -17508,7 +17016,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -17595,9 +17102,7 @@ namespace Kafka.Protocol
 			await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<DeleteTopicState> _topicsCollection = Array.Empty<DeleteTopicState>();
@@ -17614,7 +17119,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
 
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -17696,9 +17200,7 @@ namespace Kafka.Protocol
 					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private NullableString _name = new NullableString(null);
@@ -17720,7 +17222,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support null for version {Version}. Supported versions for null value: 6+");
 
 					_name = value;
-
 				}
 			}
 
@@ -17749,7 +17250,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicId does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
 
 					_topicId = value;
-
 				}
 			}
 
@@ -17775,7 +17275,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicNamesCollection = value;
-
 			}
 		}
 
@@ -17800,7 +17299,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -17881,9 +17379,7 @@ namespace Kafka.Protocol
 			await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -17897,7 +17393,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -17922,7 +17417,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_responsesCollection = value;
-
 			}
 		}
 
@@ -18010,9 +17504,7 @@ namespace Kafka.Protocol
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private NullableString _name = NullableString.Default;
@@ -18030,7 +17522,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support null for version {Version}. Supported versions for null value: 6+");
 
 					_name = value;
-
 				}
 			}
 
@@ -18055,7 +17546,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -18080,7 +17570,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -18110,7 +17599,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 5+");
 
 					_errorMessage = value;
-
 				}
 			}
 
@@ -18205,9 +17693,7 @@ namespace Kafka.Protocol
 			await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int8 _resourceTypeFilter = Int8.Default;
@@ -18221,7 +17707,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resourceTypeFilter = value;
-
 			}
 		}
 
@@ -18246,7 +17731,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resourceNameFilter = value;
-
 			}
 		}
 
@@ -18275,7 +17759,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PatternTypeFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 				_patternTypeFilter = value;
-
 			}
 		}
 
@@ -18301,7 +17784,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_principalFilter = value;
-
 			}
 		}
 
@@ -18326,7 +17808,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_hostFilter = value;
-
 			}
 		}
 
@@ -18351,7 +17832,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_operation = value;
-
 			}
 		}
 
@@ -18376,7 +17856,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_permissionType = value;
-
 			}
 		}
 
@@ -18459,9 +17938,7 @@ namespace Kafka.Protocol
 			await _resourcesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -18475,7 +17952,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -18500,7 +17976,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -18525,7 +18000,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -18550,7 +18024,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resourcesCollection = value;
-
 			}
 		}
 
@@ -18634,9 +18107,7 @@ namespace Kafka.Protocol
 				await _aclsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int8 _resourceType = Int8.Default;
@@ -18650,7 +18121,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceType = value;
-
 				}
 			}
 
@@ -18675,7 +18145,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceName = value;
-
 				}
 			}
 
@@ -18704,7 +18173,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PatternType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 					_patternType = value;
-
 				}
 			}
 
@@ -18730,7 +18198,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_aclsCollection = value;
-
 				}
 			}
 
@@ -18810,9 +18277,7 @@ namespace Kafka.Protocol
 					await _permissionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _principal = String.Default;
@@ -18826,7 +18291,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_principal = value;
-
 					}
 				}
 
@@ -18851,7 +18315,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_host = value;
-
 					}
 				}
 
@@ -18876,7 +18339,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_operation = value;
-
 					}
 				}
 
@@ -18901,7 +18363,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_permissionType = value;
-
 					}
 				}
 
@@ -18977,9 +18438,7 @@ namespace Kafka.Protocol
 			await _strict.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<ComponentData> _componentsCollection = Array.Empty<ComponentData>();
@@ -18993,7 +18452,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_componentsCollection = value;
-
 			}
 		}
 
@@ -19070,9 +18528,7 @@ namespace Kafka.Protocol
 				await _match.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _entityType = String.Default;
@@ -19086,7 +18542,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_entityType = value;
-
 				}
 			}
 
@@ -19111,7 +18566,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_matchType = value;
-
 				}
 			}
 
@@ -19136,7 +18590,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_match = value;
-
 				}
 			}
 
@@ -19162,7 +18615,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_strict = value;
-
 			}
 		}
 
@@ -19245,9 +18697,7 @@ namespace Kafka.Protocol
 			await _entriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -19261,7 +18711,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -19286,7 +18735,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -19311,7 +18759,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -19336,7 +18783,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_entriesCollection = value;
-
 			}
 		}
 
@@ -19410,9 +18856,7 @@ namespace Kafka.Protocol
 				await _valuesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Array<EntityData> _entityCollection = Array.Empty<EntityData>();
@@ -19426,7 +18870,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_entityCollection = value;
-
 				}
 			}
 
@@ -19500,9 +18943,7 @@ namespace Kafka.Protocol
 					await _entityName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _entityType = String.Default;
@@ -19516,7 +18957,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_entityType = value;
-
 					}
 				}
 
@@ -19541,7 +18981,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_entityName = value;
-
 					}
 				}
 
@@ -19567,7 +19006,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_valuesCollection = value;
-
 				}
 			}
 
@@ -19641,9 +19079,7 @@ namespace Kafka.Protocol
 					await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _key = String.Default;
@@ -19657,7 +19093,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_key = value;
-
 					}
 				}
 
@@ -19682,7 +19117,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_value = value;
-
 					}
 				}
 
@@ -19755,9 +19189,7 @@ namespace Kafka.Protocol
 			await _includeClusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Boolean _includeClusterAuthorizedOperations = Boolean.Default;
@@ -19771,7 +19203,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_includeClusterAuthorizedOperations = value;
-
 			}
 		}
 
@@ -19863,9 +19294,7 @@ namespace Kafka.Protocol
 			await _clusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -19879,7 +19308,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -19904,7 +19332,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -19930,7 +19357,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -19956,7 +19382,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clusterId = value;
-
 			}
 		}
 
@@ -19982,7 +19407,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_controllerId = value;
-
 			}
 		}
 
@@ -20008,7 +19432,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokersCollection = value;
-
 			}
 		}
 
@@ -20088,9 +19511,7 @@ namespace Kafka.Protocol
 				await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int32 _brokerId = Int32.Default;
@@ -20104,7 +19525,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_brokerId = value;
-
 				}
 			}
 
@@ -20129,7 +19549,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_host = value;
-
 				}
 			}
 
@@ -20154,7 +19573,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_port = value;
-
 				}
 			}
 
@@ -20180,7 +19598,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_rack = value;
-
 				}
 			}
 
@@ -20208,7 +19625,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clusterAuthorizedOperations = value;
-
 			}
 		}
 
@@ -20294,9 +19710,7 @@ namespace Kafka.Protocol
 				await _includeDocumentation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<DescribeConfigsResource> _resourcesCollection = Array.Empty<DescribeConfigsResource>();
@@ -20310,7 +19724,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resourcesCollection = value;
-
 			}
 		}
 
@@ -20387,9 +19800,7 @@ namespace Kafka.Protocol
 				await _configurationKeysCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int8 _resourceType = Int8.Default;
@@ -20403,7 +19814,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceType = value;
-
 				}
 			}
 
@@ -20428,7 +19838,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceName = value;
-
 				}
 			}
 
@@ -20453,7 +19862,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_configurationKeysCollection = value;
-
 				}
 			}
 
@@ -20483,7 +19891,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeSynonyms does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 				_includeSynonyms = value;
-
 			}
 		}
 
@@ -20513,7 +19920,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeDocumentation does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_includeDocumentation = value;
-
 			}
 		}
 
@@ -20591,9 +19997,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -20607,7 +20011,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -20632,7 +20035,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -20715,9 +20117,7 @@ namespace Kafka.Protocol
 				await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -20731,7 +20131,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -20756,7 +20155,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -20781,7 +20179,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceType = value;
-
 				}
 			}
 
@@ -20806,7 +20203,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceName = value;
-
 				}
 			}
 
@@ -20831,7 +20227,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_configsCollection = value;
-
 				}
 			}
 
@@ -20942,9 +20337,7 @@ namespace Kafka.Protocol
 						await _documentation.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -20958,7 +20351,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_name = value;
-
 					}
 				}
 
@@ -20983,7 +20375,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_value = value;
-
 					}
 				}
 
@@ -21008,7 +20399,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_readOnly = value;
-
 					}
 				}
 
@@ -21033,7 +20423,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_isDefault = value;
-
 					}
 				}
 
@@ -21059,7 +20448,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_configSource = value;
-
 					}
 				}
 
@@ -21085,7 +20473,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_isSensitive = value;
-
 					}
 				}
 
@@ -21110,7 +20497,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_synonymsCollection = value;
-
 					}
 				}
 
@@ -21199,9 +20585,7 @@ namespace Kafka.Protocol
 							await _source.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private String _name = String.Default;
@@ -21218,7 +20602,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 							_name = value;
-
 						}
 					}
 
@@ -21246,7 +20629,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Value does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 							_value = value;
-
 						}
 					}
 
@@ -21274,7 +20656,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Source does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 							_source = value;
-
 						}
 					}
 
@@ -21301,7 +20682,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_configType = value;
-
 					}
 				}
 
@@ -21327,7 +20707,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_documentation = value;
-
 					}
 				}
 
@@ -21400,9 +20779,7 @@ namespace Kafka.Protocol
 			await _ownersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableArray<DescribeDelegationTokenOwner> _ownersCollection = Array.Empty<DescribeDelegationTokenOwner>();
@@ -21416,7 +20793,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_ownersCollection = value;
-
 			}
 		}
 
@@ -21490,9 +20866,7 @@ namespace Kafka.Protocol
 				await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _principalType = String.Default;
@@ -21506,7 +20880,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_principalType = value;
-
 				}
 			}
 
@@ -21531,7 +20904,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_principalName = value;
-
 				}
 			}
 
@@ -21612,9 +20984,7 @@ namespace Kafka.Protocol
 			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -21628,7 +20998,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -21653,7 +21022,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_tokensCollection = value;
-
 			}
 		}
 
@@ -21745,9 +21113,7 @@ namespace Kafka.Protocol
 				await _renewersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _principalType = String.Default;
@@ -21761,7 +21127,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_principalType = value;
-
 				}
 			}
 
@@ -21786,7 +21151,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_principalName = value;
-
 				}
 			}
 
@@ -21811,7 +21175,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_issueTimestamp = value;
-
 				}
 			}
 
@@ -21836,7 +21199,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_expiryTimestamp = value;
-
 				}
 			}
 
@@ -21861,7 +21223,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_maxTimestamp = value;
-
 				}
 			}
 
@@ -21886,7 +21247,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_tokenId = value;
-
 				}
 			}
 
@@ -21911,7 +21271,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_hmac = value;
-
 				}
 			}
 
@@ -21936,7 +21295,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_renewersCollection = value;
-
 				}
 			}
 
@@ -22010,9 +21368,7 @@ namespace Kafka.Protocol
 					await _principalName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _principalType = String.Default;
@@ -22026,7 +21382,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_principalType = value;
-
 					}
 				}
 
@@ -22051,7 +21406,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_principalName = value;
-
 					}
 				}
 
@@ -22078,7 +21432,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -22156,9 +21509,7 @@ namespace Kafka.Protocol
 				await _includeAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<String> _groupsCollection = Array.Empty<String>();
@@ -22172,7 +21523,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupsCollection = value;
-
 			}
 		}
 
@@ -22200,7 +21550,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_includeAuthorizedOperations = value;
-
 			}
 		}
 
@@ -22281,9 +21630,7 @@ namespace Kafka.Protocol
 			await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -22297,7 +21644,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -22322,7 +21668,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupsCollection = value;
-
 			}
 		}
 
@@ -22415,9 +21760,7 @@ namespace Kafka.Protocol
 					await _authorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -22431,7 +21774,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -22456,7 +21798,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_groupId = value;
-
 				}
 			}
 
@@ -22481,7 +21822,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_groupState = value;
-
 				}
 			}
 
@@ -22506,7 +21846,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_protocolType = value;
-
 				}
 			}
 
@@ -22531,7 +21870,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_protocolData = value;
-
 				}
 			}
 
@@ -22556,7 +21894,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_membersCollection = value;
-
 				}
 			}
 
@@ -22646,9 +21983,7 @@ namespace Kafka.Protocol
 					await _memberAssignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _memberId = String.Default;
@@ -22662,7 +21997,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_memberId = value;
-
 					}
 				}
 
@@ -22692,7 +22026,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 4+");
 
 						_groupInstanceId = value;
-
 					}
 				}
 
@@ -22718,7 +22051,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_clientId = value;
-
 					}
 				}
 
@@ -22743,7 +22075,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_clientHost = value;
-
 					}
 				}
 
@@ -22768,7 +22099,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_memberMetadata = value;
-
 					}
 				}
 
@@ -22793,7 +22123,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_memberAssignment = value;
-
 					}
 				}
 
@@ -22823,7 +22152,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"AuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_authorizedOperations = value;
-
 				}
 			}
 
@@ -22896,9 +22224,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableMap<String, DescribableLogDirTopic> _topicsCollection = NullableMap<String, DescribableLogDirTopic>.Default;
@@ -22912,7 +22238,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -22986,9 +22311,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -23002,7 +22325,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -23027,7 +22349,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -23105,9 +22426,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -23121,7 +22440,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -23146,7 +22464,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -23223,9 +22540,7 @@ namespace Kafka.Protocol
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -23239,7 +22554,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -23264,7 +22578,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_logDir = value;
-
 				}
 			}
 
@@ -23289,7 +22602,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicsCollection = value;
-
 				}
 			}
 
@@ -23363,9 +22675,7 @@ namespace Kafka.Protocol
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -23379,7 +22689,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_name = value;
-
 					}
 				}
 
@@ -23403,7 +22712,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionsCollection = value;
-
 					}
 				}
 
@@ -23482,9 +22790,7 @@ namespace Kafka.Protocol
 						await _isFutureKey.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int32 _partitionIndex = Int32.Default;
@@ -23498,7 +22804,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_partitionIndex = value;
-
 						}
 					}
 
@@ -23523,7 +22828,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_partitionSize = value;
-
 						}
 					}
 
@@ -23548,7 +22852,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_offsetLag = value;
-
 						}
 					}
 
@@ -23573,7 +22876,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_isFutureKey = value;
-
 						}
 					}
 
@@ -23647,9 +22949,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<TopicRequest> _topicsCollection = Array.Empty<TopicRequest>();
@@ -23662,7 +22962,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -23735,9 +23034,7 @@ namespace Kafka.Protocol
 				await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -23751,7 +23048,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -23776,7 +23072,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionIndexesCollection = value;
-
 				}
 			}
 
@@ -23854,9 +23149,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -23870,7 +23163,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -23895,7 +23187,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -23969,9 +23260,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -23985,7 +23274,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -24010,7 +23298,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -24090,9 +23377,7 @@ namespace Kafka.Protocol
 					await _activeProducersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -24106,7 +23391,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -24131,7 +23415,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -24157,7 +23440,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorMessage = value;
-
 					}
 				}
 
@@ -24182,7 +23464,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_activeProducersCollection = value;
-
 					}
 				}
 
@@ -24267,9 +23548,7 @@ namespace Kafka.Protocol
 						await _currentTxnStartOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int64 _producerId = Int64.Default;
@@ -24282,7 +23561,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_producerId = value;
-
 						}
 					}
 
@@ -24305,7 +23583,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_producerEpoch = value;
-
 						}
 					}
 
@@ -24329,7 +23606,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_lastSequence = value;
-
 						}
 					}
 
@@ -24354,7 +23630,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_lastTimestamp = value;
-
 						}
 					}
 
@@ -24378,7 +23653,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_coordinatorEpoch = value;
-
 						}
 					}
 
@@ -24402,7 +23676,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_currentTxnStartOffset = value;
-
 						}
 					}
 
@@ -24476,9 +23749,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
@@ -24491,7 +23762,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -24564,9 +23834,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -24580,7 +23848,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -24604,7 +23871,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -24674,9 +23940,7 @@ namespace Kafka.Protocol
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -24690,7 +23954,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -24769,9 +24032,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -24785,7 +24046,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -24809,7 +24069,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -24882,9 +24141,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -24898,7 +24155,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -24922,7 +24178,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -25010,9 +24265,7 @@ namespace Kafka.Protocol
 					await _observersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -25026,7 +24279,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -25050,7 +24302,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -25074,7 +24325,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderId = value;
-
 					}
 				}
 
@@ -25099,7 +24349,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -25123,7 +24372,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_highWatermark = value;
-
 					}
 				}
 
@@ -25146,7 +24394,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_currentVotersCollection = value;
-
 					}
 				}
 
@@ -25169,7 +24416,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_observersCollection = value;
-
 					}
 				}
 
@@ -25239,9 +24485,7 @@ namespace Kafka.Protocol
 				await _logEndOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int32 _replicaId = Int32.Default;
@@ -25254,7 +24498,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_replicaId = value;
-
 				}
 			}
 
@@ -25278,7 +24521,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_logEndOffset = value;
-
 				}
 			}
 
@@ -25350,9 +24592,7 @@ namespace Kafka.Protocol
 			await _transactionalIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<String> _transactionalIdsCollection = Array.Empty<String>();
@@ -25366,7 +24606,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionalIdsCollection = value;
-
 			}
 		}
 
@@ -25443,9 +24682,7 @@ namespace Kafka.Protocol
 			await _transactionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -25459,7 +24696,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -25483,7 +24719,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionStatesCollection = value;
-
 			}
 		}
 
@@ -25574,9 +24809,7 @@ namespace Kafka.Protocol
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -25589,7 +24822,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -25612,7 +24844,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_transactionalId = value;
-
 				}
 			}
 
@@ -25635,7 +24866,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_transactionState = value;
-
 				}
 			}
 
@@ -25658,7 +24888,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_transactionTimeoutMs = value;
-
 				}
 			}
 
@@ -25681,7 +24910,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_transactionStartTimeMs = value;
-
 				}
 			}
 
@@ -25704,7 +24932,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_producerId = value;
-
 				}
 			}
 
@@ -25727,7 +24954,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_producerEpoch = value;
-
 				}
 			}
 
@@ -25751,7 +24977,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicsCollection = value;
-
 				}
 			}
 
@@ -25825,9 +25050,7 @@ namespace Kafka.Protocol
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _topic = String.Default;
@@ -25840,7 +25063,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_topic = value;
-
 					}
 				}
 
@@ -25863,7 +25085,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionsCollection = value;
-
 					}
 				}
 
@@ -25935,9 +25156,7 @@ namespace Kafka.Protocol
 			await _usersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableArray<UserName> _usersCollection = Array.Empty<UserName>();
@@ -25951,7 +25170,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_usersCollection = value;
-
 			}
 		}
 
@@ -26022,9 +25240,7 @@ namespace Kafka.Protocol
 				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -26038,7 +25254,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -26122,9 +25337,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -26138,7 +25351,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -26163,7 +25375,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -26188,7 +25399,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -26213,7 +25423,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -26293,9 +25502,7 @@ namespace Kafka.Protocol
 				await _credentialInfosCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _user = String.Default;
@@ -26309,7 +25516,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_user = value;
-
 				}
 			}
 
@@ -26334,7 +25540,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -26359,7 +25564,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -26384,7 +25588,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_credentialInfosCollection = value;
-
 				}
 			}
 
@@ -26458,9 +25661,7 @@ namespace Kafka.Protocol
 					await _iterations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int8 _mechanism = Int8.Default;
@@ -26474,7 +25675,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_mechanism = value;
-
 					}
 				}
 
@@ -26499,7 +25699,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_iterations = value;
-
 					}
 				}
 
@@ -26582,9 +25781,7 @@ namespace Kafka.Protocol
 			await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int8 _electionType = Int8.Default;
@@ -26601,7 +25798,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ElectionType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 				_electionType = value;
-
 			}
 		}
 
@@ -26626,7 +25822,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicPartitionsCollection = value;
-
 			}
 		}
 
@@ -26700,9 +25895,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -26716,7 +25909,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -26741,7 +25933,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -26768,7 +25959,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -26853,9 +26043,7 @@ namespace Kafka.Protocol
 			await _replicaElectionResultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -26869,7 +26057,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -26897,7 +26084,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 				_errorCode = value;
-
 			}
 		}
 
@@ -26922,7 +26108,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_replicaElectionResultsCollection = value;
-
 			}
 		}
 
@@ -26996,9 +26181,7 @@ namespace Kafka.Protocol
 				await _partitionResultCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -27012,7 +26195,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -27037,7 +26219,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionResultCollection = value;
-
 				}
 			}
 
@@ -27114,9 +26295,7 @@ namespace Kafka.Protocol
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionId = Int32.Default;
@@ -27130,7 +26309,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionId = value;
-
 					}
 				}
 
@@ -27155,7 +26333,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -27180,7 +26357,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorMessage = value;
-
 					}
 				}
 
@@ -27256,9 +26432,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableString _clusterId = new NullableString(null);
@@ -27272,7 +26446,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clusterId = value;
-
 			}
 		}
 
@@ -27296,7 +26469,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -27369,9 +26541,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -27385,7 +26555,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -27409,7 +26578,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -27488,9 +26656,7 @@ namespace Kafka.Protocol
 					await _preferredSuccessorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -27504,7 +26670,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -27529,7 +26694,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderId = value;
-
 					}
 				}
 
@@ -27554,7 +26718,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -27579,7 +26742,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_preferredSuccessorsCollection = value;
-
 					}
 				}
 
@@ -27658,9 +26820,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -27674,7 +26834,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -27698,7 +26857,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -27771,9 +26929,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -27787,7 +26943,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -27811,7 +26966,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -27890,9 +27044,7 @@ namespace Kafka.Protocol
 					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -27906,7 +27058,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -27930,7 +27081,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -27954,7 +27104,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderId = value;
-
 					}
 				}
 
@@ -27979,7 +27128,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -28061,9 +27209,7 @@ namespace Kafka.Protocol
 			await _committed.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _transactionalId = String.Default;
@@ -28077,7 +27223,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionalId = value;
-
 			}
 		}
 
@@ -28102,7 +27247,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerId = value;
-
 			}
 		}
 
@@ -28127,7 +27271,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerEpoch = value;
-
 			}
 		}
 
@@ -28152,7 +27295,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_committed = value;
-
 			}
 		}
 
@@ -28229,9 +27371,7 @@ namespace Kafka.Protocol
 			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -28245,7 +27385,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -28270,7 +27409,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -28347,9 +27485,7 @@ namespace Kafka.Protocol
 			await _clientHostAddress.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Bytes _requestData = Bytes.Default;
@@ -28363,7 +27499,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_requestData = value;
-
 			}
 		}
 
@@ -28388,7 +27523,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_requestPrincipal = value;
-
 			}
 		}
 
@@ -28413,7 +27547,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clientHostAddress = value;
-
 			}
 		}
 
@@ -28490,9 +27623,7 @@ namespace Kafka.Protocol
 			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableBytes _responseData = new NullableBytes(null);
@@ -28507,7 +27638,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_responseData = value;
-
 			}
 		}
 
@@ -28533,7 +27663,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -28607,9 +27736,7 @@ namespace Kafka.Protocol
 			await _expiryTimePeriodMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Bytes _hmac = Bytes.Default;
@@ -28623,7 +27750,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_hmac = value;
-
 			}
 		}
 
@@ -28648,7 +27774,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_expiryTimePeriodMs = value;
-
 			}
 		}
 
@@ -28728,9 +27853,7 @@ namespace Kafka.Protocol
 			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -28744,7 +27867,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -28769,7 +27891,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_expiryTimestampMs = value;
-
 			}
 		}
 
@@ -28794,7 +27915,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -28935,9 +28055,7 @@ namespace Kafka.Protocol
 				await _rackId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private bool _clusterIdIsSet;
@@ -28983,7 +28101,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_replicaId = value;
-
 			}
 		}
 
@@ -29008,7 +28125,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_maxWaitMs = value;
-
 			}
 		}
 
@@ -29033,7 +28149,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_minBytes = value;
-
 			}
 		}
 
@@ -29059,7 +28174,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_maxBytes = value;
-
 			}
 		}
 
@@ -29086,7 +28200,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_isolationLevel = value;
-
 			}
 		}
 
@@ -29113,7 +28226,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_sessionId = value;
-
 			}
 		}
 
@@ -29140,7 +28252,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_sessionEpoch = value;
-
 			}
 		}
 
@@ -29166,7 +28277,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -29251,9 +28361,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -29267,7 +28375,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -29292,7 +28399,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -29317,7 +28423,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -29415,9 +28520,7 @@ namespace Kafka.Protocol
 					await _partitionMaxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partition = Int32.Default;
@@ -29431,7 +28534,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partition = value;
-
 					}
 				}
 
@@ -29457,7 +28559,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_currentLeaderEpoch = value;
-
 					}
 				}
 
@@ -29483,7 +28584,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_fetchOffset = value;
-
 					}
 				}
 
@@ -29512,7 +28612,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LastFetchedEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
 
 						_lastFetchedEpoch = value;
-
 					}
 				}
 
@@ -29539,7 +28638,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_logStartOffset = value;
-
 					}
 				}
 
@@ -29565,7 +28663,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionMaxBytes = value;
-
 					}
 				}
 
@@ -29595,7 +28692,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ForgottenTopicsDataCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 
 				_forgottenTopicsDataCollection = value;
-
 			}
 		}
 
@@ -29684,9 +28780,7 @@ namespace Kafka.Protocol
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -29700,7 +28794,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -29725,7 +28818,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -29753,7 +28845,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -29780,7 +28871,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_rackId = value;
-
 			}
 		}
 
@@ -29876,9 +28966,7 @@ namespace Kafka.Protocol
 			await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -29892,7 +28980,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -29917,7 +29004,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -29946,7 +29032,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"SessionId does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 
 				_sessionId = value;
-
 			}
 		}
 
@@ -29972,7 +29057,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_responsesCollection = value;
-
 			}
 		}
 
@@ -30057,9 +29141,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -30073,7 +29155,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -30098,7 +29179,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -30123,7 +29203,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -30285,9 +29364,7 @@ namespace Kafka.Protocol
 					await _records.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -30301,7 +29378,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -30326,7 +29402,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -30351,7 +29426,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_highWatermark = value;
-
 					}
 				}
 
@@ -30377,7 +29451,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_lastStableOffset = value;
-
 					}
 				}
 
@@ -30404,7 +29477,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_logStartOffset = value;
-
 					}
 				}
 
@@ -30514,9 +29586,7 @@ namespace Kafka.Protocol
 							await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int32 _epoch = new Int32(-1);
@@ -30533,7 +29603,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Epoch does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
 
 							_epoch = value;
-
 						}
 					}
 
@@ -30561,7 +29630,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"EndOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
 
 							_endOffset = value;
-
 						}
 					}
 
@@ -30669,9 +29737,7 @@ namespace Kafka.Protocol
 							await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int32 _leaderId = new Int32(-1);
@@ -30689,7 +29755,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
 
 							_leaderId = value;
-
 						}
 					}
 
@@ -30719,7 +29784,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 12+");
 
 							_leaderEpoch = value;
-
 						}
 					}
 
@@ -30822,9 +29886,7 @@ namespace Kafka.Protocol
 						await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int64 _endOffset = new Int64(-1);
@@ -30838,7 +29900,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_endOffset = value;
-
 						}
 					}
 
@@ -30863,7 +29924,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_epoch = value;
-
 						}
 					}
 
@@ -30893,7 +29953,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"AbortedTransactionsCollection does not support null for version {Version}. Supported versions for null value: 4+");
 
 						_abortedTransactionsCollection = value;
-
 					}
 				}
 
@@ -30975,9 +30034,7 @@ namespace Kafka.Protocol
 							await _firstOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int64 _producerId = Int64.Default;
@@ -30994,7 +30051,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 							_producerId = value;
-
 						}
 					}
 
@@ -31022,7 +30078,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"FirstOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 							_firstOffset = value;
-
 						}
 					}
 
@@ -31052,7 +30107,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PreferredReadReplica does not support version {Version} and has been defined as not ignorable. Supported versions: 11+");
 
 						_preferredReadReplica = value;
-
 					}
 				}
 
@@ -31078,7 +30132,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_records = value;
-
 					}
 				}
 
@@ -31173,9 +30226,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private bool _clusterIdIsSet;
@@ -31218,7 +30269,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_replicaId = value;
-
 			}
 		}
 
@@ -31245,7 +30295,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_maxBytes = value;
-
 			}
 		}
 
@@ -31271,7 +30320,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -31345,9 +30393,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -31361,7 +30407,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -31386,7 +30431,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -31466,9 +30510,7 @@ namespace Kafka.Protocol
 					await _position.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partition = Int32.Default;
@@ -31482,7 +30524,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partition = value;
-
 					}
 				}
 
@@ -31507,7 +30548,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_currentLeaderEpoch = value;
-
 					}
 				}
 
@@ -31532,7 +30572,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_snapshotId = value;
-
 					}
 				}
 
@@ -31604,9 +30643,7 @@ namespace Kafka.Protocol
 						await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int64 _endOffset = Int64.Default;
@@ -31619,7 +30656,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_endOffset = value;
-
 						}
 					}
 
@@ -31642,7 +30678,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_epoch = value;
-
 						}
 					}
 
@@ -31667,7 +30702,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_position = value;
-
 					}
 				}
 
@@ -31749,9 +30783,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -31765,7 +30797,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -31790,7 +30821,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -31815,7 +30845,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -31889,9 +30918,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -31905,7 +30932,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -31930,7 +30956,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -32031,9 +31056,7 @@ namespace Kafka.Protocol
 					await _unalignedRecords.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _index = Int32.Default;
@@ -32047,7 +31070,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_index = value;
-
 					}
 				}
 
@@ -32072,7 +31094,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -32097,7 +31118,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_snapshotId = value;
-
 					}
 				}
 
@@ -32169,9 +31189,7 @@ namespace Kafka.Protocol
 						await _epoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int64 _endOffset = Int64.Default;
@@ -32184,7 +31202,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_endOffset = value;
-
 						}
 					}
 
@@ -32207,7 +31224,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_epoch = value;
-
 						}
 					}
 
@@ -32303,9 +31319,7 @@ namespace Kafka.Protocol
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int32 _leaderId = Int32.Default;
@@ -32319,7 +31333,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_leaderId = value;
-
 						}
 					}
 
@@ -32344,7 +31357,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_leaderEpoch = value;
-
 						}
 					}
 
@@ -32370,7 +31382,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_size = value;
-
 					}
 				}
 
@@ -32395,7 +31406,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_position = value;
-
 					}
 				}
 
@@ -32420,7 +31430,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_unalignedRecords = value;
-
 					}
 				}
 
@@ -32511,9 +31520,7 @@ namespace Kafka.Protocol
 				await _coordinatorKeysCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _key = String.Default;
@@ -32530,7 +31537,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_key = value;
-
 			}
 		}
 
@@ -32559,7 +31565,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"KeyType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 				_keyType = value;
-
 			}
 		}
 
@@ -32588,7 +31593,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"CoordinatorKeysCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 				_coordinatorKeysCollection = value;
-
 			}
 		}
 
@@ -32708,9 +31712,7 @@ namespace Kafka.Protocol
 				await _coordinatorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -32724,7 +31726,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -32752,7 +31753,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_errorCode = value;
-
 			}
 		}
 
@@ -32781,7 +31781,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 1-3");
 
 				_errorMessage = value;
-
 			}
 		}
 
@@ -32809,7 +31808,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_nodeId = value;
-
 			}
 		}
 
@@ -32837,7 +31835,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_host = value;
-
 			}
 		}
 
@@ -32865,7 +31862,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 0-3");
 
 				_port = value;
-
 			}
 		}
 
@@ -32893,7 +31889,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"CoordinatorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 				_coordinatorsCollection = value;
-
 			}
 		}
 
@@ -33003,9 +31998,7 @@ namespace Kafka.Protocol
 					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _key = String.Default;
@@ -33022,7 +32015,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Key does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 					_key = value;
-
 				}
 			}
 
@@ -33050,7 +32042,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 					_nodeId = value;
-
 				}
 			}
 
@@ -33078,7 +32069,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 					_host = value;
-
 				}
 			}
 
@@ -33106,7 +32096,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 					_port = value;
-
 				}
 			}
 
@@ -33134,7 +32123,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 					_errorCode = value;
-
 				}
 			}
 
@@ -33163,7 +32151,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 4+");
 
 					_errorMessage = value;
-
 				}
 			}
 
@@ -33248,9 +32235,7 @@ namespace Kafka.Protocol
 				await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _groupId = String.Default;
@@ -33264,7 +32249,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupId = value;
-
 			}
 		}
 
@@ -33289,7 +32273,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_generationId = value;
-
 			}
 		}
 
@@ -33314,7 +32297,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_memberId = value;
-
 			}
 		}
 
@@ -33347,7 +32329,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
 
 				_groupInstanceId = value;
-
 			}
 		}
 
@@ -33429,9 +32410,7 @@ namespace Kafka.Protocol
 			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -33445,7 +32424,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -33470,7 +32448,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -33544,9 +32521,7 @@ namespace Kafka.Protocol
 			await _validateOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Map<Int8, AlterConfigsResource> _resourcesCollection = Map<Int8, AlterConfigsResource>.Default;
@@ -33560,7 +32535,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resourcesCollection = value;
-
 			}
 		}
 
@@ -33637,9 +32611,7 @@ namespace Kafka.Protocol
 				await _configsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int8 _resourceType = Int8.Default;
@@ -33653,7 +32625,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceType = value;
-
 				}
 			}
 
@@ -33678,7 +32649,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceName = value;
-
 				}
 			}
 
@@ -33703,7 +32673,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_configsCollection = value;
-
 				}
 			}
 
@@ -33780,9 +32749,7 @@ namespace Kafka.Protocol
 					await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -33796,7 +32763,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_name = value;
-
 					}
 				}
 
@@ -33821,7 +32787,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_configOperation = value;
-
 					}
 				}
 
@@ -33846,7 +32811,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_value = value;
-
 					}
 				}
 
@@ -33873,7 +32837,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_validateOnly = value;
-
 			}
 		}
 
@@ -33950,9 +32913,7 @@ namespace Kafka.Protocol
 			await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -33966,7 +32927,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -33991,7 +32951,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_responsesCollection = value;
-
 			}
 		}
 
@@ -34071,9 +33030,7 @@ namespace Kafka.Protocol
 				await _resourceName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -34087,7 +33044,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -34112,7 +33068,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -34137,7 +33092,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceType = value;
-
 				}
 			}
 
@@ -34162,7 +33116,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_resourceName = value;
-
 				}
 			}
 
@@ -34251,9 +33204,7 @@ namespace Kafka.Protocol
 				await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableString _transactionalId = NullableString.Default;
@@ -34267,7 +33218,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionalId = value;
-
 			}
 		}
 
@@ -34292,7 +33242,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionTimeoutMs = value;
-
 			}
 		}
 
@@ -34321,7 +33270,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_producerId = value;
-
 			}
 		}
 
@@ -34351,7 +33299,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_producerEpoch = value;
-
 			}
 		}
 
@@ -34435,9 +33382,7 @@ namespace Kafka.Protocol
 			await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -34451,7 +33396,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -34476,7 +33420,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -34502,7 +33445,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerId = value;
-
 			}
 		}
 
@@ -34528,7 +33470,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerEpoch = value;
-
 			}
 		}
 
@@ -34625,9 +33566,7 @@ namespace Kafka.Protocol
 			await _protocolsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _groupId = String.Default;
@@ -34641,7 +33580,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupId = value;
-
 			}
 		}
 
@@ -34666,7 +33604,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_sessionTimeoutMs = value;
-
 			}
 		}
 
@@ -34692,7 +33629,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_rebalanceTimeoutMs = value;
-
 			}
 		}
 
@@ -34718,7 +33654,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_memberId = value;
-
 			}
 		}
 
@@ -34751,7 +33686,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 5+");
 
 				_groupInstanceId = value;
-
 			}
 		}
 
@@ -34777,7 +33711,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_protocolType = value;
-
 			}
 		}
 
@@ -34802,7 +33735,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_protocolsCollection = value;
-
 			}
 		}
 
@@ -34876,9 +33808,7 @@ namespace Kafka.Protocol
 				await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -34892,7 +33822,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -34917,7 +33846,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_metadata = value;
-
 				}
 			}
 
@@ -35021,9 +33949,7 @@ namespace Kafka.Protocol
 			await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -35037,7 +33963,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -35062,7 +33987,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -35088,7 +34012,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_generationId = value;
-
 			}
 		}
 
@@ -35119,7 +34042,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolType does not support null for version {Version}. Supported versions for null value: 7+");
 
 				_protocolType = value;
-
 			}
 		}
 
@@ -35149,7 +34071,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolName does not support null for version {Version}. Supported versions for null value: 7+");
 
 				_protocolName = value;
-
 			}
 		}
 
@@ -35174,7 +34095,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_leader = value;
-
 			}
 		}
 
@@ -35199,7 +34119,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_memberId = value;
-
 			}
 		}
 
@@ -35223,7 +34142,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_membersCollection = value;
-
 			}
 		}
 
@@ -35303,9 +34221,7 @@ namespace Kafka.Protocol
 				await _metadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _memberId = String.Default;
@@ -35319,7 +34235,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_memberId = value;
-
 				}
 			}
 
@@ -35352,7 +34267,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 5+");
 
 					_groupInstanceId = value;
-
 				}
 			}
 
@@ -35378,7 +34292,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_metadata = value;
-
 				}
 			}
 
@@ -35484,9 +34397,7 @@ namespace Kafka.Protocol
 			await _liveLeadersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _controllerId = Int32.Default;
@@ -35500,7 +34411,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_controllerId = value;
-
 			}
 		}
 
@@ -35525,7 +34435,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_controllerEpoch = value;
-
 			}
 		}
 
@@ -35551,7 +34460,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerEpoch = value;
-
 			}
 		}
 
@@ -35580,7 +34488,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"Type does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 				_type = value;
-
 			}
 		}
 
@@ -35608,7 +34515,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"UngroupedPartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-1");
 
 				_ungroupedPartitionStatesCollection = value;
-
 			}
 		}
 
@@ -35636,7 +34542,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
 
 				_topicStatesCollection = value;
-
 			}
 		}
 
@@ -35725,9 +34630,7 @@ namespace Kafka.Protocol
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -35744,7 +34647,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
 
 					_topicName = value;
-
 				}
 			}
 
@@ -35769,7 +34671,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -35797,7 +34698,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
 
 					_partitionStatesCollection = value;
-
 				}
 			}
 
@@ -35823,7 +34723,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_liveLeadersCollection = value;
-
 			}
 		}
 
@@ -35900,9 +34799,7 @@ namespace Kafka.Protocol
 				await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int32 _brokerId = Int32.Default;
@@ -35916,7 +34813,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_brokerId = value;
-
 				}
 			}
 
@@ -35941,7 +34837,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_hostName = value;
-
 				}
 			}
 
@@ -35966,7 +34861,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_port = value;
-
 				}
 			}
 
@@ -36079,9 +34973,7 @@ namespace Kafka.Protocol
 					await _isNew.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -36095,7 +34987,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -36120,7 +35011,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionIndex = value;
-
 				}
 			}
 
@@ -36145,7 +35035,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_controllerEpoch = value;
-
 				}
 			}
 
@@ -36170,7 +35059,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_leader = value;
-
 				}
 			}
 
@@ -36195,7 +35083,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_leaderEpoch = value;
-
 				}
 			}
 
@@ -36220,7 +35107,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_isrCollection = value;
-
 				}
 			}
 
@@ -36245,7 +35131,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_zkVersion = value;
-
 				}
 			}
 
@@ -36270,7 +35155,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_replicasCollection = value;
-
 				}
 			}
 
@@ -36295,7 +35179,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_addingReplicasCollection = value;
-
 				}
 			}
 
@@ -36320,7 +35203,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_removingReplicasCollection = value;
-
 				}
 			}
 
@@ -36346,7 +35228,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_isNew = value;
-
 				}
 			}
 
@@ -36436,9 +35317,7 @@ namespace Kafka.Protocol
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -36452,7 +35331,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -36480,7 +35358,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"PartitionErrorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
 
 				_partitionErrorsCollection = value;
-
 			}
 		}
 
@@ -36508,7 +35385,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -36590,9 +35466,7 @@ namespace Kafka.Protocol
 					await _partitionErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Uuid _topicId = Uuid.Default;
@@ -36609,7 +35483,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicId does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 					_topicId = value;
-
 				}
 			}
 
@@ -36637,7 +35510,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionErrorsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 					_partitionErrorsCollection = value;
-
 				}
 			}
 
@@ -36714,9 +35586,7 @@ namespace Kafka.Protocol
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -36730,7 +35600,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -36755,7 +35624,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionIndex = value;
-
 				}
 			}
 
@@ -36780,7 +35648,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -36861,9 +35728,7 @@ namespace Kafka.Protocol
 			await _grantingVotersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _version = Int16.Default;
@@ -36877,7 +35742,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_version = value;
-
 			}
 		}
 
@@ -36902,7 +35766,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_leaderId = value;
-
 			}
 		}
 
@@ -36927,7 +35790,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_votersCollection = value;
-
 			}
 		}
 
@@ -36952,7 +35814,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_grantingVotersCollection = value;
-
 			}
 		}
 
@@ -37018,9 +35879,7 @@ namespace Kafka.Protocol
 				await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int32 _voterId = Int32.Default;
@@ -37033,7 +35892,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_voterId = value;
-
 				}
 			}
 
@@ -37121,9 +35979,7 @@ namespace Kafka.Protocol
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _groupId = String.Default;
@@ -37137,7 +35993,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupId = value;
-
 			}
 		}
 
@@ -37165,7 +36020,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-2");
 
 				_memberId = value;
-
 			}
 		}
 
@@ -37193,7 +36047,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_membersCollection = value;
-
 			}
 		}
 
@@ -37275,9 +36128,7 @@ namespace Kafka.Protocol
 					await _groupInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _memberId = String.Default;
@@ -37294,7 +36145,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_memberId = value;
-
 				}
 			}
 
@@ -37327,7 +36177,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
 
 					_groupInstanceId = value;
-
 				}
 			}
 
@@ -37417,9 +36266,7 @@ namespace Kafka.Protocol
 				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -37433,7 +36280,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -37458,7 +36304,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -37486,7 +36331,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MembersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_membersCollection = value;
-
 			}
 		}
 
@@ -37575,9 +36419,7 @@ namespace Kafka.Protocol
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _memberId = String.Default;
@@ -37594,7 +36436,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_memberId = value;
-
 				}
 			}
 
@@ -37626,7 +36467,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
 
 					_groupInstanceId = value;
-
 				}
 			}
 
@@ -37654,7 +36494,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_errorCode = value;
-
 				}
 			}
 
@@ -37730,9 +36569,7 @@ namespace Kafka.Protocol
 				await _statesFilterCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<String> _statesFilterCollection = Array.Empty<String>();
@@ -37749,7 +36586,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"StatesFilterCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 				_statesFilterCollection = value;
-
 			}
 		}
 
@@ -37833,9 +36669,7 @@ namespace Kafka.Protocol
 			await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -37849,7 +36683,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -37874,7 +36707,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -37899,7 +36731,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupsCollection = value;
-
 			}
 		}
 
@@ -37980,9 +36811,7 @@ namespace Kafka.Protocol
 					await _groupState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _groupId = String.Default;
@@ -37996,7 +36825,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_groupId = value;
-
 				}
 			}
 
@@ -38021,7 +36849,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_protocolType = value;
-
 				}
 			}
 
@@ -38046,7 +36873,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_groupState = value;
-
 				}
 			}
 
@@ -38128,9 +36954,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _replicaId = Int32.Default;
@@ -38144,7 +36968,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_replicaId = value;
-
 			}
 		}
 
@@ -38172,7 +36995,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IsolationLevel does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
 
 				_isolationLevel = value;
-
 			}
 		}
 
@@ -38197,7 +37019,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -38271,9 +37092,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -38287,7 +37106,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -38312,7 +37130,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -38396,9 +37213,7 @@ namespace Kafka.Protocol
 					await _maxNumOffsets.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -38412,7 +37227,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -38438,7 +37252,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_currentLeaderEpoch = value;
-
 					}
 				}
 
@@ -38464,7 +37277,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_timestamp = value;
-
 					}
 				}
 
@@ -38490,7 +37302,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_maxNumOffsets = value;
-
 					}
 				}
 
@@ -38574,9 +37385,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -38590,7 +37399,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -38615,7 +37423,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -38689,9 +37496,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -38705,7 +37510,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -38730,7 +37534,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -38828,9 +37631,7 @@ namespace Kafka.Protocol
 						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -38844,7 +37645,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -38869,7 +37669,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -38894,7 +37693,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_oldStyleOffsetsCollection = value;
-
 					}
 				}
 
@@ -38923,7 +37721,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Timestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 						_timestamp = value;
-
 					}
 				}
 
@@ -38953,7 +37750,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Offset does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 						_offset = value;
-
 					}
 				}
 
@@ -38982,7 +37778,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -39058,9 +37853,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _timeoutMs = new Int32(60000);
@@ -39075,7 +37868,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -39102,7 +37894,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -39177,9 +37968,7 @@ namespace Kafka.Protocol
 				await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -39193,7 +37982,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -39218,7 +38006,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionIndexesCollection = value;
-
 				}
 			}
 
@@ -39302,9 +38089,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -39318,7 +38103,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -39343,7 +38127,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -39368,7 +38151,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -39393,7 +38175,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -39467,9 +38248,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -39483,7 +38262,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -39508,7 +38286,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -39588,9 +38365,7 @@ namespace Kafka.Protocol
 					await _removingReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -39604,7 +38379,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -39629,7 +38403,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_replicasCollection = value;
-
 					}
 				}
 
@@ -39654,7 +38427,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_addingReplicasCollection = value;
-
 					}
 				}
 
@@ -39679,7 +38451,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_removingReplicasCollection = value;
-
 					}
 				}
 
@@ -39755,9 +38526,7 @@ namespace Kafka.Protocol
 			await _producerIdFiltersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<String> _stateFiltersCollection = Array.Empty<String>();
@@ -39771,7 +38540,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_stateFiltersCollection = value;
-
 			}
 		}
 
@@ -39796,7 +38564,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerIdFiltersCollection = value;
-
 			}
 		}
 
@@ -39879,9 +38646,7 @@ namespace Kafka.Protocol
 			await _transactionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -39895,7 +38660,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -39919,7 +38683,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -39943,7 +38706,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_unknownStateFiltersCollection = value;
-
 			}
 		}
 
@@ -39967,7 +38729,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionStatesCollection = value;
-
 			}
 		}
 
@@ -40043,9 +38804,7 @@ namespace Kafka.Protocol
 				await _transactionState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _transactionalId = String.Default;
@@ -40058,7 +38817,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_transactionalId = value;
-
 				}
 			}
 
@@ -40081,7 +38839,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_producerId = value;
-
 				}
 			}
 
@@ -40105,7 +38862,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_transactionState = value;
-
 				}
 			}
 
@@ -40198,9 +38954,7 @@ namespace Kafka.Protocol
 				await _includeTopicAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableArray<MetadataRequestTopic> _topicsCollection = Array.Empty<MetadataRequestTopic>();
@@ -40218,7 +38972,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 1+");
 
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -40296,9 +39049,7 @@ namespace Kafka.Protocol
 				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Uuid _topicId = Uuid.Default;
@@ -40312,7 +39063,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -40341,7 +39091,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support null for version {Version}. Supported versions for null value: 10+");
 
 					_name = value;
-
 				}
 			}
 
@@ -40371,7 +39120,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"AllowAutoTopicCreation does not support version {Version} and has been defined as not ignorable. Supported versions: 4+");
 
 				_allowAutoTopicCreation = value;
-
 			}
 		}
 
@@ -40400,7 +39148,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8-10");
 
 				_includeClusterAuthorizedOperations = value;
-
 			}
 		}
 
@@ -40428,7 +39175,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"IncludeTopicAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 				_includeTopicAuthorizedOperations = value;
-
 			}
 		}
 
@@ -40533,9 +39279,7 @@ namespace Kafka.Protocol
 				await _clusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -40549,7 +39293,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -40574,7 +39317,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokersCollection = value;
-
 			}
 		}
 
@@ -40658,9 +39400,7 @@ namespace Kafka.Protocol
 					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int32 _nodeId = Int32.Default;
@@ -40674,7 +39414,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_nodeId = value;
-
 				}
 			}
 
@@ -40699,7 +39438,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_host = value;
-
 				}
 			}
 
@@ -40724,7 +39462,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_port = value;
-
 				}
 			}
 
@@ -40754,7 +39491,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 1+");
 
 					_rack = value;
-
 				}
 			}
 
@@ -40786,7 +39522,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ClusterId does not support null for version {Version}. Supported versions for null value: 2+");
 
 				_clusterId = value;
-
 			}
 		}
 
@@ -40813,7 +39548,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_controllerId = value;
-
 			}
 		}
 
@@ -40839,7 +39573,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -40937,9 +39670,7 @@ namespace Kafka.Protocol
 					await _topicAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int16 _errorCode = Int16.Default;
@@ -40953,7 +39684,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -40982,7 +39712,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support null for version {Version}. Supported versions for null value: 12+");
 
 					_name = value;
-
 				}
 			}
 
@@ -41007,7 +39736,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -41033,7 +39761,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_isInternal = value;
-
 				}
 			}
 
@@ -41059,7 +39786,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -41156,9 +39882,7 @@ namespace Kafka.Protocol
 						await _offlineReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int16 _errorCode = Int16.Default;
@@ -41172,7 +39896,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -41197,7 +39920,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -41222,7 +39944,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderId = value;
-
 					}
 				}
 
@@ -41248,7 +39969,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -41274,7 +39994,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_replicaNodesCollection = value;
-
 					}
 				}
 
@@ -41299,7 +40018,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_isrNodesCollection = value;
-
 					}
 				}
 
@@ -41324,7 +40042,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_offlineReplicasCollection = value;
-
 					}
 				}
 
@@ -41354,7 +40071,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 					_topicAuthorizedOperations = value;
-
 				}
 			}
 
@@ -41385,7 +40101,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ClusterAuthorizedOperations does not support version {Version} and has been defined as not ignorable. Supported versions: 8-10");
 
 				_clusterAuthorizedOperations = value;
-
 			}
 		}
 
@@ -41488,9 +40203,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _groupId = String.Default;
@@ -41504,7 +40217,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupId = value;
-
 			}
 		}
 
@@ -41530,7 +40242,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_generationId = value;
-
 			}
 		}
 
@@ -41556,7 +40267,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_memberId = value;
-
 			}
 		}
 
@@ -41589,7 +40299,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 7+");
 
 				_groupInstanceId = value;
-
 			}
 		}
 
@@ -41616,7 +40325,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_retentionTimeMs = value;
-
 			}
 		}
 
@@ -41642,7 +40350,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -41716,9 +40423,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -41732,7 +40437,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -41757,7 +40461,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -41848,9 +40551,7 @@ namespace Kafka.Protocol
 					await _committedMetadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -41864,7 +40565,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -41889,7 +40589,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_committedOffset = value;
-
 					}
 				}
 
@@ -41915,7 +40614,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_committedLeaderEpoch = value;
-
 					}
 				}
 
@@ -41945,7 +40643,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommitTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1");
 
 						_commitTimestamp = value;
-
 					}
 				}
 
@@ -41971,7 +40668,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_committedMetadata = value;
-
 					}
 				}
 
@@ -42054,9 +40750,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -42070,7 +40764,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -42095,7 +40788,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -42169,9 +40861,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -42185,7 +40875,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -42210,7 +40899,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -42284,9 +40972,7 @@ namespace Kafka.Protocol
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -42300,7 +40986,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -42325,7 +41010,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -42401,9 +41085,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _groupId = String.Default;
@@ -42417,7 +41099,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupId = value;
-
 			}
 		}
 
@@ -42442,7 +41123,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -42516,9 +41196,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -42532,7 +41210,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -42557,7 +41234,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -42628,9 +41304,7 @@ namespace Kafka.Protocol
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -42644,7 +41318,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -42726,9 +41399,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -42742,7 +41413,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -42767,7 +41437,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -42792,7 +41461,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -42866,9 +41534,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -42882,7 +41548,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -42907,7 +41572,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -42981,9 +41645,7 @@ namespace Kafka.Protocol
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -42997,7 +41659,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -43022,7 +41683,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -43120,9 +41780,7 @@ namespace Kafka.Protocol
 				await _requireStable.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _groupId = String.Default;
@@ -43139,7 +41797,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 				_groupId = value;
-
 			}
 		}
 
@@ -43171,7 +41828,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 2-7");
 
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -43253,9 +41909,7 @@ namespace Kafka.Protocol
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -43272,7 +41926,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 					_name = value;
-
 				}
 			}
 
@@ -43300,7 +41953,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 					_partitionIndexesCollection = value;
-
 				}
 			}
 
@@ -43329,7 +41981,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 				_groupsCollection = value;
-
 			}
 		}
 
@@ -43411,9 +42062,7 @@ namespace Kafka.Protocol
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _groupId = String.Default;
@@ -43430,7 +42079,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 					_groupId = value;
-
 				}
 			}
 
@@ -43462,7 +42110,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicsCollection does not support null for version {Version}. Supported versions for null value: 8+");
 
 					_topicsCollection = value;
-
 				}
 			}
 
@@ -43544,9 +42191,7 @@ namespace Kafka.Protocol
 						await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -43563,7 +42208,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 						_name = value;
-
 					}
 				}
 
@@ -43591,7 +42235,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 						_partitionIndexesCollection = value;
-
 					}
 				}
 
@@ -43622,7 +42265,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"RequireStable does not support version {Version} and has been defined as not ignorable. Supported versions: 7+");
 
 				_requireStable = value;
-
 			}
 		}
 
@@ -43722,9 +42364,7 @@ namespace Kafka.Protocol
 				await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -43738,7 +42378,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -43766,7 +42405,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -43848,9 +42486,7 @@ namespace Kafka.Protocol
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -43867,7 +42503,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 					_name = value;
-
 				}
 			}
 
@@ -43895,7 +42530,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -43998,9 +42632,7 @@ namespace Kafka.Protocol
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -44017,7 +42649,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -44045,7 +42676,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 						_committedOffset = value;
-
 					}
 				}
 
@@ -44071,7 +42701,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_committedLeaderEpoch = value;
-
 					}
 				}
 
@@ -44104,7 +42733,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Metadata does not support null for version {Version}. Supported versions for null value: 0-7");
 
 						_metadata = value;
-
 					}
 				}
 
@@ -44132,7 +42760,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 0-7");
 
 						_errorCode = value;
-
 					}
 				}
 
@@ -44160,7 +42787,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -44189,7 +42815,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 				_groupsCollection = value;
-
 			}
 		}
 
@@ -44278,9 +42903,7 @@ namespace Kafka.Protocol
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _groupId = String.Default;
@@ -44297,7 +42920,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"GroupId does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 					_groupId = value;
-
 				}
 			}
 
@@ -44325,7 +42947,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 					_topicsCollection = value;
-
 				}
 			}
 
@@ -44407,9 +43028,7 @@ namespace Kafka.Protocol
 						await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -44426,7 +43045,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 						_name = value;
-
 					}
 				}
 
@@ -44454,7 +43072,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 						_partitionsCollection = value;
-
 					}
 				}
 
@@ -44557,9 +43174,7 @@ namespace Kafka.Protocol
 							await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int32 _partitionIndex = Int32.Default;
@@ -44576,7 +43191,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 							_partitionIndex = value;
-
 						}
 					}
 
@@ -44604,7 +43218,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"CommittedOffset does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 							_committedOffset = value;
-
 						}
 					}
 
@@ -44630,7 +43243,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_committedLeaderEpoch = value;
-
 						}
 					}
 
@@ -44663,7 +43275,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"Metadata does not support null for version {Version}. Supported versions for null value: 8+");
 
 							_metadata = value;
-
 						}
 					}
 
@@ -44691,7 +43302,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 							_errorCode = value;
-
 						}
 					}
 
@@ -44722,7 +43332,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"ErrorCode does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 					_errorCode = value;
-
 				}
 			}
 
@@ -44802,9 +43411,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _replicaId = new Int32(-2);
@@ -44819,7 +43426,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_replicaId = value;
-
 			}
 		}
 
@@ -44845,7 +43451,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -44919,9 +43524,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -44935,7 +43538,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -44960,7 +43562,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -45041,9 +43642,7 @@ namespace Kafka.Protocol
 					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partition = Int32.Default;
@@ -45057,7 +43656,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partition = value;
-
 					}
 				}
 
@@ -45083,7 +43681,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_currentLeaderEpoch = value;
-
 					}
 				}
 
@@ -45109,7 +43706,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -45192,9 +43788,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -45208,7 +43802,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -45233,7 +43826,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -45307,9 +43899,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topic = String.Default;
@@ -45323,7 +43913,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topic = value;
-
 				}
 			}
 
@@ -45348,7 +43937,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -45432,9 +44020,7 @@ namespace Kafka.Protocol
 					await _endOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int16 _errorCode = Int16.Default;
@@ -45448,7 +44034,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -45473,7 +44058,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partition = value;
-
 					}
 				}
 
@@ -45499,7 +44083,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -45526,7 +44109,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_endOffset = value;
-
 					}
 				}
 
@@ -45613,9 +44195,7 @@ namespace Kafka.Protocol
 			await _topicDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableString _transactionalId = new NullableString(null);
@@ -45637,7 +44217,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TransactionalId does not support null for version {Version}. Supported versions for null value: 3+");
 
 				_transactionalId = value;
-
 			}
 		}
 
@@ -45663,7 +44242,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_acks = value;
-
 			}
 		}
 
@@ -45688,7 +44266,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -45713,7 +44290,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicDataCollection = value;
-
 			}
 		}
 
@@ -45787,9 +44363,7 @@ namespace Kafka.Protocol
 				await _partitionDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -45803,7 +44377,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -45828,7 +44401,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionDataCollection = value;
-
 				}
 			}
 
@@ -45902,9 +44474,7 @@ namespace Kafka.Protocol
 					await _records.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _index = Int32.Default;
@@ -45918,7 +44488,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_index = value;
-
 					}
 				}
 
@@ -45943,7 +44512,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_records = value;
-
 					}
 				}
 
@@ -46026,9 +44594,7 @@ namespace Kafka.Protocol
 				await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Map<String, TopicProduceResponse> _responsesCollection = Map<String, TopicProduceResponse>.Default;
@@ -46042,7 +44608,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_responsesCollection = value;
-
 			}
 		}
 
@@ -46116,9 +44681,7 @@ namespace Kafka.Protocol
 				await _partitionResponsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -46132,7 +44695,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -46157,7 +44719,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionResponsesCollection = value;
-
 				}
 			}
 
@@ -46262,9 +44823,7 @@ namespace Kafka.Protocol
 						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _index = Int32.Default;
@@ -46278,7 +44837,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_index = value;
-
 					}
 				}
 
@@ -46303,7 +44861,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -46328,7 +44885,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_baseOffset = value;
-
 					}
 				}
 
@@ -46354,7 +44910,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_logAppendTimeMs = value;
-
 					}
 				}
 
@@ -46381,7 +44936,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_logStartOffset = value;
-
 					}
 				}
 
@@ -46407,7 +44961,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_recordErrorsCollection = value;
-
 					}
 				}
 
@@ -46489,9 +45042,7 @@ namespace Kafka.Protocol
 							await _batchIndexErrorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int32 _batchIndex = Int32.Default;
@@ -46508,7 +45059,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"BatchIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
 
 							_batchIndex = value;
-
 						}
 					}
 
@@ -46541,7 +45091,6 @@ namespace Kafka.Protocol
 								throw new UnsupportedVersionException($"BatchIndexErrorMessage does not support null for version {Version}. Supported versions for null value: 8+");
 
 							_batchIndexErrorMessage = value;
-
 						}
 					}
 
@@ -46573,7 +45122,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 8+");
 
 						_errorMessage = value;
-
 					}
 				}
 
@@ -46602,7 +45150,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -46677,9 +45224,7 @@ namespace Kafka.Protocol
 			await _renewPeriodMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Bytes _hmac = Bytes.Default;
@@ -46693,7 +45238,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_hmac = value;
-
 			}
 		}
 
@@ -46718,7 +45262,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_renewPeriodMs = value;
-
 			}
 		}
 
@@ -46798,9 +45341,7 @@ namespace Kafka.Protocol
 			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -46814,7 +45355,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -46839,7 +45379,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_expiryTimestampMs = value;
-
 			}
 		}
 
@@ -46864,7 +45403,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -46908,7 +45446,7 @@ namespace Kafka.Protocol
 			_requestApiVersion.GetSize(IsFlexibleVersion) +
 			_correlationId.GetSize(IsFlexibleVersion) +
 			(Version >= 1 ? 
-				_clientId.GetSize(IsFlexibleVersion):
+				_clientId.GetSize(false):
 				0) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
@@ -46921,7 +45459,7 @@ namespace Kafka.Protocol
 			instance.RequestApiVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.CorrelationId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 1) 
-				instance.ClientId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.ClientId = await NullableString.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
 			{
@@ -46945,12 +45483,10 @@ namespace Kafka.Protocol
 			await _requestApiVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _correlationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 1)
-				await _clientId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _clientId.WriteToAsync(writer, false, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _requestApiKey = Int16.Default;
@@ -46964,7 +45500,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_requestApiKey = value;
-
 			}
 		}
 
@@ -46989,7 +45524,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_requestApiVersion = value;
-
 			}
 		}
 
@@ -47014,7 +45548,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_correlationId = value;
-
 			}
 		}
 
@@ -47043,7 +45576,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ClientId does not support null for version {Version}. Supported versions for null value: 1+");
 
 				_clientId = value;
-
 			}
 		}
 
@@ -47117,9 +45649,7 @@ namespace Kafka.Protocol
 			await _correlationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _correlationId = Int32.Default;
@@ -47133,7 +45663,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_correlationId = value;
-
 			}
 		}
 
@@ -47207,9 +45736,7 @@ namespace Kafka.Protocol
 			await _authBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Bytes _authBytes = Bytes.Default;
@@ -47223,7 +45750,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_authBytes = value;
-
 			}
 		}
 
@@ -47310,9 +45836,7 @@ namespace Kafka.Protocol
 				await _sessionLifetimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -47326,7 +45850,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -47351,7 +45874,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -47376,7 +45898,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_authBytes = value;
-
 			}
 		}
 
@@ -47402,7 +45923,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_sessionLifetimeMs = value;
-
 			}
 		}
 
@@ -47474,9 +45994,7 @@ namespace Kafka.Protocol
 			await _mechanism.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _mechanism = String.Default;
@@ -47490,7 +46008,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_mechanism = value;
-
 			}
 		}
 
@@ -47567,9 +46084,7 @@ namespace Kafka.Protocol
 			await _mechanismsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -47583,7 +46098,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -47608,7 +46122,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_mechanismsCollection = value;
-
 			}
 		}
 
@@ -47679,9 +46192,7 @@ namespace Kafka.Protocol
 			await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _version = Int16.Default;
@@ -47695,7 +46206,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_version = value;
-
 			}
 		}
 
@@ -47772,9 +46282,7 @@ namespace Kafka.Protocol
 			await _lastContainedLogTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _version = Int16.Default;
@@ -47788,7 +46296,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_version = value;
-
 			}
 		}
 
@@ -47813,7 +46320,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_lastContainedLogTimestamp = value;
-
 			}
 		}
 
@@ -47921,9 +46427,7 @@ namespace Kafka.Protocol
 				await _topicStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _controllerId = Int32.Default;
@@ -47937,7 +46441,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_controllerId = value;
-
 			}
 		}
 
@@ -47962,7 +46465,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_controllerEpoch = value;
-
 			}
 		}
 
@@ -47988,7 +46490,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerEpoch = value;
-
 			}
 		}
 
@@ -48017,7 +46518,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"DeletePartitions does not support version {Version} and has been defined as not ignorable. Supported versions: 0-2");
 
 				_deletePartitions = value;
-
 			}
 		}
 
@@ -48042,7 +46542,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_ungroupedPartitionsCollection = value;
-
 			}
 		}
 
@@ -48116,9 +46615,7 @@ namespace Kafka.Protocol
 				await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -48132,7 +46629,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -48157,7 +46653,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionIndex = value;
-
 				}
 			}
 
@@ -48186,7 +46681,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
 
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -48268,9 +46762,7 @@ namespace Kafka.Protocol
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -48287,7 +46779,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
 
 					_name = value;
-
 				}
 			}
 
@@ -48315,7 +46806,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionIndexesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1-2");
 
 					_partitionIndexesCollection = value;
-
 				}
 			}
 
@@ -48344,7 +46834,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_topicStatesCollection = value;
-
 			}
 		}
 
@@ -48426,9 +46915,7 @@ namespace Kafka.Protocol
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -48445,7 +46932,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_topicName = value;
-
 				}
 			}
 
@@ -48473,7 +46959,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 					_partitionStatesCollection = value;
-
 				}
 			}
 
@@ -48562,9 +47047,7 @@ namespace Kafka.Protocol
 						await _deletePartition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -48581,7 +47064,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"PartitionIndex does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -48610,7 +47092,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -48639,7 +47120,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"DeletePartition does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 						_deletePartition = value;
-
 					}
 				}
 
@@ -48718,9 +47198,7 @@ namespace Kafka.Protocol
 			await _partitionErrorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -48734,7 +47212,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -48759,7 +47236,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_partitionErrorsCollection = value;
-
 			}
 		}
 
@@ -48836,9 +47312,7 @@ namespace Kafka.Protocol
 				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -48852,7 +47326,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -48877,7 +47350,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionIndex = value;
-
 				}
 			}
 
@@ -48902,7 +47374,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -49004,9 +47475,7 @@ namespace Kafka.Protocol
 			await _assignmentsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _groupId = String.Default;
@@ -49020,7 +47489,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupId = value;
-
 			}
 		}
 
@@ -49045,7 +47513,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_generationId = value;
-
 			}
 		}
 
@@ -49070,7 +47537,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_memberId = value;
-
 			}
 		}
 
@@ -49103,7 +47569,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
 
 				_groupInstanceId = value;
-
 			}
 		}
 
@@ -49134,7 +47599,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolType does not support null for version {Version}. Supported versions for null value: 5+");
 
 				_protocolType = value;
-
 			}
 		}
 
@@ -49165,7 +47629,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolName does not support null for version {Version}. Supported versions for null value: 5+");
 
 				_protocolName = value;
-
 			}
 		}
 
@@ -49191,7 +47654,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_assignmentsCollection = value;
-
 			}
 		}
 
@@ -49265,9 +47727,7 @@ namespace Kafka.Protocol
 				await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _memberId = String.Default;
@@ -49281,7 +47741,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_memberId = value;
-
 				}
 			}
 
@@ -49306,7 +47765,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_assignment = value;
-
 				}
 			}
 
@@ -49405,9 +47863,7 @@ namespace Kafka.Protocol
 			await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -49421,7 +47877,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -49446,7 +47901,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -49476,7 +47930,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolType does not support null for version {Version}. Supported versions for null value: 5+");
 
 				_protocolType = value;
-
 			}
 		}
 
@@ -49507,7 +47960,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"ProtocolName does not support null for version {Version}. Supported versions for null value: 5+");
 
 				_protocolName = value;
-
 			}
 		}
 
@@ -49533,7 +47985,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_assignment = value;
-
 			}
 		}
 
@@ -49637,9 +48088,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private String _transactionalId = String.Default;
@@ -49653,7 +48102,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_transactionalId = value;
-
 			}
 		}
 
@@ -49678,7 +48126,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_groupId = value;
-
 			}
 		}
 
@@ -49703,7 +48150,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerId = value;
-
 			}
 		}
 
@@ -49728,7 +48174,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_producerEpoch = value;
-
 			}
 		}
 
@@ -49757,7 +48202,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GenerationId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_generationId = value;
-
 			}
 		}
 
@@ -49787,7 +48231,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"MemberId does not support version {Version} and has been defined as not ignorable. Supported versions: 3+");
 
 				_memberId = value;
-
 			}
 		}
 
@@ -49821,7 +48264,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"GroupInstanceId does not support null for version {Version}. Supported versions for null value: 3+");
 
 				_groupInstanceId = value;
-
 			}
 		}
 
@@ -49847,7 +48289,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -49921,9 +48362,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -49937,7 +48376,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -49962,7 +48400,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -50046,9 +48483,7 @@ namespace Kafka.Protocol
 					await _committedMetadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -50062,7 +48497,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -50087,7 +48521,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_committedOffset = value;
-
 					}
 				}
 
@@ -50113,7 +48546,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_committedLeaderEpoch = value;
-
 					}
 				}
 
@@ -50139,7 +48571,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_committedMetadata = value;
-
 					}
 				}
 
@@ -50218,9 +48649,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -50234,7 +48663,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -50259,7 +48687,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -50333,9 +48760,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _name = String.Default;
@@ -50349,7 +48774,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_name = value;
-
 				}
 			}
 
@@ -50374,7 +48798,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -50448,9 +48871,7 @@ namespace Kafka.Protocol
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -50464,7 +48885,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -50489,7 +48909,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -50562,9 +48981,7 @@ namespace Kafka.Protocol
 			await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _brokerId = Int32.Default;
@@ -50578,7 +48995,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerId = value;
-
 			}
 		}
 
@@ -50658,9 +49074,7 @@ namespace Kafka.Protocol
 			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -50674,7 +49088,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -50699,7 +49112,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -50724,7 +49136,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -50798,9 +49209,7 @@ namespace Kafka.Protocol
 			await _featureUpdatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _timeoutMs = new Int32(60000);
@@ -50815,7 +49224,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_timeoutMs = value;
-
 			}
 		}
 
@@ -50841,7 +49249,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_featureUpdatesCollection = value;
-
 			}
 		}
 
@@ -50918,9 +49325,7 @@ namespace Kafka.Protocol
 				await _allowDowngrade.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _feature = String.Default;
@@ -50934,7 +49339,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_feature = value;
-
 				}
 			}
 
@@ -50959,7 +49363,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_maxVersionLevel = value;
-
 				}
 			}
 
@@ -50984,7 +49387,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_allowDowngrade = value;
-
 				}
 			}
 
@@ -51068,9 +49470,7 @@ namespace Kafka.Protocol
 			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _throttleTimeMs = Int32.Default;
@@ -51084,7 +49484,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_throttleTimeMs = value;
-
 			}
 		}
 
@@ -51109,7 +49508,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -51134,7 +49532,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorMessage = value;
-
 			}
 		}
 
@@ -51159,7 +49556,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_resultsCollection = value;
-
 			}
 		}
 
@@ -51236,9 +49632,7 @@ namespace Kafka.Protocol
 				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _feature = String.Default;
@@ -51252,7 +49646,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_feature = value;
-
 				}
 			}
 
@@ -51277,7 +49670,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorCode = value;
-
 				}
 			}
 
@@ -51302,7 +49694,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_errorMessage = value;
-
 				}
 			}
 
@@ -51401,9 +49792,7 @@ namespace Kafka.Protocol
 			await _liveBrokersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int32 _controllerId = Int32.Default;
@@ -51417,7 +49806,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_controllerId = value;
-
 			}
 		}
 
@@ -51442,7 +49830,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_controllerEpoch = value;
-
 			}
 		}
 
@@ -51468,7 +49855,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_brokerEpoch = value;
-
 			}
 		}
 
@@ -51497,7 +49883,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"UngroupedPartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0-4");
 
 				_ungroupedPartitionStatesCollection = value;
-
 			}
 		}
 
@@ -51525,7 +49910,6 @@ namespace Kafka.Protocol
 					throw new UnsupportedVersionException($"TopicStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 				_topicStatesCollection = value;
-
 			}
 		}
 
@@ -51614,9 +49998,7 @@ namespace Kafka.Protocol
 					await _partitionStatesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -51633,7 +50015,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"TopicName does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 					_topicName = value;
-
 				}
 			}
 
@@ -51658,7 +50039,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicId = value;
-
 				}
 			}
 
@@ -51686,7 +50066,6 @@ namespace Kafka.Protocol
 						throw new UnsupportedVersionException($"PartitionStatesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
 
 					_partitionStatesCollection = value;
-
 				}
 			}
 
@@ -51711,7 +50090,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_liveBrokersCollection = value;
-
 			}
 		}
 
@@ -51801,9 +50179,7 @@ namespace Kafka.Protocol
 					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int32 _id = Int32.Default;
@@ -51817,7 +50193,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_id = value;
-
 				}
 			}
 
@@ -51842,7 +50217,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_v0Host = value;
-
 				}
 			}
 
@@ -51867,7 +50241,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_v0Port = value;
-
 				}
 			}
 
@@ -51892,7 +50265,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_endpointsCollection = value;
-
 				}
 			}
 
@@ -51988,9 +50360,7 @@ namespace Kafka.Protocol
 						await _securityProtocol.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _port = Int32.Default;
@@ -52007,7 +50377,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 						_port = value;
-
 					}
 				}
 
@@ -52035,7 +50404,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 						_host = value;
-
 					}
 				}
 
@@ -52060,7 +50428,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_listener = value;
-
 					}
 				}
 
@@ -52088,7 +50455,6 @@ namespace Kafka.Protocol
 							throw new UnsupportedVersionException($"SecurityProtocol does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
 
 						_securityProtocol = value;
-
 					}
 				}
 
@@ -52114,7 +50480,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_rack = value;
-
 				}
 			}
 
@@ -52213,9 +50578,7 @@ namespace Kafka.Protocol
 					await _offlineReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -52229,7 +50592,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -52254,7 +50616,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionIndex = value;
-
 				}
 			}
 
@@ -52279,7 +50640,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_controllerEpoch = value;
-
 				}
 			}
 
@@ -52304,7 +50664,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_leader = value;
-
 				}
 			}
 
@@ -52329,7 +50688,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_leaderEpoch = value;
-
 				}
 			}
 
@@ -52354,7 +50712,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_isrCollection = value;
-
 				}
 			}
 
@@ -52379,7 +50736,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_zkVersion = value;
-
 				}
 			}
 
@@ -52404,7 +50760,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_replicasCollection = value;
-
 				}
 			}
 
@@ -52429,7 +50784,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_offlineReplicasCollection = value;
-
 				}
 			}
 
@@ -52504,9 +50858,7 @@ namespace Kafka.Protocol
 			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -52520,7 +50872,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -52594,9 +50945,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private NullableString _clusterId = new NullableString(null);
@@ -52610,7 +50959,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_clusterId = value;
-
 			}
 		}
 
@@ -52634,7 +50982,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -52707,9 +51054,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -52723,7 +51068,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -52747,7 +51091,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -52829,9 +51172,7 @@ namespace Kafka.Protocol
 					await _lastOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -52845,7 +51186,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -52870,7 +51210,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_candidateEpoch = value;
-
 					}
 				}
 
@@ -52895,7 +51234,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_candidateId = value;
-
 					}
 				}
 
@@ -52920,7 +51258,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_lastOffsetEpoch = value;
-
 					}
 				}
 
@@ -52945,7 +51282,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_lastOffset = value;
-
 					}
 				}
 
@@ -53024,9 +51360,7 @@ namespace Kafka.Protocol
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Int16 _errorCode = Int16.Default;
@@ -53040,7 +51374,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_errorCode = value;
-
 			}
 		}
 
@@ -53064,7 +51397,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_topicsCollection = value;
-
 			}
 		}
 
@@ -53137,9 +51469,7 @@ namespace Kafka.Protocol
 				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private String _topicName = String.Default;
@@ -53153,7 +51483,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicName = value;
-
 				}
 			}
 
@@ -53177,7 +51506,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_partitionsCollection = value;
-
 				}
 			}
 
@@ -53259,9 +51587,7 @@ namespace Kafka.Protocol
 					await _voteGranted.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private Int32 _partitionIndex = Int32.Default;
@@ -53275,7 +51601,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndex = value;
-
 					}
 				}
 
@@ -53299,7 +51624,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_errorCode = value;
-
 					}
 				}
 
@@ -53323,7 +51647,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderId = value;
-
 					}
 				}
 
@@ -53348,7 +51671,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_leaderEpoch = value;
-
 					}
 				}
 
@@ -53373,7 +51695,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_voteGranted = value;
-
 					}
 				}
 
@@ -53446,9 +51767,7 @@ namespace Kafka.Protocol
 			await _markersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<WritableTxnMarker> _markersCollection = Array.Empty<WritableTxnMarker>();
@@ -53462,7 +51781,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_markersCollection = value;
-
 			}
 		}
 
@@ -53545,9 +51863,7 @@ namespace Kafka.Protocol
 				await _coordinatorEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int64 _producerId = Int64.Default;
@@ -53561,7 +51877,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_producerId = value;
-
 				}
 			}
 
@@ -53586,7 +51901,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_producerEpoch = value;
-
 				}
 			}
 
@@ -53611,7 +51925,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_transactionResult = value;
-
 				}
 			}
 
@@ -53636,7 +51949,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicsCollection = value;
-
 				}
 			}
 
@@ -53710,9 +52022,7 @@ namespace Kafka.Protocol
 					await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -53726,7 +52036,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_name = value;
-
 					}
 				}
 
@@ -53751,7 +52060,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionIndexesCollection = value;
-
 					}
 				}
 
@@ -53777,7 +52085,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_coordinatorEpoch = value;
-
 				}
 			}
 
@@ -53852,9 +52159,7 @@ namespace Kafka.Protocol
 			await _markersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
-			{
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
 		}
 
 		private Array<WritableTxnMarkerResult> _markersCollection = Array.Empty<WritableTxnMarkerResult>();
@@ -53868,7 +52173,6 @@ namespace Kafka.Protocol
 			private set 
 			{
 				_markersCollection = value;
-
 			}
 		}
 
@@ -53942,9 +52246,7 @@ namespace Kafka.Protocol
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
-				{
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-				}
 			}
 
 			private Int64 _producerId = Int64.Default;
@@ -53958,7 +52260,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_producerId = value;
-
 				}
 			}
 
@@ -53983,7 +52284,6 @@ namespace Kafka.Protocol
 				private set 
 				{
 					_topicsCollection = value;
-
 				}
 			}
 
@@ -54057,9 +52357,7 @@ namespace Kafka.Protocol
 					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 					if (IsFlexibleVersion)
-					{
 						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-					}
 				}
 
 				private String _name = String.Default;
@@ -54073,7 +52371,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_name = value;
-
 					}
 				}
 
@@ -54098,7 +52395,6 @@ namespace Kafka.Protocol
 					private set 
 					{
 						_partitionsCollection = value;
-
 					}
 				}
 
@@ -54172,9 +52468,7 @@ namespace Kafka.Protocol
 						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 						if (IsFlexibleVersion)
-						{
 							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-						}
 					}
 
 					private Int32 _partitionIndex = Int32.Default;
@@ -54188,7 +52482,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_partitionIndex = value;
-
 						}
 					}
 
@@ -54213,7 +52506,6 @@ namespace Kafka.Protocol
 						private set 
 						{
 							_errorCode = value;
-
 						}
 					}
 

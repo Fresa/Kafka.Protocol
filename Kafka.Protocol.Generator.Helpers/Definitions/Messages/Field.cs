@@ -10,7 +10,9 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
 
         public string Versions { get; set; } = default!;
 
-        public string NullableVersions { get; set; } = default!;
+        public string? NullableVersions { get; set; }
+        
+        public string? FlexibleVersions { get; set; }
 
         public int? Tag { get; set; }
 

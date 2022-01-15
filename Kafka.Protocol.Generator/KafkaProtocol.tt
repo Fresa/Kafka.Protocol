@@ -366,6 +366,10 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 			return;
 		}
 	}
+
+	var isFlexibleVersionExpression = messageField.FlexibleVersions == null ? 
+		"IsFlexibleVersion" :
+		VersionRange.Parse(messageField.FlexibleVersions).GetExpression("Version");
 	var propertyName = messageField.GetPropertyName();
 	
 	if (!first)
@@ -377,7 +381,7 @@ void PrintSizeOf(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field mes
 		#>	(<#= versionRange.GetExpression("Version") #> ? <# _();
 		#>	<#
 	}
-	#>	<#= propertyName #>.GetSize(IsFlexibleVersion)<#
+	#>	<#= propertyName #>.GetSize(<#= isFlexibleVersionExpression #>)<#
 	if (!versionRange.Full)
 	{
 		#>:<# _();
@@ -435,6 +439,7 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 		return;
 	var parentFieldTypeName = messageField.Parent?.GetFullTypeNameWithoutArrayCharacters() ?? "";
 	var fieldName = messageField.GetFieldName(parentFieldTypeName);
+
 	if (!versionRange.Full)
 	{
 		#>if (<#= versionRange.GetExpression("instance.Version") #>) <# _(); 
@@ -445,7 +450,10 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 	var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
 	var nullable = messageField.IsNullable() ? "Nullable" : "";
 	var nullableSign = messageField.IsNullable() ? "?" : "";
-
+	var isFlexibleVersionExpression = messageField.FlexibleVersions == null ? 
+		"instance.IsFlexibleVersion" :
+		VersionRange.Parse(messageField.FlexibleVersions).GetExpression("version");
+	
 	#>instance.<#= fieldName #> = <# 
 	if (messageField.Fields == null)
 	{
@@ -453,16 +461,16 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 		{
 			if (IsPrimitiveType(messageField))
 			{
-				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
+				#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 			} 
 			else 
 			{
-				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
+				#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 			}
 		} 
 		else 
 		{
-			#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# 
+			#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, cancellationToken).ConfigureAwait(false);<# 
 		}
 	}
 	else 
@@ -472,11 +480,11 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 			var mapKeyField = messageField.Fields.FirstOrDefault(field => field.MapKey);
 			if (mapKeyField == null)
 			{
-				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 
+				#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 
 			}
 			else 
 			{
-				#>await <#= fieldTypeName #>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.<#= mapKeyField.GetName() #>, cancellationToken).ConfigureAwait(false);<# 
+				#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.<#= mapKeyField.GetName() #>, cancellationToken).ConfigureAwait(false);<# 
 			}
 		} 
 		else 
@@ -523,7 +531,7 @@ void PrintReadTags(IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Mess
 
 void PrintWriteTags()
 {
-	#>if (IsFlexibleVersion)<# Block(() =>
+	#>if (IsFlexibleVersion)<# _(); Tab(() =>
 	{
 		#>await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);<#		
 	}); 
@@ -542,13 +550,16 @@ void PrintWriteTo(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field me
 		}
 	}
 
+	var isFlexibleVersionExpression = messageField.FlexibleVersions == null ? 
+		"IsFlexibleVersion" :
+		VersionRange.Parse(messageField.FlexibleVersions).GetExpression("Version");
 	var propertyName = messageField.GetPropertyName();
 	if (!versionRange.Full)
 	{
 		#>if (<#= versionRange.GetExpression("Version") #>)<# _(); 
 		#>	<#
 	}
-	#>await <#= propertyName #>.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# _();		
+	#>await <#= propertyName #>.WriteToAsync(writer, <#= isFlexibleVersionExpression #>, cancellationToken).ConfigureAwait(false);<# _();		
 }
 
 void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field, string className)
@@ -558,7 +569,9 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	var fieldTypeName = field.GetNullableFullTypeName();
 	var propertyName = field.GetPropertyName();
 	var fieldName = field.GetFieldName(className);
-	var flexibleVersionRange = VersionRange.Parse(field.Message.FlexibleVersions);
+	var flexibleVersionRange = field.FlexibleVersions == null ? 
+		VersionRange.Parse(field.Message.FlexibleVersions) :
+		VersionRange.Parse(field.FlexibleVersions);
 	
 	if (field.Tag.HasValue)
 	{
@@ -618,9 +631,10 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 				}		
 			} 
 			
-			#><#= propertyName #> = value;<# _();
+			#><#= propertyName #> = value;<# 
 			if (field.Tag.HasValue)	
 			{
+				_();
 				#><#= propertyName #>IsSet = true;<# 
 			}
 		});
