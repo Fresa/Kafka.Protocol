@@ -179,10 +179,9 @@ namespace Kafka.Protocol<# Block(() =>
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsRequest), messageDefinition =>
 			{
 				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# LF();
-				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<# LF();
+				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<#
 			}); LF();
-
-			#>throw new ArgumentException($"{apiKey} is not supported");<#
+			#>throw new ArgumentException($"There is no request message with api key {apiKey}");<#
 		}); LF(2);
 
 		#>public static async ValueTask<Message> CreateResponseMessageFromReaderAsync(<# LF();
@@ -194,12 +193,21 @@ namespace Kafka.Protocol<# Block(() =>
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsResponse), messageDefinition =>
 			{
 				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# LF();
-				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<# LF();
+				#>	return await <#= messageDefinition.Name #>.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);<#
 			}); LF();
+			#>throw new ArgumentException($"There is no response message with api key {apiKey}");<#
+		}); LF(2);
 
-			#>throw new ArgumentException($"{apiKey} is not supported");<#
+		#>public static Int16 GetResponseHeaderVersionFor(RequestPayload payload)<# Block(() =>
+		{
+			#>var apiKey = payload.Message.ApiMessageKey;<# LF();
+			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsResponse), messageDefinition =>
+			{
+				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# LF(); 
+				#>	return new <#= messageDefinition.Name #>(payload.Message.Version).HeaderVersion;<#
+			}); LF();
+			#>throw new ArgumentException($"There is no response message with api key {apiKey}");<#
 		});
-
 	}); LF(2);
 	
 	// Messages
@@ -220,6 +228,7 @@ namespace Kafka.Protocol<# Block(() =>
 				 #>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
 			}); LF(2);
 
+			#>internal override Int16 ApiMessageKey => ApiKey;<# LF();
 			#>public static readonly Int16 ApiKey = Int16.From(<#= messageDefinition.ApiKey #>);<# LF(2);
 
 			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From #>);<# LF();

@@ -6,6 +6,8 @@ namespace Kafka.Protocol
 {
     public abstract class Message
     {
+        internal abstract Int16 ApiMessageKey { get; }
+
         public abstract Int16 Version { get; }
 
         internal abstract ValueTask WriteToAsync(

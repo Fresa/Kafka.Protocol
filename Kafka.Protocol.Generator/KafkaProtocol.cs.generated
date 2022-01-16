@@ -2517,209 +2517,141 @@ namespace Kafka.Protocol
 		{
 			if (AddOffsetsToTxnRequest.ApiKey == apiKey)
 				return await AddOffsetsToTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AddPartitionsToTxnRequest.ApiKey == apiKey)
 				return await AddPartitionsToTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AllocateProducerIdsRequest.ApiKey == apiKey)
 				return await AllocateProducerIdsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterClientQuotasRequest.ApiKey == apiKey)
 				return await AlterClientQuotasRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterConfigsRequest.ApiKey == apiKey)
 				return await AlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterIsrRequest.ApiKey == apiKey)
 				return await AlterIsrRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterPartitionReassignmentsRequest.ApiKey == apiKey)
 				return await AlterPartitionReassignmentsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterReplicaLogDirsRequest.ApiKey == apiKey)
 				return await AlterReplicaLogDirsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterUserScramCredentialsRequest.ApiKey == apiKey)
 				return await AlterUserScramCredentialsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ApiVersionsRequest.ApiKey == apiKey)
 				return await ApiVersionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (BeginQuorumEpochRequest.ApiKey == apiKey)
 				return await BeginQuorumEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (BrokerHeartbeatRequest.ApiKey == apiKey)
 				return await BrokerHeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (BrokerRegistrationRequest.ApiKey == apiKey)
 				return await BrokerRegistrationRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ControlledShutdownRequest.ApiKey == apiKey)
 				return await ControlledShutdownRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (CreateAclsRequest.ApiKey == apiKey)
 				return await CreateAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (CreateDelegationTokenRequest.ApiKey == apiKey)
 				return await CreateDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (CreatePartitionsRequest.ApiKey == apiKey)
 				return await CreatePartitionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (CreateTopicsRequest.ApiKey == apiKey)
 				return await CreateTopicsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DeleteAclsRequest.ApiKey == apiKey)
 				return await DeleteAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DeleteGroupsRequest.ApiKey == apiKey)
 				return await DeleteGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DeleteRecordsRequest.ApiKey == apiKey)
 				return await DeleteRecordsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DeleteTopicsRequest.ApiKey == apiKey)
 				return await DeleteTopicsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeAclsRequest.ApiKey == apiKey)
 				return await DescribeAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeClientQuotasRequest.ApiKey == apiKey)
 				return await DescribeClientQuotasRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeClusterRequest.ApiKey == apiKey)
 				return await DescribeClusterRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeConfigsRequest.ApiKey == apiKey)
 				return await DescribeConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeDelegationTokenRequest.ApiKey == apiKey)
 				return await DescribeDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeGroupsRequest.ApiKey == apiKey)
 				return await DescribeGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeLogDirsRequest.ApiKey == apiKey)
 				return await DescribeLogDirsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeProducersRequest.ApiKey == apiKey)
 				return await DescribeProducersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeQuorumRequest.ApiKey == apiKey)
 				return await DescribeQuorumRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeTransactionsRequest.ApiKey == apiKey)
 				return await DescribeTransactionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeUserScramCredentialsRequest.ApiKey == apiKey)
 				return await DescribeUserScramCredentialsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ElectLeadersRequest.ApiKey == apiKey)
 				return await ElectLeadersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (EndQuorumEpochRequest.ApiKey == apiKey)
 				return await EndQuorumEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (EndTxnRequest.ApiKey == apiKey)
 				return await EndTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (EnvelopeRequest.ApiKey == apiKey)
 				return await EnvelopeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ExpireDelegationTokenRequest.ApiKey == apiKey)
 				return await ExpireDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (FetchRequest.ApiKey == apiKey)
 				return await FetchRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (FetchSnapshotRequest.ApiKey == apiKey)
 				return await FetchSnapshotRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (FindCoordinatorRequest.ApiKey == apiKey)
 				return await FindCoordinatorRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (HeartbeatRequest.ApiKey == apiKey)
 				return await HeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (IncrementalAlterConfigsRequest.ApiKey == apiKey)
 				return await IncrementalAlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (InitProducerIdRequest.ApiKey == apiKey)
 				return await InitProducerIdRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (JoinGroupRequest.ApiKey == apiKey)
 				return await JoinGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (LeaderAndIsrRequest.ApiKey == apiKey)
 				return await LeaderAndIsrRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (LeaveGroupRequest.ApiKey == apiKey)
 				return await LeaveGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ListGroupsRequest.ApiKey == apiKey)
 				return await ListGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ListOffsetsRequest.ApiKey == apiKey)
 				return await ListOffsetsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ListPartitionReassignmentsRequest.ApiKey == apiKey)
 				return await ListPartitionReassignmentsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ListTransactionsRequest.ApiKey == apiKey)
 				return await ListTransactionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (MetadataRequest.ApiKey == apiKey)
 				return await MetadataRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (OffsetCommitRequest.ApiKey == apiKey)
 				return await OffsetCommitRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (OffsetDeleteRequest.ApiKey == apiKey)
 				return await OffsetDeleteRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (OffsetFetchRequest.ApiKey == apiKey)
 				return await OffsetFetchRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (OffsetForLeaderEpochRequest.ApiKey == apiKey)
 				return await OffsetForLeaderEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ProduceRequest.ApiKey == apiKey)
 				return await ProduceRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (RenewDelegationTokenRequest.ApiKey == apiKey)
 				return await RenewDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (SaslAuthenticateRequest.ApiKey == apiKey)
 				return await SaslAuthenticateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (SaslHandshakeRequest.ApiKey == apiKey)
 				return await SaslHandshakeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (StopReplicaRequest.ApiKey == apiKey)
 				return await StopReplicaRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (SyncGroupRequest.ApiKey == apiKey)
 				return await SyncGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (TxnOffsetCommitRequest.ApiKey == apiKey)
 				return await TxnOffsetCommitRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (UnregisterBrokerRequest.ApiKey == apiKey)
 				return await UnregisterBrokerRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (UpdateFeaturesRequest.ApiKey == apiKey)
 				return await UpdateFeaturesRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (UpdateMetadataRequest.ApiKey == apiKey)
 				return await UpdateMetadataRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (VoteRequest.ApiKey == apiKey)
 				return await VoteRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (WriteTxnMarkersRequest.ApiKey == apiKey)
 				return await WriteTxnMarkersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
-			throw new ArgumentException($"{apiKey} is not supported");
+			throw new ArgumentException($"There is no request message with api key {apiKey}");
 		}
 
 		public static async ValueTask<Message> CreateResponseMessageFromReaderAsync(
@@ -2730,209 +2662,283 @@ namespace Kafka.Protocol
 		{
 			if (AddOffsetsToTxnResponse.ApiKey == apiKey)
 				return await AddOffsetsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
 				return await AddPartitionsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AllocateProducerIdsResponse.ApiKey == apiKey)
 				return await AllocateProducerIdsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterClientQuotasResponse.ApiKey == apiKey)
 				return await AlterClientQuotasResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterConfigsResponse.ApiKey == apiKey)
 				return await AlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterIsrResponse.ApiKey == apiKey)
 				return await AlterIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterPartitionReassignmentsResponse.ApiKey == apiKey)
 				return await AlterPartitionReassignmentsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterReplicaLogDirsResponse.ApiKey == apiKey)
 				return await AlterReplicaLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (AlterUserScramCredentialsResponse.ApiKey == apiKey)
 				return await AlterUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ApiVersionsResponse.ApiKey == apiKey)
 				return await ApiVersionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (BeginQuorumEpochResponse.ApiKey == apiKey)
 				return await BeginQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (BrokerHeartbeatResponse.ApiKey == apiKey)
 				return await BrokerHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (BrokerRegistrationResponse.ApiKey == apiKey)
 				return await BrokerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ControlledShutdownResponse.ApiKey == apiKey)
 				return await ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (CreateAclsResponse.ApiKey == apiKey)
 				return await CreateAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (CreateDelegationTokenResponse.ApiKey == apiKey)
 				return await CreateDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (CreatePartitionsResponse.ApiKey == apiKey)
 				return await CreatePartitionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (CreateTopicsResponse.ApiKey == apiKey)
 				return await CreateTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DeleteAclsResponse.ApiKey == apiKey)
 				return await DeleteAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DeleteGroupsResponse.ApiKey == apiKey)
 				return await DeleteGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DeleteRecordsResponse.ApiKey == apiKey)
 				return await DeleteRecordsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DeleteTopicsResponse.ApiKey == apiKey)
 				return await DeleteTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeAclsResponse.ApiKey == apiKey)
 				return await DescribeAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeClientQuotasResponse.ApiKey == apiKey)
 				return await DescribeClientQuotasResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeClusterResponse.ApiKey == apiKey)
 				return await DescribeClusterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeConfigsResponse.ApiKey == apiKey)
 				return await DescribeConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeDelegationTokenResponse.ApiKey == apiKey)
 				return await DescribeDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeGroupsResponse.ApiKey == apiKey)
 				return await DescribeGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeLogDirsResponse.ApiKey == apiKey)
 				return await DescribeLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeProducersResponse.ApiKey == apiKey)
 				return await DescribeProducersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeQuorumResponse.ApiKey == apiKey)
 				return await DescribeQuorumResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeTransactionsResponse.ApiKey == apiKey)
 				return await DescribeTransactionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (DescribeUserScramCredentialsResponse.ApiKey == apiKey)
 				return await DescribeUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ElectLeadersResponse.ApiKey == apiKey)
 				return await ElectLeadersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (EndQuorumEpochResponse.ApiKey == apiKey)
 				return await EndQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (EndTxnResponse.ApiKey == apiKey)
 				return await EndTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (EnvelopeResponse.ApiKey == apiKey)
 				return await EnvelopeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ExpireDelegationTokenResponse.ApiKey == apiKey)
 				return await ExpireDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (FetchResponse.ApiKey == apiKey)
 				return await FetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (FetchSnapshotResponse.ApiKey == apiKey)
 				return await FetchSnapshotResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (FindCoordinatorResponse.ApiKey == apiKey)
 				return await FindCoordinatorResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (HeartbeatResponse.ApiKey == apiKey)
 				return await HeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
 				return await IncrementalAlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (InitProducerIdResponse.ApiKey == apiKey)
 				return await InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (JoinGroupResponse.ApiKey == apiKey)
 				return await JoinGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (LeaderAndIsrResponse.ApiKey == apiKey)
 				return await LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (LeaveGroupResponse.ApiKey == apiKey)
 				return await LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ListGroupsResponse.ApiKey == apiKey)
 				return await ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ListOffsetsResponse.ApiKey == apiKey)
 				return await ListOffsetsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ListPartitionReassignmentsResponse.ApiKey == apiKey)
 				return await ListPartitionReassignmentsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ListTransactionsResponse.ApiKey == apiKey)
 				return await ListTransactionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (MetadataResponse.ApiKey == apiKey)
 				return await MetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (OffsetCommitResponse.ApiKey == apiKey)
 				return await OffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (OffsetDeleteResponse.ApiKey == apiKey)
 				return await OffsetDeleteResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (OffsetFetchResponse.ApiKey == apiKey)
 				return await OffsetFetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (OffsetForLeaderEpochResponse.ApiKey == apiKey)
 				return await OffsetForLeaderEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (ProduceResponse.ApiKey == apiKey)
 				return await ProduceResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (RenewDelegationTokenResponse.ApiKey == apiKey)
 				return await RenewDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (SaslAuthenticateResponse.ApiKey == apiKey)
 				return await SaslAuthenticateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (SaslHandshakeResponse.ApiKey == apiKey)
 				return await SaslHandshakeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (StopReplicaResponse.ApiKey == apiKey)
 				return await StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (SyncGroupResponse.ApiKey == apiKey)
 				return await SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (TxnOffsetCommitResponse.ApiKey == apiKey)
 				return await TxnOffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (UnregisterBrokerResponse.ApiKey == apiKey)
 				return await UnregisterBrokerResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (UpdateFeaturesResponse.ApiKey == apiKey)
 				return await UpdateFeaturesResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (UpdateMetadataResponse.ApiKey == apiKey)
 				return await UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (VoteResponse.ApiKey == apiKey)
 				return await VoteResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-
 			if (WriteTxnMarkersResponse.ApiKey == apiKey)
 				return await WriteTxnMarkersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			throw new ArgumentException($"There is no response message with api key {apiKey}");
+		}
 
-			throw new ArgumentException($"{apiKey} is not supported");
+		public static Int16 GetResponseHeaderVersionFor(RequestPayload payload)
+		{
+			var apiKey = payload.Message.ApiMessageKey;
+			if (AddOffsetsToTxnResponse.ApiKey == apiKey)
+				return new AddOffsetsToTxnResponse(payload.Message.Version).HeaderVersion;
+			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
+				return new AddPartitionsToTxnResponse(payload.Message.Version).HeaderVersion;
+			if (AllocateProducerIdsResponse.ApiKey == apiKey)
+				return new AllocateProducerIdsResponse(payload.Message.Version).HeaderVersion;
+			if (AlterClientQuotasResponse.ApiKey == apiKey)
+				return new AlterClientQuotasResponse(payload.Message.Version).HeaderVersion;
+			if (AlterConfigsResponse.ApiKey == apiKey)
+				return new AlterConfigsResponse(payload.Message.Version).HeaderVersion;
+			if (AlterIsrResponse.ApiKey == apiKey)
+				return new AlterIsrResponse(payload.Message.Version).HeaderVersion;
+			if (AlterPartitionReassignmentsResponse.ApiKey == apiKey)
+				return new AlterPartitionReassignmentsResponse(payload.Message.Version).HeaderVersion;
+			if (AlterReplicaLogDirsResponse.ApiKey == apiKey)
+				return new AlterReplicaLogDirsResponse(payload.Message.Version).HeaderVersion;
+			if (AlterUserScramCredentialsResponse.ApiKey == apiKey)
+				return new AlterUserScramCredentialsResponse(payload.Message.Version).HeaderVersion;
+			if (ApiVersionsResponse.ApiKey == apiKey)
+				return new ApiVersionsResponse(payload.Message.Version).HeaderVersion;
+			if (BeginQuorumEpochResponse.ApiKey == apiKey)
+				return new BeginQuorumEpochResponse(payload.Message.Version).HeaderVersion;
+			if (BrokerHeartbeatResponse.ApiKey == apiKey)
+				return new BrokerHeartbeatResponse(payload.Message.Version).HeaderVersion;
+			if (BrokerRegistrationResponse.ApiKey == apiKey)
+				return new BrokerRegistrationResponse(payload.Message.Version).HeaderVersion;
+			if (ControlledShutdownResponse.ApiKey == apiKey)
+				return new ControlledShutdownResponse(payload.Message.Version).HeaderVersion;
+			if (CreateAclsResponse.ApiKey == apiKey)
+				return new CreateAclsResponse(payload.Message.Version).HeaderVersion;
+			if (CreateDelegationTokenResponse.ApiKey == apiKey)
+				return new CreateDelegationTokenResponse(payload.Message.Version).HeaderVersion;
+			if (CreatePartitionsResponse.ApiKey == apiKey)
+				return new CreatePartitionsResponse(payload.Message.Version).HeaderVersion;
+			if (CreateTopicsResponse.ApiKey == apiKey)
+				return new CreateTopicsResponse(payload.Message.Version).HeaderVersion;
+			if (DeleteAclsResponse.ApiKey == apiKey)
+				return new DeleteAclsResponse(payload.Message.Version).HeaderVersion;
+			if (DeleteGroupsResponse.ApiKey == apiKey)
+				return new DeleteGroupsResponse(payload.Message.Version).HeaderVersion;
+			if (DeleteRecordsResponse.ApiKey == apiKey)
+				return new DeleteRecordsResponse(payload.Message.Version).HeaderVersion;
+			if (DeleteTopicsResponse.ApiKey == apiKey)
+				return new DeleteTopicsResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeAclsResponse.ApiKey == apiKey)
+				return new DescribeAclsResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeClientQuotasResponse.ApiKey == apiKey)
+				return new DescribeClientQuotasResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeClusterResponse.ApiKey == apiKey)
+				return new DescribeClusterResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeConfigsResponse.ApiKey == apiKey)
+				return new DescribeConfigsResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeDelegationTokenResponse.ApiKey == apiKey)
+				return new DescribeDelegationTokenResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeGroupsResponse.ApiKey == apiKey)
+				return new DescribeGroupsResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeLogDirsResponse.ApiKey == apiKey)
+				return new DescribeLogDirsResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeProducersResponse.ApiKey == apiKey)
+				return new DescribeProducersResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeQuorumResponse.ApiKey == apiKey)
+				return new DescribeQuorumResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeTransactionsResponse.ApiKey == apiKey)
+				return new DescribeTransactionsResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeUserScramCredentialsResponse.ApiKey == apiKey)
+				return new DescribeUserScramCredentialsResponse(payload.Message.Version).HeaderVersion;
+			if (ElectLeadersResponse.ApiKey == apiKey)
+				return new ElectLeadersResponse(payload.Message.Version).HeaderVersion;
+			if (EndQuorumEpochResponse.ApiKey == apiKey)
+				return new EndQuorumEpochResponse(payload.Message.Version).HeaderVersion;
+			if (EndTxnResponse.ApiKey == apiKey)
+				return new EndTxnResponse(payload.Message.Version).HeaderVersion;
+			if (EnvelopeResponse.ApiKey == apiKey)
+				return new EnvelopeResponse(payload.Message.Version).HeaderVersion;
+			if (ExpireDelegationTokenResponse.ApiKey == apiKey)
+				return new ExpireDelegationTokenResponse(payload.Message.Version).HeaderVersion;
+			if (FetchResponse.ApiKey == apiKey)
+				return new FetchResponse(payload.Message.Version).HeaderVersion;
+			if (FetchSnapshotResponse.ApiKey == apiKey)
+				return new FetchSnapshotResponse(payload.Message.Version).HeaderVersion;
+			if (FindCoordinatorResponse.ApiKey == apiKey)
+				return new FindCoordinatorResponse(payload.Message.Version).HeaderVersion;
+			if (HeartbeatResponse.ApiKey == apiKey)
+				return new HeartbeatResponse(payload.Message.Version).HeaderVersion;
+			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
+				return new IncrementalAlterConfigsResponse(payload.Message.Version).HeaderVersion;
+			if (InitProducerIdResponse.ApiKey == apiKey)
+				return new InitProducerIdResponse(payload.Message.Version).HeaderVersion;
+			if (JoinGroupResponse.ApiKey == apiKey)
+				return new JoinGroupResponse(payload.Message.Version).HeaderVersion;
+			if (LeaderAndIsrResponse.ApiKey == apiKey)
+				return new LeaderAndIsrResponse(payload.Message.Version).HeaderVersion;
+			if (LeaveGroupResponse.ApiKey == apiKey)
+				return new LeaveGroupResponse(payload.Message.Version).HeaderVersion;
+			if (ListGroupsResponse.ApiKey == apiKey)
+				return new ListGroupsResponse(payload.Message.Version).HeaderVersion;
+			if (ListOffsetsResponse.ApiKey == apiKey)
+				return new ListOffsetsResponse(payload.Message.Version).HeaderVersion;
+			if (ListPartitionReassignmentsResponse.ApiKey == apiKey)
+				return new ListPartitionReassignmentsResponse(payload.Message.Version).HeaderVersion;
+			if (ListTransactionsResponse.ApiKey == apiKey)
+				return new ListTransactionsResponse(payload.Message.Version).HeaderVersion;
+			if (MetadataResponse.ApiKey == apiKey)
+				return new MetadataResponse(payload.Message.Version).HeaderVersion;
+			if (OffsetCommitResponse.ApiKey == apiKey)
+				return new OffsetCommitResponse(payload.Message.Version).HeaderVersion;
+			if (OffsetDeleteResponse.ApiKey == apiKey)
+				return new OffsetDeleteResponse(payload.Message.Version).HeaderVersion;
+			if (OffsetFetchResponse.ApiKey == apiKey)
+				return new OffsetFetchResponse(payload.Message.Version).HeaderVersion;
+			if (OffsetForLeaderEpochResponse.ApiKey == apiKey)
+				return new OffsetForLeaderEpochResponse(payload.Message.Version).HeaderVersion;
+			if (ProduceResponse.ApiKey == apiKey)
+				return new ProduceResponse(payload.Message.Version).HeaderVersion;
+			if (RenewDelegationTokenResponse.ApiKey == apiKey)
+				return new RenewDelegationTokenResponse(payload.Message.Version).HeaderVersion;
+			if (SaslAuthenticateResponse.ApiKey == apiKey)
+				return new SaslAuthenticateResponse(payload.Message.Version).HeaderVersion;
+			if (SaslHandshakeResponse.ApiKey == apiKey)
+				return new SaslHandshakeResponse(payload.Message.Version).HeaderVersion;
+			if (StopReplicaResponse.ApiKey == apiKey)
+				return new StopReplicaResponse(payload.Message.Version).HeaderVersion;
+			if (SyncGroupResponse.ApiKey == apiKey)
+				return new SyncGroupResponse(payload.Message.Version).HeaderVersion;
+			if (TxnOffsetCommitResponse.ApiKey == apiKey)
+				return new TxnOffsetCommitResponse(payload.Message.Version).HeaderVersion;
+			if (UnregisterBrokerResponse.ApiKey == apiKey)
+				return new UnregisterBrokerResponse(payload.Message.Version).HeaderVersion;
+			if (UpdateFeaturesResponse.ApiKey == apiKey)
+				return new UpdateFeaturesResponse(payload.Message.Version).HeaderVersion;
+			if (UpdateMetadataResponse.ApiKey == apiKey)
+				return new UpdateMetadataResponse(payload.Message.Version).HeaderVersion;
+			if (VoteResponse.ApiKey == apiKey)
+				return new VoteResponse(payload.Message.Version).HeaderVersion;
+			if (WriteTxnMarkersResponse.ApiKey == apiKey)
+				return new WriteTxnMarkersResponse(payload.Message.Version).HeaderVersion;
+			throw new ArgumentException($"There is no response message with api key {apiKey}");
 		}
 	}
 
@@ -2947,6 +2953,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(25);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -3123,6 +3130,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(25);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -3242,6 +3250,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(24);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -3530,6 +3539,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(24);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -3873,6 +3883,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(67);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -3997,6 +4008,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(67);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -4170,6 +4182,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(49);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -4655,6 +4668,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(49);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -5025,6 +5039,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(33);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -5398,6 +5413,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(33);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -5683,6 +5699,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(56);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -6108,6 +6125,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(56);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -6582,6 +6600,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(45);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -6932,6 +6951,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(45);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -7356,6 +7376,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(34);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -7675,6 +7696,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(34);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -8018,6 +8040,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(51);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -8445,6 +8468,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(51);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -8703,6 +8727,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(18);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -8833,6 +8858,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(18);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -9576,6 +9602,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(53);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -9945,6 +9972,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(53);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -10336,6 +10364,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(63);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -10541,6 +10570,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(63);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -10745,6 +10775,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(62);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -11280,6 +11311,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(62);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -11428,6 +11460,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -11656,6 +11689,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -11927,6 +11961,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(7);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -12057,6 +12092,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(7);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -12288,6 +12324,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(30);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -12639,6 +12676,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(30);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -12870,6 +12908,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(38);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -13104,6 +13143,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(38);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -13412,6 +13452,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(37);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -13785,6 +13826,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(37);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -14045,6 +14087,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 5;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(19);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -14622,6 +14665,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 5;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(19);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -15295,6 +15339,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -15444,6 +15489,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(31);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -15795,6 +15841,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(31);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -16363,6 +16410,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(42);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -16458,6 +16506,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(42);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -16689,6 +16738,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(21);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -17035,6 +17085,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(21);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -17405,6 +17456,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(20);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -17697,6 +17749,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(20);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -18004,6 +18057,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(29);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -18270,6 +18324,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(29);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -18784,6 +18839,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(48);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -19045,6 +19101,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(48);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -19554,6 +19611,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(60);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -19649,6 +19707,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(60);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -20077,6 +20136,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(32);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -20383,6 +20443,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(32);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -21176,6 +21237,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(41);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -21383,6 +21445,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(41);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -21915,6 +21978,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 5;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(15);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -22044,6 +22108,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 5;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(15);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -22653,6 +22718,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(35);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -22860,6 +22926,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(35);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -23394,6 +23461,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(61);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -23599,6 +23667,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(61);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -24210,6 +24279,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(55);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -24498,6 +24568,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(55);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -25069,6 +25140,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(65);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -25164,6 +25236,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(65);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -25649,6 +25722,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(50);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -25829,6 +25903,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(50);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -26280,6 +26355,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(43);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -26550,6 +26626,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(43);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -26954,6 +27031,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(54);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -27350,6 +27428,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(54);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -27741,6 +27820,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(26);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -27917,6 +27997,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(26);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -28036,6 +28117,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(58);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -28185,6 +28267,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(58);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -28306,6 +28389,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(40);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -28428,6 +28512,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(40);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -28574,6 +28659,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 12;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(1);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -29542,6 +29628,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 12;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(1);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -30809,6 +30896,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(59);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -31390,6 +31478,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(59);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -32123,6 +32212,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(10);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -32295,6 +32385,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(10);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -32859,6 +32950,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(12);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -33048,6 +33140,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(12);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -33171,6 +33264,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(44);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -33571,6 +33665,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(44);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -33856,6 +33951,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(22);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -34050,6 +34146,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(22);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -34225,6 +34322,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 6;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(11);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -34613,6 +34711,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 6;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(11);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -35064,6 +35163,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(4);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -36012,6 +36112,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(4);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -36436,6 +36537,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -36690,6 +36792,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(13);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -36985,6 +37088,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(13);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -37306,6 +37410,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(16);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -37408,6 +37513,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(16);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -37701,6 +37807,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 6;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(2);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -38143,6 +38250,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 6;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(2);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -38623,6 +38731,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(46);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -38861,6 +38970,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(46);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -39312,6 +39422,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(66);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -39434,6 +39545,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(66);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -39738,6 +39850,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 9;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(3);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -40061,6 +40174,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 9;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(3);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -40993,6 +41107,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 8;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(8);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -41572,6 +41687,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 8;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(8);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -41919,6 +42035,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(47);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -42238,6 +42355,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(47);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -42608,6 +42726,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 6;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(9);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -43200,6 +43319,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 6;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(9);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -44273,6 +44393,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(23);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -44658,6 +44779,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(23);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -45067,6 +45189,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 9;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -45480,6 +45603,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 9;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -46122,6 +46246,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(39);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -46244,6 +46369,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(39);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -46390,6 +46516,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -46574,6 +46701,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -46669,6 +46797,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(36);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -46764,6 +46893,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(36);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -46943,6 +47073,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(17);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -47038,6 +47169,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = false;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(17);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -47157,6 +47289,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -47252,6 +47385,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -47374,6 +47508,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(5);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -48184,6 +48319,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 2;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(5);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -48442,6 +48578,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(14);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -48844,6 +48981,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 4;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(14);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -49068,6 +49206,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(28);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -49667,6 +49806,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 3;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(28);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -50010,6 +50150,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(64);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -50105,6 +50246,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(64);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -50251,6 +50393,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(57);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -50514,6 +50657,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(57);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -50826,6 +50970,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 6;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(6);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -51927,6 +52072,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 6;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(6);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -52019,6 +52165,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(52);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -52442,6 +52589,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = true;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(52);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -52860,6 +53008,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(27);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
@@ -53260,6 +53409,7 @@ namespace Kafka.Protocol
 			IsFlexibleVersion = version >= 1;
 		}
 
+		internal override Int16 ApiMessageKey => ApiKey;
 		public static readonly Int16 ApiKey = Int16.From(27);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
