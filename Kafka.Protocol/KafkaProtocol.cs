@@ -2962,7 +2962,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -3139,7 +3139,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -3259,7 +3259,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -3548,7 +3548,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -3892,7 +3892,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -4017,7 +4017,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -4191,7 +4191,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -4677,7 +4677,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -5048,7 +5048,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -5422,7 +5422,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -5708,7 +5708,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -6134,7 +6134,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -6609,7 +6609,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -6960,7 +6960,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -7385,7 +7385,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -7705,7 +7705,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -8049,7 +8049,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -8477,7 +8477,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -8736,7 +8736,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -8867,7 +8867,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -9611,7 +9611,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -9981,7 +9981,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -10373,7 +10373,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -10579,7 +10579,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -10784,7 +10784,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -11320,7 +11320,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -11469,7 +11469,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -11698,7 +11698,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -11970,7 +11970,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -12101,7 +12101,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -12333,7 +12333,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -12685,7 +12685,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -12917,7 +12917,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -13152,7 +13152,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -13461,7 +13461,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -13835,7 +13835,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -14096,7 +14096,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -14674,7 +14674,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -15348,7 +15348,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -15498,7 +15498,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -15850,7 +15850,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -16419,7 +16419,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -16515,7 +16515,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -16747,7 +16747,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -17094,7 +17094,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -17465,7 +17465,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -17758,7 +17758,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -18066,7 +18066,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -18333,7 +18333,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -18848,7 +18848,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -19110,7 +19110,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -19620,7 +19620,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -19716,7 +19716,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -20145,7 +20145,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -20452,7 +20452,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -21246,7 +21246,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -21454,7 +21454,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -21987,7 +21987,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -22117,7 +22117,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -22727,7 +22727,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -22935,7 +22935,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -23470,7 +23470,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -23676,7 +23676,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -24288,7 +24288,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -24577,7 +24577,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -25149,7 +25149,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -25245,7 +25245,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -25731,7 +25731,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -25912,7 +25912,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -26364,7 +26364,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -26635,7 +26635,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -27040,7 +27040,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -27437,7 +27437,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -27829,7 +27829,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -28006,7 +28006,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -28126,7 +28126,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -28276,7 +28276,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -28398,7 +28398,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -28521,7 +28521,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -28668,7 +28668,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -29637,7 +29637,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -30905,7 +30905,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -31487,7 +31487,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -32221,7 +32221,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -32394,7 +32394,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -32959,7 +32959,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -33149,7 +33149,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -33273,7 +33273,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -33674,7 +33674,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -33960,7 +33960,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -34155,7 +34155,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -34331,7 +34331,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -34720,7 +34720,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -35172,7 +35172,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -36121,7 +36121,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -36546,7 +36546,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -36801,7 +36801,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -37097,7 +37097,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -37419,7 +37419,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -37522,7 +37522,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -37816,7 +37816,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -38259,7 +38259,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -38740,7 +38740,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -38979,7 +38979,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -39431,7 +39431,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -39554,7 +39554,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -39859,7 +39859,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -40183,7 +40183,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -41116,7 +41116,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -41696,7 +41696,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -42044,7 +42044,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -42364,7 +42364,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -42735,7 +42735,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -43328,7 +43328,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -44402,7 +44402,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -44788,7 +44788,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -45198,7 +45198,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -45612,7 +45612,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -46255,7 +46255,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -46378,7 +46378,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -46525,7 +46525,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -46710,7 +46710,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -46806,7 +46806,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -46902,7 +46902,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -47082,7 +47082,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -47178,7 +47178,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -47298,7 +47298,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -47394,7 +47394,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -47517,7 +47517,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -48328,7 +48328,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -48587,7 +48587,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -48990,7 +48990,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -49215,7 +49215,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -49815,7 +49815,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -50159,7 +50159,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -50255,7 +50255,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -50402,7 +50402,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -50666,7 +50666,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -50979,7 +50979,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -52081,7 +52081,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -52174,7 +52174,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -52598,7 +52598,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -53017,7 +53017,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{
@@ -53418,7 +53418,7 @@ namespace Kafka.Protocol
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
-		internal Int16 HeaderVersion 
+		public Int16 HeaderVersion 
 		{
 			get
 			{

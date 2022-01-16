@@ -238,7 +238,7 @@ namespace Kafka.Protocol<# Block(() =>
 			#>internal bool IsFlexibleVersion { get; }<# LF(2);
 
 			// https://github.com/apache/kafka/blob/99b9b3e84f4e98c3f07714e1de6a139a004cbc5b/generator/src/main/java/org/apache/kafka/message/ApiMessageTypeGenerator.java#L324
-			#>internal Int16 HeaderVersion <# Block(() => 
+			#>public Int16 HeaderVersion <# Block(() => 
 			{
 				#>get<# Block(() => 
 				{
@@ -247,7 +247,7 @@ namespace Kafka.Protocol<# Block(() =>
 						switch (messageDefinition.ApiKey)
 						{
 							// Version 0 of ControlledShutdownRequest has a non-standard request header
-							// which does not include clientId.  Version 1 of ControlledShutdownRequest
+							// which does not include clientId. Version 1 of ControlledShutdownRequest
 							// and later use the standard request header.								
 							case 7:
 								#>if (Version == 0)<# LF();
