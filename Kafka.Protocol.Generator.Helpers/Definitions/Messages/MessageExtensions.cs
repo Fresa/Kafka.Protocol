@@ -30,6 +30,11 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
             return message.Name.ToUpper() == "REQUESTHEADER";
         }
 
+        public static bool IsData(this Message message)
+        {
+            return message.Type.ToUpper() == "DATA";
+        }
+
         public static IEnumerable<Field> GetTaggedFields(this Message message) =>
             message.Fields
                 .Where(childField => childField.Tag.HasValue)

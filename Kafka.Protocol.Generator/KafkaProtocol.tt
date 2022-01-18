@@ -406,8 +406,6 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
-				// If this is the RequestHeader it determines it's version by reading the message api key and version it represents
-				//if (messageDefinition.ApiKey == 0)
 				#>var instance = new <#= messageDefinition.Name #>(version);<# LF();
 				
 				messageDefinition.Fields.ForEach(messageField => 
@@ -467,6 +465,92 @@ namespace Kafka.Protocol<# Block(() =>
 		}); LF();
 	}); LF();
 	
+	// Data
+	PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsData), messageDefinition =>
+	{
+		var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
+		var flexibleVersionRange = VersionRange.Parse(messageDefinition.FlexibleVersions);
+
+		#>public class <#= messageDefinition.Name #><# Block(() => 
+		{
+			#>public <#= messageDefinition.Name #>(Int16 version)<# Block(() => 
+			{
+				#>if (version.InRange(MinVersion, MaxVersion) == false) <# LF();
+				#>	throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<# LF(2);
+
+				 #>Version = version;<# LF();
+				 #>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
+			}); LF(2);
+
+			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From ?? throw new InvalidOperationException("From cannot be null") #>);<# LF();
+			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To ?? throw new InvalidOperationException("To cannot be null") #>);<# LF(2);
+
+			#>public Int16 Version { get; }<# LF();
+			#>internal bool IsFlexibleVersion { get; }<# LF(2);
+
+			PrintCreateTagSection(messageDefinition.GetTaggedFields()); LF(2);
+
+			#>internal int GetSize() =><# LF();
+			messageDefinition.Fields.ForEach((messageField, messageFieldIndex) => 
+			{
+				PrintSizeOf(messageField, messageFieldIndex == 0);
+			}); #> +<# LF();
+			PrintSizeOfTags(); #>;<# LF(2);
+
+			#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+			{
+				#>var instance = new <#= messageDefinition.Name #>(version);<# LF();
+				
+				messageDefinition.Fields.ForEach(messageField => 
+				{
+					PrintReadField(messageField);
+				}); LF();
+
+				PrintReadTags(messageDefinition.GetTaggedFields(), messageDefinition.Name);
+
+				if (messageDefinition.Fields.Any())
+				{
+					#>return instance;<#
+				}
+				else 
+				{
+					#>return await new ValueTask<<#= messageDefinition.Name #>>(instance);<#
+				}
+			}); LF(2);
+
+			#>internal async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
+			{
+				if (messageDefinition.Fields.Any() == false)
+				{
+					#>await Task.CompletedTask;<#
+				}
+
+				messageDefinition.Fields.ForEach(messageField => 
+				{
+					PrintWriteTo(messageField);
+				}); LF();
+
+				PrintWriteTags();
+			}); if (messageDefinition.Fields.Any()) LF(2);
+
+			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
+			{
+				PrintField(messageField, messageDefinition.Name);
+				if (messageFieldIndex + 1 != messageFieldCount) LF();
+			});
+
+			if (messageDefinition.CommonStructs != null)
+			{
+				LF(2);
+				PrintOnNewRowForEachWithIndex(messageDefinition.CommonStructs, (commonStruct, commonStructIndex, commonStructCount) =>
+				{
+					PrintCommonStruct(commonStruct);
+					if (commonStructIndex + 1 != commonStructCount) LF();
+				});
+			}
+		}); LF();
+	}); LF();
+
 	#>public static class ResponseExtensions<# Block(() => 
 	{
 		#>public static ApiVersionsResponse WithAllApiKeys(this ApiVersionsResponse response)<# Block(() => 
