@@ -14,9 +14,6 @@ namespace Kafka.Protocol
         public RequestHeader Header { get; }
         public Message Message { get; }
 
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
-
         private static readonly ILogger Logger =
             LogFactory.Create<RequestPayload>();
 
@@ -32,13 +29,17 @@ namespace Kafka.Protocol
             Stream writer,
             CancellationToken cancellationToken = default)
         {
-            var size = Header.GetSize() +
-                       Message.GetSize();
-            await Int32.From(size)
+            var headerSize = Header.GetSize();
+            var messageSize = Message.GetSize();
+            await Int32.From(headerSize + messageSize)
                 .WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
+            
+            Logger.Debug("Writing header ({size} bytes) {@header}", headerSize, Header);
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
+            
+            Logger.Debug("Writing message ({size} bytes) {@message}", messageSize, Message);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -58,7 +59,8 @@ namespace Kafka.Protocol
                     reader,
                     cancellationToken)
                 .ConfigureAwait(false);
-            Logger.Debug("Read header {@header}", header);
+            var headerSize = header.GetSize();
+            Logger.Debug("Read header ({size} bytes) {@header}", headerSize, header);
 
             var message = await Messages
                 .CreateRequestMessageFromReaderAsync(
@@ -67,10 +69,11 @@ namespace Kafka.Protocol
                     reader,
                     cancellationToken)
                 .ConfigureAwait(false);
-            Logger.Debug("Read message {messageType} {@message}",
-                message.GetType(), message);
+            var messageSize = message.GetSize();
+            Logger.Debug("Read message ({size} bytes) {messageType} {@message}",
+                messageSize, message.GetType(), message);
 
-            var actualPayloadSize = header.GetSize() + message.GetSize();
+            var actualPayloadSize = headerSize + messageSize;
             // todo: Why is Confluent.Kafka client sending 4 extra bytes containing zeros in the ApiVersionsRequest?
             if (actualPayloadSize < size.Value)
             {
@@ -82,9 +85,14 @@ namespace Kafka.Protocol
                     string.Join(" ", unreadBytes.Take(1000)) + (unreadBytes.Length > 1000 ? " ..." : ""));
             }
 
-            if (size.Value > actualPayloadSize)
+            //if (size.Value > actualPayloadSize)
+            //{
+            //    throw new CorruptMessageException($"Expected size {size} got {actualPayloadSize}");
+            //}
+
+            if (reader.TryRead(out var a))
             {
-                throw new CorruptMessageException($"Expected size {size} got {actualPayloadSize}");
+                throw new InvalidOperationException();
             }
 
             return new RequestPayload(header, message);
