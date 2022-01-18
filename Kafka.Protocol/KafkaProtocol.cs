@@ -3082,7 +3082,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class RequestHeader : Header
+	public class RequestHeader
 	{
 		public RequestHeader(Int16 version)
 		{
@@ -3096,7 +3096,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MinVersion = Int16.From(0);
 		public static readonly Int16 MaxVersion = Int16.From(2);
 
-		public override Int16 Version { get; }
+		public Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
 		private Tags.TagSection CreateTagSection()
@@ -3104,7 +3104,7 @@ namespace Kafka.Protocol
 			return new Tags.TagSection();
 		}
 
-		internal override int GetSize() =>
+		internal int GetSize() =>
 			_requestApiKey.GetSize(IsFlexibleVersion) +
 			_requestApiVersion.GetSize(IsFlexibleVersion) +
 			_correlationId.GetSize(IsFlexibleVersion) +
@@ -3147,7 +3147,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		internal async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
 			await _requestApiKey.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _requestApiVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -3260,7 +3260,7 @@ namespace Kafka.Protocol
 		}
 	}
 
-	public class ResponseHeader : Header
+	public class ResponseHeader
 	{
 		public ResponseHeader(Int16 version)
 		{
@@ -3274,7 +3274,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 MinVersion = Int16.From(0);
 		public static readonly Int16 MaxVersion = Int16.From(1);
 
-		public override Int16 Version { get; }
+		public Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
 
 		private Tags.TagSection CreateTagSection()
@@ -3282,7 +3282,7 @@ namespace Kafka.Protocol
 			return new Tags.TagSection();
 		}
 
-		internal override int GetSize() =>
+		internal int GetSize() =>
 			_correlationId.GetSize(IsFlexibleVersion) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
@@ -3309,7 +3309,7 @@ namespace Kafka.Protocol
 			return instance;
 		}
 
-		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		internal async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
 			await _correlationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 

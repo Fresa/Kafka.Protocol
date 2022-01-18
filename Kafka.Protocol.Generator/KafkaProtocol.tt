@@ -225,7 +225,7 @@ namespace Kafka.Protocol<# Block(() =>
 		var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
 		var flexibleVersionRange = VersionRange.Parse(messageDefinition.FlexibleVersions);
 
-		#>public class <#= messageDefinition.Name #> : Header<# Block(() => 
+		#>public class <#= messageDefinition.Name #><# Block(() => 
 		{
 			#>public <#= messageDefinition.Name #>(Int16 version)<# Block(() => 
 			{
@@ -239,12 +239,12 @@ namespace Kafka.Protocol<# Block(() =>
 			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From ?? throw new InvalidOperationException("From cannot be null") #>);<# LF();
 			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To ?? throw new InvalidOperationException("To cannot be null") #>);<# LF(2);
 
-			#>public override Int16 Version { get; }<# LF();
+			#>public Int16 Version { get; }<# LF();
 			#>internal bool IsFlexibleVersion { get; }<# LF(2);
 
 			PrintCreateTagSection(messageDefinition.GetTaggedFields()); LF(2);
 
-			#>internal override int GetSize() =><# LF();
+			#>internal int GetSize() =><# LF();
 			messageDefinition.Fields.ForEach((messageField, messageFieldIndex) => 
 			{
 				PrintSizeOf(messageField, messageFieldIndex == 0);
@@ -299,7 +299,7 @@ namespace Kafka.Protocol<# Block(() =>
 					#>return instance;<#
 				}); LF(2);
 			}
-			#>internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
+			#>internal async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
 			{
 				if (messageDefinition.Fields.Any() == false)
 				{
