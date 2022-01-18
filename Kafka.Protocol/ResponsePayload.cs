@@ -51,7 +51,9 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
 
             var header = await ResponseHeader.FromReaderAsync(
-                    Messages.GetResponseHeaderVersionFor(requestPayload),
+                    Messages.GetResponseHeaderVersionFor(
+                        requestPayload.Message.ApiMessageKey, 
+                        requestPayload.Message.Version),
                     reader,
                     cancellationToken)
                 .ConfigureAwait(false);

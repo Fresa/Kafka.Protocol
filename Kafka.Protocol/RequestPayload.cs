@@ -45,7 +45,6 @@ namespace Kafka.Protocol
         }
 
         public static async ValueTask<RequestPayload> ReadFromAsync(
-            Int16 headerVersion,
             PipeReader reader,
             CancellationToken cancellationToken = default)
         {
@@ -55,7 +54,6 @@ namespace Kafka.Protocol
 
             var header = await RequestHeader
                 .FromReaderAsync(
-                    headerVersion,
                     reader,
                     cancellationToken)
                 .ConfigureAwait(false);

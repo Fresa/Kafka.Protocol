@@ -3,7 +3,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Kafka.Protocol.Records;
 using Test.It.With.XUnit;
 using Xunit;
 
@@ -15,7 +14,7 @@ namespace Kafka.Protocol.Tests.Records
         {
             public class When_calculating_length : XUnit2SpecificationAsync
             {
-                private readonly Header _header = new()
+                private readonly Kafka.Protocol.Records.Header _header = new()
                 {
                     Key = "key1",
                     Value = Encoding.UTF8.GetBytes("value1")

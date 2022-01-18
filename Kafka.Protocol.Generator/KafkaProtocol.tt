@@ -208,20 +208,132 @@ namespace Kafka.Protocol<# Block(() =>
 			#>throw new ArgumentException($"There is no request message with api key {apiKey}");<#
 		}); LF(2);
 
-		#>public static Int16 GetResponseHeaderVersionFor(RequestPayload payload)<# Block(() =>
+		#>public static Int16 GetResponseHeaderVersionFor(Int16 apiKey, Int16 version)<# Block(() =>
 		{
-			#>var apiKey = payload.Message.ApiMessageKey;<# LF();
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsResponse), messageDefinition =>
 			{
 				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# LF(); 
-				#>	return new <#= messageDefinition.Name #>(payload.Message.Version).HeaderVersion;<#
+				#>	return new <#= messageDefinition.Name #>(version).HeaderVersion;<#
 			}); LF();
 			#>throw new ArgumentException($"There is no response message with api key {apiKey}");<#
 		});
 	}); LF(2);
 	
+	// Headers
+	PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsHeader), messageDefinition =>
+	{
+		var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
+		var flexibleVersionRange = VersionRange.Parse(messageDefinition.FlexibleVersions);
+
+		#>public class <#= messageDefinition.Name #> : Header<# Block(() => 
+		{
+			#>public <#= messageDefinition.Name #>(Int16 version)<# Block(() => 
+			{
+				#>if (version.InRange(MinVersion, MaxVersion) == false) <# LF();
+				#>	throw new UnsupportedVersionException($"<#= messageDefinition.Name #> does not support version {version}. Valid versions are: <#= messageDefinition.ValidVersions #>");<# LF(2);
+
+				 #>Version = version;<# LF();
+				 #>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
+			}); LF(2);
+
+			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From ?? throw new InvalidOperationException("From cannot be null") #>);<# LF();
+			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To ?? throw new InvalidOperationException("To cannot be null") #>);<# LF(2);
+
+			#>public override Int16 Version { get; }<# LF();
+			#>internal bool IsFlexibleVersion { get; }<# LF(2);
+
+			PrintCreateTagSection(messageDefinition.GetTaggedFields()); LF(2);
+
+			#>internal override int GetSize() =><# LF();
+			messageDefinition.Fields.ForEach((messageField, messageFieldIndex) => 
+			{
+				PrintSizeOf(messageField, messageFieldIndex == 0);
+			}); #> +<# LF();
+			PrintSizeOfTags(); #>;<# LF(2);
+
+			if (messageDefinition.IsRequestHeader())
+			{
+				#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+				{
+					#>var instance = new <#= messageDefinition.Name #>(MinVersion);<# LF();
+				
+					var fieldsRead = new List<string>();
+					messageDefinition.Fields.Take(2).ToList().ForEach(messageField => 
+					{
+						PrintReadField(messageField);
+						fieldsRead.Add(messageField.Name);
+					}); LF();
+
+					#>instance = new <#= messageDefinition.Name #>(Messages.GetRequestHeaderVersionFor(<#= string.Join(", ", fieldsRead.Select(fieldRead => $"instance.{fieldRead}")) #>))<# Block(() =>
+					{
+						PrintOnNewRowForEachWithIndex(fieldsRead, (fieldName, fieldNameIndex, fieldNameCount) =>
+						{
+							#><#= fieldName #> = instance.<#= fieldName #><#
+							if (fieldNameIndex + 1 != fieldNameCount) #>, <#
+						});
+					});#>;<# LF(2);
+					
+					messageDefinition.Fields.Skip(2).ToList().ForEach(messageField => 
+					{
+						PrintReadField(messageField);
+					}); LF();
+
+					PrintReadTags(messageDefinition.GetTaggedFields(), messageDefinition.Name);
+
+					#>return instance;<#
+				}); LF(2);
+			} 
+			else 
+			{			
+				#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+				{
+					#>var instance = new <#= messageDefinition.Name #>(version);<# LF();
+				
+					messageDefinition.Fields.ForEach(messageField => 
+					{
+						PrintReadField(messageField);
+					}); LF();
+
+					PrintReadTags(messageDefinition.GetTaggedFields(), messageDefinition.Name);
+
+					#>return instance;<#
+				}); LF(2);
+			}
+			#>internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
+			{
+				if (messageDefinition.Fields.Any() == false)
+				{
+					#>await Task.CompletedTask;<#
+				}
+
+				messageDefinition.Fields.ForEach(messageField => 
+				{
+					PrintWriteTo(messageField);
+				}); LF();
+
+				PrintWriteTags();
+			}); if (messageDefinition.Fields.Any()) LF(2);
+
+			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>
+			{
+				PrintField(messageField, messageDefinition.Name);
+				if (messageFieldIndex + 1 != messageFieldCount) LF();
+			});
+
+			if (messageDefinition.CommonStructs != null)
+			{
+				LF(2);
+				PrintOnNewRowForEachWithIndex(messageDefinition.CommonStructs, (commonStruct, commonStructIndex, commonStructCount) =>
+				{
+					PrintCommonStruct(commonStruct);
+					if (commonStructIndex + 1 != commonStructCount) LF();
+				});
+			}
+		}); LF();
+	}); LF();
+
 	// Messages
-	PrintOnNewRowForEach(messageDefinitions, messageDefinition =>
+	PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsMessage), messageDefinition =>
 	{
 		var hasResponse = messageDefinitions.TryGetResponseMessageDefinitionFrom(messageDefinition, out var responseMessageDefinition);
 		var versionRange = VersionRange.Parse(messageDefinition.ValidVersions);
@@ -294,6 +406,8 @@ namespace Kafka.Protocol<# Block(() =>
 
 			#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
 			{
+				// If this is the RequestHeader it determines it's version by reading the message api key and version it represents
+				//if (messageDefinition.ApiKey == 0)
 				#>var instance = new <#= messageDefinition.Name #>(version);<# LF();
 				
 				messageDefinition.Fields.ForEach(messageField => 

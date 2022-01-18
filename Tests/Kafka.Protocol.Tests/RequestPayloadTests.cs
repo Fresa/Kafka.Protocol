@@ -38,7 +38,7 @@ namespace Kafka.Protocol.Tests
                 try
                 {
                     await RequestPayload
-                        .ReadFromAsync(0, _reader,
+                        .ReadFromAsync(_reader,
                             new CancellationTokenSource(TimeSpan.FromSeconds(2))
                                 .Token)
                         .ConfigureAwait(false);

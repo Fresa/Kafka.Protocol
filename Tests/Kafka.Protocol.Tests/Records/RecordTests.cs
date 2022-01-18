@@ -21,7 +21,7 @@ namespace Kafka.Protocol.Tests.Records
                     Attributes = 1,
                     Headers = new[]
                     {
-                        new Header()
+                        new Protocol.Records.Header()
                     },
                     Key = Encoding.UTF8.GetBytes("key1"),
                     OffsetDelta = 2,
