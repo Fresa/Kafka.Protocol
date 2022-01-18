@@ -231,8 +231,8 @@ namespace Kafka.Protocol<# Block(() =>
 			#>internal override Int16 ApiMessageKey => ApiKey;<# LF();
 			#>public static readonly Int16 ApiKey = Int16.From(<#= messageDefinition.ApiKey #>);<# LF(2);
 
-			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From #>);<# LF();
-			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To ?? -10 #>);<# LF(2);
+			#>public static readonly Int16 MinVersion = Int16.From(<#= versionRange.From ?? throw new InvalidOperationException("From cannot be null") #>);<# LF();
+			#>public static readonly Int16 MaxVersion = Int16.From(<#= versionRange.To ?? throw new InvalidOperationException("To cannot be null") #>);<# LF(2);
 
 			#>public override Int16 Version { get; }<# LF();
 			#>internal bool IsFlexibleVersion { get; }<# LF(2);

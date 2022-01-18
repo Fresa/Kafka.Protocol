@@ -72,6 +72,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
         public static VersionRange Parse(string versionRangeExpression)
         {
+            char[] delimiters = { '-', '+' };
             const string expectedFormatMessage = "Expected version range expression. Example: none, 0+, 1-2";
 
             if (string.IsNullOrEmpty(versionRangeExpression))
@@ -80,14 +81,14 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                     nameof(versionRangeExpression),
                     expectedFormatMessage);
             }
-
+            
             if (versionRangeExpression.Equals("none"))
             {
                 return new VersionRange();
             }
             
             var versions = versionRangeExpression.Split(
-                new[] {'-', '+'},
+                delimiters,
                 StringSplitOptions.RemoveEmptyEntries);
 
             if (versions.Length > 2)
@@ -106,7 +107,9 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
 
             if (versions.Length == 1)
             {
-                return new VersionRange(from);
+                return delimiters.Any(versionRangeExpression.Contains)
+                    ? new VersionRange(from)
+                    : new VersionRange(from, from);
             }
 
             if (int.TryParse(versions.Last(), out var to) == false)
