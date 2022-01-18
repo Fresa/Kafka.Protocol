@@ -208,12 +208,13 @@ namespace Kafka.Protocol<# Block(() =>
 			#>throw new ArgumentException($"There is no request message with api key {apiKey}");<#
 		}); LF(2);
 
-		#>public static Int16 GetResponseHeaderVersionFor(Int16 apiKey, Int16 version)<# Block(() =>
+		#>public static Int16 GetResponseHeaderVersionFor(RequestPayload payload)<# Block(() =>
 		{
+			#>var apiKey = payload.Message.ApiMessageKey;<# LF();
 			PrintOnNewRowForEach(messageDefinitions.Where(MessageExtensions.IsResponse), messageDefinition =>
 			{
 				#>if (<#= messageDefinition.Name #>.ApiKey == apiKey)<# LF(); 
-				#>	return new <#= messageDefinition.Name #>(version).HeaderVersion;<#
+				#>	return new <#= messageDefinition.Name #>(payload.Message.Version).HeaderVersion;<#
 			}); LF();
 			#>throw new ArgumentException($"There is no response message with api key {apiKey}");<#
 		});
