@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
@@ -39,7 +37,8 @@ namespace Kafka.Protocol
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
             
-            Logger.Debug("Writing message ({size} bytes) {@message}", messageSize, Message);
+            Logger.Debug("Writing message {messageType} ({size} bytes) {@message}", 
+                Message.GetType().Name, messageSize, Message);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -68,8 +67,8 @@ namespace Kafka.Protocol
                     cancellationToken)
                 .ConfigureAwait(false);
             var messageSize = message.GetSize();
-            Logger.Debug("Read message ({size} bytes) {messageType} {@message}",
-                messageSize, message.GetType(), message);
+            Logger.Debug("Read message {messageType} ({size} bytes) {@message}",
+                message.GetType().Name, messageSize, message);
 
             var actualPayloadSize = headerSize + messageSize;
             // todo: Why is Confluent.Kafka client sending 4 extra bytes containing zeros in the ApiVersionsRequest?
@@ -82,17 +81,7 @@ namespace Kafka.Protocol
                     unreadLength,
                     string.Join(" ", unreadBytes.Take(1000)) + (unreadBytes.Length > 1000 ? " ..." : ""));
             }
-
-            //if (size.Value > actualPayloadSize)
-            //{
-            //    throw new CorruptMessageException($"Expected size {size} got {actualPayloadSize}");
-            //}
-
-            if (reader.TryRead(out var a))
-            {
-                throw new InvalidOperationException();
-            }
-
+            
             return new RequestPayload(header, message);
         }
     }

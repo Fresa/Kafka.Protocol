@@ -37,7 +37,8 @@ namespace Kafka.Protocol
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
 
-            Logger.Debug("Writing message ({size} bytes) {@message}", messageSize, Message);
+            Logger.Debug("Writing message {messageType} ({size} bytes) {@message}", 
+                Message.GetType().Name, messageSize, Message);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -66,8 +67,8 @@ namespace Kafka.Protocol
                     cancellationToken)
                 .ConfigureAwait(false);
             var messageSize = message.GetSize();
-            Logger.Debug("Read message ({size} bytes) {messageType} {@message}",
-                messageSize, message.GetType(), message);
+            Logger.Debug("Read message {messageType} ({size} bytes) {@message}",
+                message.GetType().Name, messageSize, message);
 
             var actualPayloadSize = headerSize + messageSize;
             if (payloadSize.Value != actualPayloadSize)
