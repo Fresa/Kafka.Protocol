@@ -9,6 +9,27 @@ namespace Kafka.Protocol.Records
 {
     public abstract class BaseRecordBatch : ISerialize
     {
+        protected BaseRecordBatch()
+        {
+        }
+
+        protected BaseRecordBatch(BaseRecordBatch recordBatch)
+        {
+            BaseOffset = recordBatch.BaseOffset;
+            BatchLength = recordBatch.BatchLength;
+            PartitionLeaderEpoch = recordBatch.PartitionLeaderEpoch;
+            Magic = recordBatch.Magic;
+            Crc = recordBatch.Crc;
+            Attributes = recordBatch.Attributes;
+            LastOffsetDelta = recordBatch.LastOffsetDelta;
+            FirstTimestamp = recordBatch.FirstTimestamp;
+            MaxTimestamp = recordBatch.MaxTimestamp;
+            ProducerId = recordBatch.ProducerId;
+            ProducerEpoch = recordBatch.ProducerEpoch;
+            BaseSequence = recordBatch.BaseSequence;
+            Records = recordBatch.Records;
+        }
+
         public Int64 BaseOffset { get; set; } = Int64.Default;
         public Int32 BatchLength { get; set; } = Int32.Default;
         public Int32 PartitionLeaderEpoch { get; set; } = Int32.Default;

@@ -14,6 +14,14 @@ namespace Kafka.Protocol.Records
             Records = Array<Record>.Default;
         }
 
+        internal RecordBatch(BaseRecordBatch recordBatch) : base(recordBatch)
+        {
+            if (base.Records.Value == null)
+            {
+                Records = Array<Record>.Default;
+            }
+        }
+
         internal static ValueTask<RecordBatch> FromReaderAsync(
             PipeReader reader,
             bool asCompact,

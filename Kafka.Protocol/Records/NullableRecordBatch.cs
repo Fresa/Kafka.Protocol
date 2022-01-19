@@ -7,6 +7,12 @@ namespace Kafka.Protocol.Records
     public class NullableRecordBatch : BaseRecordBatch
     {
         internal static NullableRecordBatch Default => new NullableRecordBatch();
+        
+        public NullableRecordBatch() { }
+        
+        private NullableRecordBatch(BaseRecordBatch baseRecordBatch) : base(baseRecordBatch)
+        {
+        }
 
         internal static ValueTask<NullableRecordBatch> FromReaderAsync(
             PipeReader reader,
@@ -24,19 +30,11 @@ namespace Kafka.Protocol.Records
         public static implicit operator RecordBatch?(NullableRecordBatch recordBatch) =>
             recordBatch.Records.Value == null
                 ? (RecordBatch?)null
-                : new RecordBatch()
-                {
-                    Attributes = recordBatch.Attributes,
-
-                };
+                : new RecordBatch(recordBatch);
 
         public static implicit operator NullableRecordBatch(RecordBatch? recordBatch) =>
             recordBatch == null
                 ? Default
-                : new NullableRecordBatch()
-                {
-                    Attributes = recordBatch.Attributes,
-
-                };
+                : new NullableRecordBatch(recordBatch);
     }
 }
