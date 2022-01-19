@@ -147,7 +147,7 @@ namespace Kafka.Protocol.Tests.Primitives
             protected override async Task WhenAsync()
             {
                 _value = await NullableArray<Int32>.FromReaderAsync(_reader, true,
-                        () => Int32.FromReaderAsync(_reader, false))
+                        () => Int32.FromReaderAsync(_reader, true))
                     .ConfigureAwait(false);
             }
 
@@ -173,7 +173,7 @@ namespace Kafka.Protocol.Tests.Primitives
             protected override async Task WhenAsync()
             {
                 _value = await NullableArray<Int32>.FromReaderAsync(_reader, true,
-                        () => Int32.FromReaderAsync(_reader, false))
+                        () => Int32.FromReaderAsync(_reader, true))
                     .ConfigureAwait(false);
             }
 
@@ -199,7 +199,7 @@ namespace Kafka.Protocol.Tests.Primitives
             protected override async Task WhenAsync()
             {
                 _value = await NullableArray<Int32>.FromReaderAsync(_reader, true,
-                        () => Int32.FromReaderAsync(_reader, false))
+                        () => Int32.FromReaderAsync(_reader, true))
                     .ConfigureAwait(false);
             }
 
