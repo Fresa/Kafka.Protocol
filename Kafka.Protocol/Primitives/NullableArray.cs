@@ -14,7 +14,7 @@ namespace Kafka.Protocol
     {
         internal int GetSize(bool asCompact) =>
             (asCompact
-                ? VarInt.From(Value == null ? 0 : Value.Length + 1).GetSize(asCompact)
+                ? UVarInt.From(Value == null ? 0 : (uint)Value.Length + 1).GetSize(asCompact)
                 : 4) +
             (Value?.Sum(item => item.GetSize(asCompact)) ?? 0);
 
