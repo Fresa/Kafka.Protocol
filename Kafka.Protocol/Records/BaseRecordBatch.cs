@@ -34,7 +34,7 @@ namespace Kafka.Protocol.Records
         public Int32 BatchLength { get; set; } = Int32.Default;
         public Int32 PartitionLeaderEpoch { get; set; } = Int32.Default;
         public Int8 Magic { get; set; } = Int8.Default;
-        public Int32 Crc { get; private set; } = Int32.Default;
+        public UInt32 Crc { get; private set; } = UInt32.Default;
         public Int16 Attributes { get; set; } = Int16.Default;
         public Int32 LastOffsetDelta { get; set; } = Int32.Default;
         public Int64 FirstTimestamp { get; set; } = Int64.Default;
@@ -100,39 +100,43 @@ namespace Kafka.Protocol.Records
             recordBatch.Magic = await Int8
                 .FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            recordBatch.Crc = await Int32
+            recordBatch.Crc = await UInt32
                 .FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            recordBatch.Attributes = await Int16.FromReaderAsync(reader, asCompact,
+
+            var checksumReader = new ChecksumCalculatingPipeReader(reader);
+            recordBatch.Attributes = await Int16.FromReaderAsync(checksumReader, asCompact,
                     cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.LastOffsetDelta = await Int32
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(checksumReader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.FirstTimestamp = await Int64
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(checksumReader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.MaxTimestamp = await Int64
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(checksumReader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            recordBatch.ProducerId = await Int64.FromReaderAsync(reader, asCompact,
+            recordBatch.ProducerId = await Int64.FromReaderAsync(checksumReader, asCompact,
                     cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.ProducerEpoch = await Int16
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(checksumReader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.BaseSequence = await Int32
-                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .FromReaderAsync(checksumReader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.Records = await NullableArray<Record>.FromReaderAsync(
-                    reader, asCompact,
-                    () => Record.FromReaderAsync(reader, asCompact,
+                    checksumReader, asCompact,
+                    () => Record.FromReaderAsync(checksumReader, asCompact,
                         cancellationToken), cancellationToken)
                 .ConfigureAwait(false);
 
-
-            await recordBatch.CheckForDataCorruption(asCompact, cancellationToken)
-                .ConfigureAwait(false);
+            if (checksumReader.Checksum != recordBatch.Crc)
+            {
+                throw new CorruptMessageException(
+                    $"Record batch is corrupt. The read data has crc {checksumReader.Checksum} but the record batch states that crc should be {recordBatch.Crc}");
+            }
 
             var actualSize = recordBatch.PayloadSize(asCompact);
             if (size != actualSize)
@@ -143,21 +147,7 @@ namespace Kafka.Protocol.Records
             return recordBatch;
         }
 
-        private async ValueTask CheckForDataCorruption(
-            bool asCompact,
-            CancellationToken cancellationToken)
-        {
-            var bytes = await SerializeCrcData(asCompact, cancellationToken)
-                .ConfigureAwait(false);
-            var crc = Crc32C.Compute(bytes);
-            if (crc != Crc)
-            {
-                throw new CorruptMessageException(
-                    $"Record batch is corrupt. The read data has crc {crc} but the record batch states that crc should be {Crc}");
-            }
-        }
-
-        ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken = default) => WriteToAsync(writer, asCompact, cancellationToken);
+        ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
         internal async ValueTask WriteToAsync(
             Stream writer,
             bool asCompact,
@@ -194,7 +184,7 @@ namespace Kafka.Protocol.Records
 
                 var bytes = await SerializeCrcData(asCompact, cancellationToken)
                     .ConfigureAwait(false);
-                Crc = (int)Crc32C.Compute(bytes);
+                Crc = Crc32C.Append(0, bytes);
 
                 await Crc.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
@@ -239,7 +229,7 @@ namespace Kafka.Protocol.Records
             {
                 await Attributes.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
-                await ((ISerialize)LastOffsetDelta).WriteToAsync(writer, asCompact, cancellationToken)
+                await LastOffsetDelta.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
                 await FirstTimestamp.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);

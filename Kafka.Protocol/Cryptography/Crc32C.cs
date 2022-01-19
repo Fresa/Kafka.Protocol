@@ -21,8 +21,11 @@
         }
 
         internal static uint Compute(byte[] input)
+            => Append(0, input);
+
+        internal static uint Append(uint crc, byte[] input)
         {
-            var crcLocal = uint.MaxValue;
+            var crcLocal = uint.MaxValue ^ crc;
 
             var table = Table;
             var length = input.Length;
