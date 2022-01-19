@@ -134,7 +134,7 @@ namespace Kafka.Protocol.Records
             await recordBatch.CheckForDataCorruption(asCompact, cancellationToken)
                 .ConfigureAwait(false);
 
-            var actualSize = recordBatch.GetSize(asCompact);
+            var actualSize = recordBatch.PayloadSize(asCompact);
             if (size != actualSize)
             {
                 throw new CorruptMessageException($"Expected size {size} got {actualSize}");
@@ -163,7 +163,7 @@ namespace Kafka.Protocol.Records
             bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            var size = GetSize(asCompact);
+            var size = PayloadSize(asCompact);
             if (asCompact)
             {
                 UVarInt length = Records.Value == null ? 0 : (uint)size + 1;
@@ -207,30 +207,28 @@ namespace Kafka.Protocol.Records
         int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
         internal int GetSize(bool asCompact)
         {
-            var size = 0;
-            if (Records.Value != null)
-            {
-                size = BaseOffset.GetSize(asCompact) +
-                       BatchLength.GetSize(asCompact) +
-                       PartitionLeaderEpoch.GetSize(asCompact) +
-                       Magic.GetSize(asCompact) +
-                       Crc.GetSize(asCompact) +
-                       Attributes.GetSize(asCompact) +
-                       LastOffsetDelta.GetSize(asCompact) +
-                       FirstTimestamp.GetSize(asCompact) +
-                       MaxTimestamp.GetSize(asCompact) +
-                       ProducerId.GetSize(asCompact) +
-                       ProducerEpoch.GetSize(asCompact) +
-                       BaseSequence.GetSize(asCompact) +
-                       NullableArray<Record>.From(Records)
-                           .GetSize(asCompact);
-            }
-
+            var size = PayloadSize(asCompact);
             return (asCompact
                        ? UVarInt.From((uint)size + 1).GetSize(asCompact)
                        : Int32.From(size).GetSize(asCompact)) +
                    size;
         }
+
+        private int PayloadSize(bool asCompact) =>
+        Records.Value == null ? 0 : BaseOffset.GetSize(asCompact) +
+                   BatchLength.GetSize(asCompact) +
+                   PartitionLeaderEpoch.GetSize(asCompact) +
+                   Magic.GetSize(asCompact) +
+                   Crc.GetSize(asCompact) +
+                   Attributes.GetSize(asCompact) +
+                   LastOffsetDelta.GetSize(asCompact) +
+                   FirstTimestamp.GetSize(asCompact) +
+                   MaxTimestamp.GetSize(asCompact) +
+                   ProducerId.GetSize(asCompact) +
+                   ProducerEpoch.GetSize(asCompact) +
+                   BaseSequence.GetSize(asCompact) +
+                   NullableArray<Record>.From(Records)
+                       .GetSize(asCompact);
 
         private async ValueTask<byte[]> SerializeCrcData(
             bool asCompact,

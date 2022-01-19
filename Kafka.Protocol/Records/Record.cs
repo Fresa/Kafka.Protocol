@@ -22,6 +22,9 @@ namespace Kafka.Protocol.Records
             bool asCompact,
             CancellationToken cancellationToken = default)
         {
+            var size = await VarInt
+                .FromReaderAsync(reader, asCompact, cancellationToken)
+                .ConfigureAwait(false);
             var record = new Record
             {
                 Attributes = await Int8.FromReaderAsync(reader, asCompact, cancellationToken)
@@ -42,10 +45,10 @@ namespace Kafka.Protocol.Records
                     valueLen,
                     cancellationToken)
                 .ConfigureAwait(false);
+
             var headerCount = await VarInt
                 .FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-
             var headers = new List<Header>();
             for (var i = 0; i < headerCount; i++)
             {
@@ -53,8 +56,14 @@ namespace Kafka.Protocol.Records
                     .ConfigureAwait(false));
             }
             record.Headers = headers.ToArray();
+
+            var actualSize = record.PayloadSize(asCompact);
+            if (size != actualSize)
+            {
+                throw new CorruptMessageException($"Expected size {size} got {actualSize}");
+            }
             return record;
-        }
+        } 
 
         ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
         internal async ValueTask WriteToAsync(
@@ -92,16 +101,19 @@ namespace Kafka.Protocol.Records
         int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
         internal int GetSize(bool asCompact)
         {
-            var size = Attributes.GetSize(asCompact) +
-                   TimestampDelta.GetSize(asCompact) +
-                   OffsetDelta.GetSize(asCompact) +
-                   VarInt.From(Key.Length).GetSize(asCompact) +
-                   Key.Length +
-                   VarInt.From(Value.Length).GetSize(asCompact) +
-                   Value.Length +
-                   VarInt.From(Headers.Length).GetSize(asCompact) +
-                   Headers.Sum(header => header.GetSize(asCompact));
+            var size = PayloadSize(asCompact);
             return VarInt.From(size).GetSize(asCompact) + size;
         }
+
+        private int PayloadSize(bool asCompact) =>
+            Attributes.GetSize(asCompact) +
+            TimestampDelta.GetSize(asCompact) +
+            OffsetDelta.GetSize(asCompact) +
+            VarInt.From(Key.Length).GetSize(asCompact) +
+            Key.Length +
+            VarInt.From(Value.Length).GetSize(asCompact) +
+            Value.Length +
+            VarInt.From(Headers.Length).GetSize(asCompact) +
+            Headers.Sum(header => header.GetSize(asCompact));
     }
 }
