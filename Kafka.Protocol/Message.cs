@@ -1,14 +1,19 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
-    public abstract class Message : ISerialize
+    public abstract class Message
     {
+        internal abstract Int16 ApiMessageKey { get; }
+
         public abstract Int16 Version { get; }
 
-        public abstract ValueTask WriteToAsync(
-            IKafkaWriter writer, 
+        internal abstract ValueTask WriteToAsync(
+            Stream writer,
             CancellationToken cancellationToken = default);
+
+        internal abstract int GetSize();
     }
 }

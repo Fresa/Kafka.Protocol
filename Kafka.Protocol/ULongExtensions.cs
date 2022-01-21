@@ -29,15 +29,7 @@ namespace Kafka.Protocol
                 buffer[position++] = (byte)byteValue;
             } while (value > 0);
 
-            var result = new byte[position];
-            Buffer.BlockCopy(
-                buffer,
-                0,
-                result,
-                0,
-                position);
-
-            return result;
+            return buffer[..position];
         }
 
         internal static long DecodeFromZigZag(this ulong value)

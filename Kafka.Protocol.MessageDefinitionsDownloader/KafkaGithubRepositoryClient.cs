@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -41,6 +42,11 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
         {
             var files = await GetMessageFilesAsync();
 
+            foreach (var file in new DirectoryInfo(path).GetFiles())
+            {
+                file.Delete();
+            }
+            
             await Task.WhenAll(files
                 .Select(async repositoryContent =>
                         await new WebClient()

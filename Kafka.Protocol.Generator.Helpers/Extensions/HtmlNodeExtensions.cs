@@ -83,7 +83,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
         /// <returns></returns>
         internal static IEnumerable<T> ParseTableNodeTo<T>(
             this HtmlNode node,
-            ResolveCellValue resolveCellValue = null)
+            ResolveCellValue? resolveCellValue = null)
             where T : class, new()
         {
             resolveCellValue = resolveCellValue ?? (htmlNode => htmlNode.InnerHtmlAsFormattedString());

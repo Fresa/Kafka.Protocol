@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.IO;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,13 +7,10 @@ using Log.It;
 
 namespace Kafka.Protocol
 {
-    public sealed class RequestPayload : IPayload
+    public sealed class RequestPayload 
     {
         public RequestHeader Header { get; }
         public Message Message { get; }
-
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
 
         private static readonly ILogger Logger =
             LogFactory.Create<RequestPayload>();
@@ -27,61 +24,64 @@ namespace Kafka.Protocol
         }
 
         public async ValueTask WriteToAsync(
-            IKafkaWriter kafkaWriter,
+            Stream writer,
             CancellationToken cancellationToken = default)
         {
-            await Header.WriteToAsync(kafkaWriter, cancellationToken)
+            var headerSize = Header.GetSize();
+            var messageSize = Message.GetSize();
+            await Int32.From(headerSize + messageSize)
+                .WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
-            await Message.WriteToAsync(kafkaWriter, cancellationToken)
+            
+            Logger.Debug("Writing header ({size} bytes) {@header}", headerSize, Header);
+            await Header.WriteToAsync(writer, cancellationToken)
+                .ConfigureAwait(false);
+            
+            Logger.Debug("Writing message {messageType} ({size} bytes) {@message}", 
+                Message.GetType().Name, messageSize, Message);
+            await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public static async ValueTask<RequestPayload> ReadFromAsync(
-            Int16 headerVersion,
-            IKafkaReader kafkaReader,
+            PipeReader reader,
             CancellationToken cancellationToken = default)
         {
             // Read payload size
-            var size = await kafkaReader
-                .ReadInt32Async(cancellationToken)
+            var size = await Int32.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
 
-            var report = kafkaReader.EnsureExpectedSize(size);
             var header = await RequestHeader
                 .FromReaderAsync(
-                    headerVersion,
-                    kafkaReader,
+                    reader,
                     cancellationToken)
                 .ConfigureAwait(false);
-            Logger.Debug("Read header {@header}", header);
+            var headerSize = header.GetSize();
+            Logger.Debug("Read header ({size} bytes) {@header}", headerSize, header);
 
             var message = await Messages
                 .CreateRequestMessageFromReaderAsync(
                     header.RequestApiKey,
                     header.RequestApiVersion,
-                    kafkaReader,
+                    reader,
                     cancellationToken)
                 .ConfigureAwait(false);
-            Logger.Debug("Read message {messageType} {@message}",
-                message.GetType(), message);
+            var messageSize = message.GetSize();
+            Logger.Debug("Read message {messageType} ({size} bytes) {@message}",
+                message.GetType().Name, messageSize, message);
 
+            var actualPayloadSize = headerSize + messageSize;
             // todo: Why is Confluent.Kafka client sending 4 extra bytes containing zeros in the ApiVersionsRequest?
-            if (report.BytesRead < size.Value)
+            if (actualPayloadSize < size.Value)
             {
-                var bytesUnRead = "";
-                var unreadLength = size.Value - report.BytesRead;
-                for (var i = 0; i < unreadLength; i++)
-                {
-                    bytesUnRead +=
-                        (byte)(await kafkaReader.ReadInt8Async(
-                            cancellationToken)).Value + " ";
-                }
+                var unreadLength = size.Value - actualPayloadSize;
+                var unreadBytes = await reader.ReadAsLittleEndianAsync(unreadLength, cancellationToken)
+                    .ConfigureAwait(false);
                 Logger.Warning("Detected {length} unknown bytes {unknownBytes}, ignoring",
                     unreadLength,
-                    bytesUnRead.Trim());
+                    string.Join(" ", unreadBytes.Take(1000)) + (unreadBytes.Length > 1000 ? " ..." : ""));
             }
-
-            report.Dispose();
+            
             return new RequestPayload(header, message);
         }
     }

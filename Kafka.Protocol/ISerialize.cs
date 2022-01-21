@@ -1,11 +1,15 @@
-﻿using System.Threading;
+﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Kafka.Protocol
 {
     public interface ISerialize
     {
-        ValueTask WriteToAsync(IKafkaWriter writer, 
+        internal ValueTask WriteToAsync(Stream writer, 
+            bool asCompact,
             CancellationToken cancellationToken = default);
+
+        internal int GetSize(bool asCompact);
     }
 }

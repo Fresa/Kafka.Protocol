@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,14 @@ namespace Kafka.Protocol.Generator.Transformation
                 .ToDictionary(
                     arg => arg.Index,
                     arg => arg.Item);
+        }
+
+        public static void ForEach<T>(this IEnumerable<T> list, Action<T, int> action)
+        {
+            foreach (var item in list.WithIndex())
+            {
+                action.Invoke(item.Value, item.Key);
+            }
         }
     }
 }

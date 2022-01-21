@@ -1,60 +1,87 @@
-﻿using System.Threading;
+﻿using System;
+using System.IO;
+using System.IO.Pipelines;
+using System.Threading;
 using System.Threading.Tasks;
+using Log.It;
 
 namespace Kafka.Protocol
 {
-    public sealed class ResponsePayload : IPayload
+    public sealed class ResponsePayload
     {
-        public RequestPayload RequestPayload { get; }
         public ResponseHeader Header { get; }
         public Message Message { get; }
 
+        private static readonly ILogger Logger =
+            LogFactory.Create<ResponsePayload>();
+
         public ResponsePayload(
-            RequestPayload requestPayload, 
-            ResponseHeader header, 
+            ResponseHeader header,
             Message message)
         {
-            RequestPayload = requestPayload;
             Header = header;
             Message = message;
         }
 
         public async ValueTask WriteToAsync(
-            IKafkaWriter writer,
+            Stream writer,
             CancellationToken cancellationToken = default)
         {
+            var headerSize = Header.GetSize();
+            var messageSize = Message.GetSize();
+            await Int32.From(headerSize + messageSize)
+                .WriteToAsync(writer, false, cancellationToken)
+                .ConfigureAwait(false);
+            
+            Logger.Debug("Writing header ({size} bytes) {@header}", headerSize, Header);
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
+
+            Logger.Debug("Writing message {messageType} ({size} bytes) {@message}", 
+                Message.GetType().Name, messageSize, Message);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
 
         public static async ValueTask<ResponsePayload> ReadFromAsync(
-            RequestPayload requestPayload, 
-            IKafkaReader reader,
+            RequestPayload requestPayload,
+            PipeReader reader,
             CancellationToken cancellationToken = default)
         {
-            // Read payload size
-            var payloadSize = await reader.ReadInt32Async(cancellationToken)
+            var payloadSize = await Int32.FromReaderAsync(reader, false, cancellationToken)
                 .ConfigureAwait(false);
-            using (reader.EnsureExpectedSize(payloadSize))
+
+            var header = await ResponseHeader.FromReaderAsync(
+                    Messages.GetResponseHeaderVersionFor(requestPayload),
+                    reader,
+                    cancellationToken)
+                .ConfigureAwait(false);
+            var headerSize = header.GetSize();
+            Logger.Debug("Read header ({size} bytes) {@header}", headerSize, header);
+
+            var message = await Messages
+                .CreateResponseMessageFromReaderAsync(
+                    requestPayload.Header.RequestApiKey,
+                    requestPayload.Header.RequestApiVersion,
+                    reader,
+                    cancellationToken)
+                .ConfigureAwait(false);
+            var messageSize = message.GetSize();
+            Logger.Debug("Read message {messageType} ({size} bytes) {@message}",
+                message.GetType().Name, messageSize, message);
+
+            var actualPayloadSize = headerSize + messageSize;
+            if (payloadSize.Value != actualPayloadSize)
             {
-                var header = await ResponseHeader.FromReaderAsync(
-                        requestPayload.Header.Version,
-                        reader,
-                        cancellationToken)
-                    .ConfigureAwait(false);
-
-                var message = await Messages
-                    .CreateResponseMessageFromReaderAsync(
-                        requestPayload.Header.RequestApiKey,
-                        requestPayload.Header.RequestApiVersion,
-                        reader,
-                        cancellationToken)
-                    .ConfigureAwait(false);
-
-                return new ResponsePayload(requestPayload, header, message);
+                throw new CorruptMessageException($"Expected size {payloadSize} got {actualPayloadSize}");
             }
+
+            if (reader.TryRead(out var a))
+            {
+                throw new InvalidOperationException();
+            }
+
+            return new ResponsePayload(header, message);
         }
     }
 }

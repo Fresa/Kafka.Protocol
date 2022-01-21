@@ -19,6 +19,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator.Helpers", "Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj", "{7988D25A-A761-42F2-B1E7-CDE857B573AD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.Generator", "Kafka.Protocol.Generator\Kafka.Protocol.Generator.csproj", "{7952E593-14F3-4EFB-8F82-76475DF3C9AC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7988D25A-A761-42F2-B1E7-CDE857B573AD} = {7988D25A-A761-42F2-B1E7-CDE857B573AD}
+		{841BD9E7-817C-427D-8DA2-2723B2D9A489} = {841BD9E7-817C-427D-8DA2-2723B2D9A489}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE41D0DC-B682-4692-ADFB-789A405916B9}"
 	ProjectSection(SolutionItems) = preProject

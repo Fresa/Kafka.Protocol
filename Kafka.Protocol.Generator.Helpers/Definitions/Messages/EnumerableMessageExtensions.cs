@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
@@ -8,7 +9,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
         public static bool TryGetResponseMessageDefinitionFrom(
             this IEnumerable<Message> messageDefinitions,
             Message messageRequest,
-            out Message messageResponse)
+            out Message? messageResponse)
         {
             if (messageRequest.IsResponse())
             {
@@ -21,6 +22,48 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
                     message.ApiKey == messageRequest.ApiKey &&
                     message.IsResponse());
             return true;
+        }
+
+        public static IEnumerable<Message> AddReferencesToFields(
+            this IEnumerable<Message> messageDefinitions)
+        {
+            foreach (var messageDefinition in messageDefinitions)
+            {
+                foreach (var field in messageDefinition.Fields)
+                {
+                    field.Message = messageDefinition;
+                    AddReferenceToField(field);
+                }
+
+                if (messageDefinition.CommonStructs != null)
+                {
+                    foreach (var commonStruct in messageDefinition.CommonStructs)
+                    {
+                        commonStruct.Message = messageDefinition;
+                        foreach (var field in commonStruct.Fields)
+                        {
+                            AddReferenceToField(field);
+                        }
+                    }
+                }
+
+                void AddReferenceToField(Field field, Field? parent = null)
+                {
+                    field.Message = messageDefinition;
+                    field.Parent = parent;
+                    if (field.Fields == null)
+                    {
+                        return;
+                    }
+
+                    foreach (var child in field.Fields)
+                    {
+                        AddReferenceToField(child, field);
+                    }
+                }
+
+                yield return messageDefinition;
+            }
         }
     }
 }

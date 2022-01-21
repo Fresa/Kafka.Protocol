@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Kafka.Protocol.Generator.Helpers.Extensions;
 
 namespace Kafka.Protocol.Generator.Helpers.Definitions
@@ -9,39 +11,19 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
         {
             var typeName = primitiveType.Type.ToPascalCase('_');
 
-            var isArray = false;
-            if (typeName.StartsWith("[]"))
+            return typeName.ToLower() switch
             {
-                isArray = true;
-                typeName = typeName.Substring(2);
-            }
-
-            switch (typeName.ToLower())
-            {
-                case "int8":
-                    typeName = "Int8";
-                    break;
-                case "varint":
-                    typeName = "VarInt";
-                    break;
-                case "varlong":
-                    typeName = "VarLong";
-                    break;
-                case "nullablestring":
-                    typeName = "NullableString";
-                    break;
-                case "nullablebytes":
-                    typeName = "NullableBytes";
-                    break;
-                case "bytes":
-                    typeName = "Bytes";
-                    break;
-                case "uint32":
-                    typeName = "UInt32";
-                    break;
-            }
-
-            return typeName + (isArray ? "[]" : "");
+                "varint" => "VarInt",
+                "varlong" => "VarLong",
+                "uint16" => "UInt16",
+                "uint32" => "UInt32",
+                "uvarint" => "UVarInt",
+                "array" => "Array<T>",
+                "nullablearray" => "NullableArray<T>",
+                "map" => "Map<TKey, TValue>",
+                "nullablemap" => "NullableMap<TKey, TValue>",
+                _ => typeName
+            };
         }
 
         public static bool IsNullable(this PrimitiveType primitiveType)
@@ -52,81 +34,70 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
                 .Contains("NULLABLE");
         }
 
-        public static string GetTypeName(this PrimitiveType primitiveType)
-        {
-            return primitiveType
+        public static string GetTypeName(this PrimitiveType primitiveType) =>
+            primitiveType
                 .ResolveType()
-                .GetPrettyName() + 
-                   (primitiveType.IsNullable() ? "?" : "");
-        }
+                .GetPrettyName() +
+            (primitiveType.IsNullable() ? "?" : "");
 
-        private static System.Type ResolveType(this PrimitiveType primitiveType)
+        private static Type ResolveType(this PrimitiveType primitiveType)
         {
-            var typeName = primitiveType.GetClassName();
+            var typeName = primitiveType
+                .GetClassName()
+                .Replace("Nullable", "");
 
-            var isArray = false;
-            if (typeName.StartsWith("[]"))
+            return typeName.ToLower() switch
             {
-                isArray = true;
-                typeName = typeName.Substring(2);
-            }
-
-            switch (typeName.ToLower())
-            {
-                case "int8":
-                    return Type<sbyte>()
-                        .ToArrayType(isArray);
-                case "varint":
-                    return Type<int>()
-                        .ToArrayType(isArray);
-                case "varlong":
-                    return Type<long>()
-                        .ToArrayType(isArray);
-                case "nullablestring":
-                    return Type<string>()
-                        .ToArrayType(isArray);
-                case "nullablebytes":
-                    return Type<byte[]>();
-                case "bytes":
-                    return Type<byte[]>();
-            }
-
-            var resolvedType = typeof(int)
-                .Assembly
-                .GetType(
-                    $"System.{typeName}",
-                    false,
-                    true);
-
-            if (resolvedType == null)
-            {
-                throw new InvalidOperationException($"Could not resolve '{primitiveType.Type}' to a primitive type");
-            }
-
-            return resolvedType
-                .ToArrayType(isArray);
+                "int8" => typeof(sbyte),
+                "varint" => typeof(int),
+                "varlong" => typeof(long),
+                "bytes" => typeof(byte[]),
+                "float64" => typeof(double),
+                "uuid" => typeof(Guid),
+                "uvarint" => typeof(uint),
+                "array<t>" => typeof(IEnumerable<>).GetGenericArguments()[0].MakeArrayType(),
+                "map<tkey, tvalue>" => typeof(Dictionary<,>),
+                _ => typeof(int).Assembly
+                         .GetType($"System.{typeName}", false, true) ??
+                     throw new InvalidOperationException(
+                         $"Could not resolve '{primitiveType.Type}' to a primitive type")
+            };
         }
 
         public static string GetDefaultValue(this PrimitiveType primitiveType)
         {
             var type = primitiveType.ResolveType();
-            if (type.IsArray)
+            
+            return type switch
             {
-                return $"new {type.GetPrettyName().Replace("[]", "[0]")}";
-            }
-
-            switch (type)
-            {
-                case System.Type t when t == typeof(string):
-                    return "string.Empty";
-                default:
-                    return "default";
-            }
+                { } when primitiveType.IsNullable() => "default",
+                { } t when t == typeof(Dictionary<,>) => "new Dictionary<TKey, TValue>()",
+                { IsArray: true } =>
+                    $"System.Array.Empty<{primitiveType.GetTypeName().Replace("[]", "")}>()",
+                { } t when t == typeof(string) => "string.Empty",
+                _ => "default"
+            };
         }
 
-        private static System.Type Type<T>()
-        {
-            return typeof(T);
-        }
+        public static bool IsArray(this PrimitiveType primitiveType) => 
+            primitiveType.ResolveType().IsArray;
+
+        public static IReadOnlyDictionary<string, string> GetGenericArgumentConstraints(
+            this PrimitiveType primitive) =>
+            primitive.GetClassName()
+                    .Replace("Nullable", "")
+                    .ToUpper() switch
+                {
+                    "ARRAY<T>" => new Dictionary<string, string>
+                    {
+                        ["T"] = "ISerialize"
+                    },
+                    "MAP<TKEY, TVALUE>" => new Dictionary<string, string>
+                    {
+                        ["TKey"] = "ISerialize", 
+                        ["TValue"] = "ISerialize"
+                    },
+                    _ => new Dictionary<string, string>()
+                };
     }
 }

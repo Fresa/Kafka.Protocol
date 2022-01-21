@@ -10,6 +10,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
         {
             { typeof(bool), "bool" },
             { typeof(short), "short" },
+            { typeof(ushort), "ushort" },
             { typeof(int), "int" },
             { typeof(uint), "uint" },
             { typeof(long), "long" },
@@ -20,7 +21,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
             { typeof(decimal), "decimal" },
             { typeof(double), "double" }
         };
-
+        
         public static string GetPrettyName(this Type type)
         {
             if (type == null)
@@ -39,7 +40,7 @@ namespace Kafka.Protocol.Generator.Helpers.Extensions
 
             if (TypeAliasMapping.TryGetValue(elementType, out var prettyName) == false)
             {
-                prettyName = elementType.FullName;
+                prettyName = elementType.Name;
             }
             
             prettyName += type.IsArray ? "[]" : "";

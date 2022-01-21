@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HtmlAgilityPack;
-using Kafka.Protocol.Generator.Helpers.BackusNaurForm.Parsers;
 using Kafka.Protocol.Generator.Helpers.Definitions;
 using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
-using Kafka.Protocol.Generator.Helpers.Definitions.Parsers;
 using Kafka.Protocol.Generator.Helpers.Extensions;
-using Field = Kafka.Protocol.Generator.Helpers.Definitions.Field;
 
 namespace Kafka.Protocol.Generator.Helpers
 {
@@ -25,15 +22,42 @@ namespace Kafka.Protocol.Generator.Helpers
 
             ErrorCodes = ParseErrorCodes();
             PrimitiveTypes = ParsePrimitiveTypes();
-            // Incorrect protocol definition: Array is never referenced as a primitive type within messages. [] is used.
-            PrimitiveTypes.Remove("ARRAY");
-            // Incorrect protocol definition: Records is never referenced as a primitive type within messages. Bytes is used.
+            // UINT16 is missing from the documentation but found in the message specifications
+            PrimitiveTypes.Add("UINT16", new PrimitiveType
+            {
+                Type = "UINT16", 
+                Description = "Represents an integer between 0 and 2^16-1 inclusive. The values are encoded using four bytes in network byte order (big-endian)."
+            });
+            // UVARINT is missing from the documentation but found in the message specifications
+            PrimitiveTypes.Add("UVARINT", new PrimitiveType
+            {
+                Type = "UVARINT",
+                Description = "The UNSIGNED_VARINT type describes an unsigned variable length integer."
+            });
+            // The following types are not explicitly defined in the specification but is used within the protocol
+            PrimitiveTypes.Add("NULLABLE_ARRAY", new PrimitiveType
+            {
+                Type = "NULLABLE_ARRAY",
+                Description = "Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T]."
+            });
+            PrimitiveTypes.Add("MAP", new PrimitiveType
+            {
+                Type = "MAP",
+                Description = "Represents a sequence of objects with a map key."
+            });
+            PrimitiveTypes.Add("NULLABLE_MAP", new PrimitiveType
+            {
+                Type = "NULLABLE_MAP",
+                Description = "Represents a nullable sequence of objects with a map key."
+            });
+            
+            // Compact types are still the same base types but with more efficient length compaction. They are used interchangeable when the message is a variable version
+            PrimitiveTypes.Keys
+                .Where(name => name.StartsWith("COMPACT_"))
+                .ToList()
+                .ForEach(name => PrimitiveTypes.Remove(name));
+            // Records is a complex type and is hand-rolled
             PrimitiveTypes.Remove("RECORDS");
-
-            RequestHeader = ParseRequestHeader();
-            ResponseHeader = ParseResponseHeader();
-
-            //MessageEnvelope = ParseRequestAndResponseStructure();
         }
 
         public IDictionary<string, PrimitiveType> PrimitiveTypes { get; set; }
@@ -41,67 +65,7 @@ namespace Kafka.Protocol.Generator.Helpers
         public IDictionary<int, ErrorCode> ErrorCodes { get; }
 
         public IDictionary<int, Message> Messages { get; } = new Dictionary<int, Message>();
-
-        public Header RequestHeader { get; }
-
-        public Header ResponseHeader { get; }
-
-        private const string ProtocolRequestHeaderXPath = "//*/pre[starts-with(text(),'Request Header')]";
-
-        private Header ParseRequestHeader()
-        {
-            var headerNode = _definition
-                .DocumentNode
-                .SelectFirst(ProtocolRequestHeaderXPath);
-
-            return ParseHeader(headerNode);
-        }
-
-        private const string ProtocolResponseHeaderXPath = "//*/pre[starts-with(text(),'Response Header')]";
-
-        private Header ParseResponseHeader()
-        {
-            var headerNode = _definition
-                .DocumentNode
-                .SelectFirst(ProtocolResponseHeaderXPath);
-
-            return ParseHeader(headerNode);
-        }
-
-        private Header ParseHeader(HtmlNode headerNode)
-        {
-            var headerDefinition = System.Net.WebUtility.HtmlDecode(
-                headerNode
-                    .InnerText);
-
-            var descriptionTable = headerNode
-                .GetFirstSiblingNamed("table")
-                .ParseTableNodeTo<FieldDescription>()
-                .ToList();
-
-            var specification = BackusNaurParser.Parse(
-                new Buffer<char>(
-                    headerDefinition
-                        .ToCharArray()));
-
-            var header = HeaderParser.Parse(specification, PrimitiveTypes.Values);
         
-            SetDescriptions(header.Fields, descriptionTable);
-
-            return header;
-        }
-        
-        private static void SetDescriptions(List<Field> fields, List<FieldDescription> fieldDescriptions)
-        {
-            foreach (var field in fields)
-            {
-                field.Description = fieldDescriptions
-                    .FirstOrDefault(
-                        description =>
-                            description.Field == field.Name)?.Description;
-            }
-        }
-
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
 
         private IDictionary<int, ErrorCode> ParseErrorCodes()

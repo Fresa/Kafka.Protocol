@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
@@ -45,45 +44,13 @@ namespace Kafka.Protocol.Generator.Helpers.Tests
             {
                 ProtocolSpecification.PrimitiveTypes
                     .Should()
-                    .HaveCount(12)
+                    .HaveCount(18)
                     .And.Subject
                     .Values
                     .Select(type => 
                         type.Description)
                     .Should()
                     .NotContainNulls();
-            }
-
-            [Fact]
-            public void It_should_have_parsed_request_header()
-            {
-                ProtocolSpecification.RequestHeader
-                    .Should()
-                    .BeEquivalentTo(
-                        new Header(
-                            new HeaderMetaData("Header", MethodType.Request), 
-                            new List<Field>()),
-                        options =>
-                            options
-                                .Excluding(header =>
-                                    header
-                                        .Fields));
-            }
-
-            [Fact]
-            public void It_should_have_parsed_response_header()
-            {
-                ProtocolSpecification.ResponseHeader
-                    .Should()
-                    .BeEquivalentTo(
-                        new Header(
-                            new HeaderMetaData("Header", MethodType.Response),
-                            new List<Field>()),
-                        options =>
-                            options
-                                .Excluding(header =>
-                                    header
-                                        .Fields));
             }
         }
     }
