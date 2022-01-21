@@ -12,6 +12,6 @@ https://www.nuget.org/packages/kafka.protocol
 There is a [`test framework`](https://github.com/Fresa/Kafka.TestFramework) for integration testing clients like [`Confluent.Kafka`](https://github.com/confluentinc/confluent-kafka-dotnet) etc.
 
 ### v2.x
-This version introduce some breaking changes due to breaking changes in the Kafka Protocol definition itself (mostly subtle property names changes), see the release notes for further details. 
+This version introduce some breaking changes due to breaking changes in the Kafka Protocol definition itself (mostly subtle property names changes), see the [release notes](https://github.com/Fresa/Kafka.Protocol/releases/tag/v2.0.0) for further details. 
 
 A major improvement is supporting optional tagged fields, which also introduces flexible message versions which includes a more effecient way of serializing some primitives. More information kan be found in [KIP-482](https://cwiki.apache.org/confluence/display/KAFKA/KIP-482%3A+The+Kafka+Protocol+should+Support+Optional+Tagged+Fields).
