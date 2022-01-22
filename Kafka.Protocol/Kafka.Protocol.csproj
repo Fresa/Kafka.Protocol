@@ -17,6 +17,7 @@
     <PackageLicenseUrl>https://github.com/Fresa/Kafka.Protocol/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Copyright © 2019 Fredrik Arvidsson</Copyright>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
