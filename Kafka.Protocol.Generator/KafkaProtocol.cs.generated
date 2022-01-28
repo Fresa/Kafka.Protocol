@@ -52901,12 +52901,13 @@ namespace Kafka.Protocol
 				CreateTagSection().GetSize() :
 				0);
 
-		public static async ValueTask<ConsumerProtocolAssignment> FromBytesAsync(Int16 version, Bytes data, CancellationToken cancellationToken = default)
+		public static async ValueTask<ConsumerProtocolAssignment> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)
 		{
 			var pipe = new Pipe();
 			await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
 			var reader = pipe.Reader;
 
+			var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
 			var instance = new ConsumerProtocolAssignment(version);
 			instance.AssignedPartitionsCollection = await Map<String, TopicPartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicPartition.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Topic, cancellationToken).ConfigureAwait(false);
 			instance.UserData = await NullableBytes.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -52932,6 +52933,7 @@ namespace Kafka.Protocol
 			var writer = new MemoryStream();
 			await using (writer.ConfigureAwait(false))
 			{
+				await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _assignedPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _userData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
@@ -53128,12 +53130,13 @@ namespace Kafka.Protocol
 				CreateTagSection().GetSize() :
 				0);
 
-		public static async ValueTask<ConsumerProtocolSubscription> FromBytesAsync(Int16 version, Bytes data, CancellationToken cancellationToken = default)
+		public static async ValueTask<ConsumerProtocolSubscription> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)
 		{
 			var pipe = new Pipe();
 			await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
 			var reader = pipe.Reader;
 
+			var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
 			var instance = new ConsumerProtocolSubscription(version);
 			instance.TopicsCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
 			instance.UserData = await NullableBytes.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -53161,6 +53164,7 @@ namespace Kafka.Protocol
 			var writer = new MemoryStream();
 			await using (writer.ConfigureAwait(false))
 			{
+				await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _userData.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 1)
@@ -53393,12 +53397,13 @@ namespace Kafka.Protocol
 				CreateTagSection().GetSize() :
 				0);
 
-		public static async ValueTask<DefaultPrincipalData> FromBytesAsync(Int16 version, Bytes data, CancellationToken cancellationToken = default)
+		public static async ValueTask<DefaultPrincipalData> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)
 		{
 			var pipe = new Pipe();
 			await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
 			var reader = pipe.Reader;
 
+			var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
 			var instance = new DefaultPrincipalData(version);
 			instance.Type = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -53425,6 +53430,7 @@ namespace Kafka.Protocol
 			var writer = new MemoryStream();
 			await using (writer.ConfigureAwait(false))
 			{
+				await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _type.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _tokenAuthenticated.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -53539,12 +53545,13 @@ namespace Kafka.Protocol
 				CreateTagSection().GetSize() :
 				0);
 
-		public static async ValueTask<LeaderChangeMessage> FromBytesAsync(Int16 version, Bytes data, CancellationToken cancellationToken = default)
+		public static async ValueTask<LeaderChangeMessage> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)
 		{
 			var pipe = new Pipe();
 			await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
 			var reader = pipe.Reader;
 
+			var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
 			var instance = new LeaderChangeMessage(version);
 			instance.Version_ = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.LeaderId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -53572,6 +53579,7 @@ namespace Kafka.Protocol
 			var writer = new MemoryStream();
 			await using (writer.ConfigureAwait(false))
 			{
+				await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _votersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -53786,12 +53794,13 @@ namespace Kafka.Protocol
 				CreateTagSection().GetSize() :
 				0);
 
-		public static async ValueTask<SnapshotFooterRecord> FromBytesAsync(Int16 version, Bytes data, CancellationToken cancellationToken = default)
+		public static async ValueTask<SnapshotFooterRecord> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)
 		{
 			var pipe = new Pipe();
 			await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
 			var reader = pipe.Reader;
 
+			var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
 			var instance = new SnapshotFooterRecord(version);
 			instance.Version_ = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
@@ -53816,6 +53825,7 @@ namespace Kafka.Protocol
 			var writer = new MemoryStream();
 			await using (writer.ConfigureAwait(false))
 			{
+				await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
@@ -53878,12 +53888,13 @@ namespace Kafka.Protocol
 				CreateTagSection().GetSize() :
 				0);
 
-		public static async ValueTask<SnapshotHeaderRecord> FromBytesAsync(Int16 version, Bytes data, CancellationToken cancellationToken = default)
+		public static async ValueTask<SnapshotHeaderRecord> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)
 		{
 			var pipe = new Pipe();
 			await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
 			var reader = pipe.Reader;
 
+			var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
 			var instance = new SnapshotHeaderRecord(version);
 			instance.Version_ = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.LastContainedLogTimestamp = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -53909,6 +53920,7 @@ namespace Kafka.Protocol
 			var writer = new MemoryStream();
 			await using (writer.ConfigureAwait(false))
 			{
+				await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _lastContainedLogTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
