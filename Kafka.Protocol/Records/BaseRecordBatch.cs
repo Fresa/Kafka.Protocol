@@ -31,9 +31,17 @@ namespace Kafka.Protocol.Records
         }
 
         public Int64 BaseOffset { get; set; } = Int64.Default;
-        public Int32 BatchLength { get; set; } = Int32.Default;
+        /// <summary>
+        /// The batch length is not calculated until the record batch is serialized as it is
+        /// dependent on the underlying message serialization format
+        /// </summary>
+        public Int32 BatchLength { get; private set; } = Int32.Default;
         public Int32 PartitionLeaderEpoch { get; set; } = Int32.Default;
         public Int8 Magic { get; set; } = Int8.Default;
+        /// <summary>
+        /// The CRC is not calculated until the record batch is serialized as it is
+        /// dependent on the underlying message serialization format
+        /// </summary>
         public UInt32 Crc { get; private set; } = UInt32.Default;
         public Int16 Attributes { get; set; } = Int16.Default;
         public Int32 LastOffsetDelta { get; set; } = Int32.Default;
@@ -91,7 +99,7 @@ namespace Kafka.Protocol.Records
             recordBatch.BaseOffset = await Int64.FromReaderAsync(reader, asCompact,
                     cancellationToken)
                 .ConfigureAwait(false);
-            recordBatch.BatchLength = await Int32.FromReaderAsync(reader, asCompact,
+            var batchLength = await Int32.FromReaderAsync(reader, asCompact,
                     cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.PartitionLeaderEpoch = await Int32
@@ -131,11 +139,19 @@ namespace Kafka.Protocol.Records
                     () => Record.FromReaderAsync(checksumReader, asCompact,
                         cancellationToken), cancellationToken)
                 .ConfigureAwait(false);
+            
+            recordBatch.BatchLength = recordBatch.GetBatchLength(asCompact);
 
             if (checksumReader.Checksum != recordBatch.Crc)
             {
                 throw new CorruptMessageException(
                     $"Record batch is corrupt. The read data has crc {checksumReader.Checksum} but the record batch states that crc should be {recordBatch.Crc}");
+            }
+
+            if (batchLength != recordBatch.BatchLength)
+            {
+                throw new CorruptMessageException(
+                    $"Expected batch length of {batchLength} but the actual length is {recordBatch.BatchLength}");
             }
 
             var actualSize = recordBatch.PayloadSize(asCompact);
@@ -173,6 +189,7 @@ namespace Kafka.Protocol.Records
                 await BaseOffset
                     .WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
+                BatchLength = GetBatchLength(asCompact);
                 await BatchLength
                     .WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
@@ -184,12 +201,11 @@ namespace Kafka.Protocol.Records
 
                 var bytes = await SerializeCrcData(asCompact, cancellationToken)
                     .ConfigureAwait(false);
-                Crc = Crc32C.Append(0, bytes);
+                Crc = Crc32C.Compute(bytes);
 
                 await Crc.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
-                await Bytes.From(bytes)
-                    .WriteToAsync(writer, asCompact, cancellationToken)
+                await writer.WriteAsync(bytes, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -205,20 +221,35 @@ namespace Kafka.Protocol.Records
         }
 
         private int PayloadSize(bool asCompact) =>
-        Records.Value == null ? 0 : BaseOffset.GetSize(asCompact) +
-                   BatchLength.GetSize(asCompact) +
-                   PartitionLeaderEpoch.GetSize(asCompact) +
-                   Magic.GetSize(asCompact) +
-                   Crc.GetSize(asCompact) +
-                   Attributes.GetSize(asCompact) +
-                   LastOffsetDelta.GetSize(asCompact) +
-                   FirstTimestamp.GetSize(asCompact) +
-                   MaxTimestamp.GetSize(asCompact) +
-                   ProducerId.GetSize(asCompact) +
-                   ProducerEpoch.GetSize(asCompact) +
-                   BaseSequence.GetSize(asCompact) +
-                   NullableArray<Record>.From(Records)
-                       .GetSize(asCompact);
+            Records.Value == null
+                ? 0
+                : BaseOffset.GetSize(asCompact) +
+                  BatchLength.GetSize(asCompact) +
+                  PartitionLeaderEpoch.GetSize(asCompact) +
+                  Magic.GetSize(asCompact) +
+                  Crc.GetSize(asCompact) +
+                  Attributes.GetSize(asCompact) +
+                  LastOffsetDelta.GetSize(asCompact) +
+                  FirstTimestamp.GetSize(asCompact) +
+                  MaxTimestamp.GetSize(asCompact) +
+                  ProducerId.GetSize(asCompact) +
+                  ProducerEpoch.GetSize(asCompact) +
+                  BaseSequence.GetSize(asCompact) +
+                  NullableArray<Record>.From(Records)
+                      .GetSize(asCompact);
+
+        private int GetBatchLength(bool asCompact) =>
+            Attributes.GetSize(asCompact) +
+            Crc.GetSize(asCompact) +
+            BaseSequence.GetSize(asCompact) +
+            FirstTimestamp.GetSize(asCompact) +
+            LastOffsetDelta.GetSize(asCompact) +
+            Magic.GetSize(asCompact) +
+            MaxTimestamp.GetSize(asCompact) +
+            PartitionLeaderEpoch.GetSize(asCompact) +
+            ProducerEpoch.GetSize(asCompact) +
+            Records.GetSize(asCompact) +
+            ProducerId.GetSize(asCompact);
 
         private async ValueTask<byte[]> SerializeCrcData(
             bool asCompact,
@@ -245,9 +276,9 @@ namespace Kafka.Protocol.Records
                 // todo: support compression
                 await Records.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
+             
+                return writer.ToArray();
             }
-
-            return writer.ToArray();
         }
     }
 }
