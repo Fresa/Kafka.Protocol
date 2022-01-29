@@ -71,7 +71,7 @@ namespace Kafka.Protocol.Records
             bool asCompact,
             CancellationToken cancellationToken = default)
         {
-            await VarInt.From(GetSize(asCompact)).WriteToAsync(writer, asCompact, cancellationToken)
+            await VarInt.From(PayloadSize(asCompact)).WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
             await Attributes.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
