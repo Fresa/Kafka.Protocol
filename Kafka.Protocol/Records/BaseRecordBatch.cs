@@ -162,7 +162,7 @@ namespace Kafka.Protocol.Records
             }
             else
             {
-                Int32 length = Records.Value?.Length ?? -1;
+                Int32 length = Records.Value == null ? -1 : size;
                 await length
                     .WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
@@ -199,8 +199,8 @@ namespace Kafka.Protocol.Records
         {
             var size = PayloadSize(asCompact);
             return (asCompact
-                       ? UVarInt.From((uint)size + 1).GetSize(asCompact)
-                       : Int32.From(size).GetSize(asCompact)) +
+                       ? UVarInt.From(Records.Value == null ? 0 : (uint)size + 1).GetSize(asCompact)
+                       : Int32.From(Records.Value == null ? -1 : size).GetSize(asCompact)) +
                    size;
         }
 
