@@ -13,8 +13,8 @@ namespace Kafka.Protocol.Records
         public Int8 Attributes { get; set; } = Int8.Default;
         public VarLong TimestampDelta { get; set; } = VarLong.Default;
         public VarInt OffsetDelta { get; set; } = VarInt.Default;
-        public byte[] Key { get; set; } = Array.Empty<byte>();
-        public byte[] Value { get; set; } = Array.Empty<byte>();
+        public byte[]? Key { get; set; }
+        public byte[]? Value { get; set; }
         public Header[] Headers { get; set; } = Array.Empty<Header>();
 
         internal static async ValueTask<Record> FromReaderAsync(
@@ -37,14 +37,18 @@ namespace Kafka.Protocol.Records
 
             var keyLength = await VarInt.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            record.Key = await reader.ReadAsync(keyLength, cancellationToken)
-                .ConfigureAwait(false);
+            record.Key = keyLength == -1
+                ? null
+                : await reader.ReadAsync(keyLength, cancellationToken)
+                    .ConfigureAwait(false);
             var valueLen = await VarInt.FromReaderAsync(reader, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            record.Value = await reader.ReadAsync(
-                    valueLen,
-                    cancellationToken)
-                .ConfigureAwait(false);
+            record.Value = valueLen == -1
+                ? null
+                : await reader.ReadAsync(
+                        valueLen,
+                        cancellationToken)
+                    .ConfigureAwait(false);
 
             var headerCount = await VarInt
                 .FromReaderAsync(reader, asCompact, cancellationToken)
@@ -79,14 +83,20 @@ namespace Kafka.Protocol.Records
                 .ConfigureAwait(false);
             await OffsetDelta.WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await VarInt.From(Key.Length).WriteToAsync(writer, asCompact, cancellationToken)
+            await VarInt.From(Key?.Length ?? -1).WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await writer.WriteAsLittleEndianAsync(Key, cancellationToken)
+            if (Key != null)
+            {
+                await writer.WriteAsLittleEndianAsync(Key, cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            await VarInt.From(Value?.Length ?? -1).WriteToAsync(writer, asCompact, cancellationToken)
                 .ConfigureAwait(false);
-            await VarInt.From(Value.Length).WriteToAsync(writer, asCompact, cancellationToken)
-                .ConfigureAwait(false);
-            await writer.WriteAsLittleEndianAsync(Value, cancellationToken)
-                .ConfigureAwait(false);
+            if (Value != null)
+            {
+                await writer.WriteAsLittleEndianAsync(Value, cancellationToken)
+                    .ConfigureAwait(false);
+            }
 
             await VarInt.From(Headers.Length)
                 .WriteToAsync(writer, asCompact, cancellationToken)
@@ -109,10 +119,10 @@ namespace Kafka.Protocol.Records
             Attributes.GetSize(asCompact) +
             TimestampDelta.GetSize(asCompact) +
             OffsetDelta.GetSize(asCompact) +
-            VarInt.From(Key.Length).GetSize(asCompact) +
-            Key.Length +
-            VarInt.From(Value.Length).GetSize(asCompact) +
-            Value.Length +
+            VarInt.From(Key?.Length ?? -1).GetSize(asCompact) +
+            (Key?.Length ?? 0) +
+            VarInt.From(Value?.Length ?? -1).GetSize(asCompact) +
+            (Value?.Length ?? 0) +
             VarInt.From(Headers.Length).GetSize(asCompact) +
             Headers.Sum(header => header.GetSize(asCompact));
     }

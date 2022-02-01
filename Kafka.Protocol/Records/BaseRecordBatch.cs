@@ -99,7 +99,7 @@ namespace Kafka.Protocol.Records
             recordBatch.BaseOffset = await Int64.FromReaderAsync(reader, asCompact,
                     cancellationToken)
                 .ConfigureAwait(false);
-            var batchLength = await Int32.FromReaderAsync(reader, asCompact,
+            recordBatch.BatchLength = await Int32.FromReaderAsync(reader, asCompact,
                     cancellationToken)
                 .ConfigureAwait(false);
             recordBatch.PartitionLeaderEpoch = await Int32
@@ -139,8 +139,6 @@ namespace Kafka.Protocol.Records
                     () => Record.FromReaderAsync(checksumReader, asCompact,
                         cancellationToken), cancellationToken)
                 .ConfigureAwait(false);
-            
-            recordBatch.BatchLength = recordBatch.GetBatchLength(asCompact);
 
             if (checksumReader.Checksum != recordBatch.Crc)
             {
@@ -148,10 +146,11 @@ namespace Kafka.Protocol.Records
                     $"Record batch is corrupt. The read data has crc {checksumReader.Checksum} but the record batch states that crc should be {recordBatch.Crc}");
             }
 
+            var batchLength = recordBatch.GetBatchLength(asCompact);
             if (batchLength != recordBatch.BatchLength)
             {
                 throw new CorruptMessageException(
-                    $"Expected batch length of {batchLength} but the actual length is {recordBatch.BatchLength}");
+                    $"Expected batch length of {recordBatch.BatchLength} but the actual length is {recordBatch}");
             }
 
             var actualSize = recordBatch.PayloadSize(asCompact);
@@ -169,6 +168,13 @@ namespace Kafka.Protocol.Records
             bool asCompact,
             CancellationToken cancellationToken = default)
         {
+            var bytes = await SerializeCrcData(asCompact, cancellationToken)
+                .ConfigureAwait(false);
+            // Batch length is not part of CRC so we can calculate CRC without the batch length being set
+            Crc = Crc32C.Compute(bytes);
+            // Batch length includes the length of the CRC so it needs to be calculated after CRC has been set
+            BatchLength = GetBatchLength(asCompact);
+
             var size = PayloadSize(asCompact);
             if (asCompact)
             {
@@ -189,7 +195,6 @@ namespace Kafka.Protocol.Records
                 await BaseOffset
                     .WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
-                BatchLength = GetBatchLength(asCompact);
                 await BatchLength
                     .WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
@@ -198,11 +203,6 @@ namespace Kafka.Protocol.Records
                     .ConfigureAwait(false);
                 await Magic.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
-
-                var bytes = await SerializeCrcData(asCompact, cancellationToken)
-                    .ConfigureAwait(false);
-                Crc = Crc32C.Compute(bytes);
-
                 await Crc.WriteToAsync(writer, asCompact, cancellationToken)
                     .ConfigureAwait(false);
                 await writer.WriteAsync(bytes, cancellationToken)
