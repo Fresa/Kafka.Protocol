@@ -498,8 +498,13 @@ namespace Kafka.Protocol<# Block(() =>
 			}); #> +<# LF();
 			PrintSizeOfTags(); #>;<# LF(2);
 
-			#>internal static async ValueTask<<#= messageDefinition.Name #>> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)<# Block(() => 
+			#>public static async ValueTask<<#= messageDefinition.Name #>> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)<# Block(() => 
 			{
+				#>var pipe = new Pipe();<# LF();
+				#>await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);<# LF();
+				#>var reader = pipe.Reader;<# LF(2);
+				
+				#>var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);<# LF();
 				#>var instance = new <#= messageDefinition.Name #>(version);<# LF();
 				
 				messageDefinition.Fields.ForEach(messageField => 
@@ -519,19 +524,25 @@ namespace Kafka.Protocol<# Block(() =>
 				}
 			}); LF(2);
 
-			#>internal async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)<# Block(() => 
+			#>public async ValueTask<Bytes> ToBytesAsync(CancellationToken cancellationToken = default)<# Block(() => 
 			{
-				if (messageDefinition.Fields.Any() == false)
+				#>var writer = new MemoryStream();<# LF();
+				#>await using (writer.ConfigureAwait(false))<# Block(() => 
 				{
-					#>await Task.CompletedTask;<#
-				}
+					#>await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);<# LF();
+            		if (messageDefinition.Fields.Any() == false)
+					{
+						#>await Task.CompletedTask;<#
+					}
 
-				messageDefinition.Fields.ForEach(messageField => 
-				{
-					PrintWriteTo(messageField);
-				}); LF();
+					messageDefinition.Fields.ForEach(messageField => 
+					{
+						PrintWriteTo(messageField);
+					}); LF();
 
-				PrintWriteTags();
+					PrintWriteTags(); LF();
+					#>return new Bytes(writer.ToArray());<#
+				});
 			}); if (messageDefinition.Fields.Any()) LF(2);
 
 			PrintOnNewRowForEachWithIndex(messageDefinition.Fields, (messageField, messageFieldIndex, messageFieldCount) =>

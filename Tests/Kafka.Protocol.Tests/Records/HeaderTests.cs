@@ -1,9 +1,7 @@
 ﻿using System.IO;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Test.It.With.XUnit;
 using Xunit;
 
 namespace Kafka.Protocol.Tests.Records
@@ -12,7 +10,7 @@ namespace Kafka.Protocol.Tests.Records
     {
         public partial class Given_a_record_header
         {
-            public class When_calculating_length : XUnit2SpecificationAsync
+            public class When_calculating_length : UnitTestSpecificationAsync
             {
                 private readonly Kafka.Protocol.Records.Header _header = new()
                 {
@@ -20,18 +18,18 @@ namespace Kafka.Protocol.Tests.Records
                     Value = Encoding.UTF8.GetBytes("value1")
                 };
 
-                private int _actualLength;
+                private byte[] _bytes = null!;
 
                 protected override async Task WhenAsync()
                 {
                     var writer = new MemoryStream();
                     await using (writer.ConfigureAwait(false))
                     {
-                        await _header.WriteToAsync(writer, false, CancellationToken.None)
+                        await _header.WriteToAsync(writer, false, CancellationToken)
                             .ConfigureAwait(false);
                     }
 
-                    _actualLength = writer.ToArray().Length;
+                    _bytes = writer.ToArray();
                 }
 
                 [Fact]
@@ -39,7 +37,17 @@ namespace Kafka.Protocol.Tests.Records
                 {
                     _header.GetSize(false).Should()
                         .BeGreaterThan(0)
-                        .And.Be(_actualLength);
+                        .And.Be(_bytes.Length);
+                }
+
+                [Fact]
+                public async Task It_should_be_readable()
+                {
+                    var reader = await _bytes.ToReaderAsync()
+                        .ConfigureAwait(false);
+                    await Protocol.Records.Header.FromReaderAsync(reader, true, CancellationToken)
+                        .ConfigureAwait(false);
+                    reader.TryRead(out _).Should().BeFalse();
                 }
             }
         }
