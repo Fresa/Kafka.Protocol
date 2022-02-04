@@ -59,17 +59,25 @@ namespace Kafka.Protocol
                     0, Math.Min(bufferWriter.FreeCapacity, result.Buffer.Length));
                 buffer.CopyTo(bufferWriter.GetSpan());
                 bufferWriter.Advance((int)buffer.Length);
-
                 reader.AdvanceTo(buffer.End);
-            } while (result.HasMoreData() && bufferWriter.WrittenCount < length);
 
-            if (bufferWriter.WrittenCount < length)
+                if (bufferWriter.WrittenCount == length)
+                {
+                    return bufferWriter.WrittenMemory.ToArray();
+                }
+            } while (result.HasMoreData());
+
+            if (bufferWriter.WrittenCount == 0)
             {
-                throw new InvalidOperationException(
-                    $"Expected {length} bytes, got {bufferWriter.WrittenCount}");
+                reader.Complete();
+                throw new OperationCanceledException(cancellationToken);
             }
 
-            return bufferWriter.WrittenMemory.ToArray();
+            var exception = new OperationCanceledException(
+                    $"Expected {length} bytes, got {bufferWriter.WrittenCount}",
+                    cancellationToken);
+            reader.Complete(exception);
+            throw exception;
         }
     }
 }

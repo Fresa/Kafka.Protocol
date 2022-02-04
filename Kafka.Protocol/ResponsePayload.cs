@@ -75,12 +75,7 @@ namespace Kafka.Protocol
             {
                 throw new CorruptMessageException($"Expected size {payloadSize} got {actualPayloadSize}");
             }
-
-            if (reader.TryRead(out var a))
-            {
-                throw new InvalidOperationException();
-            }
-
+            
             return new ResponsePayload(header, message);
         }
     }
