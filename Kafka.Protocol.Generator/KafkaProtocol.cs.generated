@@ -3810,14 +3810,23 @@ namespace Kafka.Protocol
 		public AddPartitionsToTxnRequest WithTopicsCollection(params Func<AddPartitionsToTxnTopic, AddPartitionsToTxnTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateAddPartitionsToTxnTopic()))
+				.Select(createField => createField(new AddPartitionsToTxnTopic(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal AddPartitionsToTxnTopic CreateAddPartitionsToTxnTopic()
+		public delegate AddPartitionsToTxnTopic CreateAddPartitionsToTxnTopic(AddPartitionsToTxnTopic field);
+
+		/// <summary>
+		/// <para>The partitions to add to the transaction.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddPartitionsToTxnRequest WithTopicsCollection(IEnumerable<CreateAddPartitionsToTxnTopic> createFields)
 		{
-			return new AddPartitionsToTxnTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new AddPartitionsToTxnTopic(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class AddPartitionsToTxnTopic : ISerialize
@@ -4045,14 +4054,23 @@ namespace Kafka.Protocol
 		public AddPartitionsToTxnResponse WithResultsCollection(params Func<AddPartitionsToTxnTopicResult, AddPartitionsToTxnTopicResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateAddPartitionsToTxnTopicResult()))
+				.Select(createField => createField(new AddPartitionsToTxnTopicResult(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal AddPartitionsToTxnTopicResult CreateAddPartitionsToTxnTopicResult()
+		public delegate AddPartitionsToTxnTopicResult CreateAddPartitionsToTxnTopicResult(AddPartitionsToTxnTopicResult field);
+
+		/// <summary>
+		/// <para>The results for each topic.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddPartitionsToTxnResponse WithResultsCollection(IEnumerable<CreateAddPartitionsToTxnTopicResult> createFields)
 		{
-			return new AddPartitionsToTxnTopicResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new AddPartitionsToTxnTopicResult(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class AddPartitionsToTxnTopicResult : ISerialize
@@ -4156,14 +4174,23 @@ namespace Kafka.Protocol
 			public AddPartitionsToTxnTopicResult WithResultsCollection(params Func<AddPartitionsToTxnPartitionResult, AddPartitionsToTxnPartitionResult>[] createFields)
 			{
 				ResultsCollection = createFields
-					.Select(createField => createField(CreateAddPartitionsToTxnPartitionResult()))
+					.Select(createField => createField(new AddPartitionsToTxnPartitionResult(Version)))
 					.ToDictionary(field => field.PartitionIndex);
 				return this;
 			}
 
-			internal AddPartitionsToTxnPartitionResult CreateAddPartitionsToTxnPartitionResult()
+			public delegate AddPartitionsToTxnPartitionResult CreateAddPartitionsToTxnPartitionResult(AddPartitionsToTxnPartitionResult field);
+
+			/// <summary>
+			/// <para>The results for each partition</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public AddPartitionsToTxnTopicResult WithResultsCollection(IEnumerable<CreateAddPartitionsToTxnPartitionResult> createFields)
 			{
-				return new AddPartitionsToTxnPartitionResult(Version);
+				ResultsCollection = createFields
+					.Select(createField => createField(new AddPartitionsToTxnPartitionResult(Version)))
+					.ToDictionary(field => field.PartitionIndex);
+				return this;
 			}
 
 			public class AddPartitionsToTxnPartitionResult : ISerialize
@@ -4664,14 +4691,23 @@ namespace Kafka.Protocol
 		public AlterClientQuotasRequest WithEntriesCollection(params Func<EntryData, EntryData>[] createFields)
 		{
 			EntriesCollection = createFields
-				.Select(createField => createField(CreateEntryData()))
+				.Select(createField => createField(new EntryData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal EntryData CreateEntryData()
+		public delegate EntryData CreateEntryData(EntryData field);
+
+		/// <summary>
+		/// <para>The quota configuration entries to alter.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterClientQuotasRequest WithEntriesCollection(IEnumerable<CreateEntryData> createFields)
 		{
-			return new EntryData(Version);
+			EntriesCollection = createFields
+				.Select(createField => createField(new EntryData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class EntryData : ISerialize
@@ -4751,14 +4787,23 @@ namespace Kafka.Protocol
 			public EntryData WithEntityCollection(params Func<EntityData, EntityData>[] createFields)
 			{
 				EntityCollection = createFields
-					.Select(createField => createField(CreateEntityData()))
+					.Select(createField => createField(new EntityData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal EntityData CreateEntityData()
+			public delegate EntityData CreateEntityData(EntityData field);
+
+			/// <summary>
+			/// <para>The quota entity to alter.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public EntryData WithEntityCollection(IEnumerable<CreateEntityData> createFields)
 			{
-				return new EntityData(Version);
+				EntityCollection = createFields
+					.Select(createField => createField(new EntityData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class EntityData : ISerialize
@@ -4887,14 +4932,23 @@ namespace Kafka.Protocol
 			public EntryData WithOpsCollection(params Func<OpData, OpData>[] createFields)
 			{
 				OpsCollection = createFields
-					.Select(createField => createField(CreateOpData()))
+					.Select(createField => createField(new OpData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OpData CreateOpData()
+			public delegate OpData CreateOpData(OpData field);
+
+			/// <summary>
+			/// <para>An individual quota configuration entry to alter.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public EntryData WithOpsCollection(IEnumerable<CreateOpData> createFields)
 			{
-				return new OpData(Version);
+				OpsCollection = createFields
+					.Select(createField => createField(new OpData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OpData : ISerialize
@@ -5174,14 +5228,23 @@ namespace Kafka.Protocol
 		public AlterClientQuotasResponse WithEntriesCollection(params Func<EntryData, EntryData>[] createFields)
 		{
 			EntriesCollection = createFields
-				.Select(createField => createField(CreateEntryData()))
+				.Select(createField => createField(new EntryData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal EntryData CreateEntryData()
+		public delegate EntryData CreateEntryData(EntryData field);
+
+		/// <summary>
+		/// <para>The quota configuration entries to alter.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterClientQuotasResponse WithEntriesCollection(IEnumerable<CreateEntryData> createFields)
 		{
-			return new EntryData(Version);
+			EntriesCollection = createFields
+				.Select(createField => createField(new EntryData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class EntryData : ISerialize
@@ -5312,14 +5375,23 @@ namespace Kafka.Protocol
 			public EntryData WithEntityCollection(params Func<EntityData, EntityData>[] createFields)
 			{
 				EntityCollection = createFields
-					.Select(createField => createField(CreateEntityData()))
+					.Select(createField => createField(new EntityData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal EntityData CreateEntityData()
+			public delegate EntityData CreateEntityData(EntityData field);
+
+			/// <summary>
+			/// <para>The quota entity to alter.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public EntryData WithEntityCollection(IEnumerable<CreateEntityData> createFields)
 			{
-				return new EntityData(Version);
+				EntityCollection = createFields
+					.Select(createField => createField(new EntityData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class EntityData : ISerialize
@@ -5521,14 +5593,23 @@ namespace Kafka.Protocol
 		public AlterConfigsRequest WithResourcesCollection(params Func<AlterConfigsResource, AlterConfigsResource>[] createFields)
 		{
 			ResourcesCollection = createFields
-				.Select(createField => createField(CreateAlterConfigsResource()))
+				.Select(createField => createField(new AlterConfigsResource(Version)))
 				.ToDictionary(field => field.ResourceType);
 			return this;
 		}
 
-		internal AlterConfigsResource CreateAlterConfigsResource()
+		public delegate AlterConfigsResource CreateAlterConfigsResource(AlterConfigsResource field);
+
+		/// <summary>
+		/// <para>The updates for each resource.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterConfigsRequest WithResourcesCollection(IEnumerable<CreateAlterConfigsResource> createFields)
 		{
-			return new AlterConfigsResource(Version);
+			ResourcesCollection = createFields
+				.Select(createField => createField(new AlterConfigsResource(Version)))
+				.ToDictionary(field => field.ResourceType);
+			return this;
 		}
 
 		public class AlterConfigsResource : ISerialize
@@ -5659,14 +5740,23 @@ namespace Kafka.Protocol
 			public AlterConfigsResource WithConfigsCollection(params Func<AlterableConfig, AlterableConfig>[] createFields)
 			{
 				ConfigsCollection = createFields
-					.Select(createField => createField(CreateAlterableConfig()))
+					.Select(createField => createField(new AlterableConfig(Version)))
 					.ToDictionary(field => field.Name);
 				return this;
 			}
 
-			internal AlterableConfig CreateAlterableConfig()
+			public delegate AlterableConfig CreateAlterableConfig(AlterableConfig field);
+
+			/// <summary>
+			/// <para>The configurations.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public AlterConfigsResource WithConfigsCollection(IEnumerable<CreateAlterableConfig> createFields)
 			{
-				return new AlterableConfig(Version);
+				ConfigsCollection = createFields
+					.Select(createField => createField(new AlterableConfig(Version)))
+					.ToDictionary(field => field.Name);
+				return this;
 			}
 
 			public class AlterableConfig : ISerialize
@@ -5919,14 +6009,23 @@ namespace Kafka.Protocol
 		public AlterConfigsResponse WithResponsesCollection(params Func<AlterConfigsResourceResponse, AlterConfigsResourceResponse>[] createFields)
 		{
 			ResponsesCollection = createFields
-				.Select(createField => createField(CreateAlterConfigsResourceResponse()))
+				.Select(createField => createField(new AlterConfigsResourceResponse(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal AlterConfigsResourceResponse CreateAlterConfigsResourceResponse()
+		public delegate AlterConfigsResourceResponse CreateAlterConfigsResourceResponse(AlterConfigsResourceResponse field);
+
+		/// <summary>
+		/// <para>The responses for each resource.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterConfigsResponse WithResponsesCollection(IEnumerable<CreateAlterConfigsResourceResponse> createFields)
 		{
-			return new AlterConfigsResourceResponse(Version);
+			ResponsesCollection = createFields
+				.Select(createField => createField(new AlterConfigsResourceResponse(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class AlterConfigsResourceResponse : ISerialize
@@ -6232,14 +6331,22 @@ namespace Kafka.Protocol
 		public AlterIsrRequest WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterIsrRequest WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -6341,14 +6448,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -6656,14 +6771,22 @@ namespace Kafka.Protocol
 		public AlterIsrResponse WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterIsrResponse WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -6765,14 +6888,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -7108,14 +7239,23 @@ namespace Kafka.Protocol
 		public AlterPartitionReassignmentsRequest WithTopicsCollection(params Func<ReassignableTopic, ReassignableTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateReassignableTopic()))
+				.Select(createField => createField(new ReassignableTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ReassignableTopic CreateReassignableTopic()
+		public delegate ReassignableTopic CreateReassignableTopic(ReassignableTopic field);
+
+		/// <summary>
+		/// <para>The topics to reassign.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterPartitionReassignmentsRequest WithTopicsCollection(IEnumerable<CreateReassignableTopic> createFields)
 		{
-			return new ReassignableTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new ReassignableTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ReassignableTopic : ISerialize
@@ -7219,14 +7359,23 @@ namespace Kafka.Protocol
 			public ReassignableTopic WithPartitionsCollection(params Func<ReassignablePartition, ReassignablePartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateReassignablePartition()))
+					.Select(createField => createField(new ReassignablePartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal ReassignablePartition CreateReassignablePartition()
+			public delegate ReassignablePartition CreateReassignablePartition(ReassignablePartition field);
+
+			/// <summary>
+			/// <para>The partitions to reassign.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReassignableTopic WithPartitionsCollection(IEnumerable<CreateReassignablePartition> createFields)
 			{
-				return new ReassignablePartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new ReassignablePartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class ReassignablePartition : ISerialize
@@ -7511,14 +7660,23 @@ namespace Kafka.Protocol
 		public AlterPartitionReassignmentsResponse WithResponsesCollection(params Func<ReassignableTopicResponse, ReassignableTopicResponse>[] createFields)
 		{
 			ResponsesCollection = createFields
-				.Select(createField => createField(CreateReassignableTopicResponse()))
+				.Select(createField => createField(new ReassignableTopicResponse(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ReassignableTopicResponse CreateReassignableTopicResponse()
+		public delegate ReassignableTopicResponse CreateReassignableTopicResponse(ReassignableTopicResponse field);
+
+		/// <summary>
+		/// <para>The responses to topics to reassign.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterPartitionReassignmentsResponse WithResponsesCollection(IEnumerable<CreateReassignableTopicResponse> createFields)
 		{
-			return new ReassignableTopicResponse(Version);
+			ResponsesCollection = createFields
+				.Select(createField => createField(new ReassignableTopicResponse(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ReassignableTopicResponse : ISerialize
@@ -7622,14 +7780,23 @@ namespace Kafka.Protocol
 			public ReassignableTopicResponse WithPartitionsCollection(params Func<ReassignablePartitionResponse, ReassignablePartitionResponse>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateReassignablePartitionResponse()))
+					.Select(createField => createField(new ReassignablePartitionResponse(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal ReassignablePartitionResponse CreateReassignablePartitionResponse()
+			public delegate ReassignablePartitionResponse CreateReassignablePartitionResponse(ReassignablePartitionResponse field);
+
+			/// <summary>
+			/// <para>The responses to partitions to reassign</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReassignableTopicResponse WithPartitionsCollection(IEnumerable<CreateReassignablePartitionResponse> createFields)
 			{
-				return new ReassignablePartitionResponse(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new ReassignablePartitionResponse(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class ReassignablePartitionResponse : ISerialize
@@ -7855,14 +8022,23 @@ namespace Kafka.Protocol
 		public AlterReplicaLogDirsRequest WithDirsCollection(params Func<AlterReplicaLogDir, AlterReplicaLogDir>[] createFields)
 		{
 			DirsCollection = createFields
-				.Select(createField => createField(CreateAlterReplicaLogDir()))
+				.Select(createField => createField(new AlterReplicaLogDir(Version)))
 				.ToDictionary(field => field.Path);
 			return this;
 		}
 
-		internal AlterReplicaLogDir CreateAlterReplicaLogDir()
+		public delegate AlterReplicaLogDir CreateAlterReplicaLogDir(AlterReplicaLogDir field);
+
+		/// <summary>
+		/// <para>The alterations to make for each directory.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterReplicaLogDirsRequest WithDirsCollection(IEnumerable<CreateAlterReplicaLogDir> createFields)
 		{
-			return new AlterReplicaLogDir(Version);
+			DirsCollection = createFields
+				.Select(createField => createField(new AlterReplicaLogDir(Version)))
+				.ToDictionary(field => field.Path);
+			return this;
 		}
 
 		public class AlterReplicaLogDir : ISerialize
@@ -7966,14 +8142,23 @@ namespace Kafka.Protocol
 			public AlterReplicaLogDir WithTopicsCollection(params Func<AlterReplicaLogDirTopic, AlterReplicaLogDirTopic>[] createFields)
 			{
 				TopicsCollection = createFields
-					.Select(createField => createField(CreateAlterReplicaLogDirTopic()))
+					.Select(createField => createField(new AlterReplicaLogDirTopic(Version)))
 					.ToDictionary(field => field.Name);
 				return this;
 			}
 
-			internal AlterReplicaLogDirTopic CreateAlterReplicaLogDirTopic()
+			public delegate AlterReplicaLogDirTopic CreateAlterReplicaLogDirTopic(AlterReplicaLogDirTopic field);
+
+			/// <summary>
+			/// <para>The topics to add to the directory.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public AlterReplicaLogDir WithTopicsCollection(IEnumerable<CreateAlterReplicaLogDirTopic> createFields)
 			{
-				return new AlterReplicaLogDirTopic(Version);
+				TopicsCollection = createFields
+					.Select(createField => createField(new AlterReplicaLogDirTopic(Version)))
+					.ToDictionary(field => field.Name);
+				return this;
 			}
 
 			public class AlterReplicaLogDirTopic : ISerialize
@@ -8202,14 +8387,23 @@ namespace Kafka.Protocol
 		public AlterReplicaLogDirsResponse WithResultsCollection(params Func<AlterReplicaLogDirTopicResult, AlterReplicaLogDirTopicResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateAlterReplicaLogDirTopicResult()))
+				.Select(createField => createField(new AlterReplicaLogDirTopicResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal AlterReplicaLogDirTopicResult CreateAlterReplicaLogDirTopicResult()
+		public delegate AlterReplicaLogDirTopicResult CreateAlterReplicaLogDirTopicResult(AlterReplicaLogDirTopicResult field);
+
+		/// <summary>
+		/// <para>The results for each topic.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterReplicaLogDirsResponse WithResultsCollection(IEnumerable<CreateAlterReplicaLogDirTopicResult> createFields)
 		{
-			return new AlterReplicaLogDirTopicResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new AlterReplicaLogDirTopicResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class AlterReplicaLogDirTopicResult : ISerialize
@@ -8313,14 +8507,23 @@ namespace Kafka.Protocol
 			public AlterReplicaLogDirTopicResult WithPartitionsCollection(params Func<AlterReplicaLogDirPartitionResult, AlterReplicaLogDirPartitionResult>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateAlterReplicaLogDirPartitionResult()))
+					.Select(createField => createField(new AlterReplicaLogDirPartitionResult(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal AlterReplicaLogDirPartitionResult CreateAlterReplicaLogDirPartitionResult()
+			public delegate AlterReplicaLogDirPartitionResult CreateAlterReplicaLogDirPartitionResult(AlterReplicaLogDirPartitionResult field);
+
+			/// <summary>
+			/// <para>The results for each partition.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public AlterReplicaLogDirTopicResult WithPartitionsCollection(IEnumerable<CreateAlterReplicaLogDirPartitionResult> createFields)
 			{
-				return new AlterReplicaLogDirPartitionResult(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new AlterReplicaLogDirPartitionResult(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class AlterReplicaLogDirPartitionResult : ISerialize
@@ -8522,14 +8725,23 @@ namespace Kafka.Protocol
 		public AlterUserScramCredentialsRequest WithDeletionsCollection(params Func<ScramCredentialDeletion, ScramCredentialDeletion>[] createFields)
 		{
 			DeletionsCollection = createFields
-				.Select(createField => createField(CreateScramCredentialDeletion()))
+				.Select(createField => createField(new ScramCredentialDeletion(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ScramCredentialDeletion CreateScramCredentialDeletion()
+		public delegate ScramCredentialDeletion CreateScramCredentialDeletion(ScramCredentialDeletion field);
+
+		/// <summary>
+		/// <para>The SCRAM credentials to remove.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterUserScramCredentialsRequest WithDeletionsCollection(IEnumerable<CreateScramCredentialDeletion> createFields)
 		{
-			return new ScramCredentialDeletion(Version);
+			DeletionsCollection = createFields
+				.Select(createField => createField(new ScramCredentialDeletion(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ScramCredentialDeletion : ISerialize
@@ -8658,14 +8870,23 @@ namespace Kafka.Protocol
 		public AlterUserScramCredentialsRequest WithUpsertionsCollection(params Func<ScramCredentialUpsertion, ScramCredentialUpsertion>[] createFields)
 		{
 			UpsertionsCollection = createFields
-				.Select(createField => createField(CreateScramCredentialUpsertion()))
+				.Select(createField => createField(new ScramCredentialUpsertion(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ScramCredentialUpsertion CreateScramCredentialUpsertion()
+		public delegate ScramCredentialUpsertion CreateScramCredentialUpsertion(ScramCredentialUpsertion field);
+
+		/// <summary>
+		/// <para>The SCRAM credentials to update/insert.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterUserScramCredentialsRequest WithUpsertionsCollection(IEnumerable<CreateScramCredentialUpsertion> createFields)
 		{
-			return new ScramCredentialUpsertion(Version);
+			UpsertionsCollection = createFields
+				.Select(createField => createField(new ScramCredentialUpsertion(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ScramCredentialUpsertion : ISerialize
@@ -8974,14 +9195,23 @@ namespace Kafka.Protocol
 		public AlterUserScramCredentialsResponse WithResultsCollection(params Func<AlterUserScramCredentialsResult, AlterUserScramCredentialsResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateAlterUserScramCredentialsResult()))
+				.Select(createField => createField(new AlterUserScramCredentialsResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal AlterUserScramCredentialsResult CreateAlterUserScramCredentialsResult()
+		public delegate AlterUserScramCredentialsResult CreateAlterUserScramCredentialsResult(AlterUserScramCredentialsResult field);
+
+		/// <summary>
+		/// <para>The results for deletions and alterations, one per affected user.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AlterUserScramCredentialsResponse WithResultsCollection(IEnumerable<CreateAlterUserScramCredentialsResult> createFields)
 		{
-			return new AlterUserScramCredentialsResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new AlterUserScramCredentialsResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class AlterUserScramCredentialsResult : ISerialize
@@ -9425,14 +9655,23 @@ namespace Kafka.Protocol
 		public ApiVersionsResponse WithApiKeysCollection(params Func<ApiVersion, ApiVersion>[] createFields)
 		{
 			ApiKeysCollection = createFields
-				.Select(createField => createField(CreateApiVersion()))
+				.Select(createField => createField(new ApiVersion(Version)))
 				.ToDictionary(field => field.ApiKey);
 			return this;
 		}
 
-		internal ApiVersion CreateApiVersion()
+		public delegate ApiVersion CreateApiVersion(ApiVersion field);
+
+		/// <summary>
+		/// <para>The APIs supported by the broker.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ApiVersionsResponse WithApiKeysCollection(IEnumerable<CreateApiVersion> createFields)
 		{
-			return new ApiVersion(Version);
+			ApiKeysCollection = createFields
+				.Select(createField => createField(new ApiVersion(Version)))
+				.ToDictionary(field => field.ApiKey);
+			return this;
 		}
 
 		public class ApiVersion : ISerialize
@@ -9614,14 +9853,23 @@ namespace Kafka.Protocol
 		public ApiVersionsResponse WithSupportedFeaturesCollection(params Func<SupportedFeatureKey, SupportedFeatureKey>[] createFields)
 		{
 			SupportedFeaturesCollection = createFields
-				.Select(createField => createField(CreateSupportedFeatureKey()))
+				.Select(createField => createField(new SupportedFeatureKey(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal SupportedFeatureKey CreateSupportedFeatureKey()
+		public delegate SupportedFeatureKey CreateSupportedFeatureKey(SupportedFeatureKey field);
+
+		/// <summary>
+		/// <para>Features supported by the broker.</para>
+		/// <para>Versions: 3+</para>
+		/// </summary>
+		public ApiVersionsResponse WithSupportedFeaturesCollection(IEnumerable<CreateSupportedFeatureKey> createFields)
 		{
-			return new SupportedFeatureKey(Version);
+			SupportedFeaturesCollection = createFields
+				.Select(createField => createField(new SupportedFeatureKey(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class SupportedFeatureKey : ISerialize
@@ -9828,14 +10076,23 @@ namespace Kafka.Protocol
 		public ApiVersionsResponse WithFinalizedFeaturesCollection(params Func<FinalizedFeatureKey, FinalizedFeatureKey>[] createFields)
 		{
 			FinalizedFeaturesCollection = createFields
-				.Select(createField => createField(CreateFinalizedFeatureKey()))
+				.Select(createField => createField(new FinalizedFeatureKey(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal FinalizedFeatureKey CreateFinalizedFeatureKey()
+		public delegate FinalizedFeatureKey CreateFinalizedFeatureKey(FinalizedFeatureKey field);
+
+		/// <summary>
+		/// <para>List of cluster-wide finalized features. The information is valid only if FinalizedFeaturesEpoch >= 0.</para>
+		/// <para>Versions: 3+</para>
+		/// </summary>
+		public ApiVersionsResponse WithFinalizedFeaturesCollection(IEnumerable<CreateFinalizedFeatureKey> createFields)
 		{
-			return new FinalizedFeatureKey(Version);
+			FinalizedFeaturesCollection = createFields
+				.Select(createField => createField(new FinalizedFeatureKey(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class FinalizedFeatureKey : ISerialize
@@ -10106,14 +10363,22 @@ namespace Kafka.Protocol
 		public BeginQuorumEpochRequest WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public BeginQuorumEpochRequest WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -10215,14 +10480,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -10476,14 +10749,22 @@ namespace Kafka.Protocol
 		public BeginQuorumEpochResponse WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public BeginQuorumEpochResponse WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -10585,14 +10866,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -11341,14 +11630,23 @@ namespace Kafka.Protocol
 		public BrokerRegistrationRequest WithListenersCollection(params Func<Listener, Listener>[] createFields)
 		{
 			ListenersCollection = createFields
-				.Select(createField => createField(CreateListener()))
+				.Select(createField => createField(new Listener(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal Listener CreateListener()
+		public delegate Listener CreateListener(Listener field);
+
+		/// <summary>
+		/// <para>The listeners of this broker</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public BrokerRegistrationRequest WithListenersCollection(IEnumerable<CreateListener> createFields)
 		{
-			return new Listener(Version);
+			ListenersCollection = createFields
+				.Select(createField => createField(new Listener(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class Listener : ISerialize
@@ -11531,14 +11829,23 @@ namespace Kafka.Protocol
 		public BrokerRegistrationRequest WithFeaturesCollection(params Func<Feature, Feature>[] createFields)
 		{
 			FeaturesCollection = createFields
-				.Select(createField => createField(CreateFeature()))
+				.Select(createField => createField(new Feature(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal Feature CreateFeature()
+		public delegate Feature CreateFeature(Feature field);
+
+		/// <summary>
+		/// <para>The features on this broker</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public BrokerRegistrationRequest WithFeaturesCollection(IEnumerable<CreateFeature> createFields)
 		{
-			return new Feature(Version);
+			FeaturesCollection = createFields
+				.Select(createField => createField(new Feature(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class Feature : ISerialize
@@ -12097,14 +12404,23 @@ namespace Kafka.Protocol
 		public ControlledShutdownResponse WithRemainingPartitionsCollection(params Func<RemainingPartition, RemainingPartition>[] createFields)
 		{
 			RemainingPartitionsCollection = createFields
-				.Select(createField => createField(CreateRemainingPartition()))
+				.Select(createField => createField(new RemainingPartition(Version)))
 				.ToDictionary(field => field.TopicName);
 			return this;
 		}
 
-		internal RemainingPartition CreateRemainingPartition()
+		public delegate RemainingPartition CreateRemainingPartition(RemainingPartition field);
+
+		/// <summary>
+		/// <para>The partitions that the broker still leads.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControlledShutdownResponse WithRemainingPartitionsCollection(IEnumerable<CreateRemainingPartition> createFields)
 		{
-			return new RemainingPartition(Version);
+			RemainingPartitionsCollection = createFields
+				.Select(createField => createField(new RemainingPartition(Version)))
+				.ToDictionary(field => field.TopicName);
+			return this;
 		}
 
 		public class RemainingPartition : ISerialize
@@ -12302,14 +12618,23 @@ namespace Kafka.Protocol
 		public CreateAclsRequest WithCreationsCollection(params Func<AclCreation, AclCreation>[] createFields)
 		{
 			CreationsCollection = createFields
-				.Select(createField => createField(CreateAclCreation()))
+				.Select(createField => createField(new AclCreation(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal AclCreation CreateAclCreation()
+		public delegate AclCreation CreateAclCreation(AclCreation field);
+
+		/// <summary>
+		/// <para>The ACLs that we want to create.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public CreateAclsRequest WithCreationsCollection(IEnumerable<CreateAclCreation> createFields)
 		{
-			return new AclCreation(Version);
+			CreationsCollection = createFields
+				.Select(createField => createField(new AclCreation(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class AclCreation : ISerialize
@@ -12681,14 +13006,23 @@ namespace Kafka.Protocol
 		public CreateAclsResponse WithResultsCollection(params Func<AclCreationResult, AclCreationResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateAclCreationResult()))
+				.Select(createField => createField(new AclCreationResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal AclCreationResult CreateAclCreationResult()
+		public delegate AclCreationResult CreateAclCreationResult(AclCreationResult field);
+
+		/// <summary>
+		/// <para>The results for each ACL creation.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public CreateAclsResponse WithResultsCollection(IEnumerable<CreateAclCreationResult> createFields)
 		{
-			return new AclCreationResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new AclCreationResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class AclCreationResult : ISerialize
@@ -12889,14 +13223,23 @@ namespace Kafka.Protocol
 		public CreateDelegationTokenRequest WithRenewersCollection(params Func<CreatableRenewers, CreatableRenewers>[] createFields)
 		{
 			RenewersCollection = createFields
-				.Select(createField => createField(CreateCreatableRenewers()))
+				.Select(createField => createField(new CreatableRenewers(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal CreatableRenewers CreateCreatableRenewers()
+		public delegate CreatableRenewers CreateCreatableRenewers(CreatableRenewers field);
+
+		/// <summary>
+		/// <para>A list of those who are allowed to renew this token before it expires.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public CreateDelegationTokenRequest WithRenewersCollection(IEnumerable<CreateCreatableRenewers> createFields)
 		{
-			return new CreatableRenewers(Version);
+			RenewersCollection = createFields
+				.Select(createField => createField(new CreatableRenewers(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class CreatableRenewers : ISerialize
@@ -13436,14 +13779,23 @@ namespace Kafka.Protocol
 		public CreatePartitionsRequest WithTopicsCollection(params Func<CreatePartitionsTopic, CreatePartitionsTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateCreatePartitionsTopic()))
+				.Select(createField => createField(new CreatePartitionsTopic(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal CreatePartitionsTopic CreateCreatePartitionsTopic()
+		public delegate CreatePartitionsTopic CreateCreatePartitionsTopic(CreatePartitionsTopic field);
+
+		/// <summary>
+		/// <para>Each topic that we want to create new partitions inside.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public CreatePartitionsRequest WithTopicsCollection(IEnumerable<CreateCreatePartitionsTopic> createFields)
 		{
-			return new CreatePartitionsTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new CreatePartitionsTopic(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class CreatePartitionsTopic : ISerialize
@@ -13574,14 +13926,23 @@ namespace Kafka.Protocol
 			public CreatePartitionsTopic WithAssignmentsCollection(params Func<CreatePartitionsAssignment, CreatePartitionsAssignment>[] createFields)
 			{
 				AssignmentsCollection = createFields
-					.Select(createField => createField(CreateCreatePartitionsAssignment()))
+					.Select(createField => createField(new CreatePartitionsAssignment(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal CreatePartitionsAssignment CreateCreatePartitionsAssignment()
+			public delegate CreatePartitionsAssignment CreateCreatePartitionsAssignment(CreatePartitionsAssignment field);
+
+			/// <summary>
+			/// <para>The new partition assignments.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public CreatePartitionsTopic WithAssignmentsCollection(IEnumerable<CreateCreatePartitionsAssignment> createFields)
 			{
-				return new CreatePartitionsAssignment(Version);
+				AssignmentsCollection = createFields
+					.Select(createField => createField(new CreatePartitionsAssignment(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class CreatePartitionsAssignment : ISerialize
@@ -13831,14 +14192,23 @@ namespace Kafka.Protocol
 		public CreatePartitionsResponse WithResultsCollection(params Func<CreatePartitionsTopicResult, CreatePartitionsTopicResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateCreatePartitionsTopicResult()))
+				.Select(createField => createField(new CreatePartitionsTopicResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal CreatePartitionsTopicResult CreateCreatePartitionsTopicResult()
+		public delegate CreatePartitionsTopicResult CreateCreatePartitionsTopicResult(CreatePartitionsTopicResult field);
+
+		/// <summary>
+		/// <para>The partition creation results for each topic.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public CreatePartitionsResponse WithResultsCollection(IEnumerable<CreateCreatePartitionsTopicResult> createFields)
 		{
-			return new CreatePartitionsTopicResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new CreatePartitionsTopicResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class CreatePartitionsTopicResult : ISerialize
@@ -14075,14 +14445,23 @@ namespace Kafka.Protocol
 		public CreateTopicsRequest WithTopicsCollection(params Func<CreatableTopic, CreatableTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateCreatableTopic()))
+				.Select(createField => createField(new CreatableTopic(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal CreatableTopic CreateCreatableTopic()
+		public delegate CreatableTopic CreateCreatableTopic(CreatableTopic field);
+
+		/// <summary>
+		/// <para>The topics to create.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public CreateTopicsRequest WithTopicsCollection(IEnumerable<CreateCreatableTopic> createFields)
 		{
-			return new CreatableTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new CreatableTopic(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class CreatableTopic : ISerialize
@@ -14243,14 +14622,23 @@ namespace Kafka.Protocol
 			public CreatableTopic WithAssignmentsCollection(params Func<CreatableReplicaAssignment, CreatableReplicaAssignment>[] createFields)
 			{
 				AssignmentsCollection = createFields
-					.Select(createField => createField(CreateCreatableReplicaAssignment()))
+					.Select(createField => createField(new CreatableReplicaAssignment(Version)))
 					.ToDictionary(field => field.PartitionIndex);
 				return this;
 			}
 
-			internal CreatableReplicaAssignment CreateCreatableReplicaAssignment()
+			public delegate CreatableReplicaAssignment CreateCreatableReplicaAssignment(CreatableReplicaAssignment field);
+
+			/// <summary>
+			/// <para>The manual partition assignment, or the empty array if we are using automatic assignment.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public CreatableTopic WithAssignmentsCollection(IEnumerable<CreateCreatableReplicaAssignment> createFields)
 			{
-				return new CreatableReplicaAssignment(Version);
+				AssignmentsCollection = createFields
+					.Select(createField => createField(new CreatableReplicaAssignment(Version)))
+					.ToDictionary(field => field.PartitionIndex);
+				return this;
 			}
 
 			public class CreatableReplicaAssignment : ISerialize
@@ -14379,14 +14767,23 @@ namespace Kafka.Protocol
 			public CreatableTopic WithConfigsCollection(params Func<CreateableTopicConfig, CreateableTopicConfig>[] createFields)
 			{
 				ConfigsCollection = createFields
-					.Select(createField => createField(CreateCreateableTopicConfig()))
+					.Select(createField => createField(new CreateableTopicConfig(Version)))
 					.ToDictionary(field => field.Name);
 				return this;
 			}
 
-			internal CreateableTopicConfig CreateCreateableTopicConfig()
+			public delegate CreateableTopicConfig CreateCreateableTopicConfig(CreateableTopicConfig field);
+
+			/// <summary>
+			/// <para>The custom topic configurations to set.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public CreatableTopic WithConfigsCollection(IEnumerable<CreateCreateableTopicConfig> createFields)
 			{
-				return new CreateableTopicConfig(Version);
+				ConfigsCollection = createFields
+					.Select(createField => createField(new CreateableTopicConfig(Version)))
+					.ToDictionary(field => field.Name);
+				return this;
 			}
 
 			public class CreateableTopicConfig : ISerialize
@@ -14674,14 +15071,23 @@ namespace Kafka.Protocol
 		public CreateTopicsResponse WithTopicsCollection(params Func<CreatableTopicResult, CreatableTopicResult>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateCreatableTopicResult()))
+				.Select(createField => createField(new CreatableTopicResult(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal CreatableTopicResult CreateCreatableTopicResult()
+		public delegate CreatableTopicResult CreateCreatableTopicResult(CreatableTopicResult field);
+
+		/// <summary>
+		/// <para>Results for each topic we tried to create.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public CreateTopicsResponse WithTopicsCollection(IEnumerable<CreateCreatableTopicResult> createFields)
 		{
-			return new CreatableTopicResult(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new CreatableTopicResult(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class CreatableTopicResult : ISerialize
@@ -14992,14 +15398,23 @@ namespace Kafka.Protocol
 			public CreatableTopicResult WithConfigsCollection(params Func<CreatableTopicConfigs, CreatableTopicConfigs>[] createFields)
 			{
 				ConfigsCollection = createFields
-					.Select(createField => createField(CreateCreatableTopicConfigs()))
+					.Select(createField => createField(new CreatableTopicConfigs(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal CreatableTopicConfigs CreateCreatableTopicConfigs()
+			public delegate CreatableTopicConfigs CreateCreatableTopicConfigs(CreatableTopicConfigs field);
+
+			/// <summary>
+			/// <para>Configuration of the topic.</para>
+			/// <para>Versions: 5+</para>
+			/// </summary>
+			public CreatableTopicResult WithConfigsCollection(IEnumerable<CreateCreatableTopicConfigs> createFields)
 			{
-				return new CreatableTopicConfigs(Version);
+				ConfigsCollection = createFields
+					.Select(createField => createField(new CreatableTopicConfigs(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class CreatableTopicConfigs : ISerialize
@@ -15317,14 +15732,23 @@ namespace Kafka.Protocol
 		public DeleteAclsRequest WithFiltersCollection(params Func<DeleteAclsFilter, DeleteAclsFilter>[] createFields)
 		{
 			FiltersCollection = createFields
-				.Select(createField => createField(CreateDeleteAclsFilter()))
+				.Select(createField => createField(new DeleteAclsFilter(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DeleteAclsFilter CreateDeleteAclsFilter()
+		public delegate DeleteAclsFilter CreateDeleteAclsFilter(DeleteAclsFilter field);
+
+		/// <summary>
+		/// <para>The filters to use when deleting ACLs.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteAclsRequest WithFiltersCollection(IEnumerable<CreateDeleteAclsFilter> createFields)
 		{
-			return new DeleteAclsFilter(Version);
+			FiltersCollection = createFields
+				.Select(createField => createField(new DeleteAclsFilter(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DeleteAclsFilter : ISerialize
@@ -15696,14 +16120,23 @@ namespace Kafka.Protocol
 		public DeleteAclsResponse WithFilterResultsCollection(params Func<DeleteAclsFilterResult, DeleteAclsFilterResult>[] createFields)
 		{
 			FilterResultsCollection = createFields
-				.Select(createField => createField(CreateDeleteAclsFilterResult()))
+				.Select(createField => createField(new DeleteAclsFilterResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DeleteAclsFilterResult CreateDeleteAclsFilterResult()
+		public delegate DeleteAclsFilterResult CreateDeleteAclsFilterResult(DeleteAclsFilterResult field);
+
+		/// <summary>
+		/// <para>The results for each filter.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteAclsResponse WithFilterResultsCollection(IEnumerable<CreateDeleteAclsFilterResult> createFields)
 		{
-			return new DeleteAclsFilterResult(Version);
+			FilterResultsCollection = createFields
+				.Select(createField => createField(new DeleteAclsFilterResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DeleteAclsFilterResult : ISerialize
@@ -15834,14 +16267,23 @@ namespace Kafka.Protocol
 			public DeleteAclsFilterResult WithMatchingAclsCollection(params Func<DeleteAclsMatchingAcl, DeleteAclsMatchingAcl>[] createFields)
 			{
 				MatchingAclsCollection = createFields
-					.Select(createField => createField(CreateDeleteAclsMatchingAcl()))
+					.Select(createField => createField(new DeleteAclsMatchingAcl(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal DeleteAclsMatchingAcl CreateDeleteAclsMatchingAcl()
+			public delegate DeleteAclsMatchingAcl CreateDeleteAclsMatchingAcl(DeleteAclsMatchingAcl field);
+
+			/// <summary>
+			/// <para>The ACLs which matched this filter.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteAclsFilterResult WithMatchingAclsCollection(IEnumerable<CreateDeleteAclsMatchingAcl> createFields)
 			{
-				return new DeleteAclsMatchingAcl(Version);
+				MatchingAclsCollection = createFields
+					.Select(createField => createField(new DeleteAclsMatchingAcl(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class DeleteAclsMatchingAcl : ISerialize
@@ -16361,14 +16803,23 @@ namespace Kafka.Protocol
 		public DeleteGroupsResponse WithResultsCollection(params Func<DeletableGroupResult, DeletableGroupResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateDeletableGroupResult()))
+				.Select(createField => createField(new DeletableGroupResult(Version)))
 				.ToDictionary(field => field.GroupId);
 			return this;
 		}
 
-		internal DeletableGroupResult CreateDeletableGroupResult()
+		public delegate DeletableGroupResult CreateDeletableGroupResult(DeletableGroupResult field);
+
+		/// <summary>
+		/// <para>The deletion results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteGroupsResponse WithResultsCollection(IEnumerable<CreateDeletableGroupResult> createFields)
 		{
-			return new DeletableGroupResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new DeletableGroupResult(Version)))
+				.ToDictionary(field => field.GroupId);
+			return this;
 		}
 
 		public class DeletableGroupResult : ISerialize
@@ -16569,14 +17020,23 @@ namespace Kafka.Protocol
 		public DeleteRecordsRequest WithTopicsCollection(params Func<DeleteRecordsTopic, DeleteRecordsTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateDeleteRecordsTopic()))
+				.Select(createField => createField(new DeleteRecordsTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DeleteRecordsTopic CreateDeleteRecordsTopic()
+		public delegate DeleteRecordsTopic CreateDeleteRecordsTopic(DeleteRecordsTopic field);
+
+		/// <summary>
+		/// <para>Each topic that we want to delete records from.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteRecordsRequest WithTopicsCollection(IEnumerable<CreateDeleteRecordsTopic> createFields)
 		{
-			return new DeleteRecordsTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new DeleteRecordsTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DeleteRecordsTopic : ISerialize
@@ -16680,14 +17140,23 @@ namespace Kafka.Protocol
 			public DeleteRecordsTopic WithPartitionsCollection(params Func<DeleteRecordsPartition, DeleteRecordsPartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateDeleteRecordsPartition()))
+					.Select(createField => createField(new DeleteRecordsPartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal DeleteRecordsPartition CreateDeleteRecordsPartition()
+			public delegate DeleteRecordsPartition CreateDeleteRecordsPartition(DeleteRecordsPartition field);
+
+			/// <summary>
+			/// <para>Each partition that we want to delete records from.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteRecordsTopic WithPartitionsCollection(IEnumerable<CreateDeleteRecordsPartition> createFields)
 			{
-				return new DeleteRecordsPartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new DeleteRecordsPartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class DeleteRecordsPartition : ISerialize
@@ -16940,14 +17409,23 @@ namespace Kafka.Protocol
 		public DeleteRecordsResponse WithTopicsCollection(params Func<DeleteRecordsTopicResult, DeleteRecordsTopicResult>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateDeleteRecordsTopicResult()))
+				.Select(createField => createField(new DeleteRecordsTopicResult(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal DeleteRecordsTopicResult CreateDeleteRecordsTopicResult()
+		public delegate DeleteRecordsTopicResult CreateDeleteRecordsTopicResult(DeleteRecordsTopicResult field);
+
+		/// <summary>
+		/// <para>Each topic that we wanted to delete records from.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteRecordsResponse WithTopicsCollection(IEnumerable<CreateDeleteRecordsTopicResult> createFields)
 		{
-			return new DeleteRecordsTopicResult(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new DeleteRecordsTopicResult(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class DeleteRecordsTopicResult : ISerialize
@@ -17051,14 +17529,23 @@ namespace Kafka.Protocol
 			public DeleteRecordsTopicResult WithPartitionsCollection(params Func<DeleteRecordsPartitionResult, DeleteRecordsPartitionResult>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateDeleteRecordsPartitionResult()))
+					.Select(createField => createField(new DeleteRecordsPartitionResult(Version)))
 					.ToDictionary(field => field.PartitionIndex);
 				return this;
 			}
 
-			internal DeleteRecordsPartitionResult CreateDeleteRecordsPartitionResult()
+			public delegate DeleteRecordsPartitionResult CreateDeleteRecordsPartitionResult(DeleteRecordsPartitionResult field);
+
+			/// <summary>
+			/// <para>Each partition that we wanted to delete records from.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteRecordsTopicResult WithPartitionsCollection(IEnumerable<CreateDeleteRecordsPartitionResult> createFields)
 			{
-				return new DeleteRecordsPartitionResult(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new DeleteRecordsPartitionResult(Version)))
+					.ToDictionary(field => field.PartitionIndex);
+				return this;
 			}
 
 			public class DeleteRecordsPartitionResult : ISerialize
@@ -17301,14 +17788,23 @@ namespace Kafka.Protocol
 		public DeleteTopicsRequest WithTopicsCollection(params Func<DeleteTopicState, DeleteTopicState>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateDeleteTopicState()))
+				.Select(createField => createField(new DeleteTopicState(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DeleteTopicState CreateDeleteTopicState()
+		public delegate DeleteTopicState CreateDeleteTopicState(DeleteTopicState field);
+
+		/// <summary>
+		/// <para>The name or topic ID of the topic</para>
+		/// <para>Versions: 6+</para>
+		/// </summary>
+		public DeleteTopicsRequest WithTopicsCollection(IEnumerable<CreateDeleteTopicState> createFields)
 		{
-			return new DeleteTopicState(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new DeleteTopicState(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DeleteTopicState : ISerialize
@@ -17608,14 +18104,23 @@ namespace Kafka.Protocol
 		public DeleteTopicsResponse WithResponsesCollection(params Func<DeletableTopicResult, DeletableTopicResult>[] createFields)
 		{
 			ResponsesCollection = createFields
-				.Select(createField => createField(CreateDeletableTopicResult()))
+				.Select(createField => createField(new DeletableTopicResult(Version)))
 				.ToDictionary(field => (NullableString)field.Name);
 			return this;
 		}
 
-		internal DeletableTopicResult CreateDeletableTopicResult()
+		public delegate DeletableTopicResult CreateDeletableTopicResult(DeletableTopicResult field);
+
+		/// <summary>
+		/// <para>The results for each topic we tried to delete.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteTopicsResponse WithResponsesCollection(IEnumerable<CreateDeletableTopicResult> createFields)
 		{
-			return new DeletableTopicResult(Version);
+			ResponsesCollection = createFields
+				.Select(createField => createField(new DeletableTopicResult(Version)))
+				.ToDictionary(field => (NullableString)field.Name);
+			return this;
 		}
 
 		public class DeletableTopicResult : ISerialize
@@ -18233,14 +18738,23 @@ namespace Kafka.Protocol
 		public DescribeAclsResponse WithResourcesCollection(params Func<DescribeAclsResource, DescribeAclsResource>[] createFields)
 		{
 			ResourcesCollection = createFields
-				.Select(createField => createField(CreateDescribeAclsResource()))
+				.Select(createField => createField(new DescribeAclsResource(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DescribeAclsResource CreateDescribeAclsResource()
+		public delegate DescribeAclsResource CreateDescribeAclsResource(DescribeAclsResource field);
+
+		/// <summary>
+		/// <para>Each Resource that is referenced in an ACL.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeAclsResponse WithResourcesCollection(IEnumerable<CreateDescribeAclsResource> createFields)
 		{
-			return new DescribeAclsResource(Version);
+			ResourcesCollection = createFields
+				.Select(createField => createField(new DescribeAclsResource(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DescribeAclsResource : ISerialize
@@ -18407,14 +18921,23 @@ namespace Kafka.Protocol
 			public DescribeAclsResource WithAclsCollection(params Func<AclDescription, AclDescription>[] createFields)
 			{
 				AclsCollection = createFields
-					.Select(createField => createField(CreateAclDescription()))
+					.Select(createField => createField(new AclDescription(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal AclDescription CreateAclDescription()
+			public delegate AclDescription CreateAclDescription(AclDescription field);
+
+			/// <summary>
+			/// <para>The ACLs.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeAclsResource WithAclsCollection(IEnumerable<CreateAclDescription> createFields)
 			{
-				return new AclDescription(Version);
+				AclsCollection = createFields
+					.Select(createField => createField(new AclDescription(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class AclDescription : ISerialize
@@ -18670,14 +19193,23 @@ namespace Kafka.Protocol
 		public DescribeClientQuotasRequest WithComponentsCollection(params Func<ComponentData, ComponentData>[] createFields)
 		{
 			ComponentsCollection = createFields
-				.Select(createField => createField(CreateComponentData()))
+				.Select(createField => createField(new ComponentData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ComponentData CreateComponentData()
+		public delegate ComponentData CreateComponentData(ComponentData field);
+
+		/// <summary>
+		/// <para>Filter components to apply to quota entities.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeClientQuotasRequest WithComponentsCollection(IEnumerable<CreateComponentData> createFields)
 		{
-			return new ComponentData(Version);
+			ComponentsCollection = createFields
+				.Select(createField => createField(new ComponentData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ComponentData : ISerialize
@@ -19010,14 +19542,23 @@ namespace Kafka.Protocol
 		public DescribeClientQuotasResponse WithEntriesCollection(params Func<EntryData, EntryData>[] createFields)
 		{
 			EntriesCollection = createFields
-				.Select(createField => createField(CreateEntryData()))
+				.Select(createField => createField(new EntryData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal EntryData CreateEntryData()
+		public delegate EntryData CreateEntryData(EntryData field);
+
+		/// <summary>
+		/// <para>A result entry.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeClientQuotasResponse WithEntriesCollection(IEnumerable<CreateEntryData> createFields)
 		{
-			return new EntryData(Version);
+			EntriesCollection = createFields
+				.Select(createField => createField(new EntryData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class EntryData : ISerialize
@@ -19097,14 +19638,23 @@ namespace Kafka.Protocol
 			public EntryData WithEntityCollection(params Func<EntityData, EntityData>[] createFields)
 			{
 				EntityCollection = createFields
-					.Select(createField => createField(CreateEntityData()))
+					.Select(createField => createField(new EntityData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal EntityData CreateEntityData()
+			public delegate EntityData CreateEntityData(EntityData field);
+
+			/// <summary>
+			/// <para>The quota entity description.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public EntryData WithEntityCollection(IEnumerable<CreateEntityData> createFields)
 			{
-				return new EntityData(Version);
+				EntityCollection = createFields
+					.Select(createField => createField(new EntityData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class EntityData : ISerialize
@@ -19233,14 +19783,23 @@ namespace Kafka.Protocol
 			public EntryData WithValuesCollection(params Func<ValueData, ValueData>[] createFields)
 			{
 				ValuesCollection = createFields
-					.Select(createField => createField(CreateValueData()))
+					.Select(createField => createField(new ValueData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal ValueData CreateValueData()
+			public delegate ValueData CreateValueData(ValueData field);
+
+			/// <summary>
+			/// <para>The quota values for the entity.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public EntryData WithValuesCollection(IEnumerable<CreateValueData> createFields)
 			{
-				return new ValueData(Version);
+				ValuesCollection = createFields
+					.Select(createField => createField(new ValueData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class ValueData : ISerialize
@@ -19677,14 +20236,23 @@ namespace Kafka.Protocol
 		public DescribeClusterResponse WithBrokersCollection(params Func<DescribeClusterBroker, DescribeClusterBroker>[] createFields)
 		{
 			BrokersCollection = createFields
-				.Select(createField => createField(CreateDescribeClusterBroker()))
+				.Select(createField => createField(new DescribeClusterBroker(Version)))
 				.ToDictionary(field => field.BrokerId);
 			return this;
 		}
 
-		internal DescribeClusterBroker CreateDescribeClusterBroker()
+		public delegate DescribeClusterBroker CreateDescribeClusterBroker(DescribeClusterBroker field);
+
+		/// <summary>
+		/// <para>Each broker in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeClusterResponse WithBrokersCollection(IEnumerable<CreateDescribeClusterBroker> createFields)
 		{
-			return new DescribeClusterBroker(Version);
+			BrokersCollection = createFields
+				.Select(createField => createField(new DescribeClusterBroker(Version)))
+				.ToDictionary(field => field.BrokerId);
+			return this;
 		}
 
 		public class DescribeClusterBroker : ISerialize
@@ -19978,14 +20546,23 @@ namespace Kafka.Protocol
 		public DescribeConfigsRequest WithResourcesCollection(params Func<DescribeConfigsResource, DescribeConfigsResource>[] createFields)
 		{
 			ResourcesCollection = createFields
-				.Select(createField => createField(CreateDescribeConfigsResource()))
+				.Select(createField => createField(new DescribeConfigsResource(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DescribeConfigsResource CreateDescribeConfigsResource()
+		public delegate DescribeConfigsResource CreateDescribeConfigsResource(DescribeConfigsResource field);
+
+		/// <summary>
+		/// <para>The resources whose configurations we want to describe.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeConfigsRequest WithResourcesCollection(IEnumerable<CreateDescribeConfigsResource> createFields)
 		{
-			return new DescribeConfigsResource(Version);
+			ResourcesCollection = createFields
+				.Select(createField => createField(new DescribeConfigsResource(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DescribeConfigsResource : ISerialize
@@ -20298,14 +20875,23 @@ namespace Kafka.Protocol
 		public DescribeConfigsResponse WithResultsCollection(params Func<DescribeConfigsResult, DescribeConfigsResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateDescribeConfigsResult()))
+				.Select(createField => createField(new DescribeConfigsResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DescribeConfigsResult CreateDescribeConfigsResult()
+		public delegate DescribeConfigsResult CreateDescribeConfigsResult(DescribeConfigsResult field);
+
+		/// <summary>
+		/// <para>The results for each resource.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeConfigsResponse WithResultsCollection(IEnumerable<CreateDescribeConfigsResult> createFields)
 		{
-			return new DescribeConfigsResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new DescribeConfigsResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DescribeConfigsResult : ISerialize
@@ -20490,14 +21076,23 @@ namespace Kafka.Protocol
 			public DescribeConfigsResult WithConfigsCollection(params Func<DescribeConfigsResourceResult, DescribeConfigsResourceResult>[] createFields)
 			{
 				ConfigsCollection = createFields
-					.Select(createField => createField(CreateDescribeConfigsResourceResult()))
+					.Select(createField => createField(new DescribeConfigsResourceResult(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal DescribeConfigsResourceResult CreateDescribeConfigsResourceResult()
+			public delegate DescribeConfigsResourceResult CreateDescribeConfigsResourceResult(DescribeConfigsResourceResult field);
+
+			/// <summary>
+			/// <para>Each listed configuration.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeConfigsResult WithConfigsCollection(IEnumerable<CreateDescribeConfigsResourceResult> createFields)
 			{
-				return new DescribeConfigsResourceResult(Version);
+				ConfigsCollection = createFields
+					.Select(createField => createField(new DescribeConfigsResourceResult(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class DescribeConfigsResourceResult : ISerialize
@@ -20767,14 +21362,23 @@ namespace Kafka.Protocol
 				public DescribeConfigsResourceResult WithSynonymsCollection(params Func<DescribeConfigsSynonym, DescribeConfigsSynonym>[] createFields)
 				{
 					SynonymsCollection = createFields
-						.Select(createField => createField(CreateDescribeConfigsSynonym()))
+						.Select(createField => createField(new DescribeConfigsSynonym(Version)))
 						.ToArray();
 					return this;
 				}
 
-				internal DescribeConfigsSynonym CreateDescribeConfigsSynonym()
+				public delegate DescribeConfigsSynonym CreateDescribeConfigsSynonym(DescribeConfigsSynonym field);
+
+				/// <summary>
+				/// <para>The synonyms for this configuration key.</para>
+				/// <para>Versions: 1+</para>
+				/// </summary>
+				public DescribeConfigsResourceResult WithSynonymsCollection(IEnumerable<CreateDescribeConfigsSynonym> createFields)
 				{
-					return new DescribeConfigsSynonym(Version);
+					SynonymsCollection = createFields
+						.Select(createField => createField(new DescribeConfigsSynonym(Version)))
+						.ToArray();
+					return this;
 				}
 
 				public class DescribeConfigsSynonym : ISerialize
@@ -21072,14 +21676,23 @@ namespace Kafka.Protocol
 		public DescribeDelegationTokenRequest WithOwnersCollection(params Func<DescribeDelegationTokenOwner, DescribeDelegationTokenOwner>[] createFields)
 		{
 			OwnersCollection = createFields
-				.Select(createField => createField(CreateDescribeDelegationTokenOwner()))
+				.Select(createField => createField(new DescribeDelegationTokenOwner(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DescribeDelegationTokenOwner CreateDescribeDelegationTokenOwner()
+		public delegate DescribeDelegationTokenOwner CreateDescribeDelegationTokenOwner(DescribeDelegationTokenOwner field);
+
+		/// <summary>
+		/// <para>Each owner that we want to describe delegation tokens for, or null to describe all tokens.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeDelegationTokenRequest WithOwnersCollection(IEnumerable<CreateDescribeDelegationTokenOwner> createFields)
 		{
-			return new DescribeDelegationTokenOwner(Version);
+			OwnersCollection = createFields
+				.Select(createField => createField(new DescribeDelegationTokenOwner(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DescribeDelegationTokenOwner : ISerialize
@@ -21310,14 +21923,23 @@ namespace Kafka.Protocol
 		public DescribeDelegationTokenResponse WithTokensCollection(params Func<DescribedDelegationToken, DescribedDelegationToken>[] createFields)
 		{
 			TokensCollection = createFields
-				.Select(createField => createField(CreateDescribedDelegationToken()))
+				.Select(createField => createField(new DescribedDelegationToken(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DescribedDelegationToken CreateDescribedDelegationToken()
+		public delegate DescribedDelegationToken CreateDescribedDelegationToken(DescribedDelegationToken field);
+
+		/// <summary>
+		/// <para>The tokens.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeDelegationTokenResponse WithTokensCollection(IEnumerable<CreateDescribedDelegationToken> createFields)
 		{
-			return new DescribedDelegationToken(Version);
+			TokensCollection = createFields
+				.Select(createField => createField(new DescribedDelegationToken(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DescribedDelegationToken : ISerialize
@@ -21583,14 +22205,23 @@ namespace Kafka.Protocol
 			public DescribedDelegationToken WithRenewersCollection(params Func<DescribedDelegationTokenRenewer, DescribedDelegationTokenRenewer>[] createFields)
 			{
 				RenewersCollection = createFields
-					.Select(createField => createField(CreateDescribedDelegationTokenRenewer()))
+					.Select(createField => createField(new DescribedDelegationTokenRenewer(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal DescribedDelegationTokenRenewer CreateDescribedDelegationTokenRenewer()
+			public delegate DescribedDelegationTokenRenewer CreateDescribedDelegationTokenRenewer(DescribedDelegationTokenRenewer field);
+
+			/// <summary>
+			/// <para>Those who are able to renew this token before it expires.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedDelegationToken WithRenewersCollection(IEnumerable<CreateDescribedDelegationTokenRenewer> createFields)
 			{
-				return new DescribedDelegationTokenRenewer(Version);
+				RenewersCollection = createFields
+					.Select(createField => createField(new DescribedDelegationTokenRenewer(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class DescribedDelegationTokenRenewer : ISerialize
@@ -21974,14 +22605,23 @@ namespace Kafka.Protocol
 		public DescribeGroupsResponse WithGroupsCollection(params Func<DescribedGroup, DescribedGroup>[] createFields)
 		{
 			GroupsCollection = createFields
-				.Select(createField => createField(CreateDescribedGroup()))
+				.Select(createField => createField(new DescribedGroup(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DescribedGroup CreateDescribedGroup()
+		public delegate DescribedGroup CreateDescribedGroup(DescribedGroup field);
+
+		/// <summary>
+		/// <para>Each described group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeGroupsResponse WithGroupsCollection(IEnumerable<CreateDescribedGroup> createFields)
 		{
-			return new DescribedGroup(Version);
+			GroupsCollection = createFields
+				.Select(createField => createField(new DescribedGroup(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DescribedGroup : ISerialize
@@ -22200,14 +22840,23 @@ namespace Kafka.Protocol
 			public DescribedGroup WithMembersCollection(params Func<DescribedGroupMember, DescribedGroupMember>[] createFields)
 			{
 				MembersCollection = createFields
-					.Select(createField => createField(CreateDescribedGroupMember()))
+					.Select(createField => createField(new DescribedGroupMember(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal DescribedGroupMember CreateDescribedGroupMember()
+			public delegate DescribedGroupMember CreateDescribedGroupMember(DescribedGroupMember field);
+
+			/// <summary>
+			/// <para>The group members.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithMembersCollection(IEnumerable<CreateDescribedGroupMember> createFields)
 			{
-				return new DescribedGroupMember(Version);
+				MembersCollection = createFields
+					.Select(createField => createField(new DescribedGroupMember(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class DescribedGroupMember : ISerialize
@@ -22553,14 +23202,23 @@ namespace Kafka.Protocol
 		public DescribeLogDirsRequest WithTopicsCollection(params Func<DescribableLogDirTopic, DescribableLogDirTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateDescribableLogDirTopic()))
+				.Select(createField => createField(new DescribableLogDirTopic(Version)))
 				.ToDictionary(field => field.Topic);
 			return this;
 		}
 
-		internal DescribableLogDirTopic CreateDescribableLogDirTopic()
+		public delegate DescribableLogDirTopic CreateDescribableLogDirTopic(DescribableLogDirTopic field);
+
+		/// <summary>
+		/// <para>Each topic that we want to describe log directories for, or null for all topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeLogDirsRequest WithTopicsCollection(IEnumerable<CreateDescribableLogDirTopic> createFields)
 		{
-			return new DescribableLogDirTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new DescribableLogDirTopic(Version)))
+				.ToDictionary(field => field.Topic);
+			return this;
 		}
 
 		public class DescribableLogDirTopic : ISerialize
@@ -22788,14 +23446,23 @@ namespace Kafka.Protocol
 		public DescribeLogDirsResponse WithResultsCollection(params Func<DescribeLogDirsResult, DescribeLogDirsResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateDescribeLogDirsResult()))
+				.Select(createField => createField(new DescribeLogDirsResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DescribeLogDirsResult CreateDescribeLogDirsResult()
+		public delegate DescribeLogDirsResult CreateDescribeLogDirsResult(DescribeLogDirsResult field);
+
+		/// <summary>
+		/// <para>The log directories.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeLogDirsResponse WithResultsCollection(IEnumerable<CreateDescribeLogDirsResult> createFields)
 		{
-			return new DescribeLogDirsResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new DescribeLogDirsResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DescribeLogDirsResult : ISerialize
@@ -22926,14 +23593,23 @@ namespace Kafka.Protocol
 			public DescribeLogDirsResult WithTopicsCollection(params Func<DescribeLogDirsTopic, DescribeLogDirsTopic>[] createFields)
 			{
 				TopicsCollection = createFields
-					.Select(createField => createField(CreateDescribeLogDirsTopic()))
+					.Select(createField => createField(new DescribeLogDirsTopic(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal DescribeLogDirsTopic CreateDescribeLogDirsTopic()
+			public delegate DescribeLogDirsTopic CreateDescribeLogDirsTopic(DescribeLogDirsTopic field);
+
+			/// <summary>
+			/// <para>Each topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeLogDirsResult WithTopicsCollection(IEnumerable<CreateDescribeLogDirsTopic> createFields)
 			{
-				return new DescribeLogDirsTopic(Version);
+				TopicsCollection = createFields
+					.Select(createField => createField(new DescribeLogDirsTopic(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class DescribeLogDirsTopic : ISerialize
@@ -23035,14 +23711,22 @@ namespace Kafka.Protocol
 				public DescribeLogDirsTopic WithPartitionsCollection(params Func<DescribeLogDirsPartition, DescribeLogDirsPartition>[] createFields)
 				{
 					PartitionsCollection = createFields
-						.Select(createField => createField(CreateDescribeLogDirsPartition()))
+						.Select(createField => createField(new DescribeLogDirsPartition(Version)))
 						.ToArray();
 					return this;
 				}
 
-				internal DescribeLogDirsPartition CreateDescribeLogDirsPartition()
+				public delegate DescribeLogDirsPartition CreateDescribeLogDirsPartition(DescribeLogDirsPartition field);
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public DescribeLogDirsTopic WithPartitionsCollection(IEnumerable<CreateDescribeLogDirsPartition> createFields)
 				{
-					return new DescribeLogDirsPartition(Version);
+					PartitionsCollection = createFields
+						.Select(createField => createField(new DescribeLogDirsPartition(Version)))
+						.ToArray();
+					return this;
 				}
 
 				public class DescribeLogDirsPartition : ISerialize
@@ -23294,14 +23978,22 @@ namespace Kafka.Protocol
 		public DescribeProducersRequest WithTopicsCollection(params Func<TopicRequest, TopicRequest>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicRequest()))
+				.Select(createField => createField(new TopicRequest(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicRequest CreateTopicRequest()
+		public delegate TopicRequest CreateTopicRequest(TopicRequest field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeProducersRequest WithTopicsCollection(IEnumerable<CreateTopicRequest> createFields)
 		{
-			return new TopicRequest(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicRequest(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicRequest : ISerialize
@@ -23529,14 +24221,23 @@ namespace Kafka.Protocol
 		public DescribeProducersResponse WithTopicsCollection(params Func<TopicResponse, TopicResponse>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicResponse()))
+				.Select(createField => createField(new TopicResponse(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicResponse CreateTopicResponse()
+		public delegate TopicResponse CreateTopicResponse(TopicResponse field);
+
+		/// <summary>
+		/// <para>Each topic in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeProducersResponse WithTopicsCollection(IEnumerable<CreateTopicResponse> createFields)
 		{
-			return new TopicResponse(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicResponse(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicResponse : ISerialize
@@ -23640,14 +24341,23 @@ namespace Kafka.Protocol
 			public TopicResponse WithPartitionsCollection(params Func<PartitionResponse, PartitionResponse>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionResponse()))
+					.Select(createField => createField(new PartitionResponse(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionResponse CreatePartitionResponse()
+			public delegate PartitionResponse CreatePartitionResponse(PartitionResponse field);
+
+			/// <summary>
+			/// <para>Each partition in the response.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicResponse WithPartitionsCollection(IEnumerable<CreatePartitionResponse> createFields)
 			{
-				return new PartitionResponse(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResponse(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionResponse : ISerialize
@@ -23805,14 +24515,22 @@ namespace Kafka.Protocol
 				public PartitionResponse WithActiveProducersCollection(params Func<ProducerState, ProducerState>[] createFields)
 				{
 					ActiveProducersCollection = createFields
-						.Select(createField => createField(CreateProducerState()))
+						.Select(createField => createField(new ProducerState(Version)))
 						.ToArray();
 					return this;
 				}
 
-				internal ProducerState CreateProducerState()
+				public delegate ProducerState CreateProducerState(ProducerState field);
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResponse WithActiveProducersCollection(IEnumerable<CreateProducerState> createFields)
 				{
-					return new ProducerState(Version);
+					ActiveProducersCollection = createFields
+						.Select(createField => createField(new ProducerState(Version)))
+						.ToArray();
+					return this;
 				}
 
 				public class ProducerState : ISerialize
@@ -24112,14 +24830,22 @@ namespace Kafka.Protocol
 		public DescribeQuorumRequest WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeQuorumRequest WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -24221,14 +24947,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -24428,14 +25162,22 @@ namespace Kafka.Protocol
 		public DescribeQuorumResponse WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeQuorumResponse WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -24537,14 +25279,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -25096,14 +25846,22 @@ namespace Kafka.Protocol
 		public DescribeTransactionsResponse WithTransactionStatesCollection(params Func<TransactionState, TransactionState>[] createFields)
 		{
 			TransactionStatesCollection = createFields
-				.Select(createField => createField(CreateTransactionState()))
+				.Select(createField => createField(new TransactionState(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TransactionState CreateTransactionState()
+		public delegate TransactionState CreateTransactionState(TransactionState field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeTransactionsResponse WithTransactionStatesCollection(IEnumerable<CreateTransactionState> createFields)
 		{
-			return new TransactionState(Version);
+			TransactionStatesCollection = createFields
+				.Select(createField => createField(new TransactionState(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TransactionState : ISerialize
@@ -25355,14 +26113,23 @@ namespace Kafka.Protocol
 			public TransactionState WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 			{
 				TopicsCollection = createFields
-					.Select(createField => createField(CreateTopicData()))
+					.Select(createField => createField(new TopicData(Version)))
 					.ToDictionary(field => field.Topic);
 				return this;
 			}
 
-			internal TopicData CreateTopicData()
+			public delegate TopicData CreateTopicData(TopicData field);
+
+			/// <summary>
+			/// <para>The set of partitions included in the current transaction (if active). When a transaction is preparing to commit or abort, this will include only partitions which do not have markers.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TransactionState WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 			{
-				return new TopicData(Version);
+				TopicsCollection = createFields
+					.Select(createField => createField(new TopicData(Version)))
+					.ToDictionary(field => field.Topic);
+				return this;
 			}
 
 			public class TopicData : ISerialize
@@ -25557,14 +26324,23 @@ namespace Kafka.Protocol
 		public DescribeUserScramCredentialsRequest WithUsersCollection(params Func<UserName, UserName>[] createFields)
 		{
 			UsersCollection = createFields
-				.Select(createField => createField(CreateUserName()))
+				.Select(createField => createField(new UserName(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal UserName CreateUserName()
+		public delegate UserName CreateUserName(UserName field);
+
+		/// <summary>
+		/// <para>The users to describe, or null/empty to describe all users.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeUserScramCredentialsRequest WithUsersCollection(IEnumerable<CreateUserName> createFields)
 		{
-			return new UserName(Version);
+			UsersCollection = createFields
+				.Select(createField => createField(new UserName(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class UserName : ISerialize
@@ -25819,14 +26595,23 @@ namespace Kafka.Protocol
 		public DescribeUserScramCredentialsResponse WithResultsCollection(params Func<DescribeUserScramCredentialsResult, DescribeUserScramCredentialsResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateDescribeUserScramCredentialsResult()))
+				.Select(createField => createField(new DescribeUserScramCredentialsResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal DescribeUserScramCredentialsResult CreateDescribeUserScramCredentialsResult()
+		public delegate DescribeUserScramCredentialsResult CreateDescribeUserScramCredentialsResult(DescribeUserScramCredentialsResult field);
+
+		/// <summary>
+		/// <para>The results for descriptions, one per user.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeUserScramCredentialsResponse WithResultsCollection(IEnumerable<CreateDescribeUserScramCredentialsResult> createFields)
 		{
-			return new DescribeUserScramCredentialsResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new DescribeUserScramCredentialsResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class DescribeUserScramCredentialsResult : ISerialize
@@ -25984,14 +26769,23 @@ namespace Kafka.Protocol
 			public DescribeUserScramCredentialsResult WithCredentialInfosCollection(params Func<CredentialInfo, CredentialInfo>[] createFields)
 			{
 				CredentialInfosCollection = createFields
-					.Select(createField => createField(CreateCredentialInfo()))
+					.Select(createField => createField(new CredentialInfo(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal CredentialInfo CreateCredentialInfo()
+			public delegate CredentialInfo CreateCredentialInfo(CredentialInfo field);
+
+			/// <summary>
+			/// <para>The mechanism and related information associated with the user's SCRAM credentials.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeUserScramCredentialsResult WithCredentialInfosCollection(IEnumerable<CreateCredentialInfo> createFields)
 			{
-				return new CredentialInfo(Version);
+				CredentialInfosCollection = createFields
+					.Select(createField => createField(new CredentialInfo(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class CredentialInfo : ISerialize
@@ -26227,14 +27021,23 @@ namespace Kafka.Protocol
 		public ElectLeadersRequest WithTopicPartitionsCollection(params Func<TopicPartitions, TopicPartitions>[] createFields)
 		{
 			TopicPartitionsCollection = createFields
-				.Select(createField => createField(CreateTopicPartitions()))
+				.Select(createField => createField(new TopicPartitions(Version)))
 				.ToDictionary(field => field.Topic);
 			return this;
 		}
 
-		internal TopicPartitions CreateTopicPartitions()
+		public delegate TopicPartitions CreateTopicPartitions(TopicPartitions field);
+
+		/// <summary>
+		/// <para>The topic partitions to elect leaders.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ElectLeadersRequest WithTopicPartitionsCollection(IEnumerable<CreateTopicPartitions> createFields)
 		{
-			return new TopicPartitions(Version);
+			TopicPartitionsCollection = createFields
+				.Select(createField => createField(new TopicPartitions(Version)))
+				.ToDictionary(field => field.Topic);
+			return this;
 		}
 
 		public class TopicPartitions : ISerialize
@@ -26522,14 +27325,23 @@ namespace Kafka.Protocol
 		public ElectLeadersResponse WithReplicaElectionResultsCollection(params Func<ReplicaElectionResult, ReplicaElectionResult>[] createFields)
 		{
 			ReplicaElectionResultsCollection = createFields
-				.Select(createField => createField(CreateReplicaElectionResult()))
+				.Select(createField => createField(new ReplicaElectionResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ReplicaElectionResult CreateReplicaElectionResult()
+		public delegate ReplicaElectionResult CreateReplicaElectionResult(ReplicaElectionResult field);
+
+		/// <summary>
+		/// <para>The election results, or an empty array if the requester did not have permission and the request asks for all partitions.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ElectLeadersResponse WithReplicaElectionResultsCollection(IEnumerable<CreateReplicaElectionResult> createFields)
 		{
-			return new ReplicaElectionResult(Version);
+			ReplicaElectionResultsCollection = createFields
+				.Select(createField => createField(new ReplicaElectionResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ReplicaElectionResult : ISerialize
@@ -26633,14 +27445,23 @@ namespace Kafka.Protocol
 			public ReplicaElectionResult WithPartitionResultCollection(params Func<PartitionResult, PartitionResult>[] createFields)
 			{
 				PartitionResultCollection = createFields
-					.Select(createField => createField(CreatePartitionResult()))
+					.Select(createField => createField(new PartitionResult(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionResult CreatePartitionResult()
+			public delegate PartitionResult CreatePartitionResult(PartitionResult field);
+
+			/// <summary>
+			/// <para>The results for each partition</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReplicaElectionResult WithPartitionResultCollection(IEnumerable<CreatePartitionResult> createFields)
 			{
-				return new PartitionResult(Version);
+				PartitionResultCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionResult : ISerialize
@@ -26891,14 +27712,22 @@ namespace Kafka.Protocol
 		public EndQuorumEpochRequest WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public EndQuorumEpochRequest WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -27000,14 +27829,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -27288,14 +28125,22 @@ namespace Kafka.Protocol
 		public EndQuorumEpochResponse WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public EndQuorumEpochResponse WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -27397,14 +28242,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -28772,14 +29625,23 @@ namespace Kafka.Protocol
 		public FetchRequest WithTopicsCollection(params Func<FetchTopic, FetchTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateFetchTopic()))
+				.Select(createField => createField(new FetchTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal FetchTopic CreateFetchTopic()
+		public delegate FetchTopic CreateFetchTopic(FetchTopic field);
+
+		/// <summary>
+		/// <para>The topics to fetch.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public FetchRequest WithTopicsCollection(IEnumerable<CreateFetchTopic> createFields)
 		{
-			return new FetchTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new FetchTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class FetchTopic : ISerialize
@@ -28918,14 +29780,23 @@ namespace Kafka.Protocol
 			public FetchTopic WithPartitionsCollection(params Func<FetchPartition, FetchPartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateFetchPartition()))
+					.Select(createField => createField(new FetchPartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal FetchPartition CreateFetchPartition()
+			public delegate FetchPartition CreateFetchPartition(FetchPartition field);
+
+			/// <summary>
+			/// <para>The partitions to fetch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public FetchTopic WithPartitionsCollection(IEnumerable<CreateFetchPartition> createFields)
 			{
-				return new FetchPartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new FetchPartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class FetchPartition : ISerialize
@@ -29187,14 +30058,23 @@ namespace Kafka.Protocol
 		public FetchRequest WithForgottenTopicsDataCollection(params Func<ForgottenTopic, ForgottenTopic>[] createFields)
 		{
 			ForgottenTopicsDataCollection = createFields
-				.Select(createField => createField(CreateForgottenTopic()))
+				.Select(createField => createField(new ForgottenTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ForgottenTopic CreateForgottenTopic()
+		public delegate ForgottenTopic CreateForgottenTopic(ForgottenTopic field);
+
+		/// <summary>
+		/// <para>In an incremental fetch request, the partitions to remove.</para>
+		/// <para>Versions: 7+</para>
+		/// </summary>
+		public FetchRequest WithForgottenTopicsDataCollection(IEnumerable<CreateForgottenTopic> createFields)
 		{
-			return new ForgottenTopic(Version);
+			ForgottenTopicsDataCollection = createFields
+				.Select(createField => createField(new ForgottenTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ForgottenTopic : ISerialize
@@ -29561,14 +30441,23 @@ namespace Kafka.Protocol
 		public FetchResponse WithResponsesCollection(params Func<FetchableTopicResponse, FetchableTopicResponse>[] createFields)
 		{
 			ResponsesCollection = createFields
-				.Select(createField => createField(CreateFetchableTopicResponse()))
+				.Select(createField => createField(new FetchableTopicResponse(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal FetchableTopicResponse CreateFetchableTopicResponse()
+		public delegate FetchableTopicResponse CreateFetchableTopicResponse(FetchableTopicResponse field);
+
+		/// <summary>
+		/// <para>The response topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public FetchResponse WithResponsesCollection(IEnumerable<CreateFetchableTopicResponse> createFields)
 		{
-			return new FetchableTopicResponse(Version);
+			ResponsesCollection = createFields
+				.Select(createField => createField(new FetchableTopicResponse(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class FetchableTopicResponse : ISerialize
@@ -29707,14 +30596,23 @@ namespace Kafka.Protocol
 			public FetchableTopicResponse WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>The topic partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public FetchableTopicResponse WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -30010,13 +30908,8 @@ namespace Kafka.Protocol
 				/// </summary>
 				public PartitionData WithDivergingEpoch(Func<EpochEndOffset, EpochEndOffset> createField)
 				{
-					DivergingEpoch = createField(CreateEpochEndOffset());
+					DivergingEpoch = createField(new EpochEndOffset(Version));
 					return this;
-				}
-
-				internal EpochEndOffset CreateEpochEndOffset()
-				{
-					return new EpochEndOffset(Version);
 				}
 
 				public class EpochEndOffset : ISerialize
@@ -30161,13 +31054,8 @@ namespace Kafka.Protocol
 				/// </summary>
 				public PartitionData WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)
 				{
-					CurrentLeader = createField(CreateLeaderIdAndEpoch());
+					CurrentLeader = createField(new LeaderIdAndEpoch(Version));
 					return this;
-				}
-
-				internal LeaderIdAndEpoch CreateLeaderIdAndEpoch()
-				{
-					return new LeaderIdAndEpoch(Version);
 				}
 
 				public class LeaderIdAndEpoch : ISerialize
@@ -30318,13 +31206,8 @@ namespace Kafka.Protocol
 				/// </summary>
 				public PartitionData WithSnapshotId_(Func<SnapshotId, SnapshotId> createField)
 				{
-					SnapshotId_ = createField(CreateSnapshotId());
+					SnapshotId_ = createField(new SnapshotId(Version));
 					return this;
-				}
-
-				internal SnapshotId CreateSnapshotId()
-				{
-					return new SnapshotId(Version);
 				}
 
 				public class SnapshotId : ISerialize
@@ -30457,14 +31340,23 @@ namespace Kafka.Protocol
 				public PartitionData WithAbortedTransactionsCollection(params Func<AbortedTransaction, AbortedTransaction>[] createFields)
 				{
 					AbortedTransactionsCollection = createFields
-						.Select(createField => createField(CreateAbortedTransaction()))
+						.Select(createField => createField(new AbortedTransaction(Version)))
 						.ToArray();
 					return this;
 				}
 
-				internal AbortedTransaction CreateAbortedTransaction()
+				public delegate AbortedTransaction CreateAbortedTransaction(AbortedTransaction field);
+
+				/// <summary>
+				/// <para>The aborted transactions.</para>
+				/// <para>Versions: 4+</para>
+				/// </summary>
+				public PartitionData WithAbortedTransactionsCollection(IEnumerable<CreateAbortedTransaction> createFields)
 				{
-					return new AbortedTransaction(Version);
+					AbortedTransactionsCollection = createFields
+						.Select(createField => createField(new AbortedTransaction(Version)))
+						.ToArray();
+					return this;
 				}
 
 				public class AbortedTransaction : ISerialize
@@ -30833,14 +31725,23 @@ namespace Kafka.Protocol
 		public FetchSnapshotRequest WithTopicsCollection(params Func<TopicSnapshot, TopicSnapshot>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicSnapshot()))
+				.Select(createField => createField(new TopicSnapshot(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicSnapshot CreateTopicSnapshot()
+		public delegate TopicSnapshot CreateTopicSnapshot(TopicSnapshot field);
+
+		/// <summary>
+		/// <para>The topics to fetch</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public FetchSnapshotRequest WithTopicsCollection(IEnumerable<CreateTopicSnapshot> createFields)
 		{
-			return new TopicSnapshot(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicSnapshot(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicSnapshot : ISerialize
@@ -30944,14 +31845,23 @@ namespace Kafka.Protocol
 			public TopicSnapshot WithPartitionsCollection(params Func<PartitionSnapshot, PartitionSnapshot>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionSnapshot()))
+					.Select(createField => createField(new PartitionSnapshot(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionSnapshot CreatePartitionSnapshot()
+			public delegate PartitionSnapshot CreatePartitionSnapshot(PartitionSnapshot field);
+
+			/// <summary>
+			/// <para>The partitions to fetch</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicSnapshot WithPartitionsCollection(IEnumerable<CreatePartitionSnapshot> createFields)
 			{
-				return new PartitionSnapshot(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionSnapshot(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionSnapshot : ISerialize
@@ -31084,13 +31994,8 @@ namespace Kafka.Protocol
 				/// </summary>
 				public PartitionSnapshot WithSnapshotId_(Func<SnapshotId, SnapshotId> createField)
 				{
-					SnapshotId_ = createField(CreateSnapshotId());
+					SnapshotId_ = createField(new SnapshotId(Version));
 					return this;
-				}
-
-				internal SnapshotId CreateSnapshotId()
-				{
-					return new SnapshotId(Version);
 				}
 
 				public class SnapshotId : ISerialize
@@ -31367,14 +32272,23 @@ namespace Kafka.Protocol
 		public FetchSnapshotResponse WithTopicsCollection(params Func<TopicSnapshot, TopicSnapshot>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicSnapshot()))
+				.Select(createField => createField(new TopicSnapshot(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicSnapshot CreateTopicSnapshot()
+		public delegate TopicSnapshot CreateTopicSnapshot(TopicSnapshot field);
+
+		/// <summary>
+		/// <para>The topics to fetch.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public FetchSnapshotResponse WithTopicsCollection(IEnumerable<CreateTopicSnapshot> createFields)
 		{
-			return new TopicSnapshot(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicSnapshot(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicSnapshot : ISerialize
@@ -31478,14 +32392,23 @@ namespace Kafka.Protocol
 			public TopicSnapshot WithPartitionsCollection(params Func<PartitionSnapshot, PartitionSnapshot>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionSnapshot()))
+					.Select(createField => createField(new PartitionSnapshot(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionSnapshot CreatePartitionSnapshot()
+			public delegate PartitionSnapshot CreatePartitionSnapshot(PartitionSnapshot field);
+
+			/// <summary>
+			/// <para>The partitions to fetch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicSnapshot WithPartitionsCollection(IEnumerable<CreatePartitionSnapshot> createFields)
 			{
-				return new PartitionSnapshot(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionSnapshot(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionSnapshot : ISerialize
@@ -31639,13 +32562,8 @@ namespace Kafka.Protocol
 				/// </summary>
 				public PartitionSnapshot WithSnapshotId_(Func<SnapshotId, SnapshotId> createField)
 				{
-					SnapshotId_ = createField(CreateSnapshotId());
+					SnapshotId_ = createField(new SnapshotId(Version));
 					return this;
-				}
-
-				internal SnapshotId CreateSnapshotId()
-				{
-					return new SnapshotId(Version);
 				}
 
 				public class SnapshotId : ISerialize
@@ -31769,13 +32687,8 @@ namespace Kafka.Protocol
 				/// </summary>
 				public PartitionSnapshot WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)
 				{
-					CurrentLeader = createField(CreateLeaderIdAndEpoch());
+					CurrentLeader = createField(new LeaderIdAndEpoch(Version));
 					return this;
-				}
-
-				internal LeaderIdAndEpoch CreateLeaderIdAndEpoch()
-				{
-					return new LeaderIdAndEpoch(Version);
 				}
 
 				public class LeaderIdAndEpoch : ISerialize
@@ -32429,14 +33342,23 @@ namespace Kafka.Protocol
 		public FindCoordinatorResponse WithCoordinatorsCollection(params Func<Coordinator, Coordinator>[] createFields)
 		{
 			CoordinatorsCollection = createFields
-				.Select(createField => createField(CreateCoordinator()))
+				.Select(createField => createField(new Coordinator(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal Coordinator CreateCoordinator()
+		public delegate Coordinator CreateCoordinator(Coordinator field);
+
+		/// <summary>
+		/// <para>Each coordinator result in the response</para>
+		/// <para>Versions: 4+</para>
+		/// </summary>
+		public FindCoordinatorResponse WithCoordinatorsCollection(IEnumerable<CreateCoordinator> createFields)
 		{
-			return new Coordinator(Version);
+			CoordinatorsCollection = createFields
+				.Select(createField => createField(new Coordinator(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class Coordinator : ISerialize
@@ -33102,14 +34024,23 @@ namespace Kafka.Protocol
 		public IncrementalAlterConfigsRequest WithResourcesCollection(params Func<AlterConfigsResource, AlterConfigsResource>[] createFields)
 		{
 			ResourcesCollection = createFields
-				.Select(createField => createField(CreateAlterConfigsResource()))
+				.Select(createField => createField(new AlterConfigsResource(Version)))
 				.ToDictionary(field => field.ResourceType);
 			return this;
 		}
 
-		internal AlterConfigsResource CreateAlterConfigsResource()
+		public delegate AlterConfigsResource CreateAlterConfigsResource(AlterConfigsResource field);
+
+		/// <summary>
+		/// <para>The incremental updates for each resource.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public IncrementalAlterConfigsRequest WithResourcesCollection(IEnumerable<CreateAlterConfigsResource> createFields)
 		{
-			return new AlterConfigsResource(Version);
+			ResourcesCollection = createFields
+				.Select(createField => createField(new AlterConfigsResource(Version)))
+				.ToDictionary(field => field.ResourceType);
+			return this;
 		}
 
 		public class AlterConfigsResource : ISerialize
@@ -33240,14 +34171,23 @@ namespace Kafka.Protocol
 			public AlterConfigsResource WithConfigsCollection(params Func<AlterableConfig, AlterableConfig>[] createFields)
 			{
 				ConfigsCollection = createFields
-					.Select(createField => createField(CreateAlterableConfig()))
+					.Select(createField => createField(new AlterableConfig(Version)))
 					.ToDictionary(field => field.Name);
 				return this;
 			}
 
-			internal AlterableConfig CreateAlterableConfig()
+			public delegate AlterableConfig CreateAlterableConfig(AlterableConfig field);
+
+			/// <summary>
+			/// <para>The configurations.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public AlterConfigsResource WithConfigsCollection(IEnumerable<CreateAlterableConfig> createFields)
 			{
-				return new AlterableConfig(Version);
+				ConfigsCollection = createFields
+					.Select(createField => createField(new AlterableConfig(Version)))
+					.ToDictionary(field => field.Name);
+				return this;
 			}
 
 			public class AlterableConfig : ISerialize
@@ -33527,14 +34467,23 @@ namespace Kafka.Protocol
 		public IncrementalAlterConfigsResponse WithResponsesCollection(params Func<AlterConfigsResourceResponse, AlterConfigsResourceResponse>[] createFields)
 		{
 			ResponsesCollection = createFields
-				.Select(createField => createField(CreateAlterConfigsResourceResponse()))
+				.Select(createField => createField(new AlterConfigsResourceResponse(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal AlterConfigsResourceResponse CreateAlterConfigsResourceResponse()
+		public delegate AlterConfigsResourceResponse CreateAlterConfigsResourceResponse(AlterConfigsResourceResponse field);
+
+		/// <summary>
+		/// <para>The responses for each resource.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public IncrementalAlterConfigsResponse WithResponsesCollection(IEnumerable<CreateAlterConfigsResourceResponse> createFields)
 		{
-			return new AlterConfigsResourceResponse(Version);
+			ResponsesCollection = createFields
+				.Select(createField => createField(new AlterConfigsResourceResponse(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class AlterConfigsResourceResponse : ISerialize
@@ -34338,14 +35287,23 @@ namespace Kafka.Protocol
 		public JoinGroupRequest WithProtocolsCollection(params Func<JoinGroupRequestProtocol, JoinGroupRequestProtocol>[] createFields)
 		{
 			ProtocolsCollection = createFields
-				.Select(createField => createField(CreateJoinGroupRequestProtocol()))
+				.Select(createField => createField(new JoinGroupRequestProtocol(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal JoinGroupRequestProtocol CreateJoinGroupRequestProtocol()
+		public delegate JoinGroupRequestProtocol CreateJoinGroupRequestProtocol(JoinGroupRequestProtocol field);
+
+		/// <summary>
+		/// <para>The list of protocols that the member supports.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public JoinGroupRequest WithProtocolsCollection(IEnumerable<CreateJoinGroupRequestProtocol> createFields)
 		{
-			return new JoinGroupRequestProtocol(Version);
+			ProtocolsCollection = createFields
+				.Select(createField => createField(new JoinGroupRequestProtocol(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class JoinGroupRequestProtocol : ISerialize
@@ -34753,14 +35711,22 @@ namespace Kafka.Protocol
 		public JoinGroupResponse WithMembersCollection(params Func<JoinGroupResponseMember, JoinGroupResponseMember>[] createFields)
 		{
 			MembersCollection = createFields
-				.Select(createField => createField(CreateJoinGroupResponseMember()))
+				.Select(createField => createField(new JoinGroupResponseMember(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal JoinGroupResponseMember CreateJoinGroupResponseMember()
+		public delegate JoinGroupResponseMember CreateJoinGroupResponseMember(JoinGroupResponseMember field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public JoinGroupResponse WithMembersCollection(IEnumerable<CreateJoinGroupResponseMember> createFields)
 		{
-			return new JoinGroupResponseMember(Version);
+			MembersCollection = createFields
+				.Select(createField => createField(new JoinGroupResponseMember(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class JoinGroupResponseMember : ISerialize
@@ -35163,14 +36129,23 @@ namespace Kafka.Protocol
 		public LeaderAndIsrRequest WithTopicStatesCollection(params Func<LeaderAndIsrTopicState, LeaderAndIsrTopicState>[] createFields)
 		{
 			TopicStatesCollection = createFields
-				.Select(createField => createField(CreateLeaderAndIsrTopicState()))
+				.Select(createField => createField(new LeaderAndIsrTopicState(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal LeaderAndIsrTopicState CreateLeaderAndIsrTopicState()
+		public delegate LeaderAndIsrTopicState CreateLeaderAndIsrTopicState(LeaderAndIsrTopicState field);
+
+		/// <summary>
+		/// <para>Each topic.</para>
+		/// <para>Versions: 2+</para>
+		/// </summary>
+		public LeaderAndIsrRequest WithTopicStatesCollection(IEnumerable<CreateLeaderAndIsrTopicState> createFields)
 		{
-			return new LeaderAndIsrTopicState(Version);
+			TopicStatesCollection = createFields
+				.Select(createField => createField(new LeaderAndIsrTopicState(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class LeaderAndIsrTopicState : ISerialize
@@ -35344,14 +36319,23 @@ namespace Kafka.Protocol
 		public LeaderAndIsrRequest WithLiveLeadersCollection(params Func<LeaderAndIsrLiveLeader, LeaderAndIsrLiveLeader>[] createFields)
 		{
 			LiveLeadersCollection = createFields
-				.Select(createField => createField(CreateLeaderAndIsrLiveLeader()))
+				.Select(createField => createField(new LeaderAndIsrLiveLeader(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal LeaderAndIsrLiveLeader CreateLeaderAndIsrLiveLeader()
+		public delegate LeaderAndIsrLiveLeader CreateLeaderAndIsrLiveLeader(LeaderAndIsrLiveLeader field);
+
+		/// <summary>
+		/// <para>The current live leaders.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public LeaderAndIsrRequest WithLiveLeadersCollection(IEnumerable<CreateLeaderAndIsrLiveLeader> createFields)
 		{
-			return new LeaderAndIsrLiveLeader(Version);
+			LiveLeadersCollection = createFields
+				.Select(createField => createField(new LeaderAndIsrLiveLeader(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class LeaderAndIsrLiveLeader : ISerialize
@@ -36015,14 +36999,23 @@ namespace Kafka.Protocol
 		public LeaderAndIsrResponse WithTopicsCollection(params Func<LeaderAndIsrTopicError, LeaderAndIsrTopicError>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateLeaderAndIsrTopicError()))
+				.Select(createField => createField(new LeaderAndIsrTopicError(Version)))
 				.ToDictionary(field => field.TopicId);
 			return this;
 		}
 
-		internal LeaderAndIsrTopicError CreateLeaderAndIsrTopicError()
+		public delegate LeaderAndIsrTopicError CreateLeaderAndIsrTopicError(LeaderAndIsrTopicError field);
+
+		/// <summary>
+		/// <para>Each topic</para>
+		/// <para>Versions: 5+</para>
+		/// </summary>
+		public LeaderAndIsrResponse WithTopicsCollection(IEnumerable<CreateLeaderAndIsrTopicError> createFields)
 		{
-			return new LeaderAndIsrTopicError(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new LeaderAndIsrTopicError(Version)))
+				.ToDictionary(field => field.TopicId);
+			return this;
 		}
 
 		public class LeaderAndIsrTopicError : ISerialize
@@ -36440,14 +37433,23 @@ namespace Kafka.Protocol
 		public LeaveGroupRequest WithMembersCollection(params Func<MemberIdentity, MemberIdentity>[] createFields)
 		{
 			MembersCollection = createFields
-				.Select(createField => createField(CreateMemberIdentity()))
+				.Select(createField => createField(new MemberIdentity(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal MemberIdentity CreateMemberIdentity()
+		public delegate MemberIdentity CreateMemberIdentity(MemberIdentity field);
+
+		/// <summary>
+		/// <para>List of leaving member identities.</para>
+		/// <para>Versions: 3+</para>
+		/// </summary>
+		public LeaveGroupRequest WithMembersCollection(IEnumerable<CreateMemberIdentity> createFields)
 		{
-			return new MemberIdentity(Version);
+			MembersCollection = createFields
+				.Select(createField => createField(new MemberIdentity(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class MemberIdentity : ISerialize
@@ -36733,14 +37735,23 @@ namespace Kafka.Protocol
 		public LeaveGroupResponse WithMembersCollection(params Func<MemberResponse, MemberResponse>[] createFields)
 		{
 			MembersCollection = createFields
-				.Select(createField => createField(CreateMemberResponse()))
+				.Select(createField => createField(new MemberResponse(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal MemberResponse CreateMemberResponse()
+		public delegate MemberResponse CreateMemberResponse(MemberResponse field);
+
+		/// <summary>
+		/// <para>List of leaving member responses.</para>
+		/// <para>Versions: 3+</para>
+		/// </summary>
+		public LeaveGroupResponse WithMembersCollection(IEnumerable<CreateMemberResponse> createFields)
 		{
-			return new MemberResponse(Version);
+			MembersCollection = createFields
+				.Select(createField => createField(new MemberResponse(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class MemberResponse : ISerialize
@@ -37151,14 +38162,23 @@ namespace Kafka.Protocol
 		public ListGroupsResponse WithGroupsCollection(params Func<ListedGroup, ListedGroup>[] createFields)
 		{
 			GroupsCollection = createFields
-				.Select(createField => createField(CreateListedGroup()))
+				.Select(createField => createField(new ListedGroup(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ListedGroup CreateListedGroup()
+		public delegate ListedGroup CreateListedGroup(ListedGroup field);
+
+		/// <summary>
+		/// <para>Each group in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListGroupsResponse WithGroupsCollection(IEnumerable<CreateListedGroup> createFields)
 		{
-			return new ListedGroup(Version);
+			GroupsCollection = createFields
+				.Select(createField => createField(new ListedGroup(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ListedGroup : ISerialize
@@ -37448,14 +38468,23 @@ namespace Kafka.Protocol
 		public ListOffsetsRequest WithTopicsCollection(params Func<ListOffsetsTopic, ListOffsetsTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateListOffsetsTopic()))
+				.Select(createField => createField(new ListOffsetsTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ListOffsetsTopic CreateListOffsetsTopic()
+		public delegate ListOffsetsTopic CreateListOffsetsTopic(ListOffsetsTopic field);
+
+		/// <summary>
+		/// <para>Each topic in the request.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListOffsetsRequest WithTopicsCollection(IEnumerable<CreateListOffsetsTopic> createFields)
 		{
-			return new ListOffsetsTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new ListOffsetsTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ListOffsetsTopic : ISerialize
@@ -37559,14 +38588,23 @@ namespace Kafka.Protocol
 			public ListOffsetsTopic WithPartitionsCollection(params Func<ListOffsetsPartition, ListOffsetsPartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateListOffsetsPartition()))
+					.Select(createField => createField(new ListOffsetsPartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal ListOffsetsPartition CreateListOffsetsPartition()
+			public delegate ListOffsetsPartition CreateListOffsetsPartition(ListOffsetsPartition field);
+
+			/// <summary>
+			/// <para>Each partition in the request.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ListOffsetsTopic WithPartitionsCollection(IEnumerable<CreateListOffsetsPartition> createFields)
 			{
-				return new ListOffsetsPartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new ListOffsetsPartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class ListOffsetsPartition : ISerialize
@@ -37868,14 +38906,23 @@ namespace Kafka.Protocol
 		public ListOffsetsResponse WithTopicsCollection(params Func<ListOffsetsTopicResponse, ListOffsetsTopicResponse>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateListOffsetsTopicResponse()))
+				.Select(createField => createField(new ListOffsetsTopicResponse(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ListOffsetsTopicResponse CreateListOffsetsTopicResponse()
+		public delegate ListOffsetsTopicResponse CreateListOffsetsTopicResponse(ListOffsetsTopicResponse field);
+
+		/// <summary>
+		/// <para>Each topic in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListOffsetsResponse WithTopicsCollection(IEnumerable<CreateListOffsetsTopicResponse> createFields)
 		{
-			return new ListOffsetsTopicResponse(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new ListOffsetsTopicResponse(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ListOffsetsTopicResponse : ISerialize
@@ -37979,14 +39026,23 @@ namespace Kafka.Protocol
 			public ListOffsetsTopicResponse WithPartitionsCollection(params Func<ListOffsetsPartitionResponse, ListOffsetsPartitionResponse>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateListOffsetsPartitionResponse()))
+					.Select(createField => createField(new ListOffsetsPartitionResponse(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal ListOffsetsPartitionResponse CreateListOffsetsPartitionResponse()
+			public delegate ListOffsetsPartitionResponse CreateListOffsetsPartitionResponse(ListOffsetsPartitionResponse field);
+
+			/// <summary>
+			/// <para>Each partition in the response.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ListOffsetsTopicResponse WithPartitionsCollection(IEnumerable<CreateListOffsetsPartitionResponse> createFields)
 			{
-				return new ListOffsetsPartitionResponse(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new ListOffsetsPartitionResponse(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class ListOffsetsPartitionResponse : ISerialize
@@ -38356,14 +39412,24 @@ namespace Kafka.Protocol
 		public ListPartitionReassignmentsRequest WithTopicsCollection(params Func<ListPartitionReassignmentsTopics, ListPartitionReassignmentsTopics>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateListPartitionReassignmentsTopics()))
+				.Select(createField => createField(new ListPartitionReassignmentsTopics(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal ListPartitionReassignmentsTopics CreateListPartitionReassignmentsTopics()
+		public delegate ListPartitionReassignmentsTopics CreateListPartitionReassignmentsTopics(ListPartitionReassignmentsTopics field);
+
+		/// <summary>
+		/// <para>The topics to list partition reassignments for, or null to list everything.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ListPartitionReassignmentsRequest WithTopicsCollection(IEnumerable<CreateListPartitionReassignmentsTopics> createFields)
 		{
-			return new ListPartitionReassignmentsTopics(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new ListPartitionReassignmentsTopics(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class ListPartitionReassignmentsTopics : ISerialize
@@ -38645,14 +39711,23 @@ namespace Kafka.Protocol
 		public ListPartitionReassignmentsResponse WithTopicsCollection(params Func<OngoingTopicReassignment, OngoingTopicReassignment>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOngoingTopicReassignment()))
+				.Select(createField => createField(new OngoingTopicReassignment(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal OngoingTopicReassignment CreateOngoingTopicReassignment()
+		public delegate OngoingTopicReassignment CreateOngoingTopicReassignment(OngoingTopicReassignment field);
+
+		/// <summary>
+		/// <para>The ongoing reassignments for each topic.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListPartitionReassignmentsResponse WithTopicsCollection(IEnumerable<CreateOngoingTopicReassignment> createFields)
 		{
-			return new OngoingTopicReassignment(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OngoingTopicReassignment(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class OngoingTopicReassignment : ISerialize
@@ -38756,14 +39831,23 @@ namespace Kafka.Protocol
 			public OngoingTopicReassignment WithPartitionsCollection(params Func<OngoingPartitionReassignment, OngoingPartitionReassignment>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateOngoingPartitionReassignment()))
+					.Select(createField => createField(new OngoingPartitionReassignment(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OngoingPartitionReassignment CreateOngoingPartitionReassignment()
+			public delegate OngoingPartitionReassignment CreateOngoingPartitionReassignment(OngoingPartitionReassignment field);
+
+			/// <summary>
+			/// <para>The ongoing reassignments for each partition.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public OngoingTopicReassignment WithPartitionsCollection(IEnumerable<CreateOngoingPartitionReassignment> createFields)
 			{
-				return new OngoingPartitionReassignment(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new OngoingPartitionReassignment(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OngoingPartitionReassignment : ISerialize
@@ -39216,14 +40300,22 @@ namespace Kafka.Protocol
 		public ListTransactionsResponse WithTransactionStatesCollection(params Func<TransactionState, TransactionState>[] createFields)
 		{
 			TransactionStatesCollection = createFields
-				.Select(createField => createField(CreateTransactionState()))
+				.Select(createField => createField(new TransactionState(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TransactionState CreateTransactionState()
+		public delegate TransactionState CreateTransactionState(TransactionState field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListTransactionsResponse WithTransactionStatesCollection(IEnumerable<CreateTransactionState> createFields)
 		{
-			return new TransactionState(Version);
+			TransactionStatesCollection = createFields
+				.Select(createField => createField(new TransactionState(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TransactionState : ISerialize
@@ -39469,14 +40561,23 @@ namespace Kafka.Protocol
 		public MetadataRequest WithTopicsCollection(params Func<MetadataRequestTopic, MetadataRequestTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateMetadataRequestTopic()))
+				.Select(createField => createField(new MetadataRequestTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal MetadataRequestTopic CreateMetadataRequestTopic()
+		public delegate MetadataRequestTopic CreateMetadataRequestTopic(MetadataRequestTopic field);
+
+		/// <summary>
+		/// <para>The topics to fetch metadata for.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public MetadataRequest WithTopicsCollection(IEnumerable<CreateMetadataRequestTopic> createFields)
 		{
-			return new MetadataRequestTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new MetadataRequestTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class MetadataRequestTopic : ISerialize
@@ -39823,14 +40924,23 @@ namespace Kafka.Protocol
 		public MetadataResponse WithBrokersCollection(params Func<MetadataResponseBroker, MetadataResponseBroker>[] createFields)
 		{
 			BrokersCollection = createFields
-				.Select(createField => createField(CreateMetadataResponseBroker()))
+				.Select(createField => createField(new MetadataResponseBroker(Version)))
 				.ToDictionary(field => field.NodeId);
 			return this;
 		}
 
-		internal MetadataResponseBroker CreateMetadataResponseBroker()
+		public delegate MetadataResponseBroker CreateMetadataResponseBroker(MetadataResponseBroker field);
+
+		/// <summary>
+		/// <para>Each broker in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public MetadataResponse WithBrokersCollection(IEnumerable<CreateMetadataResponseBroker> createFields)
 		{
-			return new MetadataResponseBroker(Version);
+			BrokersCollection = createFields
+				.Select(createField => createField(new MetadataResponseBroker(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
 		}
 
 		public class MetadataResponseBroker : ISerialize
@@ -40079,14 +41189,23 @@ namespace Kafka.Protocol
 		public MetadataResponse WithTopicsCollection(params Func<MetadataResponseTopic, MetadataResponseTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateMetadataResponseTopic()))
+				.Select(createField => createField(new MetadataResponseTopic(Version)))
 				.ToDictionary(field => (NullableString)field.Name);
 			return this;
 		}
 
-		internal MetadataResponseTopic CreateMetadataResponseTopic()
+		public delegate MetadataResponseTopic CreateMetadataResponseTopic(MetadataResponseTopic field);
+
+		/// <summary>
+		/// <para>Each topic in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public MetadataResponse WithTopicsCollection(IEnumerable<CreateMetadataResponseTopic> createFields)
 		{
-			return new MetadataResponseTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new MetadataResponseTopic(Version)))
+				.ToDictionary(field => (NullableString)field.Name);
+			return this;
 		}
 
 		public class MetadataResponseTopic : ISerialize
@@ -40292,14 +41411,23 @@ namespace Kafka.Protocol
 			public MetadataResponseTopic WithPartitionsCollection(params Func<MetadataResponsePartition, MetadataResponsePartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateMetadataResponsePartition()))
+					.Select(createField => createField(new MetadataResponsePartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal MetadataResponsePartition CreateMetadataResponsePartition()
+			public delegate MetadataResponsePartition CreateMetadataResponsePartition(MetadataResponsePartition field);
+
+			/// <summary>
+			/// <para>Each partition in the topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public MetadataResponseTopic WithPartitionsCollection(IEnumerable<CreateMetadataResponsePartition> createFields)
 			{
-				return new MetadataResponsePartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new MetadataResponsePartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class MetadataResponsePartition : ISerialize
@@ -40865,14 +41993,23 @@ namespace Kafka.Protocol
 		public OffsetCommitRequest WithTopicsCollection(params Func<OffsetCommitRequestTopic, OffsetCommitRequestTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOffsetCommitRequestTopic()))
+				.Select(createField => createField(new OffsetCommitRequestTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal OffsetCommitRequestTopic CreateOffsetCommitRequestTopic()
+		public delegate OffsetCommitRequestTopic CreateOffsetCommitRequestTopic(OffsetCommitRequestTopic field);
+
+		/// <summary>
+		/// <para>The topics to commit offsets for.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public OffsetCommitRequest WithTopicsCollection(IEnumerable<CreateOffsetCommitRequestTopic> createFields)
 		{
-			return new OffsetCommitRequestTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OffsetCommitRequestTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class OffsetCommitRequestTopic : ISerialize
@@ -40976,14 +42113,23 @@ namespace Kafka.Protocol
 			public OffsetCommitRequestTopic WithPartitionsCollection(params Func<OffsetCommitRequestPartition, OffsetCommitRequestPartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateOffsetCommitRequestPartition()))
+					.Select(createField => createField(new OffsetCommitRequestPartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OffsetCommitRequestPartition CreateOffsetCommitRequestPartition()
+			public delegate OffsetCommitRequestPartition CreateOffsetCommitRequestPartition(OffsetCommitRequestPartition field);
+
+			/// <summary>
+			/// <para>Each partition to commit offsets for.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public OffsetCommitRequestTopic WithPartitionsCollection(IEnumerable<CreateOffsetCommitRequestPartition> createFields)
 			{
-				return new OffsetCommitRequestPartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new OffsetCommitRequestPartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OffsetCommitRequestPartition : ISerialize
@@ -41312,14 +42458,23 @@ namespace Kafka.Protocol
 		public OffsetCommitResponse WithTopicsCollection(params Func<OffsetCommitResponseTopic, OffsetCommitResponseTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOffsetCommitResponseTopic()))
+				.Select(createField => createField(new OffsetCommitResponseTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal OffsetCommitResponseTopic CreateOffsetCommitResponseTopic()
+		public delegate OffsetCommitResponseTopic CreateOffsetCommitResponseTopic(OffsetCommitResponseTopic field);
+
+		/// <summary>
+		/// <para>The responses for each topic.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public OffsetCommitResponse WithTopicsCollection(IEnumerable<CreateOffsetCommitResponseTopic> createFields)
 		{
-			return new OffsetCommitResponseTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OffsetCommitResponseTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class OffsetCommitResponseTopic : ISerialize
@@ -41423,14 +42578,23 @@ namespace Kafka.Protocol
 			public OffsetCommitResponseTopic WithPartitionsCollection(params Func<OffsetCommitResponsePartition, OffsetCommitResponsePartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateOffsetCommitResponsePartition()))
+					.Select(createField => createField(new OffsetCommitResponsePartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OffsetCommitResponsePartition CreateOffsetCommitResponsePartition()
+			public delegate OffsetCommitResponsePartition CreateOffsetCommitResponsePartition(OffsetCommitResponsePartition field);
+
+			/// <summary>
+			/// <para>The responses for each partition in the topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public OffsetCommitResponseTopic WithPartitionsCollection(IEnumerable<CreateOffsetCommitResponsePartition> createFields)
 			{
-				return new OffsetCommitResponsePartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new OffsetCommitResponsePartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OffsetCommitResponsePartition : ISerialize
@@ -41656,14 +42820,23 @@ namespace Kafka.Protocol
 		public OffsetDeleteRequest WithTopicsCollection(params Func<OffsetDeleteRequestTopic, OffsetDeleteRequestTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOffsetDeleteRequestTopic()))
+				.Select(createField => createField(new OffsetDeleteRequestTopic(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal OffsetDeleteRequestTopic CreateOffsetDeleteRequestTopic()
+		public delegate OffsetDeleteRequestTopic CreateOffsetDeleteRequestTopic(OffsetDeleteRequestTopic field);
+
+		/// <summary>
+		/// <para>The topics to delete offsets for</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public OffsetDeleteRequest WithTopicsCollection(IEnumerable<CreateOffsetDeleteRequestTopic> createFields)
 		{
-			return new OffsetDeleteRequestTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OffsetDeleteRequestTopic(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class OffsetDeleteRequestTopic : ISerialize
@@ -41767,14 +42940,23 @@ namespace Kafka.Protocol
 			public OffsetDeleteRequestTopic WithPartitionsCollection(params Func<OffsetDeleteRequestPartition, OffsetDeleteRequestPartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateOffsetDeleteRequestPartition()))
+					.Select(createField => createField(new OffsetDeleteRequestPartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OffsetDeleteRequestPartition CreateOffsetDeleteRequestPartition()
+			public delegate OffsetDeleteRequestPartition CreateOffsetDeleteRequestPartition(OffsetDeleteRequestPartition field);
+
+			/// <summary>
+			/// <para>Each partition to delete offsets for.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public OffsetDeleteRequestTopic WithPartitionsCollection(IEnumerable<CreateOffsetDeleteRequestPartition> createFields)
 			{
-				return new OffsetDeleteRequestPartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new OffsetDeleteRequestPartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OffsetDeleteRequestPartition : ISerialize
@@ -42003,14 +43185,23 @@ namespace Kafka.Protocol
 		public OffsetDeleteResponse WithTopicsCollection(params Func<OffsetDeleteResponseTopic, OffsetDeleteResponseTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOffsetDeleteResponseTopic()))
+				.Select(createField => createField(new OffsetDeleteResponseTopic(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal OffsetDeleteResponseTopic CreateOffsetDeleteResponseTopic()
+		public delegate OffsetDeleteResponseTopic CreateOffsetDeleteResponseTopic(OffsetDeleteResponseTopic field);
+
+		/// <summary>
+		/// <para>The responses for each topic.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public OffsetDeleteResponse WithTopicsCollection(IEnumerable<CreateOffsetDeleteResponseTopic> createFields)
 		{
-			return new OffsetDeleteResponseTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OffsetDeleteResponseTopic(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class OffsetDeleteResponseTopic : ISerialize
@@ -42114,14 +43305,23 @@ namespace Kafka.Protocol
 			public OffsetDeleteResponseTopic WithPartitionsCollection(params Func<OffsetDeleteResponsePartition, OffsetDeleteResponsePartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateOffsetDeleteResponsePartition()))
+					.Select(createField => createField(new OffsetDeleteResponsePartition(Version)))
 					.ToDictionary(field => field.PartitionIndex);
 				return this;
 			}
 
-			internal OffsetDeleteResponsePartition CreateOffsetDeleteResponsePartition()
+			public delegate OffsetDeleteResponsePartition CreateOffsetDeleteResponsePartition(OffsetDeleteResponsePartition field);
+
+			/// <summary>
+			/// <para>The responses for each partition in the topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public OffsetDeleteResponseTopic WithPartitionsCollection(IEnumerable<CreateOffsetDeleteResponsePartition> createFields)
 			{
-				return new OffsetDeleteResponsePartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new OffsetDeleteResponsePartition(Version)))
+					.ToDictionary(field => field.PartitionIndex);
+				return this;
 			}
 
 			public class OffsetDeleteResponsePartition : ISerialize
@@ -42379,14 +43579,23 @@ namespace Kafka.Protocol
 		public OffsetFetchRequest WithTopicsCollection(params Func<OffsetFetchRequestTopic, OffsetFetchRequestTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOffsetFetchRequestTopic()))
+				.Select(createField => createField(new OffsetFetchRequestTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal OffsetFetchRequestTopic CreateOffsetFetchRequestTopic()
+		public delegate OffsetFetchRequestTopic CreateOffsetFetchRequestTopic(OffsetFetchRequestTopic field);
+
+		/// <summary>
+		/// <para>Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.</para>
+		/// <para>Versions: 0-7</para>
+		/// </summary>
+		public OffsetFetchRequest WithTopicsCollection(IEnumerable<CreateOffsetFetchRequestTopic> createFields)
 		{
-			return new OffsetFetchRequestTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OffsetFetchRequestTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class OffsetFetchRequestTopic : ISerialize
@@ -42532,14 +43741,23 @@ namespace Kafka.Protocol
 		public OffsetFetchRequest WithGroupsCollection(params Func<OffsetFetchRequestGroup, OffsetFetchRequestGroup>[] createFields)
 		{
 			GroupsCollection = createFields
-				.Select(createField => createField(CreateOffsetFetchRequestGroup()))
+				.Select(createField => createField(new OffsetFetchRequestGroup(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal OffsetFetchRequestGroup CreateOffsetFetchRequestGroup()
+		public delegate OffsetFetchRequestGroup CreateOffsetFetchRequestGroup(OffsetFetchRequestGroup field);
+
+		/// <summary>
+		/// <para>Each group we would like to fetch offsets for</para>
+		/// <para>Versions: 8+</para>
+		/// </summary>
+		public OffsetFetchRequest WithGroupsCollection(IEnumerable<CreateOffsetFetchRequestGroup> createFields)
 		{
-			return new OffsetFetchRequestGroup(Version);
+			GroupsCollection = createFields
+				.Select(createField => createField(new OffsetFetchRequestGroup(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class OffsetFetchRequestGroup : ISerialize
@@ -42661,14 +43879,23 @@ namespace Kafka.Protocol
 			public OffsetFetchRequestGroup WithTopicsCollection(params Func<OffsetFetchRequestTopics, OffsetFetchRequestTopics>[] createFields)
 			{
 				TopicsCollection = createFields
-					.Select(createField => createField(CreateOffsetFetchRequestTopics()))
+					.Select(createField => createField(new OffsetFetchRequestTopics(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OffsetFetchRequestTopics CreateOffsetFetchRequestTopics()
+			public delegate OffsetFetchRequestTopics CreateOffsetFetchRequestTopics(OffsetFetchRequestTopics field);
+
+			/// <summary>
+			/// <para>Each topic we would like to fetch offsets for, or null to fetch offsets for all topics.</para>
+			/// <para>Versions: 8+</para>
+			/// </summary>
+			public OffsetFetchRequestGroup WithTopicsCollection(IEnumerable<CreateOffsetFetchRequestTopics> createFields)
 			{
-				return new OffsetFetchRequestTopics(Version);
+				TopicsCollection = createFields
+					.Select(createField => createField(new OffsetFetchRequestTopics(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OffsetFetchRequestTopics : ISerialize
@@ -42965,14 +44192,23 @@ namespace Kafka.Protocol
 		public OffsetFetchResponse WithTopicsCollection(params Func<OffsetFetchResponseTopic, OffsetFetchResponseTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOffsetFetchResponseTopic()))
+				.Select(createField => createField(new OffsetFetchResponseTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal OffsetFetchResponseTopic CreateOffsetFetchResponseTopic()
+		public delegate OffsetFetchResponseTopic CreateOffsetFetchResponseTopic(OffsetFetchResponseTopic field);
+
+		/// <summary>
+		/// <para>The responses per topic.</para>
+		/// <para>Versions: 0-7</para>
+		/// </summary>
+		public OffsetFetchResponse WithTopicsCollection(IEnumerable<CreateOffsetFetchResponseTopic> createFields)
 		{
-			return new OffsetFetchResponseTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OffsetFetchResponseTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class OffsetFetchResponseTopic : ISerialize
@@ -43090,14 +44326,23 @@ namespace Kafka.Protocol
 			public OffsetFetchResponseTopic WithPartitionsCollection(params Func<OffsetFetchResponsePartition, OffsetFetchResponsePartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateOffsetFetchResponsePartition()))
+					.Select(createField => createField(new OffsetFetchResponsePartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OffsetFetchResponsePartition CreateOffsetFetchResponsePartition()
+			public delegate OffsetFetchResponsePartition CreateOffsetFetchResponsePartition(OffsetFetchResponsePartition field);
+
+			/// <summary>
+			/// <para>The responses per partition</para>
+			/// <para>Versions: 0-7</para>
+			/// </summary>
+			public OffsetFetchResponseTopic WithPartitionsCollection(IEnumerable<CreateOffsetFetchResponsePartition> createFields)
 			{
-				return new OffsetFetchResponsePartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new OffsetFetchResponsePartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OffsetFetchResponsePartition : ISerialize
@@ -43375,14 +44620,23 @@ namespace Kafka.Protocol
 		public OffsetFetchResponse WithGroupsCollection(params Func<OffsetFetchResponseGroup, OffsetFetchResponseGroup>[] createFields)
 		{
 			GroupsCollection = createFields
-				.Select(createField => createField(CreateOffsetFetchResponseGroup()))
+				.Select(createField => createField(new OffsetFetchResponseGroup(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal OffsetFetchResponseGroup CreateOffsetFetchResponseGroup()
+		public delegate OffsetFetchResponseGroup CreateOffsetFetchResponseGroup(OffsetFetchResponseGroup field);
+
+		/// <summary>
+		/// <para>The responses per group id.</para>
+		/// <para>Versions: 8+</para>
+		/// </summary>
+		public OffsetFetchResponse WithGroupsCollection(IEnumerable<CreateOffsetFetchResponseGroup> createFields)
 		{
-			return new OffsetFetchResponseGroup(Version);
+			GroupsCollection = createFields
+				.Select(createField => createField(new OffsetFetchResponseGroup(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class OffsetFetchResponseGroup : ISerialize
@@ -43507,14 +44761,23 @@ namespace Kafka.Protocol
 			public OffsetFetchResponseGroup WithTopicsCollection(params Func<OffsetFetchResponseTopics, OffsetFetchResponseTopics>[] createFields)
 			{
 				TopicsCollection = createFields
-					.Select(createField => createField(CreateOffsetFetchResponseTopics()))
+					.Select(createField => createField(new OffsetFetchResponseTopics(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OffsetFetchResponseTopics CreateOffsetFetchResponseTopics()
+			public delegate OffsetFetchResponseTopics CreateOffsetFetchResponseTopics(OffsetFetchResponseTopics field);
+
+			/// <summary>
+			/// <para>The responses per topic.</para>
+			/// <para>Versions: 8+</para>
+			/// </summary>
+			public OffsetFetchResponseGroup WithTopicsCollection(IEnumerable<CreateOffsetFetchResponseTopics> createFields)
 			{
-				return new OffsetFetchResponseTopics(Version);
+				TopicsCollection = createFields
+					.Select(createField => createField(new OffsetFetchResponseTopics(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OffsetFetchResponseTopics : ISerialize
@@ -43632,14 +44895,23 @@ namespace Kafka.Protocol
 				public OffsetFetchResponseTopics WithPartitionsCollection(params Func<OffsetFetchResponsePartitions, OffsetFetchResponsePartitions>[] createFields)
 				{
 					PartitionsCollection = createFields
-						.Select(createField => createField(CreateOffsetFetchResponsePartitions()))
+						.Select(createField => createField(new OffsetFetchResponsePartitions(Version)))
 						.ToArray();
 					return this;
 				}
 
-				internal OffsetFetchResponsePartitions CreateOffsetFetchResponsePartitions()
+				public delegate OffsetFetchResponsePartitions CreateOffsetFetchResponsePartitions(OffsetFetchResponsePartitions field);
+
+				/// <summary>
+				/// <para>The responses per partition</para>
+				/// <para>Versions: 8+</para>
+				/// </summary>
+				public OffsetFetchResponseTopics WithPartitionsCollection(IEnumerable<CreateOffsetFetchResponsePartitions> createFields)
 				{
-					return new OffsetFetchResponsePartitions(Version);
+					PartitionsCollection = createFields
+						.Select(createField => createField(new OffsetFetchResponsePartitions(Version)))
+						.ToArray();
+					return this;
 				}
 
 				public class OffsetFetchResponsePartitions : ISerialize
@@ -44020,14 +45292,23 @@ namespace Kafka.Protocol
 		public OffsetForLeaderEpochRequest WithTopicsCollection(params Func<OffsetForLeaderTopic, OffsetForLeaderTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOffsetForLeaderTopic()))
+				.Select(createField => createField(new OffsetForLeaderTopic(Version)))
 				.ToDictionary(field => field.Topic);
 			return this;
 		}
 
-		internal OffsetForLeaderTopic CreateOffsetForLeaderTopic()
+		public delegate OffsetForLeaderTopic CreateOffsetForLeaderTopic(OffsetForLeaderTopic field);
+
+		/// <summary>
+		/// <para>Each topic to get offsets for.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public OffsetForLeaderEpochRequest WithTopicsCollection(IEnumerable<CreateOffsetForLeaderTopic> createFields)
 		{
-			return new OffsetForLeaderTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OffsetForLeaderTopic(Version)))
+				.ToDictionary(field => field.Topic);
+			return this;
 		}
 
 		public class OffsetForLeaderTopic : ISerialize
@@ -44131,14 +45412,23 @@ namespace Kafka.Protocol
 			public OffsetForLeaderTopic WithPartitionsCollection(params Func<OffsetForLeaderPartition, OffsetForLeaderPartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateOffsetForLeaderPartition()))
+					.Select(createField => createField(new OffsetForLeaderPartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal OffsetForLeaderPartition CreateOffsetForLeaderPartition()
+			public delegate OffsetForLeaderPartition CreateOffsetForLeaderPartition(OffsetForLeaderPartition field);
+
+			/// <summary>
+			/// <para>Each partition to get offsets for.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public OffsetForLeaderTopic WithPartitionsCollection(IEnumerable<CreateOffsetForLeaderPartition> createFields)
 			{
-				return new OffsetForLeaderPartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new OffsetForLeaderPartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class OffsetForLeaderPartition : ISerialize
@@ -44404,14 +45694,23 @@ namespace Kafka.Protocol
 		public OffsetForLeaderEpochResponse WithTopicsCollection(params Func<OffsetForLeaderTopicResult, OffsetForLeaderTopicResult>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateOffsetForLeaderTopicResult()))
+				.Select(createField => createField(new OffsetForLeaderTopicResult(Version)))
 				.ToDictionary(field => field.Topic);
 			return this;
 		}
 
-		internal OffsetForLeaderTopicResult CreateOffsetForLeaderTopicResult()
+		public delegate OffsetForLeaderTopicResult CreateOffsetForLeaderTopicResult(OffsetForLeaderTopicResult field);
+
+		/// <summary>
+		/// <para>Each topic we fetched offsets for.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public OffsetForLeaderEpochResponse WithTopicsCollection(IEnumerable<CreateOffsetForLeaderTopicResult> createFields)
 		{
-			return new OffsetForLeaderTopicResult(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new OffsetForLeaderTopicResult(Version)))
+				.ToDictionary(field => field.Topic);
+			return this;
 		}
 
 		public class OffsetForLeaderTopicResult : ISerialize
@@ -44515,14 +45814,23 @@ namespace Kafka.Protocol
 			public OffsetForLeaderTopicResult WithPartitionsCollection(params Func<EpochEndOffset, EpochEndOffset>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateEpochEndOffset()))
+					.Select(createField => createField(new EpochEndOffset(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal EpochEndOffset CreateEpochEndOffset()
+			public delegate EpochEndOffset CreateEpochEndOffset(EpochEndOffset field);
+
+			/// <summary>
+			/// <para>Each partition in the topic we fetched offsets for.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public OffsetForLeaderTopicResult WithPartitionsCollection(IEnumerable<CreateEpochEndOffset> createFields)
 			{
-				return new EpochEndOffset(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new EpochEndOffset(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class EpochEndOffset : ISerialize
@@ -44877,14 +46185,23 @@ namespace Kafka.Protocol
 		public ProduceRequest WithTopicDataCollection(params Func<TopicProduceData, TopicProduceData>[] createFields)
 		{
 			TopicDataCollection = createFields
-				.Select(createField => createField(CreateTopicProduceData()))
+				.Select(createField => createField(new TopicProduceData(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal TopicProduceData CreateTopicProduceData()
+		public delegate TopicProduceData CreateTopicProduceData(TopicProduceData field);
+
+		/// <summary>
+		/// <para>Each topic to produce to.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ProduceRequest WithTopicDataCollection(IEnumerable<CreateTopicProduceData> createFields)
 		{
-			return new TopicProduceData(Version);
+			TopicDataCollection = createFields
+				.Select(createField => createField(new TopicProduceData(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class TopicProduceData : ISerialize
@@ -44988,14 +46305,23 @@ namespace Kafka.Protocol
 			public TopicProduceData WithPartitionDataCollection(params Func<PartitionProduceData, PartitionProduceData>[] createFields)
 			{
 				PartitionDataCollection = createFields
-					.Select(createField => createField(CreatePartitionProduceData()))
+					.Select(createField => createField(new PartitionProduceData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionProduceData CreatePartitionProduceData()
+			public delegate PartitionProduceData CreatePartitionProduceData(PartitionProduceData field);
+
+			/// <summary>
+			/// <para>Each partition to produce to.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicProduceData WithPartitionDataCollection(IEnumerable<CreatePartitionProduceData> createFields)
 			{
-				return new PartitionProduceData(Version);
+				PartitionDataCollection = createFields
+					.Select(createField => createField(new PartitionProduceData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionProduceData : ISerialize
@@ -45204,14 +46530,23 @@ namespace Kafka.Protocol
 		public ProduceResponse WithResponsesCollection(params Func<TopicProduceResponse, TopicProduceResponse>[] createFields)
 		{
 			ResponsesCollection = createFields
-				.Select(createField => createField(CreateTopicProduceResponse()))
+				.Select(createField => createField(new TopicProduceResponse(Version)))
 				.ToDictionary(field => field.Name);
 			return this;
 		}
 
-		internal TopicProduceResponse CreateTopicProduceResponse()
+		public delegate TopicProduceResponse CreateTopicProduceResponse(TopicProduceResponse field);
+
+		/// <summary>
+		/// <para>Each produce response</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ProduceResponse WithResponsesCollection(IEnumerable<CreateTopicProduceResponse> createFields)
 		{
-			return new TopicProduceResponse(Version);
+			ResponsesCollection = createFields
+				.Select(createField => createField(new TopicProduceResponse(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
 		}
 
 		public class TopicProduceResponse : ISerialize
@@ -45315,14 +46650,23 @@ namespace Kafka.Protocol
 			public TopicProduceResponse WithPartitionResponsesCollection(params Func<PartitionProduceResponse, PartitionProduceResponse>[] createFields)
 			{
 				PartitionResponsesCollection = createFields
-					.Select(createField => createField(CreatePartitionProduceResponse()))
+					.Select(createField => createField(new PartitionProduceResponse(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionProduceResponse CreatePartitionProduceResponse()
+			public delegate PartitionProduceResponse CreatePartitionProduceResponse(PartitionProduceResponse field);
+
+			/// <summary>
+			/// <para>Each partition that we produced to within the topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicProduceResponse WithPartitionResponsesCollection(IEnumerable<CreatePartitionProduceResponse> createFields)
 			{
-				return new PartitionProduceResponse(Version);
+				PartitionResponsesCollection = createFields
+					.Select(createField => createField(new PartitionProduceResponse(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionProduceResponse : ISerialize
@@ -45557,14 +46901,23 @@ namespace Kafka.Protocol
 				public PartitionProduceResponse WithRecordErrorsCollection(params Func<BatchIndexAndErrorMessage, BatchIndexAndErrorMessage>[] createFields)
 				{
 					RecordErrorsCollection = createFields
-						.Select(createField => createField(CreateBatchIndexAndErrorMessage()))
+						.Select(createField => createField(new BatchIndexAndErrorMessage(Version)))
 						.ToArray();
 					return this;
 				}
 
-				internal BatchIndexAndErrorMessage CreateBatchIndexAndErrorMessage()
+				public delegate BatchIndexAndErrorMessage CreateBatchIndexAndErrorMessage(BatchIndexAndErrorMessage field);
+
+				/// <summary>
+				/// <para>The batch indices of records that caused the batch to be dropped</para>
+				/// <para>Versions: 8+</para>
+				/// </summary>
+				public PartitionProduceResponse WithRecordErrorsCollection(IEnumerable<CreateBatchIndexAndErrorMessage> createFields)
 				{
-					return new BatchIndexAndErrorMessage(Version);
+					RecordErrorsCollection = createFields
+						.Select(createField => createField(new BatchIndexAndErrorMessage(Version)))
+						.ToArray();
+					return this;
 				}
 
 				public class BatchIndexAndErrorMessage : ISerialize
@@ -46744,14 +48097,23 @@ namespace Kafka.Protocol
 		public StopReplicaRequest WithUngroupedPartitionsCollection(params Func<StopReplicaPartitionV0, StopReplicaPartitionV0>[] createFields)
 		{
 			UngroupedPartitionsCollection = createFields
-				.Select(createField => createField(CreateStopReplicaPartitionV0()))
+				.Select(createField => createField(new StopReplicaPartitionV0(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal StopReplicaPartitionV0 CreateStopReplicaPartitionV0()
+		public delegate StopReplicaPartitionV0 CreateStopReplicaPartitionV0(StopReplicaPartitionV0 field);
+
+		/// <summary>
+		/// <para>The partitions to stop.</para>
+		/// <para>Versions: 0</para>
+		/// </summary>
+		public StopReplicaRequest WithUngroupedPartitionsCollection(IEnumerable<CreateStopReplicaPartitionV0> createFields)
 		{
-			return new StopReplicaPartitionV0(Version);
+			UngroupedPartitionsCollection = createFields
+				.Select(createField => createField(new StopReplicaPartitionV0(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class StopReplicaPartitionV0 : ISerialize
@@ -46897,14 +48259,23 @@ namespace Kafka.Protocol
 		public StopReplicaRequest WithTopicsCollection(params Func<StopReplicaTopicV1, StopReplicaTopicV1>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateStopReplicaTopicV1()))
+				.Select(createField => createField(new StopReplicaTopicV1(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal StopReplicaTopicV1 CreateStopReplicaTopicV1()
+		public delegate StopReplicaTopicV1 CreateStopReplicaTopicV1(StopReplicaTopicV1 field);
+
+		/// <summary>
+		/// <para>The topics to stop.</para>
+		/// <para>Versions: 1-2</para>
+		/// </summary>
+		public StopReplicaRequest WithTopicsCollection(IEnumerable<CreateStopReplicaTopicV1> createFields)
 		{
-			return new StopReplicaTopicV1(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new StopReplicaTopicV1(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class StopReplicaTopicV1 : ISerialize
@@ -47050,14 +48421,23 @@ namespace Kafka.Protocol
 		public StopReplicaRequest WithTopicStatesCollection(params Func<StopReplicaTopicState, StopReplicaTopicState>[] createFields)
 		{
 			TopicStatesCollection = createFields
-				.Select(createField => createField(CreateStopReplicaTopicState()))
+				.Select(createField => createField(new StopReplicaTopicState(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal StopReplicaTopicState CreateStopReplicaTopicState()
+		public delegate StopReplicaTopicState CreateStopReplicaTopicState(StopReplicaTopicState field);
+
+		/// <summary>
+		/// <para>Each topic.</para>
+		/// <para>Versions: 3+</para>
+		/// </summary>
+		public StopReplicaRequest WithTopicStatesCollection(IEnumerable<CreateStopReplicaTopicState> createFields)
 		{
-			return new StopReplicaTopicState(Version);
+			TopicStatesCollection = createFields
+				.Select(createField => createField(new StopReplicaTopicState(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class StopReplicaTopicState : ISerialize
@@ -47175,14 +48555,23 @@ namespace Kafka.Protocol
 			public StopReplicaTopicState WithPartitionStatesCollection(params Func<StopReplicaPartitionState, StopReplicaPartitionState>[] createFields)
 			{
 				PartitionStatesCollection = createFields
-					.Select(createField => createField(CreateStopReplicaPartitionState()))
+					.Select(createField => createField(new StopReplicaPartitionState(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal StopReplicaPartitionState CreateStopReplicaPartitionState()
+			public delegate StopReplicaPartitionState CreateStopReplicaPartitionState(StopReplicaPartitionState field);
+
+			/// <summary>
+			/// <para>The state of each partition</para>
+			/// <para>Versions: 3+</para>
+			/// </summary>
+			public StopReplicaTopicState WithPartitionStatesCollection(IEnumerable<CreateStopReplicaPartitionState> createFields)
 			{
-				return new StopReplicaPartitionState(Version);
+				PartitionStatesCollection = createFields
+					.Select(createField => createField(new StopReplicaPartitionState(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class StopReplicaPartitionState : ISerialize
@@ -47461,14 +48850,23 @@ namespace Kafka.Protocol
 		public StopReplicaResponse WithPartitionErrorsCollection(params Func<StopReplicaPartitionError, StopReplicaPartitionError>[] createFields)
 		{
 			PartitionErrorsCollection = createFields
-				.Select(createField => createField(CreateStopReplicaPartitionError()))
+				.Select(createField => createField(new StopReplicaPartitionError(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal StopReplicaPartitionError CreateStopReplicaPartitionError()
+		public delegate StopReplicaPartitionError CreateStopReplicaPartitionError(StopReplicaPartitionError field);
+
+		/// <summary>
+		/// <para>The responses for each partition.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public StopReplicaResponse WithPartitionErrorsCollection(IEnumerable<CreateStopReplicaPartitionError> createFields)
 		{
-			return new StopReplicaPartitionError(Version);
+			PartitionErrorsCollection = createFields
+				.Select(createField => createField(new StopReplicaPartitionError(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class StopReplicaPartitionError : ISerialize
@@ -47888,14 +49286,23 @@ namespace Kafka.Protocol
 		public SyncGroupRequest WithAssignmentsCollection(params Func<SyncGroupRequestAssignment, SyncGroupRequestAssignment>[] createFields)
 		{
 			AssignmentsCollection = createFields
-				.Select(createField => createField(CreateSyncGroupRequestAssignment()))
+				.Select(createField => createField(new SyncGroupRequestAssignment(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal SyncGroupRequestAssignment CreateSyncGroupRequestAssignment()
+		public delegate SyncGroupRequestAssignment CreateSyncGroupRequestAssignment(SyncGroupRequestAssignment field);
+
+		/// <summary>
+		/// <para>Each assignment.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public SyncGroupRequest WithAssignmentsCollection(IEnumerable<CreateSyncGroupRequestAssignment> createFields)
 		{
-			return new SyncGroupRequestAssignment(Version);
+			AssignmentsCollection = createFields
+				.Select(createField => createField(new SyncGroupRequestAssignment(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class SyncGroupRequestAssignment : ISerialize
@@ -48541,14 +49948,23 @@ namespace Kafka.Protocol
 		public TxnOffsetCommitRequest WithTopicsCollection(params Func<TxnOffsetCommitRequestTopic, TxnOffsetCommitRequestTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTxnOffsetCommitRequestTopic()))
+				.Select(createField => createField(new TxnOffsetCommitRequestTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TxnOffsetCommitRequestTopic CreateTxnOffsetCommitRequestTopic()
+		public delegate TxnOffsetCommitRequestTopic CreateTxnOffsetCommitRequestTopic(TxnOffsetCommitRequestTopic field);
+
+		/// <summary>
+		/// <para>Each topic that we want to commit offsets for.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public TxnOffsetCommitRequest WithTopicsCollection(IEnumerable<CreateTxnOffsetCommitRequestTopic> createFields)
 		{
-			return new TxnOffsetCommitRequestTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TxnOffsetCommitRequestTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TxnOffsetCommitRequestTopic : ISerialize
@@ -48652,14 +50068,23 @@ namespace Kafka.Protocol
 			public TxnOffsetCommitRequestTopic WithPartitionsCollection(params Func<TxnOffsetCommitRequestPartition, TxnOffsetCommitRequestPartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateTxnOffsetCommitRequestPartition()))
+					.Select(createField => createField(new TxnOffsetCommitRequestPartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal TxnOffsetCommitRequestPartition CreateTxnOffsetCommitRequestPartition()
+			public delegate TxnOffsetCommitRequestPartition CreateTxnOffsetCommitRequestPartition(TxnOffsetCommitRequestPartition field);
+
+			/// <summary>
+			/// <para>The partitions inside the topic that we want to committ offsets for.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TxnOffsetCommitRequestTopic WithPartitionsCollection(IEnumerable<CreateTxnOffsetCommitRequestPartition> createFields)
 			{
-				return new TxnOffsetCommitRequestPartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new TxnOffsetCommitRequestPartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class TxnOffsetCommitRequestPartition : ISerialize
@@ -48948,14 +50373,23 @@ namespace Kafka.Protocol
 		public TxnOffsetCommitResponse WithTopicsCollection(params Func<TxnOffsetCommitResponseTopic, TxnOffsetCommitResponseTopic>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTxnOffsetCommitResponseTopic()))
+				.Select(createField => createField(new TxnOffsetCommitResponseTopic(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TxnOffsetCommitResponseTopic CreateTxnOffsetCommitResponseTopic()
+		public delegate TxnOffsetCommitResponseTopic CreateTxnOffsetCommitResponseTopic(TxnOffsetCommitResponseTopic field);
+
+		/// <summary>
+		/// <para>The responses for each topic.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public TxnOffsetCommitResponse WithTopicsCollection(IEnumerable<CreateTxnOffsetCommitResponseTopic> createFields)
 		{
-			return new TxnOffsetCommitResponseTopic(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TxnOffsetCommitResponseTopic(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TxnOffsetCommitResponseTopic : ISerialize
@@ -49059,14 +50493,23 @@ namespace Kafka.Protocol
 			public TxnOffsetCommitResponseTopic WithPartitionsCollection(params Func<TxnOffsetCommitResponsePartition, TxnOffsetCommitResponsePartition>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreateTxnOffsetCommitResponsePartition()))
+					.Select(createField => createField(new TxnOffsetCommitResponsePartition(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal TxnOffsetCommitResponsePartition CreateTxnOffsetCommitResponsePartition()
+			public delegate TxnOffsetCommitResponsePartition CreateTxnOffsetCommitResponsePartition(TxnOffsetCommitResponsePartition field);
+
+			/// <summary>
+			/// <para>The responses for each partition in the topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TxnOffsetCommitResponseTopic WithPartitionsCollection(IEnumerable<CreateTxnOffsetCommitResponsePartition> createFields)
 			{
-				return new TxnOffsetCommitResponsePartition(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new TxnOffsetCommitResponsePartition(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class TxnOffsetCommitResponsePartition : ISerialize
@@ -49537,14 +50980,23 @@ namespace Kafka.Protocol
 		public UpdateFeaturesRequest WithFeatureUpdatesCollection(params Func<FeatureUpdateKey, FeatureUpdateKey>[] createFields)
 		{
 			FeatureUpdatesCollection = createFields
-				.Select(createField => createField(CreateFeatureUpdateKey()))
+				.Select(createField => createField(new FeatureUpdateKey(Version)))
 				.ToDictionary(field => field.Feature);
 			return this;
 		}
 
-		internal FeatureUpdateKey CreateFeatureUpdateKey()
+		public delegate FeatureUpdateKey CreateFeatureUpdateKey(FeatureUpdateKey field);
+
+		/// <summary>
+		/// <para>The list of updates to finalized features.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateFeaturesRequest WithFeatureUpdatesCollection(IEnumerable<CreateFeatureUpdateKey> createFields)
 		{
-			return new FeatureUpdateKey(Version);
+			FeatureUpdatesCollection = createFields
+				.Select(createField => createField(new FeatureUpdateKey(Version)))
+				.ToDictionary(field => field.Feature);
+			return this;
 		}
 
 		public class FeatureUpdateKey : ISerialize
@@ -49853,14 +51305,23 @@ namespace Kafka.Protocol
 		public UpdateFeaturesResponse WithResultsCollection(params Func<UpdatableFeatureResult, UpdatableFeatureResult>[] createFields)
 		{
 			ResultsCollection = createFields
-				.Select(createField => createField(CreateUpdatableFeatureResult()))
+				.Select(createField => createField(new UpdatableFeatureResult(Version)))
 				.ToDictionary(field => field.Feature);
 			return this;
 		}
 
-		internal UpdatableFeatureResult CreateUpdatableFeatureResult()
+		public delegate UpdatableFeatureResult CreateUpdatableFeatureResult(UpdatableFeatureResult field);
+
+		/// <summary>
+		/// <para>Results for each feature update.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateFeaturesResponse WithResultsCollection(IEnumerable<CreateUpdatableFeatureResult> createFields)
 		{
-			return new UpdatableFeatureResult(Version);
+			ResultsCollection = createFields
+				.Select(createField => createField(new UpdatableFeatureResult(Version)))
+				.ToDictionary(field => field.Feature);
+			return this;
 		}
 
 		public class UpdatableFeatureResult : ISerialize
@@ -50216,14 +51677,23 @@ namespace Kafka.Protocol
 		public UpdateMetadataRequest WithTopicStatesCollection(params Func<UpdateMetadataTopicState, UpdateMetadataTopicState>[] createFields)
 		{
 			TopicStatesCollection = createFields
-				.Select(createField => createField(CreateUpdateMetadataTopicState()))
+				.Select(createField => createField(new UpdateMetadataTopicState(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal UpdateMetadataTopicState CreateUpdateMetadataTopicState()
+		public delegate UpdateMetadataTopicState CreateUpdateMetadataTopicState(UpdateMetadataTopicState field);
+
+		/// <summary>
+		/// <para>In newer versions of this RPC, each topic that we would like to update.</para>
+		/// <para>Versions: 5+</para>
+		/// </summary>
+		public UpdateMetadataRequest WithTopicStatesCollection(IEnumerable<CreateUpdateMetadataTopicState> createFields)
 		{
-			return new UpdateMetadataTopicState(Version);
+			TopicStatesCollection = createFields
+				.Select(createField => createField(new UpdateMetadataTopicState(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class UpdateMetadataTopicState : ISerialize
@@ -50395,14 +51865,22 @@ namespace Kafka.Protocol
 		public UpdateMetadataRequest WithLiveBrokersCollection(params Func<UpdateMetadataBroker, UpdateMetadataBroker>[] createFields)
 		{
 			LiveBrokersCollection = createFields
-				.Select(createField => createField(CreateUpdateMetadataBroker()))
+				.Select(createField => createField(new UpdateMetadataBroker(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal UpdateMetadataBroker CreateUpdateMetadataBroker()
+		public delegate UpdateMetadataBroker CreateUpdateMetadataBroker(UpdateMetadataBroker field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateMetadataRequest WithLiveBrokersCollection(IEnumerable<CreateUpdateMetadataBroker> createFields)
 		{
-			return new UpdateMetadataBroker(Version);
+			LiveBrokersCollection = createFields
+				.Select(createField => createField(new UpdateMetadataBroker(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class UpdateMetadataBroker : ISerialize
@@ -50579,14 +52057,23 @@ namespace Kafka.Protocol
 			public UpdateMetadataBroker WithEndpointsCollection(params Func<UpdateMetadataEndpoint, UpdateMetadataEndpoint>[] createFields)
 			{
 				EndpointsCollection = createFields
-					.Select(createField => createField(CreateUpdateMetadataEndpoint()))
+					.Select(createField => createField(new UpdateMetadataEndpoint(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal UpdateMetadataEndpoint CreateUpdateMetadataEndpoint()
+			public delegate UpdateMetadataEndpoint CreateUpdateMetadataEndpoint(UpdateMetadataEndpoint field);
+
+			/// <summary>
+			/// <para>The broker endpoints.</para>
+			/// <para>Versions: 1+</para>
+			/// </summary>
+			public UpdateMetadataBroker WithEndpointsCollection(IEnumerable<CreateUpdateMetadataEndpoint> createFields)
 			{
-				return new UpdateMetadataEndpoint(Version);
+				EndpointsCollection = createFields
+					.Select(createField => createField(new UpdateMetadataEndpoint(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class UpdateMetadataEndpoint : ISerialize
@@ -51313,14 +52800,22 @@ namespace Kafka.Protocol
 		public VoteRequest WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public VoteRequest WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -51422,14 +52917,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -51737,14 +53240,22 @@ namespace Kafka.Protocol
 		public VoteResponse WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
 		{
 			TopicsCollection = createFields
-				.Select(createField => createField(CreateTopicData()))
+				.Select(createField => createField(new TopicData(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal TopicData CreateTopicData()
+		public delegate TopicData CreateTopicData(TopicData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public VoteResponse WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
 		{
-			return new TopicData(Version);
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicData(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class TopicData : ISerialize
@@ -51846,14 +53357,22 @@ namespace Kafka.Protocol
 			public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
 			{
 				PartitionsCollection = createFields
-					.Select(createField => createField(CreatePartitionData()))
+					.Select(createField => createField(new PartitionData(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal PartitionData CreatePartitionData()
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
 			{
-				return new PartitionData(Version);
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class PartitionData : ISerialize
@@ -52131,14 +53650,23 @@ namespace Kafka.Protocol
 		public WriteTxnMarkersRequest WithMarkersCollection(params Func<WritableTxnMarker, WritableTxnMarker>[] createFields)
 		{
 			MarkersCollection = createFields
-				.Select(createField => createField(CreateWritableTxnMarker()))
+				.Select(createField => createField(new WritableTxnMarker(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal WritableTxnMarker CreateWritableTxnMarker()
+		public delegate WritableTxnMarker CreateWritableTxnMarker(WritableTxnMarker field);
+
+		/// <summary>
+		/// <para>The transaction markers to be written.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public WriteTxnMarkersRequest WithMarkersCollection(IEnumerable<CreateWritableTxnMarker> createFields)
 		{
-			return new WritableTxnMarker(Version);
+			MarkersCollection = createFields
+				.Select(createField => createField(new WritableTxnMarker(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class WritableTxnMarker : ISerialize
@@ -52299,14 +53827,23 @@ namespace Kafka.Protocol
 			public WritableTxnMarker WithTopicsCollection(params Func<WritableTxnMarkerTopic, WritableTxnMarkerTopic>[] createFields)
 			{
 				TopicsCollection = createFields
-					.Select(createField => createField(CreateWritableTxnMarkerTopic()))
+					.Select(createField => createField(new WritableTxnMarkerTopic(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal WritableTxnMarkerTopic CreateWritableTxnMarkerTopic()
+			public delegate WritableTxnMarkerTopic CreateWritableTxnMarkerTopic(WritableTxnMarkerTopic field);
+
+			/// <summary>
+			/// <para>Each topic that we want to write transaction marker(s) for.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public WritableTxnMarker WithTopicsCollection(IEnumerable<CreateWritableTxnMarkerTopic> createFields)
 			{
-				return new WritableTxnMarkerTopic(Version);
+				TopicsCollection = createFields
+					.Select(createField => createField(new WritableTxnMarkerTopic(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class WritableTxnMarkerTopic : ISerialize
@@ -52532,14 +54069,23 @@ namespace Kafka.Protocol
 		public WriteTxnMarkersResponse WithMarkersCollection(params Func<WritableTxnMarkerResult, WritableTxnMarkerResult>[] createFields)
 		{
 			MarkersCollection = createFields
-				.Select(createField => createField(CreateWritableTxnMarkerResult()))
+				.Select(createField => createField(new WritableTxnMarkerResult(Version)))
 				.ToArray();
 			return this;
 		}
 
-		internal WritableTxnMarkerResult CreateWritableTxnMarkerResult()
+		public delegate WritableTxnMarkerResult CreateWritableTxnMarkerResult(WritableTxnMarkerResult field);
+
+		/// <summary>
+		/// <para>The results for writing makers.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public WriteTxnMarkersResponse WithMarkersCollection(IEnumerable<CreateWritableTxnMarkerResult> createFields)
 		{
-			return new WritableTxnMarkerResult(Version);
+			MarkersCollection = createFields
+				.Select(createField => createField(new WritableTxnMarkerResult(Version)))
+				.ToArray();
+			return this;
 		}
 
 		public class WritableTxnMarkerResult : ISerialize
@@ -52643,14 +54189,23 @@ namespace Kafka.Protocol
 			public WritableTxnMarkerResult WithTopicsCollection(params Func<WritableTxnMarkerTopicResult, WritableTxnMarkerTopicResult>[] createFields)
 			{
 				TopicsCollection = createFields
-					.Select(createField => createField(CreateWritableTxnMarkerTopicResult()))
+					.Select(createField => createField(new WritableTxnMarkerTopicResult(Version)))
 					.ToArray();
 				return this;
 			}
 
-			internal WritableTxnMarkerTopicResult CreateWritableTxnMarkerTopicResult()
+			public delegate WritableTxnMarkerTopicResult CreateWritableTxnMarkerTopicResult(WritableTxnMarkerTopicResult field);
+
+			/// <summary>
+			/// <para>The results by topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public WritableTxnMarkerResult WithTopicsCollection(IEnumerable<CreateWritableTxnMarkerTopicResult> createFields)
 			{
-				return new WritableTxnMarkerTopicResult(Version);
+				TopicsCollection = createFields
+					.Select(createField => createField(new WritableTxnMarkerTopicResult(Version)))
+					.ToArray();
+				return this;
 			}
 
 			public class WritableTxnMarkerTopicResult : ISerialize
@@ -52754,14 +54309,23 @@ namespace Kafka.Protocol
 				public WritableTxnMarkerTopicResult WithPartitionsCollection(params Func<WritableTxnMarkerPartitionResult, WritableTxnMarkerPartitionResult>[] createFields)
 				{
 					PartitionsCollection = createFields
-						.Select(createField => createField(CreateWritableTxnMarkerPartitionResult()))
+						.Select(createField => createField(new WritableTxnMarkerPartitionResult(Version)))
 						.ToArray();
 					return this;
 				}
 
-				internal WritableTxnMarkerPartitionResult CreateWritableTxnMarkerPartitionResult()
+				public delegate WritableTxnMarkerPartitionResult CreateWritableTxnMarkerPartitionResult(WritableTxnMarkerPartitionResult field);
+
+				/// <summary>
+				/// <para>The results by partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public WritableTxnMarkerTopicResult WithPartitionsCollection(IEnumerable<CreateWritableTxnMarkerPartitionResult> createFields)
 				{
-					return new WritableTxnMarkerPartitionResult(Version);
+					PartitionsCollection = createFields
+						.Select(createField => createField(new WritableTxnMarkerPartitionResult(Version)))
+						.ToArray();
+					return this;
 				}
 
 				public class WritableTxnMarkerPartitionResult : ISerialize
@@ -52962,14 +54526,22 @@ namespace Kafka.Protocol
 		public ConsumerProtocolAssignment WithAssignedPartitionsCollection(params Func<TopicPartition, TopicPartition>[] createFields)
 		{
 			AssignedPartitionsCollection = createFields
-				.Select(createField => createField(CreateTopicPartition()))
+				.Select(createField => createField(new TopicPartition(Version)))
 				.ToDictionary(field => field.Topic);
 			return this;
 		}
 
-		internal TopicPartition CreateTopicPartition()
+		public delegate TopicPartition CreateTopicPartition(TopicPartition field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ConsumerProtocolAssignment WithAssignedPartitionsCollection(IEnumerable<CreateTopicPartition> createFields)
 		{
-			return new TopicPartition(Version);
+			AssignedPartitionsCollection = createFields
+				.Select(createField => createField(new TopicPartition(Version)))
+				.ToDictionary(field => field.Topic);
+			return this;
 		}
 
 		public class TopicPartition : ISerialize
@@ -53241,14 +54813,22 @@ namespace Kafka.Protocol
 		public ConsumerProtocolSubscription WithOwnedPartitionsCollection(params Func<TopicPartition, TopicPartition>[] createFields)
 		{
 			OwnedPartitionsCollection = createFields
-				.Select(createField => createField(CreateTopicPartition()))
+				.Select(createField => createField(new TopicPartition(Version)))
 				.ToDictionary(field => field.Topic);
 			return this;
 		}
 
-		internal TopicPartition CreateTopicPartition()
+		public delegate TopicPartition CreateTopicPartition(TopicPartition field);
+
+		/// <summary>
+		/// <para>Versions: 1+</para>
+		/// </summary>
+		public ConsumerProtocolSubscription WithOwnedPartitionsCollection(IEnumerable<CreateTopicPartition> createFields)
 		{
-			return new TopicPartition(Version);
+			OwnedPartitionsCollection = createFields
+				.Select(createField => createField(new TopicPartition(Version)))
+				.ToDictionary(field => field.Topic);
+			return this;
 		}
 
 		public class TopicPartition : ISerialize
