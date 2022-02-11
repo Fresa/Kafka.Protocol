@@ -924,7 +924,19 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		{
 			var mapKeyNullConversion = mapKeyField.IsNullable() ? $"({mapKeyField.GetFullTypeName()})" : "";
 			#><#= fieldName #> = createFields<# LF();
-			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# LF();
+			#>	.Select(createField => createField(new <#= fieldTypeNameWithoutArrayCharacters #>(Version)))<# LF();
+			#>	.ToDictionary(field => <#= mapKeyNullConversion #>field.<#= mapKeyField.GetName() #>);<# LF();
+			#>return this;<#
+		}); LF(2);
+
+		#>public delegate <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>(<#= fieldTypeNameWithoutArrayCharacters #> field);<# LF(2);
+
+		GenerateFieldDocumentation();
+		#>public <#= className #> With<#= fieldName #>(IEnumerable<Create<#= fieldTypeNameWithoutArrayCharacters #>> createFields)<# Block(() => 
+		{
+			var mapKeyNullConversion = mapKeyField.IsNullable() ? $"({mapKeyField.GetFullTypeName()})" : "";
+			#><#= fieldName #> = createFields<# LF();
+			#>	.Select(createField => createField(new <#= fieldTypeNameWithoutArrayCharacters #>(Version)))<# LF();
 			#>	.ToDictionary(field => <#= mapKeyNullConversion #>field.<#= mapKeyField.GetName() #>);<# LF();
 			#>return this;<#
 		}); LF(2);
@@ -934,7 +946,18 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 		#>public <#= className #> With<#= fieldName #>(params Func<<#= fieldTypeNameWithoutArrayCharacters #>, <#= fieldTypeNameWithoutArrayCharacters #>>[] createFields)<# Block(() => 
 		{
 			#><#= fieldName #> = createFields<# LF();
-			#>	.Select(createField => createField(Create<#= fieldTypeNameWithoutArrayCharacters #>()))<# LF();
+			#>	.Select(createField => createField(new <#= fieldTypeNameWithoutArrayCharacters #>(Version)))<# LF();
+			#>	.ToArray();<# LF();
+			#>return this;<#
+		}); LF(2);
+
+		#>public delegate <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>(<#= fieldTypeNameWithoutArrayCharacters #> field);<# LF(2);
+		
+		GenerateFieldDocumentation();
+		#>public <#= className #> With<#= fieldName #>(IEnumerable<Create<#= fieldTypeNameWithoutArrayCharacters #>> createFields)<# Block(() => 
+		{
+			#><#= fieldName #> = createFields<# LF();
+			#>	.Select(createField => createField(new <#= fieldTypeNameWithoutArrayCharacters #>(Version)))<# LF();
 			#>	.ToArray();<# LF();
 			#>return this;<#
 		}); LF(2);
@@ -943,16 +966,11 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	{
 		#>public <#= className #> With<#= fieldName #>(Func<<#= fieldTypeName #>, <#= fieldTypeName #>> createField)<# Block(() => 
 		{
-			#><#= fieldName #> = createField(Create<#= fieldTypeName #>());<# LF();
+			#><#= fieldName #> = createField(new <#= fieldTypeNameWithoutArrayCharacters #>(Version));<# LF();
 			#>return this;<#
 		}); LF(2);
 	}
 	
-	#>internal <#= fieldTypeNameWithoutArrayCharacters #> Create<#= fieldTypeNameWithoutArrayCharacters #>()<# Block(() => 
-	{
-		#>return new <#= fieldTypeNameWithoutArrayCharacters #>(Version);<#
-	}); LF(2);
-
 	#>public class <#= fieldTypeNameWithoutArrayCharacters #> : ISerialize<# Block(() => 
 	{
 		#>internal <#= fieldTypeNameWithoutArrayCharacters #>(Int16 version)<# Block(() => 

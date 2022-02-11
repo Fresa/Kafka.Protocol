@@ -8,27 +8,53 @@ namespace Kafka.Protocol.Tests.BreakingChangesDetection
         public void MetadataRequest()
         {
             new MetadataRequest(1).Respond()
-                        .WithTopicsCollection(
-                            new MetadataRequest(1).TopicsCollection?.Select(topic =>
-                                new Func<MetadataResponse.MetadataResponseTopic,
-                                    MetadataResponse.MetadataResponseTopic>(
-                                    responseTopic =>
-                                        responseTopic
-                                            .WithName(topic.Name)
-                                            .WithPartitionsCollection(partition =>
-                                                partition
-                                                    .WithLeaderId(Int32.From(0))
-                                                    .WithPartitionIndex(Int32.From(0))
-                                                    .WithReplicaNodesCollection(new[] { Int32.From(0) }))))
-                                .ToArray() ?? Array.Empty<Func<MetadataResponse.MetadataResponseTopic, MetadataResponse.MetadataResponseTopic>>())
-                        .WithControllerId(Int32.From(0))
-                        .WithClusterId(String.From("test"))
-                        .WithBrokersCollection(broker => broker
-                            .WithRack("testrack")
-                            .WithNodeId(Int32.From(0))
-                            .WithHost(String.From("localhost"))
-                            .WithPort(Int32.From(1000))
-                        );
+                .WithTopicsCollection(
+                    new MetadataRequest(1).TopicsCollection?.Select(topic =>
+                        new MetadataResponse.CreateMetadataResponseTopic(
+                            responseTopic =>
+                                responseTopic
+                                    .WithName(topic.Name)
+                                    .WithPartitionsCollection(partition =>
+                                        partition
+                                            .WithLeaderId(0)
+                                            .WithPartitionIndex(0)
+                                            .WithReplicaNodesCollection(Array<Int32>.From(0)))))
+                    ?? Enumerable.Empty<MetadataResponse.CreateMetadataResponseTopic>())
+                .WithControllerId(0)
+                .WithClusterId("test")
+                .WithBrokersCollection(broker => broker
+                    .WithRack("testrack")
+                    .WithNodeId(0)
+                    .WithHost("localhost")
+                    .WithPort(1000)
+                );
+
+            new MetadataRequest(1).Respond()
+                .WithTopicsCollection(
+                    new MetadataRequest(1).TopicsCollection?.Select(topic =>
+                            new Func<MetadataResponse.MetadataResponseTopic,
+                                MetadataResponse.MetadataResponseTopic>(
+                                responseTopic =>
+                                    responseTopic
+                                        .WithName(topic.Name)
+                                        .WithPartitionsCollection(partition =>
+                                            partition
+                                                .WithLeaderId(Int32.From(0))
+                                                .WithPartitionIndex(
+                                                    Int32.From(0))
+                                                .WithReplicaNodesCollection(
+                                                    new[] { Int32.From(0) }))))
+                        .ToArray() ??
+                    Array.Empty<Func<MetadataResponse.MetadataResponseTopic,
+                        MetadataResponse.MetadataResponseTopic>>())
+                .WithControllerId(Int32.From(0))
+                .WithClusterId(String.From("test"))
+                .WithBrokersCollection(broker => broker
+                    .WithRack("testrack")
+                    .WithNodeId(Int32.From(0))
+                    .WithHost(String.From("localhost"))
+                    .WithPort(Int32.From(1000))
+                );
         }
 
         public void ProduceRequest()
