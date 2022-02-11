@@ -48,7 +48,13 @@ jobs:
       run: |
         # Find the latest version tag that is not a pre-release
         # Matches v1, v1.2, v1.2.3, v12.13.21 etc
-        from_tag=$(git tag -l v* | grep -E ^v[0-9]+\(\.[0-9]+\.?[0-9]+?\)?$ | tail -1)
+        from_tag=$(git tag -l v* --merged ${{ github.ref_name }} | grep -E ^v[0-9]+\(\.[0-9]+\.?[0-9]+?\)?$ | tail -1)
+
+        
+        # Get commit this branch branched from
+        from_ref_exclusive=git rev-list $(git rev-list master.. | tail -1)^ -n 1
+
+
         [[ -z "$from_tag" ]] && \
           from_ref_exclusive=${{ steps.gitversion.outputs.versionSourceSha }} || \
           from_ref_exclusive=$from_tag
