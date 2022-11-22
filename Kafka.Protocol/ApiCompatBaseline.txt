@@ -1,0 +1,6 @@
+Compat issues with assembly Kafka.Protocol:
+TypesMustExist : Type 'Kafka.Protocol.AlterIsrRequest' does not exist in the implementation but it does exist in the contract.
+TypesMustExist : Type 'Kafka.Protocol.AlterIsrResponse' does not exist in the implementation but it does exist in the contract.
+MembersMustExist : Member 'public Kafka.Protocol.LeaderAndIsrRequest.LeaderAndIsrPartitionState Kafka.Protocol.LeaderAndIsrRequest.LeaderAndIsrPartitionState.WithZkVersion(Kafka.Protocol.Int32)' does not exist in the implementation but it does exist in the contract.
+MembersMustExist : Member 'public Kafka.Protocol.Int32 Kafka.Protocol.LeaderAndIsrRequest.LeaderAndIsrPartitionState.ZkVersion.get()' does not exist in the implementation but it does exist in the contract.
+Total Issues: 4

@@ -16,8 +16,12 @@
 {
   "apiKey": 56,
   "type": "response",
-  "name": "AlterIsrResponse",
-  "validVersions": "0",
+  "name": "AlterPartitionResponse",
+  // Version 1 adds LeaderRecoveryState field (KIP-704).
+  //
+  // Version 2 adds TopicId field to replace TopicName field, can return the following new errors:
+  // INELIGIBLE_REPLICA, NEW_LEADER_ELECTED and UNKNOWN_TOPIC_ID (KIP-841).
+  "validVersions": "0-2",
   "flexibleVersions": "0+",
   "fields": [
     { "name": "ThrottleTimeMs", "type": "int32", "versions": "0+",
@@ -25,8 +29,10 @@
     { "name": "ErrorCode", "type": "int16", "versions": "0+",
       "about": "The top level response error code" },
     { "name": "Topics", "type": "[]TopicData", "versions": "0+", "fields": [
-      { "name":  "Name", "type": "string", "versions": "0+", "entityType": "topicName",
+      { "name": "TopicName", "type": "string", "versions": "0-1", "ignorable": true, "entityType": "topicName",
         "about": "The name of the topic" },
+      { "name":  "TopicId", "type": "uuid", "versions": "2+", "ignorable": true,
+        "about": "The ID of the topic" },
       { "name": "Partitions", "type": "[]PartitionData", "versions": "0+", "fields": [
         { "name": "PartitionIndex", "type": "int32", "versions": "0+",
           "about": "The partition index" },
@@ -38,8 +44,10 @@
           "about": "The leader epoch." },
         { "name": "Isr", "type": "[]int32", "versions": "0+", "entityType": "brokerId",
           "about": "The in-sync replica IDs." },
-        { "name": "CurrentIsrVersion", "type": "int32", "versions": "0+",
-          "about": "The current ISR version." }
+        { "name": "LeaderRecoveryState", "type": "int8", "versions": "1+", "default": "0", "ignorable": true,
+          "about": "1 if the partition is recovering from an unclean leader election; 0 otherwise." },
+        { "name": "PartitionEpoch", "type": "int32", "versions": "0+",
+          "about": "The current epoch for the partition for KRaft controllers. The current ZK version for the legacy controllers." }
       ]}
     ]}
   ]
