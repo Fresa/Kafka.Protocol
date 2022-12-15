@@ -40,8 +40,8 @@ jobs:
         id: version
         run: |
           version=${{ steps.release.outputs.version }}
-          if ${{ steps.versioning.outputs.is-prerelease }}; then
-            version="$version-pre-$(echo ${{ steps.versioning.outputs.release-ref }} | cut -c1-8)"
+          if ${{ steps.release.outputs.is-prerelease }}; then
+            version="$version-pre-$(echo ${{ steps.release.outputs.release-ref }} | cut -c1-8)"
           fi
 
           echo "::set-output name=version::$version"
