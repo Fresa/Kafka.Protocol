@@ -25,7 +25,7 @@
     <Folder Include="ProtocolSpecifications\" />
   </ItemGroup>
 
-  <Target Name="BeforeBuild" BeforeTargets="Build">
+  <Target Name="CopyProtocol" AfterTargets="Build">
     <Copy SourceFiles="KafkaProtocol.cs.generated" DestinationFiles="../Kafka.Protocol/KafkaProtocol.cs" ContinueOnError="false" />
   </Target>
 </Project>
