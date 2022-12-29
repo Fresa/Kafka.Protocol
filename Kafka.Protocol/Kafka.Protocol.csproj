@@ -18,6 +18,10 @@
     <Copyright>Copyright © 2019 Fredrik Arvidsson</Copyright>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<RestoreAdditionalProjectSources>
+		https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json;
+	</RestoreAdditionalProjectSources>
+	<BaselineAllAPICompatError>false</BaselineAllAPICompatError>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +30,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.DotNet.ApiCompat" Version="7.0.0-beta.22115.2" PrivateAssets="All" />
     <PackageReference Include="System.IO.Pipelines" Version="4.5.3" />
   </ItemGroup>
 
@@ -36,6 +41,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
   </ItemGroup>
+	
+  <ItemGroup>
+	<ResolvedMatchingContract Include="LastMajorVersionBinary/lib/$(TargetFramework)/$(AssemblyName).dll" />
+  </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -44,5 +53,12 @@
   <PropertyGroup Condition="'$(NCrunch)' == '1'">
     <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
   </PropertyGroup>
-
+	
+  <Target Name="DownloadLastMajorVersion" BeforeTargets="PreBuildEvent">
+	  <DownloadFile SourceUrl="https://www.nuget.org/api/v2/package/Kafka.Protocol/2.1.0" DestinationFolder="LastMajorVersionBinary">
+		  <Output TaskParameter="DownloadedFile" PropertyName="LastMajorVersionNugetPackage" />
+	  </DownloadFile>
+	  <Unzip SourceFiles="$(LastMajorVersionNugetPackage)" DestinationFolder="LastMajorVersionBinary" />
+  </Target>
+  
 </Project>

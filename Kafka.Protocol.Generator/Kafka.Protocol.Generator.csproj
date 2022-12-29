@@ -25,9 +25,7 @@
     <Folder Include="ProtocolSpecifications\" />
   </ItemGroup>
 
-  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
-  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-  <Target Name="BeforeBuild" BeforeTargets="Build">
+  <Target Name="CopyProtocol" AfterTargets="Build">
     <Copy SourceFiles="KafkaProtocol.cs.generated" DestinationFiles="../Kafka.Protocol/KafkaProtocol.cs" ContinueOnError="false" />
   </Target>
 </Project>
