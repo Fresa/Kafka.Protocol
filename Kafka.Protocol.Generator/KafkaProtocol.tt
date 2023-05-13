@@ -35,14 +35,7 @@
 
 	var primitiveTypeNames = protocol.PrimitiveTypes.Values
 		.Select(type => type.GetClassName());
-
-	bool IsPrimitiveType(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field)
-	{
-		var typeName = field.GetFullTypeNameWithoutArrayCharacters();
-		return primitiveTypeNames
-			.Any(primitiveTypeName => 
-				typeName == primitiveTypeName);
-	}
+	FieldExtensions.SetPrimitiveTypeNames(primitiveTypeNames.ToArray());	
 #>
 #pragma warning disable 1591
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
@@ -714,7 +707,6 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 
 	var fieldTypeName = messageField.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
-	var nullable = messageField.IsNullable() ? "Nullable" : "";
 	var nullableSign = messageField.IsNullable() ? "?" : "";
 	var isFlexibleVersionExpression = messageField.FlexibleVersions == null ? 
 		"instance.IsFlexibleVersion" :
@@ -725,7 +717,7 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 	{
 		if (messageField.IsArray())
 		{
-			if (IsPrimitiveType(messageField))
+			if (messageField.IsPrimitiveType())
 			{
 				#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 			} 
@@ -859,7 +851,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	}
 	else 
 	{
-		if (IsPrimitiveType(field))
+		if (field.IsPrimitiveType())
 		{
 			#> = <#= propertyTypeName #>.Default<# 
 		}
