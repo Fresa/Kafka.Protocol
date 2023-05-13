@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
 {
@@ -8,7 +9,14 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
 
         public string Type { get; set; } = default!;
 
-        public string Versions { get; set; } = default!;
+        private string? _versions;
+        public string Versions
+        {
+            get => (_versions ?? TaggedVersions) ??
+                   throw new NullReferenceException(
+                       $"Both {nameof(Versions)} and {TaggedVersions} are null");
+            set => _versions = value;
+        }
 
         public string? NullableVersions { get; set; }
         
