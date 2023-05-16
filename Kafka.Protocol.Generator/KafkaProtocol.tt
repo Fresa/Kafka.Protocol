@@ -1040,9 +1040,8 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			if (!versionRange.Full)
 			{
 				#>if (versionRange.GetExpression("version") == false)<# LF(); 
-				#>	<#
+				#>  throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<# LF(2);
 			}
-			#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<# LF(2);
 
 			#>Version = version;<# LF();
 			#>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#
