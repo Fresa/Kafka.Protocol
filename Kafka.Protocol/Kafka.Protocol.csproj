@@ -55,7 +55,7 @@
   </PropertyGroup>
 	
   <Target Name="DownloadLastMajorVersion" BeforeTargets="PreBuildEvent">
-	  <DownloadFile SourceUrl="https://www.nuget.org/api/v2/package/Kafka.Protocol/2.1.0" DestinationFolder="LastMajorVersionBinary">
+	  <DownloadFile SourceUrl="https://www.nuget.org/api/v2/package/Kafka.Protocol/3.0.0" DestinationFolder="LastMajorVersionBinary">
 		  <Output TaskParameter="DownloadedFile" PropertyName="LastMajorVersionNugetPackage" />
 	  </DownloadFile>
 	  <Unzip SourceFiles="$(LastMajorVersionNugetPackage)" DestinationFolder="LastMajorVersionBinary" />

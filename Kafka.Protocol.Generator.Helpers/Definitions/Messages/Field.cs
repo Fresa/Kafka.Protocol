@@ -28,7 +28,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
 
         public bool Ignorable { get; set; }
 
-        public string Default { get; set; } = default!;
+        public string? Default { get; set; }
 
         public string About { get; set; } = default!;
 

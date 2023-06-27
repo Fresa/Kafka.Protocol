@@ -7,7 +7,7 @@ namespace Kafka.Protocol.Generator.Helpers
 {
     public static class JsonFileLoader
     {
-        public static IEnumerable<T> LoadFrom<T>(string path)
+        public static IEnumerable<T?> LoadFrom<T>(string path)
         {
             return Directory
                 .EnumerateFiles(path, "*.json")
