@@ -5,6 +5,10 @@ on:
     branches:
       - "**"
 
+env:
+  project_path: Kafka.Protocol
+  project_name: Kafka.Protocol
+
 jobs:
   test:
     name: Build & Test
@@ -59,10 +63,19 @@ jobs:
           last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
           release_ref: ${{ steps.versioning.outputs.release-ref }}
           path_to_commits: ./commit_logs.json
+      - name: Write Release Notes to File
+        run: | 
+          echo "${{ steps.release_notes.outputs.release_notes }}" > release_notes.txt
       - name: Pack
-        env:
-          release_notes: ${{ steps.release_notes.outputs.release_notes }}
-        run: dotnet pack Kafka.Protocol/Kafka.Protocol.csproj -c Release -o nuget-packages -p:PackageVersion=${{ steps.release-tag.outputs.version }} -p:PackageReleaseNotes="$release_notes"
+        run: | 
+          dotnet pack ${{ env.project_path }}/${{ env.project_name }}.csproj \
+            -c Release \
+            -o nuget-packages \
+            -p:PackageVersion=${{ steps.release-tag.outputs.version }} \
+            -p:InformationalVersion=${{ steps.release-tag.outputs.version }} \
+            -p:AssemblyVersion=${{ steps.versioning.outputs.major-version }}.0.0.0 \
+            -p:FileVersion=${{ steps.versioning.outputs.version }}.0 \
+            -p:ContinuousIntegrationBuild=true
       - name: Create Tag
         uses: actions/github-script@v6
         with:
@@ -76,7 +89,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          body: ${{ steps.release_notes.outputs.release_notes }}
+          body_path: release_notes.txt
           tag_name: ${{ steps.release-tag.outputs.tag }}
           prerelease: ${{ steps.versioning.outputs.is-prerelease }}
         env:
@@ -94,4 +107,7 @@ jobs:
           ref: v${{ steps.versioning.outputs.major-version }}.${{ steps.versioning.outputs.minor-version }}
           description: ${{ steps.release-tag.outputs.tag }}
       - name: Publish to nuget.org
-        run: dotnet nuget push nuget-packages/Kafka.Protocol.${{ steps.release-tag.outputs.version }}.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+        run: |
+          dotnet nuget push nuget-packages/${{ env.project_name }}.${{ steps.release-tag.outputs.version }}.nupkg \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json
