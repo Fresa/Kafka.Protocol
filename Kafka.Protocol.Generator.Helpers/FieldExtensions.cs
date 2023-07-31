@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Kafka.Protocol.Generator.Helpers.Extensions;
@@ -15,6 +14,17 @@ namespace Kafka.Protocol.Generator.Helpers
         {
             "Version"
         };
+
+        private static string[]? _primitiveTypeNames;
+
+        public static void SetPrimitiveTypeNames(string[] typeNames)
+        {
+            //if (_primitiveTypeNames != null)
+            //    throw new InvalidOperationException(
+            //        "Primitive type names have already been set");
+
+            _primitiveTypeNames = typeNames;
+        }
 
         public static bool IsArray(this Field field)
         {
@@ -36,11 +46,18 @@ namespace Kafka.Protocol.Generator.Helpers
             return mapKeyField != default;
         }
 
-        public static string GetName(this Field field) => 
+        public static string GetName(this Field field) =>
             field.Name + (field.IsArray() ? "Collection" : "");
 
-        public static string GetFullTypeName(this Field field) => 
-            (field.IsNullable() ? "Nullable" : "") + field.GetNonNullableFullTypeName();
+        public static string GetFullTypeName(this Field field)
+        {
+            var type = field.GetNonNullableFullTypeName();
+            if (!field.IsNullable()) 
+                return type;
+            return field.Fields != null && !field.IsArray()
+                ? $"Nullable<{type}>"
+                : $"Nullable{type}";
+        }
 
         private static string GetNonNullableFullTypeName(this Field field)
         {
@@ -104,14 +121,14 @@ namespace Kafka.Protocol.Generator.Helpers
             var fullTypeName = field.GetFullTypeNameWithoutArrayCharacters();
             var name = field.GetName().FirstCharacterToUpperCase();
 
-            return ReservedFieldNames.Contains(name) || 
+            return ReservedFieldNames.Contains(name) ||
                    fullTypeName.Equals(name, StringComparison.CurrentCultureIgnoreCase) ||
                    name.Equals(parentFieldTypeName, StringComparison.CurrentCultureIgnoreCase)
                 ? name + "_"
                 : name;
         }
 
-        public static string GetPropertyName(this Field field) => 
+        public static string GetPropertyName(this Field field) =>
             $"_{field.GetName().FirstCharacterToLowerCase()}";
 
         public static bool IsCompactable(this Field field) =>
@@ -123,5 +140,31 @@ namespace Kafka.Protocol.Generator.Helpers
                 .Where(childField => childField.Tag.HasValue)
                 .OrderBy(childField => childField.Tag) ??
             Enumerable.Empty<Field>();
+
+        public static bool IsPrimitiveType(this Field field)
+        {
+            if (_primitiveTypeNames == null)
+                throw new InvalidOperationException(
+                    $"Primitive types have not been defined via {nameof(SetPrimitiveTypeNames)}");
+            
+            var typeName = field.GetFullTypeNameWithoutArrayCharacters();
+            return _primitiveTypeNames
+                .Any(primitiveTypeName =>
+                    typeName == primitiveTypeName);
+        }
+
+        public static string GetDefaultValue(this Field field)
+        {
+            if (field.IsNullable() && field.Fields != null)
+                return $"new {field.GetFullTypeName()}()";
+            if (field.Default != null)
+                return $"new {field.GetFullTypeName()}({(field.Default == string.Empty ? "string.Empty" : field.Default)})";
+            if (field.IsDictionary() || field.IsPrimitiveType())
+                return $"{field.GetFullTypeName()}.Default";
+            if (field.IsArray())
+                return $"Array.Empty<{field.GetFullTypeNameWithoutArrayCharacters()}>";
+            
+            return "default!";
+        }
     }
 }

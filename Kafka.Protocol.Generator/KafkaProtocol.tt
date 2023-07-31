@@ -35,14 +35,7 @@
 
 	var primitiveTypeNames = protocol.PrimitiveTypes.Values
 		.Select(type => type.GetClassName());
-
-	bool IsPrimitiveType(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field field)
-	{
-		var typeName = field.GetFullTypeNameWithoutArrayCharacters();
-		return primitiveTypeNames
-			.Any(primitiveTypeName => 
-				typeName == primitiveTypeName);
-	}
+	FieldExtensions.SetPrimitiveTypeNames(primitiveTypeNames.ToArray());	
 #>
 #pragma warning disable 1591
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
@@ -714,7 +707,6 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 
 	var fieldTypeName = messageField.GetTypeName();
 	var fieldTypeNameWithoutArrayCharacters = messageField.GetFullTypeNameWithoutArrayCharacters();
-	var nullable = messageField.IsNullable() ? "Nullable" : "";
 	var nullableSign = messageField.IsNullable() ? "?" : "";
 	var isFlexibleVersionExpression = messageField.FlexibleVersions == null ? 
 		"instance.IsFlexibleVersion" :
@@ -725,7 +717,7 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 	{
 		if (messageField.IsArray())
 		{
-			if (IsPrimitiveType(messageField))
+			if (messageField.IsPrimitiveType())
 			{
 				#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 			} 
@@ -753,6 +745,10 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 				#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.<#= mapKeyField.GetName() #>, cancellationToken).ConfigureAwait(false);<# 
 			}
 		} 
+		else if (messageField.IsNullable())
+		{
+			#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 
+		}
 		else 
 		{
 			#>await <#= fieldTypeName #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);<# 
@@ -859,7 +855,7 @@ void PrintField(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field fiel
 	}
 	else 
 	{
-		if (IsPrimitiveType(field))
+		if (field.IsPrimitiveType())
 		{
 			#> = <#= propertyTypeName #>.Default<# 
 		}
@@ -1048,9 +1044,8 @@ void PrintCommonStruct(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Com
 			if (!versionRange.Full)
 			{
 				#>if (versionRange.GetExpression("version") == false)<# LF(); 
-				#>	<#
+				#>  throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<# LF(2);
 			}
-			#>throw new UnsupportedVersionException($"<#= commonStruct.Name #> does not support version {version}. Valid versions are: <#= commonStruct.Versions #>");<# LF(2);
 
 			#>Version = version;<# LF();
 			#>IsFlexibleVersion = <#= flexibleVersionRange.GetExpression("version") #>;<#

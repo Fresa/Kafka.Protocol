@@ -73,7 +73,7 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions
         public static VersionRange Parse(string versionRangeExpression)
         {
             char[] delimiters = { '-', '+' };
-            const string expectedFormatMessage = "Expected version range expression. Example: none, 0+, 1-2";
+            var expectedFormatMessage = $"Expected version range expression got '{versionRangeExpression ?? "<NULL>"}'. Example: none, 0+, 1-2";
 
             if (string.IsNullOrEmpty(versionRangeExpression))
             {
