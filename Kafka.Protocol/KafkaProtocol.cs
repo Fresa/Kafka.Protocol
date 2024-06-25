@@ -2520,6 +2520,8 @@ namespace Kafka.Protocol
 				return await AddOffsetsToTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (AddPartitionsToTxnRequest.ApiKey == apiKey)
 				return await AddPartitionsToTxnRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (AddRaftVoterRequest.ApiKey == apiKey)
+				return await AddRaftVoterRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (AllocateProducerIdsRequest.ApiKey == apiKey)
 				return await AllocateProducerIdsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (AlterClientQuotasRequest.ApiKey == apiKey)
@@ -2536,16 +2538,22 @@ namespace Kafka.Protocol
 				return await AlterUserScramCredentialsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ApiVersionsRequest.ApiKey == apiKey)
 				return await ApiVersionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (AssignReplicasToDirsRequest.ApiKey == apiKey)
+				return await AssignReplicasToDirsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (BeginQuorumEpochRequest.ApiKey == apiKey)
 				return await BeginQuorumEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (BrokerHeartbeatRequest.ApiKey == apiKey)
 				return await BrokerHeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (BrokerRegistrationRequest.ApiKey == apiKey)
 				return await BrokerRegistrationRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ConsumerGroupDescribeRequest.ApiKey == apiKey)
+				return await ConsumerGroupDescribeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ConsumerGroupHeartbeatRequest.ApiKey == apiKey)
 				return await ConsumerGroupHeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ControlledShutdownRequest.ApiKey == apiKey)
 				return await ControlledShutdownRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ControllerRegistrationRequest.ApiKey == apiKey)
+				return await ControllerRegistrationRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (CreateAclsRequest.ApiKey == apiKey)
 				return await CreateAclsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (CreateDelegationTokenRequest.ApiKey == apiKey)
@@ -2560,6 +2568,8 @@ namespace Kafka.Protocol
 				return await DeleteGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DeleteRecordsRequest.ApiKey == apiKey)
 				return await DeleteRecordsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (DeleteShareGroupStateRequest.ApiKey == apiKey)
+				return await DeleteShareGroupStateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DeleteTopicsRequest.ApiKey == apiKey)
 				return await DeleteTopicsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DescribeAclsRequest.ApiKey == apiKey)
@@ -2580,6 +2590,8 @@ namespace Kafka.Protocol
 				return await DescribeProducersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DescribeQuorumRequest.ApiKey == apiKey)
 				return await DescribeQuorumRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (DescribeTopicPartitionsRequest.ApiKey == apiKey)
+				return await DescribeTopicPartitionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DescribeTransactionsRequest.ApiKey == apiKey)
 				return await DescribeTransactionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DescribeUserScramCredentialsRequest.ApiKey == apiKey)
@@ -2600,10 +2612,14 @@ namespace Kafka.Protocol
 				return await FetchSnapshotRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (FindCoordinatorRequest.ApiKey == apiKey)
 				return await FindCoordinatorRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (GetTelemetrySubscriptionsRequest.ApiKey == apiKey)
+				return await GetTelemetrySubscriptionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (HeartbeatRequest.ApiKey == apiKey)
 				return await HeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (IncrementalAlterConfigsRequest.ApiKey == apiKey)
 				return await IncrementalAlterConfigsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (InitializeShareGroupStateRequest.ApiKey == apiKey)
+				return await InitializeShareGroupStateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (InitProducerIdRequest.ApiKey == apiKey)
 				return await InitProducerIdRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (JoinGroupRequest.ApiKey == apiKey)
@@ -2612,6 +2628,8 @@ namespace Kafka.Protocol
 				return await LeaderAndIsrRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (LeaveGroupRequest.ApiKey == apiKey)
 				return await LeaveGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ListClientMetricsResourcesRequest.ApiKey == apiKey)
+				return await ListClientMetricsResourcesRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ListGroupsRequest.ApiKey == apiKey)
 				return await ListGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ListOffsetsRequest.ApiKey == apiKey)
@@ -2632,12 +2650,28 @@ namespace Kafka.Protocol
 				return await OffsetForLeaderEpochRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ProduceRequest.ApiKey == apiKey)
 				return await ProduceRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (PushTelemetryRequest.ApiKey == apiKey)
+				return await PushTelemetryRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ReadShareGroupStateRequest.ApiKey == apiKey)
+				return await ReadShareGroupStateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ReadShareGroupStateSummaryRequest.ApiKey == apiKey)
+				return await ReadShareGroupStateSummaryRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (RemoveRaftVoterRequest.ApiKey == apiKey)
+				return await RemoveRaftVoterRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (RenewDelegationTokenRequest.ApiKey == apiKey)
 				return await RenewDelegationTokenRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (SaslAuthenticateRequest.ApiKey == apiKey)
 				return await SaslAuthenticateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (SaslHandshakeRequest.ApiKey == apiKey)
 				return await SaslHandshakeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ShareAcknowledgeRequest.ApiKey == apiKey)
+				return await ShareAcknowledgeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ShareFetchRequest.ApiKey == apiKey)
+				return await ShareFetchRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ShareGroupDescribeRequest.ApiKey == apiKey)
+				return await ShareGroupDescribeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ShareGroupHeartbeatRequest.ApiKey == apiKey)
+				return await ShareGroupHeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (StopReplicaRequest.ApiKey == apiKey)
 				return await StopReplicaRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (SyncGroupRequest.ApiKey == apiKey)
@@ -2650,8 +2684,12 @@ namespace Kafka.Protocol
 				return await UpdateFeaturesRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (UpdateMetadataRequest.ApiKey == apiKey)
 				return await UpdateMetadataRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (UpdateRaftVoterRequest.ApiKey == apiKey)
+				return await UpdateRaftVoterRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (VoteRequest.ApiKey == apiKey)
 				return await VoteRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (WriteShareGroupStateRequest.ApiKey == apiKey)
+				return await WriteShareGroupStateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (WriteTxnMarkersRequest.ApiKey == apiKey)
 				return await WriteTxnMarkersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			throw new ArgumentException($"There is no request message with api key {apiKey}");
@@ -2667,6 +2705,8 @@ namespace Kafka.Protocol
 				return await AddOffsetsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
 				return await AddPartitionsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (AddRaftVoterResponse.ApiKey == apiKey)
+				return await AddRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (AllocateProducerIdsResponse.ApiKey == apiKey)
 				return await AllocateProducerIdsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (AlterClientQuotasResponse.ApiKey == apiKey)
@@ -2683,16 +2723,22 @@ namespace Kafka.Protocol
 				return await AlterUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ApiVersionsResponse.ApiKey == apiKey)
 				return await ApiVersionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (AssignReplicasToDirsResponse.ApiKey == apiKey)
+				return await AssignReplicasToDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (BeginQuorumEpochResponse.ApiKey == apiKey)
 				return await BeginQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (BrokerHeartbeatResponse.ApiKey == apiKey)
 				return await BrokerHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (BrokerRegistrationResponse.ApiKey == apiKey)
 				return await BrokerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ConsumerGroupDescribeResponse.ApiKey == apiKey)
+				return await ConsumerGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ConsumerGroupHeartbeatResponse.ApiKey == apiKey)
 				return await ConsumerGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ControlledShutdownResponse.ApiKey == apiKey)
 				return await ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ControllerRegistrationResponse.ApiKey == apiKey)
+				return await ControllerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (CreateAclsResponse.ApiKey == apiKey)
 				return await CreateAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (CreateDelegationTokenResponse.ApiKey == apiKey)
@@ -2707,6 +2753,8 @@ namespace Kafka.Protocol
 				return await DeleteGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DeleteRecordsResponse.ApiKey == apiKey)
 				return await DeleteRecordsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (DeleteShareGroupStateResponse.ApiKey == apiKey)
+				return await DeleteShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DeleteTopicsResponse.ApiKey == apiKey)
 				return await DeleteTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DescribeAclsResponse.ApiKey == apiKey)
@@ -2727,6 +2775,8 @@ namespace Kafka.Protocol
 				return await DescribeProducersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DescribeQuorumResponse.ApiKey == apiKey)
 				return await DescribeQuorumResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (DescribeTopicPartitionsResponse.ApiKey == apiKey)
+				return await DescribeTopicPartitionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DescribeTransactionsResponse.ApiKey == apiKey)
 				return await DescribeTransactionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (DescribeUserScramCredentialsResponse.ApiKey == apiKey)
@@ -2747,10 +2797,14 @@ namespace Kafka.Protocol
 				return await FetchSnapshotResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (FindCoordinatorResponse.ApiKey == apiKey)
 				return await FindCoordinatorResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (GetTelemetrySubscriptionsResponse.ApiKey == apiKey)
+				return await GetTelemetrySubscriptionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (HeartbeatResponse.ApiKey == apiKey)
 				return await HeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
 				return await IncrementalAlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (InitializeShareGroupStateResponse.ApiKey == apiKey)
+				return await InitializeShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (InitProducerIdResponse.ApiKey == apiKey)
 				return await InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (JoinGroupResponse.ApiKey == apiKey)
@@ -2759,6 +2813,8 @@ namespace Kafka.Protocol
 				return await LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (LeaveGroupResponse.ApiKey == apiKey)
 				return await LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ListClientMetricsResourcesResponse.ApiKey == apiKey)
+				return await ListClientMetricsResourcesResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ListGroupsResponse.ApiKey == apiKey)
 				return await ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ListOffsetsResponse.ApiKey == apiKey)
@@ -2779,12 +2835,28 @@ namespace Kafka.Protocol
 				return await OffsetForLeaderEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (ProduceResponse.ApiKey == apiKey)
 				return await ProduceResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (PushTelemetryResponse.ApiKey == apiKey)
+				return await PushTelemetryResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ReadShareGroupStateResponse.ApiKey == apiKey)
+				return await ReadShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ReadShareGroupStateSummaryResponse.ApiKey == apiKey)
+				return await ReadShareGroupStateSummaryResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (RemoveRaftVoterResponse.ApiKey == apiKey)
+				return await RemoveRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (RenewDelegationTokenResponse.ApiKey == apiKey)
 				return await RenewDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (SaslAuthenticateResponse.ApiKey == apiKey)
 				return await SaslAuthenticateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (SaslHandshakeResponse.ApiKey == apiKey)
 				return await SaslHandshakeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ShareAcknowledgeResponse.ApiKey == apiKey)
+				return await ShareAcknowledgeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ShareFetchResponse.ApiKey == apiKey)
+				return await ShareFetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ShareGroupDescribeResponse.ApiKey == apiKey)
+				return await ShareGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (ShareGroupHeartbeatResponse.ApiKey == apiKey)
+				return await ShareGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (StopReplicaResponse.ApiKey == apiKey)
 				return await StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (SyncGroupResponse.ApiKey == apiKey)
@@ -2797,8 +2869,12 @@ namespace Kafka.Protocol
 				return await UpdateFeaturesResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (UpdateMetadataResponse.ApiKey == apiKey)
 				return await UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (UpdateRaftVoterResponse.ApiKey == apiKey)
+				return await UpdateRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (VoteResponse.ApiKey == apiKey)
 				return await VoteResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+			if (WriteShareGroupStateResponse.ApiKey == apiKey)
+				return await WriteShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			if (WriteTxnMarkersResponse.ApiKey == apiKey)
 				return await WriteTxnMarkersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
 			throw new ArgumentException($"There is no response message with api key {apiKey}");
@@ -2810,6 +2886,8 @@ namespace Kafka.Protocol
 				return new AddOffsetsToTxnRequest(version).HeaderVersion;
 			if (AddPartitionsToTxnRequest.ApiKey == apiKey)
 				return new AddPartitionsToTxnRequest(version).HeaderVersion;
+			if (AddRaftVoterRequest.ApiKey == apiKey)
+				return new AddRaftVoterRequest(version).HeaderVersion;
 			if (AllocateProducerIdsRequest.ApiKey == apiKey)
 				return new AllocateProducerIdsRequest(version).HeaderVersion;
 			if (AlterClientQuotasRequest.ApiKey == apiKey)
@@ -2826,16 +2904,22 @@ namespace Kafka.Protocol
 				return new AlterUserScramCredentialsRequest(version).HeaderVersion;
 			if (ApiVersionsRequest.ApiKey == apiKey)
 				return new ApiVersionsRequest(version).HeaderVersion;
+			if (AssignReplicasToDirsRequest.ApiKey == apiKey)
+				return new AssignReplicasToDirsRequest(version).HeaderVersion;
 			if (BeginQuorumEpochRequest.ApiKey == apiKey)
 				return new BeginQuorumEpochRequest(version).HeaderVersion;
 			if (BrokerHeartbeatRequest.ApiKey == apiKey)
 				return new BrokerHeartbeatRequest(version).HeaderVersion;
 			if (BrokerRegistrationRequest.ApiKey == apiKey)
 				return new BrokerRegistrationRequest(version).HeaderVersion;
+			if (ConsumerGroupDescribeRequest.ApiKey == apiKey)
+				return new ConsumerGroupDescribeRequest(version).HeaderVersion;
 			if (ConsumerGroupHeartbeatRequest.ApiKey == apiKey)
 				return new ConsumerGroupHeartbeatRequest(version).HeaderVersion;
 			if (ControlledShutdownRequest.ApiKey == apiKey)
 				return new ControlledShutdownRequest(version).HeaderVersion;
+			if (ControllerRegistrationRequest.ApiKey == apiKey)
+				return new ControllerRegistrationRequest(version).HeaderVersion;
 			if (CreateAclsRequest.ApiKey == apiKey)
 				return new CreateAclsRequest(version).HeaderVersion;
 			if (CreateDelegationTokenRequest.ApiKey == apiKey)
@@ -2850,6 +2934,8 @@ namespace Kafka.Protocol
 				return new DeleteGroupsRequest(version).HeaderVersion;
 			if (DeleteRecordsRequest.ApiKey == apiKey)
 				return new DeleteRecordsRequest(version).HeaderVersion;
+			if (DeleteShareGroupStateRequest.ApiKey == apiKey)
+				return new DeleteShareGroupStateRequest(version).HeaderVersion;
 			if (DeleteTopicsRequest.ApiKey == apiKey)
 				return new DeleteTopicsRequest(version).HeaderVersion;
 			if (DescribeAclsRequest.ApiKey == apiKey)
@@ -2870,6 +2956,8 @@ namespace Kafka.Protocol
 				return new DescribeProducersRequest(version).HeaderVersion;
 			if (DescribeQuorumRequest.ApiKey == apiKey)
 				return new DescribeQuorumRequest(version).HeaderVersion;
+			if (DescribeTopicPartitionsRequest.ApiKey == apiKey)
+				return new DescribeTopicPartitionsRequest(version).HeaderVersion;
 			if (DescribeTransactionsRequest.ApiKey == apiKey)
 				return new DescribeTransactionsRequest(version).HeaderVersion;
 			if (DescribeUserScramCredentialsRequest.ApiKey == apiKey)
@@ -2890,10 +2978,14 @@ namespace Kafka.Protocol
 				return new FetchSnapshotRequest(version).HeaderVersion;
 			if (FindCoordinatorRequest.ApiKey == apiKey)
 				return new FindCoordinatorRequest(version).HeaderVersion;
+			if (GetTelemetrySubscriptionsRequest.ApiKey == apiKey)
+				return new GetTelemetrySubscriptionsRequest(version).HeaderVersion;
 			if (HeartbeatRequest.ApiKey == apiKey)
 				return new HeartbeatRequest(version).HeaderVersion;
 			if (IncrementalAlterConfigsRequest.ApiKey == apiKey)
 				return new IncrementalAlterConfigsRequest(version).HeaderVersion;
+			if (InitializeShareGroupStateRequest.ApiKey == apiKey)
+				return new InitializeShareGroupStateRequest(version).HeaderVersion;
 			if (InitProducerIdRequest.ApiKey == apiKey)
 				return new InitProducerIdRequest(version).HeaderVersion;
 			if (JoinGroupRequest.ApiKey == apiKey)
@@ -2902,6 +2994,8 @@ namespace Kafka.Protocol
 				return new LeaderAndIsrRequest(version).HeaderVersion;
 			if (LeaveGroupRequest.ApiKey == apiKey)
 				return new LeaveGroupRequest(version).HeaderVersion;
+			if (ListClientMetricsResourcesRequest.ApiKey == apiKey)
+				return new ListClientMetricsResourcesRequest(version).HeaderVersion;
 			if (ListGroupsRequest.ApiKey == apiKey)
 				return new ListGroupsRequest(version).HeaderVersion;
 			if (ListOffsetsRequest.ApiKey == apiKey)
@@ -2922,12 +3016,28 @@ namespace Kafka.Protocol
 				return new OffsetForLeaderEpochRequest(version).HeaderVersion;
 			if (ProduceRequest.ApiKey == apiKey)
 				return new ProduceRequest(version).HeaderVersion;
+			if (PushTelemetryRequest.ApiKey == apiKey)
+				return new PushTelemetryRequest(version).HeaderVersion;
+			if (ReadShareGroupStateRequest.ApiKey == apiKey)
+				return new ReadShareGroupStateRequest(version).HeaderVersion;
+			if (ReadShareGroupStateSummaryRequest.ApiKey == apiKey)
+				return new ReadShareGroupStateSummaryRequest(version).HeaderVersion;
+			if (RemoveRaftVoterRequest.ApiKey == apiKey)
+				return new RemoveRaftVoterRequest(version).HeaderVersion;
 			if (RenewDelegationTokenRequest.ApiKey == apiKey)
 				return new RenewDelegationTokenRequest(version).HeaderVersion;
 			if (SaslAuthenticateRequest.ApiKey == apiKey)
 				return new SaslAuthenticateRequest(version).HeaderVersion;
 			if (SaslHandshakeRequest.ApiKey == apiKey)
 				return new SaslHandshakeRequest(version).HeaderVersion;
+			if (ShareAcknowledgeRequest.ApiKey == apiKey)
+				return new ShareAcknowledgeRequest(version).HeaderVersion;
+			if (ShareFetchRequest.ApiKey == apiKey)
+				return new ShareFetchRequest(version).HeaderVersion;
+			if (ShareGroupDescribeRequest.ApiKey == apiKey)
+				return new ShareGroupDescribeRequest(version).HeaderVersion;
+			if (ShareGroupHeartbeatRequest.ApiKey == apiKey)
+				return new ShareGroupHeartbeatRequest(version).HeaderVersion;
 			if (StopReplicaRequest.ApiKey == apiKey)
 				return new StopReplicaRequest(version).HeaderVersion;
 			if (SyncGroupRequest.ApiKey == apiKey)
@@ -2940,8 +3050,12 @@ namespace Kafka.Protocol
 				return new UpdateFeaturesRequest(version).HeaderVersion;
 			if (UpdateMetadataRequest.ApiKey == apiKey)
 				return new UpdateMetadataRequest(version).HeaderVersion;
+			if (UpdateRaftVoterRequest.ApiKey == apiKey)
+				return new UpdateRaftVoterRequest(version).HeaderVersion;
 			if (VoteRequest.ApiKey == apiKey)
 				return new VoteRequest(version).HeaderVersion;
+			if (WriteShareGroupStateRequest.ApiKey == apiKey)
+				return new WriteShareGroupStateRequest(version).HeaderVersion;
 			if (WriteTxnMarkersRequest.ApiKey == apiKey)
 				return new WriteTxnMarkersRequest(version).HeaderVersion;
 			throw new ArgumentException($"There is no request message with api key {apiKey}");
@@ -2954,6 +3068,8 @@ namespace Kafka.Protocol
 				return new AddOffsetsToTxnResponse(payload.Message.Version).HeaderVersion;
 			if (AddPartitionsToTxnResponse.ApiKey == apiKey)
 				return new AddPartitionsToTxnResponse(payload.Message.Version).HeaderVersion;
+			if (AddRaftVoterResponse.ApiKey == apiKey)
+				return new AddRaftVoterResponse(payload.Message.Version).HeaderVersion;
 			if (AllocateProducerIdsResponse.ApiKey == apiKey)
 				return new AllocateProducerIdsResponse(payload.Message.Version).HeaderVersion;
 			if (AlterClientQuotasResponse.ApiKey == apiKey)
@@ -2970,16 +3086,22 @@ namespace Kafka.Protocol
 				return new AlterUserScramCredentialsResponse(payload.Message.Version).HeaderVersion;
 			if (ApiVersionsResponse.ApiKey == apiKey)
 				return new ApiVersionsResponse(payload.Message.Version).HeaderVersion;
+			if (AssignReplicasToDirsResponse.ApiKey == apiKey)
+				return new AssignReplicasToDirsResponse(payload.Message.Version).HeaderVersion;
 			if (BeginQuorumEpochResponse.ApiKey == apiKey)
 				return new BeginQuorumEpochResponse(payload.Message.Version).HeaderVersion;
 			if (BrokerHeartbeatResponse.ApiKey == apiKey)
 				return new BrokerHeartbeatResponse(payload.Message.Version).HeaderVersion;
 			if (BrokerRegistrationResponse.ApiKey == apiKey)
 				return new BrokerRegistrationResponse(payload.Message.Version).HeaderVersion;
+			if (ConsumerGroupDescribeResponse.ApiKey == apiKey)
+				return new ConsumerGroupDescribeResponse(payload.Message.Version).HeaderVersion;
 			if (ConsumerGroupHeartbeatResponse.ApiKey == apiKey)
 				return new ConsumerGroupHeartbeatResponse(payload.Message.Version).HeaderVersion;
 			if (ControlledShutdownResponse.ApiKey == apiKey)
 				return new ControlledShutdownResponse(payload.Message.Version).HeaderVersion;
+			if (ControllerRegistrationResponse.ApiKey == apiKey)
+				return new ControllerRegistrationResponse(payload.Message.Version).HeaderVersion;
 			if (CreateAclsResponse.ApiKey == apiKey)
 				return new CreateAclsResponse(payload.Message.Version).HeaderVersion;
 			if (CreateDelegationTokenResponse.ApiKey == apiKey)
@@ -2994,6 +3116,8 @@ namespace Kafka.Protocol
 				return new DeleteGroupsResponse(payload.Message.Version).HeaderVersion;
 			if (DeleteRecordsResponse.ApiKey == apiKey)
 				return new DeleteRecordsResponse(payload.Message.Version).HeaderVersion;
+			if (DeleteShareGroupStateResponse.ApiKey == apiKey)
+				return new DeleteShareGroupStateResponse(payload.Message.Version).HeaderVersion;
 			if (DeleteTopicsResponse.ApiKey == apiKey)
 				return new DeleteTopicsResponse(payload.Message.Version).HeaderVersion;
 			if (DescribeAclsResponse.ApiKey == apiKey)
@@ -3014,6 +3138,8 @@ namespace Kafka.Protocol
 				return new DescribeProducersResponse(payload.Message.Version).HeaderVersion;
 			if (DescribeQuorumResponse.ApiKey == apiKey)
 				return new DescribeQuorumResponse(payload.Message.Version).HeaderVersion;
+			if (DescribeTopicPartitionsResponse.ApiKey == apiKey)
+				return new DescribeTopicPartitionsResponse(payload.Message.Version).HeaderVersion;
 			if (DescribeTransactionsResponse.ApiKey == apiKey)
 				return new DescribeTransactionsResponse(payload.Message.Version).HeaderVersion;
 			if (DescribeUserScramCredentialsResponse.ApiKey == apiKey)
@@ -3034,10 +3160,14 @@ namespace Kafka.Protocol
 				return new FetchSnapshotResponse(payload.Message.Version).HeaderVersion;
 			if (FindCoordinatorResponse.ApiKey == apiKey)
 				return new FindCoordinatorResponse(payload.Message.Version).HeaderVersion;
+			if (GetTelemetrySubscriptionsResponse.ApiKey == apiKey)
+				return new GetTelemetrySubscriptionsResponse(payload.Message.Version).HeaderVersion;
 			if (HeartbeatResponse.ApiKey == apiKey)
 				return new HeartbeatResponse(payload.Message.Version).HeaderVersion;
 			if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
 				return new IncrementalAlterConfigsResponse(payload.Message.Version).HeaderVersion;
+			if (InitializeShareGroupStateResponse.ApiKey == apiKey)
+				return new InitializeShareGroupStateResponse(payload.Message.Version).HeaderVersion;
 			if (InitProducerIdResponse.ApiKey == apiKey)
 				return new InitProducerIdResponse(payload.Message.Version).HeaderVersion;
 			if (JoinGroupResponse.ApiKey == apiKey)
@@ -3046,6 +3176,8 @@ namespace Kafka.Protocol
 				return new LeaderAndIsrResponse(payload.Message.Version).HeaderVersion;
 			if (LeaveGroupResponse.ApiKey == apiKey)
 				return new LeaveGroupResponse(payload.Message.Version).HeaderVersion;
+			if (ListClientMetricsResourcesResponse.ApiKey == apiKey)
+				return new ListClientMetricsResourcesResponse(payload.Message.Version).HeaderVersion;
 			if (ListGroupsResponse.ApiKey == apiKey)
 				return new ListGroupsResponse(payload.Message.Version).HeaderVersion;
 			if (ListOffsetsResponse.ApiKey == apiKey)
@@ -3066,12 +3198,28 @@ namespace Kafka.Protocol
 				return new OffsetForLeaderEpochResponse(payload.Message.Version).HeaderVersion;
 			if (ProduceResponse.ApiKey == apiKey)
 				return new ProduceResponse(payload.Message.Version).HeaderVersion;
+			if (PushTelemetryResponse.ApiKey == apiKey)
+				return new PushTelemetryResponse(payload.Message.Version).HeaderVersion;
+			if (ReadShareGroupStateResponse.ApiKey == apiKey)
+				return new ReadShareGroupStateResponse(payload.Message.Version).HeaderVersion;
+			if (ReadShareGroupStateSummaryResponse.ApiKey == apiKey)
+				return new ReadShareGroupStateSummaryResponse(payload.Message.Version).HeaderVersion;
+			if (RemoveRaftVoterResponse.ApiKey == apiKey)
+				return new RemoveRaftVoterResponse(payload.Message.Version).HeaderVersion;
 			if (RenewDelegationTokenResponse.ApiKey == apiKey)
 				return new RenewDelegationTokenResponse(payload.Message.Version).HeaderVersion;
 			if (SaslAuthenticateResponse.ApiKey == apiKey)
 				return new SaslAuthenticateResponse(payload.Message.Version).HeaderVersion;
 			if (SaslHandshakeResponse.ApiKey == apiKey)
 				return new SaslHandshakeResponse(payload.Message.Version).HeaderVersion;
+			if (ShareAcknowledgeResponse.ApiKey == apiKey)
+				return new ShareAcknowledgeResponse(payload.Message.Version).HeaderVersion;
+			if (ShareFetchResponse.ApiKey == apiKey)
+				return new ShareFetchResponse(payload.Message.Version).HeaderVersion;
+			if (ShareGroupDescribeResponse.ApiKey == apiKey)
+				return new ShareGroupDescribeResponse(payload.Message.Version).HeaderVersion;
+			if (ShareGroupHeartbeatResponse.ApiKey == apiKey)
+				return new ShareGroupHeartbeatResponse(payload.Message.Version).HeaderVersion;
 			if (StopReplicaResponse.ApiKey == apiKey)
 				return new StopReplicaResponse(payload.Message.Version).HeaderVersion;
 			if (SyncGroupResponse.ApiKey == apiKey)
@@ -3084,8 +3232,12 @@ namespace Kafka.Protocol
 				return new UpdateFeaturesResponse(payload.Message.Version).HeaderVersion;
 			if (UpdateMetadataResponse.ApiKey == apiKey)
 				return new UpdateMetadataResponse(payload.Message.Version).HeaderVersion;
+			if (UpdateRaftVoterResponse.ApiKey == apiKey)
+				return new UpdateRaftVoterResponse(payload.Message.Version).HeaderVersion;
 			if (VoteResponse.ApiKey == apiKey)
 				return new VoteResponse(payload.Message.Version).HeaderVersion;
+			if (WriteShareGroupStateResponse.ApiKey == apiKey)
+				return new WriteShareGroupStateResponse(payload.Message.Version).HeaderVersion;
 			if (WriteTxnMarkersResponse.ApiKey == apiKey)
 				return new WriteTxnMarkersResponse(payload.Message.Version).HeaderVersion;
 			throw new ArgumentException($"There is no response message with api key {apiKey}");
@@ -3357,7 +3509,7 @@ namespace Kafka.Protocol
 		public AddOffsetsToTxnRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"AddOffsetsToTxnRequest does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"AddOffsetsToTxnRequest does not support version {version}. Valid versions are: 0-4");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -3367,7 +3519,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(25);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(3);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -3534,7 +3686,7 @@ namespace Kafka.Protocol
 		public AddOffsetsToTxnResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"AddOffsetsToTxnResponse does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"AddOffsetsToTxnResponse does not support version {version}. Valid versions are: 0-4");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -3544,7 +3696,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(25);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(3);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -3654,7 +3806,7 @@ namespace Kafka.Protocol
 		public AddPartitionsToTxnRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"AddPartitionsToTxnRequest does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"AddPartitionsToTxnRequest does not support version {version}. Valid versions are: 0-5");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -3664,7 +3816,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(24);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(4);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -4237,7 +4389,7 @@ namespace Kafka.Protocol
 		public AddPartitionsToTxnResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"AddPartitionsToTxnResponse does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"AddPartitionsToTxnResponse does not support version {version}. Valid versions are: 0-5");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -4247,7 +4399,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(24);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(4);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -4766,6 +4918,501 @@ namespace Kafka.Protocol
 				PartitionErrorCode = partitionErrorCode;
 				return this;
 			}
+		}
+	}
+
+	public class AddRaftVoterRequest : Message, IRespond<AddRaftVoterResponse>
+	{
+		public AddRaftVoterRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"AddRaftVoterRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(80);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_clusterId.GetSize(IsFlexibleVersion) +
+			_timeoutMs.GetSize(IsFlexibleVersion) +
+			_voterId.GetSize(IsFlexibleVersion) +
+			_voterDirectoryId.GetSize(IsFlexibleVersion) +
+			_listenersCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<AddRaftVoterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new AddRaftVoterRequest(version);
+			instance.ClusterId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TimeoutMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ListenersCollection = await Map<String, Listener>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Listener.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AddRaftVoterRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _voterDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _listenersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _clusterId = String.Default;
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String ClusterId 
+		{
+			get => _clusterId;
+			private set 
+			{
+				_clusterId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterRequest WithClusterId(String clusterId)
+		{
+			ClusterId = clusterId;
+			return this;
+		}
+
+		private Int32 _timeoutMs = Int32.Default;
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 TimeoutMs 
+		{
+			get => _timeoutMs;
+			private set 
+			{
+				_timeoutMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterRequest WithTimeoutMs(Int32 timeoutMs)
+		{
+			TimeoutMs = timeoutMs;
+			return this;
+		}
+
+		private Int32 _voterId = Int32.Default;
+		/// <summary>
+		/// <para>The replica id of the voter getting added to the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 VoterId 
+		{
+			get => _voterId;
+			private set 
+			{
+				_voterId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The replica id of the voter getting added to the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterRequest WithVoterId(Int32 voterId)
+		{
+			VoterId = voterId;
+			return this;
+		}
+
+		private Uuid _voterDirectoryId = Uuid.Default;
+		/// <summary>
+		/// <para>The directory id of the voter getting added to the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Uuid VoterDirectoryId 
+		{
+			get => _voterDirectoryId;
+			private set 
+			{
+				_voterDirectoryId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The directory id of the voter getting added to the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterRequest WithVoterDirectoryId(Uuid voterDirectoryId)
+		{
+			VoterDirectoryId = voterDirectoryId;
+			return this;
+		}
+
+		private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
+		/// <summary>
+		/// <para>The endpoints that can be used to communicate with the voter</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Map<String, Listener> ListenersCollection 
+		{
+			get => _listenersCollection;
+			private set 
+			{
+				_listenersCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The endpoints that can be used to communicate with the voter</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterRequest WithListenersCollection(params Func<Listener, Listener>[] createFields)
+		{
+			ListenersCollection = createFields
+				.Select(createField => createField(new Listener(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
+		}
+
+		public delegate Listener CreateListener(Listener field);
+
+		/// <summary>
+		/// <para>The endpoints that can be used to communicate with the voter</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterRequest WithListenersCollection(IEnumerable<CreateListener> createFields)
+		{
+			ListenersCollection = createFields
+				.Select(createField => createField(new Listener(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
+		}
+
+		public class Listener : ISerialize
+		{
+			internal Listener(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_name.GetSize(IsFlexibleVersion) +
+				_host.GetSize(IsFlexibleVersion) +
+				_port.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Listener> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Listener(version);
+				instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Port = await UInt16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Listener is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private String _name = String.Default;
+			/// <summary>
+			/// <para>The name of the endpoint</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Name 
+			{
+				get => _name;
+				private set 
+				{
+					_name = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The name of the endpoint</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
+			private String _host = String.Default;
+			/// <summary>
+			/// <para>The hostname</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Host 
+			{
+				get => _host;
+				private set 
+				{
+					_host = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The hostname</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithHost(String host)
+			{
+				Host = host;
+				return this;
+			}
+
+			private UInt16 _port = UInt16.Default;
+			/// <summary>
+			/// <para>The port</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public UInt16 Port 
+			{
+				get => _port;
+				private set 
+				{
+					_port = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The port</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithPort(UInt16 port)
+			{
+				Port = port;
+				return this;
+			}
+		}
+
+		public AddRaftVoterResponse Respond()
+			=> new AddRaftVoterResponse(Version);
+	}
+
+	public class AddRaftVoterResponse : Message
+	{
+		public AddRaftVoterResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"AddRaftVoterResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(80);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_errorMessage.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<AddRaftVoterResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new AddRaftVoterResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AddRaftVoterResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private NullableString _errorMessage = NullableString.Default;
+		/// <summary>
+		/// <para>The error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String? ErrorMessage 
+		{
+			get => _errorMessage;
+			private set 
+			{
+				_errorMessage = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AddRaftVoterResponse WithErrorMessage(String? errorMessage)
+		{
+			ErrorMessage = errorMessage;
+			return this;
 		}
 	}
 
@@ -11078,6 +11725,986 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class AssignReplicasToDirsRequest : Message, IRespond<AssignReplicasToDirsResponse>
+	{
+		public AssignReplicasToDirsRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"AssignReplicasToDirsRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(73);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_brokerId.GetSize(IsFlexibleVersion) +
+			_brokerEpoch.GetSize(IsFlexibleVersion) +
+			_directoriesCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<AssignReplicasToDirsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new AssignReplicasToDirsRequest(version);
+			instance.BrokerId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.BrokerEpoch = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.DirectoriesCollection = await Array<DirectoryData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DirectoryData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AssignReplicasToDirsRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _brokerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _brokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _directoriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _brokerId = Int32.Default;
+		/// <summary>
+		/// <para>The ID of the requesting broker</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 BrokerId 
+		{
+			get => _brokerId;
+			private set 
+			{
+				_brokerId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The ID of the requesting broker</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AssignReplicasToDirsRequest WithBrokerId(Int32 brokerId)
+		{
+			BrokerId = brokerId;
+			return this;
+		}
+
+		private Int64 _brokerEpoch = new Int64(-1);
+		/// <summary>
+		/// <para>The epoch of the requesting broker</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: -1</para>
+		/// </summary>
+		public Int64 BrokerEpoch 
+		{
+			get => _brokerEpoch;
+			private set 
+			{
+				_brokerEpoch = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The epoch of the requesting broker</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: -1</para>
+		/// </summary>
+		public AssignReplicasToDirsRequest WithBrokerEpoch(Int64 brokerEpoch)
+		{
+			BrokerEpoch = brokerEpoch;
+			return this;
+		}
+
+		private Array<DirectoryData> _directoriesCollection = Array.Empty<DirectoryData>();
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<DirectoryData> DirectoriesCollection 
+		{
+			get => _directoriesCollection;
+			private set 
+			{
+				_directoriesCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AssignReplicasToDirsRequest WithDirectoriesCollection(params Func<DirectoryData, DirectoryData>[] createFields)
+		{
+			DirectoriesCollection = createFields
+				.Select(createField => createField(new DirectoryData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate DirectoryData CreateDirectoryData(DirectoryData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AssignReplicasToDirsRequest WithDirectoriesCollection(IEnumerable<CreateDirectoryData> createFields)
+		{
+			DirectoriesCollection = createFields
+				.Select(createField => createField(new DirectoryData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class DirectoryData : ISerialize
+		{
+			internal DirectoryData(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_id.GetSize(IsFlexibleVersion) +
+				_topicsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<DirectoryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new DirectoryData(version);
+				instance.Id = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = await Array<TopicData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DirectoryData is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _id.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _id = Uuid.Default;
+			/// <summary>
+			/// <para>The ID of the directory</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid Id 
+			{
+				get => _id;
+				private set 
+				{
+					_id = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The ID of the directory</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DirectoryData WithId(Uuid id)
+			{
+				Id = id;
+				return this;
+			}
+
+			private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<TopicData> TopicsCollection 
+			{
+				get => _topicsCollection;
+				private set 
+				{
+					_topicsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DirectoryData WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
+			{
+				TopicsCollection = createFields
+					.Select(createField => createField(new TopicData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate TopicData CreateTopicData(TopicData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DirectoryData WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
+			{
+				TopicsCollection = createFields
+					.Select(createField => createField(new TopicData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class TopicData : ISerialize
+			{
+				internal TopicData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_topicId.GetSize(IsFlexibleVersion) +
+					_partitionsCollection.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new TopicData(version);
+					instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Uuid _topicId = Uuid.Default;
+				/// <summary>
+				/// <para>The ID of the assigned topic</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Uuid TopicId 
+				{
+					get => _topicId;
+					private set 
+					{
+						_topicId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The ID of the assigned topic</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public TopicData WithTopicId(Uuid topicId)
+				{
+					TopicId = topicId;
+					return this;
+				}
+
+				private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<PartitionData> PartitionsCollection 
+				{
+					get => _partitionsCollection;
+					private set 
+					{
+						_partitionsCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+				{
+					PartitionsCollection = createFields
+						.Select(createField => createField(new PartitionData(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public delegate PartitionData CreatePartitionData(PartitionData field);
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+				{
+					PartitionsCollection = createFields
+						.Select(createField => createField(new PartitionData(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public class PartitionData : ISerialize
+				{
+					internal PartitionData(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_partitionIndex.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new PartitionData(version);
+						instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int32 _partitionIndex = Int32.Default;
+					/// <summary>
+					/// <para>The partition index</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int32 PartitionIndex 
+					{
+						get => _partitionIndex;
+						private set 
+						{
+							_partitionIndex = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The partition index</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public PartitionData WithPartitionIndex(Int32 partitionIndex)
+					{
+						PartitionIndex = partitionIndex;
+						return this;
+					}
+				}
+			}
+		}
+
+		public AssignReplicasToDirsResponse Respond()
+			=> new AssignReplicasToDirsResponse(Version);
+	}
+
+	public class AssignReplicasToDirsResponse : Message
+	{
+		public AssignReplicasToDirsResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"AssignReplicasToDirsResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(73);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_directoriesCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<AssignReplicasToDirsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new AssignReplicasToDirsResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.DirectoriesCollection = await Array<DirectoryData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DirectoryData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for AssignReplicasToDirsResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _directoriesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AssignReplicasToDirsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The top level response error code</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The top level response error code</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AssignReplicasToDirsResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private Array<DirectoryData> _directoriesCollection = Array.Empty<DirectoryData>();
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<DirectoryData> DirectoriesCollection 
+		{
+			get => _directoriesCollection;
+			private set 
+			{
+				_directoriesCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AssignReplicasToDirsResponse WithDirectoriesCollection(params Func<DirectoryData, DirectoryData>[] createFields)
+		{
+			DirectoriesCollection = createFields
+				.Select(createField => createField(new DirectoryData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate DirectoryData CreateDirectoryData(DirectoryData field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public AssignReplicasToDirsResponse WithDirectoriesCollection(IEnumerable<CreateDirectoryData> createFields)
+		{
+			DirectoriesCollection = createFields
+				.Select(createField => createField(new DirectoryData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class DirectoryData : ISerialize
+		{
+			internal DirectoryData(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_id.GetSize(IsFlexibleVersion) +
+				_topicsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<DirectoryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new DirectoryData(version);
+				instance.Id = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.TopicsCollection = await Array<TopicData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DirectoryData is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _id.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _id = Uuid.Default;
+			/// <summary>
+			/// <para>The ID of the directory</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid Id 
+			{
+				get => _id;
+				private set 
+				{
+					_id = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The ID of the directory</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DirectoryData WithId(Uuid id)
+			{
+				Id = id;
+				return this;
+			}
+
+			private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<TopicData> TopicsCollection 
+			{
+				get => _topicsCollection;
+				private set 
+				{
+					_topicsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DirectoryData WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
+			{
+				TopicsCollection = createFields
+					.Select(createField => createField(new TopicData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate TopicData CreateTopicData(TopicData field);
+
+			/// <summary>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DirectoryData WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
+			{
+				TopicsCollection = createFields
+					.Select(createField => createField(new TopicData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class TopicData : ISerialize
+			{
+				internal TopicData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_topicId.GetSize(IsFlexibleVersion) +
+					_partitionsCollection.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new TopicData(version);
+					instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Uuid _topicId = Uuid.Default;
+				/// <summary>
+				/// <para>The ID of the assigned topic</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Uuid TopicId 
+				{
+					get => _topicId;
+					private set 
+					{
+						_topicId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The ID of the assigned topic</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public TopicData WithTopicId(Uuid topicId)
+				{
+					TopicId = topicId;
+					return this;
+				}
+
+				private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<PartitionData> PartitionsCollection 
+				{
+					get => _partitionsCollection;
+					private set 
+					{
+						_partitionsCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+				{
+					PartitionsCollection = createFields
+						.Select(createField => createField(new PartitionData(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public delegate PartitionData CreatePartitionData(PartitionData field);
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+				{
+					PartitionsCollection = createFields
+						.Select(createField => createField(new PartitionData(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public class PartitionData : ISerialize
+				{
+					internal PartitionData(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_partitionIndex.GetSize(IsFlexibleVersion) +
+						_errorCode.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new PartitionData(version);
+						instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int32 _partitionIndex = Int32.Default;
+					/// <summary>
+					/// <para>The partition index</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int32 PartitionIndex 
+					{
+						get => _partitionIndex;
+						private set 
+						{
+							_partitionIndex = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The partition index</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public PartitionData WithPartitionIndex(Int32 partitionIndex)
+					{
+						PartitionIndex = partitionIndex;
+						return this;
+					}
+
+					private Int16 _errorCode = Int16.Default;
+					/// <summary>
+					/// <para>The partition level error code</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int16 ErrorCode 
+					{
+						get => _errorCode;
+						private set 
+						{
+							_errorCode = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The partition level error code</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public PartitionData WithErrorCode(Int16 errorCode)
+					{
+						ErrorCode = errorCode;
+						return this;
+					}
+				}
+			}
+		}
+	}
+
 	public class BeginQuorumEpochRequest : Message, IRespond<BeginQuorumEpochResponse>
 	{
 		public BeginQuorumEpochRequest(Int16 version)
@@ -11877,7 +13504,7 @@ namespace Kafka.Protocol
 		public BrokerHeartbeatRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"BrokerHeartbeatRequest does not support version {version}. Valid versions are: 0");
+				throw new UnsupportedVersionException($"BrokerHeartbeatRequest does not support version {version}. Valid versions are: 0-1");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -11887,7 +13514,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(63);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -11902,7 +13529,14 @@ namespace Kafka.Protocol
 
 		private Tags.TagSection CreateTagSection()
 		{
-			return new Tags.TagSection();
+			var tags = new List<Tags.TaggedField>();
+			if (Version >= 1 && _offlineLogDirsCollectionIsSet) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 0,
+					Field = _offlineLogDirsCollection
+				});
+			return new Tags.TagSection(tags.ToArray());
 		}
 
 		internal override int GetSize() =>
@@ -11931,6 +13565,17 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
+						case 0:
+							if (instance.Version >= 1) 
+								instance.OfflineLogDirsCollection = await Array<Uuid>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+							else
+								throw new InvalidOperationException($"Field OfflineLogDirsCollection is not supported for version {instance.Version}");
+							{
+								var size = instance._offlineLogDirsCollection.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field OfflineLogDirsCollection read length {tag.Length} but had actual length of {size}");
+							}
+							break;
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for BrokerHeartbeatRequest is unknown");
 					}
@@ -12074,6 +13719,35 @@ namespace Kafka.Protocol
 			return this;
 		}
 
+		private bool _offlineLogDirsCollectionIsSet;
+		private Array<Uuid> _offlineLogDirsCollection = Array.Empty<Uuid>();
+		/// <summary>
+		/// <para>Log directories that failed and went offline.</para>
+		/// <para>Versions: 1+</para>
+		/// </summary>
+		public Array<Uuid> OfflineLogDirsCollection 
+		{
+			get => _offlineLogDirsCollection;
+			private set 
+			{
+				if (Version >= 1 == false)
+					throw new UnsupportedVersionException($"OfflineLogDirsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+
+				_offlineLogDirsCollection = value;
+				_offlineLogDirsCollectionIsSet = true;
+			}
+		}
+
+		/// <summary>
+		/// <para>Log directories that failed and went offline.</para>
+		/// <para>Versions: 1+</para>
+		/// </summary>
+		public BrokerHeartbeatRequest WithOfflineLogDirsCollection(Array<Uuid> offlineLogDirsCollection)
+		{
+			OfflineLogDirsCollection = offlineLogDirsCollection;
+			return this;
+		}
+
 		public BrokerHeartbeatResponse Respond()
 			=> new BrokerHeartbeatResponse(Version);
 	}
@@ -12083,7 +13757,7 @@ namespace Kafka.Protocol
 		public BrokerHeartbeatResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"BrokerHeartbeatResponse does not support version {version}. Valid versions are: 0");
+				throw new UnsupportedVersionException($"BrokerHeartbeatResponse does not support version {version}. Valid versions are: 0-1");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -12093,7 +13767,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(63);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -12288,7 +13962,7 @@ namespace Kafka.Protocol
 		public BrokerRegistrationRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"BrokerRegistrationRequest does not support version {version}. Valid versions are: 0-1");
+				throw new UnsupportedVersionException($"BrokerRegistrationRequest does not support version {version}. Valid versions are: 0-3");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -12298,7 +13972,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(62);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(1);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -12326,6 +14000,12 @@ namespace Kafka.Protocol
 			(Version >= 1 ? 
 				_isMigratingZkBroker.GetSize(IsFlexibleVersion):
 				0) +
+			(Version >= 2 ? 
+				_logDirsCollection.GetSize(IsFlexibleVersion):
+				0) +
+			(Version >= 3 ? 
+				_previousBrokerEpoch.GetSize(IsFlexibleVersion):
+				0) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
 				0);
@@ -12341,6 +14021,10 @@ namespace Kafka.Protocol
 			instance.Rack = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 1) 
 				instance.IsMigratingZkBroker = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (instance.Version >= 2) 
+				instance.LogDirsCollection = await Array<Uuid>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+			if (instance.Version >= 3) 
+				instance.PreviousBrokerEpoch = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
 			{
@@ -12368,6 +14052,10 @@ namespace Kafka.Protocol
 			await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 1)
 				await _isMigratingZkBroker.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (Version >= 2)
+				await _logDirsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (Version >= 3)
+				await _previousBrokerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -12869,6 +14557,56 @@ namespace Kafka.Protocol
 			return this;
 		}
 
+		private Array<Uuid> _logDirsCollection = Array.Empty<Uuid>();
+		/// <summary>
+		/// <para>Log directories configured in this broker which are available.</para>
+		/// <para>Versions: 2+</para>
+		/// </summary>
+		public Array<Uuid> LogDirsCollection 
+		{
+			get => _logDirsCollection;
+			private set 
+			{
+				_logDirsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Log directories configured in this broker which are available.</para>
+		/// <para>Versions: 2+</para>
+		/// </summary>
+		public BrokerRegistrationRequest WithLogDirsCollection(Array<Uuid> logDirsCollection)
+		{
+			LogDirsCollection = logDirsCollection;
+			return this;
+		}
+
+		private Int64 _previousBrokerEpoch = new Int64(-1);
+		/// <summary>
+		/// <para>The epoch before a clean shutdown.</para>
+		/// <para>Versions: 3+</para>
+		/// <para>Default: -1</para>
+		/// </summary>
+		public Int64 PreviousBrokerEpoch 
+		{
+			get => _previousBrokerEpoch;
+			private set 
+			{
+				_previousBrokerEpoch = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The epoch before a clean shutdown.</para>
+		/// <para>Versions: 3+</para>
+		/// <para>Default: -1</para>
+		/// </summary>
+		public BrokerRegistrationRequest WithPreviousBrokerEpoch(Int64 previousBrokerEpoch)
+		{
+			PreviousBrokerEpoch = previousBrokerEpoch;
+			return this;
+		}
+
 		public BrokerRegistrationResponse Respond()
 			=> new BrokerRegistrationResponse(Version);
 	}
@@ -12878,7 +14616,7 @@ namespace Kafka.Protocol
 		public BrokerRegistrationResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"BrokerRegistrationResponse does not support version {version}. Valid versions are: 0-1");
+				throw new UnsupportedVersionException($"BrokerRegistrationResponse does not support version {version}. Valid versions are: 0-3");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -12888,7 +14626,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(62);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(1);
+		public static readonly Int16 MaxVersion = Int16.From(3);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -13022,6 +14760,1116 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class ConsumerGroupDescribeRequest : Message, IRespond<ConsumerGroupDescribeResponse>
+	{
+		public ConsumerGroupDescribeRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ConsumerGroupDescribeRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(69);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupIdsCollection.GetSize(IsFlexibleVersion) +
+			_includeAuthorizedOperations.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ConsumerGroupDescribeRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ConsumerGroupDescribeRequest(version);
+			instance.GroupIdsCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+			instance.IncludeAuthorizedOperations = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ConsumerGroupDescribeRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _includeAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Array<String> _groupIdsCollection = Array.Empty<String>();
+		/// <summary>
+		/// <para>The ids of the groups to describe</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<String> GroupIdsCollection 
+		{
+			get => _groupIdsCollection;
+			private set 
+			{
+				_groupIdsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The ids of the groups to describe</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ConsumerGroupDescribeRequest WithGroupIdsCollection(Array<String> groupIdsCollection)
+		{
+			GroupIdsCollection = groupIdsCollection;
+			return this;
+		}
+
+		private Boolean _includeAuthorizedOperations = Boolean.Default;
+		/// <summary>
+		/// <para>Whether to include authorized operations.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Boolean IncludeAuthorizedOperations 
+		{
+			get => _includeAuthorizedOperations;
+			private set 
+			{
+				_includeAuthorizedOperations = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Whether to include authorized operations.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ConsumerGroupDescribeRequest WithIncludeAuthorizedOperations(Boolean includeAuthorizedOperations)
+		{
+			IncludeAuthorizedOperations = includeAuthorizedOperations;
+			return this;
+		}
+
+		public ConsumerGroupDescribeResponse Respond()
+			=> new ConsumerGroupDescribeResponse(Version);
+	}
+
+	public class ConsumerGroupDescribeResponse : Message
+	{
+		public ConsumerGroupDescribeResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ConsumerGroupDescribeResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(69);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_groupsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ConsumerGroupDescribeResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ConsumerGroupDescribeResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.GroupsCollection = await Array<DescribedGroup>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ConsumerGroupDescribeResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ConsumerGroupDescribeResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Array<DescribedGroup> _groupsCollection = Array.Empty<DescribedGroup>();
+		/// <summary>
+		/// <para>Each described group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<DescribedGroup> GroupsCollection 
+		{
+			get => _groupsCollection;
+			private set 
+			{
+				_groupsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Each described group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ConsumerGroupDescribeResponse WithGroupsCollection(params Func<DescribedGroup, DescribedGroup>[] createFields)
+		{
+			GroupsCollection = createFields
+				.Select(createField => createField(new DescribedGroup(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate DescribedGroup CreateDescribedGroup(DescribedGroup field);
+
+		/// <summary>
+		/// <para>Each described group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ConsumerGroupDescribeResponse WithGroupsCollection(IEnumerable<CreateDescribedGroup> createFields)
+		{
+			GroupsCollection = createFields
+				.Select(createField => createField(new DescribedGroup(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class DescribedGroup : ISerialize
+		{
+			internal DescribedGroup(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_errorCode.GetSize(IsFlexibleVersion) +
+				_errorMessage.GetSize(IsFlexibleVersion) +
+				_groupId.GetSize(IsFlexibleVersion) +
+				_groupState.GetSize(IsFlexibleVersion) +
+				_groupEpoch.GetSize(IsFlexibleVersion) +
+				_assignmentEpoch.GetSize(IsFlexibleVersion) +
+				_assignorName.GetSize(IsFlexibleVersion) +
+				_membersCollection.GetSize(IsFlexibleVersion) +
+				_authorizedOperations.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<DescribedGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new DescribedGroup(version);
+				instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.GroupState = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.GroupEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.AssignmentEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.AssignorName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.MembersCollection = await Array<Member>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Member.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+				instance.AuthorizedOperations = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedGroup is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _groupState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _groupEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _assignmentEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _assignorName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _authorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int16 _errorCode = Int16.Default;
+			/// <summary>
+			/// <para>The describe error, or 0 if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int16 ErrorCode 
+			{
+				get => _errorCode;
+				private set 
+				{
+					_errorCode = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The describe error, or 0 if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
+			private NullableString _errorMessage = new NullableString(null);
+			/// <summary>
+			/// <para>The top-level error message, or null if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public String? ErrorMessage 
+			{
+				get => _errorMessage;
+				private set 
+				{
+					_errorMessage = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The top-level error message, or null if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public DescribedGroup WithErrorMessage(String? errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
+			}
+
+			private String _groupId = String.Default;
+			/// <summary>
+			/// <para>The group ID string.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String GroupId 
+			{
+				get => _groupId;
+				private set 
+				{
+					_groupId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The group ID string.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithGroupId(String groupId)
+			{
+				GroupId = groupId;
+				return this;
+			}
+
+			private String _groupState = String.Default;
+			/// <summary>
+			/// <para>The group state string, or the empty string.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String GroupState 
+			{
+				get => _groupState;
+				private set 
+				{
+					_groupState = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The group state string, or the empty string.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithGroupState(String groupState)
+			{
+				GroupState = groupState;
+				return this;
+			}
+
+			private Int32 _groupEpoch = Int32.Default;
+			/// <summary>
+			/// <para>The group epoch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 GroupEpoch 
+			{
+				get => _groupEpoch;
+				private set 
+				{
+					_groupEpoch = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The group epoch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithGroupEpoch(Int32 groupEpoch)
+			{
+				GroupEpoch = groupEpoch;
+				return this;
+			}
+
+			private Int32 _assignmentEpoch = Int32.Default;
+			/// <summary>
+			/// <para>The assignment epoch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 AssignmentEpoch 
+			{
+				get => _assignmentEpoch;
+				private set 
+				{
+					_assignmentEpoch = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The assignment epoch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithAssignmentEpoch(Int32 assignmentEpoch)
+			{
+				AssignmentEpoch = assignmentEpoch;
+				return this;
+			}
+
+			private String _assignorName = String.Default;
+			/// <summary>
+			/// <para>The selected assignor.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String AssignorName 
+			{
+				get => _assignorName;
+				private set 
+				{
+					_assignorName = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The selected assignor.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithAssignorName(String assignorName)
+			{
+				AssignorName = assignorName;
+				return this;
+			}
+
+			private Array<Member> _membersCollection = Array.Empty<Member>();
+			/// <summary>
+			/// <para>The members.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<Member> MembersCollection 
+			{
+				get => _membersCollection;
+				private set 
+				{
+					_membersCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The members.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithMembersCollection(params Func<Member, Member>[] createFields)
+			{
+				MembersCollection = createFields
+					.Select(createField => createField(new Member(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate Member CreateMember(Member field);
+
+			/// <summary>
+			/// <para>The members.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithMembersCollection(IEnumerable<CreateMember> createFields)
+			{
+				MembersCollection = createFields
+					.Select(createField => createField(new Member(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class Member : ISerialize
+			{
+				internal Member(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_memberId.GetSize(IsFlexibleVersion) +
+					_instanceId.GetSize(IsFlexibleVersion) +
+					_rackId.GetSize(IsFlexibleVersion) +
+					_memberEpoch.GetSize(IsFlexibleVersion) +
+					_clientId.GetSize(IsFlexibleVersion) +
+					_clientHost.GetSize(IsFlexibleVersion) +
+					_subscribedTopicNamesCollection.GetSize(IsFlexibleVersion) +
+					_subscribedTopicRegex.GetSize(IsFlexibleVersion) +
+					_assignment.GetSize(IsFlexibleVersion) +
+					_targetAssignment.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<Member> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new Member(version);
+					instance.MemberId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.InstanceId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.RackId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.MemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ClientId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ClientHost = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.SubscribedTopicNamesCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+					instance.SubscribedTopicRegex = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.Assignment_ = await Assignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+					instance.TargetAssignment = await Assignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for Member is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _instanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _rackId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _memberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _clientId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _clientHost.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _subscribedTopicNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _subscribedTopicRegex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _targetAssignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private String _memberId = String.Default;
+				/// <summary>
+				/// <para>The member ID.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public String MemberId 
+				{
+					get => _memberId;
+					private set 
+					{
+						_memberId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The member ID.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithMemberId(String memberId)
+				{
+					MemberId = memberId;
+					return this;
+				}
+
+				private NullableString _instanceId = new NullableString(null);
+				/// <summary>
+				/// <para>The member instance ID.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? InstanceId 
+				{
+					get => _instanceId;
+					private set 
+					{
+						_instanceId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The member instance ID.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public Member WithInstanceId(String? instanceId)
+				{
+					InstanceId = instanceId;
+					return this;
+				}
+
+				private NullableString _rackId = new NullableString(null);
+				/// <summary>
+				/// <para>The member rack ID.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? RackId 
+				{
+					get => _rackId;
+					private set 
+					{
+						_rackId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The member rack ID.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public Member WithRackId(String? rackId)
+				{
+					RackId = rackId;
+					return this;
+				}
+
+				private Int32 _memberEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The current member epoch.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 MemberEpoch 
+				{
+					get => _memberEpoch;
+					private set 
+					{
+						_memberEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The current member epoch.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithMemberEpoch(Int32 memberEpoch)
+				{
+					MemberEpoch = memberEpoch;
+					return this;
+				}
+
+				private String _clientId = String.Default;
+				/// <summary>
+				/// <para>The client ID.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public String ClientId 
+				{
+					get => _clientId;
+					private set 
+					{
+						_clientId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The client ID.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithClientId(String clientId)
+				{
+					ClientId = clientId;
+					return this;
+				}
+
+				private String _clientHost = String.Default;
+				/// <summary>
+				/// <para>The client host.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public String ClientHost 
+				{
+					get => _clientHost;
+					private set 
+					{
+						_clientHost = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The client host.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithClientHost(String clientHost)
+				{
+					ClientHost = clientHost;
+					return this;
+				}
+
+				private Array<String> _subscribedTopicNamesCollection = Array.Empty<String>();
+				/// <summary>
+				/// <para>The subscribed topic names.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<String> SubscribedTopicNamesCollection 
+				{
+					get => _subscribedTopicNamesCollection;
+					private set 
+					{
+						_subscribedTopicNamesCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The subscribed topic names.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithSubscribedTopicNamesCollection(Array<String> subscribedTopicNamesCollection)
+				{
+					SubscribedTopicNamesCollection = subscribedTopicNamesCollection;
+					return this;
+				}
+
+				private NullableString _subscribedTopicRegex = new NullableString(null);
+				/// <summary>
+				/// <para>the subscribed topic regex otherwise or null of not provided.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? SubscribedTopicRegex 
+				{
+					get => _subscribedTopicRegex;
+					private set 
+					{
+						_subscribedTopicRegex = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>the subscribed topic regex otherwise or null of not provided.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public Member WithSubscribedTopicRegex(String? subscribedTopicRegex)
+				{
+					SubscribedTopicRegex = subscribedTopicRegex;
+					return this;
+				}
+
+				private Assignment _assignment = default!;
+				/// <summary>
+				/// <para>The current assignment.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Assignment Assignment_ 
+				{
+					get => _assignment;
+					private set 
+					{
+						_assignment = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The current assignment.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithAssignment_(Assignment assignment)
+				{
+					Assignment_ = assignment;
+					return this;
+				}
+
+				private Assignment _targetAssignment = default!;
+				/// <summary>
+				/// <para>The target assignment.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Assignment TargetAssignment 
+				{
+					get => _targetAssignment;
+					private set 
+					{
+						_targetAssignment = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The target assignment.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithTargetAssignment(Assignment targetAssignment)
+				{
+					TargetAssignment = targetAssignment;
+					return this;
+				}
+			}
+
+			private Int32 _authorizedOperations = new Int32(-2147483648);
+			/// <summary>
+			/// <para>32-bit bitfield to represent authorized operations for this group.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: -2147483648</para>
+			/// </summary>
+			public Int32 AuthorizedOperations 
+			{
+				get => _authorizedOperations;
+				private set 
+				{
+					_authorizedOperations = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>32-bit bitfield to represent authorized operations for this group.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: -2147483648</para>
+			/// </summary>
+			public DescribedGroup WithAuthorizedOperations(Int32 authorizedOperations)
+			{
+				AuthorizedOperations = authorizedOperations;
+				return this;
+			}
+		}
+
+		public class TopicPartitions : ISerialize
+		{
+			internal TopicPartitions(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_topicName.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<TopicPartitions> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new TopicPartitions(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartitions is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicPartitions WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private String _topicName = String.Default;
+			/// <summary>
+			/// <para>The topic name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String TopicName 
+			{
+				get => _topicName;
+				private set 
+				{
+					_topicName = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicPartitions WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
+			private Array<Int32> _partitionsCollection = Array.Empty<Int32>();
+			/// <summary>
+			/// <para>The partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<Int32> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicPartitions WithPartitionsCollection(Array<Int32> partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
+			}
+		}
+
+		public class Assignment : ISerialize
+		{
+			internal Assignment(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicPartitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Assignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Assignment(version);
+				instance.TopicPartitionsCollection = await Array<TopicPartitions>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Assignment is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Array<TopicPartitions> _topicPartitionsCollection = Array.Empty<TopicPartitions>();
+			/// <summary>
+			/// <para>The assigned topic-partitions to the member.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<TopicPartitions> TopicPartitionsCollection 
+			{
+				get => _topicPartitionsCollection;
+				private set 
+				{
+					_topicPartitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The assigned topic-partitions to the member.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Assignment WithTopicPartitionsCollection(Array<TopicPartitions> topicPartitionsCollection)
+			{
+				TopicPartitionsCollection = topicPartitionsCollection;
+				return this;
+			}
+		}
+	}
+
 	public class ConsumerGroupHeartbeatRequest : Message, IRespond<ConsumerGroupHeartbeatResponse>
 	{
 		public ConsumerGroupHeartbeatRequest(Int16 version)
@@ -13063,9 +15911,7 @@ namespace Kafka.Protocol
 			_rackId.GetSize(IsFlexibleVersion) +
 			_rebalanceTimeoutMs.GetSize(IsFlexibleVersion) +
 			_subscribedTopicNamesCollection.GetSize(IsFlexibleVersion) +
-			_subscribedTopicRegex.GetSize(IsFlexibleVersion) +
 			_serverAssignor.GetSize(IsFlexibleVersion) +
-			_clientAssignorsCollection.GetSize(IsFlexibleVersion) +
 			_topicPartitionsCollection.GetSize(IsFlexibleVersion) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
@@ -13081,9 +15927,7 @@ namespace Kafka.Protocol
 			instance.RackId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.RebalanceTimeoutMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.SubscribedTopicNamesCollection = await NullableArray<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
-			instance.SubscribedTopicRegex = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.ServerAssignor = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			instance.ClientAssignorsCollection = await NullableArray<Assignor>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Assignor.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 			instance.TopicPartitionsCollection = await NullableArray<TopicPartitions>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
@@ -13111,9 +15955,7 @@ namespace Kafka.Protocol
 			await _rackId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _rebalanceTimeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _subscribedTopicNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			await _subscribedTopicRegex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _serverAssignor.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			await _clientAssignorsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _topicPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
@@ -13246,7 +16088,7 @@ namespace Kafka.Protocol
 
 		private Int32 _rebalanceTimeoutMs = new Int32(-1);
 		/// <summary>
-		/// <para>-1 if it didn't chance since the last heartbeat; the maximum time in milliseconds that the coordinator will wait on the member to revoke its partitions otherwise.</para>
+		/// <para>-1 if it didn't change since the last heartbeat; the maximum time in milliseconds that the coordinator will wait on the member to revoke its partitions otherwise.</para>
 		/// <para>Versions: 0+</para>
 		/// <para>Default: -1</para>
 		/// </summary>
@@ -13260,7 +16102,7 @@ namespace Kafka.Protocol
 		}
 
 		/// <summary>
-		/// <para>-1 if it didn't chance since the last heartbeat; the maximum time in milliseconds that the coordinator will wait on the member to revoke its partitions otherwise.</para>
+		/// <para>-1 if it didn't change since the last heartbeat; the maximum time in milliseconds that the coordinator will wait on the member to revoke its partitions otherwise.</para>
 		/// <para>Versions: 0+</para>
 		/// <para>Default: -1</para>
 		/// </summary>
@@ -13296,32 +16138,6 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private NullableString _subscribedTopicRegex = new NullableString(null);
-		/// <summary>
-		/// <para>null if it didn't change since the last heartbeat; the subscribed topic regex otherwise</para>
-		/// <para>Versions: 0+</para>
-		/// <para>Default: null</para>
-		/// </summary>
-		public String? SubscribedTopicRegex 
-		{
-			get => _subscribedTopicRegex;
-			private set 
-			{
-				_subscribedTopicRegex = value;
-			}
-		}
-
-		/// <summary>
-		/// <para>null if it didn't change since the last heartbeat; the subscribed topic regex otherwise</para>
-		/// <para>Versions: 0+</para>
-		/// <para>Default: null</para>
-		/// </summary>
-		public ConsumerGroupHeartbeatRequest WithSubscribedTopicRegex(String? subscribedTopicRegex)
-		{
-			SubscribedTopicRegex = subscribedTopicRegex;
-			return this;
-		}
-
 		private NullableString _serverAssignor = new NullableString(null);
 		/// <summary>
 		/// <para>null if not used or if it didn't change since the last heartbeat; the server side assignor to use otherwise.</para>
@@ -13346,262 +16162,6 @@ namespace Kafka.Protocol
 		{
 			ServerAssignor = serverAssignor;
 			return this;
-		}
-
-		private NullableArray<Assignor> _clientAssignorsCollection = new NullableArray<Assignor>(null);
-		/// <summary>
-		/// <para>null if not used or if it didn't change since the last heartbeat; the list of client-side assignors otherwise.</para>
-		/// <para>Versions: 0+</para>
-		/// <para>Default: null</para>
-		/// </summary>
-		public Array<Assignor>? ClientAssignorsCollection 
-		{
-			get => _clientAssignorsCollection;
-			private set 
-			{
-				_clientAssignorsCollection = value;
-			}
-		}
-
-		/// <summary>
-		/// <para>null if not used or if it didn't change since the last heartbeat; the list of client-side assignors otherwise.</para>
-		/// <para>Versions: 0+</para>
-		/// <para>Default: null</para>
-		/// </summary>
-		public ConsumerGroupHeartbeatRequest WithClientAssignorsCollection(params Func<Assignor, Assignor>[] createFields)
-		{
-			ClientAssignorsCollection = createFields
-				.Select(createField => createField(new Assignor(Version)))
-				.ToArray();
-			return this;
-		}
-
-		public delegate Assignor CreateAssignor(Assignor field);
-
-		/// <summary>
-		/// <para>null if not used or if it didn't change since the last heartbeat; the list of client-side assignors otherwise.</para>
-		/// <para>Versions: 0+</para>
-		/// <para>Default: null</para>
-		/// </summary>
-		public ConsumerGroupHeartbeatRequest WithClientAssignorsCollection(IEnumerable<CreateAssignor> createFields)
-		{
-			ClientAssignorsCollection = createFields
-				.Select(createField => createField(new Assignor(Version)))
-				.ToArray();
-			return this;
-		}
-
-		public class Assignor : ISerialize
-		{
-			internal Assignor(Int16 version)
-			{
-				Version = version;
-				IsFlexibleVersion = true;
-			}
-
-			internal Int16 Version { get; }
-			internal bool IsFlexibleVersion { get; }
-
-			private Tags.TagSection CreateTagSection()
-			{
-				return new Tags.TagSection();
-			}
-
-			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-			internal int GetSize(bool _) =>
-				_name.GetSize(IsFlexibleVersion) +
-				_minimumVersion.GetSize(IsFlexibleVersion) +
-				_maximumVersion.GetSize(IsFlexibleVersion) +
-				_reason.GetSize(IsFlexibleVersion) +
-				_metadataVersion.GetSize(IsFlexibleVersion) +
-				_metadataBytes.GetSize(IsFlexibleVersion) +
-				(IsFlexibleVersion ? 
-					CreateTagSection().GetSize() :
-					0);
-
-			internal static async ValueTask<Assignor> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
-			{
-				var instance = new Assignor(version);
-				instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				instance.MinimumVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				instance.MaximumVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				instance.Reason = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				instance.MetadataVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				instance.MetadataBytes = await Bytes.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-
-				if (instance.IsFlexibleVersion)
-				{
-					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
-					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
-					{
-						switch (tag.Tag)
-						{
-							default:
-								throw new InvalidOperationException($"Tag '{tag.Tag}' for Assignor is unknown");
-						}
-					}
-				}
-
-				return instance;
-			}
-
-			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
-			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
-			{
-				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _minimumVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _maximumVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _reason.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _metadataVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _metadataBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-
-				if (IsFlexibleVersion)
-					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
-			}
-
-			private String _name = String.Default;
-			/// <summary>
-			/// <para>The name of the assignor.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public String Name 
-			{
-				get => _name;
-				private set 
-				{
-					_name = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The name of the assignor.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignor WithName(String name)
-			{
-				Name = name;
-				return this;
-			}
-
-			private Int16 _minimumVersion = Int16.Default;
-			/// <summary>
-			/// <para>The minimum supported version for the metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Int16 MinimumVersion 
-			{
-				get => _minimumVersion;
-				private set 
-				{
-					_minimumVersion = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The minimum supported version for the metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignor WithMinimumVersion(Int16 minimumVersion)
-			{
-				MinimumVersion = minimumVersion;
-				return this;
-			}
-
-			private Int16 _maximumVersion = Int16.Default;
-			/// <summary>
-			/// <para>The maximum supported version for the metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Int16 MaximumVersion 
-			{
-				get => _maximumVersion;
-				private set 
-				{
-					_maximumVersion = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The maximum supported version for the metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignor WithMaximumVersion(Int16 maximumVersion)
-			{
-				MaximumVersion = maximumVersion;
-				return this;
-			}
-
-			private Int8 _reason = Int8.Default;
-			/// <summary>
-			/// <para>The reason of the metadata update.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Int8 Reason 
-			{
-				get => _reason;
-				private set 
-				{
-					_reason = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The reason of the metadata update.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignor WithReason(Int8 reason)
-			{
-				Reason = reason;
-				return this;
-			}
-
-			private Int16 _metadataVersion = Int16.Default;
-			/// <summary>
-			/// <para>The version of the metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Int16 MetadataVersion 
-			{
-				get => _metadataVersion;
-				private set 
-				{
-					_metadataVersion = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The version of the metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignor WithMetadataVersion(Int16 metadataVersion)
-			{
-				MetadataVersion = metadataVersion;
-				return this;
-			}
-
-			private Bytes _metadataBytes = Bytes.Default;
-			/// <summary>
-			/// <para>The metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Bytes MetadataBytes 
-			{
-				get => _metadataBytes;
-				private set 
-				{
-					_metadataBytes = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignor WithMetadataBytes(Bytes metadataBytes)
-			{
-				MetadataBytes = metadataBytes;
-				return this;
-			}
 		}
 
 		private NullableArray<TopicPartitions> _topicPartitionsCollection = new NullableArray<TopicPartitions>(null);
@@ -13795,7 +16355,6 @@ namespace Kafka.Protocol
 			_errorMessage.GetSize(IsFlexibleVersion) +
 			_memberId.GetSize(IsFlexibleVersion) +
 			_memberEpoch.GetSize(IsFlexibleVersion) +
-			_shouldComputeAssignment.GetSize(IsFlexibleVersion) +
 			_heartbeatIntervalMs.GetSize(IsFlexibleVersion) +
 			_assignment.GetSize(IsFlexibleVersion) +
 			(IsFlexibleVersion ? 
@@ -13810,7 +16369,6 @@ namespace Kafka.Protocol
 			instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.MemberId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.MemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			instance.ShouldComputeAssignment = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.HeartbeatIntervalMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.Assignment_ = await Nullable<Assignment>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Assignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 
@@ -13837,7 +16395,6 @@ namespace Kafka.Protocol
 			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _memberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-			await _shouldComputeAssignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _heartbeatIntervalMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
@@ -13969,30 +16526,6 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Boolean _shouldComputeAssignment = Boolean.Default;
-		/// <summary>
-		/// <para>True if the member should compute the assignment for the group.</para>
-		/// <para>Versions: 0+</para>
-		/// </summary>
-		public Boolean ShouldComputeAssignment 
-		{
-			get => _shouldComputeAssignment;
-			private set 
-			{
-				_shouldComputeAssignment = value;
-			}
-		}
-
-		/// <summary>
-		/// <para>True if the member should compute the assignment for the group.</para>
-		/// <para>Versions: 0+</para>
-		/// </summary>
-		public ConsumerGroupHeartbeatResponse WithShouldComputeAssignment(Boolean shouldComputeAssignment)
-		{
-			ShouldComputeAssignment = shouldComputeAssignment;
-			return this;
-		}
-
 		private Int32 _heartbeatIntervalMs = Int32.Default;
 		/// <summary>
 		/// <para>The heartbeat interval in milliseconds.</para>
@@ -14061,11 +16594,7 @@ namespace Kafka.Protocol
 
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
-				_error.GetSize(IsFlexibleVersion) +
-				_assignedTopicPartitionsCollection.GetSize(IsFlexibleVersion) +
-				_pendingTopicPartitionsCollection.GetSize(IsFlexibleVersion) +
-				_metadataVersion.GetSize(IsFlexibleVersion) +
-				_metadataBytes.GetSize(IsFlexibleVersion) +
+				_topicPartitionsCollection.GetSize(IsFlexibleVersion) +
 				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
@@ -14073,11 +16602,7 @@ namespace Kafka.Protocol
 			internal static async ValueTask<Assignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
 			{
 				var instance = new Assignment(version);
-				instance.Error = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				instance.AssignedTopicPartitionsCollection = await Array<TopicPartitions>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
-				instance.PendingTopicPartitionsCollection = await Array<TopicPartitions>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
-				instance.MetadataVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				instance.MetadataBytes = await Bytes.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.TopicPartitionsCollection = await Array<TopicPartitions>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 
 				if (instance.IsFlexibleVersion)
 				{
@@ -14098,51 +16623,23 @@ namespace Kafka.Protocol
 			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
-				await _error.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _assignedTopicPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _pendingTopicPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _metadataVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-				await _metadataBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _topicPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
 			}
 
-			private Int8 _error = Int8.Default;
-			/// <summary>
-			/// <para>The assigned error.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Int8 Error 
-			{
-				get => _error;
-				private set 
-				{
-					_error = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The assigned error.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignment WithError(Int8 error)
-			{
-				Error = error;
-				return this;
-			}
-
-			private Array<TopicPartitions> _assignedTopicPartitionsCollection = Array.Empty<TopicPartitions>();
+			private Array<TopicPartitions> _topicPartitionsCollection = Array.Empty<TopicPartitions>();
 			/// <summary>
 			/// <para>The partitions assigned to the member that can be used immediately.</para>
 			/// <para>Versions: 0+</para>
 			/// </summary>
-			public Array<TopicPartitions> AssignedTopicPartitionsCollection 
+			public Array<TopicPartitions> TopicPartitionsCollection 
 			{
-				get => _assignedTopicPartitionsCollection;
+				get => _topicPartitionsCollection;
 				private set 
 				{
-					_assignedTopicPartitionsCollection = value;
+					_topicPartitionsCollection = value;
 				}
 			}
 
@@ -14150,81 +16647,9 @@ namespace Kafka.Protocol
 			/// <para>The partitions assigned to the member that can be used immediately.</para>
 			/// <para>Versions: 0+</para>
 			/// </summary>
-			public Assignment WithAssignedTopicPartitionsCollection(Array<TopicPartitions> assignedTopicPartitionsCollection)
+			public Assignment WithTopicPartitionsCollection(Array<TopicPartitions> topicPartitionsCollection)
 			{
-				AssignedTopicPartitionsCollection = assignedTopicPartitionsCollection;
-				return this;
-			}
-
-			private Array<TopicPartitions> _pendingTopicPartitionsCollection = Array.Empty<TopicPartitions>();
-			/// <summary>
-			/// <para>The partitions assigned to the member that cannot be used because they are not released by their former owners yet.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Array<TopicPartitions> PendingTopicPartitionsCollection 
-			{
-				get => _pendingTopicPartitionsCollection;
-				private set 
-				{
-					_pendingTopicPartitionsCollection = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The partitions assigned to the member that cannot be used because they are not released by their former owners yet.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignment WithPendingTopicPartitionsCollection(Array<TopicPartitions> pendingTopicPartitionsCollection)
-			{
-				PendingTopicPartitionsCollection = pendingTopicPartitionsCollection;
-				return this;
-			}
-
-			private Int16 _metadataVersion = Int16.Default;
-			/// <summary>
-			/// <para>The version of the metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Int16 MetadataVersion 
-			{
-				get => _metadataVersion;
-				private set 
-				{
-					_metadataVersion = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The version of the metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignment WithMetadataVersion(Int16 metadataVersion)
-			{
-				MetadataVersion = metadataVersion;
-				return this;
-			}
-
-			private Bytes _metadataBytes = Bytes.Default;
-			/// <summary>
-			/// <para>The assigned metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Bytes MetadataBytes 
-			{
-				get => _metadataBytes;
-				private set 
-				{
-					_metadataBytes = value;
-				}
-			}
-
-			/// <summary>
-			/// <para>The assigned metadata.</para>
-			/// <para>Versions: 0+</para>
-			/// </summary>
-			public Assignment WithMetadataBytes(Bytes metadataBytes)
-			{
-				MetadataBytes = metadataBytes;
+				TopicPartitionsCollection = topicPartitionsCollection;
 				return this;
 			}
 		}
@@ -14704,6 +17129,680 @@ namespace Kafka.Protocol
 				PartitionIndex = partitionIndex;
 				return this;
 			}
+		}
+	}
+
+	public class ControllerRegistrationRequest : Message, IRespond<ControllerRegistrationResponse>
+	{
+		public ControllerRegistrationRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ControllerRegistrationRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(70);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_controllerId.GetSize(IsFlexibleVersion) +
+			_incarnationId.GetSize(IsFlexibleVersion) +
+			_zkMigrationReady.GetSize(IsFlexibleVersion) +
+			_listenersCollection.GetSize(IsFlexibleVersion) +
+			_featuresCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ControllerRegistrationRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ControllerRegistrationRequest(version);
+			instance.ControllerId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.IncarnationId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ZkMigrationReady = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ListenersCollection = await Map<String, Listener>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Listener.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+			instance.FeaturesCollection = await Map<String, Feature>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Feature.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ControllerRegistrationRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _controllerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _incarnationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _zkMigrationReady.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _listenersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _featuresCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _controllerId = Int32.Default;
+		/// <summary>
+		/// <para>The ID of the controller to register.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ControllerId 
+		{
+			get => _controllerId;
+			private set 
+			{
+				_controllerId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The ID of the controller to register.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationRequest WithControllerId(Int32 controllerId)
+		{
+			ControllerId = controllerId;
+			return this;
+		}
+
+		private Uuid _incarnationId = Uuid.Default;
+		/// <summary>
+		/// <para>The controller incarnation ID, which is unique to each process run.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Uuid IncarnationId 
+		{
+			get => _incarnationId;
+			private set 
+			{
+				_incarnationId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The controller incarnation ID, which is unique to each process run.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationRequest WithIncarnationId(Uuid incarnationId)
+		{
+			IncarnationId = incarnationId;
+			return this;
+		}
+
+		private Boolean _zkMigrationReady = Boolean.Default;
+		/// <summary>
+		/// <para>Set if the required configurations for ZK migration are present.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Boolean ZkMigrationReady 
+		{
+			get => _zkMigrationReady;
+			private set 
+			{
+				_zkMigrationReady = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Set if the required configurations for ZK migration are present.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationRequest WithZkMigrationReady(Boolean zkMigrationReady)
+		{
+			ZkMigrationReady = zkMigrationReady;
+			return this;
+		}
+
+		private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
+		/// <summary>
+		/// <para>The listeners of this controller</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Map<String, Listener> ListenersCollection 
+		{
+			get => _listenersCollection;
+			private set 
+			{
+				_listenersCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The listeners of this controller</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationRequest WithListenersCollection(params Func<Listener, Listener>[] createFields)
+		{
+			ListenersCollection = createFields
+				.Select(createField => createField(new Listener(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
+		}
+
+		public delegate Listener CreateListener(Listener field);
+
+		/// <summary>
+		/// <para>The listeners of this controller</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationRequest WithListenersCollection(IEnumerable<CreateListener> createFields)
+		{
+			ListenersCollection = createFields
+				.Select(createField => createField(new Listener(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
+		}
+
+		public class Listener : ISerialize
+		{
+			internal Listener(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_name.GetSize(IsFlexibleVersion) +
+				_host.GetSize(IsFlexibleVersion) +
+				_port.GetSize(IsFlexibleVersion) +
+				_securityProtocol.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Listener> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Listener(version);
+				instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Port = await UInt16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.SecurityProtocol = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Listener is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _securityProtocol.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private String _name = String.Default;
+			/// <summary>
+			/// <para>The name of the endpoint.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Name 
+			{
+				get => _name;
+				private set 
+				{
+					_name = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The name of the endpoint.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
+			private String _host = String.Default;
+			/// <summary>
+			/// <para>The hostname.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Host 
+			{
+				get => _host;
+				private set 
+				{
+					_host = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The hostname.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithHost(String host)
+			{
+				Host = host;
+				return this;
+			}
+
+			private UInt16 _port = UInt16.Default;
+			/// <summary>
+			/// <para>The port.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public UInt16 Port 
+			{
+				get => _port;
+				private set 
+				{
+					_port = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The port.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithPort(UInt16 port)
+			{
+				Port = port;
+				return this;
+			}
+
+			private Int16 _securityProtocol = Int16.Default;
+			/// <summary>
+			/// <para>The security protocol.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int16 SecurityProtocol 
+			{
+				get => _securityProtocol;
+				private set 
+				{
+					_securityProtocol = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The security protocol.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithSecurityProtocol(Int16 securityProtocol)
+			{
+				SecurityProtocol = securityProtocol;
+				return this;
+			}
+		}
+
+		private Map<String, Feature> _featuresCollection = Map<String, Feature>.Default;
+		/// <summary>
+		/// <para>The features on this controller</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Map<String, Feature> FeaturesCollection 
+		{
+			get => _featuresCollection;
+			private set 
+			{
+				_featuresCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The features on this controller</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationRequest WithFeaturesCollection(params Func<Feature, Feature>[] createFields)
+		{
+			FeaturesCollection = createFields
+				.Select(createField => createField(new Feature(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
+		}
+
+		public delegate Feature CreateFeature(Feature field);
+
+		/// <summary>
+		/// <para>The features on this controller</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationRequest WithFeaturesCollection(IEnumerable<CreateFeature> createFields)
+		{
+			FeaturesCollection = createFields
+				.Select(createField => createField(new Feature(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
+		}
+
+		public class Feature : ISerialize
+		{
+			internal Feature(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_name.GetSize(IsFlexibleVersion) +
+				_minSupportedVersion.GetSize(IsFlexibleVersion) +
+				_maxSupportedVersion.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Feature> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Feature(version);
+				instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.MinSupportedVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.MaxSupportedVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Feature is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _minSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _maxSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private String _name = String.Default;
+			/// <summary>
+			/// <para>The feature name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Name 
+			{
+				get => _name;
+				private set 
+				{
+					_name = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The feature name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Feature WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
+			private Int16 _minSupportedVersion = Int16.Default;
+			/// <summary>
+			/// <para>The minimum supported feature level.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int16 MinSupportedVersion 
+			{
+				get => _minSupportedVersion;
+				private set 
+				{
+					_minSupportedVersion = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The minimum supported feature level.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Feature WithMinSupportedVersion(Int16 minSupportedVersion)
+			{
+				MinSupportedVersion = minSupportedVersion;
+				return this;
+			}
+
+			private Int16 _maxSupportedVersion = Int16.Default;
+			/// <summary>
+			/// <para>The maximum supported feature level.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int16 MaxSupportedVersion 
+			{
+				get => _maxSupportedVersion;
+				private set 
+				{
+					_maxSupportedVersion = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The maximum supported feature level.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Feature WithMaxSupportedVersion(Int16 maxSupportedVersion)
+			{
+				MaxSupportedVersion = maxSupportedVersion;
+				return this;
+			}
+		}
+
+		public ControllerRegistrationResponse Respond()
+			=> new ControllerRegistrationResponse(Version);
+	}
+
+	public class ControllerRegistrationResponse : Message
+	{
+		public ControllerRegistrationResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ControllerRegistrationResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(70);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_errorMessage.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ControllerRegistrationResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ControllerRegistrationResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ControllerRegistrationResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The response error code.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The response error code.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private NullableString _errorMessage = NullableString.Default;
+		/// <summary>
+		/// <para>The response error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String? ErrorMessage 
+		{
+			get => _errorMessage;
+			private set 
+			{
+				_errorMessage = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The response error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ControllerRegistrationResponse WithErrorMessage(String? errorMessage)
+		{
+			ErrorMessage = errorMessage;
+			return this;
 		}
 	}
 
@@ -20004,6 +23103,708 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class DeleteShareGroupStateRequest : Message, IRespond<DeleteShareGroupStateResponse>
+	{
+		public DeleteShareGroupStateRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"DeleteShareGroupStateRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(86);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupId.GetSize(IsFlexibleVersion) +
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<DeleteShareGroupStateRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new DeleteShareGroupStateRequest(version);
+			instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TopicsCollection = await Array<DeleteStateData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DeleteStateData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteShareGroupStateRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _groupId = String.Default;
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String GroupId 
+		{
+			get => _groupId;
+			private set 
+			{
+				_groupId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteShareGroupStateRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
+		private Array<DeleteStateData> _topicsCollection = Array.Empty<DeleteStateData>();
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<DeleteStateData> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteShareGroupStateRequest WithTopicsCollection(params Func<DeleteStateData, DeleteStateData>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new DeleteStateData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate DeleteStateData CreateDeleteStateData(DeleteStateData field);
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteShareGroupStateRequest WithTopicsCollection(IEnumerable<CreateDeleteStateData> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new DeleteStateData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class DeleteStateData : ISerialize
+		{
+			internal DeleteStateData(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<DeleteStateData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new DeleteStateData(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteStateData is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteStateData WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionData> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteStateData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteStateData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionData : ISerialize
+			{
+				internal PartitionData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionData(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+			}
+		}
+
+		public DeleteShareGroupStateResponse Respond()
+			=> new DeleteShareGroupStateResponse(Version);
+	}
+
+	public class DeleteShareGroupStateResponse : Message
+	{
+		public DeleteShareGroupStateResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"DeleteShareGroupStateResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(86);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_resultsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<DeleteShareGroupStateResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new DeleteShareGroupStateResponse(version);
+			instance.ResultsCollection = await Array<DeleteStateResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DeleteStateResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteShareGroupStateResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Array<DeleteStateResult> _resultsCollection = Array.Empty<DeleteStateResult>();
+		/// <summary>
+		/// <para>The delete results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<DeleteStateResult> ResultsCollection 
+		{
+			get => _resultsCollection;
+			private set 
+			{
+				_resultsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The delete results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteShareGroupStateResponse WithResultsCollection(params Func<DeleteStateResult, DeleteStateResult>[] createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new DeleteStateResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate DeleteStateResult CreateDeleteStateResult(DeleteStateResult field);
+
+		/// <summary>
+		/// <para>The delete results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DeleteShareGroupStateResponse WithResultsCollection(IEnumerable<CreateDeleteStateResult> createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new DeleteStateResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class DeleteStateResult : ISerialize
+		{
+			internal DeleteStateResult(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<DeleteStateResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new DeleteStateResult(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DeleteStateResult is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteStateResult WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionResult> _partitionsCollection = Array.Empty<PartitionResult>();
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionResult> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteStateResult WithPartitionsCollection(params Func<PartitionResult, PartitionResult>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionResult CreatePartitionResult(PartitionResult field);
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DeleteStateResult WithPartitionsCollection(IEnumerable<CreatePartitionResult> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionResult : ISerialize
+			{
+				internal PartitionResult(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_errorCode.GetSize(IsFlexibleVersion) +
+					_errorMessage.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionResult(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResult is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int16 _errorCode = Int16.Default;
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 ErrorCode 
+				{
+					get => _errorCode;
+					private set 
+					{
+						_errorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
+				private NullableString _errorMessage = new NullableString(null);
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? ErrorMessage 
+				{
+					get => _errorMessage;
+					private set 
+					{
+						_errorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public PartitionResult WithErrorMessage(String? errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
+				}
+			}
+		}
+	}
+
 	public class DeleteTopicsRequest : Message, IRespond<DeleteTopicsResponse>
 	{
 		public DeleteTopicsRequest(Int16 version)
@@ -22236,7 +26037,7 @@ namespace Kafka.Protocol
 		public DescribeClusterRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"DescribeClusterRequest does not support version {version}. Valid versions are: 0");
+				throw new UnsupportedVersionException($"DescribeClusterRequest does not support version {version}. Valid versions are: 0-1");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -22246,7 +26047,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(60);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -22266,6 +26067,9 @@ namespace Kafka.Protocol
 
 		internal override int GetSize() =>
 			_includeClusterAuthorizedOperations.GetSize(IsFlexibleVersion) +
+			(Version >= 1 ? 
+				_endpointType.GetSize(IsFlexibleVersion):
+				0) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
 				0);
@@ -22274,6 +26078,8 @@ namespace Kafka.Protocol
 		{
 			var instance = new DescribeClusterRequest(version);
 			instance.IncludeClusterAuthorizedOperations = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (instance.Version >= 1) 
+				instance.EndpointType = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
 			{
@@ -22294,6 +26100,8 @@ namespace Kafka.Protocol
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
 			await _includeClusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (Version >= 1)
+				await _endpointType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -22323,6 +26131,35 @@ namespace Kafka.Protocol
 			return this;
 		}
 
+		private Int8 _endpointType = new Int8(1);
+		/// <summary>
+		/// <para>The endpoint type to describe. 1=brokers, 2=controllers.</para>
+		/// <para>Versions: 1+</para>
+		/// <para>Default: 1</para>
+		/// </summary>
+		public Int8 EndpointType 
+		{
+			get => _endpointType;
+			private set 
+			{
+				if (Version >= 1 == false)
+					throw new UnsupportedVersionException($"EndpointType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+
+				_endpointType = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The endpoint type to describe. 1=brokers, 2=controllers.</para>
+		/// <para>Versions: 1+</para>
+		/// <para>Default: 1</para>
+		/// </summary>
+		public DescribeClusterRequest WithEndpointType(Int8 endpointType)
+		{
+			EndpointType = endpointType;
+			return this;
+		}
+
 		public DescribeClusterResponse Respond()
 			=> new DescribeClusterResponse(Version);
 	}
@@ -22332,7 +26169,7 @@ namespace Kafka.Protocol
 		public DescribeClusterResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"DescribeClusterResponse does not support version {version}. Valid versions are: 0");
+				throw new UnsupportedVersionException($"DescribeClusterResponse does not support version {version}. Valid versions are: 0-1");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -22342,7 +26179,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(60);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -22364,6 +26201,9 @@ namespace Kafka.Protocol
 			_throttleTimeMs.GetSize(IsFlexibleVersion) +
 			_errorCode.GetSize(IsFlexibleVersion) +
 			_errorMessage.GetSize(IsFlexibleVersion) +
+			(Version >= 1 ? 
+				_endpointType.GetSize(IsFlexibleVersion):
+				0) +
 			_clusterId.GetSize(IsFlexibleVersion) +
 			_controllerId.GetSize(IsFlexibleVersion) +
 			_brokersCollection.GetSize(IsFlexibleVersion) +
@@ -22378,6 +26218,8 @@ namespace Kafka.Protocol
 			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (instance.Version >= 1) 
+				instance.EndpointType = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.ClusterId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.ControllerId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.BrokersCollection = await Map<Int32, DescribeClusterBroker>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DescribeClusterBroker.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.BrokerId, cancellationToken).ConfigureAwait(false);
@@ -22404,6 +26246,8 @@ namespace Kafka.Protocol
 			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (Version >= 1)
+				await _endpointType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _controllerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _brokersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -22484,6 +26328,35 @@ namespace Kafka.Protocol
 		public DescribeClusterResponse WithErrorMessage(String? errorMessage)
 		{
 			ErrorMessage = errorMessage;
+			return this;
+		}
+
+		private Int8 _endpointType = new Int8(1);
+		/// <summary>
+		/// <para>The endpoint type that was described. 1=brokers, 2=controllers.</para>
+		/// <para>Versions: 1+</para>
+		/// <para>Default: 1</para>
+		/// </summary>
+		public Int8 EndpointType 
+		{
+			get => _endpointType;
+			private set 
+			{
+				if (Version >= 1 == false)
+					throw new UnsupportedVersionException($"EndpointType does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+
+				_endpointType = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The endpoint type that was described. 1=brokers, 2=controllers.</para>
+		/// <para>Versions: 1+</para>
+		/// <para>Default: 1</para>
+		/// </summary>
+		public DescribeClusterResponse WithEndpointType(Int8 endpointType)
+		{
+			EndpointType = endpointType;
 			return this;
 		}
 
@@ -27235,7 +31108,7 @@ namespace Kafka.Protocol
 		public DescribeQuorumRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"DescribeQuorumRequest does not support version {version}. Valid versions are: 0-1");
+				throw new UnsupportedVersionException($"DescribeQuorumRequest does not support version {version}. Valid versions are: 0-2");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -27245,7 +31118,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(55);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(1);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -27540,7 +31413,7 @@ namespace Kafka.Protocol
 		public DescribeQuorumResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"DescribeQuorumResponse does not support version {version}. Valid versions are: 0-1");
+				throw new UnsupportedVersionException($"DescribeQuorumResponse does not support version {version}. Valid versions are: 0-2");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -27550,7 +31423,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(55);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(1);
+		public static readonly Int16 MaxVersion = Int16.From(2);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -27570,7 +31443,13 @@ namespace Kafka.Protocol
 
 		internal override int GetSize() =>
 			_errorCode.GetSize(IsFlexibleVersion) +
+			(Version >= 2 ? 
+				_errorMessage.GetSize(IsFlexibleVersion):
+				0) +
 			_topicsCollection.GetSize(IsFlexibleVersion) +
+			(Version >= 2 ? 
+				_nodesCollection.GetSize(IsFlexibleVersion):
+				0) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
 				0);
@@ -27579,7 +31458,11 @@ namespace Kafka.Protocol
 		{
 			var instance = new DescribeQuorumResponse(version);
 			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (instance.Version >= 2) 
+				instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			instance.TopicsCollection = await Array<TopicData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+			if (instance.Version >= 2) 
+				instance.NodesCollection = await Map<Int32, Node>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Node.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
 			{
@@ -27600,7 +31483,11 @@ namespace Kafka.Protocol
 		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
 		{
 			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (Version >= 2)
+				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (Version >= 2)
+				await _nodesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -27627,6 +31514,34 @@ namespace Kafka.Protocol
 		public DescribeQuorumResponse WithErrorCode(Int16 errorCode)
 		{
 			ErrorCode = errorCode;
+			return this;
+		}
+
+		private NullableString _errorMessage = NullableString.Default;
+		/// <summary>
+		/// <para>The error message, or null if there was no error.</para>
+		/// <para>Versions: 2+</para>
+		/// </summary>
+		public String? ErrorMessage 
+		{
+			get => _errorMessage;
+			private set 
+			{
+				if (Version >= 2 == false &&
+					value == null) 
+					throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 2+");
+
+				_errorMessage = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error message, or null if there was no error.</para>
+		/// <para>Versions: 2+</para>
+		/// </summary>
+		public DescribeQuorumResponse WithErrorMessage(String? errorMessage)
+		{
+			ErrorMessage = errorMessage;
 			return this;
 		}
 
@@ -27804,6 +31719,9 @@ namespace Kafka.Protocol
 				internal int GetSize(bool _) =>
 					_partitionIndex.GetSize(IsFlexibleVersion) +
 					_errorCode.GetSize(IsFlexibleVersion) +
+					(Version >= 2 ? 
+						_errorMessage.GetSize(IsFlexibleVersion):
+						0) +
 					_leaderId.GetSize(IsFlexibleVersion) +
 					_leaderEpoch.GetSize(IsFlexibleVersion) +
 					_highWatermark.GetSize(IsFlexibleVersion) +
@@ -27818,6 +31736,8 @@ namespace Kafka.Protocol
 					var instance = new PartitionData(version);
 					instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					if (instance.Version >= 2) 
+						instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					instance.LeaderId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					instance.HighWatermark = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -27845,6 +31765,8 @@ namespace Kafka.Protocol
 				{
 					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					if (Version >= 2)
+						await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 					await _highWatermark.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -27898,6 +31820,34 @@ namespace Kafka.Protocol
 				public PartitionData WithErrorCode(Int16 errorCode)
 				{
 					ErrorCode = errorCode;
+					return this;
+				}
+
+				private NullableString _errorMessage = NullableString.Default;
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 2+</para>
+				/// </summary>
+				public String? ErrorMessage 
+				{
+					get => _errorMessage;
+					private set 
+					{
+						if (Version >= 2 == false &&
+							value == null) 
+							throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 2+");
+
+						_errorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 2+</para>
+				/// </summary>
+				public PartitionData WithErrorMessage(String? errorMessage)
+				{
+					ErrorMessage = errorMessage;
 					return this;
 				}
 
@@ -28017,6 +31967,334 @@ namespace Kafka.Protocol
 			}
 		}
 
+		private Map<Int32, Node> _nodesCollection = Map<Int32, Node>.Default;
+		/// <summary>
+		/// <para>Versions: 2+</para>
+		/// </summary>
+		public Map<Int32, Node> NodesCollection 
+		{
+			get => _nodesCollection;
+			private set 
+			{
+				if (Version >= 2 == false)
+					throw new UnsupportedVersionException($"NodesCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+
+				_nodesCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Versions: 2+</para>
+		/// </summary>
+		public DescribeQuorumResponse WithNodesCollection(params Func<Node, Node>[] createFields)
+		{
+			NodesCollection = createFields
+				.Select(createField => createField(new Node(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public delegate Node CreateNode(Node field);
+
+		/// <summary>
+		/// <para>Versions: 2+</para>
+		/// </summary>
+		public DescribeQuorumResponse WithNodesCollection(IEnumerable<CreateNode> createFields)
+		{
+			NodesCollection = createFields
+				.Select(createField => createField(new Node(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public class Node : ISerialize
+		{
+			internal Node(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				(Version >= 2 ? 
+					_nodeId.GetSize(IsFlexibleVersion):
+					0) +
+				(Version >= 2 ? 
+					_listenersCollection.GetSize(IsFlexibleVersion):
+					0) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Node> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Node(version);
+				if (instance.Version >= 2) 
+					instance.NodeId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 2) 
+					instance.ListenersCollection = await Map<String, Listener>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Listener.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Node is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				if (Version >= 2)
+					await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 2)
+					await _listenersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int32 _nodeId = Int32.Default;
+			/// <summary>
+			/// <para>The ID of the associated node</para>
+			/// <para>Versions: 2+</para>
+			/// </summary>
+			public Int32 NodeId 
+			{
+				get => _nodeId;
+				private set 
+				{
+					if (Version >= 2 == false)
+						throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+
+					_nodeId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The ID of the associated node</para>
+			/// <para>Versions: 2+</para>
+			/// </summary>
+			public Node WithNodeId(Int32 nodeId)
+			{
+				NodeId = nodeId;
+				return this;
+			}
+
+			private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
+			/// <summary>
+			/// <para>The listeners of this controller</para>
+			/// <para>Versions: 2+</para>
+			/// </summary>
+			public Map<String, Listener> ListenersCollection 
+			{
+				get => _listenersCollection;
+				private set 
+				{
+					if (Version >= 2 == false)
+						throw new UnsupportedVersionException($"ListenersCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+
+					_listenersCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The listeners of this controller</para>
+			/// <para>Versions: 2+</para>
+			/// </summary>
+			public Node WithListenersCollection(params Func<Listener, Listener>[] createFields)
+			{
+				ListenersCollection = createFields
+					.Select(createField => createField(new Listener(Version)))
+					.ToDictionary(field => field.Name);
+				return this;
+			}
+
+			public delegate Listener CreateListener(Listener field);
+
+			/// <summary>
+			/// <para>The listeners of this controller</para>
+			/// <para>Versions: 2+</para>
+			/// </summary>
+			public Node WithListenersCollection(IEnumerable<CreateListener> createFields)
+			{
+				ListenersCollection = createFields
+					.Select(createField => createField(new Listener(Version)))
+					.ToDictionary(field => field.Name);
+				return this;
+			}
+
+			public class Listener : ISerialize
+			{
+				internal Listener(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					(Version >= 2 ? 
+						_name.GetSize(IsFlexibleVersion):
+						0) +
+					(Version >= 2 ? 
+						_host.GetSize(IsFlexibleVersion):
+						0) +
+					(Version >= 2 ? 
+						_port.GetSize(IsFlexibleVersion):
+						0) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<Listener> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new Listener(version);
+					if (instance.Version >= 2) 
+						instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					if (instance.Version >= 2) 
+						instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					if (instance.Version >= 2) 
+						instance.Port = await UInt16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for Listener is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					if (Version >= 2)
+						await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					if (Version >= 2)
+						await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					if (Version >= 2)
+						await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private String _name = String.Default;
+				/// <summary>
+				/// <para>The name of the endpoint</para>
+				/// <para>Versions: 2+</para>
+				/// </summary>
+				public String Name 
+				{
+					get => _name;
+					private set 
+					{
+						if (Version >= 2 == false)
+							throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+
+						_name = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The name of the endpoint</para>
+				/// <para>Versions: 2+</para>
+				/// </summary>
+				public Listener WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
+				private String _host = String.Default;
+				/// <summary>
+				/// <para>The hostname</para>
+				/// <para>Versions: 2+</para>
+				/// </summary>
+				public String Host 
+				{
+					get => _host;
+					private set 
+					{
+						if (Version >= 2 == false)
+							throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+
+						_host = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The hostname</para>
+				/// <para>Versions: 2+</para>
+				/// </summary>
+				public Listener WithHost(String host)
+				{
+					Host = host;
+					return this;
+				}
+
+				private UInt16 _port = UInt16.Default;
+				/// <summary>
+				/// <para>The port</para>
+				/// <para>Versions: 2+</para>
+				/// </summary>
+				public UInt16 Port 
+				{
+					get => _port;
+					private set 
+					{
+						if (Version >= 2 == false)
+							throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+
+						_port = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The port</para>
+				/// <para>Versions: 2+</para>
+				/// </summary>
+				public Listener WithPort(UInt16 port)
+				{
+					Port = port;
+					return this;
+				}
+			}
+		}
+
 		public class ReplicaState : ISerialize
 		{
 			internal ReplicaState(Int16 version)
@@ -28036,6 +32314,9 @@ namespace Kafka.Protocol
 			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
 			internal int GetSize(bool _) =>
 				_replicaId.GetSize(IsFlexibleVersion) +
+				(Version >= 2 ? 
+					_replicaDirectoryId.GetSize(IsFlexibleVersion):
+					0) +
 				_logEndOffset.GetSize(IsFlexibleVersion) +
 				(Version >= 1 ? 
 					_lastFetchTimestamp.GetSize(IsFlexibleVersion):
@@ -28051,6 +32332,8 @@ namespace Kafka.Protocol
 			{
 				var instance = new ReplicaState(version);
 				instance.ReplicaId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 2) 
+					instance.ReplicaDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				instance.LogEndOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 1) 
 					instance.LastFetchTimestamp = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -28077,6 +32360,8 @@ namespace Kafka.Protocol
 			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
 			{
 				await _replicaId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 2)
+					await _replicaDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				await _logEndOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 1)
 					await _lastFetchTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -28106,6 +32391,31 @@ namespace Kafka.Protocol
 			public ReplicaState WithReplicaId(Int32 replicaId)
 			{
 				ReplicaId = replicaId;
+				return this;
+			}
+
+			private Uuid _replicaDirectoryId = Uuid.Default;
+			/// <summary>
+			/// <para>Versions: 2+</para>
+			/// </summary>
+			public Uuid ReplicaDirectoryId 
+			{
+				get => _replicaDirectoryId;
+				private set 
+				{
+					if (Version >= 2 == false)
+						throw new UnsupportedVersionException($"ReplicaDirectoryId does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+
+					_replicaDirectoryId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>Versions: 2+</para>
+			/// </summary>
+			public ReplicaState WithReplicaDirectoryId(Uuid replicaDirectoryId)
+			{
+				ReplicaDirectoryId = replicaDirectoryId;
 				return this;
 			}
 
@@ -28182,6 +32492,1162 @@ namespace Kafka.Protocol
 			public ReplicaState WithLastCaughtUpTimestamp(Int64 lastCaughtUpTimestamp)
 			{
 				LastCaughtUpTimestamp = lastCaughtUpTimestamp;
+				return this;
+			}
+		}
+	}
+
+	public class DescribeTopicPartitionsRequest : Message, IRespond<DescribeTopicPartitionsResponse>
+	{
+		public DescribeTopicPartitionsRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"DescribeTopicPartitionsRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(75);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			_responsePartitionLimit.GetSize(IsFlexibleVersion) +
+			_cursor.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<DescribeTopicPartitionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new DescribeTopicPartitionsRequest(version);
+			instance.TopicsCollection = await Array<TopicRequest>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicRequest.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+			instance.ResponsePartitionLimit = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.Cursor_ = await Nullable<Cursor>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Cursor.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeTopicPartitionsRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _responsePartitionLimit.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _cursor.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Array<TopicRequest> _topicsCollection = Array.Empty<TopicRequest>();
+		/// <summary>
+		/// <para>The topics to fetch details for.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<TopicRequest> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The topics to fetch details for.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeTopicPartitionsRequest WithTopicsCollection(params Func<TopicRequest, TopicRequest>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicRequest(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate TopicRequest CreateTopicRequest(TopicRequest field);
+
+		/// <summary>
+		/// <para>The topics to fetch details for.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeTopicPartitionsRequest WithTopicsCollection(IEnumerable<CreateTopicRequest> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new TopicRequest(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class TopicRequest : ISerialize
+		{
+			internal TopicRequest(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_name.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<TopicRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new TopicRequest(version);
+				instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicRequest is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private String _name = String.Default;
+			/// <summary>
+			/// <para>The topic name</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Name 
+			{
+				get => _name;
+				private set 
+				{
+					_name = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic name</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicRequest WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+		}
+
+		private Int32 _responsePartitionLimit = new Int32(2000);
+		/// <summary>
+		/// <para>The maximum number of partitions included in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: 2000</para>
+		/// </summary>
+		public Int32 ResponsePartitionLimit 
+		{
+			get => _responsePartitionLimit;
+			private set 
+			{
+				_responsePartitionLimit = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The maximum number of partitions included in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: 2000</para>
+		/// </summary>
+		public DescribeTopicPartitionsRequest WithResponsePartitionLimit(Int32 responsePartitionLimit)
+		{
+			ResponsePartitionLimit = responsePartitionLimit;
+			return this;
+		}
+
+		private Nullable<Cursor> _cursor = new Nullable<Cursor>(null);
+		/// <summary>
+		/// <para>The first topic and partition index to fetch details for.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public Cursor? Cursor_ 
+		{
+			get => _cursor;
+			private set 
+			{
+				_cursor = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The first topic and partition index to fetch details for.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public DescribeTopicPartitionsRequest WithCursor_(Func<Cursor?, Cursor?> createField)
+		{
+			Cursor_ = createField(new Cursor(Version));
+			return this;
+		}
+
+		public class Cursor : ISerialize
+		{
+			internal Cursor(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicName.GetSize(IsFlexibleVersion) +
+				_partitionIndex.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Cursor> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Cursor(version);
+				instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Cursor is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private String _topicName = String.Default;
+			/// <summary>
+			/// <para>The name for the first topic to process</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String TopicName 
+			{
+				get => _topicName;
+				private set 
+				{
+					_topicName = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The name for the first topic to process</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Cursor WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
+			private Int32 _partitionIndex = Int32.Default;
+			/// <summary>
+			/// <para>The partition index to start with</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 PartitionIndex 
+			{
+				get => _partitionIndex;
+				private set 
+				{
+					_partitionIndex = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partition index to start with</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Cursor WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
+				return this;
+			}
+		}
+
+		public DescribeTopicPartitionsResponse Respond()
+			=> new DescribeTopicPartitionsResponse(Version);
+	}
+
+	public class DescribeTopicPartitionsResponse : Message
+	{
+		public DescribeTopicPartitionsResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"DescribeTopicPartitionsResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(75);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			_nextCursor.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<DescribeTopicPartitionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new DescribeTopicPartitionsResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TopicsCollection = await Map<NullableString, DescribeTopicPartitionsResponseTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DescribeTopicPartitionsResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+			instance.NextCursor = await Nullable<Cursor>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Cursor.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeTopicPartitionsResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _nextCursor.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeTopicPartitionsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Map<NullableString, DescribeTopicPartitionsResponseTopic> _topicsCollection = Map<NullableString, DescribeTopicPartitionsResponseTopic>.Default;
+		/// <summary>
+		/// <para>Each topic in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Map<NullableString, DescribeTopicPartitionsResponseTopic> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Each topic in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeTopicPartitionsResponse WithTopicsCollection(params Func<DescribeTopicPartitionsResponseTopic, DescribeTopicPartitionsResponseTopic>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new DescribeTopicPartitionsResponseTopic(Version)))
+				.ToDictionary(field => (NullableString)field.Name);
+			return this;
+		}
+
+		public delegate DescribeTopicPartitionsResponseTopic CreateDescribeTopicPartitionsResponseTopic(DescribeTopicPartitionsResponseTopic field);
+
+		/// <summary>
+		/// <para>Each topic in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public DescribeTopicPartitionsResponse WithTopicsCollection(IEnumerable<CreateDescribeTopicPartitionsResponseTopic> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new DescribeTopicPartitionsResponseTopic(Version)))
+				.ToDictionary(field => (NullableString)field.Name);
+			return this;
+		}
+
+		public class DescribeTopicPartitionsResponseTopic : ISerialize
+		{
+			internal DescribeTopicPartitionsResponseTopic(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_errorCode.GetSize(IsFlexibleVersion) +
+				_name.GetSize(IsFlexibleVersion) +
+				_topicId.GetSize(IsFlexibleVersion) +
+				_isInternal.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				_topicAuthorizedOperations.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<DescribeTopicPartitionsResponseTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new DescribeTopicPartitionsResponseTopic(version);
+				instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Name = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.IsInternal = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<DescribeTopicPartitionsResponsePartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DescribeTopicPartitionsResponsePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+				instance.TopicAuthorizedOperations = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeTopicPartitionsResponseTopic is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _isInternal.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _topicAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int16 _errorCode = Int16.Default;
+			/// <summary>
+			/// <para>The topic error, or 0 if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int16 ErrorCode 
+			{
+				get => _errorCode;
+				private set 
+				{
+					_errorCode = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic error, or 0 if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeTopicPartitionsResponseTopic WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
+			private NullableString _name = NullableString.Default;
+			/// <summary>
+			/// <para>The topic name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String? Name 
+			{
+				get => _name;
+				private set 
+				{
+					_name = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeTopicPartitionsResponseTopic WithName(String? name)
+			{
+				Name = name;
+				return this;
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic id.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic id.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeTopicPartitionsResponseTopic WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Boolean _isInternal = new Boolean(false);
+			/// <summary>
+			/// <para>True if the topic is internal.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: false</para>
+			/// </summary>
+			public Boolean IsInternal 
+			{
+				get => _isInternal;
+				private set 
+				{
+					_isInternal = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>True if the topic is internal.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: false</para>
+			/// </summary>
+			public DescribeTopicPartitionsResponseTopic WithIsInternal(Boolean isInternal)
+			{
+				IsInternal = isInternal;
+				return this;
+			}
+
+			private Array<DescribeTopicPartitionsResponsePartition> _partitionsCollection = Array.Empty<DescribeTopicPartitionsResponsePartition>();
+			/// <summary>
+			/// <para>Each partition in the topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<DescribeTopicPartitionsResponsePartition> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>Each partition in the topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeTopicPartitionsResponseTopic WithPartitionsCollection(params Func<DescribeTopicPartitionsResponsePartition, DescribeTopicPartitionsResponsePartition>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new DescribeTopicPartitionsResponsePartition(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate DescribeTopicPartitionsResponsePartition CreateDescribeTopicPartitionsResponsePartition(DescribeTopicPartitionsResponsePartition field);
+
+			/// <summary>
+			/// <para>Each partition in the topic.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribeTopicPartitionsResponseTopic WithPartitionsCollection(IEnumerable<CreateDescribeTopicPartitionsResponsePartition> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new DescribeTopicPartitionsResponsePartition(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class DescribeTopicPartitionsResponsePartition : ISerialize
+			{
+				internal DescribeTopicPartitionsResponsePartition(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_errorCode.GetSize(IsFlexibleVersion) +
+					_partitionIndex.GetSize(IsFlexibleVersion) +
+					_leaderId.GetSize(IsFlexibleVersion) +
+					_leaderEpoch.GetSize(IsFlexibleVersion) +
+					_replicaNodesCollection.GetSize(IsFlexibleVersion) +
+					_isrNodesCollection.GetSize(IsFlexibleVersion) +
+					_eligibleLeaderReplicasCollection.GetSize(IsFlexibleVersion) +
+					_lastKnownElrCollection.GetSize(IsFlexibleVersion) +
+					_offlineReplicasCollection.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<DescribeTopicPartitionsResponsePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new DescribeTopicPartitionsResponsePartition(version);
+					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.LeaderId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ReplicaNodesCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+					instance.IsrNodesCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+					instance.EligibleLeaderReplicasCollection = await NullableArray<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+					instance.LastKnownElrCollection = await NullableArray<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+					instance.OfflineReplicasCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribeTopicPartitionsResponsePartition is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _replicaNodesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _isrNodesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _eligibleLeaderReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _lastKnownElrCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _offlineReplicasCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int16 _errorCode = Int16.Default;
+				/// <summary>
+				/// <para>The partition error, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 ErrorCode 
+				{
+					get => _errorCode;
+					private set 
+					{
+						_errorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition error, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
+				private Int32 _partitionIndex = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 PartitionIndex 
+				{
+					get => _partitionIndex;
+					private set 
+					{
+						_partitionIndex = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
+				private Int32 _leaderId = Int32.Default;
+				/// <summary>
+				/// <para>The ID of the leader broker.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 LeaderId 
+				{
+					get => _leaderId;
+					private set 
+					{
+						_leaderId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The ID of the leader broker.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithLeaderId(Int32 leaderId)
+				{
+					LeaderId = leaderId;
+					return this;
+				}
+
+				private Int32 _leaderEpoch = new Int32(-1);
+				/// <summary>
+				/// <para>The leader epoch of this partition.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: -1</para>
+				/// </summary>
+				public Int32 LeaderEpoch 
+				{
+					get => _leaderEpoch;
+					private set 
+					{
+						_leaderEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The leader epoch of this partition.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: -1</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
+				}
+
+				private Array<Int32> _replicaNodesCollection = Array.Empty<Int32>();
+				/// <summary>
+				/// <para>The set of all nodes that host this partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<Int32> ReplicaNodesCollection 
+				{
+					get => _replicaNodesCollection;
+					private set 
+					{
+						_replicaNodesCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The set of all nodes that host this partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithReplicaNodesCollection(Array<Int32> replicaNodesCollection)
+				{
+					ReplicaNodesCollection = replicaNodesCollection;
+					return this;
+				}
+
+				private Array<Int32> _isrNodesCollection = Array.Empty<Int32>();
+				/// <summary>
+				/// <para>The set of nodes that are in sync with the leader for this partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<Int32> IsrNodesCollection 
+				{
+					get => _isrNodesCollection;
+					private set 
+					{
+						_isrNodesCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The set of nodes that are in sync with the leader for this partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithIsrNodesCollection(Array<Int32> isrNodesCollection)
+				{
+					IsrNodesCollection = isrNodesCollection;
+					return this;
+				}
+
+				private NullableArray<Int32> _eligibleLeaderReplicasCollection = new NullableArray<Int32>(null);
+				/// <summary>
+				/// <para>The new eligible leader replicas otherwise.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public Array<Int32>? EligibleLeaderReplicasCollection 
+				{
+					get => _eligibleLeaderReplicasCollection;
+					private set 
+					{
+						_eligibleLeaderReplicasCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The new eligible leader replicas otherwise.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithEligibleLeaderReplicasCollection(Array<Int32>? eligibleLeaderReplicasCollection)
+				{
+					EligibleLeaderReplicasCollection = eligibleLeaderReplicasCollection;
+					return this;
+				}
+
+				private NullableArray<Int32> _lastKnownElrCollection = new NullableArray<Int32>(null);
+				/// <summary>
+				/// <para>The last known ELR.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public Array<Int32>? LastKnownElrCollection 
+				{
+					get => _lastKnownElrCollection;
+					private set 
+					{
+						_lastKnownElrCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The last known ELR.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithLastKnownElrCollection(Array<Int32>? lastKnownElrCollection)
+				{
+					LastKnownElrCollection = lastKnownElrCollection;
+					return this;
+				}
+
+				private Array<Int32> _offlineReplicasCollection = Array.Empty<Int32>();
+				/// <summary>
+				/// <para>The set of offline replicas of this partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<Int32> OfflineReplicasCollection 
+				{
+					get => _offlineReplicasCollection;
+					private set 
+					{
+						_offlineReplicasCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The set of offline replicas of this partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public DescribeTopicPartitionsResponsePartition WithOfflineReplicasCollection(Array<Int32> offlineReplicasCollection)
+				{
+					OfflineReplicasCollection = offlineReplicasCollection;
+					return this;
+				}
+			}
+
+			private Int32 _topicAuthorizedOperations = new Int32(-2147483648);
+			/// <summary>
+			/// <para>32-bit bitfield to represent authorized operations for this topic.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: -2147483648</para>
+			/// </summary>
+			public Int32 TopicAuthorizedOperations 
+			{
+				get => _topicAuthorizedOperations;
+				private set 
+				{
+					_topicAuthorizedOperations = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>32-bit bitfield to represent authorized operations for this topic.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: -2147483648</para>
+			/// </summary>
+			public DescribeTopicPartitionsResponseTopic WithTopicAuthorizedOperations(Int32 topicAuthorizedOperations)
+			{
+				TopicAuthorizedOperations = topicAuthorizedOperations;
+				return this;
+			}
+		}
+
+		private Nullable<Cursor> _nextCursor = new Nullable<Cursor>(null);
+		/// <summary>
+		/// <para>The next topic and partition index to fetch details for.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public Cursor? NextCursor 
+		{
+			get => _nextCursor;
+			private set 
+			{
+				_nextCursor = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The next topic and partition index to fetch details for.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public DescribeTopicPartitionsResponse WithNextCursor(Func<Cursor?, Cursor?> createField)
+		{
+			NextCursor = createField(new Cursor(Version));
+			return this;
+		}
+
+		public class Cursor : ISerialize
+		{
+			internal Cursor(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicName.GetSize(IsFlexibleVersion) +
+				_partitionIndex.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Cursor> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Cursor(version);
+				instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Cursor is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private String _topicName = String.Default;
+			/// <summary>
+			/// <para>The name for the first topic to process</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String TopicName 
+			{
+				get => _topicName;
+				private set 
+				{
+					_topicName = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The name for the first topic to process</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Cursor WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
+			private Int32 _partitionIndex = Int32.Default;
+			/// <summary>
+			/// <para>The partition index to start with</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 PartitionIndex 
+			{
+				get => _partitionIndex;
+				private set 
+				{
+					_partitionIndex = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partition index to start with</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Cursor WithPartitionIndex(Int32 partitionIndex)
+			{
+				PartitionIndex = partitionIndex;
 				return this;
 			}
 		}
@@ -30975,7 +36441,7 @@ namespace Kafka.Protocol
 		public EndTxnRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"EndTxnRequest does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"EndTxnRequest does not support version {version}. Valid versions are: 0-4");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -30985,7 +36451,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(26);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(3);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -31152,7 +36618,7 @@ namespace Kafka.Protocol
 		public EndTxnResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"EndTxnResponse does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"EndTxnResponse does not support version {version}. Valid versions are: 0-4");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -31162,7 +36628,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(26);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(3);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -31814,7 +37280,7 @@ namespace Kafka.Protocol
 		public FetchRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 0-15");
+				throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 0-16");
 
 			Version = version;
 			IsFlexibleVersion = version >= 12;
@@ -31824,7 +37290,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(1);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(15);
+		public static readonly Int16 MaxVersion = Int16.From(16);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -32987,7 +38453,7 @@ namespace Kafka.Protocol
 		public FetchResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 0-15");
+				throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 0-16");
 
 			Version = version;
 			IsFlexibleVersion = version >= 12;
@@ -32997,7 +38463,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(1);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(15);
+		public static readonly Int16 MaxVersion = Int16.From(16);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -33012,7 +38478,14 @@ namespace Kafka.Protocol
 
 		private Tags.TagSection CreateTagSection()
 		{
-			return new Tags.TagSection();
+			var tags = new List<Tags.TaggedField>();
+			if (Version >= 16 && _nodeEndpointsCollectionIsSet) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 0,
+					Field = _nodeEndpointsCollection
+				});
+			return new Tags.TagSection(tags.ToArray());
 		}
 
 		internal override int GetSize() =>
@@ -33048,6 +38521,17 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
+						case 0:
+							if (instance.Version >= 16) 
+								instance.NodeEndpointsCollection = await Map<Int32, NodeEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => NodeEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
+							else
+								throw new InvalidOperationException($"Field NodeEndpointsCollection is not supported for version {instance.Version}");
+							{
+								var size = instance._nodeEndpointsCollection.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field NodeEndpointsCollection read length {tag.Length} but had actual length of {size}");
+							}
+							break;
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchResponse is unknown");
 					}
@@ -34235,7 +39719,7 @@ namespace Kafka.Protocol
 					return this;
 				}
 
-				private NullableRecordBatch _records = default!;
+				private NullableRecordBatch _records = NullableRecordBatch.Default;
 				/// <summary>
 				/// <para>The record data.</para>
 				/// <para>Versions: 0+</para>
@@ -34258,6 +39742,244 @@ namespace Kafka.Protocol
 					Records = records;
 					return this;
 				}
+			}
+		}
+
+		private bool _nodeEndpointsCollectionIsSet;
+		private Map<Int32, NodeEndpoint> _nodeEndpointsCollection = Map<Int32, NodeEndpoint>.Default;
+		/// <summary>
+		/// <para>Endpoints for all current-leaders enumerated in PartitionData, with errors NOT_LEADER_OR_FOLLOWER & FENCED_LEADER_EPOCH.</para>
+		/// <para>Versions: 16+</para>
+		/// </summary>
+		public Map<Int32, NodeEndpoint> NodeEndpointsCollection 
+		{
+			get => _nodeEndpointsCollection;
+			private set 
+			{
+				if (Version >= 16 == false)
+					throw new UnsupportedVersionException($"NodeEndpointsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 16+");
+
+				_nodeEndpointsCollection = value;
+				_nodeEndpointsCollectionIsSet = true;
+			}
+		}
+
+		/// <summary>
+		/// <para>Endpoints for all current-leaders enumerated in PartitionData, with errors NOT_LEADER_OR_FOLLOWER & FENCED_LEADER_EPOCH.</para>
+		/// <para>Versions: 16+</para>
+		/// </summary>
+		public FetchResponse WithNodeEndpointsCollection(params Func<NodeEndpoint, NodeEndpoint>[] createFields)
+		{
+			NodeEndpointsCollection = createFields
+				.Select(createField => createField(new NodeEndpoint(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public delegate NodeEndpoint CreateNodeEndpoint(NodeEndpoint field);
+
+		/// <summary>
+		/// <para>Endpoints for all current-leaders enumerated in PartitionData, with errors NOT_LEADER_OR_FOLLOWER & FENCED_LEADER_EPOCH.</para>
+		/// <para>Versions: 16+</para>
+		/// </summary>
+		public FetchResponse WithNodeEndpointsCollection(IEnumerable<CreateNodeEndpoint> createFields)
+		{
+			NodeEndpointsCollection = createFields
+				.Select(createField => createField(new NodeEndpoint(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public class NodeEndpoint : ISerialize
+		{
+			internal NodeEndpoint(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = version >= 12;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				(Version >= 16 ? 
+					_nodeId.GetSize(IsFlexibleVersion):
+					0) +
+				(Version >= 16 ? 
+					_host.GetSize(IsFlexibleVersion):
+					0) +
+				(Version >= 16 ? 
+					_port.GetSize(IsFlexibleVersion):
+					0) +
+				(Version >= 16 ? 
+					_rack.GetSize(IsFlexibleVersion):
+					0) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<NodeEndpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new NodeEndpoint(version);
+				if (instance.Version >= 16) 
+					instance.NodeId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 16) 
+					instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 16) 
+					instance.Port = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 16) 
+					instance.Rack = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for NodeEndpoint is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				if (Version >= 16)
+					await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 16)
+					await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 16)
+					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 16)
+					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int32 _nodeId = Int32.Default;
+			/// <summary>
+			/// <para>The ID of the associated node.</para>
+			/// <para>Versions: 16+</para>
+			/// </summary>
+			public Int32 NodeId 
+			{
+				get => _nodeId;
+				private set 
+				{
+					if (Version >= 16 == false)
+						throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 16+");
+
+					_nodeId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The ID of the associated node.</para>
+			/// <para>Versions: 16+</para>
+			/// </summary>
+			public NodeEndpoint WithNodeId(Int32 nodeId)
+			{
+				NodeId = nodeId;
+				return this;
+			}
+
+			private String _host = String.Default;
+			/// <summary>
+			/// <para>The node's hostname.</para>
+			/// <para>Versions: 16+</para>
+			/// </summary>
+			public String Host 
+			{
+				get => _host;
+				private set 
+				{
+					if (Version >= 16 == false)
+						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 16+");
+
+					_host = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The node's hostname.</para>
+			/// <para>Versions: 16+</para>
+			/// </summary>
+			public NodeEndpoint WithHost(String host)
+			{
+				Host = host;
+				return this;
+			}
+
+			private Int32 _port = Int32.Default;
+			/// <summary>
+			/// <para>The node's port.</para>
+			/// <para>Versions: 16+</para>
+			/// </summary>
+			public Int32 Port 
+			{
+				get => _port;
+				private set 
+				{
+					if (Version >= 16 == false)
+						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 16+");
+
+					_port = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The node's port.</para>
+			/// <para>Versions: 16+</para>
+			/// </summary>
+			public NodeEndpoint WithPort(Int32 port)
+			{
+				Port = port;
+				return this;
+			}
+
+			private NullableString _rack = new NullableString(null);
+			/// <summary>
+			/// <para>The rack of the node, or null if it has not been assigned to a rack.</para>
+			/// <para>Versions: 16+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public String? Rack 
+			{
+				get => _rack;
+				private set 
+				{
+					if (Version >= 16 == false)
+						throw new UnsupportedVersionException($"Rack does not support version {Version} and has been defined as not ignorable. Supported versions: 16+");
+
+					if (Version >= 16 == false &&
+						value == null) 
+						throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 16+");
+
+					_rack = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The rack of the node, or null if it has not been assigned to a rack.</para>
+			/// <para>Versions: 16+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public NodeEndpoint WithRack(String? rack)
+			{
+				Rack = rack;
+				return this;
 			}
 		}
 	}
@@ -35572,7 +41294,7 @@ namespace Kafka.Protocol
 					return this;
 				}
 
-				private RecordBatch _unalignedRecords = default!;
+				private RecordBatch _unalignedRecords = RecordBatch.Default;
 				/// <summary>
 				/// <para>Snapshot data in records format which may not be aligned on an offset boundary</para>
 				/// <para>Versions: 0+</para>
@@ -35604,7 +41326,7 @@ namespace Kafka.Protocol
 		public FindCoordinatorRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"FindCoordinatorRequest does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"FindCoordinatorRequest does not support version {version}. Valid versions are: 0-6");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -35614,7 +41336,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(10);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(4);
+		public static readonly Int16 MaxVersion = Int16.From(6);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -35777,7 +41499,7 @@ namespace Kafka.Protocol
 		public FindCoordinatorResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"FindCoordinatorResponse does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"FindCoordinatorResponse does not support version {version}. Valid versions are: 0-6");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -35787,7 +41509,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(10);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(4);
+		public static readonly Int16 MaxVersion = Int16.From(6);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -36343,6 +42065,411 @@ namespace Kafka.Protocol
 				ErrorMessage = errorMessage;
 				return this;
 			}
+		}
+	}
+
+	public class GetTelemetrySubscriptionsRequest : Message, IRespond<GetTelemetrySubscriptionsResponse>
+	{
+		public GetTelemetrySubscriptionsRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"GetTelemetrySubscriptionsRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(71);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_clientInstanceId.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<GetTelemetrySubscriptionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new GetTelemetrySubscriptionsRequest(version);
+			instance.ClientInstanceId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for GetTelemetrySubscriptionsRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _clientInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Uuid _clientInstanceId = Uuid.Default;
+		/// <summary>
+		/// <para>Unique id for this client instance, must be set to 0 on the first request.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Uuid ClientInstanceId 
+		{
+			get => _clientInstanceId;
+			private set 
+			{
+				_clientInstanceId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Unique id for this client instance, must be set to 0 on the first request.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsRequest WithClientInstanceId(Uuid clientInstanceId)
+		{
+			ClientInstanceId = clientInstanceId;
+			return this;
+		}
+
+		public GetTelemetrySubscriptionsResponse Respond()
+			=> new GetTelemetrySubscriptionsResponse(Version);
+	}
+
+	public class GetTelemetrySubscriptionsResponse : Message
+	{
+		public GetTelemetrySubscriptionsResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"GetTelemetrySubscriptionsResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(71);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_clientInstanceId.GetSize(IsFlexibleVersion) +
+			_subscriptionId.GetSize(IsFlexibleVersion) +
+			_acceptedCompressionTypesCollection.GetSize(IsFlexibleVersion) +
+			_pushIntervalMs.GetSize(IsFlexibleVersion) +
+			_telemetryMaxBytes.GetSize(IsFlexibleVersion) +
+			_deltaTemporality.GetSize(IsFlexibleVersion) +
+			_requestedMetricsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<GetTelemetrySubscriptionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new GetTelemetrySubscriptionsResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ClientInstanceId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.SubscriptionId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.AcceptedCompressionTypesCollection = await Array<Int8>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+			instance.PushIntervalMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TelemetryMaxBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.DeltaTemporality = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.RequestedMetricsCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for GetTelemetrySubscriptionsResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _clientInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _subscriptionId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _acceptedCompressionTypesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _pushIntervalMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _telemetryMaxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _deltaTemporality.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _requestedMetricsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private Uuid _clientInstanceId = Uuid.Default;
+		/// <summary>
+		/// <para>Assigned client instance id if ClientInstanceId was 0 in the request, else 0.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Uuid ClientInstanceId 
+		{
+			get => _clientInstanceId;
+			private set 
+			{
+				_clientInstanceId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Assigned client instance id if ClientInstanceId was 0 in the request, else 0.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithClientInstanceId(Uuid clientInstanceId)
+		{
+			ClientInstanceId = clientInstanceId;
+			return this;
+		}
+
+		private Int32 _subscriptionId = Int32.Default;
+		/// <summary>
+		/// <para>Unique identifier for the current subscription set for this client instance.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 SubscriptionId 
+		{
+			get => _subscriptionId;
+			private set 
+			{
+				_subscriptionId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Unique identifier for the current subscription set for this client instance.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithSubscriptionId(Int32 subscriptionId)
+		{
+			SubscriptionId = subscriptionId;
+			return this;
+		}
+
+		private Array<Int8> _acceptedCompressionTypesCollection = Array.Empty<Int8>();
+		/// <summary>
+		/// <para>Compression types that broker accepts for the PushTelemetryRequest.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<Int8> AcceptedCompressionTypesCollection 
+		{
+			get => _acceptedCompressionTypesCollection;
+			private set 
+			{
+				_acceptedCompressionTypesCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Compression types that broker accepts for the PushTelemetryRequest.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithAcceptedCompressionTypesCollection(Array<Int8> acceptedCompressionTypesCollection)
+		{
+			AcceptedCompressionTypesCollection = acceptedCompressionTypesCollection;
+			return this;
+		}
+
+		private Int32 _pushIntervalMs = Int32.Default;
+		/// <summary>
+		/// <para>Configured push interval, which is the lowest configured interval in the current subscription set.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 PushIntervalMs 
+		{
+			get => _pushIntervalMs;
+			private set 
+			{
+				_pushIntervalMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Configured push interval, which is the lowest configured interval in the current subscription set.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithPushIntervalMs(Int32 pushIntervalMs)
+		{
+			PushIntervalMs = pushIntervalMs;
+			return this;
+		}
+
+		private Int32 _telemetryMaxBytes = Int32.Default;
+		/// <summary>
+		/// <para>The maximum bytes of binary data the broker accepts in PushTelemetryRequest.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 TelemetryMaxBytes 
+		{
+			get => _telemetryMaxBytes;
+			private set 
+			{
+				_telemetryMaxBytes = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The maximum bytes of binary data the broker accepts in PushTelemetryRequest.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithTelemetryMaxBytes(Int32 telemetryMaxBytes)
+		{
+			TelemetryMaxBytes = telemetryMaxBytes;
+			return this;
+		}
+
+		private Boolean _deltaTemporality = Boolean.Default;
+		/// <summary>
+		/// <para>Flag to indicate monotonic/counter metrics are to be emitted as deltas or cumulative values</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Boolean DeltaTemporality 
+		{
+			get => _deltaTemporality;
+			private set 
+			{
+				_deltaTemporality = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Flag to indicate monotonic/counter metrics are to be emitted as deltas or cumulative values</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithDeltaTemporality(Boolean deltaTemporality)
+		{
+			DeltaTemporality = deltaTemporality;
+			return this;
+		}
+
+		private Array<String> _requestedMetricsCollection = Array.Empty<String>();
+		/// <summary>
+		/// <para>Requested metrics prefix string match. Empty array: No metrics subscribed, Array[0] empty string: All metrics subscribed.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<String> RequestedMetricsCollection 
+		{
+			get => _requestedMetricsCollection;
+			private set 
+			{
+				_requestedMetricsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Requested metrics prefix string match. Empty array: No metrics subscribed, Array[0] empty string: All metrics subscribed.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public GetTelemetrySubscriptionsResponse WithRequestedMetricsCollection(Array<String> requestedMetricsCollection)
+		{
+			RequestedMetricsCollection = requestedMetricsCollection;
+			return this;
 		}
 	}
 
@@ -37374,12 +43501,768 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class InitializeShareGroupStateRequest : Message, IRespond<InitializeShareGroupStateResponse>
+	{
+		public InitializeShareGroupStateRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"InitializeShareGroupStateRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(83);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupId.GetSize(IsFlexibleVersion) +
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<InitializeShareGroupStateRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new InitializeShareGroupStateRequest(version);
+			instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TopicsCollection = await Array<InitializeStateData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => InitializeStateData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for InitializeShareGroupStateRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _groupId = String.Default;
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String GroupId 
+		{
+			get => _groupId;
+			private set 
+			{
+				_groupId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public InitializeShareGroupStateRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
+		private Array<InitializeStateData> _topicsCollection = Array.Empty<InitializeStateData>();
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<InitializeStateData> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public InitializeShareGroupStateRequest WithTopicsCollection(params Func<InitializeStateData, InitializeStateData>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new InitializeStateData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate InitializeStateData CreateInitializeStateData(InitializeStateData field);
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public InitializeShareGroupStateRequest WithTopicsCollection(IEnumerable<CreateInitializeStateData> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new InitializeStateData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class InitializeStateData : ISerialize
+		{
+			internal InitializeStateData(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<InitializeStateData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new InitializeStateData(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for InitializeStateData is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public InitializeStateData WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionData> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public InitializeStateData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public InitializeStateData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionData : ISerialize
+			{
+				internal PartitionData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_stateEpoch.GetSize(IsFlexibleVersion) +
+					_startOffset.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionData(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StateEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StartOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _stateEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _startOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int32 _stateEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The state epoch for this share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 StateEpoch 
+				{
+					get => _stateEpoch;
+					private set 
+					{
+						_stateEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The state epoch for this share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithStateEpoch(Int32 stateEpoch)
+				{
+					StateEpoch = stateEpoch;
+					return this;
+				}
+
+				private Int64 _startOffset = Int64.Default;
+				/// <summary>
+				/// <para>The share-partition start offset, or -1 if the start offset is not being initialized.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int64 StartOffset 
+				{
+					get => _startOffset;
+					private set 
+					{
+						_startOffset = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The share-partition start offset, or -1 if the start offset is not being initialized.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithStartOffset(Int64 startOffset)
+				{
+					StartOffset = startOffset;
+					return this;
+				}
+			}
+		}
+
+		public InitializeShareGroupStateResponse Respond()
+			=> new InitializeShareGroupStateResponse(Version);
+	}
+
+	public class InitializeShareGroupStateResponse : Message
+	{
+		public InitializeShareGroupStateResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"InitializeShareGroupStateResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(83);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_resultsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<InitializeShareGroupStateResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new InitializeShareGroupStateResponse(version);
+			instance.ResultsCollection = await Array<InitializeStateResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => InitializeStateResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for InitializeShareGroupStateResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Array<InitializeStateResult> _resultsCollection = Array.Empty<InitializeStateResult>();
+		/// <summary>
+		/// <para>The initialization results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<InitializeStateResult> ResultsCollection 
+		{
+			get => _resultsCollection;
+			private set 
+			{
+				_resultsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The initialization results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public InitializeShareGroupStateResponse WithResultsCollection(params Func<InitializeStateResult, InitializeStateResult>[] createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new InitializeStateResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate InitializeStateResult CreateInitializeStateResult(InitializeStateResult field);
+
+		/// <summary>
+		/// <para>The initialization results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public InitializeShareGroupStateResponse WithResultsCollection(IEnumerable<CreateInitializeStateResult> createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new InitializeStateResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class InitializeStateResult : ISerialize
+		{
+			internal InitializeStateResult(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<InitializeStateResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new InitializeStateResult(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for InitializeStateResult is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public InitializeStateResult WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionResult> _partitionsCollection = Array.Empty<PartitionResult>();
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionResult> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public InitializeStateResult WithPartitionsCollection(params Func<PartitionResult, PartitionResult>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionResult CreatePartitionResult(PartitionResult field);
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public InitializeStateResult WithPartitionsCollection(IEnumerable<CreatePartitionResult> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionResult : ISerialize
+			{
+				internal PartitionResult(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_errorCode.GetSize(IsFlexibleVersion) +
+					_errorMessage.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionResult(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResult is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int16 _errorCode = Int16.Default;
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 ErrorCode 
+				{
+					get => _errorCode;
+					private set 
+					{
+						_errorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
+				private NullableString _errorMessage = new NullableString(null);
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? ErrorMessage 
+				{
+					get => _errorMessage;
+					private set 
+					{
+						_errorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public PartitionResult WithErrorMessage(String? errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
+				}
+			}
+		}
+	}
+
 	public class InitProducerIdRequest : Message, IRespond<InitProducerIdResponse>
 	{
 		public InitProducerIdRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"InitProducerIdRequest does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"InitProducerIdRequest does not support version {version}. Valid versions are: 0-5");
 
 			Version = version;
 			IsFlexibleVersion = version >= 2;
@@ -37389,7 +44272,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(22);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(4);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -37574,7 +44457,7 @@ namespace Kafka.Protocol
 		public InitProducerIdResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"InitProducerIdResponse does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"InitProducerIdResponse does not support version {version}. Valid versions are: 0-5");
 
 			Version = version;
 			IsFlexibleVersion = version >= 2;
@@ -37584,7 +44467,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(22);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(4);
+		public static readonly Int16 MaxVersion = Int16.From(5);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -40815,12 +47698,323 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class ListClientMetricsResourcesRequest : Message, IRespond<ListClientMetricsResourcesResponse>
+	{
+		public ListClientMetricsResourcesRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ListClientMetricsResourcesRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(74);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+		 +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ListClientMetricsResourcesRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ListClientMetricsResourcesRequest(version);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListClientMetricsResourcesRequest is unknown");
+					}
+				}
+			}
+
+			return await new ValueTask<ListClientMetricsResourcesRequest>(instance);
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await Task.CompletedTask;
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		public ListClientMetricsResourcesResponse Respond()
+			=> new ListClientMetricsResourcesResponse(Version);
+	}
+
+	public class ListClientMetricsResourcesResponse : Message
+	{
+		public ListClientMetricsResourcesResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ListClientMetricsResourcesResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(74);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_clientMetricsResourcesCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ListClientMetricsResourcesResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ListClientMetricsResourcesResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ClientMetricsResourcesCollection = await Array<ClientMetricsResource>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ClientMetricsResource.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ListClientMetricsResourcesResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _clientMetricsResourcesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListClientMetricsResourcesResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListClientMetricsResourcesResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private Array<ClientMetricsResource> _clientMetricsResourcesCollection = Array.Empty<ClientMetricsResource>();
+		/// <summary>
+		/// <para>Each client metrics resource in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<ClientMetricsResource> ClientMetricsResourcesCollection 
+		{
+			get => _clientMetricsResourcesCollection;
+			private set 
+			{
+				_clientMetricsResourcesCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Each client metrics resource in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListClientMetricsResourcesResponse WithClientMetricsResourcesCollection(params Func<ClientMetricsResource, ClientMetricsResource>[] createFields)
+		{
+			ClientMetricsResourcesCollection = createFields
+				.Select(createField => createField(new ClientMetricsResource(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate ClientMetricsResource CreateClientMetricsResource(ClientMetricsResource field);
+
+		/// <summary>
+		/// <para>Each client metrics resource in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ListClientMetricsResourcesResponse WithClientMetricsResourcesCollection(IEnumerable<CreateClientMetricsResource> createFields)
+		{
+			ClientMetricsResourcesCollection = createFields
+				.Select(createField => createField(new ClientMetricsResource(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class ClientMetricsResource : ISerialize
+		{
+			internal ClientMetricsResource(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_name.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<ClientMetricsResource> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new ClientMetricsResource(version);
+				instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ClientMetricsResource is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private String _name = String.Default;
+			/// <summary>
+			/// <para>The resource name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Name 
+			{
+				get => _name;
+				private set 
+				{
+					_name = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The resource name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ClientMetricsResource WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+		}
+	}
+
 	public class ListGroupsRequest : Message, IRespond<ListGroupsResponse>
 	{
 		public ListGroupsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"ListGroupsRequest does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"ListGroupsRequest does not support version {version}. Valid versions are: 0-6");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -40830,7 +48024,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(16);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(4);
+		public static readonly Int16 MaxVersion = Int16.From(6);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -40852,6 +48046,9 @@ namespace Kafka.Protocol
 			(Version >= 4 ? 
 				_statesFilterCollection.GetSize(IsFlexibleVersion):
 				0) +
+			(Version >= 5 ? 
+				_typesFilterCollection.GetSize(IsFlexibleVersion):
+				0) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
 				0);
@@ -40861,6 +48058,8 @@ namespace Kafka.Protocol
 			var instance = new ListGroupsRequest(version);
 			if (instance.Version >= 4) 
 				instance.StatesFilterCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+			if (instance.Version >= 5) 
+				instance.TypesFilterCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
 			{
@@ -40882,6 +48081,8 @@ namespace Kafka.Protocol
 		{
 			if (Version >= 4)
 				await _statesFilterCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (Version >= 5)
+				await _typesFilterCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -40889,7 +48090,7 @@ namespace Kafka.Protocol
 
 		private Array<String> _statesFilterCollection = Array.Empty<String>();
 		/// <summary>
-		/// <para>The states of the groups we want to list. If empty all groups are returned with their state.</para>
+		/// <para>The states of the groups we want to list. If empty, all groups are returned with their state.</para>
 		/// <para>Versions: 4+</para>
 		/// </summary>
 		public Array<String> StatesFilterCollection 
@@ -40905,12 +48106,39 @@ namespace Kafka.Protocol
 		}
 
 		/// <summary>
-		/// <para>The states of the groups we want to list. If empty all groups are returned with their state.</para>
+		/// <para>The states of the groups we want to list. If empty, all groups are returned with their state.</para>
 		/// <para>Versions: 4+</para>
 		/// </summary>
 		public ListGroupsRequest WithStatesFilterCollection(Array<String> statesFilterCollection)
 		{
 			StatesFilterCollection = statesFilterCollection;
+			return this;
+		}
+
+		private Array<String> _typesFilterCollection = Array.Empty<String>();
+		/// <summary>
+		/// <para>The types of the groups we want to list. If empty, all groups are returned with their type.</para>
+		/// <para>Versions: 5+</para>
+		/// </summary>
+		public Array<String> TypesFilterCollection 
+		{
+			get => _typesFilterCollection;
+			private set 
+			{
+				if (Version >= 5 == false)
+					throw new UnsupportedVersionException($"TypesFilterCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 5+");
+
+				_typesFilterCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The types of the groups we want to list. If empty, all groups are returned with their type.</para>
+		/// <para>Versions: 5+</para>
+		/// </summary>
+		public ListGroupsRequest WithTypesFilterCollection(Array<String> typesFilterCollection)
+		{
+			TypesFilterCollection = typesFilterCollection;
 			return this;
 		}
 
@@ -40923,7 +48151,7 @@ namespace Kafka.Protocol
 		public ListGroupsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"ListGroupsResponse does not support version {version}. Valid versions are: 0-4");
+				throw new UnsupportedVersionException($"ListGroupsResponse does not support version {version}. Valid versions are: 0-6");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -40933,7 +48161,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(16);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(4);
+		public static readonly Int16 MaxVersion = Int16.From(6);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -41107,6 +48335,9 @@ namespace Kafka.Protocol
 				(Version >= 4 ? 
 					_groupState.GetSize(IsFlexibleVersion):
 					0) +
+				(Version >= 5 ? 
+					_groupType.GetSize(IsFlexibleVersion):
+					0) +
 				(IsFlexibleVersion ? 
 					CreateTagSection().GetSize() :
 					0);
@@ -41118,6 +48349,8 @@ namespace Kafka.Protocol
 				instance.ProtocolType = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 4) 
 					instance.GroupState = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 5) 
+					instance.GroupType = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (instance.IsFlexibleVersion)
 				{
@@ -41142,6 +48375,8 @@ namespace Kafka.Protocol
 				await _protocolType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 4)
 					await _groupState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 5)
+					await _groupType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 				if (IsFlexibleVersion)
 					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -41216,6 +48451,30 @@ namespace Kafka.Protocol
 			public ListedGroup WithGroupState(String groupState)
 			{
 				GroupState = groupState;
+				return this;
+			}
+
+			private String _groupType = String.Default;
+			/// <summary>
+			/// <para>The group type name.</para>
+			/// <para>Versions: 5+</para>
+			/// </summary>
+			public String GroupType 
+			{
+				get => _groupType;
+				private set 
+				{
+					_groupType = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The group type name.</para>
+			/// <para>Versions: 5+</para>
+			/// </summary>
+			public ListedGroup WithGroupType(String groupType)
+			{
+				GroupType = groupType;
 				return this;
 			}
 		}
@@ -41301,7 +48560,7 @@ namespace Kafka.Protocol
 
 		private Int32 _replicaId = Int32.Default;
 		/// <summary>
-		/// <para>The broker ID of the requestor, or -1 if this request is being made by a normal consumer.</para>
+		/// <para>The broker ID of the requester, or -1 if this request is being made by a normal consumer.</para>
 		/// <para>Versions: 0+</para>
 		/// </summary>
 		public Int32 ReplicaId 
@@ -41314,7 +48573,7 @@ namespace Kafka.Protocol
 		}
 
 		/// <summary>
-		/// <para>The broker ID of the requestor, or -1 if this request is being made by a normal consumer.</para>
+		/// <para>The broker ID of the requester, or -1 if this request is being made by a normal consumer.</para>
 		/// <para>Versions: 0+</para>
 		/// </summary>
 		public ListOffsetsRequest WithReplicaId(Int32 replicaId)
@@ -42919,7 +50178,7 @@ namespace Kafka.Protocol
 		public ListTransactionsRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"ListTransactionsRequest does not support version {version}. Valid versions are: 0");
+				throw new UnsupportedVersionException($"ListTransactionsRequest does not support version {version}. Valid versions are: 0-1");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -42929,7 +50188,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(66);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -42950,6 +50209,9 @@ namespace Kafka.Protocol
 		internal override int GetSize() =>
 			_stateFiltersCollection.GetSize(IsFlexibleVersion) +
 			_producerIdFiltersCollection.GetSize(IsFlexibleVersion) +
+			(Version >= 1 ? 
+				_durationFilter.GetSize(IsFlexibleVersion):
+				0) +
 			(IsFlexibleVersion ? 
 				CreateTagSection().GetSize() :
 				0);
@@ -42959,6 +50221,8 @@ namespace Kafka.Protocol
 			var instance = new ListTransactionsRequest(version);
 			instance.StateFiltersCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
 			instance.ProducerIdFiltersCollection = await Array<Int64>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+			if (instance.Version >= 1) 
+				instance.DurationFilter = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (instance.IsFlexibleVersion)
 			{
@@ -42980,6 +50244,8 @@ namespace Kafka.Protocol
 		{
 			await _stateFiltersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			await _producerIdFiltersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			if (Version >= 1)
+				await _durationFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
 			if (IsFlexibleVersion)
 				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -43033,6 +50299,35 @@ namespace Kafka.Protocol
 			return this;
 		}
 
+		private Int64 _durationFilter = new Int64(-1);
+		/// <summary>
+		/// <para>Duration (in millis) to filter by: if < 0, all transactions will be returned; otherwise, only transactions running longer than this duration will be returned</para>
+		/// <para>Versions: 1+</para>
+		/// <para>Default: -1</para>
+		/// </summary>
+		public Int64 DurationFilter 
+		{
+			get => _durationFilter;
+			private set 
+			{
+				if (Version >= 1 == false)
+					throw new UnsupportedVersionException($"DurationFilter does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+
+				_durationFilter = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Duration (in millis) to filter by: if < 0, all transactions will be returned; otherwise, only transactions running longer than this duration will be returned</para>
+		/// <para>Versions: 1+</para>
+		/// <para>Default: -1</para>
+		/// </summary>
+		public ListTransactionsRequest WithDurationFilter(Int64 durationFilter)
+		{
+			DurationFilter = durationFilter;
+			return this;
+		}
+
 		public ListTransactionsResponse Respond()
 			=> new ListTransactionsResponse(Version);
 	}
@@ -43042,7 +50337,7 @@ namespace Kafka.Protocol
 		public ListTransactionsResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"ListTransactionsResponse does not support version {version}. Valid versions are: 0");
+				throw new UnsupportedVersionException($"ListTransactionsResponse does not support version {version}. Valid versions are: 0-1");
 
 			Version = version;
 			IsFlexibleVersion = true;
@@ -43052,7 +50347,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(66);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(1);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -43808,7 +51103,7 @@ namespace Kafka.Protocol
 
 		private Map<Int32, MetadataResponseBroker> _brokersCollection = Map<Int32, MetadataResponseBroker>.Default;
 		/// <summary>
-		/// <para>Each broker in the response.</para>
+		/// <para>A list of brokers present in the cluster.</para>
 		/// <para>Versions: 0+</para>
 		/// </summary>
 		public Map<Int32, MetadataResponseBroker> BrokersCollection 
@@ -43821,7 +51116,7 @@ namespace Kafka.Protocol
 		}
 
 		/// <summary>
-		/// <para>Each broker in the response.</para>
+		/// <para>A list of brokers present in the cluster.</para>
 		/// <para>Versions: 0+</para>
 		/// </summary>
 		public MetadataResponse WithBrokersCollection(params Func<MetadataResponseBroker, MetadataResponseBroker>[] createFields)
@@ -43835,7 +51130,7 @@ namespace Kafka.Protocol
 		public delegate MetadataResponseBroker CreateMetadataResponseBroker(MetadataResponseBroker field);
 
 		/// <summary>
-		/// <para>Each broker in the response.</para>
+		/// <para>A list of brokers present in the cluster.</para>
 		/// <para>Versions: 0+</para>
 		/// </summary>
 		public MetadataResponse WithBrokersCollection(IEnumerable<CreateMetadataResponseBroker> createFields)
@@ -44217,7 +51512,7 @@ namespace Kafka.Protocol
 
 			private NullableString _name = NullableString.Default;
 			/// <summary>
-			/// <para>The topic name.</para>
+			/// <para>The topic name. Null for non-existing topics queried by ID. This is never null when ErrorCode is zero. One of Name and TopicId is always populated.</para>
 			/// <para>Versions: 0+</para>
 			/// </summary>
 			public String? Name 
@@ -44234,7 +51529,7 @@ namespace Kafka.Protocol
 			}
 
 			/// <summary>
-			/// <para>The topic name.</para>
+			/// <para>The topic name. Null for non-existing topics queried by ID. This is never null when ErrorCode is zero. One of Name and TopicId is always populated.</para>
 			/// <para>Versions: 0+</para>
 			/// </summary>
 			public MetadataResponseTopic WithName(String? name)
@@ -44245,7 +51540,7 @@ namespace Kafka.Protocol
 
 			private Uuid _topicId = Uuid.Default;
 			/// <summary>
-			/// <para>The topic id.</para>
+			/// <para>The topic id. Zero for non-existing topics queried by name. This is never zero when ErrorCode is zero. One of Name and TopicId is always populated.</para>
 			/// <para>Versions: 10+</para>
 			/// </summary>
 			public Uuid TopicId 
@@ -44258,7 +51553,7 @@ namespace Kafka.Protocol
 			}
 
 			/// <summary>
-			/// <para>The topic id.</para>
+			/// <para>The topic id. Zero for non-existing topics queried by name. This is never zero when ErrorCode is zero. One of Name and TopicId is always populated.</para>
 			/// <para>Versions: 10+</para>
 			/// </summary>
 			public MetadataResponseTopic WithTopicId(Uuid topicId)
@@ -44648,7 +51943,7 @@ namespace Kafka.Protocol
 		public OffsetCommitRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 0-8");
+				throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 0-9");
 
 			Version = version;
 			IsFlexibleVersion = version >= 8;
@@ -44658,7 +51953,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(8);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(8);
+		public static readonly Int16 MaxVersion = Int16.From(9);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -44679,7 +51974,7 @@ namespace Kafka.Protocol
 		internal override int GetSize() =>
 			_groupId.GetSize(IsFlexibleVersion) +
 			(Version >= 1 ? 
-				_generationId.GetSize(IsFlexibleVersion):
+				_generationIdOrMemberEpoch.GetSize(IsFlexibleVersion):
 				0) +
 			(Version >= 1 ? 
 				_memberId.GetSize(IsFlexibleVersion):
@@ -44700,7 +51995,7 @@ namespace Kafka.Protocol
 			var instance = new OffsetCommitRequest(version);
 			instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 1) 
-				instance.GenerationId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.GenerationIdOrMemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 1) 
 				instance.MemberId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (instance.Version >= 7) 
@@ -44729,7 +52024,7 @@ namespace Kafka.Protocol
 		{
 			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 1)
-				await _generationId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _generationIdOrMemberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 1)
 				await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 			if (Version >= 7)
@@ -44766,29 +52061,29 @@ namespace Kafka.Protocol
 			return this;
 		}
 
-		private Int32 _generationId = new Int32(-1);
+		private Int32 _generationIdOrMemberEpoch = new Int32(-1);
 		/// <summary>
-		/// <para>The generation of the group.</para>
+		/// <para>The generation of the group if using the classic group protocol or the member epoch if using the consumer protocol.</para>
 		/// <para>Versions: 1+</para>
 		/// <para>Default: -1</para>
 		/// </summary>
-		public Int32 GenerationId 
+		public Int32 GenerationIdOrMemberEpoch 
 		{
-			get => _generationId;
+			get => _generationIdOrMemberEpoch;
 			private set 
 			{
-				_generationId = value;
+				_generationIdOrMemberEpoch = value;
 			}
 		}
 
 		/// <summary>
-		/// <para>The generation of the group.</para>
+		/// <para>The generation of the group if using the classic group protocol or the member epoch if using the consumer protocol.</para>
 		/// <para>Versions: 1+</para>
 		/// <para>Default: -1</para>
 		/// </summary>
-		public OffsetCommitRequest WithGenerationId(Int32 generationId)
+		public OffsetCommitRequest WithGenerationIdOrMemberEpoch(Int32 generationIdOrMemberEpoch)
 		{
-			GenerationId = generationId;
+			GenerationIdOrMemberEpoch = generationIdOrMemberEpoch;
 			return this;
 		}
 
@@ -45246,7 +52541,7 @@ namespace Kafka.Protocol
 		public OffsetCommitResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"OffsetCommitResponse does not support version {version}. Valid versions are: 0-8");
+				throw new UnsupportedVersionException($"OffsetCommitResponse does not support version {version}. Valid versions are: 0-9");
 
 			Version = version;
 			IsFlexibleVersion = version >= 8;
@@ -45256,7 +52551,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(8);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(8);
+		public static readonly Int16 MaxVersion = Int16.From(9);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -46339,7 +53634,7 @@ namespace Kafka.Protocol
 		public OffsetFetchRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 0-8");
+				throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 0-9");
 
 			Version = version;
 			IsFlexibleVersion = version >= 6;
@@ -46349,7 +53644,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(9);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(8);
+		public static readonly Int16 MaxVersion = Int16.From(9);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -46684,6 +53979,12 @@ namespace Kafka.Protocol
 				(Version >= 8 ? 
 					_groupId.GetSize(IsFlexibleVersion):
 					0) +
+				(Version >= 9 ? 
+					_memberId.GetSize(IsFlexibleVersion):
+					0) +
+				(Version >= 9 ? 
+					_memberEpoch.GetSize(IsFlexibleVersion):
+					0) +
 				(Version >= 8 ? 
 					_topicsCollection.GetSize(IsFlexibleVersion):
 					0) +
@@ -46696,6 +53997,10 @@ namespace Kafka.Protocol
 				var instance = new OffsetFetchRequestGroup(version);
 				if (instance.Version >= 8) 
 					instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 9) 
+					instance.MemberId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 9) 
+					instance.MemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (instance.Version >= 8) 
 					instance.TopicsCollection = await NullableArray<OffsetFetchRequestTopics>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => OffsetFetchRequestTopics.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
 
@@ -46720,6 +54025,10 @@ namespace Kafka.Protocol
 			{
 				if (Version >= 8)
 					await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 9)
+					await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 9)
+					await _memberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 				if (Version >= 8)
 					await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
 
@@ -46751,6 +54060,62 @@ namespace Kafka.Protocol
 			public OffsetFetchRequestGroup WithGroupId(String groupId)
 			{
 				GroupId = groupId;
+				return this;
+			}
+
+			private NullableString _memberId = new NullableString(null);
+			/// <summary>
+			/// <para>The member ID assigned by the group coordinator if using the new consumer protocol (KIP-848).</para>
+			/// <para>Versions: 9+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public String? MemberId 
+			{
+				get => _memberId;
+				private set 
+				{
+					if (Version >= 9 == false &&
+						value == null) 
+						throw new UnsupportedVersionException($"MemberId does not support null for version {Version}. Supported versions for null value: 9+");
+
+					_memberId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The member ID assigned by the group coordinator if using the new consumer protocol (KIP-848).</para>
+			/// <para>Versions: 9+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public OffsetFetchRequestGroup WithMemberId(String? memberId)
+			{
+				MemberId = memberId;
+				return this;
+			}
+
+			private Int32 _memberEpoch = new Int32(-1);
+			/// <summary>
+			/// <para>The member epoch if using the new consumer protocol (KIP-848).</para>
+			/// <para>Versions: 9+</para>
+			/// <para>Default: -1</para>
+			/// </summary>
+			public Int32 MemberEpoch 
+			{
+				get => _memberEpoch;
+				private set 
+				{
+					_memberEpoch = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The member epoch if using the new consumer protocol (KIP-848).</para>
+			/// <para>Versions: 9+</para>
+			/// <para>Default: -1</para>
+			/// </summary>
+			public OffsetFetchRequestGroup WithMemberEpoch(Int32 memberEpoch)
+			{
+				MemberEpoch = memberEpoch;
 				return this;
 			}
 
@@ -46959,7 +54324,7 @@ namespace Kafka.Protocol
 		public OffsetFetchResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"OffsetFetchResponse does not support version {version}. Valid versions are: 0-8");
+				throw new UnsupportedVersionException($"OffsetFetchResponse does not support version {version}. Valid versions are: 0-9");
 
 			Version = version;
 			IsFlexibleVersion = version >= 6;
@@ -46969,7 +54334,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(9);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(8);
+		public static readonly Int16 MaxVersion = Int16.From(9);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -48910,7 +56275,7 @@ namespace Kafka.Protocol
 		public ProduceRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"ProduceRequest does not support version {version}. Valid versions are: 0-9");
+				throw new UnsupportedVersionException($"ProduceRequest does not support version {version}. Valid versions are: 0-11");
 
 			Version = version;
 			IsFlexibleVersion = version >= 9;
@@ -48920,7 +56285,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(9);
+		public static readonly Int16 MaxVersion = Int16.From(11);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -49307,7 +56672,7 @@ namespace Kafka.Protocol
 					return this;
 				}
 
-				private NullableRecordBatch _records = default!;
+				private NullableRecordBatch _records = NullableRecordBatch.Default;
 				/// <summary>
 				/// <para>The record data to be produced.</para>
 				/// <para>Versions: 0+</para>
@@ -49342,7 +56707,7 @@ namespace Kafka.Protocol
 		public ProduceResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"ProduceResponse does not support version {version}. Valid versions are: 0-9");
+				throw new UnsupportedVersionException($"ProduceResponse does not support version {version}. Valid versions are: 0-11");
 
 			Version = version;
 			IsFlexibleVersion = version >= 9;
@@ -49352,7 +56717,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(0);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(9);
+		public static readonly Int16 MaxVersion = Int16.From(11);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -49367,7 +56732,14 @@ namespace Kafka.Protocol
 
 		private Tags.TagSection CreateTagSection()
 		{
-			return new Tags.TagSection();
+			var tags = new List<Tags.TaggedField>();
+			if (Version >= 10 && _nodeEndpointsCollectionIsSet) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 0,
+					Field = _nodeEndpointsCollection
+				});
+			return new Tags.TagSection(tags.ToArray());
 		}
 
 		internal override int GetSize() =>
@@ -49393,6 +56765,17 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
+						case 0:
+							if (instance.Version >= 10) 
+								instance.NodeEndpointsCollection = await Map<Int32, NodeEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => NodeEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
+							else
+								throw new InvalidOperationException($"Field NodeEndpointsCollection is not supported for version {instance.Version}");
+							{
+								var size = instance._nodeEndpointsCollection.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field NodeEndpointsCollection read length {tag.Length} but had actual length of {size}");
+							}
+							break;
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for ProduceResponse is unknown");
 					}
@@ -49585,7 +56968,14 @@ namespace Kafka.Protocol
 
 				private Tags.TagSection CreateTagSection()
 				{
-					return new Tags.TagSection();
+					var tags = new List<Tags.TaggedField>();
+					if (Version >= 10 && _currentLeaderIsSet) 
+						tags.Add(new Tags.TaggedField
+						{
+							Tag = 0,
+							Field = _currentLeader
+						});
+					return new Tags.TagSection(tags.ToArray());
 				}
 
 				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
@@ -49631,6 +57021,17 @@ namespace Kafka.Protocol
 						{
 							switch (tag.Tag)
 							{
+								case 0:
+									if (instance.Version >= 10) 
+										instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+									else
+										throw new InvalidOperationException($"Field CurrentLeader is not supported for version {instance.Version}");
+									{
+										var size = instance._currentLeader.GetSize(true);
+										if (size != tag.Length)
+											throw new CorruptMessageException($"Tagged field CurrentLeader read length {tag.Length} but had actual length of {size}");
+									}
+									break;
 								default:
 									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionProduceResponse is unknown");
 							}
@@ -49977,6 +57378,156 @@ namespace Kafka.Protocol
 					ErrorMessage = errorMessage;
 					return this;
 				}
+
+				private bool _currentLeaderIsSet;
+				private LeaderIdAndEpoch _currentLeader = default!;
+				/// <summary>
+				/// <para>Versions: 10+</para>
+				/// </summary>
+				public LeaderIdAndEpoch CurrentLeader 
+				{
+					get => _currentLeader;
+					private set 
+					{
+						if (Version >= 10 == false)
+							throw new UnsupportedVersionException($"CurrentLeader does not support version {Version} and has been defined as not ignorable. Supported versions: 10+");
+
+						_currentLeader = value;
+						_currentLeaderIsSet = true;
+					}
+				}
+
+				/// <summary>
+				/// <para>Versions: 10+</para>
+				/// </summary>
+				public PartitionProduceResponse WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)
+				{
+					CurrentLeader = createField(new LeaderIdAndEpoch(Version));
+					return this;
+				}
+
+				public class LeaderIdAndEpoch : ISerialize
+				{
+					internal LeaderIdAndEpoch(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = version >= 9;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						(Version >= 10 ? 
+							_leaderId.GetSize(IsFlexibleVersion):
+							0) +
+						(Version >= 10 ? 
+							_leaderEpoch.GetSize(IsFlexibleVersion):
+							0) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new LeaderIdAndEpoch(version);
+						if (instance.Version >= 10) 
+							instance.LeaderId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						if (instance.Version >= 10) 
+							instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderIdAndEpoch is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						if (Version >= 10)
+							await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						if (Version >= 10)
+							await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int32 _leaderId = new Int32(-1);
+					/// <summary>
+					/// <para>The ID of the current leader or -1 if the leader is unknown.</para>
+					/// <para>Versions: 10+</para>
+					/// <para>Default: -1</para>
+					/// </summary>
+					public Int32 LeaderId 
+					{
+						get => _leaderId;
+						private set 
+						{
+							if (Version >= 10 == false)
+								throw new UnsupportedVersionException($"LeaderId does not support version {Version} and has been defined as not ignorable. Supported versions: 10+");
+
+							_leaderId = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The ID of the current leader or -1 if the leader is unknown.</para>
+					/// <para>Versions: 10+</para>
+					/// <para>Default: -1</para>
+					/// </summary>
+					public LeaderIdAndEpoch WithLeaderId(Int32 leaderId)
+					{
+						LeaderId = leaderId;
+						return this;
+					}
+
+					private Int32 _leaderEpoch = new Int32(-1);
+					/// <summary>
+					/// <para>The latest known leader epoch</para>
+					/// <para>Versions: 10+</para>
+					/// <para>Default: -1</para>
+					/// </summary>
+					public Int32 LeaderEpoch 
+					{
+						get => _leaderEpoch;
+						private set 
+						{
+							if (Version >= 10 == false)
+								throw new UnsupportedVersionException($"LeaderEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 10+");
+
+							_leaderEpoch = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The latest known leader epoch</para>
+					/// <para>Versions: 10+</para>
+					/// <para>Default: -1</para>
+					/// </summary>
+					public LeaderIdAndEpoch WithLeaderEpoch(Int32 leaderEpoch)
+					{
+						LeaderEpoch = leaderEpoch;
+						return this;
+					}
+				}
 			}
 		}
 
@@ -50003,6 +57554,2628 @@ namespace Kafka.Protocol
 		public ProduceResponse WithThrottleTimeMs(Int32 throttleTimeMs)
 		{
 			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private bool _nodeEndpointsCollectionIsSet;
+		private Map<Int32, NodeEndpoint> _nodeEndpointsCollection = Map<Int32, NodeEndpoint>.Default;
+		/// <summary>
+		/// <para>Endpoints for all current-leaders enumerated in PartitionProduceResponses, with errors NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 10+</para>
+		/// </summary>
+		public Map<Int32, NodeEndpoint> NodeEndpointsCollection 
+		{
+			get => _nodeEndpointsCollection;
+			private set 
+			{
+				if (Version >= 10 == false)
+					throw new UnsupportedVersionException($"NodeEndpointsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 10+");
+
+				_nodeEndpointsCollection = value;
+				_nodeEndpointsCollectionIsSet = true;
+			}
+		}
+
+		/// <summary>
+		/// <para>Endpoints for all current-leaders enumerated in PartitionProduceResponses, with errors NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 10+</para>
+		/// </summary>
+		public ProduceResponse WithNodeEndpointsCollection(params Func<NodeEndpoint, NodeEndpoint>[] createFields)
+		{
+			NodeEndpointsCollection = createFields
+				.Select(createField => createField(new NodeEndpoint(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public delegate NodeEndpoint CreateNodeEndpoint(NodeEndpoint field);
+
+		/// <summary>
+		/// <para>Endpoints for all current-leaders enumerated in PartitionProduceResponses, with errors NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 10+</para>
+		/// </summary>
+		public ProduceResponse WithNodeEndpointsCollection(IEnumerable<CreateNodeEndpoint> createFields)
+		{
+			NodeEndpointsCollection = createFields
+				.Select(createField => createField(new NodeEndpoint(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public class NodeEndpoint : ISerialize
+		{
+			internal NodeEndpoint(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = version >= 9;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				(Version >= 10 ? 
+					_nodeId.GetSize(IsFlexibleVersion):
+					0) +
+				(Version >= 10 ? 
+					_host.GetSize(IsFlexibleVersion):
+					0) +
+				(Version >= 10 ? 
+					_port.GetSize(IsFlexibleVersion):
+					0) +
+				(Version >= 10 ? 
+					_rack.GetSize(IsFlexibleVersion):
+					0) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<NodeEndpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new NodeEndpoint(version);
+				if (instance.Version >= 10) 
+					instance.NodeId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 10) 
+					instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 10) 
+					instance.Port = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (instance.Version >= 10) 
+					instance.Rack = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for NodeEndpoint is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				if (Version >= 10)
+					await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 10)
+					await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 10)
+					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				if (Version >= 10)
+					await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int32 _nodeId = Int32.Default;
+			/// <summary>
+			/// <para>The ID of the associated node.</para>
+			/// <para>Versions: 10+</para>
+			/// </summary>
+			public Int32 NodeId 
+			{
+				get => _nodeId;
+				private set 
+				{
+					if (Version >= 10 == false)
+						throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 10+");
+
+					_nodeId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The ID of the associated node.</para>
+			/// <para>Versions: 10+</para>
+			/// </summary>
+			public NodeEndpoint WithNodeId(Int32 nodeId)
+			{
+				NodeId = nodeId;
+				return this;
+			}
+
+			private String _host = String.Default;
+			/// <summary>
+			/// <para>The node's hostname.</para>
+			/// <para>Versions: 10+</para>
+			/// </summary>
+			public String Host 
+			{
+				get => _host;
+				private set 
+				{
+					if (Version >= 10 == false)
+						throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 10+");
+
+					_host = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The node's hostname.</para>
+			/// <para>Versions: 10+</para>
+			/// </summary>
+			public NodeEndpoint WithHost(String host)
+			{
+				Host = host;
+				return this;
+			}
+
+			private Int32 _port = Int32.Default;
+			/// <summary>
+			/// <para>The node's port.</para>
+			/// <para>Versions: 10+</para>
+			/// </summary>
+			public Int32 Port 
+			{
+				get => _port;
+				private set 
+				{
+					if (Version >= 10 == false)
+						throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 10+");
+
+					_port = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The node's port.</para>
+			/// <para>Versions: 10+</para>
+			/// </summary>
+			public NodeEndpoint WithPort(Int32 port)
+			{
+				Port = port;
+				return this;
+			}
+
+			private NullableString _rack = new NullableString(null);
+			/// <summary>
+			/// <para>The rack of the node, or null if it has not been assigned to a rack.</para>
+			/// <para>Versions: 10+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public String? Rack 
+			{
+				get => _rack;
+				private set 
+				{
+					if (Version >= 10 == false)
+						throw new UnsupportedVersionException($"Rack does not support version {Version} and has been defined as not ignorable. Supported versions: 10+");
+
+					if (Version >= 10 == false &&
+						value == null) 
+						throw new UnsupportedVersionException($"Rack does not support null for version {Version}. Supported versions for null value: 10+");
+
+					_rack = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The rack of the node, or null if it has not been assigned to a rack.</para>
+			/// <para>Versions: 10+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public NodeEndpoint WithRack(String? rack)
+			{
+				Rack = rack;
+				return this;
+			}
+		}
+	}
+
+	public class PushTelemetryRequest : Message, IRespond<PushTelemetryResponse>
+	{
+		public PushTelemetryRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"PushTelemetryRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(72);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_clientInstanceId.GetSize(IsFlexibleVersion) +
+			_subscriptionId.GetSize(IsFlexibleVersion) +
+			_terminating.GetSize(IsFlexibleVersion) +
+			_compressionType.GetSize(IsFlexibleVersion) +
+			_metrics.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<PushTelemetryRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new PushTelemetryRequest(version);
+			instance.ClientInstanceId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.SubscriptionId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.Terminating = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.CompressionType = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.Metrics = await Bytes.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for PushTelemetryRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _clientInstanceId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _subscriptionId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _terminating.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _compressionType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _metrics.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Uuid _clientInstanceId = Uuid.Default;
+		/// <summary>
+		/// <para>Unique id for this client instance.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Uuid ClientInstanceId 
+		{
+			get => _clientInstanceId;
+			private set 
+			{
+				_clientInstanceId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Unique id for this client instance.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public PushTelemetryRequest WithClientInstanceId(Uuid clientInstanceId)
+		{
+			ClientInstanceId = clientInstanceId;
+			return this;
+		}
+
+		private Int32 _subscriptionId = Int32.Default;
+		/// <summary>
+		/// <para>Unique identifier for the current subscription.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 SubscriptionId 
+		{
+			get => _subscriptionId;
+			private set 
+			{
+				_subscriptionId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Unique identifier for the current subscription.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public PushTelemetryRequest WithSubscriptionId(Int32 subscriptionId)
+		{
+			SubscriptionId = subscriptionId;
+			return this;
+		}
+
+		private Boolean _terminating = Boolean.Default;
+		/// <summary>
+		/// <para>Client is terminating the connection.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Boolean Terminating 
+		{
+			get => _terminating;
+			private set 
+			{
+				_terminating = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Client is terminating the connection.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public PushTelemetryRequest WithTerminating(Boolean terminating)
+		{
+			Terminating = terminating;
+			return this;
+		}
+
+		private Int8 _compressionType = Int8.Default;
+		/// <summary>
+		/// <para>Compression codec used to compress the metrics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int8 CompressionType 
+		{
+			get => _compressionType;
+			private set 
+			{
+				_compressionType = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Compression codec used to compress the metrics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public PushTelemetryRequest WithCompressionType(Int8 compressionType)
+		{
+			CompressionType = compressionType;
+			return this;
+		}
+
+		private Bytes _metrics = Bytes.Default;
+		/// <summary>
+		/// <para>Metrics encoded in OpenTelemetry MetricsData v1 protobuf format.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Bytes Metrics 
+		{
+			get => _metrics;
+			private set 
+			{
+				_metrics = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Metrics encoded in OpenTelemetry MetricsData v1 protobuf format.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public PushTelemetryRequest WithMetrics(Bytes metrics)
+		{
+			Metrics = metrics;
+			return this;
+		}
+
+		public PushTelemetryResponse Respond()
+			=> new PushTelemetryResponse(Version);
+	}
+
+	public class PushTelemetryResponse : Message
+	{
+		public PushTelemetryResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"PushTelemetryResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(72);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<PushTelemetryResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new PushTelemetryResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for PushTelemetryResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public PushTelemetryResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public PushTelemetryResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+	}
+
+	public class ReadShareGroupStateRequest : Message, IRespond<ReadShareGroupStateResponse>
+	{
+		public ReadShareGroupStateRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ReadShareGroupStateRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(84);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupId.GetSize(IsFlexibleVersion) +
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ReadShareGroupStateRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ReadShareGroupStateRequest(version);
+			instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TopicsCollection = await Array<ReadStateData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ReadStateData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReadShareGroupStateRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _groupId = String.Default;
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String GroupId 
+		{
+			get => _groupId;
+			private set 
+			{
+				_groupId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
+		private Array<ReadStateData> _topicsCollection = Array.Empty<ReadStateData>();
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<ReadStateData> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateRequest WithTopicsCollection(params Func<ReadStateData, ReadStateData>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new ReadStateData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate ReadStateData CreateReadStateData(ReadStateData field);
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateRequest WithTopicsCollection(IEnumerable<CreateReadStateData> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new ReadStateData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class ReadStateData : ISerialize
+		{
+			internal ReadStateData(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<ReadStateData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new ReadStateData(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ReadStateData is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateData WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionData> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionData : ISerialize
+			{
+				internal PartitionData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_leaderEpoch.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionData(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int32 _leaderEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The leader epoch of the share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 LeaderEpoch 
+				{
+					get => _leaderEpoch;
+					private set 
+					{
+						_leaderEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The leader epoch of the share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
+				}
+			}
+		}
+
+		public ReadShareGroupStateResponse Respond()
+			=> new ReadShareGroupStateResponse(Version);
+	}
+
+	public class ReadShareGroupStateResponse : Message
+	{
+		public ReadShareGroupStateResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ReadShareGroupStateResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(84);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_resultsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ReadShareGroupStateResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ReadShareGroupStateResponse(version);
+			instance.ResultsCollection = await Array<ReadStateResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ReadStateResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReadShareGroupStateResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Array<ReadStateResult> _resultsCollection = Array.Empty<ReadStateResult>();
+		/// <summary>
+		/// <para>The read results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<ReadStateResult> ResultsCollection 
+		{
+			get => _resultsCollection;
+			private set 
+			{
+				_resultsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The read results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateResponse WithResultsCollection(params Func<ReadStateResult, ReadStateResult>[] createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new ReadStateResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate ReadStateResult CreateReadStateResult(ReadStateResult field);
+
+		/// <summary>
+		/// <para>The read results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateResponse WithResultsCollection(IEnumerable<CreateReadStateResult> createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new ReadStateResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class ReadStateResult : ISerialize
+		{
+			internal ReadStateResult(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<ReadStateResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new ReadStateResult(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ReadStateResult is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateResult WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionResult> _partitionsCollection = Array.Empty<PartitionResult>();
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionResult> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateResult WithPartitionsCollection(params Func<PartitionResult, PartitionResult>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionResult CreatePartitionResult(PartitionResult field);
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateResult WithPartitionsCollection(IEnumerable<CreatePartitionResult> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionResult : ISerialize
+			{
+				internal PartitionResult(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_errorCode.GetSize(IsFlexibleVersion) +
+					_errorMessage.GetSize(IsFlexibleVersion) +
+					_stateEpoch.GetSize(IsFlexibleVersion) +
+					_startOffset.GetSize(IsFlexibleVersion) +
+					_stateBatchesCollection.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionResult(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StateEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StartOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StateBatchesCollection = await Array<StateBatch>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => StateBatch.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResult is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _stateEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _startOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _stateBatchesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int16 _errorCode = Int16.Default;
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 ErrorCode 
+				{
+					get => _errorCode;
+					private set 
+					{
+						_errorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
+				private NullableString _errorMessage = new NullableString(null);
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? ErrorMessage 
+				{
+					get => _errorMessage;
+					private set 
+					{
+						_errorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public PartitionResult WithErrorMessage(String? errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
+				}
+
+				private Int32 _stateEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The state epoch for this share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 StateEpoch 
+				{
+					get => _stateEpoch;
+					private set 
+					{
+						_stateEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The state epoch for this share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithStateEpoch(Int32 stateEpoch)
+				{
+					StateEpoch = stateEpoch;
+					return this;
+				}
+
+				private Int64 _startOffset = Int64.Default;
+				/// <summary>
+				/// <para>The share-partition start offset, which can be -1 if it is not yet initialized.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int64 StartOffset 
+				{
+					get => _startOffset;
+					private set 
+					{
+						_startOffset = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The share-partition start offset, which can be -1 if it is not yet initialized.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithStartOffset(Int64 startOffset)
+				{
+					StartOffset = startOffset;
+					return this;
+				}
+
+				private Array<StateBatch> _stateBatchesCollection = Array.Empty<StateBatch>();
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<StateBatch> StateBatchesCollection 
+				{
+					get => _stateBatchesCollection;
+					private set 
+					{
+						_stateBatchesCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithStateBatchesCollection(params Func<StateBatch, StateBatch>[] createFields)
+				{
+					StateBatchesCollection = createFields
+						.Select(createField => createField(new StateBatch(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public delegate StateBatch CreateStateBatch(StateBatch field);
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithStateBatchesCollection(IEnumerable<CreateStateBatch> createFields)
+				{
+					StateBatchesCollection = createFields
+						.Select(createField => createField(new StateBatch(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public class StateBatch : ISerialize
+				{
+					internal StateBatch(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_firstOffset.GetSize(IsFlexibleVersion) +
+						_lastOffset.GetSize(IsFlexibleVersion) +
+						_deliveryState.GetSize(IsFlexibleVersion) +
+						_deliveryCount.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<StateBatch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new StateBatch(version);
+						instance.FirstOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.LastOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.DeliveryState = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.DeliveryCount = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for StateBatch is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _firstOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _lastOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _deliveryState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _deliveryCount.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int64 _firstOffset = Int64.Default;
+					/// <summary>
+					/// <para>The base offset of this state batch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 FirstOffset 
+					{
+						get => _firstOffset;
+						private set 
+						{
+							_firstOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The base offset of this state batch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public StateBatch WithFirstOffset(Int64 firstOffset)
+					{
+						FirstOffset = firstOffset;
+						return this;
+					}
+
+					private Int64 _lastOffset = Int64.Default;
+					/// <summary>
+					/// <para>The last offset of this state batch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 LastOffset 
+					{
+						get => _lastOffset;
+						private set 
+						{
+							_lastOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The last offset of this state batch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public StateBatch WithLastOffset(Int64 lastOffset)
+					{
+						LastOffset = lastOffset;
+						return this;
+					}
+
+					private Int8 _deliveryState = Int8.Default;
+					/// <summary>
+					/// <para>The state - 0:Available,2:Acked,4:Archived.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int8 DeliveryState 
+					{
+						get => _deliveryState;
+						private set 
+						{
+							_deliveryState = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The state - 0:Available,2:Acked,4:Archived.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public StateBatch WithDeliveryState(Int8 deliveryState)
+					{
+						DeliveryState = deliveryState;
+						return this;
+					}
+
+					private Int16 _deliveryCount = Int16.Default;
+					/// <summary>
+					/// <para>The delivery count.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int16 DeliveryCount 
+					{
+						get => _deliveryCount;
+						private set 
+						{
+							_deliveryCount = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The delivery count.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public StateBatch WithDeliveryCount(Int16 deliveryCount)
+					{
+						DeliveryCount = deliveryCount;
+						return this;
+					}
+				}
+			}
+		}
+	}
+
+	public class ReadShareGroupStateSummaryRequest : Message, IRespond<ReadShareGroupStateSummaryResponse>
+	{
+		public ReadShareGroupStateSummaryRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ReadShareGroupStateSummaryRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(87);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupId.GetSize(IsFlexibleVersion) +
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ReadShareGroupStateSummaryRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ReadShareGroupStateSummaryRequest(version);
+			instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TopicsCollection = await Array<ReadStateSummaryData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ReadStateSummaryData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReadShareGroupStateSummaryRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _groupId = String.Default;
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String GroupId 
+		{
+			get => _groupId;
+			private set 
+			{
+				_groupId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateSummaryRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
+		private Array<ReadStateSummaryData> _topicsCollection = Array.Empty<ReadStateSummaryData>();
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<ReadStateSummaryData> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateSummaryRequest WithTopicsCollection(params Func<ReadStateSummaryData, ReadStateSummaryData>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new ReadStateSummaryData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate ReadStateSummaryData CreateReadStateSummaryData(ReadStateSummaryData field);
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateSummaryRequest WithTopicsCollection(IEnumerable<CreateReadStateSummaryData> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new ReadStateSummaryData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class ReadStateSummaryData : ISerialize
+		{
+			internal ReadStateSummaryData(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<ReadStateSummaryData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new ReadStateSummaryData(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ReadStateSummaryData is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateSummaryData WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionData> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateSummaryData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateSummaryData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionData : ISerialize
+			{
+				internal PartitionData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_leaderEpoch.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionData(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int32 _leaderEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The leader epoch of the share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 LeaderEpoch 
+				{
+					get => _leaderEpoch;
+					private set 
+					{
+						_leaderEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The leader epoch of the share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
+				}
+			}
+		}
+
+		public ReadShareGroupStateSummaryResponse Respond()
+			=> new ReadShareGroupStateSummaryResponse(Version);
+	}
+
+	public class ReadShareGroupStateSummaryResponse : Message
+	{
+		public ReadShareGroupStateSummaryResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ReadShareGroupStateSummaryResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(87);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_resultsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ReadShareGroupStateSummaryResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ReadShareGroupStateSummaryResponse(version);
+			instance.ResultsCollection = await Array<ReadStateSummaryResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ReadStateSummaryResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ReadShareGroupStateSummaryResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Array<ReadStateSummaryResult> _resultsCollection = Array.Empty<ReadStateSummaryResult>();
+		/// <summary>
+		/// <para>The read results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<ReadStateSummaryResult> ResultsCollection 
+		{
+			get => _resultsCollection;
+			private set 
+			{
+				_resultsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The read results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateSummaryResponse WithResultsCollection(params Func<ReadStateSummaryResult, ReadStateSummaryResult>[] createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new ReadStateSummaryResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate ReadStateSummaryResult CreateReadStateSummaryResult(ReadStateSummaryResult field);
+
+		/// <summary>
+		/// <para>The read results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ReadShareGroupStateSummaryResponse WithResultsCollection(IEnumerable<CreateReadStateSummaryResult> createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new ReadStateSummaryResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class ReadStateSummaryResult : ISerialize
+		{
+			internal ReadStateSummaryResult(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<ReadStateSummaryResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new ReadStateSummaryResult(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ReadStateSummaryResult is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateSummaryResult WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionResult> _partitionsCollection = Array.Empty<PartitionResult>();
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionResult> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateSummaryResult WithPartitionsCollection(params Func<PartitionResult, PartitionResult>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionResult CreatePartitionResult(PartitionResult field);
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ReadStateSummaryResult WithPartitionsCollection(IEnumerable<CreatePartitionResult> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionResult : ISerialize
+			{
+				internal PartitionResult(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_errorCode.GetSize(IsFlexibleVersion) +
+					_errorMessage.GetSize(IsFlexibleVersion) +
+					_stateEpoch.GetSize(IsFlexibleVersion) +
+					_startOffset.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionResult(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StateEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StartOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResult is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _stateEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _startOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int16 _errorCode = Int16.Default;
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 ErrorCode 
+				{
+					get => _errorCode;
+					private set 
+					{
+						_errorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
+				private NullableString _errorMessage = new NullableString(null);
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? ErrorMessage 
+				{
+					get => _errorMessage;
+					private set 
+					{
+						_errorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public PartitionResult WithErrorMessage(String? errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
+				}
+
+				private Int32 _stateEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The state epoch of the share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 StateEpoch 
+				{
+					get => _stateEpoch;
+					private set 
+					{
+						_stateEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The state epoch of the share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithStateEpoch(Int32 stateEpoch)
+				{
+					StateEpoch = stateEpoch;
+					return this;
+				}
+
+				private Int64 _startOffset = Int64.Default;
+				/// <summary>
+				/// <para>The share-partition start offset.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int64 StartOffset 
+				{
+					get => _startOffset;
+					private set 
+					{
+						_startOffset = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The share-partition start offset.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithStartOffset(Int64 startOffset)
+				{
+					StartOffset = startOffset;
+					return this;
+				}
+			}
+		}
+	}
+
+	public class RemoveRaftVoterRequest : Message, IRespond<RemoveRaftVoterResponse>
+	{
+		public RemoveRaftVoterRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"RemoveRaftVoterRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(81);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_clusterId.GetSize(IsFlexibleVersion) +
+			_voterId.GetSize(IsFlexibleVersion) +
+			_voterDirectoryId.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<RemoveRaftVoterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new RemoveRaftVoterRequest(version);
+			instance.ClusterId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for RemoveRaftVoterRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _voterDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _clusterId = String.Default;
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String ClusterId 
+		{
+			get => _clusterId;
+			private set 
+			{
+				_clusterId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public RemoveRaftVoterRequest WithClusterId(String clusterId)
+		{
+			ClusterId = clusterId;
+			return this;
+		}
+
+		private Int32 _voterId = Int32.Default;
+		/// <summary>
+		/// <para>The replica id of the voter getting removed from the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 VoterId 
+		{
+			get => _voterId;
+			private set 
+			{
+				_voterId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The replica id of the voter getting removed from the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public RemoveRaftVoterRequest WithVoterId(Int32 voterId)
+		{
+			VoterId = voterId;
+			return this;
+		}
+
+		private Uuid _voterDirectoryId = Uuid.Default;
+		/// <summary>
+		/// <para>The directory id of the voter getting removed from the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Uuid VoterDirectoryId 
+		{
+			get => _voterDirectoryId;
+			private set 
+			{
+				_voterDirectoryId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The directory id of the voter getting removed from the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public RemoveRaftVoterRequest WithVoterDirectoryId(Uuid voterDirectoryId)
+		{
+			VoterDirectoryId = voterDirectoryId;
+			return this;
+		}
+
+		public RemoveRaftVoterResponse Respond()
+			=> new RemoveRaftVoterResponse(Version);
+	}
+
+	public class RemoveRaftVoterResponse : Message
+	{
+		public RemoveRaftVoterResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"RemoveRaftVoterResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(81);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_errorMessage.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<RemoveRaftVoterResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new RemoveRaftVoterResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for RemoveRaftVoterResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public RemoveRaftVoterResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public RemoveRaftVoterResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private NullableString _errorMessage = NullableString.Default;
+		/// <summary>
+		/// <para>The error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String? ErrorMessage 
+		{
+			get => _errorMessage;
+			private set 
+			{
+				_errorMessage = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public RemoveRaftVoterResponse WithErrorMessage(String? errorMessage)
+		{
+			ErrorMessage = errorMessage;
 			return this;
 		}
 	}
@@ -50766,6 +60939,4899 @@ namespace Kafka.Protocol
 		{
 			MechanismsCollection = mechanismsCollection;
 			return this;
+		}
+	}
+
+	public class ShareAcknowledgeRequest : Message, IRespond<ShareAcknowledgeResponse>
+	{
+		public ShareAcknowledgeRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ShareAcknowledgeRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(79);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupId.GetSize(IsFlexibleVersion) +
+			_memberId.GetSize(IsFlexibleVersion) +
+			_shareSessionEpoch.GetSize(IsFlexibleVersion) +
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ShareAcknowledgeRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ShareAcknowledgeRequest(version);
+			instance.GroupId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MemberId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ShareSessionEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TopicsCollection = await Array<AcknowledgeTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgeTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareAcknowledgeRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _shareSessionEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private NullableString _groupId = new NullableString(null);
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public String? GroupId 
+		{
+			get => _groupId;
+			private set 
+			{
+				_groupId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareAcknowledgeRequest WithGroupId(String? groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
+		private NullableString _memberId = NullableString.Default;
+		/// <summary>
+		/// <para>The member ID.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String? MemberId 
+		{
+			get => _memberId;
+			private set 
+			{
+				_memberId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The member ID.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeRequest WithMemberId(String? memberId)
+		{
+			MemberId = memberId;
+			return this;
+		}
+
+		private Int32 _shareSessionEpoch = Int32.Default;
+		/// <summary>
+		/// <para>The current share session epoch: 0 to open a share session; -1 to close it; otherwise increments for consecutive requests.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ShareSessionEpoch 
+		{
+			get => _shareSessionEpoch;
+			private set 
+			{
+				_shareSessionEpoch = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The current share session epoch: 0 to open a share session; -1 to close it; otherwise increments for consecutive requests.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeRequest WithShareSessionEpoch(Int32 shareSessionEpoch)
+		{
+			ShareSessionEpoch = shareSessionEpoch;
+			return this;
+		}
+
+		private Array<AcknowledgeTopic> _topicsCollection = Array.Empty<AcknowledgeTopic>();
+		/// <summary>
+		/// <para>The topics containing records to acknowledge.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<AcknowledgeTopic> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The topics containing records to acknowledge.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeRequest WithTopicsCollection(params Func<AcknowledgeTopic, AcknowledgeTopic>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new AcknowledgeTopic(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate AcknowledgeTopic CreateAcknowledgeTopic(AcknowledgeTopic field);
+
+		/// <summary>
+		/// <para>The topics containing records to acknowledge.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeRequest WithTopicsCollection(IEnumerable<CreateAcknowledgeTopic> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new AcknowledgeTopic(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class AcknowledgeTopic : ISerialize
+		{
+			internal AcknowledgeTopic(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<AcknowledgeTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new AcknowledgeTopic(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<AcknowledgePartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for AcknowledgeTopic is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public AcknowledgeTopic WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<AcknowledgePartition> _partitionsCollection = Array.Empty<AcknowledgePartition>();
+			/// <summary>
+			/// <para>The partitions containing records to acknowledge.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<AcknowledgePartition> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partitions containing records to acknowledge.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public AcknowledgeTopic WithPartitionsCollection(params Func<AcknowledgePartition, AcknowledgePartition>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new AcknowledgePartition(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate AcknowledgePartition CreateAcknowledgePartition(AcknowledgePartition field);
+
+			/// <summary>
+			/// <para>The partitions containing records to acknowledge.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public AcknowledgeTopic WithPartitionsCollection(IEnumerable<CreateAcknowledgePartition> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new AcknowledgePartition(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class AcknowledgePartition : ISerialize
+			{
+				internal AcknowledgePartition(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partitionIndex.GetSize(IsFlexibleVersion) +
+					_acknowledgementBatchesCollection.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<AcknowledgePartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new AcknowledgePartition(version);
+					instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.AcknowledgementBatchesCollection = await Array<AcknowledgementBatch>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgementBatch.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for AcknowledgePartition is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _acknowledgementBatchesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partitionIndex = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 PartitionIndex 
+				{
+					get => _partitionIndex;
+					private set 
+					{
+						_partitionIndex = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public AcknowledgePartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
+				private Array<AcknowledgementBatch> _acknowledgementBatchesCollection = Array.Empty<AcknowledgementBatch>();
+				/// <summary>
+				/// <para>Record batches to acknowledge.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<AcknowledgementBatch> AcknowledgementBatchesCollection 
+				{
+					get => _acknowledgementBatchesCollection;
+					private set 
+					{
+						_acknowledgementBatchesCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>Record batches to acknowledge.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public AcknowledgePartition WithAcknowledgementBatchesCollection(params Func<AcknowledgementBatch, AcknowledgementBatch>[] createFields)
+				{
+					AcknowledgementBatchesCollection = createFields
+						.Select(createField => createField(new AcknowledgementBatch(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public delegate AcknowledgementBatch CreateAcknowledgementBatch(AcknowledgementBatch field);
+
+				/// <summary>
+				/// <para>Record batches to acknowledge.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public AcknowledgePartition WithAcknowledgementBatchesCollection(IEnumerable<CreateAcknowledgementBatch> createFields)
+				{
+					AcknowledgementBatchesCollection = createFields
+						.Select(createField => createField(new AcknowledgementBatch(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public class AcknowledgementBatch : ISerialize
+				{
+					internal AcknowledgementBatch(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_firstOffset.GetSize(IsFlexibleVersion) +
+						_lastOffset.GetSize(IsFlexibleVersion) +
+						_acknowledgeTypesCollection.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<AcknowledgementBatch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new AcknowledgementBatch(version);
+						instance.FirstOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.LastOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.AcknowledgeTypesCollection = await Array<Int8>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for AcknowledgementBatch is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _firstOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _lastOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _acknowledgeTypesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int64 _firstOffset = Int64.Default;
+					/// <summary>
+					/// <para>First offset of batch of records to acknowledge.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 FirstOffset 
+					{
+						get => _firstOffset;
+						private set 
+						{
+							_firstOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>First offset of batch of records to acknowledge.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcknowledgementBatch WithFirstOffset(Int64 firstOffset)
+					{
+						FirstOffset = firstOffset;
+						return this;
+					}
+
+					private Int64 _lastOffset = Int64.Default;
+					/// <summary>
+					/// <para>Last offset (inclusive) of batch of records to acknowledge.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 LastOffset 
+					{
+						get => _lastOffset;
+						private set 
+						{
+							_lastOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>Last offset (inclusive) of batch of records to acknowledge.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcknowledgementBatch WithLastOffset(Int64 lastOffset)
+					{
+						LastOffset = lastOffset;
+						return this;
+					}
+
+					private Array<Int8> _acknowledgeTypesCollection = Array.Empty<Int8>();
+					/// <summary>
+					/// <para>Array of acknowledge types - 0:Gap,1:Accept,2:Release,3:Reject.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Array<Int8> AcknowledgeTypesCollection 
+					{
+						get => _acknowledgeTypesCollection;
+						private set 
+						{
+							_acknowledgeTypesCollection = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>Array of acknowledge types - 0:Gap,1:Accept,2:Release,3:Reject.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcknowledgementBatch WithAcknowledgeTypesCollection(Array<Int8> acknowledgeTypesCollection)
+					{
+						AcknowledgeTypesCollection = acknowledgeTypesCollection;
+						return this;
+					}
+				}
+			}
+		}
+
+		public ShareAcknowledgeResponse Respond()
+			=> new ShareAcknowledgeResponse(Version);
+	}
+
+	public class ShareAcknowledgeResponse : Message
+	{
+		public ShareAcknowledgeResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ShareAcknowledgeResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(79);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_errorMessage.GetSize(IsFlexibleVersion) +
+			_responsesCollection.GetSize(IsFlexibleVersion) +
+			_nodeEndpointsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ShareAcknowledgeResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ShareAcknowledgeResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ResponsesCollection = await Array<ShareAcknowledgeTopicResponse>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ShareAcknowledgeTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+			instance.NodeEndpointsCollection = await Map<Int32, NodeEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => NodeEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareAcknowledgeResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _nodeEndpointsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The top level response error code.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The top level response error code.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private NullableString _errorMessage = new NullableString(null);
+		/// <summary>
+		/// <para>The top-level error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public String? ErrorMessage 
+		{
+			get => _errorMessage;
+			private set 
+			{
+				_errorMessage = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The top-level error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareAcknowledgeResponse WithErrorMessage(String? errorMessage)
+		{
+			ErrorMessage = errorMessage;
+			return this;
+		}
+
+		private Array<ShareAcknowledgeTopicResponse> _responsesCollection = Array.Empty<ShareAcknowledgeTopicResponse>();
+		/// <summary>
+		/// <para>The response topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<ShareAcknowledgeTopicResponse> ResponsesCollection 
+		{
+			get => _responsesCollection;
+			private set 
+			{
+				_responsesCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The response topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeResponse WithResponsesCollection(params Func<ShareAcknowledgeTopicResponse, ShareAcknowledgeTopicResponse>[] createFields)
+		{
+			ResponsesCollection = createFields
+				.Select(createField => createField(new ShareAcknowledgeTopicResponse(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate ShareAcknowledgeTopicResponse CreateShareAcknowledgeTopicResponse(ShareAcknowledgeTopicResponse field);
+
+		/// <summary>
+		/// <para>The response topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeResponse WithResponsesCollection(IEnumerable<CreateShareAcknowledgeTopicResponse> createFields)
+		{
+			ResponsesCollection = createFields
+				.Select(createField => createField(new ShareAcknowledgeTopicResponse(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class ShareAcknowledgeTopicResponse : ISerialize
+		{
+			internal ShareAcknowledgeTopicResponse(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<ShareAcknowledgeTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new ShareAcknowledgeTopicResponse(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareAcknowledgeTopicResponse is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ShareAcknowledgeTopicResponse WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+			/// <summary>
+			/// <para>The topic partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionData> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ShareAcknowledgeTopicResponse WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>The topic partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ShareAcknowledgeTopicResponse WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionData : ISerialize
+			{
+				internal PartitionData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partitionIndex.GetSize(IsFlexibleVersion) +
+					_errorCode.GetSize(IsFlexibleVersion) +
+					_errorMessage.GetSize(IsFlexibleVersion) +
+					_currentLeader.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionData(version);
+					instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _currentLeader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partitionIndex = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 PartitionIndex 
+				{
+					get => _partitionIndex;
+					private set 
+					{
+						_partitionIndex = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
+				private Int16 _errorCode = Int16.Default;
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 ErrorCode 
+				{
+					get => _errorCode;
+					private set 
+					{
+						_errorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
+				private NullableString _errorMessage = new NullableString(null);
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? ErrorMessage 
+				{
+					get => _errorMessage;
+					private set 
+					{
+						_errorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public PartitionData WithErrorMessage(String? errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
+				}
+
+				private LeaderIdAndEpoch _currentLeader = default!;
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public LeaderIdAndEpoch CurrentLeader 
+				{
+					get => _currentLeader;
+					private set 
+					{
+						_currentLeader = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)
+				{
+					CurrentLeader = createField(new LeaderIdAndEpoch(Version));
+					return this;
+				}
+
+				public class LeaderIdAndEpoch : ISerialize
+				{
+					internal LeaderIdAndEpoch(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_leaderId.GetSize(IsFlexibleVersion) +
+						_leaderEpoch.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new LeaderIdAndEpoch(version);
+						instance.LeaderId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderIdAndEpoch is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int32 _leaderId = Int32.Default;
+					/// <summary>
+					/// <para>The ID of the current leader or -1 if the leader is unknown.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int32 LeaderId 
+					{
+						get => _leaderId;
+						private set 
+						{
+							_leaderId = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The ID of the current leader or -1 if the leader is unknown.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public LeaderIdAndEpoch WithLeaderId(Int32 leaderId)
+					{
+						LeaderId = leaderId;
+						return this;
+					}
+
+					private Int32 _leaderEpoch = Int32.Default;
+					/// <summary>
+					/// <para>The latest known leader epoch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int32 LeaderEpoch 
+					{
+						get => _leaderEpoch;
+						private set 
+						{
+							_leaderEpoch = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The latest known leader epoch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public LeaderIdAndEpoch WithLeaderEpoch(Int32 leaderEpoch)
+					{
+						LeaderEpoch = leaderEpoch;
+						return this;
+					}
+				}
+			}
+		}
+
+		private Map<Int32, NodeEndpoint> _nodeEndpointsCollection = Map<Int32, NodeEndpoint>.Default;
+		/// <summary>
+		/// <para>Endpoints for all current leaders enumerated in PartitionData with error NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Map<Int32, NodeEndpoint> NodeEndpointsCollection 
+		{
+			get => _nodeEndpointsCollection;
+			private set 
+			{
+				_nodeEndpointsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Endpoints for all current leaders enumerated in PartitionData with error NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeResponse WithNodeEndpointsCollection(params Func<NodeEndpoint, NodeEndpoint>[] createFields)
+		{
+			NodeEndpointsCollection = createFields
+				.Select(createField => createField(new NodeEndpoint(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public delegate NodeEndpoint CreateNodeEndpoint(NodeEndpoint field);
+
+		/// <summary>
+		/// <para>Endpoints for all current leaders enumerated in PartitionData with error NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareAcknowledgeResponse WithNodeEndpointsCollection(IEnumerable<CreateNodeEndpoint> createFields)
+		{
+			NodeEndpointsCollection = createFields
+				.Select(createField => createField(new NodeEndpoint(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public class NodeEndpoint : ISerialize
+		{
+			internal NodeEndpoint(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_nodeId.GetSize(IsFlexibleVersion) +
+				_host.GetSize(IsFlexibleVersion) +
+				_port.GetSize(IsFlexibleVersion) +
+				_rack.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<NodeEndpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new NodeEndpoint(version);
+				instance.NodeId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Port = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Rack = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for NodeEndpoint is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int32 _nodeId = Int32.Default;
+			/// <summary>
+			/// <para>The ID of the associated node.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 NodeId 
+			{
+				get => _nodeId;
+				private set 
+				{
+					_nodeId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The ID of the associated node.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public NodeEndpoint WithNodeId(Int32 nodeId)
+			{
+				NodeId = nodeId;
+				return this;
+			}
+
+			private String _host = String.Default;
+			/// <summary>
+			/// <para>The node's hostname.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Host 
+			{
+				get => _host;
+				private set 
+				{
+					_host = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The node's hostname.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public NodeEndpoint WithHost(String host)
+			{
+				Host = host;
+				return this;
+			}
+
+			private Int32 _port = Int32.Default;
+			/// <summary>
+			/// <para>The node's port.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 Port 
+			{
+				get => _port;
+				private set 
+				{
+					_port = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The node's port.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public NodeEndpoint WithPort(Int32 port)
+			{
+				Port = port;
+				return this;
+			}
+
+			private NullableString _rack = new NullableString(null);
+			/// <summary>
+			/// <para>The rack of the node, or null if it has not been assigned to a rack.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public String? Rack 
+			{
+				get => _rack;
+				private set 
+				{
+					_rack = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The rack of the node, or null if it has not been assigned to a rack.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public NodeEndpoint WithRack(String? rack)
+			{
+				Rack = rack;
+				return this;
+			}
+		}
+	}
+
+	public class ShareFetchRequest : Message, IRespond<ShareFetchResponse>
+	{
+		public ShareFetchRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ShareFetchRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(78);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupId.GetSize(IsFlexibleVersion) +
+			_memberId.GetSize(IsFlexibleVersion) +
+			_shareSessionEpoch.GetSize(IsFlexibleVersion) +
+			_maxWaitMs.GetSize(IsFlexibleVersion) +
+			_minBytes.GetSize(IsFlexibleVersion) +
+			_maxBytes.GetSize(IsFlexibleVersion) +
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			_forgottenTopicsDataCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ShareFetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ShareFetchRequest(version);
+			instance.GroupId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MemberId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ShareSessionEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MaxWaitMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MinBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MaxBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TopicsCollection = await Array<FetchTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => FetchTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+			instance.ForgottenTopicsDataCollection = await Array<ForgottenTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareFetchRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _shareSessionEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _maxWaitMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _minBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _maxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _forgottenTopicsDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private NullableString _groupId = new NullableString(null);
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public String? GroupId 
+		{
+			get => _groupId;
+			private set 
+			{
+				_groupId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareFetchRequest WithGroupId(String? groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
+		private NullableString _memberId = NullableString.Default;
+		/// <summary>
+		/// <para>The member ID.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String? MemberId 
+		{
+			get => _memberId;
+			private set 
+			{
+				_memberId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The member ID.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchRequest WithMemberId(String? memberId)
+		{
+			MemberId = memberId;
+			return this;
+		}
+
+		private Int32 _shareSessionEpoch = Int32.Default;
+		/// <summary>
+		/// <para>The current share session epoch: 0 to open a share session; -1 to close it; otherwise increments for consecutive requests.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ShareSessionEpoch 
+		{
+			get => _shareSessionEpoch;
+			private set 
+			{
+				_shareSessionEpoch = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The current share session epoch: 0 to open a share session; -1 to close it; otherwise increments for consecutive requests.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchRequest WithShareSessionEpoch(Int32 shareSessionEpoch)
+		{
+			ShareSessionEpoch = shareSessionEpoch;
+			return this;
+		}
+
+		private Int32 _maxWaitMs = Int32.Default;
+		/// <summary>
+		/// <para>The maximum time in milliseconds to wait for the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 MaxWaitMs 
+		{
+			get => _maxWaitMs;
+			private set 
+			{
+				_maxWaitMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The maximum time in milliseconds to wait for the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchRequest WithMaxWaitMs(Int32 maxWaitMs)
+		{
+			MaxWaitMs = maxWaitMs;
+			return this;
+		}
+
+		private Int32 _minBytes = Int32.Default;
+		/// <summary>
+		/// <para>The minimum bytes to accumulate in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 MinBytes 
+		{
+			get => _minBytes;
+			private set 
+			{
+				_minBytes = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The minimum bytes to accumulate in the response.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchRequest WithMinBytes(Int32 minBytes)
+		{
+			MinBytes = minBytes;
+			return this;
+		}
+
+		private Int32 _maxBytes = new Int32(0x7fffffff);
+		/// <summary>
+		/// <para>The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: 0x7fffffff</para>
+		/// </summary>
+		public Int32 MaxBytes 
+		{
+			get => _maxBytes;
+			private set 
+			{
+				_maxBytes = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: 0x7fffffff</para>
+		/// </summary>
+		public ShareFetchRequest WithMaxBytes(Int32 maxBytes)
+		{
+			MaxBytes = maxBytes;
+			return this;
+		}
+
+		private Array<FetchTopic> _topicsCollection = Array.Empty<FetchTopic>();
+		/// <summary>
+		/// <para>The topics to fetch.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<FetchTopic> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The topics to fetch.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchRequest WithTopicsCollection(params Func<FetchTopic, FetchTopic>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new FetchTopic(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate FetchTopic CreateFetchTopic(FetchTopic field);
+
+		/// <summary>
+		/// <para>The topics to fetch.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchRequest WithTopicsCollection(IEnumerable<CreateFetchTopic> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new FetchTopic(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class FetchTopic : ISerialize
+		{
+			internal FetchTopic(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<FetchTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new FetchTopic(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<FetchPartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchTopic is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public FetchTopic WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<FetchPartition> _partitionsCollection = Array.Empty<FetchPartition>();
+			/// <summary>
+			/// <para>The partitions to fetch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<FetchPartition> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partitions to fetch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public FetchTopic WithPartitionsCollection(params Func<FetchPartition, FetchPartition>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new FetchPartition(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate FetchPartition CreateFetchPartition(FetchPartition field);
+
+			/// <summary>
+			/// <para>The partitions to fetch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public FetchTopic WithPartitionsCollection(IEnumerable<CreateFetchPartition> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new FetchPartition(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class FetchPartition : ISerialize
+			{
+				internal FetchPartition(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partitionIndex.GetSize(IsFlexibleVersion) +
+					_partitionMaxBytes.GetSize(IsFlexibleVersion) +
+					_acknowledgementBatchesCollection.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<FetchPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new FetchPartition(version);
+					instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.PartitionMaxBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.AcknowledgementBatchesCollection = await Array<AcknowledgementBatch>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgementBatch.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for FetchPartition is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _partitionMaxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _acknowledgementBatchesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partitionIndex = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 PartitionIndex 
+				{
+					get => _partitionIndex;
+					private set 
+					{
+						_partitionIndex = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public FetchPartition WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
+				private Int32 _partitionMaxBytes = Int32.Default;
+				/// <summary>
+				/// <para>The maximum bytes to fetch from this partition. 0 when only acknowledgement with no fetching is required. See KIP-74 for cases where this limit may not be honored.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 PartitionMaxBytes 
+				{
+					get => _partitionMaxBytes;
+					private set 
+					{
+						_partitionMaxBytes = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The maximum bytes to fetch from this partition. 0 when only acknowledgement with no fetching is required. See KIP-74 for cases where this limit may not be honored.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public FetchPartition WithPartitionMaxBytes(Int32 partitionMaxBytes)
+				{
+					PartitionMaxBytes = partitionMaxBytes;
+					return this;
+				}
+
+				private Array<AcknowledgementBatch> _acknowledgementBatchesCollection = Array.Empty<AcknowledgementBatch>();
+				/// <summary>
+				/// <para>Record batches to acknowledge.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<AcknowledgementBatch> AcknowledgementBatchesCollection 
+				{
+					get => _acknowledgementBatchesCollection;
+					private set 
+					{
+						_acknowledgementBatchesCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>Record batches to acknowledge.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public FetchPartition WithAcknowledgementBatchesCollection(params Func<AcknowledgementBatch, AcknowledgementBatch>[] createFields)
+				{
+					AcknowledgementBatchesCollection = createFields
+						.Select(createField => createField(new AcknowledgementBatch(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public delegate AcknowledgementBatch CreateAcknowledgementBatch(AcknowledgementBatch field);
+
+				/// <summary>
+				/// <para>Record batches to acknowledge.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public FetchPartition WithAcknowledgementBatchesCollection(IEnumerable<CreateAcknowledgementBatch> createFields)
+				{
+					AcknowledgementBatchesCollection = createFields
+						.Select(createField => createField(new AcknowledgementBatch(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public class AcknowledgementBatch : ISerialize
+				{
+					internal AcknowledgementBatch(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_firstOffset.GetSize(IsFlexibleVersion) +
+						_lastOffset.GetSize(IsFlexibleVersion) +
+						_acknowledgeTypesCollection.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<AcknowledgementBatch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new AcknowledgementBatch(version);
+						instance.FirstOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.LastOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.AcknowledgeTypesCollection = await Array<Int8>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for AcknowledgementBatch is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _firstOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _lastOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _acknowledgeTypesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int64 _firstOffset = Int64.Default;
+					/// <summary>
+					/// <para>First offset of batch of records to acknowledge.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 FirstOffset 
+					{
+						get => _firstOffset;
+						private set 
+						{
+							_firstOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>First offset of batch of records to acknowledge.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcknowledgementBatch WithFirstOffset(Int64 firstOffset)
+					{
+						FirstOffset = firstOffset;
+						return this;
+					}
+
+					private Int64 _lastOffset = Int64.Default;
+					/// <summary>
+					/// <para>Last offset (inclusive) of batch of records to acknowledge.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 LastOffset 
+					{
+						get => _lastOffset;
+						private set 
+						{
+							_lastOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>Last offset (inclusive) of batch of records to acknowledge.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcknowledgementBatch WithLastOffset(Int64 lastOffset)
+					{
+						LastOffset = lastOffset;
+						return this;
+					}
+
+					private Array<Int8> _acknowledgeTypesCollection = Array.Empty<Int8>();
+					/// <summary>
+					/// <para>Array of acknowledge types - 0:Gap,1:Accept,2:Release,3:Reject.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Array<Int8> AcknowledgeTypesCollection 
+					{
+						get => _acknowledgeTypesCollection;
+						private set 
+						{
+							_acknowledgeTypesCollection = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>Array of acknowledge types - 0:Gap,1:Accept,2:Release,3:Reject.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcknowledgementBatch WithAcknowledgeTypesCollection(Array<Int8> acknowledgeTypesCollection)
+					{
+						AcknowledgeTypesCollection = acknowledgeTypesCollection;
+						return this;
+					}
+				}
+			}
+		}
+
+		private Array<ForgottenTopic> _forgottenTopicsDataCollection = Array.Empty<ForgottenTopic>();
+		/// <summary>
+		/// <para>The partitions to remove from this share session.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<ForgottenTopic> ForgottenTopicsDataCollection 
+		{
+			get => _forgottenTopicsDataCollection;
+			private set 
+			{
+				_forgottenTopicsDataCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The partitions to remove from this share session.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchRequest WithForgottenTopicsDataCollection(params Func<ForgottenTopic, ForgottenTopic>[] createFields)
+		{
+			ForgottenTopicsDataCollection = createFields
+				.Select(createField => createField(new ForgottenTopic(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate ForgottenTopic CreateForgottenTopic(ForgottenTopic field);
+
+		/// <summary>
+		/// <para>The partitions to remove from this share session.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchRequest WithForgottenTopicsDataCollection(IEnumerable<CreateForgottenTopic> createFields)
+		{
+			ForgottenTopicsDataCollection = createFields
+				.Select(createField => createField(new ForgottenTopic(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class ForgottenTopic : ISerialize
+		{
+			internal ForgottenTopic(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<ForgottenTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new ForgottenTopic(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ForgottenTopic is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ForgottenTopic WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<Int32> _partitionsCollection = Array.Empty<Int32>();
+			/// <summary>
+			/// <para>The partitions indexes to forget.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<Int32> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partitions indexes to forget.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ForgottenTopic WithPartitionsCollection(Array<Int32> partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
+			}
+		}
+
+		public ShareFetchResponse Respond()
+			=> new ShareFetchResponse(Version);
+	}
+
+	public class ShareFetchResponse : Message
+	{
+		public ShareFetchResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ShareFetchResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(78);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_errorMessage.GetSize(IsFlexibleVersion) +
+			_responsesCollection.GetSize(IsFlexibleVersion) +
+			_nodeEndpointsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ShareFetchResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ShareFetchResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ResponsesCollection = await Array<ShareFetchableTopicResponse>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ShareFetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+			instance.NodeEndpointsCollection = await Map<Int32, NodeEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => NodeEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareFetchResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _nodeEndpointsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The top-level response error code.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The top-level response error code.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private NullableString _errorMessage = new NullableString(null);
+		/// <summary>
+		/// <para>The top-level error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public String? ErrorMessage 
+		{
+			get => _errorMessage;
+			private set 
+			{
+				_errorMessage = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The top-level error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareFetchResponse WithErrorMessage(String? errorMessage)
+		{
+			ErrorMessage = errorMessage;
+			return this;
+		}
+
+		private Array<ShareFetchableTopicResponse> _responsesCollection = Array.Empty<ShareFetchableTopicResponse>();
+		/// <summary>
+		/// <para>The response topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<ShareFetchableTopicResponse> ResponsesCollection 
+		{
+			get => _responsesCollection;
+			private set 
+			{
+				_responsesCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The response topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchResponse WithResponsesCollection(params Func<ShareFetchableTopicResponse, ShareFetchableTopicResponse>[] createFields)
+		{
+			ResponsesCollection = createFields
+				.Select(createField => createField(new ShareFetchableTopicResponse(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate ShareFetchableTopicResponse CreateShareFetchableTopicResponse(ShareFetchableTopicResponse field);
+
+		/// <summary>
+		/// <para>The response topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchResponse WithResponsesCollection(IEnumerable<CreateShareFetchableTopicResponse> createFields)
+		{
+			ResponsesCollection = createFields
+				.Select(createField => createField(new ShareFetchableTopicResponse(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class ShareFetchableTopicResponse : ISerialize
+		{
+			internal ShareFetchableTopicResponse(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<ShareFetchableTopicResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new ShareFetchableTopicResponse(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareFetchableTopicResponse is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The unique topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ShareFetchableTopicResponse WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+			/// <summary>
+			/// <para>The topic partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionData> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ShareFetchableTopicResponse WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>The topic partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public ShareFetchableTopicResponse WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionData : ISerialize
+			{
+				internal PartitionData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partitionIndex.GetSize(IsFlexibleVersion) +
+					_errorCode.GetSize(IsFlexibleVersion) +
+					_errorMessage.GetSize(IsFlexibleVersion) +
+					_acknowledgeErrorCode.GetSize(IsFlexibleVersion) +
+					_acknowledgeErrorMessage.GetSize(IsFlexibleVersion) +
+					_currentLeader.GetSize(IsFlexibleVersion) +
+					_records.GetSize(IsFlexibleVersion) +
+					_acquiredRecordsCollection.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionData(version);
+					instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.AcknowledgeErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.AcknowledgeErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.CurrentLeader = await LeaderIdAndEpoch.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+					instance.Records = await NullableRecordBatch.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.AcquiredRecordsCollection = await Array<AcquiredRecords>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcquiredRecords.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _acknowledgeErrorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _acknowledgeErrorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _currentLeader.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _records.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _acquiredRecordsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partitionIndex = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 PartitionIndex 
+				{
+					get => _partitionIndex;
+					private set 
+					{
+						_partitionIndex = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithPartitionIndex(Int32 partitionIndex)
+				{
+					PartitionIndex = partitionIndex;
+					return this;
+				}
+
+				private Int16 _errorCode = Int16.Default;
+				/// <summary>
+				/// <para>The fetch error code, or 0 if there was no fetch error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 ErrorCode 
+				{
+					get => _errorCode;
+					private set 
+					{
+						_errorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The fetch error code, or 0 if there was no fetch error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
+				private NullableString _errorMessage = new NullableString(null);
+				/// <summary>
+				/// <para>The fetch error message, or null if there was no fetch error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? ErrorMessage 
+				{
+					get => _errorMessage;
+					private set 
+					{
+						_errorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The fetch error message, or null if there was no fetch error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public PartitionData WithErrorMessage(String? errorMessage)
+				{
+					ErrorMessage = errorMessage;
+					return this;
+				}
+
+				private Int16 _acknowledgeErrorCode = Int16.Default;
+				/// <summary>
+				/// <para>The acknowledge error code, or 0 if there was no acknowledge error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 AcknowledgeErrorCode 
+				{
+					get => _acknowledgeErrorCode;
+					private set 
+					{
+						_acknowledgeErrorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The acknowledge error code, or 0 if there was no acknowledge error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithAcknowledgeErrorCode(Int16 acknowledgeErrorCode)
+				{
+					AcknowledgeErrorCode = acknowledgeErrorCode;
+					return this;
+				}
+
+				private NullableString _acknowledgeErrorMessage = new NullableString(null);
+				/// <summary>
+				/// <para>The acknowledge error message, or null if there was no acknowledge error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? AcknowledgeErrorMessage 
+				{
+					get => _acknowledgeErrorMessage;
+					private set 
+					{
+						_acknowledgeErrorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The acknowledge error message, or null if there was no acknowledge error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public PartitionData WithAcknowledgeErrorMessage(String? acknowledgeErrorMessage)
+				{
+					AcknowledgeErrorMessage = acknowledgeErrorMessage;
+					return this;
+				}
+
+				private LeaderIdAndEpoch _currentLeader = default!;
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public LeaderIdAndEpoch CurrentLeader 
+				{
+					get => _currentLeader;
+					private set 
+					{
+						_currentLeader = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)
+				{
+					CurrentLeader = createField(new LeaderIdAndEpoch(Version));
+					return this;
+				}
+
+				public class LeaderIdAndEpoch : ISerialize
+				{
+					internal LeaderIdAndEpoch(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_leaderId.GetSize(IsFlexibleVersion) +
+						_leaderEpoch.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<LeaderIdAndEpoch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new LeaderIdAndEpoch(version);
+						instance.LeaderId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderIdAndEpoch is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int32 _leaderId = Int32.Default;
+					/// <summary>
+					/// <para>The ID of the current leader or -1 if the leader is unknown.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int32 LeaderId 
+					{
+						get => _leaderId;
+						private set 
+						{
+							_leaderId = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The ID of the current leader or -1 if the leader is unknown.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public LeaderIdAndEpoch WithLeaderId(Int32 leaderId)
+					{
+						LeaderId = leaderId;
+						return this;
+					}
+
+					private Int32 _leaderEpoch = Int32.Default;
+					/// <summary>
+					/// <para>The latest known leader epoch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int32 LeaderEpoch 
+					{
+						get => _leaderEpoch;
+						private set 
+						{
+							_leaderEpoch = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The latest known leader epoch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public LeaderIdAndEpoch WithLeaderEpoch(Int32 leaderEpoch)
+					{
+						LeaderEpoch = leaderEpoch;
+						return this;
+					}
+				}
+
+				private NullableRecordBatch _records = NullableRecordBatch.Default;
+				/// <summary>
+				/// <para>The record data.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public RecordBatch? Records 
+				{
+					get => _records;
+					private set 
+					{
+						_records = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The record data.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithRecords(RecordBatch? records)
+				{
+					Records = records;
+					return this;
+				}
+
+				private Array<AcquiredRecords> _acquiredRecordsCollection = Array.Empty<AcquiredRecords>();
+				/// <summary>
+				/// <para>The acquired records.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<AcquiredRecords> AcquiredRecordsCollection 
+				{
+					get => _acquiredRecordsCollection;
+					private set 
+					{
+						_acquiredRecordsCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The acquired records.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithAcquiredRecordsCollection(params Func<AcquiredRecords, AcquiredRecords>[] createFields)
+				{
+					AcquiredRecordsCollection = createFields
+						.Select(createField => createField(new AcquiredRecords(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public delegate AcquiredRecords CreateAcquiredRecords(AcquiredRecords field);
+
+				/// <summary>
+				/// <para>The acquired records.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithAcquiredRecordsCollection(IEnumerable<CreateAcquiredRecords> createFields)
+				{
+					AcquiredRecordsCollection = createFields
+						.Select(createField => createField(new AcquiredRecords(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public class AcquiredRecords : ISerialize
+				{
+					internal AcquiredRecords(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_firstOffset.GetSize(IsFlexibleVersion) +
+						_lastOffset.GetSize(IsFlexibleVersion) +
+						_deliveryCount.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<AcquiredRecords> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new AcquiredRecords(version);
+						instance.FirstOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.LastOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.DeliveryCount = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for AcquiredRecords is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _firstOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _lastOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _deliveryCount.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int64 _firstOffset = Int64.Default;
+					/// <summary>
+					/// <para>The earliest offset in this batch of acquired records.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 FirstOffset 
+					{
+						get => _firstOffset;
+						private set 
+						{
+							_firstOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The earliest offset in this batch of acquired records.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcquiredRecords WithFirstOffset(Int64 firstOffset)
+					{
+						FirstOffset = firstOffset;
+						return this;
+					}
+
+					private Int64 _lastOffset = Int64.Default;
+					/// <summary>
+					/// <para>The last offset of this batch of acquired records.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 LastOffset 
+					{
+						get => _lastOffset;
+						private set 
+						{
+							_lastOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The last offset of this batch of acquired records.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcquiredRecords WithLastOffset(Int64 lastOffset)
+					{
+						LastOffset = lastOffset;
+						return this;
+					}
+
+					private Int16 _deliveryCount = Int16.Default;
+					/// <summary>
+					/// <para>The delivery count of this batch of acquired records.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int16 DeliveryCount 
+					{
+						get => _deliveryCount;
+						private set 
+						{
+							_deliveryCount = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The delivery count of this batch of acquired records.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public AcquiredRecords WithDeliveryCount(Int16 deliveryCount)
+					{
+						DeliveryCount = deliveryCount;
+						return this;
+					}
+				}
+			}
+		}
+
+		private Map<Int32, NodeEndpoint> _nodeEndpointsCollection = Map<Int32, NodeEndpoint>.Default;
+		/// <summary>
+		/// <para>Endpoints for all current leaders enumerated in PartitionData with error NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Map<Int32, NodeEndpoint> NodeEndpointsCollection 
+		{
+			get => _nodeEndpointsCollection;
+			private set 
+			{
+				_nodeEndpointsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Endpoints for all current leaders enumerated in PartitionData with error NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchResponse WithNodeEndpointsCollection(params Func<NodeEndpoint, NodeEndpoint>[] createFields)
+		{
+			NodeEndpointsCollection = createFields
+				.Select(createField => createField(new NodeEndpoint(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public delegate NodeEndpoint CreateNodeEndpoint(NodeEndpoint field);
+
+		/// <summary>
+		/// <para>Endpoints for all current leaders enumerated in PartitionData with error NOT_LEADER_OR_FOLLOWER.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareFetchResponse WithNodeEndpointsCollection(IEnumerable<CreateNodeEndpoint> createFields)
+		{
+			NodeEndpointsCollection = createFields
+				.Select(createField => createField(new NodeEndpoint(Version)))
+				.ToDictionary(field => field.NodeId);
+			return this;
+		}
+
+		public class NodeEndpoint : ISerialize
+		{
+			internal NodeEndpoint(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_nodeId.GetSize(IsFlexibleVersion) +
+				_host.GetSize(IsFlexibleVersion) +
+				_port.GetSize(IsFlexibleVersion) +
+				_rack.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<NodeEndpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new NodeEndpoint(version);
+				instance.NodeId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Port = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Rack = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for NodeEndpoint is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int32 _nodeId = Int32.Default;
+			/// <summary>
+			/// <para>The ID of the associated node.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 NodeId 
+			{
+				get => _nodeId;
+				private set 
+				{
+					_nodeId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The ID of the associated node.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public NodeEndpoint WithNodeId(Int32 nodeId)
+			{
+				NodeId = nodeId;
+				return this;
+			}
+
+			private String _host = String.Default;
+			/// <summary>
+			/// <para>The node's hostname.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Host 
+			{
+				get => _host;
+				private set 
+				{
+					_host = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The node's hostname.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public NodeEndpoint WithHost(String host)
+			{
+				Host = host;
+				return this;
+			}
+
+			private Int32 _port = Int32.Default;
+			/// <summary>
+			/// <para>The node's port.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 Port 
+			{
+				get => _port;
+				private set 
+				{
+					_port = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The node's port.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public NodeEndpoint WithPort(Int32 port)
+			{
+				Port = port;
+				return this;
+			}
+
+			private NullableString _rack = new NullableString(null);
+			/// <summary>
+			/// <para>The rack of the node, or null if it has not been assigned to a rack.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public String? Rack 
+			{
+				get => _rack;
+				private set 
+				{
+					_rack = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The rack of the node, or null if it has not been assigned to a rack.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public NodeEndpoint WithRack(String? rack)
+			{
+				Rack = rack;
+				return this;
+			}
+		}
+	}
+
+	public class ShareGroupDescribeRequest : Message, IRespond<ShareGroupDescribeResponse>
+	{
+		public ShareGroupDescribeRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ShareGroupDescribeRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(77);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupIdsCollection.GetSize(IsFlexibleVersion) +
+			_includeAuthorizedOperations.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ShareGroupDescribeRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ShareGroupDescribeRequest(version);
+			instance.GroupIdsCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+			instance.IncludeAuthorizedOperations = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareGroupDescribeRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupIdsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _includeAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Array<String> _groupIdsCollection = Array.Empty<String>();
+		/// <summary>
+		/// <para>The ids of the groups to describe</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<String> GroupIdsCollection 
+		{
+			get => _groupIdsCollection;
+			private set 
+			{
+				_groupIdsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The ids of the groups to describe</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupDescribeRequest WithGroupIdsCollection(Array<String> groupIdsCollection)
+		{
+			GroupIdsCollection = groupIdsCollection;
+			return this;
+		}
+
+		private Boolean _includeAuthorizedOperations = Boolean.Default;
+		/// <summary>
+		/// <para>Whether to include authorized operations.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Boolean IncludeAuthorizedOperations 
+		{
+			get => _includeAuthorizedOperations;
+			private set 
+			{
+				_includeAuthorizedOperations = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Whether to include authorized operations.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupDescribeRequest WithIncludeAuthorizedOperations(Boolean includeAuthorizedOperations)
+		{
+			IncludeAuthorizedOperations = includeAuthorizedOperations;
+			return this;
+		}
+
+		public ShareGroupDescribeResponse Respond()
+			=> new ShareGroupDescribeResponse(Version);
+	}
+
+	public class ShareGroupDescribeResponse : Message
+	{
+		public ShareGroupDescribeResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ShareGroupDescribeResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(77);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_groupsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ShareGroupDescribeResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ShareGroupDescribeResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.GroupsCollection = await Array<DescribedGroup>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => DescribedGroup.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareGroupDescribeResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _groupsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupDescribeResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Array<DescribedGroup> _groupsCollection = Array.Empty<DescribedGroup>();
+		/// <summary>
+		/// <para>Each described group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<DescribedGroup> GroupsCollection 
+		{
+			get => _groupsCollection;
+			private set 
+			{
+				_groupsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Each described group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupDescribeResponse WithGroupsCollection(params Func<DescribedGroup, DescribedGroup>[] createFields)
+		{
+			GroupsCollection = createFields
+				.Select(createField => createField(new DescribedGroup(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate DescribedGroup CreateDescribedGroup(DescribedGroup field);
+
+		/// <summary>
+		/// <para>Each described group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupDescribeResponse WithGroupsCollection(IEnumerable<CreateDescribedGroup> createFields)
+		{
+			GroupsCollection = createFields
+				.Select(createField => createField(new DescribedGroup(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class DescribedGroup : ISerialize
+		{
+			internal DescribedGroup(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_errorCode.GetSize(IsFlexibleVersion) +
+				_errorMessage.GetSize(IsFlexibleVersion) +
+				_groupId.GetSize(IsFlexibleVersion) +
+				_groupState.GetSize(IsFlexibleVersion) +
+				_groupEpoch.GetSize(IsFlexibleVersion) +
+				_assignmentEpoch.GetSize(IsFlexibleVersion) +
+				_assignorName.GetSize(IsFlexibleVersion) +
+				_membersCollection.GetSize(IsFlexibleVersion) +
+				_authorizedOperations.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<DescribedGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new DescribedGroup(version);
+				instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.GroupState = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.GroupEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.AssignmentEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.AssignorName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.MembersCollection = await Array<Member>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Member.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+				instance.AuthorizedOperations = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for DescribedGroup is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _groupState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _groupEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _assignmentEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _assignorName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _membersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _authorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int16 _errorCode = Int16.Default;
+			/// <summary>
+			/// <para>The describe error, or 0 if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int16 ErrorCode 
+			{
+				get => _errorCode;
+				private set 
+				{
+					_errorCode = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The describe error, or 0 if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithErrorCode(Int16 errorCode)
+			{
+				ErrorCode = errorCode;
+				return this;
+			}
+
+			private NullableString _errorMessage = new NullableString(null);
+			/// <summary>
+			/// <para>The top-level error message, or null if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public String? ErrorMessage 
+			{
+				get => _errorMessage;
+				private set 
+				{
+					_errorMessage = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The top-level error message, or null if there was no error.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: null</para>
+			/// </summary>
+			public DescribedGroup WithErrorMessage(String? errorMessage)
+			{
+				ErrorMessage = errorMessage;
+				return this;
+			}
+
+			private String _groupId = String.Default;
+			/// <summary>
+			/// <para>The group ID string.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String GroupId 
+			{
+				get => _groupId;
+				private set 
+				{
+					_groupId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The group ID string.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithGroupId(String groupId)
+			{
+				GroupId = groupId;
+				return this;
+			}
+
+			private String _groupState = String.Default;
+			/// <summary>
+			/// <para>The group state string, or the empty string.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String GroupState 
+			{
+				get => _groupState;
+				private set 
+				{
+					_groupState = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The group state string, or the empty string.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithGroupState(String groupState)
+			{
+				GroupState = groupState;
+				return this;
+			}
+
+			private Int32 _groupEpoch = Int32.Default;
+			/// <summary>
+			/// <para>The group epoch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 GroupEpoch 
+			{
+				get => _groupEpoch;
+				private set 
+				{
+					_groupEpoch = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The group epoch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithGroupEpoch(Int32 groupEpoch)
+			{
+				GroupEpoch = groupEpoch;
+				return this;
+			}
+
+			private Int32 _assignmentEpoch = Int32.Default;
+			/// <summary>
+			/// <para>The assignment epoch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 AssignmentEpoch 
+			{
+				get => _assignmentEpoch;
+				private set 
+				{
+					_assignmentEpoch = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The assignment epoch.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithAssignmentEpoch(Int32 assignmentEpoch)
+			{
+				AssignmentEpoch = assignmentEpoch;
+				return this;
+			}
+
+			private String _assignorName = String.Default;
+			/// <summary>
+			/// <para>The selected assignor.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String AssignorName 
+			{
+				get => _assignorName;
+				private set 
+				{
+					_assignorName = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The selected assignor.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithAssignorName(String assignorName)
+			{
+				AssignorName = assignorName;
+				return this;
+			}
+
+			private Array<Member> _membersCollection = Array.Empty<Member>();
+			/// <summary>
+			/// <para>The members.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<Member> MembersCollection 
+			{
+				get => _membersCollection;
+				private set 
+				{
+					_membersCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The members.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithMembersCollection(params Func<Member, Member>[] createFields)
+			{
+				MembersCollection = createFields
+					.Select(createField => createField(new Member(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate Member CreateMember(Member field);
+
+			/// <summary>
+			/// <para>The members.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public DescribedGroup WithMembersCollection(IEnumerable<CreateMember> createFields)
+			{
+				MembersCollection = createFields
+					.Select(createField => createField(new Member(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class Member : ISerialize
+			{
+				internal Member(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_memberId.GetSize(IsFlexibleVersion) +
+					_rackId.GetSize(IsFlexibleVersion) +
+					_memberEpoch.GetSize(IsFlexibleVersion) +
+					_clientId.GetSize(IsFlexibleVersion) +
+					_clientHost.GetSize(IsFlexibleVersion) +
+					_subscribedTopicNamesCollection.GetSize(IsFlexibleVersion) +
+					_assignment.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<Member> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new Member(version);
+					instance.MemberId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.RackId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.MemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ClientId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ClientHost = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.SubscribedTopicNamesCollection = await Array<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+					instance.Assignment_ = await Assignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for Member is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _rackId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _memberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _clientId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _clientHost.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _subscribedTopicNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private String _memberId = String.Default;
+				/// <summary>
+				/// <para>The member ID.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public String MemberId 
+				{
+					get => _memberId;
+					private set 
+					{
+						_memberId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The member ID.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithMemberId(String memberId)
+				{
+					MemberId = memberId;
+					return this;
+				}
+
+				private NullableString _rackId = new NullableString(null);
+				/// <summary>
+				/// <para>The member rack ID.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? RackId 
+				{
+					get => _rackId;
+					private set 
+					{
+						_rackId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The member rack ID.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public Member WithRackId(String? rackId)
+				{
+					RackId = rackId;
+					return this;
+				}
+
+				private Int32 _memberEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The current member epoch.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 MemberEpoch 
+				{
+					get => _memberEpoch;
+					private set 
+					{
+						_memberEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The current member epoch.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithMemberEpoch(Int32 memberEpoch)
+				{
+					MemberEpoch = memberEpoch;
+					return this;
+				}
+
+				private String _clientId = String.Default;
+				/// <summary>
+				/// <para>The client ID.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public String ClientId 
+				{
+					get => _clientId;
+					private set 
+					{
+						_clientId = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The client ID.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithClientId(String clientId)
+				{
+					ClientId = clientId;
+					return this;
+				}
+
+				private String _clientHost = String.Default;
+				/// <summary>
+				/// <para>The client host.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public String ClientHost 
+				{
+					get => _clientHost;
+					private set 
+					{
+						_clientHost = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The client host.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithClientHost(String clientHost)
+				{
+					ClientHost = clientHost;
+					return this;
+				}
+
+				private Array<String> _subscribedTopicNamesCollection = Array.Empty<String>();
+				/// <summary>
+				/// <para>The subscribed topic names.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<String> SubscribedTopicNamesCollection 
+				{
+					get => _subscribedTopicNamesCollection;
+					private set 
+					{
+						_subscribedTopicNamesCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The subscribed topic names.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithSubscribedTopicNamesCollection(Array<String> subscribedTopicNamesCollection)
+				{
+					SubscribedTopicNamesCollection = subscribedTopicNamesCollection;
+					return this;
+				}
+
+				private Assignment _assignment = default!;
+				/// <summary>
+				/// <para>The current assignment.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Assignment Assignment_ 
+				{
+					get => _assignment;
+					private set 
+					{
+						_assignment = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The current assignment.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Member WithAssignment_(Assignment assignment)
+				{
+					Assignment_ = assignment;
+					return this;
+				}
+			}
+
+			private Int32 _authorizedOperations = new Int32(-2147483648);
+			/// <summary>
+			/// <para>32-bit bitfield to represent authorized operations for this group.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: -2147483648</para>
+			/// </summary>
+			public Int32 AuthorizedOperations 
+			{
+				get => _authorizedOperations;
+				private set 
+				{
+					_authorizedOperations = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>32-bit bitfield to represent authorized operations for this group.</para>
+			/// <para>Versions: 0+</para>
+			/// <para>Default: -2147483648</para>
+			/// </summary>
+			public DescribedGroup WithAuthorizedOperations(Int32 authorizedOperations)
+			{
+				AuthorizedOperations = authorizedOperations;
+				return this;
+			}
+		}
+
+		public class TopicPartitions : ISerialize
+		{
+			internal TopicPartitions(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_topicName.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<TopicPartitions> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new TopicPartitions(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartitions is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicPartitions WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private String _topicName = String.Default;
+			/// <summary>
+			/// <para>The topic name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String TopicName 
+			{
+				get => _topicName;
+				private set 
+				{
+					_topicName = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic name.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicPartitions WithTopicName(String topicName)
+			{
+				TopicName = topicName;
+				return this;
+			}
+
+			private Array<Int32> _partitionsCollection = Array.Empty<Int32>();
+			/// <summary>
+			/// <para>The partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<Int32> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicPartitions WithPartitionsCollection(Array<Int32> partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
+			}
+		}
+
+		public class Assignment : ISerialize
+		{
+			internal Assignment(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicPartitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Assignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Assignment(version);
+				instance.TopicPartitionsCollection = await Array<TopicPartitions>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Assignment is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Array<TopicPartitions> _topicPartitionsCollection = Array.Empty<TopicPartitions>();
+			/// <summary>
+			/// <para>The assigned topic-partitions to the member.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<TopicPartitions> TopicPartitionsCollection 
+			{
+				get => _topicPartitionsCollection;
+				private set 
+				{
+					_topicPartitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The assigned topic-partitions to the member.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Assignment WithTopicPartitionsCollection(Array<TopicPartitions> topicPartitionsCollection)
+			{
+				TopicPartitionsCollection = topicPartitionsCollection;
+				return this;
+			}
+		}
+	}
+
+	public class ShareGroupHeartbeatRequest : Message, IRespond<ShareGroupHeartbeatResponse>
+	{
+		public ShareGroupHeartbeatRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ShareGroupHeartbeatRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(76);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupId.GetSize(IsFlexibleVersion) +
+			_memberId.GetSize(IsFlexibleVersion) +
+			_memberEpoch.GetSize(IsFlexibleVersion) +
+			_rackId.GetSize(IsFlexibleVersion) +
+			_subscribedTopicNamesCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ShareGroupHeartbeatRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ShareGroupHeartbeatRequest(version);
+			instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MemberId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.RackId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.SubscribedTopicNamesCollection = await NullableArray<String>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareGroupHeartbeatRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _memberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _rackId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _subscribedTopicNamesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _groupId = String.Default;
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String GroupId 
+		{
+			get => _groupId;
+			private set 
+			{
+				_groupId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupHeartbeatRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
+		private String _memberId = String.Default;
+		/// <summary>
+		/// <para>The member ID generated by the coordinator. The member ID must be kept during the entire lifetime of the member.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String MemberId 
+		{
+			get => _memberId;
+			private set 
+			{
+				_memberId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The member ID generated by the coordinator. The member ID must be kept during the entire lifetime of the member.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupHeartbeatRequest WithMemberId(String memberId)
+		{
+			MemberId = memberId;
+			return this;
+		}
+
+		private Int32 _memberEpoch = Int32.Default;
+		/// <summary>
+		/// <para>The current member epoch; 0 to join the group; -1 to leave the group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 MemberEpoch 
+		{
+			get => _memberEpoch;
+			private set 
+			{
+				_memberEpoch = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The current member epoch; 0 to join the group; -1 to leave the group.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupHeartbeatRequest WithMemberEpoch(Int32 memberEpoch)
+		{
+			MemberEpoch = memberEpoch;
+			return this;
+		}
+
+		private NullableString _rackId = new NullableString(null);
+		/// <summary>
+		/// <para>null if not provided or if it didn't change since the last heartbeat; the rack ID of consumer otherwise.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public String? RackId 
+		{
+			get => _rackId;
+			private set 
+			{
+				_rackId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>null if not provided or if it didn't change since the last heartbeat; the rack ID of consumer otherwise.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareGroupHeartbeatRequest WithRackId(String? rackId)
+		{
+			RackId = rackId;
+			return this;
+		}
+
+		private NullableArray<String> _subscribedTopicNamesCollection = new NullableArray<String>(null);
+		/// <summary>
+		/// <para>null if it didn't change since the last heartbeat; the subscribed topic names otherwise.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public Array<String>? SubscribedTopicNamesCollection 
+		{
+			get => _subscribedTopicNamesCollection;
+			private set 
+			{
+				_subscribedTopicNamesCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>null if it didn't change since the last heartbeat; the subscribed topic names otherwise.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareGroupHeartbeatRequest WithSubscribedTopicNamesCollection(Array<String>? subscribedTopicNamesCollection)
+		{
+			SubscribedTopicNamesCollection = subscribedTopicNamesCollection;
+			return this;
+		}
+
+		public ShareGroupHeartbeatResponse Respond()
+			=> new ShareGroupHeartbeatResponse(Version);
+	}
+
+	public class ShareGroupHeartbeatResponse : Message
+	{
+		public ShareGroupHeartbeatResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"ShareGroupHeartbeatResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(76);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			_errorMessage.GetSize(IsFlexibleVersion) +
+			_memberId.GetSize(IsFlexibleVersion) +
+			_memberEpoch.GetSize(IsFlexibleVersion) +
+			_heartbeatIntervalMs.GetSize(IsFlexibleVersion) +
+			_assignment.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<ShareGroupHeartbeatResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new ShareGroupHeartbeatResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MemberId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.MemberEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.HeartbeatIntervalMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.Assignment_ = await Nullable<Assignment>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Assignment.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for ShareGroupHeartbeatResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _memberId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _memberEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _heartbeatIntervalMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupHeartbeatResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The top-level error code, or 0 if there was no error</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The top-level error code, or 0 if there was no error</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupHeartbeatResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+
+		private NullableString _errorMessage = new NullableString(null);
+		/// <summary>
+		/// <para>The top-level error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public String? ErrorMessage 
+		{
+			get => _errorMessage;
+			private set 
+			{
+				_errorMessage = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The top-level error message, or null if there was no error.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareGroupHeartbeatResponse WithErrorMessage(String? errorMessage)
+		{
+			ErrorMessage = errorMessage;
+			return this;
+		}
+
+		private NullableString _memberId = new NullableString(null);
+		/// <summary>
+		/// <para>The member ID generated by the coordinator. Only provided when the member joins with MemberEpoch == 0.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public String? MemberId 
+		{
+			get => _memberId;
+			private set 
+			{
+				_memberId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The member ID generated by the coordinator. Only provided when the member joins with MemberEpoch == 0.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareGroupHeartbeatResponse WithMemberId(String? memberId)
+		{
+			MemberId = memberId;
+			return this;
+		}
+
+		private Int32 _memberEpoch = Int32.Default;
+		/// <summary>
+		/// <para>The member epoch.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 MemberEpoch 
+		{
+			get => _memberEpoch;
+			private set 
+			{
+				_memberEpoch = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The member epoch.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupHeartbeatResponse WithMemberEpoch(Int32 memberEpoch)
+		{
+			MemberEpoch = memberEpoch;
+			return this;
+		}
+
+		private Int32 _heartbeatIntervalMs = Int32.Default;
+		/// <summary>
+		/// <para>The heartbeat interval in milliseconds.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 HeartbeatIntervalMs 
+		{
+			get => _heartbeatIntervalMs;
+			private set 
+			{
+				_heartbeatIntervalMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The heartbeat interval in milliseconds.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public ShareGroupHeartbeatResponse WithHeartbeatIntervalMs(Int32 heartbeatIntervalMs)
+		{
+			HeartbeatIntervalMs = heartbeatIntervalMs;
+			return this;
+		}
+
+		private Nullable<Assignment> _assignment = new Nullable<Assignment>(null);
+		/// <summary>
+		/// <para>null if not provided; the assignment otherwise.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public Assignment? Assignment_ 
+		{
+			get => _assignment;
+			private set 
+			{
+				_assignment = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>null if not provided; the assignment otherwise.</para>
+		/// <para>Versions: 0+</para>
+		/// <para>Default: null</para>
+		/// </summary>
+		public ShareGroupHeartbeatResponse WithAssignment_(Func<Assignment?, Assignment?> createField)
+		{
+			Assignment_ = createField(new Assignment(Version));
+			return this;
+		}
+
+		public class Assignment : ISerialize
+		{
+			internal Assignment(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicPartitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Assignment> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Assignment(version);
+				instance.TopicPartitionsCollection = await Array<TopicPartitions>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicPartitions.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Assignment is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicPartitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Array<TopicPartitions> _topicPartitionsCollection = Array.Empty<TopicPartitions>();
+			/// <summary>
+			/// <para>The partitions assigned to the member.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<TopicPartitions> TopicPartitionsCollection 
+			{
+				get => _topicPartitionsCollection;
+				private set 
+				{
+					_topicPartitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partitions assigned to the member.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Assignment WithTopicPartitionsCollection(Array<TopicPartitions> topicPartitionsCollection)
+			{
+				TopicPartitionsCollection = topicPartitionsCollection;
+				return this;
+			}
+		}
+
+		public class TopicPartitions : ISerialize
+		{
+			internal TopicPartitions(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<TopicPartitions> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new TopicPartitions(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for TopicPartitions is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic ID.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicPartitions WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<Int32> _partitionsCollection = Array.Empty<Int32>();
+			/// <summary>
+			/// <para>The partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<Int32> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public TopicPartitions WithPartitionsCollection(Array<Int32> partitionsCollection)
+			{
+				PartitionsCollection = partitionsCollection;
+				return this;
+			}
 		}
 	}
 
@@ -52583,7 +67649,7 @@ namespace Kafka.Protocol
 		public TxnOffsetCommitRequest(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"TxnOffsetCommitRequest does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"TxnOffsetCommitRequest does not support version {version}. Valid versions are: 0-4");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -52593,7 +67659,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(28);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(3);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -52988,7 +68054,7 @@ namespace Kafka.Protocol
 
 			private Array<TxnOffsetCommitRequestPartition> _partitionsCollection = Array.Empty<TxnOffsetCommitRequestPartition>();
 			/// <summary>
-			/// <para>The partitions inside the topic that we want to committ offsets for.</para>
+			/// <para>The partitions inside the topic that we want to commit offsets for.</para>
 			/// <para>Versions: 0+</para>
 			/// </summary>
 			public Array<TxnOffsetCommitRequestPartition> PartitionsCollection 
@@ -53001,7 +68067,7 @@ namespace Kafka.Protocol
 			}
 
 			/// <summary>
-			/// <para>The partitions inside the topic that we want to committ offsets for.</para>
+			/// <para>The partitions inside the topic that we want to commit offsets for.</para>
 			/// <para>Versions: 0+</para>
 			/// </summary>
 			public TxnOffsetCommitRequestTopic WithPartitionsCollection(params Func<TxnOffsetCommitRequestPartition, TxnOffsetCommitRequestPartition>[] createFields)
@@ -53015,7 +68081,7 @@ namespace Kafka.Protocol
 			public delegate TxnOffsetCommitRequestPartition CreateTxnOffsetCommitRequestPartition(TxnOffsetCommitRequestPartition field);
 
 			/// <summary>
-			/// <para>The partitions inside the topic that we want to committ offsets for.</para>
+			/// <para>The partitions inside the topic that we want to commit offsets for.</para>
 			/// <para>Versions: 0+</para>
 			/// </summary>
 			public TxnOffsetCommitRequestTopic WithPartitionsCollection(IEnumerable<CreateTxnOffsetCommitRequestPartition> createFields)
@@ -53201,7 +68267,7 @@ namespace Kafka.Protocol
 		public TxnOffsetCommitResponse(Int16 version)
 		{
 			if (version.InRange(MinVersion, MaxVersion) == false) 
-				throw new UnsupportedVersionException($"TxnOffsetCommitResponse does not support version {version}. Valid versions are: 0-3");
+				throw new UnsupportedVersionException($"TxnOffsetCommitResponse does not support version {version}. Valid versions are: 0-4");
 
 			Version = version;
 			IsFlexibleVersion = version >= 3;
@@ -53211,7 +68277,7 @@ namespace Kafka.Protocol
 		public static readonly Int16 ApiKey = Int16.From(28);
 
 		public static readonly Int16 MinVersion = Int16.From(0);
-		public static readonly Int16 MaxVersion = Int16.From(3);
+		public static readonly Int16 MaxVersion = Int16.From(4);
 
 		public override Int16 Version { get; }
 		internal bool IsFlexibleVersion { get; }
@@ -54505,7 +69571,14 @@ namespace Kafka.Protocol
 
 		private Tags.TagSection CreateTagSection()
 		{
-			return new Tags.TagSection();
+			var tags = new List<Tags.TaggedField>();
+			if (Version >= 8 && _typeIsSet) 
+				tags.Add(new Tags.TaggedField
+				{
+					Tag = 0,
+					Field = _type
+				});
+			return new Tags.TagSection(tags.ToArray());
 		}
 
 		internal override int GetSize() =>
@@ -54550,6 +69623,17 @@ namespace Kafka.Protocol
 				{
 					switch (tag.Tag)
 					{
+						case 0:
+							if (instance.Version >= 8) 
+								instance.Type = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+							else
+								throw new InvalidOperationException($"Field Type is not supported for version {instance.Version}");
+							{
+								var size = instance._type.GetSize(true);
+								if (size != tag.Length)
+									throw new CorruptMessageException($"Tagged field Type read length {tag.Length} but had actual length of {size}");
+							}
+							break;
 						default:
 							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateMetadataRequest is unknown");
 					}
@@ -54627,6 +69711,37 @@ namespace Kafka.Protocol
 		public UpdateMetadataRequest WithIsKRaftController(Boolean isKRaftController)
 		{
 			IsKRaftController = isKRaftController;
+			return this;
+		}
+
+		private bool _typeIsSet;
+		private Int8 _type = new Int8(0);
+		/// <summary>
+		/// <para>Indicates if this request is a Full metadata snapshot (2), Incremental (1), or Unknown (0). Using during ZK migration, see KIP-866</para>
+		/// <para>Versions: 8+</para>
+		/// <para>Default: 0</para>
+		/// </summary>
+		public Int8 Type 
+		{
+			get => _type;
+			private set 
+			{
+				if (Version >= 8 == false)
+					throw new UnsupportedVersionException($"Type does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
+
+				_type = value;
+				_typeIsSet = true;
+			}
+		}
+
+		/// <summary>
+		/// <para>Indicates if this request is a Full metadata snapshot (2), Incremental (1), or Unknown (0). Using during ZK migration, see KIP-866</para>
+		/// <para>Versions: 8+</para>
+		/// <para>Default: 0</para>
+		/// </summary>
+		public UpdateMetadataRequest WithType(Int8 type)
+		{
+			Type = type;
 			return this;
 		}
 
@@ -55738,6 +70853,581 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class UpdateRaftVoterRequest : Message, IRespond<UpdateRaftVoterResponse>
+	{
+		public UpdateRaftVoterRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"UpdateRaftVoterRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(82);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_clusterId.GetSize(IsFlexibleVersion) +
+			_voterId.GetSize(IsFlexibleVersion) +
+			_voterDirectoryId.GetSize(IsFlexibleVersion) +
+			_listenersCollection.GetSize(IsFlexibleVersion) +
+			_kRaftVersionFeature.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<UpdateRaftVoterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new UpdateRaftVoterRequest(version);
+			instance.ClusterId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ListenersCollection = await Map<String, Listener>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Listener.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+			instance.KRaftVersionFeature_ = await KRaftVersionFeature.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateRaftVoterRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _voterDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _listenersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _kRaftVersionFeature.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _clusterId = String.Default;
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String ClusterId 
+		{
+			get => _clusterId;
+			private set 
+			{
+				_clusterId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateRaftVoterRequest WithClusterId(String clusterId)
+		{
+			ClusterId = clusterId;
+			return this;
+		}
+
+		private Int32 _voterId = Int32.Default;
+		/// <summary>
+		/// <para>The replica id of the voter getting updated in the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 VoterId 
+		{
+			get => _voterId;
+			private set 
+			{
+				_voterId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The replica id of the voter getting updated in the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateRaftVoterRequest WithVoterId(Int32 voterId)
+		{
+			VoterId = voterId;
+			return this;
+		}
+
+		private Uuid _voterDirectoryId = Uuid.Default;
+		/// <summary>
+		/// <para>The directory id of the voter getting updated in the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Uuid VoterDirectoryId 
+		{
+			get => _voterDirectoryId;
+			private set 
+			{
+				_voterDirectoryId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The directory id of the voter getting updated in the topic partition</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateRaftVoterRequest WithVoterDirectoryId(Uuid voterDirectoryId)
+		{
+			VoterDirectoryId = voterDirectoryId;
+			return this;
+		}
+
+		private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
+		/// <summary>
+		/// <para>The endpoint that can be used to communicate with the leader</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Map<String, Listener> ListenersCollection 
+		{
+			get => _listenersCollection;
+			private set 
+			{
+				_listenersCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The endpoint that can be used to communicate with the leader</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateRaftVoterRequest WithListenersCollection(params Func<Listener, Listener>[] createFields)
+		{
+			ListenersCollection = createFields
+				.Select(createField => createField(new Listener(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
+		}
+
+		public delegate Listener CreateListener(Listener field);
+
+		/// <summary>
+		/// <para>The endpoint that can be used to communicate with the leader</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateRaftVoterRequest WithListenersCollection(IEnumerable<CreateListener> createFields)
+		{
+			ListenersCollection = createFields
+				.Select(createField => createField(new Listener(Version)))
+				.ToDictionary(field => field.Name);
+			return this;
+		}
+
+		public class Listener : ISerialize
+		{
+			internal Listener(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_name.GetSize(IsFlexibleVersion) +
+				_host.GetSize(IsFlexibleVersion) +
+				_port.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Listener> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Listener(version);
+				instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.Port = await UInt16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Listener is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private String _name = String.Default;
+			/// <summary>
+			/// <para>The name of the endpoint</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Name 
+			{
+				get => _name;
+				private set 
+				{
+					_name = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The name of the endpoint</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithName(String name)
+			{
+				Name = name;
+				return this;
+			}
+
+			private String _host = String.Default;
+			/// <summary>
+			/// <para>The hostname</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public String Host 
+			{
+				get => _host;
+				private set 
+				{
+					_host = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The hostname</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithHost(String host)
+			{
+				Host = host;
+				return this;
+			}
+
+			private UInt16 _port = UInt16.Default;
+			/// <summary>
+			/// <para>The port</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public UInt16 Port 
+			{
+				get => _port;
+				private set 
+				{
+					_port = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The port</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Listener WithPort(UInt16 port)
+			{
+				Port = port;
+				return this;
+			}
+		}
+
+		private KRaftVersionFeature _kRaftVersionFeature = default!;
+		/// <summary>
+		/// <para>The range of versions of the protocol that the replica supports</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public KRaftVersionFeature KRaftVersionFeature_ 
+		{
+			get => _kRaftVersionFeature;
+			private set 
+			{
+				_kRaftVersionFeature = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The range of versions of the protocol that the replica supports</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateRaftVoterRequest WithKRaftVersionFeature_(Func<KRaftVersionFeature, KRaftVersionFeature> createField)
+		{
+			KRaftVersionFeature_ = createField(new KRaftVersionFeature(Version));
+			return this;
+		}
+
+		public class KRaftVersionFeature : ISerialize
+		{
+			internal KRaftVersionFeature(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_minSupportedVersion.GetSize(IsFlexibleVersion) +
+				_maxSupportedVersion.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<KRaftVersionFeature> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new KRaftVersionFeature(version);
+				instance.MinSupportedVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.MaxSupportedVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for KRaftVersionFeature is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _minSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _maxSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int16 _minSupportedVersion = Int16.Default;
+			/// <summary>
+			/// <para>The minimum supported KRaft protocol version</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int16 MinSupportedVersion 
+			{
+				get => _minSupportedVersion;
+				private set 
+				{
+					_minSupportedVersion = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The minimum supported KRaft protocol version</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public KRaftVersionFeature WithMinSupportedVersion(Int16 minSupportedVersion)
+			{
+				MinSupportedVersion = minSupportedVersion;
+				return this;
+			}
+
+			private Int16 _maxSupportedVersion = Int16.Default;
+			/// <summary>
+			/// <para>The maximum supported KRaft protocol version</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int16 MaxSupportedVersion 
+			{
+				get => _maxSupportedVersion;
+				private set 
+				{
+					_maxSupportedVersion = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The maximum supported KRaft protocol version</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public KRaftVersionFeature WithMaxSupportedVersion(Int16 maxSupportedVersion)
+			{
+				MaxSupportedVersion = maxSupportedVersion;
+				return this;
+			}
+		}
+
+		public UpdateRaftVoterResponse Respond()
+			=> new UpdateRaftVoterResponse(Version);
+	}
+
+	public class UpdateRaftVoterResponse : Message
+	{
+		public UpdateRaftVoterResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"UpdateRaftVoterResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(82);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_throttleTimeMs.GetSize(IsFlexibleVersion) +
+			_errorCode.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<UpdateRaftVoterResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new UpdateRaftVoterResponse(version);
+			instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for UpdateRaftVoterResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Int32 _throttleTimeMs = Int32.Default;
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int32 ThrottleTimeMs 
+		{
+			get => _throttleTimeMs;
+			private set 
+			{
+				_throttleTimeMs = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The duration in milliseconds for which the request was throttled due to a quota violation, or zero if the request did not violate any quota.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateRaftVoterResponse WithThrottleTimeMs(Int32 throttleTimeMs)
+		{
+			ThrottleTimeMs = throttleTimeMs;
+			return this;
+		}
+
+		private Int16 _errorCode = Int16.Default;
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 ErrorCode 
+		{
+			get => _errorCode;
+			private set 
+			{
+				_errorCode = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The error code, or 0 if there was no error</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public UpdateRaftVoterResponse WithErrorCode(Int16 errorCode)
+		{
+			ErrorCode = errorCode;
+			return this;
+		}
+	}
+
 	public class VoteRequest : Message, IRespond<VoteResponse>
 	{
 		public VoteRequest(Int16 version)
@@ -56607,6 +72297,988 @@ namespace Kafka.Protocol
 				public PartitionData WithVoteGranted(Boolean voteGranted)
 				{
 					VoteGranted = voteGranted;
+					return this;
+				}
+			}
+		}
+	}
+
+	public class WriteShareGroupStateRequest : Message, IRespond<WriteShareGroupStateResponse>
+	{
+		public WriteShareGroupStateRequest(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"WriteShareGroupStateRequest does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(85);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 2 : 1);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_groupId.GetSize(IsFlexibleVersion) +
+			_topicsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<WriteShareGroupStateRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new WriteShareGroupStateRequest(version);
+			instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.TopicsCollection = await Array<WriteStateData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => WriteStateData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for WriteShareGroupStateRequest is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private String _groupId = String.Default;
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public String GroupId 
+		{
+			get => _groupId;
+			private set 
+			{
+				_groupId = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The group identifier.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public WriteShareGroupStateRequest WithGroupId(String groupId)
+		{
+			GroupId = groupId;
+			return this;
+		}
+
+		private Array<WriteStateData> _topicsCollection = Array.Empty<WriteStateData>();
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<WriteStateData> TopicsCollection 
+		{
+			get => _topicsCollection;
+			private set 
+			{
+				_topicsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public WriteShareGroupStateRequest WithTopicsCollection(params Func<WriteStateData, WriteStateData>[] createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new WriteStateData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate WriteStateData CreateWriteStateData(WriteStateData field);
+
+		/// <summary>
+		/// <para>The data for the topics.</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public WriteShareGroupStateRequest WithTopicsCollection(IEnumerable<CreateWriteStateData> createFields)
+		{
+			TopicsCollection = createFields
+				.Select(createField => createField(new WriteStateData(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class WriteStateData : ISerialize
+		{
+			internal WriteStateData(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<WriteStateData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new WriteStateData(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for WriteStateData is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public WriteStateData WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionData> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public WriteStateData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionData CreatePartitionData(PartitionData field);
+
+			/// <summary>
+			/// <para>The data for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public WriteStateData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionData(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionData : ISerialize
+			{
+				internal PartitionData(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_stateEpoch.GetSize(IsFlexibleVersion) +
+					_leaderEpoch.GetSize(IsFlexibleVersion) +
+					_startOffset.GetSize(IsFlexibleVersion) +
+					_stateBatchesCollection.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionData(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StateEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StartOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.StateBatchesCollection = await Array<StateBatch>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => StateBatch.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionData is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _stateEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _startOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _stateBatchesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int32 _stateEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The state epoch for this share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 StateEpoch 
+				{
+					get => _stateEpoch;
+					private set 
+					{
+						_stateEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The state epoch for this share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithStateEpoch(Int32 stateEpoch)
+				{
+					StateEpoch = stateEpoch;
+					return this;
+				}
+
+				private Int32 _leaderEpoch = Int32.Default;
+				/// <summary>
+				/// <para>The leader epoch of the share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 LeaderEpoch 
+				{
+					get => _leaderEpoch;
+					private set 
+					{
+						_leaderEpoch = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The leader epoch of the share-partition.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithLeaderEpoch(Int32 leaderEpoch)
+				{
+					LeaderEpoch = leaderEpoch;
+					return this;
+				}
+
+				private Int64 _startOffset = Int64.Default;
+				/// <summary>
+				/// <para>The share-partition start offset, or -1 if the start offset is not being written.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int64 StartOffset 
+				{
+					get => _startOffset;
+					private set 
+					{
+						_startOffset = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The share-partition start offset, or -1 if the start offset is not being written.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithStartOffset(Int64 startOffset)
+				{
+					StartOffset = startOffset;
+					return this;
+				}
+
+				private Array<StateBatch> _stateBatchesCollection = Array.Empty<StateBatch>();
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Array<StateBatch> StateBatchesCollection 
+				{
+					get => _stateBatchesCollection;
+					private set 
+					{
+						_stateBatchesCollection = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithStateBatchesCollection(params Func<StateBatch, StateBatch>[] createFields)
+				{
+					StateBatchesCollection = createFields
+						.Select(createField => createField(new StateBatch(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public delegate StateBatch CreateStateBatch(StateBatch field);
+
+				/// <summary>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionData WithStateBatchesCollection(IEnumerable<CreateStateBatch> createFields)
+				{
+					StateBatchesCollection = createFields
+						.Select(createField => createField(new StateBatch(Version)))
+						.ToArray();
+					return this;
+				}
+
+				public class StateBatch : ISerialize
+				{
+					internal StateBatch(Int16 version)
+					{
+						Version = version;
+						IsFlexibleVersion = true;
+					}
+
+					internal Int16 Version { get; }
+					internal bool IsFlexibleVersion { get; }
+
+					private Tags.TagSection CreateTagSection()
+					{
+						return new Tags.TagSection();
+					}
+
+					int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+					internal int GetSize(bool _) =>
+						_firstOffset.GetSize(IsFlexibleVersion) +
+						_lastOffset.GetSize(IsFlexibleVersion) +
+						_deliveryState.GetSize(IsFlexibleVersion) +
+						_deliveryCount.GetSize(IsFlexibleVersion) +
+						(IsFlexibleVersion ? 
+							CreateTagSection().GetSize() :
+							0);
+
+					internal static async ValueTask<StateBatch> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+					{
+						var instance = new StateBatch(version);
+						instance.FirstOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.LastOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.DeliveryState = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						instance.DeliveryCount = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (instance.IsFlexibleVersion)
+						{
+							var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+							await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+							{
+								switch (tag.Tag)
+								{
+									default:
+										throw new InvalidOperationException($"Tag '{tag.Tag}' for StateBatch is unknown");
+								}
+							}
+						}
+
+						return instance;
+					}
+
+					ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+					internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+					{
+						await _firstOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _lastOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _deliveryState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+						await _deliveryCount.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+						if (IsFlexibleVersion)
+							await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+					}
+
+					private Int64 _firstOffset = Int64.Default;
+					/// <summary>
+					/// <para>The base offset of this state batch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 FirstOffset 
+					{
+						get => _firstOffset;
+						private set 
+						{
+							_firstOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The base offset of this state batch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public StateBatch WithFirstOffset(Int64 firstOffset)
+					{
+						FirstOffset = firstOffset;
+						return this;
+					}
+
+					private Int64 _lastOffset = Int64.Default;
+					/// <summary>
+					/// <para>The last offset of this state batch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int64 LastOffset 
+					{
+						get => _lastOffset;
+						private set 
+						{
+							_lastOffset = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The last offset of this state batch.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public StateBatch WithLastOffset(Int64 lastOffset)
+					{
+						LastOffset = lastOffset;
+						return this;
+					}
+
+					private Int8 _deliveryState = Int8.Default;
+					/// <summary>
+					/// <para>The state - 0:Available,2:Acked,4:Archived</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int8 DeliveryState 
+					{
+						get => _deliveryState;
+						private set 
+						{
+							_deliveryState = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The state - 0:Available,2:Acked,4:Archived</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public StateBatch WithDeliveryState(Int8 deliveryState)
+					{
+						DeliveryState = deliveryState;
+						return this;
+					}
+
+					private Int16 _deliveryCount = Int16.Default;
+					/// <summary>
+					/// <para>The delivery count.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public Int16 DeliveryCount 
+					{
+						get => _deliveryCount;
+						private set 
+						{
+							_deliveryCount = value;
+						}
+					}
+
+					/// <summary>
+					/// <para>The delivery count.</para>
+					/// <para>Versions: 0+</para>
+					/// </summary>
+					public StateBatch WithDeliveryCount(Int16 deliveryCount)
+					{
+						DeliveryCount = deliveryCount;
+						return this;
+					}
+				}
+			}
+		}
+
+		public WriteShareGroupStateResponse Respond()
+			=> new WriteShareGroupStateResponse(Version);
+	}
+
+	public class WriteShareGroupStateResponse : Message
+	{
+		public WriteShareGroupStateResponse(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"WriteShareGroupStateResponse does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		internal override Int16 ApiMessageKey => ApiKey;
+		public static readonly Int16 ApiKey = Int16.From(85);
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public override Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		public Int16 HeaderVersion 
+		{
+			get
+			{
+				return (short)(IsFlexibleVersion ? 1 : 0);
+			}
+		}
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal override int GetSize() =>
+			_resultsCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		internal static async ValueTask<WriteShareGroupStateResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+		{
+			var instance = new WriteShareGroupStateResponse(version);
+			instance.ResultsCollection = await Array<WriteStateResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => WriteStateResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for WriteShareGroupStateResponse is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+		{
+			await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (IsFlexibleVersion)
+				await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+		}
+
+		private Array<WriteStateResult> _resultsCollection = Array.Empty<WriteStateResult>();
+		/// <summary>
+		/// <para>The write results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<WriteStateResult> ResultsCollection 
+		{
+			get => _resultsCollection;
+			private set 
+			{
+				_resultsCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The write results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public WriteShareGroupStateResponse WithResultsCollection(params Func<WriteStateResult, WriteStateResult>[] createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new WriteStateResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate WriteStateResult CreateWriteStateResult(WriteStateResult field);
+
+		/// <summary>
+		/// <para>The write results</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public WriteShareGroupStateResponse WithResultsCollection(IEnumerable<CreateWriteStateResult> createFields)
+		{
+			ResultsCollection = createFields
+				.Select(createField => createField(new WriteStateResult(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class WriteStateResult : ISerialize
+		{
+			internal WriteStateResult(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_topicId.GetSize(IsFlexibleVersion) +
+				_partitionsCollection.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<WriteStateResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new WriteStateResult(version);
+				instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.PartitionsCollection = await Array<PartitionResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionResult.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for WriteStateResult is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Uuid _topicId = Uuid.Default;
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid TopicId 
+			{
+				get => _topicId;
+				private set 
+				{
+					_topicId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The topic identifier</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public WriteStateResult WithTopicId(Uuid topicId)
+			{
+				TopicId = topicId;
+				return this;
+			}
+
+			private Array<PartitionResult> _partitionsCollection = Array.Empty<PartitionResult>();
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Array<PartitionResult> PartitionsCollection 
+			{
+				get => _partitionsCollection;
+				private set 
+				{
+					_partitionsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public WriteStateResult WithPartitionsCollection(params Func<PartitionResult, PartitionResult>[] createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public delegate PartitionResult CreatePartitionResult(PartitionResult field);
+
+			/// <summary>
+			/// <para>The results for the partitions.</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public WriteStateResult WithPartitionsCollection(IEnumerable<CreatePartitionResult> createFields)
+			{
+				PartitionsCollection = createFields
+					.Select(createField => createField(new PartitionResult(Version)))
+					.ToArray();
+				return this;
+			}
+
+			public class PartitionResult : ISerialize
+			{
+				internal PartitionResult(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_partition.GetSize(IsFlexibleVersion) +
+					_errorCode.GetSize(IsFlexibleVersion) +
+					_errorMessage.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new PartitionResult(version);
+					instance.Partition = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionResult is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _partition.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int32 _partition = Int32.Default;
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int32 Partition 
+				{
+					get => _partition;
+					private set 
+					{
+						_partition = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The partition index.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithPartition(Int32 partition)
+				{
+					Partition = partition;
+					return this;
+				}
+
+				private Int16 _errorCode = Int16.Default;
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 ErrorCode 
+				{
+					get => _errorCode;
+					private set 
+					{
+						_errorCode = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error code, or 0 if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public PartitionResult WithErrorCode(Int16 errorCode)
+				{
+					ErrorCode = errorCode;
+					return this;
+				}
+
+				private NullableString _errorMessage = new NullableString(null);
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public String? ErrorMessage 
+				{
+					get => _errorMessage;
+					private set 
+					{
+						_errorMessage = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The error message, or null if there was no error.</para>
+				/// <para>Versions: 0+</para>
+				/// <para>Default: null</para>
+				/// </summary>
+				public PartitionResult WithErrorMessage(String? errorMessage)
+				{
+					ErrorMessage = errorMessage;
 					return this;
 				}
 			}
@@ -58212,6 +74884,126 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class KRaftVersionRecord
+	{
+		public KRaftVersionRecord(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"KRaftVersionRecord does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal int GetSize() =>
+			_version.GetSize(IsFlexibleVersion) +
+			_kRaftVersion.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		public static async ValueTask<KRaftVersionRecord> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)
+		{
+			var pipe = new Pipe();
+			await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
+			var reader = pipe.Reader;
+
+			var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
+			var instance = new KRaftVersionRecord(version);
+			instance.Version_ = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.KRaftVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for KRaftVersionRecord is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		public async ValueTask<Bytes> ToBytesAsync(CancellationToken cancellationToken = default)
+		{
+			var writer = new MemoryStream();
+			await using (writer.ConfigureAwait(false))
+			{
+				await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _kRaftVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				return new Bytes(writer.ToArray());
+			}
+		}
+
+		private Int16 _version = Int16.Default;
+		/// <summary>
+		/// <para>The version of the kraft version record</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 Version_ 
+		{
+			get => _version;
+			private set 
+			{
+				_version = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The version of the kraft version record</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public KRaftVersionRecord WithVersion_(Int16 version)
+		{
+			Version_ = version;
+			return this;
+		}
+
+		private Int16 _kRaftVersion = Int16.Default;
+		/// <summary>
+		/// <para>The kraft protocol version</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 KRaftVersion 
+		{
+			get => _kRaftVersion;
+			private set 
+			{
+				_kRaftVersion = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The kraft protocol version</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public KRaftVersionRecord WithKRaftVersion(Int16 kRaftVersion)
+		{
+			KRaftVersion = kRaftVersion;
+			return this;
+		}
+	}
+
 	public class LeaderChangeMessage
 	{
 		public LeaderChangeMessage(Int16 version)
@@ -58675,6 +75467,551 @@ namespace Kafka.Protocol
 		}
 	}
 
+	public class VotersRecord
+	{
+		public VotersRecord(Int16 version)
+		{
+			if (version.InRange(MinVersion, MaxVersion) == false) 
+				throw new UnsupportedVersionException($"VotersRecord does not support version {version}. Valid versions are: 0");
+
+			Version = version;
+			IsFlexibleVersion = true;
+		}
+
+		public static readonly Int16 MinVersion = Int16.From(0);
+		public static readonly Int16 MaxVersion = Int16.From(0);
+
+		public Int16 Version { get; }
+		internal bool IsFlexibleVersion { get; }
+
+		private Tags.TagSection CreateTagSection()
+		{
+			return new Tags.TagSection();
+		}
+
+		internal int GetSize() =>
+			_version.GetSize(IsFlexibleVersion) +
+			_votersCollection.GetSize(IsFlexibleVersion) +
+			(IsFlexibleVersion ? 
+				CreateTagSection().GetSize() :
+				0);
+
+		public static async ValueTask<VotersRecord> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default)
+		{
+			var pipe = new Pipe();
+			await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
+			var reader = pipe.Reader;
+
+			var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
+			var instance = new VotersRecord(version);
+			instance.Version_ = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+			instance.VotersCollection = await Array<Voter>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Voter.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+
+			if (instance.IsFlexibleVersion)
+			{
+				var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+				await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+				{
+					switch (tag.Tag)
+					{
+						default:
+							throw new InvalidOperationException($"Tag '{tag.Tag}' for VotersRecord is unknown");
+					}
+				}
+			}
+
+			return instance;
+		}
+
+		public async ValueTask<Bytes> ToBytesAsync(CancellationToken cancellationToken = default)
+		{
+			var writer = new MemoryStream();
+			await using (writer.ConfigureAwait(false))
+			{
+				await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _votersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				return new Bytes(writer.ToArray());
+			}
+		}
+
+		private Int16 _version = Int16.Default;
+		/// <summary>
+		/// <para>The version of the voters record</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Int16 Version_ 
+		{
+			get => _version;
+			private set 
+			{
+				_version = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>The version of the voters record</para>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public VotersRecord WithVersion_(Int16 version)
+		{
+			Version_ = version;
+			return this;
+		}
+
+		private Array<Voter> _votersCollection = Array.Empty<Voter>();
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public Array<Voter> VotersCollection 
+		{
+			get => _votersCollection;
+			private set 
+			{
+				_votersCollection = value;
+			}
+		}
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public VotersRecord WithVotersCollection(params Func<Voter, Voter>[] createFields)
+		{
+			VotersCollection = createFields
+				.Select(createField => createField(new Voter(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public delegate Voter CreateVoter(Voter field);
+
+		/// <summary>
+		/// <para>Versions: 0+</para>
+		/// </summary>
+		public VotersRecord WithVotersCollection(IEnumerable<CreateVoter> createFields)
+		{
+			VotersCollection = createFields
+				.Select(createField => createField(new Voter(Version)))
+				.ToArray();
+			return this;
+		}
+
+		public class Voter : ISerialize
+		{
+			internal Voter(Int16 version)
+			{
+				Version = version;
+				IsFlexibleVersion = true;
+			}
+
+			internal Int16 Version { get; }
+			internal bool IsFlexibleVersion { get; }
+
+			private Tags.TagSection CreateTagSection()
+			{
+				return new Tags.TagSection();
+			}
+
+			int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+			internal int GetSize(bool _) =>
+				_voterId.GetSize(IsFlexibleVersion) +
+				_voterDirectoryId.GetSize(IsFlexibleVersion) +
+				_endpointsCollection.GetSize(IsFlexibleVersion) +
+				_kRaftVersionFeature.GetSize(IsFlexibleVersion) +
+				(IsFlexibleVersion ? 
+					CreateTagSection().GetSize() :
+					0);
+
+			internal static async ValueTask<Voter> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+			{
+				var instance = new Voter(version);
+				instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				instance.EndpointsCollection = await Map<String, Endpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Endpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+				instance.KRaftVersionFeature_ = await KRaftVersionFeature.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+
+				if (instance.IsFlexibleVersion)
+				{
+					var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+					await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+					{
+						switch (tag.Tag)
+						{
+							default:
+								throw new InvalidOperationException($"Tag '{tag.Tag}' for Voter is unknown");
+						}
+					}
+				}
+
+				return instance;
+			}
+
+			ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+			internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+			{
+				await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _voterDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _endpointsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+				await _kRaftVersionFeature.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+				if (IsFlexibleVersion)
+					await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+			}
+
+			private Int32 _voterId = Int32.Default;
+			/// <summary>
+			/// <para>The replica id of the voter in the topic partition</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Int32 VoterId 
+			{
+				get => _voterId;
+				private set 
+				{
+					_voterId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The replica id of the voter in the topic partition</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Voter WithVoterId(Int32 voterId)
+			{
+				VoterId = voterId;
+				return this;
+			}
+
+			private Uuid _voterDirectoryId = Uuid.Default;
+			/// <summary>
+			/// <para>The directory id of the voter in the topic partition</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Uuid VoterDirectoryId 
+			{
+				get => _voterDirectoryId;
+				private set 
+				{
+					_voterDirectoryId = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The directory id of the voter in the topic partition</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Voter WithVoterDirectoryId(Uuid voterDirectoryId)
+			{
+				VoterDirectoryId = voterDirectoryId;
+				return this;
+			}
+
+			private Map<String, Endpoint> _endpointsCollection = Map<String, Endpoint>.Default;
+			/// <summary>
+			/// <para>The endpoint that can be used to communicate with the voter</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Map<String, Endpoint> EndpointsCollection 
+			{
+				get => _endpointsCollection;
+				private set 
+				{
+					_endpointsCollection = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The endpoint that can be used to communicate with the voter</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Voter WithEndpointsCollection(params Func<Endpoint, Endpoint>[] createFields)
+			{
+				EndpointsCollection = createFields
+					.Select(createField => createField(new Endpoint(Version)))
+					.ToDictionary(field => field.Name);
+				return this;
+			}
+
+			public delegate Endpoint CreateEndpoint(Endpoint field);
+
+			/// <summary>
+			/// <para>The endpoint that can be used to communicate with the voter</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Voter WithEndpointsCollection(IEnumerable<CreateEndpoint> createFields)
+			{
+				EndpointsCollection = createFields
+					.Select(createField => createField(new Endpoint(Version)))
+					.ToDictionary(field => field.Name);
+				return this;
+			}
+
+			public class Endpoint : ISerialize
+			{
+				internal Endpoint(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_name.GetSize(IsFlexibleVersion) +
+					_host.GetSize(IsFlexibleVersion) +
+					_port.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<Endpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new Endpoint(version);
+					instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.Port = await UInt16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for Endpoint is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private String _name = String.Default;
+				/// <summary>
+				/// <para>The name of the endpoint</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public String Name 
+				{
+					get => _name;
+					private set 
+					{
+						_name = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The name of the endpoint</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Endpoint WithName(String name)
+				{
+					Name = name;
+					return this;
+				}
+
+				private String _host = String.Default;
+				/// <summary>
+				/// <para>The hostname</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public String Host 
+				{
+					get => _host;
+					private set 
+					{
+						_host = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The hostname</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Endpoint WithHost(String host)
+				{
+					Host = host;
+					return this;
+				}
+
+				private UInt16 _port = UInt16.Default;
+				/// <summary>
+				/// <para>The port</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public UInt16 Port 
+				{
+					get => _port;
+					private set 
+					{
+						_port = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The port</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Endpoint WithPort(UInt16 port)
+				{
+					Port = port;
+					return this;
+				}
+			}
+
+			private KRaftVersionFeature _kRaftVersionFeature = default!;
+			/// <summary>
+			/// <para>The range of versions of the protocol that the replica supports</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public KRaftVersionFeature KRaftVersionFeature_ 
+			{
+				get => _kRaftVersionFeature;
+				private set 
+				{
+					_kRaftVersionFeature = value;
+				}
+			}
+
+			/// <summary>
+			/// <para>The range of versions of the protocol that the replica supports</para>
+			/// <para>Versions: 0+</para>
+			/// </summary>
+			public Voter WithKRaftVersionFeature_(Func<KRaftVersionFeature, KRaftVersionFeature> createField)
+			{
+				KRaftVersionFeature_ = createField(new KRaftVersionFeature(Version));
+				return this;
+			}
+
+			public class KRaftVersionFeature : ISerialize
+			{
+				internal KRaftVersionFeature(Int16 version)
+				{
+					Version = version;
+					IsFlexibleVersion = true;
+				}
+
+				internal Int16 Version { get; }
+				internal bool IsFlexibleVersion { get; }
+
+				private Tags.TagSection CreateTagSection()
+				{
+					return new Tags.TagSection();
+				}
+
+				int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+				internal int GetSize(bool _) =>
+					_minSupportedVersion.GetSize(IsFlexibleVersion) +
+					_maxSupportedVersion.GetSize(IsFlexibleVersion) +
+					(IsFlexibleVersion ? 
+						CreateTagSection().GetSize() :
+						0);
+
+				internal static async ValueTask<KRaftVersionFeature> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+				{
+					var instance = new KRaftVersionFeature(version);
+					instance.MinSupportedVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					instance.MaxSupportedVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (instance.IsFlexibleVersion)
+					{
+						var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+						await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+						{
+							switch (tag.Tag)
+							{
+								default:
+									throw new InvalidOperationException($"Tag '{tag.Tag}' for KRaftVersionFeature is unknown");
+							}
+						}
+					}
+
+					return instance;
+				}
+
+				ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+				internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+				{
+					await _minSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+					await _maxSupportedVersion.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+
+					if (IsFlexibleVersion)
+						await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+				}
+
+				private Int16 _minSupportedVersion = Int16.Default;
+				/// <summary>
+				/// <para>The minimum supported KRaft protocol version</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 MinSupportedVersion 
+				{
+					get => _minSupportedVersion;
+					private set 
+					{
+						_minSupportedVersion = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The minimum supported KRaft protocol version</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public KRaftVersionFeature WithMinSupportedVersion(Int16 minSupportedVersion)
+				{
+					MinSupportedVersion = minSupportedVersion;
+					return this;
+				}
+
+				private Int16 _maxSupportedVersion = Int16.Default;
+				/// <summary>
+				/// <para>The maximum supported KRaft protocol version</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public Int16 MaxSupportedVersion 
+				{
+					get => _maxSupportedVersion;
+					private set 
+					{
+						_maxSupportedVersion = value;
+					}
+				}
+
+				/// <summary>
+				/// <para>The maximum supported KRaft protocol version</para>
+				/// <para>Versions: 0+</para>
+				/// </summary>
+				public KRaftVersionFeature WithMaxSupportedVersion(Int16 maxSupportedVersion)
+				{
+					MaxSupportedVersion = maxSupportedVersion;
+					return this;
+				}
+			}
+		}
+	}
+
 	public static class ResponseExtensions
 	{
 		public static ApiVersionsResponse WithAllApiKeys(this ApiVersionsResponse response)
@@ -58688,6 +76025,10 @@ namespace Kafka.Protocol
 					.WithApiKey(AddPartitionsToTxnRequest.ApiKey)
 					.WithMinVersion(AddPartitionsToTxnRequest.MinVersion)
 					.WithMaxVersion(AddPartitionsToTxnRequest.MaxVersion),
+				key => key
+					.WithApiKey(AddRaftVoterRequest.ApiKey)
+					.WithMinVersion(AddRaftVoterRequest.MinVersion)
+					.WithMaxVersion(AddRaftVoterRequest.MaxVersion),
 				key => key
 					.WithApiKey(AllocateProducerIdsRequest.ApiKey)
 					.WithMinVersion(AllocateProducerIdsRequest.MinVersion)
@@ -58721,6 +76062,10 @@ namespace Kafka.Protocol
 					.WithMinVersion(ApiVersionsRequest.MinVersion)
 					.WithMaxVersion(ApiVersionsRequest.MaxVersion),
 				key => key
+					.WithApiKey(AssignReplicasToDirsRequest.ApiKey)
+					.WithMinVersion(AssignReplicasToDirsRequest.MinVersion)
+					.WithMaxVersion(AssignReplicasToDirsRequest.MaxVersion),
+				key => key
 					.WithApiKey(BeginQuorumEpochRequest.ApiKey)
 					.WithMinVersion(BeginQuorumEpochRequest.MinVersion)
 					.WithMaxVersion(BeginQuorumEpochRequest.MaxVersion),
@@ -58733,6 +76078,10 @@ namespace Kafka.Protocol
 					.WithMinVersion(BrokerRegistrationRequest.MinVersion)
 					.WithMaxVersion(BrokerRegistrationRequest.MaxVersion),
 				key => key
+					.WithApiKey(ConsumerGroupDescribeRequest.ApiKey)
+					.WithMinVersion(ConsumerGroupDescribeRequest.MinVersion)
+					.WithMaxVersion(ConsumerGroupDescribeRequest.MaxVersion),
+				key => key
 					.WithApiKey(ConsumerGroupHeartbeatRequest.ApiKey)
 					.WithMinVersion(ConsumerGroupHeartbeatRequest.MinVersion)
 					.WithMaxVersion(ConsumerGroupHeartbeatRequest.MaxVersion),
@@ -58740,6 +76089,10 @@ namespace Kafka.Protocol
 					.WithApiKey(ControlledShutdownRequest.ApiKey)
 					.WithMinVersion(ControlledShutdownRequest.MinVersion)
 					.WithMaxVersion(ControlledShutdownRequest.MaxVersion),
+				key => key
+					.WithApiKey(ControllerRegistrationRequest.ApiKey)
+					.WithMinVersion(ControllerRegistrationRequest.MinVersion)
+					.WithMaxVersion(ControllerRegistrationRequest.MaxVersion),
 				key => key
 					.WithApiKey(CreateAclsRequest.ApiKey)
 					.WithMinVersion(CreateAclsRequest.MinVersion)
@@ -58768,6 +76121,10 @@ namespace Kafka.Protocol
 					.WithApiKey(DeleteRecordsRequest.ApiKey)
 					.WithMinVersion(DeleteRecordsRequest.MinVersion)
 					.WithMaxVersion(DeleteRecordsRequest.MaxVersion),
+				key => key
+					.WithApiKey(DeleteShareGroupStateRequest.ApiKey)
+					.WithMinVersion(DeleteShareGroupStateRequest.MinVersion)
+					.WithMaxVersion(DeleteShareGroupStateRequest.MaxVersion),
 				key => key
 					.WithApiKey(DeleteTopicsRequest.ApiKey)
 					.WithMinVersion(DeleteTopicsRequest.MinVersion)
@@ -58809,6 +76166,10 @@ namespace Kafka.Protocol
 					.WithMinVersion(DescribeQuorumRequest.MinVersion)
 					.WithMaxVersion(DescribeQuorumRequest.MaxVersion),
 				key => key
+					.WithApiKey(DescribeTopicPartitionsRequest.ApiKey)
+					.WithMinVersion(DescribeTopicPartitionsRequest.MinVersion)
+					.WithMaxVersion(DescribeTopicPartitionsRequest.MaxVersion),
+				key => key
 					.WithApiKey(DescribeTransactionsRequest.ApiKey)
 					.WithMinVersion(DescribeTransactionsRequest.MinVersion)
 					.WithMaxVersion(DescribeTransactionsRequest.MaxVersion),
@@ -58849,6 +76210,10 @@ namespace Kafka.Protocol
 					.WithMinVersion(FindCoordinatorRequest.MinVersion)
 					.WithMaxVersion(FindCoordinatorRequest.MaxVersion),
 				key => key
+					.WithApiKey(GetTelemetrySubscriptionsRequest.ApiKey)
+					.WithMinVersion(GetTelemetrySubscriptionsRequest.MinVersion)
+					.WithMaxVersion(GetTelemetrySubscriptionsRequest.MaxVersion),
+				key => key
 					.WithApiKey(HeartbeatRequest.ApiKey)
 					.WithMinVersion(HeartbeatRequest.MinVersion)
 					.WithMaxVersion(HeartbeatRequest.MaxVersion),
@@ -58856,6 +76221,10 @@ namespace Kafka.Protocol
 					.WithApiKey(IncrementalAlterConfigsRequest.ApiKey)
 					.WithMinVersion(IncrementalAlterConfigsRequest.MinVersion)
 					.WithMaxVersion(IncrementalAlterConfigsRequest.MaxVersion),
+				key => key
+					.WithApiKey(InitializeShareGroupStateRequest.ApiKey)
+					.WithMinVersion(InitializeShareGroupStateRequest.MinVersion)
+					.WithMaxVersion(InitializeShareGroupStateRequest.MaxVersion),
 				key => key
 					.WithApiKey(InitProducerIdRequest.ApiKey)
 					.WithMinVersion(InitProducerIdRequest.MinVersion)
@@ -58872,6 +76241,10 @@ namespace Kafka.Protocol
 					.WithApiKey(LeaveGroupRequest.ApiKey)
 					.WithMinVersion(LeaveGroupRequest.MinVersion)
 					.WithMaxVersion(LeaveGroupRequest.MaxVersion),
+				key => key
+					.WithApiKey(ListClientMetricsResourcesRequest.ApiKey)
+					.WithMinVersion(ListClientMetricsResourcesRequest.MinVersion)
+					.WithMaxVersion(ListClientMetricsResourcesRequest.MaxVersion),
 				key => key
 					.WithApiKey(ListGroupsRequest.ApiKey)
 					.WithMinVersion(ListGroupsRequest.MinVersion)
@@ -58913,6 +76286,22 @@ namespace Kafka.Protocol
 					.WithMinVersion(ProduceRequest.MinVersion)
 					.WithMaxVersion(ProduceRequest.MaxVersion),
 				key => key
+					.WithApiKey(PushTelemetryRequest.ApiKey)
+					.WithMinVersion(PushTelemetryRequest.MinVersion)
+					.WithMaxVersion(PushTelemetryRequest.MaxVersion),
+				key => key
+					.WithApiKey(ReadShareGroupStateRequest.ApiKey)
+					.WithMinVersion(ReadShareGroupStateRequest.MinVersion)
+					.WithMaxVersion(ReadShareGroupStateRequest.MaxVersion),
+				key => key
+					.WithApiKey(ReadShareGroupStateSummaryRequest.ApiKey)
+					.WithMinVersion(ReadShareGroupStateSummaryRequest.MinVersion)
+					.WithMaxVersion(ReadShareGroupStateSummaryRequest.MaxVersion),
+				key => key
+					.WithApiKey(RemoveRaftVoterRequest.ApiKey)
+					.WithMinVersion(RemoveRaftVoterRequest.MinVersion)
+					.WithMaxVersion(RemoveRaftVoterRequest.MaxVersion),
+				key => key
 					.WithApiKey(RenewDelegationTokenRequest.ApiKey)
 					.WithMinVersion(RenewDelegationTokenRequest.MinVersion)
 					.WithMaxVersion(RenewDelegationTokenRequest.MaxVersion),
@@ -58924,6 +76313,22 @@ namespace Kafka.Protocol
 					.WithApiKey(SaslHandshakeRequest.ApiKey)
 					.WithMinVersion(SaslHandshakeRequest.MinVersion)
 					.WithMaxVersion(SaslHandshakeRequest.MaxVersion),
+				key => key
+					.WithApiKey(ShareAcknowledgeRequest.ApiKey)
+					.WithMinVersion(ShareAcknowledgeRequest.MinVersion)
+					.WithMaxVersion(ShareAcknowledgeRequest.MaxVersion),
+				key => key
+					.WithApiKey(ShareFetchRequest.ApiKey)
+					.WithMinVersion(ShareFetchRequest.MinVersion)
+					.WithMaxVersion(ShareFetchRequest.MaxVersion),
+				key => key
+					.WithApiKey(ShareGroupDescribeRequest.ApiKey)
+					.WithMinVersion(ShareGroupDescribeRequest.MinVersion)
+					.WithMaxVersion(ShareGroupDescribeRequest.MaxVersion),
+				key => key
+					.WithApiKey(ShareGroupHeartbeatRequest.ApiKey)
+					.WithMinVersion(ShareGroupHeartbeatRequest.MinVersion)
+					.WithMaxVersion(ShareGroupHeartbeatRequest.MaxVersion),
 				key => key
 					.WithApiKey(StopReplicaRequest.ApiKey)
 					.WithMinVersion(StopReplicaRequest.MinVersion)
@@ -58949,9 +76354,17 @@ namespace Kafka.Protocol
 					.WithMinVersion(UpdateMetadataRequest.MinVersion)
 					.WithMaxVersion(UpdateMetadataRequest.MaxVersion),
 				key => key
+					.WithApiKey(UpdateRaftVoterRequest.ApiKey)
+					.WithMinVersion(UpdateRaftVoterRequest.MinVersion)
+					.WithMaxVersion(UpdateRaftVoterRequest.MaxVersion),
+				key => key
 					.WithApiKey(VoteRequest.ApiKey)
 					.WithMinVersion(VoteRequest.MinVersion)
 					.WithMaxVersion(VoteRequest.MaxVersion),
+				key => key
+					.WithApiKey(WriteShareGroupStateRequest.ApiKey)
+					.WithMinVersion(WriteShareGroupStateRequest.MinVersion)
+					.WithMaxVersion(WriteShareGroupStateRequest.MaxVersion),
 				key => key
 					.WithApiKey(WriteTxnMarkersRequest.ApiKey)
 					.WithMinVersion(WriteTxnMarkersRequest.MinVersion)
