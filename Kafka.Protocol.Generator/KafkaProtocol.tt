@@ -726,9 +726,13 @@ void PrintRead(Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field messa
 				#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, () => <#= fieldTypeNameWithoutArrayCharacters #>.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);<# 	
 			}
 		} 
-		else 
+		else if (messageField.IsPrimitiveType())
 		{
 			#>await <#= fieldTypeName #>.FromReaderAsync(reader, <#= isFlexibleVersionExpression #>, cancellationToken).ConfigureAwait(false);<# 
+		}
+		else 
+		{
+			#>await <#= fieldTypeName #>.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);<# 
 		}
 	}
 	else 
