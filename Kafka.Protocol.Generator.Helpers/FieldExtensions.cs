@@ -19,11 +19,10 @@ namespace Kafka.Protocol.Generator.Helpers
 
         public static void SetPrimitiveTypeNames(string[] typeNames)
         {
-            //if (_primitiveTypeNames != null)
-            //    throw new InvalidOperationException(
-            //        "Primitive type names have already been set");
-
-            _primitiveTypeNames = typeNames;
+            _primitiveTypeNames = typeNames
+                .Append("RecordBatch")
+                .Append("NullableRecordBatch")
+                .ToArray();
         }
 
         public static bool IsArray(this Field field)
