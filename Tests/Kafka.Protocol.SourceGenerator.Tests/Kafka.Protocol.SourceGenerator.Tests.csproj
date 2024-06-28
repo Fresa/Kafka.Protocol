@@ -23,7 +23,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Kafka.Protocol.SourceGenerator\Kafka.Protocol.SourceGenerator.csproj"
-						  ReferenceOutputAssembly="true"
+						  ReferenceOutputAssembly="false"
 						  OutputItemType="Analyzer" />
+		<ProjectReference Include="..\..\Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj" OutputItemType="Analyzer" />
 	</ItemGroup>
 </Project>
