@@ -20,6 +20,15 @@
 	<ItemGroup>
 		<Using Include="Xunit" />
 	</ItemGroup>
+	
+	<ItemGroup>
+		<AdditionalFiles Include="../../Kafka.Protocol.MessageDefinitionsDownloader/MessageDefinitions/*.json">
+			<LinkBase>MessageDefinitions</LinkBase>
+		</AdditionalFiles>
+		<AdditionalFiles Include="../../Kafka.Protocol.Generator/ProtocolSpecifications/Apache Kafka.html">
+			<LinkBase>ProtocolSpecifications</LinkBase>
+		</AdditionalFiles>
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Kafka.Protocol.SourceGenerator\Kafka.Protocol.SourceGenerator.csproj"
