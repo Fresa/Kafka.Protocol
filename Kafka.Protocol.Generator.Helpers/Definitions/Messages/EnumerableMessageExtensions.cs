@@ -25,44 +25,47 @@ namespace Kafka.Protocol.Generator.Helpers.Definitions.Messages
         }
 
         public static IEnumerable<Message> AddReferencesToFields(
-            this IEnumerable<Message> messageDefinitions)
+            this IEnumerable<Message> messageDefinitions) =>
+            messageDefinitions
+                .Select(messageDefinition => 
+                    messageDefinition.AddReferencesToFields());
+
+        public static Message AddReferencesToFields(
+            this Message messageDefinition)
         {
-            foreach (var messageDefinition in messageDefinitions)
+            foreach (var field in messageDefinition.Fields)
             {
-                foreach (var field in messageDefinition.Fields)
-                {
-                    field.Message = messageDefinition;
-                    AddReferenceToField(field);
-                }
+                field.Message = messageDefinition;
+                AddReferenceToField(field);
+            }
 
-                if (messageDefinition.CommonStructs != null)
+            if (messageDefinition.CommonStructs != null)
+            {
+                foreach (var commonStruct in messageDefinition.CommonStructs)
                 {
-                    foreach (var commonStruct in messageDefinition.CommonStructs)
+                    commonStruct.Message = messageDefinition;
+                    foreach (var field in commonStruct.Fields)
                     {
-                        commonStruct.Message = messageDefinition;
-                        foreach (var field in commonStruct.Fields)
-                        {
-                            AddReferenceToField(field);
-                        }
+                        AddReferenceToField(field);
                     }
                 }
+            }
 
-                void AddReferenceToField(Field field, Field? parent = null)
+            return messageDefinition;
+
+            void AddReferenceToField(Field field, Field? parent = null)
+            {
+                field.Message = messageDefinition;
+                field.Parent = parent;
+                if (field.Fields == null)
                 {
-                    field.Message = messageDefinition;
-                    field.Parent = parent;
-                    if (field.Fields == null)
-                    {
-                        return;
-                    }
-
-                    foreach (var child in field.Fields)
-                    {
-                        AddReferenceToField(child, field);
-                    }
+                    return;
                 }
 
-                yield return messageDefinition;
+                foreach (var child in field.Fields)
+                {
+                    AddReferenceToField(child, field);
+                }
             }
         }
     }
