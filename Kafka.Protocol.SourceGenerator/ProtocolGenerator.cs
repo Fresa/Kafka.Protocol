@@ -20,10 +20,15 @@ namespace Kafka.Protocol.SourceGenerator
         private static readonly Regex SpecificationFileRegex = new("^.*/MessageDefinitions/.*.json$");
         private static readonly Regex ProtocolSpecificationRegex = new("^.*/ProtocolSpecifications/Apache Kafka.html$");
 
-        public void Initialize(IncrementalGeneratorInitializationContext context)
+        private static readonly JsonSerializerOptions
+            _specificationFileSerializerOptions = new()
+            {
+                ReadCommentHandling = JsonCommentHandling.Skip
+            };
+
+    public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             //Debugger.Launch();
-            context.RegisterSourceOutput(context.AdditionalTextsProvider.Collect(), Testar);
             var protocolSpecifications = context.AdditionalTextsProvider
                 .Where(static file =>
                      ProtocolSpecificationRegex.IsMatch(file.Path))
@@ -74,7 +79,7 @@ namespace Kafka.Protocol.SourceGenerator
             var messageDefinitions = specificationContent
                 .Select(static (text, _) =>
                     JsonSerializer
-                        .Deserialize<Message>(text.ToString())!
+                        .Deserialize<Message>(text.ToString(), _specificationFileSerializerOptions)!
                         .AddReferencesToFields())
                 .Collect()
                 .Select((array, _) =>
@@ -92,24 +97,7 @@ namespace Kafka.Protocol.SourceGenerator
             
             context.RegisterSourceOutput(primitiveTypeNames.Combine(messageDefinitions), GenerateMessages);
         }
-
-        private void Testar(SourceProductionContext arg1, ImmutableArray<AdditionalText> arg2)
-        {
-            arg1.AddSource("test4.cs", @"
-namespace Generated
-{
-    public class AdditionalTextList
-    {
-        public static void PrintTexts()
-        {
-            System.Console.WriteLine(""Hello world"");
-        }
-    }
-}");
-        }
         
-       
-
         private void GenerateErrorCodes(SourceProductionContext arg1, ICollection<ErrorCode> arg2)
         {
             arg1.AddSource("test.cs", @"
