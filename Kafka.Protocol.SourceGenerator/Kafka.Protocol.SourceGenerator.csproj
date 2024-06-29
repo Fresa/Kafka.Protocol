@@ -7,18 +7,12 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 		<GeneratedFolder>Generated</GeneratedFolder>
-		<CompilerGeneratedFilesOutputPath></CompilerGeneratedFilesOutputPath>
 		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
 		<IsRoslynComponent>true</IsRoslynComponent>
 
 		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<Compile Remove="$(GeneratedFolder)/**/*.cs" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" PrivateAssets="all" GeneratePathProperty="true" />
