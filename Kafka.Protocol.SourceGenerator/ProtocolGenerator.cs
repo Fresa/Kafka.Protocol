@@ -17,8 +17,8 @@ namespace Kafka.Protocol.SourceGenerator
     [Generator]
     public partial class ProtocolGenerator : IIncrementalGenerator
     {
-        private static readonly Regex SpecificationFileRegex = new("^.*/MessageDefinitions/.*.json$");
-        private static readonly Regex ProtocolSpecificationRegex = new("^.*/ProtocolSpecifications/Apache Kafka.html$");
+        private static readonly Regex SpecificationFileRegex = new(@"^.*(\\|/)MessageDefinitions(\\|/).*.json$");
+        private static readonly Regex ProtocolSpecificationRegex = new(@"^.*(\\|/)ProtocolSpecifications(\\|/)Apache Kafka.html$");
 
         private static readonly JsonSerializerOptions
             _specificationFileSerializerOptions = new()
