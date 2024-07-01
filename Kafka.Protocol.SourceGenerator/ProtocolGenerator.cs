@@ -43,7 +43,19 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                             $"No protocol specification could be found. Make sure a file matching {ProtocolSpecificationRegex} is added to AdditionalFiles");
                     }
 
-                    return array.First();
+                    var specification = array.First();
+                    if (!specification.ErrorCodes.Any())
+                    {
+                        throw new InvalidOperationException(
+                            $"No error codes are defined in the protocol specification at {ProtocolSpecificationRegex}");
+                    }
+                    if (!specification.PrimitiveTypes.Any())
+                    {
+                        throw new InvalidOperationException(
+                            $"No primitive types are defined in the protocol specification found at {ProtocolSpecificationRegex}");
+                    }
+
+                    return specification;
                 });
         var primitiveTypes =
             protocolSpecification.Select(

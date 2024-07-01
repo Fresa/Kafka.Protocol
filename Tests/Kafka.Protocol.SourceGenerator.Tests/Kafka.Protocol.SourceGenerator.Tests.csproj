@@ -8,9 +8,19 @@
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
 		<WarningsAsErrors>CS8785,CS8784</WarningsAsErrors>
+
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
 	</PropertyGroup>
+	
+	<Target Name="RemoveSourceGeneratedFiles" BeforeTargets="CoreCompile">
+		<ItemGroup>
+			<Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
+		</ItemGroup>
+	</Target>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" PrivateAssets="all" />
 		<PackageReference Include="coverlet.collector" Version="6.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
 		<PackageReference Include="xunit" Version="2.5.3" />
@@ -31,9 +41,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Kafka.Protocol.SourceGenerator\Kafka.Protocol.SourceGenerator.csproj"
-						  ReferenceOutputAssembly="false"
-						  OutputItemType="Analyzer" />
+		<ProjectReference Include="..\..\Kafka.Protocol.SourceGenerator\Kafka.Protocol.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
 		<ProjectReference Include="..\..\Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj" OutputItemType="Analyzer" />
 	</ItemGroup>
 </Project>
