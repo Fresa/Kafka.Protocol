@@ -7,6 +7,7 @@ using Kafka.Protocol.Generator.Helpers;
 using Kafka.Protocol.Generator.Helpers.Definitions;
 using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Kafka.Protocol.Generator.Helpers.Extensions;
+using Kafka.Protocol.SourceGenerator.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -30,7 +31,13 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         SpecificationFileSerializerOptions = new()
         {
             ReadCommentHandling = JsonCommentHandling.Skip,
-            PropertyNameCaseInsensitive = true
+            PropertyNameCaseInsensitive = true,
+            Converters =
+            {
+                // The specification files defines some property types loosely, so we try to cast appropriately
+                new PrimitiveToStringConverter(),
+                new StringToIntegerConverter()
+            }
         };
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -98,7 +105,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                 }
                 catch (JsonException e)
                 {
-                    throw new InvalidOperationException($"Caught exception deserializing: {file.Path}: {e.Message} {e.StackTrace}");
+                    throw new JsonException($"Caught exception deserializing: {file.Path}: {e.Message} {e.StackTrace}");
                 }
             });
         var requestMessages = messageDefinitions
