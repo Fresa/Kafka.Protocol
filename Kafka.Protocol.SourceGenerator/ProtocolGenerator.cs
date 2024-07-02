@@ -92,7 +92,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             });
 
         context.RegisterSourceOutput(primitiveTypes, GeneratePrimitiveTypes);
-        //context.RegisterSourceOutput(errorCodes, GenerateErrorCodes);
+        context.RegisterSourceOutput(errorCodes, GenerateErrorCodes);
         context.RegisterSourceOutput(primitiveTypeNames.Combine(messageDefinitions), GenerateMessages);
     }
 
@@ -101,13 +101,6 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         arg1.AddSource("test.cs", @"
 namespace Generated
 {
-    public class AdditionalTextList
-    {
-        public static void PrintTexts()
-        {
-            System.Console.WriteLine(""Hello world"");
-        }
-    }
 }");
     }
 
@@ -131,11 +124,8 @@ namespace Generated
 
             sourceProductionContext.AddSource($"{classNameWithoutGenerics}.g.cs", ParseCSharpCode($$"""
                     using System;
-                    using System.Collections;
                     using System.Collections.Generic;
                     using System.IO;
-                    using System.IO.Pipelines;
-                    using System.Linq;
                     using System.Threading;
                     using System.Threading.Tasks;
                     
