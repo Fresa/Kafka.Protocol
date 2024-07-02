@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -28,7 +29,8 @@ public partial class ProtocolGenerator : IIncrementalGenerator
     private static readonly JsonSerializerOptions
         SpecificationFileSerializerOptions = new()
         {
-            ReadCommentHandling = JsonCommentHandling.Skip
+            ReadCommentHandling = JsonCommentHandling.Skip,
+            PropertyNameCaseInsensitive = true
         };
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
@@ -84,19 +86,20 @@ public partial class ProtocolGenerator : IIncrementalGenerator
 
         var messageDefinitions = context.AdditionalTextsProvider
             .ReadTextFromFilesMatching(SpecificationFileRegex)
-            .Select(static (text, _) =>
-                JsonSerializer
-                    .Deserialize<Message>(text.ToString(), SpecificationFileSerializerOptions)!
-                    .AddReferencesToFields())
-            .Collect()
-            .Select(static (array, _) =>
+            .Select(static (file, _) =>
             {
-                if (array.IsEmpty)
+                var json = file.Content.ToString();
+                try
                 {
-                    throw new InvalidOperationException(
-                        $"No message specification files could be found. Make sure files are added as AdditionalFiles matching {SpecificationFileRegex}");
+                    return JsonSerializer
+                        .Deserialize<Message>(json,
+                            SpecificationFileSerializerOptions)!
+                        .AddReferencesToFields();
                 }
-                return array;
+                catch (JsonException e)
+                {
+                    throw new InvalidOperationException($"Caught exception deserializing: {file.Path}: {e.Message} {e.StackTrace}");
+                }
             });
         var requestMessages = messageDefinitions
             .Where(message => message.IsRequest())
