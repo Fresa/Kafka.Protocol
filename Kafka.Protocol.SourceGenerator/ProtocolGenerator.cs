@@ -18,6 +18,9 @@ public partial class ProtocolGenerator : IIncrementalGenerator
     private static readonly Regex ProtocolSpecificationRegex = new(@"^.*(\\|/)ProtocolSpecifications(\\|/)Apache Kafka.html$");
     private const string Namespace = "Kafka.Protocol";
 
+    private const string CodeGeneratedWarningComment =
+        "// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.";
+
     private static readonly JsonSerializerOptions
         SpecificationFileSerializerOptions = new()
         {
@@ -116,6 +119,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             var description = primitiveType.Description;
 
             sourceProductionContext.AddSource($"{classNameWithoutGenerics}.g.cs", ParseCSharpCode($$"""
+                    {{CodeGeneratedWarningComment}}
                     using System;
                     using System.Collections.Generic;
                     using System.IO;
@@ -194,6 +198,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         {
             var exceptionName = errorCode.Error.ToPascalCase('_');
             sourceProductionContext.AddSource($"Errors/{exceptionName}.g.cs", ParseCSharpCode($$"""
+                    {{CodeGeneratedWarningComment}}
                     using System;
                     
                     namespace {{Namespace}}

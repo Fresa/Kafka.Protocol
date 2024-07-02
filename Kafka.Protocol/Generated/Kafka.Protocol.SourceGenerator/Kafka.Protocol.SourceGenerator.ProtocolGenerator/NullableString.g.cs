@@ -1,4 +1,5 @@
-﻿using System;
+﻿// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
