@@ -6,9 +6,8 @@ using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Kafka.Protocol;
 
-namespace Kafka.Protocol2
+namespace Kafka.Protocol
 {
     /// <summary>
     /// <para>Represents a double-precision 64-bit format IEEE 754 value. The values are encoded using eight bytes in network byte order (big-endian).</para>

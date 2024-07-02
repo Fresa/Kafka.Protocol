@@ -6,9 +6,8 @@ using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Kafka.Protocol;
 
-namespace Kafka.Protocol2
+namespace Kafka.Protocol
 {
     /// <summary>
     /// <para>Represents a raw sequence of bytes or null. For non-null values, first the length N is given as an INT32. Then N bytes follow. A null value is encoded with length of -1 and there are no following bytes.</para>

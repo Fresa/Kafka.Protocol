@@ -6,9 +6,8 @@ using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Kafka.Protocol;
 
-namespace Kafka.Protocol2
+namespace Kafka.Protocol
 {
     /// <summary>
     /// <para>Represents an integer between -2^63 and 2^63-1 inclusive. Encoding follows the variable-length zig-zag encoding from  <a href="http://code.google.com/apis/protocolbuffers/docs/encoding.html"> Google Protocol Buffers</a>.</para>

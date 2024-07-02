@@ -6,9 +6,8 @@ using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Kafka.Protocol;
 
-namespace Kafka.Protocol2
+namespace Kafka.Protocol
 {
     /// <summary>
     /// <para>Represents an integer between -2^31 and 2^31-1 inclusive. The values are encoded using four bytes in network byte order (big-endian).</para>

@@ -6,9 +6,8 @@ using System.IO.Pipelines;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Kafka.Protocol;
 
-namespace Kafka.Protocol2
+namespace Kafka.Protocol
 {
     /// <summary>
     /// <para>Represents a sequence of objects of a given type T. Type T can be either a primitive type (e.g. STRING) or a structure. First, the length N + 1 is given as an UNSIGNED_VARINT. Then N instances of type T follow. A null array is represented with a length of 0. In protocol documentation an array of T instances is referred to as [T].</para>

@@ -15,7 +15,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
 {
     private static readonly Regex SpecificationFileRegex = new(@"^.*(\\|/)MessageDefinitions(\\|/).*.json$");
     private static readonly Regex ProtocolSpecificationRegex = new(@"^.*(\\|/)ProtocolSpecifications(\\|/)Apache Kafka.html$");
-    private const string Namespace = "Kafka.Protocol2";
+    private const string Namespace = "Kafka.Protocol";
 
     private static readonly JsonSerializerOptions
         SpecificationFileSerializerOptions = new()
@@ -138,7 +138,6 @@ namespace Generated
                     using System.Linq;
                     using System.Threading;
                     using System.Threading.Tasks;
-                    using Kafka.Protocol;
                     
                     namespace {{Namespace}}
                     {
