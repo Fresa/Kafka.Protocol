@@ -21,6 +21,10 @@ public partial class ProtocolGenerator : IIncrementalGenerator
     private const string CodeGeneratedWarningComment =
         "// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.";
 
+    private static string GenerateMissingSpecificationFiles(
+        string messageType = "") =>
+        $"No {messageType}{(messageType == string.Empty ? "" : " ")}message specification files could be found. Make sure files are added as AdditionalFiles matching {SpecificationFileRegex}";
+
     private static readonly JsonSerializerOptions
         SpecificationFileSerializerOptions = new()
         {
@@ -94,6 +98,31 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                 }
                 return array;
             });
+        var requestMessages = messageDefinitions
+            .Where(message => message.IsRequest())
+            .Collect()
+            .ThrowIfEmpty(
+                GenerateMissingSpecificationFiles("request"));
+        var responseMessages = messageDefinitions
+            .Where(message => message.IsResponse())
+            .Collect()
+            .ThrowIfEmpty(
+                GenerateMissingSpecificationFiles("response"));
+        var headerMessages = messageDefinitions
+            .Where(message => message.IsHeader())
+            .Collect()
+            .ThrowIfEmpty(
+                GenerateMissingSpecificationFiles("header"));
+        var messages = messageDefinitions
+            .Where(message => message.IsMessage())
+            .Collect()
+            .ThrowIfEmpty(
+                GenerateMissingSpecificationFiles());
+        var dataMessages = messageDefinitions
+            .Where(message => message.IsData())
+            .Collect()
+            .ThrowIfEmpty(
+                GenerateMissingSpecificationFiles("data"));
 
         context.RegisterSourceOutput(primitiveTypes, GeneratePrimitiveTypes);
         context.RegisterSourceOutput(errorCodes, GenerateErrorCodes);
