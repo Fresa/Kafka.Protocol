@@ -5,6 +5,7 @@ using HtmlAgilityPack;
 using Kafka.Protocol.Generator.Helpers;
 using Kafka.Protocol.Generator.Helpers.Definitions;
 using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
+using Kafka.Protocol.Generator.Helpers.Extensions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -96,15 +97,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         context.RegisterSourceOutput(primitiveTypeNames.Combine(messageDefinitions), GenerateMessages);
     }
 
-    private void GenerateErrorCodes(SourceProductionContext arg1, ICollection<ErrorCode> arg2)
-    {
-        arg1.AddSource("test.cs", @"
-namespace Generated
-{
-}");
-    }
-
-    private void GeneratePrimitiveTypes(
+    private static void GeneratePrimitiveTypes(
         SourceProductionContext sourceProductionContext,
         ICollection<PrimitiveType> primitiveTypes)
     {
@@ -192,6 +185,34 @@ namespace Generated
             string? GenerateIfNullable(string code) => isNullable ? code : null;
         }
     }
+
+    private static void GenerateErrorCodes(
+        SourceProductionContext sourceProductionContext, 
+        ICollection<ErrorCode> errorCodes)
+    {
+        foreach (var errorCode in errorCodes)
+        {
+            var exceptionName = errorCode.Error.ToPascalCase('_');
+            sourceProductionContext.AddSource($"Errors/{exceptionName}.g.cs", ParseCSharpCode($$"""
+                    using System;
+                    
+                    namespace {{Namespace}}
+                    {
+                        {{Documentation.Generate(errorCode.Description ?? "")}}
+                        public class {{exceptionName}}Exception : Exception
+                        {
+                            public {{exceptionName}}Exception() { }
+                  
+                            public {{exceptionName}}Exception(string message) : base(message) { }
+                  
+                            public const int ErrorCode = {{errorCode.Code}};
+                            public int Code => ErrorCode;
+                        }
+                    }
+                  """));
+        }
+    }
+
 
     private void GenerateMessages(SourceProductionContext arg1, (string[] Left, ImmutableArray<Message> Right) arg2)
     {

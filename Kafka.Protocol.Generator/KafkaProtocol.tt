@@ -51,24 +51,6 @@ using Kafka.Protocol.Records;
 namespace Kafka.Protocol<# Block(() =>
 {
 	
-	// Exceptions
-    PrintOnNewRowForEachWithIndex(protocol.ErrorCodes.Values, (errorCode, index, count) =>
-    {
-        var exceptionName = errorCode.Error.ToPascalCase('_');
-        GenerateDocumentation(errorCode.Description);
-        #>public class <#= exceptionName #>Exception : Exception<# Block(() =>
-        {
-			#>public <#= exceptionName #>Exception() { }<# LF(2);
-
-            #>public <#= exceptionName #>Exception(string message) : base(message) { }<# LF(2);
-
-			#>public const int ErrorCode = <#= errorCode.Code #>;<# LF();
-			#>public int Code => ErrorCode;<# 
-        });
-
-		if (index + 1 != count) LF();
-    }); LF(2);
-
 	#>public static class Messages <# Block(() =>
     {
 		#>public static async ValueTask<Message> CreateRequestMessageFromReaderAsync(<# LF();
