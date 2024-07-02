@@ -6,6 +6,7 @@ using Kafka.Protocol.Generator.Helpers;
 using Kafka.Protocol.Generator.Helpers.Definitions;
 using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace Kafka.Protocol.SourceGenerator;
 
@@ -14,6 +15,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
 {
     private static readonly Regex SpecificationFileRegex = new(@"^.*(\\|/)MessageDefinitions(\\|/).*.json$");
     private static readonly Regex ProtocolSpecificationRegex = new(@"^.*(\\|/)ProtocolSpecifications(\\|/)Apache Kafka.html$");
+    private const string Namespace = "Kafka.Protocol2";
 
     private static readonly JsonSerializerOptions
         SpecificationFileSerializerOptions = new()
@@ -88,13 +90,12 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                 }
                 return array;
             });
-            
-        //context.RegisterSourceOutput(primitiveTypes, GeneratePrimitiveTypes);
+
+        context.RegisterSourceOutput(primitiveTypes, GeneratePrimitiveTypes);
         //context.RegisterSourceOutput(errorCodes, GenerateErrorCodes);
-            
         context.RegisterSourceOutput(primitiveTypeNames.Combine(messageDefinitions), GenerateMessages);
     }
-        
+
     private void GenerateErrorCodes(SourceProductionContext arg1, ICollection<ErrorCode> arg2)
     {
         arg1.AddSource("test.cs", @"
@@ -110,28 +111,92 @@ namespace Generated
 }");
     }
 
-    private void GeneratePrimitiveTypes(SourceProductionContext arg1, ICollection<PrimitiveType> arg2)
+    private void GeneratePrimitiveTypes(
+        SourceProductionContext sourceProductionContext,
+        ICollection<PrimitiveType> primitiveTypes)
     {
-        foreach (var primitiveType in arg2)
+        foreach (var primitiveType in primitiveTypes)
         {
-            arg1.AddSource($"{primitiveType.Type}.g.cs", $@"
-namespace Generated
-{{
-    public class {primitiveType.Type}
-    {{
-        public static void PrintTexts()
-        {{
-            System.Console.WriteLine(""Hello world"");
-        }}
-    }}
-}}");
+            var className = primitiveType.GetClassName();
+            var classNameWithoutGenerics = className.Split('<').First();
+            var type = primitiveType.GetTypeName();
+            var defaultValue = primitiveType.GetDefaultValue();
+            var isNullable = primitiveType.IsNullable();
+            var @params = primitiveType.IsArray() ? "params " : "";
+            var genericConstraints =
+                primitiveType.GetGenericArgumentConstraints();
+            var nonNullableType = className.TrimStart("Nullable".ToCharArray());
+            var nullableType = nonNullableType + "?";
+            var description = primitiveType.Description;
+
+            sourceProductionContext.AddSource($"{classNameWithoutGenerics}.g.cs", ParseCSharpCode($$"""
+                    namespace {{Namespace}}
+                    {
+                        {{Documentation.Generate(description ?? "")}}
+                        public readonly partial struct {{className}} : ISerialize
+                            {{Constraints.Generate(genericConstraints)}}
+                        {
+                            public {{type}} Value { get; }
+                      
+                            public {{classNameWithoutGenerics}}({{@params}}{{type}} value)
+                            {
+                                Value = value;
+                            }
+                      
+                            public override bool Equals(object obj) =>
+                                obj is {{className}} comparing{{classNameWithoutGenerics}} && this == comparing{{classNameWithoutGenerics}};
+                      
+                            public override int GetHashCode() =>
+                            {{(isNullable ?
+                                "Value?.GetHashCode() ?? 0;" :
+                                "Value.GetHashCode();")}}
+                            
+                            public override string ToString() =>
+                            {{(isNullable ?
+                                "Value?.ToString() ?? string.Empty;" :
+                                "Value.ToString();")}}
+                        
+                            public static bool operator == ({{className}} x, {{className}} y) =>
+                                x.Value == y.Value;
+                            
+                            public static bool operator != ({{className}} x, {{className}} y) =>
+                                !(x == y);
+                            
+                            public static implicit operator {{type}}({{className}} value) => 
+                                value.Value;
+                      
+                            public static implicit operator {{className}}({{type}} value) => 
+                                From(value);
+                            
+                            {{GenerateIfNullable($"""
+                            public static implicit operator {nullableType}({className} value) =>
+                                value.Value == null ? null as {nullableType} : {nonNullableType}.From(value.Value);
+
+                            public static implicit operator {className}({nullableType} value) =>
+                                From(value?.Value);
+                            """)}}
+                                             
+                            int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+                      
+                            ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => 
+                                WriteToAsync(writer, asCompact, cancellationToken);
+                      
+                            public static {{className}} From({{@params}}{{type}} value) =>
+                                new {{className}}(value);
+                            
+                            public static {{className}} Default { get; } = From({{defaultValue}});
+                        }
+                    }
+                  """));
+            continue;
+
+            string? GenerateIfNullable(string code) => isNullable ? code : null;
         }
-            
     }
 
     private void GenerateMessages(SourceProductionContext arg1, (string[] Left, ImmutableArray<Message> Right) arg2)
     {
-        arg1.AddSource("test3.cs", @"
+        arg1.AddSource("test5.cs", @"
 namespace Generated
 {
     public class AdditionalTextList
@@ -144,5 +209,10 @@ namespace Generated
 }");
     }
 
-        
+    private static string ParseCSharpCode(string code) =>
+        SyntaxFactory.ParseCompilationUnit(code, options: new CSharpParseOptions())
+            .NormalizeWhitespace()
+            .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)
+            .GetText()
+            .ToString();
 }
