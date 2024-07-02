@@ -130,6 +130,16 @@ namespace Generated
             var description = primitiveType.Description;
 
             sourceProductionContext.AddSource($"{classNameWithoutGenerics}.g.cs", ParseCSharpCode($$"""
+                    using System;
+                    using System.Collections;
+                    using System.Collections.Generic;
+                    using System.IO;
+                    using System.IO.Pipelines;
+                    using System.Linq;
+                    using System.Threading;
+                    using System.Threading.Tasks;
+                    using Kafka.Protocol;
+                    
                     namespace {{Namespace}}
                     {
                         {{Documentation.Generate(description ?? "")}}

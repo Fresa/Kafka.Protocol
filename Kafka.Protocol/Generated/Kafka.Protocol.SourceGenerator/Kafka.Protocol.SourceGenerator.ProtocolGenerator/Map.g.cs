@@ -1,4 +1,14 @@
-﻿namespace Kafka.Protocol
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Pipelines;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Kafka.Protocol;
+
+namespace Kafka.Protocol2
 {
     /// <summary>
     /// <para>Represents a sequence of objects with a map key.</para>

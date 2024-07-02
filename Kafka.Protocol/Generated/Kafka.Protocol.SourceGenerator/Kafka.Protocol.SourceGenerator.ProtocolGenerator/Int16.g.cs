@@ -1,4 +1,14 @@
-﻿namespace Kafka.Protocol
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Pipelines;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Kafka.Protocol;
+
+namespace Kafka.Protocol2
 {
     /// <summary>
     /// <para>Represents an integer between -2^15 and 2^15-1 inclusive. The values are encoded using two bytes in network byte order (big-endian).</para>
