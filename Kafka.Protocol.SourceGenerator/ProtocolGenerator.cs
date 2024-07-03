@@ -136,8 +136,11 @@ public partial class ProtocolGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(primitiveTypes, GeneratePrimitiveTypes);
         context.RegisterSourceOutput(errorCodes, GenerateErrorCodes);
+        
         context.RegisterSourceOutput(requestMessages, GenerateCreateRequestMessageMethod);
+        context.RegisterSourceOutput(requestMessages, GenerateGetRequestHeaderVersionForMethod);
         context.RegisterSourceOutput(responseMessages, GenerateCreateResponseMessageMethod);
+        context.RegisterSourceOutput(responseMessages, GenerateGetResponseHeaderVersionForMethod);
         //context.RegisterSourceOutput(primitiveTypeNames.Combine(messages), GenerateMessages);
     }
 
@@ -277,11 +280,16 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             GenerateCreateMessageMethod(isRequest: false, messages));
     }
 
-    private static string GenerateCreateMessageMethod(bool isRequest,
+    private static string GenerateCreateMessageMethod(
+        bool isRequest,
         ImmutableArray<Message> messages) =>
         ParseCSharpCode(
             $$"""
                 {{CodeGeneratedWarningComment}}
+                using System.IO.Pipelines;
+                using System.Threading;
+                using System.Threading.Tasks;
+                
                 namespace Kafka.Protocol
                 {
                     public static partial class Messages 
@@ -296,6 +304,51 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                              {expression}          
                              if ({message.Name}.ApiKey == apiKey)
                                  return {message.Name}.FromReaderAsync(version, reader, cancellationToken);
+                             """)}}
+                            throw new ArgumentException($"There is no {{(isRequest ? "request" : "response")}} message with api key {apiKey}");
+                        }
+                    }
+                }
+              """);
+
+    private static void GenerateGetRequestHeaderVersionForMethod(
+        SourceProductionContext sourceProductionContext,
+        ImmutableArray<Message> messages)
+    {
+        sourceProductionContext.AddSource(
+            "Messages.GetRequestHeaderVersionFor.g.cs",
+            GenerateGetHeaderVersionMethod(isRequest: true, messages));
+    }
+
+    private static void GenerateGetResponseHeaderVersionForMethod(
+        SourceProductionContext sourceProductionContext,
+        ImmutableArray<Message> messages)
+    {
+        sourceProductionContext.AddSource(
+            "Messages.GetResponseHeaderVersionFor.g.cs",
+            GenerateGetHeaderVersionMethod(isRequest: false, messages));
+    }
+
+    private static string GenerateGetHeaderVersionMethod(
+        bool isRequest,
+        ImmutableArray<Message> messages) =>
+        ParseCSharpCode(
+            $$"""
+                {{CodeGeneratedWarningComment}}
+                using System.IO.Pipelines;
+                using System.Threading;
+                using System.Threading.Tasks;
+                
+                namespace Kafka.Protocol
+                {
+                    public static partial class Messages 
+                    {
+                        public static Int16 Get{{(isRequest ? "Request" : "Response")}}HeaderVersionFor(Int16 apiKey, Int16 version)
+                        {
+                        {{messages.Aggregate("", (expression, message) => $"""
+                             {expression}          
+                             if ({message.Name}.ApiKey == apiKey)
+                                 return {message.Name}(version).HeaderVersion;
                              """)}}
                             throw new ArgumentException($"There is no {{(isRequest ? "request" : "response")}} message with api key {apiKey}");
                         }

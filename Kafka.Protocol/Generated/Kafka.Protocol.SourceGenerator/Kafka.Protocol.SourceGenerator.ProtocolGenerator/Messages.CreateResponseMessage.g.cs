@@ -1,4 +1,8 @@
 ﻿// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
+using System.IO.Pipelines;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Kafka.Protocol
 {
     public static partial class Messages
