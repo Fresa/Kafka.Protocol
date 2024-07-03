@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Kafka.Protocol.SourceGenerator.Json;
 
-internal sealed class AutoTypeToStringConverter : JsonConverter<string>
+internal sealed class PrimitiveToStringConverter : JsonConverter<string>
 {
     public override string? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
         reader.TokenType switch

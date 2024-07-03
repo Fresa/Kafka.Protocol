@@ -136,7 +136,9 @@ public partial class ProtocolGenerator : IIncrementalGenerator
 
         context.RegisterSourceOutput(primitiveTypes, GeneratePrimitiveTypes);
         context.RegisterSourceOutput(errorCodes, GenerateErrorCodes);
-        context.RegisterSourceOutput(primitiveTypeNames.Combine(messageDefinitions), GenerateMessages);
+        context.RegisterSourceOutput(requestMessages, GenerateCreateRequestMessageMethod);
+        context.RegisterSourceOutput(responseMessages, GenerateCreateResponseMessageMethod);
+        //context.RegisterSourceOutput(primitiveTypeNames.Combine(messages), GenerateMessages);
     }
 
     private static void GeneratePrimitiveTypes(
@@ -257,10 +259,55 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         }
     }
 
-
-    private void GenerateMessages(SourceProductionContext arg1, (string[] Left, ImmutableArray<Message> Right) arg2)
+    private static void GenerateCreateRequestMessageMethod(
+        SourceProductionContext sourceProductionContext, 
+        ImmutableArray<Message> messages)
     {
-        arg1.AddSource("test5.cs", @"
+        sourceProductionContext.AddSource(
+            "Messages.CreateRequestMessage.g.cs",
+            GenerateCreateMessageMethod(isRequest: true, messages));
+    }
+
+    private static void GenerateCreateResponseMessageMethod(
+        SourceProductionContext sourceProductionContext,
+        ImmutableArray<Message> messages)
+    {
+        sourceProductionContext.AddSource(
+            "Messages.CreateResponseMessage.g.cs", 
+            GenerateCreateMessageMethod(isRequest: false, messages));
+    }
+
+    private static string GenerateCreateMessageMethod(bool isRequest,
+        ImmutableArray<Message> messages) =>
+        ParseCSharpCode(
+            $$"""
+                {{CodeGeneratedWarningComment}}
+                namespace Kafka.Protocol
+                {
+                    public static partial class Messages 
+                    {
+                        public static ValueTask<Message> Create{{(isRequest ? "Request" : "Response")}}MessageFromReaderAsync(
+                            Int16 apiKey, 
+                            Int16 version, 
+                            PipeReader reader, 
+                            CancellationToken cancellationToken = default)
+                        {
+                        {{messages.Aggregate("", (expression, message) => $"""
+                             {expression}          
+                             if ({message.Name}.ApiKey == apiKey)
+                                 return {message.Name}.FromReaderAsync(version, reader, cancellationToken);
+                             """)}}
+                            throw new ArgumentException($"There is no {{(isRequest ? "request" : "response")}} message with api key {apiKey}");
+                        }
+                    }
+                }
+              """);
+
+    private static void GenerateMessages(
+        SourceProductionContext sourceProductionContext, 
+        (string[] PrimitiveTypeNames, ImmutableArray<Message> Messages) messages)
+    {
+        sourceProductionContext.AddSource("test5.cs", @"
 namespace Generated
 {
     public class AdditionalTextList
