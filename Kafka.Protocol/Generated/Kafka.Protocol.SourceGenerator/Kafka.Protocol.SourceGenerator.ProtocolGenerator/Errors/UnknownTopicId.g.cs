@@ -1,4 +1,5 @@
-﻿// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
+﻿#nullable enable
+// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
 using System;
 
 namespace Kafka.Protocol

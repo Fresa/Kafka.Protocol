@@ -63,15 +63,19 @@ internal static class Tag
                 {
                     switch (tag.Tag) 
                     {
-                        {{taggedFields.Select(GenerateReadTagCase)}}
+                        {{taggedFields.GenerateReadTagCases()}}
                         default:
-                	        throw new InvalidOperationException($"Tag '{tag.Tag}' for {{parentType}} is unknown");<# 
+                	        throw new InvalidOperationException($"Tag '{tag.Tag}' for {{parentType}} is unknown");
                     }
                 }
             }
           """;
 
-    private static string GenerateReadTagCase(Field taggedField)
+    private static string GenerateReadTagCases(
+        this IEnumerable<Field> taggedFields) =>
+        taggedFields.AggregateToString(field => field.GenerateReadTagCase());
+
+    private static string GenerateReadTagCase(this Field taggedField)
     {
         var propertyName = taggedField.GetPropertyName();
         var parentFieldTypeName =

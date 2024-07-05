@@ -164,7 +164,7 @@ internal static class FieldExtensions
         }
     }
 
-    private static string GenerateWriteTos(
+    internal static string GenerateWriteTos(
         this List<Generator.Helpers.Definitions.Messages.Field>
             messageFields) =>
         messageFields.Aggregate("", (expression, field) =>
@@ -206,11 +206,8 @@ internal static class FieldExtensions
     internal static string GenerateFields(
         this List<Generator.Helpers.Definitions.Messages.Field> fields,
         string className) =>
-        fields.Aggregate("", (expression, field) =>
-            $"""
-             {expression}
-             {field.GenerateField(className)}
-             """);
+        fields.AggregateToString(field =>
+            field.GenerateField(className));
 
     internal static string GenerateField(
         this Generator.Helpers.Definitions.Messages.Field field, 
@@ -271,10 +268,7 @@ internal static class FieldExtensions
                             """ : "")}}
              
                         {{propertyName}} = value;
-                        if (field.Tag.HasValue)	
-                        {
-                            {{propertyName}}IsSet = true;
-                        }
+                        {{field.Tag.HasValue.IfTrue($"{propertyName}IsSet = true;")}}
                     }
                 }
                
@@ -290,7 +284,7 @@ internal static class FieldExtensions
                     {
                         {{fieldName}} = {{fieldTypeArgumentName}};
                         return this;
-                    };
+                    }
                   """;
         }
 
@@ -343,7 +337,7 @@ internal static class FieldExtensions
                            {
                               {{fieldName}} = createField(new {{fieldTypeNameWithoutArrayCharacters}}(Version));
                               return this;
-                           }); 
+                           }
                         """)}}
 
               public class {{fieldTypeNameWithoutArrayCharacters}} : ISerialize 

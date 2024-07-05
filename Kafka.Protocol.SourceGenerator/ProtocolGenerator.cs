@@ -1,5 +1,7 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -10,6 +12,7 @@ using Kafka.Protocol.Generator.Helpers.Extensions;
 using Kafka.Protocol.SourceGenerator.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Kafka.Protocol.SourceGenerator;
 
@@ -141,8 +144,14 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         context.RegisterSourceOutput(requestMessages, GenerateGetRequestHeaderVersionForMethod);
         context.RegisterSourceOutput(responseMessages, GenerateCreateResponseMessageMethod);
         context.RegisterSourceOutput(responseMessages, GenerateGetResponseHeaderVersionForMethod);
+
+        context.RegisterSourceOutput(primitiveTypeNames.Combine(headerMessages),
+            WithExceptionReporting<(string[], ImmutableArray<Message>)>(GenerateHeaderMessages));
         //context.RegisterSourceOutput(primitiveTypeNames.Combine(messages), GenerateMessages);
     }
+
+
+    
 
     private static void GeneratePrimitiveTypes(
         SourceProductionContext sourceProductionContext,
@@ -289,6 +298,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             $$"""
                 #nullable enable
                 {{CodeGeneratedWarningComment}}
+                using System;
                 using System.IO.Pipelines;
                 using System.Threading;
                 using System.Threading.Tasks;
@@ -339,6 +349,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             $$"""
                 #nullable enable
                 {{CodeGeneratedWarningComment}}
+                using System;
                 using System.IO.Pipelines;
                 using System.Threading;
                 using System.Threading.Tasks;
@@ -360,21 +371,108 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                 }
               """);
 
-    private static void GenerateMessages(
-        SourceProductionContext sourceProductionContext, 
-        (string[] PrimitiveTypeNames, ImmutableArray<Message> Messages) messages)
+    private static void GenerateHeaderMessages(
+        SourceProductionContext sourceProductionContext,
+        (string[] PrimitiveTypeNames, ImmutableArray<Message> Messages) input)
     {
-        sourceProductionContext.AddSource("test5.cs", @"
-namespace Generated
-{
-    public class AdditionalTextList
-    {
-        public static void PrintTexts()
+        Generator.Helpers.FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
+        foreach (var message in input.Messages)
         {
-            System.Console.WriteLine(""Hello world"");
+            var versionRange = VersionRange.Parse(message.ValidVersions);
+            var flexibleVersionRange = VersionRange.Parse(message.FlexibleVersions);
+            var requestApiKey = new Lazy<Field>(() => message.Fields.First());
+            var requestApiVersion = new Lazy<Field>(() => message.Fields.Skip(1).First());
+            var requestFields = new Lazy<List<Field>>(() => message.Fields.Skip(2).ToList());
+
+            sourceProductionContext.AddSource(
+                $"Headers/{message.Name}.g.cs", ParseCSharpCode($$"""
+                        #nullable enable
+                        {{CodeGeneratedWarningComment}}
+                        using System;
+                        using System.IO;
+                        using System.IO.Pipelines;
+                        using System.Threading;
+                        using System.Threading.Tasks;
+                        
+                        namespace {{Namespace}}
+                        {
+                            public class {{message.Name}}
+                            {
+                      	        public {{message.Name}}(Int16 version)
+                      	        {
+                      		        if (version.InRange(MinVersion, MaxVersion) == false) 
+                      		        	throw new UnsupportedVersionException($"{{message.Name}} does not support version {version}. Valid versions are: {{message.ValidVersions}}");
+                          
+                      		        Version = version;
+                      		        IsFlexibleVersion = {{flexibleVersionRange.GetExpression("version")}};
+                      	        }
+                          
+                      	        public static readonly Int16 MinVersion = Int16.From({{versionRange.From ?? throw new InvalidOperationException("From cannot be null")}});
+                      	        public static readonly Int16 MaxVersion = Int16.From({{versionRange.To ?? throw new InvalidOperationException("To cannot be null")}});
+                          
+                      	        public Int16 Version { get; }
+                      	        internal bool IsFlexibleVersion { get; }
+                          
+                                {{Tag.GenerateCreateTagSection(message.GetTaggedFields().ToArray())}}
+                      	        
+                      	        internal int GetSize() => 
+                      	            {{message.Fields.GenerateSizeOf()}} +
+                      	            {{Tag.GenerateSizeOf()}};
+                              
+                      	        {{(message.IsRequestHeader() ?
+                                      $$"""
+                                            internal static async ValueTask<{{message.Name}}> FromReaderAsync(PipeReader reader, CancellationToken cancellationToken = default)
+                                            {
+                                                var instance = new {{message.Name}}(MinVersion);
+                                        
+                                                {{requestApiKey.Value.GenerateReadField()}}
+                                                {{requestApiVersion.Value.GenerateReadField()}}
+                                                                     
+                                                instance = new {{message.Name}}(Messages.GetRequestHeaderVersionFor(instance.{{requestApiKey.Value.Name}}, instance.{{requestApiVersion.Value.Name}}))
+                                                {
+                                                    {{string.Join(",", requestFields.Value.Select(field =>
+                                                        $"{field.Name} = instance.{field.Name}"))}}
+                                                };
+                                            
+                                                {{requestFields.Value.GenerateReadFields()}}
+                                                
+                                                {{Tag.GenerateReadTags(message.GetTaggedFields(), message.Name)}}                     
+                                                                     
+                                                return instance;
+                                            }
+                                        """ :
+                                      $$"""
+                                         internal static async ValueTask<{{message.Name}}> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+                                         {
+                                             var instance = new {{message.Name}}(version);
+                                         
+                                             {{message.Fields.GenerateReadFields()}}
+                                             
+                                             {{Tag.GenerateReadTags(message.GetTaggedFields(), message.Name)}}
+                                        
+                                             return instance;
+                                         }
+                                        """)}}
+                      		       
+                      	        internal async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
+                      	        {
+                      		        {{(message.Fields.Count == 0 ?
+                                              "return;" :
+                                              $"""
+                                               {message.Fields.GenerateWriteTos()}
+                                                                                 
+                                               {Tag.GenerateWriteTags()}
+                                               """
+                                          )}}
+                      	        }
+                                
+                                {{message.Fields.GenerateFields(message.Name)}}
+                      	        
+                      	        {{message.CommonStructs.GenerateCommonStructs()}}
+                      	    }
+                        }
+                      """));
         }
-    }
-}");
     }
 
     private static string ParseCSharpCode(string code) =>
@@ -383,4 +481,50 @@ namespace Generated
             .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)
             .GetText()
             .ToString();
+
+    private static Action<SourceProductionContext, T> WithExceptionReporting<T>(
+        Action<SourceProductionContext, T> handler) =>
+        (productionContext, input) =>
+        {
+            try
+            {
+                handler.Invoke(productionContext, input);
+            }
+            catch (Exception e)
+            {
+                var stackTrace = new StackTrace(e, true);
+                StackFrame? frame = null;
+                for (var i = 0; i < stackTrace.FrameCount; i++)
+                {
+                    frame = stackTrace.GetFrame(i);
+                    if (frame.GetFileLineNumber() != 0)
+                    {
+                        break;
+                    }
+                }
+
+                var location = Location.Create(
+                    frame?.GetFileName() ?? string.Empty,
+                    new TextSpan(),
+                    new LinePositionSpan(
+                        new LinePosition(
+                            frame?.GetFileLineNumber() ?? 0,
+                            frame?.GetFileColumnNumber() ?? 0),
+                        new LinePosition(
+                            frame?.GetFileLineNumber() ?? 0,
+                            frame?.GetFileColumnNumber() + 1 ?? 0)));
+                productionContext.ReportDiagnostic(Diagnostic.Create(
+                    new DiagnosticDescriptor(
+                        id: "CS0001",
+                        title: "Unhandled error",
+                        messageFormat: "{0}",
+                        category: "Compiler",
+                        defaultSeverity: DiagnosticSeverity.Error,
+                        isEnabledByDefault: true,
+                        description: e.StackTrace,
+                        customTags: WellKnownDiagnosticTags.AnalyzerException),
+                    location: location,
+                    [e.ToString().Replace("\r\n", " |").Replace("\n", " |")]));
+            }
+        };
 }
