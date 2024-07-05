@@ -450,8 +450,8 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                                                                      
                                                 instance = new {{message.Name}}(Messages.GetRequestHeaderVersionFor(instance.{{requestApiKey.Value.Name}}, instance.{{requestApiVersion.Value.Name}}))
                                                 {
-                                                    {{string.Join(",", requestFields.Value.Select(field =>
-                                                        $"{field.Name} = instance.{field.Name}"))}}
+                                                    {{requestApiKey.Value.Name}} = instance.{{requestApiKey.Value.Name}},
+                                                    {{requestApiVersion.Value.Name}} = instance.{{requestApiVersion.Value.Name}}
                                                 };
                                             
                                                 {{requestFields.Value.GenerateReadFields()}}

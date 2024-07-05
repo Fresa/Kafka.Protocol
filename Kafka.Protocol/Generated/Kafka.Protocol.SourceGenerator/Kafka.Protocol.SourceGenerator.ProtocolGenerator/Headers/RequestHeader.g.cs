@@ -36,8 +36,8 @@ namespace Kafka.Protocol
             instance.RequestApiVersion = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance = new RequestHeader(Messages.GetRequestHeaderVersionFor(instance.RequestApiKey, instance.RequestApiVersion))
             {
-                CorrelationId = instance.CorrelationId,
-                ClientId = instance.ClientId
+                RequestApiKey = instance.RequestApiKey,
+                RequestApiVersion = instance.RequestApiVersion
             };
             instance.CorrelationId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 1)
