@@ -163,6 +163,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             var description = primitiveType.Description;
 
             sourceProductionContext.AddSource($"{classNameWithoutGenerics}.g.cs", ParseCSharpCode($$"""
+                    #nullable enable
                     {{CodeGeneratedWarningComment}}
                     using System;
                     using System.Collections.Generic;
@@ -242,6 +243,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         {
             var exceptionName = errorCode.Error.ToPascalCase('_');
             sourceProductionContext.AddSource($"Errors/{exceptionName}.g.cs", ParseCSharpCode($$"""
+                    #nullable enable
                     {{CodeGeneratedWarningComment}}
                     using System;
                     
@@ -285,12 +287,13 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         ImmutableArray<Message> messages) =>
         ParseCSharpCode(
             $$"""
+                #nullable enable
                 {{CodeGeneratedWarningComment}}
                 using System.IO.Pipelines;
                 using System.Threading;
                 using System.Threading.Tasks;
                 
-                namespace Kafka.Protocol
+                namespace {{Namespace}}
                 {
                     public static partial class Messages 
                     {
@@ -334,12 +337,13 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         ImmutableArray<Message> messages) =>
         ParseCSharpCode(
             $$"""
+                #nullable enable
                 {{CodeGeneratedWarningComment}}
                 using System.IO.Pipelines;
                 using System.Threading;
                 using System.Threading.Tasks;
                 
-                namespace Kafka.Protocol
+                namespace {{Namespace}}
                 {
                     public static partial class Messages 
                     {
