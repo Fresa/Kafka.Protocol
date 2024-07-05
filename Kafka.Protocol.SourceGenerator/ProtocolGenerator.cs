@@ -330,7 +330,31 @@ public partial class ProtocolGenerator : IIncrementalGenerator
     {
         sourceProductionContext.AddSource(
             "Messages.GetRequestHeaderVersionFor.g.cs",
-            GenerateGetHeaderVersionMethod(isRequest: true, messages));
+            ParseCSharpCode(
+                $$"""
+                    #nullable enable
+                    {{CodeGeneratedWarningComment}}
+                    using System;
+                    using System.IO.Pipelines;
+                    using System.Threading;
+                    using System.Threading.Tasks;
+                    
+                    namespace {{Namespace}}
+                    {
+                        public static partial class Messages 
+                        {
+                            public static Int16 GetRequestHeaderVersionFor(Int16 apiKey, Int16 version)
+                            {
+                                {{messages.Aggregate("", (expression, message) => $"""
+                                     {expression}          
+                                     if ({message.Name}.ApiKey == apiKey)
+                                         return {message.Name}(version).HeaderVersion;
+                                     """)}}
+                                throw new ArgumentException($"There is no request message with api key {apiKey}");
+                            }
+                        }
+                    }
+                  """));
     }
 
     private static void GenerateGetResponseHeaderVersionForMethod(
@@ -339,38 +363,34 @@ public partial class ProtocolGenerator : IIncrementalGenerator
     {
         sourceProductionContext.AddSource(
             "Messages.GetResponseHeaderVersionFor.g.cs",
-            GenerateGetHeaderVersionMethod(isRequest: false, messages));
-    }
-
-    private static string GenerateGetHeaderVersionMethod(
-        bool isRequest,
-        ImmutableArray<Message> messages) =>
-        ParseCSharpCode(
-            $$"""
-                #nullable enable
-                {{CodeGeneratedWarningComment}}
-                using System;
-                using System.IO.Pipelines;
-                using System.Threading;
-                using System.Threading.Tasks;
-                
-                namespace {{Namespace}}
-                {
-                    public static partial class Messages 
+            ParseCSharpCode(
+                $$"""
+                    #nullable enable
+                    {{CodeGeneratedWarningComment}}
+                    using System;
+                    using System.IO.Pipelines;
+                    using System.Threading;
+                    using System.Threading.Tasks;
+                    
+                    namespace {{Namespace}}
                     {
-                        public static Int16 Get{{(isRequest ? "Request" : "Response")}}HeaderVersionFor(Int16 apiKey, Int16 version)
+                        public static partial class Messages 
                         {
-                        {{messages.Aggregate("", (expression, message) => $"""
-                             {expression}          
-                             if ({message.Name}.ApiKey == apiKey)
-                                 return {message.Name}(version).HeaderVersion;
-                             """)}}
-                            throw new ArgumentException($"There is no {{(isRequest ? "request" : "response")}} message with api key {apiKey}");
+                            public static Int16 GetResponseHeaderVersionFor(RequestPayload payload)
+                            {
+                                var apiKey = payload.Message.ApiMessageKey;
+                                var version = payload.Message.Version;
+                                {{messages.AggregateToString(message => $"""
+                                     if ({message.Name}.ApiKey == apiKey)
+                                         return {message.Name}(version).HeaderVersion;
+                                     """)}}
+                                throw new ArgumentException($"There is no response message with api key {apiKey}");
+                            }
                         }
                     }
-                }
-              """);
-
+                  """));
+    }
+    
     private static void GenerateHeaderMessages(
         SourceProductionContext sourceProductionContext,
         (string[] PrimitiveTypeNames, ImmutableArray<Message> Messages) input)

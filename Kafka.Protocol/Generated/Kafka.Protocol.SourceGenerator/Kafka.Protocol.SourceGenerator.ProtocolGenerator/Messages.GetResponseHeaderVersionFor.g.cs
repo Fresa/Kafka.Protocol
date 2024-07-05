@@ -9,8 +9,10 @@ namespace Kafka.Protocol
 {
     public static partial class Messages
     {
-        public static Int16 GetResponseHeaderVersionFor(Int16 apiKey, Int16 version)
+        public static Int16 GetResponseHeaderVersionFor(RequestPayload payload)
         {
+            var apiKey = payload.Message.ApiMessageKey;
+            var version = payload.Message.Version;
             if (AddOffsetsToTxnResponse.ApiKey == apiKey)
                 return AddOffsetsToTxnResponse(version).HeaderVersion;
             if (AddPartitionsToTxnResponse.ApiKey == apiKey)
