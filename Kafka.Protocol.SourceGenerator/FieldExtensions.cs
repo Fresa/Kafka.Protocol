@@ -243,7 +243,7 @@ internal static class FieldExtensions
                                 $"Array.Empty<{fieldTypeNameWithoutArrayCharacters}>();" :
                                 field.IsPrimitiveType() ?
                                     $"{propertyTypeName}.Default;" :
-                                    "default!")}}
+                                    "default!;")}}
                                   
                 {{fieldDocumentation}}
                   

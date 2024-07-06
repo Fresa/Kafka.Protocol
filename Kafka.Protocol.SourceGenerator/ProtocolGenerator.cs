@@ -157,11 +157,10 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                 GenerateGetResponseHeaderVersionForMethod));
         context.RegisterSourceOutput(primitiveTypeNames.Combine(headerMessages),
             WithExceptionReporting<(string[], ImmutableArray<Message>)>(GenerateHeaderMessages));
-        //context.RegisterSourceOutput(primitiveTypeNames.Combine(messages), GenerateMessages);
+        context.RegisterSourceOutput(primitiveTypeNames.Combine(messages),
+            WithExceptionReporting<(string[], ImmutableArray<Message>)>(
+                GenerateMessages));
     }
-
-
-    
 
     private static void GeneratePrimitiveTypes(
         SourceProductionContext sourceProductionContext,
@@ -400,22 +399,22 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                     }
                   """));
     }
-    
+
     private static void GenerateHeaderMessages(
         SourceProductionContext sourceProductionContext,
-        (string[] PrimitiveTypeNames, ImmutableArray<Message> Messages) input)
+        (string[] PrimitiveTypeNames, ImmutableArray<Message> Headers) input)
     {
         Generator.Helpers.FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
-        foreach (var message in input.Messages)
+        foreach (var header in input.Headers)
         {
-            var versionRange = VersionRange.Parse(message.ValidVersions);
-            var flexibleVersionRange = VersionRange.Parse(message.FlexibleVersions);
-            var requestApiKey = new Lazy<Field>(() => message.Fields.First());
-            var requestApiVersion = new Lazy<Field>(() => message.Fields.Skip(1).First());
-            var requestFields = new Lazy<List<Field>>(() => message.Fields.Skip(2).ToList());
+            var versionRange = VersionRange.Parse(header.ValidVersions);
+            var flexibleVersionRange = VersionRange.Parse(header.FlexibleVersions);
+            var requestApiKey = new Lazy<Field>(() => header.Fields.First());
+            var requestApiVersion = new Lazy<Field>(() => header.Fields.Skip(1).First());
+            var requestFields = new Lazy<List<Field>>(() => header.Fields.Skip(2).ToList());
 
             sourceProductionContext.AddSource(
-                $"Headers/{message.Name}.g.cs", ParseCSharpCode($$"""
+                $"Headers/{header.Name}.g.cs", ParseCSharpCode($$"""
                         #nullable enable
                         {{CodeGeneratedWarningComment}}
                         using System;
@@ -426,12 +425,12 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                         
                         namespace {{Namespace}}
                         {
-                            public class {{message.Name}}
+                            public class {{header.Name}}
                             {
-                      	        public {{message.Name}}(Int16 version)
+                      	        public {{header.Name}}(Int16 version)
                       	        {
                       		        if (version.InRange(MinVersion, MaxVersion) == false) 
-                      		        	throw new UnsupportedVersionException($"{{message.Name}} does not support version {version}. Valid versions are: {{message.ValidVersions}}");
+                      		        	throw new UnsupportedVersionException($"{{header.Name}} does not support version {version}. Valid versions are: {{header.ValidVersions}}");
                           
                       		        Version = version;
                       		        IsFlexibleVersion = {{flexibleVersionRange.GetExpression("version")}};
@@ -443,22 +442,22 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                       	        public Int16 Version { get; }
                       	        internal bool IsFlexibleVersion { get; }
                           
-                                {{Tag.GenerateCreateTagSection(message.GetTaggedFields().ToArray())}}
+                                {{Tag.GenerateCreateTagSection(header.GetTaggedFields().ToArray())}}
                       	        
                       	        internal int GetSize() => 
-                      	            {{message.Fields.GenerateSizeOf()}} +
+                      	            {{header.Fields.GenerateSizeOf()}} +
                       	            {{Tag.GenerateSizeOf()}};
                               
-                      	        {{(message.IsRequestHeader() ?
+                      	        {{(header.IsRequestHeader() ?
                                       $$"""
-                                            internal static async ValueTask<{{message.Name}}> FromReaderAsync(PipeReader reader, CancellationToken cancellationToken = default)
+                                            internal static async ValueTask<{{header.Name}}> FromReaderAsync(PipeReader reader, CancellationToken cancellationToken = default)
                                             {
-                                                var instance = new {{message.Name}}(MinVersion);
+                                                var instance = new {{header.Name}}(MinVersion);
                                         
                                                 {{requestApiKey.Value.GenerateReadField()}}
                                                 {{requestApiVersion.Value.GenerateReadField()}}
                                                                      
-                                                instance = new {{message.Name}}(Messages.GetRequestHeaderVersionFor(instance.{{requestApiKey.Value.Name}}, instance.{{requestApiVersion.Value.Name}}))
+                                                instance = new {{header.Name}}(Messages.GetRequestHeaderVersionFor(instance.{{requestApiKey.Value.Name}}, instance.{{requestApiVersion.Value.Name}}))
                                                 {
                                                     {{requestApiKey.Value.Name}} = instance.{{requestApiKey.Value.Name}},
                                                     {{requestApiVersion.Value.Name}} = instance.{{requestApiVersion.Value.Name}}
@@ -466,19 +465,19 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                                             
                                                 {{requestFields.Value.GenerateReadFields()}}
                                                 
-                                                {{Tag.GenerateReadTags(message.GetTaggedFields(), message.Name)}}                     
+                                                {{Tag.GenerateReadTags(header.GetTaggedFields(), header.Name)}}                     
                                                                      
                                                 return instance;
                                             }
                                         """ :
                                       $$"""
-                                         internal static async ValueTask<{{message.Name}}> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+                                         internal static async ValueTask<{{header.Name}}> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                                          {
-                                             var instance = new {{message.Name}}(version);
+                                             var instance = new {{header.Name}}(version);
                                          
-                                             {{message.Fields.GenerateReadFields()}}
+                                             {{header.Fields.GenerateReadFields()}}
                                              
-                                             {{Tag.GenerateReadTags(message.GetTaggedFields(), message.Name)}}
+                                             {{Tag.GenerateReadTags(header.GetTaggedFields(), header.Name)}}
                                         
                                              return instance;
                                          }
@@ -486,20 +485,140 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                       		       
                       	        internal async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
                       	        {
-                      		        {{(message.Fields.Count == 0 ?
+                      		        {{(header.Fields.Count == 0 ?
                                               "return;" :
                                               $"""
-                                               {message.Fields.GenerateWriteTos()}
+                                               {header.Fields.GenerateWriteTos()}
                                                                                  
                                                {Tag.GenerateWriteTags()}
                                                """
                                           )}}
                       	        }
                                 
-                                {{message.Fields.GenerateFields(message.Name)}}
+                                {{header.Fields.GenerateFields(header.Name)}}
                       	        
-                      	        {{message.CommonStructs.GenerateCommonStructs()}}
+                      	        {{header.CommonStructs.GenerateCommonStructs()}}
                       	    }
+                        }
+                      """));
+        }
+    }
+
+    private static void GenerateMessages(SourceProductionContext sourceProductionContext,
+            (string[] PrimitiveTypeNames, ImmutableArray<Message> Messages) input)
+    {
+        Generator.Helpers.FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
+        foreach (var message in input.Messages)
+        {
+            if (!message.IsMessage())
+                throw new InvalidOperationException(
+                    $"Expected message but got type {message.Type}");
+
+            var hasResponse = input.Messages.TryGetResponseMessageDefinitionFrom(message, out var responseMessageDefinition);
+            var versionRange = VersionRange.Parse(message.ValidVersions);
+            var flexibleVersionRange = VersionRange.Parse(message.FlexibleVersions);
+
+            sourceProductionContext.AddSource(
+                $"Messages/{message.Name}.g.cs", ParseCSharpCode($$"""
+                        #nullable enable
+                        {{CodeGeneratedWarningComment}}
+                        using System;
+                        using System.Collections.Generic;
+                        using System.IO;
+                        using System.IO.Pipelines;
+                        using System.Threading;
+                        using System.Threading.Tasks;
+                        using Kafka.Protocol.Records;
+                                              
+                        namespace {{Namespace}}
+                        {
+                            public class {{message.Name}} : Message{{(hasResponse ? $", IRespond<{responseMessageDefinition.Name}>" : "")}} 
+                            {
+                      	        public {{message.Name}}(Int16 version) 
+                      	        {
+                      		        if (version.InRange(MinVersion, MaxVersion) == false) 
+                      		    	    throw new UnsupportedVersionException($"{{message.Name}} does not support version {version}. Valid versions are: {{message.ValidVersions}}"); 
+                              
+                      		        Version = version;
+                      		        IsFlexibleVersion = {{flexibleVersionRange.GetExpression("version")}};
+                      	        }
+                              
+                      	        internal override Int16 ApiMessageKey => ApiKey;
+                      	        public static readonly Int16 ApiKey = Int16.From({{message.ApiKey}}); 
+                              
+                      	        public static readonly Int16 MinVersion = Int16.From({{versionRange.From ?? throw new InvalidOperationException("From cannot be null")}});
+                      	        public static readonly Int16 MaxVersion = Int16.From({{versionRange.To ?? throw new InvalidOperationException("To cannot be null")}}); 
+                              
+                      	        public override Int16 Version { get; }
+                      	        internal bool IsFlexibleVersion { get; } 
+                              
+                      	        // https://github.com/apache/kafka/blob/99b9b3e84f4e98c3f07714e1de6a139a004cbc5b/generator/src/main/java/org/apache/kafka/message/ApiMessageTypeGenerator.java#L324
+                      	        public Int16 HeaderVersion  
+                      	        {
+                      		        get 
+                      		        {
+                      			        {{(message.IsRequest() ?
+                                              $"""
+                                               {
+                                                   // Version 0 of ControlledShutdownRequest has a non-standard request header
+                                                   // which does not include clientId. Version 1 of ControlledShutdownRequest
+                                                   // and later use the standard request header.								
+                                                   (message.ApiKey == 7).IfTrue(
+                                                       """
+                                                       if (Version == 0)
+                                                           return 0;
+                                                       """)
+                                               }
+                                               return (short)(IsFlexibleVersion ? 2 : 1);
+                                               """ :
+                                              $"{
+                                                  // ApiVersionsResponse always includes a v0 header
+                                                  // See KIP-511 for details
+                                                  (message.ApiKey == 18 ?
+                                                      "return 0;" :
+                                                      "return (short)(IsFlexibleVersion ? 1 : 0);")}")}}
+                      		        }
+                      	        }
+                              
+                      	        {{Tag.GenerateCreateTagSection(message.GetTaggedFields().ToArray())}} 
+                              
+                      	        internal override int GetSize() =>
+                      	            {{message.Fields.GenerateSizeOf()}} +
+                      	            {{Tag.GenerateSizeOf()}}; 
+                              
+                      	        internal static async ValueTask<{{message.Name}}> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default) 
+                      	        {
+                      		        var instance = new {{message.Name}}(version);
+                      		        
+                      		        {{message.Fields.GenerateReadFields()}}
+                              
+                      		        {{Tag.GenerateReadTags(message.GetTaggedFields(), message.Name)}}
+                              
+                      		        {{(message.Fields.Any() ?
+                                          "return instance;" :
+                                          $"return await new ValueTask<{message.Name}>(instance);")}}
+                      	        }
+                              
+                      	        internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default) 
+                      	        {
+                      		        {{(message.Fields.Count == 0 ?
+                                          "await Task.CompletedTask;" :
+                                          message.Fields.GenerateWriteTos())}}
+                              
+                      		        {{Tag.GenerateWriteTags()}}
+                      	        }
+                              
+                      	        {{message.Fields.GenerateFields(message.Name)}}
+                              
+                                {{message.CommonStructs.GenerateCommonStructs()}}
+                              
+                      	        {{(hasResponse ?
+                                      $"""
+                                          public {responseMessageDefinition.Name} Respond()
+                                              => new {responseMessageDefinition.Name}(Version);
+                                       """ :
+                                      "")}}
+                            }
                         }
                       """));
         }
