@@ -39,6 +39,7 @@ namespace Kafka.Protocol
 
         private Tags.TagSection CreateTagSection()
         {
+            var tags = new List<Tags.TaggedField>();
             if (Version >= 1 && _offlineLogDirsCollectionIsSet)
             {
                 tags.Add(new Tags.TaggedField { Tag = 0, Field = _offlineLogDirsCollection });

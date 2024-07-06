@@ -39,6 +39,7 @@ namespace Kafka.Protocol
 
         private Tags.TagSection CreateTagSection()
         {
+            var tags = new List<Tags.TaggedField>();
             if (Version >= 16 && _nodeEndpointsCollectionIsSet)
             {
                 tags.Add(new Tags.TaggedField { Tag = 0, Field = _nodeEndpointsCollection });
@@ -364,6 +365,7 @@ namespace Kafka.Protocol
 
                 private Tags.TagSection CreateTagSection()
                 {
+                    var tags = new List<Tags.TaggedField>();
                     if (Version >= 12 && _divergingEpochIsSet)
                     {
                         tags.Add(new Tags.TaggedField { Tag = 0, Field = _divergingEpoch });

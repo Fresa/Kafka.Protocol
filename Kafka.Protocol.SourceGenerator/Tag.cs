@@ -11,20 +11,18 @@ internal static class Tag
     {
         return taggedFields.Length == 0
             ? """
-                    private Tags.TagSection CreateTagSection()
-                    {
-                        return new Tags.TagSection();
-                    }	
+                private Tags.TagSection CreateTagSection()
+                {
+                    return new Tags.TagSection();
+                }	
               """
             : $$"""
-                   private Tags.TagSection CreateTagSection()
-                   {
-                       {{taggedFields.Aggregate("", (expression, field) => $"""
-                            {expression}
-                            {GenerateAddTag(field)}
-                            """)}}
-                       return new Tags.TagSection(tags.ToArray());
-                   }	
+                private Tags.TagSection CreateTagSection()
+                {
+                    var tags = new List<Tags.TaggedField>();
+                    {{taggedFields.AggregateToString(GenerateAddTag)}}
+                    return new Tags.TagSection(tags.ToArray());
+                }	
                 """;
     }
 

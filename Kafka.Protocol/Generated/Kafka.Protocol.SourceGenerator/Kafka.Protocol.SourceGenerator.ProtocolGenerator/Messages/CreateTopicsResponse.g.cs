@@ -148,6 +148,7 @@ namespace Kafka.Protocol
 
             private Tags.TagSection CreateTagSection()
             {
+                var tags = new List<Tags.TaggedField>();
                 if (Version >= 5 && _topicConfigErrorCodeIsSet)
                 {
                     tags.Add(new Tags.TaggedField { Tag = 0, Field = _topicConfigErrorCode });

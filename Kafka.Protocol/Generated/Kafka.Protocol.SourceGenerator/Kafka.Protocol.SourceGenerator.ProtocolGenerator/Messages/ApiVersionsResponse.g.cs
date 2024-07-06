@@ -39,6 +39,7 @@ namespace Kafka.Protocol
 
         private Tags.TagSection CreateTagSection()
         {
+            var tags = new List<Tags.TaggedField>();
             if (Version >= 3 && _supportedFeaturesCollectionIsSet)
             {
                 tags.Add(new Tags.TaggedField { Tag = 0, Field = _supportedFeaturesCollection });

@@ -39,6 +39,7 @@ namespace Kafka.Protocol
 
         private Tags.TagSection CreateTagSection()
         {
+            var tags = new List<Tags.TaggedField>();
             if (Version >= 8 && _typeIsSet)
             {
                 tags.Add(new Tags.TaggedField { Tag = 0, Field = _type });
