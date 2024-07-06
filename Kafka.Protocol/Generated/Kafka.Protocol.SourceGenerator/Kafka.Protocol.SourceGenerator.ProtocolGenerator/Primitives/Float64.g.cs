@@ -1,4 +1,5 @@
 ﻿#nullable enable
+#pragma warning disable 1591
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
 using System;
 using System.Collections.Generic;

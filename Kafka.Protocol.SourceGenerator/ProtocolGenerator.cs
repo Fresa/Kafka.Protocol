@@ -182,6 +182,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
 
             sourceProductionContext.AddSource($"Primitives/{classNameWithoutGenerics}.g.cs", ParseCSharpCode($$"""
                     #nullable enable
+                    #pragma warning disable 1591
                     {{CodeGeneratedWarningComment}}
                     using System;
                     using System.Collections.Generic;
@@ -262,6 +263,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             var exceptionName = errorCode.Error.ToPascalCase('_');
             sourceProductionContext.AddSource($"Errors/{exceptionName}.g.cs", ParseCSharpCode($$"""
                     #nullable enable
+                    #pragma warning disable 1591
                     {{CodeGeneratedWarningComment}}
                     using System;
                     
@@ -306,6 +308,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         ParseCSharpCode(
             $$"""
                 #nullable enable
+                #pragma warning disable 1591
                 {{CodeGeneratedWarningComment}}
                 using System;
                 using System.IO.Pipelines;
@@ -342,6 +345,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             ParseCSharpCode(
                 $$"""
                     #nullable enable
+                    #pragma warning disable 1591
                     {{CodeGeneratedWarningComment}}
                     using System;
                     using System.IO.Pipelines;
@@ -375,6 +379,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             ParseCSharpCode(
                 $$"""
                     #nullable enable
+                    #pragma warning disable 1591
                     {{CodeGeneratedWarningComment}}
                     using System;
                     using System.IO.Pipelines;
@@ -416,6 +421,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             sourceProductionContext.AddSource(
                 $"Headers/{header.Name}.g.cs", ParseCSharpCode($$"""
                         #nullable enable
+                        #pragma warning disable 1591
                         {{CodeGeneratedWarningComment}}
                         using System;
                         using System.IO;
