@@ -12,181 +12,181 @@ namespace Kafka.Protocol
         public static Int16 GetRequestHeaderVersionFor(Int16 apiKey, Int16 version)
         {
             if (AddOffsetsToTxnRequest.ApiKey == apiKey)
-                return AddOffsetsToTxnRequest(version).HeaderVersion;
+                return new AddOffsetsToTxnRequest(version).HeaderVersion;
             if (AddPartitionsToTxnRequest.ApiKey == apiKey)
-                return AddPartitionsToTxnRequest(version).HeaderVersion;
+                return new AddPartitionsToTxnRequest(version).HeaderVersion;
             if (AddRaftVoterRequest.ApiKey == apiKey)
-                return AddRaftVoterRequest(version).HeaderVersion;
+                return new AddRaftVoterRequest(version).HeaderVersion;
             if (AllocateProducerIdsRequest.ApiKey == apiKey)
-                return AllocateProducerIdsRequest(version).HeaderVersion;
+                return new AllocateProducerIdsRequest(version).HeaderVersion;
             if (AlterClientQuotasRequest.ApiKey == apiKey)
-                return AlterClientQuotasRequest(version).HeaderVersion;
+                return new AlterClientQuotasRequest(version).HeaderVersion;
             if (AlterConfigsRequest.ApiKey == apiKey)
-                return AlterConfigsRequest(version).HeaderVersion;
+                return new AlterConfigsRequest(version).HeaderVersion;
             if (AlterPartitionReassignmentsRequest.ApiKey == apiKey)
-                return AlterPartitionReassignmentsRequest(version).HeaderVersion;
+                return new AlterPartitionReassignmentsRequest(version).HeaderVersion;
             if (AlterPartitionRequest.ApiKey == apiKey)
-                return AlterPartitionRequest(version).HeaderVersion;
+                return new AlterPartitionRequest(version).HeaderVersion;
             if (AlterReplicaLogDirsRequest.ApiKey == apiKey)
-                return AlterReplicaLogDirsRequest(version).HeaderVersion;
+                return new AlterReplicaLogDirsRequest(version).HeaderVersion;
             if (AlterUserScramCredentialsRequest.ApiKey == apiKey)
-                return AlterUserScramCredentialsRequest(version).HeaderVersion;
+                return new AlterUserScramCredentialsRequest(version).HeaderVersion;
             if (ApiVersionsRequest.ApiKey == apiKey)
-                return ApiVersionsRequest(version).HeaderVersion;
+                return new ApiVersionsRequest(version).HeaderVersion;
             if (AssignReplicasToDirsRequest.ApiKey == apiKey)
-                return AssignReplicasToDirsRequest(version).HeaderVersion;
+                return new AssignReplicasToDirsRequest(version).HeaderVersion;
             if (BeginQuorumEpochRequest.ApiKey == apiKey)
-                return BeginQuorumEpochRequest(version).HeaderVersion;
+                return new BeginQuorumEpochRequest(version).HeaderVersion;
             if (BrokerHeartbeatRequest.ApiKey == apiKey)
-                return BrokerHeartbeatRequest(version).HeaderVersion;
+                return new BrokerHeartbeatRequest(version).HeaderVersion;
             if (BrokerRegistrationRequest.ApiKey == apiKey)
-                return BrokerRegistrationRequest(version).HeaderVersion;
+                return new BrokerRegistrationRequest(version).HeaderVersion;
             if (ConsumerGroupDescribeRequest.ApiKey == apiKey)
-                return ConsumerGroupDescribeRequest(version).HeaderVersion;
+                return new ConsumerGroupDescribeRequest(version).HeaderVersion;
             if (ConsumerGroupHeartbeatRequest.ApiKey == apiKey)
-                return ConsumerGroupHeartbeatRequest(version).HeaderVersion;
+                return new ConsumerGroupHeartbeatRequest(version).HeaderVersion;
             if (ControlledShutdownRequest.ApiKey == apiKey)
-                return ControlledShutdownRequest(version).HeaderVersion;
+                return new ControlledShutdownRequest(version).HeaderVersion;
             if (ControllerRegistrationRequest.ApiKey == apiKey)
-                return ControllerRegistrationRequest(version).HeaderVersion;
+                return new ControllerRegistrationRequest(version).HeaderVersion;
             if (CreateAclsRequest.ApiKey == apiKey)
-                return CreateAclsRequest(version).HeaderVersion;
+                return new CreateAclsRequest(version).HeaderVersion;
             if (CreateDelegationTokenRequest.ApiKey == apiKey)
-                return CreateDelegationTokenRequest(version).HeaderVersion;
+                return new CreateDelegationTokenRequest(version).HeaderVersion;
             if (CreatePartitionsRequest.ApiKey == apiKey)
-                return CreatePartitionsRequest(version).HeaderVersion;
+                return new CreatePartitionsRequest(version).HeaderVersion;
             if (CreateTopicsRequest.ApiKey == apiKey)
-                return CreateTopicsRequest(version).HeaderVersion;
+                return new CreateTopicsRequest(version).HeaderVersion;
             if (DeleteAclsRequest.ApiKey == apiKey)
-                return DeleteAclsRequest(version).HeaderVersion;
+                return new DeleteAclsRequest(version).HeaderVersion;
             if (DeleteGroupsRequest.ApiKey == apiKey)
-                return DeleteGroupsRequest(version).HeaderVersion;
+                return new DeleteGroupsRequest(version).HeaderVersion;
             if (DeleteRecordsRequest.ApiKey == apiKey)
-                return DeleteRecordsRequest(version).HeaderVersion;
+                return new DeleteRecordsRequest(version).HeaderVersion;
             if (DeleteShareGroupStateRequest.ApiKey == apiKey)
-                return DeleteShareGroupStateRequest(version).HeaderVersion;
+                return new DeleteShareGroupStateRequest(version).HeaderVersion;
             if (DeleteTopicsRequest.ApiKey == apiKey)
-                return DeleteTopicsRequest(version).HeaderVersion;
+                return new DeleteTopicsRequest(version).HeaderVersion;
             if (DescribeAclsRequest.ApiKey == apiKey)
-                return DescribeAclsRequest(version).HeaderVersion;
+                return new DescribeAclsRequest(version).HeaderVersion;
             if (DescribeClientQuotasRequest.ApiKey == apiKey)
-                return DescribeClientQuotasRequest(version).HeaderVersion;
+                return new DescribeClientQuotasRequest(version).HeaderVersion;
             if (DescribeClusterRequest.ApiKey == apiKey)
-                return DescribeClusterRequest(version).HeaderVersion;
+                return new DescribeClusterRequest(version).HeaderVersion;
             if (DescribeConfigsRequest.ApiKey == apiKey)
-                return DescribeConfigsRequest(version).HeaderVersion;
+                return new DescribeConfigsRequest(version).HeaderVersion;
             if (DescribeDelegationTokenRequest.ApiKey == apiKey)
-                return DescribeDelegationTokenRequest(version).HeaderVersion;
+                return new DescribeDelegationTokenRequest(version).HeaderVersion;
             if (DescribeGroupsRequest.ApiKey == apiKey)
-                return DescribeGroupsRequest(version).HeaderVersion;
+                return new DescribeGroupsRequest(version).HeaderVersion;
             if (DescribeLogDirsRequest.ApiKey == apiKey)
-                return DescribeLogDirsRequest(version).HeaderVersion;
+                return new DescribeLogDirsRequest(version).HeaderVersion;
             if (DescribeProducersRequest.ApiKey == apiKey)
-                return DescribeProducersRequest(version).HeaderVersion;
+                return new DescribeProducersRequest(version).HeaderVersion;
             if (DescribeQuorumRequest.ApiKey == apiKey)
-                return DescribeQuorumRequest(version).HeaderVersion;
+                return new DescribeQuorumRequest(version).HeaderVersion;
             if (DescribeTopicPartitionsRequest.ApiKey == apiKey)
-                return DescribeTopicPartitionsRequest(version).HeaderVersion;
+                return new DescribeTopicPartitionsRequest(version).HeaderVersion;
             if (DescribeTransactionsRequest.ApiKey == apiKey)
-                return DescribeTransactionsRequest(version).HeaderVersion;
+                return new DescribeTransactionsRequest(version).HeaderVersion;
             if (DescribeUserScramCredentialsRequest.ApiKey == apiKey)
-                return DescribeUserScramCredentialsRequest(version).HeaderVersion;
+                return new DescribeUserScramCredentialsRequest(version).HeaderVersion;
             if (ElectLeadersRequest.ApiKey == apiKey)
-                return ElectLeadersRequest(version).HeaderVersion;
+                return new ElectLeadersRequest(version).HeaderVersion;
             if (EndQuorumEpochRequest.ApiKey == apiKey)
-                return EndQuorumEpochRequest(version).HeaderVersion;
+                return new EndQuorumEpochRequest(version).HeaderVersion;
             if (EndTxnRequest.ApiKey == apiKey)
-                return EndTxnRequest(version).HeaderVersion;
+                return new EndTxnRequest(version).HeaderVersion;
             if (EnvelopeRequest.ApiKey == apiKey)
-                return EnvelopeRequest(version).HeaderVersion;
+                return new EnvelopeRequest(version).HeaderVersion;
             if (ExpireDelegationTokenRequest.ApiKey == apiKey)
-                return ExpireDelegationTokenRequest(version).HeaderVersion;
+                return new ExpireDelegationTokenRequest(version).HeaderVersion;
             if (FetchRequest.ApiKey == apiKey)
-                return FetchRequest(version).HeaderVersion;
+                return new FetchRequest(version).HeaderVersion;
             if (FetchSnapshotRequest.ApiKey == apiKey)
-                return FetchSnapshotRequest(version).HeaderVersion;
+                return new FetchSnapshotRequest(version).HeaderVersion;
             if (FindCoordinatorRequest.ApiKey == apiKey)
-                return FindCoordinatorRequest(version).HeaderVersion;
+                return new FindCoordinatorRequest(version).HeaderVersion;
             if (GetTelemetrySubscriptionsRequest.ApiKey == apiKey)
-                return GetTelemetrySubscriptionsRequest(version).HeaderVersion;
+                return new GetTelemetrySubscriptionsRequest(version).HeaderVersion;
             if (HeartbeatRequest.ApiKey == apiKey)
-                return HeartbeatRequest(version).HeaderVersion;
+                return new HeartbeatRequest(version).HeaderVersion;
             if (IncrementalAlterConfigsRequest.ApiKey == apiKey)
-                return IncrementalAlterConfigsRequest(version).HeaderVersion;
+                return new IncrementalAlterConfigsRequest(version).HeaderVersion;
             if (InitializeShareGroupStateRequest.ApiKey == apiKey)
-                return InitializeShareGroupStateRequest(version).HeaderVersion;
+                return new InitializeShareGroupStateRequest(version).HeaderVersion;
             if (InitProducerIdRequest.ApiKey == apiKey)
-                return InitProducerIdRequest(version).HeaderVersion;
+                return new InitProducerIdRequest(version).HeaderVersion;
             if (JoinGroupRequest.ApiKey == apiKey)
-                return JoinGroupRequest(version).HeaderVersion;
+                return new JoinGroupRequest(version).HeaderVersion;
             if (LeaderAndIsrRequest.ApiKey == apiKey)
-                return LeaderAndIsrRequest(version).HeaderVersion;
+                return new LeaderAndIsrRequest(version).HeaderVersion;
             if (LeaveGroupRequest.ApiKey == apiKey)
-                return LeaveGroupRequest(version).HeaderVersion;
+                return new LeaveGroupRequest(version).HeaderVersion;
             if (ListClientMetricsResourcesRequest.ApiKey == apiKey)
-                return ListClientMetricsResourcesRequest(version).HeaderVersion;
+                return new ListClientMetricsResourcesRequest(version).HeaderVersion;
             if (ListGroupsRequest.ApiKey == apiKey)
-                return ListGroupsRequest(version).HeaderVersion;
+                return new ListGroupsRequest(version).HeaderVersion;
             if (ListOffsetsRequest.ApiKey == apiKey)
-                return ListOffsetsRequest(version).HeaderVersion;
+                return new ListOffsetsRequest(version).HeaderVersion;
             if (ListPartitionReassignmentsRequest.ApiKey == apiKey)
-                return ListPartitionReassignmentsRequest(version).HeaderVersion;
+                return new ListPartitionReassignmentsRequest(version).HeaderVersion;
             if (ListTransactionsRequest.ApiKey == apiKey)
-                return ListTransactionsRequest(version).HeaderVersion;
+                return new ListTransactionsRequest(version).HeaderVersion;
             if (MetadataRequest.ApiKey == apiKey)
-                return MetadataRequest(version).HeaderVersion;
+                return new MetadataRequest(version).HeaderVersion;
             if (OffsetCommitRequest.ApiKey == apiKey)
-                return OffsetCommitRequest(version).HeaderVersion;
+                return new OffsetCommitRequest(version).HeaderVersion;
             if (OffsetDeleteRequest.ApiKey == apiKey)
-                return OffsetDeleteRequest(version).HeaderVersion;
+                return new OffsetDeleteRequest(version).HeaderVersion;
             if (OffsetFetchRequest.ApiKey == apiKey)
-                return OffsetFetchRequest(version).HeaderVersion;
+                return new OffsetFetchRequest(version).HeaderVersion;
             if (OffsetForLeaderEpochRequest.ApiKey == apiKey)
-                return OffsetForLeaderEpochRequest(version).HeaderVersion;
+                return new OffsetForLeaderEpochRequest(version).HeaderVersion;
             if (ProduceRequest.ApiKey == apiKey)
-                return ProduceRequest(version).HeaderVersion;
+                return new ProduceRequest(version).HeaderVersion;
             if (PushTelemetryRequest.ApiKey == apiKey)
-                return PushTelemetryRequest(version).HeaderVersion;
+                return new PushTelemetryRequest(version).HeaderVersion;
             if (ReadShareGroupStateRequest.ApiKey == apiKey)
-                return ReadShareGroupStateRequest(version).HeaderVersion;
+                return new ReadShareGroupStateRequest(version).HeaderVersion;
             if (ReadShareGroupStateSummaryRequest.ApiKey == apiKey)
-                return ReadShareGroupStateSummaryRequest(version).HeaderVersion;
+                return new ReadShareGroupStateSummaryRequest(version).HeaderVersion;
             if (RemoveRaftVoterRequest.ApiKey == apiKey)
-                return RemoveRaftVoterRequest(version).HeaderVersion;
+                return new RemoveRaftVoterRequest(version).HeaderVersion;
             if (RenewDelegationTokenRequest.ApiKey == apiKey)
-                return RenewDelegationTokenRequest(version).HeaderVersion;
+                return new RenewDelegationTokenRequest(version).HeaderVersion;
             if (SaslAuthenticateRequest.ApiKey == apiKey)
-                return SaslAuthenticateRequest(version).HeaderVersion;
+                return new SaslAuthenticateRequest(version).HeaderVersion;
             if (SaslHandshakeRequest.ApiKey == apiKey)
-                return SaslHandshakeRequest(version).HeaderVersion;
+                return new SaslHandshakeRequest(version).HeaderVersion;
             if (ShareAcknowledgeRequest.ApiKey == apiKey)
-                return ShareAcknowledgeRequest(version).HeaderVersion;
+                return new ShareAcknowledgeRequest(version).HeaderVersion;
             if (ShareFetchRequest.ApiKey == apiKey)
-                return ShareFetchRequest(version).HeaderVersion;
+                return new ShareFetchRequest(version).HeaderVersion;
             if (ShareGroupDescribeRequest.ApiKey == apiKey)
-                return ShareGroupDescribeRequest(version).HeaderVersion;
+                return new ShareGroupDescribeRequest(version).HeaderVersion;
             if (ShareGroupHeartbeatRequest.ApiKey == apiKey)
-                return ShareGroupHeartbeatRequest(version).HeaderVersion;
+                return new ShareGroupHeartbeatRequest(version).HeaderVersion;
             if (StopReplicaRequest.ApiKey == apiKey)
-                return StopReplicaRequest(version).HeaderVersion;
+                return new StopReplicaRequest(version).HeaderVersion;
             if (SyncGroupRequest.ApiKey == apiKey)
-                return SyncGroupRequest(version).HeaderVersion;
+                return new SyncGroupRequest(version).HeaderVersion;
             if (TxnOffsetCommitRequest.ApiKey == apiKey)
-                return TxnOffsetCommitRequest(version).HeaderVersion;
+                return new TxnOffsetCommitRequest(version).HeaderVersion;
             if (UnregisterBrokerRequest.ApiKey == apiKey)
-                return UnregisterBrokerRequest(version).HeaderVersion;
+                return new UnregisterBrokerRequest(version).HeaderVersion;
             if (UpdateFeaturesRequest.ApiKey == apiKey)
-                return UpdateFeaturesRequest(version).HeaderVersion;
+                return new UpdateFeaturesRequest(version).HeaderVersion;
             if (UpdateMetadataRequest.ApiKey == apiKey)
-                return UpdateMetadataRequest(version).HeaderVersion;
+                return new UpdateMetadataRequest(version).HeaderVersion;
             if (UpdateRaftVoterRequest.ApiKey == apiKey)
-                return UpdateRaftVoterRequest(version).HeaderVersion;
+                return new UpdateRaftVoterRequest(version).HeaderVersion;
             if (VoteRequest.ApiKey == apiKey)
-                return VoteRequest(version).HeaderVersion;
+                return new VoteRequest(version).HeaderVersion;
             if (WriteShareGroupStateRequest.ApiKey == apiKey)
-                return WriteShareGroupStateRequest(version).HeaderVersion;
+                return new WriteShareGroupStateRequest(version).HeaderVersion;
             if (WriteTxnMarkersRequest.ApiKey == apiKey)
-                return WriteTxnMarkersRequest(version).HeaderVersion;
+                return new WriteTxnMarkersRequest(version).HeaderVersion;
             throw new ArgumentException($"There is no request message with api key {apiKey}");
         }
     }

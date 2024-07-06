@@ -357,7 +357,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                                 {{messages.Aggregate("", (expression, message) => $"""
                                      {expression}          
                                      if ({message.Name}.ApiKey == apiKey)
-                                         return {message.Name}(version).HeaderVersion;
+                                         return new {message.Name}(version).HeaderVersion;
                                      """)}}
                                 throw new ArgumentException($"There is no request message with api key {apiKey}");
                             }
@@ -391,7 +391,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                                 var version = payload.Message.Version;
                                 {{messages.AggregateToString(message => $"""
                                      if ({message.Name}.ApiKey == apiKey)
-                                         return {message.Name}(version).HeaderVersion;
+                                         return new {message.Name}(version).HeaderVersion;
                                      """)}}
                                 throw new ArgumentException($"There is no response message with api key {apiKey}");
                             }
