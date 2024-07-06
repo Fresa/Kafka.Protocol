@@ -521,6 +521,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             sourceProductionContext.AddSource(
                 $"Messages/{message.Name}.g.cs", ParseCSharpCode($$"""
                         #nullable enable
+                        #pragma warning disable 1591
                         {{CodeGeneratedWarningComment}}
                         using System;
                         using System.Collections.Generic;
@@ -531,6 +532,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                         using System.Threading.Tasks;
                         using Kafka.Protocol.Records;
                                               
+                        // ReSharper disable MemberHidesStaticFromOuterClass FromReaderAsync will cause a lot of these warnings
                         namespace {{Namespace}}
                         {
                             public class {{message.Name}} : Message{{(hasResponse ? $", IRespond<{responseMessageDefinition.Name}>" : "")}} 

@@ -1,4 +1,5 @@
 ﻿#nullable enable
+#pragma warning disable 1591
 // WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Kafka.Protocol.Records;
 
+// ReSharper disable MemberHidesStaticFromOuterClass FromReaderAsync will cause a lot of these warnings
 namespace Kafka.Protocol
 {
     public class ConsumerGroupHeartbeatRequest : Message, IRespond<ConsumerGroupHeartbeatResponse>
