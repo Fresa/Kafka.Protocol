@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -17,7 +16,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Kafka.Protocol.SourceGenerator;
 
 [Generator]
-public partial class ProtocolGenerator : IIncrementalGenerator
+internal sealed class ProtocolGenerator : IIncrementalGenerator
 {
     private static readonly Regex SpecificationFileRegex = new(@"^.*(\\|/)MessageDefinitions(\\|/).*.json$");
     private static readonly Regex ProtocolSpecificationRegex = new(@"^.*(\\|/)ProtocolSpecifications(\\|/)Apache Kafka.html$");
@@ -26,7 +25,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
     private const string CodeGeneratedWarningComment =
         "// WARNING! THIS FILE IS AUTO-GENERATED! DO NOT EDIT.";
 
-    private static string GenerateMissingSpecificationFiles(
+    private static string MissingSpecificationFiles(
         string messageType = "") =>
         $"No {messageType}{(messageType == string.Empty ? "" : " ")}message specification files could be found. Make sure files are added as AdditionalFiles matching {SpecificationFileRegex}";
 
@@ -115,27 +114,27 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             .Where(message => message.IsRequest())
             .Collect()
             .ThrowIfEmpty(
-                GenerateMissingSpecificationFiles("request"));
+                MissingSpecificationFiles("request"));
         var responseMessages = messageDefinitions
             .Where(message => message.IsResponse())
             .Collect()
             .ThrowIfEmpty(
-                GenerateMissingSpecificationFiles("response"));
+                MissingSpecificationFiles("response"));
         var headerMessages = messageDefinitions
             .Where(message => message.IsHeader())
             .Collect()
             .ThrowIfEmpty(
-                GenerateMissingSpecificationFiles("header"));
+                MissingSpecificationFiles("header"));
         var messages = messageDefinitions
             .Where(message => message.IsMessage())
             .Collect()
             .ThrowIfEmpty(
-                GenerateMissingSpecificationFiles());
+                MissingSpecificationFiles());
         var dataMessages = messageDefinitions
             .Where(message => message.IsData())
             .Collect()
             .ThrowIfEmpty(
-                GenerateMissingSpecificationFiles("data"));
+                MissingSpecificationFiles("data"));
 
         context.RegisterSourceOutput(primitiveTypes,
             WithExceptionReporting<ICollection<PrimitiveType>>(
@@ -163,6 +162,9 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         context.RegisterSourceOutput(primitiveTypeNames.Combine(dataMessages),
             WithExceptionReporting<(string[], ImmutableArray<Message>)>(
                 GenerateData));
+        context.RegisterSourceOutput(requestMessages,
+            WithExceptionReporting<ImmutableArray<Message>>(
+                GenerateResponseExtensions));
     }
 
     private static void GeneratePrimitiveTypes(
@@ -305,7 +307,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             GenerateCreateMessageMethod(isRequest: false, messages));
     }
 
-    private static string GenerateCreateMessageMethod(
+    private static SourceText GenerateCreateMessageMethod(
         bool isRequest,
         ImmutableArray<Message> messages) =>
         ParseCSharpCode(
@@ -579,8 +581,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                                                        """
                                                        if (Version == 0)
                                                            return 0;
-                                                       """)
-                                               }
+                                                       """)}
                                                return (short)(IsFlexibleVersion ? 2 : 1);
                                                """ :
                                               $"{
@@ -731,12 +732,40 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         }
     }
 
-    private static string ParseCSharpCode(string code) =>
-        SyntaxFactory.ParseCompilationUnit(code, options: new CSharpParseOptions())
-            .NormalizeWhitespace()
-            .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)
-            .GetText()
-            .ToString();
+    private static void GenerateResponseExtensions(SourceProductionContext sourceProductionContext, ImmutableArray<Message> requestMessages)
+    {
+        sourceProductionContext.AddSource(
+            "ResponseExtensions.g.cs", ParseCSharpCode($$"""
+                    #nullable enable
+                    #pragma warning disable 1591
+                    {{CodeGeneratedWarningComment}}
+                                      
+                    namespace {{Namespace}}
+                    {
+                        public static class ResponseExtensions
+                        {
+                            public static ApiVersionsResponse WithAllApiKeys(this ApiVersionsResponse response) =>
+                                response.WithApiKeysCollection({{requestMessages.Aggregate("", (expression, requestMessage) => $"{(requestMessage.IsRequest() ? $"""
+                                     {(expression == "" ? "" : expression + ",")}
+                                                    key => key
+                                                        .WithApiKey({requestMessage.Name}.ApiKey)
+                                                        .WithMinVersion({requestMessage.Name}.MinVersion)
+                                                        .WithMaxVersion({requestMessage.Name}.MaxVersion)
+                                     """ : throw new InvalidOperationException($"Expected request message but got {requestMessage.Type}"))}")}});
+                     }
+                  }
+                  """, false));
+    }
+
+    private static SourceText ParseCSharpCode(string code, bool normalize = true)
+    {
+        var compilationUnit = SyntaxFactory
+            .ParseCompilationUnit(code, options: new CSharpParseOptions());
+        if (normalize)
+            compilationUnit = compilationUnit.NormalizeWhitespace();
+        return compilationUnit.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)
+            .GetText(Encoding.UTF8);
+    }
 
     /// <summary>
     /// Exceptions thrown by source generators doesn't generate errors that gets
