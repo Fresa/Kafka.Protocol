@@ -160,6 +160,9 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         context.RegisterSourceOutput(primitiveTypeNames.Combine(messages),
             WithExceptionReporting<(string[], ImmutableArray<Message>)>(
                 GenerateMessages));
+        context.RegisterSourceOutput(primitiveTypeNames.Combine(dataMessages),
+            WithExceptionReporting<(string[], ImmutableArray<Message>)>(
+                GenerateData));
     }
 
     private static void GeneratePrimitiveTypes(
@@ -628,6 +631,101 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                                        """ :
                                       "")}}
                             }
+                        }
+                      """));
+        }
+    }
+
+    private static void GenerateData(SourceProductionContext sourceProductionContext,
+            (string[] PrimitiveTypeNames, ImmutableArray<Message> Data) input)
+    {
+        Generator.Helpers.FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
+        foreach (var data in input.Data)
+        {
+            if (!data.IsData())
+                throw new InvalidOperationException(
+                    $"Expected data but got type {data.Type}");
+
+            var versionRange = VersionRange.Parse(data.ValidVersions);
+            var flexibleVersionRange = VersionRange.Parse(data.FlexibleVersions);
+
+            sourceProductionContext.AddSource(
+                $"Data/{data.Name}.g.cs", ParseCSharpCode($$"""
+                        #nullable enable
+                        #pragma warning disable 1591
+                        {{CodeGeneratedWarningComment}}
+                        using System;
+                        using System.Collections.Generic;
+                        using System.IO;
+                        using System.IO.Pipelines;
+                        using System.Linq;
+                        using System.Threading;
+                        using System.Threading.Tasks;
+                        using Kafka.Protocol.Records;
+                                              
+                        // ReSharper disable MemberHidesStaticFromOuterClass FromReaderAsync will cause a lot of these warnings
+                        namespace {{Namespace}}
+                        {
+                            public class {{data.Name}} 
+                            {
+                      	        public {{data.Name}}(Int16 version) 
+                      	        {
+                      		        if (version.InRange(MinVersion, MaxVersion) == false) 
+                      		        	throw new UnsupportedVersionException($"{{data.Name}} does not support version {version}. Valid versions are: {{data.ValidVersions}}"); 
+                          
+                      		        Version = version;
+                      		        IsFlexibleVersion = {{flexibleVersionRange.GetExpression("version")}};
+                      	        } 
+                          
+                      	        public static readonly Int16 MinVersion = Int16.From({{versionRange.From ?? throw new InvalidOperationException("From cannot be null")}});
+                      	        public static readonly Int16 MaxVersion = Int16.From({{versionRange.To ?? throw new InvalidOperationException("To cannot be null")}}); 
+                              
+                      	        public Int16 Version { get; }
+                      	        internal bool IsFlexibleVersion { get; } 
+                              
+                      	        {{Tag.GenerateCreateTagSection(data.GetTaggedFields().ToArray())}} 
+                              
+                      	        internal int GetSize() =>
+                      	            {{data.Fields.GenerateSizeOf()}} +
+                      	            {{Tag.GenerateSizeOf()}}; 
+                              
+                      	        public static async ValueTask<{{data.Name}}> FromBytesAsync(Bytes data, CancellationToken cancellationToken = default) 
+                      	        {
+                      		        var pipe = new Pipe();
+                      		        await pipe.Writer.WriteAsync(data.Value, cancellationToken).ConfigureAwait(false);
+                      		        var reader = pipe.Reader; 
+                      		        
+                      		        var version = await Int16.FromReaderAsync(reader, false, cancellationToken).ConfigureAwait(false);
+                      		        var instance = new {{data.Name}}(version);
+                      		        
+                      		        {{data.Fields.GenerateReadFields()}} 
+                              
+                      		        {{Tag.GenerateReadTags(data.GetTaggedFields(), data.Name)}}
+                              
+                      		        {{(data.Fields.Any() ?
+                                          "return instance;" :
+                                          $"return await new ValueTask<{data.Name}>(instance);")}}
+                      	        }
+                              
+                      	        public async ValueTask<Bytes> ToBytesAsync(CancellationToken cancellationToken = default) 
+                      	        {
+                      		        var writer = new MemoryStream();
+                      		        await using (writer.ConfigureAwait(false)) 
+                      		        {
+                      			        await Version.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                                		{{(data.Fields.Count == 0 ?
+                                      "await Task.CompletedTask;" :
+                                      $"{data.Fields.GenerateWriteTos()}")}}
+                      			
+                      			        {{Tag.GenerateWriteTags()}} 
+                      			        return new Bytes(writer.ToArray());
+                      		        }
+                      	        }
+                              
+                      	        {{data.Fields.GenerateFields(data.Name)}}
+                              
+                      	        {{data.CommonStructs.GenerateCommonStructs()}}
+                            } 
                         }
                       """));
         }
