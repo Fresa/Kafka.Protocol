@@ -9,184 +9,184 @@ namespace Kafka.Protocol
 {
     public static partial class Messages
     {
-        public static ValueTask<Message> CreateResponseMessageFromReaderAsync(Int16 apiKey, Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+        public static async ValueTask<Message> CreateResponseMessageFromReaderAsync(Int16 apiKey, Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             if (AddOffsetsToTxnResponse.ApiKey == apiKey)
-                return AddOffsetsToTxnResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AddOffsetsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AddPartitionsToTxnResponse.ApiKey == apiKey)
-                return AddPartitionsToTxnResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AddPartitionsToTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AddRaftVoterResponse.ApiKey == apiKey)
-                return AddRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AddRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AllocateProducerIdsResponse.ApiKey == apiKey)
-                return AllocateProducerIdsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AllocateProducerIdsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AlterClientQuotasResponse.ApiKey == apiKey)
-                return AlterClientQuotasResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AlterClientQuotasResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AlterConfigsResponse.ApiKey == apiKey)
-                return AlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AlterPartitionReassignmentsResponse.ApiKey == apiKey)
-                return AlterPartitionReassignmentsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AlterPartitionReassignmentsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AlterPartitionResponse.ApiKey == apiKey)
-                return AlterPartitionResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AlterPartitionResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AlterReplicaLogDirsResponse.ApiKey == apiKey)
-                return AlterReplicaLogDirsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AlterReplicaLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AlterUserScramCredentialsResponse.ApiKey == apiKey)
-                return AlterUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AlterUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ApiVersionsResponse.ApiKey == apiKey)
-                return ApiVersionsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ApiVersionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AssignReplicasToDirsResponse.ApiKey == apiKey)
-                return AssignReplicasToDirsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await AssignReplicasToDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (BeginQuorumEpochResponse.ApiKey == apiKey)
-                return BeginQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await BeginQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (BrokerHeartbeatResponse.ApiKey == apiKey)
-                return BrokerHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await BrokerHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (BrokerRegistrationResponse.ApiKey == apiKey)
-                return BrokerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await BrokerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ConsumerGroupDescribeResponse.ApiKey == apiKey)
-                return ConsumerGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ConsumerGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ConsumerGroupHeartbeatResponse.ApiKey == apiKey)
-                return ConsumerGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ConsumerGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ControlledShutdownResponse.ApiKey == apiKey)
-                return ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ControllerRegistrationResponse.ApiKey == apiKey)
-                return ControllerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ControllerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (CreateAclsResponse.ApiKey == apiKey)
-                return CreateAclsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await CreateAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (CreateDelegationTokenResponse.ApiKey == apiKey)
-                return CreateDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await CreateDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (CreatePartitionsResponse.ApiKey == apiKey)
-                return CreatePartitionsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await CreatePartitionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (CreateTopicsResponse.ApiKey == apiKey)
-                return CreateTopicsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await CreateTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DeleteAclsResponse.ApiKey == apiKey)
-                return DeleteAclsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DeleteAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DeleteGroupsResponse.ApiKey == apiKey)
-                return DeleteGroupsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DeleteGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DeleteRecordsResponse.ApiKey == apiKey)
-                return DeleteRecordsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DeleteRecordsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DeleteShareGroupStateResponse.ApiKey == apiKey)
-                return DeleteShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DeleteShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DeleteTopicsResponse.ApiKey == apiKey)
-                return DeleteTopicsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DeleteTopicsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeAclsResponse.ApiKey == apiKey)
-                return DescribeAclsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeAclsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeClientQuotasResponse.ApiKey == apiKey)
-                return DescribeClientQuotasResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeClientQuotasResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeClusterResponse.ApiKey == apiKey)
-                return DescribeClusterResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeClusterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeConfigsResponse.ApiKey == apiKey)
-                return DescribeConfigsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeDelegationTokenResponse.ApiKey == apiKey)
-                return DescribeDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeGroupsResponse.ApiKey == apiKey)
-                return DescribeGroupsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeLogDirsResponse.ApiKey == apiKey)
-                return DescribeLogDirsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeLogDirsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeProducersResponse.ApiKey == apiKey)
-                return DescribeProducersResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeProducersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeQuorumResponse.ApiKey == apiKey)
-                return DescribeQuorumResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeQuorumResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeTopicPartitionsResponse.ApiKey == apiKey)
-                return DescribeTopicPartitionsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeTopicPartitionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeTransactionsResponse.ApiKey == apiKey)
-                return DescribeTransactionsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeTransactionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeUserScramCredentialsResponse.ApiKey == apiKey)
-                return DescribeUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await DescribeUserScramCredentialsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ElectLeadersResponse.ApiKey == apiKey)
-                return ElectLeadersResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ElectLeadersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (EndQuorumEpochResponse.ApiKey == apiKey)
-                return EndQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await EndQuorumEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (EndTxnResponse.ApiKey == apiKey)
-                return EndTxnResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await EndTxnResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (EnvelopeResponse.ApiKey == apiKey)
-                return EnvelopeResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await EnvelopeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ExpireDelegationTokenResponse.ApiKey == apiKey)
-                return ExpireDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ExpireDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (FetchResponse.ApiKey == apiKey)
-                return FetchResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await FetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (FetchSnapshotResponse.ApiKey == apiKey)
-                return FetchSnapshotResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await FetchSnapshotResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (FindCoordinatorResponse.ApiKey == apiKey)
-                return FindCoordinatorResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await FindCoordinatorResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (GetTelemetrySubscriptionsResponse.ApiKey == apiKey)
-                return GetTelemetrySubscriptionsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await GetTelemetrySubscriptionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (HeartbeatResponse.ApiKey == apiKey)
-                return HeartbeatResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await HeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (IncrementalAlterConfigsResponse.ApiKey == apiKey)
-                return IncrementalAlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await IncrementalAlterConfigsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (InitializeShareGroupStateResponse.ApiKey == apiKey)
-                return InitializeShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await InitializeShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (InitProducerIdResponse.ApiKey == apiKey)
-                return InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (JoinGroupResponse.ApiKey == apiKey)
-                return JoinGroupResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await JoinGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (LeaderAndIsrResponse.ApiKey == apiKey)
-                return LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (LeaveGroupResponse.ApiKey == apiKey)
-                return LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ListClientMetricsResourcesResponse.ApiKey == apiKey)
-                return ListClientMetricsResourcesResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ListClientMetricsResourcesResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ListGroupsResponse.ApiKey == apiKey)
-                return ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ListGroupsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ListOffsetsResponse.ApiKey == apiKey)
-                return ListOffsetsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ListOffsetsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ListPartitionReassignmentsResponse.ApiKey == apiKey)
-                return ListPartitionReassignmentsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ListPartitionReassignmentsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ListTransactionsResponse.ApiKey == apiKey)
-                return ListTransactionsResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ListTransactionsResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (MetadataResponse.ApiKey == apiKey)
-                return MetadataResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await MetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (OffsetCommitResponse.ApiKey == apiKey)
-                return OffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await OffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (OffsetDeleteResponse.ApiKey == apiKey)
-                return OffsetDeleteResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await OffsetDeleteResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (OffsetFetchResponse.ApiKey == apiKey)
-                return OffsetFetchResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await OffsetFetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (OffsetForLeaderEpochResponse.ApiKey == apiKey)
-                return OffsetForLeaderEpochResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await OffsetForLeaderEpochResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ProduceResponse.ApiKey == apiKey)
-                return ProduceResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ProduceResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (PushTelemetryResponse.ApiKey == apiKey)
-                return PushTelemetryResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await PushTelemetryResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ReadShareGroupStateResponse.ApiKey == apiKey)
-                return ReadShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ReadShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ReadShareGroupStateSummaryResponse.ApiKey == apiKey)
-                return ReadShareGroupStateSummaryResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ReadShareGroupStateSummaryResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (RemoveRaftVoterResponse.ApiKey == apiKey)
-                return RemoveRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await RemoveRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (RenewDelegationTokenResponse.ApiKey == apiKey)
-                return RenewDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await RenewDelegationTokenResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (SaslAuthenticateResponse.ApiKey == apiKey)
-                return SaslAuthenticateResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await SaslAuthenticateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (SaslHandshakeResponse.ApiKey == apiKey)
-                return SaslHandshakeResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await SaslHandshakeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ShareAcknowledgeResponse.ApiKey == apiKey)
-                return ShareAcknowledgeResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ShareAcknowledgeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ShareFetchResponse.ApiKey == apiKey)
-                return ShareFetchResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ShareFetchResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ShareGroupDescribeResponse.ApiKey == apiKey)
-                return ShareGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ShareGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ShareGroupHeartbeatResponse.ApiKey == apiKey)
-                return ShareGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await ShareGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (StopReplicaResponse.ApiKey == apiKey)
-                return StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (SyncGroupResponse.ApiKey == apiKey)
-                return SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (TxnOffsetCommitResponse.ApiKey == apiKey)
-                return TxnOffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await TxnOffsetCommitResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UnregisterBrokerResponse.ApiKey == apiKey)
-                return UnregisterBrokerResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await UnregisterBrokerResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UpdateFeaturesResponse.ApiKey == apiKey)
-                return UpdateFeaturesResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await UpdateFeaturesResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UpdateMetadataResponse.ApiKey == apiKey)
-                return UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UpdateRaftVoterResponse.ApiKey == apiKey)
-                return UpdateRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await UpdateRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (VoteResponse.ApiKey == apiKey)
-                return VoteResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await VoteResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (WriteShareGroupStateResponse.ApiKey == apiKey)
-                return WriteShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await WriteShareGroupStateResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (WriteTxnMarkersResponse.ApiKey == apiKey)
-                return WriteTxnMarkersResponse.FromReaderAsync(version, reader, cancellationToken);
+                return await WriteTxnMarkersResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             throw new ArgumentException($"There is no response message with api key {apiKey}");
         }
     }
