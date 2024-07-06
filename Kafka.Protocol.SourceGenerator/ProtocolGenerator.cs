@@ -137,14 +137,24 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             .ThrowIfEmpty(
                 GenerateMissingSpecificationFiles("data"));
 
-        context.RegisterSourceOutput(primitiveTypes, GeneratePrimitiveTypes);
-        context.RegisterSourceOutput(errorCodes, GenerateErrorCodes);
-        
-        context.RegisterSourceOutput(requestMessages, GenerateCreateRequestMessageMethod);
-        context.RegisterSourceOutput(requestMessages, GenerateGetRequestHeaderVersionForMethod);
-        context.RegisterSourceOutput(responseMessages, GenerateCreateResponseMessageMethod);
-        context.RegisterSourceOutput(responseMessages, GenerateGetResponseHeaderVersionForMethod);
+        context.RegisterSourceOutput(primitiveTypes,
+            WithExceptionReporting<ICollection<PrimitiveType>>(
+                GeneratePrimitiveTypes));
+        context.RegisterSourceOutput(errorCodes,
+            WithExceptionReporting<ICollection<ErrorCode>>(GenerateErrorCodes));
 
+        context.RegisterSourceOutput(requestMessages,
+            WithExceptionReporting<ImmutableArray<Message>>(
+                GenerateCreateRequestMessageMethod));
+        context.RegisterSourceOutput(requestMessages,
+            WithExceptionReporting<ImmutableArray<Message>>(
+                GenerateGetRequestHeaderVersionForMethod));
+        context.RegisterSourceOutput(responseMessages,
+            WithExceptionReporting<ImmutableArray<Message>>(
+                GenerateCreateResponseMessageMethod));
+        context.RegisterSourceOutput(responseMessages,
+            WithExceptionReporting<ImmutableArray<Message>>(
+                GenerateGetResponseHeaderVersionForMethod));
         context.RegisterSourceOutput(primitiveTypeNames.Combine(headerMessages),
             WithExceptionReporting<(string[], ImmutableArray<Message>)>(GenerateHeaderMessages));
         //context.RegisterSourceOutput(primitiveTypeNames.Combine(messages), GenerateMessages);
@@ -502,6 +512,17 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             .GetText()
             .ToString();
 
+    /// <summary>
+    /// Exceptions thrown by source generators doesn't generate errors that gets
+    /// collapsed in the error list of VS like analyzers and like analyzers multiline
+    /// messages are trimmed to the first line, so we need to construct our own
+    /// exception reporting that concatenates multiple lines and do some trickery
+    /// with finding the stack frame for the first managed file that caused to
+    /// the exception to simplify locating the issue
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="handler"></param>
+    /// <returns></returns>
     private static Action<SourceProductionContext, T> WithExceptionReporting<T>(
         Action<SourceProductionContext, T> handler) =>
         (productionContext, input) =>
