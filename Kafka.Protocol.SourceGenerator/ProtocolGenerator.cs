@@ -255,7 +255,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
     }
 
     private static void GenerateErrorCodes(
-        SourceProductionContext sourceProductionContext, 
+        SourceProductionContext sourceProductionContext,
         ICollection<ErrorCode> errorCodes)
     {
         foreach (var errorCode in errorCodes)
@@ -284,7 +284,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
     }
 
     private static void GenerateCreateRequestMessageMethod(
-        SourceProductionContext sourceProductionContext, 
+        SourceProductionContext sourceProductionContext,
         ImmutableArray<Message> messages)
     {
         sourceProductionContext.AddSource(
@@ -297,7 +297,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
         ImmutableArray<Message> messages)
     {
         sourceProductionContext.AddSource(
-            "Messages.CreateResponseMessage.g.cs", 
+            "Messages.CreateResponseMessage.g.cs",
             GenerateCreateMessageMethod(isRequest: false, messages));
     }
 
@@ -317,7 +317,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                 {
                     public static partial class Messages 
                     {
-                        public static ValueTask<Message> Create{{(isRequest ? "Request" : "Response")}}MessageFromReaderAsync(
+                        public static async ValueTask<Message> Create{{(isRequest ? "Request" : "Response")}}MessageFromReaderAsync(
                             Int16 apiKey, 
                             Int16 version, 
                             PipeReader reader, 
@@ -326,7 +326,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
                         {{messages.Aggregate("", (expression, message) => $"""
                              {expression}          
                              if ({message.Name}.ApiKey == apiKey)
-                                 return {message.Name}.FromReaderAsync(version, reader, cancellationToken);
+                                 return await {message.Name}.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
                              """)}}
                             throw new ArgumentException($"There is no {{(isRequest ? "request" : "response")}} message with api key {apiKey}");
                         }
