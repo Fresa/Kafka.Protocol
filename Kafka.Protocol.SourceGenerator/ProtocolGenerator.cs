@@ -171,7 +171,7 @@ public partial class ProtocolGenerator : IIncrementalGenerator
             var nullableType = nonNullableType + "?";
             var description = primitiveType.Description;
 
-            sourceProductionContext.AddSource($"{classNameWithoutGenerics}.g.cs", ParseCSharpCode($$"""
+            sourceProductionContext.AddSource($"Primitives/{classNameWithoutGenerics}.g.cs", ParseCSharpCode($$"""
                     #nullable enable
                     {{CodeGeneratedWarningComment}}
                     using System;
