@@ -66,7 +66,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection(tags.ToArray());
         }
 
-        internal override int GetSize() => +(IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _errorCode.GetSize(IsFlexibleVersion) + _apiKeysCollection.GetSize(IsFlexibleVersion) + (Version >= 1 ? _throttleTimeMs.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ApiVersionsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ApiVersionsResponse(version);

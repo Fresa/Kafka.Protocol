@@ -51,7 +51,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection(tags.ToArray());
         }
 
-        internal override int GetSize() => _controllerEpoch.GetSize(IsFlexibleVersion) + (Version >= 5 ? _brokerEpoch.GetSize(IsFlexibleVersion) : 0) + (Version >= 0 && Version <= 4 ? _ungroupedPartitionStatesCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _topicStatesCollection.GetSize(IsFlexibleVersion) : 0) + _liveBrokersCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _controllerId.GetSize(IsFlexibleVersion) + (Version >= 8 ? _isKRaftController.GetSize(IsFlexibleVersion) : 0) + _controllerEpoch.GetSize(IsFlexibleVersion) + (Version >= 5 ? _brokerEpoch.GetSize(IsFlexibleVersion) : 0) + (Version >= 0 && Version <= 4 ? _ungroupedPartitionStatesCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _topicStatesCollection.GetSize(IsFlexibleVersion) : 0) + _liveBrokersCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<UpdateMetadataRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new UpdateMetadataRequest(version);

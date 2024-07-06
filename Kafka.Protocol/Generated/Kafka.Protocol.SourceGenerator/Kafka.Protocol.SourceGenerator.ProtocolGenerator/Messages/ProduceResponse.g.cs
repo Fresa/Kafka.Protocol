@@ -51,7 +51,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection(tags.ToArray());
         }
 
-        internal override int GetSize() => +(IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _responsesCollection.GetSize(IsFlexibleVersion) + (Version >= 1 ? _throttleTimeMs.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ProduceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ProduceResponse(version);
@@ -264,7 +264,7 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => +(IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _index.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _baseOffset.GetSize(IsFlexibleVersion) + (Version >= 2 ? _logAppendTimeMs.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _logStartOffset.GetSize(IsFlexibleVersion) : 0) + (Version >= 8 ? _recordErrorsCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 8 ? _errorMessage.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<PartitionProduceResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new PartitionProduceResponse(version);

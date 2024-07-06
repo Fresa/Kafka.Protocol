@@ -161,7 +161,7 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => (Version >= 5 ? _numPartitions.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _replicationFactor.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _configsCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => _name.GetSize(IsFlexibleVersion) + (Version >= 7 ? _topicId.GetSize(IsFlexibleVersion) : 0) + _errorCode.GetSize(IsFlexibleVersion) + (Version >= 1 ? _errorMessage.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _numPartitions.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _replicationFactor.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _configsCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<CreatableTopicResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new CreatableTopicResult(version);

@@ -56,7 +56,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection(tags.ToArray());
         }
 
-        internal override int GetSize() => _maxWaitMs.GetSize(IsFlexibleVersion) + _minBytes.GetSize(IsFlexibleVersion) + (Version >= 3 ? _maxBytes.GetSize(IsFlexibleVersion) : 0) + (Version >= 4 ? _isolationLevel.GetSize(IsFlexibleVersion) : 0) + (Version >= 7 ? _sessionId.GetSize(IsFlexibleVersion) : 0) + (Version >= 7 ? _sessionEpoch.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (Version >= 7 ? _forgottenTopicsDataCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 11 ? _rackId.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => (Version >= 0 && Version <= 14 ? _replicaId.GetSize(IsFlexibleVersion) : 0) + _maxWaitMs.GetSize(IsFlexibleVersion) + _minBytes.GetSize(IsFlexibleVersion) + (Version >= 3 ? _maxBytes.GetSize(IsFlexibleVersion) : 0) + (Version >= 4 ? _isolationLevel.GetSize(IsFlexibleVersion) : 0) + (Version >= 7 ? _sessionId.GetSize(IsFlexibleVersion) : 0) + (Version >= 7 ? _sessionEpoch.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (Version >= 7 ? _forgottenTopicsDataCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 11 ? _rackId.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<FetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new FetchRequest(version);

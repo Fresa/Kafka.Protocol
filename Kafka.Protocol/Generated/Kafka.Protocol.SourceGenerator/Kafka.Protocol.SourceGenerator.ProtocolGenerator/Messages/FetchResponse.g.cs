@@ -51,7 +51,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection(tags.ToArray());
         }
 
-        internal override int GetSize() => +(IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => (Version >= 1 ? _throttleTimeMs.GetSize(IsFlexibleVersion) : 0) + (Version >= 7 ? _errorCode.GetSize(IsFlexibleVersion) : 0) + (Version >= 7 ? _sessionId.GetSize(IsFlexibleVersion) : 0) + _responsesCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<FetchResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new FetchResponse(version);
@@ -388,7 +388,7 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => (Version >= 4 ? _abortedTransactionsCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 11 ? _preferredReadReplica.GetSize(IsFlexibleVersion) : 0) + _records.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _highWatermark.GetSize(IsFlexibleVersion) + (Version >= 4 ? _lastStableOffset.GetSize(IsFlexibleVersion) : 0) + (Version >= 5 ? _logStartOffset.GetSize(IsFlexibleVersion) : 0) + (Version >= 4 ? _abortedTransactionsCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 11 ? _preferredReadReplica.GetSize(IsFlexibleVersion) : 0) + _records.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new PartitionData(version);

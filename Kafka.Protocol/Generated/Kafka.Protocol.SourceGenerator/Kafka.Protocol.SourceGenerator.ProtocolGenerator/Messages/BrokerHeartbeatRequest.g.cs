@@ -51,7 +51,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection(tags.ToArray());
         }
 
-        internal override int GetSize() => +(IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _brokerId.GetSize(IsFlexibleVersion) + _brokerEpoch.GetSize(IsFlexibleVersion) + _currentMetadataOffset.GetSize(IsFlexibleVersion) + _wantFence.GetSize(IsFlexibleVersion) + _wantShutDown.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<BrokerHeartbeatRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new BrokerHeartbeatRequest(version);

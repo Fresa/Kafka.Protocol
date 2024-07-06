@@ -10,7 +10,7 @@ internal static class FieldExtensions
 {
     internal static string GenerateSizeOf(
         this List<Generator.Helpers.Definitions.Messages.Field> messageFields) =>
-        string.Join(" +", messageFields.Aggregate("",
+        messageFields.Aggregate("",
             (expression, messageField) =>
             {
                 var versionRange = VersionRange.Parse(messageField.Versions);
@@ -21,7 +21,7 @@ internal static class FieldExtensions
                     versionRange = versionRange.Except(taggedVersionRange);
                     if (versionRange.None)
                     {
-                        return string.Empty;
+                        return expression;
                     }
                 }
 
@@ -38,7 +38,7 @@ internal static class FieldExtensions
                           {propertyName}.GetSize({isFlexibleVersionExpression})
                           {(versionRange.Full ? "" : ": 0)")}
                         """;
-            }));
+            });
 
     internal static string GenerateReadFields(
         this List<Generator.Helpers.Definitions.Messages.Field> messageFields) =>

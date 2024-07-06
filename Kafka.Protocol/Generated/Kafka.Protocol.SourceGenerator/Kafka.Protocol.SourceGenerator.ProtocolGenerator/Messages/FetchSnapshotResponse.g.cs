@@ -294,7 +294,7 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _size.GetSize(IsFlexibleVersion) + _position.GetSize(IsFlexibleVersion) + _unalignedRecords.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _index.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _snapshotId.GetSize(IsFlexibleVersion) + _size.GetSize(IsFlexibleVersion) + _position.GetSize(IsFlexibleVersion) + _unalignedRecords.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<PartitionSnapshot> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new PartitionSnapshot(version);
