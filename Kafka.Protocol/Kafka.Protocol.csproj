@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>CS8600;CS8601;CS8603;CS8614;CS8618;CS8625;CS8785;CS8784</WarningsAsErrors>
+    <!--Ignore comparing assembly identity as we don't set assembly identity information until pack-->
+	<NoWarn>CP0003</NoWarn>
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText('$(MSBuildProjectDirectory)/release_notes.txt'))</PackageReleaseNotes>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
@@ -18,10 +20,10 @@
     <Copyright>Copyright © 2019 Fredrik Arvidsson</Copyright>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-	<RestoreAdditionalProjectSources>
-		https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json;
-	</RestoreAdditionalProjectSources>
-	<BaselineAllAPICompatError>false</BaselineAllAPICompatError>
+    <ApiCompatValidateAssemblies>true</ApiCompatValidateAssemblies>
+    <ApiCompatContractAssembly>LastMajorVersionBinary/lib/$(TargetFramework)/$(AssemblyName).dll</ApiCompatContractAssembly>
+    <!--https://learn.microsoft.com/en-us/dotnet/fundamentals/apicompat/diagnostic-ids-->
+    <ApiCompatGenerateSuppressionFile>false</ApiCompatGenerateSuppressionFile>
 
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
@@ -29,11 +31,11 @@
 
   <ItemGroup>
     <PackageReference Include="Log.It" Version="3.0.3" />
+    <PackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="8.0.303" PrivateAssets="all" IsImplicitlyDefined="true" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.DotNet.ApiCompat" Version="8.0.0-beta.24324.7" PrivateAssets="All" />
     <PackageReference Include="System.IO.Pipelines" Version="4.5.3" />
     <ProjectReference Include="..\Kafka.Protocol.SourceGenerator\Kafka.Protocol.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
     <ProjectReference Include="..\Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
@@ -65,10 +67,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
   </ItemGroup>
-	
-  <ItemGroup>
-	<ResolvedMatchingContract Include="LastMajorVersionBinary/lib/$(TargetFramework)/$(AssemblyName).dll" />
-  </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
@@ -79,7 +77,7 @@
   </PropertyGroup>
 	
   <Target Name="DownloadLastMajorVersion" BeforeTargets="PreBuildEvent">
-	  <DownloadFile SourceUrl="https://www.nuget.org/api/v2/package/Kafka.Protocol/4.0.0" DestinationFolder="LastMajorVersionBinary">
+	  <DownloadFile SourceUrl="https://www.nuget.org/api/v2/package/Kafka.Protocol/5.0.0" DestinationFolder="LastMajorVersionBinary">
 		  <Output TaskParameter="DownloadedFile" PropertyName="LastMajorVersionNugetPackage" />
 	  </DownloadFile>
 	  <Unzip SourceFiles="$(LastMajorVersionNugetPackage)" DestinationFolder="LastMajorVersionBinary" />
