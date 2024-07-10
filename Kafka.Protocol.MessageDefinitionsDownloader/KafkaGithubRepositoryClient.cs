@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
+using Kafka.Protocol.SourceGenerator.Definitions.Messages;
 using Newtonsoft.Json;
 using Octokit;
 using ProductHeaderValue = Octokit.ProductHeaderValue;

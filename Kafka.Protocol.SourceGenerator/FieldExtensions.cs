@@ -1,15 +1,173 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using System.Threading;
-using Kafka.Protocol.Generator.Helpers;
-using Kafka.Protocol.Generator.Helpers.Definitions;
-using Kafka.Protocol.Generator.Helpers.Extensions;
+using Kafka.Protocol.SourceGenerator.Definitions;
+using Kafka.Protocol.SourceGenerator.Definitions.Messages;
+using Kafka.Protocol.SourceGenerator.Extensions;
 
 namespace Kafka.Protocol.SourceGenerator;
 
 internal static class FieldExtensions
 {
+    private const string ArrayTypeCharacter = "[]";
+
+    private static readonly string[] ReservedFieldNames =
+    {
+            "Version"
+        };
+
+    private static string[]? _primitiveTypeNames;
+
+    public static void SetPrimitiveTypeNames(string[] typeNames)
+    {
+        _primitiveTypeNames = typeNames
+            .Append("RecordBatch")
+            .Append("NullableRecordBatch")
+            .ToArray();
+    }
+
+    public static bool IsArray(this Field field)
+    {
+        return field.Type.StartsWith(ArrayTypeCharacter);
+    }
+
+    public static bool IsDictionary(this Field field)
+    {
+        return field.Fields?.Any(subField => subField.MapKey) ?? false;
+    }
+
+    public static bool TryGetMapKeyField(
+        this Field field,
+        out Field mapKeyField)
+    {
+        mapKeyField = field.Fields?
+            .FirstOrDefault(subField => subField.MapKey);
+
+        return mapKeyField != default;
+    }
+
+    public static string GetName(this Field field) =>
+        field.Name + (field.IsArray() ? "Collection" : "");
+
+    public static string GetFullTypeName(this Field field)
+    {
+        var type = field.GetNonNullableFullTypeName();
+        if (!field.IsNullable())
+            return type;
+        return field.Fields != null && !field.IsArray()
+            ? $"Nullable<{type}>"
+            : $"Nullable{type}";
+    }
+
+    private static string GetNonNullableFullTypeName(this Field field)
+    {
+        var name = field.GetFullTypeNameWithoutArrayCharacters();
+
+        if (field.TryGetMapKeyField(out var mapKeyField))
+        {
+            return $"Map<{mapKeyField.GetTypeName()}, {name}>";
+        }
+
+        return field.IsArray() ? $"Array<{name}>" : name;
+    }
+
+    public static string GetNullableFullTypeName(this Field field) =>
+        field.GetNonNullableFullTypeName() + (field.IsNullable() ? "?" : "");
+
+    public static string GetTypeName(this Field field)
+    {
+        return GetFullTypeName(field).Split('.').Last();
+    }
+
+    public static string GetNullableSign(this Field field)
+    {
+        return field.IsNullable() ? "?" : "";
+    }
+
+    public static string GetFullTypeNameWithoutArrayCharacters(this Field field)
+    {
+        var typeName = field.Type;
+        if (field.IsArray())
+        {
+            typeName = typeName.TrimStart(ArrayTypeCharacter.ToCharArray());
+        }
+
+        switch (typeName.ToLower())
+        {
+            case "bool":
+                typeName = "Boolean";
+                break;
+            case "records":
+                typeName = "RecordBatch";
+                break;
+            case "uint16":
+                typeName = "UInt16";
+                break;
+            case "uint32":
+                typeName = "UInt32";
+                break;
+        }
+
+        return typeName.FirstCharacterToUpperCase();
+    }
+
+    public static bool IsNullable(this Field field)
+    {
+        return !string.IsNullOrEmpty(field.NullableVersions);
+    }
+
+    public static string GetFieldName(this Field field, string parentFieldTypeName = "")
+    {
+        var fullTypeName = field.GetFullTypeNameWithoutArrayCharacters();
+        var name = field.GetName().FirstCharacterToUpperCase();
+
+        return ReservedFieldNames.Contains(name) ||
+               fullTypeName.Equals(name, StringComparison.CurrentCultureIgnoreCase) ||
+               name.Equals(parentFieldTypeName, StringComparison.CurrentCultureIgnoreCase)
+            ? name + "_"
+            : name;
+    }
+
+    public static string GetPropertyName(this Field field) =>
+        $"_{field.GetName().FirstCharacterToLowerCase()}";
+
+    public static bool IsCompactable(this Field field) =>
+        field.IsArray() || field.GetTypeName().Equals("string",
+            StringComparison.CurrentCultureIgnoreCase);
+
+    public static IEnumerable<Field> GetTaggedFields(this Field field) =>
+        field.Fields?
+            .Where(childField => childField.Tag.HasValue)
+            .OrderBy(childField => childField.Tag) ??
+        Enumerable.Empty<Field>();
+
+    public static bool IsPrimitiveType(this Field field)
+    {
+        if (_primitiveTypeNames == null)
+            throw new InvalidOperationException(
+                $"Primitive types have not been defined via {nameof(SetPrimitiveTypeNames)}");
+
+        var typeName = field.GetFullTypeNameWithoutArrayCharacters();
+        return _primitiveTypeNames
+            .Any(primitiveTypeName =>
+                typeName == primitiveTypeName);
+    }
+
+    public static string GetDefaultValue(this Field field)
+    {
+        if (field.IsNullable() && field.Fields != null)
+            return $"new {field.GetFullTypeName()}()";
+        if (field.Default != null)
+            return $"new {field.GetFullTypeName()}({(field.Default == string.Empty ? "string.Empty" : field.Default)})";
+        if (field.IsDictionary() || field.IsPrimitiveType())
+            return $"{field.GetFullTypeName()}.Default";
+        if (field.IsArray())
+            return $"Array.Empty<{field.GetFullTypeNameWithoutArrayCharacters()}>";
+
+        return "default!";
+    }
+
     internal static string GenerateSizeOf(
-        this List<Generator.Helpers.Definitions.Messages.Field> messageFields) =>
+        this List<Field> messageFields) =>
         messageFields.Aggregate("",
             (expression, messageField) =>
             {
@@ -41,14 +199,14 @@ internal static class FieldExtensions
             });
 
     internal static string GenerateReadFields(
-        this List<Generator.Helpers.Definitions.Messages.Field> messageFields) =>
+        this List<Field> messageFields) =>
         messageFields.Aggregate("", (expression, field) =>
             $"""
              {expression}
              {field.GenerateReadField()}
              """);
 
-    internal static string GenerateReadField(this Generator.Helpers.Definitions.Messages.Field messageField)
+    internal static string GenerateReadField(this Field messageField)
     {
         var versionRange = VersionRange.Parse(messageField.Versions);
         if (messageField.TaggedVersions != null)
@@ -62,7 +220,7 @@ internal static class FieldExtensions
             : messageField.GenerateRead(versionRange);
     }
 
-    internal static string GenerateRead(this Generator.Helpers.Definitions.Messages.Field messageField, VersionRange versionRange)
+    internal static string GenerateRead(this Field messageField, VersionRange versionRange)
     {
         if (versionRange.None)
             return string.Empty;
@@ -165,7 +323,7 @@ internal static class FieldExtensions
     }
 
     internal static string GenerateWriteTos(
-        this List<Generator.Helpers.Definitions.Messages.Field>
+        this List<Field>
             messageFields) =>
         messageFields.Aggregate("", (expression, field) =>
             $"""
@@ -173,7 +331,7 @@ internal static class FieldExtensions
              {field.GenerateWriteTo()}
              """);
 
-    internal static string GenerateWriteTo(this Generator.Helpers.Definitions.Messages.Field messageField)
+    internal static string GenerateWriteTo(this Field messageField)
     {
         var versionRange = VersionRange.Parse(messageField.Versions);
         if (messageField.TaggedVersions != null)
@@ -204,13 +362,13 @@ internal static class FieldExtensions
     }
 
     internal static string GenerateFields(
-        this List<Generator.Helpers.Definitions.Messages.Field> fields,
+        this List<Field> fields,
         string className) =>
         fields.AggregateToString(field =>
             field.GenerateField(className));
 
     internal static string GenerateField(
-        this Generator.Helpers.Definitions.Messages.Field field, 
+        this Field field, 
         string className)
     {
         var propertyTypeName = field.GetFullTypeName();

@@ -1,5 +1,5 @@
-﻿using Kafka.Protocol.Generator.Helpers.Definitions;
-using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
+﻿using Kafka.Protocol.SourceGenerator.Definitions;
+using Kafka.Protocol.SourceGenerator.Definitions.Messages;
 
 namespace Kafka.Protocol.SourceGenerator;
 

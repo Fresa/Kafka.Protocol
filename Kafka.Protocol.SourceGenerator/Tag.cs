@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
-using Kafka.Protocol.Generator.Helpers;
-using Kafka.Protocol.Generator.Helpers.Definitions;
-using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
+using Kafka.Protocol.SourceGenerator.Definitions;
+using Kafka.Protocol.SourceGenerator.Definitions.Messages;
 
 namespace Kafka.Protocol.SourceGenerator;
 
@@ -51,7 +50,7 @@ internal static class Tag
          """;
 
     internal static string GenerateReadTags(
-        IEnumerable<Kafka.Protocol.Generator.Helpers.Definitions.Messages.Field>
+        IEnumerable<Field>
             taggedFields, string parentType) =>
         $$"""
             if (instance.IsFlexibleVersion)

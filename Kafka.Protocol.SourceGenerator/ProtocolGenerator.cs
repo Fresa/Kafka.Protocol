@@ -4,10 +4,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using Kafka.Protocol.Generator.Helpers;
-using Kafka.Protocol.Generator.Helpers.Definitions;
-using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
-using Kafka.Protocol.Generator.Helpers.Extensions;
+using Kafka.Protocol.SourceGenerator.Definitions;
+using Kafka.Protocol.SourceGenerator.Definitions.Messages;
+using Kafka.Protocol.SourceGenerator.Extensions;
 using Kafka.Protocol.SourceGenerator.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -414,7 +413,7 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
         SourceProductionContext sourceProductionContext,
         (string[] PrimitiveTypeNames, ImmutableArray<Message> Headers) input)
     {
-        Generator.Helpers.FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
+        FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
         foreach (var header in input.Headers)
         {
             var versionRange = VersionRange.Parse(header.ValidVersions);
@@ -518,7 +517,7 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
     private static void GenerateMessages(SourceProductionContext sourceProductionContext,
             (string[] PrimitiveTypeNames, ImmutableArray<Message> Messages) input)
     {
-        Generator.Helpers.FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
+        FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
         foreach (var message in input.Messages)
         {
             if (!message.IsMessage())
@@ -640,7 +639,7 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
     private static void GenerateData(SourceProductionContext sourceProductionContext,
             (string[] PrimitiveTypeNames, ImmutableArray<Message> Data) input)
     {
-        Generator.Helpers.FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
+        FieldExtensions.SetPrimitiveTypeNames(input.PrimitiveTypeNames);
         foreach (var data in input.Data)
         {
             if (!data.IsData())

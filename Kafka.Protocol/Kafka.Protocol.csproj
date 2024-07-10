@@ -38,7 +38,6 @@
     </PackageReference>
     <PackageReference Include="System.IO.Pipelines" Version="4.5.3" />
     <ProjectReference Include="..\Kafka.Protocol.SourceGenerator\Kafka.Protocol.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
-    <ProjectReference Include="..\Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,22 +49,9 @@
     <AdditionalFiles Include="../Kafka.Protocol.MessageDefinitionsDownloader/MessageDefinitions/*.json">
       <LinkBase>MessageDefinitions</LinkBase>
     </AdditionalFiles>
-    <Compile Remove="KafkaProtocol.cs" />
 	<AdditionalFiles Include="../Kafka.Protocol.Generator/ProtocolSpecifications/Apache Kafka.html">
   	  <LinkBase>ProtocolSpecifications</LinkBase>
 	</AdditionalFiles>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="KafkaProtocol.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="KafkaProtocol.tt">
-      <OutputFilePath>..\Kafka.Protocol\</OutputFilePath>
-      <LastGenOutput>KafkaProtocol.cs</LastGenOutput>
-      <Generator>TextTemplatingFileGenerator</Generator>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

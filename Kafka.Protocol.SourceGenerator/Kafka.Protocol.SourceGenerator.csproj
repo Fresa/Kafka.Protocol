@@ -13,6 +13,12 @@
 
 		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
 	</PropertyGroup>
+	
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Kafka.Protocol.SourceGenerator.UnitTests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" PrivateAssets="all" GeneratePathProperty="true" />
@@ -22,7 +28,7 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" PrivateAssets="all" />
 		<PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
-		<PackageReference Include="System.Text.Json" Version="8.0.3" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
+		<PackageReference Include="System.Text.Json" Version="8.0.4" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" PrivateAssets="all" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.15" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
 	</ItemGroup>
@@ -34,10 +40,6 @@
 		<AdditionalFiles Include="../Kafka.Protocol.Generator/ProtocolSpecifications/Apache Kafka.html">
 			<LinkBase>ProtocolSpecifications</LinkBase>
 		</AdditionalFiles>
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj" OutputItemType="Analyzer" PrivateAssets="all" />
 	</ItemGroup>
 
 	<Target Name="GetDependencyTargetPaths">

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
 using Test.It.With.XUnit;
 using Xunit;
 

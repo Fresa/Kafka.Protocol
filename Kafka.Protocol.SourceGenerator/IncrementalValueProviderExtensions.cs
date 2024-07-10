@@ -1,5 +1,5 @@
 ﻿using System.Collections.Immutable;
-using Kafka.Protocol.Generator.Helpers.Definitions.Messages;
+using Kafka.Protocol.SourceGenerator.Definitions.Messages;
 using Microsoft.CodeAnalysis;
 
 namespace Kafka.Protocol.SourceGenerator;
