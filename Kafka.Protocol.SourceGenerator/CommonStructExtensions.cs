@@ -15,7 +15,7 @@ internal static class CommonStructExtensions
              """) ?? string.Empty;
     }
 
-    internal static string GenerateCommonStruct(this CommonStruct commonStruct)
+    private static string GenerateCommonStruct(this CommonStruct commonStruct)
     {
         var versionRange = VersionRange.Parse(commonStruct.Versions);
         var flexibleVersionRange = VersionRange.Parse(commonStruct.Message.FlexibleVersions);

@@ -1,6 +1,6 @@
 ﻿namespace Kafka.Protocol.SourceGenerator.Definitions.Messages
 {
-    public static class MessageExtensions
+    internal static class MessageExtensions
     {
         public static bool IsResponse(this Message message)
         {

@@ -1,8 +1,8 @@
 namespace Kafka.Protocol.SourceGenerator.Extensions
 {
-    public static class TypeExtensions
+    internal static class TypeExtensions
     {
-        private static readonly Dictionary<Type, string> TypeAliasMapping = new Dictionary<Type, string>
+        private static readonly Dictionary<Type, string> TypeAliasMapping = new()
         {
             { typeof(bool), "bool" },
             { typeof(short), "short" },
@@ -18,7 +18,7 @@ namespace Kafka.Protocol.SourceGenerator.Extensions
             { typeof(double), "double" }
         };
         
-        public static string GetPrettyName(this Type type)
+        public static string GetPrettyName(this Type? type)
         {
             if (type == null)
             {
@@ -55,16 +55,6 @@ namespace Kafka.Protocol.SourceGenerator.Extensions
                 .Select(GetPrettyName);
 
             return $"{prettyName}<{string.Join(", ", genericArguments)}>";
-        }
-
-        internal static Type ToArrayType(this Type type, bool isArray)
-        {
-            if (isArray || type.IsArray)
-            {
-                return type.MakeArrayType();
-            }
-
-            return type;
         }
     }
 }

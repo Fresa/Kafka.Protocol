@@ -2,7 +2,7 @@
 
 namespace Kafka.Protocol.SourceGenerator.Definitions
 {
-    public static class PrimitiveTypeExtensions
+    internal static class PrimitiveTypeExtensions
     {
         public static string GetClassName(this PrimitiveType primitiveType)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Kafka.Protocol.SourceGenerator.Definitions
 {
-    public class VersionRange
+    internal sealed class VersionRange
     {
         public VersionRange()
         {

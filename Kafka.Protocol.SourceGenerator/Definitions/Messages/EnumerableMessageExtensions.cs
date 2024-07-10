@@ -1,6 +1,6 @@
 ﻿namespace Kafka.Protocol.SourceGenerator.Definitions.Messages
 {
-    public static class EnumerableMessageExtensions
+    internal static class EnumerableMessageExtensions
     {
         public static bool TryGetResponseMessageDefinitionFrom(
             this IEnumerable<Message> messageDefinitions,
@@ -19,12 +19,6 @@
                     message.IsResponse());
             return true;
         }
-
-        public static IEnumerable<Message> AddReferencesToFields(
-            this IEnumerable<Message> messageDefinitions) =>
-            messageDefinitions
-                .Select(messageDefinition => 
-                    messageDefinition.AddReferencesToFields());
 
         public static Message AddReferencesToFields(
             this Message messageDefinition)

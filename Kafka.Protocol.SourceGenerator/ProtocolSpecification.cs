@@ -1,15 +1,14 @@
 ﻿using HtmlAgilityPack;
 using Kafka.Protocol.SourceGenerator.Definitions;
-using Kafka.Protocol.SourceGenerator.Definitions.Messages;
 using Kafka.Protocol.SourceGenerator.Extensions;
 
 namespace Kafka.Protocol.SourceGenerator
 {
-    public class ProtocolSpecification
+    internal sealed class ProtocolSpecification
     {
         private readonly HtmlDocument _definition;
 
-        public static ProtocolSpecification Load(HtmlDocument definition)
+        internal static ProtocolSpecification Load(HtmlDocument definition)
         {
             return new ProtocolSpecification(definition);
         }
@@ -62,8 +61,6 @@ namespace Kafka.Protocol.SourceGenerator
 
         public IDictionary<int, ErrorCode> ErrorCodes { get; }
 
-        public IDictionary<int, Message> Messages { get; } = new Dictionary<int, Message>();
-        
         private const string ProtocolErrorCodesXPath = "//*[contains(@id,'protocol_error_codes')]/..";
 
         private IDictionary<int, ErrorCode> ParseErrorCodes()

@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using System.Threading;
-using Kafka.Protocol.SourceGenerator.Definitions;
+﻿using Kafka.Protocol.SourceGenerator.Definitions;
 using Kafka.Protocol.SourceGenerator.Definitions.Messages;
 using Kafka.Protocol.SourceGenerator.Extensions;
 
@@ -11,13 +9,13 @@ internal static class FieldExtensions
     private const string ArrayTypeCharacter = "[]";
 
     private static readonly string[] ReservedFieldNames =
-    {
-            "Version"
-        };
+    [
+        "Version"
+    ];
 
     private static string[]? _primitiveTypeNames;
 
-    public static void SetPrimitiveTypeNames(string[] typeNames)
+    internal static void SetPrimitiveTypeNames(string[] typeNames)
     {
         _primitiveTypeNames = typeNames
             .Append("RecordBatch")
@@ -25,19 +23,19 @@ internal static class FieldExtensions
             .ToArray();
     }
 
-    public static bool IsArray(this Field field)
+    private static bool IsArray(this Field field)
     {
         return field.Type.StartsWith(ArrayTypeCharacter);
     }
 
-    public static bool IsDictionary(this Field field)
+    private static bool IsDictionary(this Field field)
     {
         return field.Fields?.Any(subField => subField.MapKey) ?? false;
     }
 
-    public static bool TryGetMapKeyField(
+    private static bool TryGetMapKeyField(
         this Field field,
-        out Field mapKeyField)
+        out Field? mapKeyField)
     {
         mapKeyField = field.Fields?
             .FirstOrDefault(subField => subField.MapKey);
@@ -45,10 +43,10 @@ internal static class FieldExtensions
         return mapKeyField != default;
     }
 
-    public static string GetName(this Field field) =>
+    private static string GetName(this Field field) =>
         field.Name + (field.IsArray() ? "Collection" : "");
 
-    public static string GetFullTypeName(this Field field)
+    private static string GetFullTypeName(this Field field)
     {
         var type = field.GetNonNullableFullTypeName();
         if (!field.IsNullable())
@@ -70,20 +68,20 @@ internal static class FieldExtensions
         return field.IsArray() ? $"Array<{name}>" : name;
     }
 
-    public static string GetNullableFullTypeName(this Field field) =>
+    private static string GetNullableFullTypeName(this Field field) =>
         field.GetNonNullableFullTypeName() + (field.IsNullable() ? "?" : "");
 
-    public static string GetTypeName(this Field field)
+    private static string GetTypeName(this Field field)
     {
         return GetFullTypeName(field).Split('.').Last();
     }
 
-    public static string GetNullableSign(this Field field)
+    internal static string GetNullableSign(this Field field)
     {
         return field.IsNullable() ? "?" : "";
     }
 
-    public static string GetFullTypeNameWithoutArrayCharacters(this Field field)
+    internal static string GetFullTypeNameWithoutArrayCharacters(this Field field)
     {
         var typeName = field.Type;
         if (field.IsArray())
@@ -110,12 +108,12 @@ internal static class FieldExtensions
         return typeName.FirstCharacterToUpperCase();
     }
 
-    public static bool IsNullable(this Field field)
+    private static bool IsNullable(this Field field)
     {
         return !string.IsNullOrEmpty(field.NullableVersions);
     }
 
-    public static string GetFieldName(this Field field, string parentFieldTypeName = "")
+    internal static string GetFieldName(this Field field, string parentFieldTypeName = "")
     {
         var fullTypeName = field.GetFullTypeNameWithoutArrayCharacters();
         var name = field.GetName().FirstCharacterToUpperCase();
@@ -127,20 +125,16 @@ internal static class FieldExtensions
             : name;
     }
 
-    public static string GetPropertyName(this Field field) =>
+    internal static string GetPropertyName(this Field field) =>
         $"_{field.GetName().FirstCharacterToLowerCase()}";
 
-    public static bool IsCompactable(this Field field) =>
-        field.IsArray() || field.GetTypeName().Equals("string",
-            StringComparison.CurrentCultureIgnoreCase);
-
-    public static IEnumerable<Field> GetTaggedFields(this Field field) =>
+    private static IEnumerable<Field> GetTaggedFields(this Field field) =>
         field.Fields?
             .Where(childField => childField.Tag.HasValue)
             .OrderBy(childField => childField.Tag) ??
         Enumerable.Empty<Field>();
 
-    public static bool IsPrimitiveType(this Field field)
+    private static bool IsPrimitiveType(this Field field)
     {
         if (_primitiveTypeNames == null)
             throw new InvalidOperationException(
@@ -150,20 +144,6 @@ internal static class FieldExtensions
         return _primitiveTypeNames
             .Any(primitiveTypeName =>
                 typeName == primitiveTypeName);
-    }
-
-    public static string GetDefaultValue(this Field field)
-    {
-        if (field.IsNullable() && field.Fields != null)
-            return $"new {field.GetFullTypeName()}()";
-        if (field.Default != null)
-            return $"new {field.GetFullTypeName()}({(field.Default == string.Empty ? "string.Empty" : field.Default)})";
-        if (field.IsDictionary() || field.IsPrimitiveType())
-            return $"{field.GetFullTypeName()}.Default";
-        if (field.IsArray())
-            return $"Array.Empty<{field.GetFullTypeNameWithoutArrayCharacters()}>";
-
-        return "default!";
     }
 
     internal static string GenerateSizeOf(
