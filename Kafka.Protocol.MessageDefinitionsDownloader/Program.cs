@@ -15,7 +15,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                 path = args.First();
                 if (!Directory.Exists(path))
                 {
-                    Console.Error.WriteLine($"'{path}' is not a valid directory");
+                    await Console.Error.WriteLineAsync($"'{path}' is not a valid directory")
+                        .ConfigureAwait(false);
                     return;
                 }
             }
