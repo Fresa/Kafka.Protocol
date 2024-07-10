@@ -524,7 +524,7 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
                 throw new InvalidOperationException(
                     $"Expected message but got type {message.Type}");
 
-            var hasResponse = input.Messages.TryGetResponseMessageDefinitionFrom(message, out var responseMessageDefinition);
+            input.Messages.TryGetResponseMessageDefinitionFrom(message, out var responseMessageDefinition);
             var versionRange = VersionRange.Parse(message.ValidVersions);
             var flexibleVersionRange = VersionRange.Parse(message.FlexibleVersions);
 
@@ -545,7 +545,7 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
                         // ReSharper disable MemberHidesStaticFromOuterClass FromReaderAsync will cause a lot of these warnings
                         namespace {{Namespace}}
                         {
-                            public class {{message.Name}} : Message{{(hasResponse ? $", IRespond<{responseMessageDefinition.Name}>" : "")}} 
+                            public class {{message.Name}} : Message{{(responseMessageDefinition is not null ? $", IRespond<{responseMessageDefinition.Name}>" : "")}} 
                             {
                       	        public {{message.Name}}(Int16 version) 
                       	        {
@@ -624,7 +624,7 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
                               
                                 {{message.CommonStructs.GenerateCommonStructs()}}
                               
-                      	        {{(hasResponse ?
+                      	        {{(responseMessageDefinition is not null ?
                                       $"""
                                           public {responseMessageDefinition.Name} Respond()
                                               => new {responseMessageDefinition.Name}(Version);

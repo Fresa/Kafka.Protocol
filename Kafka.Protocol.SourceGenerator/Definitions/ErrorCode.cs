@@ -2,9 +2,9 @@
 {
     public class ErrorCode
     {
-        public string Error { get; internal set; }
-        public int Code { get; internal set; }
-        public bool Retriable { get; internal set; }
-        public string? Description { get; internal set; }
+        public string Error { get; init; } = default!;
+        public int Code { get; internal init; }
+        public bool Retriable { get; internal init; }
+        public string? Description { get; internal init; }
     }
 }

@@ -1,11 +1,13 @@
-﻿namespace Kafka.Protocol.SourceGenerator.Definitions.Messages
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Kafka.Protocol.SourceGenerator.Definitions.Messages
 {
     internal static class EnumerableMessageExtensions
     {
         public static bool TryGetResponseMessageDefinitionFrom(
             this IEnumerable<Message> messageDefinitions,
             Message messageRequest,
-            out Message? messageResponse)
+            [NotNullWhen(true)] out Message? messageResponse)
         {
             if (messageRequest.IsResponse())
             {

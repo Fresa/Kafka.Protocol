@@ -1,4 +1,5 @@
-﻿using Kafka.Protocol.SourceGenerator.Definitions;
+﻿using System.Diagnostics.CodeAnalysis;
+using Kafka.Protocol.SourceGenerator.Definitions;
 using Kafka.Protocol.SourceGenerator.Definitions.Messages;
 using Kafka.Protocol.SourceGenerator.Extensions;
 
@@ -35,7 +36,7 @@ internal static class FieldExtensions
 
     private static bool TryGetMapKeyField(
         this Field field,
-        out Field? mapKeyField)
+        [NotNullWhen(true)] out Field? mapKeyField)
     {
         mapKeyField = field.Fields?
             .FirstOrDefault(subField => subField.MapKey);

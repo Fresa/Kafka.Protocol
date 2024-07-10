@@ -2,7 +2,7 @@
 {
     public class PrimitiveType
     {
-        public string Type { get; internal set; }
-        public string? Description { get; internal set; }
+        public string Type { get; internal init; } = default!;
+        public string? Description { get; internal init; }
     }
 }
