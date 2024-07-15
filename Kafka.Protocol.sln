@@ -15,6 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.MessageDefin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE41D0DC-B682-4692-ADFB-789A405916B9}"
 	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
 		.github\workflows\ci.yml = .github\workflows\ci.yml
 		.github\CODEOWNERS = .github\CODEOWNERS
 		README.md = README.md
