@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 10
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -27,6 +27,10 @@ jobs:
         run: dotnet build -c Release
       - name: Test
         run: dotnet test -c Release --no-build --verbosity normal
+      - name: Ensure Generated Code Committed
+        shell: bash  
+        run: |
+          git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code
 
   release:
     name: Create Release

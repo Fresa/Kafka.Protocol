@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using FluentAssertions;
-using Kafka.Protocol.Generator.Helpers.Extensions;
+using Kafka.Protocol.SourceGenerator.Extensions;
 using Test.It.With.XUnit;
 using Xunit;
 using Type = System.Type;
 
-namespace Kafka.Protocol.Generator.Helpers.Tests
+namespace Kafka.Protocol.SourceGenerator.UnitTests
 {
     public partial class Given_type_extensions
     {

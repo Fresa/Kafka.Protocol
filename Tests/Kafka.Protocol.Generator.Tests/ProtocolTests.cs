@@ -3,11 +3,11 @@ using System.IO;
 using System.Linq;
 using FluentAssertions;
 using HtmlAgilityPack;
-using Kafka.Protocol.Generator.Helpers.Definitions;
+using Kafka.Protocol.SourceGenerator.Definitions;
 using Test.It.With.XUnit;
 using Xunit;
 
-namespace Kafka.Protocol.Generator.Helpers.Tests
+namespace Kafka.Protocol.SourceGenerator.UnitTests
 {
     public partial class Given_an_apache_kafka_definition_document
     {       

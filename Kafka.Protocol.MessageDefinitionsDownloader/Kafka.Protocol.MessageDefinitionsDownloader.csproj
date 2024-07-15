@@ -11,14 +11,4 @@
     <PackageReference Include="Octokit" Version="0.32.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Kafka.Protocol.Generator.Helpers\Kafka.Protocol.Generator.Helpers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\9.0.1\lib\netstandard1.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

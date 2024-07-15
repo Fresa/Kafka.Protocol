@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>12</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<GeneratedFolder>Generated</GeneratedFolder>
+		<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+		<IsRoslynComponent>true</IsRoslynComponent>
+
+		<GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Kafka.Protocol.SourceGenerator.UnitTests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" PrivateAssets="all" GeneratePathProperty="true" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" PrivateAssets="all" />
+		<PackageReference Include="PolySharp" Version="1.14.1">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
+		<PackageReference Include="System.Text.Json" Version="8.0.4" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
+		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" PrivateAssets="all" />
+		<PackageReference Include="HtmlAgilityPack" Version="1.11.15" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="../Kafka.Protocol.MessageDefinitionsDownloader/MessageDefinitions/*.json">
+			<LinkBase>MessageDefinitions</LinkBase>
+		</AdditionalFiles>
+		<AdditionalFiles Include="../Kafka.Protocol.Generator/ProtocolSpecifications/Apache Kafka.html">
+			<LinkBase>ProtocolSpecifications</LinkBase>
+		</AdditionalFiles>
+	</ItemGroup>
+
+	<Target Name="GetDependencyTargetPaths">
+		<ItemGroup>
+			<TargetPathWithTargetPlatformMoniker Include="$(PkgHtmlAgilityPack)\lib\netstandard2.0\HtmlAgilityPack.dll" IncludeRuntimeDependency="false" />
+			<TargetPathWithTargetPlatformMoniker Include="$(PkgSystem_Text_Json)\lib\netstandard2.0\System.Text.Json.dll" IncludeRuntimeDependency="false" />
+			<TargetPathWithTargetPlatformMoniker Include="$(PkgSystem_Text_Encodings_Web)\lib\netstandard2.0\System.Text.Encodings.Web.dll" IncludeRuntimeDependency="false" />
+			<TargetPathWithTargetPlatformMoniker Include="$(PkgMicrosoft_Bcl_AsyncInterfaces)\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll" IncludeRuntimeDependency="false" />
+		</ItemGroup>
+	</Target>
+</Project>
