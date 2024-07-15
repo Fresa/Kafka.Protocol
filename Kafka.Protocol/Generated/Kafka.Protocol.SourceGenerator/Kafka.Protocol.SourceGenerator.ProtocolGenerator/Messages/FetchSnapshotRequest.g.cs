@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public FetchSnapshotRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"FetchSnapshotRequest does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"FetchSnapshotRequest does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(59);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -331,7 +331,13 @@ namespace Kafka.Protocol
 
                 private Tags.TagSection CreateTagSection()
                 {
-                    return new Tags.TagSection();
+                    var tags = new List<Tags.TaggedField>();
+                    if (Version >= 1 && _replicaDirectoryIdIsSet)
+                    {
+                        tags.Add(new Tags.TaggedField { Tag = 0, Field = _replicaDirectoryId });
+                    }
+
+                    return new Tags.TagSection(tags.ToArray());
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
@@ -350,6 +356,18 @@ namespace Kafka.Protocol
                         {
                             switch (tag.Tag)
                             {
+                                case 0:
+                                    if (instance.Version >= 1)
+                                        instance.ReplicaDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                                    else
+                                        throw new InvalidOperationException($"Field ReplicaDirectoryId is not supported for version {instance.Version}");
+                                {
+                                    var size = instance._replicaDirectoryId.GetSize(true);
+                                    if (size != tag.Length)
+                                        throw new CorruptMessageException($"Tagged field ReplicaDirectoryId read length {tag.Length} but had actual length of {size}");
+                                }
+
+                                    break;
                                 default:
                                     throw new InvalidOperationException($"Tag '{tag.Tag}' for PartitionSnapshot is unknown");
                             }
@@ -560,6 +578,34 @@ namespace Kafka.Protocol
                 public PartitionSnapshot WithPosition(Int64 position)
                 {
                     Position = position;
+                    return this;
+                }
+
+                private bool _replicaDirectoryIdIsSet;
+                private Uuid _replicaDirectoryId = Uuid.Default;
+                /// <summary>
+                /// <para>The directory id of the follower fetching</para>
+                /// <para>Versions: 1+</para>
+                /// </summary>
+                public Uuid ReplicaDirectoryId
+                {
+                    get => _replicaDirectoryId;
+                    private set
+                    {
+                        if (Version >= 1 == false)
+                            throw new UnsupportedVersionException($"ReplicaDirectoryId does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                        _replicaDirectoryId = value;
+                        _replicaDirectoryIdIsSet = true;
+                    }
+                }
+
+                /// <summary>
+                /// <para>The directory id of the follower fetching</para>
+                /// <para>Versions: 1+</para>
+                /// </summary>
+                public PartitionSnapshot WithReplicaDirectoryId(Uuid replicaDirectoryId)
+                {
+                    ReplicaDirectoryId = replicaDirectoryId;
                     return this;
                 }
             }

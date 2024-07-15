@@ -18,16 +18,16 @@ namespace Kafka.Protocol
         public BeginQuorumEpochResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"BeginQuorumEpochResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"BeginQuorumEpochResponse does not support version {version}. Valid versions are: 0-1");
             Version = version;
-            IsFlexibleVersion = false;
+            IsFlexibleVersion = version >= 1;
         }
 
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(53);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -42,7 +42,13 @@ namespace Kafka.Protocol
 
         private Tags.TagSection CreateTagSection()
         {
-            return new Tags.TagSection();
+            var tags = new List<Tags.TaggedField>();
+            if (Version >= 1 && _nodeEndpointsCollectionIsSet)
+            {
+                tags.Add(new Tags.TaggedField { Tag = 0, Field = _nodeEndpointsCollection });
+            }
+
+            return new Tags.TagSection(tags.ToArray());
         }
 
         internal override int GetSize() => _errorCode.GetSize(IsFlexibleVersion) + _topicsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
@@ -58,6 +64,18 @@ namespace Kafka.Protocol
                 {
                     switch (tag.Tag)
                     {
+                        case 0:
+                            if (instance.Version >= 1)
+                                instance.NodeEndpointsCollection = await Map<Int32, NodeEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => NodeEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
+                            else
+                                throw new InvalidOperationException($"Field NodeEndpointsCollection is not supported for version {instance.Version}");
+                        {
+                            var size = instance._nodeEndpointsCollection.GetSize(true);
+                            if (size != tag.Length)
+                                throw new CorruptMessageException($"Tagged field NodeEndpointsCollection read length {tag.Length} but had actual length of {size}");
+                        }
+
+                            break;
                         default:
                             throw new InvalidOperationException($"Tag '{tag.Tag}' for BeginQuorumEpochResponse is unknown");
                     }
@@ -138,7 +156,7 @@ namespace Kafka.Protocol
             internal TopicData(Int16 version)
             {
                 Version = version;
-                IsFlexibleVersion = false;
+                IsFlexibleVersion = version >= 1;
             }
 
             internal Int16 Version { get; }
@@ -244,7 +262,7 @@ namespace Kafka.Protocol
                 internal PartitionData(Int16 version)
                 {
                     Version = version;
-                    IsFlexibleVersion = false;
+                    IsFlexibleVersion = version >= 1;
                 }
 
                 internal Int16 Version { get; }
@@ -386,6 +404,182 @@ namespace Kafka.Protocol
                     LeaderEpoch = leaderEpoch;
                     return this;
                 }
+            }
+        }
+
+        private bool _nodeEndpointsCollectionIsSet;
+        private Map<Int32, NodeEndpoint> _nodeEndpointsCollection = Map<Int32, NodeEndpoint>.Default;
+        /// <summary>
+        /// <para>Endpoints for all leaders enumerated in PartitionData</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public Map<Int32, NodeEndpoint> NodeEndpointsCollection
+        {
+            get => _nodeEndpointsCollection;
+            private set
+            {
+                if (Version >= 1 == false)
+                    throw new UnsupportedVersionException($"NodeEndpointsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                _nodeEndpointsCollection = value;
+                _nodeEndpointsCollectionIsSet = true;
+            }
+        }
+
+        /// <summary>
+        /// <para>Endpoints for all leaders enumerated in PartitionData</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public BeginQuorumEpochResponse WithNodeEndpointsCollection(params Func<NodeEndpoint, NodeEndpoint>[] createFields)
+        {
+            NodeEndpointsCollection = createFields.Select(createField => createField(new NodeEndpoint(Version))).ToDictionary(field => field.NodeId);
+            return this;
+        }
+
+        public delegate NodeEndpoint CreateNodeEndpoint(NodeEndpoint field);
+        /// <summary>
+        /// <para>Endpoints for all leaders enumerated in PartitionData</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public BeginQuorumEpochResponse WithNodeEndpointsCollection(IEnumerable<CreateNodeEndpoint> createFields)
+        {
+            NodeEndpointsCollection = createFields.Select(createField => createField(new NodeEndpoint(Version))).ToDictionary(field => field.NodeId);
+            return this;
+        }
+
+        public class NodeEndpoint : ISerialize
+        {
+            internal NodeEndpoint(Int16 version)
+            {
+                Version = version;
+                IsFlexibleVersion = version >= 1;
+            }
+
+            internal Int16 Version { get; }
+            internal bool IsFlexibleVersion { get; }
+
+            private Tags.TagSection CreateTagSection()
+            {
+                return new Tags.TagSection();
+            }
+
+            int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+            internal int GetSize(bool _) => (Version >= 1 ? _nodeId.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _host.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _port.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal static async ValueTask<NodeEndpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+            {
+                var instance = new NodeEndpoint(version);
+                if (instance.Version >= 1)
+                    instance.NodeId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.Port = await UInt16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.IsFlexibleVersion)
+                {
+                    var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+                    await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+                    {
+                        switch (tag.Tag)
+                        {
+                            default:
+                                throw new InvalidOperationException($"Tag '{tag.Tag}' for NodeEndpoint is unknown");
+                        }
+                    }
+                }
+
+                return instance;
+            }
+
+            ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+            internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+            {
+                if (Version >= 1)
+                    await _nodeId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (IsFlexibleVersion)
+                {
+                    await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+                }
+            }
+
+            private Int32 _nodeId = Int32.Default;
+            /// <summary>
+            /// <para>The ID of the associated node</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Int32 NodeId
+            {
+                get => _nodeId;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"NodeId does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _nodeId = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The ID of the associated node</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public NodeEndpoint WithNodeId(Int32 nodeId)
+            {
+                NodeId = nodeId;
+                return this;
+            }
+
+            private String _host = String.Default;
+            /// <summary>
+            /// <para>The node's hostname</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public String Host
+            {
+                get => _host;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _host = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The node's hostname</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public NodeEndpoint WithHost(String host)
+            {
+                Host = host;
+                return this;
+            }
+
+            private UInt16 _port = UInt16.Default;
+            /// <summary>
+            /// <para>The node's port</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public UInt16 Port
+            {
+                get => _port;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _port = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The node's port</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public NodeEndpoint WithPort(UInt16 port)
+            {
+                Port = port;
+                return this;
             }
         }
     }

@@ -18,16 +18,16 @@ namespace Kafka.Protocol
         public BeginQuorumEpochRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"BeginQuorumEpochRequest does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"BeginQuorumEpochRequest does not support version {version}. Valid versions are: 0-1");
             Version = version;
-            IsFlexibleVersion = false;
+            IsFlexibleVersion = version >= 1;
         }
 
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(53);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,12 +45,16 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _clusterId.GetSize(IsFlexibleVersion) + _topicsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _clusterId.GetSize(IsFlexibleVersion) + (Version >= 1 ? _voterId.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (Version >= 1 ? _leaderEndpointsCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<BeginQuorumEpochRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new BeginQuorumEpochRequest(version);
             instance.ClusterId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.TopicsCollection = await Array<TopicData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => TopicData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.LeaderEndpointsCollection = await Map<String, LeaderEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => LeaderEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -70,7 +74,11 @@ namespace Kafka.Protocol
         internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
         {
             await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _leaderEndpointsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -98,6 +106,32 @@ namespace Kafka.Protocol
         public BeginQuorumEpochRequest WithClusterId(String? clusterId)
         {
             ClusterId = clusterId;
+            return this;
+        }
+
+        private Int32 _voterId = new Int32(-1);
+        /// <summary>
+        /// <para>The replica id of the voter receiving the request</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public Int32 VoterId
+        {
+            get => _voterId;
+            private set
+            {
+                _voterId = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The replica id of the voter receiving the request</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public BeginQuorumEpochRequest WithVoterId(Int32 voterId)
+        {
+            VoterId = voterId;
             return this;
         }
 
@@ -138,7 +172,7 @@ namespace Kafka.Protocol
             internal TopicData(Int16 version)
             {
                 Version = version;
-                IsFlexibleVersion = false;
+                IsFlexibleVersion = version >= 1;
             }
 
             internal Int16 Version { get; }
@@ -185,7 +219,7 @@ namespace Kafka.Protocol
 
             private String _topicName = String.Default;
             /// <summary>
-            /// <para>The topic name.</para>
+            /// <para>The topic name</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String TopicName
@@ -198,7 +232,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name.</para>
+            /// <para>The topic name</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithTopicName(String topicName)
@@ -244,7 +278,7 @@ namespace Kafka.Protocol
                 internal PartitionData(Int16 version)
                 {
                     Version = version;
-                    IsFlexibleVersion = false;
+                    IsFlexibleVersion = version >= 1;
                 }
 
                 internal Int16 Version { get; }
@@ -256,11 +290,13 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _leaderId.GetSize(IsFlexibleVersion) + _leaderEpoch.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + (Version >= 1 ? _voterDirectoryId.GetSize(IsFlexibleVersion) : 0) + _leaderId.GetSize(IsFlexibleVersion) + _leaderEpoch.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<PartitionData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new PartitionData(version);
                     instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (instance.Version >= 1)
+                        instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.LeaderId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
@@ -283,6 +319,8 @@ namespace Kafka.Protocol
                 internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
                 {
                     await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (Version >= 1)
+                        await _voterDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _leaderId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (IsFlexibleVersion)
@@ -293,7 +331,7 @@ namespace Kafka.Protocol
 
                 private Int32 _partitionIndex = Int32.Default;
                 /// <summary>
-                /// <para>The partition index.</para>
+                /// <para>The partition index</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 PartitionIndex
@@ -306,12 +344,36 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The partition index.</para>
+                /// <para>The partition index</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithPartitionIndex(Int32 partitionIndex)
                 {
                     PartitionIndex = partitionIndex;
+                    return this;
+                }
+
+                private Uuid _voterDirectoryId = Uuid.Default;
+                /// <summary>
+                /// <para>The directory id of the receiving replica</para>
+                /// <para>Versions: 1+</para>
+                /// </summary>
+                public Uuid VoterDirectoryId
+                {
+                    get => _voterDirectoryId;
+                    private set
+                    {
+                        _voterDirectoryId = value;
+                    }
+                }
+
+                /// <summary>
+                /// <para>The directory id of the receiving replica</para>
+                /// <para>Versions: 1+</para>
+                /// </summary>
+                public PartitionData WithVoterDirectoryId(Uuid voterDirectoryId)
+                {
+                    VoterDirectoryId = voterDirectoryId;
                     return this;
                 }
 
@@ -362,6 +424,178 @@ namespace Kafka.Protocol
                     LeaderEpoch = leaderEpoch;
                     return this;
                 }
+            }
+        }
+
+        private Map<String, LeaderEndpoint> _leaderEndpointsCollection = Map<String, LeaderEndpoint>.Default;
+        /// <summary>
+        /// <para>Endpoints for the leader</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public Map<String, LeaderEndpoint> LeaderEndpointsCollection
+        {
+            get => _leaderEndpointsCollection;
+            private set
+            {
+                _leaderEndpointsCollection = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>Endpoints for the leader</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public BeginQuorumEpochRequest WithLeaderEndpointsCollection(params Func<LeaderEndpoint, LeaderEndpoint>[] createFields)
+        {
+            LeaderEndpointsCollection = createFields.Select(createField => createField(new LeaderEndpoint(Version))).ToDictionary(field => field.Name);
+            return this;
+        }
+
+        public delegate LeaderEndpoint CreateLeaderEndpoint(LeaderEndpoint field);
+        /// <summary>
+        /// <para>Endpoints for the leader</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public BeginQuorumEpochRequest WithLeaderEndpointsCollection(IEnumerable<CreateLeaderEndpoint> createFields)
+        {
+            LeaderEndpointsCollection = createFields.Select(createField => createField(new LeaderEndpoint(Version))).ToDictionary(field => field.Name);
+            return this;
+        }
+
+        public class LeaderEndpoint : ISerialize
+        {
+            internal LeaderEndpoint(Int16 version)
+            {
+                Version = version;
+                IsFlexibleVersion = version >= 1;
+            }
+
+            internal Int16 Version { get; }
+            internal bool IsFlexibleVersion { get; }
+
+            private Tags.TagSection CreateTagSection()
+            {
+                return new Tags.TagSection();
+            }
+
+            int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
+            internal int GetSize(bool _) => (Version >= 1 ? _name.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _host.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _port.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal static async ValueTask<LeaderEndpoint> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+            {
+                var instance = new LeaderEndpoint(version);
+                if (instance.Version >= 1)
+                    instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.Port = await UInt16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.IsFlexibleVersion)
+                {
+                    var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
+                    await foreach (var tag in tagSection.WithCancellation(cancellationToken).ConfigureAwait(false))
+                    {
+                        switch (tag.Tag)
+                        {
+                            default:
+                                throw new InvalidOperationException($"Tag '{tag.Tag}' for LeaderEndpoint is unknown");
+                        }
+                    }
+                }
+
+                return instance;
+            }
+
+            ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
+            internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
+            {
+                if (Version >= 1)
+                    await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (IsFlexibleVersion)
+                {
+                    await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
+                }
+            }
+
+            private String _name = String.Default;
+            /// <summary>
+            /// <para>The name of the endpoint</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public String Name
+            {
+                get => _name;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _name = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The name of the endpoint</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public LeaderEndpoint WithName(String name)
+            {
+                Name = name;
+                return this;
+            }
+
+            private String _host = String.Default;
+            /// <summary>
+            /// <para>The node's hostname</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public String Host
+            {
+                get => _host;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"Host does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _host = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The node's hostname</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public LeaderEndpoint WithHost(String host)
+            {
+                Host = host;
+                return this;
+            }
+
+            private UInt16 _port = UInt16.Default;
+            /// <summary>
+            /// <para>The node's port</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public UInt16 Port
+            {
+                get => _port;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"Port does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _port = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The node's port</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public LeaderEndpoint WithPort(UInt16 port)
+            {
+                Port = port;
+                return this;
             }
         }
 

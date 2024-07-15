@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public BrokerRegistrationResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"BrokerRegistrationResponse does not support version {version}. Valid versions are: 0-3");
+                throw new UnsupportedVersionException($"BrokerRegistrationResponse does not support version {version}. Valid versions are: 0-4");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(62);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(3);
+        public static readonly Int16 MaxVersion = Int16.From(4);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
