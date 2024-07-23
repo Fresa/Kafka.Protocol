@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ApiVersionsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ApiVersionsResponse does not support version {version}. Valid versions are: 0-3");
+                throw new UnsupportedVersionException($"ApiVersionsResponse does not support version {version}. Valid versions are: 0-4");
             Version = version;
             IsFlexibleVersion = version >= 3;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(18);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(3);
+        public static readonly Int16 MaxVersion = Int16.From(4);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -361,7 +361,7 @@ namespace Kafka.Protocol
         private bool _supportedFeaturesCollectionIsSet;
         private Map<String, SupportedFeatureKey> _supportedFeaturesCollection = Map<String, SupportedFeatureKey>.Default;
         /// <summary>
-        /// <para>Features supported by the broker.</para>
+        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
         /// <para>Versions: 3+</para>
         /// </summary>
         public Map<String, SupportedFeatureKey> SupportedFeaturesCollection
@@ -375,7 +375,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Features supported by the broker.</para>
+        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
         /// <para>Versions: 3+</para>
         /// </summary>
         public ApiVersionsResponse WithSupportedFeaturesCollection(params Func<SupportedFeatureKey, SupportedFeatureKey>[] createFields)
@@ -386,7 +386,7 @@ namespace Kafka.Protocol
 
         public delegate SupportedFeatureKey CreateSupportedFeatureKey(SupportedFeatureKey field);
         /// <summary>
-        /// <para>Features supported by the broker.</para>
+        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
         /// <para>Versions: 3+</para>
         /// </summary>
         public ApiVersionsResponse WithSupportedFeaturesCollection(IEnumerable<CreateSupportedFeatureKey> createFields)

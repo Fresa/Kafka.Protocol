@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public BrokerRegistrationRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"BrokerRegistrationRequest does not support version {version}. Valid versions are: 0-3");
+                throw new UnsupportedVersionException($"BrokerRegistrationRequest does not support version {version}. Valid versions are: 0-4");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(62);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(3);
+        public static readonly Int16 MaxVersion = Int16.From(4);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -357,7 +357,7 @@ namespace Kafka.Protocol
 
         private Map<String, Feature> _featuresCollection = Map<String, Feature>.Default;
         /// <summary>
-        /// <para>The features on this broker</para>
+        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, Feature> FeaturesCollection
@@ -370,7 +370,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The features on this broker</para>
+        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public BrokerRegistrationRequest WithFeaturesCollection(params Func<Feature, Feature>[] createFields)
@@ -381,7 +381,7 @@ namespace Kafka.Protocol
 
         public delegate Feature CreateFeature(Feature field);
         /// <summary>
-        /// <para>The features on this broker</para>
+        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public BrokerRegistrationRequest WithFeaturesCollection(IEnumerable<CreateFeature> createFields)
