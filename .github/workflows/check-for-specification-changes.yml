@@ -33,5 +33,5 @@ jobs:
         working-directory: Kafka.Protocol.MessageDefinitionsDownloader
         shell: bash  
         run: |
-          git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code -- $(pwd)/MessageDefinitions/
-          
+          git config --global core.safecrlf false
+          git diff --ignore-space-at-eol --ignore-cr-at-eol --stat --exit-code -- $(pwd)/MessageDefinitions/
