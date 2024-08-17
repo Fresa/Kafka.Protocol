@@ -1,0 +1,31 @@
+name: Check for No Protocol Specification Changes
+
+on:
+  schedule:
+    # At 00:00 on Sunday.
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+
+env:
+  project_path: Kafka.Protocol
+  project_name: Kafka.Protocol
+
+jobs:
+  changes:
+    name: Check for No Protocol Specification Changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Download Specifications
+        working-directory: Kafka.Protocol.MessageDefinitionsDownloader
+        run: dotnet run 
+      - name: Check for specification changes
+        shell: bash  
+        run: |
+          git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code
+          
