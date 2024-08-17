@@ -4,10 +4,8 @@ on:
   push:
     branches:
       - "**"
-
-env:
-  project_path: Kafka.Protocol
-  project_name: Kafka.Protocol
+    tags-ignore:
+      - '**'
 
 jobs:
   test:
@@ -27,91 +25,17 @@ jobs:
         run: dotnet build -c Release
       - name: Test
         run: dotnet test -c Release --no-build --verbosity normal
-      - name: Ensure Generated Code Committed
+      - name: Ensure Generated Code is Committed
         shell: bash  
         run: |
           git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code
 
   release:
     name: Create Release
-    needs: [test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          # Fetches entire history, so we can analyze commits since last tag
-          fetch-depth: 0
-      - name: Determine Release Versioning
-        id: versioning
-        uses: Fresa/trunk-based-release-versioning@v0
-      - name: Determine Release Version
-        id: release-tag
-        run: |
-          version=${{ steps.versioning.outputs.version }}
-          if ${{ steps.versioning.outputs.is-prerelease }}; then
-            version="$version-pre-$(echo ${{ steps.versioning.outputs.release-ref }} | cut -c1-8)"
-          fi
-
-          echo "tag=v$version" >> $GITHUB_OUTPUT
-          echo "version=$version" >> $GITHUB_OUTPUT
-      - name: Convert Commit Logs to JSON
-        id: convert-commit-logs
-        uses: mikefarah/yq@v4.30.6
-        with:
-          cmd: yq ea -o=json 'select(. != null) | [.]' "$(echo "${{ steps.versioning.outputs.commit-logs-path }}" | sed "s|^${{ github.workspace }}/||")" | tee commit_logs.json
-      - name: Generate Release Notes
-        id: release_notes
-        uses: Fresa/release-notes-generator@v2
-        with:
-          version: ${{ steps.release-tag.outputs.tag }}
-          last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
-          release_ref: ${{ steps.versioning.outputs.release-ref }}
-          path_to_commits: ./commit_logs.json
-      - name: Write Release Notes to File
-        run: | 
-          echo "${{ steps.release_notes.outputs.release_notes }}" > release_notes.txt
-      - name: Pack
-        run: | 
-          dotnet pack ${{ env.project_path }}/${{ env.project_name }}.csproj \
-            -c Release \
-            -o nuget-packages \
-            -p:PackageVersion=${{ steps.release-tag.outputs.version }} \
-            -p:InformationalVersion=${{ steps.release-tag.outputs.version }} \
-            -p:AssemblyVersion=${{ steps.versioning.outputs.major-version }}.0.0.0 \
-            -p:FileVersion=${{ steps.versioning.outputs.version }}.0 \
-            -p:ContinuousIntegrationBuild=true
-      - name: Create Tag
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.release-tag.outputs.tag }}",
-              sha: "${{ steps.versioning.outputs.release-ref }}"
-            });
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          body_path: release_notes.txt
-          tag_name: ${{ steps.release-tag.outputs.tag }}
-          prerelease: ${{ steps.versioning.outputs.is-prerelease }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Update Latest Minor Tag
-        uses: EndBug/latest-tag@v1
-        if: steps.versioning.outputs.is-prerelease == 'false'
-        with:
-          ref: v${{ steps.versioning.outputs.major-version }}
-          description: ${{ steps.release-tag.outputs.tag }}
-      - name: Update Latest Patch Tag
-        uses: EndBug/latest-tag@v1
-        if: steps.versioning.outputs.is-prerelease == 'false'
-        with:
-          ref: v${{ steps.versioning.outputs.major-version }}.${{ steps.versioning.outputs.minor-version }}
-          description: ${{ steps.release-tag.outputs.tag }}
-      - name: Publish to nuget.org
-        run: |
-          dotnet nuget push nuget-packages/${{ env.project_name }}.${{ steps.release-tag.outputs.version }}.nupkg \
-            --api-key ${{ secrets.NUGET_API_KEY }} \
-            --source https://api.nuget.org/v3/index.json
+    uses: https://github.com/Fresa/Library.Net.ContinuousDelivery/actions/workflows/release.yml@v0
+    if: github.repository == 'Fresa/Kafka.Protocol' && github.actor != 'dependabot[bot]'
+    with:
+      project_path: Kafka.Protocol
+      project_name: Kafka.Protocol
+    secrets: 
+      nuget_api_key: ${{ secrets.NUGET_API_KEY }}
