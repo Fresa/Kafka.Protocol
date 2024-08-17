@@ -32,5 +32,5 @@ jobs:
       - name: Check for specification changes
         shell: bash  
         run: |
-          git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code $(pwd)/MessageDefinitions/
+          git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code -- $(pwd)/MessageDefinitions/
           
