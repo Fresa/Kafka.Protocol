@@ -10,6 +10,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<PackageId>Kafka.Protocol</PackageId>
     <PackageVersion></PackageVersion>
     <Authors>Fredrik Arvidsson</Authors>
     <Company>FKAN Consulting AB</Company>
