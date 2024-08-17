@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -17,9 +18,10 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
 
         public async Task GetMessagesAndWriteToPathAsync(string path, CancellationToken cancellationToken = default)
         {
+            var pathUri = new Uri(path);
             var files = await GetMessageFilesAsync();
 
-            foreach (var file in new DirectoryInfo(path).GetFiles())
+            foreach (var file in new DirectoryInfo(pathUri.AbsolutePath).GetFiles())
             {
                 file.Delete();
             }
@@ -28,7 +30,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             await Task.WhenAll(files
                 .Select(async repositoryContent =>
                 {
-                    var fileStream = new FileStream($"{path}\\{repositoryContent.Name}",
+                    var fileUri  =  new Uri(pathUri, repositoryContent.Name);
+                    var fileStream = new FileStream(fileUri.AbsolutePath,
                         FileMode.Create, FileAccess.Write);
                     await using (fileStream.ConfigureAwait(false))
                     {
