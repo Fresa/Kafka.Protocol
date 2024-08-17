@@ -28,9 +28,9 @@ jobs:
           dotnet-version: 8.0.x
       - name: Download Specifications
         working-directory: Kafka.Protocol.MessageDefinitionsDownloader
-        run: dotnet run 
+        run: dotnet run -- $(pwd)/MessageDefinitions/
       - name: Check for specification changes
         shell: bash  
         run: |
-          git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code
+          git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code $(pwd)/MessageDefinitions/
           
