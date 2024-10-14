@@ -10,6 +10,7 @@
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<PackageId>Kafka.Protocol</PackageId>
     <PackageVersion></PackageVersion>
     <Authors>Fredrik Arvidsson</Authors>
     <Company>FKAN Consulting AB</Company>
@@ -49,7 +50,7 @@
     <AdditionalFiles Include="../Kafka.Protocol.MessageDefinitionsDownloader/MessageDefinitions/*.json">
       <LinkBase>MessageDefinitions</LinkBase>
     </AdditionalFiles>
-	<AdditionalFiles Include="../Kafka.Protocol.Generator/ProtocolSpecifications/Apache Kafka.html">
+	<AdditionalFiles Include="ProtocolSpecifications/Apache Kafka.html">
   	  <LinkBase>ProtocolSpecifications</LinkBase>
 	</AdditionalFiles>
   </ItemGroup>
@@ -57,10 +58,6 @@
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
-  <PropertyGroup Condition="'$(NCrunch)' == '1'">
-    <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
-  </PropertyGroup>
 	
   <Target Name="DownloadLastMajorVersion" BeforeTargets="PreBuildEvent">
 	  <DownloadFile SourceUrl="https://www.nuget.org/api/v2/package/Kafka.Protocol/5.0.0" DestinationFolder="LastMajorVersionBinary">
