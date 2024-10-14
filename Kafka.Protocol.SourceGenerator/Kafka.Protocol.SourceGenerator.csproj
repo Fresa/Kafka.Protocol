@@ -32,7 +32,7 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
-		<PackageReference Include="System.Text.Json" Version="8.0.4" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
+		<PackageReference Include="System.Text.Json" Version="8.0.5" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" PrivateAssets="all" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.15" OutputItemType="Analyzer" PrivateAssets="all" GeneratePathProperty="true" />
 	</ItemGroup>
