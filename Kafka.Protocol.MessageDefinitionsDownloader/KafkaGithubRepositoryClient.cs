@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Octokit;
@@ -11,15 +13,19 @@ using ProductHeaderValue = Octokit.ProductHeaderValue;
 
 namespace Kafka.Protocol.MessageDefinitionsDownloader
 {
-    public class KafkaGithubRepositoryClient
+    public partial class KafkaGithubRepositoryClient
     {
+        private const string RepositoryOwner = "apache";
+        private const string RepositoryName = "kafka";
         private readonly GitHubClient _client = new(
                     new ProductHeaderValue("Kafka.Protocol"));
 
         public async Task GetMessagesAndWriteToPathAsync(string path, CancellationToken cancellationToken = default)
         {
             var pathUri = new Uri(path);
-            var files = await GetMessageFilesAsync();
+            var latestReleaseTag = await GetLatestReleaseTagAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var files = await GetMessageFilesAsync(latestReleaseTag);
 
             foreach (var file in new DirectoryInfo(pathUri.AbsolutePath).GetFiles())
             {
@@ -27,10 +33,21 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             }
             using var fileClient = new HttpClient();
 
+            var releaseTagFileUri = new Uri(pathUri, "release_tag.md");
+            var releaseTagFileStream = new FileStream(releaseTagFileUri.AbsolutePath,
+                FileMode.Create, FileAccess.Write);
+            await using (releaseTagFileStream.ConfigureAwait(false))
+            {
+                await releaseTagFileStream.WriteAsync(
+                        Encoding.UTF8.GetBytes(latestReleaseTag.Name),
+                        cancellationToken)
+                    .ConfigureAwait(false);
+            }
+
             await Task.WhenAll(files
                 .Select(async repositoryContent =>
                 {
-                    var fileUri  =  new Uri(pathUri, repositoryContent.Name);
+                    var fileUri = new Uri(pathUri, repositoryContent.Name);
                     var fileStream = new FileStream(fileUri.AbsolutePath,
                         FileMode.Create, FileAccess.Write);
                     await using (fileStream.ConfigureAwait(false))
@@ -47,16 +64,30 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                     }
                 }));
         }
-        
-        private async Task<IEnumerable<RepositoryContent>> GetMessageFilesAsync()
+
+        [GeneratedRegex(@"^\d+.\d+.\d+$")]
+        private partial Regex GetReleaseTagRegEx();
+
+        private async Task<RepositoryTag> GetLatestReleaseTagAsync(
+            CancellationToken _)
+        {
+            var tags = await _client.Repository.GetAllTags(
+                    RepositoryOwner,
+                    RepositoryName)
+                .ConfigureAwait(false);
+            return tags.First(tag => GetReleaseTagRegEx().IsMatch(tag.Name));
+        }
+
+        private async Task<IEnumerable<RepositoryContent>> GetMessageFilesAsync(RepositoryTag tag)
         {
             var content = await _client
                 .Repository
                 .Content
-                .GetAllContents(
-                    "apache",
-                    "kafka",
-                    "clients/src/main/resources/common/message")
+                .GetAllContentsByRef(
+                    RepositoryOwner,
+                    RepositoryName,
+                    "clients/src/main/resources/common/message",
+                    tag.Name)
                 .ConfigureAwait(false);
 
             var messages = content
