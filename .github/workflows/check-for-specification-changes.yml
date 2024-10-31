@@ -27,8 +27,7 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Download Specifications
-        working-directory: Kafka.Protocol.MessageDefinitionsDownloader
-        run: dotnet run -- $(pwd)/MessageDefinitions/
+        run: dotnet run --project Kafka.Protocol.MessageDefinitionsDownloader -- $(pwd)
       - name: Check for specification changes
         working-directory: Kafka.Protocol.MessageDefinitionsDownloader
         shell: bash  
