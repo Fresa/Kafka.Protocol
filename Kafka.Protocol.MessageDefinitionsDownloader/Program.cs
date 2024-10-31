@@ -23,12 +23,11 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                 }
             }
 
-            var outputPath = new Uri(new Uri(repositoryPath), "Kafka.Protocol.MessageDefinitionsDownloader/MessageDefinitions/");
             var client = new KafkaGithubRepositoryClient();
             var latestReleaseTag = await client.GetLatestReleaseTagAsync()
                 .ConfigureAwait(false);
 
-            var readmePath = new Uri(new Uri(repositoryPath), "README.md");
+            var readmePath = new Uri(Path.Combine(repositoryPath, "README.md"));
             var updated = await UpdateKafkaReleaseTagInReadmeIfNewerReleaseAsync(readmePath,
                     latestReleaseTag)
                 .ConfigureAwait(false);
@@ -37,7 +36,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                 return;
             }
 
-            Console.WriteLine($"Writing files to '{outputPath}'");
+            var outputPath = new Uri(Path.Combine(repositoryPath, "Kafka.Protocol.MessageDefinitionsDownloader/MessageDefinitions/"));
+            Console.WriteLine($"Writing files to '{outputPath.AbsolutePath}'");
             await client.GetMessagesAndWriteToPathAsync(outputPath, latestReleaseTag)
                 .ConfigureAwait(false);
             Console.WriteLine("Done");
@@ -51,7 +51,7 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             if (!currentVersionTextMatch.Success)
             {
                 throw new InvalidOperationException(
-                    $"Expected to find {GetReleaseTagRegEx()} in {readmePath}");
+                    $"Expected to find {GetReleaseTagRegEx()} in {readmePath.AbsolutePath}");
             }
 
             var newVersion = releaseTag.Name.Trim();
@@ -76,7 +76,7 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                     return false;
             }
 
-            Console.WriteLine($"Updating {readmePath} from Kafka version {currentVersion} to {newVersion}");
+            Console.WriteLine($"Updating {readmePath.AbsolutePath} from Kafka version {currentVersion} to {newVersion}");
             var newReadmeContent = GetReleaseTagRegEx().Replace(readmeContent,
                 newVersionText);
             await File.WriteAllTextAsync(readmePath.AbsolutePath, newReadmeContent)
