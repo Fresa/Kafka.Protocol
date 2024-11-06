@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+	<Nullable>enable</Nullable>
+	<OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>Kafka.Protocol.MessageDefinitionsDownloader</AssemblyName>
     <RootNamespace>Kafka.Protocol.MessageDefinitionsDownloader</RootNamespace>

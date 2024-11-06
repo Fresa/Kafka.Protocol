@@ -14,8 +14,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
 {
     public partial class KafkaGithubRepositoryClient
     {
-        private const string RepositoryOwner = "apache";
-        private const string RepositoryName = "kafka";
+        internal const string RepositoryOwner = "apache";
+        internal const string RepositoryName = "kafka";
         private readonly GitHubClient _client = new(
                     new ProductHeaderValue("Kafka.Protocol"));
 
@@ -23,10 +23,6 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
         {
             var files = await GetMessageFilesAsync(releaseTag);
 
-            foreach (var file in new DirectoryInfo(pathUri.AbsolutePath).GetFiles())
-            {
-                file.Delete();
-            }
             using var fileClient = new HttpClient();
 
             await Task.WhenAll(files
