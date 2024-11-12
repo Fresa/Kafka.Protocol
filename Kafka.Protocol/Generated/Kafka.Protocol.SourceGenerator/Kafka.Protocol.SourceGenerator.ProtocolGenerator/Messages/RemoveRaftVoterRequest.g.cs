@@ -49,7 +49,7 @@ namespace Kafka.Protocol
         internal static async ValueTask<RemoveRaftVoterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new RemoveRaftVoterRequest(version);
-            instance.ClusterId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            instance.ClusterId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
@@ -79,11 +79,11 @@ namespace Kafka.Protocol
             }
         }
 
-        private String _clusterId = String.Default;
+        private NullableString _clusterId = NullableString.Default;
         /// <summary>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public String ClusterId
+        public String? ClusterId
         {
             get => _clusterId;
             private set
@@ -95,7 +95,7 @@ namespace Kafka.Protocol
         /// <summary>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public RemoveRaftVoterRequest WithClusterId(String clusterId)
+        public RemoveRaftVoterRequest WithClusterId(String? clusterId)
         {
             ClusterId = clusterId;
             return this;

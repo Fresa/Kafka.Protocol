@@ -141,7 +141,7 @@ namespace Kafka.Protocol
                 instance.NumPartitions = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.ReplicationFactor = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.AssignmentsCollection = await Map<Int32, CreatableReplicaAssignment>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => CreatableReplicaAssignment.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.PartitionIndex, cancellationToken).ConfigureAwait(false);
-                instance.ConfigsCollection = await Map<String, CreateableTopicConfig>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => CreateableTopicConfig.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
+                instance.ConfigsCollection = await Map<String, CreatableTopicConfig>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => CreatableTopicConfig.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -378,12 +378,12 @@ namespace Kafka.Protocol
                 }
             }
 
-            private Map<String, CreateableTopicConfig> _configsCollection = Map<String, CreateableTopicConfig>.Default;
+            private Map<String, CreatableTopicConfig> _configsCollection = Map<String, CreatableTopicConfig>.Default;
             /// <summary>
             /// <para>The custom topic configurations to set.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
-            public Map<String, CreateableTopicConfig> ConfigsCollection
+            public Map<String, CreatableTopicConfig> ConfigsCollection
             {
                 get => _configsCollection;
                 private set
@@ -396,26 +396,26 @@ namespace Kafka.Protocol
             /// <para>The custom topic configurations to set.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
-            public CreatableTopic WithConfigsCollection(params Func<CreateableTopicConfig, CreateableTopicConfig>[] createFields)
+            public CreatableTopic WithConfigsCollection(params Func<CreatableTopicConfig, CreatableTopicConfig>[] createFields)
             {
-                ConfigsCollection = createFields.Select(createField => createField(new CreateableTopicConfig(Version))).ToDictionary(field => field.Name);
+                ConfigsCollection = createFields.Select(createField => createField(new CreatableTopicConfig(Version))).ToDictionary(field => field.Name);
                 return this;
             }
 
-            public delegate CreateableTopicConfig CreateCreateableTopicConfig(CreateableTopicConfig field);
+            public delegate CreatableTopicConfig CreateCreatableTopicConfig(CreatableTopicConfig field);
             /// <summary>
             /// <para>The custom topic configurations to set.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
-            public CreatableTopic WithConfigsCollection(IEnumerable<CreateCreateableTopicConfig> createFields)
+            public CreatableTopic WithConfigsCollection(IEnumerable<CreateCreatableTopicConfig> createFields)
             {
-                ConfigsCollection = createFields.Select(createField => createField(new CreateableTopicConfig(Version))).ToDictionary(field => field.Name);
+                ConfigsCollection = createFields.Select(createField => createField(new CreatableTopicConfig(Version))).ToDictionary(field => field.Name);
                 return this;
             }
 
-            public class CreateableTopicConfig : ISerialize
+            public class CreatableTopicConfig : ISerialize
             {
-                internal CreateableTopicConfig(Int16 version)
+                internal CreatableTopicConfig(Int16 version)
                 {
                     Version = version;
                     IsFlexibleVersion = version >= 5;
@@ -431,9 +431,9 @@ namespace Kafka.Protocol
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
                 internal int GetSize(bool _) => _name.GetSize(IsFlexibleVersion) + _value.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
-                internal static async ValueTask<CreateableTopicConfig> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
+                internal static async ValueTask<CreatableTopicConfig> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
-                    var instance = new CreateableTopicConfig(version);
+                    var instance = new CreatableTopicConfig(version);
                     instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.Value = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
@@ -444,7 +444,7 @@ namespace Kafka.Protocol
                             switch (tag.Tag)
                             {
                                 default:
-                                    throw new InvalidOperationException($"Tag '{tag.Tag}' for CreateableTopicConfig is unknown");
+                                    throw new InvalidOperationException($"Tag '{tag.Tag}' for CreatableTopicConfig is unknown");
                             }
                         }
                     }
@@ -481,7 +481,7 @@ namespace Kafka.Protocol
                 /// <para>The configuration name.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
-                public CreateableTopicConfig WithName(String name)
+                public CreatableTopicConfig WithName(String name)
                 {
                     Name = name;
                     return this;
@@ -505,7 +505,7 @@ namespace Kafka.Protocol
                 /// <para>The configuration value.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
-                public CreateableTopicConfig WithValue(String? value)
+                public CreatableTopicConfig WithValue(String? value)
                 {
                     Value = value;
                     return this;

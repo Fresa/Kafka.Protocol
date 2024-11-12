@@ -3,6 +3,8 @@ Protocol definitions for Kafka.
 
 [![Continuous Delivery](https://github.com/Fresa/Kafka.Protocol/actions/workflows/ci.yml/badge.svg)](https://github.com/Fresa/Kafka.Protocol/actions/workflows/ci.yml)
 
+Kafka version: [**3.9.0**](https://github.com/apache/kafka/releases/tag/3.9.0)
+
 ## Download
 https://www.nuget.org/packages/kafka.protocol
 

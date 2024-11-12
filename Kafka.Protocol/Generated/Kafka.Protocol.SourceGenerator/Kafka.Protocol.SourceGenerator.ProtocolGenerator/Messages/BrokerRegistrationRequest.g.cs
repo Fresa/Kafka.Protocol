@@ -357,7 +357,7 @@ namespace Kafka.Protocol
 
         private Map<String, Feature> _featuresCollection = Map<String, Feature>.Default;
         /// <summary>
-        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
+        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 are omitted.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, Feature> FeaturesCollection
@@ -370,7 +370,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
+        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 are omitted.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public BrokerRegistrationRequest WithFeaturesCollection(params Func<Feature, Feature>[] createFields)
@@ -381,7 +381,7 @@ namespace Kafka.Protocol
 
         public delegate Feature CreateFeature(Feature field);
         /// <summary>
-        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
+        /// <para>The features on this broker. Note: in v0-v3, features with MinSupportedVersion = 0 are omitted.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public BrokerRegistrationRequest WithFeaturesCollection(IEnumerable<CreateFeature> createFields)

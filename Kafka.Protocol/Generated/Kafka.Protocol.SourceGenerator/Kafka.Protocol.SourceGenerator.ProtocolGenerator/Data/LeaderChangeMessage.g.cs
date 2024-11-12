@@ -18,13 +18,13 @@ namespace Kafka.Protocol
         public LeaderChangeMessage(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"LeaderChangeMessage does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"LeaderChangeMessage does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
 
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -193,11 +193,13 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _voterId.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => _voterId.GetSize(IsFlexibleVersion) + (Version >= 1 ? _voterDirectoryId.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<Voter> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new Voter(version);
                 instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 1)
+                    instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -218,6 +220,8 @@ namespace Kafka.Protocol
             internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
             {
                 await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 1)
+                    await _voterDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
                     await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -243,6 +247,32 @@ namespace Kafka.Protocol
             public Voter WithVoterId(Int32 voterId)
             {
                 VoterId = voterId;
+                return this;
+            }
+
+            private Uuid _voterDirectoryId = Uuid.Default;
+            /// <summary>
+            /// <para>The directory id of the voter</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Uuid VoterDirectoryId
+            {
+                get => _voterDirectoryId;
+                private set
+                {
+                    if (Version >= 1 == false)
+                        throw new UnsupportedVersionException($"VoterDirectoryId does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                    _voterDirectoryId = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The directory id of the voter</para>
+            /// <para>Versions: 1+</para>
+            /// </summary>
+            public Voter WithVoterDirectoryId(Uuid voterDirectoryId)
+            {
+                VoterDirectoryId = voterDirectoryId;
                 return this;
             }
         }

@@ -45,11 +45,12 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _clusterId.GetSize(IsFlexibleVersion) + _voterId.GetSize(IsFlexibleVersion) + _voterDirectoryId.GetSize(IsFlexibleVersion) + _listenersCollection.GetSize(IsFlexibleVersion) + _kRaftVersionFeature.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _clusterId.GetSize(IsFlexibleVersion) + _currentLeaderEpoch.GetSize(IsFlexibleVersion) + _voterId.GetSize(IsFlexibleVersion) + _voterDirectoryId.GetSize(IsFlexibleVersion) + _listenersCollection.GetSize(IsFlexibleVersion) + _kRaftVersionFeature.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<UpdateRaftVoterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new UpdateRaftVoterRequest(version);
-            instance.ClusterId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            instance.ClusterId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            instance.CurrentLeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.VoterId = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.VoterDirectoryId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ListenersCollection = await Map<String, Listener>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Listener.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
@@ -73,6 +74,7 @@ namespace Kafka.Protocol
         internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
         {
             await _clusterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            await _currentLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _voterId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _voterDirectoryId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _listenersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -83,11 +85,11 @@ namespace Kafka.Protocol
             }
         }
 
-        private String _clusterId = String.Default;
+        private NullableString _clusterId = NullableString.Default;
         /// <summary>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public String ClusterId
+        public String? ClusterId
         {
             get => _clusterId;
             private set
@@ -99,9 +101,33 @@ namespace Kafka.Protocol
         /// <summary>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public UpdateRaftVoterRequest WithClusterId(String clusterId)
+        public UpdateRaftVoterRequest WithClusterId(String? clusterId)
         {
             ClusterId = clusterId;
+            return this;
+        }
+
+        private Int32 _currentLeaderEpoch = Int32.Default;
+        /// <summary>
+        /// <para>The current leader epoch of the partition, -1 for unknown leader epoch</para>
+        /// <para>Versions: 0+</para>
+        /// </summary>
+        public Int32 CurrentLeaderEpoch
+        {
+            get => _currentLeaderEpoch;
+            private set
+            {
+                _currentLeaderEpoch = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The current leader epoch of the partition, -1 for unknown leader epoch</para>
+        /// <para>Versions: 0+</para>
+        /// </summary>
+        public UpdateRaftVoterRequest WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
+        {
+            CurrentLeaderEpoch = currentLeaderEpoch;
             return this;
         }
 

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ListGroupsRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ListGroupsRequest does not support version {version}. Valid versions are: 0-6");
+                throw new UnsupportedVersionException($"ListGroupsRequest does not support version {version}. Valid versions are: 0-5");
             Version = version;
             IsFlexibleVersion = version >= 3;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(16);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(6);
+        public static readonly Int16 MaxVersion = Int16.From(5);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
