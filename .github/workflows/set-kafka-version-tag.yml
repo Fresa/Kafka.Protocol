@@ -26,5 +26,5 @@ jobs:
       - name: Update Kafka Release Tag
         uses: EndBug/latest-tag@v1
         with:
-          ref: Kafka-${{ steps.kafka-release-version.version }}
-          description: Kafka version ${{ steps.kafka-release-version.version }}
+          ref: Kafka-${{ steps.kafka-release-version.outputs.version }}
+          description: Kafka version ${{ steps.kafka-release-version.outputs.version }}
