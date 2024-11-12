@@ -40,7 +40,7 @@ internal sealed class ReleaseTagFile
         if (_repositoryTag is null)
         {
             Console.WriteLine(
-                "No current release exist, setting proposed version {releaseTag.Name}");
+                $"No current release exist, setting proposed version {releaseTag.Name}");
             _repositoryTag = releaseTag;
             return true;
         }

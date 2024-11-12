@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Octokit;
+using Octokit.Internal;
 
 namespace Kafka.Protocol.MessageDefinitionsDownloader
 {
@@ -26,8 +28,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                 }
             }
 
-            var client = new KafkaGithubRepositoryClient();
-            var latestReleaseTag = await client.GetLatestReleaseTagAsync()
+            var githubClient = CreateGithubClient();
+            var latestReleaseTag = await githubClient.GetLatestReleaseTagAsync()
                 .ConfigureAwait(false);
             var kafkaReleaseTagFilePath =
                 Path.Combine(repositoryPath, ReleaseTagFileName);
@@ -43,7 +45,7 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             var outputPath = Path.Combine(repositoryPath, MessageDefinitionsPath);
             DeleteExistingMessageDefinitions(outputPath);
             Console.WriteLine($"Downloading and writing specifications to '{outputPath}'");
-            await client.GetMessagesAndWriteToPathAsync(outputPath, latestReleaseTag)
+            await githubClient.GetMessagesAndWriteToPathAsync(outputPath, latestReleaseTag)
                 .ConfigureAwait(false);
 
             var readmePath = Path.Combine(repositoryPath, ReadmeFileName);
@@ -53,6 +55,17 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             readmeFile.UpdateKafkaRelease(latestReleaseTag);
             await readmeFile.SaveAsync()
                 .ConfigureAwait(false);
+        }
+
+        private static KafkaGithubRepositoryClient CreateGithubClient()
+        {
+            var githubToken =
+                Environment.GetEnvironmentVariable("GITHUB_TOKEN");
+            var githubCredentials = new InMemoryCredentialStore(
+                githubToken is null
+                    ? Credentials.Anonymous
+                    : new Credentials(githubToken));
+            return new KafkaGithubRepositoryClient(githubCredentials);
         }
 
         private static void DeleteExistingMessageDefinitions(string outputPath)

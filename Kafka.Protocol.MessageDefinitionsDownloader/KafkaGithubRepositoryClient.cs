@@ -12,12 +12,13 @@ using ProductHeaderValue = Octokit.ProductHeaderValue;
 
 namespace Kafka.Protocol.MessageDefinitionsDownloader
 {
-    public partial class KafkaGithubRepositoryClient
+    public partial class KafkaGithubRepositoryClient(
+        ICredentialStore credentials)
     {
         internal const string RepositoryOwner = "apache";
         internal const string RepositoryName = "kafka";
         private readonly GitHubClient _client = new(
-                    new ProductHeaderValue("Kafka.Protocol"));
+                    new ProductHeaderValue("Kafka.Protocol"), credentials);
 
         public async Task GetMessagesAndWriteToPathAsync(string path, RepositoryTag releaseTag, CancellationToken cancellationToken = default)
         {
