@@ -19,7 +19,7 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
         private readonly GitHubClient _client = new(
                     new ProductHeaderValue("Kafka.Protocol"));
 
-        public async Task GetMessagesAndWriteToPathAsync(Uri pathUri, RepositoryTag releaseTag, CancellationToken cancellationToken = default)
+        public async Task GetMessagesAndWriteToPathAsync(string path, RepositoryTag releaseTag, CancellationToken cancellationToken = default)
         {
             var files = await GetMessageFilesAsync(releaseTag);
 
@@ -28,8 +28,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             await Task.WhenAll(files
                 .Select(async repositoryContent =>
                 {
-                    var fileUri = new Uri(pathUri, repositoryContent.Name);
-                    var fileStream = new FileStream(fileUri.AbsolutePath,
+                    var filePath = Path.Combine(path, repositoryContent.Name);
+                    var fileStream = new FileStream(filePath,
                         FileMode.Create, FileAccess.Write);
                     await using (fileStream.ConfigureAwait(false))
                     {

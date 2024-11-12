@@ -7,7 +7,7 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
 {
     class Program
     {
-        private const string ReleaseTagFileName = "ReleaseTag.json";
+        private const string ReleaseTagFileName = "KafkaReleaseTag.json";
         private const string ReadmeFileName = "README.md";
         private const string MessageDefinitionsPath =
             "Kafka.Protocol.MessageDefinitionsDownloader/MessageDefinitions/";
@@ -29,10 +29,8 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             var client = new KafkaGithubRepositoryClient();
             var latestReleaseTag = await client.GetLatestReleaseTagAsync()
                 .ConfigureAwait(false);
-            var outputPath = new Uri(Path.Combine(repositoryPath, MessageDefinitionsPath));
             var kafkaReleaseTagFilePath =
-                Path.Combine(outputPath.AbsolutePath, ReleaseTagFileName);
-            
+                Path.Combine(repositoryPath, ReleaseTagFileName);
             var releaseTagFile = await ReleaseTagFile.ReadAsync(kafkaReleaseTagFilePath)
                 .ConfigureAwait(false);
             if (!releaseTagFile.UpdateIfNewer(latestReleaseTag))
@@ -42,8 +40,9 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             await releaseTagFile.SaveAsync()
                 .ConfigureAwait(false);
 
-            DeleteExistingMessageDefinitions(outputPath.AbsolutePath);
-            Console.WriteLine($"Downloading and writing specifications to '{outputPath.AbsolutePath}'");
+            var outputPath = Path.Combine(repositoryPath, MessageDefinitionsPath);
+            DeleteExistingMessageDefinitions(outputPath);
+            Console.WriteLine($"Downloading and writing specifications to '{outputPath}'");
             await client.GetMessagesAndWriteToPathAsync(outputPath, latestReleaseTag)
                 .ConfigureAwait(false);
 
@@ -61,8 +60,6 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
             Console.WriteLine($"Deleting existing specifications from '{outputPath}'");
             foreach (var file in new DirectoryInfo(outputPath).GetFiles())
             {
-                if (file.Name == ReleaseTagFileName)
-                    continue;
                 file.Delete();
             }
         }
