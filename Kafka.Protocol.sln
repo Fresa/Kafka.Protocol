@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\ci.yml = .github\workflows\ci.yml
 		.github\CODEOWNERS = .github\CODEOWNERS
 		README.md = README.md
+		.github\workflows\set-kafka-version-tag.yml = .github\workflows\set-kafka-version-tag.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kafka.Protocol.SourceGenerator", "Kafka.Protocol.SourceGenerator\Kafka.Protocol.SourceGenerator.csproj", "{4ED349C3-7623-46AE-883D-8EE0C1595A00}"
