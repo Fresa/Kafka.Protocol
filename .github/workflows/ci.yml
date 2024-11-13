@@ -33,6 +33,7 @@ jobs:
   release:
     name: Create Release
     uses: Fresa/Library.Net.ContinuousDelivery/.github/workflows/release.yml@v0
+    needs: test
     if: github.repository == 'Fresa/Kafka.Protocol' && github.actor != 'dependabot[bot]'
     with:
       project_path: Kafka.Protocol
