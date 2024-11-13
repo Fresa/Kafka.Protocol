@@ -3,7 +3,7 @@ name: Set Kafka Version Tag
 on:
   push:
     branches:
-      - '**'
+      - master
     tags-ignore:
       - '**'
 
