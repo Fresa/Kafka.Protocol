@@ -25,6 +25,7 @@
     <ApiCompatContractAssembly>LastMajorVersionBinary/lib/$(TargetFramework)/$(AssemblyName).dll</ApiCompatContractAssembly>
     <!--https://learn.microsoft.com/en-us/dotnet/fundamentals/apicompat/diagnostic-ids-->
     <ApiCompatGenerateSuppressionFile>false</ApiCompatGenerateSuppressionFile>
+    <_ApiCompatCaptureGroupPattern>.+%5C$([System.IO.Path]::DirectorySeparatorChar)(.+)%5C$([System.IO.Path]::DirectorySeparatorChar)(.+)</_ApiCompatCaptureGroupPattern>
 
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
@@ -65,5 +66,10 @@
 	  </DownloadFile>
 	  <Unzip SourceFiles="$(LastMajorVersionNugetPackage)" DestinationFolder="LastMajorVersionBinary" />
   </Target>
-  
+
+  <ItemGroup>
+    <!-- Make sure the Right suppression directive is OS-agnostic and disregards configuration -->
+	<ApiCompatRightAssembliesTransformationPattern Include="$(_ApiCompatCaptureGroupPattern)" ReplacementString="obj/$1/$2" />
+  </ItemGroup>
+
 </Project>
