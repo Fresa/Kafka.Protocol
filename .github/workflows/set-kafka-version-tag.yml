@@ -1,0 +1,30 @@
+name: Set Kafka Version Tag
+
+on:
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+
+jobs:
+  set_kafka_version_tag:
+    name: Set Kafka Version Tag
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions: 
+      # Create tag
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Read Kafka Release Version
+        id: kafka-release-version
+        shell: bash  
+        run: |
+          version=$(cat KafkaReleaseTag.json | jq '.name' | xargs)
+          echo "version=$version" >> $GITHUB_OUTPUT
+      - name: Update Kafka Release Tag
+        uses: EndBug/latest-tag@v1
+        with:
+          ref: Kafka-${{ steps.kafka-release-version.outputs.version }}
+          description: Kafka version ${{ steps.kafka-release-version.outputs.version }}

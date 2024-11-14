@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Octokit;
@@ -11,27 +12,25 @@ using ProductHeaderValue = Octokit.ProductHeaderValue;
 
 namespace Kafka.Protocol.MessageDefinitionsDownloader
 {
-    public class KafkaGithubRepositoryClient
+    public partial class KafkaGithubRepositoryClient(
+        ICredentialStore credentials)
     {
+        internal const string RepositoryOwner = "apache";
+        internal const string RepositoryName = "kafka";
         private readonly GitHubClient _client = new(
-                    new ProductHeaderValue("Kafka.Protocol"));
+                    new ProductHeaderValue("Kafka.Protocol"), credentials);
 
-        public async Task GetMessagesAndWriteToPathAsync(string path, CancellationToken cancellationToken = default)
+        public async Task GetMessagesAndWriteToPathAsync(string path, RepositoryTag releaseTag, CancellationToken cancellationToken = default)
         {
-            var pathUri = new Uri(path);
-            var files = await GetMessageFilesAsync();
+            var files = await GetMessageFilesAsync(releaseTag);
 
-            foreach (var file in new DirectoryInfo(pathUri.AbsolutePath).GetFiles())
-            {
-                file.Delete();
-            }
             using var fileClient = new HttpClient();
 
             await Task.WhenAll(files
                 .Select(async repositoryContent =>
                 {
-                    var fileUri  =  new Uri(pathUri, repositoryContent.Name);
-                    var fileStream = new FileStream(fileUri.AbsolutePath,
+                    var filePath = Path.Combine(path, repositoryContent.Name);
+                    var fileStream = new FileStream(filePath,
                         FileMode.Create, FileAccess.Write);
                     await using (fileStream.ConfigureAwait(false))
                     {
@@ -47,16 +46,35 @@ namespace Kafka.Protocol.MessageDefinitionsDownloader
                     }
                 }));
         }
-        
-        private async Task<IEnumerable<RepositoryContent>> GetMessageFilesAsync()
+
+        [GeneratedRegex(@"^\d+\.\d+\.\d+$")]
+        private partial Regex GetReleaseTagRegEx();
+
+        internal async Task<RepositoryTag> GetLatestReleaseTagAsync()
+        {
+            Console.WriteLine($"Finding latest release matching {GetReleaseTagRegEx()}");
+            var tags = await _client.Repository.GetAllTags(
+                    RepositoryOwner,
+                    RepositoryName)
+                .ConfigureAwait(false);
+            return tags.First(tag =>
+            {
+                var isMatch = GetReleaseTagRegEx().IsMatch(tag.Name);
+                Console.WriteLine($"{tag.Name} -> {(isMatch ? "Match" : "No match")}");
+                return isMatch;
+            });
+        }
+
+        private async Task<IEnumerable<RepositoryContent>> GetMessageFilesAsync(RepositoryTag tag)
         {
             var content = await _client
                 .Repository
                 .Content
-                .GetAllContents(
-                    "apache",
-                    "kafka",
-                    "clients/src/main/resources/common/message")
+                .GetAllContentsByRef(
+                    RepositoryOwner, 
+                    RepositoryName,
+                    "clients/src/main/resources/common/message",
+                    tag.Name)
                 .ConfigureAwait(false);
 
             var messages = content

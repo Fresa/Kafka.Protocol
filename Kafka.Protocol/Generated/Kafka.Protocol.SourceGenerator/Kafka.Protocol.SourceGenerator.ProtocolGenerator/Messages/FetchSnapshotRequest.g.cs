@@ -592,8 +592,6 @@ namespace Kafka.Protocol
                     get => _replicaDirectoryId;
                     private set
                     {
-                        if (Version >= 1 == false)
-                            throw new UnsupportedVersionException($"ReplicaDirectoryId does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
                         _replicaDirectoryId = value;
                         _replicaDirectoryIdIsSet = true;
                     }

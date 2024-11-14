@@ -361,7 +361,7 @@ namespace Kafka.Protocol
         private bool _supportedFeaturesCollectionIsSet;
         private Map<String, SupportedFeatureKey> _supportedFeaturesCollection = Map<String, SupportedFeatureKey>.Default;
         /// <summary>
-        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
+        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 are omitted.</para>
         /// <para>Versions: 3+</para>
         /// </summary>
         public Map<String, SupportedFeatureKey> SupportedFeaturesCollection
@@ -375,7 +375,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
+        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 are omitted.</para>
         /// <para>Versions: 3+</para>
         /// </summary>
         public ApiVersionsResponse WithSupportedFeaturesCollection(params Func<SupportedFeatureKey, SupportedFeatureKey>[] createFields)
@@ -386,7 +386,7 @@ namespace Kafka.Protocol
 
         public delegate SupportedFeatureKey CreateSupportedFeatureKey(SupportedFeatureKey field);
         /// <summary>
-        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 show up with MinSupportedVersion = 1.</para>
+        /// <para>Features supported by the broker. Note: in v0-v3, features with MinSupportedVersion = 0 are omitted.</para>
         /// <para>Versions: 3+</para>
         /// </summary>
         public ApiVersionsResponse WithSupportedFeaturesCollection(IEnumerable<CreateSupportedFeatureKey> createFields)
