@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
-using Log.It;
+using Kafka.Protocol.Logging;
 
 namespace Kafka.Protocol
 {
@@ -11,9 +10,6 @@ namespace Kafka.Protocol
     {
         public ResponseHeader Header { get; }
         public Message Message { get; }
-
-        private static readonly ILogger Logger =
-            LogFactory.Create<ResponsePayload>();
 
         public ResponsePayload(
             ResponseHeader header,
@@ -33,12 +29,11 @@ namespace Kafka.Protocol
                 .WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
             
-            Logger.Debug("Writing header ({size} bytes) {@header}", headerSize, Header);
+            KafkaEventSource.Log.ResponseHeaderWritten(headerSize, Header);
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
 
-            Logger.Debug("Writing message {messageType} ({size} bytes) {@message}", 
-                Message.GetType().Name, messageSize, Message);
+            KafkaEventSource.Log.ResponseMessageWritten(messageSize, Message);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -57,7 +52,7 @@ namespace Kafka.Protocol
                     cancellationToken)
                 .ConfigureAwait(false);
             var headerSize = header.GetSize();
-            Logger.Debug("Read header ({size} bytes) {@header}", headerSize, header);
+            KafkaEventSource.Log.ResponseHeaderRead(headerSize, header);
 
             var message = await Messages
                 .CreateResponseMessageFromReaderAsync(
@@ -67,8 +62,7 @@ namespace Kafka.Protocol
                     cancellationToken)
                 .ConfigureAwait(false);
             var messageSize = message.GetSize();
-            Logger.Debug("Read message {messageType} ({size} bytes) {@message}",
-                message.GetType().Name, messageSize, message);
+            KafkaEventSource.Log.ResponseMessageRead(messageSize, message);
 
             var actualPayloadSize = headerSize + messageSize;
             if (payloadSize.Value != actualPayloadSize)
