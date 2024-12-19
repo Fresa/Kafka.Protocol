@@ -6,80 +6,82 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Kafka.Protocol.Logging
 {
     internal static class YamlSerializer
     {
-        private const string Empty = "";
-
         internal static string Serialize(object? obj) =>
-            Serialize(obj, string.Empty, out _).Trim();
+            Serialize(obj, string.Empty, out _);
+        
         private static string Serialize(object? obj, string indentation, out bool simple)
         {
-            simple = true;
-            if (obj is null)
-                return "null";
             if (TrySerializeSimpleType(obj, out var simpleValue))
             {
+                simple = true;
                 return simpleValue;
             }
 
             simple = false;
             var type = obj.GetType();
-            var isMap = type.GetInterfaces().Any(@interface =>
-                (@interface.IsGenericType &&
-                 @interface.GetGenericTypeDefinition() ==
-                 typeof(IDictionary<,>)) ||
-                @interface == typeof(IDictionary)
-            );
 
+            var isMap = IsMap(type);
             if (obj is IEnumerable list)
             {
                 return string.Join(Environment.NewLine,
                     list.Cast<object?>()
-                        .Where(item => item != null)
-                        .Cast<object>().Select(
+                        .Select(
                             item => isMap
                                 ? Serialize(item, indentation, out _)
                                 : $"{indentation}- {Serialize(item, indentation + "  ", out _).TrimStart()}"));
             }
 
-            if (type.IsGenericType && type.GetGenericTypeDefinition() ==
-                typeof(KeyValuePair<,>))
+            if (IsKeyValuePair(type))
             {
-                var key = type
-                    .GetProperty("Key")!.GetValue(obj);
-                var value = type
-                    .GetProperty("Value")!.GetValue(obj);
+                var key = type.GetProperty("Key")!.GetValue(obj);
+                var value = type.GetProperty("Value")!.GetValue(obj);
 
                 return $"{indentation}? {Serialize(key, indentation + "  ", out _)}{Environment.NewLine}" +
                        $"{indentation}: {Serialize(value, indentation + "  ", out _)}";
             }
 
-            var properties = type
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(info => info.CanRead && info.GetIndexParameters().Length == 0)
-                .ToList();
-
-            return properties.Any()
-                ? string.Join(Environment.NewLine, properties.Select(
-                    property =>
-                    {
-                        var value = property.GetValue(obj, null);
-                        var serializedValue =
-                            Serialize(value, indentation + "  ", out var isSimple);
-                        return
-                            $"{indentation}{property.Name}: {(isSimple ? string.Empty : Environment.NewLine)}{serializedValue}";
-                    }))
-                : string.Empty;
+            var properties = GetProperties(type);
+            return string.Join(Environment.NewLine, properties.Select(
+                property =>
+                {
+                    var value = property.GetValue(obj, null);
+                    var serializedValue =
+                        Serialize(value, indentation + "  ", out var isSimple);
+                    return
+                        $"{indentation}{property.Name}: {(isSimple ? string.Empty : Environment.NewLine)}{serializedValue}";
+                }));
         }
 
-        private static readonly ConcurrentDictionary<Type, bool> IsSimpleTypeCache = new ConcurrentDictionary<Type, bool>();
+        private static bool IsMap(Type type) =>
+            type.GetInterfaces().Any(@interface =>
+                (@interface.IsGenericType &&
+                 @interface.GetGenericTypeDefinition() ==
+                 typeof(IDictionary<,>)) ||
+                @interface == typeof(IDictionary));
 
-        private static bool TrySerializeSimpleType(object obj, [NotNullWhen(true)] out string? serializedValue)
+        private static bool IsKeyValuePair(Type type) =>
+            type.IsGenericType &&
+            type.GetGenericTypeDefinition() == typeof(KeyValuePair<,>);
+
+        private static IEnumerable<PropertyInfo> GetProperties(Type type) =>
+            type
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(info =>
+                    info.CanRead && info.GetIndexParameters().Length == 0);
+
+        private static bool TrySerializeSimpleType([NotNullWhen(false)] object? obj, [NotNullWhen(true)] out string? serializedValue)
         {
+            if (obj is null)
+            {
+                serializedValue = "null";
+                return true;
+            }
+
             var type = obj.GetType();
             while (true)
             {
