@@ -83,27 +83,22 @@ namespace Kafka.Protocol.Logging
             var type = obj.GetType();
             while (true)
             {
-                if (IsSimpleTypeCache.GetOrAdd(type, _ =>
-                        type.IsPrimitive ||
-                        type.IsEnum ||
-                        type == typeof(string) ||
-                        type == typeof(decimal) ||
-                        type == typeof(DateTime) ||
-                        type == typeof(DateTimeOffset) ||
-                        type == typeof(TimeSpan) ||
-                        type == typeof(Guid)))
+                serializedValue = obj switch
                 {
-                    serializedValue = obj switch
-                    {
-                        bool boolValue => boolValue ? "true" : "false",
-                        decimal value => value.ToString(NumberFormatInfo.InvariantInfo),
-                        double value => value.ToString(NumberFormatInfo.InvariantInfo),
-                        DateTimeOffset value => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ"),
-                        DateTime value => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ"),
-                        TimeSpan value => value.ToString(@"d\.hh\:mm\:ss\.fff"),
+                    string str => str,
+                    bool boolValue => boolValue ? "true" : "false",
+                    decimal value => value.ToString(NumberFormatInfo.InvariantInfo),
+                    double value => value.ToString(NumberFormatInfo.InvariantInfo),
+                    DateTimeOffset value => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ"),
+                    DateTime value => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ"),
+                    TimeSpan value => value.ToString(@"d\.hh\:mm\:ss\.fff"),
+                    Guid guid => guid.ToString(),
+                    _ when type.IsPrimitive || type.IsEnum => obj.ToString(),
+                    _ => null
+                };
 
-                        _ => obj.ToString()
-                    };
+                if (serializedValue != null)
+                {
                     return true;
                 }
 
