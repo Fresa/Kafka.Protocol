@@ -41,8 +41,8 @@ namespace Kafka.Protocol.Logging
                 var key = type.GetProperty("Key")!.GetValue(obj);
                 var value = type.GetProperty("Value")!.GetValue(obj);
 
-                return $"{indentation}? {Serialize(key, indentation + "  ", out _)}{Environment.NewLine}" +
-                       $"{indentation}: {Serialize(value, indentation + "  ", out _)}";
+                return $"{indentation}? {Serialize(key, indentation + "  ", out _).TrimStart()}{Environment.NewLine}" +
+                       $"{indentation}: {Serialize(value, indentation + "  ", out _).TrimStart()}";
             }
 
             var properties = GetProperties(type);
