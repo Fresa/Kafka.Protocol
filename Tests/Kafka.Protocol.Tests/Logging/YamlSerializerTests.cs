@@ -42,7 +42,11 @@ public class YamlSerializerTests : XUnit2Specification
                     Foo = 1,
                     Bar = new
                     {
-                        Foo = "fii"
+                        Foo = "fii",
+                        Baz = new 
+                        {
+                            Fii = "fyy"
+                        }
                     },
 
                 },
@@ -50,6 +54,8 @@ public class YamlSerializerTests : XUnit2Specification
                 Foo: 1
                 Bar: 
                   Foo: fii
+                  Baz: 
+                    Fii: fyy
                 """
             },
             new object[]
@@ -110,22 +116,36 @@ public class YamlSerializerTests : XUnit2Specification
             {
                 new List<KeyValuePair<object, object>>
                 {
-                    new(new { Foo = "foo" }, new
+                    new(new
+                    {
+                        Foo = new
+                        {
+                            Bar = "foo"
+                        }
+                    }, new
                     {
                         Bar = "bar",
                         Baz = "fee"
                     }),
-                    new(new { Foo = "foo" }, new
+                    new(new
+                    {
+                        Foo = new
+                        {
+                            Bar = "foo"
+                        }
+                    }, new
                     {
                         Bar = "baz",
                         Baz = "bar"
                     }),
                 },
                 """
-                - ? Foo: foo
+                - ? Foo: 
+                      Bar: foo
                   : Bar: bar
                     Baz: fee
-                - ? Foo: foo
+                - ? Foo: 
+                      Bar: foo
                   : Bar: baz
                     Baz: bar
                 """
