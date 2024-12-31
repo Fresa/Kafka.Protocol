@@ -3,18 +3,34 @@ using System.Diagnostics.Tracing;
 
 namespace Kafka.Protocol.Logging
 {
-    [EventSource(Name = KafkaEventSource.Name)]
-    public sealed class KafkaEventSource : EventSource
+    /// <summary>
+    /// Event source for Kafka.Protocol logs
+    /// </summary>
+    [EventSource(Name = Name)]
+    public sealed class LogEventSource : EventSource
     {
-        private KafkaEventSource()
+        private LogEventSource()
         {
         }
 
-        public const string Name = "Kafka.Protocol";
+        /// <summary>
+        /// The name of the event source
+        /// </summary>
+        public new const string Name = "Kafka.Protocol";
 
+        /// <summary>
+        /// Log keywords
+        /// </summary>
         public static class Keywords
         {
+            /// <summary>
+            /// Request logs
+            /// </summary>
             public const EventKeywords Request = (EventKeywords)1;
+
+            /// <summary>
+            /// Response logs
+            /// </summary>
             public const EventKeywords Response = (EventKeywords)(1 << 1);
         }
 
@@ -31,7 +47,7 @@ namespace Kafka.Protocol.Logging
             public const int ResponseMessageRead = 9;
         }
 
-        internal static readonly KafkaEventSource Log = new KafkaEventSource();
+        internal static readonly LogEventSource Log = new LogEventSource();
 
         [NonEvent]
         internal void RequestHeaderWritten(int size, RequestHeader header)
@@ -287,7 +303,5 @@ namespace Kafka.Protocol.Logging
             WriteEventCore(eventId, numEventDatas, descrs);
 
         }
-
-        
     }
 }

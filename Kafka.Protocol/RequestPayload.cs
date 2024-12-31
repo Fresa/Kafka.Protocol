@@ -30,11 +30,11 @@ namespace Kafka.Protocol
                 .WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
 
-            KafkaEventSource.Log.RequestHeaderWritten(headerSize, Header);
+            LogEventSource.Log.RequestHeaderWritten(headerSize, Header);
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
             
-            KafkaEventSource.Log.RequestMessageWritten(messageSize, Message);
+            LogEventSource.Log.RequestMessageWritten(messageSize, Message);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -53,7 +53,7 @@ namespace Kafka.Protocol
                     cancellationToken)
                 .ConfigureAwait(false);
             var headerSize = header.GetSize();
-            KafkaEventSource.Log.RequestHeaderRead(headerSize, header);
+            LogEventSource.Log.RequestHeaderRead(headerSize, header);
 
             var message = await Messages
                 .CreateRequestMessageFromReaderAsync(
@@ -64,7 +64,7 @@ namespace Kafka.Protocol
                 .ConfigureAwait(false);
             var messageSize = message.GetSize();
 
-            KafkaEventSource.Log.RequestMessageRead(messageSize, message);
+            LogEventSource.Log.RequestMessageRead(messageSize, message);
 
             var actualPayloadSize = headerSize + messageSize;
             // todo: Why is Confluent.Kafka client sending 4 extra bytes containing zeros in the ApiVersionsRequest?
@@ -73,7 +73,7 @@ namespace Kafka.Protocol
                 var unreadLength = size.Value - actualPayloadSize;
                 var unreadBytes = await reader.ReadAsLittleEndianAsync(unreadLength, cancellationToken)
                     .ConfigureAwait(false);
-                KafkaEventSource.Log.UnknownDataDetected(unreadLength,
+                LogEventSource.Log.UnknownDataDetected(unreadLength,
                     string.Join(" ", unreadBytes.Take(1000)) +
                     (unreadBytes.Length > 1000 ? " ..." : ""));
             }

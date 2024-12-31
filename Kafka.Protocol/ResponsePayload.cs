@@ -29,11 +29,11 @@ namespace Kafka.Protocol
                 .WriteToAsync(writer, false, cancellationToken)
                 .ConfigureAwait(false);
             
-            KafkaEventSource.Log.ResponseHeaderWritten(headerSize, Header);
+            LogEventSource.Log.ResponseHeaderWritten(headerSize, Header);
             await Header.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
 
-            KafkaEventSource.Log.ResponseMessageWritten(messageSize, Message);
+            LogEventSource.Log.ResponseMessageWritten(messageSize, Message);
             await Message.WriteToAsync(writer, cancellationToken)
                 .ConfigureAwait(false);
         }
@@ -52,7 +52,7 @@ namespace Kafka.Protocol
                     cancellationToken)
                 .ConfigureAwait(false);
             var headerSize = header.GetSize();
-            KafkaEventSource.Log.ResponseHeaderRead(headerSize, header);
+            LogEventSource.Log.ResponseHeaderRead(headerSize, header);
 
             var message = await Messages
                 .CreateResponseMessageFromReaderAsync(
@@ -62,7 +62,7 @@ namespace Kafka.Protocol
                     cancellationToken)
                 .ConfigureAwait(false);
             var messageSize = message.GetSize();
-            KafkaEventSource.Log.ResponseMessageRead(messageSize, message);
+            LogEventSource.Log.ResponseMessageRead(messageSize, message);
 
             var actualPayloadSize = headerSize + messageSize;
             if (payloadSize.Value != actualPayloadSize)
