@@ -12,7 +12,7 @@ namespace Kafka.Protocol.Logging
     {
         internal static string Serialize(object? obj) =>
             Serialize(obj, string.Empty, out _);
-        
+
         private static string Serialize(object? obj, string indentation, out bool simple)
         {
             if (TrySerializeSimpleType(obj, out var simpleValue))
@@ -82,36 +82,35 @@ namespace Kafka.Protocol.Logging
             }
 
             var type = obj.GetType();
-            while (true)
+            var underlyingType = Nullable.GetUnderlyingType(type);
+            if (underlyingType != null)
             {
-                serializedValue = obj switch
-                {
-                    string str => str,
-                    bool boolValue => boolValue ? "true" : "false",
-                    decimal value => value.ToString(NumberFormatInfo.InvariantInfo),
-                    double value => value.ToString(NumberFormatInfo.InvariantInfo),
-                    DateTimeOffset value => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ"),
-                    DateTime value => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ"),
-                    TimeSpan value => value.ToString(@"d\.hh\:mm\:ss\.fff"),
-                    Guid guid => guid.ToString(),
-                    _ when type.IsPrimitive || type.IsEnum => obj.ToString(),
-                    _ => null
-                };
-
-                if (serializedValue != null)
-                {
-                    return true;
-                }
-
-                type = Nullable.GetUnderlyingType(type);
-                if (type != null)
-                {
-                    continue;
-                }
-
-                serializedValue = null;
-                return false;
+                type = underlyingType;
             }
+
+            serializedValue = obj switch
+            {
+                string str => str,
+                bool boolValue => boolValue ? "true" : "false",
+                decimal value => value.ToString(NumberFormatInfo.InvariantInfo),
+                double value => value.ToString(NumberFormatInfo.InvariantInfo),
+                DateTimeOffset value => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ"),
+                DateTime value => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffZ"),
+                TimeSpan value => value.ToString(@"d\.hh\:mm\:ss\.fff"),
+                Guid guid => guid.ToString(),
+                _ when type.IsPrimitive || type.IsEnum => obj.ToString(),
+                _ => null
+            };
+
+            if (serializedValue != null)
+            {
+                return true;
+            }
+
+
+            serializedValue = null;
+            return false;
+
         }
     }
 }
