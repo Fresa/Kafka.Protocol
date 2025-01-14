@@ -25,23 +25,8 @@ internal sealed class LogEventListener(ITestOutputHelper outputHelper)
 
     protected override void OnEventWritten(EventWrittenEventArgs eventData)
     {
-        var data = string.Join(Environment.NewLine, eventData.PayloadNames?.Select((payloadName, i) =>
-        {
-            var payload = eventData.Payload?[i];
-            var formattedPayload = payload switch
-            {
-                string strPayload =>
-                    strPayload.Contains(Environment.NewLine)
-                        ? $"{PayloadValueMultilineSeparator}{strPayload.Replace(Environment.NewLine, PayloadValueMultilineSeparator)}"
-                        : strPayload,
-                _ => payload?.ToString()
-            };
-            return $"{Indentation}{payloadName}: {formattedPayload}";
-        }) ?? Array.Empty<string>());
-            
         outputHelper.WriteLine(
             $"{eventData.EventName} [{eventData.Level.ToString().ToUpper()}]: {GetFormattedMessage(eventData)} {GetFormattedEventPayload(eventData)}");
-            
         base.OnEventWritten(eventData);
     }
 

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.IO.Pipelines;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Log.It;
-using Log.It.With.NLog;
 using Test.It.With.XUnit;
 using Xunit;
 using Xunit.Abstractions;
@@ -19,11 +15,6 @@ namespace Kafka.Protocol.Tests
         {
             private PipeReader _reader;
             private Exception _exceptionCaught;
-
-            static When_reading_the_payload()
-            {
-                LogFactory.Initialize(new NLogFactory(new LogicalThreadContext()));
-            }
 
             protected override async Task GivenAsync()
             {
