@@ -25,11 +25,27 @@ public class YamlSerializerTests : XUnit2Specification
             new object[] { (decimal)1.2, "1.2" },
             new object[] { true, "true" },
             new object?[] { null, "null" },
-            new object[] { "string", "string" },
+            new object[] { "string", """
+                |
+                string
+                """ },
             new object[] { new DateTimeOffset(2024, 2, 11, 8, 42, 54, TimeSpan.Zero), "2024-02-11T08:42:54.000Z" },
             new object[] { new DateTime(2024, 2, 11, 8, 42, 54), "2024-02-11T08:42:54.000Z" },
             new object[] { new TimeSpan(11, 8, 42, 54, 123), "11.08:42:54.123" },
-            new object[] { Guid.Parse("1A3B944E-3632-467B-A53A-206305310BAE"), "1a3b944e-3632-467b-a53a-206305310bae" }
+            new object[] { Guid.Parse("1A3B944E-3632-467B-A53A-206305310BAE"), "1a3b944e-3632-467b-a53a-206305310bae" },
+            new object[] { "", "\"\"" },
+            new object[] { "  ", "\"  \"" },
+            new object[] { """
+                           :Foo\t"
+                           
+                           test
+                           """, """
+                                |
+                                :Foo\t"
+                                
+                                test
+                                """
+            }
         };
 
     public static IEnumerable<object?[]> ComplexObjects =>
@@ -42,7 +58,10 @@ public class YamlSerializerTests : XUnit2Specification
                     Foo = 1,
                     Bar = new
                     {
-                        Foo = "fii",
+                        Foo = """
+                              fii
+                              foo
+                              """,
                         Baz = new 
                         {
                             Fii = "fyy"
@@ -53,9 +72,12 @@ public class YamlSerializerTests : XUnit2Specification
                 """
                 Foo: 1
                 Bar: 
-                  Foo: fii
+                  Foo: |
+                    fii
+                    foo
                   Baz: 
-                    Fii: fyy
+                    Fii: |
+                      fyy
                 """
             },
             new object[]
@@ -69,7 +91,8 @@ public class YamlSerializerTests : XUnit2Specification
                 },
                 """
                 Foo: 
-                  - bar
+                  - |
+                    bar
                 """
             },
             new object[]
@@ -80,8 +103,10 @@ public class YamlSerializerTests : XUnit2Specification
                     "bar"
                 },
                 """
-                - foo
-                - bar
+                - |
+                  foo
+                - |
+                  bar
                 """
             },
             new object[]
@@ -92,10 +117,14 @@ public class YamlSerializerTests : XUnit2Specification
                     ["bar"] = "baz"
                 },
                 """
-                ? foo
-                : bar
-                ? bar
-                : baz
+                ? |
+                  foo
+                : |
+                  bar
+                ? |
+                  bar
+                : |
+                  baz
                 """
             },
             new object[]
@@ -106,10 +135,14 @@ public class YamlSerializerTests : XUnit2Specification
                     new("foo", "baz")
                 },
                 """
-                - ? foo
-                  : bar
-                - ? foo
-                  : baz
+                - ? |
+                    foo
+                  : |
+                    bar
+                - ? |
+                    foo
+                  : |
+                    baz
                 """
             },
             new object[]
@@ -141,14 +174,46 @@ public class YamlSerializerTests : XUnit2Specification
                 },
                 """
                 - ? Foo: 
-                      Bar: foo
-                  : Bar: bar
-                    Baz: fee
+                      Bar: |
+                        foo
+                  : Bar: |
+                      bar
+                    Baz: |
+                      fee
                 - ? Foo: 
-                      Bar: foo
-                  : Bar: baz
-                    Baz: bar
+                      Bar: |
+                        foo
+                  : Bar: |
+                      baz
+                    Baz: |
+                      bar
                 """
+            },
+            new object[]
+            {
+                new string[]{},
+                "[]"
+            },
+            new object[]
+            {
+                new Dictionary<string, string>(),
+                "{}"
+            },
+            new object[]
+            {
+                new
+                {
+                    Foo = Array.Empty<string>()
+                },
+                "Foo: []"
+            },
+            new object[]
+            {
+                new
+                {
+                    Foo = new Dictionary<string, string>()
+                },
+                "Foo: {}"
             }
         };
 }

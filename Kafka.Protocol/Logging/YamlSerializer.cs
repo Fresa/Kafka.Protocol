@@ -15,7 +15,9 @@ namespace Kafka.Protocol.Logging
 
         private static string Serialize(object? obj, string indentation, out bool simple)
         {
-            if (TrySerializeSimpleType(obj, out var simpleValue))
+            if (TrySerializeSimpleType(obj, 
+                    indentation, 
+                    out var simpleValue))
             {
                 simple = true;
                 return simpleValue;
@@ -27,12 +29,18 @@ namespace Kafka.Protocol.Logging
             var isMap = IsMap(type);
             if (obj is IEnumerable list)
             {
-                return string.Join(Environment.NewLine,
+                var enumerable = string.Join(Environment.NewLine,
                     list.Cast<object?>()
                         .Select(
                             item => isMap
                                 ? Serialize(item, indentation, out _)
                                 : $"{indentation}- {Serialize(item, indentation + "  ", out _).TrimStart()}"));
+                if (enumerable != string.Empty)
+                {
+                    return enumerable;
+                }
+                simple = true;
+                return isMap ? "{}" : "[]";
             }
 
             if (IsKeyValuePair(type))
@@ -73,7 +81,9 @@ namespace Kafka.Protocol.Logging
                 .Where(info =>
                     info.CanRead && info.GetIndexParameters().Length == 0);
 
-        private static bool TrySerializeSimpleType([NotNullWhen(false)] object? obj, [NotNullWhen(true)] out string? serializedValue)
+        private static bool TrySerializeSimpleType([NotNullWhen(false)] object? obj, 
+            string indentation,
+            [NotNullWhen(true)] out string? serializedValue)
         {
             if (obj is null)
             {
@@ -90,7 +100,10 @@ namespace Kafka.Protocol.Logging
 
             serializedValue = obj switch
             {
-                string str => str,
+                string str when str == string.Empty => "\"\"",
+                string str when str.All(c => c == ' ') => $"\"{str}\"",
+                // https://yaml.org/spec/1.2.2/#812-literal-style
+                string str => $"|{Environment.NewLine}{indentation}{str.Replace(Environment.NewLine, $"{Environment.NewLine}{indentation}")}",
                 bool boolValue => boolValue ? "true" : "false",
                 decimal value => value.ToString(NumberFormatInfo.InvariantInfo),
                 double value => value.ToString(NumberFormatInfo.InvariantInfo),
