@@ -9,11 +9,11 @@ Kafka version: [**3.9.0**](https://github.com/apache/kafka/releases/tag/3.9.0)
 https://www.nuget.org/packages/kafka.protocol
 
 ## Getting Started
-[`KafkaProtocol.cs`](https://github.com/Fresa/Kafka.Protocol/blob/master/Kafka.Protocol/KafkaProtocol.cs) contains auto-generated protocol definitions based on the official [`message specifications`](https://github.com/apache/kafka/tree/trunk/clients/src/main/resources/common/message) found in the offical [`apache/kafka`](https://github.com/apache/kafka) repository together with generated basic value types extracted from the [`Kafka protocol guide`](http://kafka.apache.org/protocol.html). The Record Batch and Record are not available as specifications so these are manually rolled and provided based on the documentation found [`here`](http://kafka.apache.org/documentation/#recordbatch).
+The namespace `Kafka.Protocol` contains generated protocol definitions based on the [`message specifications`](https://github.com/apache/kafka/tree/trunk/clients/src/main/resources/common/message) found in the [`apache/kafka`](https://github.com/apache/kafka) repository together with basic value types extracted from the [`Kafka protocol guide`](http://kafka.apache.org/protocol.html). The Record Batch and Record are manually rolled and provided based on the documentation found [`here`](http://kafka.apache.org/documentation/#recordbatch).
 
 There is a [`test framework`](https://github.com/Fresa/Kafka.TestFramework) for integration testing clients like [`Confluent.Kafka`](https://github.com/confluentinc/confluent-kafka-dotnet) etc.
 
-### v2.x
-This version introduce some breaking changes due to breaking changes in the Kafka Protocol definition itself (mostly subtle property names changes), see the [release notes](https://github.com/Fresa/Kafka.Protocol/releases/tag/v2.0.0) for further details. 
+### Logging
+Log events are generated using an [`EventSource`](Kafka.Protocol/Logging/LogEventSource.cs) that can be subscribed on using an [`EventListener`](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/eventsource-collect-and-view-traces#eventlistener). Have a look at [`LogEventListener`](tests/Kafka.Protocol.Tests/LogEventListener.cs) for an example.
 
-A major improvement is supporting optional tagged fields, which also introduces flexible message versions which includes a more effecient way of serializing some primitives. More information kan be found in [KIP-482](https://cwiki.apache.org/confluence/display/KAFKA/KIP-482%3A+The+Kafka+Protocol+should+Support+Optional+Tagged+Fields).
+Avoid subscribing on verbose log events in a production environment as it includes yaml serialized .NET Kafka message representations which can be quite resource intense and can add a substantial amount of latency. Pretty useful though for test purposes if you need visualization of what data the messages contain in a human readable way.
