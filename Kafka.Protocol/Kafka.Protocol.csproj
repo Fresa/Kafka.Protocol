@@ -29,10 +29,10 @@
 
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Log.It" Version="3.0.3" />
     <PackageReference Include="Microsoft.DotNet.ApiCompat.Task" Version="8.0.303" PrivateAssets="all" IsImplicitlyDefined="true" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 // ReSharper disable once CheckNamespace
 namespace Kafka.Protocol
 {
-    public partial struct Map<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
+    public partial struct Map<TKey, TValue> : IDictionary<TKey, TValue>
     {
         private Array<TValue> AsArray() =>
             Array<TValue>.From(Value.Values.ToArray());
@@ -36,12 +36,84 @@ namespace Kafka.Protocol
                     .ConfigureAwait(false))
                 .ToDictionary(selectKey));
 
+        /// <inheritdoc />
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => 
-            Value.AsEnumerable().GetEnumerator();
+            Value.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => 
             GetEnumerator();
 
-        public TValue this[TKey key] => Value[key];
+        /// <inheritdoc />
+        public void Add(TKey key, TValue value)
+        {
+            Value.Add(key, value);
+        }
+
+        /// <inheritdoc />
+        public bool ContainsKey(TKey key)
+        {
+            return Value.ContainsKey(key);
+        }
+
+        /// <inheritdoc />
+        public bool Remove(TKey key)
+        {
+            return Value.Remove(key);
+        }
+
+        /// <inheritdoc />
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            return Value.TryGetValue(key, out value);
+        }
+
+        /// <inheritdoc />
+        public TValue this[TKey key]
+        {
+            get => Value[key];
+            set => Value[key] = value;
+        }
+
+        /// <inheritdoc />
+        public ICollection<TKey> Keys => Value.Keys;
+
+        /// <inheritdoc />
+        public ICollection<TValue> Values => Value.Values;
+
+        /// <inheritdoc />
+        public void Add(KeyValuePair<TKey, TValue> item)
+        {
+            Value.Add(item.Key, item.Value);
+        }
+
+        /// <inheritdoc />
+        public void Clear()
+        {
+            Value.Clear();
+        }
+
+        /// <inheritdoc />
+        public bool Contains(KeyValuePair<TKey, TValue> item)
+        {
+            return Value.Contains(item);
+        }
+
+        /// <inheritdoc />
+        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        {
+            ((IDictionary<TKey, TValue>)Value).CopyTo(array, arrayIndex);
+        }
+
+        /// <inheritdoc />
+        public bool Remove(KeyValuePair<TKey, TValue> item)
+        {
+            return Value.Remove(item.Key);
+        }
+
+        /// <inheritdoc />
+        public int Count => Value.Count;
+
+        /// <inheritdoc />
+        public bool IsReadOnly => false;
     }
 }
