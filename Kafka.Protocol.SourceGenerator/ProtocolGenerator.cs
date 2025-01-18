@@ -799,16 +799,18 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
                     }
                 }
 
-                var firstStackTraceLocation = Location.Create(
-                    firstFrameWithLineNumber?.GetFileName() ?? string.Empty,
-                    new TextSpan(),
-                    new LinePositionSpan(
-                        new LinePosition(
-                            firstFrameWithLineNumber?.GetFileLineNumber() ?? 0,
-                            firstFrameWithLineNumber?.GetFileColumnNumber() ?? 0),
-                        new LinePosition(
-                            firstFrameWithLineNumber?.GetFileLineNumber() ?? 0,
-                            firstFrameWithLineNumber?.GetFileColumnNumber() + 1 ?? 0)));
+                var firstStackTraceLocation = firstFrameWithLineNumber == null ?
+                    Location.None :
+                    Location.Create(
+                        firstFrameWithLineNumber.GetFileName(),
+                        new TextSpan(),
+                        new LinePositionSpan(
+                            new LinePosition(
+                                firstFrameWithLineNumber.GetFileLineNumber(),
+                                firstFrameWithLineNumber.GetFileColumnNumber()),
+                            new LinePosition(
+                                firstFrameWithLineNumber.GetFileLineNumber(),
+                                firstFrameWithLineNumber.GetFileColumnNumber() + 1)));
 
                 productionContext.ReportDiagnostic(Diagnostic.Create(
                     UnhandledException,
