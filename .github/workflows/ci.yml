@@ -18,6 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup .NET
+        id: dotnet
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
@@ -29,6 +30,8 @@ jobs:
         shell: bash  
         run: |
           git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code
+    outputs:
+      dotnet_version: ${{ steps.dotnet.outputs.dotnet-version }}
 
   release:
     name: Create Release
@@ -38,5 +41,6 @@ jobs:
     with:
       project_path: Kafka.Protocol
       project_name: Kafka.Protocol
+      dotnet_version: ${{ needs.test.outputs.dotnet_version }}
     secrets: 
       nuget_api_key: ${{ secrets.NUGET_API_KEY }}
