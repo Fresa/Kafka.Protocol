@@ -788,38 +788,48 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
             catch (Exception e)
             {
                 var stackTrace = new StackTrace(e, true);
-                StackFrame? frame = null;
+                StackFrame? firstFrameWithLineNumber = null;
                 for (var i = 0; i < stackTrace.FrameCount; i++)
                 {
-                    frame = stackTrace.GetFrame(i);
+                    var frame = stackTrace.GetFrame(i);
                     if (frame.GetFileLineNumber() != 0)
                     {
+                        firstFrameWithLineNumber = frame;
                         break;
                     }
                 }
 
-                var location = Location.Create(
-                    frame?.GetFileName() ?? string.Empty,
-                    new TextSpan(),
-                    new LinePositionSpan(
-                        new LinePosition(
-                            frame?.GetFileLineNumber() ?? 0,
-                            frame?.GetFileColumnNumber() ?? 0),
-                        new LinePosition(
-                            frame?.GetFileLineNumber() ?? 0,
-                            frame?.GetFileColumnNumber() + 1 ?? 0)));
+                var firstStackTraceLocation = firstFrameWithLineNumber == null ?
+                    Location.None :
+                    Location.Create(
+                        firstFrameWithLineNumber.GetFileName(),
+                        new TextSpan(),
+                        new LinePositionSpan(
+                            new LinePosition(
+                                firstFrameWithLineNumber.GetFileLineNumber(),
+                                firstFrameWithLineNumber.GetFileColumnNumber()),
+                            new LinePosition(
+                                firstFrameWithLineNumber.GetFileLineNumber(),
+                                firstFrameWithLineNumber.GetFileColumnNumber() + 1)));
+
                 productionContext.ReportDiagnostic(Diagnostic.Create(
-                    new DiagnosticDescriptor(
-                        id: "CS0001",
-                        title: "Unhandled error",
-                        messageFormat: "{0}",
-                        category: "Compiler",
-                        defaultSeverity: DiagnosticSeverity.Error,
-                        isEnabledByDefault: true,
-                        description: e.StackTrace,
-                        customTags: WellKnownDiagnosticTags.AnalyzerException),
-                    location: location,
-                    [e.ToString().Replace("\r\n", " |").Replace("\n", " |")]));
+                    UnhandledException,
+                    location: firstStackTraceLocation,
+                    // Only single line https://github.com/dotnet/roslyn/issues/1455
+                    messageArgs: [e.ToString().Replace("\r\n", " |").Replace("\n", " |")]));
             }
         };
+
+    private static readonly DiagnosticDescriptor UnhandledException =
+        new(
+            id: "KP0001",
+            title: "Unhandled error",
+            // Only single line https://github.com/dotnet/roslyn/issues/1455
+            messageFormat: "{0}",
+            category: "Compiler",
+            defaultSeverity: DiagnosticSeverity.Error,
+            isEnabledByDefault: true,
+            // Doesn't work
+            description: null,
+            customTags: WellKnownDiagnosticTags.AnalyzerException);
 }

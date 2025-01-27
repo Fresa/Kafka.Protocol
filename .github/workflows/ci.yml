@@ -16,11 +16,12 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        id: dotnet
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 9.0.x
       - name: Build
         run: dotnet build -c Release
       - name: Test
@@ -29,6 +30,8 @@ jobs:
         shell: bash  
         run: |
           git diff --ignore-space-at-eol --ignore-cr-at-eol --exit-code
+    outputs:
+      dotnet_version: ${{ steps.dotnet.outputs.dotnet-version }}
 
   release:
     name: Create Release
@@ -38,5 +41,6 @@ jobs:
     with:
       project_path: Kafka.Protocol
       project_name: Kafka.Protocol
+      dotnet_version: ${{ needs.test.outputs.dotnet_version }}
     secrets: 
       nuget_api_key: ${{ secrets.NUGET_API_KEY }}
