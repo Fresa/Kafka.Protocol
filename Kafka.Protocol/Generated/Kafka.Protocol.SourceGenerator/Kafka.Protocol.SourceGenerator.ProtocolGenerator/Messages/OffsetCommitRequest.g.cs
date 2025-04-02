@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public OffsetCommitRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 0-9");
+                throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 2-9");
             Version = version;
             IsFlexibleVersion = version >= 8;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(8);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(2);
         public static readonly Int16 MaxVersion = Int16.From(9);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -384,7 +384,7 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _committedOffset.GetSize(IsFlexibleVersion) + (Version >= 6 ? _committedLeaderEpoch.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 && Version <= 1 ? _commitTimestamp.GetSize(IsFlexibleVersion) : 0) + _committedMetadata.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _committedOffset.GetSize(IsFlexibleVersion) + (Version >= 6 ? _committedLeaderEpoch.GetSize(IsFlexibleVersion) : 0) + _committedMetadata.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<OffsetCommitRequestPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new OffsetCommitRequestPartition(version);
@@ -392,8 +392,6 @@ namespace Kafka.Protocol
                     instance.CommittedOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.Version >= 6)
                         instance.CommittedLeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    if (instance.Version >= 1 && instance.Version <= 1)
-                        instance.CommitTimestamp = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.CommittedMetadata = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
                     {
@@ -418,8 +416,6 @@ namespace Kafka.Protocol
                     await _committedOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (Version >= 6)
                         await _committedLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    if (Version >= 1 && Version <= 1)
-                        await _commitTimestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _committedMetadata.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (IsFlexibleVersion)
                     {
@@ -498,34 +494,6 @@ namespace Kafka.Protocol
                 public OffsetCommitRequestPartition WithCommittedLeaderEpoch(Int32 committedLeaderEpoch)
                 {
                     CommittedLeaderEpoch = committedLeaderEpoch;
-                    return this;
-                }
-
-                private Int64 _commitTimestamp = new Int64(-1);
-                /// <summary>
-                /// <para>The timestamp of the commit.</para>
-                /// <para>Versions: 1</para>
-                /// <para>Default: -1</para>
-                /// </summary>
-                public Int64 CommitTimestamp
-                {
-                    get => _commitTimestamp;
-                    private set
-                    {
-                        if (Version >= 1 && Version <= 1 == false)
-                            throw new UnsupportedVersionException($"CommitTimestamp does not support version {Version} and has been defined as not ignorable. Supported versions: 1");
-                        _commitTimestamp = value;
-                    }
-                }
-
-                /// <summary>
-                /// <para>The timestamp of the commit.</para>
-                /// <para>Versions: 1</para>
-                /// <para>Default: -1</para>
-                /// </summary>
-                public OffsetCommitRequestPartition WithCommitTimestamp(Int64 commitTimestamp)
-                {
-                    CommitTimestamp = commitTimestamp;
                     return this;
                 }
 

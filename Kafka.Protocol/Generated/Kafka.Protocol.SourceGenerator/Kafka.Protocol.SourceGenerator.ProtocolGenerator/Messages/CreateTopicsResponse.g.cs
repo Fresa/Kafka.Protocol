@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public CreateTopicsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"CreateTopicsResponse does not support version {version}. Valid versions are: 0-7");
+                throw new UnsupportedVersionException($"CreateTopicsResponse does not support version {version}. Valid versions are: 2-7");
             Version = version;
             IsFlexibleVersion = version >= 5;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(19);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(2);
         public static readonly Int16 MaxVersion = Int16.From(7);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -252,7 +252,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 7+</para>
             /// </summary>
             public Uuid TopicId
@@ -265,7 +265,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 7+</para>
             /// </summary>
             public CreatableTopicResult WithTopicId(Uuid topicId)

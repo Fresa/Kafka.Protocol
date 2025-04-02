@@ -3,6 +3,18 @@
 <Suppressions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.ControlledShutdownRequest</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.ControlledShutdownResponse</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Kafka.Protocol.CreateTopicsRequest.CreatableTopic.CreateableTopicConfig</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
@@ -10,6 +22,42 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Kafka.Protocol.CreateTopicsRequest.CreatableTopic.CreateCreateableTopicConfig</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.LeaderAndIsrRequest</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.LeaderAndIsrResponse</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.StopReplicaRequest</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.StopReplicaResponse</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.UpdateMetadataRequest</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.UpdateMetadataResponse</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
   </Suppression>
@@ -22,6 +70,30 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Kafka.Protocol.AddRaftVoterRequest.WithClusterId(Kafka.Protocol.String)</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.AlterPartitionRequest.TopicData.get_TopicName</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.AlterPartitionRequest.TopicData.WithTopicName(Kafka.Protocol.String)</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.AlterPartitionResponse.TopicData.get_TopicName</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.AlterPartitionResponse.TopicData.WithTopicName(Kafka.Protocol.String)</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
   </Suppression>
@@ -40,6 +112,54 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Kafka.Protocol.CreateTopicsRequest.CreatableTopic.WithConfigsCollection(System.Func{Kafka.Protocol.CreateTopicsRequest.CreatableTopic.CreateableTopicConfig,Kafka.Protocol.CreateTopicsRequest.CreatableTopic.CreateableTopicConfig}[])</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.DescribeConfigsResponse.DescribeConfigsResult.DescribeConfigsResourceResult.get_IsDefault</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.DescribeConfigsResponse.DescribeConfigsResult.DescribeConfigsResourceResult.WithIsDefault(Kafka.Protocol.Boolean)</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ListOffsetsRequest.ListOffsetsTopic.ListOffsetsPartition.get_MaxNumOffsets</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ListOffsetsRequest.ListOffsetsTopic.ListOffsetsPartition.WithMaxNumOffsets(Kafka.Protocol.Int32)</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ListOffsetsResponse.ListOffsetsTopicResponse.ListOffsetsPartitionResponse.get_OldStyleOffsetsCollection</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ListOffsetsResponse.ListOffsetsTopicResponse.ListOffsetsPartitionResponse.WithOldStyleOffsetsCollection(Kafka.Protocol.Array{Kafka.Protocol.Int64})</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.OffsetCommitRequest.OffsetCommitRequestTopic.OffsetCommitRequestPartition.get_CommitTimestamp</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.OffsetCommitRequest.OffsetCommitRequestTopic.OffsetCommitRequestPartition.WithCommitTimestamp(Kafka.Protocol.Int64)</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
   </Suppression>
@@ -64,6 +184,30 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Kafka.Protocol.UpdateRaftVoterRequest.WithClusterId(Kafka.Protocol.String)</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.VoteRequest.TopicData.PartitionData.get_CandidateEpoch</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.VoteRequest.TopicData.PartitionData.get_CandidateId</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.VoteRequest.TopicData.PartitionData.WithCandidateEpoch(Kafka.Protocol.Int32)</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.VoteRequest.TopicData.PartitionData.WithCandidateId(Kafka.Protocol.Int32)</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
   </Suppression>

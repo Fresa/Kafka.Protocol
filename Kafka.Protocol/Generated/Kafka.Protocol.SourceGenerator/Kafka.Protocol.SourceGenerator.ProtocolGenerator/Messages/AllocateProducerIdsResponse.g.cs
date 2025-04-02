@@ -107,7 +107,7 @@ namespace Kafka.Protocol
 
         private Int16 _errorCode = Int16.Default;
         /// <summary>
-        /// <para>The top level response error code</para>
+        /// <para>The top level response error code.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 ErrorCode
@@ -120,7 +120,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The top level response error code</para>
+        /// <para>The top level response error code.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AllocateProducerIdsResponse WithErrorCode(Int16 errorCode)
@@ -131,7 +131,7 @@ namespace Kafka.Protocol
 
         private Int64 _producerIdStart = Int64.Default;
         /// <summary>
-        /// <para>The first producer ID in this range, inclusive</para>
+        /// <para>The first producer ID in this range, inclusive.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int64 ProducerIdStart
@@ -144,7 +144,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The first producer ID in this range, inclusive</para>
+        /// <para>The first producer ID in this range, inclusive.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AllocateProducerIdsResponse WithProducerIdStart(Int64 producerIdStart)
@@ -155,7 +155,7 @@ namespace Kafka.Protocol
 
         private Int32 _producerIdLen = Int32.Default;
         /// <summary>
-        /// <para>The number of producer IDs in this range</para>
+        /// <para>The number of producer IDs in this range.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 ProducerIdLen
@@ -168,7 +168,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The number of producer IDs in this range</para>
+        /// <para>The number of producer IDs in this range.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AllocateProducerIdsResponse WithProducerIdLen(Int32 producerIdLen)

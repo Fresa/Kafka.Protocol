@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeLogDirsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeLogDirsResponse does not support version {version}. Valid versions are: 0-4");
+                throw new UnsupportedVersionException($"DescribeLogDirsResponse does not support version {version}. Valid versions are: 1-4");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(35);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(4);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -274,7 +274,7 @@ namespace Kafka.Protocol
 
             private Array<DescribeLogDirsTopic> _topicsCollection = Array.Empty<DescribeLogDirsTopic>();
             /// <summary>
-            /// <para>Each topic.</para>
+            /// <para>The topics.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<DescribeLogDirsTopic> TopicsCollection
@@ -287,7 +287,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>Each topic.</para>
+            /// <para>The topics.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DescribeLogDirsResult WithTopicsCollection(params Func<DescribeLogDirsTopic, DescribeLogDirsTopic>[] createFields)
@@ -298,7 +298,7 @@ namespace Kafka.Protocol
 
             public delegate DescribeLogDirsTopic CreateDescribeLogDirsTopic(DescribeLogDirsTopic field);
             /// <summary>
-            /// <para>Each topic.</para>
+            /// <para>The topics.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DescribeLogDirsResult WithTopicsCollection(IEnumerable<CreateDescribeLogDirsTopic> createFields)
@@ -383,6 +383,7 @@ namespace Kafka.Protocol
 
                 private Array<DescribeLogDirsPartition> _partitionsCollection = Array.Empty<DescribeLogDirsPartition>();
                 /// <summary>
+                /// <para>The partitions.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Array<DescribeLogDirsPartition> PartitionsCollection
@@ -395,6 +396,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The partitions.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public DescribeLogDirsTopic WithPartitionsCollection(params Func<DescribeLogDirsPartition, DescribeLogDirsPartition>[] createFields)
@@ -405,6 +407,7 @@ namespace Kafka.Protocol
 
                 public delegate DescribeLogDirsPartition CreateDescribeLogDirsPartition(DescribeLogDirsPartition field);
                 /// <summary>
+                /// <para>The partitions.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public DescribeLogDirsTopic WithPartitionsCollection(IEnumerable<CreateDescribeLogDirsPartition> createFields)
@@ -517,7 +520,7 @@ namespace Kafka.Protocol
 
                     private Int64 _offsetLag = Int64.Default;
                     /// <summary>
-                    /// <para>The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition)</para>
+                    /// <para>The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition).</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int64 OffsetLag
@@ -530,7 +533,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition)</para>
+                    /// <para>The lag of the log's LEO w.r.t. partition's HW (if it is the current log for the partition) or current replica's LEO (if it is the future log for the partition).</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public DescribeLogDirsPartition WithOffsetLag(Int64 offsetLag)

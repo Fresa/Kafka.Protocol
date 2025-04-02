@@ -14,12 +14,12 @@ namespace Kafka.Protocol
         public RequestHeader(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"RequestHeader does not support version {version}. Valid versions are: 0-2");
+                throw new UnsupportedVersionException($"RequestHeader does not support version {version}. Valid versions are: 1-2");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
 
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(2);
         public Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -154,6 +154,8 @@ namespace Kafka.Protocol
             get => _clientId;
             private set
             {
+                if (Version >= 1 == false)
+                    throw new UnsupportedVersionException($"ClientId does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
                 if (Version >= 1 == false && value == null)
                     throw new UnsupportedVersionException($"ClientId does not support null for version {Version}. Supported versions for null value: 1+");
                 _clientId = value;

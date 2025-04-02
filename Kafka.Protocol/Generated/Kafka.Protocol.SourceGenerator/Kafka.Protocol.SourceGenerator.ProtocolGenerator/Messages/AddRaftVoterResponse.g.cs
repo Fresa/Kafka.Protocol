@@ -105,7 +105,7 @@ namespace Kafka.Protocol
 
         private Int16 _errorCode = Int16.Default;
         /// <summary>
-        /// <para>The error code, or 0 if there was no error</para>
+        /// <para>The error code, or 0 if there was no error.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 ErrorCode
@@ -118,7 +118,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The error code, or 0 if there was no error</para>
+        /// <para>The error code, or 0 if there was no error.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AddRaftVoterResponse WithErrorCode(Int16 errorCode)

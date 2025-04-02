@@ -77,7 +77,7 @@ namespace Kafka.Protocol
 
         private Array<ReadStateResult> _resultsCollection = Array.Empty<ReadStateResult>();
         /// <summary>
-        /// <para>The read results</para>
+        /// <para>The read results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<ReadStateResult> ResultsCollection
@@ -90,7 +90,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The read results</para>
+        /// <para>The read results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ReadShareGroupStateResponse WithResultsCollection(params Func<ReadStateResult, ReadStateResult>[] createFields)
@@ -101,7 +101,7 @@ namespace Kafka.Protocol
 
         public delegate ReadStateResult CreateReadStateResult(ReadStateResult field);
         /// <summary>
-        /// <para>The read results</para>
+        /// <para>The read results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ReadShareGroupStateResponse WithResultsCollection(IEnumerable<CreateReadStateResult> createFields)
@@ -162,7 +162,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The topic identifier</para>
+            /// <para>The topic identifier.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Uuid TopicId
@@ -175,7 +175,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic identifier</para>
+            /// <para>The topic identifier.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReadStateResult WithTopicId(Uuid topicId)
@@ -401,6 +401,7 @@ namespace Kafka.Protocol
 
                 private Array<StateBatch> _stateBatchesCollection = Array.Empty<StateBatch>();
                 /// <summary>
+                /// <para>The state batches for this share-partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Array<StateBatch> StateBatchesCollection
@@ -413,6 +414,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The state batches for this share-partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionResult WithStateBatchesCollection(params Func<StateBatch, StateBatch>[] createFields)
@@ -423,6 +425,7 @@ namespace Kafka.Protocol
 
                 public delegate StateBatch CreateStateBatch(StateBatch field);
                 /// <summary>
+                /// <para>The state batches for this share-partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionResult WithStateBatchesCollection(IEnumerable<CreateStateBatch> createFields)

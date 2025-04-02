@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ListOffsetsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ListOffsetsResponse does not support version {version}. Valid versions are: 0-9");
+                throw new UnsupportedVersionException($"ListOffsetsResponse does not support version {version}. Valid versions are: 1-10");
             Version = version;
             IsFlexibleVersion = version >= 6;
         }
@@ -26,8 +26,8 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(2);
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(9);
+        public static readonly Int16 MinVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(10);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -190,7 +190,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Name
@@ -203,7 +203,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ListOffsetsTopicResponse WithName(String name)
@@ -264,14 +264,12 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + (Version >= 0 && Version <= 0 ? _oldStyleOffsetsCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _timestamp.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _offset.GetSize(IsFlexibleVersion) : 0) + (Version >= 4 ? _leaderEpoch.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + (Version >= 1 ? _timestamp.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _offset.GetSize(IsFlexibleVersion) : 0) + (Version >= 4 ? _leaderEpoch.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<ListOffsetsPartitionResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new ListOffsetsPartitionResponse(version);
                     instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    if (instance.Version >= 0 && instance.Version <= 0)
-                        instance.OldStyleOffsetsCollection = await Array<Int64>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
                     if (instance.Version >= 1)
                         instance.Timestamp = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.Version >= 1)
@@ -299,8 +297,6 @@ namespace Kafka.Protocol
                 {
                     await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    if (Version >= 0 && Version <= 0)
-                        await _oldStyleOffsetsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (Version >= 1)
                         await _timestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (Version >= 1)
@@ -358,32 +354,6 @@ namespace Kafka.Protocol
                 public ListOffsetsPartitionResponse WithErrorCode(Int16 errorCode)
                 {
                     ErrorCode = errorCode;
-                    return this;
-                }
-
-                private Array<Int64> _oldStyleOffsetsCollection = Array.Empty<Int64>();
-                /// <summary>
-                /// <para>The result offsets.</para>
-                /// <para>Versions: 0</para>
-                /// </summary>
-                public Array<Int64> OldStyleOffsetsCollection
-                {
-                    get => _oldStyleOffsetsCollection;
-                    private set
-                    {
-                        if (Version >= 0 && Version <= 0 == false)
-                            throw new UnsupportedVersionException($"OldStyleOffsetsCollection does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-                        _oldStyleOffsetsCollection = value;
-                    }
-                }
-
-                /// <summary>
-                /// <para>The result offsets.</para>
-                /// <para>Versions: 0</para>
-                /// </summary>
-                public ListOffsetsPartitionResponse WithOldStyleOffsetsCollection(Array<Int64> oldStyleOffsetsCollection)
-                {
-                    OldStyleOffsetsCollection = oldStyleOffsetsCollection;
                     return this;
                 }
 
@@ -445,6 +415,7 @@ namespace Kafka.Protocol
 
                 private Int32 _leaderEpoch = new Int32(-1);
                 /// <summary>
+                /// <para>The leader epoch associated with the returned offset.</para>
                 /// <para>Versions: 4+</para>
                 /// <para>Default: -1</para>
                 /// </summary>
@@ -460,6 +431,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The leader epoch associated with the returned offset.</para>
                 /// <para>Versions: 4+</para>
                 /// <para>Default: -1</para>
                 /// </summary>

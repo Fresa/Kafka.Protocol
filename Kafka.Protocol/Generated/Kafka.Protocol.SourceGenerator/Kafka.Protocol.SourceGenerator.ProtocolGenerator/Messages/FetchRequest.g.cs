@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public FetchRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 0-17");
+                throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 4-17");
             Version = version;
             IsFlexibleVersion = version >= 12;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(1);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(4);
         public static readonly Int16 MaxVersion = Int16.From(17);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -203,6 +203,7 @@ namespace Kafka.Protocol
         private bool _replicaStateIsSet;
         private ReplicaState _replicaState = default !;
         /// <summary>
+        /// <para>The state of the replica in the follower.</para>
         /// <para>Versions: 15+</para>
         /// </summary>
         public ReplicaState ReplicaState_
@@ -218,6 +219,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The state of the replica in the follower.</para>
         /// <para>Versions: 15+</para>
         /// </summary>
         public FetchRequest WithReplicaState_(Func<ReplicaState, ReplicaState> createField)
@@ -413,7 +415,7 @@ namespace Kafka.Protocol
 
         private Int8 _isolationLevel = new Int8(0);
         /// <summary>
-        /// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records</para>
+        /// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records.</para>
         /// <para>Versions: 4+</para>
         /// <para>Default: 0</para>
         /// </summary>
@@ -427,7 +429,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records</para>
+        /// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records.</para>
         /// <para>Versions: 4+</para>
         /// <para>Default: 0</para>
         /// </summary>
@@ -606,7 +608,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 13+</para>
             /// </summary>
             public Uuid TopicId
@@ -619,7 +621,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 13+</para>
             /// </summary>
             public FetchTopic WithTopicId(Uuid topicId)
@@ -821,7 +823,7 @@ namespace Kafka.Protocol
 
                 private Int32 _lastFetchedEpoch = new Int32(-1);
                 /// <summary>
-                /// <para>The epoch of the last fetched record or -1 if there is none</para>
+                /// <para>The epoch of the last fetched record or -1 if there is none.</para>
                 /// <para>Versions: 12+</para>
                 /// <para>Default: -1</para>
                 /// </summary>
@@ -837,7 +839,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The epoch of the last fetched record or -1 if there is none</para>
+                /// <para>The epoch of the last fetched record or -1 if there is none.</para>
                 /// <para>Versions: 12+</para>
                 /// <para>Default: -1</para>
                 /// </summary>
@@ -900,7 +902,7 @@ namespace Kafka.Protocol
                 private bool _replicaDirectoryIdIsSet;
                 private Uuid _replicaDirectoryId = Uuid.Default;
                 /// <summary>
-                /// <para>The directory id of the follower fetching</para>
+                /// <para>The directory id of the follower fetching.</para>
                 /// <para>Versions: 17+</para>
                 /// </summary>
                 public Uuid ReplicaDirectoryId
@@ -914,7 +916,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The directory id of the follower fetching</para>
+                /// <para>The directory id of the follower fetching.</para>
                 /// <para>Versions: 17+</para>
                 /// </summary>
                 public FetchPartition WithReplicaDirectoryId(Uuid replicaDirectoryId)
@@ -1046,7 +1048,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 13+</para>
             /// </summary>
             public Uuid TopicId
@@ -1059,7 +1061,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 13+</para>
             /// </summary>
             public ForgottenTopic WithTopicId(Uuid topicId)
@@ -1097,7 +1099,7 @@ namespace Kafka.Protocol
 
         private String _rackId = new String(string.Empty);
         /// <summary>
-        /// <para>Rack ID of the consumer making this request</para>
+        /// <para>Rack ID of the consumer making this request.</para>
         /// <para>Versions: 11+</para>
         /// <para>Default: Empty string</para>
         /// </summary>
@@ -1111,7 +1113,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Rack ID of the consumer making this request</para>
+        /// <para>Rack ID of the consumer making this request.</para>
         /// <para>Versions: 11+</para>
         /// <para>Default: Empty string</para>
         /// </summary>

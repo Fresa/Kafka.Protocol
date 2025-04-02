@@ -85,6 +85,7 @@ namespace Kafka.Protocol
 
         private NullableString _clusterId = NullableString.Default;
         /// <summary>
+        /// <para>The cluster id.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public String? ClusterId
@@ -97,6 +98,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The cluster id.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AddRaftVoterRequest WithClusterId(String? clusterId)
@@ -107,6 +109,7 @@ namespace Kafka.Protocol
 
         private Int32 _timeoutMs = Int32.Default;
         /// <summary>
+        /// <para>The maximum time to wait for the request to complete before returning.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 TimeoutMs
@@ -119,6 +122,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The maximum time to wait for the request to complete before returning.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AddRaftVoterRequest WithTimeoutMs(Int32 timeoutMs)
@@ -129,7 +133,7 @@ namespace Kafka.Protocol
 
         private Int32 _voterId = Int32.Default;
         /// <summary>
-        /// <para>The replica id of the voter getting added to the topic partition</para>
+        /// <para>The replica id of the voter getting added to the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 VoterId
@@ -142,7 +146,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The replica id of the voter getting added to the topic partition</para>
+        /// <para>The replica id of the voter getting added to the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AddRaftVoterRequest WithVoterId(Int32 voterId)
@@ -153,7 +157,7 @@ namespace Kafka.Protocol
 
         private Uuid _voterDirectoryId = Uuid.Default;
         /// <summary>
-        /// <para>The directory id of the voter getting added to the topic partition</para>
+        /// <para>The directory id of the voter getting added to the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Uuid VoterDirectoryId
@@ -166,7 +170,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The directory id of the voter getting added to the topic partition</para>
+        /// <para>The directory id of the voter getting added to the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AddRaftVoterRequest WithVoterDirectoryId(Uuid voterDirectoryId)
@@ -177,7 +181,7 @@ namespace Kafka.Protocol
 
         private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
         /// <summary>
-        /// <para>The endpoints that can be used to communicate with the voter</para>
+        /// <para>The endpoints that can be used to communicate with the voter.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, Listener> ListenersCollection
@@ -190,7 +194,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The endpoints that can be used to communicate with the voter</para>
+        /// <para>The endpoints that can be used to communicate with the voter.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AddRaftVoterRequest WithListenersCollection(params Func<Listener, Listener>[] createFields)
@@ -201,7 +205,7 @@ namespace Kafka.Protocol
 
         public delegate Listener CreateListener(Listener field);
         /// <summary>
-        /// <para>The endpoints that can be used to communicate with the voter</para>
+        /// <para>The endpoints that can be used to communicate with the voter.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AddRaftVoterRequest WithListenersCollection(IEnumerable<CreateListener> createFields)
@@ -264,7 +268,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The name of the endpoint</para>
+            /// <para>The name of the endpoint.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Name
@@ -277,7 +281,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The name of the endpoint</para>
+            /// <para>The name of the endpoint.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Listener WithName(String name)
@@ -288,7 +292,7 @@ namespace Kafka.Protocol
 
             private String _host = String.Default;
             /// <summary>
-            /// <para>The hostname</para>
+            /// <para>The hostname.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Host
@@ -301,7 +305,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The hostname</para>
+            /// <para>The hostname.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Listener WithHost(String host)
@@ -312,7 +316,7 @@ namespace Kafka.Protocol
 
             private UInt16 _port = UInt16.Default;
             /// <summary>
-            /// <para>The port</para>
+            /// <para>The port.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public UInt16 Port
@@ -325,7 +329,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The port</para>
+            /// <para>The port.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Listener WithPort(UInt16 port)

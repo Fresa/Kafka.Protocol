@@ -137,6 +137,7 @@ namespace Kafka.Protocol
 
         private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
         /// <summary>
+        /// <para>The response from the describe quorum API.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TopicData> TopicsCollection
@@ -149,6 +150,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The response from the describe quorum API.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeQuorumResponse WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
@@ -159,6 +161,7 @@ namespace Kafka.Protocol
 
         public delegate TopicData CreateTopicData(TopicData field);
         /// <summary>
+        /// <para>The response from the describe quorum API.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeQuorumResponse WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
@@ -243,6 +246,7 @@ namespace Kafka.Protocol
 
             private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
             /// <summary>
+            /// <para>The partition data.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<PartitionData> PartitionsCollection
@@ -255,6 +259,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The partition data.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
@@ -265,6 +270,7 @@ namespace Kafka.Protocol
 
             public delegate PartitionData CreatePartitionData(PartitionData field);
             /// <summary>
+            /// <para>The partition data.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
@@ -363,6 +369,7 @@ namespace Kafka.Protocol
 
                 private Int16 _errorCode = Int16.Default;
                 /// <summary>
+                /// <para>The partition error code.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int16 ErrorCode
@@ -375,6 +382,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The partition error code.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithErrorCode(Int16 errorCode)
@@ -435,7 +443,7 @@ namespace Kafka.Protocol
 
                 private Int32 _leaderEpoch = Int32.Default;
                 /// <summary>
-                /// <para>The latest known leader epoch</para>
+                /// <para>The latest known leader epoch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 LeaderEpoch
@@ -448,7 +456,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The latest known leader epoch</para>
+                /// <para>The latest known leader epoch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithLeaderEpoch(Int32 leaderEpoch)
@@ -459,6 +467,7 @@ namespace Kafka.Protocol
 
                 private Int64 _highWatermark = Int64.Default;
                 /// <summary>
+                /// <para>The high water mark.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int64 HighWatermark
@@ -471,6 +480,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The high water mark.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithHighWatermark(Int64 highWatermark)
@@ -481,6 +491,7 @@ namespace Kafka.Protocol
 
                 private Array<ReplicaState> _currentVotersCollection = Array.Empty<ReplicaState>();
                 /// <summary>
+                /// <para>The current voters of the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Array<ReplicaState> CurrentVotersCollection
@@ -493,6 +504,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The current voters of the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithCurrentVotersCollection(Array<ReplicaState> currentVotersCollection)
@@ -503,6 +515,7 @@ namespace Kafka.Protocol
 
                 private Array<ReplicaState> _observersCollection = Array.Empty<ReplicaState>();
                 /// <summary>
+                /// <para>The observers of the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Array<ReplicaState> ObserversCollection
@@ -515,6 +528,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The observers of the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithObserversCollection(Array<ReplicaState> observersCollection)
@@ -527,6 +541,7 @@ namespace Kafka.Protocol
 
         private Map<Int32, Node> _nodesCollection = Map<Int32, Node>.Default;
         /// <summary>
+        /// <para>The nodes in the quorum.</para>
         /// <para>Versions: 2+</para>
         /// </summary>
         public Map<Int32, Node> NodesCollection
@@ -541,6 +556,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The nodes in the quorum.</para>
         /// <para>Versions: 2+</para>
         /// </summary>
         public DescribeQuorumResponse WithNodesCollection(params Func<Node, Node>[] createFields)
@@ -551,6 +567,7 @@ namespace Kafka.Protocol
 
         public delegate Node CreateNode(Node field);
         /// <summary>
+        /// <para>The nodes in the quorum.</para>
         /// <para>Versions: 2+</para>
         /// </summary>
         public DescribeQuorumResponse WithNodesCollection(IEnumerable<CreateNode> createFields)
@@ -615,7 +632,7 @@ namespace Kafka.Protocol
 
             private Int32 _nodeId = Int32.Default;
             /// <summary>
-            /// <para>The ID of the associated node</para>
+            /// <para>The ID of the associated node.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public Int32 NodeId
@@ -630,7 +647,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The ID of the associated node</para>
+            /// <para>The ID of the associated node.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public Node WithNodeId(Int32 nodeId)
@@ -641,7 +658,7 @@ namespace Kafka.Protocol
 
             private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
             /// <summary>
-            /// <para>The listeners of this controller</para>
+            /// <para>The listeners of this controller.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public Map<String, Listener> ListenersCollection
@@ -656,7 +673,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The listeners of this controller</para>
+            /// <para>The listeners of this controller.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public Node WithListenersCollection(params Func<Listener, Listener>[] createFields)
@@ -667,7 +684,7 @@ namespace Kafka.Protocol
 
             public delegate Listener CreateListener(Listener field);
             /// <summary>
-            /// <para>The listeners of this controller</para>
+            /// <para>The listeners of this controller.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public Node WithListenersCollection(IEnumerable<CreateListener> createFields)
@@ -736,7 +753,7 @@ namespace Kafka.Protocol
 
                 private String _name = String.Default;
                 /// <summary>
-                /// <para>The name of the endpoint</para>
+                /// <para>The name of the endpoint.</para>
                 /// <para>Versions: 2+</para>
                 /// </summary>
                 public String Name
@@ -751,7 +768,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The name of the endpoint</para>
+                /// <para>The name of the endpoint.</para>
                 /// <para>Versions: 2+</para>
                 /// </summary>
                 public Listener WithName(String name)
@@ -762,7 +779,7 @@ namespace Kafka.Protocol
 
                 private String _host = String.Default;
                 /// <summary>
-                /// <para>The hostname</para>
+                /// <para>The hostname.</para>
                 /// <para>Versions: 2+</para>
                 /// </summary>
                 public String Host
@@ -777,7 +794,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The hostname</para>
+                /// <para>The hostname.</para>
                 /// <para>Versions: 2+</para>
                 /// </summary>
                 public Listener WithHost(String host)
@@ -788,7 +805,7 @@ namespace Kafka.Protocol
 
                 private UInt16 _port = UInt16.Default;
                 /// <summary>
-                /// <para>The port</para>
+                /// <para>The port.</para>
                 /// <para>Versions: 2+</para>
                 /// </summary>
                 public UInt16 Port
@@ -803,7 +820,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The port</para>
+                /// <para>The port.</para>
                 /// <para>Versions: 2+</para>
                 /// </summary>
                 public Listener WithPort(UInt16 port)
@@ -878,6 +895,7 @@ namespace Kafka.Protocol
 
             private Int32 _replicaId = Int32.Default;
             /// <summary>
+            /// <para>The ID of the replica.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int32 ReplicaId
@@ -890,6 +908,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The ID of the replica.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReplicaState WithReplicaId(Int32 replicaId)
@@ -900,6 +919,7 @@ namespace Kafka.Protocol
 
             private Uuid _replicaDirectoryId = Uuid.Default;
             /// <summary>
+            /// <para>The replica directory ID of the replica.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public Uuid ReplicaDirectoryId
@@ -914,6 +934,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The replica directory ID of the replica.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public ReplicaState WithReplicaDirectoryId(Uuid replicaDirectoryId)
@@ -924,7 +945,7 @@ namespace Kafka.Protocol
 
             private Int64 _logEndOffset = Int64.Default;
             /// <summary>
-            /// <para>The last known log end offset of the follower or -1 if it is unknown</para>
+            /// <para>The last known log end offset of the follower or -1 if it is unknown.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int64 LogEndOffset
@@ -937,7 +958,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The last known log end offset of the follower or -1 if it is unknown</para>
+            /// <para>The last known log end offset of the follower or -1 if it is unknown.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReplicaState WithLogEndOffset(Int64 logEndOffset)
@@ -948,7 +969,7 @@ namespace Kafka.Protocol
 
             private Int64 _lastFetchTimestamp = new Int64(-1);
             /// <summary>
-            /// <para>The last known leader wall clock time time when a follower fetched from the leader. This is reported as -1 both for the current leader or if it is unknown for a voter</para>
+            /// <para>The last known leader wall clock time time when a follower fetched from the leader. This is reported as -1 both for the current leader or if it is unknown for a voter.</para>
             /// <para>Versions: 1+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -962,7 +983,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The last known leader wall clock time time when a follower fetched from the leader. This is reported as -1 both for the current leader or if it is unknown for a voter</para>
+            /// <para>The last known leader wall clock time time when a follower fetched from the leader. This is reported as -1 both for the current leader or if it is unknown for a voter.</para>
             /// <para>Versions: 1+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -974,7 +995,7 @@ namespace Kafka.Protocol
 
             private Int64 _lastCaughtUpTimestamp = new Int64(-1);
             /// <summary>
-            /// <para>The leader wall clock append time of the offset for which the follower made the most recent fetch request. This is reported as the current time for the leader and -1 if unknown for a voter</para>
+            /// <para>The leader wall clock append time of the offset for which the follower made the most recent fetch request. This is reported as the current time for the leader and -1 if unknown for a voter.</para>
             /// <para>Versions: 1+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -988,7 +1009,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The leader wall clock append time of the offset for which the follower made the most recent fetch request. This is reported as the current time for the leader and -1 if unknown for a voter</para>
+            /// <para>The leader wall clock append time of the offset for which the follower made the most recent fetch request. This is reported as the current time for the leader and -1 if unknown for a voter.</para>
             /// <para>Versions: 1+</para>
             /// <para>Default: -1</para>
             /// </summary>

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DeleteTopicsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DeleteTopicsResponse does not support version {version}. Valid versions are: 0-6");
+                throw new UnsupportedVersionException($"DeleteTopicsResponse does not support version {version}. Valid versions are: 1-6");
             Version = version;
             IsFlexibleVersion = version >= 4;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(20);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(6);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -198,7 +198,7 @@ namespace Kafka.Protocol
 
             private NullableString _name = NullableString.Default;
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String? Name
@@ -213,7 +213,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DeletableTopicResult WithName(String? name)
@@ -224,7 +224,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>the unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 6+</para>
             /// </summary>
             public Uuid TopicId
@@ -237,7 +237,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>the unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 6+</para>
             /// </summary>
             public DeletableTopicResult WithTopicId(Uuid topicId)

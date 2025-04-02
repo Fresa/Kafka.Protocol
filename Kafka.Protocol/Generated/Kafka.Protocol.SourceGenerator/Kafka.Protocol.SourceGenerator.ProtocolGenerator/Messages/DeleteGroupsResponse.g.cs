@@ -103,7 +103,7 @@ namespace Kafka.Protocol
 
         private Map<String, DeletableGroupResult> _resultsCollection = Map<String, DeletableGroupResult>.Default;
         /// <summary>
-        /// <para>The deletion results</para>
+        /// <para>The deletion results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, DeletableGroupResult> ResultsCollection
@@ -116,7 +116,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The deletion results</para>
+        /// <para>The deletion results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DeleteGroupsResponse WithResultsCollection(params Func<DeletableGroupResult, DeletableGroupResult>[] createFields)
@@ -127,7 +127,7 @@ namespace Kafka.Protocol
 
         public delegate DeletableGroupResult CreateDeletableGroupResult(DeletableGroupResult field);
         /// <summary>
-        /// <para>The deletion results</para>
+        /// <para>The deletion results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DeleteGroupsResponse WithResultsCollection(IEnumerable<CreateDeletableGroupResult> createFields)
@@ -188,7 +188,7 @@ namespace Kafka.Protocol
 
             private String _groupId = String.Default;
             /// <summary>
-            /// <para>The group id</para>
+            /// <para>The group id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String GroupId
@@ -201,7 +201,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The group id</para>
+            /// <para>The group id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DeletableGroupResult WithGroupId(String groupId)

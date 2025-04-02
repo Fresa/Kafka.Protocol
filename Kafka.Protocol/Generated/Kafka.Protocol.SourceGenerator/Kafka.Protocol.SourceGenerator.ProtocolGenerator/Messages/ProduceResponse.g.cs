@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ProduceResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ProduceResponse does not support version {version}. Valid versions are: 0-11");
+                throw new UnsupportedVersionException($"ProduceResponse does not support version {version}. Valid versions are: 3-12");
             Version = version;
             IsFlexibleVersion = version >= 9;
         }
@@ -26,8 +26,8 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(0);
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(11);
+        public static readonly Int16 MinVersion = Int16.From(3);
+        public static readonly Int16 MaxVersion = Int16.From(12);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -99,7 +99,7 @@ namespace Kafka.Protocol
 
         private Map<String, TopicProduceResponse> _responsesCollection = Map<String, TopicProduceResponse>.Default;
         /// <summary>
-        /// <para>Each produce response</para>
+        /// <para>Each produce response.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, TopicProduceResponse> ResponsesCollection
@@ -112,7 +112,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Each produce response</para>
+        /// <para>Each produce response.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ProduceResponse WithResponsesCollection(params Func<TopicProduceResponse, TopicProduceResponse>[] createFields)
@@ -123,7 +123,7 @@ namespace Kafka.Protocol
 
         public delegate TopicProduceResponse CreateTopicProduceResponse(TopicProduceResponse field);
         /// <summary>
-        /// <para>Each produce response</para>
+        /// <para>Each produce response.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ProduceResponse WithResponsesCollection(IEnumerable<CreateTopicProduceResponse> createFields)
@@ -184,7 +184,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Name
@@ -197,7 +197,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicProduceResponse WithName(String name)
@@ -453,7 +453,7 @@ namespace Kafka.Protocol
 
                 private Array<BatchIndexAndErrorMessage> _recordErrorsCollection = Array.Empty<BatchIndexAndErrorMessage>();
                 /// <summary>
-                /// <para>The batch indices of records that caused the batch to be dropped</para>
+                /// <para>The batch indices of records that caused the batch to be dropped.</para>
                 /// <para>Versions: 8+</para>
                 /// </summary>
                 public Array<BatchIndexAndErrorMessage> RecordErrorsCollection
@@ -466,7 +466,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The batch indices of records that caused the batch to be dropped</para>
+                /// <para>The batch indices of records that caused the batch to be dropped.</para>
                 /// <para>Versions: 8+</para>
                 /// </summary>
                 public PartitionProduceResponse WithRecordErrorsCollection(params Func<BatchIndexAndErrorMessage, BatchIndexAndErrorMessage>[] createFields)
@@ -477,7 +477,7 @@ namespace Kafka.Protocol
 
                 public delegate BatchIndexAndErrorMessage CreateBatchIndexAndErrorMessage(BatchIndexAndErrorMessage field);
                 /// <summary>
-                /// <para>The batch indices of records that caused the batch to be dropped</para>
+                /// <para>The batch indices of records that caused the batch to be dropped.</para>
                 /// <para>Versions: 8+</para>
                 /// </summary>
                 public PartitionProduceResponse WithRecordErrorsCollection(IEnumerable<CreateBatchIndexAndErrorMessage> createFields)
@@ -542,7 +542,7 @@ namespace Kafka.Protocol
 
                     private Int32 _batchIndex = Int32.Default;
                     /// <summary>
-                    /// <para>The batch index of the record that cause the batch to be dropped</para>
+                    /// <para>The batch index of the record that caused the batch to be dropped.</para>
                     /// <para>Versions: 8+</para>
                     /// </summary>
                     public Int32 BatchIndex
@@ -557,7 +557,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The batch index of the record that cause the batch to be dropped</para>
+                    /// <para>The batch index of the record that caused the batch to be dropped.</para>
                     /// <para>Versions: 8+</para>
                     /// </summary>
                     public BatchIndexAndErrorMessage WithBatchIndex(Int32 batchIndex)
@@ -568,7 +568,7 @@ namespace Kafka.Protocol
 
                     private NullableString _batchIndexErrorMessage = new NullableString(null);
                     /// <summary>
-                    /// <para>The error message of the record that caused the batch to be dropped</para>
+                    /// <para>The error message of the record that caused the batch to be dropped.</para>
                     /// <para>Versions: 8+</para>
                     /// <para>Default: null</para>
                     /// </summary>
@@ -586,7 +586,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The error message of the record that caused the batch to be dropped</para>
+                    /// <para>The error message of the record that caused the batch to be dropped.</para>
                     /// <para>Versions: 8+</para>
                     /// <para>Default: null</para>
                     /// </summary>
@@ -599,7 +599,7 @@ namespace Kafka.Protocol
 
                 private NullableString _errorMessage = new NullableString(null);
                 /// <summary>
-                /// <para>The global error message summarizing the common root cause of the records that caused the batch to be dropped</para>
+                /// <para>The global error message summarizing the common root cause of the records that caused the batch to be dropped.</para>
                 /// <para>Versions: 8+</para>
                 /// <para>Default: null</para>
                 /// </summary>
@@ -615,7 +615,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The global error message summarizing the common root cause of the records that caused the batch to be dropped</para>
+                /// <para>The global error message summarizing the common root cause of the records that caused the batch to be dropped.</para>
                 /// <para>Versions: 8+</para>
                 /// <para>Default: null</para>
                 /// </summary>
@@ -628,6 +628,7 @@ namespace Kafka.Protocol
                 private bool _currentLeaderIsSet;
                 private LeaderIdAndEpoch _currentLeader = default !;
                 /// <summary>
+                /// <para>The leader broker that the producer should use for future requests.</para>
                 /// <para>Versions: 10+</para>
                 /// </summary>
                 public LeaderIdAndEpoch CurrentLeader
@@ -643,6 +644,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The leader broker that the producer should use for future requests.</para>
                 /// <para>Versions: 10+</para>
                 /// </summary>
                 public PartitionProduceResponse WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)
@@ -735,7 +737,7 @@ namespace Kafka.Protocol
 
                     private Int32 _leaderEpoch = new Int32(-1);
                     /// <summary>
-                    /// <para>The latest known leader epoch</para>
+                    /// <para>The latest known leader epoch.</para>
                     /// <para>Versions: 10+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -751,7 +753,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The latest known leader epoch</para>
+                    /// <para>The latest known leader epoch.</para>
                     /// <para>Versions: 10+</para>
                     /// <para>Default: -1</para>
                     /// </summary>

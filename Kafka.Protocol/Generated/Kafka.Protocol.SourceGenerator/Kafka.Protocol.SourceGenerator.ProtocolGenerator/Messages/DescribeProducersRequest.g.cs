@@ -77,6 +77,7 @@ namespace Kafka.Protocol
 
         private Array<TopicRequest> _topicsCollection = Array.Empty<TopicRequest>();
         /// <summary>
+        /// <para>The topics to list producers for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TopicRequest> TopicsCollection
@@ -89,6 +90,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The topics to list producers for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeProducersRequest WithTopicsCollection(params Func<TopicRequest, TopicRequest>[] createFields)
@@ -99,6 +101,7 @@ namespace Kafka.Protocol
 
         public delegate TopicRequest CreateTopicRequest(TopicRequest field);
         /// <summary>
+        /// <para>The topics to list producers for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeProducersRequest WithTopicsCollection(IEnumerable<CreateTopicRequest> createFields)

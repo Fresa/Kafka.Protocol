@@ -489,6 +489,7 @@ namespace Kafka.Protocol
 
                 private LeaderIdAndEpoch _currentLeader = default !;
                 /// <summary>
+                /// <para>The current leader of the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public LeaderIdAndEpoch CurrentLeader
@@ -501,6 +502,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The current leader of the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)

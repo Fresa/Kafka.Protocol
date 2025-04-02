@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public AlterPartitionRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"AlterPartitionRequest does not support version {version}. Valid versions are: 0-3");
+                throw new UnsupportedVersionException($"AlterPartitionRequest does not support version {version}. Valid versions are: 2-3");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(56);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(2);
         public static readonly Int16 MaxVersion = Int16.From(3);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -81,7 +81,7 @@ namespace Kafka.Protocol
 
         private Int32 _brokerId = Int32.Default;
         /// <summary>
-        /// <para>The ID of the requesting broker</para>
+        /// <para>The ID of the requesting broker.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 BrokerId
@@ -94,7 +94,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The ID of the requesting broker</para>
+        /// <para>The ID of the requesting broker.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AlterPartitionRequest WithBrokerId(Int32 brokerId)
@@ -105,7 +105,7 @@ namespace Kafka.Protocol
 
         private Int64 _brokerEpoch = new Int64(-1);
         /// <summary>
-        /// <para>The epoch of the requesting broker</para>
+        /// <para>The epoch of the requesting broker.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -119,7 +119,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The epoch of the requesting broker</para>
+        /// <para>The epoch of the requesting broker.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -131,6 +131,7 @@ namespace Kafka.Protocol
 
         private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
         /// <summary>
+        /// <para>The topics to alter ISRs for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TopicData> TopicsCollection
@@ -143,6 +144,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The topics to alter ISRs for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AlterPartitionRequest WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
@@ -153,6 +155,7 @@ namespace Kafka.Protocol
 
         public delegate TopicData CreateTopicData(TopicData field);
         /// <summary>
+        /// <para>The topics to alter ISRs for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AlterPartitionRequest WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
@@ -178,12 +181,10 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => (Version >= 0 && Version <= 1 ? _topicName.GetSize(IsFlexibleVersion) : 0) + (Version >= 2 ? _topicId.GetSize(IsFlexibleVersion) : 0) + _partitionsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => (Version >= 2 ? _topicId.GetSize(IsFlexibleVersion) : 0) + _partitionsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new TopicData(version);
-                if (instance.Version >= 0 && instance.Version <= 1)
-                    instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.Version >= 2)
                     instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -206,8 +207,6 @@ namespace Kafka.Protocol
             ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
             internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
             {
-                if (Version >= 0 && Version <= 1)
-                    await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (Version >= 2)
                     await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -217,33 +216,9 @@ namespace Kafka.Protocol
                 }
             }
 
-            private String _topicName = String.Default;
-            /// <summary>
-            /// <para>The name of the topic to alter ISRs for</para>
-            /// <para>Versions: 0-1</para>
-            /// </summary>
-            public String TopicName
-            {
-                get => _topicName;
-                private set
-                {
-                    _topicName = value;
-                }
-            }
-
-            /// <summary>
-            /// <para>The name of the topic to alter ISRs for</para>
-            /// <para>Versions: 0-1</para>
-            /// </summary>
-            public TopicData WithTopicName(String topicName)
-            {
-                TopicName = topicName;
-                return this;
-            }
-
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The ID of the topic to alter ISRs for</para>
+            /// <para>The ID of the topic to alter ISRs for.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public Uuid TopicId
@@ -256,7 +231,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The ID of the topic to alter ISRs for</para>
+            /// <para>The ID of the topic to alter ISRs for.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public TopicData WithTopicId(Uuid topicId)
@@ -267,6 +242,7 @@ namespace Kafka.Protocol
 
             private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
             /// <summary>
+            /// <para>The partitions to alter ISRs for.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<PartitionData> PartitionsCollection
@@ -279,6 +255,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The partitions to alter ISRs for.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
@@ -289,6 +266,7 @@ namespace Kafka.Protocol
 
             public delegate PartitionData CreatePartitionData(PartitionData field);
             /// <summary>
+            /// <para>The partitions to alter ISRs for.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
@@ -363,7 +341,7 @@ namespace Kafka.Protocol
 
                 private Int32 _partitionIndex = Int32.Default;
                 /// <summary>
-                /// <para>The partition index</para>
+                /// <para>The partition index.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 PartitionIndex
@@ -376,7 +354,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The partition index</para>
+                /// <para>The partition index.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithPartitionIndex(Int32 partitionIndex)
@@ -387,7 +365,7 @@ namespace Kafka.Protocol
 
                 private Int32 _leaderEpoch = Int32.Default;
                 /// <summary>
-                /// <para>The leader epoch of this partition</para>
+                /// <para>The leader epoch of this partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 LeaderEpoch
@@ -400,7 +378,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The leader epoch of this partition</para>
+                /// <para>The leader epoch of this partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithLeaderEpoch(Int32 leaderEpoch)
@@ -437,6 +415,7 @@ namespace Kafka.Protocol
 
                 private Array<BrokerState> _newIsrWithEpochsCollection = Array.Empty<BrokerState>();
                 /// <summary>
+                /// <para>The ISR for this partition.</para>
                 /// <para>Versions: 3+</para>
                 /// </summary>
                 public Array<BrokerState> NewIsrWithEpochsCollection
@@ -451,6 +430,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The ISR for this partition.</para>
                 /// <para>Versions: 3+</para>
                 /// </summary>
                 public PartitionData WithNewIsrWithEpochsCollection(params Func<BrokerState, BrokerState>[] createFields)
@@ -461,6 +441,7 @@ namespace Kafka.Protocol
 
                 public delegate BrokerState CreateBrokerState(BrokerState field);
                 /// <summary>
+                /// <para>The ISR for this partition.</para>
                 /// <para>Versions: 3+</para>
                 /// </summary>
                 public PartitionData WithNewIsrWithEpochsCollection(IEnumerable<CreateBrokerState> createFields)
@@ -608,7 +589,7 @@ namespace Kafka.Protocol
 
                 private Int32 _partitionEpoch = Int32.Default;
                 /// <summary>
-                /// <para>The expected epoch of the partition which is being updated. For legacy cluster this is the ZkVersion in the LeaderAndIsr request.</para>
+                /// <para>The expected epoch of the partition which is being updated.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 PartitionEpoch
@@ -621,7 +602,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The expected epoch of the partition which is being updated. For legacy cluster this is the ZkVersion in the LeaderAndIsr request.</para>
+                /// <para>The expected epoch of the partition which is being updated.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithPartitionEpoch(Int32 partitionEpoch)

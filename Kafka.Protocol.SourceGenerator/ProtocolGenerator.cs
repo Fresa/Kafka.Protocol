@@ -108,7 +108,8 @@ internal sealed class ProtocolGenerator : IIncrementalGenerator
                 {
                     throw new JsonException($"Caught exception deserializing: {file.Path}: {e.Message} {e.StackTrace}");
                 }
-            });
+            })
+            .Where(message => !VersionRange.Parse(message.ValidVersions).None);
         var requestMessages = messageDefinitions
             .Where(message => message.IsRequest())
             .Collect()

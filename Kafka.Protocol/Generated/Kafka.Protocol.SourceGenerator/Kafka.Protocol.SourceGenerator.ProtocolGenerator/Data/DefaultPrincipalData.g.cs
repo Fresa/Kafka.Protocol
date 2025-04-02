@@ -80,7 +80,7 @@ namespace Kafka.Protocol
 
         private String _type = String.Default;
         /// <summary>
-        /// <para>The principal type</para>
+        /// <para>The principal type.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public String Type
@@ -93,7 +93,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The principal type</para>
+        /// <para>The principal type.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DefaultPrincipalData WithType(String type)
@@ -104,7 +104,7 @@ namespace Kafka.Protocol
 
         private String _name = String.Default;
         /// <summary>
-        /// <para>The principal name</para>
+        /// <para>The principal name.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public String Name
@@ -117,7 +117,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The principal name</para>
+        /// <para>The principal name.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DefaultPrincipalData WithName(String name)

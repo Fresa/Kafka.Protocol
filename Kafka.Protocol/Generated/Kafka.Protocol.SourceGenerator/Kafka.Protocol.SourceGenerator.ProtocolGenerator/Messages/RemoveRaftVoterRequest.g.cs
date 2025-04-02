@@ -81,6 +81,7 @@ namespace Kafka.Protocol
 
         private NullableString _clusterId = NullableString.Default;
         /// <summary>
+        /// <para>The cluster id of the request.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public String? ClusterId
@@ -93,6 +94,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The cluster id of the request.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public RemoveRaftVoterRequest WithClusterId(String? clusterId)
@@ -103,7 +105,7 @@ namespace Kafka.Protocol
 
         private Int32 _voterId = Int32.Default;
         /// <summary>
-        /// <para>The replica id of the voter getting removed from the topic partition</para>
+        /// <para>The replica id of the voter getting removed from the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 VoterId
@@ -116,7 +118,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The replica id of the voter getting removed from the topic partition</para>
+        /// <para>The replica id of the voter getting removed from the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public RemoveRaftVoterRequest WithVoterId(Int32 voterId)
@@ -127,7 +129,7 @@ namespace Kafka.Protocol
 
         private Uuid _voterDirectoryId = Uuid.Default;
         /// <summary>
-        /// <para>The directory id of the voter getting removed from the topic partition</para>
+        /// <para>The directory id of the voter getting removed from the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Uuid VoterDirectoryId
@@ -140,7 +142,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The directory id of the voter getting removed from the topic partition</para>
+        /// <para>The directory id of the voter getting removed from the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public RemoveRaftVoterRequest WithVoterDirectoryId(Uuid voterDirectoryId)

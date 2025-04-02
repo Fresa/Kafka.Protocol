@@ -240,7 +240,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Name
@@ -253,7 +253,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReassignableTopicResponse WithName(String name)
@@ -264,7 +264,7 @@ namespace Kafka.Protocol
 
             private Array<ReassignablePartitionResponse> _partitionsCollection = Array.Empty<ReassignablePartitionResponse>();
             /// <summary>
-            /// <para>The responses to partitions to reassign</para>
+            /// <para>The responses to partitions to reassign.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<ReassignablePartitionResponse> PartitionsCollection
@@ -277,7 +277,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The responses to partitions to reassign</para>
+            /// <para>The responses to partitions to reassign.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReassignableTopicResponse WithPartitionsCollection(params Func<ReassignablePartitionResponse, ReassignablePartitionResponse>[] createFields)
@@ -288,7 +288,7 @@ namespace Kafka.Protocol
 
             public delegate ReassignablePartitionResponse CreateReassignablePartitionResponse(ReassignablePartitionResponse field);
             /// <summary>
-            /// <para>The responses to partitions to reassign</para>
+            /// <para>The responses to partitions to reassign.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReassignableTopicResponse WithPartitionsCollection(IEnumerable<CreateReassignablePartitionResponse> createFields)

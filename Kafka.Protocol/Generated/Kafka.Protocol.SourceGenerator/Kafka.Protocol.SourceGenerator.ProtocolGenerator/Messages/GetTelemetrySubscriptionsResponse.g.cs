@@ -261,7 +261,7 @@ namespace Kafka.Protocol
 
         private Boolean _deltaTemporality = Boolean.Default;
         /// <summary>
-        /// <para>Flag to indicate monotonic/counter metrics are to be emitted as deltas or cumulative values</para>
+        /// <para>Flag to indicate monotonic/counter metrics are to be emitted as deltas or cumulative values.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Boolean DeltaTemporality
@@ -274,7 +274,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Flag to indicate monotonic/counter metrics are to be emitted as deltas or cumulative values</para>
+        /// <para>Flag to indicate monotonic/counter metrics are to be emitted as deltas or cumulative values.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public GetTelemetrySubscriptionsResponse WithDeltaTemporality(Boolean deltaTemporality)

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeGroupsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeGroupsResponse does not support version {version}. Valid versions are: 0-5");
+                throw new UnsupportedVersionException($"DescribeGroupsResponse does not support version {version}. Valid versions are: 0-6");
             Version = version;
             IsFlexibleVersion = version >= 5;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(15);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(5);
+        public static readonly Int16 MaxVersion = Int16.From(6);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -155,11 +155,13 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _errorCode.GetSize(IsFlexibleVersion) + _groupId.GetSize(IsFlexibleVersion) + _groupState.GetSize(IsFlexibleVersion) + _protocolType.GetSize(IsFlexibleVersion) + _protocolData.GetSize(IsFlexibleVersion) + _membersCollection.GetSize(IsFlexibleVersion) + (Version >= 3 ? _authorizedOperations.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => _errorCode.GetSize(IsFlexibleVersion) + (Version >= 6 ? _errorMessage.GetSize(IsFlexibleVersion) : 0) + _groupId.GetSize(IsFlexibleVersion) + _groupState.GetSize(IsFlexibleVersion) + _protocolType.GetSize(IsFlexibleVersion) + _protocolData.GetSize(IsFlexibleVersion) + _membersCollection.GetSize(IsFlexibleVersion) + (Version >= 3 ? _authorizedOperations.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<DescribedGroup> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new DescribedGroup(version);
                 instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 6)
+                    instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.GroupId = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.GroupState = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.ProtocolType = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -187,6 +189,8 @@ namespace Kafka.Protocol
             internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
             {
                 await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 6)
+                    await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _groupId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _groupState.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _protocolType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -221,6 +225,36 @@ namespace Kafka.Protocol
             public DescribedGroup WithErrorCode(Int16 errorCode)
             {
                 ErrorCode = errorCode;
+                return this;
+            }
+
+            private NullableString _errorMessage = new NullableString(null);
+            /// <summary>
+            /// <para>The describe error message, or null if there was no error.</para>
+            /// <para>Versions: 6+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public String? ErrorMessage
+            {
+                get => _errorMessage;
+                private set
+                {
+                    if (Version >= 6 == false)
+                        throw new UnsupportedVersionException($"ErrorMessage does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
+                    if (Version >= 6 == false && value == null)
+                        throw new UnsupportedVersionException($"ErrorMessage does not support null for version {Version}. Supported versions for null value: 6+");
+                    _errorMessage = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The describe error message, or null if there was no error.</para>
+            /// <para>Versions: 6+</para>
+            /// <para>Default: null</para>
+            /// </summary>
+            public DescribedGroup WithErrorMessage(String? errorMessage)
+            {
+                ErrorMessage = errorMessage;
                 return this;
             }
 
@@ -417,7 +451,7 @@ namespace Kafka.Protocol
 
                 private String _memberId = String.Default;
                 /// <summary>
-                /// <para>The member ID assigned by the group coordinator.</para>
+                /// <para>The member id.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public String MemberId
@@ -430,7 +464,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The member ID assigned by the group coordinator.</para>
+                /// <para>The member id.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public DescribedGroupMember WithMemberId(String memberId)

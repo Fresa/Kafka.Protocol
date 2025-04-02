@@ -76,7 +76,7 @@ namespace Kafka.Protocol
 
         private Int16 _version = Int16.Default;
         /// <summary>
-        /// <para>The version of the snapshot footer record</para>
+        /// <para>The version of the snapshot footer record.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 Version_
@@ -89,7 +89,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The version of the snapshot footer record</para>
+        /// <para>The version of the snapshot footer record.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public SnapshotFooterRecord WithVersion_(Int16 version)

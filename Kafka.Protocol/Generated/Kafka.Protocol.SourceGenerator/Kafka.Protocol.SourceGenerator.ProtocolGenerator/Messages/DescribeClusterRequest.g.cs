@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeClusterRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeClusterRequest does not support version {version}. Valid versions are: 0-1");
+                throw new UnsupportedVersionException($"DescribeClusterRequest does not support version {version}. Valid versions are: 0-2");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(60);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,13 +45,15 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _includeClusterAuthorizedOperations.GetSize(IsFlexibleVersion) + (Version >= 1 ? _endpointType.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _includeClusterAuthorizedOperations.GetSize(IsFlexibleVersion) + (Version >= 1 ? _endpointType.GetSize(IsFlexibleVersion) : 0) + (Version >= 2 ? _includeFencedBrokers.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<DescribeClusterRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new DescribeClusterRequest(version);
             instance.IncludeClusterAuthorizedOperations = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 1)
                 instance.EndpointType = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 2)
+                instance.IncludeFencedBrokers = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -73,6 +75,8 @@ namespace Kafka.Protocol
             await _includeClusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 1)
                 await _endpointType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 2)
+                await _includeFencedBrokers.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -128,6 +132,32 @@ namespace Kafka.Protocol
         public DescribeClusterRequest WithEndpointType(Int8 endpointType)
         {
             EndpointType = endpointType;
+            return this;
+        }
+
+        private Boolean _includeFencedBrokers = Boolean.Default;
+        /// <summary>
+        /// <para>Whether to include fenced brokers when listing brokers.</para>
+        /// <para>Versions: 2+</para>
+        /// </summary>
+        public Boolean IncludeFencedBrokers
+        {
+            get => _includeFencedBrokers;
+            private set
+            {
+                if (Version >= 2 == false)
+                    throw new UnsupportedVersionException($"IncludeFencedBrokers does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+                _includeFencedBrokers = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>Whether to include fenced brokers when listing brokers.</para>
+        /// <para>Versions: 2+</para>
+        /// </summary>
+        public DescribeClusterRequest WithIncludeFencedBrokers(Boolean includeFencedBrokers)
+        {
+            IncludeFencedBrokers = includeFencedBrokers;
             return this;
         }
 

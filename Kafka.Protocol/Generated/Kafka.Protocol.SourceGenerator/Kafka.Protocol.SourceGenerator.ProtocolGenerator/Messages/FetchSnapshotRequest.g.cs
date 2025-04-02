@@ -97,7 +97,7 @@ namespace Kafka.Protocol
         private bool _clusterIdIsSet;
         private NullableString _clusterId = new NullableString(null);
         /// <summary>
-        /// <para>The clusterId if known, this is used to validate metadata fetches prior to broker registration</para>
+        /// <para>The clusterId if known, this is used to validate metadata fetches prior to broker registration.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -112,7 +112,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The clusterId if known, this is used to validate metadata fetches prior to broker registration</para>
+        /// <para>The clusterId if known, this is used to validate metadata fetches prior to broker registration.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -124,7 +124,7 @@ namespace Kafka.Protocol
 
         private Int32 _replicaId = new Int32(-1);
         /// <summary>
-        /// <para>The broker ID of the follower</para>
+        /// <para>The broker ID of the follower.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -138,7 +138,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The broker ID of the follower</para>
+        /// <para>The broker ID of the follower.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -150,7 +150,7 @@ namespace Kafka.Protocol
 
         private Int32 _maxBytes = new Int32(0x7fffffff);
         /// <summary>
-        /// <para>The maximum bytes to fetch from all of the snapshots</para>
+        /// <para>The maximum bytes to fetch from all of the snapshots.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: 0x7fffffff</para>
         /// </summary>
@@ -164,7 +164,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The maximum bytes to fetch from all of the snapshots</para>
+        /// <para>The maximum bytes to fetch from all of the snapshots.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: 0x7fffffff</para>
         /// </summary>
@@ -176,7 +176,7 @@ namespace Kafka.Protocol
 
         private Array<TopicSnapshot> _topicsCollection = Array.Empty<TopicSnapshot>();
         /// <summary>
-        /// <para>The topics to fetch</para>
+        /// <para>The topics to fetch.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TopicSnapshot> TopicsCollection
@@ -189,7 +189,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The topics to fetch</para>
+        /// <para>The topics to fetch.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public FetchSnapshotRequest WithTopicsCollection(params Func<TopicSnapshot, TopicSnapshot>[] createFields)
@@ -200,7 +200,7 @@ namespace Kafka.Protocol
 
         public delegate TopicSnapshot CreateTopicSnapshot(TopicSnapshot field);
         /// <summary>
-        /// <para>The topics to fetch</para>
+        /// <para>The topics to fetch.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public FetchSnapshotRequest WithTopicsCollection(IEnumerable<CreateTopicSnapshot> createFields)
@@ -261,7 +261,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The name of the topic to fetch</para>
+            /// <para>The name of the topic to fetch.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Name
@@ -274,7 +274,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The name of the topic to fetch</para>
+            /// <para>The name of the topic to fetch.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicSnapshot WithName(String name)
@@ -285,7 +285,7 @@ namespace Kafka.Protocol
 
             private Array<PartitionSnapshot> _partitionsCollection = Array.Empty<PartitionSnapshot>();
             /// <summary>
-            /// <para>The partitions to fetch</para>
+            /// <para>The partitions to fetch.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<PartitionSnapshot> PartitionsCollection
@@ -298,7 +298,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The partitions to fetch</para>
+            /// <para>The partitions to fetch.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicSnapshot WithPartitionsCollection(params Func<PartitionSnapshot, PartitionSnapshot>[] createFields)
@@ -309,7 +309,7 @@ namespace Kafka.Protocol
 
             public delegate PartitionSnapshot CreatePartitionSnapshot(PartitionSnapshot field);
             /// <summary>
-            /// <para>The partitions to fetch</para>
+            /// <para>The partitions to fetch.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicSnapshot WithPartitionsCollection(IEnumerable<CreatePartitionSnapshot> createFields)
@@ -392,7 +392,7 @@ namespace Kafka.Protocol
 
                 private Int32 _partition = Int32.Default;
                 /// <summary>
-                /// <para>The partition index</para>
+                /// <para>The partition index.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 Partition
@@ -405,7 +405,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The partition index</para>
+                /// <para>The partition index.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionSnapshot WithPartition(Int32 partition)
@@ -416,7 +416,7 @@ namespace Kafka.Protocol
 
                 private Int32 _currentLeaderEpoch = Int32.Default;
                 /// <summary>
-                /// <para>The current leader epoch of the partition, -1 for unknown leader epoch</para>
+                /// <para>The current leader epoch of the partition, -1 for unknown leader epoch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 CurrentLeaderEpoch
@@ -429,7 +429,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The current leader epoch of the partition, -1 for unknown leader epoch</para>
+                /// <para>The current leader epoch of the partition, -1 for unknown leader epoch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionSnapshot WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
@@ -440,7 +440,7 @@ namespace Kafka.Protocol
 
                 private SnapshotId _snapshotId = default !;
                 /// <summary>
-                /// <para>The snapshot endOffset and epoch to fetch</para>
+                /// <para>The snapshot endOffset and epoch to fetch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public SnapshotId SnapshotId_
@@ -453,7 +453,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The snapshot endOffset and epoch to fetch</para>
+                /// <para>The snapshot endOffset and epoch to fetch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionSnapshot WithSnapshotId_(Func<SnapshotId, SnapshotId> createField)
@@ -514,6 +514,7 @@ namespace Kafka.Protocol
 
                     private Int64 _endOffset = Int64.Default;
                     /// <summary>
+                    /// <para>The end offset of the snapshot.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int64 EndOffset
@@ -526,6 +527,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The end offset of the snapshot.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public SnapshotId WithEndOffset(Int64 endOffset)
@@ -536,6 +538,7 @@ namespace Kafka.Protocol
 
                     private Int32 _epoch = Int32.Default;
                     /// <summary>
+                    /// <para>The epoch of the snapshot.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int32 Epoch
@@ -548,6 +551,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The epoch of the snapshot.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public SnapshotId WithEpoch(Int32 epoch)
@@ -559,7 +563,7 @@ namespace Kafka.Protocol
 
                 private Int64 _position = Int64.Default;
                 /// <summary>
-                /// <para>The byte position within the snapshot to start fetching from</para>
+                /// <para>The byte position within the snapshot to start fetching from.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int64 Position
@@ -572,7 +576,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The byte position within the snapshot to start fetching from</para>
+                /// <para>The byte position within the snapshot to start fetching from.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionSnapshot WithPosition(Int64 position)
@@ -584,7 +588,7 @@ namespace Kafka.Protocol
                 private bool _replicaDirectoryIdIsSet;
                 private Uuid _replicaDirectoryId = Uuid.Default;
                 /// <summary>
-                /// <para>The directory id of the follower fetching</para>
+                /// <para>The directory id of the follower fetching.</para>
                 /// <para>Versions: 1+</para>
                 /// </summary>
                 public Uuid ReplicaDirectoryId
@@ -598,7 +602,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The directory id of the follower fetching</para>
+                /// <para>The directory id of the follower fetching.</para>
                 /// <para>Versions: 1+</para>
                 /// </summary>
                 public PartitionSnapshot WithReplicaDirectoryId(Uuid replicaDirectoryId)

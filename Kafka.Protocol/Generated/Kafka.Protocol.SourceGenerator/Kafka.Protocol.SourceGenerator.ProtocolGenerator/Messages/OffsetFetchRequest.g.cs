@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public OffsetFetchRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 0-9");
+                throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 1-9");
             Version = version;
             IsFlexibleVersion = version >= 6;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(9);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(9);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -263,7 +263,7 @@ namespace Kafka.Protocol
 
         private Array<OffsetFetchRequestGroup> _groupsCollection = Array.Empty<OffsetFetchRequestGroup>();
         /// <summary>
-        /// <para>Each group we would like to fetch offsets for</para>
+        /// <para>Each group we would like to fetch offsets for.</para>
         /// <para>Versions: 8+</para>
         /// </summary>
         public Array<OffsetFetchRequestGroup> GroupsCollection
@@ -278,7 +278,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Each group we would like to fetch offsets for</para>
+        /// <para>Each group we would like to fetch offsets for.</para>
         /// <para>Versions: 8+</para>
         /// </summary>
         public OffsetFetchRequest WithGroupsCollection(params Func<OffsetFetchRequestGroup, OffsetFetchRequestGroup>[] createFields)
@@ -289,7 +289,7 @@ namespace Kafka.Protocol
 
         public delegate OffsetFetchRequestGroup CreateOffsetFetchRequestGroup(OffsetFetchRequestGroup field);
         /// <summary>
-        /// <para>Each group we would like to fetch offsets for</para>
+        /// <para>Each group we would like to fetch offsets for.</para>
         /// <para>Versions: 8+</para>
         /// </summary>
         public OffsetFetchRequest WithGroupsCollection(IEnumerable<CreateOffsetFetchRequestGroup> createFields)
@@ -388,7 +388,7 @@ namespace Kafka.Protocol
 
             private NullableString _memberId = new NullableString(null);
             /// <summary>
-            /// <para>The member ID assigned by the group coordinator if using the new consumer protocol (KIP-848).</para>
+            /// <para>The member id.</para>
             /// <para>Versions: 9+</para>
             /// <para>Default: null</para>
             /// </summary>
@@ -404,7 +404,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The member ID assigned by the group coordinator if using the new consumer protocol (KIP-848).</para>
+            /// <para>The member id.</para>
             /// <para>Versions: 9+</para>
             /// <para>Default: null</para>
             /// </summary>

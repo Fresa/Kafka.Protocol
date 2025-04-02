@@ -164,7 +164,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Name
@@ -177,7 +177,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicRequest WithName(String name)
@@ -291,7 +291,7 @@ namespace Kafka.Protocol
 
             private String _topicName = String.Default;
             /// <summary>
-            /// <para>The name for the first topic to process</para>
+            /// <para>The name for the first topic to process.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String TopicName
@@ -304,7 +304,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The name for the first topic to process</para>
+            /// <para>The name for the first topic to process.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Cursor WithTopicName(String topicName)
@@ -315,7 +315,7 @@ namespace Kafka.Protocol
 
             private Int32 _partitionIndex = Int32.Default;
             /// <summary>
-            /// <para>The partition index to start with</para>
+            /// <para>The partition index to start with.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int32 PartitionIndex
@@ -328,7 +328,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The partition index to start with</para>
+            /// <para>The partition index to start with.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Cursor WithPartitionIndex(Int32 partitionIndex)

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DeleteTopicsRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DeleteTopicsRequest does not support version {version}. Valid versions are: 0-6");
+                throw new UnsupportedVersionException($"DeleteTopicsRequest does not support version {version}. Valid versions are: 1-6");
             Version = version;
             IsFlexibleVersion = version >= 4;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(20);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(6);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -85,7 +85,7 @@ namespace Kafka.Protocol
 
         private Array<DeleteTopicState> _topicsCollection = Array.Empty<DeleteTopicState>();
         /// <summary>
-        /// <para>The name or topic ID of the topic</para>
+        /// <para>The name or topic ID of the topic.</para>
         /// <para>Versions: 6+</para>
         /// </summary>
         public Array<DeleteTopicState> TopicsCollection
@@ -100,7 +100,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The name or topic ID of the topic</para>
+        /// <para>The name or topic ID of the topic.</para>
         /// <para>Versions: 6+</para>
         /// </summary>
         public DeleteTopicsRequest WithTopicsCollection(params Func<DeleteTopicState, DeleteTopicState>[] createFields)
@@ -111,7 +111,7 @@ namespace Kafka.Protocol
 
         public delegate DeleteTopicState CreateDeleteTopicState(DeleteTopicState field);
         /// <summary>
-        /// <para>The name or topic ID of the topic</para>
+        /// <para>The name or topic ID of the topic.</para>
         /// <para>Versions: 6+</para>
         /// </summary>
         public DeleteTopicsRequest WithTopicsCollection(IEnumerable<CreateDeleteTopicState> createFields)
@@ -176,7 +176,7 @@ namespace Kafka.Protocol
 
             private NullableString _name = new NullableString(null);
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 6+</para>
             /// <para>Default: null</para>
             /// </summary>
@@ -194,7 +194,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 6+</para>
             /// <para>Default: null</para>
             /// </summary>
@@ -206,7 +206,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 6+</para>
             /// </summary>
             public Uuid TopicId
@@ -221,7 +221,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 6+</para>
             /// </summary>
             public DeleteTopicState WithTopicId(Uuid topicId)
@@ -233,7 +233,7 @@ namespace Kafka.Protocol
 
         private Array<String> _topicNamesCollection = Array.Empty<String>();
         /// <summary>
-        /// <para>The names of the topics to delete</para>
+        /// <para>The names of the topics to delete.</para>
         /// <para>Versions: 0-5</para>
         /// </summary>
         public Array<String> TopicNamesCollection
@@ -246,7 +246,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The names of the topics to delete</para>
+        /// <para>The names of the topics to delete.</para>
         /// <para>Versions: 0-5</para>
         /// </summary>
         public DeleteTopicsRequest WithTopicNamesCollection(Array<String> topicNamesCollection)

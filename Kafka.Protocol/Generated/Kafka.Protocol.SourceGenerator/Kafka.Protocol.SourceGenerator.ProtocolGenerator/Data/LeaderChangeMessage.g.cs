@@ -82,7 +82,7 @@ namespace Kafka.Protocol
 
         private Int16 _version = Int16.Default;
         /// <summary>
-        /// <para>The version of the leader change message</para>
+        /// <para>The version of the leader change message.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 Version_
@@ -95,7 +95,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The version of the leader change message</para>
+        /// <para>The version of the leader change message.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public LeaderChangeMessage WithVersion_(Int16 version)
@@ -106,7 +106,7 @@ namespace Kafka.Protocol
 
         private Int32 _leaderId = Int32.Default;
         /// <summary>
-        /// <para>The ID of the newly elected leader</para>
+        /// <para>The ID of the newly elected leader.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 LeaderId
@@ -119,7 +119,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The ID of the newly elected leader</para>
+        /// <para>The ID of the newly elected leader.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public LeaderChangeMessage WithLeaderId(Int32 leaderId)
@@ -130,7 +130,7 @@ namespace Kafka.Protocol
 
         private Array<Voter> _votersCollection = Array.Empty<Voter>();
         /// <summary>
-        /// <para>The set of voters in the quorum for this epoch</para>
+        /// <para>The set of voters in the quorum for this epoch.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<Voter> VotersCollection
@@ -143,7 +143,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The set of voters in the quorum for this epoch</para>
+        /// <para>The set of voters in the quorum for this epoch.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public LeaderChangeMessage WithVotersCollection(Array<Voter> votersCollection)
@@ -154,7 +154,7 @@ namespace Kafka.Protocol
 
         private Array<Voter> _grantingVotersCollection = Array.Empty<Voter>();
         /// <summary>
-        /// <para>The voters who voted for the leader at the time of election</para>
+        /// <para>The voters who voted for the leader at the time of election.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<Voter> GrantingVotersCollection
@@ -167,7 +167,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The voters who voted for the leader at the time of election</para>
+        /// <para>The voters who voted for the leader at the time of election.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public LeaderChangeMessage WithGrantingVotersCollection(Array<Voter> grantingVotersCollection)
@@ -230,6 +230,7 @@ namespace Kafka.Protocol
 
             private Int32 _voterId = Int32.Default;
             /// <summary>
+            /// <para>The ID of the voter.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int32 VoterId
@@ -242,6 +243,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The ID of the voter.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Voter WithVoterId(Int32 voterId)
@@ -252,7 +254,7 @@ namespace Kafka.Protocol
 
             private Uuid _voterDirectoryId = Uuid.Default;
             /// <summary>
-            /// <para>The directory id of the voter</para>
+            /// <para>The directory id of the voter.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public Uuid VoterDirectoryId
@@ -267,7 +269,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The directory id of the voter</para>
+            /// <para>The directory id of the voter.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public Voter WithVoterDirectoryId(Uuid voterDirectoryId)

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeDelegationTokenResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeDelegationTokenResponse does not support version {version}. Valid versions are: 0-3");
+                throw new UnsupportedVersionException($"DescribeDelegationTokenResponse does not support version {version}. Valid versions are: 1-3");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(41);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(3);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -515,7 +515,7 @@ namespace Kafka.Protocol
 
                 private String _principalType = String.Default;
                 /// <summary>
-                /// <para>The renewer principal type</para>
+                /// <para>The renewer principal type.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public String PrincipalType
@@ -528,7 +528,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The renewer principal type</para>
+                /// <para>The renewer principal type.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public DescribedDelegationTokenRenewer WithPrincipalType(String principalType)
@@ -539,7 +539,7 @@ namespace Kafka.Protocol
 
                 private String _principalName = String.Default;
                 /// <summary>
-                /// <para>The renewer principal name</para>
+                /// <para>The renewer principal name.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public String PrincipalName
@@ -552,7 +552,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The renewer principal name</para>
+                /// <para>The renewer principal name.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public DescribedDelegationTokenRenewer WithPrincipalName(String principalName)

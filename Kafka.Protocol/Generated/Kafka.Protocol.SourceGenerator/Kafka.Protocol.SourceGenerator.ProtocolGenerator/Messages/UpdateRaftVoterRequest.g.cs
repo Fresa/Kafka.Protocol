@@ -87,6 +87,7 @@ namespace Kafka.Protocol
 
         private NullableString _clusterId = NullableString.Default;
         /// <summary>
+        /// <para>The cluster id.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public String? ClusterId
@@ -99,6 +100,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The cluster id.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterRequest WithClusterId(String? clusterId)
@@ -109,7 +111,7 @@ namespace Kafka.Protocol
 
         private Int32 _currentLeaderEpoch = Int32.Default;
         /// <summary>
-        /// <para>The current leader epoch of the partition, -1 for unknown leader epoch</para>
+        /// <para>The current leader epoch of the partition, -1 for unknown leader epoch.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 CurrentLeaderEpoch
@@ -122,7 +124,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The current leader epoch of the partition, -1 for unknown leader epoch</para>
+        /// <para>The current leader epoch of the partition, -1 for unknown leader epoch.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterRequest WithCurrentLeaderEpoch(Int32 currentLeaderEpoch)
@@ -133,7 +135,7 @@ namespace Kafka.Protocol
 
         private Int32 _voterId = Int32.Default;
         /// <summary>
-        /// <para>The replica id of the voter getting updated in the topic partition</para>
+        /// <para>The replica id of the voter getting updated in the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 VoterId
@@ -146,7 +148,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The replica id of the voter getting updated in the topic partition</para>
+        /// <para>The replica id of the voter getting updated in the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterRequest WithVoterId(Int32 voterId)
@@ -157,7 +159,7 @@ namespace Kafka.Protocol
 
         private Uuid _voterDirectoryId = Uuid.Default;
         /// <summary>
-        /// <para>The directory id of the voter getting updated in the topic partition</para>
+        /// <para>The directory id of the voter getting updated in the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Uuid VoterDirectoryId
@@ -170,7 +172,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The directory id of the voter getting updated in the topic partition</para>
+        /// <para>The directory id of the voter getting updated in the topic partition.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterRequest WithVoterDirectoryId(Uuid voterDirectoryId)
@@ -181,7 +183,7 @@ namespace Kafka.Protocol
 
         private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
         /// <summary>
-        /// <para>The endpoint that can be used to communicate with the leader</para>
+        /// <para>The endpoint that can be used to communicate with the leader.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, Listener> ListenersCollection
@@ -194,7 +196,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The endpoint that can be used to communicate with the leader</para>
+        /// <para>The endpoint that can be used to communicate with the leader.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterRequest WithListenersCollection(params Func<Listener, Listener>[] createFields)
@@ -205,7 +207,7 @@ namespace Kafka.Protocol
 
         public delegate Listener CreateListener(Listener field);
         /// <summary>
-        /// <para>The endpoint that can be used to communicate with the leader</para>
+        /// <para>The endpoint that can be used to communicate with the leader.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterRequest WithListenersCollection(IEnumerable<CreateListener> createFields)
@@ -268,7 +270,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The name of the endpoint</para>
+            /// <para>The name of the endpoint.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Name
@@ -281,7 +283,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The name of the endpoint</para>
+            /// <para>The name of the endpoint.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Listener WithName(String name)
@@ -292,7 +294,7 @@ namespace Kafka.Protocol
 
             private String _host = String.Default;
             /// <summary>
-            /// <para>The hostname</para>
+            /// <para>The hostname.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Host
@@ -305,7 +307,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The hostname</para>
+            /// <para>The hostname.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Listener WithHost(String host)
@@ -316,7 +318,7 @@ namespace Kafka.Protocol
 
             private UInt16 _port = UInt16.Default;
             /// <summary>
-            /// <para>The port</para>
+            /// <para>The port.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public UInt16 Port
@@ -329,7 +331,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The port</para>
+            /// <para>The port.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Listener WithPort(UInt16 port)
@@ -341,7 +343,7 @@ namespace Kafka.Protocol
 
         private KRaftVersionFeature _kRaftVersionFeature = default !;
         /// <summary>
-        /// <para>The range of versions of the protocol that the replica supports</para>
+        /// <para>The range of versions of the protocol that the replica supports.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public KRaftVersionFeature KRaftVersionFeature_
@@ -354,7 +356,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The range of versions of the protocol that the replica supports</para>
+        /// <para>The range of versions of the protocol that the replica supports.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterRequest WithKRaftVersionFeature_(Func<KRaftVersionFeature, KRaftVersionFeature> createField)
@@ -415,7 +417,7 @@ namespace Kafka.Protocol
 
             private Int16 _minSupportedVersion = Int16.Default;
             /// <summary>
-            /// <para>The minimum supported KRaft protocol version</para>
+            /// <para>The minimum supported KRaft protocol version.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int16 MinSupportedVersion
@@ -428,7 +430,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The minimum supported KRaft protocol version</para>
+            /// <para>The minimum supported KRaft protocol version.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public KRaftVersionFeature WithMinSupportedVersion(Int16 minSupportedVersion)
@@ -439,7 +441,7 @@ namespace Kafka.Protocol
 
             private Int16 _maxSupportedVersion = Int16.Default;
             /// <summary>
-            /// <para>The maximum supported KRaft protocol version</para>
+            /// <para>The maximum supported KRaft protocol version.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int16 MaxSupportedVersion
@@ -452,7 +454,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The maximum supported KRaft protocol version</para>
+            /// <para>The maximum supported KRaft protocol version.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public KRaftVersionFeature WithMaxSupportedVersion(Int16 maxSupportedVersion)

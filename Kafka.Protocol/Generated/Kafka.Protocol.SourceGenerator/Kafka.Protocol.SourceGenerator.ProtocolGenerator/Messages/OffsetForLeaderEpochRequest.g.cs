@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public OffsetForLeaderEpochRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"OffsetForLeaderEpochRequest does not support version {version}. Valid versions are: 0-4");
+                throw new UnsupportedVersionException($"OffsetForLeaderEpochRequest does not support version {version}. Valid versions are: 2-4");
             Version = version;
             IsFlexibleVersion = version >= 4;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(23);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(2);
         public static readonly Int16 MaxVersion = Int16.From(4);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }

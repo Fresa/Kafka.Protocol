@@ -83,7 +83,7 @@ namespace Kafka.Protocol
 
         private Array<String> _stateFiltersCollection = Array.Empty<String>();
         /// <summary>
-        /// <para>The transaction states to filter by: if empty, all transactions are returned; if non-empty, then only transactions matching one of the filtered states will be returned</para>
+        /// <para>The transaction states to filter by: if empty, all transactions are returned; if non-empty, then only transactions matching one of the filtered states will be returned.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<String> StateFiltersCollection
@@ -96,7 +96,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The transaction states to filter by: if empty, all transactions are returned; if non-empty, then only transactions matching one of the filtered states will be returned</para>
+        /// <para>The transaction states to filter by: if empty, all transactions are returned; if non-empty, then only transactions matching one of the filtered states will be returned.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ListTransactionsRequest WithStateFiltersCollection(Array<String> stateFiltersCollection)
@@ -107,7 +107,7 @@ namespace Kafka.Protocol
 
         private Array<Int64> _producerIdFiltersCollection = Array.Empty<Int64>();
         /// <summary>
-        /// <para>The producerIds to filter by: if empty, all transactions will be returned; if non-empty, only transactions which match one of the filtered producerIds will be returned</para>
+        /// <para>The producerIds to filter by: if empty, all transactions will be returned; if non-empty, only transactions which match one of the filtered producerIds will be returned.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<Int64> ProducerIdFiltersCollection
@@ -120,7 +120,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The producerIds to filter by: if empty, all transactions will be returned; if non-empty, only transactions which match one of the filtered producerIds will be returned</para>
+        /// <para>The producerIds to filter by: if empty, all transactions will be returned; if non-empty, only transactions which match one of the filtered producerIds will be returned.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ListTransactionsRequest WithProducerIdFiltersCollection(Array<Int64> producerIdFiltersCollection)
@@ -131,7 +131,7 @@ namespace Kafka.Protocol
 
         private Int64 _durationFilter = new Int64(-1);
         /// <summary>
-        /// <para>Duration (in millis) to filter by: if < 0 , all  transactions  will  be  returned ; otherwise , only  transactions  running  longer  than  this  duration  will  be  returned</para>
+        /// <para>Duration (in millis) to filter by: if < 0 , all  transactions  will  be  returned ; otherwise , only  transactions  running  longer  than  this  duration  will  be  returned.</para>
         /// <para>Versions: 1+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -147,7 +147,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Duration (in millis) to filter by: if < 0 , all  transactions  will  be  returned ; otherwise , only  transactions  running  longer  than  this  duration  will  be  returned</para>
+        /// <para>Duration (in millis) to filter by: if < 0 , all  transactions  will  be  returned ; otherwise , only  transactions  running  longer  than  this  duration  will  be  returned.</para>
         /// <para>Versions: 1+</para>
         /// <para>Default: -1</para>
         /// </summary>

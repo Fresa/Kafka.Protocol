@@ -103,7 +103,7 @@ namespace Kafka.Protocol
 
         private Map<String, OffsetDeleteRequestTopic> _topicsCollection = Map<String, OffsetDeleteRequestTopic>.Default;
         /// <summary>
-        /// <para>The topics to delete offsets for</para>
+        /// <para>The topics to delete offsets for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, OffsetDeleteRequestTopic> TopicsCollection
@@ -116,7 +116,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The topics to delete offsets for</para>
+        /// <para>The topics to delete offsets for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public OffsetDeleteRequest WithTopicsCollection(params Func<OffsetDeleteRequestTopic, OffsetDeleteRequestTopic>[] createFields)
@@ -127,7 +127,7 @@ namespace Kafka.Protocol
 
         public delegate OffsetDeleteRequestTopic CreateOffsetDeleteRequestTopic(OffsetDeleteRequestTopic field);
         /// <summary>
-        /// <para>The topics to delete offsets for</para>
+        /// <para>The topics to delete offsets for.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public OffsetDeleteRequest WithTopicsCollection(IEnumerable<CreateOffsetDeleteRequestTopic> createFields)

@@ -79,7 +79,7 @@ namespace Kafka.Protocol
 
         private Array<String> _groupIdsCollection = Array.Empty<String>();
         /// <summary>
-        /// <para>The ids of the groups to describe</para>
+        /// <para>The ids of the groups to describe.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<String> GroupIdsCollection
@@ -92,7 +92,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The ids of the groups to describe</para>
+        /// <para>The ids of the groups to describe.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ShareGroupDescribeRequest WithGroupIdsCollection(Array<String> groupIdsCollection)

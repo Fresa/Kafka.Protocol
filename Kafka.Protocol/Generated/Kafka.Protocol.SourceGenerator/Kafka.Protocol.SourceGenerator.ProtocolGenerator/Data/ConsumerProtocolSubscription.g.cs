@@ -90,6 +90,7 @@ namespace Kafka.Protocol
 
         private Array<String> _topicsCollection = Array.Empty<String>();
         /// <summary>
+        /// <para>The topics that the member wants to consume.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<String> TopicsCollection
@@ -102,6 +103,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The topics that the member wants to consume.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ConsumerProtocolSubscription WithTopicsCollection(Array<String> topicsCollection)
@@ -112,6 +114,7 @@ namespace Kafka.Protocol
 
         private NullableBytes _userData = new NullableBytes(null);
         /// <summary>
+        /// <para>User data that will be passed back to the consumer.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -125,6 +128,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>User data that will be passed back to the consumer.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -136,6 +140,7 @@ namespace Kafka.Protocol
 
         private Map<String, TopicPartition> _ownedPartitionsCollection = Map<String, TopicPartition>.Default;
         /// <summary>
+        /// <para>The partitions that the member owns.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public Map<String, TopicPartition> OwnedPartitionsCollection
@@ -148,6 +153,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The partitions that the member owns.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public ConsumerProtocolSubscription WithOwnedPartitionsCollection(params Func<TopicPartition, TopicPartition>[] createFields)
@@ -158,6 +164,7 @@ namespace Kafka.Protocol
 
         public delegate TopicPartition CreateTopicPartition(TopicPartition field);
         /// <summary>
+        /// <para>The partitions that the member owns.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public ConsumerProtocolSubscription WithOwnedPartitionsCollection(IEnumerable<CreateTopicPartition> createFields)
@@ -222,6 +229,7 @@ namespace Kafka.Protocol
 
             private String _topic = String.Default;
             /// <summary>
+            /// <para>The topic name.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public String Topic
@@ -236,6 +244,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The topic name.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public TopicPartition WithTopic(String topic)
@@ -246,6 +255,7 @@ namespace Kafka.Protocol
 
             private Array<Int32> _partitionsCollection = Array.Empty<Int32>();
             /// <summary>
+            /// <para>The partition ids.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public Array<Int32> PartitionsCollection
@@ -260,6 +270,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The partition ids.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public TopicPartition WithPartitionsCollection(Array<Int32> partitionsCollection)
@@ -271,6 +282,7 @@ namespace Kafka.Protocol
 
         private Int32 _generationId = new Int32(-1);
         /// <summary>
+        /// <para>The generation id of the member.</para>
         /// <para>Versions: 2+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -284,6 +296,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The generation id of the member.</para>
         /// <para>Versions: 2+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -295,6 +308,7 @@ namespace Kafka.Protocol
 
         private NullableString _rackId = new NullableString(null);
         /// <summary>
+        /// <para>The rack id of the member.</para>
         /// <para>Versions: 3+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -310,6 +324,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The rack id of the member.</para>
         /// <para>Versions: 3+</para>
         /// <para>Default: null</para>
         /// </summary>

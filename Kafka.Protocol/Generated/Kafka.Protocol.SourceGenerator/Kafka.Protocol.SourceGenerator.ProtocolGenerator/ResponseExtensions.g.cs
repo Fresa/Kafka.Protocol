@@ -77,10 +77,6 @@
                    .WithMinVersion(ConsumerGroupHeartbeatRequest.MinVersion)
                    .WithMaxVersion(ConsumerGroupHeartbeatRequest.MaxVersion),
                key => key
-                   .WithApiKey(ControlledShutdownRequest.ApiKey)
-                   .WithMinVersion(ControlledShutdownRequest.MinVersion)
-                   .WithMaxVersion(ControlledShutdownRequest.MaxVersion),
-               key => key
                    .WithApiKey(ControllerRegistrationRequest.ApiKey)
                    .WithMinVersion(ControllerRegistrationRequest.MinVersion)
                    .WithMaxVersion(ControllerRegistrationRequest.MaxVersion),
@@ -225,10 +221,6 @@
                    .WithMinVersion(JoinGroupRequest.MinVersion)
                    .WithMaxVersion(JoinGroupRequest.MaxVersion),
                key => key
-                   .WithApiKey(LeaderAndIsrRequest.ApiKey)
-                   .WithMinVersion(LeaderAndIsrRequest.MinVersion)
-                   .WithMaxVersion(LeaderAndIsrRequest.MaxVersion),
-               key => key
                    .WithApiKey(LeaveGroupRequest.ApiKey)
                    .WithMinVersion(LeaveGroupRequest.MinVersion)
                    .WithMaxVersion(LeaveGroupRequest.MaxVersion),
@@ -321,10 +313,6 @@
                    .WithMinVersion(ShareGroupHeartbeatRequest.MinVersion)
                    .WithMaxVersion(ShareGroupHeartbeatRequest.MaxVersion),
                key => key
-                   .WithApiKey(StopReplicaRequest.ApiKey)
-                   .WithMinVersion(StopReplicaRequest.MinVersion)
-                   .WithMaxVersion(StopReplicaRequest.MaxVersion),
-               key => key
                    .WithApiKey(SyncGroupRequest.ApiKey)
                    .WithMinVersion(SyncGroupRequest.MinVersion)
                    .WithMaxVersion(SyncGroupRequest.MaxVersion),
@@ -340,10 +328,6 @@
                    .WithApiKey(UpdateFeaturesRequest.ApiKey)
                    .WithMinVersion(UpdateFeaturesRequest.MinVersion)
                    .WithMaxVersion(UpdateFeaturesRequest.MaxVersion),
-               key => key
-                   .WithApiKey(UpdateMetadataRequest.ApiKey)
-                   .WithMinVersion(UpdateMetadataRequest.MinVersion)
-                   .WithMaxVersion(UpdateMetadataRequest.MaxVersion),
                key => key
                    .WithApiKey(UpdateRaftVoterRequest.ApiKey)
                    .WithMinVersion(UpdateRaftVoterRequest.MinVersion)

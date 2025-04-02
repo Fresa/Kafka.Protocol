@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeLogDirsRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeLogDirsRequest does not support version {version}. Valid versions are: 0-4");
+                throw new UnsupportedVersionException($"DescribeLogDirsRequest does not support version {version}. Valid versions are: 1-4");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(35);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(4);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -162,7 +162,7 @@ namespace Kafka.Protocol
 
             private String _topic = String.Default;
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Topic
@@ -175,7 +175,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DescribableLogDirTopic WithTopic(String topic)

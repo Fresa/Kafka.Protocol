@@ -737,7 +737,7 @@ namespace Kafka.Protocol
         private bool _zkMigrationReadyIsSet;
         private Boolean _zkMigrationReady = new Boolean(false);
         /// <summary>
-        /// <para>Set by a KRaft controller if the required configurations for ZK migration are present</para>
+        /// <para>Set by a KRaft controller if the required configurations for ZK migration are present.</para>
         /// <para>Versions: 3+</para>
         /// <para>Default: false</para>
         /// </summary>
@@ -752,7 +752,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Set by a KRaft controller if the required configurations for ZK migration are present</para>
+        /// <para>Set by a KRaft controller if the required configurations for ZK migration are present.</para>
         /// <para>Versions: 3+</para>
         /// <para>Default: false</para>
         /// </summary>

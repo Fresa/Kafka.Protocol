@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public OffsetFetchResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"OffsetFetchResponse does not support version {version}. Valid versions are: 0-9");
+                throw new UnsupportedVersionException($"OffsetFetchResponse does not support version {version}. Valid versions are: 1-9");
             Version = version;
             IsFlexibleVersion = version >= 6;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(9);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(9);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -232,7 +232,7 @@ namespace Kafka.Protocol
 
             private Array<OffsetFetchResponsePartition> _partitionsCollection = Array.Empty<OffsetFetchResponsePartition>();
             /// <summary>
-            /// <para>The responses per partition</para>
+            /// <para>The responses per partition.</para>
             /// <para>Versions: 0-7</para>
             /// </summary>
             public Array<OffsetFetchResponsePartition> PartitionsCollection
@@ -247,7 +247,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The responses per partition</para>
+            /// <para>The responses per partition.</para>
             /// <para>Versions: 0-7</para>
             /// </summary>
             public OffsetFetchResponseTopic WithPartitionsCollection(params Func<OffsetFetchResponsePartition, OffsetFetchResponsePartition>[] createFields)
@@ -258,7 +258,7 @@ namespace Kafka.Protocol
 
             public delegate OffsetFetchResponsePartition CreateOffsetFetchResponsePartition(OffsetFetchResponsePartition field);
             /// <summary>
-            /// <para>The responses per partition</para>
+            /// <para>The responses per partition.</para>
             /// <para>Versions: 0-7</para>
             /// </summary>
             public OffsetFetchResponseTopic WithPartitionsCollection(IEnumerable<CreateOffsetFetchResponsePartition> createFields)
@@ -733,7 +733,7 @@ namespace Kafka.Protocol
 
                 private Array<OffsetFetchResponsePartitions> _partitionsCollection = Array.Empty<OffsetFetchResponsePartitions>();
                 /// <summary>
-                /// <para>The responses per partition</para>
+                /// <para>The responses per partition.</para>
                 /// <para>Versions: 8+</para>
                 /// </summary>
                 public Array<OffsetFetchResponsePartitions> PartitionsCollection
@@ -748,7 +748,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The responses per partition</para>
+                /// <para>The responses per partition.</para>
                 /// <para>Versions: 8+</para>
                 /// </summary>
                 public OffsetFetchResponseTopics WithPartitionsCollection(params Func<OffsetFetchResponsePartitions, OffsetFetchResponsePartitions>[] createFields)
@@ -759,7 +759,7 @@ namespace Kafka.Protocol
 
                 public delegate OffsetFetchResponsePartitions CreateOffsetFetchResponsePartitions(OffsetFetchResponsePartitions field);
                 /// <summary>
-                /// <para>The responses per partition</para>
+                /// <para>The responses per partition.</para>
                 /// <para>Versions: 8+</para>
                 /// </summary>
                 public OffsetFetchResponseTopics WithPartitionsCollection(IEnumerable<CreateOffsetFetchResponsePartitions> createFields)

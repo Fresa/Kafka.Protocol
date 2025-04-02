@@ -79,7 +79,7 @@ namespace Kafka.Protocol
 
         private Int32 _brokerId = Int32.Default;
         /// <summary>
-        /// <para>The ID of the requesting broker</para>
+        /// <para>The ID of the requesting broker.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int32 BrokerId
@@ -92,7 +92,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The ID of the requesting broker</para>
+        /// <para>The ID of the requesting broker.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AllocateProducerIdsRequest WithBrokerId(Int32 brokerId)
@@ -103,7 +103,7 @@ namespace Kafka.Protocol
 
         private Int64 _brokerEpoch = new Int64(-1);
         /// <summary>
-        /// <para>The epoch of the requesting broker</para>
+        /// <para>The epoch of the requesting broker.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: -1</para>
         /// </summary>
@@ -117,7 +117,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The epoch of the requesting broker</para>
+        /// <para>The epoch of the requesting broker.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: -1</para>
         /// </summary>

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeClusterResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeClusterResponse does not support version {version}. Valid versions are: 0-1");
+                throw new UnsupportedVersionException($"DescribeClusterResponse does not support version {version}. Valid versions are: 0-2");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(60);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -117,7 +117,7 @@ namespace Kafka.Protocol
 
         private Int16 _errorCode = Int16.Default;
         /// <summary>
-        /// <para>The top-level error code, or 0 if there was no error</para>
+        /// <para>The top-level error code, or 0 if there was no error.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 ErrorCode
@@ -130,7 +130,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The top-level error code, or 0 if there was no error</para>
+        /// <para>The top-level error code, or 0 if there was no error.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeClusterResponse WithErrorCode(Int16 errorCode)
@@ -295,7 +295,7 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _brokerId.GetSize(IsFlexibleVersion) + _host.GetSize(IsFlexibleVersion) + _port.GetSize(IsFlexibleVersion) + _rack.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => _brokerId.GetSize(IsFlexibleVersion) + _host.GetSize(IsFlexibleVersion) + _port.GetSize(IsFlexibleVersion) + _rack.GetSize(IsFlexibleVersion) + (Version >= 2 ? _isFenced.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<DescribeClusterBroker> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new DescribeClusterBroker(version);
@@ -303,6 +303,8 @@ namespace Kafka.Protocol
                 instance.Host = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.Port = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.Rack = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 2)
+                    instance.IsFenced = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -326,6 +328,8 @@ namespace Kafka.Protocol
                 await _host.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _port.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _rack.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 2)
+                    await _isFenced.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
                     await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -427,6 +431,32 @@ namespace Kafka.Protocol
             public DescribeClusterBroker WithRack(String? rack)
             {
                 Rack = rack;
+                return this;
+            }
+
+            private Boolean _isFenced = Boolean.Default;
+            /// <summary>
+            /// <para>Whether the broker is fenced</para>
+            /// <para>Versions: 2+</para>
+            /// </summary>
+            public Boolean IsFenced
+            {
+                get => _isFenced;
+                private set
+                {
+                    if (Version >= 2 == false)
+                        throw new UnsupportedVersionException($"IsFenced does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+                    _isFenced = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>Whether the broker is fenced</para>
+            /// <para>Versions: 2+</para>
+            /// </summary>
+            public DescribeClusterBroker WithIsFenced(Boolean isFenced)
+            {
+                IsFenced = isFenced;
                 return this;
             }
         }

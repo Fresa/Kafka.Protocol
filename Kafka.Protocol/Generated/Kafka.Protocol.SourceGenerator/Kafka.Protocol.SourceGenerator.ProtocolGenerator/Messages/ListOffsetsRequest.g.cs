@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ListOffsetsRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ListOffsetsRequest does not support version {version}. Valid versions are: 0-9");
+                throw new UnsupportedVersionException($"ListOffsetsRequest does not support version {version}. Valid versions are: 1-10");
             Version = version;
             IsFlexibleVersion = version >= 6;
         }
@@ -26,8 +26,8 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(2);
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(9);
+        public static readonly Int16 MinVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(10);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _replicaId.GetSize(IsFlexibleVersion) + (Version >= 2 ? _isolationLevel.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _replicaId.GetSize(IsFlexibleVersion) + (Version >= 2 ? _isolationLevel.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (Version >= 10 ? _timeoutMs.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ListOffsetsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ListOffsetsRequest(version);
@@ -53,6 +53,8 @@ namespace Kafka.Protocol
             if (instance.Version >= 2)
                 instance.IsolationLevel = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.TopicsCollection = await Array<ListOffsetsTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ListOffsetsTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 10)
+                instance.TimeoutMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -75,6 +77,8 @@ namespace Kafka.Protocol
             if (Version >= 2)
                 await _isolationLevel.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 10)
+                await _timeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -107,7 +111,7 @@ namespace Kafka.Protocol
 
         private Int8 _isolationLevel = Int8.Default;
         /// <summary>
-        /// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records</para>
+        /// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records.</para>
         /// <para>Versions: 2+</para>
         /// </summary>
         public Int8 IsolationLevel
@@ -122,7 +126,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records</para>
+        /// <para>This setting controls the visibility of transactional records. Using READ_UNCOMMITTED (isolation_level = 0) makes all records visible. With READ_COMMITTED (isolation_level = 1), non-transactional and COMMITTED transactional records are visible. To be more concrete, READ_COMMITTED returns all data from offsets smaller than the current LSO (last stable offset), and enables the inclusion of the list of aborted transactions in the result, which allows consumers to discard ABORTED transactional records.</para>
         /// <para>Versions: 2+</para>
         /// </summary>
         public ListOffsetsRequest WithIsolationLevel(Int8 isolationLevel)
@@ -292,7 +296,7 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + (Version >= 4 ? _currentLeaderEpoch.GetSize(IsFlexibleVersion) : 0) + _timestamp.GetSize(IsFlexibleVersion) + (Version >= 0 && Version <= 0 ? _maxNumOffsets.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + (Version >= 4 ? _currentLeaderEpoch.GetSize(IsFlexibleVersion) : 0) + _timestamp.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<ListOffsetsPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new ListOffsetsPartition(version);
@@ -300,8 +304,6 @@ namespace Kafka.Protocol
                     if (instance.Version >= 4)
                         instance.CurrentLeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.Timestamp = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    if (instance.Version >= 0 && instance.Version <= 0)
-                        instance.MaxNumOffsets = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
                     {
                         var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -325,8 +327,6 @@ namespace Kafka.Protocol
                     if (Version >= 4)
                         await _currentLeaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _timestamp.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    if (Version >= 0 && Version <= 0)
-                        await _maxNumOffsets.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (IsFlexibleVersion)
                     {
                         await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -406,35 +406,31 @@ namespace Kafka.Protocol
                     Timestamp = timestamp;
                     return this;
                 }
-
-                private Int32 _maxNumOffsets = new Int32(1);
-                /// <summary>
-                /// <para>The maximum number of offsets to report.</para>
-                /// <para>Versions: 0</para>
-                /// <para>Default: 1</para>
-                /// </summary>
-                public Int32 MaxNumOffsets
-                {
-                    get => _maxNumOffsets;
-                    private set
-                    {
-                        if (Version >= 0 && Version <= 0 == false)
-                            throw new UnsupportedVersionException($"MaxNumOffsets does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-                        _maxNumOffsets = value;
-                    }
-                }
-
-                /// <summary>
-                /// <para>The maximum number of offsets to report.</para>
-                /// <para>Versions: 0</para>
-                /// <para>Default: 1</para>
-                /// </summary>
-                public ListOffsetsPartition WithMaxNumOffsets(Int32 maxNumOffsets)
-                {
-                    MaxNumOffsets = maxNumOffsets;
-                    return this;
-                }
             }
+        }
+
+        private Int32 _timeoutMs = Int32.Default;
+        /// <summary>
+        /// <para>The timeout to await a response in milliseconds for requests that require reading from remote storage for topics enabled with tiered storage.</para>
+        /// <para>Versions: 10+</para>
+        /// </summary>
+        public Int32 TimeoutMs
+        {
+            get => _timeoutMs;
+            private set
+            {
+                _timeoutMs = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The timeout to await a response in milliseconds for requests that require reading from remote storage for topics enabled with tiered storage.</para>
+        /// <para>Versions: 10+</para>
+        /// </summary>
+        public ListOffsetsRequest WithTimeoutMs(Int32 timeoutMs)
+        {
+            TimeoutMs = timeoutMs;
+            return this;
         }
 
         public ListOffsetsResponse Respond() => new ListOffsetsResponse(Version);

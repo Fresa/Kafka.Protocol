@@ -171,7 +171,7 @@ namespace Kafka.Protocol
 
         private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
         /// <summary>
-        /// <para>The listeners of this broker</para>
+        /// <para>The listeners of this broker.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, Listener> ListenersCollection
@@ -184,7 +184,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The listeners of this broker</para>
+        /// <para>The listeners of this broker.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public BrokerRegistrationRequest WithListenersCollection(params Func<Listener, Listener>[] createFields)
@@ -195,7 +195,7 @@ namespace Kafka.Protocol
 
         public delegate Listener CreateListener(Listener field);
         /// <summary>
-        /// <para>The listeners of this broker</para>
+        /// <para>The listeners of this broker.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public BrokerRegistrationRequest WithListenersCollection(IEnumerable<CreateListener> createFields)
@@ -541,7 +541,7 @@ namespace Kafka.Protocol
 
         private Boolean _isMigratingZkBroker = new Boolean(false);
         /// <summary>
-        /// <para>If the required configurations for ZK migration are present, this value is set to true</para>
+        /// <para>If the required configurations for ZK migration are present, this value is set to true.</para>
         /// <para>Versions: 1+</para>
         /// <para>Default: false</para>
         /// </summary>
@@ -557,7 +557,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>If the required configurations for ZK migration are present, this value is set to true</para>
+        /// <para>If the required configurations for ZK migration are present, this value is set to true.</para>
         /// <para>Versions: 1+</para>
         /// <para>Default: false</para>
         /// </summary>
