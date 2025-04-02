@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ConsumerGroupDescribeResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ConsumerGroupDescribeResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"ConsumerGroupDescribeResponse does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(69);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -422,7 +422,7 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _memberId.GetSize(IsFlexibleVersion) + _instanceId.GetSize(IsFlexibleVersion) + _rackId.GetSize(IsFlexibleVersion) + _memberEpoch.GetSize(IsFlexibleVersion) + _clientId.GetSize(IsFlexibleVersion) + _clientHost.GetSize(IsFlexibleVersion) + _subscribedTopicNamesCollection.GetSize(IsFlexibleVersion) + _subscribedTopicRegex.GetSize(IsFlexibleVersion) + _assignment.GetSize(IsFlexibleVersion) + _targetAssignment.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _memberId.GetSize(IsFlexibleVersion) + _instanceId.GetSize(IsFlexibleVersion) + _rackId.GetSize(IsFlexibleVersion) + _memberEpoch.GetSize(IsFlexibleVersion) + _clientId.GetSize(IsFlexibleVersion) + _clientHost.GetSize(IsFlexibleVersion) + _subscribedTopicNamesCollection.GetSize(IsFlexibleVersion) + _subscribedTopicRegex.GetSize(IsFlexibleVersion) + _assignment.GetSize(IsFlexibleVersion) + _targetAssignment.GetSize(IsFlexibleVersion) + (Version >= 1 ? _memberType.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<Member> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new Member(version);
@@ -436,6 +436,8 @@ namespace Kafka.Protocol
                     instance.SubscribedTopicRegex = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.Assignment_ = await Assignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
                     instance.TargetAssignment = await Assignment.FromReaderAsync(instance.Version, reader, cancellationToken).ConfigureAwait(false);
+                    if (instance.Version >= 1)
+                        instance.MemberType = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
                     {
                         var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -465,6 +467,8 @@ namespace Kafka.Protocol
                     await _subscribedTopicRegex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _assignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _targetAssignment.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (Version >= 1)
+                        await _memberType.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (IsFlexibleVersion)
                     {
                         await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -714,6 +718,32 @@ namespace Kafka.Protocol
                 public Member WithTargetAssignment(Assignment targetAssignment)
                 {
                     TargetAssignment = targetAssignment;
+                    return this;
+                }
+
+                private Int8 _memberType = new Int8(-1);
+                /// <summary>
+                /// <para>-1 for unknown. 0 for classic member. +1 for consumer member.</para>
+                /// <para>Versions: 1+</para>
+                /// <para>Default: -1</para>
+                /// </summary>
+                public Int8 MemberType
+                {
+                    get => _memberType;
+                    private set
+                    {
+                        _memberType = value;
+                    }
+                }
+
+                /// <summary>
+                /// <para>-1 for unknown. 0 for classic member. +1 for consumer member.</para>
+                /// <para>Versions: 1+</para>
+                /// <para>Default: -1</para>
+                /// </summary>
+                public Member WithMemberType(Int8 memberType)
+                {
+                    MemberType = memberType;
                     return this;
                 }
             }

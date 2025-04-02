@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public VoteResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"VoteResponse does not support version {version}. Valid versions are: 0-1");
+                throw new UnsupportedVersionException($"VoteResponse does not support version {version}. Valid versions are: 0-2");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(52);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -121,6 +121,7 @@ namespace Kafka.Protocol
 
         private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
         /// <summary>
+        /// <para>The results for each topic.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TopicData> TopicsCollection
@@ -133,6 +134,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The results for each topic.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public VoteResponse WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
@@ -143,6 +145,7 @@ namespace Kafka.Protocol
 
         public delegate TopicData CreateTopicData(TopicData field);
         /// <summary>
+        /// <para>The results for each topic.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public VoteResponse WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
@@ -227,6 +230,7 @@ namespace Kafka.Protocol
 
             private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
             /// <summary>
+            /// <para>The results for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<PartitionData> PartitionsCollection
@@ -239,6 +243,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The results for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
@@ -249,6 +254,7 @@ namespace Kafka.Protocol
 
             public delegate PartitionData CreatePartitionData(PartitionData field);
             /// <summary>
+            /// <para>The results for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
@@ -339,6 +345,7 @@ namespace Kafka.Protocol
 
                 private Int16 _errorCode = Int16.Default;
                 /// <summary>
+                /// <para>The partition level error code.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int16 ErrorCode
@@ -351,6 +358,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The partition level error code.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithErrorCode(Int16 errorCode)
@@ -385,7 +393,7 @@ namespace Kafka.Protocol
 
                 private Int32 _leaderEpoch = Int32.Default;
                 /// <summary>
-                /// <para>The latest known leader epoch</para>
+                /// <para>The latest known leader epoch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 LeaderEpoch
@@ -398,7 +406,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The latest known leader epoch</para>
+                /// <para>The latest known leader epoch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithLeaderEpoch(Int32 leaderEpoch)
@@ -409,7 +417,7 @@ namespace Kafka.Protocol
 
                 private Boolean _voteGranted = Boolean.Default;
                 /// <summary>
-                /// <para>True if the vote was granted and false otherwise</para>
+                /// <para>True if the vote was granted and false otherwise.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Boolean VoteGranted
@@ -422,7 +430,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>True if the vote was granted and false otherwise</para>
+                /// <para>True if the vote was granted and false otherwise.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithVoteGranted(Boolean voteGranted)
@@ -436,7 +444,7 @@ namespace Kafka.Protocol
         private bool _nodeEndpointsCollectionIsSet;
         private Map<Int32, NodeEndpoint> _nodeEndpointsCollection = Map<Int32, NodeEndpoint>.Default;
         /// <summary>
-        /// <para>Endpoints for all current-leaders enumerated in PartitionData</para>
+        /// <para>Endpoints for all current-leaders enumerated in PartitionData.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public Map<Int32, NodeEndpoint> NodeEndpointsCollection
@@ -452,7 +460,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Endpoints for all current-leaders enumerated in PartitionData</para>
+        /// <para>Endpoints for all current-leaders enumerated in PartitionData.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public VoteResponse WithNodeEndpointsCollection(params Func<NodeEndpoint, NodeEndpoint>[] createFields)
@@ -463,7 +471,7 @@ namespace Kafka.Protocol
 
         public delegate NodeEndpoint CreateNodeEndpoint(NodeEndpoint field);
         /// <summary>
-        /// <para>Endpoints for all current-leaders enumerated in PartitionData</para>
+        /// <para>Endpoints for all current-leaders enumerated in PartitionData.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public VoteResponse WithNodeEndpointsCollection(IEnumerable<CreateNodeEndpoint> createFields)
@@ -532,7 +540,7 @@ namespace Kafka.Protocol
 
             private Int32 _nodeId = Int32.Default;
             /// <summary>
-            /// <para>The ID of the associated node</para>
+            /// <para>The ID of the associated node.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public Int32 NodeId
@@ -547,7 +555,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The ID of the associated node</para>
+            /// <para>The ID of the associated node.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public NodeEndpoint WithNodeId(Int32 nodeId)
@@ -558,7 +566,7 @@ namespace Kafka.Protocol
 
             private String _host = String.Default;
             /// <summary>
-            /// <para>The node's hostname</para>
+            /// <para>The node's hostname.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public String Host
@@ -573,7 +581,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The node's hostname</para>
+            /// <para>The node's hostname.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public NodeEndpoint WithHost(String host)
@@ -584,7 +592,7 @@ namespace Kafka.Protocol
 
             private UInt16 _port = UInt16.Default;
             /// <summary>
-            /// <para>The node's port</para>
+            /// <para>The node's port.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public UInt16 Port
@@ -599,7 +607,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The node's port</para>
+            /// <para>The node's port.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public NodeEndpoint WithPort(UInt16 port)

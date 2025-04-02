@@ -78,7 +78,7 @@ namespace Kafka.Protocol
 
         private Int16 _version = Int16.Default;
         /// <summary>
-        /// <para>The version of the kraft version record</para>
+        /// <para>The version of the kraft version record.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 Version_
@@ -91,7 +91,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The version of the kraft version record</para>
+        /// <para>The version of the kraft version record.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public KRaftVersionRecord WithVersion_(Int16 version)
@@ -102,7 +102,7 @@ namespace Kafka.Protocol
 
         private Int16 _kRaftVersion = Int16.Default;
         /// <summary>
-        /// <para>The kraft protocol version</para>
+        /// <para>The kraft protocol version.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 KRaftVersion
@@ -115,7 +115,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The kraft protocol version</para>
+        /// <para>The kraft protocol version.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public KRaftVersionRecord WithKRaftVersion(Int16 kRaftVersion)

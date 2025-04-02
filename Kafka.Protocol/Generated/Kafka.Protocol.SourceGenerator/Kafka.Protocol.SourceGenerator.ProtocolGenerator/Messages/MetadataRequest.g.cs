@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public MetadataRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"MetadataRequest does not support version {version}. Valid versions are: 0-12");
+                throw new UnsupportedVersionException($"MetadataRequest does not support version {version}. Valid versions are: 0-13");
             Version = version;
             IsFlexibleVersion = version >= 9;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(3);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(12);
+        public static readonly Int16 MaxVersion = Int16.From(13);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 

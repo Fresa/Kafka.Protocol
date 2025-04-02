@@ -118,7 +118,7 @@ namespace Kafka.Protocol
 
         private Int16 _errorCode = Int16.Default;
         /// <summary>
-        /// <para>The error code, or 0 if there was no error</para>
+        /// <para>The error code, or 0 if there was no error.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 ErrorCode
@@ -131,7 +131,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The error code, or 0 if there was no error</para>
+        /// <para>The error code, or 0 if there was no error.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterResponse WithErrorCode(Int16 errorCode)
@@ -143,6 +143,7 @@ namespace Kafka.Protocol
         private bool _currentLeaderIsSet;
         private CurrentLeader _currentLeader = default !;
         /// <summary>
+        /// <para>Details of the current Raft cluster leader.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public CurrentLeader CurrentLeader_
@@ -156,6 +157,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>Details of the current Raft cluster leader.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public UpdateRaftVoterResponse WithCurrentLeader_(Func<CurrentLeader, CurrentLeader> createField)
@@ -220,7 +222,7 @@ namespace Kafka.Protocol
 
             private Int32 _leaderId = new Int32(-1);
             /// <summary>
-            /// <para>The replica id of the current leader or -1 if the leader is unknown</para>
+            /// <para>The replica id of the current leader or -1 if the leader is unknown.</para>
             /// <para>Versions: 0+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -234,7 +236,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The replica id of the current leader or -1 if the leader is unknown</para>
+            /// <para>The replica id of the current leader or -1 if the leader is unknown.</para>
             /// <para>Versions: 0+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -246,7 +248,7 @@ namespace Kafka.Protocol
 
             private Int32 _leaderEpoch = new Int32(-1);
             /// <summary>
-            /// <para>The latest known leader epoch</para>
+            /// <para>The latest known leader epoch.</para>
             /// <para>Versions: 0+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -260,7 +262,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The latest known leader epoch</para>
+            /// <para>The latest known leader epoch.</para>
             /// <para>Versions: 0+</para>
             /// <para>Default: -1</para>
             /// </summary>
@@ -272,7 +274,7 @@ namespace Kafka.Protocol
 
             private String _host = String.Default;
             /// <summary>
-            /// <para>The node's hostname</para>
+            /// <para>The node's hostname.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Host
@@ -285,7 +287,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The node's hostname</para>
+            /// <para>The node's hostname.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public CurrentLeader WithHost(String host)
@@ -296,7 +298,7 @@ namespace Kafka.Protocol
 
             private Int32 _port = Int32.Default;
             /// <summary>
-            /// <para>The node's port</para>
+            /// <para>The node's port.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int32 Port
@@ -309,7 +311,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The node's port</para>
+            /// <para>The node's port.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public CurrentLeader WithPort(Int32 port)

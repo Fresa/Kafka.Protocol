@@ -46,8 +46,6 @@ namespace Kafka.Protocol
                 return await ConsumerGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ConsumerGroupHeartbeatResponse.ApiKey == apiKey)
                 return await ConsumerGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-            if (ControlledShutdownResponse.ApiKey == apiKey)
-                return await ControlledShutdownResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ControllerRegistrationResponse.ApiKey == apiKey)
                 return await ControllerRegistrationResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (CreateAclsResponse.ApiKey == apiKey)
@@ -120,8 +118,6 @@ namespace Kafka.Protocol
                 return await InitProducerIdResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (JoinGroupResponse.ApiKey == apiKey)
                 return await JoinGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-            if (LeaderAndIsrResponse.ApiKey == apiKey)
-                return await LeaderAndIsrResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (LeaveGroupResponse.ApiKey == apiKey)
                 return await LeaveGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ListClientMetricsResourcesResponse.ApiKey == apiKey)
@@ -168,8 +164,6 @@ namespace Kafka.Protocol
                 return await ShareGroupDescribeResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ShareGroupHeartbeatResponse.ApiKey == apiKey)
                 return await ShareGroupHeartbeatResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-            if (StopReplicaResponse.ApiKey == apiKey)
-                return await StopReplicaResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (SyncGroupResponse.ApiKey == apiKey)
                 return await SyncGroupResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (TxnOffsetCommitResponse.ApiKey == apiKey)
@@ -178,8 +172,6 @@ namespace Kafka.Protocol
                 return await UnregisterBrokerResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UpdateFeaturesResponse.ApiKey == apiKey)
                 return await UpdateFeaturesResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-            if (UpdateMetadataResponse.ApiKey == apiKey)
-                return await UpdateMetadataResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (UpdateRaftVoterResponse.ApiKey == apiKey)
                 return await UpdateRaftVoterResponse.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (VoteResponse.ApiKey == apiKey)

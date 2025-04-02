@@ -381,7 +381,7 @@ namespace Kafka.Protocol
 
             private Array<AddPartitionsToTxnPartitionResult> _resultsByPartitionCollection = Array.Empty<AddPartitionsToTxnPartitionResult>();
             /// <summary>
-            /// <para>The results for each partition</para>
+            /// <para>The results for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<AddPartitionsToTxnPartitionResult> ResultsByPartitionCollection
@@ -394,7 +394,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The results for each partition</para>
+            /// <para>The results for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public AddPartitionsToTxnTopicResult WithResultsByPartitionCollection(Array<AddPartitionsToTxnPartitionResult> resultsByPartitionCollection)

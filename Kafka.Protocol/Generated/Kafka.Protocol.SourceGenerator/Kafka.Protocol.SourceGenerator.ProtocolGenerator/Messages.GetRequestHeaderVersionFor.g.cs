@@ -46,8 +46,6 @@ namespace Kafka.Protocol
                 return new ConsumerGroupDescribeRequest(version).HeaderVersion;
             if (ConsumerGroupHeartbeatRequest.ApiKey == apiKey)
                 return new ConsumerGroupHeartbeatRequest(version).HeaderVersion;
-            if (ControlledShutdownRequest.ApiKey == apiKey)
-                return new ControlledShutdownRequest(version).HeaderVersion;
             if (ControllerRegistrationRequest.ApiKey == apiKey)
                 return new ControllerRegistrationRequest(version).HeaderVersion;
             if (CreateAclsRequest.ApiKey == apiKey)
@@ -120,8 +118,6 @@ namespace Kafka.Protocol
                 return new InitProducerIdRequest(version).HeaderVersion;
             if (JoinGroupRequest.ApiKey == apiKey)
                 return new JoinGroupRequest(version).HeaderVersion;
-            if (LeaderAndIsrRequest.ApiKey == apiKey)
-                return new LeaderAndIsrRequest(version).HeaderVersion;
             if (LeaveGroupRequest.ApiKey == apiKey)
                 return new LeaveGroupRequest(version).HeaderVersion;
             if (ListClientMetricsResourcesRequest.ApiKey == apiKey)
@@ -168,8 +164,6 @@ namespace Kafka.Protocol
                 return new ShareGroupDescribeRequest(version).HeaderVersion;
             if (ShareGroupHeartbeatRequest.ApiKey == apiKey)
                 return new ShareGroupHeartbeatRequest(version).HeaderVersion;
-            if (StopReplicaRequest.ApiKey == apiKey)
-                return new StopReplicaRequest(version).HeaderVersion;
             if (SyncGroupRequest.ApiKey == apiKey)
                 return new SyncGroupRequest(version).HeaderVersion;
             if (TxnOffsetCommitRequest.ApiKey == apiKey)
@@ -178,8 +172,6 @@ namespace Kafka.Protocol
                 return new UnregisterBrokerRequest(version).HeaderVersion;
             if (UpdateFeaturesRequest.ApiKey == apiKey)
                 return new UpdateFeaturesRequest(version).HeaderVersion;
-            if (UpdateMetadataRequest.ApiKey == apiKey)
-                return new UpdateMetadataRequest(version).HeaderVersion;
             if (UpdateRaftVoterRequest.ApiKey == apiKey)
                 return new UpdateRaftVoterRequest(version).HeaderVersion;
             if (VoteRequest.ApiKey == apiKey)

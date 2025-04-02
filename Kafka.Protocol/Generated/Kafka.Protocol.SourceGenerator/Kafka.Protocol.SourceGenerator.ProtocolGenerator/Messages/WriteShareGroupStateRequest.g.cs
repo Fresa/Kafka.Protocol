@@ -399,6 +399,7 @@ namespace Kafka.Protocol
 
                 private Array<StateBatch> _stateBatchesCollection = Array.Empty<StateBatch>();
                 /// <summary>
+                /// <para>The state batches for the share-partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Array<StateBatch> StateBatchesCollection
@@ -411,6 +412,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The state batches for the share-partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithStateBatchesCollection(params Func<StateBatch, StateBatch>[] createFields)
@@ -421,6 +423,7 @@ namespace Kafka.Protocol
 
                 public delegate StateBatch CreateStateBatch(StateBatch field);
                 /// <summary>
+                /// <para>The state batches for the share-partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithStateBatchesCollection(IEnumerable<CreateStateBatch> createFields)
@@ -533,7 +536,7 @@ namespace Kafka.Protocol
 
                     private Int8 _deliveryState = Int8.Default;
                     /// <summary>
-                    /// <para>The state - 0:Available,2:Acked,4:Archived</para>
+                    /// <para>The state - 0:Available,2:Acked,4:Archived.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int8 DeliveryState
@@ -546,7 +549,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The state - 0:Available,2:Acked,4:Archived</para>
+                    /// <para>The state - 0:Available,2:Acked,4:Archived.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public StateBatch WithDeliveryState(Int8 deliveryState)

@@ -105,7 +105,7 @@ namespace Kafka.Protocol
 
         private Int16 _errorCode = Int16.Default;
         /// <summary>
-        /// <para>The top level response error code</para>
+        /// <para>The top level response error code.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 ErrorCode
@@ -118,7 +118,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The top level response error code</para>
+        /// <para>The top level response error code.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AssignReplicasToDirsResponse WithErrorCode(Int16 errorCode)
@@ -129,6 +129,7 @@ namespace Kafka.Protocol
 
         private Array<DirectoryData> _directoriesCollection = Array.Empty<DirectoryData>();
         /// <summary>
+        /// <para>The list of directories and their assigned partitions.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<DirectoryData> DirectoriesCollection
@@ -141,6 +142,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The list of directories and their assigned partitions.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AssignReplicasToDirsResponse WithDirectoriesCollection(params Func<DirectoryData, DirectoryData>[] createFields)
@@ -151,6 +153,7 @@ namespace Kafka.Protocol
 
         public delegate DirectoryData CreateDirectoryData(DirectoryData field);
         /// <summary>
+        /// <para>The list of directories and their assigned partitions.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AssignReplicasToDirsResponse WithDirectoriesCollection(IEnumerable<CreateDirectoryData> createFields)
@@ -211,7 +214,7 @@ namespace Kafka.Protocol
 
             private Uuid _id = Uuid.Default;
             /// <summary>
-            /// <para>The ID of the directory</para>
+            /// <para>The ID of the directory.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Uuid Id
@@ -224,7 +227,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The ID of the directory</para>
+            /// <para>The ID of the directory.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DirectoryData WithId(Uuid id)
@@ -235,6 +238,7 @@ namespace Kafka.Protocol
 
             private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
             /// <summary>
+            /// <para>The list of topics and their assigned partitions.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<TopicData> TopicsCollection
@@ -247,6 +251,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The list of topics and their assigned partitions.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DirectoryData WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
@@ -257,6 +262,7 @@ namespace Kafka.Protocol
 
             public delegate TopicData CreateTopicData(TopicData field);
             /// <summary>
+            /// <para>The list of topics and their assigned partitions.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DirectoryData WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
@@ -317,7 +323,7 @@ namespace Kafka.Protocol
 
                 private Uuid _topicId = Uuid.Default;
                 /// <summary>
-                /// <para>The ID of the assigned topic</para>
+                /// <para>The ID of the assigned topic.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Uuid TopicId
@@ -330,7 +336,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The ID of the assigned topic</para>
+                /// <para>The ID of the assigned topic.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public TopicData WithTopicId(Uuid topicId)
@@ -341,6 +347,7 @@ namespace Kafka.Protocol
 
                 private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
                 /// <summary>
+                /// <para>The list of assigned partitions.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Array<PartitionData> PartitionsCollection
@@ -353,6 +360,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The list of assigned partitions.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
@@ -363,6 +371,7 @@ namespace Kafka.Protocol
 
                 public delegate PartitionData CreatePartitionData(PartitionData field);
                 /// <summary>
+                /// <para>The list of assigned partitions.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
@@ -423,7 +432,7 @@ namespace Kafka.Protocol
 
                     private Int32 _partitionIndex = Int32.Default;
                     /// <summary>
-                    /// <para>The partition index</para>
+                    /// <para>The partition index.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int32 PartitionIndex
@@ -436,7 +445,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The partition index</para>
+                    /// <para>The partition index.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public PartitionData WithPartitionIndex(Int32 partitionIndex)
@@ -447,7 +456,7 @@ namespace Kafka.Protocol
 
                     private Int16 _errorCode = Int16.Default;
                     /// <summary>
-                    /// <para>The partition level error code</para>
+                    /// <para>The partition level error code.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int16 ErrorCode
@@ -460,7 +469,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The partition level error code</para>
+                    /// <para>The partition level error code.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public PartitionData WithErrorCode(Int16 errorCode)

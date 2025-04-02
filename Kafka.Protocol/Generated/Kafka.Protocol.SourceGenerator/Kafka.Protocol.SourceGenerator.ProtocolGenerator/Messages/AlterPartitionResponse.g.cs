@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public AlterPartitionResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"AlterPartitionResponse does not support version {version}. Valid versions are: 0-3");
+                throw new UnsupportedVersionException($"AlterPartitionResponse does not support version {version}. Valid versions are: 2-3");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(56);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(2);
         public static readonly Int16 MaxVersion = Int16.From(3);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -105,7 +105,7 @@ namespace Kafka.Protocol
 
         private Int16 _errorCode = Int16.Default;
         /// <summary>
-        /// <para>The top level response error code</para>
+        /// <para>The top level response error code.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 ErrorCode
@@ -118,7 +118,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The top level response error code</para>
+        /// <para>The top level response error code.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AlterPartitionResponse WithErrorCode(Int16 errorCode)
@@ -129,6 +129,7 @@ namespace Kafka.Protocol
 
         private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
         /// <summary>
+        /// <para>The responses for each topic.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TopicData> TopicsCollection
@@ -141,6 +142,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The responses for each topic.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AlterPartitionResponse WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
@@ -151,6 +153,7 @@ namespace Kafka.Protocol
 
         public delegate TopicData CreateTopicData(TopicData field);
         /// <summary>
+        /// <para>The responses for each topic.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public AlterPartitionResponse WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
@@ -176,12 +179,10 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => (Version >= 0 && Version <= 1 ? _topicName.GetSize(IsFlexibleVersion) : 0) + (Version >= 2 ? _topicId.GetSize(IsFlexibleVersion) : 0) + _partitionsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => (Version >= 2 ? _topicId.GetSize(IsFlexibleVersion) : 0) + _partitionsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<TopicData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new TopicData(version);
-                if (instance.Version >= 0 && instance.Version <= 1)
-                    instance.TopicName = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (instance.Version >= 2)
                     instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.PartitionsCollection = await Array<PartitionData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -204,8 +205,6 @@ namespace Kafka.Protocol
             ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
             internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
             {
-                if (Version >= 0 && Version <= 1)
-                    await _topicName.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (Version >= 2)
                     await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -215,33 +214,9 @@ namespace Kafka.Protocol
                 }
             }
 
-            private String _topicName = String.Default;
-            /// <summary>
-            /// <para>The name of the topic</para>
-            /// <para>Versions: 0-1</para>
-            /// </summary>
-            public String TopicName
-            {
-                get => _topicName;
-                private set
-                {
-                    _topicName = value;
-                }
-            }
-
-            /// <summary>
-            /// <para>The name of the topic</para>
-            /// <para>Versions: 0-1</para>
-            /// </summary>
-            public TopicData WithTopicName(String topicName)
-            {
-                TopicName = topicName;
-                return this;
-            }
-
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The ID of the topic</para>
+            /// <para>The ID of the topic.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public Uuid TopicId
@@ -254,7 +229,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The ID of the topic</para>
+            /// <para>The ID of the topic.</para>
             /// <para>Versions: 2+</para>
             /// </summary>
             public TopicData WithTopicId(Uuid topicId)
@@ -265,6 +240,7 @@ namespace Kafka.Protocol
 
             private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
             /// <summary>
+            /// <para>The responses for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<PartitionData> PartitionsCollection
@@ -277,6 +253,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The responses for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
@@ -287,6 +264,7 @@ namespace Kafka.Protocol
 
             public delegate PartitionData CreatePartitionData(PartitionData field);
             /// <summary>
+            /// <para>The responses for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
@@ -359,7 +337,7 @@ namespace Kafka.Protocol
 
                 private Int32 _partitionIndex = Int32.Default;
                 /// <summary>
-                /// <para>The partition index</para>
+                /// <para>The partition index.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 PartitionIndex
@@ -372,7 +350,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The partition index</para>
+                /// <para>The partition index.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithPartitionIndex(Int32 partitionIndex)
@@ -383,7 +361,7 @@ namespace Kafka.Protocol
 
                 private Int16 _errorCode = Int16.Default;
                 /// <summary>
-                /// <para>The partition level error code</para>
+                /// <para>The partition level error code.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int16 ErrorCode
@@ -396,7 +374,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The partition level error code</para>
+                /// <para>The partition level error code.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithErrorCode(Int16 errorCode)
@@ -505,7 +483,7 @@ namespace Kafka.Protocol
 
                 private Int32 _partitionEpoch = Int32.Default;
                 /// <summary>
-                /// <para>The current epoch for the partition for KRaft controllers. The current ZK version for the legacy controllers.</para>
+                /// <para>The current epoch for the partition for KRaft controllers.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 PartitionEpoch
@@ -518,7 +496,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The current epoch for the partition for KRaft controllers. The current ZK version for the legacy controllers.</para>
+                /// <para>The current epoch for the partition for KRaft controllers.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithPartitionEpoch(Int32 partitionEpoch)

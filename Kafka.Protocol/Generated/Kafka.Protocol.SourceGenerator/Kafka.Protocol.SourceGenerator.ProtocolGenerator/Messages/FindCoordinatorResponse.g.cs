@@ -257,7 +257,7 @@ namespace Kafka.Protocol
 
         private Array<Coordinator> _coordinatorsCollection = Array.Empty<Coordinator>();
         /// <summary>
-        /// <para>Each coordinator result in the response</para>
+        /// <para>Each coordinator result in the response.</para>
         /// <para>Versions: 4+</para>
         /// </summary>
         public Array<Coordinator> CoordinatorsCollection
@@ -272,7 +272,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Each coordinator result in the response</para>
+        /// <para>Each coordinator result in the response.</para>
         /// <para>Versions: 4+</para>
         /// </summary>
         public FindCoordinatorResponse WithCoordinatorsCollection(params Func<Coordinator, Coordinator>[] createFields)
@@ -283,7 +283,7 @@ namespace Kafka.Protocol
 
         public delegate Coordinator CreateCoordinator(Coordinator field);
         /// <summary>
-        /// <para>Each coordinator result in the response</para>
+        /// <para>Each coordinator result in the response.</para>
         /// <para>Versions: 4+</para>
         /// </summary>
         public FindCoordinatorResponse WithCoordinatorsCollection(IEnumerable<CreateCoordinator> createFields)

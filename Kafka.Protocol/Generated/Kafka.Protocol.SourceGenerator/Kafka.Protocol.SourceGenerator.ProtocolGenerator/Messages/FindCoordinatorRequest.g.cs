@@ -113,7 +113,7 @@ namespace Kafka.Protocol
 
         private Int8 _keyType = new Int8(0);
         /// <summary>
-        /// <para>The coordinator key type. (Group, transaction, etc.)</para>
+        /// <para>The coordinator key type. (group, transaction, share).</para>
         /// <para>Versions: 1+</para>
         /// <para>Default: 0</para>
         /// </summary>
@@ -129,7 +129,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The coordinator key type. (Group, transaction, etc.)</para>
+        /// <para>The coordinator key type. (group, transaction, share).</para>
         /// <para>Versions: 1+</para>
         /// <para>Default: 0</para>
         /// </summary>

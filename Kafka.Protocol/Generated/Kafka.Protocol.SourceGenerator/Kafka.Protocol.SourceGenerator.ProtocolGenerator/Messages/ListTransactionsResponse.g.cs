@@ -107,6 +107,7 @@ namespace Kafka.Protocol
 
         private Int16 _errorCode = Int16.Default;
         /// <summary>
+        /// <para>The error code, or 0 if there was no error.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 ErrorCode
@@ -119,6 +120,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The error code, or 0 if there was no error.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ListTransactionsResponse WithErrorCode(Int16 errorCode)
@@ -129,7 +131,7 @@ namespace Kafka.Protocol
 
         private Array<String> _unknownStateFiltersCollection = Array.Empty<String>();
         /// <summary>
-        /// <para>Set of state filters provided in the request which were unknown to the transaction coordinator</para>
+        /// <para>Set of state filters provided in the request which were unknown to the transaction coordinator.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<String> UnknownStateFiltersCollection
@@ -142,7 +144,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Set of state filters provided in the request which were unknown to the transaction coordinator</para>
+        /// <para>Set of state filters provided in the request which were unknown to the transaction coordinator.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ListTransactionsResponse WithUnknownStateFiltersCollection(Array<String> unknownStateFiltersCollection)
@@ -153,6 +155,7 @@ namespace Kafka.Protocol
 
         private Array<TransactionState> _transactionStatesCollection = Array.Empty<TransactionState>();
         /// <summary>
+        /// <para>The current state of the transaction for the transactional id.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TransactionState> TransactionStatesCollection
@@ -165,6 +168,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The current state of the transaction for the transactional id.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ListTransactionsResponse WithTransactionStatesCollection(params Func<TransactionState, TransactionState>[] createFields)
@@ -175,6 +179,7 @@ namespace Kafka.Protocol
 
         public delegate TransactionState CreateTransactionState(TransactionState field);
         /// <summary>
+        /// <para>The current state of the transaction for the transactional id.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ListTransactionsResponse WithTransactionStatesCollection(IEnumerable<CreateTransactionState> createFields)
@@ -237,6 +242,7 @@ namespace Kafka.Protocol
 
             private String _transactionalId = String.Default;
             /// <summary>
+            /// <para>The transactional id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String TransactionalId
@@ -249,6 +255,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The transactional id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithTransactionalId(String transactionalId)
@@ -259,6 +266,7 @@ namespace Kafka.Protocol
 
             private Int64 _producerId = Int64.Default;
             /// <summary>
+            /// <para>The producer id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int64 ProducerId
@@ -271,6 +279,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The producer id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithProducerId(Int64 producerId)
@@ -281,7 +290,7 @@ namespace Kafka.Protocol
 
             private String _transactionState = String.Default;
             /// <summary>
-            /// <para>The current transaction state of the producer</para>
+            /// <para>The current transaction state of the producer.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String TransactionState_
@@ -294,7 +303,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The current transaction state of the producer</para>
+            /// <para>The current transaction state of the producer.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithTransactionState_(String transactionState)

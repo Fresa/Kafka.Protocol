@@ -77,7 +77,7 @@ namespace Kafka.Protocol
 
         private Array<InitializeStateResult> _resultsCollection = Array.Empty<InitializeStateResult>();
         /// <summary>
-        /// <para>The initialization results</para>
+        /// <para>The initialization results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<InitializeStateResult> ResultsCollection
@@ -90,7 +90,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The initialization results</para>
+        /// <para>The initialization results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public InitializeShareGroupStateResponse WithResultsCollection(params Func<InitializeStateResult, InitializeStateResult>[] createFields)
@@ -101,7 +101,7 @@ namespace Kafka.Protocol
 
         public delegate InitializeStateResult CreateInitializeStateResult(InitializeStateResult field);
         /// <summary>
-        /// <para>The initialization results</para>
+        /// <para>The initialization results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public InitializeShareGroupStateResponse WithResultsCollection(IEnumerable<CreateInitializeStateResult> createFields)
@@ -162,7 +162,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The topic identifier</para>
+            /// <para>The topic identifier.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Uuid TopicId
@@ -175,7 +175,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic identifier</para>
+            /// <para>The topic identifier.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public InitializeStateResult WithTopicId(Uuid topicId)

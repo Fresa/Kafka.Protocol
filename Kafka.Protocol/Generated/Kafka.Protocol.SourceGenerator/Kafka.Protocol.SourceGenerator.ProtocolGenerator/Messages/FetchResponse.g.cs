@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public FetchResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 0-17");
+                throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 4-17");
             Version = version;
             IsFlexibleVersion = version >= 12;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(1);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(4);
         public static readonly Int16 MaxVersion = Int16.From(17);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -298,7 +298,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 13+</para>
             /// </summary>
             public Uuid TopicId
@@ -311,7 +311,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The unique topic ID</para>
+            /// <para>The unique topic ID.</para>
             /// <para>Versions: 13+</para>
             /// </summary>
             public FetchableTopicResponse WithTopicId(Uuid topicId)
@@ -551,7 +551,7 @@ namespace Kafka.Protocol
 
                 private Int64 _lastStableOffset = new Int64(-1);
                 /// <summary>
-                /// <para>The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)</para>
+                /// <para>The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED).</para>
                 /// <para>Versions: 4+</para>
                 /// <para>Default: -1</para>
                 /// </summary>
@@ -565,7 +565,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED)</para>
+                /// <para>The last stable offset (or LSO) of the partition. This is the last offset such that the state of all transactional records prior to this offset have been decided (ABORTED or COMMITTED).</para>
                 /// <para>Versions: 4+</para>
                 /// <para>Default: -1</para>
                 /// </summary>
@@ -604,7 +604,7 @@ namespace Kafka.Protocol
                 private bool _divergingEpochIsSet;
                 private EpochEndOffset _divergingEpoch = default !;
                 /// <summary>
-                /// <para>In case divergence is detected based on the `LastFetchedEpoch` and `FetchOffset` in the request, this field indicates the largest epoch and its end offset such that subsequent records are known to diverge</para>
+                /// <para>In case divergence is detected based on the `LastFetchedEpoch` and `FetchOffset` in the request, this field indicates the largest epoch and its end offset such that subsequent records are known to diverge.</para>
                 /// <para>Versions: 12+</para>
                 /// </summary>
                 public EpochEndOffset DivergingEpoch
@@ -620,7 +620,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>In case divergence is detected based on the `LastFetchedEpoch` and `FetchOffset` in the request, this field indicates the largest epoch and its end offset such that subsequent records are known to diverge</para>
+                /// <para>In case divergence is detected based on the `LastFetchedEpoch` and `FetchOffset` in the request, this field indicates the largest epoch and its end offset such that subsequent records are known to diverge.</para>
                 /// <para>Versions: 12+</para>
                 /// </summary>
                 public PartitionData WithDivergingEpoch(Func<EpochEndOffset, EpochEndOffset> createField)
@@ -685,6 +685,7 @@ namespace Kafka.Protocol
 
                     private Int32 _epoch = new Int32(-1);
                     /// <summary>
+                    /// <para>The largest epoch.</para>
                     /// <para>Versions: 12+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -700,6 +701,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The largest epoch.</para>
                     /// <para>Versions: 12+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -711,6 +713,7 @@ namespace Kafka.Protocol
 
                     private Int64 _endOffset = new Int64(-1);
                     /// <summary>
+                    /// <para>The end offset of the epoch.</para>
                     /// <para>Versions: 12+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -726,6 +729,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The end offset of the epoch.</para>
                     /// <para>Versions: 12+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -739,6 +743,7 @@ namespace Kafka.Protocol
                 private bool _currentLeaderIsSet;
                 private LeaderIdAndEpoch _currentLeader = default !;
                 /// <summary>
+                /// <para>The current leader of the partition.</para>
                 /// <para>Versions: 12+</para>
                 /// </summary>
                 public LeaderIdAndEpoch CurrentLeader
@@ -754,6 +759,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The current leader of the partition.</para>
                 /// <para>Versions: 12+</para>
                 /// </summary>
                 public PartitionData WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)
@@ -846,7 +852,7 @@ namespace Kafka.Protocol
 
                     private Int32 _leaderEpoch = new Int32(-1);
                     /// <summary>
-                    /// <para>The latest known leader epoch</para>
+                    /// <para>The latest known leader epoch.</para>
                     /// <para>Versions: 12+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -862,7 +868,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The latest known leader epoch</para>
+                    /// <para>The latest known leader epoch.</para>
                     /// <para>Versions: 12+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -953,6 +959,7 @@ namespace Kafka.Protocol
 
                     private Int64 _endOffset = new Int64(-1);
                     /// <summary>
+                    /// <para>The end offset of the epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -966,6 +973,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The end offset of the epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -977,6 +985,7 @@ namespace Kafka.Protocol
 
                     private Int32 _epoch = new Int32(-1);
                     /// <summary>
+                    /// <para>The largest epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -990,6 +999,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The largest epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -1146,7 +1156,7 @@ namespace Kafka.Protocol
 
                 private Int32 _preferredReadReplica = new Int32(-1);
                 /// <summary>
-                /// <para>The preferred read replica for the consumer to use on its next fetch request</para>
+                /// <para>The preferred read replica for the consumer to use on its next fetch request.</para>
                 /// <para>Versions: 11+</para>
                 /// <para>Default: -1</para>
                 /// </summary>
@@ -1162,7 +1172,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The preferred read replica for the consumer to use on its next fetch request</para>
+                /// <para>The preferred read replica for the consumer to use on its next fetch request.</para>
                 /// <para>Versions: 11+</para>
                 /// <para>Default: -1</para>
                 /// </summary>

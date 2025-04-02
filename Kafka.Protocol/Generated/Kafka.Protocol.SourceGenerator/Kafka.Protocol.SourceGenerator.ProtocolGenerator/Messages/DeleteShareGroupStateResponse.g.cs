@@ -77,7 +77,7 @@ namespace Kafka.Protocol
 
         private Array<DeleteStateResult> _resultsCollection = Array.Empty<DeleteStateResult>();
         /// <summary>
-        /// <para>The delete results</para>
+        /// <para>The delete results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<DeleteStateResult> ResultsCollection
@@ -90,7 +90,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The delete results</para>
+        /// <para>The delete results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DeleteShareGroupStateResponse WithResultsCollection(params Func<DeleteStateResult, DeleteStateResult>[] createFields)
@@ -101,7 +101,7 @@ namespace Kafka.Protocol
 
         public delegate DeleteStateResult CreateDeleteStateResult(DeleteStateResult field);
         /// <summary>
-        /// <para>The delete results</para>
+        /// <para>The delete results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DeleteShareGroupStateResponse WithResultsCollection(IEnumerable<CreateDeleteStateResult> createFields)
@@ -162,7 +162,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The topic identifier</para>
+            /// <para>The topic identifier.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Uuid TopicId
@@ -175,7 +175,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic identifier</para>
+            /// <para>The topic identifier.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public DeleteStateResult WithTopicId(Uuid topicId)

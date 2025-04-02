@@ -218,7 +218,7 @@ namespace Kafka.Protocol
 
             private String _topic = String.Default;
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Topic
@@ -231,7 +231,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReplicaElectionResult WithTopic(String topic)
@@ -242,7 +242,7 @@ namespace Kafka.Protocol
 
             private Array<PartitionResult> _partitionResultCollection = Array.Empty<PartitionResult>();
             /// <summary>
-            /// <para>The results for each partition</para>
+            /// <para>The results for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<PartitionResult> PartitionResultCollection
@@ -255,7 +255,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The results for each partition</para>
+            /// <para>The results for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReplicaElectionResult WithPartitionResultCollection(params Func<PartitionResult, PartitionResult>[] createFields)
@@ -266,7 +266,7 @@ namespace Kafka.Protocol
 
             public delegate PartitionResult CreatePartitionResult(PartitionResult field);
             /// <summary>
-            /// <para>The results for each partition</para>
+            /// <para>The results for each partition.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReplicaElectionResult WithPartitionResultCollection(IEnumerable<CreatePartitionResult> createFields)
@@ -329,7 +329,7 @@ namespace Kafka.Protocol
 
                 private Int32 _partitionId = Int32.Default;
                 /// <summary>
-                /// <para>The partition id</para>
+                /// <para>The partition id.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 PartitionId
@@ -342,7 +342,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The partition id</para>
+                /// <para>The partition id.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionResult WithPartitionId(Int32 partitionId)

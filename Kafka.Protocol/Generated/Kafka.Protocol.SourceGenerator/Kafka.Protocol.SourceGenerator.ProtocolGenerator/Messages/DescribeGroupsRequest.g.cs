@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeGroupsRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeGroupsRequest does not support version {version}. Valid versions are: 0-5");
+                throw new UnsupportedVersionException($"DescribeGroupsRequest does not support version {version}. Valid versions are: 0-6");
             Version = version;
             IsFlexibleVersion = version >= 5;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(15);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(5);
+        public static readonly Int16 MaxVersion = Int16.From(6);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -81,7 +81,7 @@ namespace Kafka.Protocol
 
         private Array<String> _groupsCollection = Array.Empty<String>();
         /// <summary>
-        /// <para>The names of the groups to describe</para>
+        /// <para>The names of the groups to describe.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<String> GroupsCollection
@@ -94,7 +94,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The names of the groups to describe</para>
+        /// <para>The names of the groups to describe.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeGroupsRequest WithGroupsCollection(Array<String> groupsCollection)

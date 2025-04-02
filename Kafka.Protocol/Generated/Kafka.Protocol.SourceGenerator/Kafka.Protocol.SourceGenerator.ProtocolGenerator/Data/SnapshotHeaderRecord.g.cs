@@ -78,7 +78,7 @@ namespace Kafka.Protocol
 
         private Int16 _version = Int16.Default;
         /// <summary>
-        /// <para>The version of the snapshot header record</para>
+        /// <para>The version of the snapshot header record.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int16 Version_
@@ -91,7 +91,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The version of the snapshot header record</para>
+        /// <para>The version of the snapshot header record.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public SnapshotHeaderRecord WithVersion_(Int16 version)
@@ -102,7 +102,7 @@ namespace Kafka.Protocol
 
         private Int64 _lastContainedLogTimestamp = Int64.Default;
         /// <summary>
-        /// <para>The append time of the last record from the log contained in this snapshot</para>
+        /// <para>The append time of the last record from the log contained in this snapshot.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Int64 LastContainedLogTimestamp
@@ -115,7 +115,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The append time of the last record from the log contained in this snapshot</para>
+        /// <para>The append time of the last record from the log contained in this snapshot.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public SnapshotHeaderRecord WithLastContainedLogTimestamp(Int64 lastContainedLogTimestamp)

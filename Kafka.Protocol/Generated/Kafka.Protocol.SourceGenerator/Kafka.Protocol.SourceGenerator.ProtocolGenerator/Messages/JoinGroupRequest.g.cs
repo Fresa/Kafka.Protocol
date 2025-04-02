@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public JoinGroupRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"JoinGroupRequest does not support version {version}. Valid versions are: 0-9");
+                throw new UnsupportedVersionException($"JoinGroupRequest does not support version {version}. Valid versions are: 2-9");
             Version = version;
             IsFlexibleVersion = version >= 6;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(11);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(2);
         public static readonly Int16 MaxVersion = Int16.From(9);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }

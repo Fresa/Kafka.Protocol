@@ -83,6 +83,7 @@ namespace Kafka.Protocol
 
         private NullableString _clusterId = new NullableString(null);
         /// <summary>
+        /// <para>The cluster id.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -96,6 +97,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The cluster id.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -107,6 +109,7 @@ namespace Kafka.Protocol
 
         private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
         /// <summary>
+        /// <para>The topics.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TopicData> TopicsCollection
@@ -119,6 +122,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The topics.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public EndQuorumEpochRequest WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
@@ -129,6 +133,7 @@ namespace Kafka.Protocol
 
         public delegate TopicData CreateTopicData(TopicData field);
         /// <summary>
+        /// <para>The topics.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public EndQuorumEpochRequest WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
@@ -213,6 +218,7 @@ namespace Kafka.Protocol
 
             private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
             /// <summary>
+            /// <para>The partitions.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<PartitionData> PartitionsCollection
@@ -225,6 +231,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The partitions.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
@@ -235,6 +242,7 @@ namespace Kafka.Protocol
 
             public delegate PartitionData CreatePartitionData(PartitionData field);
             /// <summary>
+            /// <para>The partitions.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)
@@ -329,7 +337,7 @@ namespace Kafka.Protocol
 
                 private Int32 _leaderId = Int32.Default;
                 /// <summary>
-                /// <para>The current leader ID that is resigning</para>
+                /// <para>The current leader ID that is resigning.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 LeaderId
@@ -342,7 +350,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The current leader ID that is resigning</para>
+                /// <para>The current leader ID that is resigning.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithLeaderId(Int32 leaderId)
@@ -353,7 +361,7 @@ namespace Kafka.Protocol
 
                 private Int32 _leaderEpoch = Int32.Default;
                 /// <summary>
-                /// <para>The current epoch</para>
+                /// <para>The current epoch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 LeaderEpoch
@@ -366,7 +374,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The current epoch</para>
+                /// <para>The current epoch.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionData WithLeaderEpoch(Int32 leaderEpoch)
@@ -377,7 +385,7 @@ namespace Kafka.Protocol
 
                 private Array<Int32> _preferredSuccessorsCollection = Array.Empty<Int32>();
                 /// <summary>
-                /// <para>A sorted list of preferred successors to start the election</para>
+                /// <para>A sorted list of preferred successors to start the election.</para>
                 /// <para>Versions: 0</para>
                 /// </summary>
                 public Array<Int32> PreferredSuccessorsCollection
@@ -390,7 +398,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>A sorted list of preferred successors to start the election</para>
+                /// <para>A sorted list of preferred successors to start the election.</para>
                 /// <para>Versions: 0</para>
                 /// </summary>
                 public PartitionData WithPreferredSuccessorsCollection(Array<Int32> preferredSuccessorsCollection)
@@ -401,7 +409,7 @@ namespace Kafka.Protocol
 
                 private Array<ReplicaInfo> _preferredCandidatesCollection = Array.Empty<ReplicaInfo>();
                 /// <summary>
-                /// <para>A sorted list of preferred candidates to start the election</para>
+                /// <para>A sorted list of preferred candidates to start the election.</para>
                 /// <para>Versions: 1+</para>
                 /// </summary>
                 public Array<ReplicaInfo> PreferredCandidatesCollection
@@ -414,7 +422,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>A sorted list of preferred candidates to start the election</para>
+                /// <para>A sorted list of preferred candidates to start the election.</para>
                 /// <para>Versions: 1+</para>
                 /// </summary>
                 public PartitionData WithPreferredCandidatesCollection(params Func<ReplicaInfo, ReplicaInfo>[] createFields)
@@ -425,7 +433,7 @@ namespace Kafka.Protocol
 
                 public delegate ReplicaInfo CreateReplicaInfo(ReplicaInfo field);
                 /// <summary>
-                /// <para>A sorted list of preferred candidates to start the election</para>
+                /// <para>A sorted list of preferred candidates to start the election.</para>
                 /// <para>Versions: 1+</para>
                 /// </summary>
                 public PartitionData WithPreferredCandidatesCollection(IEnumerable<CreateReplicaInfo> createFields)
@@ -490,6 +498,7 @@ namespace Kafka.Protocol
 
                     private Int32 _candidateId = Int32.Default;
                     /// <summary>
+                    /// <para>The ID of the candidate replica.</para>
                     /// <para>Versions: 1+</para>
                     /// </summary>
                     public Int32 CandidateId
@@ -504,6 +513,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The ID of the candidate replica.</para>
                     /// <para>Versions: 1+</para>
                     /// </summary>
                     public ReplicaInfo WithCandidateId(Int32 candidateId)
@@ -514,6 +524,7 @@ namespace Kafka.Protocol
 
                     private Uuid _candidateDirectoryId = Uuid.Default;
                     /// <summary>
+                    /// <para>The directory ID of the candidate replica.</para>
                     /// <para>Versions: 1+</para>
                     /// </summary>
                     public Uuid CandidateDirectoryId
@@ -528,6 +539,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The directory ID of the candidate replica.</para>
                     /// <para>Versions: 1+</para>
                     /// </summary>
                     public ReplicaInfo WithCandidateDirectoryId(Uuid candidateDirectoryId)
@@ -541,7 +553,7 @@ namespace Kafka.Protocol
 
         private Map<String, LeaderEndpoint> _leaderEndpointsCollection = Map<String, LeaderEndpoint>.Default;
         /// <summary>
-        /// <para>Endpoints for the leader</para>
+        /// <para>Endpoints for the leader.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public Map<String, LeaderEndpoint> LeaderEndpointsCollection
@@ -554,7 +566,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Endpoints for the leader</para>
+        /// <para>Endpoints for the leader.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public EndQuorumEpochRequest WithLeaderEndpointsCollection(params Func<LeaderEndpoint, LeaderEndpoint>[] createFields)
@@ -565,7 +577,7 @@ namespace Kafka.Protocol
 
         public delegate LeaderEndpoint CreateLeaderEndpoint(LeaderEndpoint field);
         /// <summary>
-        /// <para>Endpoints for the leader</para>
+        /// <para>Endpoints for the leader.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public EndQuorumEpochRequest WithLeaderEndpointsCollection(IEnumerable<CreateLeaderEndpoint> createFields)
@@ -634,7 +646,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The name of the endpoint</para>
+            /// <para>The name of the endpoint.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public String Name
@@ -649,7 +661,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The name of the endpoint</para>
+            /// <para>The name of the endpoint.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public LeaderEndpoint WithName(String name)
@@ -660,7 +672,7 @@ namespace Kafka.Protocol
 
             private String _host = String.Default;
             /// <summary>
-            /// <para>The node's hostname</para>
+            /// <para>The node's hostname.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public String Host
@@ -675,7 +687,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The node's hostname</para>
+            /// <para>The node's hostname.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public LeaderEndpoint WithHost(String host)
@@ -686,7 +698,7 @@ namespace Kafka.Protocol
 
             private UInt16 _port = UInt16.Default;
             /// <summary>
-            /// <para>The node's port</para>
+            /// <para>The node's port.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public UInt16 Port
@@ -701,7 +713,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The node's port</para>
+            /// <para>The node's port.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public LeaderEndpoint WithPort(UInt16 port)

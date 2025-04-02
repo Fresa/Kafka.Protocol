@@ -77,6 +77,7 @@ namespace Kafka.Protocol
 
         private Array<TopicData> _topicsCollection = Array.Empty<TopicData>();
         /// <summary>
+        /// <para>The topics to describe.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TopicData> TopicsCollection
@@ -89,6 +90,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The topics to describe.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeQuorumRequest WithTopicsCollection(params Func<TopicData, TopicData>[] createFields)
@@ -99,6 +101,7 @@ namespace Kafka.Protocol
 
         public delegate TopicData CreateTopicData(TopicData field);
         /// <summary>
+        /// <para>The topics to describe.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeQuorumRequest WithTopicsCollection(IEnumerable<CreateTopicData> createFields)
@@ -183,6 +186,7 @@ namespace Kafka.Protocol
 
             private Array<PartitionData> _partitionsCollection = Array.Empty<PartitionData>();
             /// <summary>
+            /// <para>The partitions to describe.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<PartitionData> PartitionsCollection
@@ -195,6 +199,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The partitions to describe.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(params Func<PartitionData, PartitionData>[] createFields)
@@ -205,6 +210,7 @@ namespace Kafka.Protocol
 
             public delegate PartitionData CreatePartitionData(PartitionData field);
             /// <summary>
+            /// <para>The partitions to describe.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicData WithPartitionsCollection(IEnumerable<CreatePartitionData> createFields)

@@ -157,7 +157,7 @@ namespace Kafka.Protocol
 
         private Map<String, Listener> _listenersCollection = Map<String, Listener>.Default;
         /// <summary>
-        /// <para>The listeners of this controller</para>
+        /// <para>The listeners of this controller.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, Listener> ListenersCollection
@@ -170,7 +170,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The listeners of this controller</para>
+        /// <para>The listeners of this controller.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ControllerRegistrationRequest WithListenersCollection(params Func<Listener, Listener>[] createFields)
@@ -181,7 +181,7 @@ namespace Kafka.Protocol
 
         public delegate Listener CreateListener(Listener field);
         /// <summary>
-        /// <para>The listeners of this controller</para>
+        /// <para>The listeners of this controller.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ControllerRegistrationRequest WithListenersCollection(IEnumerable<CreateListener> createFields)
@@ -343,7 +343,7 @@ namespace Kafka.Protocol
 
         private Map<String, Feature> _featuresCollection = Map<String, Feature>.Default;
         /// <summary>
-        /// <para>The features on this controller</para>
+        /// <para>The features on this controller.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, Feature> FeaturesCollection
@@ -356,7 +356,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The features on this controller</para>
+        /// <para>The features on this controller.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ControllerRegistrationRequest WithFeaturesCollection(params Func<Feature, Feature>[] createFields)
@@ -367,7 +367,7 @@ namespace Kafka.Protocol
 
         public delegate Feature CreateFeature(Feature field);
         /// <summary>
-        /// <para>The features on this controller</para>
+        /// <para>The features on this controller.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ControllerRegistrationRequest WithFeaturesCollection(IEnumerable<CreateFeature> createFields)

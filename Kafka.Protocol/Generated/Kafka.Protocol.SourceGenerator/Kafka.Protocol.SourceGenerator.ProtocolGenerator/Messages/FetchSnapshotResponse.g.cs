@@ -412,7 +412,7 @@ namespace Kafka.Protocol
 
                 private SnapshotId _snapshotId = default !;
                 /// <summary>
-                /// <para>The snapshot endOffset and epoch fetched</para>
+                /// <para>The snapshot endOffset and epoch fetched.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public SnapshotId SnapshotId_
@@ -425,7 +425,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The snapshot endOffset and epoch fetched</para>
+                /// <para>The snapshot endOffset and epoch fetched.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionSnapshot WithSnapshotId_(Func<SnapshotId, SnapshotId> createField)
@@ -486,6 +486,7 @@ namespace Kafka.Protocol
 
                     private Int64 _endOffset = Int64.Default;
                     /// <summary>
+                    /// <para>The snapshot end offset.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int64 EndOffset
@@ -498,6 +499,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The snapshot end offset.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public SnapshotId WithEndOffset(Int64 endOffset)
@@ -508,6 +510,7 @@ namespace Kafka.Protocol
 
                     private Int32 _epoch = Int32.Default;
                     /// <summary>
+                    /// <para>The snapshot epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int32 Epoch
@@ -520,6 +523,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The snapshot epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public SnapshotId WithEpoch(Int32 epoch)
@@ -532,6 +536,7 @@ namespace Kafka.Protocol
                 private bool _currentLeaderIsSet;
                 private LeaderIdAndEpoch _currentLeader = default !;
                 /// <summary>
+                /// <para>The leader of the partition at the time of the snapshot.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public LeaderIdAndEpoch CurrentLeader
@@ -545,6 +550,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The leader of the partition at the time of the snapshot.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionSnapshot WithCurrentLeader(Func<LeaderIdAndEpoch, LeaderIdAndEpoch> createField)
@@ -629,7 +635,7 @@ namespace Kafka.Protocol
 
                     private Int32 _leaderEpoch = Int32.Default;
                     /// <summary>
-                    /// <para>The latest known leader epoch</para>
+                    /// <para>The latest known leader epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int32 LeaderEpoch
@@ -642,7 +648,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The latest known leader epoch</para>
+                    /// <para>The latest known leader epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public LeaderIdAndEpoch WithLeaderEpoch(Int32 leaderEpoch)
@@ -702,7 +708,7 @@ namespace Kafka.Protocol
 
                 private RecordBatch _unalignedRecords = RecordBatch.Default;
                 /// <summary>
-                /// <para>Snapshot data in records format which may not be aligned on an offset boundary</para>
+                /// <para>Snapshot data in records format which may not be aligned on an offset boundary.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public RecordBatch UnalignedRecords
@@ -715,7 +721,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>Snapshot data in records format which may not be aligned on an offset boundary</para>
+                /// <para>Snapshot data in records format which may not be aligned on an offset boundary.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionSnapshot WithUnalignedRecords(RecordBatch unalignedRecords)
@@ -729,7 +735,7 @@ namespace Kafka.Protocol
         private bool _nodeEndpointsCollectionIsSet;
         private Map<Int32, NodeEndpoint> _nodeEndpointsCollection = Map<Int32, NodeEndpoint>.Default;
         /// <summary>
-        /// <para>Endpoints for all current-leaders enumerated in PartitionSnapshot</para>
+        /// <para>Endpoints for all current-leaders enumerated in PartitionSnapshot.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public Map<Int32, NodeEndpoint> NodeEndpointsCollection
@@ -745,7 +751,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>Endpoints for all current-leaders enumerated in PartitionSnapshot</para>
+        /// <para>Endpoints for all current-leaders enumerated in PartitionSnapshot.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public FetchSnapshotResponse WithNodeEndpointsCollection(params Func<NodeEndpoint, NodeEndpoint>[] createFields)
@@ -756,7 +762,7 @@ namespace Kafka.Protocol
 
         public delegate NodeEndpoint CreateNodeEndpoint(NodeEndpoint field);
         /// <summary>
-        /// <para>Endpoints for all current-leaders enumerated in PartitionSnapshot</para>
+        /// <para>Endpoints for all current-leaders enumerated in PartitionSnapshot.</para>
         /// <para>Versions: 1+</para>
         /// </summary>
         public FetchSnapshotResponse WithNodeEndpointsCollection(IEnumerable<CreateNodeEndpoint> createFields)
@@ -825,7 +831,7 @@ namespace Kafka.Protocol
 
             private Int32 _nodeId = Int32.Default;
             /// <summary>
-            /// <para>The ID of the associated node</para>
+            /// <para>The ID of the associated node.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public Int32 NodeId
@@ -840,7 +846,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The ID of the associated node</para>
+            /// <para>The ID of the associated node.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public NodeEndpoint WithNodeId(Int32 nodeId)
@@ -851,7 +857,7 @@ namespace Kafka.Protocol
 
             private String _host = String.Default;
             /// <summary>
-            /// <para>The node's hostname</para>
+            /// <para>The node's hostname.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public String Host
@@ -866,7 +872,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The node's hostname</para>
+            /// <para>The node's hostname.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public NodeEndpoint WithHost(String host)
@@ -877,7 +883,7 @@ namespace Kafka.Protocol
 
             private UInt16 _port = UInt16.Default;
             /// <summary>
-            /// <para>The node's port</para>
+            /// <para>The node's port.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public UInt16 Port
@@ -892,7 +898,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The node's port</para>
+            /// <para>The node's port.</para>
             /// <para>Versions: 1+</para>
             /// </summary>
             public NodeEndpoint WithPort(UInt16 port)

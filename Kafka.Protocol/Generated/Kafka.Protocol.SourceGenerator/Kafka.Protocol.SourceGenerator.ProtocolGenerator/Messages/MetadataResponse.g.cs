@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public MetadataResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"MetadataResponse does not support version {version}. Valid versions are: 0-12");
+                throw new UnsupportedVersionException($"MetadataResponse does not support version {version}. Valid versions are: 0-13");
             Version = version;
             IsFlexibleVersion = version >= 9;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(3);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(12);
+        public static readonly Int16 MaxVersion = Int16.From(13);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => (Version >= 3 ? _throttleTimeMs.GetSize(IsFlexibleVersion) : 0) + _brokersCollection.GetSize(IsFlexibleVersion) + (Version >= 2 ? _clusterId.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _controllerId.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (Version >= 8 && Version <= 10 ? _clusterAuthorizedOperations.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => (Version >= 3 ? _throttleTimeMs.GetSize(IsFlexibleVersion) : 0) + _brokersCollection.GetSize(IsFlexibleVersion) + (Version >= 2 ? _clusterId.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _controllerId.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + (Version >= 8 && Version <= 10 ? _clusterAuthorizedOperations.GetSize(IsFlexibleVersion) : 0) + (Version >= 13 ? _errorCode.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<MetadataResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new MetadataResponse(version);
@@ -59,6 +59,8 @@ namespace Kafka.Protocol
             instance.TopicsCollection = await Map<NullableString, MetadataResponseTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => MetadataResponseTopic.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Name, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 8 && instance.Version <= 10)
                 instance.ClusterAuthorizedOperations = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 13)
+                instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -87,6 +89,8 @@ namespace Kafka.Protocol
             await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 8 && Version <= 10)
                 await _clusterAuthorizedOperations.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 13)
+                await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -886,6 +890,30 @@ namespace Kafka.Protocol
         public MetadataResponse WithClusterAuthorizedOperations(Int32 clusterAuthorizedOperations)
         {
             ClusterAuthorizedOperations = clusterAuthorizedOperations;
+            return this;
+        }
+
+        private Int16 _errorCode = Int16.Default;
+        /// <summary>
+        /// <para>The top-level error code, or 0 if there was no error.</para>
+        /// <para>Versions: 13+</para>
+        /// </summary>
+        public Int16 ErrorCode
+        {
+            get => _errorCode;
+            private set
+            {
+                _errorCode = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The top-level error code, or 0 if there was no error.</para>
+        /// <para>Versions: 13+</para>
+        /// </summary>
+        public MetadataResponse WithErrorCode(Int16 errorCode)
+        {
+            ErrorCode = errorCode;
             return this;
         }
     }

@@ -78,6 +78,7 @@ namespace Kafka.Protocol
 
         private Map<String, TopicPartition> _assignedPartitionsCollection = Map<String, TopicPartition>.Default;
         /// <summary>
+        /// <para>The list of topics and partitions assigned to this consumer.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Map<String, TopicPartition> AssignedPartitionsCollection
@@ -90,6 +91,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The list of topics and partitions assigned to this consumer.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ConsumerProtocolAssignment WithAssignedPartitionsCollection(params Func<TopicPartition, TopicPartition>[] createFields)
@@ -100,6 +102,7 @@ namespace Kafka.Protocol
 
         public delegate TopicPartition CreateTopicPartition(TopicPartition field);
         /// <summary>
+        /// <para>The list of topics and partitions assigned to this consumer.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ConsumerProtocolAssignment WithAssignedPartitionsCollection(IEnumerable<CreateTopicPartition> createFields)
@@ -160,6 +163,7 @@ namespace Kafka.Protocol
 
             private String _topic = String.Default;
             /// <summary>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Topic
@@ -172,6 +176,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicPartition WithTopic(String topic)
@@ -182,6 +187,7 @@ namespace Kafka.Protocol
 
             private Array<Int32> _partitionsCollection = Array.Empty<Int32>();
             /// <summary>
+            /// <para>The list of partitions assigned to this consumer.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<Int32> PartitionsCollection
@@ -194,6 +200,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The list of partitions assigned to this consumer.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicPartition WithPartitionsCollection(Array<Int32> partitionsCollection)
@@ -205,6 +212,7 @@ namespace Kafka.Protocol
 
         private NullableBytes _userData = new NullableBytes(null);
         /// <summary>
+        /// <para>User data.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>
@@ -218,6 +226,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>User data.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: null</para>
         /// </summary>

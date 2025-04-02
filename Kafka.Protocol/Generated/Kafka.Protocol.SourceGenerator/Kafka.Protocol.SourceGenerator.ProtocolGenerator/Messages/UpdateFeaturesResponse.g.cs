@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public UpdateFeaturesResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"UpdateFeaturesResponse does not support version {version}. Valid versions are: 0-1");
+                throw new UnsupportedVersionException($"UpdateFeaturesResponse does not support version {version}. Valid versions are: 0-2");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(57);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,14 +45,15 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _resultsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + (Version >= 0 && Version <= 1 ? _resultsCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<UpdateFeaturesResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new UpdateFeaturesResponse(version);
             instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-            instance.ResultsCollection = await Map<String, UpdatableFeatureResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => UpdatableFeatureResult.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Feature, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 0 && instance.Version <= 1)
+                instance.ResultsCollection = await Map<String, UpdatableFeatureResult>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => UpdatableFeatureResult.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.Feature, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -74,7 +75,8 @@ namespace Kafka.Protocol
             await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-            await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 0 && Version <= 1)
+                await _resultsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -156,7 +158,7 @@ namespace Kafka.Protocol
         private Map<String, UpdatableFeatureResult> _resultsCollection = Map<String, UpdatableFeatureResult>.Default;
         /// <summary>
         /// <para>Results for each feature update.</para>
-        /// <para>Versions: 0+</para>
+        /// <para>Versions: 0-1</para>
         /// </summary>
         public Map<String, UpdatableFeatureResult> ResultsCollection
         {
@@ -169,7 +171,7 @@ namespace Kafka.Protocol
 
         /// <summary>
         /// <para>Results for each feature update.</para>
-        /// <para>Versions: 0+</para>
+        /// <para>Versions: 0-1</para>
         /// </summary>
         public UpdateFeaturesResponse WithResultsCollection(params Func<UpdatableFeatureResult, UpdatableFeatureResult>[] createFields)
         {
@@ -180,7 +182,7 @@ namespace Kafka.Protocol
         public delegate UpdatableFeatureResult CreateUpdatableFeatureResult(UpdatableFeatureResult field);
         /// <summary>
         /// <para>Results for each feature update.</para>
-        /// <para>Versions: 0+</para>
+        /// <para>Versions: 0-1</para>
         /// </summary>
         public UpdateFeaturesResponse WithResultsCollection(IEnumerable<CreateUpdatableFeatureResult> createFields)
         {

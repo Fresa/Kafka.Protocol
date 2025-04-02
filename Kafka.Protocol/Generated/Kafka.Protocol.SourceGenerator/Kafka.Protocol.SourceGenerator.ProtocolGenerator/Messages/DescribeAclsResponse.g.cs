@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeAclsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeAclsResponse does not support version {version}. Valid versions are: 0-3");
+                throw new UnsupportedVersionException($"DescribeAclsResponse does not support version {version}. Valid versions are: 1-3");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(29);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(3);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }

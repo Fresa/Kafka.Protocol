@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public DescribeConfigsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"DescribeConfigsResponse does not support version {version}. Valid versions are: 0-4");
+                throw new UnsupportedVersionException($"DescribeConfigsResponse does not support version {version}. Valid versions are: 1-4");
             Version = version;
             IsFlexibleVersion = version >= 4;
         }
@@ -26,7 +26,7 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(32);
-        public static readonly Int16 MinVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
         public static readonly Int16 MaxVersion = Int16.From(4);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
@@ -340,15 +340,13 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _name.GetSize(IsFlexibleVersion) + _value.GetSize(IsFlexibleVersion) + _readOnly.GetSize(IsFlexibleVersion) + (Version >= 0 && Version <= 0 ? _isDefault.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _configSource.GetSize(IsFlexibleVersion) : 0) + _isSensitive.GetSize(IsFlexibleVersion) + (Version >= 1 ? _synonymsCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _configType.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _documentation.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _name.GetSize(IsFlexibleVersion) + _value.GetSize(IsFlexibleVersion) + _readOnly.GetSize(IsFlexibleVersion) + (Version >= 1 ? _configSource.GetSize(IsFlexibleVersion) : 0) + _isSensitive.GetSize(IsFlexibleVersion) + (Version >= 1 ? _synonymsCollection.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _configType.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _documentation.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<DescribeConfigsResourceResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new DescribeConfigsResourceResult(version);
                     instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.Value = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.ReadOnly = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    if (instance.Version >= 0 && instance.Version <= 0)
-                        instance.IsDefault = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.Version >= 1)
                         instance.ConfigSource = await Int8.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.IsSensitive = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -380,8 +378,6 @@ namespace Kafka.Protocol
                     await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _value.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _readOnly.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    if (Version >= 0 && Version <= 0)
-                        await _isDefault.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (Version >= 1)
                         await _configSource.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _isSensitive.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -466,32 +462,6 @@ namespace Kafka.Protocol
                 public DescribeConfigsResourceResult WithReadOnly(Boolean readOnly)
                 {
                     ReadOnly = readOnly;
-                    return this;
-                }
-
-                private Boolean _isDefault = Boolean.Default;
-                /// <summary>
-                /// <para>True if the configuration is not set.</para>
-                /// <para>Versions: 0</para>
-                /// </summary>
-                public Boolean IsDefault
-                {
-                    get => _isDefault;
-                    private set
-                    {
-                        if (Version >= 0 && Version <= 0 == false)
-                            throw new UnsupportedVersionException($"IsDefault does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
-                        _isDefault = value;
-                    }
-                }
-
-                /// <summary>
-                /// <para>True if the configuration is not set.</para>
-                /// <para>Versions: 0</para>
-                /// </summary>
-                public DescribeConfigsResourceResult WithIsDefault(Boolean isDefault)
-                {
-                    IsDefault = isDefault;
                     return this;
                 }
 
@@ -719,7 +689,7 @@ namespace Kafka.Protocol
 
                 private Int8 _configType = new Int8(0);
                 /// <summary>
-                /// <para>The configuration data type. Type can be one of the following values - BOOLEAN, STRING, INT, SHORT, LONG, DOUBLE, LIST, CLASS, PASSWORD</para>
+                /// <para>The configuration data type. Type can be one of the following values - BOOLEAN, STRING, INT, SHORT, LONG, DOUBLE, LIST, CLASS, PASSWORD.</para>
                 /// <para>Versions: 3+</para>
                 /// <para>Default: 0</para>
                 /// </summary>
@@ -733,7 +703,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The configuration data type. Type can be one of the following values - BOOLEAN, STRING, INT, SHORT, LONG, DOUBLE, LIST, CLASS, PASSWORD</para>
+                /// <para>The configuration data type. Type can be one of the following values - BOOLEAN, STRING, INT, SHORT, LONG, DOUBLE, LIST, CLASS, PASSWORD.</para>
                 /// <para>Versions: 3+</para>
                 /// <para>Default: 0</para>
                 /// </summary>

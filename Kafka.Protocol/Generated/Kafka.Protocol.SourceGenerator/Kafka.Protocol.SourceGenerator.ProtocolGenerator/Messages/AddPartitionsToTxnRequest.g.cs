@@ -509,7 +509,7 @@ namespace Kafka.Protocol
 
             private Array<Int32> _partitionsCollection = Array.Empty<Int32>();
             /// <summary>
-            /// <para>The partition indexes to add to the transaction</para>
+            /// <para>The partition indexes to add to the transaction.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Array<Int32> PartitionsCollection
@@ -522,7 +522,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The partition indexes to add to the transaction</para>
+            /// <para>The partition indexes to add to the transaction.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public AddPartitionsToTxnTopic WithPartitionsCollection(Array<Int32> partitionsCollection)

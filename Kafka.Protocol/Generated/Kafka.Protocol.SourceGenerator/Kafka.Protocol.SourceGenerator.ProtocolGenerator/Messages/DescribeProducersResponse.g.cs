@@ -188,7 +188,7 @@ namespace Kafka.Protocol
 
             private String _name = String.Default;
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String Name
@@ -201,7 +201,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic name</para>
+            /// <para>The topic name.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TopicResponse WithName(String name)
@@ -349,7 +349,7 @@ namespace Kafka.Protocol
 
                 private NullableString _errorMessage = new NullableString(null);
                 /// <summary>
-                /// <para>The partition error message, which may be null if no additional details are available</para>
+                /// <para>The partition error message, which may be null if no additional details are available.</para>
                 /// <para>Versions: 0+</para>
                 /// <para>Default: null</para>
                 /// </summary>
@@ -363,7 +363,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The partition error message, which may be null if no additional details are available</para>
+                /// <para>The partition error message, which may be null if no additional details are available.</para>
                 /// <para>Versions: 0+</para>
                 /// <para>Default: null</para>
                 /// </summary>
@@ -375,6 +375,7 @@ namespace Kafka.Protocol
 
                 private Array<ProducerState> _activeProducersCollection = Array.Empty<ProducerState>();
                 /// <summary>
+                /// <para>The active producers for the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Array<ProducerState> ActiveProducersCollection
@@ -387,6 +388,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The active producers for the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionResponse WithActiveProducersCollection(params Func<ProducerState, ProducerState>[] createFields)
@@ -397,6 +399,7 @@ namespace Kafka.Protocol
 
                 public delegate ProducerState CreateProducerState(ProducerState field);
                 /// <summary>
+                /// <para>The active producers for the partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionResponse WithActiveProducersCollection(IEnumerable<CreateProducerState> createFields)
@@ -465,6 +468,7 @@ namespace Kafka.Protocol
 
                     private Int64 _producerId = Int64.Default;
                     /// <summary>
+                    /// <para>The producer id.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int64 ProducerId
@@ -477,6 +481,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The producer id.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public ProducerState WithProducerId(Int64 producerId)
@@ -487,6 +492,7 @@ namespace Kafka.Protocol
 
                     private Int32 _producerEpoch = Int32.Default;
                     /// <summary>
+                    /// <para>The producer epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int32 ProducerEpoch
@@ -499,6 +505,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The producer epoch.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public ProducerState WithProducerEpoch(Int32 producerEpoch)
@@ -509,6 +516,7 @@ namespace Kafka.Protocol
 
                     private Int32 _lastSequence = new Int32(-1);
                     /// <summary>
+                    /// <para>The last sequence number sent by the producer.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -522,6 +530,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The last sequence number sent by the producer.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -533,6 +542,7 @@ namespace Kafka.Protocol
 
                     private Int64 _lastTimestamp = new Int64(-1);
                     /// <summary>
+                    /// <para>The last timestamp sent by the producer.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -546,6 +556,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The last timestamp sent by the producer.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -557,6 +568,7 @@ namespace Kafka.Protocol
 
                     private Int32 _coordinatorEpoch = Int32.Default;
                     /// <summary>
+                    /// <para>The current epoch of the producer group.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int32 CoordinatorEpoch
@@ -569,6 +581,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The current epoch of the producer group.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public ProducerState WithCoordinatorEpoch(Int32 coordinatorEpoch)
@@ -579,6 +592,7 @@ namespace Kafka.Protocol
 
                     private Int64 _currentTxnStartOffset = new Int64(-1);
                     /// <summary>
+                    /// <para>The current transaction start offset of the producer.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>
@@ -592,6 +606,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
+                    /// <para>The current transaction start offset of the producer.</para>
                     /// <para>Versions: 0+</para>
                     /// <para>Default: -1</para>
                     /// </summary>

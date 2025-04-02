@@ -77,7 +77,7 @@ namespace Kafka.Protocol
 
         private Array<ReadStateSummaryResult> _resultsCollection = Array.Empty<ReadStateSummaryResult>();
         /// <summary>
-        /// <para>The read results</para>
+        /// <para>The read results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<ReadStateSummaryResult> ResultsCollection
@@ -90,7 +90,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The read results</para>
+        /// <para>The read results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ReadShareGroupStateSummaryResponse WithResultsCollection(params Func<ReadStateSummaryResult, ReadStateSummaryResult>[] createFields)
@@ -101,7 +101,7 @@ namespace Kafka.Protocol
 
         public delegate ReadStateSummaryResult CreateReadStateSummaryResult(ReadStateSummaryResult field);
         /// <summary>
-        /// <para>The read results</para>
+        /// <para>The read results.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public ReadShareGroupStateSummaryResponse WithResultsCollection(IEnumerable<CreateReadStateSummaryResult> createFields)
@@ -162,7 +162,7 @@ namespace Kafka.Protocol
 
             private Uuid _topicId = Uuid.Default;
             /// <summary>
-            /// <para>The topic identifier</para>
+            /// <para>The topic identifier.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Uuid TopicId
@@ -175,7 +175,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
-            /// <para>The topic identifier</para>
+            /// <para>The topic identifier.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public ReadStateSummaryResult WithTopicId(Uuid topicId)

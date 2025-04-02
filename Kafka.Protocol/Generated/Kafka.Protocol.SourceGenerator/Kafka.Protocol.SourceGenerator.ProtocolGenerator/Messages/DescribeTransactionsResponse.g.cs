@@ -103,6 +103,7 @@ namespace Kafka.Protocol
 
         private Array<TransactionState> _transactionStatesCollection = Array.Empty<TransactionState>();
         /// <summary>
+        /// <para>The current state of the transaction.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public Array<TransactionState> TransactionStatesCollection
@@ -115,6 +116,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
+        /// <para>The current state of the transaction.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeTransactionsResponse WithTransactionStatesCollection(params Func<TransactionState, TransactionState>[] createFields)
@@ -125,6 +127,7 @@ namespace Kafka.Protocol
 
         public delegate TransactionState CreateTransactionState(TransactionState field);
         /// <summary>
+        /// <para>The current state of the transaction.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
         public DescribeTransactionsResponse WithTransactionStatesCollection(IEnumerable<CreateTransactionState> createFields)
@@ -197,6 +200,7 @@ namespace Kafka.Protocol
 
             private Int16 _errorCode = Int16.Default;
             /// <summary>
+            /// <para>The error code.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int16 ErrorCode
@@ -209,6 +213,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The error code.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithErrorCode(Int16 errorCode)
@@ -219,6 +224,7 @@ namespace Kafka.Protocol
 
             private String _transactionalId = String.Default;
             /// <summary>
+            /// <para>The transactional id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String TransactionalId
@@ -231,6 +237,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The transactional id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithTransactionalId(String transactionalId)
@@ -241,6 +248,7 @@ namespace Kafka.Protocol
 
             private String _transactionState = String.Default;
             /// <summary>
+            /// <para>The current transaction state of the producer.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public String TransactionState_
@@ -253,6 +261,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The current transaction state of the producer.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithTransactionState_(String transactionState)
@@ -263,6 +272,7 @@ namespace Kafka.Protocol
 
             private Int32 _transactionTimeoutMs = Int32.Default;
             /// <summary>
+            /// <para>The timeout in milliseconds for the transaction.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int32 TransactionTimeoutMs
@@ -275,6 +285,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The timeout in milliseconds for the transaction.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithTransactionTimeoutMs(Int32 transactionTimeoutMs)
@@ -285,6 +296,7 @@ namespace Kafka.Protocol
 
             private Int64 _transactionStartTimeMs = Int64.Default;
             /// <summary>
+            /// <para>The start time of the transaction in milliseconds.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int64 TransactionStartTimeMs
@@ -297,6 +309,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The start time of the transaction in milliseconds.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithTransactionStartTimeMs(Int64 transactionStartTimeMs)
@@ -307,6 +320,7 @@ namespace Kafka.Protocol
 
             private Int64 _producerId = Int64.Default;
             /// <summary>
+            /// <para>The current producer id associated with the transaction.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int64 ProducerId
@@ -319,6 +333,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The current producer id associated with the transaction.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithProducerId(Int64 producerId)
@@ -329,6 +344,7 @@ namespace Kafka.Protocol
 
             private Int16 _producerEpoch = Int16.Default;
             /// <summary>
+            /// <para>The current epoch associated with the producer id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public Int16 ProducerEpoch
@@ -341,6 +357,7 @@ namespace Kafka.Protocol
             }
 
             /// <summary>
+            /// <para>The current epoch associated with the producer id.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
             public TransactionState WithProducerEpoch(Int16 producerEpoch)
@@ -436,6 +453,7 @@ namespace Kafka.Protocol
 
                 private String _topic = String.Default;
                 /// <summary>
+                /// <para>The topic name.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public String Topic
@@ -448,6 +466,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The topic name.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public TopicData WithTopic(String topic)
@@ -458,6 +477,7 @@ namespace Kafka.Protocol
 
                 private Array<Int32> _partitionsCollection = Array.Empty<Int32>();
                 /// <summary>
+                /// <para>The partition ids included in the current transaction.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Array<Int32> PartitionsCollection
@@ -470,6 +490,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
+                /// <para>The partition ids included in the current transaction.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public TopicData WithPartitionsCollection(Array<Int32> partitionsCollection)

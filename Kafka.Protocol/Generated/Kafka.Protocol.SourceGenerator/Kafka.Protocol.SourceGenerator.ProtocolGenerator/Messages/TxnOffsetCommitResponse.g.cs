@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public TxnOffsetCommitResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"TxnOffsetCommitResponse does not support version {version}. Valid versions are: 0-4");
+                throw new UnsupportedVersionException($"TxnOffsetCommitResponse does not support version {version}. Valid versions are: 0-5");
             Version = version;
             IsFlexibleVersion = version >= 3;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(28);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(4);
+        public static readonly Int16 MaxVersion = Int16.From(5);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
