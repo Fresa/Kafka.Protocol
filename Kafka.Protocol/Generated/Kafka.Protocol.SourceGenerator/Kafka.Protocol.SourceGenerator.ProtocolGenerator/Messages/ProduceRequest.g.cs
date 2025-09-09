@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ProduceRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ProduceRequest does not support version {version}. Valid versions are: 3-12");
+                throw new UnsupportedVersionException($"ProduceRequest does not support version {version}. Valid versions are: 3-13");
             Version = version;
             IsFlexibleVersion = version >= 9;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(0);
         public static readonly Int16 MinVersion = Int16.From(3);
-        public static readonly Int16 MaxVersion = Int16.From(12);
+        public static readonly Int16 MaxVersion = Int16.From(13);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -213,11 +213,14 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _name.GetSize(IsFlexibleVersion) + _partitionDataCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => (Version >= 0 && Version <= 12 ? _name.GetSize(IsFlexibleVersion) : 0) + (Version >= 13 ? _topicId.GetSize(IsFlexibleVersion) : 0) + _partitionDataCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<TopicProduceData> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new TopicProduceData(version);
-                instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 0 && instance.Version <= 12)
+                    instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 13)
+                    instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.PartitionDataCollection = await Array<PartitionProduceData>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => PartitionProduceData.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
@@ -238,7 +241,10 @@ namespace Kafka.Protocol
             ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
             internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
             {
-                await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 0 && Version <= 12)
+                    await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 13)
+                    await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _partitionDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
@@ -249,7 +255,7 @@ namespace Kafka.Protocol
             private String _name = String.Default;
             /// <summary>
             /// <para>The topic name.</para>
-            /// <para>Versions: 0+</para>
+            /// <para>Versions: 0-12</para>
             /// </summary>
             public String Name
             {
@@ -262,11 +268,35 @@ namespace Kafka.Protocol
 
             /// <summary>
             /// <para>The topic name.</para>
-            /// <para>Versions: 0+</para>
+            /// <para>Versions: 0-12</para>
             /// </summary>
             public TopicProduceData WithName(String name)
             {
                 Name = name;
+                return this;
+            }
+
+            private Uuid _topicId = Uuid.Default;
+            /// <summary>
+            /// <para>The unique topic ID</para>
+            /// <para>Versions: 13+</para>
+            /// </summary>
+            public Uuid TopicId
+            {
+                get => _topicId;
+                private set
+                {
+                    _topicId = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The unique topic ID</para>
+            /// <para>Versions: 13+</para>
+            /// </summary>
+            public TopicProduceData WithTopicId(Uuid topicId)
+            {
+                TopicId = topicId;
                 return this;
             }
 

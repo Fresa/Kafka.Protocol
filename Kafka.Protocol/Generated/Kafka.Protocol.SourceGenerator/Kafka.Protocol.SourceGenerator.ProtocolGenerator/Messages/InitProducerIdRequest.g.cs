@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public InitProducerIdRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"InitProducerIdRequest does not support version {version}. Valid versions are: 0-5");
+                throw new UnsupportedVersionException($"InitProducerIdRequest does not support version {version}. Valid versions are: 0-6");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(22);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(5);
+        public static readonly Int16 MaxVersion = Int16.From(6);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _transactionalId.GetSize(IsFlexibleVersion) + _transactionTimeoutMs.GetSize(IsFlexibleVersion) + (Version >= 3 ? _producerId.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _producerEpoch.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _transactionalId.GetSize(IsFlexibleVersion) + _transactionTimeoutMs.GetSize(IsFlexibleVersion) + (Version >= 3 ? _producerId.GetSize(IsFlexibleVersion) : 0) + (Version >= 3 ? _producerEpoch.GetSize(IsFlexibleVersion) : 0) + (Version >= 6 ? _enable2Pc.GetSize(IsFlexibleVersion) : 0) + (Version >= 6 ? _keepPreparedTxn.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<InitProducerIdRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new InitProducerIdRequest(version);
@@ -55,6 +55,10 @@ namespace Kafka.Protocol
                 instance.ProducerId = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 3)
                 instance.ProducerEpoch = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 6)
+                instance.Enable2Pc = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 6)
+                instance.KeepPreparedTxn = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -79,6 +83,10 @@ namespace Kafka.Protocol
                 await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 3)
                 await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 6)
+                await _enable2Pc.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 6)
+                await _keepPreparedTxn.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -186,6 +194,62 @@ namespace Kafka.Protocol
         public InitProducerIdRequest WithProducerEpoch(Int16 producerEpoch)
         {
             ProducerEpoch = producerEpoch;
+            return this;
+        }
+
+        private Boolean _enable2Pc = new Boolean(false);
+        /// <summary>
+        /// <para>True if the client wants to enable two-phase commit (2PC) protocol for transactions.</para>
+        /// <para>Versions: 6+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public Boolean Enable2Pc
+        {
+            get => _enable2Pc;
+            private set
+            {
+                if (Version >= 6 == false)
+                    throw new UnsupportedVersionException($"Enable2Pc does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
+                _enable2Pc = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>True if the client wants to enable two-phase commit (2PC) protocol for transactions.</para>
+        /// <para>Versions: 6+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public InitProducerIdRequest WithEnable2Pc(Boolean enable2Pc)
+        {
+            Enable2Pc = enable2Pc;
+            return this;
+        }
+
+        private Boolean _keepPreparedTxn = new Boolean(false);
+        /// <summary>
+        /// <para>True if the client wants to keep the currently ongoing transaction instead of aborting it.</para>
+        /// <para>Versions: 6+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public Boolean KeepPreparedTxn
+        {
+            get => _keepPreparedTxn;
+            private set
+            {
+                if (Version >= 6 == false)
+                    throw new UnsupportedVersionException($"KeepPreparedTxn does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
+                _keepPreparedTxn = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>True if the client wants to keep the currently ongoing transaction instead of aborting it.</para>
+        /// <para>Versions: 6+</para>
+        /// <para>Default: false</para>
+        /// </summary>
+        public InitProducerIdRequest WithKeepPreparedTxn(Boolean keepPreparedTxn)
+        {
+            KeepPreparedTxn = keepPreparedTxn;
             return this;
         }
 

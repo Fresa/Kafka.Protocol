@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public InitProducerIdResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"InitProducerIdResponse does not support version {version}. Valid versions are: 0-5");
+                throw new UnsupportedVersionException($"InitProducerIdResponse does not support version {version}. Valid versions are: 0-6");
             Version = version;
             IsFlexibleVersion = version >= 2;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(22);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(5);
+        public static readonly Int16 MaxVersion = Int16.From(6);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _producerId.GetSize(IsFlexibleVersion) + _producerEpoch.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _producerId.GetSize(IsFlexibleVersion) + _producerEpoch.GetSize(IsFlexibleVersion) + (Version >= 6 ? _ongoingTxnProducerId.GetSize(IsFlexibleVersion) : 0) + (Version >= 6 ? _ongoingTxnProducerEpoch.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<InitProducerIdResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new InitProducerIdResponse(version);
@@ -53,6 +53,10 @@ namespace Kafka.Protocol
             instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ProducerId = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ProducerEpoch = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 6)
+                instance.OngoingTxnProducerId = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 6)
+                instance.OngoingTxnProducerEpoch = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -75,6 +79,10 @@ namespace Kafka.Protocol
             await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _producerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _producerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 6)
+                await _ongoingTxnProducerId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 6)
+                await _ongoingTxnProducerEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -176,6 +184,62 @@ namespace Kafka.Protocol
         public InitProducerIdResponse WithProducerEpoch(Int16 producerEpoch)
         {
             ProducerEpoch = producerEpoch;
+            return this;
+        }
+
+        private Int64 _ongoingTxnProducerId = new Int64(-1);
+        /// <summary>
+        /// <para>The producer id for ongoing transaction when KeepPreparedTxn is used, -1 if there is no transaction ongoing.</para>
+        /// <para>Versions: 6+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public Int64 OngoingTxnProducerId
+        {
+            get => _ongoingTxnProducerId;
+            private set
+            {
+                if (Version >= 6 == false)
+                    throw new UnsupportedVersionException($"OngoingTxnProducerId does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
+                _ongoingTxnProducerId = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The producer id for ongoing transaction when KeepPreparedTxn is used, -1 if there is no transaction ongoing.</para>
+        /// <para>Versions: 6+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public InitProducerIdResponse WithOngoingTxnProducerId(Int64 ongoingTxnProducerId)
+        {
+            OngoingTxnProducerId = ongoingTxnProducerId;
+            return this;
+        }
+
+        private Int16 _ongoingTxnProducerEpoch = new Int16(-1);
+        /// <summary>
+        /// <para>The epoch associated with the  producer id for ongoing transaction when KeepPreparedTxn is used, -1 if there is no transaction ongoing.</para>
+        /// <para>Versions: 6+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public Int16 OngoingTxnProducerEpoch
+        {
+            get => _ongoingTxnProducerEpoch;
+            private set
+            {
+                if (Version >= 6 == false)
+                    throw new UnsupportedVersionException($"OngoingTxnProducerEpoch does not support version {Version} and has been defined as not ignorable. Supported versions: 6+");
+                _ongoingTxnProducerEpoch = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The epoch associated with the  producer id for ongoing transaction when KeepPreparedTxn is used, -1 if there is no transaction ongoing.</para>
+        /// <para>Versions: 6+</para>
+        /// <para>Default: -1</para>
+        /// </summary>
+        public InitProducerIdResponse WithOngoingTxnProducerEpoch(Int16 ongoingTxnProducerEpoch)
+        {
+            OngoingTxnProducerEpoch = ongoingTxnProducerEpoch;
             return this;
         }
     }

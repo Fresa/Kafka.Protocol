@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public FetchResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 4-17");
+                throw new UnsupportedVersionException($"FetchResponse does not support version {version}. Valid versions are: 4-18");
             Version = version;
             IsFlexibleVersion = version >= 12;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(1);
         public static readonly Int16 MinVersion = Int16.From(4);
-        public static readonly Int16 MaxVersion = Int16.From(17);
+        public static readonly Int16 MaxVersion = Int16.From(18);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 

@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ShareFetchRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ShareFetchRequest does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"ShareFetchRequest does not support version {version}. Valid versions are: 1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -26,8 +26,8 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(78);
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _groupId.GetSize(IsFlexibleVersion) + _memberId.GetSize(IsFlexibleVersion) + _shareSessionEpoch.GetSize(IsFlexibleVersion) + _maxWaitMs.GetSize(IsFlexibleVersion) + _minBytes.GetSize(IsFlexibleVersion) + _maxBytes.GetSize(IsFlexibleVersion) + _topicsCollection.GetSize(IsFlexibleVersion) + _forgottenTopicsDataCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _groupId.GetSize(IsFlexibleVersion) + _memberId.GetSize(IsFlexibleVersion) + _shareSessionEpoch.GetSize(IsFlexibleVersion) + _maxWaitMs.GetSize(IsFlexibleVersion) + _minBytes.GetSize(IsFlexibleVersion) + _maxBytes.GetSize(IsFlexibleVersion) + (Version >= 1 ? _maxRecords.GetSize(IsFlexibleVersion) : 0) + (Version >= 1 ? _batchSize.GetSize(IsFlexibleVersion) : 0) + _topicsCollection.GetSize(IsFlexibleVersion) + _forgottenTopicsDataCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ShareFetchRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ShareFetchRequest(version);
@@ -55,7 +55,11 @@ namespace Kafka.Protocol
             instance.MaxWaitMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.MinBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.MaxBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-            instance.TopicsCollection = await Array<FetchTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => FetchTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.MaxRecords = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.BatchSize = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            instance.TopicsCollection = await Map<Uuid, FetchTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => FetchTopic.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.TopicId, cancellationToken).ConfigureAwait(false);
             instance.ForgottenTopicsDataCollection = await Array<ForgottenTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ForgottenTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
@@ -81,6 +85,10 @@ namespace Kafka.Protocol
             await _maxWaitMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _minBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _maxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _maxRecords.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _batchSize.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _topicsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _forgottenTopicsDataCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
@@ -213,7 +221,7 @@ namespace Kafka.Protocol
 
         private Int32 _maxBytes = new Int32(0x7fffffff);
         /// <summary>
-        /// <para>The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.</para>
+        /// <para>The maximum bytes to fetch. See KIP-74 for cases where this limit may not be honored.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: 0x7fffffff</para>
         /// </summary>
@@ -227,7 +235,7 @@ namespace Kafka.Protocol
         }
 
         /// <summary>
-        /// <para>The maximum bytes to fetch.  See KIP-74 for cases where this limit may not be honored.</para>
+        /// <para>The maximum bytes to fetch. See KIP-74 for cases where this limit may not be honored.</para>
         /// <para>Versions: 0+</para>
         /// <para>Default: 0x7fffffff</para>
         /// </summary>
@@ -237,12 +245,64 @@ namespace Kafka.Protocol
             return this;
         }
 
-        private Array<FetchTopic> _topicsCollection = Array.Empty<FetchTopic>();
+        private Int32 _maxRecords = Int32.Default;
+        /// <summary>
+        /// <para>The maximum number of records to fetch. This limit can be exceeded for alignment of batch boundaries.</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public Int32 MaxRecords
+        {
+            get => _maxRecords;
+            private set
+            {
+                if (Version >= 1 == false)
+                    throw new UnsupportedVersionException($"MaxRecords does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                _maxRecords = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The maximum number of records to fetch. This limit can be exceeded for alignment of batch boundaries.</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public ShareFetchRequest WithMaxRecords(Int32 maxRecords)
+        {
+            MaxRecords = maxRecords;
+            return this;
+        }
+
+        private Int32 _batchSize = Int32.Default;
+        /// <summary>
+        /// <para>The optimal number of records for batches of acquired records and acknowledgements.</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public Int32 BatchSize
+        {
+            get => _batchSize;
+            private set
+            {
+                if (Version >= 1 == false)
+                    throw new UnsupportedVersionException($"BatchSize does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                _batchSize = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The optimal number of records for batches of acquired records and acknowledgements.</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public ShareFetchRequest WithBatchSize(Int32 batchSize)
+        {
+            BatchSize = batchSize;
+            return this;
+        }
+
+        private Map<Uuid, FetchTopic> _topicsCollection = Map<Uuid, FetchTopic>.Default;
         /// <summary>
         /// <para>The topics to fetch.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public Array<FetchTopic> TopicsCollection
+        public Map<Uuid, FetchTopic> TopicsCollection
         {
             get => _topicsCollection;
             private set
@@ -257,7 +317,7 @@ namespace Kafka.Protocol
         /// </summary>
         public ShareFetchRequest WithTopicsCollection(params Func<FetchTopic, FetchTopic>[] createFields)
         {
-            TopicsCollection = createFields.Select(createField => createField(new FetchTopic(Version))).ToArray();
+            TopicsCollection = createFields.Select(createField => createField(new FetchTopic(Version))).ToDictionary(field => field.TopicId);
             return this;
         }
 
@@ -268,7 +328,7 @@ namespace Kafka.Protocol
         /// </summary>
         public ShareFetchRequest WithTopicsCollection(IEnumerable<CreateFetchTopic> createFields)
         {
-            TopicsCollection = createFields.Select(createField => createField(new FetchTopic(Version))).ToArray();
+            TopicsCollection = createFields.Select(createField => createField(new FetchTopic(Version))).ToDictionary(field => field.TopicId);
             return this;
         }
 
@@ -294,7 +354,7 @@ namespace Kafka.Protocol
             {
                 var instance = new FetchTopic(version);
                 instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                instance.PartitionsCollection = await Array<FetchPartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+                instance.PartitionsCollection = await Map<Int32, FetchPartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => FetchPartition.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.PartitionIndex, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -346,12 +406,12 @@ namespace Kafka.Protocol
                 return this;
             }
 
-            private Array<FetchPartition> _partitionsCollection = Array.Empty<FetchPartition>();
+            private Map<Int32, FetchPartition> _partitionsCollection = Map<Int32, FetchPartition>.Default;
             /// <summary>
             /// <para>The partitions to fetch.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
-            public Array<FetchPartition> PartitionsCollection
+            public Map<Int32, FetchPartition> PartitionsCollection
             {
                 get => _partitionsCollection;
                 private set
@@ -366,7 +426,7 @@ namespace Kafka.Protocol
             /// </summary>
             public FetchTopic WithPartitionsCollection(params Func<FetchPartition, FetchPartition>[] createFields)
             {
-                PartitionsCollection = createFields.Select(createField => createField(new FetchPartition(Version))).ToArray();
+                PartitionsCollection = createFields.Select(createField => createField(new FetchPartition(Version))).ToDictionary(field => field.PartitionIndex);
                 return this;
             }
 
@@ -377,7 +437,7 @@ namespace Kafka.Protocol
             /// </summary>
             public FetchTopic WithPartitionsCollection(IEnumerable<CreateFetchPartition> createFields)
             {
-                PartitionsCollection = createFields.Select(createField => createField(new FetchPartition(Version))).ToArray();
+                PartitionsCollection = createFields.Select(createField => createField(new FetchPartition(Version))).ToDictionary(field => field.PartitionIndex);
                 return this;
             }
 
@@ -398,12 +458,13 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + _partitionMaxBytes.GetSize(IsFlexibleVersion) + _acknowledgementBatchesCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _partitionIndex.GetSize(IsFlexibleVersion) + (Version >= 0 && Version <= 0 ? _partitionMaxBytes.GetSize(IsFlexibleVersion) : 0) + _acknowledgementBatchesCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<FetchPartition> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new FetchPartition(version);
                     instance.PartitionIndex = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    instance.PartitionMaxBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (instance.Version >= 0 && instance.Version <= 0)
+                        instance.PartitionMaxBytes = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.AcknowledgementBatchesCollection = await Array<AcknowledgementBatch>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgementBatch.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
                     {
@@ -425,7 +486,8 @@ namespace Kafka.Protocol
                 internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
                 {
                     await _partitionIndex.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                    await _partitionMaxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (Version >= 0 && Version <= 0)
+                        await _partitionMaxBytes.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _acknowledgementBatchesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (IsFlexibleVersion)
                     {
@@ -460,20 +522,22 @@ namespace Kafka.Protocol
                 private Int32 _partitionMaxBytes = Int32.Default;
                 /// <summary>
                 /// <para>The maximum bytes to fetch from this partition. 0 when only acknowledgement with no fetching is required. See KIP-74 for cases where this limit may not be honored.</para>
-                /// <para>Versions: 0+</para>
+                /// <para>Versions: 0</para>
                 /// </summary>
                 public Int32 PartitionMaxBytes
                 {
                     get => _partitionMaxBytes;
                     private set
                     {
+                        if (Version >= 0 && Version <= 0 == false)
+                            throw new UnsupportedVersionException($"PartitionMaxBytes does not support version {Version} and has been defined as not ignorable. Supported versions: 0");
                         _partitionMaxBytes = value;
                     }
                 }
 
                 /// <summary>
                 /// <para>The maximum bytes to fetch from this partition. 0 when only acknowledgement with no fetching is required. See KIP-74 for cases where this limit may not be honored.</para>
-                /// <para>Versions: 0+</para>
+                /// <para>Versions: 0</para>
                 /// </summary>
                 public FetchPartition WithPartitionMaxBytes(Int32 partitionMaxBytes)
                 {

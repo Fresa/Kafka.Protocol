@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ShareFetchResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ShareFetchResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"ShareFetchResponse does not support version {version}. Valid versions are: 1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -26,8 +26,8 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(78);
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,14 +45,16 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _responsesCollection.GetSize(IsFlexibleVersion) + _nodeEndpointsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + (Version >= 1 ? _acquisitionLockTimeoutMs.GetSize(IsFlexibleVersion) : 0) + _responsesCollection.GetSize(IsFlexibleVersion) + _nodeEndpointsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ShareFetchResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ShareFetchResponse(version);
             instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-            instance.ResponsesCollection = await Array<ShareFetchableTopicResponse>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ShareFetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.AcquisitionLockTimeoutMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            instance.ResponsesCollection = await Map<Uuid, ShareFetchableTopicResponse>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ShareFetchableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.TopicId, cancellationToken).ConfigureAwait(false);
             instance.NodeEndpointsCollection = await Map<Int32, NodeEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => NodeEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
@@ -75,6 +77,8 @@ namespace Kafka.Protocol
             await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _acquisitionLockTimeoutMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _nodeEndpointsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
@@ -157,12 +161,38 @@ namespace Kafka.Protocol
             return this;
         }
 
-        private Array<ShareFetchableTopicResponse> _responsesCollection = Array.Empty<ShareFetchableTopicResponse>();
+        private Int32 _acquisitionLockTimeoutMs = Int32.Default;
+        /// <summary>
+        /// <para>The time in milliseconds for which the acquired records are locked.</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public Int32 AcquisitionLockTimeoutMs
+        {
+            get => _acquisitionLockTimeoutMs;
+            private set
+            {
+                if (Version >= 1 == false)
+                    throw new UnsupportedVersionException($"AcquisitionLockTimeoutMs does not support version {Version} and has been defined as not ignorable. Supported versions: 1+");
+                _acquisitionLockTimeoutMs = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The time in milliseconds for which the acquired records are locked.</para>
+        /// <para>Versions: 1+</para>
+        /// </summary>
+        public ShareFetchResponse WithAcquisitionLockTimeoutMs(Int32 acquisitionLockTimeoutMs)
+        {
+            AcquisitionLockTimeoutMs = acquisitionLockTimeoutMs;
+            return this;
+        }
+
+        private Map<Uuid, ShareFetchableTopicResponse> _responsesCollection = Map<Uuid, ShareFetchableTopicResponse>.Default;
         /// <summary>
         /// <para>The response topics.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public Array<ShareFetchableTopicResponse> ResponsesCollection
+        public Map<Uuid, ShareFetchableTopicResponse> ResponsesCollection
         {
             get => _responsesCollection;
             private set
@@ -177,7 +207,7 @@ namespace Kafka.Protocol
         /// </summary>
         public ShareFetchResponse WithResponsesCollection(params Func<ShareFetchableTopicResponse, ShareFetchableTopicResponse>[] createFields)
         {
-            ResponsesCollection = createFields.Select(createField => createField(new ShareFetchableTopicResponse(Version))).ToArray();
+            ResponsesCollection = createFields.Select(createField => createField(new ShareFetchableTopicResponse(Version))).ToDictionary(field => field.TopicId);
             return this;
         }
 
@@ -188,7 +218,7 @@ namespace Kafka.Protocol
         /// </summary>
         public ShareFetchResponse WithResponsesCollection(IEnumerable<CreateShareFetchableTopicResponse> createFields)
         {
-            ResponsesCollection = createFields.Select(createField => createField(new ShareFetchableTopicResponse(Version))).ToArray();
+            ResponsesCollection = createFields.Select(createField => createField(new ShareFetchableTopicResponse(Version))).ToDictionary(field => field.TopicId);
             return this;
         }
 
@@ -620,6 +650,8 @@ namespace Kafka.Protocol
                     get => _records;
                     private set
                     {
+                        if (Version >= 0 && Version <= 0 == false && value == null)
+                            throw new UnsupportedVersionException($"Records does not support null for version {Version}. Supported versions for null value: 0");
                         _records = value;
                     }
                 }

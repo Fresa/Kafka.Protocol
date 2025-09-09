@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/package-validation/diagnostic-ids -->
-<Suppressions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Suppressions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Kafka.Protocol.ControlledShutdownRequest</Target>
@@ -34,6 +34,18 @@
   <Suppression>
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:Kafka.Protocol.LeaderAndIsrResponse</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.ListClientMetricsResourcesRequest</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0001</DiagnosticId>
+    <Target>T:Kafka.Protocol.ListClientMetricsResourcesResponse</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
   </Suppression>
@@ -172,6 +184,42 @@
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
     <Target>M:Kafka.Protocol.RemoveRaftVoterRequest.WithClusterId(Kafka.Protocol.String)</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ShareAcknowledgeRequest.AcknowledgeTopic.get_PartitionsCollection</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ShareAcknowledgeRequest.get_TopicsCollection</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ShareAcknowledgeResponse.get_ResponsesCollection</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ShareFetchRequest.FetchTopic.get_PartitionsCollection</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ShareFetchRequest.get_TopicsCollection</Target>
+    <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
+    <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
+  </Suppression>
+  <Suppression>
+    <DiagnosticId>CP0002</DiagnosticId>
+    <Target>M:Kafka.Protocol.ShareFetchResponse.get_ResponsesCollection</Target>
     <Left>LastMajorVersionBinary/lib/netstandard2.1/Kafka.Protocol.dll</Left>
     <Right>obj/netstandard2.1/Kafka.Protocol.dll</Right>
   </Suppression>
