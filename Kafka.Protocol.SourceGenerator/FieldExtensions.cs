@@ -52,7 +52,7 @@ internal static class FieldExtensions
         var type = field.GetNonNullableFullTypeName();
         if (!field.IsNullable())
             return type;
-        return field.Fields != null && !field.IsArray()
+        return !field.IsPrimitiveType() && !field.IsArray()
             ? $"Nullable<{type}>"
             : $"Nullable{type}";
     }
@@ -248,10 +248,20 @@ internal static class FieldExtensions
                        reader, 
                        {isFlexibleVersionExpression}, 
                       """ :
-                     """
-                         instance.Version, 
-                         reader, 
-                     """)}
+                     messageField.IsNullable() ?
+                         $"""
+                           reader,
+                           {isFlexibleVersionExpression}, 
+                           () => {fieldTypeNameWithoutArrayCharacters}
+                              .FromReaderAsync(
+                                  instance.Version,
+                                  reader,
+                                  cancellationToken), 
+                          """ : 
+                         """
+                           instance.Version,
+                           reader,
+                         """)}
                      cancellationToken)
                  .ConfigureAwait(false);
              """;
