@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ShareAcknowledgeResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ShareAcknowledgeResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"ShareAcknowledgeResponse does not support version {version}. Valid versions are: 1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -26,8 +26,8 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(79);
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -52,7 +52,7 @@ namespace Kafka.Protocol
             instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-            instance.ResponsesCollection = await Array<ShareAcknowledgeTopicResponse>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ShareAcknowledgeTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+            instance.ResponsesCollection = await Map<Uuid, ShareAcknowledgeTopicResponse>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ShareAcknowledgeTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.TopicId, cancellationToken).ConfigureAwait(false);
             instance.NodeEndpointsCollection = await Map<Int32, NodeEndpoint>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => NodeEndpoint.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.NodeId, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
@@ -157,12 +157,12 @@ namespace Kafka.Protocol
             return this;
         }
 
-        private Array<ShareAcknowledgeTopicResponse> _responsesCollection = Array.Empty<ShareAcknowledgeTopicResponse>();
+        private Map<Uuid, ShareAcknowledgeTopicResponse> _responsesCollection = Map<Uuid, ShareAcknowledgeTopicResponse>.Default;
         /// <summary>
         /// <para>The response topics.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public Array<ShareAcknowledgeTopicResponse> ResponsesCollection
+        public Map<Uuid, ShareAcknowledgeTopicResponse> ResponsesCollection
         {
             get => _responsesCollection;
             private set
@@ -177,7 +177,7 @@ namespace Kafka.Protocol
         /// </summary>
         public ShareAcknowledgeResponse WithResponsesCollection(params Func<ShareAcknowledgeTopicResponse, ShareAcknowledgeTopicResponse>[] createFields)
         {
-            ResponsesCollection = createFields.Select(createField => createField(new ShareAcknowledgeTopicResponse(Version))).ToArray();
+            ResponsesCollection = createFields.Select(createField => createField(new ShareAcknowledgeTopicResponse(Version))).ToDictionary(field => field.TopicId);
             return this;
         }
 
@@ -188,7 +188,7 @@ namespace Kafka.Protocol
         /// </summary>
         public ShareAcknowledgeResponse WithResponsesCollection(IEnumerable<CreateShareAcknowledgeTopicResponse> createFields)
         {
-            ResponsesCollection = createFields.Select(createField => createField(new ShareAcknowledgeTopicResponse(Version))).ToArray();
+            ResponsesCollection = createFields.Select(createField => createField(new ShareAcknowledgeTopicResponse(Version))).ToDictionary(field => field.TopicId);
             return this;
         }
 

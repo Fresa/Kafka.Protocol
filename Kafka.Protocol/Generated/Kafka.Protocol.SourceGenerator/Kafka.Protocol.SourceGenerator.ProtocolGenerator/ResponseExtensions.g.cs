@@ -45,6 +45,10 @@
                    .WithMinVersion(AlterReplicaLogDirsRequest.MinVersion)
                    .WithMaxVersion(AlterReplicaLogDirsRequest.MaxVersion),
                key => key
+                   .WithApiKey(AlterShareGroupOffsetsRequest.ApiKey)
+                   .WithMinVersion(AlterShareGroupOffsetsRequest.MinVersion)
+                   .WithMaxVersion(AlterShareGroupOffsetsRequest.MaxVersion),
+               key => key
                    .WithApiKey(AlterUserScramCredentialsRequest.ApiKey)
                    .WithMinVersion(AlterUserScramCredentialsRequest.MinVersion)
                    .WithMaxVersion(AlterUserScramCredentialsRequest.MaxVersion),
@@ -109,6 +113,10 @@
                    .WithMinVersion(DeleteRecordsRequest.MinVersion)
                    .WithMaxVersion(DeleteRecordsRequest.MaxVersion),
                key => key
+                   .WithApiKey(DeleteShareGroupOffsetsRequest.ApiKey)
+                   .WithMinVersion(DeleteShareGroupOffsetsRequest.MinVersion)
+                   .WithMaxVersion(DeleteShareGroupOffsetsRequest.MaxVersion),
+               key => key
                    .WithApiKey(DeleteShareGroupStateRequest.ApiKey)
                    .WithMinVersion(DeleteShareGroupStateRequest.MinVersion)
                    .WithMaxVersion(DeleteShareGroupStateRequest.MaxVersion),
@@ -152,6 +160,10 @@
                    .WithApiKey(DescribeQuorumRequest.ApiKey)
                    .WithMinVersion(DescribeQuorumRequest.MinVersion)
                    .WithMaxVersion(DescribeQuorumRequest.MaxVersion),
+               key => key
+                   .WithApiKey(DescribeShareGroupOffsetsRequest.ApiKey)
+                   .WithMinVersion(DescribeShareGroupOffsetsRequest.MinVersion)
+                   .WithMaxVersion(DescribeShareGroupOffsetsRequest.MaxVersion),
                key => key
                    .WithApiKey(DescribeTopicPartitionsRequest.ApiKey)
                    .WithMinVersion(DescribeTopicPartitionsRequest.MinVersion)
@@ -225,9 +237,9 @@
                    .WithMinVersion(LeaveGroupRequest.MinVersion)
                    .WithMaxVersion(LeaveGroupRequest.MaxVersion),
                key => key
-                   .WithApiKey(ListClientMetricsResourcesRequest.ApiKey)
-                   .WithMinVersion(ListClientMetricsResourcesRequest.MinVersion)
-                   .WithMaxVersion(ListClientMetricsResourcesRequest.MaxVersion),
+                   .WithApiKey(ListConfigResourcesRequest.ApiKey)
+                   .WithMinVersion(ListConfigResourcesRequest.MinVersion)
+                   .WithMaxVersion(ListConfigResourcesRequest.MaxVersion),
                key => key
                    .WithApiKey(ListGroupsRequest.ApiKey)
                    .WithMinVersion(ListGroupsRequest.MinVersion)
@@ -312,6 +324,14 @@
                    .WithApiKey(ShareGroupHeartbeatRequest.ApiKey)
                    .WithMinVersion(ShareGroupHeartbeatRequest.MinVersion)
                    .WithMaxVersion(ShareGroupHeartbeatRequest.MaxVersion),
+               key => key
+                   .WithApiKey(StreamsGroupDescribeRequest.ApiKey)
+                   .WithMinVersion(StreamsGroupDescribeRequest.MinVersion)
+                   .WithMaxVersion(StreamsGroupDescribeRequest.MaxVersion),
+               key => key
+                   .WithApiKey(StreamsGroupHeartbeatRequest.ApiKey)
+                   .WithMinVersion(StreamsGroupHeartbeatRequest.MinVersion)
+                   .WithMaxVersion(StreamsGroupHeartbeatRequest.MaxVersion),
                key => key
                    .WithApiKey(SyncGroupRequest.ApiKey)
                    .WithMinVersion(SyncGroupRequest.MinVersion)

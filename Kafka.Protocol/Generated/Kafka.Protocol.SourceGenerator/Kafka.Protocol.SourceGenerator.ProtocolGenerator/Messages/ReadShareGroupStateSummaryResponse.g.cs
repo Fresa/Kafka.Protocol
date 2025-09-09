@@ -236,7 +236,7 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => _partition.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _stateEpoch.GetSize(IsFlexibleVersion) + _startOffset.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => _partition.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _stateEpoch.GetSize(IsFlexibleVersion) + _leaderEpoch.GetSize(IsFlexibleVersion) + _startOffset.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<PartitionResult> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new PartitionResult(version);
@@ -244,6 +244,7 @@ namespace Kafka.Protocol
                     instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.StateEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    instance.LeaderEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     instance.StartOffset = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
                     {
@@ -268,6 +269,7 @@ namespace Kafka.Protocol
                     await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _stateEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    await _leaderEpoch.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     await _startOffset.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (IsFlexibleVersion)
                     {
@@ -370,6 +372,30 @@ namespace Kafka.Protocol
                 public PartitionResult WithStateEpoch(Int32 stateEpoch)
                 {
                     StateEpoch = stateEpoch;
+                    return this;
+                }
+
+                private Int32 _leaderEpoch = Int32.Default;
+                /// <summary>
+                /// <para>The leader epoch of the share-partition.</para>
+                /// <para>Versions: 0+</para>
+                /// </summary>
+                public Int32 LeaderEpoch
+                {
+                    get => _leaderEpoch;
+                    private set
+                    {
+                        _leaderEpoch = value;
+                    }
+                }
+
+                /// <summary>
+                /// <para>The leader epoch of the share-partition.</para>
+                /// <para>Versions: 0+</para>
+                /// </summary>
+                public PartitionResult WithLeaderEpoch(Int32 leaderEpoch)
+                {
+                    LeaderEpoch = leaderEpoch;
                     return this;
                 }
 

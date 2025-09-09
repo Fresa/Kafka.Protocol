@@ -30,6 +30,8 @@ namespace Kafka.Protocol
                 return new AlterPartitionRequest(version).HeaderVersion;
             if (AlterReplicaLogDirsRequest.ApiKey == apiKey)
                 return new AlterReplicaLogDirsRequest(version).HeaderVersion;
+            if (AlterShareGroupOffsetsRequest.ApiKey == apiKey)
+                return new AlterShareGroupOffsetsRequest(version).HeaderVersion;
             if (AlterUserScramCredentialsRequest.ApiKey == apiKey)
                 return new AlterUserScramCredentialsRequest(version).HeaderVersion;
             if (ApiVersionsRequest.ApiKey == apiKey)
@@ -62,6 +64,8 @@ namespace Kafka.Protocol
                 return new DeleteGroupsRequest(version).HeaderVersion;
             if (DeleteRecordsRequest.ApiKey == apiKey)
                 return new DeleteRecordsRequest(version).HeaderVersion;
+            if (DeleteShareGroupOffsetsRequest.ApiKey == apiKey)
+                return new DeleteShareGroupOffsetsRequest(version).HeaderVersion;
             if (DeleteShareGroupStateRequest.ApiKey == apiKey)
                 return new DeleteShareGroupStateRequest(version).HeaderVersion;
             if (DeleteTopicsRequest.ApiKey == apiKey)
@@ -84,6 +88,8 @@ namespace Kafka.Protocol
                 return new DescribeProducersRequest(version).HeaderVersion;
             if (DescribeQuorumRequest.ApiKey == apiKey)
                 return new DescribeQuorumRequest(version).HeaderVersion;
+            if (DescribeShareGroupOffsetsRequest.ApiKey == apiKey)
+                return new DescribeShareGroupOffsetsRequest(version).HeaderVersion;
             if (DescribeTopicPartitionsRequest.ApiKey == apiKey)
                 return new DescribeTopicPartitionsRequest(version).HeaderVersion;
             if (DescribeTransactionsRequest.ApiKey == apiKey)
@@ -120,8 +126,8 @@ namespace Kafka.Protocol
                 return new JoinGroupRequest(version).HeaderVersion;
             if (LeaveGroupRequest.ApiKey == apiKey)
                 return new LeaveGroupRequest(version).HeaderVersion;
-            if (ListClientMetricsResourcesRequest.ApiKey == apiKey)
-                return new ListClientMetricsResourcesRequest(version).HeaderVersion;
+            if (ListConfigResourcesRequest.ApiKey == apiKey)
+                return new ListConfigResourcesRequest(version).HeaderVersion;
             if (ListGroupsRequest.ApiKey == apiKey)
                 return new ListGroupsRequest(version).HeaderVersion;
             if (ListOffsetsRequest.ApiKey == apiKey)
@@ -164,6 +170,10 @@ namespace Kafka.Protocol
                 return new ShareGroupDescribeRequest(version).HeaderVersion;
             if (ShareGroupHeartbeatRequest.ApiKey == apiKey)
                 return new ShareGroupHeartbeatRequest(version).HeaderVersion;
+            if (StreamsGroupDescribeRequest.ApiKey == apiKey)
+                return new StreamsGroupDescribeRequest(version).HeaderVersion;
+            if (StreamsGroupHeartbeatRequest.ApiKey == apiKey)
+                return new StreamsGroupHeartbeatRequest(version).HeaderVersion;
             if (SyncGroupRequest.ApiKey == apiKey)
                 return new SyncGroupRequest(version).HeaderVersion;
             if (TxnOffsetCommitRequest.ApiKey == apiKey)

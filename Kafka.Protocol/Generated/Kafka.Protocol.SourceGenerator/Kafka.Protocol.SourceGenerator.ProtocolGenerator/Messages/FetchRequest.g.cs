@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public FetchRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 4-17");
+                throw new UnsupportedVersionException($"FetchRequest does not support version {version}. Valid versions are: 4-18");
             Version = version;
             IsFlexibleVersion = version >= 12;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(1);
         public static readonly Int16 MinVersion = Int16.From(4);
-        public static readonly Int16 MaxVersion = Int16.From(17);
+        public static readonly Int16 MaxVersion = Int16.From(18);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -684,6 +684,11 @@ namespace Kafka.Protocol
                         tags.Add(new Tags.TaggedField { Tag = 0, Field = _replicaDirectoryId });
                     }
 
+                    if (Version >= 18 && _highWatermarkIsSet)
+                    {
+                        tags.Add(new Tags.TaggedField { Tag = 1, Field = _highWatermark });
+                    }
+
                     return new Tags.TagSection(tags.ToArray());
                 }
 
@@ -717,6 +722,18 @@ namespace Kafka.Protocol
                                     var size = instance._replicaDirectoryId.GetSize(true);
                                     if (size != tag.Length)
                                         throw new CorruptMessageException($"Tagged field ReplicaDirectoryId read length {tag.Length} but had actual length of {size}");
+                                }
+
+                                    break;
+                                case 1:
+                                    if (instance.Version >= 18)
+                                        instance.HighWatermark = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                                    else
+                                        throw new InvalidOperationException($"Field HighWatermark is not supported for version {instance.Version}");
+                                {
+                                    var size = instance._highWatermark.GetSize(true);
+                                    if (size != tag.Length)
+                                        throw new CorruptMessageException($"Tagged field HighWatermark read length {tag.Length} but had actual length of {size}");
                                 }
 
                                     break;
@@ -922,6 +939,34 @@ namespace Kafka.Protocol
                 public FetchPartition WithReplicaDirectoryId(Uuid replicaDirectoryId)
                 {
                     ReplicaDirectoryId = replicaDirectoryId;
+                    return this;
+                }
+
+                private bool _highWatermarkIsSet;
+                private Int64 _highWatermark = new Int64(9223372036854775807);
+                /// <summary>
+                /// <para>The high-watermark known by the replica. -1 if the high-watermark is not known and 9223372036854775807 if the feature is not supported.</para>
+                /// <para>Versions: 18+</para>
+                /// <para>Default: 9223372036854775807</para>
+                /// </summary>
+                public Int64 HighWatermark
+                {
+                    get => _highWatermark;
+                    private set
+                    {
+                        _highWatermark = value;
+                        _highWatermarkIsSet = true;
+                    }
+                }
+
+                /// <summary>
+                /// <para>The high-watermark known by the replica. -1 if the high-watermark is not known and 9223372036854775807 if the feature is not supported.</para>
+                /// <para>Versions: 18+</para>
+                /// <para>Default: 9223372036854775807</para>
+                /// </summary>
+                public FetchPartition WithHighWatermark(Int64 highWatermark)
+                {
+                    HighWatermark = highWatermark;
                     return this;
                 }
             }

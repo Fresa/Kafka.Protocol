@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public OffsetCommitRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 2-9");
+                throw new UnsupportedVersionException($"OffsetCommitRequest does not support version {version}. Valid versions are: 2-10");
             Version = version;
             IsFlexibleVersion = version >= 8;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(8);
         public static readonly Int16 MinVersion = Int16.From(2);
-        public static readonly Int16 MaxVersion = Int16.From(9);
+        public static readonly Int16 MaxVersion = Int16.From(10);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -275,11 +275,14 @@ namespace Kafka.Protocol
             }
 
             int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-            internal int GetSize(bool _) => _name.GetSize(IsFlexibleVersion) + _partitionsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+            internal int GetSize(bool _) => (Version >= 0 && Version <= 9 ? _name.GetSize(IsFlexibleVersion) : 0) + (Version >= 10 ? _topicId.GetSize(IsFlexibleVersion) : 0) + _partitionsCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
             internal static async ValueTask<OffsetCommitRequestTopic> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
             {
                 var instance = new OffsetCommitRequestTopic(version);
-                instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 0 && instance.Version <= 9)
+                    instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (instance.Version >= 10)
+                    instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 instance.PartitionsCollection = await Array<OffsetCommitRequestPartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => OffsetCommitRequestPartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
@@ -300,7 +303,10 @@ namespace Kafka.Protocol
             ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
             internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
             {
-                await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 0 && Version <= 9)
+                    await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                if (Version >= 10)
+                    await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 await _partitionsCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                 if (IsFlexibleVersion)
                 {
@@ -311,7 +317,7 @@ namespace Kafka.Protocol
             private String _name = String.Default;
             /// <summary>
             /// <para>The topic name.</para>
-            /// <para>Versions: 0+</para>
+            /// <para>Versions: 0-9</para>
             /// </summary>
             public String Name
             {
@@ -324,11 +330,35 @@ namespace Kafka.Protocol
 
             /// <summary>
             /// <para>The topic name.</para>
-            /// <para>Versions: 0+</para>
+            /// <para>Versions: 0-9</para>
             /// </summary>
             public OffsetCommitRequestTopic WithName(String name)
             {
                 Name = name;
+                return this;
+            }
+
+            private Uuid _topicId = Uuid.Default;
+            /// <summary>
+            /// <para>The topic ID.</para>
+            /// <para>Versions: 10+</para>
+            /// </summary>
+            public Uuid TopicId
+            {
+                get => _topicId;
+                private set
+                {
+                    _topicId = value;
+                }
+            }
+
+            /// <summary>
+            /// <para>The topic ID.</para>
+            /// <para>Versions: 10+</para>
+            /// </summary>
+            public OffsetCommitRequestTopic WithTopicId(Uuid topicId)
+            {
+                TopicId = topicId;
                 return this;
             }
 

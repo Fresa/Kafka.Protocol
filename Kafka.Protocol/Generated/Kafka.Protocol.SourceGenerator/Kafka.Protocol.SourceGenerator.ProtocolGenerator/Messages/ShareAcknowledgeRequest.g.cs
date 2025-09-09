@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ShareAcknowledgeRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ShareAcknowledgeRequest does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"ShareAcknowledgeRequest does not support version {version}. Valid versions are: 1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -26,8 +26,8 @@ namespace Kafka.Protocol
         internal override Int16 ApiMessageKey => ApiKey;
 
         public static readonly Int16 ApiKey = Int16.From(79);
-        public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MinVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -52,7 +52,7 @@ namespace Kafka.Protocol
             instance.GroupId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.MemberId = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ShareSessionEpoch = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-            instance.TopicsCollection = await Array<AcknowledgeTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgeTopic.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+            instance.TopicsCollection = await Map<Uuid, AcknowledgeTopic>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgeTopic.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.TopicId, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -155,12 +155,12 @@ namespace Kafka.Protocol
             return this;
         }
 
-        private Array<AcknowledgeTopic> _topicsCollection = Array.Empty<AcknowledgeTopic>();
+        private Map<Uuid, AcknowledgeTopic> _topicsCollection = Map<Uuid, AcknowledgeTopic>.Default;
         /// <summary>
         /// <para>The topics containing records to acknowledge.</para>
         /// <para>Versions: 0+</para>
         /// </summary>
-        public Array<AcknowledgeTopic> TopicsCollection
+        public Map<Uuid, AcknowledgeTopic> TopicsCollection
         {
             get => _topicsCollection;
             private set
@@ -175,7 +175,7 @@ namespace Kafka.Protocol
         /// </summary>
         public ShareAcknowledgeRequest WithTopicsCollection(params Func<AcknowledgeTopic, AcknowledgeTopic>[] createFields)
         {
-            TopicsCollection = createFields.Select(createField => createField(new AcknowledgeTopic(Version))).ToArray();
+            TopicsCollection = createFields.Select(createField => createField(new AcknowledgeTopic(Version))).ToDictionary(field => field.TopicId);
             return this;
         }
 
@@ -186,7 +186,7 @@ namespace Kafka.Protocol
         /// </summary>
         public ShareAcknowledgeRequest WithTopicsCollection(IEnumerable<CreateAcknowledgeTopic> createFields)
         {
-            TopicsCollection = createFields.Select(createField => createField(new AcknowledgeTopic(Version))).ToArray();
+            TopicsCollection = createFields.Select(createField => createField(new AcknowledgeTopic(Version))).ToDictionary(field => field.TopicId);
             return this;
         }
 
@@ -212,7 +212,7 @@ namespace Kafka.Protocol
             {
                 var instance = new AcknowledgeTopic(version);
                 instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
-                instance.PartitionsCollection = await Array<AcknowledgePartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgePartition.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
+                instance.PartitionsCollection = await Map<Int32, AcknowledgePartition>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => AcknowledgePartition.FromReaderAsync(instance.Version, reader, cancellationToken), field => field.PartitionIndex, cancellationToken).ConfigureAwait(false);
                 if (instance.IsFlexibleVersion)
                 {
                     var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -264,12 +264,12 @@ namespace Kafka.Protocol
                 return this;
             }
 
-            private Array<AcknowledgePartition> _partitionsCollection = Array.Empty<AcknowledgePartition>();
+            private Map<Int32, AcknowledgePartition> _partitionsCollection = Map<Int32, AcknowledgePartition>.Default;
             /// <summary>
             /// <para>The partitions containing records to acknowledge.</para>
             /// <para>Versions: 0+</para>
             /// </summary>
-            public Array<AcknowledgePartition> PartitionsCollection
+            public Map<Int32, AcknowledgePartition> PartitionsCollection
             {
                 get => _partitionsCollection;
                 private set
@@ -284,7 +284,7 @@ namespace Kafka.Protocol
             /// </summary>
             public AcknowledgeTopic WithPartitionsCollection(params Func<AcknowledgePartition, AcknowledgePartition>[] createFields)
             {
-                PartitionsCollection = createFields.Select(createField => createField(new AcknowledgePartition(Version))).ToArray();
+                PartitionsCollection = createFields.Select(createField => createField(new AcknowledgePartition(Version))).ToDictionary(field => field.PartitionIndex);
                 return this;
             }
 
@@ -295,7 +295,7 @@ namespace Kafka.Protocol
             /// </summary>
             public AcknowledgeTopic WithPartitionsCollection(IEnumerable<CreateAcknowledgePartition> createFields)
             {
-                PartitionsCollection = createFields.Select(createField => createField(new AcknowledgePartition(Version))).ToArray();
+                PartitionsCollection = createFields.Select(createField => createField(new AcknowledgePartition(Version))).ToDictionary(field => field.PartitionIndex);
                 return this;
             }
 

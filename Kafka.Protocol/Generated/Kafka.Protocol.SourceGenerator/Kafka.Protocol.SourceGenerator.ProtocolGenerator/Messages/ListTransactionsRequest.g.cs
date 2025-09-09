@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public ListTransactionsRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"ListTransactionsRequest does not support version {version}. Valid versions are: 0-1");
+                throw new UnsupportedVersionException($"ListTransactionsRequest does not support version {version}. Valid versions are: 0-2");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(66);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(1);
+        public static readonly Int16 MaxVersion = Int16.From(2);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,7 +45,7 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _stateFiltersCollection.GetSize(IsFlexibleVersion) + _producerIdFiltersCollection.GetSize(IsFlexibleVersion) + (Version >= 1 ? _durationFilter.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _stateFiltersCollection.GetSize(IsFlexibleVersion) + _producerIdFiltersCollection.GetSize(IsFlexibleVersion) + (Version >= 1 ? _durationFilter.GetSize(IsFlexibleVersion) : 0) + (Version >= 2 ? _transactionalIdPattern.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<ListTransactionsRequest> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new ListTransactionsRequest(version);
@@ -53,6 +53,8 @@ namespace Kafka.Protocol
             instance.ProducerIdFiltersCollection = await Array<Int64>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
             if (instance.Version >= 1)
                 instance.DurationFilter = await Int64.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 2)
+                instance.TransactionalIdPattern = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (instance.IsFlexibleVersion)
             {
                 var tagSection = await Tags.TagSection.FromReaderAsync(reader, cancellationToken).ConfigureAwait(false);
@@ -75,6 +77,8 @@ namespace Kafka.Protocol
             await _producerIdFiltersCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (Version >= 1)
                 await _durationFilter.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 2)
+                await _transactionalIdPattern.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             if (IsFlexibleVersion)
             {
                 await CreateTagSection().WriteToAsync(writer, cancellationToken).ConfigureAwait(false);
@@ -154,6 +158,36 @@ namespace Kafka.Protocol
         public ListTransactionsRequest WithDurationFilter(Int64 durationFilter)
         {
             DurationFilter = durationFilter;
+            return this;
+        }
+
+        private NullableString _transactionalIdPattern = new NullableString(null);
+        /// <summary>
+        /// <para>The transactional ID regular expression pattern to filter by: if it is empty or null, all transactions are returned; Otherwise then only the transactions matching the given regular expression will be returned.</para>
+        /// <para>Versions: 2+</para>
+        /// <para>Default: null</para>
+        /// </summary>
+        public String? TransactionalIdPattern
+        {
+            get => _transactionalIdPattern;
+            private set
+            {
+                if (Version >= 2 == false)
+                    throw new UnsupportedVersionException($"TransactionalIdPattern does not support version {Version} and has been defined as not ignorable. Supported versions: 2+");
+                if (Version >= 2 == false && value == null)
+                    throw new UnsupportedVersionException($"TransactionalIdPattern does not support null for version {Version}. Supported versions for null value: 2+");
+                _transactionalIdPattern = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The transactional ID regular expression pattern to filter by: if it is empty or null, all transactions are returned; Otherwise then only the transactions matching the given regular expression will be returned.</para>
+        /// <para>Versions: 2+</para>
+        /// <para>Default: null</para>
+        /// </summary>
+        public ListTransactionsRequest WithTransactionalIdPattern(String? transactionalIdPattern)
+        {
+            TransactionalIdPattern = transactionalIdPattern;
             return this;
         }
 

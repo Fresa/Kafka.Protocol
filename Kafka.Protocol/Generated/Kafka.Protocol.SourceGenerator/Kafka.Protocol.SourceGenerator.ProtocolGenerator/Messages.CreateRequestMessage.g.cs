@@ -30,6 +30,8 @@ namespace Kafka.Protocol
                 return await AlterPartitionRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AlterReplicaLogDirsRequest.ApiKey == apiKey)
                 return await AlterReplicaLogDirsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+            if (AlterShareGroupOffsetsRequest.ApiKey == apiKey)
+                return await AlterShareGroupOffsetsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (AlterUserScramCredentialsRequest.ApiKey == apiKey)
                 return await AlterUserScramCredentialsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ApiVersionsRequest.ApiKey == apiKey)
@@ -62,6 +64,8 @@ namespace Kafka.Protocol
                 return await DeleteGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DeleteRecordsRequest.ApiKey == apiKey)
                 return await DeleteRecordsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+            if (DeleteShareGroupOffsetsRequest.ApiKey == apiKey)
+                return await DeleteShareGroupOffsetsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DeleteShareGroupStateRequest.ApiKey == apiKey)
                 return await DeleteShareGroupStateRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DeleteTopicsRequest.ApiKey == apiKey)
@@ -84,6 +88,8 @@ namespace Kafka.Protocol
                 return await DescribeProducersRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeQuorumRequest.ApiKey == apiKey)
                 return await DescribeQuorumRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+            if (DescribeShareGroupOffsetsRequest.ApiKey == apiKey)
+                return await DescribeShareGroupOffsetsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeTopicPartitionsRequest.ApiKey == apiKey)
                 return await DescribeTopicPartitionsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (DescribeTransactionsRequest.ApiKey == apiKey)
@@ -120,8 +126,8 @@ namespace Kafka.Protocol
                 return await JoinGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (LeaveGroupRequest.ApiKey == apiKey)
                 return await LeaveGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
-            if (ListClientMetricsResourcesRequest.ApiKey == apiKey)
-                return await ListClientMetricsResourcesRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+            if (ListConfigResourcesRequest.ApiKey == apiKey)
+                return await ListConfigResourcesRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ListGroupsRequest.ApiKey == apiKey)
                 return await ListGroupsRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ListOffsetsRequest.ApiKey == apiKey)
@@ -164,6 +170,10 @@ namespace Kafka.Protocol
                 return await ShareGroupDescribeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (ShareGroupHeartbeatRequest.ApiKey == apiKey)
                 return await ShareGroupHeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+            if (StreamsGroupDescribeRequest.ApiKey == apiKey)
+                return await StreamsGroupDescribeRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
+            if (StreamsGroupHeartbeatRequest.ApiKey == apiKey)
+                return await StreamsGroupHeartbeatRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (SyncGroupRequest.ApiKey == apiKey)
                 return await SyncGroupRequest.FromReaderAsync(version, reader, cancellationToken).ConfigureAwait(false);
             if (TxnOffsetCommitRequest.ApiKey == apiKey)

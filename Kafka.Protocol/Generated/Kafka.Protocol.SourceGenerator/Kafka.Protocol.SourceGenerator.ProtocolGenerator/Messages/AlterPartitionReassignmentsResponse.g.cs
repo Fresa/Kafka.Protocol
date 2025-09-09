@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public AlterPartitionReassignmentsResponse(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"AlterPartitionReassignmentsResponse does not support version {version}. Valid versions are: 0");
+                throw new UnsupportedVersionException($"AlterPartitionReassignmentsResponse does not support version {version}. Valid versions are: 0-1");
             Version = version;
             IsFlexibleVersion = true;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(45);
         public static readonly Int16 MinVersion = Int16.From(0);
-        public static readonly Int16 MaxVersion = Int16.From(0);
+        public static readonly Int16 MaxVersion = Int16.From(1);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -45,11 +45,13 @@ namespace Kafka.Protocol
             return new Tags.TagSection();
         }
 
-        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _responsesCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+        internal override int GetSize() => _throttleTimeMs.GetSize(IsFlexibleVersion) + (Version >= 1 ? _allowReplicationFactorChange.GetSize(IsFlexibleVersion) : 0) + _errorCode.GetSize(IsFlexibleVersion) + _errorMessage.GetSize(IsFlexibleVersion) + _responsesCollection.GetSize(IsFlexibleVersion) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
         internal static async ValueTask<AlterPartitionReassignmentsResponse> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
         {
             var instance = new AlterPartitionReassignmentsResponse(version);
             instance.ThrottleTimeMs = await Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (instance.Version >= 1)
+                instance.AllowReplicationFactorChange = await Boolean.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorCode = await Int16.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ErrorMessage = await NullableString.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             instance.ResponsesCollection = await Array<ReassignableTopicResponse>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => ReassignableTopicResponse.FromReaderAsync(instance.Version, reader, cancellationToken), cancellationToken).ConfigureAwait(false);
@@ -72,6 +74,8 @@ namespace Kafka.Protocol
         internal override async ValueTask WriteToAsync(Stream writer, CancellationToken cancellationToken = default)
         {
             await _throttleTimeMs.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+            if (Version >= 1)
+                await _allowReplicationFactorChange.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _errorCode.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _errorMessage.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
             await _responsesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
@@ -102,6 +106,32 @@ namespace Kafka.Protocol
         public AlterPartitionReassignmentsResponse WithThrottleTimeMs(Int32 throttleTimeMs)
         {
             ThrottleTimeMs = throttleTimeMs;
+            return this;
+        }
+
+        private Boolean _allowReplicationFactorChange = new Boolean(true);
+        /// <summary>
+        /// <para>The option indicating whether changing the replication factor of any given partition as part of the request was allowed.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: true</para>
+        /// </summary>
+        public Boolean AllowReplicationFactorChange
+        {
+            get => _allowReplicationFactorChange;
+            private set
+            {
+                _allowReplicationFactorChange = value;
+            }
+        }
+
+        /// <summary>
+        /// <para>The option indicating whether changing the replication factor of any given partition as part of the request was allowed.</para>
+        /// <para>Versions: 1+</para>
+        /// <para>Default: true</para>
+        /// </summary>
+        public AlterPartitionReassignmentsResponse WithAllowReplicationFactorChange(Boolean allowReplicationFactorChange)
+        {
+            AllowReplicationFactorChange = allowReplicationFactorChange;
             return this;
         }
 

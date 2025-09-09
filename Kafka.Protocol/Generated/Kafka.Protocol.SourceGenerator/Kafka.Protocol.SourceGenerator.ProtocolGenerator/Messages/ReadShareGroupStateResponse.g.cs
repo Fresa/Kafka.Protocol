@@ -353,7 +353,7 @@ namespace Kafka.Protocol
 
                 private Int32 _stateEpoch = Int32.Default;
                 /// <summary>
-                /// <para>The state epoch for this share-partition.</para>
+                /// <para>The state epoch of the share-partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public Int32 StateEpoch
@@ -366,7 +366,7 @@ namespace Kafka.Protocol
                 }
 
                 /// <summary>
-                /// <para>The state epoch for this share-partition.</para>
+                /// <para>The state epoch of the share-partition.</para>
                 /// <para>Versions: 0+</para>
                 /// </summary>
                 public PartitionResult WithStateEpoch(Int32 stateEpoch)
@@ -490,7 +490,7 @@ namespace Kafka.Protocol
 
                     private Int64 _firstOffset = Int64.Default;
                     /// <summary>
-                    /// <para>The base offset of this state batch.</para>
+                    /// <para>The first offset of this state batch.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int64 FirstOffset
@@ -503,7 +503,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The base offset of this state batch.</para>
+                    /// <para>The first offset of this state batch.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public StateBatch WithFirstOffset(Int64 firstOffset)
@@ -538,7 +538,7 @@ namespace Kafka.Protocol
 
                     private Int8 _deliveryState = Int8.Default;
                     /// <summary>
-                    /// <para>The state - 0:Available,2:Acked,4:Archived.</para>
+                    /// <para>The delivery state - 0:Available,2:Acked,4:Archived.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public Int8 DeliveryState
@@ -551,7 +551,7 @@ namespace Kafka.Protocol
                     }
 
                     /// <summary>
-                    /// <para>The state - 0:Available,2:Acked,4:Archived.</para>
+                    /// <para>The delivery state - 0:Available,2:Acked,4:Archived.</para>
                     /// <para>Versions: 0+</para>
                     /// </summary>
                     public StateBatch WithDeliveryState(Int8 deliveryState)

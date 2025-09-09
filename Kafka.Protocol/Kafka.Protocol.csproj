@@ -23,7 +23,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <ApiCompatValidateAssemblies>true</ApiCompatValidateAssemblies>
     <ApiCompatContractAssembly>LastMajorVersionBinary/lib/$(TargetFramework)/$(AssemblyName).dll</ApiCompatContractAssembly>
-    <!--https://learn.microsoft.com/en-us/dotnet/fundamentals/apicompat/diagnostic-ids-->
+    <!-- https://learn.microsoft.com/en-us/dotnet/fundamentals/apicompat/diagnostic-ids -->
     <ApiCompatGenerateSuppressionFile>false</ApiCompatGenerateSuppressionFile>
     <_ApiCompatCaptureGroupPattern>.+%5C$([System.IO.Path]::DirectorySeparatorChar)(.+)%5C$([System.IO.Path]::DirectorySeparatorChar)(.+)</_ApiCompatCaptureGroupPattern>
 

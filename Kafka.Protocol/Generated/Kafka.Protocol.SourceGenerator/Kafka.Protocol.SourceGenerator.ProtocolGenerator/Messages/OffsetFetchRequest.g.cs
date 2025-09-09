@@ -18,7 +18,7 @@ namespace Kafka.Protocol
         public OffsetFetchRequest(Int16 version)
         {
             if (version.InRange(MinVersion, MaxVersion) == false)
-                throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 1-9");
+                throw new UnsupportedVersionException($"OffsetFetchRequest does not support version {version}. Valid versions are: 1-10");
             Version = version;
             IsFlexibleVersion = version >= 6;
         }
@@ -27,7 +27,7 @@ namespace Kafka.Protocol
 
         public static readonly Int16 ApiKey = Int16.From(9);
         public static readonly Int16 MinVersion = Int16.From(1);
-        public static readonly Int16 MaxVersion = Int16.From(9);
+        public static readonly Int16 MaxVersion = Int16.From(10);
         public override Int16 Version { get; }
         internal bool IsFlexibleVersion { get; }
 
@@ -496,12 +496,14 @@ namespace Kafka.Protocol
                 }
 
                 int ISerialize.GetSize(bool asCompact) => GetSize(asCompact);
-                internal int GetSize(bool _) => (Version >= 8 ? _name.GetSize(IsFlexibleVersion) : 0) + (Version >= 8 ? _partitionIndexesCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
+                internal int GetSize(bool _) => (Version >= 8 && Version <= 9 ? _name.GetSize(IsFlexibleVersion) : 0) + (Version >= 10 ? _topicId.GetSize(IsFlexibleVersion) : 0) + (Version >= 8 ? _partitionIndexesCollection.GetSize(IsFlexibleVersion) : 0) + (IsFlexibleVersion ? CreateTagSection().GetSize() : 0);
                 internal static async ValueTask<OffsetFetchRequestTopics> FromReaderAsync(Int16 version, PipeReader reader, CancellationToken cancellationToken = default)
                 {
                     var instance = new OffsetFetchRequestTopics(version);
-                    if (instance.Version >= 8)
+                    if (instance.Version >= 8 && instance.Version <= 9)
                         instance.Name = await String.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (instance.Version >= 10)
+                        instance.TopicId = await Uuid.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (instance.Version >= 8)
                         instance.PartitionIndexesCollection = await Array<Int32>.FromReaderAsync(reader, instance.IsFlexibleVersion, () => Int32.FromReaderAsync(reader, instance.IsFlexibleVersion, cancellationToken), cancellationToken).ConfigureAwait(false);
                     if (instance.IsFlexibleVersion)
@@ -523,8 +525,10 @@ namespace Kafka.Protocol
                 ValueTask ISerialize.WriteToAsync(Stream writer, bool asCompact, CancellationToken cancellationToken) => WriteToAsync(writer, asCompact, cancellationToken);
                 internal async ValueTask WriteToAsync(Stream writer, bool _, CancellationToken cancellationToken = default)
                 {
-                    if (Version >= 8)
+                    if (Version >= 8 && Version <= 9)
                         await _name.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
+                    if (Version >= 10)
+                        await _topicId.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (Version >= 8)
                         await _partitionIndexesCollection.WriteToAsync(writer, IsFlexibleVersion, cancellationToken).ConfigureAwait(false);
                     if (IsFlexibleVersion)
@@ -536,26 +540,48 @@ namespace Kafka.Protocol
                 private String _name = String.Default;
                 /// <summary>
                 /// <para>The topic name.</para>
-                /// <para>Versions: 8+</para>
+                /// <para>Versions: 8-9</para>
                 /// </summary>
                 public String Name
                 {
                     get => _name;
                     private set
                     {
-                        if (Version >= 8 == false)
-                            throw new UnsupportedVersionException($"Name does not support version {Version} and has been defined as not ignorable. Supported versions: 8+");
                         _name = value;
                     }
                 }
 
                 /// <summary>
                 /// <para>The topic name.</para>
-                /// <para>Versions: 8+</para>
+                /// <para>Versions: 8-9</para>
                 /// </summary>
                 public OffsetFetchRequestTopics WithName(String name)
                 {
                     Name = name;
+                    return this;
+                }
+
+                private Uuid _topicId = Uuid.Default;
+                /// <summary>
+                /// <para>The topic ID.</para>
+                /// <para>Versions: 10+</para>
+                /// </summary>
+                public Uuid TopicId
+                {
+                    get => _topicId;
+                    private set
+                    {
+                        _topicId = value;
+                    }
+                }
+
+                /// <summary>
+                /// <para>The topic ID.</para>
+                /// <para>Versions: 10+</para>
+                /// </summary>
+                public OffsetFetchRequestTopics WithTopicId(Uuid topicId)
+                {
+                    TopicId = topicId;
                     return this;
                 }
 
